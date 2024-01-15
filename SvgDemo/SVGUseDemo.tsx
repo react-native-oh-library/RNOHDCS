@@ -53,6 +53,7 @@ function App() {
               fill="black"
               stroke="red"
               strokeWidth={5}
+              x={110}
             
             ></Path>
 
