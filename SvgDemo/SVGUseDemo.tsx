@@ -47,12 +47,13 @@ function App() {
               stroke="red"
               strokeWidth={5}
             ></Rect>
-            <Circle r="20" fill="black" stroke="red" strokeWidth={5}></Circle>
+            <Circle r="20" x={60} y={30} fill="black" stroke="red" strokeWidth={5}></Circle>
             <Path
               d="M 0,0 l 60,30 v -30 h -20"
               fill="black"
               stroke="red"
               strokeWidth={5}
+            
             ></Path>
 
             <LinearGradient id="LinearGradient">
@@ -63,7 +64,7 @@ function App() {
           </G>
         </Defs>
 
-        <SVGText x={100} y={140}>
+        <SVGText x={100} y={20}>
           Use 使用各种基础组件
         </SVGText>
         <Use href="#Rect" x={0} y={50}></Use>
