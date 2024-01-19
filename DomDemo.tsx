@@ -5,8 +5,8 @@ import {
   useNavigate,
   useOutlet,
   useRoutes,
+  MemoryRouter as Router
 } from 'react-router-dom';
-import { MemoryRouter as Router } from 'react-router-dom';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -283,4 +283,3 @@ const DomDemo = () => {
   );
 };
 export default DomDemo;
-
