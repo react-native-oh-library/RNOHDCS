@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
-import Svg, { Path, Rect, Image, Circle, Polygon } from 'react-native-svg';
+import Svg, { Path, Rect, Image, Circle, Polygon, LinearGradient, Stop, Defs } from 'react-native-svg';
 
 const SVGDemo = () => {
 
@@ -70,14 +70,12 @@ const SVGDemo = () => {
       <View>
         <Text>多Circle</Text>
         <Svg height="100" width="100">
-          <Circle cx="50" cy="50" r="40" fill="#ddd" />
+          <Circle cx="50" cy="50" r="40" fill="red" />
           <Circle
             cx="60"
             cy="60"
             r="20"
-            stroke="#0074d9"
-            strokeWidth="40"
-            fill="none"
+            fill="#0074d9"
           />
         </Svg>
       </View>
@@ -120,6 +118,25 @@ const SVGDemo = () => {
             y="5%"
             width="90%"
             height="90%"
+            href={require('./123.png')}
+          />
+        </Svg>
+      </View>
+
+      <View>
+        <Text>多Image</Text>
+        <Svg height="50" width="110">
+          <Image
+            width="50"
+            height="50"
+            opacity="0.6"
+            href={require('../assets/123.jpg')}
+          />
+          <Image
+            x="60"
+            y="0"
+            width="50"
+            height="50"
             opacity="0.6"
             href={require('../assets/123.png')}
           />
@@ -127,22 +144,44 @@ const SVGDemo = () => {
       </View>
 
       <View>
-        <Text>多Image</Text>
+        <Text>LinearGradient Path</Text>
         <Svg height="100" width="100">
-          <Image
-            width="45%"
-            height="100%"
-            opacity="0.6"
-            href={require('../assets/123.png')}
+          <Defs>
+            <LinearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+              <Stop offset="0" stopColor="#FFD080" stopOpacity="1" />
+              <Stop offset="1" stopColor="red" stopOpacity="1" />
+            </LinearGradient>
+          </Defs>
+          <Path
+            d="M25 10 L98 65 L70 25 L16 77 L11 30 L0 4 L90 50 L50 10 L11 22 L77 95 L20 25"
+            fill="url(#grad1)"
           />
-          <Image
-            x="50%"
-            y="0"
-            width="45%"
-            height="100%"
-            opacity="0.6"
-            href={require('../assets/123.png')}
-          />
+        </Svg>
+      </View>
+
+      <View>
+        <Text>LinearGradient Rect</Text>
+        <Svg height="100" width="100">
+          <Defs>
+            <LinearGradient id="grad2" x1="0" y1="0" x2="0" y2="1">
+              <Stop offset="0" stopColor="#FFD080" stopOpacity="1" />
+              <Stop offset="1" stopColor="red" stopOpacity="1" />
+            </LinearGradient>
+          </Defs>
+          <Rect width="100" height="100" fill="url(#grad2)" />
+        </Svg>
+      </View>
+
+      <View>
+        <Text>LinearGradient Circle</Text>
+        <Svg height="100" width="100">
+          <Defs>
+            <LinearGradient id="grad3" x1="0" y1="0" x2="1" y2="1">
+              <Stop offset="0" stopColor="#FFD080" stopOpacity="1" />
+              <Stop offset="1" stopColor="red" stopOpacity="1" />
+            </LinearGradient>
+          </Defs>
+          <Circle cx="50" cy="50" r="40" fill="url(#grad3)" />
         </Svg>
       </View>
     </ScrollView>
