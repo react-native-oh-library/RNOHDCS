@@ -112,12 +112,12 @@ function example() {
             checkedImage={
               <Image
                 source={require('./img/check-box-Image.png')}
-                style={styles.tabBarSelectedIcon}></Image>
+                ></Image>
             } //设置选中图片
             unCheckedImage={
               <Image
                 source={require('./img/uncheck-box-Image.png')}
-                style={styles.tabBarSelectedIcon}></Image>
+              ></Image>
             } //设置未选中图片
           />
         </View>
@@ -165,10 +165,6 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 0.3,
     backgroundColor: 'darkgray',
-  },
-  tabBarSelectedIcon: {
-    borderWidth: 3,
-    borderRadius: 2,
   },
 });
 export default example;
