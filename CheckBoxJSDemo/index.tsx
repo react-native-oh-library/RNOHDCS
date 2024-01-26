@@ -68,6 +68,8 @@ function example() {
             leftText={item.name} //左侧文本
             leftTextStyle={{fontSize: 20, fontWeight: '700'}} //设置左侧文本样式
             checkBoxColor="red" //设置复选框颜色
+            checkedCheckBoxColor='yellow' //设置选中状态下复选框颜色，checkBoxColor这个属性会失效
+            uncheckedCheckBoxColor='green' //设置未选中状态下复选框颜色，checkBoxColor这个属性会失效
           />
         </View>
         <View style={styles.line}></View>
@@ -112,7 +114,7 @@ function example() {
             checkedImage={
               <Image
                 source={require('./img/check-box-Image.png')}
-                ></Image>
+              ></Image>
             } //设置选中图片
             unCheckedImage={
               <Image
@@ -165,6 +167,10 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 0.3,
     backgroundColor: 'darkgray',
+  },
+  tabBarSelectedIcon: {
+    borderWidth: 3,
+    borderRadius: 2,
   },
 });
 export default example;
