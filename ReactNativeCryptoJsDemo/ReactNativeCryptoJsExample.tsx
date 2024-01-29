@@ -78,7 +78,7 @@ export const ReactNativeCryptoJsExample = () => {
   const [decryptObj, setDecryptObj] = useState('');
   return (
     <ScrollView style={{backgroundColor: 'yellow'}} bounces>
-      <Text> 测试react-native-crypto-js使用AES算法加解密字符串</Text>
+      <Text> 测试使用AES算法加解密字符串</Text>
        <View style={{padding: 10}}>
             <TextInput  style={{height: 40}}  placeholder="请输入内容!" onChangeText={(cryptText: React.SetStateAction<string>) => setCryptText(cryptText)} defaultValue={cryptText} />
             </View>
@@ -88,7 +88,7 @@ export const ReactNativeCryptoJsExample = () => {
             <TextInput  style={{height: 40}}  placeholder="请输入内容!" onChangeText={(decryptText: React.SetStateAction<string>) => setDecryptText(decryptText)} defaultValue={decryptText} />
             </View>
             <Button onPress={() => {decrypt_str(decryptText)}} title="解密字符串"/>
-        <Text> 测试react-native-crypto-js使用AES算法加解密字符串</Text>
+        <Text> 测试使用AES算法加解密字符串</Text>
         <View style={{padding: 10}}>
             <TextInput  style={{height: 40}}  placeholder="请输入内容!" onChangeText={(cryptObj: React.SetStateAction<string>) => setCryptObj(cryptObj)} defaultValue={cryptObj} />
             </View>
@@ -98,12 +98,12 @@ export const ReactNativeCryptoJsExample = () => {
             <TextInput  style={{height: 40}}  placeholder="请输入内容!" onChangeText={(decryptObj: React.SetStateAction<string>) => setDecryptObj(decryptObj)} defaultValue={decryptObj} />
             </View>
             <Button onPress={() => {decrypt_obj(decryptObj)}} title="解密对象"/>
-        <Text> 测试react-native-crypto-js使用MD5算法加密字符串</Text>
+        <Text> 测试使用MD5算法加密字符串</Text>
         <View style={{padding: 10}}>
             <TextInput  style={{height: 40}}  placeholder="请输入内容!" onChangeText={(cryptText1: React.SetStateAction<string>) =>setCryptText1(cryptText1)} defaultValue={cryptText1} />
             </View>
             <Button onPress={() => { MD5_encrypt_str(cryptText1) }} title="加密"/>
-        <Text> 测试react-native-crypto-js使用HmacMD5算法加解密字符串</Text>
+        <Text> 测试使用HmacMD5算法加解密字符串</Text>
         <View style={{padding: 10}}>
             <TextInput  style={{height: 40}}  placeholder="请输入内容!" onChangeText={(cryptText2: React.SetStateAction<string>) =>setCryptText2(cryptText2)} defaultValue={cryptText2} />
             </View>
