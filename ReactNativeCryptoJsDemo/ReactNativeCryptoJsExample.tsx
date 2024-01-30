@@ -103,7 +103,7 @@ export const ReactNativeCryptoJsExample = () => {
             <TextInput  style={{height: 40}}  placeholder="请输入内容!" onChangeText={(cryptText1: React.SetStateAction<string>) =>setCryptText1(cryptText1)} defaultValue={cryptText1} />
             </View>
             <Button onPress={() => { MD5_encrypt_str(cryptText1) }} title="加密"/>
-        <Text> 测试使用HmacMD5算法加解密字符串</Text>
+        <Text> 测试使用HmacMD5算法加密字符串</Text>
         <View style={{padding: 10}}>
             <TextInput  style={{height: 40}}  placeholder="请输入内容!" onChangeText={(cryptText2: React.SetStateAction<string>) =>setCryptText2(cryptText2)} defaultValue={cryptText2} />
             </View>
