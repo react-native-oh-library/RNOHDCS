@@ -10,7 +10,7 @@ import {
     Button
   } from 'react-native';
 
-  import FS from 'react-native-fs';
+  import FS from '@react-native-oh-tpl/react-native-fs';
   
   import {
     Colors,
@@ -38,41 +38,41 @@ import {
     const [unlinkFileParam, setUnlinkFileParam] = useState('');
 
     const mkdirExample = () => {
-      FS.mkdir(mkdirParam).then((result) => {
-        console.log('mkdir mkdirParam： '+mkdirParam);
-        console.log('mkdir Successfully created directory.');
+      FS.mkdir(FS.DocumentDirectoryPath + '/' + mkdirParam).then((result) => {
+        console.log('file mkdirParam： '+ mkdirParam);
+        console.log('file Successfully created directory.');
       }, err => {
-        console.error('mkdir mkdir: '+ err.message)
+        console.error('file mkdir: '+ err.message)
       });
     }
 
     const existsExample = () => {
-      FS.exists(existsSource)
+      FS.exists(FS.DocumentDirectoryPath + '/' + existsSource)
             .then(result => {
-              console.log('mkdir Exists: ' + result)
+              console.log('file Exists: ' + result)
             },err => {
-              console.log('mkdir exists: '+err.message);
+              console.log('file exists: '+err.message);
             })
     }
    
     const writeFileExample = () => {
       if(writeFileParam.length > 0 && writeFileContent.length > 0) {
-        FS.writeFile(writeFileParam, writeFileContent)
+        FS.writeFile(FS.DocumentDirectoryPath + '/' + writeFileParam, writeFileContent)
               .then((result) => {
-                console.log('mkdir Successfully Wrote to File')
+                console.log('file Successfully Wrote to File')
               }, err => {
-                console.log('mkdir writeFile: '+err.message);
+                console.log('file writeFile: '+err.message);
               })
       }
     }
 
     const appendFileExample = () => {
       if(appendFileParam.length > 0 && appendContent.length > 0) {
-        FS.appendFile(appendFileParam, appendContent)
+        FS.appendFile(FS.DocumentDirectoryPath + '/' + appendFileParam, appendContent)
               .then((result) => {
-                console.log('mkdir Successfully Appended to File')
+                console.log('file Successfully Appended to File')
               }, err => {
-                console.log('mkdir appendFile: '+err.message);
+                console.log('file appendFile: '+err.message);
               })
       }
     }
@@ -81,45 +81,46 @@ import {
       if(readFileAssetsParam.length > 0) {
         FS.readFileAssets(readFileAssetsParam)
               .then((result) => {
-                console.log('mkdir File Contents:', result)
+                console.log('file File Contents:', result)
               }, err => {
-                console.log('mkdir readFileAssets: '+err.message);
+                console.log('file readFileAssets: '+err.message);
               })
       }
     }
   
     const copyFileExample = () => {
       if(copyFileSource.length > 0) {
-        FS.copyFile( copyFileSource,  copyFileDest)
+        FS.copyFile(FS.DocumentDirectoryPath + '/' + copyFileSource,  
+        FS.DocumentDirectoryPath + '/' + copyFileDest)
               .then((result) => {
-                console.log('mkdir Successfully put copy of file to specified destination.')
+                console.log('file Successfully put copy of file to specified destination.')
               }, err => {
-                console.log('mkdir copyFile: '+err.message);
+                console.log('file copyFile: '+err.message);
               })
       }
     }
 
     const readFileExampleutf8 = () => {
       if(readFileParam.length > 0) {
-        FS.readFile(readFileParam,'utf8')
+        FS.readFile(FS.DocumentDirectoryPath + '/' + readFileParam,'utf8')
               .then((result) => {
-                console.log('mkdir File Contents:', result)
+                console.log('file Contents:', result)
               }, err => {
-                console.log('mkdir readFile: '+err.message);
+                console.log('file readFile: '+err.message);
               })
       }
     }
 
     const unlinkExample = () => {
       if(unlinkFileParam.length > 0) {
-        FS.unlink(unlinkFileParam)
+        FS.unlink(FS.DocumentDirectoryPath + '/' + unlinkFileParam)
               .then((result) => {
-                console.log('mkdir Successfully unlinked specified file')
+                console.log('file Successfully unlinked specified file')
               }, err => {
-                console.log('mkdir unlink: '+err.message);
+                console.log('file unlink: '+err.message);
               });
       } else {
-        console.log('mkdir unlink'+ unlinkFileParam)
+        console.log('file unlink'+ unlinkFileParam)
       }
     }
 
@@ -140,6 +141,7 @@ import {
               <View style={styles.sectionDescription}>
                 <Text>
                   {"FS.DocumentDirectoryPath: " + FS.DocumentDirectoryPath + '\n'}
+                  {"FS.CachesDirectoryPath: " + FS.CachesDirectoryPath + '\n'}
                 </Text>
               </View>
             </View>
@@ -369,7 +371,7 @@ import {
       fontWeight: '700',
     },
     input: {
-      
+      marginTop: 12,
     },
     
     footer: {
