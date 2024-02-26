@@ -34,7 +34,7 @@ export function PermissionsExample() {
                 <View style={styles.view}>
                     <Button label={'查询相机权限'}
                         onPress={async () => {
-                            let check = await RTNPermissions.check('ohos.permission.GET_INSTALLED_BUNDLE_LIST');
+                            let check = await RTNPermissions.check('ohos.permission.CAMERA');
                             setResult(check + '');
                             console.info('RTNPermissions===== check', check);
                         }} />
