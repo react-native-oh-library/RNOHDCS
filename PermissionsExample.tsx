@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, View, Text } from 'react-native';
-import RTNPermissions, { Permission } from '@react-native-oh-tpl/react-native-permissions';
+import RTNPermissions, { Permission } from 'react-native-permissions';
 import React, { useState } from 'react';
 import { Button } from '../components';
 
