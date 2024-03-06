@@ -92,8 +92,13 @@ function EventBusDemo() {
   }
 
   function handleRemove() {
-    EventBus.removeEventListener('test_event', eventTest, 0);
-    setMsg('已删除test_event类型的eventTest事件');
+    let has = EventBus.hasEventListener('test_event', eventTest, 0);
+    if (has) {
+      EventBus.removeEventListener('test_event', eventTest, 0);
+      setMsg('已删除test_event类型的eventTest事件');
+    } else {
+      setMsg('未找到test_event类型的eventTest事件');
+    }
   }
 
   function handleDispatch() {
@@ -102,7 +107,7 @@ function EventBusDemo() {
       EventBus.hasEventListener('test_event');
       setMsg('成功执行test_event类型的eventTest事件');
     } else {
-      setMsg('test_event类型的eventTest事件已被删除');
+      setMsg('test_event类型的eventTest事件已被删除或未找到事件');
     }
   }
 
