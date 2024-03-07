@@ -12,28 +12,24 @@ function App({ }): JSX.Element {
 
   const { message } = state
 
-  // {uri: 'https://copyright.bdstatic.com/vcg/creative/cc9c744cf9f7c864889c563cbdeddce6.jpg@h_1280'}
-  // require('./assets/ic_menu_black_24dp.png')
   return (
     <View style={styles.container}>
       <ToolbarAndroid
-        navIcon={require('./assets/ic_menu_black_24dp.png')}
-        // logo={require('./assets/icon_app.png')}
+        navIcon={require('../assets/ic_menu_black_24dp.png')}
+        logo={require('../assets/icon_app.png')}
         title={"ToolbarAndroid Example"}
-        // subtitle={'ToolbarAndroid Subtitle'}
-        // titleColor={'#FFFFFF'}
-        // subtitleColor={'#FF00FF'}
+        subtitle={'ToolbarAndroid Subtitle'}
+        titleColor={'#FFFFFF'}
+        subtitleColor={'#FF00FF'}
         contentInsetStart={10}
         contentInsetEnd={10}
-        rtl={false}
+        rtl={true}
         style={styles.toolbar}
         actions={[
-          { title: 'Action1', icon: require('./assets/icon_phone.png'), show: 'ifRoom', showWithText: true },
-          // { title: 'Action2Action2Action2Action2Action2Action2Action2Action2', icon: require('./assets/icon_copy.png'), show: 'ifRoom', showWithText: true },
-          // { title: 'Action3Action3Action3Action3Action3', icon: require('./assets/icon_note.png'), show: 'ifRoom', showWithText: true },
-          // { title: 'Action4', icon: require('./assets/icon_note.png'), show: 'ifRoom', showWithText: true }
+          { title: 'Action1', icon: require('../assets/icon_phone.png'), show: 'ifRoom', showWithText: true },
+          { title: 'Action2', icon: require('../assets/icon_copy.png'), show: 'ifRoom', showWithText: true }
         ]}
-        overflowIcon={require('./assets/relay.png')}
+        overflowIcon={require('../assets/relay.png')}
         onIconClicked={() => setState({ message: 'Clicked nav icon' })}
         onActionSelected={(position: number) => setState({ message: `Clicked Menu-${position}` })} />
       <View style={styles.centerContainer}>
