@@ -3,7 +3,7 @@ import { SafeAreaView, ScrollView, StatusBar, Button } from 'react-native';
 
 import Markdown from 'react-native-markdown-display';
 // import img from './img/img.png'
-const img = requeir('./img/img.png')
+const img = require('./img/img.png')
 const copy = `  
 ![Minion](${img})
 `;

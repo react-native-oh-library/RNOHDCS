@@ -2,7 +2,7 @@ import React from 'react';
 import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
 
 import Markdown, { MarkdownIt } from 'react-native-markdown-display'; 
-const blockEmbedPlugin  = require('markdown-it-block-embed')
+import blockEmbedPlugin from 'markdown-it-block-embed'
 
 const markdownItInstance = 
     MarkdownIt({typographer: true})
