@@ -52,7 +52,7 @@ const App: () => React$Node = () => {
           style={{height: '100%'}}
         >
             <Button
-              title={'mergeStyle is ${flag}'}
+              title={`mergeStyle is ${flag}`}
               onPress={pressFN}
               />
             <Markdown

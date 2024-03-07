@@ -1,5 +1,5 @@
-import React from 'react';
-import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
+import React,{useState} from 'react';
+import { SafeAreaView, ScrollView, StatusBar,View, Text , Button} from 'react-native';
 
 import Markdown from 'react-native-markdown-display';
 
@@ -225,9 +225,140 @@ const rules ={
     </View>
   ),
 }
+const rules2 = {
+  code_inline: (node, children, parent, styles, inheritedStyles = {}) => (
+    <Text key={node.key} style={[inheritedStyles, styles.code_inline]}>
+      
+      >> code_inline >> "{node.content}"
+    </Text>
+  ),
+  code_block: (node, children, parent, styles, inheritedStyles = {}) => {
+    // we trim new lines off the end of code blocks because the parser sends an extra one.
+    let {content} = node;
 
+    if (
+      typeof node.content === 'string' &&
+      node.content.charAt(node.content.length - 1) === '\n'
+    ) {
+      content = node.content.substring(0, node.content.length - 1);
+    }
+
+    return (
+      <Text key={node.key} style={[inheritedStyles, styles.code_block]}>
+        >> code_block >> "{content}"
+      </Text>
+    );
+  },
+  fence: (node, children, parent, styles, inheritedStyles = {}) => {
+    // we trim new lines off the end of code blocks because the parser sends an extra one.
+    let {content} = node;
+
+    if (
+      typeof node.content === 'string' &&
+      node.content.charAt(node.content.length - 1) === '\n'
+    ) {
+      content = node.content.substring(0, node.content.length - 1);
+    }
+
+    return (
+      <Text key={node.key} style={[inheritedStyles, styles.fence]}>
+        >> fence >> "{content}"
+      </Text>
+    );
+  },
+
+  // Tables
+  table: (node, children, parent, styles) => (
+    <View key={node.key} style={styles._VIEW_SAFE_table}>
+      {children}
+    </View>
+  ),
+  thead: (node, children, parent, styles) => (
+    <View key={node.key} style={styles._VIEW_SAFE_thead}>
+      {children}
+    </View>
+  ),
+  tbody: (node, children, parent, styles) => (
+    <View key={node.key} style={styles._VIEW_SAFE_tbody}>
+      {children}
+    </View>
+  ),
+  th: (node, children, parent, styles) => (
+    <View key={node.key} style={styles._VIEW_SAFE_th}>
+      {children}
+    </View>
+  ),
+  tr: (node, children, parent, styles) => (
+    <View key={node.key} style={styles._VIEW_SAFE_tr}>
+      {children}
+    </View>
+  ),
+  td: (node, children, parent, styles) => (
+    <View key={node.key} style={styles._VIEW_SAFE_td}>
+      {children}
+    </View>
+  ),
+
+
+  // Text Output
+  text: (node, children, parent, styles, inheritedStyles = {}) => {
+    let isTable = false;
+    parent.forEach((element) => {
+      if (element.type == 'table') {
+        isTable = true;
+      }
+    });
+    return (
+      <View style={{width: isTable ? ' 100%' : 'auto'}}>
+        <Text key={node.key} style={[inheritedStyles, styles.heading6]}>
+          {node.content}
+        </Text>
+      </View>
+    );
+  },
+  textgroup: (node, children, parent, styles) => (
+    <Text key={node.key} style={styles.textgroup}>
+      {children}
+    </Text>
+  ),
+  paragraph: (node, children, parent, styles) => (
+    <View key={node.key} style={styles._VIEW_SAFE_paragraph}>
+      {children}
+    </View>
+  ),
+  hardbreak: (node, children, parent, styles) => (
+    <Text key={node.key} style={styles.hardbreak}>
+      {'\n'}
+    </Text>
+  ),
+  softbreak: (node, children, parent, styles) => (
+    <Text key={node.key} style={styles.softbreak}>
+      {'\n'}
+    </Text>
+  ),
+
+  // Believe these are never used but retained for completeness
+  pre: (node, children, parent, styles) => (
+    <View key={node.key} style={styles._VIEW_SAFE_pre}>
+      {children}
+    </View>
+  ),
+  inline: (node, children, parent, styles) => (
+    <Text key={node.key} style={styles.inline}>
+      {children}
+    </Text>
+  ),
+  span: (node, children, parent, styles) => (
+    <Text key={node.key} style={styles.span}>
+      {children}
+    </Text>
+  ),
+}
 const App: () => React$Node = () => {
-
+const [newRules, setNewRules] = useState(rules);
+const changeRules = () =>{
+  setNewRules(rules2)
+}
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -236,8 +367,12 @@ const App: () => React$Node = () => {
           contentInsetAdjustmentBehavior="automatic"
           style={{height: '100%'}}
         >
+          <Button
+            title = "Change Rules"
+            onPress = {changeRules}
+          />
           <Markdown
-           rules={rules}
+           rules={newRules}
           >
             {copy}
           </Markdown>

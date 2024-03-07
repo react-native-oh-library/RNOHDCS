@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
+import { SafeAreaView, ScrollView, StatusBar, Text } from 'react-native';
 
 import Markdown from 'react-native-markdown-display';
 
@@ -23,7 +23,7 @@ const App: () => React$Node = () => {
         >
           <Markdown
             maxTopLevelChildren = {4}
-            topLevelMaxExceededItem = {`<Text key="dotdotdot">...</Text>`}
+            topLevelMaxExceededItem = {<Text key="dotdotdot">...</Text>}
           >
             {copy}
           </Markdown>

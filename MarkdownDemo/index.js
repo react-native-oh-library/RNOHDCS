@@ -17,77 +17,83 @@ import AllRules from './AllRules';
 import OnLinkPress from './OnLinkPress';
 import MarkdownIt from './MarkdownIt';
 import MaxTopLevelChildren from './MaxTopLevelChildren';
-import DebugPrintTree from './DebugPrintTree'
+import DebugPrintTree from './DebugPrintTree';
+import PreProcessing from './PreProcessing';
+import DefaultImageHandler from './DefaultImageHandler'
 
 
 function App() {
   return (
     <NavigationContainer>
-      <Page naeme="children: Heading">
+      <Page name="children: Heading">
         <Heading />
       </Page>
-      <Page naeme="children: Horizontal">
+      <Page name="children: Horizontal">
         <Horizontal />
       </Page>
-      <Page naeme="children: Emphasis">
+      <Page name="children: Emphasis">
         <Emphasis />
       </Page>
-      <Page naeme="children: Blockquotes">
+      <Page name="children: Blockquotes">
         <Blockquotes />
       </Page>
-      <Page naeme="children: Lists">
+      <Page name="children: Lists">
         <Lists />
       </Page>
-      <Page naeme="children: Code">
+      <Page name="children: Code">
         <Code />
       </Page>
-      <Page naeme="children: Tables">
+      <Page name="children: Tables">
         <Tables />
       </Page>
-      <Page naeme="children: Links">
+      <Page name="children: Links">
         <Links />
       </Page>
-      <Page naeme="children: Images">
+      <Page name="children: Images">
         <Images />
       </Page>
-      <Page naeme="children: baseImages">
+      <Page name="children: baseImages">
         <BaseImages />
       </Page>
-      <Page naeme="children: Typographic">
+      <Page name="children: Typographic">
         <Typographic />
       </Page>
 
-      <Page naeme="style: Style">
+      <Page name="style: Style">
         <Style />
       </Page>
 
-      <Page naeme="style: MergeStyle">
+      <Page name="style: MergeStyle">
         <MergeStyle />
       </Page>
 
-      <Page naeme="Rules: Rules">
+      <Page name="Rules: Rules">
         <Rules />
       </Page>
 
-      <Page naeme="Rules: AllRules">
+      <Page name="Rules: AllRules">
         <AllRules />
       </Page>
 
-      <Page naeme="OnLinkPress">
+      <Page name="OnLinkPress">
         <OnLinkPress />
       </Page>
-      <Page naeme="MarkdownIt">
+      <Page name="MarkdownIt">
         <MarkdownIt />
       </Page>
-      <Page naeme="PreProcessing">
+      <Page name="PreProcessing">
         <PreProcessing />
       </Page>
       
-      <Page naeme="MaxTopLevelChildren">
+      <Page name="MaxTopLevelChildren">
         <MaxTopLevelChildren />
       </Page>
-      <Page naeme="DebugPrintTree">
+      <Page name="DebugPrintTree">
         <DebugPrintTree />
+      </Page>
+
+      <Page name="DefaultImageHandler">
+        <DefaultImageHandler />
       </Page>
       
     </NavigationContainer>
