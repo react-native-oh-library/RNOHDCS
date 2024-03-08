@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { Button } from 'react-native';
-import PushNotificationIOS from 'react-native-push-notification';
+import PushNotification from '@react-native-oh-tpl/push-notification-ios';
 
-export const PushNotificationExample = () => {
+export const PushNotificationDemo = () => {
 
   const [data, setData] = useState({});
 
   const addNotificationRequest = () => {
-    PushNotificationIOS.addNotificationRequest({
+    console.log("PYNNN:111");
+    PushNotification.addNotificationRequest({
       id: 'test',
       title: 'title',
       subtitle: 'subtitle',
@@ -16,15 +17,12 @@ export const PushNotificationExample = () => {
       category: 'test',
       threadId: 'thread-id',
       fireDate: new Date(new Date().valueOf() + 2000),
-      repeats: true,
-      userInfo: {
-        image: 'https://www.github.com/Naturalclar.png',
-      }
+      repeats: true
     });
   };
 
   const addSilentNotificationRequest = () => {
-    PushNotificationIOS.addNotificationRequest({
+    PushNotification.addNotificationRequest({
       id: 'test-4',
       title: 'title',
       subtitle: 'subtitle',
@@ -33,15 +31,12 @@ export const PushNotificationExample = () => {
       isSilent: true,
       threadId: 'thread-id',
       fireDate: new Date(new Date().valueOf() + 2000),
-      repeats: true,
-      userInfo: {
-        image: 'https://www.github.com/Naturalclar.png',
-      }
+      repeats: true
     });
   };
 
   const addMultipleRequests = () => {
-    PushNotificationIOS.addNotificationRequest({
+    PushNotification.addNotificationRequest({
       id: 'test-1',
       title: 'First',
       subtitle: 'subtitle',
@@ -52,7 +47,7 @@ export const PushNotificationExample = () => {
       repeats: true,
     });
 
-    PushNotificationIOS.addNotificationRequest({
+    PushNotification.addNotificationRequest({
       id: 'test-2',
       title: 'Second',
       subtitle: 'subtitle',
@@ -63,7 +58,7 @@ export const PushNotificationExample = () => {
       repeats: true,
     });
 
-    PushNotificationIOS.addNotificationRequest({
+    PushNotification.addNotificationRequest({
       id: 'test-3',
       title: 'Third',
       subtitle: 'subtitle',
@@ -76,15 +71,15 @@ export const PushNotificationExample = () => {
   };
 
   const removeAllDeliveredNotifications = () => {
-    PushNotificationIOS.removeAllDeliveredNotifications();
+    PushNotification.removeAllDeliveredNotifications();
   };
 
   const removeDeliveredNotifications = () => {
-    PushNotificationIOS.removeDeliveredNotifications(['test-1', 'test-2']);
+    PushNotification.removeDeliveredNotifications(['test-1', 'test-2']);
   };
 
   const getDeliveredNotifications = () => {
-    PushNotificationIOS.getDeliveredNotifications((data) => {
+    PushNotification.getDeliveredNotifications((data) => {
       if (data) {
         setData(data)
       } else {
@@ -118,7 +113,7 @@ export const PushNotificationExample = () => {
       <Button
         title="Set app's icon badge to 42"
         onPress={() =>
-          PushNotificationIOS.setApplicationIconBadgeNumber(42)
+          PushNotification.setApplicationIconBadgeNumber(42)
         }
       />
 
@@ -127,7 +122,7 @@ export const PushNotificationExample = () => {
       <Button
         title="Clear app's icon badge"
         onPress={() =>
-          PushNotificationIOS.setApplicationIconBadgeNumber(0)
+          PushNotification.setApplicationIconBadgeNumber(0)
         }
       />
 
