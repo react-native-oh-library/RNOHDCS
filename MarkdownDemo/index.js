@@ -8,7 +8,7 @@ import Code from './Code';
 import Tables from './Tables';
 import Links from './Links';
 import Images from './Images';
-import BaseImages from './BaseImages'
+import BaseImages from './BaseImage'
 import Typographic from './Typographic';
 import Style from './Style';
 import MergeStyle from './MergeStyle';
