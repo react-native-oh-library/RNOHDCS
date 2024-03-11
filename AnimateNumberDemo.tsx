@@ -34,6 +34,10 @@ const App = () => {
                 <AnimateNumber value={value} timing="linear" countBy={1} interval={140} steps={45} />
             </Text>
             <Text style={styles.row}>
+                <Text>steps:</Text>
+                <AnimateNumber value={value} steps={5} interval={2000} />
+            </Text>
+            <Text style={styles.row}>
                 <Text>Formate Example:</Text>
                 <AnimateNumber value={value} countBy={1} interval={150} formatter={(val) => {
                     return '$ ' + parseFloat(val).toFixed(2)
