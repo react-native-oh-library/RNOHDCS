@@ -31,10 +31,6 @@ const App = () => {
             </Text>
             <Text style={styles.row}>
                 <Text>steps:</Text>
-                <AnimateNumber value={value} timing="linear" countBy={1} interval={140} steps={45} />
-            </Text>
-            <Text style={styles.row}>
-                <Text>steps:</Text>
                 <AnimateNumber value={value} steps={5} interval={2000} />
             </Text>
             <Text style={styles.row}>
