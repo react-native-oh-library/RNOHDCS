@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webview Demo</title>
+    <script>
+        // 监听来自postMessage的消息
+        window.addEventListener('message', function (event) {
+            // event.data 包含发送过来的消息
+            var receivedMessage = event.data;
+            // 在页面中显示接收到的消息
+            var messageContainer = document.getElementById('messageContainer');
+            messageContainer.innerHTML += '<p>Received Message: ' + receivedMessage + '</p>';
+        });
+
+        // 向React Native发送消息的函数
+        function sendMessageToReactNative() {
+            var message = 'Hello from Web Page!!';
+            // 发送消息给React Native
+            window.parent.postMessage(message, '*');
+            // window.ReactNativeWebView.postMessage(message, '*');
+        }
+    </script>
+</head>
+
+<body>
+    <button onclick="sendMessageToReactNative()">Send Message to React Native</button>
+    <div id="messageContainer"></div>
+</body>
+
+</html>
