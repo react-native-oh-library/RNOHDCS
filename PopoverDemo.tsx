@@ -27,6 +27,8 @@ const PopoverDemo = () => {
               onRequestClose={() => {setShowPopoverA(false)}}
               >
               <Text>This is the contents of the popoverA</Text>
+              <Text>This is the contents of the popoverB</Text>
+              <Text>This is the contents of the popoverC</Text>
             </Popover>
             <TouchableOpacity>
                 <Text>test:mode、offset、placement、popoverShift、popoverStyle、backgroundStyle、arrowSize、arrowShift、animationConfig</Text>
