@@ -5,7 +5,6 @@ import Markdown from 'react-native-markdown-display';
 
 const styles = StyleSheet.create({
   heading1: {
-    fontSize: 32,
     backgroundColor: '#000000',
     color: '#FFFFFF',
   },
