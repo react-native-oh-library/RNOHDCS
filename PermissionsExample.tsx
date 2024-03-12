@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, View, Text } from 'react-native';
-import RTNPermissions, { Permission } from '@react-native-oh-tpl/react-native-permissions';
+import RTNPermissions, { NotificationsResponse, Permission, PermissionStatus } from 'react-native-permissions';
 import React, { useState } from 'react';
 import { Button } from '../components';
 
@@ -31,138 +31,164 @@ export function PermissionsExample() {
             <Text style={styles.text}>{result}</Text>
 
             <ScrollView style={styles.buttonArea}>
+
+                <View style={styles.view}>
+                    <Button label={'打开设置页面'}
+                        onPress={() => {
+                            RTNPermissions.openSettings();
+                        }} />
+                </View>
+
                 <View style={styles.view}>
                     <Button label={'查询相机权限'}
                         onPress={async () => {
-                            let check = await RTNPermissions.check('ohos.permission.GET_INSTALLED_BUNDLE_LIST');
+                            let check: PermissionStatus | undefined = await RTNPermissions.check('ohos.permission.CAMERA');
                             setResult(check + '');
-                            console.info('RTNPermissions===== check', check);
+                            check = undefined
                         }} />
                     <Button label={'设置相机权限'}
                         onPress={async () => {
-                            let request = await RTNPermissions.request('ohos.permission.CAMERA');
+                            let request: PermissionStatus | undefined = await RTNPermissions.request('ohos.permission.CAMERA');
                             setResult(request);
-                            console.info('RTNPermissions===== request', request);
+                            request = undefined
                         }} />
                 </View>
 
                 <View style={styles.view}>
                     <Button label={'查询麦克风权限'}
                         onPress={async () => {
-                            let check = await RTNPermissions.check('ohos.permission.MICROPHONE');
+                            let check: PermissionStatus | undefined = await RTNPermissions.check('ohos.permission.MICROPHONE');
                             setResult(check + '');
-                            console.info('RTNPermissions===== check', check);
+                            check = undefined
                         }} />
                     <Button label={'设置麦克风权限'}
                         onPress={async () => {
-                            let request = await RTNPermissions.request('ohos.permission.MICROPHONE');
+                            let request: PermissionStatus | undefined = await RTNPermissions.request('ohos.permission.MICROPHONE');
                             setResult(request);
-                            console.info('RTNPermissions===== request', request);
+                            request = undefined
                         }} />
                 </View>
 
                 <View style={styles.view}>
                     <Button label={'查询日历读取权限'}
                         onPress={async () => {
-                            let check = await RTNPermissions.check('ohos.permission.READ_CALENDAR');
+                            let check: PermissionStatus | undefined = await RTNPermissions.check('ohos.permission.READ_CALENDAR');
                             setResult(check + '');
-                            console.info('RTNPermissions===== check', check);
+                            check = undefined
                         }} />
                     <Button label={'设置日历读取权限'}
                         onPress={async () => {
-                            let request = await RTNPermissions.request('ohos.permission.READ_CALENDAR');
+                            let request: PermissionStatus | undefined = await RTNPermissions.request('ohos.permission.READ_CALENDAR');
                             setResult(request);
-                            console.info('RTNPermissions===== request', request);
+                            request = undefined
                         }} />
                 </View>
 
                 <View style={styles.view}>
                     <Button label={'查询日历添加、移除或更改日历活动权限'}
                         onPress={async () => {
-                            let check = await RTNPermissions.check('ohos.permission.WRITE_CALENDAR');
+                            let check: PermissionStatus | undefined = await RTNPermissions.check('ohos.permission.WRITE_CALENDAR');
                             setResult(check + '');
-                            console.info('RTNPermissions===== check', check);
+                            check = undefined
                         }} />
                     <Button label={'设置日历添加、移除或更改日历活动权限'}
                         onPress={async () => {
-                            let request = await RTNPermissions.request('ohos.permission.WRITE_CALENDAR');
+                            let request: PermissionStatus | undefined = await RTNPermissions.request('ohos.permission.WRITE_CALENDAR');
                             setResult(request);
-                            console.info('RTNPermissions===== request', request);
+                            request = undefined
                         }} />
                 </View>
 
                 <View style={styles.view}>
                     <Button label={'查询健身运动权限'}
                         onPress={async () => {
-                            let check = await RTNPermissions.check('ohos.permission.ACTIVITY_MOTION');
+                            let check: PermissionStatus | undefined = await RTNPermissions.check('ohos.permission.ACTIVITY_MOTION');
                             setResult(check + '');
-                            console.info('RTNPermissions===== check', check);
+                            check = undefined
                         }} />
                     <Button label={'设置健身运动权限'}
                         onPress={async () => {
-                            let request = await RTNPermissions.request('ohos.permission.ACTIVITY_MOTION');
+                            let request: PermissionStatus | undefined = await RTNPermissions.request('ohos.permission.ACTIVITY_MOTION');
                             setResult(request);
-                            console.info('RTNPermissions===== request', request);
+                            request = undefined
                         }} />
                 </View>
 
                 <View style={styles.view}>
                     <Button label={'查询身体传感器权限'}
                         onPress={async () => {
-                            let check = await RTNPermissions.check('ohos.permission.READ_HEALTH_DATA');
+                            let check: PermissionStatus | undefined = await RTNPermissions.check('ohos.permission.READ_HEALTH_DATA');
                             setResult(check + '');
-                            console.info('RTNPermissions===== check', check);
+                            check = undefined
                         }} />
                     <Button label={'设置身体传感器权限'}
                         onPress={async () => {
                             let request = await RTNPermissions.request('ohos.permission.READ_HEALTH_DATA');
                             setResult(request);
-                            console.info('RTNPermissions===== request', request);
                         }} />
                 </View>
 
                 <View style={styles.view}>
                     <Button label={'查询多设备协同权限'}
                         onPress={async () => {
-                            let check = await RTNPermissions.check('ohos.permission.DISTRIBUTED_DATASYNC');
+                            let check: PermissionStatus | undefined = await RTNPermissions.check('ohos.permission.DISTRIBUTED_DATASYNC');
                             setResult(check + '');
-                            console.info('RTNPermissions===== check', check);
+                            check = undefined
                         }} />
                     <Button label={'设置多设备协同权限'}
                         onPress={async () => {
-                            let request = await RTNPermissions.request('ohos.permission.DISTRIBUTED_DATASYNC');
+                            let request: PermissionStatus | undefined = await RTNPermissions.request('ohos.permission.DISTRIBUTED_DATASYNC');
                             setResult(request);
-                            console.info('RTNPermissions===== request', request);
+                            request = undefined
                         }} />
                 </View>
 
                 <View style={styles.view}>
                     <Button label={'查询蓝牙权限'}
                         onPress={async () => {
-                            let check = await RTNPermissions.check('ohos.permission.ACCESS_BLUETOOTH');
+                            let check: PermissionStatus | undefined = await RTNPermissions.check('ohos.permission.ACCESS_BLUETOOTH');
                             setResult(check + '');
-                            console.info('RTNPermissions===== check', check);
+                            check = undefined
                         }} />
                     <Button label={'设置蓝牙权限'}
                         onPress={async () => {
-                            let request = await RTNPermissions.request('ohos.permission.ACCESS_BLUETOOTH');
+                            let request: PermissionStatus | undefined = await RTNPermissions.request('ohos.permission.ACCESS_BLUETOOTH');
                             setResult(request);
-                            console.info('RTNPermissions===== request', request);
+                            request = undefined
                         }} />
+                </View>
+
+                <View style={styles.view}>
+                    <Button
+                        label={'查询通知权限'}
+                        onPress={async () => {
+                            let checkNotifications: NotificationsResponse | undefined = await RTNPermissions.checkNotifications();
+                            setResult(JSON.stringify(checkNotifications.status));
+                            checkNotifications = undefined
+                        }}
+                    />
+                    <Button
+                        label={'设置通知权限'}
+                        onPress={async () => {
+                            let requestNotifications: NotificationsResponse | undefined = await RTNPermissions.requestNotifications([]);
+                            setResult('granted');
+                            requestNotifications = undefined
+                        }}
+                    />
                 </View>
 
                 <View style={styles.view}>
                     <Button label={'查询读取用户外部存储中的媒体文件信息权限'}
                         onPress={async () => {
-                            let check = await RTNPermissions.check('ohos.permission.READ_MEDIA');
+                            let check: PermissionStatus | undefined = await RTNPermissions.check('ohos.permission.READ_MEDIA');
                             setResult(check + '');
-                            console.info('RTNPermissions===== check', check);
+                            check = undefined
                         }} />
                     <Button label={'设置读取用户外部存储中的媒体文件信息权限'}
                         onPress={async () => {
-                            let request = await RTNPermissions.request('ohos.permission.READ_MEDIA');
+                            let request: PermissionStatus | undefined = await RTNPermissions.request('ohos.permission.READ_MEDIA');
                             setResult(request);
-                            console.info('RTNPermissions===== request', request);
+                            request = undefined
                         }} />
                 </View>
 
@@ -170,15 +196,15 @@ export function PermissionsExample() {
                 <View style={styles.view}>
                     <Button label={'查询访问图片与视频权限'}
                         onPress={async () => {
-                            let check = await RTNPermissions.check('ohos.permission.MEDIA_LOCATION');
+                            let check: PermissionStatus | undefined = await RTNPermissions.check('ohos.permission.MEDIA_LOCATION');
                             setResult(check + '');
-                            console.info('RTNPermissions===== check', check);
+                            check = undefined
                         }} />
                     <Button label={'设置访问图片与视频权限'}
                         onPress={async () => {
-                            let request = await RTNPermissions.request('ohos.permission.MEDIA_LOCATION');
+                            let request: PermissionStatus | undefined = await RTNPermissions.request('ohos.permission.MEDIA_LOCATION');
                             setResult(request);
-                            console.info('RTNPermissions===== request', request);
+                            request = undefined
                         }} />
                 </View>
 
@@ -186,17 +212,17 @@ export function PermissionsExample() {
                     <Button
                         label={'查询应用获取设备位置信息权限'}
                         onPress={async () => {
-                            let check = await RTNPermissions.check('ohos.permission.APPROXIMATELY_LOCATION');
+                            let check: PermissionStatus | undefined = await RTNPermissions.check('ohos.permission.APPROXIMATELY_LOCATION');
                             setResult(check + '');
-                            console.info('RTNPermissions===== check', check);
+                            check = undefined
                         }}
                     />
                     <Button
                         label={'设置应用获取设备位置信息权限'}
                         onPress={async () => {
-                            let request = await RTNPermissions.request('ohos.permission.APPROXIMATELY_LOCATION');
+                            let request: PermissionStatus | undefined = await RTNPermissions.request('ohos.permission.APPROXIMATELY_LOCATION');
                             setResult(request);
-                            console.info('RTNPermissions===== request', request);
+                            request = undefined
                         }}
                     />
                 </View>
@@ -205,31 +231,22 @@ export function PermissionsExample() {
                     <Button
                         label={'查询多个权限'}
                         onPress={async () => {
-                            let checkMultiple = await RTNPermissions.checkMultiple(permissionNormal);
+                            let checkMultiple: Record<Permission, PermissionStatus> | undefined = await RTNPermissions.checkMultiple(permissionNormal);
                             setResult(JSON.stringify(checkMultiple));
-                            console.info('RTNPermissions===== checkMultiple', checkMultiple);
+                            checkMultiple = undefined
                         }}
                     />
                     <Button
                         label={'设置多个权限'}
                         onPress={async () => {
-                            let requestMultiple = await RTNPermissions.requestMultiple(permissionNormal);
+                            let requestMultiple: Record<Permission, PermissionStatus> | undefined = await RTNPermissions.requestMultiple(permissionNormal);
                             setResult(JSON.stringify(requestMultiple));
-                            console.info('RTNPermissions===== requestMultiple', requestMultiple);
+                            requestMultiple = undefined
+
                         }}
                     />
                 </View>
 
-                <View style={styles.view}>
-                    <Button
-                        label={'设置通知权限'}
-                        onPress={async () => {
-                            let requestNotifications = await RTNPermissions.requestNotifications([]);
-                            setResult('granted');
-                            console.info('RTNPermissions===== requestMultiple', requestNotifications);
-                        }}
-                    />
-                </View>
             </ScrollView>
         </View>
     );
