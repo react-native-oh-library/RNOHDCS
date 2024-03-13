@@ -81,13 +81,13 @@ export function MapsDemo() {
         <Page name="Gradient Polylines">
           <GradientPolylines />
         </Page>
-        <Page name="Animating with MapViews 原库demo报错 勿点">
+        {/* <Page name="Animating with MapViews 原库demo报错 勿点">
           <AnimatedViews />
         </Page>
         <Page name="Animated Marker Position 原库demo报错 勿点">
           <AnimatedMarkers />
-        </Page>
-        <Page name="Custom Callouts 华为地图marker自带，但是不能自定义样式">
+        </Page> */}
+        <Page name="Custom Callouts 华为地图不支持">
           <Callouts />
         </Page>
         <Page name="Circles, Polygons, and Polylines">
@@ -99,42 +99,42 @@ export function MapsDemo() {
         <Page name="Custom Markers">
           <CustomMarkers />
         </Page>
-        <Page name="Take Snapshot 原库没有正确返回">
+        <Page name="Take Snapshot">
           <TakeSnapshot />
         </Page>
-        <Page name="Cached Map 原库无显示效果">
+        {/* <Page name="Cached Map 原库无显示效果">
           <CachedMap />
-        </Page>
+        </Page> */}
         <Page name="Map with loading 华为地图不支持">
           <LoadingMap />
         </Page>
         <Page name="Get visible map boundaries 华为地图不支持">
           <MapBoundaries />
         </Page>
-        <Page name="Focus Map On Markers 原库无显示效果">
+        {/* <Page name="Focus Map On Markers 原库无显示效果">
           <FocusOnMarkers />
-        </Page>
+        </Page> */}
         <Page name="Fit Map To Coordinates getMarkersFrames">
           <FitToCoordinates />
         </Page>
         <Page name="Android Lite MapView 华为地图不支持">
           <LiteMapView />
         </Page>
-        <Page name="Custom Tiles 原库无效果显示，华为地图也没看到类似能力">
+        <Page name="Custom Tiles 华为地图不支持">
           <CustomTiles />
         </Page>
-        <Page name="WMS Tiles 原库无效果显示，华为地图也没看到类似能力">
+        <Page name="WMS Tiles 华为地图不支持">
           <WMSTiles />
         </Page>
         <Page name="Position Markers with Z-index 华为地图不支持给 Marker 设置颜色">
           <ZIndexMarkers />
         </Page>
-        <Page name="Customize the style of the map 华为地图不支持自定义样式">
+        <Page name="Customize the style of the map 华为地图不支持">
           <MapStyle />
         </Page>
-        <Page name="Reposition the legal label 与地图控件无关">
+        {/* <Page name="Reposition the legal label 与地图控件无关">
           <LegalLabel />
-        </Page>
+        </Page> */}
         <Page name="Update native props">
           <SetNativePropsOverlays />
         </Page>
@@ -147,16 +147,16 @@ export function MapsDemo() {
         <Page name="Load Map with KML 华为地图不支持">
           <MapKml />
         </Page>
-        <Page name="BUG: Marker Won't Update (Android) 原库未实现，无实际意义">
+        {/* <Page name="BUG: Marker Won't Update (Android) 原库未实现，无实际意义">
           <BugMarkerWontUpdate />
-        </Page>
-        <Page name="Image Overlay Component with Assets 需要自定义view去实现此功能">
+        </Page> */}
+        <Page name="Image Overlay Component with Assets 华为地图不支持">
           <ImageOverlayWithAssets />
         </Page>
-        <Page name="Image Overlay Component with URL 需要自定义view去实现此功能">
+        <Page name="Image Overlay Component with URL 华为地图不支持">
           <ImageOverlayWithURL />
         </Page>
-        <Page name="Image Overlay with Bearing 需要自定义view去实现此功能">
+        <Page name="Image Overlay with Bearing 华为地图不支持">
           <ImageOverlayWithBearing />
         </Page>
         <Page name="Animated Map Navigation">
