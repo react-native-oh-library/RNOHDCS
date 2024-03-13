@@ -20,6 +20,7 @@ import MaxTopLevelChildren from './MaxTopLevelChildren';
 import DebugPrintTree from './DebugPrintTree';
 import PreProcessing from './PreProcessing';
 import DefaultImageHandler from './DefaultImageHandler'
+import Renderer from './Renderer'
 
 
 function App() {
@@ -94,6 +95,10 @@ function App() {
 
       <Page name="DefaultImageHandler">
         <DefaultImageHandler />
+      </Page>
+
+      <Page name="Renderer">
+        <Renderer />
       </Page>
       
     </NavigationContainer>
