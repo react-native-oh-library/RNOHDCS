@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, Button, StyleSheet, TextInput } from 'react-native';
 import dayjs from 'dayjs'
+import 'dayjs/locale/zh-cn'
 import advancedFormat from 'dayjs/plugin/advancedFormat'
 import arraySupport from 'dayjs/plugin/arraySupport'
 import bigIntSupport from 'dayjs/plugin/bigIntSupport'
@@ -25,10 +26,18 @@ import objectSupport from 'dayjs/plugin/objectSupport'
 import pluralGetSet from 'dayjs/plugin/pluralGetSet'
 import quarterOfYear from 'dayjs/plugin/quarterOfYear'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import toArray from 'dayjs/plugin/toArray'
+import toObject from 'dayjs/plugin/toObject'
+import updateLocale from 'dayjs/plugin/updateLocale'
+import utc from 'dayjs/plugin/utc'
+import weekOfYear from 'dayjs/plugin/weekOfYear'
+import weekYear from 'dayjs/plugin/weekYear'
+import weekday from 'dayjs/plugin/weekday'
+
 
 
 const PluginDemo = () => {
-
+  dayjs.locale('zh-cn')
   dayjs.extend(advancedFormat)
   dayjs.extend(arraySupport)
   dayjs.extend(bigIntSupport)
@@ -53,15 +62,23 @@ const PluginDemo = () => {
   dayjs.extend(pluralGetSet)
   dayjs.extend(quarterOfYear)
   dayjs.extend(relativeTime)
+  dayjs.extend(toArray)
+  dayjs.extend(toObject)
+  dayjs.extend(updateLocale)
+  dayjs.extend(utc)
+  dayjs.extend(weekOfYear)
+  dayjs.extend(weekYear)
+dayjs.extend(weekday)
+
 
   const [durationValue, setDurationValue] = useState('')
-  const [betweenA, setBetweenA] = useState('')
-  const [betweenB, setBetweenB] = useState('')
-  const [middle, setMiddle] = useState('')
+  const [betweenA, setBetweenA] = useState('2024-04-01')
+  const [betweenB, setBetweenB] = useState('2024-04-08')
+  const [middle, setMiddle] = useState('2024-04-05')
   const [isBetweenBool, setIsBetweenBool] = useState(false)
   const [leapYear, setLeapYear] = useState('2024')
-  const [compareDateA, setCompareDateA] = useState('')
-  const [compareDateB, setCompareDateB] = useState('')
+  const [compareDateA, setCompareDateA] = useState('2024-04-01')
+  const [compareDateB, setCompareDateB] = useState('2024-04-05')
   const [isSameOrAfterBool, setIsSameOrAfterBool] = useState(false)
   const [isSameOrBeforeBool, setIsSameOrBeforeBool] = useState(false)
   const [isTodayData, setIsTodayData] = useState('2024-03-11')
@@ -72,10 +89,23 @@ const PluginDemo = () => {
   const [minMaxDataA, setMinMaxDataA] = useState('2021-05-01')
   const [minMaxDataB, setMinMaxDataB] = useState('2023-01-08')
   const [quarterOfYearData, setQuarterOfYearData] = useState('2024-01-01')
+  const [weekOfYearData, setWeekOfYearData] = useState('2024-01-01')
+  const [weekDayData, setWeekDayData] = useState(dayjs().weekday())
 
 
   const globalLocaleData = dayjs().localeData()
-
+  // 修改语言配置
+  dayjs.updateLocale('zh-cn', {
+    // A : 上午/下午/晚上 , dddd: 星期
+    calendar: {
+      lastDay: 'YYYY.MM.DD [昨天] A h:mm dddd',
+      sameDay: 'YYYY.MM.DD [今天] A h:mm dddd',
+      nextDay: 'YYYY.MM.DD [明天] A h:mm dddd',
+      lastWeek: 'YYYY.MM.DD A h:mm [上]dddd',
+      nextWeek: 'YYYY.MM.DD A h:mm [下]dddd',
+      sameElse: 'YYYY.MM.DD A h:mm dddd',
+    },
+  });
 
   return (
     <View style={styles.container}>
@@ -394,7 +424,7 @@ const PluginDemo = () => {
       </View>
 
       <View style={styles.viewBox}>
-        <Text style={[styles.headerTitle, styles.interval]}>插件：PluralGetSet增加了 .from .to .fromNow .toNow 4 个 API 来展示相对的时间 (e.g. 3 小时以前).</Text>
+        <Text style={[styles.headerTitle, styles.interval]}>插件：RelativeTime增加了 .from .to .fromNow .toNow 4 个 API 来展示相对的时间 (e.g. 3 小时以前).</Text>
         <Text style={[styles.formatLabel, styles.interval]}>.from 距离 X 的相对时间: {dayjs().from(dayjs('2010-01-01'))}</Text>
         <Text style={[styles.formatLabel, styles.interval]}>.fromNow  X 距离现在的相对时间: {dayjs('2024-01-01').fromNow()}</Text>
         <Text style={[styles.formatLabel, styles.interval]}>.to 到 X 的相对时间: {dayjs().to(dayjs('2010-01-01'))}</Text>
@@ -402,11 +432,44 @@ const PluginDemo = () => {
       </View>
 
       <View style={styles.viewBox}>
-        <Text style={[styles.headerTitle, styles.interval]}>插件：PluralGetSet增加了 .from .to .fromNow .toNow 4 个 API 来展示相对的时间 (e.g. 3 小时以前).</Text>
-        <Text style={[styles.formatLabel, styles.interval]}>.from 距离 X 的相对时间: {dayjs().from(dayjs('2010-01-01'))}</Text>
-        <Text style={[styles.formatLabel, styles.interval]}>.fromNow  X 距离现在的相对时间: {dayjs('2024-01-01').fromNow()}</Text>
-        <Text style={[styles.formatLabel, styles.interval]}>.to 到 X 的相对时间: {dayjs().to(dayjs('2010-01-01'))}</Text>
-        <Text style={[styles.formatLabel, styles.interval]}>.toNow X 到现在的相对时间: {dayjs('2024-01-01').toNow()}</Text>
+        <Text style={[styles.headerTitle, styles.interval]}>插件：ToArray增加了 .toArray() API 来返回包含时间数值的 array。</Text>
+        <Text style={[styles.formatLabel, styles.interval]}>{dayjs().toArray()}</Text>
+      </View>
+      
+      <View style={styles.viewBox}>
+        <Text style={[styles.headerTitle, styles.interval]}>插件：ToObject增加了 .toObject() API 来返回包含时间数值的 object。</Text>
+        <Text style={[styles.formatLabel, styles.interval]}>年：{dayjs().toObject().years}</Text>
+        <Text style={[styles.formatLabel, styles.interval]}>月：{dayjs().toObject().months + 1}</Text>
+      </View>
+
+      <View style={styles.viewBox}>
+        <Text style={[styles.headerTitle, styles.interval]}>插件：UpdateLocale 增加了 .updateLocale API 来更新语言配置的属性。</Text>
+        <Text style={[styles.formatLabel, styles.interval]}>{dayjs().calendar()}</Text>
+      </View>
+
+      <View style={styles.viewBox}>
+        <Text style={[styles.headerTitle, styles.interval]}>插件：UTC 增加了 .utc .local .isUTC APIs 使用 UTC 模式来解析和展示时间。</Text>
+        <Text style={[styles.formatLabel, styles.interval]}>将本地时间转换成 UTC 时间:</Text>
+        <Text style={[styles.formatLabel, styles.interval]}>{dayjs().utc().format()}</Text>
+      </View>
+
+      <View style={styles.viewBox}>
+        <Text style={[styles.headerTitle, styles.interval]}>插件：WeekOfYear 增加了 .week() API 返回一个 number 来表示 Day.js 的日期是年中第几周。</Text>
+        <TextInput
+            style={[styles.inputStyle, { width: 100, marginRight: 10 }]}
+            onChangeText={text => setWeekOfYearData(text)}
+            value={weekOfYearData}
+          />
+        <Text style={[styles.formatLabel, styles.interval]}>是第{dayjs(weekOfYearData).week()}周</Text>
+      </View>
+
+      <View style={styles.viewBox}>
+        <Text style={[styles.headerTitle, styles.interval]}>插件：WeekYear 增加了 .weekYear() API 来获取基于当前语言的按周计算的年份。</Text>
+        <Text style={[styles.formatLabel, styles.interval]}>{dayjs().weekYear()}</Text>
+      </View>
+      <View style={styles.viewBox}>
+        <Text style={[styles.headerTitle, styles.interval]}>插件：WeekDay 增加了 .weekday() API 来获取或设置当前语言的星期。</Text>
+        <Text style={[styles.formatLabel, styles.interval]}>{weekDayData}</Text>
       </View>
 
     </View>
@@ -420,7 +483,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 50,
-    padding: 8
+    padding: 2
   },
   textCommon: {
     marginBottom: 10,
@@ -455,6 +518,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: "center",
     justifyContent: "center"
+  },
+  flexRowBetween: {
+    flexDirection: 'row',
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom:10
   },
   flexColCenter: {
     alignItems: "center",
