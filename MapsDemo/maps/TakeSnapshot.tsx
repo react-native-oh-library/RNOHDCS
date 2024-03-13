@@ -23,14 +23,14 @@ const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const SPACE = 0.01;
 
-interface Spec extends TurboModule{
-  getCamera(): string;
-  setCamera(camera: Camera): void;
-}
+// interface Spec extends TurboModule{
+//   getCamera(): string;
+//   setCamera(camera: Camera): void;
+// }
 
 class MarkerTypes extends React.Component<any, any> {
   
-  airMapTurbo = TurboModuleRegistry.get<Spec>('AIRMapManager')!
+  // airMapTurbo = TurboModuleRegistry.get<Spec>('AIRMapManager')!
 
   map: any;
   constructor(props: any) {
@@ -40,23 +40,55 @@ class MarkerTypes extends React.Component<any, any> {
     };
   }
 
-  takeSnapshot() {
-    this.map.takeSnapshot(
-      300,
-      300,
-      {
+  async takeSnapshot() {
+    console.log('liwang-----rnlogs-----takeSnapsho----->start');
+    // let result = await this.map.takeSnapshot({
+    //   width: 300,
+    //   height: 300,
+    //   region: {
+    //     latitude: LATITUDE - SPACE,
+    //     longitude: LONGITUDE - SPACE,
+    //     latitudeDelta: 0.01,
+    //     longitudeDelta: 0.01 * ASPECT_RATIO,
+    //   }
+    // });
+
+    this.map.takeSnapshot({
+      width: 300,
+      height: 300,
+      region: {
         latitude: LATITUDE - SPACE,
         longitude: LONGITUDE - SPACE,
         latitudeDelta: 0.01,
         longitudeDelta: 0.01 * ASPECT_RATIO,
-      },
-      (err: any, data: any) => {
-        if (err) {
-          console.log(err);
-        }
-        this.setState({mapSnapshot: data});
-      },
-    );
+      }
+    }).then((result:string)=>{
+      console.log('liwang-----rnlogs-----takeSnapsho----->then=' + JSON.stringify(result));
+
+      let resultData = {
+        uri: result,
+      }
+      this.setState({mapSnapshot: resultData});
+    });
+    // this.map.takeSnapshot({
+    //   width: 300,
+    //   height: 300,
+    //   region: {
+    //     latitude: LATITUDE - SPACE,
+    //     longitude: LONGITUDE - SPACE,
+    //     latitudeDelta: 0.01,
+    //     longitudeDelta: 0.01 * ASPECT_RATIO,
+    //   }
+    // }).then((err: any, data: any) => {
+    //   if (err) {
+    //     console.log(err);
+    //   }
+    //   console.log('liwang-----rnlogs-----takeSnapsho----->data=' + data)
+    //   let resultData = {
+    //     uri: data,
+    //   }
+    //   this.setState({mapSnapshot: resultData});
+    // });
   }
 
   render() {
