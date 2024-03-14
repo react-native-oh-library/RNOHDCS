@@ -34,7 +34,7 @@ const App: () => React$Node = () => {
               style={{
                 body: {color: 'red', fontSize: 10},
                 heading1: {color: 'purple'},
-                fence: {color: 'black', fontSize: 14}
+                code_block: {color: 'black', fontSize: 14}
               }}
             >
               {copy}
