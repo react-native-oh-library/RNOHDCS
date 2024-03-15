@@ -18,32 +18,23 @@ export default function StandaloneRow(){
     const onRowOpen = rowKey =>{
         setLog2('在行动画打开时调用')
     }
+    const empty6 = () => { setLog6('') }
+    const [log6,setLog6] = useState('')
     const onRowDidOpen = rowKey =>{
-        setLog2('在行动画已打开时调用')
+        setLog6('在行动画已打开时调用')
     } 
+
     const empty3 = () => { setLog3('') }
     const [log3,setLog3] = useState('')
     const onRowClose = rowKey =>{
         setLog3('在行动画关闭时调用')
     }
-    const onRowDidClose = rowKey =>{
-        setLog3('在行动画已关闭时调用')
-    }
+    
     const empty4 = () => { setLog4('') 
-    setLog5('') }
+    }
     const [log4,setLog4] = useState('')
-    const onLeftActionStatusChange = rowKey =>{
-        setLog4('当滑动值越过左侧ActivationValue时调用一次')
-    }
-    const onRightActionStatusChange = rowKey =>{
-        setLog4('当滑动值越过右侧ActivationValue时调用一次')
-    }
-    const [log5,setLog5] = useState('')
-    const onLeftAction = rowKey =>{
-        setLog5('onLeftAction')
-    }
-    const onRightAction = rowKey =>{
-        setLog5('onRightAction')
+    const onRowDidClose = rowKey =>{
+        setLog4('在行动画已关闭时调用')
     }
     return (
         <View style={styles.container}>
@@ -60,11 +51,21 @@ export default function StandaloneRow(){
                         <Text>I am standalone SwipeRow #1</Text>
                     </View>
                 </SwipeRow>
-                <View style={styles.spacer} />
-                <Text>onRowOpen/onRowDidOpen:<Text style={[{color:'blue'}]}>{log2}</Text></Text>
+                <Text>onRowOpen:<Text style={[{color:'blue'}]}>{log2}</Text></Text>
                 <Text onPress={empty2} style={styles.empty}>清空日志</Text>
                 <SwipeRow leftOpenValue={75} rightOpenValue={-75}
-                onRowOpen={onRowOpen}
+                onRowOpen={onRowOpen}>
+                    <View style={styles.standaloneRowBack}>
+                        <Text style={styles.backTextWhite}>Left</Text>
+                        <Text style={styles.backTextWhite}>Right</Text>
+                    </View>
+                    <View style={styles.standaloneRowFront}>
+                        <Text>I am standalone SwipeRow #1</Text>
+                    </View>
+                </SwipeRow>
+                <Text>onRowDidOpen:<Text style={[{color:'blue'}]}>{log6}</Text></Text>
+                <Text onPress={empty6} style={styles.empty}>清空日志</Text>
+                <SwipeRow leftOpenValue={75} rightOpenValue={-75}
                 onRowDidOpen={onRowDidOpen}>
                     <View style={styles.standaloneRowBack}>
                         <Text style={styles.backTextWhite}>Left</Text>
@@ -74,11 +75,24 @@ export default function StandaloneRow(){
                         <Text>I am standalone SwipeRow #1</Text>
                     </View>
                 </SwipeRow>
-                <View style={styles.spacer} />
-                <Text>onRowClose/onRowDidClose:<Text style={[{color:'blue'}]}>{log3}</Text></Text>
+
+
+                <Text>onRowClose:<Text style={[{color:'blue'}]}>{log3}</Text></Text>
                 <Text onPress={empty3} style={styles.empty}>清空日志</Text>
                 <SwipeRow leftOpenValue={75} rightOpenValue={-75}
-                onRowClose={onRowClose}
+                onRowClose={onRowClose}>
+                    <View style={styles.standaloneRowBack}>
+                        <Text style={styles.backTextWhite}>Left</Text>
+                        <Text style={styles.backTextWhite}>Right</Text>
+                    </View>
+                    <View style={styles.standaloneRowFront}>
+                        <Text>I am standalone SwipeRow #1</Text>
+                    </View>
+                </SwipeRow>
+
+                <Text>onRowDidClose:<Text style={[{color:'blue'}]}>{log4}</Text></Text>
+                <Text onPress={empty4} style={styles.empty}>清空日志</Text>
+                <SwipeRow leftOpenValue={75} rightOpenValue={-75}
                 onRowDidClose={onRowDidClose}>
                     <View style={styles.standaloneRowBack}>
                         <Text style={styles.backTextWhite}>Left</Text>
@@ -88,25 +102,8 @@ export default function StandaloneRow(){
                         <Text>I am standalone SwipeRow #1</Text>
                     </View>
                 </SwipeRow>
-                <View style={styles.spacer} />
-                <Text>onLeftActionStatusChange/onRightActionStatusChange:<Text style={[{color:'blue'}]}>{log4}</Text></Text>
-                <Text>onLeftAction/onRightAction:<Text style={[{color:'blue'}]}>{log5}</Text></Text>
-                <Text onPress={empty4} style={styles.empty}>清空日志</Text>
-                <SwipeRow leftOpenValue={75} rightOpenValue={-75}
-                leftActivationValue={100} rightActivationValue={-200}
-                onLeftActionStatusChange={onLeftActionStatusChange}
-                onRightActionStatusChange={onRightActionStatusChange}
-                onLeftAction={onLeftAction}
-                onRightAction={onRightAction} 
-                >
-                    <View style={styles.standaloneRowBack}>
-                        <Text style={styles.backTextWhite}>Left</Text>
-                        <Text style={styles.backTextWhite}>Right</Text>
-                    </View>
-                    <View style={styles.standaloneRowFront}>
-                        <Text>I am standalone SwipeRow #1</Text>
-                    </View>
-                </SwipeRow>
+
+               
             </View>
         </View>
     )
