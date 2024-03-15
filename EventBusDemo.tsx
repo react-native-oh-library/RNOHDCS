@@ -11,9 +11,7 @@ import EventBus from 'eventbusjs';
 import EventBus3 from 'eventbusjs';
 const TAG = 'EventBus';
 const MyContext = createContext('null');
-let onoff = '';
-let onoff2 = '';
-let onoff3 = '';
+
 const styles = StyleSheet.create({
   main: {
     height: '100%',
@@ -54,7 +52,6 @@ const styles = StyleSheet.create({
 });
 
 function eventTest(state, action) {
-  onoff = '----基础使用';
   console.warn(`${TAG}-----,成功派发test_event类型的eventTest事件`);
 }
 
@@ -81,7 +78,6 @@ var p2 = new (TestParamsClass2 as any)();
 
 function EventBusDemo() {
   const [msg, setMsg] = useState('');
-  const [msgKeep, setMsgKeep] = useState('');
   const [msgParams, setMsgParams] = useState('');
   const [value, onChangeText] = useState('');
   const [value2, onChangeText2] = useState('');
@@ -150,7 +146,7 @@ function EventBusDemo() {
   }
 
   return (
-    <MyContext.Provider value={{myGlobalVar: onoff}}>
+    <MyContext.Provider value={{myGlobalVar: ''}}>
       <ScrollView style={styles.main}>
         <View style={styles.mainItem}>
           <Text style={styles.title}>基础使用 & Keeping the scope</Text>
