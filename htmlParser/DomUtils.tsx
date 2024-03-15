@@ -29,9 +29,12 @@ import {
   nextElementSibling,
   prevElementSibling,
 } from "./domUtils/traversal";
+import { openHandlesTimeout } from '../jest.config';
+import { timeout } from '../rn_tester/examples/Layout/LayoutAnimationExample';
 
 const CircularJSON = require('circular-json');
 let nodeResult: any[] = [];
+let timeOut: NodeJS.Timeout | string | number | undefined = -1;
 
 export function DomUtilsPage() {
   const [result, setResult] = useState('请点击按钮，查看效果...');
@@ -43,6 +46,7 @@ export function DomUtilsPage() {
       <ScrollView style={styles.buttonArea}>
         <View style = {styles.view}>
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             const dom = parseDocument("<div><p><span></span></p><p></p></div>").children[0] as Element;
             const firstChild = dom.children[0] as Element;
             const matches = htmlparser2.DomUtils.removeSubsets([dom, firstChild.children[0]]);
@@ -54,6 +58,7 @@ export function DomUtilsPage() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             const markup = "<div><p><span></span></p><a></a></div>";
             const dom = parseDocument(markup).children[0] as Element;
             const p = dom.children[0] as Element;
@@ -67,6 +72,7 @@ export function DomUtilsPage() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             let root: Document = parseDocument("<div><p><span></span></p><a></a></div>");
             let dom: Element;
             let p: Element;
@@ -82,6 +88,7 @@ export function DomUtilsPage() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             const expected = {
               idAsdf: fixture[1] as Element,
               tag2: [] as AnyNode[],
@@ -100,6 +107,7 @@ export function DomUtilsPage() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             const expected = {
               idAsdf: fixture[1] as Element,
               tag2: [] as AnyNode[],
@@ -118,6 +126,7 @@ export function DomUtilsPage() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             const expected = {
               idAsdf: fixture[1] as Element,
               tag2: [] as AnyNode[],
@@ -136,6 +145,7 @@ export function DomUtilsPage() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             const expected = {
               idAsdf: fixture[1] as Element,
               tag2: [] as AnyNode[],
@@ -154,6 +164,7 @@ export function DomUtilsPage() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             const dom = parseDOM("<div><p><img/></p><p><object/></p></div>")[0] as Element;
             const dom1 = parseDOM("<div><p><img/><span/></p><p><object/></p></div>")[0] as Element;
             const child = parseDOM("<span></span>")[0] as Element;
@@ -167,6 +178,7 @@ export function DomUtilsPage() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             const dom = parseDOM("<div><p><img/></p><p><object/></p></div>")[0] as Element;
             const dom1 = parseDOM("<div><p><img/><span/></p><p><object/></p></div>")[0] as Element;
             const child = parseDOM("<span></span>")[0] as Element;
@@ -180,6 +192,7 @@ export function DomUtilsPage() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             const dom = parseDOM("<div><p><img/><object/></p><p></p></div>")[0] as Element;
             const dom1 = parseDOM("<div><p><object/></p><p></p></div>")[0] as Element;
             const parents = dom.children as Element[];
@@ -193,6 +206,7 @@ export function DomUtilsPage() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             const dom = parseDOM("<div><p><img/></p><p><object/></p></div>")[0] as Element;
             const child = parseDOM("<span></span>")[0] as Element;
             const parents = dom.children as Element[];
@@ -208,6 +222,7 @@ export function DomUtilsPage() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             const dom = parseDOM("<div><p><img/></p><p><object/></p></div>")[0] as Element;
             const child = parseDOM("<span></span>")[0] as Element;
             const parents = dom.children as Element[];
@@ -223,13 +238,14 @@ export function DomUtilsPage() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             const div = parseDOM("<div><p>")[0] as Element;
             const div1 = parseDOM("<div><template></p></template></div>")[0] as Element;
             const template = parseDOM("<template></template>")[0] as Element;
             const p = div.children[0];
             htmlparser2.DomUtils.replaceElement(p, template);
             htmlparser2.DomUtils.appendChild(template, p);
-            setResult(assembleResult('"<div><p>")".replaceElement("<p>", "<template></template>").appendChild("<template></template>", "<p>") == ' + 
+            setResult(assembleResult('"<div><p>".replaceElement("<p>", "<template></template>").appendChild("<template></template>", "<p>") == ' + 
               '"<div><template><p>/template></div>"',
               (CircularJSON.stringify(div) == CircularJSON.stringify(div1)) + ''));
           }}>
@@ -237,72 +253,43 @@ export function DomUtilsPage() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
-            const manyNodesWide = parseDocument(
-              `<body>${"<div></div>".repeat(200_000)}Text</body>`,
-            ).children;
-            const matches = find((elem) => elem.type === ElementType.Tag, manyNodesWide, true, Infinity);
-            setResult(assembleResult('find((elem) => elem.type === ElementType.Tag, manyNodesWide, true, Infinity).length === 200001',
-              (matches.length === 200001) + ''));
+            timeConsumingOperations(1, setResult);
           }}>
             <Text style={styles.buttonText}>find</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
-            const manyNodesWide = parseDocument(
-              `<body>${"<div></div>".repeat(200_000)}Text</body>`,
-            ).children;
-            const matches = findAll((elem) => elem.name === "div", manyNodesWide);
-            setResult(assembleResult('findAll((elem) => elem.name === "div", manyNodesWide).length === 200000',
-              (matches.length === 200000) + ''));
+           timeConsumingOperations(2, setResult);
           }}>
             <Text style={styles.buttonText}>findAll</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
-            const manyNodesWide = parseDocument(
-              `<body>${"<div></div>".repeat(200_000)}Text</body>`,
-            ).children;
-            const matches = filter((elem) => elem.type === ElementType.Tag, manyNodesWide);
-            setResult(assembleResult('filter((elem) => elem.type === ElementType.Tag, manyNodesWide).length === 200001',
-              (matches.length === 200001) + ''));
+            timeConsumingOperations(3, setResult);
           }}>
             <Text style={styles.buttonText}>filter</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
-            const manyNodesWide = parseDocument(
-              `<body>${"<div></div>".repeat(200_000)}Text</body>`,
-            ).children;
-            const matches = findOneChild((elem) => isTag(elem) && elem.name === "body", manyNodesWide);
-            setResult(assembleResult('findOneChild((elem) => isTag(elem) && elem.name === "body", manyNodesWide) === manyNodesWide[0]',
-              (matches === manyNodesWide[0]) + ''));
+            timeConsumingOperations(4, setResult);
           }}>
             <Text style={styles.buttonText}>findOneChild</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
-            const manyNodesWide = parseDocument(
-              `<body>${"<div></div>".repeat(200_000)}Text</body>`,
-            ).children;
-            const matches = findOne((elem) => elem.name === "body", manyNodesWide, true);
-            setResult(assembleResult('findOne((elem) => elem.name === "body", manyNodesWide, true) === manyNodesWide[0]',
-              (matches === manyNodesWide[0]) + ''));
+            timeConsumingOperations(5, setResult);
           }}>
             <Text style={styles.buttonText}>findOne</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
-            const manyNodesWide = parseDocument(
-              `<body>${"<div></div>".repeat(200_000)}Text</body>`,
-            ).children;
-            const matches = existsOne((elem) => elem.name === "body", manyNodesWide);
-            setResult(assembleResult('existsOne((elem) => elem.name === "body", manyNodesWide) === true',
-              (matches === true) + ''));
+            timeConsumingOperations(6, setResult);
           }}>
             <Text style={styles.buttonText}>existsOne</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             const matches = getOuterHTML(fixture[1]);
             setResult(assembleResult('getOuterHTML(fixture[1]) === " <script>text</script> <!-- comment --> <tag2> text </tag2>"',
               (matches) + ''));
@@ -311,14 +298,16 @@ export function DomUtilsPage() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             const matches = getInnerHTML(fixture[1]);
             setResult(assembleResult('getInnerHTML(fixture[1]) === <tag1 id="asdf"> <script>text</script> <!-- comment --> <tag2> text </tag2></tag1>',
-              (matches === '<tag1 id="asdf"> <script>text</script> <!-- comment --> <tag2> text </tag2></tag1>') + ''));
+              CircularJSON.stringify(matches)));
           }}>
             <Text style={styles.buttonText}>getInnerHTML</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             const matches = getText(fixture[1]);
             setResult(assembleResult('getText(fixture[1]) === " text   text "',
               (matches === " text   text ") + ''));
@@ -327,6 +316,7 @@ export function DomUtilsPage() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             const matches = textContent(fixture[1]);
             setResult(assembleResult('textContent(fixture[1]) === " text   text "',
               (matches === " text   text ") + ''));
@@ -335,6 +325,7 @@ export function DomUtilsPage() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             const matches = innerText(fixture[1]);
             setResult(assembleResult('innerText(fixture[1]) === "    text "',
               (matches === "    text ") + ''));
@@ -343,6 +334,7 @@ export function DomUtilsPage() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             const dom = parseDOM("<div><h1></h1><p><p><p></div>")[0] as Element;
             const matches = getSiblings(dom.children[1]);
             setResult(assembleResult('getSiblings(dom.children[1]).length === 4',
@@ -352,6 +344,7 @@ export function DomUtilsPage() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             const matches = hasAttrib(
               parseDOM("<div><h1></h1>test<p></p></div>")[0] as Element,
               "constructor"
@@ -363,6 +356,7 @@ export function DomUtilsPage() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             const dom = parseDOM(
               "<div><h1></h1>test<p></p></div>"
             )[0] as Element;
@@ -375,6 +369,7 @@ export function DomUtilsPage() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             const dom = parseDOM(
               "<div><h1></h1>test<p></p></div>"
             )[0] as Element;
@@ -387,6 +382,7 @@ export function DomUtilsPage() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             const matches = getAttributeValue(parseDOM("<div class='test'>")[0] as Element, "class");
             setResult(assembleResult('parseDOM("<div class=\'test\'>")[0] === "test"',
               (matches === 'test') + ''));
@@ -395,6 +391,7 @@ export function DomUtilsPage() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => {
+            judgeTimeOut();
             const matches = getName(parseDOM("<div>")[0] as Element);
             setResult(assembleResult('getName(parseDOM("<div>")[0] === "div"',
               (matches === 'div') + ''));
@@ -410,6 +407,70 @@ export function DomUtilsPage() {
 
 function assembleResult(input: string, result: string) {
   return '输入：\n' + input + '\n结果：\n' + result + '\n';
+}
+
+// 防抖，针对耗时操作多次快速点击只执行最后一次
+function timeConsumingOperations (methodNum: number, fun: Function) {
+  judgeTimeOut();
+  timeOut = setTimeout(() => {
+    let operationResult = '';
+    let manyNodesWide = parseDocument(
+      `<body>${"<div></div>".repeat(200_000)}Text</body>`,
+    ).children;
+    switch (methodNum) {
+      case 1:
+        const matches1 = find((elem) => elem.type === ElementType.Tag, manyNodesWide, true, Infinity);
+        operationResult = assembleResult('find((elem) => elem.type === ElementType.Tag, manyNodesWide, true, Infinity).length === 200001',
+          (matches1.length === 200001) + '');
+          fun(operationResult);
+          timeOut = -1;
+        break;
+      case 2:
+        const matches2 = findAll((elem) => elem.name === "div", manyNodesWide);
+        operationResult = assembleResult('findAll((elem) => elem.name === "div", manyNodesWide).length === 200000',
+          (matches2.length === 200000) + '');
+          fun(operationResult);
+          timeOut = -1;
+        break;
+      case 3:
+        const matches3 = filter((elem) => elem.type === ElementType.Tag, manyNodesWide);
+        operationResult = assembleResult('filter((elem) => elem.type === ElementType.Tag, manyNodesWide).length === 200001',
+          (matches3.length === 200001) + '');
+          fun(operationResult);
+          timeOut = -1;
+        break;
+      case 4:
+        const matches4 = findOneChild((elem) => isTag(elem) && elem.name === "body", manyNodesWide);
+        operationResult = assembleResult('findOneChild((elem) => isTag(elem) && elem.name === "body", manyNodesWide) === manyNodesWide[0]',
+          (matches4 === manyNodesWide[0]) + '');
+          fun(operationResult);
+          timeOut = -1;
+        break;
+      case 5:
+        const matches5 = findOne((elem) => elem.name === "body", manyNodesWide, true);
+        operationResult = assembleResult('findOne((elem) => elem.name === "body", manyNodesWide, true) === manyNodesWide[0]',
+          (matches5 === manyNodesWide[0]) + '');
+          fun(operationResult);
+        break;
+      case 6:
+        const matches6 = existsOne((elem) => elem.name === "body", manyNodesWide);
+        operationResult = assembleResult('existsOne((elem) => elem.name === "body", manyNodesWide) === true',
+          (matches6 === true) + '');
+          fun(operationResult);
+          timeOut = -1;
+        break;
+      default:
+        break;
+    }
+  }, 1000);
+}
+
+// 判断延迟任务
+function judgeTimeOut() {
+  if (timeOut != -1) {
+    clearTimeout(timeOut);
+    timeOut = -1;
+  }
 }
 
 const styles = StyleSheet.create({
