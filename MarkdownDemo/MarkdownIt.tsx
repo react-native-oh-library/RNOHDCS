@@ -7,6 +7,8 @@ const copy = `
 # This heading will show with formatting
 
 [but this link will just](be displayed as this text)
+
+![Minion](https://octodex.github.com/images/minion.png)
 `;
 
 const App: () => React$Node = () => {

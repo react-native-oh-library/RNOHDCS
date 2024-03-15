@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 
-import {View, StyleSheet, TouchableOpacity, Text} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, TouchableHighlight, Text} from 'react-native';
 
 import MapView, {Marker} from 'react-native-maps';
 // @ts-ignore
 import carImage from './assets/car.png';
+import { Button } from '../../components';
 
 export default class NavigationMap extends Component<any, any> {
   map: any;
@@ -66,28 +67,28 @@ export default class NavigationMap extends Component<any, any> {
           />
         </MapView>
         <View style={styles.buttonContainerUpDown}>
-          <TouchableOpacity
+          <TouchableHighlight
             style={[styles.button, styles.up]}
             onPress={() => this.changePosition(0.0005, 0)}>
             <Text>+ Lat</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
+          </TouchableHighlight>
+          <TouchableHighlight
             style={[styles.button, styles.down]}
             onPress={() => this.changePosition(-0.0005, 0)}>
             <Text>- Lat</Text>
-          </TouchableOpacity>
+          </TouchableHighlight>
         </View>
         <View style={styles.buttonContainerLeftRight}>
-          <TouchableOpacity
+          <TouchableHighlight
             style={[styles.button, styles.left]}
             onPress={() => this.changePosition(0, -0.0005)}>
             <Text>- Lon</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
+          </TouchableHighlight>
+          <TouchableHighlight
             style={[styles.button, styles.right]}
             onPress={() => this.changePosition(0, 0.0005)}>
             <Text>+ Lon</Text>
-          </TouchableOpacity>
+          </TouchableHighlight>
         </View>
       </View>
     );

@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, Button, StyleSheet, ScrollView, TextInput } from 'react-native';
-import DrawerLayout from 'react-native-drawer-layout-polyfill';
-import dayjs from 'dayjs'
+import React, { useState, } from 'react';
+import { View, Text, Button, StyleSheet, ScrollView, Pressable } from 'react-native';
 import ValueAssignmentDemo from './ValueAssignmentDemo.tsx'
 import OperationDemo from './OperationDemo.tsx'
 import RevealDemo from './RevealDemo.tsx'
@@ -9,46 +7,56 @@ import QueryDemo from './QueryDemo.tsx'
 import PluginDemo from './PluginDemo.tsx'
 
 const DayJsDemo = () => {
-  const drawerLayoutRef = useRef(null)
   const [value, setValue] = useState(1)
 
 
-  const open = () => {
-   console.log('open')
-    drawerLayoutRef.current?.openDrawer()
-  }
 
-  const close = (val: number) => {
-    drawerLayoutRef.current?.closeDrawer()
+
+  const changeDemo = (val: number) =>{
     setValue(val)
   }
 
-  const navigationView = (
-    <View style={styles.navigationContainer}>
-      <Button title="取值/赋值" onPress={() => close(1)} />
-      <View style={styles.interval}></View>
-      <Button title="操作" onPress={() => close(2)} />
-      <View style={styles.interval}></View>
-      <Button title="显示" onPress={() => close(3)} />
-      <View style={styles.interval}></View>
-      <Button title="查询" onPress={() => close(4)} />
-      <View style={styles.interval}></View>
-      <Button title="插件" onPress={() => close(5)} />
-    </View>
-  );
+  const menuList = [
+    {
+      name:'取值/赋值',
+      id:1
+    },
+    {
+      name:'操作',
+      id:2
+    },
+    {
+      name:'显示',
+      id:3
+    },
+    {
+      name:'查询',
+      id:4
+    },
+    {
+      name:'插件',
+      id:5
+    },
+  ] 
 
 
   return (
 
-    <DrawerLayout
-      ref={drawerLayoutRef}
-      drawerWidth={300}
-      drawerPosition="left"
-      renderNavigationView={() => navigationView}
-      drawerBackgroundColor="#ccc"
-    >
+
       <View style={styles.container}>
-        <Button title="打开弹框切换" onPress={() => open()} />
+        <View style={styles.tabs} >
+          {
+            menuList.map(item =>{
+              return (
+                <Pressable style={[styles.tabItem, value === item.id ? styles.isBoxActive : {}]} key={item.id}  onPress={() =>changeDemo(item.id)} >
+                <Text style={[styles.tabItemText,value === item.id ? styles.isActive : {}]}>{item.name}</Text>
+              </Pressable>
+              )
+            })
+          }
+ 
+        </View>
+
         <View style={styles.interval}></View>
         <ScrollView>
           {
@@ -60,7 +68,6 @@ const DayJsDemo = () => {
         </ScrollView>
 
       </View>
-    </DrawerLayout>
   );
 }
 
@@ -77,6 +84,33 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 50,
     padding: 8
+  },
+  tabs:{
+    width:'100%',
+    flexDirection: 'row',
+    alignItems: "center",
+    flexWrap:"wrap",
+    justifyContent:"space-between"
+  },
+  tabItem:{
+    width:80,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: '#ccc',
+    borderRadius:10,
+    marginBottom:10,
+  },
+  tabItemText:{
+    color:'#000',
+    fontSize:16
+  },
+  isActive: {
+    color:'#fff',
+    fontSize:16
+  },
+  isBoxActive:{
+    backgroundColor: 'skyblue',
   },
   textCommon: {
     marginBottom: 10,
