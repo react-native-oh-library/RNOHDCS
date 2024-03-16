@@ -14,34 +14,30 @@ export default function StandaloneRow(){
     const swipeGestureBegan = rowKey =>{
         setLog('开始滑动')
     }
+    const swipeGestureEnded = rowKey =>{
+        setLog('结束滑动')
+    }
+
     const empty2 = () => { setLog2('') }
     const [log2,setLog2] = useState('')
-    const swipeGestureEnded = rowKey =>{
-        setLog2('结束滑动')
+    const onScrollEnabled = rowKey =>{
+        setLog2('在启用/禁用滚动时调用')
     }
     const empty3 = () => { setLog3('') }
     const [log3,setLog3] = useState('')
     const onRowOpen = rowKey =>{
         setLog3('滑动行动画处于开启状态时调用')
     }
-    const empty4 = () => { setLog4('')}
+   
     const [log4,setLog4] = useState('')
-    const onRowClose = rowKey =>{
-        setLog4('滑动行动画处于关闭时调用')
-    }
-    const onRowDidClose = rowKey =>{
-        setLog4('滑动行动画处于已关闭时调用')
-    }
-    const empty5 = () => { setLog5('')}
-    const [log5,setLog5] = useState('')
-    const onPreviewEnd= rowKey =>{
-        setLog5('行预览完之后的回调')
+    const listViewRef = rowKey =>{
+        setLog4('listViewRef')
     }
    
     return (
         <View style={styles.container}>
             <View style={styles.standalone}>
-                <Text>swipeGestureBegan:<Text style={[{color:'blue'}]}>{log}</Text></Text>
+                <Text>swipeGestureBegan/swipeGestureEnded:<Text style={[{color:'blue'}]}>{log}</Text></Text>
                 <Text onPress={empty} style={styles.empty}>清空日志</Text>
                 <SwipeListView data={listViewData}
                 renderItem={(data,rowMap)=>(
@@ -52,9 +48,11 @@ export default function StandaloneRow(){
                 )}
                 leftOpenValue={75}
                 rightOpenValue={-75}
-                swipeGestureBegan={swipeGestureBegan}>
+                swipeGestureBegan={swipeGestureBegan}
+                swipeGestureEnded={swipeGestureEnded}
+                useNativeDriver={false}>
                 </SwipeListView>
-                <Text>swipeGestureEnded:<Text style={[{color:'blue'}]}>{log2}</Text></Text>
+                <Text>onScrollEnabled:<Text style={[{color:'blue'}]}>{log2}</Text></Text>
                 <Text onPress={empty2} style={styles.empty}>清空日志</Text>
                 <SwipeListView data={listViewData}
                 renderItem={(data,rowMap)=>(
@@ -65,7 +63,11 @@ export default function StandaloneRow(){
                 )}
                 leftOpenValue={75}
                 rightOpenValue={-75}
-                swipeGestureEnded={swipeGestureEnded}>
+                previewRowKey={'0'}
+                previewOpenValue={-40}
+                previewOpenDelay={3000}
+                onScrollEnabled={onScrollEnabled}
+                >
                 </SwipeListView>
                 <Text>onRowOpen:<Text style={[{color:'blue'}]}>{log3}</Text></Text>
                 <Text onPress={empty3} style={styles.empty}>清空日志</Text>
@@ -81,8 +83,7 @@ export default function StandaloneRow(){
                 onRowOpen={onRowOpen}>
                 </SwipeListView>
 
-                <Text>onRowClose/onRowDidClose:<Text style={[{color:'blue'}]}>{log4}</Text></Text>
-                <Text onPress={empty4} style={styles.empty}>清空日志</Text>
+                <Text>onRowOpen:<Text style={[{color:'blue'}]}>{log4}</Text></Text>
                 <SwipeListView data={listViewData}
                 renderItem={(data,rowMap)=>(
                     <View style={styles.rowFront}><Text>I am {data.item.text} in a SwipeListView</Text></View>
@@ -92,24 +93,7 @@ export default function StandaloneRow(){
                 )}
                 leftOpenValue={75}
                 rightOpenValue={-75}
-                onRowClose={onRowClose}
-                onRowDidClose={onRowDidClose}>
-                </SwipeListView>
-
-                <Text>onPreviewEnd:<Text style={[{color:'blue'}]}>{log5}</Text></Text>
-                <SwipeListView data={listViewData}
-                renderItem={(data,rowMap)=>(
-                    <View style={styles.rowFront}><Text>I am {data.item.text} in a SwipeListView</Text></View>
-                )}
-                renderHiddenItem={(data,rowMap)=>(
-                    <View style={styles.rowBack}><Text>Left</Text><Text>Right</Text></View>
-                )}
-                leftOpenValue={75}
-                rightOpenValue={-75}
-                onPreviewEnd={onPreviewEnd}
-                previewRowKey={'0'}
-                previewOpenValue={-40}
-                previewOpenDelay={3000}>
+                listViewRef={listViewRef}>
                 </SwipeListView>
             </View>
         </View>

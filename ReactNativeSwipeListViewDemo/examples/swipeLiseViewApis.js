@@ -21,12 +21,16 @@ export default function StandaloneRow(){
     const onRowDidClose = rowKey =>{
         setLog7('滑动行动画处于已关闭时调用')
     }
-    const empty5 = () => { setLog5('')}
     const [log5,setLog5] = useState('')
     const onPreviewEnd= rowKey =>{
         setLog5('行预览完之后的回调')
     }
-   
+
+    const [log6,setLog6] = useState('')
+    const shouldItemUpdate= rowKey =>{
+        setLog6('组件确定已更新')
+    }
+    
     return (
         <View style={styles.container}>
             <View style={styles.standalone}>
@@ -73,6 +77,20 @@ export default function StandaloneRow(){
                 previewRowKey={'0'}
                 previewOpenValue={-40}
                 previewOpenDelay={3000}>
+                </SwipeListView>
+
+                <Text>shouldItemUpdate:<Text style={[{color:'blue'}]}>{log6}</Text></Text>
+                <SwipeListView data={listViewData}
+                renderItem={(data,rowMap)=>(
+                    <View style={styles.rowFront}><Text>I am {data.item.text} in a SwipeListView</Text></View>
+                )}
+                renderHiddenItem={(data,rowMap)=>(
+                    <View style={styles.rowBack}><Text>Left</Text><Text>Right</Text></View>
+                )}
+                leftOpenValue={75}
+                rightOpenValue={-75}
+                shouldItemUpdate={shouldItemUpdate}
+               >
                 </SwipeListView>
             </View>
         </View>
