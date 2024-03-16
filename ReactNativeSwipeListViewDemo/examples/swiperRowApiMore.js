@@ -8,49 +8,50 @@ import {
 import { SwipeListView,SwipeRow } from 'react-native-swipe-list-view';
 
 export default function StandaloneRow(){
-    
-
-  
-
-    const empty6 = () => { setLog6('') }
-    const [log6,setLog6] = useState('')
-    const onRowDidClose = rowKey =>{
-        setLog6('在行动画已关闭时调用')
+    const empty = () => { setLog('') }
+    const [log,setLog] = useState('')
+    const onRowPress = rowKey =>{
+        setLog('当行按下时')
     }
-    const empty4 = () => { setLog4('') }
+    const empty2 = () => { setLog2('') }
+    const [log2,setLog2] = useState('')
+    const onRowOpen = rowKey =>{
+        setLog2('在行动画打开时调用')
+    }
+    const onRowDidOpen = rowKey =>{
+        setLog2('在行动画已打开时调用')
+    } 
+    const empty3 = () => { setLog3('') }
+    const [log3,setLog3] = useState('')
+    const onRowClose = rowKey =>{
+        setLog3('在行动画关闭时调用')
+    }
+    const onRowDidClose = rowKey =>{
+        setLog3('在行动画已关闭时调用')
+    }
+    const empty4 = () => { setLog4('') 
+    setLog5('') }
     const [log4,setLog4] = useState('')
     const onLeftActionStatusChange = rowKey =>{
-        setLog4('当滑动值越过左侧ActivationValue时调用')
+        setLog4('当滑动值越过左侧ActivationValue时调用一次')
     }
-
-    const empty7 = () => { setLog7('')}
-    const [log7,setLog7] = useState('')
     const onRightActionStatusChange = rowKey =>{
-        setLog7('当滑动值越过右侧ActivationValue时调用')
+        setLog4('当滑动值越过右侧ActivationValue时调用一次')
     }
-
-    const empty5 = () => { setLog5('')}
     const [log5,setLog5] = useState('')
     const onLeftAction = rowKey =>{
         setLog5('onLeftAction')
     }
-
-    const empty8 = () => { setLog8('')}
-    const [log8,setLog8] = useState('')
     const onRightAction = rowKey =>{
-        setLog8('onRightAction')
+        setLog5('onRightAction')
     }
     return (
         <View style={styles.container}>
             <View style={styles.standalone}>
-                
-             
-
-                <Text>onRowDidClose:<Text style={[{color:'blue'}]}>{log6}</Text></Text>
-                <Text onPress={empty6} style={styles.empty}>清空日志</Text>
+                <Text>onRowPress:<Text style={[{color:'blue'}]}>{log}</Text></Text>
+                <Text onPress={empty} style={styles.empty}>清空日志</Text>
                 <SwipeRow leftOpenValue={75} rightOpenValue={-75}
-               
-                onRowDidClose={onRowDidClose}>
+                onRowPress={onRowPress}>
                     <View style={styles.standaloneRowBack}>
                         <Text style={styles.backTextWhite}>Left</Text>
                         <Text style={styles.backTextWhite}>Right</Text>
@@ -59,59 +60,47 @@ export default function StandaloneRow(){
                         <Text>I am standalone SwipeRow #1</Text>
                     </View>
                 </SwipeRow>
-
-                <Text>onLeftActionStatusChange:<Text style={[{color:'blue'}]}>{log4}</Text></Text>
+                <View style={styles.spacer} />
+                <Text>onRowOpen/onRowDidOpen:<Text style={[{color:'blue'}]}>{log2}</Text></Text>
+                <Text onPress={empty2} style={styles.empty}>清空日志</Text>
+                <SwipeRow leftOpenValue={75} rightOpenValue={-75}
+                onRowOpen={onRowOpen}
+                onRowDidOpen={onRowDidOpen}
+                useNativeDriver={false}>
+                    <View style={styles.standaloneRowBack}>
+                        <Text style={styles.backTextWhite}>Left</Text>
+                        <Text style={styles.backTextWhite}>Right</Text>
+                    </View>
+                    <View style={styles.standaloneRowFront}>
+                        <Text>I am standalone SwipeRow #1</Text>
+                    </View>
+                </SwipeRow>
+                <View style={styles.spacer} />
+                <Text>onRowClose/onRowDidClose:<Text style={[{color:'blue'}]}>{log3}</Text></Text>
+                <Text onPress={empty3} style={styles.empty}>清空日志</Text>
+                <SwipeRow leftOpenValue={75} rightOpenValue={-75}
+                onRowClose={onRowClose}
+                onRowDidClose={onRowDidClose}
+                useNativeDriver={false}>
+                    <View style={styles.standaloneRowBack}>
+                        <Text style={styles.backTextWhite}>Left</Text>
+                        <Text style={styles.backTextWhite}>Right</Text>
+                    </View>
+                    <View style={styles.standaloneRowFront}>
+                        <Text>I am standalone SwipeRow #1</Text>
+                    </View>
+                </SwipeRow>
+                <View style={styles.spacer} />
+                <Text>onLeftActionStatusChange/onRightActionStatusChange:<Text style={[{color:'blue'}]}>{log4}</Text></Text>
+                <Text>onLeftAction/onRightAction:<Text style={[{color:'blue'}]}>{log5}</Text></Text>
                 <Text onPress={empty4} style={styles.empty}>清空日志</Text>
                 <SwipeRow leftOpenValue={75} rightOpenValue={-75}
                 leftActivationValue={100} rightActivationValue={-200}
                 onLeftActionStatusChange={onLeftActionStatusChange}
-                >
-                    <View style={styles.standaloneRowBack}>
-                        <Text style={styles.backTextWhite}>Left</Text>
-                        <Text style={styles.backTextWhite}>Right</Text>
-                    </View>
-                    <View style={styles.standaloneRowFront}>
-                        <Text>I am standalone SwipeRow #1</Text>
-                    </View>
-                </SwipeRow>
-
-                <Text>onRightActionStatusChange:<Text style={[{color:'blue'}]}>{log7}</Text></Text>
-                <Text onPress={empty7} style={styles.empty}>清空日志</Text>
-                <SwipeRow leftOpenValue={75} rightOpenValue={-75}
-                leftActivationValue={100} rightActivationValue={-200}
                 onRightActionStatusChange={onRightActionStatusChange}
-         
-                >
-                    <View style={styles.standaloneRowBack}>
-                        <Text style={styles.backTextWhite}>Left</Text>
-                        <Text style={styles.backTextWhite}>Right</Text>
-                    </View>
-                    <View style={styles.standaloneRowFront}>
-                        <Text>I am standalone SwipeRow #1</Text>
-                    </View>
-                </SwipeRow>
-
-           
-                <Text>onLeftAction:<Text style={[{color:'blue'}]}>{log5}</Text></Text>
-                <Text onPress={empty5} style={styles.empty}>清空日志</Text>
-                <SwipeRow leftOpenValue={75} rightOpenValue={-75}
-                leftActivationValue={100} rightActivationValue={-200}
                 onLeftAction={onLeftAction}
-                >
-                    <View style={styles.standaloneRowBack}>
-                        <Text style={styles.backTextWhite}>Left</Text>
-                        <Text style={styles.backTextWhite}>Right</Text>
-                    </View>
-                    <View style={styles.standaloneRowFront}>
-                        <Text>I am standalone SwipeRow #1</Text>
-                    </View>
-                </SwipeRow>
-               
-                <Text>onRightAction:<Text style={[{color:'blue'}]}>{log8}</Text></Text>
-                <Text onPress={empty8} style={styles.empty}>清空日志</Text>
-                <SwipeRow leftOpenValue={75} rightOpenValue={-75}
-                leftActivationValue={100} rightActivationValue={-200}
-                onRightAction={onRightAction} 
+                onRightAction={onRightAction}
+                useNativeDriver={false} 
                 >
                     <View style={styles.standaloneRowBack}>
                         <Text style={styles.backTextWhite}>Left</Text>

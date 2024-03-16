@@ -16,7 +16,6 @@ import SwipeValueBasedUi from './examples/swipe_value_based_ui';
 import Actions from './examples/actions';
 import CloseRowManually from './examples/close_row_manually';
 import SwiperRowApi from './examples/swiperRowApi';
-import SwiperRowsApi from './examples/swiperRowApis';
 import SwiperRowApiMore from './examples/swiperRowApiMore';
 import SwipeListViewApi from './examples/swipeListViewApi';
 import SwipeListViewApis from './examples/swipeLiseViewApis';
@@ -30,7 +29,6 @@ const componentMap = {
     Actions,
     CloseRowManually,
     SwiperRowApi,
-    SwiperRowsApi,
     SwiperRowApiMore,
     SwipeListViewApi,
     SwipeListViewApis
