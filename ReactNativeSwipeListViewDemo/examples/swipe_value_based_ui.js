@@ -87,8 +87,7 @@ export default function SwipeValueBasedUi() {
                                         extrapolate: 'clamp',
                                     }),
                                 },
-                            ],
-                            useNativeDriver: true
+                            ]
                         },
                     ]}
                 >
