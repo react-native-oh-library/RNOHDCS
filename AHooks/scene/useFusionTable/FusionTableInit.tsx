@@ -1,0 +1,137 @@
+import { Button, Field, Form, Icon, Input, Pagination, Select, Table } from '@alifd/next';
+import React from 'react';
+import { useFusionTable } from 'ahooks';
+import ReactJson from 'react-json-view';
+import { View } from 'react-native';
+
+interface Item {
+  name: {
+    last: string;
+  };
+  email: string;
+  phone: string;
+  gender: 'male' | 'female';
+}
+
+interface Result {
+  total: number;
+  list: Item[];
+}
+
+const getTableData = ({ current, pageSize }:{ current:any, pageSize:any }, formData: Object): Promise<Result> => {
+  let query = `page=${current}&size=${pageSize}`;
+  Object.entries(formData).forEach(([key, value]) => {
+    if (value) {
+      query += `&${key}=${value}`;
+    }
+  });
+
+  return fetch(`https://randomuser.me/api?results=${pageSize}&${query}`)
+    .then((res) => res.json())
+    .then((res) => ({
+      total: 55,
+      list: res.results.slice(0, 10),
+    }));
+};
+
+export function FusionTableInit(){
+  const field = Field.useField([]);
+  const { paginationProps, tableProps, search, loading, params } = useFusionTable(getTableData, {
+    field,
+    defaultParams: [
+      { current: 2, pageSize: 5 },
+      { name: 'hello', email: 'abc@gmail.com', gender: 'female' },
+    ],
+    defaultType: 'advance',
+  });
+  const { type, changeType, submit, reset } = search;
+
+  const advanceSearchForm = (
+    <View>
+      <Form
+        inline
+        style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}
+        field={field}
+      >
+        <Form.Item label="name:">
+          <Input name="name" placeholder="name" />
+        </Form.Item>
+        <Form.Item label="email:">
+          <Input name="email" placeholder="email" />
+        </Form.Item>
+        <Form.Item label="phone:">
+          <Input name="phone" placeholder="phone" />
+        </Form.Item>
+
+        <Form.Item label=" ">
+          <Form.Submit loading={loading} type="primary" onClick={submit}>
+            Search
+          </Form.Submit>
+        </Form.Item>
+
+        <Form.Item label=" ">
+          <Button onClick={reset}>reset</Button>
+        </Form.Item>
+
+        <Form.Item label=" ">
+          <Button text type="primary" onClick={changeType}>
+            Simple Search
+          </Button>
+        </Form.Item>
+      </Form>
+    </View>
+  );
+
+  const searchForm = (
+    <View>
+      <Form
+        inline
+        style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}
+        field={field}
+      >
+        <Form.Item label=" ">
+          <Select name="gender" defaultValue="all" onChange={submit}>
+            <Select.Option value="all">all</Select.Option>
+            <Select.Option value="male">male</Select.Option>
+            <Select.Option value="female">female</Select.Option>
+          </Select>
+        </Form.Item>
+
+        <Form.Item label=" ">
+          <Input
+            name="name"
+            innerAfter={<Icon type="search" size="xs" onClick={submit} style={{ margin: 4 }} />}
+            placeholder="enter name"
+            onPressEnter={submit}
+          />
+        </Form.Item>
+
+        <Form.Item label=" ">
+          <Button text type="primary" onClick={changeType}>
+            Advanced Search
+          </Button>
+        </Form.Item>
+      </Form>
+    </View>
+  );
+
+  return (
+    <View>
+      {type === 'simple' ? searchForm : advanceSearchForm}
+      <Table {...tableProps} primaryKey="email">
+        <Table.Column title="name" dataIndex="name.last" width={140} />
+        <Table.Column title="email" dataIndex="email" width={500} />
+        <Table.Column title="phone" dataIndex="phone" width={500} />
+        <Table.Column title="gender" dataIndex="gender" width={500} />
+      </Table>
+      <Pagination style={{ marginTop: 16 }} {...paginationProps} />
+      <View style={{ backgroundColor: '#f5f5f5', padding: 8, marginTop: 16 }}>
+        <p>Current Table:</p>
+        <ReactJson src={params[0]!} collapsed={2} />
+        <p>Current Form:</p>
+        <ReactJson src={params[1]!} collapsed={2} />
+      </View>
+    </View>
+  );
+};
+
