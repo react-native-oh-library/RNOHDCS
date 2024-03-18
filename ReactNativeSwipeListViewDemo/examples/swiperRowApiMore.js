@@ -65,7 +65,8 @@ export default function StandaloneRow(){
                 <Text onPress={empty2} style={styles.empty}>清空日志</Text>
                 <SwipeRow leftOpenValue={75} rightOpenValue={-75}
                 onRowOpen={onRowOpen}
-                onRowDidOpen={onRowDidOpen}>
+                onRowDidOpen={onRowDidOpen}
+                useNativeDriver={false}>
                     <View style={styles.standaloneRowBack}>
                         <Text style={styles.backTextWhite}>Left</Text>
                         <Text style={styles.backTextWhite}>Right</Text>
@@ -79,7 +80,8 @@ export default function StandaloneRow(){
                 <Text onPress={empty3} style={styles.empty}>清空日志</Text>
                 <SwipeRow leftOpenValue={75} rightOpenValue={-75}
                 onRowClose={onRowClose}
-                onRowDidClose={onRowDidClose}>
+                onRowDidClose={onRowDidClose}
+                useNativeDriver={false}>
                     <View style={styles.standaloneRowBack}>
                         <Text style={styles.backTextWhite}>Left</Text>
                         <Text style={styles.backTextWhite}>Right</Text>
@@ -97,7 +99,8 @@ export default function StandaloneRow(){
                 onLeftActionStatusChange={onLeftActionStatusChange}
                 onRightActionStatusChange={onRightActionStatusChange}
                 onLeftAction={onLeftAction}
-                onRightAction={onRightAction} 
+                onRightAction={onRightAction}
+                useNativeDriver={false} 
                 >
                     <View style={styles.standaloneRowBack}>
                         <Text style={styles.backTextWhite}>Left</Text>

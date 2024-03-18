@@ -1,25 +1,43 @@
 import React, { useState } from 'react';
-import { Button, Text, View } from 'react-native';
+import { Text, View, Button } from 'react-native';
 
 import ScrollableTabView, { ScrollableTabBar } from "react-native-scrollable-tab-view";
 
 export default () => {
-    const [scrollWithoutAnimation, setScrollWithoutAnimation] = useState('false');
+    const [style, setStyle] = useState({ height: 150, backgroundColor: "#FF0000" });
+
 
     return (
-        <View>
-            <Text>scrollWithoutAnimation</Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Text>scrollWithoutAnimation:{scrollWithoutAnimation}</Text>
+
+        <View style={{ height: 400 }}>
+            <Text>contentProps</Text>
+            <View>
+                <Text>contentContainerStyle:{JSON.stringify(contentContainerStyle)}</Text>
+            </View>
+            <View>
                 <Button
-                    title='scrollWithoutAnimation'
+                    title='Style1'
                     onPress={() => {
-                        JSON.parse(scrollWithoutAnimation) ? setScrollWithoutAnimation('false') : setScrollWithoutAnimation('true')
+                        setStyle({ height: 250, backgroundColor: "#7FFF00" })
+                    }}
+                />
+                <Button
+                    title='Style2'
+                    onPress={() => {
+                        setStyle({ height: 300, backgroundColor: "#236B8E" })
+                    }}
+                />
+                <Button
+                    title='Style3'
+                    onPress={() => {
+                        setStyle({ height: 350, backgroundColor: "#9F9F5F" })
                     }}
                 />
             </View>
             <View style={{ height: 150 }}>
-                <ScrollableTabView scrollWithoutAnimation={JSON.parse(scrollWithoutAnimation)}>
+                <ScrollableTabView
+                    style={style}
+                >
                     <View tabLabel="Tab #101">
                         <Text>111111111111111111111111111</Text>
                     </View>

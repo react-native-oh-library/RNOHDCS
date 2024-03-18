@@ -15,10 +15,10 @@ import SwipeToDelete from './examples/swipe_to_delete';
 import SwipeValueBasedUi from './examples/swipe_value_based_ui';
 import Actions from './examples/actions';
 import CloseRowManually from './examples/close_row_manually';
-import SwipeListView from './examples/swipeListView';
-import SwiperRow from './examples/swiperRow';
-import SwiperRows from './examples/swiperRows';
-
+import SwiperRowApi from './examples/swiperRowApi';
+import SwiperRowApiMore from './examples/swiperRowApiMore';
+import SwipeListViewApi from './examples/swipeListViewApi';
+import SwipeListViewApis from './examples/swipeLiseViewApis';
 const componentMap = {
     Basic,
     SectionList,
@@ -28,10 +28,10 @@ const componentMap = {
     SwipeValueBasedUi,
     Actions,
     CloseRowManually,
-    SwipeListView,
-    SwiperRows,
-    SwiperRow,
-    
+    SwiperRowApi,
+    SwiperRowApiMore,
+    SwipeListViewApi,
+    SwipeListViewApis
 };
 
 export default function App() {
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     switchContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
-        marginVertical: 20,
+        marginVertical: 5,
         flexWrap: 'wrap',
     },
     switch: {

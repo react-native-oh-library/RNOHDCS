@@ -1,17 +1,17 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Button, Text, View } from 'react-native';
 
 import ScrollableTabView, { ScrollableTabBar } from "react-native-scrollable-tab-view";
 
 export default () => {
-
+    const [tabBarTabIndex, setTabBarTabIndex] = useState(0);
 
     return (
         <View>
-            <Text>renderTabBar</Text>
-            <View style={{ height: 150 }}>
-                <Text>DefaultTabBar</Text>
-                <ScrollableTabView>
+            <Text>prerenderingSiblingsNumber</Text>
+            <View style={{ height: 100 }}>
+                <Text>prerenderingSiblingsNumber:0</Text>
+                <ScrollableTabView prerenderingSiblingsNumber={0}>
                     <View tabLabel="Tab #101">
                         <Text>111111111111111111111111111</Text>
                     </View>
@@ -29,9 +29,9 @@ export default () => {
                     </View>
                 </ScrollableTabView>
             </View>
-            <View style={{ height: 150 }}>
-                <Text>ScrollableTabBar</Text>
-                <ScrollableTabView renderTabBar={() => { ScrollableTabBar() }}>
+            <View style={{ height: 100 }}>
+                <Text>prerenderingSiblingsNumber:1</Text>
+                <ScrollableTabView prerenderingSiblingsNumber={1}>
                     <View tabLabel="Tab #101">
                         <Text>111111111111111111111111111</Text>
                     </View>
@@ -50,5 +50,6 @@ export default () => {
                 </ScrollableTabView>
             </View>
         </View>
+
     );
 }

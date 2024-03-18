@@ -32,7 +32,8 @@ export default function StandaloneRow(){
                 <Text>onSwipeValueChange:<Text style={[{color:'blue'}]}>{log}</Text></Text>
                 <Text onPress={empty} style={styles.empty}>清空日志</Text>
                 <SwipeRow leftOpenValue={75} rightOpenValue={-75}
-                onSwipeValueChange={onSwipeValueChange}>
+                onSwipeValueChange={onSwipeValueChange}
+                useNativeDriver={false}>
                     <View style={styles.standaloneRowBack}>
                         <Text style={styles.backTextWhite}>Left</Text>
                         <Text style={styles.backTextWhite}>Right</Text>
@@ -46,7 +47,8 @@ export default function StandaloneRow(){
                 <Text onPress={empty2} style={styles.empty}>清空日志</Text>
                 <SwipeRow leftOpenValue={75} rightOpenValue={-75}
                 swipeGestureBegan={swipeGestureBegan}
-                swipeGestureEnded={swipeGestureEnded}>
+                swipeGestureEnded={swipeGestureEnded}
+                useNativeDriver={false}>
                     <View style={styles.standaloneRowBack}>
                         <Text style={styles.backTextWhite}>Left</Text>
                         <Text style={styles.backTextWhite}>Right</Text>
