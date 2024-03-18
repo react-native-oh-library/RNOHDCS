@@ -46,7 +46,8 @@ export default function StandaloneRow(){
                 )}
                 leftOpenValue={75}
                 rightOpenValue={-75}
-                onRowClose={onRowClose}>
+                onRowClose={onRowClose}
+                useNativeDriver={false}>
                 </SwipeListView>
                 
                 <Text>onRowDidClose:<Text style={[{color:'blue'}]}>{log7}</Text></Text>
@@ -60,7 +61,8 @@ export default function StandaloneRow(){
                 )}
                 leftOpenValue={75}
                 rightOpenValue={-75}
-                onRowDidClose={onRowDidClose}>
+                onRowDidClose={onRowDidClose}
+                useNativeDriver={false}>
                 </SwipeListView>
 
                 <Text>onPreviewEnd:<Text style={[{color:'blue'}]}>{log5}</Text></Text>
