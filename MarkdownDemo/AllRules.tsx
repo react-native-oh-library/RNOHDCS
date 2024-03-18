@@ -155,32 +155,32 @@ Typographic Replacements
 const rules ={
   heading1: (node, children, parent, styles) => (
     <View key={node.key} style={styles._VIEW_SAFE_heading1}>
-        >> H1 TEXT HERE >> "{children}"
+        <Text key={node.key}>{children}</Text>
     </View>
   ),
   heading2: (node, children, parent, styles) => (
     <View key={node.key} style={styles._VIEW_SAFE_heading2}>
-       >> H2 TEXT HERE >> "{children}"
+      <Text key={node.key}>{children}</Text>
     </View>
   ),
   heading3: (node, children, parent, styles) => (
     <View key={node.key} style={styles._VIEW_SAFE_heading3}>
-       >> H3 TEXT HERE >> "{children}"
+       <Text key={node.key}>{children}</Text>
     </View>
   ),
   heading4: (node, children, parent, styles) => (
     <View key={node.key} style={styles._VIEW_SAFE_heading4}>
-       >> H4 TEXT HERE >> "{children}"
+       <Text key={node.key}>{children}</Text>
     </View>
   ),
   heading5: (node, children, parent, styles) => (
     <View key={node.key} style={styles._VIEW_SAFE_heading5}>
-      >> H5 TEXT HERE >> "{children}"
+      <Text key={node.key}>{children}</Text>
     </View>
   ),
   heading6: (node, children, parent, styles) => (
     <View key={node.key} style={styles._VIEW_SAFE_heading6}>
-      >> H6 TEXT HERE >> "{children}"
+      <Text key={node.key}>{children}</Text>
     </View>
   ),
 
@@ -309,7 +309,7 @@ const rules2 = {
       }
     });
     return (
-      <View style={{width: isTable ? ' 100%' : 'auto'}}>
+      <View  key={node.key} style={{width: isTable ? ' 100%' : 'auto'}}>
         <Text key={node.key} style={[inheritedStyles, styles.heading6]}>
           {node.content}
         </Text>
@@ -361,7 +361,6 @@ const changeRules = () =>{
 }
   return (
     <>
-      <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
