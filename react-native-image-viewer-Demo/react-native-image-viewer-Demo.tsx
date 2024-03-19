@@ -76,14 +76,14 @@ const ReactImageZoon = () => {
   const renderArrowLeftFun = () => {
     return (
       <View style={{ width: 20, height: 20 }}>
-        <Image source={require('./assets/1.png')} style={{ width: '100%', height: '100%' }}></Image>
+        <Image source={{uri:'https://bpic.51yuansu.com/pic2/cover/00/52/03/5816a254309d2_610.jpg'}} style={{ width: '100%', height: '100%' }}></Image>
       </View>
     )
   }
   const renrenderArrowRightFun = () => {
     return (
       <View style={{ width: 20, height: 20 }}>
-        <Image source={require('./assets/1.png')} style={{ width: '100%', height: '100%' }}></Image>
+        <Image source={{uri:'https://pic.616pic.com/ys_img/00/13/60/slee3clqRZ.jpg'}} style={{ width: '100%', height: '100%' }}></Image>
       </View>
     )
   }
@@ -220,7 +220,7 @@ const ReactImageZoon = () => {
             swipeDownThreshold={swipeDownThreshold}
             onSwipeDown={onSwipeDown}
           />
-          <Button title="点击增加向下滑动的阈值500" onPress={() => setSwipeDownThreshold(500)} />
+          <Button title="点击增加向下滑动的阈值" onPress={() => setSwipeDownThreshold(400)} />
           <Button title="点击关闭" onPress={setFlipThresholdBtn} />
         </Modal>
 
