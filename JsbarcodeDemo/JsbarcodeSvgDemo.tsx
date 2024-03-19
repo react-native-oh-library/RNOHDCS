@@ -95,13 +95,15 @@ export default function JsbarcodeSvgDemo() {
         />
         <Text style={styles.testStyle}>flat</Text>
         <Barcode
-          value="1234568956999"
-          options={{format: 'CODE128', flat: false}}
+          value="29012343"
+          options={{format: 'EAN8', flat: false}}
         />
+        <Text style={styles.testStyle}>flat: false</Text>
         <Barcode
-          value="1234568956999"
-          options={{format: 'CODE128', flat: true}}
+          value="29012343"
+          options={{format: 'EAN8', flat: true}}
         />
+        <Text style={styles.testStyle}>flat: true</Text>
       </View>
     </ScrollView>
   );
