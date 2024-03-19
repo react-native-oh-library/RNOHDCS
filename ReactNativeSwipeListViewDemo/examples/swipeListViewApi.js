@@ -94,7 +94,8 @@ export default function StandaloneRow(){
                 )}
                 leftOpenValue={75}
                 rightOpenValue={-75}
-                listViewRef={listViewRef}>
+                listViewRef={listViewRef}
+                disableRightSwipe>
                 </SwipeListView>
             </View>
         </View>
