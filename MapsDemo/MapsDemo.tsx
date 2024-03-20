@@ -46,11 +46,15 @@ import CameraControl from './maps/CameraControl';
 import MassiveCustomMarkers from './maps/MassiveCustomMarkers';
 import CacheURLTiles from './maps/CacheURLTiles';
 import CacheWMSTiles from './maps/CacheWMSTiles';
+import MapViewApi from './maps/MapViewApi';
 
 export function MapsDemo() {
   return (
     <NavigationContainer>
       <PortalProvider>
+        <Page name="MapViewApi">
+          <MapViewApi />
+        </Page>
         <Page name="StaticMap">
           <StaticMap />
         </Page>
@@ -141,9 +145,9 @@ export function MapsDemo() {
         <Page name="Custom Overlay Component">
           <CustomOverlay />
         </Page>
-        <Page name="Test ID for Automation">
+        {/* <Page name="Test ID for Automation">
           <TestIdMarkers />
-        </Page>
+        </Page> */}
         <Page name="Load Map with KML 华为地图不支持">
           <MapKml />
         </Page>
