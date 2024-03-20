@@ -78,7 +78,7 @@ export default function StandaloneRow(){
                 onPreviewEnd={onPreviewEnd}
                 previewRowKey={'0'}
                 previewOpenValue={-40}
-                previewOpenDelay={3000}
+                previewOpenDelay={1000}
                 stopLeftSwipe={10} 
                 stopRightSwipe={-10} 
                 swipeToClosePercent={10}

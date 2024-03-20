@@ -65,7 +65,7 @@ export default function StandaloneRow(){
                 rightOpenValue={-75}
                 previewRowKey={'0'}
                 previewOpenValue={-40}
-                previewOpenDelay={3000}
+                previewOpenDelay={1000}
                 onScrollEnabled={onScrollEnabled}
                 useNativeDriver={false}
                 >
@@ -81,7 +81,8 @@ export default function StandaloneRow(){
                 )}
                 leftOpenValue={75}
                 rightOpenValue={-75}
-                onRowOpen={onRowOpen}>
+                onRowOpen={onRowOpen}
+                useNativeDriver={false}>
                 </SwipeListView>
 
                 <Text>listViewRef:<Text style={[{color:'blue'}]}>{log4}</Text></Text>
