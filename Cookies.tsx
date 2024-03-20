@@ -17,7 +17,7 @@
 import React, { useState, useRef } from 'react';
 import {ScrollView, StyleSheet, Text ,View, TouchableOpacity} from 'react-native';
 import CookieManager from '@react-native-cookies/cookies';
-import { WebView } from 'react-native-webview';
+import { WebView } from '@react-native-oh-tpl/react-native-webview';
 
 export interface Cookie {
   name: string;

@@ -14,7 +14,7 @@ Autoconverted link https://www.google.com (enable linkify to see)
 const App: () => React$Node = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      
       <SafeAreaView>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"

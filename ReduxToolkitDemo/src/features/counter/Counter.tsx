@@ -66,12 +66,7 @@ export function Counter() {
         </TouchableOpacity>
       </View>
       <View style={styles.row}>
-        <TextInput
-          style={styles.textbox}
-          value={incrementAmount}
-          keyboardType="numeric"
-          onChangeText={setIncrementAmount}
-        />
+      <Text style={styles.value}>{incrementAmount}</Text>
         <View>
           <TouchableOpacity
             style={styles.button}
@@ -219,6 +214,15 @@ export function Counter() {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
+            let a = isFulfilled({ "type": "counter/fetchCount/fulfilled","meta":{"arg":2,"requestId":"1DxfOBGsVp1l_fmjOi3r","requestSatus": "rejected", "rejectedWithValue": true}})
+            setMatchingText(JSON.stringify(a))
+            console.log('toolkit ------ isRejectedWithValue true', a)
+          }}>
+          <Text style={styles.buttonText2}>isRejectedWithValue</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
             setMatchingText(JSON.stringify(isAsyncThunkAction(incrementAsync)))
             console.log('toolkit ------ isAsyncThunkAction', isAsyncThunkAction(incrementAsync))
           }}>
@@ -227,9 +231,6 @@ export function Counter() {
       </View>
       <View style={styles.row}>
         <Text>Other Exports</Text>
-      </View>
-      <View style={styles.row}>
-        <Text style={styles.buttonText}>{otherText}</Text>
       </View>
       <View style={styles.row}>
         <TouchableOpacity
@@ -249,6 +250,9 @@ export function Counter() {
           <Text style={styles.buttonText2}>miniSerializeError</Text>
         </TouchableOpacity>
       </View>
+      <View style={styles.row}>
+        <Text style={styles.buttonText}>{otherText}</Text>
+      </View>
     </View>
   );
 }
@@ -259,6 +263,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexWrap: 'wrap',
+    marginBottom: 10
   },
   value: {
     fontSize: 78,
