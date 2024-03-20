@@ -30,6 +30,7 @@ interface Props {
   value: string;
   options: optionsType;
   jsbarcodeBack?: (value: string) => void;
+  setValid?: (value: string) => void;
 }
 
 const defaults = {
@@ -57,6 +58,7 @@ const defaults = {
 
 export const Barcode = (props: Props) => {
   const [jsbarcodeInfo, setJsbarcodeInfo] = useState('');
+  const [data, setData] = useState('');
   const {
     width = defaults.width,
     height = defaults.height,
@@ -84,7 +86,10 @@ export const Barcode = (props: Props) => {
     if(props.jsbarcodeBack){
       props.jsbarcodeBack(jsbarcodeInfo);
     }
-  }, [jsbarcodeInfo]);
+    if(props.setValid){
+      props.setValid(data);
+    }
+  }, [jsbarcodeInfo,data]);
 
   const svgText = useMemo(() => {
     const document = new DOMImplementation().createDocument(null, 'html');
@@ -110,7 +115,14 @@ export const Barcode = (props: Props) => {
       marginBottom,
       marginLeft,
       marginRight,
-      flat
+      flat,
+      valid:function(valid){
+        if(valid){
+          setData('条形码有效');
+        }else{
+          setData('条形码无效');
+        }
+      }
     });
 
     svgNode.removeAttribute('style')
