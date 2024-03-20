@@ -4,6 +4,12 @@ import {useState} from 'react';
 
 export default function JsbarcodeSvgDemo() {
   const [text, setText] = useState('');
+  const [value, setValue] = useState('');
+
+  // 获取valid数据
+  const getValid = (val:string)=>{
+    setValue(val);
+  }
 
   return (
     <ScrollView>
@@ -104,6 +110,13 @@ export default function JsbarcodeSvgDemo() {
           options={{format: 'EAN8', flat: true}}
         />
         <Text style={styles.testStyle}>flat: true</Text>
+        <Text style={styles.testStyle}>valid</Text>
+        <Barcode
+          value="9501101530003"
+          options={{format: 'EAN13', flat: true}}
+          setValid={getValid}
+        />
+        <Text>{value}</Text>
       </View>
     </ScrollView>
   );
