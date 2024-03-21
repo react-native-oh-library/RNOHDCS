@@ -19,7 +19,7 @@ With a reference later in the document defining the URL location:
 const App: () => React$Node = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      
       <SafeAreaView>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"

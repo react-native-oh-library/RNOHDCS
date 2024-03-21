@@ -90,7 +90,7 @@ dayjs.extend(weekday)
   const [minMaxDataB, setMinMaxDataB] = useState('2023-01-08')
   const [quarterOfYearData, setQuarterOfYearData] = useState('2024-01-01')
   const [weekOfYearData, setWeekOfYearData] = useState('2024-01-01')
-  const [weekDayData, setWeekDayData] = useState(dayjs().weekday())
+
 
 
   const globalLocaleData = dayjs().localeData()
@@ -118,15 +118,15 @@ dayjs.extend(weekday)
           <Text style={[styles.headerTitle, { marginRight: 20 }]}>插件：AdvancedFormat 支持更多模版</Text>
         </View>
         <View style={styles.flexRowCenter}>
-          <Text style={styles.formatLabel}>显示季度：</Text>
+          <Text style={styles.formatLabel}>显示当前季度：</Text>
           <Text >{dayjs().format('Q')}</Text>
         </View>
         <View style={styles.flexRowCenter}>
-          <Text style={styles.formatLabel}>显示带序数词的月份里的一天：</Text>
+          <Text style={styles.formatLabel}>显示当前带序数词的月份里的一天：</Text>
           <Text >{dayjs().format('Do')}</Text>
         </View>
         <View style={styles.flexRowCenter}>
-          <Text style={styles.formatLabel}>显示由 1 开始的小时</Text>
+          <Text style={styles.formatLabel}>显示当前由 1 开始的小时</Text>
           <Text >{dayjs().format('k')}</Text>
         </View>
       </View>
@@ -135,20 +135,16 @@ dayjs.extend(weekday)
         <View style={styles.flexRowCenter}>
           <Text style={[styles.headerTitle, { marginRight: 20 }]}>插件：ArraySupport支持数组参数。</Text>
         </View>
-        <View style={styles.flexRowCenter}>
           <Text style={styles.formatLabel}>可以传入数组{'[2021, 0, 3]'}:</Text>
           <Text >{dayjs([2010, 0, 3]).format()}</Text>
-        </View>
       </View>
 
       <View style={styles.viewBox}>
         <View style={styles.flexRowCenter}>
           <Text style={[styles.headerTitle, { marginRight: 20 }]}>插件：BigIntSupport支持 BigInt 参数。</Text>
         </View>
-        <View style={styles.flexRowCenter}>
-          <Text style={styles.formatLabel}>支持 BigInt 参数：</Text>
+          <Text style={styles.formatLabel}>支持 BigInt 参数：传入1666310421101</Text>
           <Text >{dayjs(BigInt(1666310421101)).format()}</Text>
-        </View>
       </View>
 
       <View style={styles.viewBox}>
@@ -157,18 +153,15 @@ dayjs.extend(weekday)
         </View>
         <Text>佛历是一个年份编号系统，主要用于柬埔寨、老挝、缅甸和泰国等东南亚国家以及斯里兰卡、马来西亚和新加坡的中国人，用于宗教或官方场合 (Wikipedia)。
           要计算 BE 年，只需在年份中添加 543。 例如，1977 年 5 月 26 日 AD / CE 应显示为 2520 年 5 月 26 日 BE（1977 + 543）。</Text>
-        <View style={styles.flexRowCenter}>
           <Text style={styles.formatLabel}>支持佛历格式化：</Text>
-          <Text >{dayjs().format('BBBB BB')}</Text>
-        </View>
+          <Text >当前时间的佛历格式化{dayjs().format('BBBB BB')}</Text>
       </View>
 
       <View style={styles.viewBox}>
         <View style={styles.flexRowCenter}>
           <Text style={[styles.headerTitle, { marginRight: 20 }]}>插件：Calendar增加了.calendar API 返回一个 string 来显示日历时间。</Text>
         </View>
-        <View style={styles.flexRowCenter}>
-          <Text style={styles.formatLabel}>显示日历时间。</Text>
+          <Text style={styles.formatLabel}>显示当前时间日历时间。</Text>
           <Text >{dayjs().calendar(null, {
             sameDay: '[Today at] h:mm A',
             nextDay: '[Tomorrow at] h:mm A',
@@ -177,17 +170,14 @@ dayjs.extend(weekday)
             lastWeek: '[Last] dddd [at] h:mm A',
             sameElse: 'DD/MM/YYYY'
           })}</Text>
-        </View>
       </View>
 
       <View style={styles.viewBox}>
         <View style={styles.flexRowCenter}>
           <Text style={[styles.headerTitle, { marginRight: 20 }]}>插件：CustomParseFormat支持自定义时间格式.</Text>
         </View>
-        <View style={styles.flexRowCenter}>
-          <Text style={styles.formatLabel}>支持 BigInt 参数：</Text>
+          <Text style={styles.formatLabel}>传入"12-25-1995", "MM-DD-YYYY"</Text>
           <Text >{dayjs("12-25-1995", "MM-DD-YYYY").format()}</Text>
-        </View>
       </View>
 
       <View style={styles.viewBox}>
@@ -292,7 +282,6 @@ dayjs.extend(weekday)
         <Text style={[styles.headerTitle, { marginRight: 20 }]}>插件：IsSameOrAfter A时间与B时间相同或在B时间之后。</Text>
         <Text style={[styles.headerTitle, { marginRight: 20 }]}>插件：IsSameOrBefore A时间与B时间相同或在B时间之前。</Text>
         <Text >可输入时间格式例如：2024， 2024-02，2024-02-05</Text>
-        <View style={styles.flexRowCenter}>
           <View style={styles.flexRowCenter}>
             <Text style={styles.formatLabel}>A时间</Text>
             <TextInput
@@ -309,7 +298,6 @@ dayjs.extend(weekday)
               value={compareDateB}
             />
           </View>
-        </View>
         <Button title='IsSameOrAfter' onPress={() => {
           setIsSameOrAfterBool(dayjs(compareDateA).isSameOrAfter(compareDateB))
         }} />
@@ -382,7 +370,6 @@ dayjs.extend(weekday)
 
       <View style={styles.viewBox}>
         <Text style={styles.headerTitle}>插件：MinMax比较传入的Day.js实例的大小。</Text>
-        <View style={styles.flexRowCenter}>
           <Text style={styles.formatLabel}>输入两个日期进行比较:</Text>
           <TextInput
             style={[styles.inputStyle, { width: 100, marginRight: 10 }]}
@@ -394,17 +381,17 @@ dayjs.extend(weekday)
             onChangeText={text => setMinMaxDataB(text)}
             value={minMaxDataB}
           />
-        </View>
-        <Text style={styles.formatLabel}>大日期为{dayjs.max(dayjs(minMaxDataA), dayjs(minMaxDataB))?.format()}</Text>
+        <Text style={styles.formatLabel}>大日期为{dayjs.max(dayjs(minMaxDataA), dayjs(minMaxDataB))?.format('YYYY-MM-DD')}</Text>
       </View>
 
       <View style={styles.viewBox}>
         <Text style={[styles.headerTitle, styles.interval]}>插件：ObjectSupport以支持传入对象参数。</Text>
+        <Text style={[styles.formatLabel, styles.interval]}>传入对象{'{year: 2010, month: 1, day: 12}'}  </Text>
         <Text style={[styles.formatLabel, styles.interval]}>{dayjs({
           year: 2010,
           month: 1,
           day: 12
-        }).format()}</Text>
+        }).format('YYYY-MM-DD')}</Text>
       </View>
 
       <View style={styles.viewBox}>
@@ -425,15 +412,16 @@ dayjs.extend(weekday)
 
       <View style={styles.viewBox}>
         <Text style={[styles.headerTitle, styles.interval]}>插件：RelativeTime增加了 .from .to .fromNow .toNow 4 个 API 来展示相对的时间 (e.g. 3 小时以前).</Text>
-        <Text style={[styles.formatLabel, styles.interval]}>.from 距离 X 的相对时间: {dayjs().from(dayjs('2010-01-01'))}</Text>
+        <Text style={[styles.formatLabel, styles.interval]}>X表示2024-01-01</Text>
+        <Text style={[styles.formatLabel, styles.interval]}>.from 距离 X 的相对时间: {dayjs().from(dayjs('2024-01-01'))}</Text>
         <Text style={[styles.formatLabel, styles.interval]}>.fromNow  X 距离现在的相对时间: {dayjs('2024-01-01').fromNow()}</Text>
-        <Text style={[styles.formatLabel, styles.interval]}>.to 到 X 的相对时间: {dayjs().to(dayjs('2010-01-01'))}</Text>
+        <Text style={[styles.formatLabel, styles.interval]}>.to 到 X 的相对时间: {dayjs().to(dayjs('2024-01-01'))}</Text>
         <Text style={[styles.formatLabel, styles.interval]}>.toNow X 到现在的相对时间: {dayjs('2024-01-01').toNow()}</Text>
       </View>
 
       <View style={styles.viewBox}>
         <Text style={[styles.headerTitle, styles.interval]}>插件：ToArray增加了 .toArray() API 来返回包含时间数值的 array。</Text>
-        <Text style={[styles.formatLabel, styles.interval]}>{dayjs().toArray()}</Text>
+        <Text style={[styles.formatLabel, styles.interval]}>当前时间数组：{dayjs().toArray()}</Text>
       </View>
       
       <View style={styles.viewBox}>
@@ -444,12 +432,12 @@ dayjs.extend(weekday)
 
       <View style={styles.viewBox}>
         <Text style={[styles.headerTitle, styles.interval]}>插件：UpdateLocale 增加了 .updateLocale API 来更新语言配置的属性。</Text>
-        <Text style={[styles.formatLabel, styles.interval]}>{dayjs().calendar()}</Text>
+        <Text style={[styles.formatLabel, styles.interval]}>当前时间：{dayjs().calendar()}</Text>
       </View>
 
       <View style={styles.viewBox}>
         <Text style={[styles.headerTitle, styles.interval]}>插件：UTC 增加了 .utc .local .isUTC APIs 使用 UTC 模式来解析和展示时间。</Text>
-        <Text style={[styles.formatLabel, styles.interval]}>将本地时间转换成 UTC 时间:</Text>
+        <Text style={[styles.formatLabel, styles.interval]}>将本地当前时间转换成 UTC 时间:</Text>
         <Text style={[styles.formatLabel, styles.interval]}>{dayjs().utc().format()}</Text>
       </View>
 
@@ -464,12 +452,13 @@ dayjs.extend(weekday)
       </View>
 
       <View style={styles.viewBox}>
-        <Text style={[styles.headerTitle, styles.interval]}>插件：WeekYear 增加了 .weekYear() API 来获取基于当前语言的按周计算的年份。</Text>
+        <Text style={[styles.headerTitle, styles.interval]}>插件：WeekYear 增加了 .weekYear() API 来获取基于当前语言的按周计算的年份（当前时间）。</Text>
         <Text style={[styles.formatLabel, styles.interval]}>{dayjs().weekYear()}</Text>
       </View>
       <View style={styles.viewBox}>
         <Text style={[styles.headerTitle, styles.interval]}>插件：WeekDay 增加了 .weekday() API 来获取或设置当前语言的星期。</Text>
-        <Text style={[styles.formatLabel, styles.interval]}>{weekDayData}</Text>
+        <Text style={[styles.formatLabel, styles.interval]}>设置1:{dayjs().weekday(1).weekday()}</Text>
+        <Text style={[styles.formatLabel, styles.interval]}>设置7:{dayjs().weekday(7).weekday()}</Text>
       </View>
 
     </View>
