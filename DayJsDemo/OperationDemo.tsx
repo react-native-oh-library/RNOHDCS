@@ -7,8 +7,8 @@ const OperationDemo = () => {
 
   const [addNum, setAddNum] = useState(1)
   const [subtractNum, setSubtractNum] = useState(1)
-  const [add, setAdd] = useState(dayjs().format('YYYY-MM-DD HH:mm:ss'))
-  const [subtract, setSubtract] = useState(dayjs().format('YYYY-MM-DD HH:mm:ss'))
+  const [add, setAdd] = useState(dayjs().format('YYYY-MM-DD'))
+  const [subtract, setSubtract] = useState(dayjs().format('YYYY-MM-DD'))
   const [start, setStart] = useState<OpUnitType>('w')
 
 
@@ -16,11 +16,11 @@ const OperationDemo = () => {
     switch (type) {
       case 'add':
         setAddNum(addNum + 1)
-        setAdd(dayjs().add(addNum, 'day').format('YYYY-MM-DD HH:mm:ss'))
+        setAdd(dayjs().add(addNum, 'day').format('YYYY-MM-DD'))
         break;
       case 'subtract':
         setSubtractNum(subtractNum + 1)
-        setSubtract(dayjs().subtract(subtractNum, 'day').format('YYYY-MM-DD HH:mm:ss'))
+        setSubtract(dayjs().subtract(subtractNum, 'day').format('YYYY-MM-DD'))
         break;
       default:
         break;

@@ -33,10 +33,12 @@ import utc from 'dayjs/plugin/utc'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
 import weekYear from 'dayjs/plugin/weekYear'
 import weekday from 'dayjs/plugin/weekday'
+import timezone from 'dayjs/plugin/timezone'
 
 
 
 const PluginDemo = () => {
+  const a = dayjs
   dayjs.locale('zh-cn')
   dayjs.extend(advancedFormat)
   dayjs.extend(arraySupport)
@@ -65,12 +67,15 @@ const PluginDemo = () => {
   dayjs.extend(toArray)
   dayjs.extend(toObject)
   dayjs.extend(updateLocale)
-  dayjs.extend(utc)
   dayjs.extend(weekOfYear)
   dayjs.extend(weekYear)
-dayjs.extend(weekday)
-
-
+  dayjs.extend(weekday)
+  dayjs.extend(utc)
+  dayjs.extend(timezone)
+  a.extend(utc)
+  a.extend(timezone)
+  const timestamp = "2014-06-01 12:00"
+  const tz = "America/New_York"
   const [durationValue, setDurationValue] = useState('')
   const [betweenA, setBetweenA] = useState('2024-04-01')
   const [betweenB, setBetweenB] = useState('2024-04-08')
@@ -106,6 +111,9 @@ dayjs.extend(weekday)
       sameElse: 'YYYY.MM.DD A h:mm dddd',
     },
   });
+
+  console.log(dayjs.tz.guess());
+  
 
   return (
     <View style={styles.container}>
@@ -185,16 +193,8 @@ dayjs.extend(weekday)
           <Text style={[styles.headerTitle, { marginRight: 20 }]}>插件：DayOfYear传入日期是年中第几天。</Text>
         </View>
         <View style={styles.flexRowCenter}>
-          <Text style={styles.formatLabel}>当前天：</Text>
-          <Text >第{dayjs().dayOfYear()}天</Text>
-        </View>
-        <View style={styles.flexRowCenter}>
           <Text style={styles.formatLabel}>2024-05-01：</Text>
           <Text >第{dayjs('2024-05-01').dayOfYear()}天</Text>
-        </View>
-        <View style={styles.flexRowCenter}>
-          <Text style={styles.formatLabel}>2024-01-01：</Text>
-          <Text >第{dayjs('2024-01-01').dayOfYear()}天</Text>
         </View>
       </View>
 
@@ -420,6 +420,11 @@ dayjs.extend(weekday)
       </View>
 
       <View style={styles.viewBox}>
+        <Text style={[styles.headerTitle, styles.interval]}>插件：Timezone 插件添加了 dayjs.tz .tz .tz.guess .tz.setDefault API，在时区之间解析或显示。</Text>
+        <Text style={[styles.formatLabel, styles.interval]}>显示当前系统时区：{dayjs.tz.guess()}</Text>
+      </View>
+
+      <View style={styles.viewBox}>
         <Text style={[styles.headerTitle, styles.interval]}>插件：ToArray增加了 .toArray() API 来返回包含时间数值的 array。</Text>
         <Text style={[styles.formatLabel, styles.interval]}>当前时间数组：{dayjs().toArray()}</Text>
       </View>
@@ -457,7 +462,6 @@ dayjs.extend(weekday)
       </View>
       <View style={styles.viewBox}>
         <Text style={[styles.headerTitle, styles.interval]}>插件：WeekDay 增加了 .weekday() API 来获取或设置当前语言的星期。</Text>
-        <Text style={[styles.formatLabel, styles.interval]}>设置1:{dayjs().weekday(1).weekday()}</Text>
         <Text style={[styles.formatLabel, styles.interval]}>设置7:{dayjs().weekday(7).weekday()}</Text>
       </View>
 
