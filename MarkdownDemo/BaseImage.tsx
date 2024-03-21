@@ -33,6 +33,12 @@ const App: () => React$Node = () => {
           style={{height: '100%'}}
         >
             <Markdown
+            style = {{
+              image: {
+                width: 200,
+                height: 200,
+              }
+            }}
             >
               {copy}
             </Markdown>

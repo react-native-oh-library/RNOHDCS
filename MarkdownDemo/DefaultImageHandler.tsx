@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { SafeAreaView, ScrollView, StatusBar, Button } from 'react-native';
+import { SafeAreaView, ScrollView, StatusBar, Button,Text } from 'react-native';
 
 import Markdown from 'react-native-markdown-display';
 // import img from './img/img.png'
@@ -30,12 +30,14 @@ const App: () => React$Node = () => {
             style = {{
               image:{
                 width:200,
-                height:200
+                height:200,
+                backgroundColor: '#ccc'
               }
             }}
           >
             {copy}
           </Markdown>
+          <Text>defaultImageHandler is : { empty || 'null'}</Text>
         </ScrollView>
       </SafeAreaView>
     </>
