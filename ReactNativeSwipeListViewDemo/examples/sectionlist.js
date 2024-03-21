@@ -91,7 +91,7 @@ export default function SectionList() {
                 rightOpenValue={-150}
                 previewRowKey={'0'}
                 previewOpenValue={-40}
-                previewOpenDelay={3000}
+                previewOpenDelay={1000}
                 onRowDidOpen={onRowDidOpen}
             />
         </View>

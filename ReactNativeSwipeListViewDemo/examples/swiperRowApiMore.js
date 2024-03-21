@@ -51,7 +51,11 @@ export default function StandaloneRow(){
                 <Text>onRowPress:<Text style={[{color:'blue'}]}>{log}</Text></Text>
                 <Text onPress={empty} style={styles.empty}>清空日志</Text>
                 <SwipeRow leftOpenValue={75} rightOpenValue={-75}
-                onRowPress={onRowPress}>
+                onRowPress={onRowPress}
+                preview={true}
+                previewRowKey={'0'}
+                previewOpenValue={-40}
+                previewOpenDelay={1000}>
                     <View style={styles.standaloneRowBack}>
                         <Text style={styles.backTextWhite}>Left</Text>
                         <Text style={styles.backTextWhite}>Right</Text>

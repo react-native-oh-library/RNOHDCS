@@ -26,6 +26,11 @@ export default function StandaloneRow(){
     const shouldItemUpdate = rowKey =>{
         setLog3('组件更新')
     }
+
+    const [log4,setLog4] = useState('')
+    const setScrollEnabled = rowKey =>{
+        setLog4('setScrollEnabled')
+    }
     return (
         <View style={styles.container}>
             <View style={styles.standalone}>
@@ -61,7 +66,12 @@ export default function StandaloneRow(){
                 <Text>shouldItemUpdate:<Text style={[{color:'blue'}]}>{log3}</Text></Text>
                 <Text onPress={empty3} style={styles.empty}>清空日志</Text>
                 <SwipeRow leftOpenValue={75} rightOpenValue={-75}
-                shouldItemUpdate={shouldItemUpdate}>
+                shouldItemUpdate={shouldItemUpdate}
+                stopLeftSwipe={30}
+                stopRightSwipe={-30}
+                useNativeDriver={false}
+                setScrollEnabled={setScrollEnabled}
+                >
                     <View style={styles.standaloneRowBack}>
                         <Text style={styles.backTextWhite}>Left</Text>
                         <Text style={styles.backTextWhite}>Right</Text>

@@ -46,7 +46,8 @@ export default function StandaloneRow(){
                 )}
                 leftOpenValue={75}
                 rightOpenValue={-75}
-                onRowClose={onRowClose}>
+                onRowClose={onRowClose}
+                >
                 </SwipeListView>
                 
                 <Text>onRowDidClose:<Text style={[{color:'blue'}]}>{log7}</Text></Text>
@@ -60,7 +61,8 @@ export default function StandaloneRow(){
                 )}
                 leftOpenValue={75}
                 rightOpenValue={-75}
-                onRowDidClose={onRowDidClose}>
+                onRowDidClose={onRowDidClose}
+                useNativeDriver={false}>
                 </SwipeListView>
 
                 <Text>onPreviewEnd:<Text style={[{color:'blue'}]}>{log5}</Text></Text>
@@ -76,7 +78,19 @@ export default function StandaloneRow(){
                 onPreviewEnd={onPreviewEnd}
                 previewRowKey={'0'}
                 previewOpenValue={-40}
-                previewOpenDelay={3000}>
+                previewOpenDelay={1000}
+                stopLeftSwipe={10} 
+                stopRightSwipe={-10} 
+                swipeToClosePercent={10}
+                swipeToOpenVelocityContribution={10}
+                previewRepeatDelay={1000}
+                friction={7}
+                tension={40}
+                restSpeedThreshold={0.001}
+                restDisplacementThreshold={0.001}
+                previewDuration={300}
+                previewRowIndex={0}
+                >
                 </SwipeListView>
 
                 <Text>shouldItemUpdate:<Text style={[{color:'blue'}]}>{log6}</Text></Text>

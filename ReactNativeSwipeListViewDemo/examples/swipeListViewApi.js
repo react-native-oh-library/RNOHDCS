@@ -65,8 +65,9 @@ export default function StandaloneRow(){
                 rightOpenValue={-75}
                 previewRowKey={'0'}
                 previewOpenValue={-40}
-                previewOpenDelay={3000}
+                previewOpenDelay={1000}
                 onScrollEnabled={onScrollEnabled}
+                useNativeDriver={false}
                 >
                 </SwipeListView>
                 <Text>onRowOpen:<Text style={[{color:'blue'}]}>{log3}</Text></Text>
@@ -80,10 +81,11 @@ export default function StandaloneRow(){
                 )}
                 leftOpenValue={75}
                 rightOpenValue={-75}
-                onRowOpen={onRowOpen}>
+                onRowOpen={onRowOpen}
+                useNativeDriver={false}>
                 </SwipeListView>
 
-                <Text>onRowOpen:<Text style={[{color:'blue'}]}>{log4}</Text></Text>
+                <Text>listViewRef:<Text style={[{color:'blue'}]}>{log4}</Text></Text>
                 <SwipeListView data={listViewData}
                 renderItem={(data,rowMap)=>(
                     <View style={styles.rowFront}><Text>I am {data.item.text} in a SwipeListView</Text></View>
@@ -93,7 +95,8 @@ export default function StandaloneRow(){
                 )}
                 leftOpenValue={75}
                 rightOpenValue={-75}
-                listViewRef={listViewRef}>
+                listViewRef={listViewRef}
+                disableRightSwipe>
                 </SwipeListView>
             </View>
         </View>
