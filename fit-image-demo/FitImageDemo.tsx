@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import {View,StyleSheet,Text,ScrollView,SafeAreaView,Image,Button} from "react-native"
 import FitImage from "react-native-fit-image"
 var styles = StyleSheet.create({
@@ -15,119 +15,192 @@ var styles = StyleSheet.create({
 const FitImageDemo=()=>{
     // 测试onLoad
     const [onLoadDatea,setOnLoad] = useState('初始onLoad值111')
-    // 获取图片尺寸
-    const [imgSizeNum,getImageSizeNum] = useState(0)
+    // 测试onError
+    const [onErrorDatea,setOnError] = useState('初始onError值111')
+    // 测试onLoadStart
+    const [onLoadStartDatea,setOnLoadStart] = useState('未执行前onLoadStart值111')
+    // 测试onLoadEnd
+    const [onLoadEndDatea,setOnLoadEnd] = useState('未执行前onLoadEnd值111')
+    // 获取本地图片尺寸
+    const [imgSizeNum,getImageSizeNum] = useState({width:0,height:0})
     const img1 = require('./assets/expo.png')
     const getImageSize = ()=>{
         let res = Image.resolveAssetSource(img1)
-        getImageSizeNum(res.width)
+        getImageSizeNum({width:res.width,height:res.height})
     }
+    // 获取网略图片尺寸
+    const imgHttp={uri:"https://octodex.github.com/images/stormtroopocat.jpg"}
+    const [imgHttpSize,getHttpSizeNum] = useState({width:0,height:0})
+    useEffect(() => {;
+         // http远程文件
+        Image.getSize(imgHttp.uri, (width,height) => {
+            getHttpSizeNum({ width,height });
+          },
+         (failure) => { console.log('failure', failure)});
+         // base64文件
+      }, []);
     return (
         <SafeAreaView>
             <ScrollView>
-                <View>
-                    <Text>验证网略图片</Text>
-                    <FitImage  style={styles.fitImageWithSize} source={{uri:"https://octodex.github.com/images/stormtroopocat.jpg"}}>
-                    </FitImage>
-                </View>
-                <View>
-                    <Text>获取图片宽度</Text>
-                    <FitImage  style={styles.fitImageWithSize} source={require('./assets/expo.png')}>
-                    </FitImage>
-                    <Text>宽度：{imgSizeNum}</Text>
-                    <Button onPress={()=>{getImageSize()}} title='调用image图片宽高'></Button>
-                </View>
-                <View>
-                    <Text>验证图片圆角</Text>
-                    <FitImage  style={{...styles.fitImageWithSize,...styles.fitImage}} source={require('./assets/expo.png')}>
-                    </FitImage>
-                    <Text>宽度：{imgSizeNum}</Text>
-                    <Button onPress={()=>{getImageSize()}} title='调用image图片宽高'></Button>
-                </View>
-                <View style={{width:'100%',height:100}}>
-                    <Text>测试resizeMode(cover contain stretch repeat center)，值为cover</Text>
-                    <FitImage resizeMode='cover' style={{...styles.fitImageWithSize}} source={require('./assets/expo.png')}>
-                    </FitImage>
-                </View>
-                <View style={{width:'100%',height:100}}>
-                    <Text>测试resizeMode(cover contain stretch repeat center)，值为contain</Text>
-                    <FitImage resizeMode='contain' style={{...styles.fitImageWithSize}} source={require('./assets/expo.png')}>
-                    </FitImage>
-                </View>
-                <View style={{width:'100%',height:100}}>
-                    <Text>测试resizeMode(cover contain stretch repeat center)，值为stretch</Text>
-                    <FitImage resizeMode='stretch' style={{...styles.fitImageWithSize}} source={require('./assets/expo.png')}>
-                    </FitImage>
-                </View>
-                <View style={{width:'100%',height:100}}>
-                    <Text>测试resizeMode(cover contain stretch repeat center)，值为repeat</Text>
-                    <FitImage resizeMode='repeat' style={{...styles.fitImageWithSize}} source={require('./assets/expo.png')}>
-                    </FitImage>
-                </View>
-                <View style={{width:'100%',height:100}}>
-                    <Text>测试resizeMode(cover contain stretch repeat center)，值为center</Text>
-                    <FitImage resizeMode='center' style={{...styles.fitImageWithSize}} source={require('./assets/expo.png')}>
-                    </FitImage>
-                </View>
-                <View>
-                    <Text>第一个测试onLoad</Text>
-                    <Text>{onLoadDatea}</Text>
-                    <FitImage onLoad={()=>{setTimeout(()=>{setOnLoad('改变后onLoad值222')},2000)}} style={styles.fitImageWithSize} source={require('./assets/expo.png')}>
-                    </FitImage>
-                </View>
-                <View>
-                    <Text>第五个测试属性indicator(加载器  true/false)，indicatorColor(加载器颜色)，indicatorSize(加载器大小(small | large)) =====》indicator值为true，indicatorSize值为large  网络图片</Text>
-                    <FitImage
-                        indicator={true} // disable loading indicator
-                        indicatorColor="red" // react native colors or color codes like #919191
-                        indicatorSize="large" // (small | large) or integer
-                        source={{uri:"https://octodex.github.com/images/stormtroopocat.jpg"}}
-                        style={{...styles.fitImage,...styles.fitImageWithSize}}
-                        />
-                </View>
-                <View>
-                    <Text>第六个测试属性indicator(加载器  true/false)，indicatorColor(加载器颜色)，indicatorSize(加载器大小(small | large | number)) =====》indicator值为true，indicatorSize值为small</Text>
-                    <FitImage
-                        indicator={true} // disable loading indicator
-                        indicatorColor="red" // react native colors or color codes like #919191
-                        indicatorSize="small" // (small | large) or integer
-                        source={require('./assets/expo.png')}
-                        style={{...styles.fitImage,...styles.fitImageWithSize}}
-                        />
-                </View>
-                <View>
-                    <Text>第七个测试属性indicator(加载器  true/false)，indicatorColor(加载器颜色)，indicatorSize(加载器大小(small | large | number)) =====》indicator值为true，indicatorSize值为number</Text>
-                    <FitImage
-                        indicator={true} // disable loading indicator
-                        indicatorColor="red" // react native colors or color codes like #919191
-                        indicatorSize={20} // (small | large) or integer
-                        source={require('./assets/expo.png')}
-                        style={{...styles.fitImage,...styles.fitImageWithSize}}
-                        />
-                </View>
-                <View>
-                    <Text>第八个测试属性indicator(加载器  true/false)，indicatorColor(加载器颜色)，indicatorSize(加载器大小(small | large | number)) =====》indicator值为false，indicatorSize值为number</Text>
-                    <Text>为false预加载器不显示</Text>
-                    <FitImage
-                        indicator={false} // disable loading indicator
-                        indicatorColor="red" // react native colors or color codes like #919191
-                        indicatorSize={20} // (small | large) or integer
-                        source={require('./assets/expo.png')}
-                        style={{...styles.fitImage,...styles.fitImageWithSize}}
-                        />
-                </View>
-                <View>
-                    <Text>不加宽高，看图片是否能出来</Text>
-                    <FitImage
-                        source={require('./assets/expo.png')}
-                        />
-                </View>
-                <View>
-                    <Text>测试blurRadius(模糊滤镜，值越大越模糊)</Text>
-                    <FitImage
-                        source={require('./assets/expo.png')}
-                        style={{...styles.fitImage,...styles.fitImageWithSize}}
-                        />
+                <View style={{width:'100%',height:'100%'}}>
+                    <View>
+                        <Text>测试属性originalWidth，originalHeight（在不加宽度高度的情况下）</Text>
+                        <FitImage
+                            source={require('./assets/expo.png')}
+                            originalWidth={400}
+                            originalHeight={400}
+                            />
+                    </View>
+                    <View>
+                        <Text>不加originalWidth，originalHeight和不加宽度高度的情况下</Text>
+                        <FitImage
+                            source={require('./assets/expo.png')}
+                            />
+                    </View>
+                    <View>
+                        <Text>不加originalWidth，originalHeight但是加宽度高度的情况下</Text>
+                        <FitImage
+                            source={require('./assets/expo.png')}
+                            style={{...styles.fitImageWithSize}}
+                            />
+                    </View>
+                    <View>
+                        <Text>不加originalWidth，originalHeight但是加宽度高度的情况下的网略图片</Text>
+                        <FitImage
+                            source={{uri:"https://octodex.github.com/images/stormtroopocat.jpg"}}
+                            style={{...styles.fitImageWithSize}}
+                            />
+                    </View>
+                    <View>
+                        <Text>加originalWidth，originalHeight但是不加宽度高度的情况下的网略图片</Text>
+                        <FitImage
+                            source={{uri:"https://octodex.github.com/images/stormtroopocat.jpg"}}
+                            originalWidth={400}
+                            originalHeight={400}
+                            />
+                    </View>
+                    <View>
+                        <Text>同时加originalWidth，originalHeight但是不加宽度高度的情况下</Text>
+                        <FitImage
+                            source={require('./assets/expo.png')}
+                            originalWidth={400}
+                            originalHeight={400}
+                            style={{...styles.fitImageWithSize}}
+                            />
+                    </View>
+                    <View>
+                        <View>
+                            <Text>indicator(加载器 为true) indicatorClor(加载器颜色) indicatorSize(值：large  small number)</Text>
+                            <Text>值为值：large</Text>
+                            <FitImage indicator={true}  indicatorClor='red' indicatorSize='large' style={{...styles.fitImageWithSize}} source={require('./assets/expo.png')}>
+                            </FitImage>
+                        </View>
+                        <View>
+                            <Text>indicator(加载器 为true) indicatorClor(加载器颜色) indicatorSize(值：large  small number)</Text>
+                            <Text>small</Text>
+                            <FitImage indicator={true}  indicatorClor='red' indicatorSize='small' style={{...styles.fitImageWithSize}} source={require('./assets/expo.png')}>
+                            </FitImage>
+                        </View>
+                        <View>
+                            <Text>indicator(加载器 为true) indicatorClor(加载器颜色) indicatorSize(值：large  small number)</Text>
+                            <Text>number:值越大指示器越大</Text>
+                            <FitImage indicator={true}  indicatorClor='red' indicatorSize={100} style={{...styles.fitImageWithSize}} source={require('./assets/expo.png')}>
+                            </FitImage>
+                        </View>
+                        <View>
+                            <Text>indicator(加载器 为false) </Text>
+                            <Text>number:值越大指示器越大</Text>
+                            <FitImage indicator={false}   style={{...styles.fitImageWithSize}} source={require('./assets/expo.png')}>
+                            </FitImage>
+                        </View>
+                    </View>
+
+
+                    <View>
+                        <Text>验证网略图片</Text>
+                        <FitImage  style={styles.fitImageWithSize}  source={{uri:"https://octodex.github.com/images/stormtroopocat.jpg"}}>
+                        </FitImage>
+                    </View>
+                    <View>
+                        <Text>获取本地图片宽高</Text>
+                        <FitImage  style={styles.fitImageWithSize} source={require('./assets/expo.png')}>
+                        </FitImage>
+                        <Text>宽度：{imgSizeNum.width},高度：{imgSizeNum.height}</Text>
+                        <Button onPress={()=>{getImageSize()}} title='调用image图片宽高'></Button>
+                    </View>
+                    <View>
+                        <Text>验证网略图片宽高</Text>
+                        <Text>宽度：{imgHttpSize.width},高度：{imgHttpSize.height}</Text>
+                        <FitImage  style={{...styles.fitImageWithSize,...styles.fitImage}} source={{uri:"https://octodex.github.com/images/stormtroopocat.jpg"}}>
+                        </FitImage>
+                    </View>
+                    <View>
+                        <Text>验证图片圆角</Text>
+                        <FitImage  style={{...styles.fitImageWithSize,...styles.fitImage}} source={require('./assets/expo.png')}>
+                        </FitImage>
+                    </View>
+                   
+                    <View style={{width:'100%',height:100}}>
+                        <Text>测试resizeMode(cover contain stretch repeat center)，值为cover</Text>
+                        <FitImage resizeMode='cover' style={{...styles.fitImageWithSize}} source={require('./assets/expo.png')}>
+                        </FitImage>
+                    </View>
+                    <View style={{width:'100%',height:100}}>
+                        <Text>测试resizeMode(cover contain stretch repeat center)，值为cover</Text>
+                        <FitImage resizeMode='cover' style={{...styles.fitImageWithSize}} source={require('./assets/expo.png')}>
+                        </FitImage>
+                    </View>
+                    <View style={{width:'100%',height:100}}>
+                        <Text>测试resizeMode(cover contain stretch repeat center)，值为contain</Text>
+                        <FitImage resizeMode='contain' style={{...styles.fitImageWithSize}} source={require('./assets/expo.png')}>
+                        </FitImage>
+                    </View>
+                    <View style={{width:'100%',height:100}}>
+                        <Text>测试resizeMode(cover contain stretch repeat center)，值为stretch</Text>
+                        <FitImage resizeMode='stretch' style={{...styles.fitImageWithSize}} source={require('./assets/expo.png')}>
+                        </FitImage>
+                    </View>
+                    <View style={{width:'100%',height:100}}>
+                        <Text>测试resizeMode(cover contain stretch repeat center)，值为repeat</Text>
+                        <FitImage resizeMode='repeat' style={{...styles.fitImageWithSize}} source={require('./assets/expo.png')}>
+                        </FitImage>
+                    </View>
+                    <View style={{width:'100%',height:100}}>
+                        <Text>测试resizeMode(cover contain stretch repeat center)，值为center</Text>
+                        <FitImage resizeMode='center' style={{...styles.fitImageWithSize}} source={require('./assets/expo.png')}>
+                        </FitImage>
+                    </View>
+                    <View>
+                        <Text>测试onLoad</Text>
+                        <Text>{onLoadDatea}</Text>
+                        <FitImage onLoad={()=>{setTimeout(()=>{setOnLoad('改变后onLoad值222')},2000)}} style={styles.fitImageWithSize} source={require('./assets/expo.png')}>
+                        </FitImage>
+                    </View>
+                    <View>
+                        <Text>测试onError</Text>
+                        <Text>{onErrorDatea}</Text>
+                        <FitImage onError={()=>{setTimeout(()=>{setOnError('改变后onError值222')},2000)}} style={styles.fitImageWithSize} source={{uri:'https://ok.gitHub.io123.png'}}>
+                        </FitImage>
+                    </View>
+                    <View>
+                        <Text>测试onLoadStart</Text>
+                        <Text>{onLoadStartDatea}</Text>
+                        <FitImage onLoadStart={()=>{setTimeout(()=>{setOnLoadStart('执行后onLoadStart值222')},2000)}} style={{...styles.fitImageWithSize,borderRadius:20}} source={require('./assets/expo.png')}>
+                        </FitImage>
+                    </View>
+                    <View>
+                        <Text>测试onLoadEnd</Text>
+                        <Text>{onLoadEndDatea}</Text>
+                        <FitImage onLoadEnd={()=>{setTimeout(()=>{setOnLoadEnd('执行后onLoadEnd值222')},2000)}} style={{...styles.fitImageWithSize,borderRadius:20}} source={require('./assets/expo.png')}>
+                        </FitImage>
+                    </View>
+                    <View>
+                        <Text>测试blurRadius(模糊滤镜，值越大越模糊)</Text>
+                        <FitImage
+                            source={require('./assets/expo.png')}
+                            style={{...styles.fitImage,...styles.fitImageWithSize}}
+                            />
+                    </View>
                 </View>
             </ScrollView>
         </SafeAreaView>
