@@ -138,27 +138,27 @@ const FitImageDemo=()=>{
                         <Text>验证图片圆角</Text>
                         <FitImage  style={{...styles.fitImageWithSize,...styles.fitImage}} source={require('./assets/expo.png')} />                        
                     </View>
-                    <View style={{width:'100%',height:100}}>
+                    <View>
                         <Text>测试resizeMode(cover contain stretch repeat center)，值为cover</Text>
                         <FitImage resizeMode='cover' style={{...styles.fitImageWithSize}} source={require('./assets/expo.png')} />                        
                     </View>
-                    <View style={{width:'100%',height:100}}>
+                    <View>
                         <Text>测试resizeMode(cover contain stretch repeat center)，值为cover</Text>
                         <FitImage resizeMode='cover' style={{...styles.fitImageWithSize}} source={require('./assets/expo.png')} />                        
                     </View>
-                    <View style={{width:'100%',height:100}}>
+                    <View>
                         <Text>测试resizeMode(cover contain stretch repeat center)，值为contain</Text>
                         <FitImage resizeMode='contain' style={{...styles.fitImageWithSize}} source={require('./assets/expo.png')} />                        
                     </View>
-                    <View style={{width:'100%',height:100}}>
+                    <View>
                         <Text>测试resizeMode(cover contain stretch repeat center)，值为stretch</Text>
                         <FitImage resizeMode='stretch' style={{...styles.fitImageWithSize}} source={require('./assets/expo.png')} />                        
                     </View>
-                    <View style={{width:'100%',height:100}}>
+                    <View>
                         <Text>测试resizeMode(cover contain stretch repeat center)，值为repeat</Text>
                         <FitImage resizeMode='repeat' style={{...styles.fitImageWithSize}} source={require('./assets/expo.png')} />                        
                     </View>
-                    <View style={{width:'100%',height:100}}>
+                    <View>
                         <Text>测试resizeMode(cover contain stretch repeat center)，值为center</Text>
                         <FitImage resizeMode='center' style={{...styles.fitImageWithSize}} source={require('./assets/expo.png')} />                        
                     </View>
