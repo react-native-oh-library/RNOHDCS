@@ -186,6 +186,7 @@ const FitImageDemo=()=>{
                         <Text>测试blurRadius(模糊滤镜，值越大越模糊)</Text>
                         <FitImage
                             source={require('./assets/expo.png')}
+                            blurRadius={20}
                             style={{...styles.fitImage,...styles.fitImageWithSize}}
                             />
                     </View>
