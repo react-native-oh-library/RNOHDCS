@@ -3,13 +3,6 @@ import {Barcode} from './component/SvgComponent';
 import {useState} from 'react';
 
 export default function JsbarcodeSvgDemo() {
-  const [text, setText] = useState('');
-  const [value, setValue] = useState('');
-
-  // 获取valid数据
-  const getValid = (val:string)=>{
-    setValue(val);
-  }
 
   return (
     <ScrollView>
@@ -99,24 +92,27 @@ export default function JsbarcodeSvgDemo() {
           value="1234568956999"
           options={{format: 'CODE128', marginLeft: 30, marginTop: 50}}
         />
-        <Text style={styles.testStyle}>flat</Text>
+        <Text style={styles.testStyle}>flat: false</Text>
         <Barcode
           value="29012343"
           options={{format: 'EAN8', flat: false}}
         />
-        <Text style={styles.testStyle}>flat: false</Text>
+        <Text style={styles.testStyle}>flat: true</Text>
         <Barcode
           value="29012343"
           options={{format: 'EAN8', flat: true}}
         />
-        <Text style={styles.testStyle}>flat: true</Text>
         <Text style={styles.testStyle}>valid</Text>
+        <Text>有效条形码测试</Text>
         <Barcode
-          value="9501101530003"
-          options={{format: 'EAN13', flat: true}}
-          setValid={getValid}
+          value="29012343"
+          options={{format: 'EAN8'}}
         />
-        <Text>{value}</Text>
+        <Text>无效条形码测试</Text>
+        <Barcode
+          value="9501101530003-hello"
+          options={{format: 'EAN8'}}
+        />
       </View>
     </ScrollView>
   );
@@ -125,12 +121,12 @@ export default function JsbarcodeSvgDemo() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   testStyle: {
-    marginTop: 10,
     fontWeight: '600',
   },
 });

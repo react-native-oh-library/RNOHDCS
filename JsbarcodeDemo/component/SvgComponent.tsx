@@ -1,6 +1,6 @@
 import {useEffect, useMemo, useState} from 'react';
 import JsBarcode from 'jsbarcode';
-import {SvgXml} from 'react-native-svg';
+import {SvgXml} from '@react-native-oh-tpl/react-native-svg';
 import {DOMImplementation, XMLSerializer} from 'xmldom';
 
 interface optionsType {
@@ -30,7 +30,6 @@ interface Props {
   value: string;
   options: optionsType;
   jsbarcodeBack?: (value: string) => void;
-  setValid?: (value: string) => void;
 }
 
 const defaults = {
@@ -58,7 +57,7 @@ const defaults = {
 
 export const Barcode = (props: Props) => {
   const [jsbarcodeInfo, setJsbarcodeInfo] = useState('');
-  const [data, setData] = useState('');
+
   const {
     width = defaults.width,
     height = defaults.height,
@@ -86,17 +85,14 @@ export const Barcode = (props: Props) => {
     if(props.jsbarcodeBack){
       props.jsbarcodeBack(jsbarcodeInfo);
     }
-    if(props.setValid){
-      props.setValid(data);
-    }
-  }, [jsbarcodeInfo,data]);
+  }, [jsbarcodeInfo]);
 
   const svgText = useMemo(() => {
-    const document = new DOMImplementation().createDocument(null, 'html');
-    const svgNode = document.createElementNS(null, 'svg');
+    const doc = new DOMImplementation().createDocument(null, 'html');
+    const svgNode = doc.createElementNS(null, 'svg');
 
     JsBarcode(svgNode, props.value, {
-      xmlDocument: document,
+      xmlDocument: doc,
       width,
       height,
       format,
@@ -118,9 +114,9 @@ export const Barcode = (props: Props) => {
       flat,
       valid:function(valid){
         if(valid){
-          setData('条形码有效');
+          console.log('jsbarcode库valid方法验证：' + '条形码有效');
         }else{
-          setData('条形码无效');
+          console.log('jsbarcode库valid方法验证：' + '条形码无效');
         }
       }
     });
