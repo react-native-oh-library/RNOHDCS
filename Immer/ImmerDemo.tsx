@@ -1,5 +1,13 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, Button, StyleSheet, ScrollView} from 'react-native';
+import React, {useState, useEffect, Component} from 'react';
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  ScrollView,
+  Switch,
+  TextInput,
+} from 'react-native';
 import {
   createDraft,
   finishDraft,
@@ -19,6 +27,7 @@ import {
   castImmutable,
   castDraft,
   applyPatches,
+  setUseStrictShallowCopy,
 } from 'immer';
 
 // 初始状态
@@ -27,40 +36,22 @@ const initialState = {
   text: 'Hello from Immer!',
 };
 enablePatches();
+
 // 启用enablePatches插件
 enableMapSet();
 // 启用enableMapSet插件
-class ShowComponent extends React.Component {
-  state = {
-    mapData: new Map(),
-    setData: new Set(),
-  };
+setUseStrictShallowCopy(true);
 
-  updateData = () => {
-    this.setState(
-      produce(draft => {
-        draft.mapData.set('key', 'value');
-        draft.setData.add('new item');
-      }),
-    );
-  };
-
-  render() {
-    return (
-      <View>
-        <Button title="Update Data" onPress={this.updateData} />
-        <Text>Map Data: {Array.from(this.state.mapData)}</Text>
-        <Text>Set Data: {Array.from(this.state.setData)}</Text>
-      </View>
-    );
-  }
-}
 const MyComponent = () => {
+  const [myMap, setMyMap] = useState(new Map([['key1', 'value1']]));
+  const [overStates, setOverStates] = useState(false);
+  const toggleSwitch = value => {
+    setOverStates(value);
+  };
   let [states, setStates] = useState(false);
   const [originals, setOriginals] = useState({users: [{name: 'zhansan'}]});
   let [res, setRes] = useState('');
   let [currentText, setCurrent] = useState('');
-  // ----------------------------------------------------
   const [count, setCount] = useState({age: 0});
   let [baseState, setBaseState] = useState([
     {
@@ -72,6 +63,41 @@ const MyComponent = () => {
   let [result, setResult] = useState({});
   let [patches, setPatches] = useState({});
   let [inversePatches, setInversePatches] = useState({});
+  const [data, setData] = useState({name: 'John', age: 30});
+  const [produceStatus, setProduceStatus] = useState(false);
+  const [castDraftState, setCastDraftState] = useState({
+    count: 0,
+  });
+  const [state, setState] = useState(initialState);
+  const [freezeRest, setFreezeRest] = useState({a: 1, b: {c: 2}});
+  const [stateRes, setStateRes] = useState({count: 0, text: 'hello-world'});
+  const [texts, setTexts] = useState('请输入内容');
+  const [stateNothing, setStateNothing] = useState({
+    name: 'John',
+    age: 30,
+    isStudent: false,
+  });
+  const obj = {a: 1, b: 2};
+  const arr = [1, 2, 3];
+  const str = 'Hello, immer!';
+  const num = 42;
+  const frozenObj = freeze({c: 3}, true);
+  const [objStatus, setObjStatus] = useState(false);
+  const [arrStatus, setArrStatus] = useState(false);
+  const [strStatus, setStrStatus] = useState(false);
+  const [numStatus, setNumStatus] = useState(false);
+  const [draftsStatus, setDratfStatus] = useState(false);
+  let originalRes = {
+    name: '初始数据1',
+    age: 18,
+  };
+  let fork = originalRes;
+  // 用户在向导中所作的所有更改
+  let changes = [];
+  // 与向导中所做的所有更改相反
+  let inverseChanges = [];
+  let [obj1, setObj1] = useState({});
+  let [obj2, setObj2] = useState({});
   const incrementCount = () => {
     if (count.age < 3) {
       setCount(
@@ -106,7 +132,8 @@ const MyComponent = () => {
     if (baseState.length < 3) {
       return setBaseState(
         produce(baseState, draftState => {
-          draftState.push({title: '新增', done: false});
+          draftState.push({title: '新增', done: states});
+          setStates((states = isDraft(draftState)));
         }),
       );
     }
@@ -126,17 +153,33 @@ const MyComponent = () => {
     });
     setBaseState(res);
   };
-  // ----------------------------------------------------
-  const [state, setState] = useState(initialState);
   // 使用createDraft来创建一个草稿副本
   const increment = () => {
     const draft = createDraft(state);
-    draft.count += 1; // 修改草稿副本
-    // setCurrent(current(draft.count))
+    if (state.count < 5) {
+      draft.count += 1; // 修改草稿副本
+    } else {
+      draft.count = 0;
+    }
     const nextState = finishDraft(draft); // 获取修改后的不可变状态
     setState(nextState); // 更新React状态
   };
-
+  const updateMap = () => {
+    setMyMap(
+      produce(myMap, draftMap => {
+        draftMap.set('key1', 'updatedValue1'); // 更新键值对
+        draftMap.set('key2', 'value2'); // 添加新的键值对
+        draftMap.delete('key3'); // 尝试删除一个不存在的键值对（不会有影响）
+      }),
+    );
+  };
+  const renderMapEntries = () => {
+    return Array.from(myMap.entries()).map(([key, value]) => (
+      <Text key={key}>
+        {key}: {value}
+      </Text>
+    ));
+  };
   const changeText = () => {
     const draft = createDraft(state);
     draft.text = 'Text updated!'; // 修改草稿副本
@@ -156,7 +199,7 @@ const MyComponent = () => {
   const handleClick = () => {
     const [result, patches, inversePatches] = produceWithPatches(
       text,
-      draft => (draft += ' World'),
+      draft => (draft = 'Hello-World'),
     );
     setResult(result);
     setPatches(patches);
@@ -167,185 +210,120 @@ const MyComponent = () => {
 
     setText(result);
   };
-  // ---------------------------------------------------------
-  const [stateLeft, setStateLeft] = useState([
-    {count: 0},
-    {age: 17, name: 'zhansan'},
-  ]);
-  const [stateRight, setStateRight] = useState([
-    {count: 0},
-    {age: 17, name: 'zhansan'},
-  ]);
-  const [stateRes, setStateRes] = useState({count: 0});
-  const [stateNothing, setStateNothing] = useState({
-    name: 'John',
-    age: 30,
-    isStudent: false,
-  });
-  const [isDraftableList, setIsDraftableList] = useState({
-    one: false,
-    two: false,
-    three: false,
-  });
-  class MyComponent extends React.Component {
-    constructor(props) {
-      super(props);
-
-      // 设置immerable标志
-      this[immerable] = true;
-
-      this.state = {
-        data: {
-          count: 0,
-          text: 'Hello Immer!',
-          immerable: true,
-        },
-      };
+  // -----------------------------------------------
+  class MyImmerableObject extends React.Component {
+    // 声明immerable属性，告诉immer处理哪些属性
+    static [immerable] = true;
+    // 定义您的对象的属性
+    constructor(name, age) {
+      super(name, age);
+      this.name = name;
+      this.age = age;
     }
-
-    incrementCount = () => {
-      this.setState(
-        produce(draft => {
-          draft.data.count += 1;
-          draft.data.text = 'hahhaha';
-        }),
-      );
-    };
-
-    render() {
-      return (
-        <View>
-          <Text>Count: {this.state.data.count}</Text>
-          <Text>text: {this.state.data.text}</Text>
-          <Button title="Increment" onPress={this.incrementCount} />
-        </View>
-      );
-    }
+    /* // 不使用immerable
+    // 声明immerable属性，告诉immer处理哪些属性
+    static [immerable] = true;
+    // 定义您的对象的属性
+    constructor(name, age) {
+      super(name, age);
+      this.name = name;
+      this.age = age;
+    } */
   }
-  const [counter, setCounter] = useState<Immutable<number>>(0);
+  const [myState, setMyState] = useState(new MyImmerableObject('Alice', 10));
+  const updateValue = () => {
+    // 使用immerable
+    const res = produce(myState, draft => {
+      draft.age = 26;
+    });
+    /*  // 不使用immerable
+    const res = {...myState, age: 26}; */
+    setMyState(res);
+  };
   // 在组件挂载时设置 immer 的自动冻结行为
   useEffect(() => {
-    // 启用自动冻结
-    setAutoFreeze(true);
-
-    // 清理函数（可选），在这里我们不需要做任何清理工作
-    return () => {
-      // 如果需要，可以在这里禁用自动冻结
-      setAutoFreeze(false);
-    };
-  }, []); // 空依赖数组确保此 effect 只运行一次
-  // 使用 immer 的 freeze 函数来冻结状态对象
-  freeze(stateLeft, true);
-  freeze(stateRight, false);
-  // 尝试修改冻结的对象将会失败，并且不会触发组件的重新渲染
-  const tryToModifyFrozenStateLeft = () => {
-    try {
-      setStateRight(
-        produce(pradft => {
-          pradft[0].age = 20;
-          pradft[0].name = 'Lisi';
-        }),
-      );
-    } catch (error) {
-      console.error('Error modifying frozen state:', error);
-    }
-  };
-  const tryToModifyFrozenStateRight = () => {
-    try {
-      setStateRight(
-        produce(pradft => {
-          pradft[1].age = 20;
-          pradft[1].name = 'Lisi';
-        }),
-      );
-    } catch (error) {
-      console.error('Error modifying frozen state:', error);
-    }
-  };
+    // 启用/停用自动冻结
+    setAutoFreeze(overStates);
+  }, [overStates]); // 空依赖数组确保此 effect 只运行一次
   const incrementCountLeft = () => {
-    // 使用 setState 来安全地更新状态
-    // setState(prevState => ({state[0].count: prevState[0].count + 1}));
-    setStateLeft(
-      produce(stateLeft, prevState => {
-        prevState[0].count += 1;
-      }),
-    );
+    const res = freeze(Object.assign({}, freezeRest), true);
+    res.a = 110;
+    res.b.c = 220;
+    console.log('调用freeze-deep:', overStates, res);
+    setFreezeRest(res);
   };
-  const incrementCountRight = () => {
-    // 使用 setState 来安全地更新状态
-    setStateRight(
-      produce(stateRight, prevState => {
-        prevState[0].count += 1;
-      }),
-    );
+  const tryToModifyFrozenStateLeft = () => {
+    const res = freeze(Object.assign({}, freezeRest), false);
+    res.a = 111;
+    res.b.c = 222;
+    console.log('调用freeze-deep:', overStates, res);
+    setFreezeRest(res);
   };
-  const ClickincrementCount = () => {
-    // 使用 immer 的 produce 函数来安全地更新状态
-    const nextState = produce(stateRes, draft => {
-      draft.count += 1;
-    });
-    // 由于启用了自动冻结，nextState 现在是一个不可变对象
-    try {
-      // 尝试修改 nextState 将会失败，因为它已经被冻结了
-      nextState.count = 100; // 这会抛出错误，因为 nextState 是不可变的
-    } catch (error) {
-      console.error('Error modifying frozen state:', error);
-    }
-
+  const ClickOffFreeze = () => {
+    const res1 = Object.assign({}, freezeRest);
+    res1.a = 10;
+    res1.b.c = 20;
+    console.log('未调用freeze:', res);
+    setFreezeRest(res1);
+  };
+  const ClickOnFreeze = () => {
+    const res = freeze(Object.assign({}, freezeRest));
+    res.a = 11;
+    res.b.c = 22;
+    console.log('调用freeze:', res);
+    setFreezeRest(res);
+  };
+  const inputText = e => {
+    let nextState = produce(stateRes, draft => {});
+    setTexts(e);
+    nextState.text = e;
     setStateRes(nextState);
   };
-  const removeProperty = () => {
-    const nextStateNothing = produce(stateNothing, draft => {
-      draft.name = 'wangwu';
-      // 使用 nothing 来删除 age 属性
-      delete draft.age; // 传统的删除方法
-      // 或者使用 immer 的 nothing 来达到相同的效果
-      // draft.isStudent = nothing; // 这将删除 isStudent 属性
-    });
+  const clickNothing = e => {
+    const nextStateNothing = produce(stateNothing, draft => e);
     setStateNothing(nextStateNothing);
-    console.log('stateNothing:', stateNothing);
-    console.log('nextStateNothing:', typeof nextStateNothing.isStudent);
   };
-  /*  useEffect(() => {
-    console.log('Current state:', stateLeft);
-  }, [stateLeft]); */
-  const clickNothing = () => {
-    const nextStateNothing = produce(stateNothing, draft => {
-      draft.name = 'wangwu';
-      // 使用 nothing 来删除 age 属性
-      // 或者使用 immer 的 nothing 来达到相同的效果
-      draft.isStudent = nothing; // 这将删除 isStudent 属性
-    });
-    setStateNothing(nextStateNothing);
-    console.log('stateNothing:', stateNothing);
-    console.log('nextStateNothing:', typeof nextStateNothing.isStudent);
+  const isDraftObj = () => {
+    setObjStatus(isDraftable(obj));
   };
-  const checkDraftability = () => {
-    const arr = {
-      one: isDraftable(stateRes),
-      two: isDraftable('Hello, World!'),
-      three: isDraftable(42),
-    };
-    setIsDraftableList(arr);
-    console.log('Is state draftable?', isDraftable(stateRes)); // 应该输出 true
-    console.log('Is string draftable?', isDraftable('Hello, World!')); // 应该输出 false
-    console.log('Is number draftable?', isDraftable(42)); // 应该输出 false
-    // ... 可以检查其他类型的值
+  const isDraftArr = () => {
+    setArrStatus(isDraftable(arr));
   };
-  const incrementCounter = () => {
-    setCounter(produce(counter, draftCounter => (draftCounter += 10)));
+  const isDraftStr = () => {
+    setStrStatus(isDraftable(str));
   };
-  // ------------------------------分割线--------------------------------------------------------------------
-  const [data, setData] = useState({name: 'John', age: 30});
-  const [produceStatus, setProduceStatus] = useState(false);
-  const [castDraftState, setCastDraftState] = useState({
-    count: 0,
+  const isDraftNum = () => {
+    setNumStatus(isDraftable(num));
+  };
+  const isDrafts = () => {
+    setDratfStatus(isDraftable(frozenObj));
+  };
+  // --------------------------------------------
+  const [draftRes, setDraftRes] = useState({
+    name: 'John',
+    age: 30,
+    hobbies: ['reading', 'coding'],
   });
+
+  const [setUseStrictShallowCopyRes, setSetUseStrictShallowCopyRes] = useState({
+    name: 'John',
+    age: 30,
+    address: {
+      city: 'New York',
+      country: 'USA',
+    },
+  });
+  const [setUseStrictShallowCopyInit, setSetUseStrictShallowCopyInit] =
+    useState();
   const updateData = () => {
     let newData = {};
     if (!produceStatus) {
       newData = produce(data, draft => {
-        draft.age += 1;
+        if (draft.age < 40) {
+          draft.age += 1;
+        } else {
+          draft.age = 0;
+        }
       });
     } else {
       newData = castImmutable(data, draft => {
@@ -354,40 +332,42 @@ const MyComponent = () => {
     }
 
     setData(newData);
-    console.log('newData:', newData);
   };
   const Clickfn = () => {
     setProduceStatus(!produceStatus);
   };
   const AddFn = () => {
-    // 使用immer的produce函数来创建一个新的状态副本
-    const newState = produce(castDraftState, draftState => {
-      // 在新状态副本中增加count的值
-      draftState.count += 1;
-    });
-
-    // 使用castDraft函数确保新状态与原始状态不共享内存
-    const nextState = castDraft(newState);
-    // 更新状态
-    setCastDraftState(nextState);
+    setCastDraftState(
+      produce(castDraftState, draftState => {
+        if (castDraftState.count < 10) {
+          draftState.count += 1;
+        } else {
+          draftState.count = 0;
+        }
+      }),
+    );
   };
-  // ---------------分割--start-----------
-  let originalRes = {
-    name: '初始数据1',
-    age: 18,
+  const doubleCount = () => {
+    setCastDraftState(
+      produce(castDraftState, draftState => {
+        if (castDraftState.count < 100) {
+          draftState.count *= 2;
+        } else {
+          draftState.count = 0;
+        }
+      }),
+    );
   };
-  let fork = originalRes;
-  // 用户在向导中所作的所有更改
-  let changes = [];
-  // 与向导中所做的所有更改相反
-  let inverseChanges = [];
-  let [obj1, setObj1] = useState({});
-  let [obj2, setObj2] = useState({});
+  const resetCount = () => {
+    const newState = castDraft({count: 0});
+    setCastDraftState(newState);
+  };
   const ClickChange = () => {
     fork = produce(
       fork,
       draft => {
-        draft.age = 20;
+        draft.age = 10;
+        draft.name = 'lisi';
       },
       // 产生的第三个参数是一个回调，patches 将从这里产生
       (patches, inversePatches) => {
@@ -395,22 +375,62 @@ const MyComponent = () => {
         inverseChanges.push(...inversePatches);
       },
     );
-    // 同时，我们的原始状态被替换，例如
-    // 从服务器收到了一些更改
-    originalRes = produce(originalRes, draft => {
-      draft.name = '更改后数据';
-    });
   };
   const fn1 = () => {
     // 当向导完成（成功）后，我们可以将 fork 中的更改重播到新的状态！
     let originalRes2 = applyPatches(originalRes, changes);
     setObj1(originalRes2);
+    console.log('originalRes2:', originalRes2);
   };
   const fn2 = () => {
     // state 现在包含来自两个代码路径的更改！
     // 最后，即使在完成向导之后，用户也可能会改变主意并撤消他的更改......
     let originalRes3 = applyPatches(originalRes, inverseChanges);
     setObj2(originalRes3);
+  };
+  const handleAddHobby = () => {
+    //不使用Draft<T>
+    const newDraftRes = {...draftRes};
+    newDraftRes.hobbies[1] = 'swimming';
+    setDraftRes(newDraftRes);
+    // 使用Draft<T>
+    /*  const nextDraftRes = produce(draftRes, draft => {
+      draft.hobbies[1] = 'swimming';
+    });
+    setDraftRes(nextDraftRes); */
+  };
+  interface Person {
+    name: string;
+    age: number;
+  }
+  // 使用Immutable<T>
+  const immutableObj1: Immutable<Person> = {
+    name: 'Alice',
+    age: 20,
+  };
+  // 不使用Immutable<T>
+  // const immutableObj1 = {
+  //   name: 'Alice',
+  //   age: 20,
+  // };
+  const [immutableData, setImmutableData] = useState();
+  const changeObj1 = () => {
+    const res = immutableObj1;
+    res.name = 'lisi';
+    console.log('immutableObj1:', immutableObj1);
+    setImmutableData(res);
+  };
+  const useSetUseStrictShallowCopy = () => {
+    const res = produce(setUseStrictShallowCopyRes, draft => {
+      draft.age = 55;
+      draft.address.city = 'China';
+    });
+    console.log('res:', JSON.stringify(res));
+    console.log(
+      'setSetUseStrictShallowCopyRes:',
+      JSON.stringify(setUseStrictShallowCopyRes),
+    );
+    setSetUseStrictShallowCopyInit(res);
   };
 
   // ----------------分割 end-------------
@@ -508,95 +528,118 @@ const MyComponent = () => {
         {/* ----------验证--enableMapSet------------------------------- */}
         <View style={styles.container}>
           <Text style={styles.text}>验证enableMapSet</Text>
-          <ShowComponent>123</ShowComponent>
+          <Text>Current Map:</Text>
+          {renderMapEntries()}
+          <Button title="Update Map" onPress={updateMap} />
         </View>
-        {/* ------------------------------------- */}
         {/* -----------------验证--freeze----------------------- */}
         <View style={styles.container}>
           <Text style={styles.text}>验证freeze</Text>
+          <Text>
+            freeze(obj,deep?)obj：要冻结的对象deep（可选）：一个布尔值，默认为false。如果为true，则深度冻结对象（包括其所有嵌套的对象）。如果为false或未提供，则只冻结对象的顶层属性
+          </Text>
           <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
             <View style={{alignItems: 'center'}}>
-              <View style={{flexDirection: 'row'}}>
-                <Text>freez开</Text>
-              </View>
-              <Text>Count: {stateLeft[0].count}</Text>
-              <Text>age: {stateLeft[1].age}</Text>
-              <Text>name: {stateLeft[1].name}</Text>
-              <Button title="Increment" onPress={incrementCountLeft} />
+              <Text>init:{JSON.stringify(freezeRest)}</Text>
               <Button
-                title="Try to change"
+                title="未调用freeze 改变数据init a=10 c=20"
+                onPress={ClickOffFreeze}
+              />
+              <Button
+                title="调用freeze 改变数据init a=11 c=22"
+                onPress={ClickOnFreeze}
+              />
+              <Button
+                title="当deep状态为false时，改变数据init a=110 c=220"
                 onPress={tryToModifyFrozenStateLeft}
               />
-            </View>
-            <View>
-              <View style={{}}>
-                <View style={{flexDirection: 'row'}}>
-                  <Text>freez关</Text>
-                </View>
-                <Text>Count: {stateRight[0].count}</Text>
-                <Text>age: {stateRight[1].age}</Text>
-                <Text>name: {stateRight[1].name}</Text>
-                <Button title="IncrementLeft" onPress={incrementCountRight} />
-                <Button
-                  title="changeLeft"
-                  onPress={tryToModifyFrozenStateRight}
-                />
-              </View>
+              <Button
+                title="当deep状态为true时，改变数据init a=110 c=220"
+                onPress={incrementCountLeft}
+              />
             </View>
           </View>
         </View>
         {/* --------------验证--setAutoFreeze------------------- */}
         <View style={styles.container}>
           <Text style={styles.text}>---验证setAutoFreeze----</Text>
-          <Text>setAutoFreeze为自动冻结,默认为true</Text>
-          <Text>Current Count: {stateRes.count}</Text>
-          <Button title="Increment Count" onPress={ClickincrementCount} />
+          <Text>
+            setAutoFreeze为自动冻结,状态：{JSON.stringify(overStates)}
+          </Text>
+          <Switch onValueChange={toggleSwitch} value={overStates} />
+          <TextInput
+            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            onChangeText={inputText}
+            value={texts}
+          />
+          <Text>你输入的内容是: {stateRes.text}</Text>
+          <Text>Current Count: {JSON.stringify(stateRes)}</Text>
         </View>
         {/* --------------验证---nothing------------------------ */}
         <View style={styles.container}>
           <Text style={styles.text}>验证nothing</Text>
-          <Text>Name: {stateNothing.name}</Text>
-          {stateNothing.age !== undefined ? (
-            <Text>Age: {stateNothing.age}</Text>
-          ) : null}
-          {typeof stateNothing.isStudent == 'boolean' ? (
-            <Text>Is Student: {stateNothing.isStudent ? 'Yes' : 'No'}</Text>
-          ) : null}
+          <Text>
+            定义的数据：
+            {JSON.stringify(stateNothing)}
+          </Text>
+          <Text>Name: {typeof stateNothing}</Text>
           <View style={{flexDirection: 'row'}}>
             <View style={{marginRight: 10}}>
-              <Text>期望age属性删除</Text>
-              <Button title="delete删除" onPress={removeProperty} />
+              <Button
+                title="标记nothing"
+                onPress={() => {
+                  clickNothing(nothing);
+                }}
+              />
             </View>
             <View>
-              <Text>期望is student属性删除</Text>
-              <Button title="nothing删除" onPress={clickNothing} />
+              <Button
+                title="标记undefined"
+                onPress={() => {
+                  clickNothing(undefined);
+                }}
+              />
             </View>
           </View>
         </View>
         {/* -----------验证----isDraftable---------------------- */}
         <View style={styles.container}>
           <Text style={styles.text}>验证isDraftable</Text>
-          <Text>
-            state:{isDraftableList.one ? 'true' : 'false'}----期望值为true
-          </Text>
-          <Text>
-            Hello, World:{isDraftableList.two ? 'true' : 'false'}----期望值false
-          </Text>
-          <Text>
-            42:{isDraftableList.three ? 'true' : 'false'}----期望值false
-          </Text>
-          <Button title="Check Draftability" onPress={checkDraftability} />
+          {/* <Button title="Check Draftability" onPress={checkDraftability} />
+          <Text>{result ? '可变对象' : '不可变对象'}</Text> */}
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Text>状态--isDraftable({JSON.stringify(obj)})</Text>
+            <Button title="isDraftObj" onPress={isDraftObj} />
+            <Text>状态:{JSON.stringify(objStatus)}</Text>
+          </View>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Text>状态--isDraftable({JSON.stringify(arr)})</Text>
+            <Button title="isDraftArr" onPress={isDraftArr} />
+            <Text>状态--{JSON.stringify(arrStatus)}</Text>
+          </View>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Text>状态--isDraftable({JSON.stringify(str)})</Text>
+            <Button title="isDraftStr" onPress={isDraftStr} />
+            <Text>状态--{JSON.stringify(strStatus)}</Text>
+          </View>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Text>状态--isDraftable({JSON.stringify(num)})</Text>
+            <Button title="isDraftNum" onPress={isDraftNum} />
+            <Text>状态--{JSON.stringify(numStatus)}</Text>
+          </View>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Text>状态--isDraftable({JSON.stringify(frozenObj)})</Text>
+            <Button title="isDrafts" onPress={isDrafts} />
+            <Text>状态--{JSON.stringify(draftsStatus)}</Text>
+          </View>
         </View>
         {/* -----------验证---immerable-------------------- */}
         <View style={styles.container}>
-          <Text style={styles.text}>验证---immerable,期望可以改变值</Text>
-          <MyComponent />
-        </View>
-        {/* ----------------验证---Immutable<T>----------- */}
-        <View style={styles.container}>
-          <Text style={styles.text}>验证--Immutable--</Text>
-          <Text>Counter: {counter}</Text>
-          <Button title="Increment" onPress={incrementCounter} />
+          <Text style={styles.text}>
+            验证---immerable,可以添加到构造函数或原型的符号
+          </Text>
+          <Text>NUM:{JSON.stringify(myState)}</Text>
+          <Button title="Update Value" onPress={updateValue} />
         </View>
         {/* -----------------验证--castImmutable----------------------- */}
         <View style={styles.container}>
@@ -611,20 +654,48 @@ const MyComponent = () => {
         <View style={styles.container}>
           <Text style={styles.text}>验证castDraft</Text>
           <Text>
-            castDraft,期望值使用castDraft函数确保新状态与原始状态不共享内存
+            castDraft,期望将任何不可变类型转换为其可变对应物。这只是一个转换,实际上并没有做任何事情
           </Text>
           <Text>Count: {castDraftState.count}</Text>
-          <Button title="Increment" onPress={AddFn} />
+          <Button title="AddFn" onPress={AddFn} />
+          <Button title="doubleCount" onPress={doubleCount} />
+          <Button title="resetCount" onPress={resetCount} />
         </View>
         {/* ---------------验证--applyPatches-------------- */}
         <View style={styles.container}>
           <Text style={styles.text}>验证applyPatches</Text>
           <Text>初始数据：{JSON.stringify(originalRes)}</Text>
-          <Button title="改变初始值" onPress={ClickChange} />
+          <Button title="改变初始值age=10" onPress={ClickChange} />
           <Button title="fn1" onPress={fn1} />
           <Text>改变后数据：{JSON.stringify(obj1)}</Text>
           <Button title="fn2" onPress={fn2} />
           <Text>恢复的数据--{JSON.stringify(obj2)}</Text>
+        </View>
+        <View style={styles.container}>
+          <Text style={styles.text}>
+            验证Draft暴露的 TypeScript 类型以将不可变类型转换为可变类型
+          </Text>
+          <Text>{JSON.stringify(draftRes)}</Text>
+          <Button title="add--使用Draft<T>" onPress={handleAddHobby} />
+        </View>
+        {/* 验证Immutable<T> */}
+        {/*   <View style={styles.container}>
+          <Text style={styles.text}>
+            验证Immutable暴露的 TypeScript 类型以将可变类型转换为不可变类型
+          </Text>
+          <Text>初始数据：{JSON.stringify(immutableObj1)}</Text>
+          <Text>更改后数据:{JSON.stringify(immutableData)}</Text>
+          <Button title="change" onPress={changeObj1} />
+        </View> */}
+        {/* 验证setUseStrictShallowCopy */}
+        <View style={styles.container}>
+          <Text style={styles.text}>
+            验证setUseStrictShallowCopy
+            可用于启用严格浅拷贝，如果启用，immer会确保不会意外的修改原始对象
+          </Text>
+          <Text>初始数据：{JSON.stringify(setUseStrictShallowCopyRes)}</Text>
+          <Text>更改后数据：{JSON.stringify(setUseStrictShallowCopyInit)}</Text>
+          <Button title="使用" onPress={useSetUseStrictShallowCopy} />
         </View>
       </View>
     </ScrollView>
