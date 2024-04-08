@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { SafeAreaView, ScrollView, StatusBar, Text, Button } from 'react-native';
+import { SafeAreaView, ScrollView, StatusBar, Text, Button,View } from 'react-native';
 
 import Markdown, { MarkdownIt } from 'react-native-markdown-display';
 import blockEmbedPlugin from 'markdown-it-block-embed';
@@ -26,19 +26,22 @@ const rules = {
   }
    
 }
+const rules2 = {
+  video: (node, children, parent, styles) =>{
+    return (<View key={node.key} style={styles.video}>
+    </View>);
+  }
+   
+}
 
 const App: () => React$Node = () => {
-  const [state, setState] = useState(null);
+  const [state, setState] = useState(rules2);
   const changeState = () =>{
-    if (!state) {
-      setState(rules)
-    } else {
-      setState(null)
-    }
+    setState(rules)
   }
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      
       <SafeAreaView>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"

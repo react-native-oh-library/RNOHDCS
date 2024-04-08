@@ -4,18 +4,32 @@ import dayjs from 'dayjs'
 
 
 const ValueAssignmentDemo = () => {
+
+  const [setterData, setSetterData] = useState(20)
+
+  console.log(dayjs().millisecond(57).millisecond())
   return (
     <View style={styles.container}>
       <Text style={styles.componentTitle}>ValueAssignmentDemo: 取值/赋值</Text>
-      <Text style={styles.textCommon}>获取或设置毫秒：{dayjs().millisecond()}</Text>
-      <Text style={styles.textCommon}>获取或设置秒：{dayjs().second()}</Text>
-      <Text style={styles.textCommon}>获取或设置分钟：{dayjs().minute()}</Text>
-      <Text style={styles.textCommon}>获取或设置小时：{dayjs().hour()}</Text>
-      <Text style={styles.textCommon}>获取或设置月份里的日期：{dayjs().date()}</Text>
-      <Text style={styles.textCommon}>获取或设置星期几：{dayjs().day()}</Text>
-      <Text style={styles.textCommon}>获取或设置月份：{dayjs().month()}</Text>
-      <Text style={styles.textCommon}>获取或设置年份。：{dayjs().year()}</Text>
-      <Text style={styles.textCommon}>从Dayjs对象中获取相应信息的 getter：年{dayjs().get('year')} 月{dayjs().get('month')}</Text>
+      <Text style={styles.textCommon}>获取毫秒，固定传入666：{dayjs().millisecond(666).millisecond()}</Text>
+      <Text style={styles.textCommon}>设置毫秒，固定传入1005：{dayjs().millisecond(1005).millisecond()}</Text>
+      <Text style={styles.textCommon}>获取秒，固定传入35：{dayjs().second(35).second()}</Text>
+      <Text style={styles.textCommon}>设置秒，固定传入63：{dayjs().second(63).second()}</Text>
+      <Text style={styles.textCommon}>获取分钟，固定传入15：{dayjs().minute(15).minute()}</Text>
+      <Text style={styles.textCommon}>设置分钟，固定传入61：{dayjs().minute(61).minute()}</Text>
+      <Text style={styles.textCommon}>获取小时，固定传入22：{dayjs().hour(22).hour()}</Text>
+      <Text style={styles.textCommon}>设置小时，固定传入25：{dayjs().hour(25).hour()}</Text>
+      <Text style={styles.textCommon}>获取月份里的日期，固定传入18：{dayjs().date(18).date()}</Text>
+      <Text style={styles.textCommon}>设置月份里的日期，固定传入35：{dayjs().date(35).date()}</Text>
+      <Text style={styles.textCommon}>获取星期几，固定传入6：{dayjs().day(6).day()}</Text>
+      <Text style={styles.textCommon}>设置星期几，固定传入9：{dayjs().day(9).day()}</Text>
+      <Text style={styles.textCommon}>获取月份，固定传入8：{dayjs().month(8).month()}</Text>
+      <Text style={styles.textCommon}>设置月份，固定传入13：{dayjs().month(13).month()}</Text>
+      <Text style={styles.textCommon}>设置年份并且获取，固定传入2024：{dayjs().year(2024).year()}</Text>
+      <Text style={styles.textCommon}>setter：年固定传入2024：{dayjs().set('year', 2024).get('year')}</Text>
+      <Text style={styles.textCommon}>setter：月固定传入8：{dayjs().set('month', 8).get('month')}</Text>
+      <Text style={styles.textCommon}>getter：年固定传入2022-05-05：{dayjs('2022-05-05').get('year')}</Text>
+      <Text style={styles.textCommon}>getter：月固定传入2022-05-05：{dayjs('2022-05-05').get('month') + 1}</Text>
     </View>
   )
 }
@@ -26,7 +40,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 50,
-    padding: 8
+    padding: 8,
+    paddingBottom:50
   },
   navigationContainer: {
     flex: 1,

@@ -18,7 +18,7 @@ test.. test... test..... test?..... test!....
 const App: () => React$Node = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      
       <SafeAreaView>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"

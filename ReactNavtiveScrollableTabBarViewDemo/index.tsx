@@ -5,6 +5,7 @@ import {PortalHost, PortalProvider} from '@gorhom/portal';
 import RenderTabBarDemo from './RenderTabBarDemo';
 import TabBarPositionDemo from './TabBarPositionDemo';
 import OnChangeTabDemo from './OnChangeTabDemo';
+import OnScrollDemo from './OnScrollDemo';
 import LockedDemo from './LockedDemo';
 import InitialPageDemo from './InitialPageDemo';
 import TabBarUnderlineStyleDemo from './TabBarUnderlineStyleDemo';
@@ -12,7 +13,10 @@ import TabBarBackgroundColorDemo from './TabBarBackgroundColorDemo';
 import TabBarActiveTextColorDemo from './TabBarActiveTextColorDemo';
 import TabBarInActiveTextColorDemo from './TabBarInActiveTextColorDemo';
 import TabBarTextStyleDemo from './TabBarTextStyleDemo';
+import StyleDemo from './StyleDemo';
 import ScrollWithoutAnimationDemo from './ScrollWithoutAnimationDemo';
+import ContentPropsDemo from './ContentPropsDemo';
+import PrerenderingSiblingsNumberDemo from './PrerenderingSiblingsNumberDemo';
 
 function App() {
     return (
@@ -26,6 +30,9 @@ function App() {
                 </Page>
                 <Page name="Example: onChangeTab">
                     <OnChangeTabDemo />
+                </Page>
+                <Page name="Example: onScroll">
+                    <OnScrollDemo />
                 </Page>
                 <Page name="Example: lock">
                     <LockedDemo />
@@ -45,17 +52,20 @@ function App() {
                 <Page name="Example: tabBarInActiveTextColor">
                     <TabBarInActiveTextColorDemo />
                 </Page>
+                <Page name="Example: style">
+                    <StyleDemo />
+                </Page>
                 <Page name="Example: tabBarTextStyle">
                     <TabBarTextStyleDemo />
                 </Page>
                 <Page name="Example: scrollWithoutAnimation">
                     <ScrollWithoutAnimationDemo />
                 </Page>
-                <Page name="Example: renderTabBar">
-                    <RenderTabBarDemo />
+                <Page name="Example: contentProps">
+                    <ContentPropsDemo />
                 </Page>
-                <Page name="Example: renderTabBar">
-                    <RenderTabBarDemo />
+                <Page name="Example: PrerenderingSiblingsNumber">
+                    <PrerenderingSiblingsNumberDemo />
                 </Page>
             </PortalProvider>
         </NavigationContainer>
