@@ -119,11 +119,17 @@ export default class ExampleOne extends Component<{}, State> {
 
 
   _alertIndex(index: number) {
-    Alert.alert("", `This is row ${index + 1}`, [], {cancelable:true});
+    Alert.alert("", `This is row ${index + 1}`, [{
+      text: "OK",
+      style: "cancel"
+    }], {});
   }
 
   _alertIndex2(value: string) {
-    Alert.alert("", `This is column ${value}`, [], {cancelable:true});
+    Alert.alert("", `This is column ${value}`, [{
+      text: "OK",
+      style: "cancel"
+    }], {});
   }
 
   render() {
