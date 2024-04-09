@@ -33,33 +33,35 @@ const FitImageDemo=()=>{
     // 获取网络图片尺寸
     const imgHttp={uri:"https://octodex.github.com/images/stormtroopocat.jpg"}
     const [imgHttpSize,getHttpSizeNum] = useState({width:0,height:0})
-    // 刷新定时器
-    var reshUi:any = null
+    // 刷新
+    const [reshUiData,setReshUi] = useState(0)
     useEffect(() => {;
+        getReloadFres()
+      }, []);
+      const getReloadFres =()=>{
          // http远程文件
-        Image.getSize(imgHttp.uri, (width,height) => {
+         Image.getSize(imgHttp.uri, (width,height) => {
             getHttpSizeNum({ width,height });
           },
          (failure) => { console.log('failure', failure)});
-         // base64文件
-      }, []);
+      }
     //  刷新
     const reLoadFun = () =>{
         setRefLoadBtn(false)
-        if(reshUi) {
-            clearTimeout(reshUi)
-        } else {
-            reshUi = setTimeout(()=>{
-                setRefLoadBtn(true)
-            },1000)
-        }
+        setReshUi(reshUiData+1)
+        getImageSizeNum({width:0,height:0})
+        getHttpSizeNum({width:0,height:0})
+        setRefLoadBtn(true)
+        getReloadFres()
     }
     return (
         <SafeAreaView>
             <ScrollView>
+                {/* button刷新按钮方便压力测试 */}
                 <Button onPress={()=>{reLoadFun()}} title='刷新'></Button>
                 {refLoadData&&(
-                     <View style={{width:'100%',height:'100%'}}>
+                    <View style={{width:'100%',height:'100%'}}>
+                    <Text>刷新了{reshUiData}次</Text>
                      <View>
                          <Text>测试onLoad</Text>
                          <Text>{onLoadDatea}</Text>
@@ -184,17 +186,17 @@ const FitImageDemo=()=>{
                      <View>
                          <Text>测试onError</Text>
                          <Text>{onErrorDatea}</Text>
-                         <FitImage onError={()=>{setTimeout(()=>{console.log('执行了onError'); setOnError('执行了onError')},2000)}} style={styles.fitImageWithSize} source={{uri:'https://ok.gitHub.io123.png'}} />    
+                         <FitImage onError={()=>{console.log('执行了onError'); setOnError('执行了onError')}} style={styles.fitImageWithSize} source={{uri:'https://ok.gitHub.io123.png'}} />    
                      </View>
                      <View>
                          <Text>测试onLoadStart</Text>
                          <Text>{onLoadStartDatea}</Text>
-                         <FitImage onLoadStart={()=>{setTimeout(()=>{console.log('执行了onLoadStart');setOnLoadStart('执行了onLoadStart')},2000)}} style={{...styles.fitImageWithSize,borderRadius:20}} source={require('./assets/expo.png')} />     
+                         <FitImage onLoadStart={()=>{console.log('执行了onLoadStart');setOnLoadStart('执行了onLoadStart')}} style={{...styles.fitImageWithSize,borderRadius:20}} source={require('./assets/expo.png')} />     
                      </View>
                      <View>
                          <Text>测试onLayOut</Text>
                          <Text>{onLayOutData}</Text>
-                         <FitImage onLayout={()=>{setTimeout(()=>{console.log('执行了onLayout');setOnLayout('执行了onLayout')},2000)}} style={{...styles.fitImageWithSize,borderRadius:20}} source={require('./assets/expo.png')} />     
+                         <FitImage onLoadStart={()=>{console.log('执行了onLayout');setOnLayout('执行了onLayout')}} style={{...styles.fitImageWithSize,borderRadius:20}} source={require('./assets/expo.png')} />     
                      </View>
                      <View>
                          <Text>测试blurRadius(模糊滤镜，值越大越模糊)</Text>
