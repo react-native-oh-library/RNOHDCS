@@ -50,7 +50,7 @@ type ItemProps = { id: number; title: string };
 const Item = ({ id, title }: ItemProps) =>
   id === 6 ? (
     <InView
-      style={styles.InView}
+      style={styles.myInView}
       triggerOnce={false}
       onChange={(inView) => {
         console.warn(inView);
@@ -59,17 +59,29 @@ const Item = ({ id, title }: ItemProps) =>
       <Text style={styles.title}>{title}</Text>
     </InView>
   ) : (
-    <View style={styles.item}>
-      <Text style={styles.title}>{title}</Text>
-    </View>
+    id === 5 || id === 7 ? (
+      <View style = {styles.item}>
+        <Text style={styles.item20}>20</Text>
+        <View style = {styles.title20}>
+          <Text style={styles.title}>{title}</Text>
+        </View>
+        <Text style={styles.item20}>20</Text>
+    </View >
+
+    ):(
+      <View style = {styles.item}>
+        <Text style={styles.title}>{title}</Text>
+     </View >
+    )
   );
 
 const FlatListTester = () => {
   const flatListRef = useRef<IOFlatListController>(null);
   return (
     <IOFlatList
+      style = {styles.myIOFlatList}
       ref={flatListRef}
-      rootMargin={{ top: 0, bottom: 0 }}
+      rootMargin={{ top: 20, bottom: 20 }}
       data={DATA}
       ListHeaderComponent={
         <View>
@@ -115,21 +127,36 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 200,
-    borderBottomColor: 'rgba(0, 0, 0, 0.1)',
-    borderBottomWidth: 1,
+    borderWidth: 1,
+    borderColor: 'blue',
     borderStyle: 'solid',
   },
   title: {
     fontSize: 14,
   },
-  InView: {
+  myInView: {
+    backgroundColor: 'red',
     alignItems: 'center',
     justifyContent: 'center',
     height: 200,
-    borderBottomColor: 'rgba(0, 0, 0, 0.1)',
-    borderBottomWidth: 1,
+    borderWidth: 1,
+    borderColor: 'blue',
     borderStyle: 'solid',
-    backgroundColor: 'red'
+  },
+  myIOFlatList: {
+    borderWidth: 1,
+    borderColor: 'black',
+    borderStyle: 'solid',
+  },
+  item20: {
+    height:20,
+    width:'100%',
+    backgroundColor: '#999'
+  },
+  title20: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 160,
   }
 });
 

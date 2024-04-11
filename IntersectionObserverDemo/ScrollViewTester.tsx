@@ -16,7 +16,8 @@ function ScrollViewTester() {
       <View style={styles.prefix} />
       <InView
         style={styles.demo}
-        triggerOnce={false}
+        as= {Text}
+        triggerOnce={true}
         onChange={(inView) => {
           console.warn(inView);
         }}
