@@ -33,8 +33,9 @@ const PullViewDemo = () => {
         //do something
         testObj.pullrelease='pullrelease--------->'
         setData(testObj)
-        setTimeout(() => {
-            resolve();
+        let timeoutId = setTimeout(function () => {
+          resolve();
+          clearTimeout(timeoutId); // 清除定时器
         }, 3000);
     };
     const onPushing = (gesturePosition) => {

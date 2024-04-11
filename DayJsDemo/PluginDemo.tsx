@@ -29,7 +29,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import toArray from 'dayjs/plugin/toArray'
 import toObject from 'dayjs/plugin/toObject'
 import updateLocale from 'dayjs/plugin/updateLocale'
-import utc from 'dayjs/plugin/utc'
+// import utc from 'dayjs/plugin/utc'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
 import weekYear from 'dayjs/plugin/weekYear'
 import weekday from 'dayjs/plugin/weekday'
@@ -70,9 +70,9 @@ const PluginDemo = () => {
   dayjs.extend(weekOfYear)
   dayjs.extend(weekYear)
   dayjs.extend(weekday)
-  dayjs.extend(utc)
+  // dayjs.extend(utc)
   dayjs.extend(timezone)
-  a.extend(utc)
+  // a.extend(utc)
   a.extend(timezone)
   const timestamp = "2014-06-01 12:00"
   const tz = "America/New_York"
@@ -443,7 +443,8 @@ const PluginDemo = () => {
       <View style={styles.viewBox}>
         <Text style={[styles.headerTitle, styles.interval]}>插件：UTC 增加了 .utc .local .isUTC APIs 使用 UTC 模式来解析和展示时间。</Text>
         <Text style={[styles.formatLabel, styles.interval]}>将本地当前时间转换成 UTC 时间:</Text>
-        <Text style={[styles.formatLabel, styles.interval]}>{dayjs().utc().format()}</Text>
+        {/* <Text style={[styles.formatLabel, styles.interval]}>{dayjs().utc().format()}</Text> */}
+        <Text style={[styles.formatLabel, styles.interval]}>{dayjs().format()}</Text>
       </View>
 
       <View style={styles.viewBox}>
