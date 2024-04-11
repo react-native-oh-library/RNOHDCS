@@ -155,14 +155,13 @@ export default class ExampleOne extends Component<{}, State> {
       <View style={styles.container}>
         <Button title = '刷新数据' onPress = {this.initData}></Button>
         <ScrollView>
-          <Text>Demo1</Text>
+          <Text style = {{marginBottom: 10}}>Demo1</Text>
            <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
               <Row data={state.tableHead1} style={styles.head} textStyle={styles.text}/>
               <Rows data={state.tableData1} textStyle={styles.text}/>
           </Table>
 
-          <View style = {{marginBottom: 10}}/>
-          <Text>Demo2</Text>
+          <Text style = {{marginBottom: 10}}>Demo2</Text>
           <Table borderStyle={{borderWidth: 1}}>
           <Row data={state.tableHead2} flexArr={[1, 2, 1, 1]} style={styles.head} textStyle={styles.text2}/>
           <TableWrapper style={styles.wrapper}>
@@ -170,8 +169,8 @@ export default class ExampleOne extends Component<{}, State> {
             <Rows data={state.tableData2} flexArr={[2, 1, 1]} style={styles.row} textStyle={styles.text2}/>
           </TableWrapper>
         </Table>
-        <View style = {{marginBottom: 10}}/>
-          <Text>Demo3</Text>
+   
+          <Text style = {{marginBottom: 10}}>Demo3</Text>
          <ScrollView horizontal={true}>
           <View>
             <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
@@ -195,8 +194,7 @@ export default class ExampleOne extends Component<{}, State> {
           </View>
         </ScrollView>
 
-        <View style = {{marginBottom: 10}}/>
-          <Text>Demo4</Text>
+          <Text style = {{marginBottom: 10}}>Demo4</Text>
           <Table borderStyle={{borderColor: 'transparent'}}>
           <Row data={state.tableHead1} style={styles.head4} textStyle={styles.text}/>
           {
@@ -212,8 +210,7 @@ export default class ExampleOne extends Component<{}, State> {
           }
         </Table>
 
-        <View style = {{marginBottom: 10}}/>
-          <Text>Demo5</Text>
+          <Text style = {{marginBottom: 10}}>Demo5</Text>
           <Table style={{flexDirection: 'row'}} borderStyle={{borderWidth: 1}}>
           {/* Left Wrapper */}
           <TableWrapper style={{width: 80}}>
