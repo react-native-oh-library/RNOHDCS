@@ -75,7 +75,7 @@ function SoundDemo(): JSX.Element {
   );
 
 
-let sound=new Sound();
+let sound=new Sound('whoosh.mp3');
 
   const setActive=()=>{
     Sound.setActive(true);
