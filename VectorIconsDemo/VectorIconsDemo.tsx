@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import {ScrollView, Text, TextInput, TurboModuleRegistry, View, Image} from 'react-native';
+import React from 'react';
+import {ScrollView} from 'react-native';
 
-
+//导入原库自带字体
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import Fontisto from 'react-native-vector-icons/Fontisto';
@@ -12,70 +12,24 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Octicons from 'react-native-vector-icons/Octicons';
 import Zocial from 'react-native-vector-icons/Zocial';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Entypo from 'react-native-vector-icons/Entypo';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import Feather from 'react-native-vector-icons/Feather';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-// import { IconButtonProps, IconProps as VectorIconProps, Icon as VectorIcon } from 'react-native-vector-icons/Icon';
 
 import { createIconSetFromIcoMoon, createIconSetFromFontello, createIconSet } from 'react-native-vector-icons';
 import icoMoonConfig from '../assets/fonts/icomoon-selection.json';
 import fontelloConfig from '../assets/fonts/fontello-config.json';
 
-import { Button } from '../components';
-import { TurboModule } from 'react-native';
-
-interface VectorIconsTurboModuleProtocol{
-  getImageForFont(fontFamily: string, glyph: string, fontSize: number, color: number): void
-  getImageForFontSync(fontFamily: string, glyph: string, fontSize: number, color: number): string
-  loadFontWithFileName(fontFileName: string, extension: string): void
-}
-
-interface Spec extends TurboModule, VectorIconsTurboModuleProtocol{
-}
-
 export function VectorIconsDemo() {
-  const [numberOfComponents, setNumberOfComponents] = useState(100);
-  const [turboResult, setTurboResult] = useState('');
 
-  const vectorIconsTurbo = TurboModuleRegistry.get<Spec>('RNVectorIcons')!
-
-  const navIcon = MaterialIcons.getImageSourceSync('123', 20, 'white');
-
-  console.info('[liwang-VectorIconsDemo]-->navIcon:', navIcon)
-  
+  //引入用户自制字体
   const CustomTest = createIconSet(
     require('../assets/fonts/test.json'),
     'poppy-icon',
     '../assets/fonts/test.ttf',
-  );
-
-  //直接调用库函数创建字体信息
-  const AntDesign = createIconSet(
-    require('../assets/fonts/AntDesign.json'),
-    'AntDesign',
-    '../assets/fonts/AntDesign.ttf',
-  );
-
-  const Entypo = createIconSet(
-    require('../assets/fonts/Entypo.json'),
-    'Entypo',
-    '../assets/fonts/Entypo.ttf',
-  );
-
-  const EvilIcons = createIconSet(
-    require('../assets/fonts/EvilIcons.json'),
-    'EvilIcons',
-    '../assets/fonts/EvilIcons.ttf',
-  );
-
-  const Feather = createIconSet(
-    require('../assets/fonts/Feather.json'),
-    'Feather',
-    '../assets/fonts/Feather.ttf',
-  );
-  
-  const FontAwesome = createIconSet(
-    require('../assets/fonts/FontAwesome.json'),
-    'FontAwesome',
-    '../assets/fonts/FontAwesome.ttf',
   );
 
   //引入 IcoMoon 自定义字体
@@ -94,30 +48,6 @@ export function VectorIconsDemo() {
 
   return (
     <ScrollView style={{ padding:20 }}>
-
-      <Button label='liwang turboModule' onPress={()=>{
-        console.info('[liwang-VectorIconsDemo]-->Button press事件: vectorIconsTurbo.getImageForFont()')
-        const navIcon = MaterialIcons.getImageSourceSync('123', 20, 'white');
-        console.info('[liwang-VectorIconsDemo]-->Button press事件: MaterialIcons.getImageForFontSync()', navIcon.uri)
-        // vectorIconsTurbo.getImageForFont('liwang from rn tsx new version', 'glyph', 1, 10)
-        // console.info('[liwang-VectorIconsDemo]-->Button press事件: vectorIconsTurbo.getImageForFontSync()')
-
-        // let result = vectorIconsTurbo.getImageForFontSync('liwang from rn tsx new version', 'glyph', 1, 10)
-        // console.info('[liwang-VectorIconsDemo]-->Button press事件: vectorIconsTurbo.getImageForFontSync() result:' + result)
-
-        // console.info('[liwang-VectorIconsDemo]-->Button press事件: vectorIconsTurbo.loadFontWithFileName()')
-        // vectorIconsTurbo.loadFontWithFileName('liwang from rn tsx new version', 'glyph')
-
-        // setTurboResult(result);
-      }}></Button>
-
-      <Text style={{
-        fontSize:20,
-      }}>
-        {turboResult}
-      </Text>
-
-      <Image source={navIcon} width={50} height={50}></Image>
 
       <CustomTest.Button
           name="application-record"
@@ -150,11 +80,11 @@ export function VectorIconsDemo() {
        </CustomFontello.Button>
 
         <AntDesign.Button
-            name="google"
+            name="forward"
             backgroundColor="#3b5998"
             size={20}
           >
-        AntDesign google
+        AntDesign forward
         </AntDesign.Button>
 
         <Entypo.Button
@@ -223,17 +153,17 @@ export function VectorIconsDemo() {
             name="bookmark"
             backgroundColor="#3b5998"
             size={20} 
+            solid
           >
           FontAwesome6_regular bookmark
         </FontAwesome6.Button>
         <FontAwesome6.Button
-            name="anchor"
+            name="apple-whole"
             backgroundColor="#3b5998"
-            size={20} 
+            size={20}
           >
-          FontAwesome6_solid anchor
+          FontAwesome6_solid apple-whole
         </FontAwesome6.Button>
-        
         <Fontisto.Button
             name="aws"
             backgroundColor="#3b5998"
@@ -284,14 +214,12 @@ export function VectorIconsDemo() {
           SimpleLineIcons mouse
         </SimpleLineIcons.Button>
         <Zocial.Button
-            name="weibo"
+            name="rss"
             backgroundColor="#3b5998"
             size={20}
           >
-          Zocial weibo
+          Zocial rss
         </Zocial.Button>
     </ScrollView>
   );
 }
-
-
