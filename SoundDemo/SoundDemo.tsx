@@ -47,7 +47,6 @@ type SliderSectionProps = PropsWithChildren<{
   func: ()=> void;
 }>;
 
-
 function Section({title,func}: SectionProps): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   return (
