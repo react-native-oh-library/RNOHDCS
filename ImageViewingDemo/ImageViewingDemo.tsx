@@ -34,12 +34,9 @@ const architecture = [
   {
     thumbnail: "https://p0.ssl.qhimgs1.com/sdr/400__/t0461b1cfd7e4ef2b66.jpg",
     original: "https://p0.ssl.qhimgs1.com/sdr/400__/t0461b1cfd7e4ef2b66.jpg",
-  },
-  {
-    thumbnail: "https://p0.ssl.qhimgs1.com/sdr/400__/t017c44dc545b663cce.jpg",
-    original: "https://p0.ssl.qhimgs1.com/sdr/400__/t017c44dc545b663cce.jpg",
   }
 ];
+
 
 
 const ImageList = ({ images, shift = 0, onPress }: Props) => (
@@ -82,31 +79,25 @@ const styles1 = StyleSheet.create({
 
 export default function App() {
   const [currentImageIndex, setImageIndex] = useState(0);
-  const [currentImageIndex1, setImageIndex1] = useState(0);
   const [images, setImages] = useState(architecture);
   const [isVisible, setIsVisible] = useState(false);
-  const [isVisible1, setIsVisible1] = useState(false);
 
   const onSelect = (images, index) => {
     setImageIndex(index);
     setImages(images);
     setIsVisible(true);
   };
-  const onSelect1 = (images, index) => {
-    setImageIndex1(index);
-    setImages(images);
-    setIsVisible1(true);
-  };
 
   const OnImageIndexChange = () => {
-    console.log('7882897');
+    if(currentImageIndex === 1) {
+      Alert.alert("OnImageIndexChange")
+    } 
   }
 
   const onLongPress = (image) => {
     Alert.alert("Long Pressed",image.uri)
   }
   const onRequestClose = () => setIsVisible(false);
-  const onRequestClose1 = () => setIsVisible1(false);
 
 
   const getImageSource = memoize((images): ImageSource[] =>
@@ -119,19 +110,11 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.root}>
-      <View><Text style={{color:'#fff'}}>fade</Text></View>
       <ImageList
         images={architecture.map((image) => image.thumbnail)}
         onPress={(index) => onSelect(architecture, index)}
         shift={0.75}
       />
-      <View><Text style={{color:'#fff'}}>slide</Text></View>
-      <ImageList
-        images={architecture.map((image) => image.thumbnail)}
-        onPress={(index) => onSelect1(architecture, index)}
-        shift={0.75}
-      />
-
       <View style={styles.about}>
         <Text style={styles.name}>[ react-native-image-viewing ]</Text>
       </View>
@@ -160,17 +143,6 @@ export default function App() {
         FooterComponent={({ imageIndex }) => (
           <ImageFooter imageIndex={imageIndex} imagesCount={images.length} />
         )}
-      />
-      <ImageViewing
-        images={getImageSource(images)}
-        imageIndex={currentImageIndex1}
-        visible={isVisible1}
-        onRequestClose={onRequestClose1}
-        OnImageIndexChange={OnImageIndexChange}
-        onLongPress={onLongPress}
-        presentationStyle="overFullScreen"
-        backgroundColor="#000"
-        animationType="slide"
       />
     </SafeAreaView>
   );
