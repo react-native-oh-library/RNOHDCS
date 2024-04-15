@@ -143,8 +143,9 @@ const PullListDemo = () => {
                 title: `this is ${i}`,
             })
         }
-        setTimeout(() => {
+        let timeoutId = setTimeout(function () => {
           setStateList([...stateList,...list]);
+          clearTimeout(timeoutId); // 清除定时器
         }, 1000);
     }
     return (

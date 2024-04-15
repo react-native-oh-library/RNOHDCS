@@ -75,30 +75,13 @@ export const ditu = {
     },
 }
 
-// 折线图
-export const zhexian = {
-    xAxis: {
-        type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    },
-    yAxis: {
-        type: 'value'
-    },
-    series: [
-        {
-            data: [150, 230, 224, 218, 135, 147, 260],
-            type: 'line'
-        }
-    ]
-};
-
 // 堆叠折线图
 export const duidiezhexian = {
     tooltip: {
         trigger: 'axis'
     },
     legend: {
-        data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+        data: ['Direct', 'Search Engine']
     },
     grid: {
         left: '3%',
@@ -121,24 +104,6 @@ export const duidiezhexian = {
     },
     series: [
         {
-            name: 'Email',
-            type: 'line',
-            stack: 'Total',
-            data: [120, 132, 101, 134, 90, 230, 210]
-        },
-        {
-            name: 'Union Ads',
-            type: 'line',
-            stack: 'Total',
-            data: [220, 182, 191, 234, 290, 330, 310]
-        },
-        {
-            name: 'Video Ads',
-            type: 'line',
-            stack: 'Total',
-            data: [150, 232, 201, 154, 190, 330, 410]
-        },
-        {
             name: 'Direct',
             type: 'line',
             stack: 'Total',
@@ -152,6 +117,52 @@ export const duidiezhexian = {
         }
     ]
 };
+
+// 折线图
+export const zhexian =  {
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data: ['Direct', 'Search Engine']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+        {
+            name: 'Direct',
+            type: 'line',
+            stack: 'Total',
+            itemStyle: { color: '#ffdd59' },
+            data: [400, 350, 300, 450, 400, 350, 300]
+        },
+        {
+            name: 'Search Engine',
+            type: 'line',
+            stack: 'Total',
+            itemStyle: { color: '#ff9f1a' },
+            data: [500, 550, 500, 600, 650, 600, 550]
+        }
+    ]
+};
+
 
 // 柱状图
 export const zhuzhuang = {

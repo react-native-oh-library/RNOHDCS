@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
-import Canvas, { Image as CanvasImage, CanvasRenderingContext2D } from 'react-native-canvas';
+import Canvas, { Image as CanvasImage, CanvasRenderingContext2D, Path2D } from 'react-native-canvas';
 
 const CanvasDemo = () => {
 
@@ -21,11 +21,11 @@ const CanvasDemo = () => {
       context.fillStyle = 'blue';
       context.fillRect(10, 10, 100, 100);
 
-      //绘制圆形
-      context.beginPath();
-      context.arc(200, 60, 50, 0, 2 * Math.PI);
+      //绘制椭圆
+      const ellipse = new Path2D(canvas);
+      ellipse.ellipse(200, 60, 50, 30, 0, 0, 2 * Math.PI);
       context.fillStyle = 'green';
-      context.fill();
+      context.fill(ellipse);
 
       //绘制线条
       context.beginPath();

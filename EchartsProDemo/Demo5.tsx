@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Alert, Text, View } from 'react-native';
 import RNEChartsPro from 'react-native-echarts-pro';
 import FangSong from './font/FangSong';
 
 const MyChartComponent = () => {
-  const showAlert = () => {
-    Alert.alert('渲染完成', '这是一个eventActions触发的警告框');
-  };
+  const [stateTxt, setStateTxt] = useState('初始化，未触发渲染完成事件');
 
   const option = {
     textStyle: {
@@ -47,14 +45,14 @@ const MyChartComponent = () => {
 
   return (
     <View style={{ height: 300, paddingTop: 25 }}>
-      <Text>formatterVariable（Y轴单位使用变量传入）/enableParseStringFunction（使用变量单位必须开启字符串函数）/eventActions（完成事件钩子回调）/fontFamilies（自定义字体为仿宋）</Text>
+      <Text>当前加载状态：{stateTxt}</Text>
       <RNEChartsPro
         height={250}
         option={option}
         enableParseStringFunction
         formatterVariable={{ unit: '￥' }}
         eventActions={{
-          finished: showAlert,
+          finished: () => { setStateTxt('渲染完成，已触发完成事件') },
         }}
         fontFamilies={
           [
