@@ -129,7 +129,11 @@ export default function App() {
         animationType="fade"
         onLongPress={onLongPress}
         delayLongPress={2000}
-        keyExtreactor={(imageSrc,index) => index.toString()}
+        keyExtreactor={(imageSrc,index) => {
+          console.log('keyExtreactor OK');
+          return index.toString()
+        }
+        }
         HeaderComponent={
           images === architecture
             ? ({ imageIndex }) => {
