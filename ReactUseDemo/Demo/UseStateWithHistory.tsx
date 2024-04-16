@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { useStateWithHistory } from 'react-use';
 
-const Demo: React.FC = () => {
+const UseStateHistoryDemo: React.FC = () => {
   // Initialize state with history
   const [count, setCount, { history, position, back, forward, go }] = useStateWithHistory<number>(0);
 
@@ -25,4 +25,4 @@ const Demo: React.FC = () => {
   );
 };
 
-export default Demo;
+export default UseStateHistoryDemo;
