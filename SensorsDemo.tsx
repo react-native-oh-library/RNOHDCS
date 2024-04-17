@@ -6,61 +6,37 @@ export const App = () => {
     const [sensors, setSensorsValue] = React.useState('');
     const [IsProintLog, setIsProintLog] = React.useState(true);
     const setInterVal = () => {
+        if(!sensors) return
         if (IsProintLog) {
             setUpdateIntervalForType(sensors, value);
             setIsProintLog(false)
+            let sensorsSubscription
             switch (sensors) {
                 case 'accelerometer':
-                    const accelerometerSubscription = accelerometer.subscribe();
-                    const timer1 = setTimeout(() => {
-                        accelerometerSubscription.unsubscribe();
-                        clearTimeout(timer1)
-                        setIsProintLog(true)
-                    }, 5000)
+                    sensorsSubscription = accelerometer.subscribe();
                     break;
                 case 'gyroscope':
-                    const gyroscopeSubscription = gyroscope.subscribe();
-                    const timer2 = setTimeout(() => {
-                        gyroscopeSubscription.unsubscribe();
-                        clearTimeout(timer2)
-                        setIsProintLog(true)
-                    }, 5000)
+                    sensorsSubscription = gyroscope.subscribe();
                     break;
                 case 'magnetometer':
-                    const magnetometerSubscription = magnetometer.subscribe();
-                    const timer3 = setTimeout(() => {
-                        magnetometerSubscription.unsubscribe();
-                        clearTimeout(timer3)
-                        setIsProintLog(true)
-                    }, 5000)
+                    sensorsSubscription = magnetometer.subscribe();
                     break;
                 case 'barometer':
-                    const barometerSubscription = barometer.subscribe();
-                    const timer4 = setTimeout(() => {
-                        barometerSubscription.unsubscribe();
-                        clearTimeout(timer4)
-                        setIsProintLog(true)
-                    }, 5000)
+                    sensorsSubscription = barometer.subscribe();
                     break;
                 case 'orientation':
-                    const orientationSubscription = orientation.subscribe()
-                    const timer5 = setTimeout(() => {
-                        orientationSubscription.unsubscribe();
-                        clearTimeout(timer5)
-                        setIsProintLog(true)
-                    }, 5000);
+                    sensorsSubscription = orientation.subscribe();
                     break;
                 case 'gravity':
-                    const gravitySubscription = gravity.subscribe()
-                    const timer6 = setTimeout(() => {
-                        gravitySubscription.unsubscribe();
-                        clearTimeout(timer6)
-                        setIsProintLog(true)
-                    }, 5000);
+                    sensorsSubscription = gravity.subscribe();
                     break;
                 default:
-                    setIsProintLog(true)
             }
+            const timer = setTimeout(() => {
+                sensorsSubscription.unsubscribe();
+                clearTimeout(timer)
+                setIsProintLog(true)
+            }, 5000);
         }
     }
     const setLogLevel0 = () => {
