@@ -1,20 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, StyleSheet, Text, View } from "react-native"
 import { useRunInJS, useSharedValue, useWorklet } from "react-native-worklets-core";
 
 const App = () => {
-    const [curTime, setCurTime] = useState<String>('0'); // 时间戳
+    const [timeStr, setTimeStr] = useState<Number>(0); // 时间戳
     const runMsg = useSharedValue('等待中');
-
-    useEffect(() => {
-        const timer = setInterval(() => {
-            const timeStr = Math.floor(Date.now()).toString().slice(0, -2);
-            setCurTime(timeStr)
-        }, 500)
-        return () => {
-            clearInterval(timer)
-        }
-    }, [])
 
     // js 阻塞方法
     const runInJs = () => {
@@ -24,8 +14,6 @@ const App = () => {
             result += i;
         }
         const end = Date.now();
-        const timeStr = (end - start).toString().slice(0, -2);
-
         const msg = `js操作完成，运行时长：${(end - start) / 1000} 秒`;
         runMsg.value = msg;
     }
@@ -70,6 +58,11 @@ const App = () => {
             <Text>使用 Hooks 展示 worklet 线程与 js 线程的差异</Text>
             <Text>当前使用循环来模拟耗时操作，循环次数越大需要处理的时间越长</Text>
 
+            <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }}>
+                <Button title="点击更新时间戳以验证阻塞" onPress={() => setTimeStr(Date.now())} />
+                <Text>{timeStr.toString()}</Text>
+            </View>
+
             <View style={styles.dividing} />
             <Text style={{ fontWeight: 'bold', fontSize: 20, marginBottom: 10 }}>useWorklet</Text>
             <Text style={{ marginBottom: 10 }}>通过 useWorklet 创建线程，在两个线程分别遍历1e8次</Text>
@@ -82,10 +75,6 @@ const App = () => {
             <Text style={{ fontWeight: 'bold', fontSize: 20, marginBottom: 10 }}>useSharedValue</Text>
             <Text>以下运行时长是通过 useSharedValue 展示，正常情况下两个线程不共享变量</Text>
             <Text>{runMsg.value}</Text>
-
-            <View style={styles.dividing} />
-            <Text style={{ marginBottom: 10 }}>以下时间戳一秒更新两次，UI被阻塞时会无法更新：</Text>
-            <Text style={styles.time}>{curTime.toString()}</Text>
 
             <View style={styles.dividing} />
             <Text style={{ fontWeight: 'bold', fontSize: 20, marginBottom: 10 }}>useRunInJS</Text>
