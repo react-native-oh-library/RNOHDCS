@@ -9,11 +9,10 @@ import {
     View,
 } from 'react-native';
 
-// import SwipeListView from '../SwipeListView';
 import { SwipeListView } from 'react-native-swipe-list-view';
 export default function Actions() {
     const [listData, setListData] = useState(
-        Array(20)
+        Array(8)
             .fill('')
             .map((_, i) => ({
                 key: `${i}`,
@@ -57,8 +56,6 @@ export default function Actions() {
     };
 
     const VisibleItem = props => {
-        console.log(props.leftActionState);
-
         const {
             rowHeightAnimatedValue,
             rightActionState,
@@ -66,16 +63,6 @@ export default function Actions() {
             data,
             removeRow,
         } = props;
-
-        if (rightActionState) {
-            Animated.timing(rowHeightAnimatedValue, {
-                toValue: 0,
-                duration: 200,
-                useNativeDriver:false
-            }).start(() => {
-                removeRow();
-            });
-        }
 
         return (
             <Animated.View
@@ -114,120 +101,26 @@ export default function Actions() {
         );
     };
 
-    const HiddenItemWithActions = props => {
-        const {
-            leftActionActivated,
-            rightActionActivated,
-            swipeAnimatedValue,
-            rowActionAnimatedValue,
-            rowHeightAnimatedValue,
-            onClose,
-            onDelete,
-        } = props;
-
-        if (rightActionActivated) {
-            Animated.spring(rowActionAnimatedValue, {
-                toValue: 500,
-                 useNativeDriver: false
-            }).start();
-        } else {
-            Animated.spring(rowActionAnimatedValue, {
-                toValue: 75,
-                 useNativeDriver: false
-            }).start();
-        }
-
-        return (
-            <Animated.View
-                style={[
-                    styles.rowBack,
-                    { height: rowHeightAnimatedValue },
-                    leftActionActivated && { backgroundColor: 'lightgreen' },
-                ]}
-            >
-                <Text>Left</Text>
-                {!leftActionActivated && (
-                    <TouchableOpacity
-                        style={[styles.backRightBtn, styles.backRightBtnLeft]}
-                        onPress={onClose}
-                    >
-                        <Text style={styles.backTextWhite}>Close</Text>
-                    </TouchableOpacity>
-                )}
-                {!leftActionActivated && (
-                    <Animated.View
-                        style={[
-                            styles.backRightBtn,
-                            styles.backRightBtnRight,
-                            { flex: 1, width: rowActionAnimatedValue },
-                        ]}
-                    >
-                        <TouchableOpacity
-                            style={[
-                                styles.backRightBtn,
-                                styles.backRightBtnRight,
-                            ]}
-                            onPress={onDelete}
-                        >
-                            <Animated.View
-                                style={[
-                                    styles.trash,
-                                    {
-                                        transform: [
-                                            {
-                                                scale: swipeAnimatedValue.interpolate(
-                                                    {
-                                                        inputRange: [-90, -45],
-                                                        outputRange: [1, 0],
-                                                        extrapolate: 'clamp',
-                                                    }
-                                                ),
-                                            },
-                                        ],
-                                    },
-                                ]}
-                            >
-                                <Image
-                                    source={require('../images/trash.png')}
-                                    style={styles.trash}
-                                />
-                            </Animated.View>
-                        </TouchableOpacity>
-                    </Animated.View>
-                )}
-            </Animated.View>
-        );
-    };
-
-    const renderHiddenItem = (data, rowMap) => {
-        const rowActionAnimatedValue = new Animated.Value(75);
-        const rowHeightAnimatedValue = new Animated.Value(50);
-        return (
-            <HiddenItemWithActions
-                data={data}
-                rowMap={rowMap}
-                rowActionAnimatedValue={rowActionAnimatedValue}
-                rowHeightAnimatedValue={rowHeightAnimatedValue}
-                onClose={() => closeRow(rowMap, data.item.key)}
-                onDelete={() => deleteRow(rowMap, data.item.key)}
-            />
-        );
-    };
+  
 
     return (
         <View style={styles.container}>
             <SwipeListView
-                useNativeDriver={false}
                 data={listData}
                 renderItem={renderItem}
-                renderHiddenItem={renderHiddenItem}
+                renderHiddenItem={()=>(
+                    <View style={styles.rowBack}>
+                    <Text>Left</Text>
+                    <Text>Right</Text>
+                    </View>
+                    )}
                 onRowDidOpen={onRowDidOpen}
                 leftOpenValue={75}
                 rightOpenValue={-150}
                 leftActivationValue={100}
                 rightActivationValue={-200}
                 leftActionValue={0}
-                rightActionValue={-500}
+                rightActionValue={-200}
                 onLeftAction={onLeftAction}
                 onRightAction={onRightAction}
                 onLeftActionStatusChange={onLeftActionStatusChange}

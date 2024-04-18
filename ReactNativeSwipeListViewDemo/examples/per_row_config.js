@@ -11,50 +11,23 @@ import { SwipeListView, SwipeRow } from 'react-native-swipe-list-view';
 
 export default function PerRowConfig() {
     const [listData, setListData] = useState(
-        Array(20)
+        Array(5)
             .fill('')
             .map((_, i) => ({ key: `${i}`, text: `item #${i}` }))
     );
 
-    const closeRow = (rowMap, rowKey) => {
-        if (rowMap[rowKey]) {
-            rowMap[rowKey].closeRow();
-        }
-    };
-
-    const deleteRow = (rowMap, rowKey) => {
-        closeRow(rowMap, rowKey);
-        const newData = [...listData];
-        const prevIndex = listData.findIndex(item => item.key === rowKey);
-        newData.splice(prevIndex, 1);
-        setListData(newData);
-    };
 
     const renderItem = (data, rowMap) => (
         <SwipeRow
-            disableLeftSwipe={parseInt(data.item.key) % 2 === 0}
-            leftOpenValue={20 + Math.random() * 150}
+            disableLeftSwipe={false}
+            leftOpenValue={80}
             rightOpenValue={-150}
         >
             <View style={styles.rowBack}>
                 <Text>Left</Text>
-                <TouchableOpacity
-                    style={[styles.backRightBtn, styles.backRightBtnLeft]}
-                    onPress={() => closeRow(rowMap, data.item.key)}
-                >
-                    <Text style={styles.backTextWhite}>Close</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={[styles.backRightBtn, styles.backRightBtnRight]}
-                    onPress={() => deleteRow(rowMap, data.item.key)}
-                >
-                    <Text style={styles.backTextWhite}>Delete</Text>
-                </TouchableOpacity>
             </View>
             <TouchableHighlight
-                onPress={() => console.log('You touched me')}
                 style={styles.rowFront}
-                underlayColor={'#AAA'}
             >
                 <View>
                     <Text>I am {data.item.text} in a SwipeListView</Text>

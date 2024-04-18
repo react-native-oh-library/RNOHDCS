@@ -50,50 +50,15 @@ export default function StandaloneRow(){
             <View style={styles.standalone}>
                 <Text>onRowPress:<Text style={[{color:'blue'}]}>{log}</Text></Text>
                 <Text onPress={empty} style={styles.empty}>清空日志</Text>
-                <SwipeRow leftOpenValue={75} rightOpenValue={-75}
-                onRowPress={onRowPress}
-                preview={true}
-                previewRowKey={'0'}
-                previewOpenValue={-40}
-                previewOpenDelay={1000}>
-                    <View style={styles.standaloneRowBack}>
-                        <Text style={styles.backTextWhite}>Left</Text>
-                        <Text style={styles.backTextWhite}>Right</Text>
-                    </View>
-                    <View style={styles.standaloneRowFront}>
-                        <Text>I am standalone SwipeRow #1</Text>
-                    </View>
-                </SwipeRow>
+                
                 <View style={styles.spacer} />
                 <Text>onRowOpen/onRowDidOpen:<Text style={[{color:'blue'}]}>{log2}</Text></Text>
                 <Text onPress={empty2} style={styles.empty}>清空日志</Text>
-                <SwipeRow leftOpenValue={75} rightOpenValue={-75}
-                onRowOpen={onRowOpen}
-                onRowDidOpen={onRowDidOpen}
-                useNativeDriver={false}>
-                    <View style={styles.standaloneRowBack}>
-                        <Text style={styles.backTextWhite}>Left</Text>
-                        <Text style={styles.backTextWhite}>Right</Text>
-                    </View>
-                    <View style={styles.standaloneRowFront}>
-                        <Text>I am standalone SwipeRow #1</Text>
-                    </View>
-                </SwipeRow>
+              
                 <View style={styles.spacer} />
                 <Text>onRowClose/onRowDidClose:<Text style={[{color:'blue'}]}>{log3}</Text></Text>
                 <Text onPress={empty3} style={styles.empty}>清空日志</Text>
-                <SwipeRow leftOpenValue={75} rightOpenValue={-75}
-                onRowClose={onRowClose}
-                onRowDidClose={onRowDidClose}
-                useNativeDriver={false}>
-                    <View style={styles.standaloneRowBack}>
-                        <Text style={styles.backTextWhite}>Left</Text>
-                        <Text style={styles.backTextWhite}>Right</Text>
-                    </View>
-                    <View style={styles.standaloneRowFront}>
-                        <Text>I am standalone SwipeRow #1</Text>
-                    </View>
-                </SwipeRow>
+            
                 <View style={styles.spacer} />
                 <Text>onLeftActionStatusChange/onRightActionStatusChange:<Text style={[{color:'blue'}]}>{log4}</Text></Text>
                 <Text>onLeftAction/onRightAction:<Text style={[{color:'blue'}]}>{log5}</Text></Text>
@@ -104,7 +69,13 @@ export default function StandaloneRow(){
                 onRightActionStatusChange={onRightActionStatusChange}
                 onLeftAction={onLeftAction}
                 onRightAction={onRightAction}
+                onRowPress={onRowPress}
+                preview={false}
+                onRowOpen={onRowOpen}
+                onRowDidOpen={onRowDidOpen}
                 useNativeDriver={false} 
+                onRowClose={onRowClose}
+                onRowDidClose={onRowDidClose}
                 >
                     <View style={styles.standaloneRowBack}>
                         <Text style={styles.backTextWhite}>Left</Text>

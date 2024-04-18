@@ -11,7 +11,7 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 
 export default function Basic() {
     const [listData, setListData] = useState(
-        Array(10)
+        Array(5)
             .fill('')
             .map((_, i) => ({ key: `${i}`, text: `item #${i}` }))
     );
@@ -45,7 +45,9 @@ export default function Basic() {
             </View>
         </TouchableHighlight>
     );
-
+    const onPreviewOpen = () => {
+        console.log('onPreviewOpen');
+    };
     const renderHiddenItem = (data, rowMap) => (
         <View style={styles.rowBack}>
             <Text>Left</Text>
@@ -73,9 +75,10 @@ export default function Basic() {
                 leftOpenValue={75}
                 rightOpenValue={-150}
                 previewRowKey={'0'}
-                previewOpenValue={-40}
-                previewOpenDelay={1000}
+                previewOpenValue={0}
+                previewOpenDelay={200}
                 onRowDidOpen={onRowDidOpen}
+                onPreviewOpen={onPreviewOpen}
             />
         </View>
     );

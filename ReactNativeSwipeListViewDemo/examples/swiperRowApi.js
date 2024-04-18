@@ -36,32 +36,11 @@ export default function StandaloneRow(){
             <View style={styles.standalone}>
                 <Text>onSwipeValueChange:<Text style={[{color:'blue'}]}>{log}</Text></Text>
                 <Text onPress={empty} style={styles.empty}>清空日志</Text>
-                <SwipeRow leftOpenValue={75} rightOpenValue={-75}
-                onSwipeValueChange={onSwipeValueChange}
-                useNativeDriver={false}>
-                    <View style={styles.standaloneRowBack}>
-                        <Text style={styles.backTextWhite}>Left</Text>
-                        <Text style={styles.backTextWhite}>Right</Text>
-                    </View>
-                    <View style={styles.standaloneRowFront}>
-                        <Text>I am standalone SwipeRow #1</Text>
-                    </View>
-                </SwipeRow>
+               
                 <View style={styles.spacer} />
                 <Text>swipeGestureBegan/swipeGestureEnded:<Text style={[{color:'blue'}]}>{log2}</Text></Text>
                 <Text onPress={empty2} style={styles.empty}>清空日志</Text>
-                <SwipeRow leftOpenValue={75} rightOpenValue={-75}
-                swipeGestureBegan={swipeGestureBegan}
-                swipeGestureEnded={swipeGestureEnded}
-                useNativeDriver={false}>
-                    <View style={styles.standaloneRowBack}>
-                        <Text style={styles.backTextWhite}>Left</Text>
-                        <Text style={styles.backTextWhite}>Right</Text>
-                    </View>
-                    <View style={styles.standaloneRowFront}>
-                        <Text>I am standalone SwipeRow #1</Text>
-                    </View>
-                </SwipeRow>
+               
                 <View style={styles.spacer} />
                 <Text>shouldItemUpdate:<Text style={[{color:'blue'}]}>{log3}</Text></Text>
                 <Text onPress={empty3} style={styles.empty}>清空日志</Text>
@@ -70,7 +49,10 @@ export default function StandaloneRow(){
                 stopLeftSwipe={30}
                 stopRightSwipe={-30}
                 useNativeDriver={false}
+                onSwipeValueChange={onSwipeValueChange}
                 setScrollEnabled={setScrollEnabled}
+                swipeGestureBegan={swipeGestureBegan}
+                swipeGestureEnded={swipeGestureEnded}
                 >
                     <View style={styles.standaloneRowBack}>
                         <Text style={styles.backTextWhite}>Left</Text>

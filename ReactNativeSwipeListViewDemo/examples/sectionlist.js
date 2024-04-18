@@ -11,12 +11,12 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 
 export default function SectionList() {
     const [listData, setListData] = useState(
-        Array(5)
+        Array(2)
             .fill('')
             .map((_, i) => ({
                 title: `title${i + 1}`,
                 data: [
-                    ...Array(5)
+                    ...Array(2)
                         .fill('')
                         .map((_, j) => ({
                             key: `${i}.${j}`,
@@ -89,9 +89,6 @@ export default function SectionList() {
                 renderSectionHeader={renderSectionHeader}
                 leftOpenValue={75}
                 rightOpenValue={-150}
-                previewRowKey={'0'}
-                previewOpenValue={-40}
-                previewOpenDelay={1000}
                 onRowDidOpen={onRowDidOpen}
             />
         </View>

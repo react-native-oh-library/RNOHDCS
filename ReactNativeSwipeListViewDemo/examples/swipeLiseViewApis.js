@@ -37,33 +37,10 @@ export default function StandaloneRow(){
                
                 <Text>onRowClose:<Text style={[{color:'blue'}]}>{log4}</Text></Text>
                 <Text onPress={empty4} style={styles.empty}>清空日志</Text>
-                <SwipeListView data={listViewData}
-                renderItem={(data,rowMap)=>(
-                    <View style={styles.rowFront}><Text>I am {data.item.text} in a SwipeListView</Text></View>
-                )}
-                renderHiddenItem={(data,rowMap)=>(
-                    <View style={styles.rowBack}><Text>Left</Text><Text>Right</Text></View>
-                )}
-                leftOpenValue={75}
-                rightOpenValue={-75}
-                onRowClose={onRowClose}
-                >
-                </SwipeListView>
                 
                 <Text>onRowDidClose:<Text style={[{color:'blue'}]}>{log7}</Text></Text>
                 <Text onPress={empty7} style={styles.empty}>清空日志</Text>
-                <SwipeListView data={listViewData}
-                renderItem={(data,rowMap)=>(
-                    <View style={styles.rowFront}><Text>I am {data.item.text} in a SwipeListView</Text></View>
-                )}
-                renderHiddenItem={(data,rowMap)=>(
-                    <View style={styles.rowBack}><Text>Left</Text><Text>Right</Text></View>
-                )}
-                leftOpenValue={75}
-                rightOpenValue={-75}
-                onRowDidClose={onRowDidClose}
-                useNativeDriver={false}>
-                </SwipeListView>
+              
 
                 <Text>onPreviewEnd:<Text style={[{color:'blue'}]}>{log5}</Text></Text>
                 <SwipeListView data={listViewData}
@@ -76,9 +53,7 @@ export default function StandaloneRow(){
                 leftOpenValue={75}
                 rightOpenValue={-75}
                 onPreviewEnd={onPreviewEnd}
-                previewRowKey={'0'}
-                previewOpenValue={-40}
-                previewOpenDelay={1000}
+             
                 stopLeftSwipe={10} 
                 stopRightSwipe={-10} 
                 swipeToClosePercent={10}
@@ -90,22 +65,16 @@ export default function StandaloneRow(){
                 restDisplacementThreshold={0.001}
                 previewDuration={300}
                 previewRowIndex={0}
+                onRowClose={onRowClose}
+                onRowDidClose={onRowDidClose}
+                useNativeDriver={false}
+                shouldItemUpdate={shouldItemUpdate}
+                preview={false}
                 >
                 </SwipeListView>
 
                 <Text>shouldItemUpdate:<Text style={[{color:'blue'}]}>{log6}</Text></Text>
-                <SwipeListView data={listViewData}
-                renderItem={(data,rowMap)=>(
-                    <View style={styles.rowFront}><Text>I am {data.item.text} in a SwipeListView</Text></View>
-                )}
-                renderHiddenItem={(data,rowMap)=>(
-                    <View style={styles.rowBack}><Text>Left</Text><Text>Right</Text></View>
-                )}
-                leftOpenValue={75}
-                rightOpenValue={-75}
-                shouldItemUpdate={shouldItemUpdate}
-               >
-                </SwipeListView>
+               
             </View>
         </View>
     )

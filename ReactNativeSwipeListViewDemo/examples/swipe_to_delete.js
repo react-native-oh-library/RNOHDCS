@@ -11,7 +11,7 @@ import {
 import { SwipeListView } from 'react-native-swipe-list-view';
 
 const rowTranslateAnimatedValues = {};
-Array(20)
+Array(5)
     .fill('')
     .forEach((_, i) => {
         rowTranslateAnimatedValues[`${i}`] = new Animated.Value(1);
@@ -19,7 +19,7 @@ Array(20)
 
 export default function SwipeToDelete() {
     const [listData, setListData] = useState(
-        Array(20)
+        Array(5)
             .fill('')
             .map((_, i) => ({ key: `${i}`, text: `item #${i}` }))
     );
@@ -29,21 +29,15 @@ export default function SwipeToDelete() {
     const onSwipeValueChange = swipeData => {
         const { key, value } = swipeData;
         if (
-            value < -Dimensions.get('window').width &&
+            value < -375&&
             !animationIsRunning.current
         ) {
             animationIsRunning.current = true;
-            Animated.timing(rowTranslateAnimatedValues[key], {
-                toValue: 0,
-                duration: 200,
-                useNativeDriver: false,
-            }).start(() => {
-                const newData = [...listData];
-                const prevIndex = listData.findIndex(item => item.key === key);
-                newData.splice(prevIndex, 1);
-                setListData(newData);
-                animationIsRunning.current = false;
-            });
+            const newData = [...listData];
+            const prevIndex = listData.findIndex(item => item.key === key);
+            newData.splice(prevIndex, 1);
+            setListData(newData);
+            animationIsRunning.current = false;
         }
     };
 
@@ -51,14 +45,6 @@ export default function SwipeToDelete() {
         <Animated.View
             style={[
                 styles.rowFrontContainer,
-                {
-                    height: rowTranslateAnimatedValues[
-                        data.item.key
-                    ].interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [0, 50],
-                    }),
-                },
             ]}
         >
             <TouchableHighlight
