@@ -8,7 +8,7 @@ export default function StandaloneRow() {
             <View style={styles.standalone}>
                 <SwipeRow leftOpenValue={75} rightOpenValue={-75}>
                     <View style={styles.standaloneRowBack}>
-                        <Text style={styles.backTextWhite}>Left111</Text>
+                        <Text style={styles.backTextWhite}>Left</Text>
                         <Text style={styles.backTextWhite}>Right</Text>
                     </View>
                     <View style={styles.standaloneRowFront}>

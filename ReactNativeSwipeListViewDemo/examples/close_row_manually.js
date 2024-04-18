@@ -21,12 +21,6 @@ export default function Basic() {
         openRowRef.current = rowMap[rowKey];
     };
 
-    const closeOpenRow = () => {
-        if (openRowRef.current && openRowRef.current.closeRow) {
-            openRowRef.current.closeRow();
-        }
-    };
-
     const renderItem = data => (
         <TouchableHighlight
             onPress={() => console.log('You touched me')}
@@ -61,9 +55,6 @@ export default function Basic() {
                 rightOpenValue={-150}
                 onRowDidOpen={onRowDidOpen}
             />
-            <TouchableOpacity onPress={closeOpenRow} style={styles.closeButton}>
-                <Text>Close Open Row</Text>
-            </TouchableOpacity>
         </View>
     );
 }

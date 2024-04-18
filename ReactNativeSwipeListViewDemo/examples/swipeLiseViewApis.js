@@ -21,10 +21,6 @@ export default function StandaloneRow(){
     const onRowDidClose = rowKey =>{
         setLog7('滑动行动画处于已关闭时调用')
     }
-    const [log5,setLog5] = useState('')
-    const onPreviewEnd= rowKey =>{
-        setLog5('行预览完之后的回调')
-    }
 
     const [log6,setLog6] = useState('')
     const shouldItemUpdate= rowKey =>{
@@ -42,7 +38,7 @@ export default function StandaloneRow(){
                 <Text onPress={empty7} style={styles.empty}>清空日志</Text>
               
 
-                <Text>onPreviewEnd:<Text style={[{color:'blue'}]}>{log5}</Text></Text>
+            
                 <SwipeListView data={listViewData}
                 renderItem={(data,rowMap)=>(
                     <View style={styles.rowFront}><Text>I am {data.item.text} in a SwipeListView</Text></View>
@@ -52,8 +48,6 @@ export default function StandaloneRow(){
                 )}
                 leftOpenValue={75}
                 rightOpenValue={-75}
-                onPreviewEnd={onPreviewEnd}
-             
                 stopLeftSwipe={10} 
                 stopRightSwipe={-10} 
                 swipeToClosePercent={10}
