@@ -41,7 +41,7 @@ const CanvasDemo = () => {
 
       //绘制图片
       const image = new CanvasImage(canvas);
-      image.src = 'https://t7.baidu.com/it/u=1819248061,230866778&fm=193&f=GIF';
+      image.src = 'https://upload.wikimedia.org/wikipedia/commons/6/63/Biho_Takashi._Bat_Before_the_Moon%2C_ca._1910.jpg';
       image.addEventListener('load', () => {
         context.drawImage(image, 10, 250, 100, 100);
       });
