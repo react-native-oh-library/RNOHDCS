@@ -33,9 +33,8 @@ const PullViewDemo = () => {
         //do something
         testObj.pullrelease='pullrelease--------->'
         setData(testObj)
-        let timeoutId = setTimeout(function () => {
+        setTimeout(() => {
           resolve();
-          clearTimeout(timeoutId); // 清除定时器
         }, 3000);
     };
     const onPushing = (gesturePosition) => {
@@ -72,13 +71,13 @@ const PullViewDemo = () => {
               topIndicatorHeight={60}>
 			<View style={{backgroundColor: '#eeeeee'}}>
 			    <Text>1***************</Text>
-                <Text>onPulling:{testObj.pulling}</Text>
+                <Text>onPulling:{data.pulling}</Text>
                 <Text>3</Text>
-                <Text>onPullOk:{testObj.pullok}</Text>
+                <Text>onPullOk:{data.pullok}</Text>
                 <Text>5</Text>
-                <Text>onPullRelease:{testObj.pullrelease}</Text>
+                <Text>onPullRelease:{data.pullrelease}</Text>
                 <Text>7</Text>
-                <Text>onPushing:{testObj.pushing}</Text>
+                <Text>onPushing:{data.pushing}</Text>
                 <Text>9</Text>
                 <Text>10</Text>
                 <Text>11</Text>
