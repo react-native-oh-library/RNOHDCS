@@ -12,9 +12,9 @@ export default () => {
         <View style={{ height: 400 }}>
             <Text>contentProps</Text>
             <View>
-                <Text>contentContainerStyle:{JSON.stringify(contentContainerStyle)}</Text>
+                <Text>contentContainerStyle:{JSON.stringify(style)}</Text>
             </View>
-            <View>
+            <View style={{ alignItems: 'center' }}>
                 <Button
                     title='Style1'
                     onPress={() => {

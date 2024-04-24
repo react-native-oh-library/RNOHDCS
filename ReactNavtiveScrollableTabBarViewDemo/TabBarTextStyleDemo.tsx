@@ -9,7 +9,7 @@ export default () => {
     return (
         <View>
             <Text>tabBarTextStyle</Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{ alignItems: 'center' }}>
                 <Text>tabBarTextStyle:{JSON.stringify(tabBarTextStyle)}</Text>
                 <Button
                     title='tabBarTextStyle1'
