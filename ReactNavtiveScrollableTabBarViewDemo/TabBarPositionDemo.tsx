@@ -9,7 +9,7 @@ export default () => {
     return (
         <View>
             <Text>tabBarPosition</Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{ alignItems: 'center' }}>
                 <Text>tabBarPosition:{tabBarPosition}</Text>
                 <Button
                     title='top'

@@ -9,7 +9,7 @@ export default () => {
     return (
         <View>
             <Text>tabBarInactiveTextColor</Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{ alignItems: 'center' }}>
                 <Text>tabBarInactiveTextColor:{tabBarInActiveTextColor}</Text>
                 <Button
                     title='tabBarInactiveTextColor1'

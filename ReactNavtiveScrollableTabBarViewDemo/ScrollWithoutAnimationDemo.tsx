@@ -9,7 +9,7 @@ export default () => {
     return (
         <View>
             <Text>scrollWithoutAnimation</Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{ alignItems: 'center' }}>
                 <Text>scrollWithoutAnimation:{scrollWithoutAnimation}</Text>
                 <Button
                     title='scrollWithoutAnimation'

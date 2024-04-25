@@ -9,7 +9,7 @@ export default () => {
     return (
         <View>
             <Text>tabBarUnderlineStyle</Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{ alignItems: 'center' }}>
                 <Text>tabBarUnderlineStyle:{JSON.stringify(tabBarUnderlineStyle)}</Text>
                 <Button
                     title='tabBarUnderlineStyle1'

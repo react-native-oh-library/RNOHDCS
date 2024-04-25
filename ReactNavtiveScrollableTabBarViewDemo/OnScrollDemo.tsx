@@ -9,7 +9,7 @@ export default () => {
     return (
         <View>
             <Text>onScroll</Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{ alignItems: 'center' }}>
                 <Text>scrollPosition:{tabBarScrollPosition}</Text>
             </View>
             <View style={{ height: 150 }}>

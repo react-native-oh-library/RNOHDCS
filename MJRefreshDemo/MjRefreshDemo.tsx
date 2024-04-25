@@ -10,7 +10,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import { MJRefreshControl } from 'react-native-mjrefresh'
+import { MJRefreshControl } from '@react-native-oh-tpl/react-native-mjrefresh'
 
 export const MjRefreshDemo = () => {
 

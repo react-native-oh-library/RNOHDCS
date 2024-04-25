@@ -11,7 +11,7 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 
 export default function Basic() {
     const [listData] = useState(
-        Array(20)
+        Array(5)
             .fill('')
             .map((_, i) => ({ key: `${i}`, text: `item #${i}` }))
     );
@@ -19,12 +19,6 @@ export default function Basic() {
 
     const onRowDidOpen = (rowKey, rowMap) => {
         openRowRef.current = rowMap[rowKey];
-    };
-
-    const closeOpenRow = () => {
-        if (openRowRef.current && openRowRef.current.closeRow) {
-            openRowRef.current.closeRow();
-        }
     };
 
     const renderItem = data => (
@@ -59,14 +53,8 @@ export default function Basic() {
                 renderHiddenItem={renderHiddenItem}
                 leftOpenValue={75}
                 rightOpenValue={-150}
-                previewRowKey={'0'}
-                previewOpenValue={-40}
-                previewOpenDelay={1000}
                 onRowDidOpen={onRowDidOpen}
             />
-            <TouchableOpacity onPress={closeOpenRow} style={styles.closeButton}>
-                <Text>Close Open Row</Text>
-            </TouchableOpacity>
         </View>
     );
 }

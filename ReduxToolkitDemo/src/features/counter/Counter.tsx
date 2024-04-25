@@ -233,6 +233,9 @@ export function Counter() {
         <Text>Other Exports</Text>
       </View>
       <View style={styles.row}>
+        <Text style={styles.buttonText}>{otherText}</Text>
+      </View>
+      <View style={styles.row}>
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
@@ -250,9 +253,6 @@ export function Counter() {
           <Text style={styles.buttonText2}>miniSerializeError</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.row}>
-        <Text style={styles.buttonText}>{otherText}</Text>
-      </View>
     </View>
   );
 }
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexWrap: 'wrap',
-    marginBottom: 10
+    marginBottom: 20
   },
   value: {
     fontSize: 78,

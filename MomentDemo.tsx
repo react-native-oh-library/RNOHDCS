@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Button, Text} from 'react-native';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
-import {ScrollView} from 'react-native-gesture-handler';
+import ScrollView from 'react-native';
 moment.locale('zh-cn');
 
 export function MomentDemo() {

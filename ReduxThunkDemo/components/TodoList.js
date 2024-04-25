@@ -17,7 +17,7 @@ const TodoList = ({todos, onTodoClick}) => {
                         <Todo
                             key={todo.id}
                             onPress={()=>{
-                                Alert.alert('延时3秒后更新...', [{ text: 'OK' }]);
+                                // Alert.alert('延时3秒后更新...', [{ text: 'OK' }]);
                                 onTodoClick(todo.id);
                             } 
                             }

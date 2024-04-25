@@ -143,7 +143,7 @@ const PullListDemo = () => {
                 title: `this is ${i}`,
             })
         }
-        setTimeout(() => {
+       setTimeout(function () => {
           setStateList([...stateList,...list]);
         }, 1000);
     }

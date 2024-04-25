@@ -39,51 +39,12 @@ export default function StandaloneRow(){
             <View style={styles.standalone}>
                 <Text>swipeGestureBegan/swipeGestureEnded:<Text style={[{color:'blue'}]}>{log}</Text></Text>
                 <Text onPress={empty} style={styles.empty}>清空日志</Text>
-                <SwipeListView data={listViewData}
-                renderItem={(data,rowMap)=>(
-                    <View style={styles.rowFront}><Text>I am {data.item.text} in a SwipeListView</Text></View>
-                )}
-                renderHiddenItem={(data,rowMap)=>(
-                    <View style={styles.rowBack}><Text>Left</Text><Text>Right</Text></View>
-                )}
-                leftOpenValue={75}
-                rightOpenValue={-75}
-                swipeGestureBegan={swipeGestureBegan}
-                swipeGestureEnded={swipeGestureEnded}
-                useNativeDriver={false}>
-                </SwipeListView>
+               
                 <Text>onScrollEnabled:<Text style={[{color:'blue'}]}>{log2}</Text></Text>
                 <Text onPress={empty2} style={styles.empty}>清空日志</Text>
-                <SwipeListView data={listViewData}
-                renderItem={(data,rowMap)=>(
-                    <View style={styles.rowFront}><Text>I am {data.item.text} in a SwipeListView</Text></View>
-                )}
-                renderHiddenItem={(data,rowMap)=>(
-                    <View style={styles.rowBack}><Text>Left</Text><Text>Right</Text></View>
-                )}
-                leftOpenValue={75}
-                rightOpenValue={-75}
-                previewRowKey={'0'}
-                previewOpenValue={-40}
-                previewOpenDelay={1000}
-                onScrollEnabled={onScrollEnabled}
-                useNativeDriver={false}
-                >
-                </SwipeListView>
+                
                 <Text>onRowOpen:<Text style={[{color:'blue'}]}>{log3}</Text></Text>
                 <Text onPress={empty3} style={styles.empty}>清空日志</Text>
-                <SwipeListView data={listViewData}
-                renderItem={(data,rowMap)=>(
-                    <View style={styles.rowFront}><Text>I am {data.item.text} in a SwipeListView</Text></View>
-                )}
-                renderHiddenItem={(data,rowMap)=>(
-                    <View style={styles.rowBack}><Text>Left</Text><Text>Right</Text></View>
-                )}
-                leftOpenValue={75}
-                rightOpenValue={-75}
-                onRowOpen={onRowOpen}
-                useNativeDriver={false}>
-                </SwipeListView>
 
                 <Text>listViewRef:<Text style={[{color:'blue'}]}>{log4}</Text></Text>
                 <SwipeListView data={listViewData}
@@ -96,6 +57,10 @@ export default function StandaloneRow(){
                 leftOpenValue={75}
                 rightOpenValue={-75}
                 listViewRef={listViewRef}
+                swipeGestureBegan={swipeGestureBegan}
+                swipeGestureEnded={swipeGestureEnded}
+                onScrollEnabled={onScrollEnabled}
+                onRowOpen={onRowOpen}
                 disableRightSwipe>
                 </SwipeListView>
             </View>

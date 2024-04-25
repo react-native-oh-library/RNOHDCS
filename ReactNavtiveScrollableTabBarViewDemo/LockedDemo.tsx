@@ -9,7 +9,7 @@ export default () => {
     return (
         <View>
             <Text>locked</Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{ alignItems: 'center' }}>
                 <Text>Locked:{isLocked}</Text>
                 <Button
                     title='islocked'

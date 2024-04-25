@@ -32,7 +32,7 @@ let AddTodo = ({ dispatch }) => {
             </TouchableOpacity>
             <TouchableOpacity style={styles.btn}
                 onPress={() => {
-                    Alert.alert('延时3秒后添加...', [{ text: 'OK' }]);
+                    // Alert.alert('延时3秒后添加...', [{ text: 'OK' }]);
                     dispatch(addTodoasync(input))
                 }}
             >

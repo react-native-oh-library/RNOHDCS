@@ -11,9 +11,9 @@ const AxiosDemo = () => {
   let requestUrl = {
     baseUrl: 'http://139.9.199.99:3000', // 基础请求地址
     getUrl: 'http://139.9.199.99:3000/tpc/get', // get请求地址
+    putUrl: 'http://139.9.199.99:3000/tpc/put',// put请求地址
     postUrl: 'http://139.9.199.99:3000/tpc/post', // post请求地址
     deleteUrl: 'https://mock.presstime.cn/mock/65dd9694a07c65d1ba49b371/example/http:/139.9.199.99:3000/tpc/delete',// delete请求地址
-    putUrl: 'https://mock.presstime.cn/mock/65dd9694a07c65d1ba49b371/example/http:/139.9.199.99:3000/tpc/put',// put请求地址
     patchUrl: 'https://jsonplaceholder.typicode.com/posts/1',// patch请求地址
     optionsUrl: 'https://orange0422.free.beeceptor.com/options', //options请求地址
     errorUrl: 'https://mock.presstime.cn/mock/65dd9694a07c65d1ba49b371/example/patch',// error请求地址
@@ -31,7 +31,7 @@ const AxiosDemo = () => {
     })
     .then(res => {
       setRequestStatus('Status:200');
-      setRequestResult('Data:Request请求成功！' + '\n' + JSON.stringify(res.data[0].briefDesc));
+      setRequestResult('Data:Request请求成功！' + '\n' + JSON.stringify(res.data));
     })
     .catch(error => {
       setRequestStatus('');
@@ -45,7 +45,7 @@ const AxiosDemo = () => {
     axios.get(requestUrl.getUrl)
     .then(res => {
       setRequestStatus('Status:200');
-      setRequestResult('Data:Get请求成功！' + '\n' + JSON.stringify(res.data[0].briefDesc));
+      setRequestResult('Data:Get请求成功！' + '\n' + JSON.stringify(res.data));
     })
     .catch(error => {
       setRequestStatus('');
@@ -59,7 +59,7 @@ const AxiosDemo = () => {
     axios.post(requestUrl.postUrl,{id: 591})
     .then(res => {
       setRequestStatus('Status:200');
-      setRequestResult('Data:Post请求成功！' + '\n' + JSON.stringify(res.data[0].briefDesc));
+      setRequestResult('Data:Post请求成功！' + '\n' + JSON.stringify(res.data));
     })
     .catch(error => {
       setRequestStatus('');
@@ -112,7 +112,7 @@ const AxiosDemo = () => {
 
   const aliasesPutRequet = () => {
     Clearcontents();
-    axios.get(requestUrl.putUrl)
+    axios.put(requestUrl.putUrl,{id: 590})
     .then(res => {
       setRequestStatus('Status:200');
       setRequestResult('Data:Put请求成功！' + '\n' + JSON.stringify(res.data));
@@ -148,7 +148,7 @@ const AxiosDemo = () => {
     })
     .then(res => {
       setRequestStatus('Status:200');
-      setRequestResult('Data:Request请求成功！' + '\n' + JSON.stringify(res.data[0].briefDesc));
+      setRequestResult('Data:Request请求成功！' + '\n' + JSON.stringify(res.data));
     })
     .catch(error => {
       setRequestStatus('');
@@ -162,7 +162,7 @@ const AxiosDemo = () => {
     instance.get(requestUrl.getUrl)
     .then(res => {
       setRequestStatus('Status:200');
-      setRequestResult('Data:Get请求成功！' + '\n' + JSON.stringify(res.data[0].briefDesc));
+      setRequestResult('Data:Get请求成功！' + '\n' + JSON.stringify(res.data));
     })
     .catch(error => {
       setRequestStatus('');
@@ -176,7 +176,7 @@ const AxiosDemo = () => {
     instance.post(requestUrl.postUrl,{id: 591})
     .then(res => {
       setRequestStatus('Status:200');
-      setRequestResult('Data:Post请求成功！' + '\n' + JSON.stringify(res.data[0].briefDesc));
+      setRequestResult('Data:Post请求成功！' + '\n' + JSON.stringify(res.data));
     })
     .catch(error => {
       setRequestStatus('');
@@ -229,7 +229,7 @@ const AxiosDemo = () => {
 
   const instancePutRequet = () => {
     Clearcontents();
-    instance.get(requestUrl.putUrl)
+    instance.put(requestUrl.putUrl,{id: 590})
     .then(res => {
       setRequestStatus('Status:200');
       setRequestResult('Data:Put请求成功！' + '\n' + JSON.stringify(res.data));
@@ -263,7 +263,7 @@ const AxiosDemo = () => {
     })
     .then(res => {
       setRequestStatus('Status:200');
-      setRequestResult('Data:请求成功！' + '\n' + JSON.stringify(res.data[0].briefDesc));
+      setRequestResult('Data:请求成功！' + '\n' + JSON.stringify(res.data));
     })
     .catch(error => {
       setRequestStatus('');
@@ -372,7 +372,7 @@ const AxiosDemo = () => {
     })
     .then(res => {
       setRequestStatus('Status:200');
-      setRequestResult('Data:请求成功！' + '\n' + JSON.stringify(res.data[0].briefDesc));
+      setRequestResult('Data:请求成功！' + '\n' + JSON.stringify(res.data));
     })
     .catch(error => {
       setRequestStatus('');
@@ -437,7 +437,7 @@ const AxiosDemo = () => {
     })
     .then(res => {
       setRequestStatus('Status:200');
-      setRequestResult('Data:请求成功！' + '\n' + JSON.stringify(res.data[0].briefDesc));
+      setRequestResult('Data:请求成功！' + '\n' + JSON.stringify(res.data));
       // 移除拦截器
       axios.interceptors.request.eject(myInterceptor);
     })
@@ -666,7 +666,7 @@ const AxiosDemo = () => {
           <Text style={styles.requestAddressUrl}>{requestAddress}</Text>
         </View>
         <View style={styles.requestResult}>
-          <Text style={styles.requestResultTeaxt}>请求地址：</Text>
+          <Text style={styles.requestResultTeaxt}>请求结果：</Text>
           <Text style={styles.requestResultState}>{requestStatus}{'\n'}{requestResult}</Text>
         </View>
         <View style={styles.requestResult}>
