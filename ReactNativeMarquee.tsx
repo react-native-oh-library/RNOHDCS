@@ -1,9 +1,8 @@
 
 import React, { useRef, useState } from 'react';
-import { Switch, Text, TouchableOpacity, View ,Button,StyleSheet } from 'react-native';
+import { Switch, Text, TouchableOpacity, View ,Button,StyleSheet, SafeAreaView } from 'react-native';
 import type { MarqueeTextHandles } from 'react-native-marquee';
 import MarqueeText, { MarqueeTextProps } from 'react-native-marquee';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 const sampleText = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry';
 
