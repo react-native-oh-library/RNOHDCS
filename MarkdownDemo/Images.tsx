@@ -1,7 +1,7 @@
-import React from 'react';
-import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
+import React from "react";
+import { SafeAreaView, ScrollView, StatusBar } from "react-native";
 
-import Markdown from 'react-native-markdown-display';
+import Markdown from "react-native-markdown-display";
 
 const copy = `  
 ![Minion](https://octodex.github.com/images/minion.png)
@@ -19,15 +19,12 @@ With a reference later in the document defining the URL location:
 const App: () => React$Node = () => {
   return (
     <>
-      
       <SafeAreaView>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
-          style={{height: '100%'}}
+          style={{ height: "100%" }}
         >
-          <Markdown>
-            {copy}
-          </Markdown>
+          <Markdown>{copy}</Markdown>
         </ScrollView>
       </SafeAreaView>
     </>

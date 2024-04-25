@@ -3,6 +3,8 @@ import { SafeAreaView, ScrollView, StatusBar,View, Text , Button} from 'react-na
 
 import Markdown from 'react-native-markdown-display';
 
+const App: () => React$Node = () => {
+  
 const copy = `  
 Headings
 
@@ -152,226 +154,199 @@ Typographic Replacements
   "Smartypants, double quotes" and 'single quotes'
 
 `;
-const rules ={
-  heading1: (node, children, parent, styles) => (
-    <View key={node.key} style={styles._VIEW_SAFE_heading1}>
-        <Text key={node.key}>{children}</Text>
-    </View>
-  ),
-  heading2: (node, children, parent, styles) => (
-    <View key={node.key} style={styles._VIEW_SAFE_heading2}>
-      <Text key={node.key}>{children}</Text>
-    </View>
-  ),
-  heading3: (node, children, parent, styles) => (
-    <View key={node.key} style={styles._VIEW_SAFE_heading3}>
-       <Text key={node.key}>{children}</Text>
-    </View>
-  ),
-  heading4: (node, children, parent, styles) => (
-    <View key={node.key} style={styles._VIEW_SAFE_heading4}>
-       <Text key={node.key}>{children}</Text>
-    </View>
-  ),
-  heading5: (node, children, parent, styles) => (
-    <View key={node.key} style={styles._VIEW_SAFE_heading5}>
-      <Text key={node.key}>{children}</Text>
-    </View>
-  ),
-  heading6: (node, children, parent, styles) => (
-    <View key={node.key} style={styles._VIEW_SAFE_heading6}>
-      <Text key={node.key}>{children}</Text>
-    </View>
-  ),
-
-  // Horizontal Rule
-  hr: (node, children, parent, styles) => (
-    <View key={node.key} style={styles._VIEW_SAFE_hr} />
-  ),
-
-  // Emphasis
-  strong: (node, children, parent, styles) => (
-    <Text key={node.key} style={styles.strong}>
-      >> strong >> "{children}"
-    </Text>
-  ),
-  em: (node, children, parent, styles) => (
-    <Text key={node.key} style={styles.em}>
-       >> em >> "{children}"
-    </Text>
-  ),
-  s: (node, children, parent, styles) => (
-    <Text key={node.key} style={styles.s}>
-      >> s >> "{children}"
-    </Text>
-  ),
-
-  // Blockquotes
-  blockquote: (node, children, parent, styles) => (
-    <View key={node.key} style={styles._VIEW_SAFE_blockquote}>
-      {children}
-    </View>
-  ),
-
-  // Lists
-  bullet_list: (node, children, parent, styles) => (
-    <View key={node.key} style={styles._VIEW_SAFE_bullet_list}>
-      {children}
-    </View>
-  ),
-  ordered_list: (node, children, parent, styles) => (
-    <View key={node.key} style={styles._VIEW_SAFE_ordered_list}>
-      {children}
-    </View>
-  ),
-}
-const rules2 = {
-  code_inline: (node, children, parent, styles, inheritedStyles = {}) => (
-    <Text key={node.key} style={[inheritedStyles, styles.code_inline]}>
-      
-      >> code_inline >> "{node.content}"
-    </Text>
-  ),
-  code_block: (node, children, parent, styles, inheritedStyles = {}) => {
-    // we trim new lines off the end of code blocks because the parser sends an extra one.
-    let {content} = node;
-
-    if (
-      typeof node.content === 'string' &&
-      node.content.charAt(node.content.length - 1) === '\n'
-    ) {
-      content = node.content.substring(0, node.content.length - 1);
-    }
-
-    return (
-      <Text key={node.key} style={[inheritedStyles, styles.code_block]}>
-        >> code_block >> "{content}"
-      </Text>
-    );
-  },
-  fence: (node, children, parent, styles, inheritedStyles = {}) => {
-    // we trim new lines off the end of code blocks because the parser sends an extra one.
-    let {content} = node;
-
-    if (
-      typeof node.content === 'string' &&
-      node.content.charAt(node.content.length - 1) === '\n'
-    ) {
-      content = node.content.substring(0, node.content.length - 1);
-    }
-
-    return (
-      <Text key={node.key} style={[inheritedStyles, styles.fence]}>
-        >> fence >> "{content}"
-      </Text>
-    );
-  },
-
-  // Tables
-  table: (node, children, parent, styles) => (
-    <View key={node.key} style={styles._VIEW_SAFE_table}>
-      {children}
-    </View>
-  ),
-  thead: (node, children, parent, styles) => (
-    <View key={node.key} style={styles._VIEW_SAFE_thead}>
-      {children}
-    </View>
-  ),
-  tbody: (node, children, parent, styles) => (
-    <View key={node.key} style={styles._VIEW_SAFE_tbody}>
-      {children}
-    </View>
-  ),
-  th: (node, children, parent, styles) => (
-    <View key={node.key} style={styles._VIEW_SAFE_th}>
-      {children}
-    </View>
-  ),
-  tr: (node, children, parent, styles) => (
-    <View key={node.key} style={styles._VIEW_SAFE_tr}>
-      {children}
-    </View>
-  ),
-  td: (node, children, parent, styles) => (
-    <View key={node.key} style={styles._VIEW_SAFE_td}>
-      {children}
-    </View>
-  ),
-
-
-  // Text Output
-  text: (node, children, parent, styles, inheritedStyles = {}) => {
-    let isTable = false;
-    parent.forEach((element) => {
-      if (element.type == 'table') {
-        isTable = true;
-      }
-    });
-    return (
-      <View  key={node.key} style={{width: isTable ? ' 100%' : 'auto'}}>
-        <Text key={node.key} style={[inheritedStyles, styles.heading6]}>
-          {node.content}
+const rules = {
+  rule1: {
+    tag:'rule1',
+    rule: {
+      heading1: (node, children, parent, styles) => (
+        <View key={node.key} style={styles._VIEW_SAFE_heading1}>
+            <Text key={node.key}>{children}</Text>
+        </View>
+      ),
+      heading2: (node, children, parent, styles) => (
+        <View key={node.key} style={styles._VIEW_SAFE_heading2}>
+          <Text key={node.key}>{children}</Text>
+        </View>
+      ),
+      heading3: (node, children, parent, styles) => (
+        <View key={node.key} style={styles._VIEW_SAFE_heading3}>
+           <Text key={node.key}>{children}</Text>
+        </View>
+      ),
+      heading4: (node, children, parent, styles) => (
+        <View key={node.key} style={styles._VIEW_SAFE_heading4}>
+           <Text key={node.key}>{children}</Text>
+        </View>
+      ),
+      heading5: (node, children, parent, styles) => (
+        <View key={node.key} style={styles._VIEW_SAFE_heading5}>
+          <Text key={node.key}>{children}</Text>
+        </View>
+      ),
+      heading6: (node, children, parent, styles) => (
+        <View key={node.key} style={styles._VIEW_SAFE_heading6}>
+          <Text key={node.key}>{children}</Text>
+        </View>
+      ),
+      hr: (node, children, parent, styles) => (
+        <View key={node.key} style={styles._VIEW_SAFE_hr} />
+      ),
+    
+      strong: (node, children, parent, styles) => (
+        <Text key={node.key} style={styles.strong}>
+          >> strong >> "{children}"
         </Text>
-      </View>
-    );
+      ),
+      em: (node, children, parent, styles) => (
+        <Text key={node.key} style={styles.em}>
+           >> em >> "{children}"
+        </Text>
+      ),
+      s: (node, children, parent, styles) => (
+        <Text key={node.key} style={styles.s}>
+          >> s >> "{children}"
+        </Text>
+      ),
+    }
   },
-  textgroup: (node, children, parent, styles) => (
-    <Text key={node.key} style={styles.textgroup}>
-      {children}
-    </Text>
-  ),
-  paragraph: (node, children, parent, styles) => (
-    <View key={node.key} style={styles._VIEW_SAFE_paragraph}>
-      {children}
-    </View>
-  ),
-  hardbreak: (node, children, parent, styles) => (
-    <Text key={node.key} style={styles.hardbreak}>
-      {'\n'}
-    </Text>
-  ),
-  softbreak: (node, children, parent, styles) => (
-    <Text key={node.key} style={styles.softbreak}>
-      {'\n'}
-    </Text>
-  ),
-
-  // Believe these are never used but retained for completeness
-  pre: (node, children, parent, styles) => (
-    <View key={node.key} style={styles._VIEW_SAFE_pre}>
-      {children}
-    </View>
-  ),
-  inline: (node, children, parent, styles) => (
-    <Text key={node.key} style={styles.inline}>
-      {children}
-    </Text>
-  ),
-  span: (node, children, parent, styles) => (
-    <Text key={node.key} style={styles.span}>
-      {children}
-    </Text>
-  ),
+  rule2: {
+    tag:'rule2',
+    rule: {
+      code_inline: (node, children, parent, styles, inheritedStyles = {}) => (
+        <Text key={node.key} style={[inheritedStyles, styles.code_inline]}>
+          
+          >> code_inline >> "{node.content}"
+        </Text>
+      ),
+      code_block: (node, children, parent, styles, inheritedStyles = {}) => {
+        let {content} = node;
+    
+        if (
+          typeof node.content === 'string' &&
+          node.content.charAt(node.content.length - 1) === '\n'
+        ) {
+          content = node.content.substring(0, node.content.length - 1);
+        }
+    
+        return (
+          <Text key={node.key} style={[inheritedStyles, styles.code_block]}>
+            >> code_block >> "{content}"
+          </Text>
+        );
+      },
+      fence: (node, children, parent, styles, inheritedStyles = {}) => {
+        let {content} = node;
+    
+        if (
+          typeof node.content === 'string' &&
+          node.content.charAt(node.content.length - 1) === '\n'
+        ) {
+          content = node.content.substring(0, node.content.length - 1);
+        }
+    
+        return (
+          <Text key={node.key} style={[inheritedStyles, styles.fence]}>
+            >> fence >> "{content}"
+          </Text>
+        );
+      },
+    
+      // Tables
+      table: (node, children, parent, styles) => (
+        <View key={node.key} style={styles._VIEW_SAFE_table}>
+          {children}
+        </View>
+      ),
+      thead: (node, children, parent, styles) => (
+        <View key={node.key} style={styles._VIEW_SAFE_thead}>
+          {children}
+        </View>
+      ),
+      tbody: (node, children, parent, styles) => (
+        <View key={node.key} style={styles._VIEW_SAFE_tbody}>
+          {children}
+        </View>
+      ),
+      th: (node, children, parent, styles) => (
+        <View key={node.key} style={styles._VIEW_SAFE_th}>
+          {children}
+        </View>
+      ),
+      tr: (node, children, parent, styles) => (
+        <View key={node.key} style={styles._VIEW_SAFE_tr}>
+          {children}
+        </View>
+      ),
+      td: (node, children, parent, styles) => (
+        <View key={node.key} style={styles._VIEW_SAFE_td}>
+          {children}
+        </View>
+      ),
+    
+      text: (node, children, parent, styles, inheritedStyles = {}) => {
+        return (
+          <Text key={node.key} style={[inheritedStyles, styles.heading6]}>
+            {node.content}
+          </Text>
+        );
+      },
+      textgroup: (node, children, parent, styles) => (
+        <Text key={node.key} style={styles.textgroup}>
+          {children}
+        </Text>
+      ),
+      paragraph: (node, children, parent, styles) => (
+        <View key={node.key} style={styles._VIEW_SAFE_paragraph}>
+          {children}
+        </View>
+      ),
+      hardbreak: (node, children, parent, styles) => (
+        <Text key={node.key} style={styles.hardbreak}>
+          {'\n'}
+        </Text>
+      ),
+      softbreak: (node, children, parent, styles) => (
+        <Text key={node.key} style={styles.softbreak}>
+          {'\n'}
+        </Text>
+      ),
+    
+      pre: (node, children, parent, styles) => (
+        <View key={node.key} style={styles._VIEW_SAFE_pre}>
+          {children}
+        </View>
+      ),
+      inline: (node, children, parent, styles) => (
+        <Text key={node.key} style={styles.inline}>
+          {children}
+        </Text>
+      ),
+      span: (node, children, parent, styles) => (
+        <Text key={node.key} style={styles.span}>
+          {children}
+        </Text>
+      ),
+    }
+  }
 }
-const App: () => React$Node = () => {
-const [newRules, setNewRules] = useState(rules);
+const [newRules, setNewRules] = useState(rules.rule1);
 const changeRules = () =>{
-  setNewRules(rules2)
+  newRules.tag === 'rule1' ? setNewRules(rules.rule2) : setNewRules(rules.rule1)
 }
   return (
     <>
       <SafeAreaView>
+      <Button
+            title = "Change Rules"
+            onPress = {changeRules}
+          />
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={{height: '100%'}}
         >
-          <Button
-            title = "Change Rules"
-            onPress = {changeRules}
-          />
+          
           <Markdown
-           rules={newRules}
+           rules={newRules.rule}
           >
             {copy}
           </Markdown>

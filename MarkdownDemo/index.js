@@ -1,27 +1,26 @@
-import {NavigationContainer, Page} from '../../components';
-import Heading from './Heading';
-import Horizontal from './Horizontal';
-import Emphasis from './Emphasis';
-import Blockquotes from './Blockquotes';
-import Lists from './Lists';
-import Code from './Code';
-import Tables from './Tables';
-import Links from './Links';
-import Images from './Images';
-import BaseImages from './BaseImage'
-import Typographic from './Typographic';
-import Style from './Style';
-import MergeStyle from './MergeStyle';
-import Rules from './Rules';
-import AllRules from './AllRules';
-import OnLinkPress from './OnLinkPress';
-import MarkdownIt from './MarkdownIt';
-import MaxTopLevelChildren from './MaxTopLevelChildren';
-import DebugPrintTree from './DebugPrintTree';
-import PreProcessing from './PreProcessing';
-import DefaultImageHandler from './DefaultImageHandler'
-import Renderer from './Renderer'
-
+import { NavigationContainer, Page } from "../../components";
+import Heading from "./Heading";
+import Horizontal from "./Horizontal";
+import Emphasis from "./Emphasis";
+import Blockquotes from "./Blockquotes";
+import Lists from "./Lists";
+import Code from "./Code";
+import Tables from "./Tables";
+import Links from "./Links";
+import Images from "./Images";
+import BaseImages from "./BaseImage";
+import Typographic from "./Typographic";
+import Style from "./Style";
+import MergeStyle from "./MergeStyle";
+import Rules from "./Rules";
+import AllRules from "./AllRules";
+import OnLinkPress from "./OnLinkPress";
+import MarkdownIt from "./MarkdownIt";
+import MaxTopLevelChildren from "./MaxTopLevelChildren";
+import DebugPrintTree from "./DebugPrintTree";
+import PreProcessing from "./PreProcessing";
+import DefaultImageHandler from "./DefaultImageHandler";
+import Renderer from "./Renderer";
 
 function App() {
   return (
@@ -85,7 +84,7 @@ function App() {
       <Page name="PreProcessing">
         <PreProcessing />
       </Page>
-      
+
       <Page name="MaxTopLevelChildren">
         <MaxTopLevelChildren />
       </Page>
@@ -100,10 +99,7 @@ function App() {
       <Page name="Renderer">
         <Renderer />
       </Page>
-      
     </NavigationContainer>
-
-
   );
 }
 export default App;

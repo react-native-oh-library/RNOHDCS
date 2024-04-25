@@ -1,12 +1,18 @@
-import React,{useState} from 'react';
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Button } from 'react-native';
+import React, { useState } from "react";
+import {
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Button,
+} from "react-native";
 
-import Markdown from 'react-native-markdown-display';
+import Markdown from "react-native-markdown-display";
 
 const styles = StyleSheet.create({
   heading1: {
-    backgroundColor: '#000000',
-    color: '#FFFFFF',
+    backgroundColor: "#000000",
+    color: "#FFFFFF",
   },
   heading2: {
     fontSize: 24,
@@ -22,7 +28,7 @@ const styles = StyleSheet.create({
   },
   heading6: {
     fontSize: 11,
-  }
+  },
 });
 
 const copy = `
@@ -39,27 +45,20 @@ const copy = `
 
 const App: () => React$Node = () => {
   const [flag, setFlag] = useState(false);
-  const pressFN = () =>{
-    flag ? setFlag(false) : setFlag(true)
-  }
+  const pressFN = () => {
+    flag ? setFlag(false) : setFlag(true);
+  };
   return (
     <>
-      
       <SafeAreaView>
+        <Button title={`mergeStyle is ${flag}`} onPress={pressFN} />
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
-          style={{height: '100%'}}
+          style={{ height: "100%" }}
         >
-            <Button
-              title={`mergeStyle is ${flag}`}
-              onPress={pressFN}
-              />
-            <Markdown
-              style={styles}
-              mergeStyle = {flag}
-            >
-              {copy}
-            </Markdown>
+          <Markdown style={styles} mergeStyle={flag}>
+            {copy}
+          </Markdown>
         </ScrollView>
       </SafeAreaView>
     </>

@@ -1,7 +1,7 @@
-import React from 'react';
-import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
+import React from "react";
+import { SafeAreaView, ScrollView, StatusBar } from "react-native";
 
-import Markdown from 'react-native-markdown-display';
+import Markdown from "react-native-markdown-display";
 
 const copy = `  
 Enable typographer option to see result.
@@ -18,15 +18,12 @@ test.. test... test..... test?..... test!....
 const App: () => React$Node = () => {
   return (
     <>
-      
       <SafeAreaView>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
-          style={{height: '100%'}}
+          style={{ height: "100%" }}
         >
-          <Markdown>
-            {copy}
-          </Markdown>
+          <Markdown>{copy}</Markdown>
         </ScrollView>
       </SafeAreaView>
     </>

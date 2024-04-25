@@ -1,9 +1,10 @@
-import React from 'react';
-import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
+import React from "react";
+import { SafeAreaView, ScrollView, StatusBar } from "react-native";
 
-import Markdown from 'react-native-markdown-display';
+import Markdown from "react-native-markdown-display";
 
-const copy = `  
+const App: () => React$Node = () => {
+  const copy = `  
 Inline \`code\`
 
 Indented code
@@ -31,18 +32,14 @@ console.log(foo(5));
 \`\`\`
 `;
 
-const App: () => React$Node = () => {
   return (
     <>
-      
       <SafeAreaView>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
-          style={{height: '100%'}}
+          style={{ height: "100%" }}
         >
-          <Markdown>
-            {copy}
-          </Markdown>
+          <Markdown>{copy}</Markdown>
         </ScrollView>
       </SafeAreaView>
     </>
