@@ -93,6 +93,7 @@ const FlatListTester = () => {
             Scroll to bottom
           </Text>
           <Text
+            style = {styles.text6}
             onPress={() => {
               flatListRef.current?.scrollToIndex({
                 animated: true,
@@ -157,6 +158,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 160,
+  },
+  text6: {
+    marginTop: 20
   }
 });
 

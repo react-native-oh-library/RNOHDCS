@@ -33,7 +33,7 @@ function ScrollViewTester() {
       <View style={styles.suffix} />
       <Text
         onPress={() => {
-          scrollViewRef.current?.scrollTo(0);
+          scrollViewRef.current?.scrollTo({x: 1, y: 1, animated: true});
         }}
       >
         Scroll to top

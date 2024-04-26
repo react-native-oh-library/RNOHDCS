@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  AppRegistry,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -53,11 +52,14 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginLeft: 20,
+    marginRight: 20
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    marginTop: 50
   },
   tab: {
     paddingHorizontal: 16,
@@ -74,4 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('ReactNativeIntersectionObserver', () => App);
+export default App;
