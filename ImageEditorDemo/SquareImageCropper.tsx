@@ -76,7 +76,7 @@ export class SquareImageCropper extends Component<Props, State> {
     }
 
     return (
-      <>
+      <SafeAreaView style={styles.containerPadding}>
         <View style={styles.viewRow}>
           <Button title="demo1" onPress={()=>this.demoChange('demo1')} />
           <Button title="demo2" onPress={()=>this.demoChange('demo2')} />
@@ -87,7 +87,7 @@ export class SquareImageCropper extends Component<Props, State> {
         {
           this.state.demoType === 'demo2' ? this._renderFullDemo() : ''
         }
-      </>
+      </SafeAreaView>
     )
   }
 
@@ -95,11 +95,11 @@ export class SquareImageCropper extends Component<Props, State> {
     const { photo, cropError, measuredSize } = this.state;
 
     if (!photo) {
-      return <SafeAreaView style={styles.container} />;
+      return <View style={styles.container} />;
     }
 
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <Text style={styles.text} testID="headerText">
           Drag the image within the square to crop
         </Text>
@@ -119,13 +119,13 @@ export class SquareImageCropper extends Component<Props, State> {
           </View>
         </TouchableHighlight>
         <Text style={styles.errorText}>{cropError?.message}</Text>
-      </SafeAreaView>
+      </View>
     );
   }
 
   _renderCroppedImage() {
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <Text style={styles.text}>Here is the cropped image</Text>
         <Image
           accessibilityIgnoresInvertColors
@@ -142,15 +142,15 @@ export class SquareImageCropper extends Component<Props, State> {
           </View>
         </TouchableHighlight>
         <Text style={styles.errorText} />
-      </SafeAreaView>
+      </View>
     );
   }
 
   _renderFullDemo() {
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <ImageCropperFull />
-      </SafeAreaView>
+      </View>
     )
   }
 
@@ -183,6 +183,10 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
+  },
+  containerPadding: {
+    flex: 1,
+    paddingTop: 50,
   },
   container: {
     flex: 1,
