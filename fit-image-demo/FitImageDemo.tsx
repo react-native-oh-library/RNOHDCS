@@ -58,6 +58,7 @@ const FitImageDemo=()=>{
         <SafeAreaView>
             <ScrollView>
                 {/* button刷新按钮方便压力测试 */}
+                <View style={{marginTop:50}}></View>
                 <Button onPress={()=>{reLoadFun()}} title='刷新'></Button>
                 {refLoadData&&(
                     <View style={{width:'100%',height:'100%'}}>
