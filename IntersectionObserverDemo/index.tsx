@@ -52,8 +52,6 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginLeft: 20,
-    marginRight: 20
   },
   header: {
     flexDirection: 'row',
@@ -73,6 +71,8 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
+    marginLeft: 20,
+    marginRight: 20
   },
 });
 
