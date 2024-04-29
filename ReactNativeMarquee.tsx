@@ -99,7 +99,7 @@ const HomeScreen = () => {
         <View style={styles.buttonContainer}>
 
           <Button
-            onPress={() => {marqueeRef.current?.start(); (false)}}
+            onPress={() => {marqueeRef.current?.start(); setOnMarquee(false)}}
             title="Start"
           />
 
