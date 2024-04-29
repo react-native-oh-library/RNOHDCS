@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, StyleSheet, Text, View } from "react-native"
-import { useRunInJS, useSharedValue, useWorklet } from "react-native-worklets-core";
+import { useRunOnJS, useSharedValue, useWorklet } from "react-native-worklets-core";
 
 const App = () => {
     const [timeStr, setTimeStr] = useState<Number>(0); // 时间戳
@@ -43,7 +43,7 @@ const App = () => {
     // 计数器
     const [count, setCount] = useState(0);
     // 定义一个useRunJS方法
-    const setCountRunInJS = useRunInJS(() => {
+    const setCountRunInJS = useRunOnJS(() => {
         setCount(Math.random());
     }, [count])
     // 在worklets线程使用RunInJS方法
@@ -77,8 +77,8 @@ const App = () => {
             <Text>{runMsg.value}</Text>
 
             <View style={styles.dividing} />
-            <Text style={{ fontWeight: 'bold', fontSize: 20, marginBottom: 10 }}>useRunInJS</Text>
-            <Text style={{ marginBottom: 10 }}>点击以下按钮更新随机数字，是在worklets线程中使用 useRunInJS 的形式更新，注意在useRunInJS中依旧无法使用js线程的变量：</Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 20, marginBottom: 10 }}>useRunOnJS</Text>
+            <Text style={{ marginBottom: 10 }}>点击以下按钮更新随机数字，是在worklets线程中使用 useRunOnJS 的形式更新，注意在useRunOnJS中依旧无法使用js线程的变量：</Text>
             <View style={{ flexDirection: 'row', gap: 10 }}>
                 <Button title="SetCount" onPress={() => countInWorkLet()} />
             </View>

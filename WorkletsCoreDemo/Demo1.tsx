@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Button, Text, View } from "react-native"
-import { useRunInJS, useWorklet } from "react-native-worklets-core";
+import { useRunOnJS, useWorklet } from "react-native-worklets-core";
 
 const App = () => {
     // 计数器
     const [count, setCount] = useState(0);
     // 定义一个useRunJS方法
-    const setCountRunInJS = useRunInJS(() => {
+    const setCountRunInJS = useRunOnJS(() => {
         setCount(Math.random());
     }, [count])
     // 在worklets线程使用RunInJS方法
