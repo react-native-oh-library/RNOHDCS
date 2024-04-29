@@ -43,7 +43,7 @@ const PopoverDemo = () => {
               isVisible = {showPopoverB}
               mode = {PopoverMode.RN_MODAL}
               offset = {10}
-              placement= {PopoverPlacement.Top}
+              placement= {PopoverPlacement.TOP}
               popoverShift= {{x:1}}
               popoverStyle= {{backgroundColor: '#f00'}}
               backgroundStyle= {{backgroundColor: '#00f'}}
@@ -70,7 +70,6 @@ const PopoverDemo = () => {
               debug = {true}
               displayArea = {new Rect(50,50,50,50)}
               displayAreaInsets = {{top:20}}
-              statusBarTranslucent = {true}
               verticalOffset = {20}
               onOpenStart = {() => {setOnOpenStart(222)}}
               onOpenComplete= {() => {setOnOpenComplete(222)}}
