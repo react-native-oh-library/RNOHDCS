@@ -2,25 +2,11 @@
 import React from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import Vconsole from '@kafudev/react-native-vconsole';
-import {TestSuite,Tester} from '@rnoh/testerino';
-import {TestCase} from '../../components';
 
 const SEVERITIES = ['Log', 'Info', 'Warn', 'Error', 'All'] as const;
 
 export const ConsoleTest = () => {
   return (
-    // <Tester>
-    // <TestSuite name="Vconsole">
-    //   {/* {SEVERITIES.map((severity, idx) => ( */}
-    //     <TestCase.Example key={1} itShould={`log message to console (1)`}>
-    //       <View style={styles.container1}>
-    //       <PropsType />
-    //     </View>
-    //     </TestCase.Example>
-    //   {/* ))} */}
-    // </TestSuite>
-    // </Tester>
-    
     <View style={styles.container}>
       <PropsType />
       <Log />
