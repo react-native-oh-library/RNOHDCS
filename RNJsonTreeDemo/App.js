@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {ScrollView, Text} from 'react-native';
 import JSONTree from 'react-native-json-tree';
 import {Tester, TestSuite} from '@rnoh/testerino';
-import {TestCase} from '../../components';
+import {TestCase} from './TestCase';
 
 const App = () => {
   return (
