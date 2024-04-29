@@ -1,5 +1,6 @@
 import React from 'react';
-import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
+import { Tester, TestSuite } from '@rnoh/testerino';
+import { TestCase } from './TestCase';
 import { View, Dimensions, Text, Image, StyleSheet, Button, ScrollView } from 'react-native';
 import { MarqueeHorizontal, MarqueeVertical } from 'react-native-marquee-ab';
 //整个屏幕的宽度(由于宽度只能使用数值所以如果想要宽度满屏的话需要获取到宽度再赋值给width)
