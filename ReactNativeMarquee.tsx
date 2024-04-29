@@ -48,7 +48,7 @@ const HomeScreen = () => {
       <View>
         <Text style={styles.label}>Options</Text>
         <View style={styles.itemContainer}>
-          <Text style={style.itemText}>onMarqueeComplete{onMarquee ? '已调用':'初始化'}</Text>
+          <Text style={styles.itemText}>onMarqueeComplete{onMarquee ? '已调用':'初始化'}</Text>
         </View>
         <View style={styles.itemContainer}>
           <Text style={styles.itemText}>Marquee on start</Text>
