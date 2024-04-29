@@ -9,7 +9,6 @@ export * from './useRequest/basic/BasicRefresh';
 export * from './useRequest/cache/CacheCacheKey';
 export * from './useRequest/cache/CacheClearCache';
 export * from './useRequest/cache/CacheParams';
-export * from './useRequest/cache/CacheSetCache';
 export * from './useRequest/cache/CacheShare';
 export * from './useRequest/cache/CacheStaleTime';
 export * from './useRequest/debounce/DebounceDebounce';
