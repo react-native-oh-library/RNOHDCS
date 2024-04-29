@@ -43,7 +43,7 @@ export function WebSocket1(){
       </View>
       {/* connect */}
       <Button title={readyState === ReadyState.Connecting ? 'connecting' : '📞 connect'} onPress={() => connect && connect()} disabled={readyState === ReadyState.Open}/>
-      <View style={{ marginTop: 8 }}>readyState: {readyState}</View>
+      <View style={{ marginTop: 8 }}><Text>readyState: {readyState}</Text></View>
       <View style={{ marginTop: 8 }}>
         <Text>received message: </Text>
         {messageHistory.current.map((message, index) => (

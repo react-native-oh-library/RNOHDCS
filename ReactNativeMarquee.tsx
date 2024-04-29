@@ -7,6 +7,10 @@ import MarqueeText, { MarqueeTextProps } from 'react-native-marquee';
 const sampleText = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry';
 
 const HomeScreen = () => {
+  const [onMarquee, setOnMarquee] = useState(false)
+  const onMarqueeCompletes = () => {
+    return true
+  };
   const [config, setConfig] = useState<Partial<MarqueeTextProps>>({
     marqueeOnStart: true,
     speed: 1,
@@ -35,16 +39,17 @@ const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.label}>Marquee Text Sample</Text>
-
       <View style={styles.marqueeWrapper}>
-        <MarqueeText key={JSON.stringify(config)} ref={marqueeRef} style={styles.text} {...config}>
+        <MarqueeText key={JSON.stringify(config)} ref={marqueeRef} style={styles.text} {...config} onMarqueeComplete={onMarqueeCompletes()}>
           {sampleText}
         </MarqueeText>
       </View>
 
       <View>
         <Text style={styles.label}>Options</Text>
-
+        <View style={styles.itemContainer}>
+          <Text style={styles.itemText}>onMarqueeComplete{onMarquee ? '已调用':'初始化'}</Text>
+        </View>
         <View style={styles.itemContainer}>
           <Text style={styles.itemText}>Marquee on start</Text>
           <Switch
@@ -94,12 +99,12 @@ const HomeScreen = () => {
         <View style={styles.buttonContainer}>
 
           <Button
-            onPress={() => marqueeRef.current?.start()}
+            onPress={() => {marqueeRef.current?.start(); setOnMarquee(false)}}
             title="Start"
           />
 
           <Button
-            onPress={() => marqueeRef.current?.stop()}
+            onPress={() => {marqueeRef.current?.stop(); setOnMarquee(true)}}
             title="Stop"
           />
         </View>

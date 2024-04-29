@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { InView, IOFlatList, type IOFlatListController } from 'react-native-intersection-observer';
 
@@ -45,15 +45,15 @@ const DATA = [
   },
 ];
 
-type ItemProps = { id: number; title: string };
+type ItemProps = { id: number; title: string, onValueChange: any };
 
-const Item = ({ id, title }: ItemProps) =>
+const Item = ({ id, title , onValueChange}: ItemProps) =>
   id === 6 ? (
     <InView
       style={styles.myInView}
       triggerOnce={false}
       onChange={(inView) => {
-        console.warn(inView);
+        onValueChange(inView)
       }}
     >
       <Text style={styles.title}>{title}</Text>
@@ -77,48 +77,58 @@ const Item = ({ id, title }: ItemProps) =>
 
 const FlatListTester = () => {
   const flatListRef = useRef<IOFlatListController>(null);
+  const [inViewVal, setValue] = useState(false);
+  const handleChildValue =(childValue) =>{
+    setValue(childValue)
+  }
   return (
-    <IOFlatList
-      style = {styles.myIOFlatList}
-      ref={flatListRef}
-      rootMargin={{ top: 20, bottom: 20 }}
-      data={DATA}
-      ListHeaderComponent={
-        <View>
+    <View>
+      <Text>目标元素是否进入： {'' + inViewVal }</Text>
+
+      <IOFlatList
+        style = {styles.myIOFlatList}
+        ref={flatListRef}
+        rootMargin={{ top: 20, bottom: 20 }}
+        data={DATA}
+        ListHeaderComponent={
+          <View>
+            <Text
+              onPress={() => {
+                flatListRef.current?.scrollToEnd();
+              }}
+            >
+              Scroll to bottom
+            </Text>
+            <Text
+              style = {styles.text6}
+              onPress={() => {
+                flatListRef.current?.scrollToIndex({
+                  animated: true,
+                  index: 5,
+                });
+              }}
+            >
+              Scroll to 6
+            </Text>
+          </View>
+        }
+        ListFooterComponent={
           <Text
+            style = {styles.contant}
             onPress={() => {
-              flatListRef.current?.scrollToEnd();
-            }}
-          >
-            Scroll to bottom
-          </Text>
-          <Text
-            onPress={() => {
-              flatListRef.current?.scrollToIndex({
-                animated: true,
-                index: 5,
-              });
-            }}
-          >
-            Scroll to 6
-          </Text>
-        </View>
-      }
-      ListFooterComponent={
-        <Text
-          onPress={() => {
             flatListRef.current?.scrollToOffset({
               animated: true,
               offset: 0,
             });
           }}
-        >
-          Scroll to bottom
-        </Text>
-      }
-      renderItem={({ item }) => <Item id={item.id} title={item.title} />}
-      keyExtractor={(item) => String(item.id)}
-    />
+          >
+            Scroll to top
+          </Text>
+        }
+        renderItem={({ item }) => <Item id={item.id} title={item.title} onValueChange= {handleChildValue} />}
+        keyExtractor={(item) => String(item.id)}
+      />
+    </View>
   );
 };
 
@@ -147,6 +157,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'black',
     borderStyle: 'solid',
+    marginBottom: 50
   },
   item20: {
     height:20,
@@ -157,6 +168,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 160,
+  },
+  text6: {
+    marginTop: 20
+  },
+  contant: {
+    height: 30,
   }
 });
 

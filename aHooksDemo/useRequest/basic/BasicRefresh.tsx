@@ -29,7 +29,7 @@ export function BasicRefresh() {
   }, []);
 
   if (loading) {
-    return <View>loading...</View>;
+    return <View><Text>loading...</Text></View>;
   }
   return (
     <View>

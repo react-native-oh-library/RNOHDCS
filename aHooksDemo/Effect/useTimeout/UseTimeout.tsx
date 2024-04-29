@@ -16,5 +16,5 @@ export function UseTimeout() {
     setState(state + 1);
   }, 3000);
 
-  return <View>{state}</View>;
+  return <View><Text>{state}</Text></View>;
 };

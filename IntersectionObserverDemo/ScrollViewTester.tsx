@@ -1,11 +1,14 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { InView, IOScrollView, IOScrollViewController } from 'react-native-intersection-observer';
 
 function ScrollViewTester() {
   const scrollViewRef = useRef<IOScrollViewController>(null);
+  const [inViewVal, setValue] = useState(false);
   return (
-    <IOScrollView ref={scrollViewRef} rootMargin={{ top: 0, bottom: 0 }}>
+    <View>
+      <Text>目标元素是否进入： {'' + inViewVal }</Text>
+      <IOScrollView style={styles.myIOScrollView} ref={scrollViewRef} rootMargin={{ top: 0, bottom: 0 }}>
       <Text
         onPress={() => {
           scrollViewRef.current?.scrollToEnd();
@@ -19,7 +22,7 @@ function ScrollViewTester() {
         as= {Text}
         triggerOnce={true}
         onChange={(inView) => {
-          console.warn(inView);
+          setValue(inView)
         }}
       >
         <Text
@@ -33,12 +36,14 @@ function ScrollViewTester() {
       <View style={styles.suffix} />
       <Text
         onPress={() => {
-          scrollViewRef.current?.scrollTo(0);
+          scrollViewRef.current?.scrollTo({x: 1, y: 1, animated: true});
         }}
       >
         Scroll to top
       </Text>
-    </IOScrollView>
+      </IOScrollView>
+    </View>
+    
   );
 }
 
@@ -53,6 +58,9 @@ const styles = StyleSheet.create({
   suffix: {
     height: 1000,
   },
+  myIOScrollView: {
+    marginBottom: 50
+  }
 });
 
 export default ScrollViewTester;
