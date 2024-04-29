@@ -1,6 +1,6 @@
 import {TestSuite} from '@rnoh/testerino';
 import React, {createRef} from 'react';
-import {TestCase} from '../../components';
+import {TestCase} from './testCase';
 import {StyleSheet, Text, View, Image, Dimensions, ViewStyle, ViewProps} from 'react-native';
 import HeaderImageScrollView, {
   TriggeringView,
