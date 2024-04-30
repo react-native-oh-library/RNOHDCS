@@ -31,7 +31,7 @@ export default () => {
             </View>
             <View style={{ height: 150 }}>
                 <Text>ScrollableTabBar</Text>
-                <ScrollableTabView renderTabBar={() => { ScrollableTabBar() }}>
+                <ScrollableTabView renderTabBar={() => <ScrollableTabBar />}>
                     <View tabLabel="Tab #101">
                         <Text>111111111111111111111111111</Text>
                     </View>
