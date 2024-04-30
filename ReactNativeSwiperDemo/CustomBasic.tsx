@@ -33,7 +33,7 @@ var styles = {
 }
 
 export default () => (
-  <View style={{flex:1, backgroundColor: 'gray'}}>
+  <View style={{flex:1, width:200}}>
       <Swiper
         style={{flex:0,backgroundColor: 'yellow'}}
         showsButtons

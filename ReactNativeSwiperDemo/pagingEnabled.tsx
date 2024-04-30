@@ -32,7 +32,7 @@ var styles = {
 export default () => {
 const [enable, setEnable] = useState(11111)
  return(
-  <Swiper style={styles.wrapper} showsButtons loop={false}
+  <Swiper style={styles.wrapper} showsButtons={false} loop={false}
   pagingEnabled={false}
    showsHorizontalScrollIndicator={true}
   >
