@@ -40,11 +40,8 @@ const architecture = [
 
 
 const ImageList = ({ images, shift = 0, onPress }: Props) => (
-  <ScrollView
-    horizontal
+  <View
     style={styles1.root}
-    contentOffset={{ x: shift * IMAGE_WIDTH, y: 0 }}
-    contentContainerStyle={styles1.container}
   >
     {images.map((imageUrl, index) => (
       <TouchableOpacity
@@ -56,7 +53,7 @@ const ImageList = ({ images, shift = 0, onPress }: Props) => (
         <Image source={{ uri: imageUrl }} style={styles1.image} />
       </TouchableOpacity>
     ))}
-  </ScrollView>
+  </View>
 );
 
 const styles1 = StyleSheet.create({
