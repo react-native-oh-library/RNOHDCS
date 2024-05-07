@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import ReactNativeBlobUtil from 'react-native-blob-util';
 import { TestSuite, Tester } from '@rnoh/testerino';
-import { TestCase } from '../components';
+import { TestCase } from '../../components';
 
 const FILE_PATH = ReactNativeBlobUtil.fs.dirs.CacheDir;
 
@@ -17,7 +17,7 @@ export function writeStream() {
 						itShould="write stream to a file."	
 						fn={async ({ expect }) => {
 							let stream = await ReactNativeBlobUtil.fs.writeStream(FILE_PATH + '/create_file_stream.txt', 'utf8')
-						expect(stream.id).to.match(/^[0-9|a-z|-]*$/)
+							expect(stream.id).to.match(/^[0-9|a-z|-]*$/)
 						}}
 					/>
 				</TestSuite>

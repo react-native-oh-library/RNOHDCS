@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import ReactNativeBlobUtil from 'react-native-blob-util';
 import { TestSuite, Tester } from '@rnoh/testerino';
-import { TestCase } from '../components';
+import { TestCase } from '../../components';
 
 const FILE_PATH = ReactNativeBlobUtil.fs.dirs.CacheDir;
 const FILE_PATH1 = ReactNativeBlobUtil.fs.dirs.DocumentDir;
