@@ -15,7 +15,6 @@ import {
     CacheCacheKey,
     CacheClearCache,
     CacheParams,
-    CacheSetCache,
     CacheShare,
     CacheStaleTime,
     CookieState1,
@@ -171,9 +170,6 @@ function Hooks() {
                     </Page>
                     <Page name="TEST:CacheParams">
                         <CacheParams />
-                    </Page>
-                    <Page name="TEST:CacheSetCache">
-                        <CacheSetCache />
                     </Page>
                     <Page name="TEST:CacheShare">
                         <CacheShare />

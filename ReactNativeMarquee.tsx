@@ -7,7 +7,7 @@ import MarqueeText, { MarqueeTextProps } from 'react-native-marquee';
 const sampleText = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry';
 
 const HomeScreen = () => {
-  const [onMarquee, steOnMarquee] = useState(false)
+  const [onMarquee, setOnMarquee] = useState(false)
   const onMarqueeCompletes = () => {
     return true
   };
@@ -39,10 +39,6 @@ const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.label}>Marquee Text Sample</Text>
-      <View style={styles.itemContainer}>
-        <Text style={style.itemText}>onMarqueeComplete{onMarquee ? '已调用':'初始化'}</Text>
-      </View>
-
       <View style={styles.marqueeWrapper}>
         <MarqueeText key={JSON.stringify(config)} ref={marqueeRef} style={styles.text} {...config} onMarqueeComplete={onMarqueeCompletes()}>
           {sampleText}
@@ -51,7 +47,9 @@ const HomeScreen = () => {
 
       <View>
         <Text style={styles.label}>Options</Text>
-
+        <View style={styles.itemContainer}>
+          <Text style={styles.itemText}>onMarqueeComplete{onMarquee ? '已调用':'初始化'}</Text>
+        </View>
         <View style={styles.itemContainer}>
           <Text style={styles.itemText}>Marquee on start</Text>
           <Switch
