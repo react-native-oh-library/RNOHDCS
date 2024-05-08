@@ -1,26 +1,29 @@
-import * as React from 'react';
-import { SafeAreaView, View, Text, StyleSheet } from 'react-native';
-import Markdown,{AstRenderer, renderRules} from 'react-native-markdown-display';
+import * as React from "react";
+import { SafeAreaView, View, Text, StyleSheet, Button } from "react-native";
+import Markdown, {
+  AstRenderer,
+  renderRules,
+} from "react-native-markdown-display";
 
 const styles = StyleSheet.create({
   heading1: {
     fontSize: 32,
-    backgroundColor: '#ccc',
-    color:'red',
-    marginTop: 10
+    backgroundColor: "#ccc",
+    color: "red",
+    marginTop: 10,
   },
   heading2: {
     fontSize: 20,
-    color:'#000',
-    marginTop: 10
-  }
-})
+    color: "#000",
+    marginTop: 10,
+  },
+});
 const MyRenderer = new AstRenderer(
   {
     ...renderRules,
-    text: (node, children, parent, styles,inheritedStyles = {}) => (
+    text: (node, children, parent, styles, inheritedStyles = {}) => (
       <Text key={node.key} style={[inheritedStyles, styles.text]}>
-        here is test: 
+        here is test:
         {node.content}
       </Text>
     ),
@@ -35,9 +38,10 @@ const MyRenderer = new AstRenderer(
         <Text>This is heading2 </Text>
         {children}
       </View>
-    )
+    ),
   },
-  styles);
+  styles
+);
 
 const copy = `
 # This is for renderer demo
@@ -48,16 +52,16 @@ This is for renderer demo
 `;
 
 const App = () => {
+  const [state, setState] = React.uesState(MyRenderer);
   return (
-      <SafeAreaView >
-           <Markdown 
-            renderer= {MyRenderer}
-           >
-            {copy}
-           </Markdown>    
-      </SafeAreaView>
+    <SafeAreaView>
+      <Button
+        title={`${state == null ? "Change Renderer" : "Remove Renderer"}`}
+        onPress={() => (state == null ? setState(MyRenderer) : setState(null))}
+      />
+      <Markdown renderer={state}>{copy}</Markdown>
+    </SafeAreaView>
   );
 };
-
 
 export default App;
