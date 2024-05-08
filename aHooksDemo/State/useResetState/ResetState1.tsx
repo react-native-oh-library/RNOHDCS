@@ -7,7 +7,6 @@ export function ResetState1(){
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log('interval count', getCount());
     }, 3000);
 
     return () => {

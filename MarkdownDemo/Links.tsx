@@ -1,7 +1,7 @@
-import React from 'react';
-import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
+import React from "react";
+import { SafeAreaView, ScrollView, StatusBar } from "react-native";
 
-import Markdown from 'react-native-markdown-display';
+import Markdown from "react-native-markdown-display";
 
 const copy = `  
 [link text](https://www.google.com)
@@ -14,15 +14,12 @@ Autoconverted link https://www.google.com (enable linkify to see)
 const App: () => React$Node = () => {
   return (
     <>
-      
       <SafeAreaView>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
-          style={{height: '100%'}}
+          style={{ height: "100%", marginHorizontal: 30 }}
         >
-          <Markdown>
-            {copy}
-          </Markdown>
+          <Markdown>{copy}</Markdown>
         </ScrollView>
       </SafeAreaView>
     </>

@@ -17,5 +17,5 @@ export function UseRafInterval() {
     setCount(count + 1);
   }, 1000);
 
-  return <View>count: {count}</View>;
+  return <View><Text>count: {count}</Text></View>;
 };

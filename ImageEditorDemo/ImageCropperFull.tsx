@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, ScrollView, Text, View, TextInput, StyleSheet, Button, Alert} from 'react-native';
+import { Image, ScrollView, Text, View, TextInput, StyleSheet, Button, Alert, KeyboardAvoidingView} from 'react-native';
 
 import { base64Data } from './utils'
 import ImageEditor from '@react-native-community/image-editor';
@@ -180,120 +180,122 @@ export class ImageCropperFull extends Component<Props, State> {
   render() {
     const { offsetX, offsetY, sizeWidth, sizeHeight, resizeMode, quality, format, photoUri, photoWidth, photoHeight ,croppedImageURI, targetSize, defaultType, displaySizeWidth, displaySizeHeight, horizontal, cropHorizontal} = this.state
     return (
-      <ScrollView>
-        <Text>选择图片类型</Text>
-        <View style={styles.flex}>
-          <Button title="base64" onPress={()=>this._changeType('base')} color={defaultType==='base' ? 'green' : ''} />
-          <Button title="远程图片" onPress={()=>this._changeType('http')} color={defaultType==='http' ? 'green' : ''} />
-          <Button title="沙箱" onPress={()=>this._changeType('local')} color={defaultType==='local' ? 'green' : ''} />
-        </View>
+      <KeyboardAvoidingView behavior="position">
+        <ScrollView>
+          <Text>选择图片类型</Text>
+          <View style={styles.flex}>
+            <Button title="base64" onPress={()=>this._changeType('base')} color={defaultType==='base' ? 'green' : ''} />
+            <Button title="远程图片" onPress={()=>this._changeType('http')} color={defaultType==='http' ? 'green' : ''} />
+            <Button title="沙箱" onPress={()=>this._changeType('local')} color={defaultType==='local' ? 'green' : ''} />
+          </View>
 
-        <ScrollView style={{height: photoHeight}} horizontal={horizontal}>
-          <Image source={{uri: photoUri}} style={{width: photoWidth, height: photoHeight}} />
+          <ScrollView style={{height: photoHeight}} horizontal={horizontal}>
+            <Image source={{uri: photoUri}} style={{width: photoWidth, height: photoHeight}} />
+          </ScrollView>
+          {
+            croppedImageURI ? 
+            <ScrollView style={{height: targetSize?.height}} horizontal={cropHorizontal}>
+              <Image source={{uri: croppedImageURI}} style={{width: targetSize?.width, height: targetSize?.height}} />
+            </ScrollView> :
+            <Text>未生成图片</Text>
+          }
+
+          <View style={styles.flex}>
+            <Text>offset:</Text>
+            <TextInput 
+              style={styles.inputStyle} 
+              value={offsetX} 
+              inputMode="numeric" 
+              placeholder="x" 
+              onChangeText={(data) => {
+                this._formChange(data, 'offsetX')
+              }}
+            />
+            <TextInput 
+              style={styles.inputStyle} 
+              value={offsetY} 
+              inputMode="numeric" 
+              placeholder="y" 
+              onChangeText={(data) => {
+                this._formChange(data, 'offsetY')
+              }}
+            />
+          </View>
+
+          <View style={styles.flex}>
+            <Text>size:</Text>
+            <TextInput
+              style={styles.inputStyle} 
+              value={sizeWidth} 
+              inputMode="numeric" 
+              placeholder="width" 
+              onChangeText={(data) => {
+                this._formChange(data, 'sizeWidth')
+              }}
+            />
+            <TextInput 
+              style={styles.inputStyle} 
+              value={sizeHeight} 
+              inputMode="numeric" 
+              placeholder="height" 
+              onChangeText={(data) => {
+                this._formChange(data, 'sizeHeight')
+              }}
+            />
+          </View>
+
+          <View style={styles.flex}>
+            <Text>displaySize:</Text>
+            <TextInput 
+              style={styles.inputStyle} 
+              value={displaySizeWidth} 
+              inputMode="numeric" 
+              placeholder="width" 
+              onChangeText={(data) => {
+                this._formChange(data, 'displaySizeWidth')
+              }}
+            />
+            <TextInput 
+              style={styles.inputStyle} 
+              value={displaySizeHeight} 
+              inputMode="numeric" 
+              placeholder="height" 
+              onChangeText={(data) => {
+                this._formChange(data, 'displaySizeHeight')
+              }}
+            />
+          </View>
+
+          <View style={styles.flex}>
+            <Text>resizeMode:</Text>
+            <Button title="contain" onPress={()=>this._formChange('contain', 'resizeMode')} color={resizeMode==='contain' ? 'green' : ''} />
+            <Button title="cover" onPress={()=>this._formChange('cover', 'resizeMode')} color={resizeMode==='cover' ? 'green' : ''} />
+            <Button title="stretch" onPress={()=>this._formChange('stretch', 'resizeMode')} color={resizeMode==='stretch' ? 'green' : ''} />
+            {/* <Button title="center" onPress={()=>this._formChange('center', 'resizeMode')} color={resizeMode==='center' ? 'green' : ''} /> */}
+          </View>
+
+          <View style={styles.flex}>
+            <Text>quality:</Text>
+            <Button title="0.3" onPress={()=>this._formChange('0.3', 'quality')} color={quality==='0.3' ? 'green' : ''} />
+            <Button title="0.5" onPress={()=>this._formChange('0.5', 'quality')} color={quality==='0.5' ? 'green' : ''} />
+            <Button title="0.9" onPress={()=>this._formChange('0.9', 'quality')} color={quality==='0.9' ? 'green' : ''} />
+            <Button title="1.0" onPress={()=>this._formChange('1.0', 'quality')} color={quality==='1.0' ? 'green' : ''} />
+          </View>
+
+          <View style={styles.flex}>
+            <Text>format:</Text>
+            <Button title="jpeg" onPress={()=>this._formChange('jpeg', 'format')} color={format==='jpeg' ? 'green' : ''} />
+            <Button title="png" onPress={()=>this._formChange('png', 'format')} color={format==='png' ? 'green' : ''} />
+            <Button title="webp" onPress={()=>this._formChange('webp', 'format')} color={format==='webp' ? 'green' : ''} />
+          </View>
+
+          <View style={styles.button}>
+            <Text>{ croppedImageURI }</Text>
+            <Button title="确定" onPress={()=>this._crop()} />
+          </View> 
+
         </ScrollView>
-        {
-          croppedImageURI ? 
-          <ScrollView style={{height: targetSize?.height}} horizontal={cropHorizontal}>
-            <Image source={{uri: croppedImageURI}} style={{width: targetSize?.width, height: targetSize?.height}} />
-          </ScrollView> :
-          <Text>未生成图片</Text>
-        }
-
-        <View style={styles.flex}>
-          <Text>offset:</Text>
-          <TextInput 
-            style={styles.inputStyle} 
-            value={offsetX} 
-            inputMode="numeric" 
-            placeholder="x" 
-            onChangeText={(data) => {
-              this._formChange(data, 'offsetX')
-            }}
-          />
-          <TextInput 
-            style={styles.inputStyle} 
-            value={offsetY} 
-            inputMode="numeric" 
-            placeholder="y" 
-            onChangeText={(data) => {
-              this._formChange(data, 'offsetY')
-            }}
-          />
-        </View>
-
-        <View style={styles.flex}>
-          <Text>size:</Text>
-          <TextInput
-            style={styles.inputStyle} 
-            value={sizeWidth} 
-            inputMode="numeric" 
-            placeholder="width" 
-            onChangeText={(data) => {
-              this._formChange(data, 'sizeWidth')
-            }}
-          />
-          <TextInput 
-            style={styles.inputStyle} 
-            value={sizeHeight} 
-            inputMode="numeric" 
-            placeholder="height" 
-            onChangeText={(data) => {
-              this._formChange(data, 'sizeHeight')
-            }}
-          />
-        </View>
-
-        <View style={styles.flex}>
-          <Text>displaySize:</Text>
-          <TextInput 
-            style={styles.inputStyle} 
-            value={displaySizeWidth} 
-            inputMode="numeric" 
-            placeholder="width" 
-            onChangeText={(data) => {
-              this._formChange(data, 'displaySizeWidth')
-            }}
-          />
-          <TextInput 
-            style={styles.inputStyle} 
-            value={displaySizeHeight} 
-            inputMode="numeric" 
-            placeholder="height" 
-            onChangeText={(data) => {
-              this._formChange(data, 'displaySizeHeight')
-            }}
-          />
-        </View>
-
-        <View style={styles.flex}>
-          <Text>resizeMode:</Text>
-          <Button title="contain" onPress={()=>this._formChange('contain', 'resizeMode')} color={resizeMode==='contain' ? 'green' : ''} />
-          <Button title="cover" onPress={()=>this._formChange('cover', 'resizeMode')} color={resizeMode==='cover' ? 'green' : ''} />
-          <Button title="stretch" onPress={()=>this._formChange('stretch', 'resizeMode')} color={resizeMode==='stretch' ? 'green' : ''} />
-          {/* <Button title="center" onPress={()=>this._formChange('center', 'resizeMode')} color={resizeMode==='center' ? 'green' : ''} /> */}
-        </View>
-
-        <View style={styles.flex}>
-          <Text>quality:</Text>
-          <Button title="0.3" onPress={()=>this._formChange('0.3', 'quality')} color={quality==='0.3' ? 'green' : ''} />
-          <Button title="0.5" onPress={()=>this._formChange('0.5', 'quality')} color={quality==='0.5' ? 'green' : ''} />
-          <Button title="0.9" onPress={()=>this._formChange('0.9', 'quality')} color={quality==='0.9' ? 'green' : ''} />
-          <Button title="1.0" onPress={()=>this._formChange('1.0', 'quality')} color={quality==='1.0' ? 'green' : ''} />
-        </View>
-
-        <View style={styles.flex}>
-          <Text>format:</Text>
-          <Button title="jpeg" onPress={()=>this._formChange('jpeg', 'format')} color={format==='jpeg' ? 'green' : ''} />
-          <Button title="png" onPress={()=>this._formChange('png', 'format')} color={format==='png' ? 'green' : ''} />
-          <Button title="webp" onPress={()=>this._formChange('webp', 'format')} color={format==='webp' ? 'green' : ''} />
-        </View>
-
-        <View style={styles.button}>
-          <Text>{ croppedImageURI }</Text>
-          <Button title="确定" onPress={()=>this._crop()} />
-        </View> 
-
-      </ScrollView>
+      </KeyboardAvoidingView>
     );
   }
 }
