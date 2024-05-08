@@ -52,7 +52,7 @@ This is for renderer demo
 `;
 
 const App = () => {
-  const [state, setState] = React.uesState(MyRenderer);
+  const [state, setState] = React.useState(MyRenderer);
   return (
     <SafeAreaView>
       <Button
