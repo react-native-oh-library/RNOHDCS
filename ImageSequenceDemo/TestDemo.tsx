@@ -104,8 +104,13 @@ const ImageSequenceDemo = (props: any) => {
                     </View>
                     <Text>开始位置：</Text><TextInput style={styles.input} onChangeText={value=>inputStartFrameIndex(value)} defaultValue="0" keyboardType="numeric"/>
                     <Text>播放速度：</Text><TextInput style={styles.input} onChangeText={value=>inputFramesPerSecond(value)} defaultValue="24" keyboardType="numeric"/>
-                    <Text>采样宽度：</Text><TextInput style={styles.input} onChangeText={value=>inputSampleWidth(value)} defaultValue="-1" keyboardType="default"/>
-                    <Text>采样高度：</Text><TextInput style={styles.input} onChangeText={value=>inputSetWinHeight(value)} defaultValue="-1" keyboardType="default"/>
+                    <View>
+                        <Text>采样宽度/高度：</Text>
+                        <View style={styles.box}>
+                            <TextInput style={[styles.input, styles.input1]} onChangeText={value => inputSampleWidth(value)} defaultValue='-1' keyboardType='default' />
+                            <TextInput style={[styles.input, styles.input1]} onChangeText={value => inputSetWinHeight(value)} defaultValue='-1' keyboardType='default' />
+                        </View>
+                    </View>
                 </View>
                 {
                     !isShow?<Button title='显示' onPress={()=>buttonIsShow()}/> : <Button title='返回' onPress={() => buttonIsShow()}/>
