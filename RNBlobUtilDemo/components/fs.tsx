@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import ReactNativeBlobUtil from 'react-native-blob-util';
 import { TestSuite, Tester } from '@rnoh/testerino';
-import { TestCase } from '../components';
+import { TestCase } from '../../components';
 
 const FILE_PATH = ReactNativeBlobUtil.fs.dirs.CacheDir;
 const FILE_PATH1 = ReactNativeBlobUtil.fs.dirs.DocumentDir;
@@ -126,64 +126,78 @@ export function unlink() {
 }
 
 export function ls() {
-	const [fileDir, setFileDir] = useState([''])
-	return (
-		<Tester style={{ flex: 1 }}>
-			<ScrollView style={{ flex: 1 }}>
-				<TestSuite name="ls">
-					<TestCase.logical
-						itShould="check current floder file."	
-						fn={async ({ expect }) => {
-							let pathNames = await ReactNativeBlobUtil.fs.ls(FILE_PATH)
-							let pathNames1 = await ReactNativeBlobUtil.fs.ls(FILE_PATH1)
-							setFileDir([...pathNames, ...pathNames1])
-						}}
-					/>
-					<View>
-						{fileDir.map((item) => {
-							return (<Text style={{color: '#fff'}}>{item}</Text>)
-						})}
-					</View>
-				</TestSuite>
-			</ScrollView>
-		</Tester>
-	)
+  const [fileDir, setFileDir] = useState([''])
+  return (
+    <Tester style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
+        <TestSuite name="ls">
+          <TestCase.Logical
+            itShould="check current floder file."
+            fn={async ({ expect }) => {
+              let pathNames = await ReactNativeBlobUtil.fs.ls(FILE_PATH)
+              let pathNames1 = await ReactNativeBlobUtil.fs.ls(FILE_PATH1)
+              setFileDir([...pathNames, ...pathNames1])
+            }}
+          />
+          <View>
+            {fileDir.map((item) => {
+              return (<Text key={item} style={{ color: '#fff' }}>{item}</Text>)
+            })}
+          </View>
+        </TestSuite>
+      </ScrollView>
+    </Tester>
+  )
 }
 
 export function stat() {
-	return (
-		<Tester style={{ flex: 1 }}>
-			<ScrollView style={{ flex: 1 }}>
-				<TestSuite name="stat">
-					<TestCase.logical
-						itShould="get file info."	
-						fn={async ({ expect }) => {
-							let fileInfo = await ReactNativeBlobUtil.fs.stat(FILE_PATH + '/create_file.txt')
-							expect(fileInfo.size).to.be.equals(6)
-						}}
-					/>
-				</TestSuite>
-			</ScrollView>
-		</Tester>
-	)
+  const [fileInfo, setFileInfo] = useState({})
+  return (
+    <Tester style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
+        <TestSuite name="stat">
+          <TestCase.Logical
+            itShould="get file info."
+            fn={async ({ expect }) => {
+              let fileInfo = await ReactNativeBlobUtil.fs.stat(FILE_PATH + '/create_file.txt')
+              setFileInfo(fileInfo)
+              expect(fileInfo.size).to.be.equals(6)
+            }}
+          />
+          <View>
+            {Object.keys(fileInfo).map((item) => {
+              return (<Text key={item} style={{ color: '#fff' }}>{item + ''} : {fileInfo[item]}</Text>)
+            })}
+          </View>
+        </TestSuite>
+      </ScrollView>
+    </Tester>
+  )
 }
 
 export function lstat() {
-	return (
-		<Tester style={{ flex: 1 }}>
-			<ScrollView style={{ flex: 1 }}>
-				<TestSuite name="lstat">
-					<TestCase.logical
-						itShould="get file link info."	
-						fn={async ({ expect }) => {
-							let fileInfo = await ReactNativeBlobUtil.fs.lstat(FILE_PATH + '/create_file.txt')
-							expect(fileInfo.size).to.be.equals(6)
-						}}
-					/>
-				</TestSuite>
-			</ScrollView>
-		</Tester>
-	)
+  const [fileInfo, setFileInfo] = useState({})
+  return (
+    <Tester style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
+        <TestSuite name="lstat">
+          <TestCase.Logical
+            itShould="get file link info."
+            fn={async ({ expect }) => {
+              let fileInfo = await ReactNativeBlobUtil.fs.lstat(FILE_PATH + '/create_file.txt')
+              setFileInfo(fileInfo)
+              expect(fileInfo.size).to.be.equals(6)
+            }}
+          />
+          <View>
+            {Object.keys(fileInfo).map((item) => {
+              return (<Text key={item} style={{ color: '#fff' }}>{item + ''} : {fileInfo[item]}</Text>)
+            })}
+          </View>
+        </TestSuite>
+      </ScrollView>
+    </Tester>
+  )
 }
 
 export function cp() {
@@ -242,76 +256,114 @@ export function mkdir() {
 }
 
 export function readFile() {
-	return (
-		<Tester style={{ flex: 1 }}>
-			<ScrollView style={{ flex: 1 }}>
-				<TestSuite name="readFile">
-					<TestCase.logical
-						itShould="read file with utf8."	
-						fn={async ({ expect }) => {
-							let str = await ReactNativeBlobUtil.fs.readFile(FILE_PATH + '/create_file.txt', 'utf8')
-							expect(str).to.be.equals('123456')
-						}}
-					/>
-				</TestSuite>
-			</ScrollView>
-		</Tester>
-	)
+  const [errMsg, setErrMsg] = useState('')
+  return (
+    <Tester style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
+        <TestSuite name="readFile">
+          <TestCase.Logical
+            itShould="read file with utf8."
+            fn={async ({ expect }) => {
+              let str = '';
+              try {
+                str = await ReactNativeBlobUtil.fs.readFile(FILE_PATH + '/create_file.txt', 'utf8')
+              } catch (err) {
+                str = err.message
+                setErrMsg(str)
+              }
+              expect(str).to.be.equals('123456')
+            }}
+          />
+          <View>
+            {errMsg ? <Text style={{ color: '#f00' }}>errMsg:{errMsg}</Text> : ''}
+          </View>
+        </TestSuite>
+      </ScrollView>
+    </Tester>
+  )
 }
 
 export function hash() {
-	return (
-		<Tester style={{ flex: 1 }}>
-			<ScrollView style={{ flex: 1 }}>
-				<TestSuite name="hash">
-					<TestCase.logical
-						itShould="return file to md5."	
-						fn={async ({ expect }) => {
-							let str = await ReactNativeBlobUtil.fs.hash(FILE_PATH + '/create_file.txt', 'md5')
-							expect(str).to.be.equals('E10ADC3949BA59ABBE56E057F20F883E')
-						}}
-					/>
-				</TestSuite>
-			</ScrollView>
-		</Tester>
-	)
+  const [errMsg, setErrMsg] = useState('')
+  return (
+    <Tester style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
+        <TestSuite name="hash">
+          <TestCase.Logical
+            itShould="return file to md5."
+            fn={async ({ expect }) => {
+              let str = '';
+              try {
+                str = await ReactNativeBlobUtil.fs.hash(FILE_PATH + '/create_file.txt', 'md5')
+              } catch (err) {
+                str = err.message
+                setErrMsg(str)
+              }
+              expect(str).to.be.equals('E10ADC3949BA59ABBE56E057F20F883E')
+            }}
+          />
+          <View>
+            {errMsg ? <Text style={{ color: '#f00' }}>errMsg:{errMsg}</Text> : ''}
+          </View>
+        </TestSuite>
+      </ScrollView>
+    </Tester>
+  )
 }
 
 export function slice() {
-	return (
-		<Tester style={{ flex: 1 }}>
-			<ScrollView style={{ flex: 1 }}>
-				<TestSuite name="slice">
-					<TestCase.logical
-						itShould="slice a file content."	
-						fn={async ({ expect }) => {
-							await ReactNativeBlobUtil.fs.slice(FILE_PATH + '/create_file.txt', FILE_PATH + '/create_file_slice.txt', 2, 5)
-							let str = await ReactNativeBlobUtil.fs.readFile(FILE_PATH + '/create_file_slice.txt', 'utf8')
-							expect(str).to.be.equals('345')
-						}}
-					/>
-				</TestSuite>
-			</ScrollView>
-		</Tester>
-	)
+  const [errMsg, setErrMsg] = useState('')
+  return (
+    <Tester style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
+        <TestSuite name="slice">
+          <TestCase.Logical
+            itShould="slice a file content."
+            fn={async ({ expect }) => {
+              let str = '';
+              try {
+                await ReactNativeBlobUtil.fs.slice(FILE_PATH + '/create_file.txt', FILE_PATH + '/create_file_slice.txt', 2, 5)
+                str = await ReactNativeBlobUtil.fs.readFile(FILE_PATH + '/create_file_slice.txt', 'utf8')
+              } catch (err) {
+                str = err.message
+                setErrMsg(str)
+              }
+              expect(str).to.be.equals('345')
+            }}
+          />
+          <View>
+            {errMsg ? <Text style={{ color: '#f00' }}>errMsg:{errMsg}</Text> : ''}
+          </View>
+        </TestSuite>
+      </ScrollView>
+    </Tester>
+  )
 }
 
 export function df() {
-	return (
-		<Tester style={{ flex: 1 }}>
-			<ScrollView style={{ flex: 1 }}>
-				<TestSuite name="df">
-					<TestCase.logical
-						itShould="return file df totalSize and freeSize."	
-						fn={async ({ expect }) => {
-							let spaceInfo = await ReactNativeBlobUtil.fs.df()
-							expect(spaceInfo.free).to.match(/^[0-9]*$/)
-						}}
-					/>
-				</TestSuite>
-			</ScrollView>
-		</Tester>
-	)
+  const [free, setFree] = useState('')
+  const [total, setTotal] = useState('')
+  return (
+    <Tester style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
+        <TestSuite name="df">
+          <TestCase.Logical
+            itShould="return file df totalSize and freeSize."
+            fn={async ({ expect }) => {
+              let spaceInfo = await ReactNativeBlobUtil.fs.df()
+              setFree(spaceInfo.free)
+              setTotal(spaceInfo.total)
+              expect(spaceInfo.free).to.match(/^[0-9]*$/)
+            }}
+          />
+          <View>
+            <Text style={{ color: '#fff' }}>free:{free}</Text>
+            <Text style={{ color: '#fff' }}>total:{total}</Text>
+          </View>
+        </TestSuite>
+      </ScrollView>
+    </Tester>
+  )
 }
 
 export function removeSession() {

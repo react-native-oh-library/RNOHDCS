@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import ReactNativeBlobUtil from 'react-native-blob-util';
 import { TestSuite, Tester, Filter } from '@rnoh/testerino';
-import { TestCase } from '../components';
+import { TestCase } from '../../components';
 
 const FILE_PATH = ReactNativeBlobUtil.fs.dirs.DocumentDir;
 
@@ -108,8 +108,8 @@ export function cancelRequest() {
               await ReactNativeBlobUtil.config({
                 fileCache: true,
                 appendExt: 'jpg'
-              }).fetch('GET', 'http://139.9.199.99:3000/tcp/download/blue.jpg').cancel((err) => {
-                expect(err).to.be.equals([])
+              }).fetch('GET', 'http://139.9.199.99:3000/tpc/download/blue.jpg').cancel((err) => {
+                expect(err.length).to.be.equals(0)
               })
 						}}
 					/>
