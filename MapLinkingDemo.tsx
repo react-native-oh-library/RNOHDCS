@@ -25,13 +25,13 @@ class MapLinkingDemo extends Component {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => {MapLinking.planRoute({lat: 39.9901079, lng:116.1887467, title: '香山公园'}, {lat:400382556, lng:116.3144536, title:'清河站'}, 'drive')}}>
+          onPress={() => {MapLinking.planRoute({lat: 39.9901079, lng:116.1887467, title: '香山公园'}, {lat:40.0382556, lng:116.3144536, title:'清河站'}, 'drive')}}>
           <View style={styles.button}>
             <Text style={styles.text}>规划线路</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => {MapLinking.navigate({lat:400382556, lng:116.3144536, title:'清河站'} )}}>
+          onPress={() => {MapLinking.navigate({lat:40.0382556, lng:116.3144536, title:'清河站'} )}}>
           <View style={styles.button}>
             <Text style={styles.text}>导航</Text>
           </View>
