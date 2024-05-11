@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import ReactNativeBlobUtil from 'react-native-blob-util';
 import { TestSuite, Tester } from '@rnoh/testerino';
-import { TestCase } from '../components';
+import { TestCase } from '../../components';
 
 const FILE_PATH = ReactNativeBlobUtil.fs.dirs.CacheDir;
 
@@ -17,7 +17,7 @@ export function writeStream() {
 						itShould="write stream to a file."	
 						fn={async ({ expect }) => {
 							let stream = await ReactNativeBlobUtil.fs.writeStream(FILE_PATH + '/create_file_stream.txt', 'utf8')
-						expect(stream.id).to.match(/^[0-9|a-z|-]*$/)
+						  expect(stream.id).to.match(/^[0-9|a-z|-]*$/)
 						}}
 					/>
 				</TestSuite>
@@ -27,46 +27,46 @@ export function writeStream() {
 }
 
 export function writeChunk() {
-	return (
-		<Tester style={{ flex: 1 }}>
-			<ScrollView style={{ flex: 1 }}>
-				<TestSuite name="writeChunk">
-					<TestCase.logical
-						itShould="write stream to a file for data."	
-						fn={async ({ expect }) => {
-							let stream = await ReactNativeBlobUtil.fs.writeStream(FILE_PATH + '/create_file_stream.txt', 'utf8', false)
-							stream.write('456789')
-							stream.close()
-							let str = await ReactNativeBlobUtil.fs.readFile(FILE_PATH + '/create_file_stream.txt', 'utf8')
-							expect(str).to.be.equals('456789')
-						}}
-					/>
-				</TestSuite>
-			</ScrollView>
-		</Tester>
-	)
+  return (
+    <Tester style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
+        <TestSuite name="writeChunk">
+          <TestCase.Logical
+            itShould="write stream to a file for data."
+            fn={async ({ expect }) => {
+              let stream = await ReactNativeBlobUtil.fs.writeStream(FILE_PATH + '/create_file_stream.txt', 'utf8', false)
+              await stream.write('456789')
+              await stream.close()
+              let str = await ReactNativeBlobUtil.fs.readFile(FILE_PATH + '/create_file_stream.txt', 'utf8')
+              expect(str).to.equals('456789')
+            }}
+          />
+        </TestSuite>
+      </ScrollView>
+    </Tester>
+  )
 }
 
 export function writeArrayChunk() {
-	return (
-		<Tester style={{ flex: 1 }}>
-			<ScrollView style={{ flex: 1 }}>
-				<TestSuite name="writeArrayChunk">
-					<TestCase.logical
-						itShould="write stream to a file for array data."	
-						fn={async ({ expect }) => {
-							let stream = await ReactNativeBlobUtil.fs.writeStream(FILE_PATH + '/create_file_stream.txt', 'ascii', false)
-							stream.encoding = 'ascii'
-							stream.write(['101', '102', '97'])
-							stream.close()
-							let str = await ReactNativeBlobUtil.fs.readFile(FILE_PATH + '/create_file_stream.txt', 'utf8')
-							expect(str).to.be.equals('efa')
-						}}
-					/>
-				</TestSuite>
-			</ScrollView>
-		</Tester>
-	)
+  return (
+    <Tester style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
+        <TestSuite name="writeArrayChunk">
+          <TestCase.Logical
+            itShould="write stream to a file for array data."
+            fn={async ({ expect }) => {
+              let stream = await ReactNativeBlobUtil.fs.writeStream(FILE_PATH + '/create_file_stream.txt', 'ascii', false)
+              stream.encoding = 'ascii'
+              await stream.write(['101', '102', '97', '101', '102', '97'])
+              await stream.close()
+              let str = await ReactNativeBlobUtil.fs.readFile(FILE_PATH + '/create_file_stream.txt', 'utf8')
+              expect(str).to.equals('efaefa')
+            }}
+          />
+        </TestSuite>
+      </ScrollView>
+    </Tester>
+  )
 }
 
 export function readStream() {
@@ -91,24 +91,24 @@ export function readStream() {
 }
 
 export function closeStream() {
-	return (
-		<Tester style={{ flex: 1 }}>
-			<ScrollView style={{ flex: 1 }}>
-				<TestSuite name="readStcloseStreamream">
-					<TestCase.logical
-						itShould="close stream."	
-						fn={async ({ expect }) => {
-							let stream = await ReactNativeBlobUtil.fs.writeStream(FILE_PATH + '/create_file_stream.txt', 'utf8', false)
-							stream.write('000000')
-							stream.close()
-							let str = await ReactNativeBlobUtil.fs.readFile(FILE_PATH + '/create_file_stream.txt', 'utf8')
-							expect(str).to.be.equals('000000')
-						}}
-					/>
-				</TestSuite>
-			</ScrollView>
-		</Tester>
-	)
+  return (
+    <Tester style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
+        <TestSuite name="readStcloseStreamream">
+          <TestCase.Logical
+            itShould="close stream."
+            fn={async ({ expect }) => {
+              let stream = await ReactNativeBlobUtil.fs.writeStream(FILE_PATH + '/create_file_stream.txt', 'utf8', false)
+              await stream.write('000000')
+              await stream.close()
+              let str = await ReactNativeBlobUtil.fs.readFile(FILE_PATH + '/create_file_stream.txt', 'utf8')
+              expect(str).to.equals('000000')
+            }}
+          />
+        </TestSuite>
+      </ScrollView>
+    </Tester>
+  )
 }
 
 
