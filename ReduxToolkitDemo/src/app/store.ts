@@ -25,6 +25,7 @@ function logger({getState, dispatch}) {
 }
 
 const increment = createAction<number | undefined>('counter/increment')
+console.log('toolkit ------ createAction  success')
 const listenerMiddleware = createListenerMiddleware()
 const effectFn = (action, listenerApi, name) => {
   console.log('toolkit ------ listenerMiddleware  startListening: ' + name)
@@ -71,17 +72,32 @@ listenerMiddleware.startListening({
   effect: effectFnactionPredicate
 })
 
-export let middAddListen = () => addListener({
-  actionCreator: increment,
-  effect: effectFnactionCreator
-})
+export let middAddListen = () => {
+  console.log('toolkit ------  getDefaultMiddleware  logger:' + addListener({
+    actionCreator: increment,
+    effect: effectFnactionCreator
+  }))
+  return addListener({
+    actionCreator: increment,
+    effect: effectFnactionCreator
+  })
+}
 
-export let middRemoveListen = () => removeListener({
-  actionCreator: increment,
-  effect: effectFnactionCreator
-})
+export let middRemoveListen = () => {
+  console.log('toolkit ------  getDefaultMiddleware  logger:' + removeListener({
+    actionCreator: increment,
+    effect: effectFnactionCreator
+  }))
+  return removeListener({
+    actionCreator: increment,
+    effect: effectFnactionCreator
+  })
+}
 
-export let middClearsListen = () => clearAllListeners()
+export let middClearsListen = () => {
+  console.log('toolkit ------  getDefaultMiddleware  logger:' + clearAllListeners())
+  return clearAllListeners()
+}
 
 const dynamicMiddleware = createDynamicMiddleware()
 dynamicMiddleware.addMiddleware(logger)
@@ -127,6 +143,7 @@ export const store = configureStore({
     console.log('toolkit ------ getDefaultMiddleware: ' + JSON.stringify(getDefaultMiddleware()))
     console.log('toolkit ------ getDefaultMiddleware: immutableCheck  success')
     console.log('toolkit ------ getDefaultMiddleware: serializableCheck  success')
+    console.log('toolkit ------ getDefaultMiddleware: actionCreatorCheck  success')
     return getDefaultMiddleware(
       {
         immutableCheck: {
