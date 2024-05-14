@@ -24,7 +24,6 @@ import {
 let defaults = {
   firstname: 'Eddard',
   lastname: 'Stark',
-  about: 'Stoic, dutiful, and honorable man',
 };
 
 
@@ -37,7 +36,6 @@ export default function TextfieldDemo() {
   }); 
   const firstnameRef  = React.createRef();;
   const lastnameRef  = React.createRef();
-  const aboutRef  = React.createRef();
   const emailRef = React.createRef();
   const passwordRef = React.createRef();
 
@@ -62,7 +60,7 @@ export default function TextfieldDemo() {
   }
 
   const onChangeText= () => {
-    ['firstname', 'lastname','about', 'email', 'password']
+    ['firstname', 'lastname', 'email', 'password']
     .forEach((name) => {
       const ref = name === 'firstname' ? firstnameRef :  
       name === 'lastname' ? lastnameRef :
@@ -107,19 +105,6 @@ export default function TextfieldDemo() {
                 onChangeText={onChangeText}
                 error={errors.lastname}
               />  
-
-              
-              <TextField
-                ref={aboutRef}
-                value={defaults.about}
-                returnKeyType='next'
-                multiline={true}
-                blurOnSubmit={true}
-                label='About (optional)'
-                onChangeText={onChangeText}
-                characterRestriction={140}
-              />
-
 
               <TextField
                 ref={emailRef}

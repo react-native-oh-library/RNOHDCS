@@ -4,37 +4,37 @@ import { Text, View, Button } from 'react-native';
 import ScrollableTabView, { ScrollableTabBar } from "react-native-scrollable-tab-view";
 
 export default () => {
-    const [style, setStyle] = useState({ height: 150, backgroundColor: "#FF0000" });
+    const [style, setStyle] = useState({ flex: 1, backgroundColor: "#FF0000" });
 
 
     return (
 
-        <View style={{ height: 400 }}>
+        <View style={{ flex: 1, flexDirection: 'column' }}>
             <Text>contentProps</Text>
             <View>
                 <Text>contentContainerStyle:{JSON.stringify(style)}</Text>
             </View>
-            <View style={{ alignItems: 'center' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Button
                     title='Style1'
                     onPress={() => {
-                        setStyle({ height: 250, backgroundColor: "#7FFF00" })
+                        setStyle({ flex: 0.8, backgroundColor: "#7FFF00" })
                     }}
                 />
                 <Button
                     title='Style2'
                     onPress={() => {
-                        setStyle({ height: 300, backgroundColor: "#236B8E" })
+                        setStyle({ flex: 0.6, backgroundColor: "#236B8E" })
                     }}
                 />
                 <Button
                     title='Style3'
                     onPress={() => {
-                        setStyle({ height: 350, backgroundColor: "#9F9F5F" })
+                        setStyle({ flex: 0.4, backgroundColor: "#9F9F5F" })
                     }}
                 />
             </View>
-            <View style={{ height: 150 }}>
+            <View style={{ flex: 1, flexDirection: 'column' }}>
                 <ScrollableTabView
                     style={style}
                 >

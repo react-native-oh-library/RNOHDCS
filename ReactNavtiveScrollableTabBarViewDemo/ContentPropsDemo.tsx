@@ -4,14 +4,14 @@ import { Text, View, Button } from 'react-native';
 import ScrollableTabView, { ScrollableTabBar } from "react-native-scrollable-tab-view";
 
 export default () => {
-    const [contentContainerStyle, setContentContainerStyle] = useState({ height: 150, backgroundColor: "#FF0000" });
+    const [contentContainerStyle, setContentContainerStyle] = useState({ paddingVertical: 20, backgroundColor: "#FF0000" });
     const [showsHorizontalScrollIndicator, setShowsHorizontalScrollIndicator] = useState('false');
     const [indicatorStyle, setIndicatorStyle] = useState('default');
 
 
     return (
 
-        <View style={{height:400}}>
+        <View style={{ flex: 1, flexDirection: 'column' }}>
             <Text>contentProps</Text>
             <View>
                 <Text>contentContainerStyle:{JSON.stringify(contentContainerStyle)}</Text>
@@ -20,19 +20,19 @@ export default () => {
                 <Button
                     title='contentContainerStyle1'
                     onPress={() => {
-                        setContentContainerStyle({ height: 250, backgroundColor: "#7FFF00" })
+                        setContentContainerStyle({ paddingVertical: 10, backgroundColor: "#7FFF00" })
                     }}
                 />
                 <Button
                     title='contentContainerStyle2'
                     onPress={() => {
-                        setContentContainerStyle({ height: 300, backgroundColor: "#236B8E" })
+                        setContentContainerStyle({ paddingVertical: 30, backgroundColor: "#236B8E" })
                     }}
                 />
                 <Button
                     title='contentContainerStyle3'
                     onPress={() => {
-                        setContentContainerStyle({ height: 350, backgroundColor: "#9F9F5F" })
+                        setContentContainerStyle({ paddingVertical: 40, backgroundColor: "#9F9F5F" })
                     }}
                 />
             </View>
@@ -70,10 +70,10 @@ export default () => {
                     }}
                 />
             </View>
-            <View style={{height:150}}>
+            <View>
                 <ScrollableTabView
                     contentProps={{
-                        contentContainerStyle: contentContainerStyle,
+                        style: contentContainerStyle,
                         showsHorizontalScrollIndicator:JSON.parse(showsHorizontalScrollIndicator),
                         indicatorStyle:indicatorStyle,
                         snapToAlignment:'center',

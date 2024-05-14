@@ -40,7 +40,7 @@ export function Counter() {
   const safeSelector = createDraftSafeSelector(state => state, selectCount)
   const selectors = createSelector(state => state, selectCount)
   console.log('toolkit ------ createDraftSafeSelector  success' + JSON.stringify(safeSelector))
-  console.log('toolkit ------ createSelector  success' + JSON.stringify(selectors))
+  console.log('toolkit ------ createSelector  success:' + JSON.stringify(selectors))
 
   const count = useAppSelector(selectCount);
   const books = useAppSelector(booksArr);
@@ -131,14 +131,6 @@ export function Counter() {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            setMatchingText(JSON.stringify(isAllOf(increment)))
-            console.log('toolkit ------ isAllOf', JSON.stringify(isAllOf(increment)))
-          }}>
-          <Text style={styles.buttonText2}>isAllOf</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
             setMatchingText(JSON.stringify(isAnyOf(increment)))
             console.log('toolkit ------ isAnyOf', isAnyOf(increment))
           }}>
@@ -158,7 +150,7 @@ export function Counter() {
             setMatchingText(JSON.stringify(isPending(increment)))
             console.log('toolkit ------ isPending false', isPending(increment))
           }}>
-          <Text style={styles.buttonText2}>isPending</Text>
+          <Text style={styles.buttonText2}>isPending false</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
@@ -166,7 +158,7 @@ export function Counter() {
             setMatchingText(JSON.stringify(isRejected(increment)))
             console.log('toolkit ------ isRejected false', isRejected(increment))
           }}>
-          <Text style={styles.buttonText2}>isRejected</Text>
+          <Text style={styles.buttonText2}>isRejected false</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
@@ -174,34 +166,34 @@ export function Counter() {
             setMatchingText(JSON.stringify(isFulfilled(increment)))
             console.log('toolkit ------ isFulfilled false', isFulfilled(increment))
           }}>
-          <Text style={styles.buttonText2}>isFulfilled</Text>
+          <Text style={styles.buttonText2}>isFulfilled false</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            let a = isPending({ "type": "counter/fetchCount/pending","meta":{"arg":2,"requestId":"1DxfOBGsVp1l_fmjOi3a","requestSatus": "pending"}})
+            let a = isPending({ "type": "counter/fetchCount/pending","meta":{"arg":2,"requestId":"1DxfOBGsVp1l_fmjOi3a","requestStatus": "pending"}})
             setMatchingText(JSON.stringify(a))
             console.log('toolkit ------ isPending true', a)
           }}>
-          <Text style={styles.buttonText2}>isPending</Text>
+          <Text style={styles.buttonText2}>isPending true</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            let a = isRejected({ "type": "counter/fetchCount/pending","meta":{"arg":2,"requestId":"1DxfOBGsVp1l_fmjOi3b","requestSatus": "pending"}})
+            let a = isRejected({ "type": "counter/fetchCount/rejected","meta":{"arg":2,"requestId":"1DxfOBGsVp1l_fmjOi3b","requestStatus": "rejected"}})
             setMatchingText(JSON.stringify(a))
             console.log('toolkit ------ isRejected true', a)
           }}>
-          <Text style={styles.buttonText2}>isRejected</Text>
+          <Text style={styles.buttonText2}>isRejected true</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            let a = isFulfilled({ "type": "counter/fetchCount/pending","meta":{"arg":2,"requestId":"1DxfOBGsVp1l_fmjOi3c","requestSatus": "pending"}})
+            let a = isFulfilled({ "type": "counter/fetchCount/fulfilled","meta":{"arg":2,"requestId":"1DxfOBGsVp1l_fmjOi3c","requestStatus": "fulfilled"}})
             setMatchingText(JSON.stringify(a))
             console.log('toolkit ------ isFulfilled true', a)
           }}>
-          <Text style={styles.buttonText2}>isFulfilled</Text>
+          <Text style={styles.buttonText2}>isFulfilled true</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
@@ -209,16 +201,16 @@ export function Counter() {
             setMatchingText(JSON.stringify(isRejectedWithValue(increment)))
             console.log('toolkit ------ isRejectedWithValue', isRejectedWithValue(increment))
           }}>
-          <Text style={styles.buttonText2}>isRejectedWithValue</Text>
+          <Text style={styles.buttonText2}>isRejectedWithValue false</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            let a = isFulfilled({ "type": "counter/fetchCount/fulfilled","meta":{"arg":2,"requestId":"1DxfOBGsVp1l_fmjOi3r","requestSatus": "rejected", "rejectedWithValue": true}})
+            let a = isFulfilled({ "type": "counter/fetchCount/fulfilled","meta":{"arg":2,"requestId":"1DxfOBGsVp1l_fmjOi3r","requestStatus": "fulfilled", "rejectedWithValue": true}})
             setMatchingText(JSON.stringify(a))
             console.log('toolkit ------ isRejectedWithValue true', a)
           }}>
-          <Text style={styles.buttonText2}>isRejectedWithValue</Text>
+          <Text style={styles.buttonText2}>isRejectedWithValue true</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}

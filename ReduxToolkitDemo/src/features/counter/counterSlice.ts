@@ -101,6 +101,8 @@ const booksAdapter = createEntityAdapter({
   selectId: (book: Book) => book.bookId,
   sortComparer: (a, b) => a.title.localeCompare(b.title),
 })
+console.log('toolkit ------ createEntityAdapter: selectId  success')
+console.log('toolkit ------ createEntityAdapter: sortComparer  success')
 export const counterSliceBooks = createSlice({
   name: 'books',
   initialState: booksAdapter.getInitialState(),
@@ -109,6 +111,7 @@ export const counterSliceBooks = createSlice({
     bookRemove: booksAdapter.removeOne
   },
 });
+console.log('toolkit ------ createEntityAdapter: getInitialState  success')
 
 export const {increment, decrement, incrementByAmount} = counterSlice.actions;
 export const {bookAdded, bookRemove} = counterSliceBooks.actions;

@@ -1,34 +1,34 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
-import { useUnmountPromise } from 'react-use';
+import {View, Text, Button} from 'react-native';
+import {useUnmountPromise} from 'react-use';
 
- const UseUnmountPromiseDemo = () => {
-  const [promiseState, setPromiseState] = React.useState('pending');
+const UseUnmountPromiseDemo = () => {
+  const [loading, setLoading] = React.useState(false);
 
-  const promise = new Promise((resolve, reject) => {
-    let timeout = setTimeout(() => {
-      resolve('Promise resolved!')
-      reject('Promise reject!')
-      clearTimeout(timeout);
-    }, 3000)
-  })
+  useUnmountPromise(() => {
+    console.log('Component is unmounting...');
+    //Simulate some async operation
+    return new Promise(resolve => setTimeout(resolve, 2000));
+  });
 
-  const unmountPromise = -useUnmountPromise();
-
-  const handleClick = () => {
-    promise.then((result) => {
-      if (!unmountPromise.current) {
-        setPromiseState(result)
-      }
-    })
-  }
+  const handleClick = async () => {
+    setLoading(true);
+    //Simulate some async operation
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    setLoading(false);
+    console.log('Async operation completed');
+  };
 
   return (
-    <View>
-      <Text>三个状态：pending、resolved、reject</Text>
-      <Text>Promise state：{promiseState}</Text>
-      <Button title='Start Promise' onPress={handleClick} />
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>{loading ? 'Loading' : 'Ready'}</Text>
+      <Button
+        title="Start Async Operation"
+        onPress={handleClick}
+        disabled={loading}
+      />
     </View>
-  )
+  );
 };
-export default UseUnmountPromiseDemo
+
+export default UseUnmountPromiseDemo;
