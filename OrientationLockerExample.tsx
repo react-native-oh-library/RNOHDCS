@@ -12,7 +12,7 @@ import {
   useOrientationChange,
   useDeviceOrientationChange,
   useLockListener,
-} from '@react-native-oh-tpl/react-native-orientation-locker';
+} from 'react-native-orientation-locker';
 
 
 export function OrientationLockerExample() {
