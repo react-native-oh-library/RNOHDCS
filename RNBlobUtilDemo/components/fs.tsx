@@ -125,6 +125,30 @@ export function unlink() {
 	)
 }
 
+export function unlinkAll() {
+	return (
+		<Tester style={{ flex: 1 }}>
+			<ScrollView style={{ flex: 1 }}>
+				<TestSuite name="unlinkAll">
+					<TestCase.logical
+						itShould="remove all file."	
+						fn={async ({ expect }) => {
+							let pathNames = await ReactNativeBlobUtil.fs.ls(FILE_PATH)
+							let pathNames1 = await ReactNativeBlobUtil.fs.ls(FILE_PATH1)
+							pathNames.array.forEach(async (item) => {
+                await ReactNativeBlobUtil.fs.unlink(FILE_PATH + '/' + item)
+              });
+              pathNames1.array.forEach(async (item) => {
+                await ReactNativeBlobUtil.fs.unlink(FILE_PATH1 + '/' + item)
+              });
+						}}
+					/>
+				</TestSuite>
+			</ScrollView>
+		</Tester>
+	)
+}
+
 export function ls() {
   const [fileDir, setFileDir] = useState([''])
   return (

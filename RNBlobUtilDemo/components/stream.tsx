@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
-	ScrollView
+	ScrollView,
+  View,
+  Text
 } from 'react-native';
 import ReactNativeBlobUtil from 'react-native-blob-util';
 import { TestSuite, Tester } from '@rnoh/testerino';
@@ -70,6 +72,7 @@ export function writeArrayChunk() {
 }
 
 export function readStream() {
+  const [errMsg, setErrMsg] = useState('')
 	return (
 		<Tester style={{ flex: 1 }}>
 			<ScrollView style={{ flex: 1 }}>
@@ -77,13 +80,21 @@ export function readStream() {
 					<TestCase.logical
 						itShould="read stream to a file."	
 						fn={async ({ expect }) => {
-							let stream = await ReactNativeBlobUtil.fs.readStream(FILE_PATH + '/create_file_stream.txt', 'utf8', 10, 3)
-							stream.open()
-							stream.onData((chunk) => {
-								expect(chunk).to.length(6)
-							})
+              let str = ''
+                let stream = await ReactNativeBlobUtil.fs.readStream(FILE_PATH + '/create_file_stream.txt', 'utf8', 10, 3)
+                stream.open()
+                stream.onData((chunk) => {
+                  expect(chunk).to.length(6)
+                })
+                stream.onError((err) => {
+                  str = err.message
+                  setErrMsg(str)
+                })
 						}}
 					/>
+          <View>
+            {errMsg ? <Text style={{ color: '#f00' }}>errMsg:{errMsg}</Text> : ''}
+          </View>
 				</TestSuite>
 			</ScrollView>
 		</Tester>
@@ -94,7 +105,7 @@ export function closeStream() {
   return (
     <Tester style={{ flex: 1 }}>
       <ScrollView style={{ flex: 1 }}>
-        <TestSuite name="readStcloseStreamream">
+        <TestSuite name="closeStream">
           <TestCase.Logical
             itShould="close stream."
             fn={async ({ expect }) => {
