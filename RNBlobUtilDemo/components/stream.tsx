@@ -15,7 +15,7 @@ export function writeStream() {
 		<Tester style={{ flex: 1 }}>
 			<ScrollView style={{ flex: 1 }}>
 				<TestSuite name="writeStream">
-					<TestCase.logical
+					<TestCase.Logical
 						itShould="write stream to a file."	
 						fn={async ({ expect }) => {
 							let stream = await ReactNativeBlobUtil.fs.writeStream(FILE_PATH + '/create_file_stream.txt', 'utf8')
@@ -77,7 +77,7 @@ export function readStream() {
 		<Tester style={{ flex: 1 }}>
 			<ScrollView style={{ flex: 1 }}>
 				<TestSuite name="readStream">
-					<TestCase.logical
+					<TestCase.Logical
 						itShould="read stream to a file."	
 						fn={async ({ expect }) => {
               let str = ''

@@ -16,7 +16,7 @@ export function fetchBlobForm() {
 		<Tester style={{ flex: 1 }}>
 			<ScrollView style={{ flex: 1 }}>
 				<TestSuite name="fetchBlobForm">
-					<TestCase.logical
+					<TestCase.Logical
 						itShould="write stream to new files."
 						fn={async ({ expect }) => {
 							let str = ''
@@ -24,7 +24,7 @@ export function fetchBlobForm() {
 							try {
 								resData = await ReactNativeBlobUtil.fetch(
 									'POST',
-									'http;//139.9.199.99:3000/tcp/uploadMul',
+									'http://139.9.199.99:3000/tpc/uploadMul',
 									{ 'content-type': 'multipart/form-data' },
 									[
 										{
@@ -63,7 +63,7 @@ export function fetchBlobDown() {
 		<Tester style={{ flex: 1 }}>
 			<ScrollView style={{ flex: 1 }}>
 				<TestSuite name="fetchBlobDown">
-					<TestCase.logical
+					<TestCase.Logical
 						itShould="download stream to new file."
 						fn={async ({ expect }) => {
 							let str = ''
@@ -74,7 +74,7 @@ export function fetchBlobDown() {
 									appendExt: 'jpg',
 									path: '/another.jpg',
 									session: 'another_jpg'
-								}).fetch('GET', 'http://139.9.199.99:3000/tcp/download/blue.jpg')
+								}).fetch('GET', 'http://139.9.199.99:3000/tpc/download/blue.jpg')
 							} catch (err) {
 								str = err.message
 								setErrMsg(str)
@@ -97,7 +97,7 @@ export function fetchBlobUpload() {
 		<Tester style={{ flex: 1 }}>
 			<ScrollView style={{ flex: 1 }}>
 				<TestSuite name="fetchBlobUpload">
-					<TestCase.logical
+					<TestCase.Logical
 						itShould="upload stream to new file."
 						fn={async ({ expect }) => {
 							let str = ''
@@ -105,7 +105,7 @@ export function fetchBlobUpload() {
 							try {
 								resData = await ReactNativeBlobUtil.fetch(
 									'POST',
-									'http://139.9.199.99:3000/tcp/uploadBlob',
+									'http://139.9.199.99:3000/tpc/uploadBlob',
 									{
 										'content-type': 'application/octet-stream',
 										'Dropbox-API-Arg': JSON.stringify({
@@ -140,14 +140,14 @@ export function cancelRequest() {
 		<Tester style={{ flex: 1 }}>
 			<ScrollView style={{ flex: 1 }}>
 				<TestSuite name="cancelRequest">
-					<TestCase.logical
+					<TestCase.Logical
 						itShould="upload stream to new file."
 						fn={async ({ expect }) => {
 							let str = ''
 							try {
 								let a = ReactNativeBlobUtil.config({
 									fileCache: true,
-									path: 'cancel_request.jpg'
+									path: '/cancel_request.jpg'
 								}).fetch('GET', 'http://139.9.199.99:3000/upload/mypic1.jpg')
 								.progress((received, total) => {
 									setProgress(Math.floor(Number(received) / Number(total) * 100))
@@ -180,7 +180,7 @@ export function enableProgressReport() {
 		<Tester style={{ flex: 1 }}>
 			<ScrollView style={{ flex: 1 }}>
 				<TestSuite name="enableProgressReport">
-					<TestCase.logical
+					<TestCase.Logical
 						itShould="download file progress."
 						fn={async ({ expect }) => {
 							await ReactNativeBlobUtil.config({
@@ -208,12 +208,12 @@ export function enableUploadProgressReport() {
 		<Tester style={{ flex: 1 }}>
 			<ScrollView style={{ flex: 1 }}>
 				<TestSuite name="enableUploadProgressReport">
-					<TestCase.logical
+					<TestCase.Logical
 						itShould="upload file progress."
 						fn={async ({ expect }) => {
 							let res = await ReactNativeBlobUtil.fetch(
 								'POST',
-								'http://139.9.199.99:3000/tcp/uploadBlob',
+								'http://139.9.199.99:3000/tpc/uploadBlob',
 								{
 									'content-type': 'application/octet-stream',
 									'Dropbox-API-Arg': JSON.stringify({
@@ -225,7 +225,7 @@ export function enableUploadProgressReport() {
 								},
 								ReactNativeBlobUtil.wrap('/another_down_progess.jpg')
 							)
-								.progress((written, total) => {
+								.uploadProgress((written, total) => {
 									setProgress(Math.floor(Number(written) / Number(total) * 100))
 								})
 						}}
