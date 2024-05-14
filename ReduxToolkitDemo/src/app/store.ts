@@ -33,7 +33,7 @@ const effectFn = (action, listenerApi, name) => {
 }
 const effectFnStopListen = (action, listenerApi, name) => {
   console.log('toolkit ------ listenerMiddleware  startListening: ' + name)
-  console.log('toolkit ------ listenerMiddleware  StopListen actionCreator')
+  console.log('toolkit ------ listenerMiddleware  StopListen type')
   listenerApi.cancelActiveListeners()
   listenerMiddleware.stopListening({ actionCreator: increment, effect: effectFnactionCreator})
 }
