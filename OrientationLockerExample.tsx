@@ -17,36 +17,9 @@ import Orientation, {
 } from 'react-native-orientation-locker';
 
 export function OrientationLockerExample() {
-  // useOrientationChange(o => {
-  //   // Handle orientation change
-  // });
-
-  // useDeviceOrientationChange(o => {
-  //   // Handle device orientation change
-  // });
-
-  // useLockListener(() => {
-  //   // Handle lock change
-  // });
-
   const [showVideo, setShowVideo] = useState(true);
   const [orientation, setOrientation] = useState<string>();
   const [isLock, setIsLock] = useState<boolean>(false);
-
-  // useOrientationChange(o => {
-  //   // Handle orientation change
-  //   console.log(' Handle orientation change-----');
-  // });
-
-  // useDeviceOrientationChange(o => {
-  //   // Handle device orientation change
-  //   console.log('Handle device orientation change-----');
-  // });
-
-  // useLockListener(() => {
-  //   console.log('Handle device useLockListener-----');
-  // });
-
   const updateOrientation = (orientation: string) => {
     console.info('---orientation-----22222', orientation);
     setOrientation(orientation);
@@ -66,34 +39,6 @@ export function OrientationLockerExample() {
     getOrientationInt();
   }, []);
 
-  // useEffect(() => {
-  //   // 开启方向变化的监听
-  //   Orientation.addOrientationListener(updateOrientation);
-  //   return () => {
-  //     // 移除方向变化的监听
-  //     Orientation.removeOrientationListener(updateOrientation);
-  //     console.log('removeOrientationListener');
-  //   };
-  // }, []);
-
-  // useEffect(() => {
-  //   // 开启设备方向变化的监听
-  //   Orientation.addDeviceOrientationListener(updateDeviceOrientation);
-  //   return () => {
-  //     // 移除设备方向变化的监听
-  //     Orientation.removeDeviceOrientationListener(updateDeviceOrientation);
-  //   };
-  // }, []);
-
-  // useEffect(() => {
-  //   // 开启锁定方向变化的监听
-  //   Orientation.addLockListener(updateLock);
-  //   return () => {
-  //     // 移除锁定方向变化的监听
-  //     Orientation.removeLockListener(updateLock);
-  //     console.log('removeLockListener');
-  //   };
-  // }, []);
 
   //获取方向
   const getOrientationInt = () => {
