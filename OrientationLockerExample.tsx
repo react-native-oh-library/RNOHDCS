@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import Orientation, {
   OrientationLocker,
   PORTRAIT,
@@ -17,43 +17,43 @@ import Orientation, {
 } from 'react-native-orientation-locker';
 
 export function OrientationLockerExample() {
-  useOrientationChange(o => {
-    // Handle orientation change
-  });
+  // useOrientationChange(o => {
+  //   // Handle orientation change
+  // });
 
-  useDeviceOrientationChange(o => {
-    // Handle device orientation change
-  });
+  // useDeviceOrientationChange(o => {
+  //   // Handle device orientation change
+  // });
 
-  useLockListener(() => {
-    // Handle lock change
-  });
+  // useLockListener(() => {
+  //   // Handle lock change
+  // });
 
   const [showVideo, setShowVideo] = useState(true);
   const [orientation, setOrientation] = useState<string>();
   const [isLock, setIsLock] = useState<boolean>(false);
 
-  useOrientationChange(o => {
-    // Handle orientation change
-    console.log(' Handle orientation change-----');
-  });
+  // useOrientationChange(o => {
+  //   // Handle orientation change
+  //   console.log(' Handle orientation change-----');
+  // });
 
-  useDeviceOrientationChange(o => {
-    // Handle device orientation change
-    console.log('Handle device orientation change-----');
-  });
+  // useDeviceOrientationChange(o => {
+  //   // Handle device orientation change
+  //   console.log('Handle device orientation change-----');
+  // });
 
-  useLockListener(() => {
-    console.log('Handle device useLockListener-----');
-  });
+  // useLockListener(() => {
+  //   console.log('Handle device useLockListener-----');
+  // });
 
   const updateOrientation = (orientation: string) => {
-    console.info('---orientation-----', orientation);
+    console.info('---orientation-----22222', orientation);
     setOrientation(orientation);
   };
 
   const updateDeviceOrientation = (orientation: string) => {
-    console.info('---updateDeviceOrientation-----', orientation);
+    console.info('---updateDeviceOrientation-----1111111', orientation);
     setOrientation(orientation);
   };
 
@@ -63,44 +63,42 @@ export function OrientationLockerExample() {
 
   useEffect(() => {
     // 开启方向变化的监听
-    getOrientationInt()
+    getOrientationInt();
   }, []);
 
-  useEffect(() => {
-    // 开启方向变化的监听
-    Orientation.addOrientationListener(updateOrientation);
-    return () => {
-      // 移除方向变化的监听
-      Orientation.removeOrientationListener(updateOrientation);
-      console.log('removeOrientationListener')
-    };
-  }, []);
+  // useEffect(() => {
+  //   // 开启方向变化的监听
+  //   Orientation.addOrientationListener(updateOrientation);
+  //   return () => {
+  //     // 移除方向变化的监听
+  //     Orientation.removeOrientationListener(updateOrientation);
+  //     console.log('removeOrientationListener');
+  //   };
+  // }, []);
 
-  useEffect(() => {
-    // 开启设备方向变化的监听
-    Orientation.addDeviceOrientationListener(updateDeviceOrientation);
-    return () => {
-      // 移除设备方向变化的监听
-      Orientation.removeDeviceOrientationListener(updateDeviceOrientation);
-      console.log('removeDeviceOrientationListener')
-    };
-  }, []);
+  // useEffect(() => {
+  //   // 开启设备方向变化的监听
+  //   Orientation.addDeviceOrientationListener(updateDeviceOrientation);
+  //   return () => {
+  //     // 移除设备方向变化的监听
+  //     Orientation.removeDeviceOrientationListener(updateDeviceOrientation);
+  //   };
+  // }, []);
 
-  useEffect(() => {
-    // 开启锁定方向变化的监听
-    Orientation.addLockListener(updateLock);
-    return () => {
-      // 移除锁定方向变化的监听
-      Orientation.removeLockListener(updateLock);
-      console.log('removeLockListener')
-    };
-  }, []);
+  // useEffect(() => {
+  //   // 开启锁定方向变化的监听
+  //   Orientation.addLockListener(updateLock);
+  //   return () => {
+  //     // 移除锁定方向变化的监听
+  //     Orientation.removeLockListener(updateLock);
+  //     console.log('removeLockListener');
+  //   };
+  // }, []);
 
   //获取方向
   const getOrientationInt = () => {
-    Orientation.getOrientation;
     Orientation.getOrientation((orientation: string) => {
-      updateOrientation(orientation)
+      updateOrientation(orientation);
       if (orientation) {
         Alert.alert(`当前屏幕方向为${orientation}`);
       } else {
@@ -139,6 +137,14 @@ export function OrientationLockerExample() {
   const lockToAllOrientationsButUpsideDown = () => {
     Orientation.lockToAllOrientationsButUpsideDown();
   };
+  // 添加监听a
+  const addTisten = () => {
+    Orientation.addDeviceOrientationListener(updateDeviceOrientation);
+  };
+  // 取消监听
+  const cancelAddTisten = () => {
+    Orientation.removeDeviceOrientationListener(updateDeviceOrientation);
+  };
 
   return (
     <View style={styles.container}>
@@ -168,7 +174,12 @@ export function OrientationLockerExample() {
       <TouchableOpacity onPress={unlockAllOrientations} style={styles.button}>
         <Text style={styles.instructions}>解锁当前屏幕旋转锁定</Text>
       </TouchableOpacity>
-
+      <TouchableOpacity onPress={addTisten} style={styles.button}>
+        <Text style={styles.instructions}>添加监听</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={cancelAddTisten} style={styles.button}>
+        <Text style={styles.instructions}>取消监听</Text>
+      </TouchableOpacity>
     </View>
   );
 }
