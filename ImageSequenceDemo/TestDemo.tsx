@@ -6,11 +6,11 @@ import TestDemo2 from "./TestDemo2";
 const images = [
     {uri: 'https://octodex.github.com/images/stormtroopocat.jpg'},
     {uri: 'https://octodex.github.com/images/saint_nictocat.jpg'},
-    require('../../assets/2.jpg'),
-    require('../../assets/3.jpg'),
-    require('../../assets/4.jpg'),
-    require('../../assets/5.jpg'),
-    require('../../assets/6.jpg'),
+    require('./assets/2.jpg'),
+    require('./assets/3.jpg'),
+    require('./assets/4.jpg'),
+    require('./assets/5.jpg'),
+    require('./assets/6.jpg'),
 ]
 
 export interface sequenceType {
