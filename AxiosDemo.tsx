@@ -15,7 +15,7 @@ const AxiosDemo = () => {
     postUrl: 'http://139.9.199.99:3000/tpc/post', // post请求地址
     deleteUrl: 'https://mock.presstime.cn/mock/65dd9694a07c65d1ba49b371/example/http:/139.9.199.99:3000/tpc/delete',// delete请求地址
     patchUrl: 'https://jsonplaceholder.typicode.com/posts/1',// patch请求地址
-    optionsUrl: 'http//1.94.37.200:7070/AntiTheftChain/downloadImage', //options请求地址
+    optionsUrl: 'http://1.94.37.200:7070/AntiTheftChain/downloadImage', //options请求地址
     errorUrl: 'https://mock.presstime.cn/mock/65dd9694a07c65d1ba49b371/example/patch',// error请求地址
     headUrl: 'https://httpbin.org/headers',// head请求地址
     proxyUrl: 'https://www.baidu.com',// https请求地址
@@ -705,7 +705,7 @@ const styles = StyleSheet.create({
   },
   click: {
     marginTop: 5,
-    width: 70,
+    width: 80,
     height: 25,
     backgroundColor: '#007FFF',
     lineHeight: 23,
