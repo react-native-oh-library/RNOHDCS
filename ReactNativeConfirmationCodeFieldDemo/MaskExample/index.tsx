@@ -27,12 +27,12 @@ const MaskExample = () => {
   console.log(`${BESE_NAME} - cellCount - ${props}`);
   const renderCell = ({index, symbol, isFocused}) => {
     let textChild = null;
-
+    let textChildIndex = null ;
     if (symbol) {
       textChild = (
         <MaskSymbol
           maskSymbol="❤️"
-          isLastFilledCell={isLastFilledCell({index, value})}>
+          isLastFilledCell={isLastFilledCell({textChildIndex, value})}>
           {symbol}
         </MaskSymbol>
       );

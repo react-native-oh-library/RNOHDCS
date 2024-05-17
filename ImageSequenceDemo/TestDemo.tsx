@@ -5,11 +5,12 @@ import TestDemo2 from "./TestDemo2";
 
 const images = [
     {uri: 'https://octodex.github.com/images/stormtroopocat.jpg'},
-    require('../../assets/2.jpg'),
-    require('../../assets/3.jpg'),
-    require('../../assets/4.jpg'),
-    require('../../assets/5.jpg'),
-    require('../../assets/6.jpg'),
+    {uri: 'https://octodex.github.com/images/saint_nictocat.jpg'},
+    require('./assets/2.jpg'),
+    require('./assets/3.jpg'),
+    require('./assets/4.jpg'),
+    require('./assets/5.jpg'),
+    require('./assets/6.jpg'),
 ]
 
 export interface sequenceType {
@@ -38,7 +39,7 @@ const ImageSequenceDemo = (props: any) => {
     }
 
     // 设置采样高度
-    const inputSampleGeight = (value: string) => {
+    const inputSampleHeight = (value: string) => {
         if (isNaN(Number(value))) {
             return;
         }
@@ -108,7 +109,7 @@ const ImageSequenceDemo = (props: any) => {
                         <Text>采样宽度/高度：</Text>
                         <View style={styles.box}>
                             <TextInput style={[styles.input, styles.input1]} onChangeText={value => inputSampleWidth(value)} defaultValue='-1' keyboardType='default' />
-                            <TextInput style={[styles.input, styles.input1]} onChangeText={value => inputSetWinHeight(value)} defaultValue='-1' keyboardType='default' />
+                            <TextInput style={[styles.input, styles.input1]} onChangeText={value => inputSampleHeight(value)} defaultValue='-1' keyboardType='default' />
                         </View>
                     </View>
                 </View>

@@ -105,6 +105,14 @@ const App = () => {
         <Text style={styles.textCommon}>弹框状态:{isOpen}</Text>
         <Text style={styles.textCommon}>弹框打开关闭过程中触发:{drawerSlideOutput}</Text>
         <Text style={styles.textCommon}>弹框状态切换触发:{drawerStateChangedOutput}</Text>
+        <TextInput
+          style={{ height: 40, borderColor: 'gray', borderWidth: 1, width:300 }}
+          onChangeText={text => onChangeText(text)}
+          value={value}
+        />
+        <View style={styles.buttonMargin}></View>
+        <Button title="修改弹框宽度" onPress={() => changeDrawerWidth()}/>
+        <View style={styles.buttonMargin}></View>
         <Button title="打开弹框" onPress={() => open()}/>
         <View style={styles.buttonMargin}></View>
         <Button title="改变弹框位置" onPress={() => changeDrawerPosition()}/>
@@ -117,13 +125,6 @@ const App = () => {
         <View style={styles.buttonMargin}></View>
         <Button title="设置导航视图的锁定模式- locked-open" onPress={() => changeDrawerLockMode("locked-open")}/>
         <View style={styles.buttonMargin}></View>
-        <TextInput
-          style={{ height: 40, borderColor: 'gray', borderWidth: 1, width:300 }}
-          onChangeText={text => onChangeText(text)}
-          value={value}
-        />
-        <View style={styles.buttonMargin}></View>
-        <Button title="修改弹框宽度" onPress={() => changeDrawerWidth()}/>
       </View>
     </DrawerLayout>
   );
@@ -133,7 +134,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
     paddingTop: 50,
     padding: 8
   },

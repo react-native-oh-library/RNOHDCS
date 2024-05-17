@@ -259,7 +259,7 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                         }}
                         style={styles.moduleButton}
                     >
-                        <Text style={styles.buttonText}>切换WIFI状态(跳转设置)</Text>
+                        <Text style={styles.buttonText}>切换飞行模式状态(跳转设置)</Text>
                     </TouchableOpacity>
                 </View>
 

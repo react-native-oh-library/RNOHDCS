@@ -16,7 +16,7 @@ export function createFile() {
 		<Tester style={{ flex: 1 }}>
 			<ScrollView style={{ flex: 1 }}>
 				<TestSuite name="createFile">
-					<TestCase.logical
+					<TestCase.Logical
 						itShould="create new file using utf8 type."	
 						fn={async ({ expect }) => {
 							await ReactNativeBlobUtil.fs.createFile(FILE_PATH + '/create_file.txt', '123456', 'utf8')
@@ -36,7 +36,7 @@ export function createFileASCII() {
 		<Tester style={{ flex: 1 }}>
 			<ScrollView style={{ flex: 1 }}>
 				<TestSuite name="createFileASCII">
-					<TestCase.logical
+					<TestCase.Logical
 						itShould="create new file using ascii type."	
 						fn={async ({ expect }) => {
 							await ReactNativeBlobUtil.fs.createFile(FILE_PATH + '/create_file_ascii.txt', [102, 111, 111], 'ascii')
@@ -55,7 +55,7 @@ export function exists() {
 		<Tester style={{ flex: 1 }}>
 			<ScrollView style={{ flex: 1 }}>
 				<TestSuite name="exists">
-					<TestCase.logical
+					<TestCase.Logical
 						itShould="return boolean to determine if file is exist."	
 						fn={async ({ expect }) => {
 							let isExist = await ReactNativeBlobUtil.fs.exists(FILE_PATH + '/create_file.txt')
@@ -73,7 +73,7 @@ export function writeFile() {
 		<Tester style={{ flex: 1 }}>
 			<ScrollView style={{ flex: 1 }}>
 				<TestSuite name="writeFile">
-					<TestCase.logical
+					<TestCase.Logical
 						itShould="write new file with utf8."	
 						fn={async ({ expect }) => {
 							await ReactNativeBlobUtil.fs.writeFile(FILE_PATH + '/write_file.txt', 'write file')
@@ -92,7 +92,7 @@ export function writeFileArray() {
 		<Tester style={{ flex: 1 }}>
 			<ScrollView style={{ flex: 1 }}>
 				<TestSuite name="writeFileArray">
-					<TestCase.logical
+					<TestCase.Logical
 						itShould="write new file with ascii."	
 						fn={async ({ expect }) => {
 							await ReactNativeBlobUtil.fs.writeFileArray(FILE_PATH + '/write_file_array.txt', [104, 97, 114, 109, 111, 110, 121], 'ascii')
@@ -111,12 +111,36 @@ export function unlink() {
 		<Tester style={{ flex: 1 }}>
 			<ScrollView style={{ flex: 1 }}>
 				<TestSuite name="unlink">
-					<TestCase.logical
+					<TestCase.Logical
 						itShould="remove a file."	
 						fn={async ({ expect }) => {
 							await ReactNativeBlobUtil.fs.unlink(FILE_PATH + '/create_file.txt')
 							let isExist = await ReactNativeBlobUtil.fs.exists(FILE_PATH + '/create_file.txt')
 							expect(isExist).to.be.false
+						}}
+					/>
+				</TestSuite>
+			</ScrollView>
+		</Tester>
+	)
+}
+
+export function unlinkAll() {
+	return (
+		<Tester style={{ flex: 1 }}>
+			<ScrollView style={{ flex: 1 }}>
+				<TestSuite name="unlinkAll">
+					<TestCase.Logical
+						itShould="remove all file."	
+						fn={async ({ expect }) => {
+							let pathNames = await ReactNativeBlobUtil.fs.ls(FILE_PATH)
+							let pathNames1 = await ReactNativeBlobUtil.fs.ls(FILE_PATH1)
+							pathNames.forEach(async (item) => {
+                await ReactNativeBlobUtil.fs.unlink(FILE_PATH + '/' + item)
+              });
+              pathNames1.forEach(async (item) => {
+                await ReactNativeBlobUtil.fs.unlink(FILE_PATH1 + '/' + item)
+              });
 						}}
 					/>
 				</TestSuite>
@@ -205,7 +229,7 @@ export function cp() {
 		<Tester style={{ flex: 1 }}>
 			<ScrollView style={{ flex: 1 }}>
 				<TestSuite name="cp">
-					<TestCase.logical
+					<TestCase.Logical
 						itShould="copy file."	
 						fn={async ({ expect }) => {
 							await ReactNativeBlobUtil.fs.cp(FILE_PATH + '/create_file.txt', FILE_PATH + '/create_file_copy.txt')
@@ -224,7 +248,7 @@ export function mv() {
 		<Tester style={{ flex: 1 }}>
 			<ScrollView style={{ flex: 1 }}>
 				<TestSuite name="mv">
-					<TestCase.logical
+					<TestCase.Logical
 						itShould="move file."	
 						fn={async ({ expect }) => {
 							await ReactNativeBlobUtil.fs.mv(FILE_PATH + '/create_file.txt', FILE_PATH + '/create_file_move.txt')
@@ -243,7 +267,7 @@ export function mkdir() {
 		<Tester style={{ flex: 1 }}>
 			<ScrollView style={{ flex: 1 }}>
 				<TestSuite name="mkdir">
-					<TestCase.logical
+					<TestCase.Logical
 						itShould="create floder."	
 						fn={async ({ expect }) => {
 							ReactNativeBlobUtil.fs.mkdir(FILE_PATH + '/111')
@@ -371,7 +395,7 @@ export function removeSession() {
 		<Tester style={{ flex: 1 }}>
 			<ScrollView style={{ flex: 1 }}>
 				<TestSuite name="removeSession">
-					<TestCase.logical
+					<TestCase.Logical
 						itShould="delete session."	
 						fn={async ({ expect }) => {
 							let session = await ReactNativeBlobUtil.fs.session('another_jpg')
