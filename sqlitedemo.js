@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, FlatList} from 'react-native';
-import SQLite from '@react-native-oh-tpl/react-native-sqlite-storage';
+import SQLite from '@react-native-oh-tpl/react-native-sqlite-storage/SQLitePlugin';
 SQLite.DEBUG(true);
 SQLite.enablePromise(false);
 const database_name = 'Test.db';
