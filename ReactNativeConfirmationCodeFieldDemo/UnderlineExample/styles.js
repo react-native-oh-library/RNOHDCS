@@ -26,4 +26,12 @@ export default StyleSheet.create({
     borderBottomColor: '#007AFF',
     borderBottomWidth: 2,
   },
+  edit:{
+    position:'absolute',
+    left:1,
+    bootom:1,
+    opacity:1,
+    fontSize:30,
+    color:'red'
+  }
 });
