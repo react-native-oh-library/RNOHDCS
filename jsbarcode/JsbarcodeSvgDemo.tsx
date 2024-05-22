@@ -109,10 +109,11 @@ export default function JsbarcodeSvgDemo() {
           options={{format: 'EAN8'}}
         />
         <Text>无效条形码测试</Text>
-        <Barcode
+        {/* 会导致其他无法显示暂时注释 */}
+        {/* <Barcode
           value="9501101530003-hello"
           options={{format: 'EAN8'}}
-        />
+        /> */}
       </View>
     </ScrollView>
   );

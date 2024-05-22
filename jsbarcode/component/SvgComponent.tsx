@@ -1,6 +1,6 @@
 import {useEffect, useMemo, useState} from 'react';
 import JsBarcode from 'jsbarcode';
-import {SvgXml} from 'react-native-svg';
+import {SvgXml} from '@react-native-oh-tpl/react-native-svg';
 import {DOMImplementation, XMLSerializer} from 'xmldom';
 
 interface optionsType {
