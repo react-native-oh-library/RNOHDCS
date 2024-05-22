@@ -10,7 +10,7 @@ import {
   Button
 } from 'react-native';
 
-import FS from '@react-native-oh-tpl/react-native-fs';
+import FS from 'react-native-fs';
 
 import {
   Colors,

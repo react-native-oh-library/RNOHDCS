@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-// import ToolbarAndroid from '@react-native-oh-tpl/toolbar-android';
 import ToolbarAndroid from '@react-native-community/toolbar-android';
 
 function App({ }): JSX.Element {

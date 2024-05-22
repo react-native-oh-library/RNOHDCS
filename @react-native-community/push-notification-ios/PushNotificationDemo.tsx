@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { Button } from 'react-native';
-import PushNotification from '@react-native-oh-tpl/push-notification-ios';
+import PushNotification from '@react-native-community/push-notification-ios';
 
 export const PushNotificationDemo = () => {
 

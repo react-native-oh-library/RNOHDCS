@@ -15,7 +15,7 @@
  */
 
 import React from 'react';
-import Animated, { useSharedValue,useAnimatedStyle,withSpring,withTiming,withRepeat,cancelAnimation,withSequence} from '@react-native-oh-tpl/react-native-reanimated';
+import Animated, { useSharedValue,useAnimatedStyle,withSpring,withTiming,withRepeat,cancelAnimation,withSequence} from 'react-native-reanimated';
 import { StyleSheet,Button,View, Text} from 'react-native';
 import { snapPoint } from "react-native-redash/src/Physics"
 import { mixColor } from "react-native-redash/src/Colors";
