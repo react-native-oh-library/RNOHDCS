@@ -1,7 +1,6 @@
 import {ScrollView, View} from 'react-native';
 import {NavigationContainer, Page} from '../../components';
 import JsbarcodeSvgDemo from './JsbarcodeSvgDemo';
-import JsbarcodeInfoDemo from './JsbarcodeInfoDemo';
 
 export default function JsbarcodeDemo() {
   return (
@@ -12,11 +11,6 @@ export default function JsbarcodeDemo() {
             <JsbarcodeSvgDemo />
            </ScrollView>
          </Page>
-        <Page name="条形码接口数据展示">
-           <ScrollView>
-             <JsbarcodeInfoDemo />
-           </ScrollView>
-        </Page>
       </NavigationContainer>
     </View>
   );
