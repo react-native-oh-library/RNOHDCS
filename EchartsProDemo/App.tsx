@@ -5,7 +5,6 @@ import Demo2 from './Demo2';
 import Demo3 from './Demo3';
 import Demo4 from './Demo4';
 import Demo5 from './Demo5';
-import Demo6 from './Demo6';
 
 const App = (): ReactElement => {
 
@@ -14,7 +13,6 @@ const App = (): ReactElement => {
         const [show2, setShow2] = useState(false);
         const [show3, setShow3] = useState(false);
         const [show5, setShow5] = useState(false);
-        const [show6, setShow6] = useState(false);
         return (
             <ScrollView>
                 <View>
@@ -59,16 +57,6 @@ const App = (): ReactElement => {
                     </View>
                 ) : (
                     <Button title='字符串函数，钩子函数' onPress={() => { setShow5(true) }}></Button>
-                )
-                }
-
-                {show6 ? (
-                    <View>
-                        <Text style={styles.title}>更多展示</Text>
-                        <Demo6 />
-                    </View>
-                ) : (
-                    <Button title='更多图表展示' onPress={() => { setShow6(true) }}></Button>
                 )
                 }
             </ScrollView >
