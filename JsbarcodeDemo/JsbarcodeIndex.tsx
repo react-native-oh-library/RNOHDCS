@@ -1,5 +1,5 @@
 import {ScrollView, View} from 'react-native';
-// import {NavigationContainer, Page} from '../../components';
+import {NavigationContainer, Page} from '../../components';
 import JsbarcodeSvgDemo from './JsbarcodeSvgDemo';
 import JsbarcodeInfoDemo from './JsbarcodeInfoDemo';
 
