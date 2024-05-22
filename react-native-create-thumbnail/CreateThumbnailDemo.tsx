@@ -26,7 +26,7 @@ export default function CreateThumbnailDemo() {
   const CreateThumbnail = async()=> {
     let obj = await createThumbnail({ 
       url:'https://media.w3.org/2010/05/sintel/trailer.mp4',
-      timeStamp: 10000
+      timeStamp: 10
     });
     setText(JSON.stringify(obj))
   }
