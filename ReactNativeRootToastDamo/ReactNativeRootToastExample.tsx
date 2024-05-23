@@ -135,7 +135,7 @@ export function ReactNativeRootToastExample() {
             shadow: dataState.shadow,
             animation: dataState.animation,
             hideOnPress: dataState.hideOnPress,
-            delay: dataState.delay,
+            delay: delay,
             backgroundColor: dataState.backgroundColor ? 'blue' : '',
             shadowColor: dataState.shadowColor ? 'yellow' : '',
             textColor: dataState.textColor ? 'purple' : '',
@@ -166,6 +166,7 @@ export function ReactNativeRootToastExample() {
     let text_durtion = dataState.duration == durations.LONG ?"长":"短";
     
     const [ptext,setPtext] = useState("顶部");
+    const [delay,setDelay] = useState(0);
     const [totext,setToPtext] = useState("");
     function a(){
         switch(dataState.position){
@@ -194,10 +195,7 @@ export function ReactNativeRootToastExample() {
     return (
         <RootSiblingParent>
             <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-                <View style={styles.fieldContainer}>
-                    <Button title = "开一个弹窗" onPress = {startPToast} />
-                    <Button title = "关掉这个弹窗" onPress = {hidePToast} />
-                </View>
+                
                 <View style={styles.fieldContainer}>
                     <Button title = "弹窗高度" onPress = {a} />
                     <Text style={styles.fieldText}> {ptext}</Text>
@@ -213,8 +211,9 @@ export function ReactNativeRootToastExample() {
                     <Text style={styles.fieldText}>弹窗延时 (ms)</Text>
                     <TextInput
                         style={styles.input}
-                        onChange={({ nativeEvent: { text } }) => { dataState.delay = parseInt(text); setDataState(dataState) }}
-                        value={(dataState.delay + '')}
+                        onChange={({ nativeEvent: { text } }) => 
+                        {  setDelay(parseInt(text)) }}
+                        value={(delay + '')}
                         keyboardType={'decimal-pad'}
                     />
                 </View>
@@ -251,6 +250,14 @@ export function ReactNativeRootToastExample() {
                 <TouchableHighlight style={styles.button} underlayColor="green" onPress={show} >
                     <Text style={styles.buttonText}>显示弹窗 {totext}</Text>
                 </TouchableHighlight>
+                <View>
+                    <Text>---------------------------------------------------------------------</Text>
+                </View>
+                <View style={styles.fieldContainer}>
+                    <Text>关闭弹窗函数示例</Text>
+                    <Button title = "开一个弹窗" onPress = {startPToast} />
+                    <Button title = "关掉这个弹窗" onPress = {hidePToast} />
+                </View>
                 <View style={styles.code}>
                     <Text style={styles.codeTittle}>CODE:</Text>
                     <Text style={styles.codeText}>
@@ -258,7 +265,7 @@ export function ReactNativeRootToastExample() {
                         <Text style={styles.string}>'{dataState.message}'</Text>{`,
                             {
                                 position:`} <Text style={styles.value}>{dataState.position}</Text>{`,
-                                delay:`} <Text style={styles.value}>{dataState.delay}</Text>{`,
+                                delay:`} <Text style={styles.value}>{delay}</Text>{`,
                                 shadow:`} <Text style={styles.value}>{dataState.shadow ? 'true' : 'false'}</Text>{`,
                                 animation:`} <Text style={styles.value}>{dataState.animation ? 'true' : 'false'}</Text>{`,
                                 hideOnPress:`} <Text style={styles.value}>{dataState.hideOnPress ? 'true' : 'false'}</Text>{`,
