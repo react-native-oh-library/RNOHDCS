@@ -31,13 +31,13 @@ export function fetchBlobForm() {
 											name: 'file',
 											filename: 'another_1.jpg',
 											type: 'image/jpeg',
-											data: '/another.jpg'
+											data: '/data/storage/el2/base/haps/entry/files/another.jpg'
 										},
 										{
 											name: 'file',
 											filename: 'another_2.jpg',
 											type: 'image/jpeg',
-											data: '/another.jpg'
+											data: '/data/storage/el2/base/haps/entry/files/another.jpg'
 										}
 									]
 								)
@@ -72,7 +72,7 @@ export function fetchBlobDown() {
 								resData = await ReactNativeBlobUtil.config({
 									fileCache: true,
 									appendExt: 'jpg',
-									path: '/another.jpg',
+									path: '/data/storage/el2/base/haps/entry/files/another.jpg',
 									session: 'another_jpg'
 								}).fetch('GET', 'http://139.9.199.99:3000/tpc/download/blue.jpg')
 							} catch (err) {
@@ -109,7 +109,7 @@ export function fetchBlobUpload() {
 									{
 										'content-type': 'application/octet-stream',
 										'Dropbox-API-Arg': JSON.stringify({
-											path: '/another_upload.jpg',
+											path: '/data/storage/el2/base/haps/entry/files/another_upload.jpg',
 											mode: 'add',
 											autorename: true,
 											mute: false
@@ -147,7 +147,7 @@ export function cancelRequest() {
 							try {
 								let a = ReactNativeBlobUtil.config({
 									fileCache: true,
-									path: '/cancel_request.jpg'
+									path: '/data/storage/el2/base/haps/entry/files/cancel_request.jpg'
 								}).fetch('GET', 'http://139.9.199.99:3000/upload/mypic1.jpg')
 								.progress((received, total) => {
 									setProgress(Math.floor(Number(received) / Number(total) * 100))
@@ -186,7 +186,7 @@ export function enableProgressReport() {
 							await ReactNativeBlobUtil.config({
 								fileCache: true,
 								appendExt: 'jpg',
-								path: '/another_down_progess.jpg',
+								path: '/data/storage/el2/base/haps/entry/files/another_down_progess.jpg',
 								session: 'another_jpg'
 							})
 								.fetch('GET', 'http://139.9.199.99:3000/upload/mypic1.jpg')
@@ -217,7 +217,7 @@ export function enableUploadProgressReport() {
 								{
 									'content-type': 'application/octet-stream',
 									'Dropbox-API-Arg': JSON.stringify({
-										path: '/another_upload_progess.jpg',
+										path: '/data/storage/el2/base/haps/entry/files/another_upload_progess.jpg',
 										mode: 'add',
 										autorename: true,
 										mute: false
