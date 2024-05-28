@@ -11,8 +11,8 @@ const AxiosDemo = () => {
   let requestUrl = {
     baseUrl: 'http://139.9.199.99:3000', // 基础请求地址
     getUrl: 'http://139.9.199.99:3000/tpc/get', // get请求地址
-    putUrl: 'http://139.9.199.99:3000/tpc/put',// put请求地址
-    postUrl: 'http://139.9.199.99:3000/tpc/post', // post请求地址
+    putUrl: 'https://mock.presstime.cn/mock/65dd9694a07c65d1ba49b371/example/http:/139.9.199.99:3000/tpc/put',// put请求地址
+    postUrl: 'https://mock.presstime.cn/mock/65dd9694a07c65d1ba49b371/example/http:/139.9.199.99:3000/tpc/post', // post请求地址
     deleteUrl: 'https://mock.presstime.cn/mock/65dd9694a07c65d1ba49b371/example/http:/139.9.199.99:3000/tpc/delete',// delete请求地址
     patchUrl: 'https://jsonplaceholder.typicode.com/posts/1',// patch请求地址
     optionsUrl: 'http://1.94.37.200:7070/AntiTheftChain/downloadImage', //options请求地址
