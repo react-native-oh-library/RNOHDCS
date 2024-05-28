@@ -45,6 +45,7 @@ const Inputs: React.FunctionComponent<InputsComponentProps> = () => {
 
   const InputFieldsStyle = {
     borderWidth: 0,
+    backgroundColor:'white'
   };
 
   const inputProps = {};
@@ -242,7 +243,7 @@ const Inputs: React.FunctionComponent<InputsComponentProps> = () => {
                 placeholderTextColor="black"
                 autoCapitalize="none"
                 keyboardAppearance="light"
-                secureTextEntry={true}
+                // secureTextEntry={true}
                 autoCorrect={false}
                 style={InputFieldsStyle}
                 keyboardType="default"
@@ -351,7 +352,7 @@ const Inputs: React.FunctionComponent<InputsComponentProps> = () => {
                 }
                 placeholder="Password"
                 autoCapitalize="none"
-                secureTextEntry={true}
+                // secureTextEntry={true}
                 autoCorrect={false}
                 keyboardType="default"
                 style={InputFieldsStyle}

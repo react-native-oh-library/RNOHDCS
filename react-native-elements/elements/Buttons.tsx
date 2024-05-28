@@ -10,19 +10,24 @@ export default function SnapCarouselExample(): JSX.Element {
 
   return (
     <View>
-      <Text style = {styles.titleStyle}>Buttons</Text>
+      <Text style={styles.titleStyle}>Buttons</Text>
       <ScrollView>
         <View style={styles.contentView}>
           <Text style={styles.subTitleStyle}>Basic Buttons</Text>
           <View style={{ alignItems: 'center' }}>
-            <View style={{margin:4}}>
+            <View style={{ margin: 4 }}>
               <Button size="sm">Small</Button>
               <Button size="md">Medium</Button>
               <Button size="lg">Large</Button>
             </View>
             <View>
-              <View style={{margin:4}}>
-                <Button>Primary</Button>
+              <View style={{ margin: 4 }}>
+                <Button
+                  linearGradientProps={{
+                    colors: ["#FF9800", "#F44336"],
+                    start: { x: 0, y: 0.5 },
+                    end: { x: 1, y: 0.5 },
+                  }}>Primary</Button>
                 <Button color="secondary">Secondary</Button>
                 <Button color="warning">Warning</Button>
                 <Button color="error">Error</Button>
@@ -278,16 +283,16 @@ const styles = StyleSheet.create({
     width: '100%',
     marginVertical: 20,
   },
-  titleStyle:{
-    fontWeight:'bold',
+  titleStyle: {
+    fontWeight: 'bold',
     fontSize: 24,
   },
-  subTitleStyle:{
-    fontWeight:'bold',
+  subTitleStyle: {
+    fontWeight: 'bold',
     fontSize: 18,
   },
-  normalTitle:{
-    fontWeight:'bold',
+  normalTitle: {
+    fontWeight: 'bold',
     fontSize: 15,
   }
 });

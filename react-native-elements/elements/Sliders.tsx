@@ -27,6 +27,7 @@ const Sliders: React.FunctionComponent<SlidersComponentProps> = () => {
 
       <View style={[styles.contentView]}>
         <Slider
+          // debugTouchArea
           value={value}
           onValueChange={setValue}
           maximumValue={100}
@@ -53,12 +54,14 @@ const Sliders: React.FunctionComponent<SlidersComponentProps> = () => {
       <Text style={styles.subTitleStyle}>Slider Vertical</Text>
       <View style={styles.verticalContent}>
         <Slider
+          debugTouchArea
           value={vertValue}
           onValueChange={setVertValue}
           maximumValue={50}
           minimumValue={20}
           step={1}
           orientation="vertical"
+          // allowTouchTrack
           thumbStyle={{ height: 20, width: 16, backgroundColor: 'transparent' }}
           thumbProps={{
             children: (

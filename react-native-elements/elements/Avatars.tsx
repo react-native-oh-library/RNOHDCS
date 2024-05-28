@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
-import { Avatar } from '@rneui/themed';
+import { Avatar, Icon } from '@rneui/themed';
 import { Text } from '@rneui/base';
 
 type AvatarData = {
@@ -196,7 +196,8 @@ const Avatars: React.FunctionComponent<AvatarComponentProps> = () => {
             source={{ uri: 'https://randomuser.me/api/portraits/women/57.jpg' }}
             containerStyle={{ backgroundColor: 'grey' }}
           >
-            <Avatar.Accessory size={23} />
+            <Avatar.Accessory size={23} name='pencil' type='font-awesome' color='#00aced'>
+            </Avatar.Accessory>
           </Avatar>
         </View>
       </ScrollView>

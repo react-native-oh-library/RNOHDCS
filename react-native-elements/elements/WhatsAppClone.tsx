@@ -93,7 +93,7 @@ const WhatsappClone: React.FunctionComponent = () => {
                 <Avatar
                   rounded
                   size={40}
-                  source={require('../../assets/images/avatar1.jpg')}
+                  // source={require('../../assets/images/avatar1.jpg')}
                 />
                 <ListItem.Content>
                   <ListItem.Title>
@@ -118,7 +118,7 @@ const WhatsappClone: React.FunctionComponent = () => {
             <Avatar
               rounded
               size={40}
-              source={require('../../assets/images/avatar1.jpg')}
+              // source={require('../../assets/images/avatar1.jpg')}
             >
               <Avatar.Accessory
                 iconProps={{ name: 'add' }}
@@ -142,7 +142,7 @@ const WhatsappClone: React.FunctionComponent = () => {
               <Avatar
                 rounded
                 size={40}
-                source={require('../../assets/images/avatar1.jpg')}
+                // source={require('../../assets/images/avatar1.jpg')}
               />
               <ListItem.Content>
                 <ListItem.Title>

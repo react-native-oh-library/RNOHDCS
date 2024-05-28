@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Pressable } from 'react-native';
+import { View, Pressable, TouchableOpacity } from 'react-native';
 import { useTheme, Text, makeStyles } from '@rneui/themed';
 
 type TextComponentProps = {};
@@ -15,17 +15,17 @@ const COLORS = [
 ];
 
 const TextComponent: React.FunctionComponent<TextComponentProps> = () => {
-  const { updateTheme } = useTheme();
+  const { theme, updateTheme } = useTheme();
   const styles = useStyles();
 
   return (
     <>
-      <Text style={{fontSize:24,fontWeight:'bold'}}>Theme</Text>
+      <Text style={{fontSize:24,fontWeight:'bold',color:theme.colors.primary}}>Theme</Text>
       <View style={styles.view}>
         <Text>Simply select colors using the palette below.</Text>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
           {COLORS.map((color) => (
-            <Pressable
+            <TouchableOpacity
               key={color}
               style={{
                 backgroundColor: '#' + color,

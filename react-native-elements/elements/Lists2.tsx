@@ -156,15 +156,15 @@ const Lists2: React.FunctionComponent<ListComponentProps> = () => {
                   <Avatar rounded source={{ uri: l.avatar_url }} />
                   <ListItem.Content>
                     <ListItem.Title
-                      style={{ color: 'black', fontWeight: 'bold' }}
+                      style={{ color: 'white', fontWeight: 'bold' }}
                     >
                       {l.name}
                     </ListItem.Title>
-                    <ListItem.Subtitle style={[{ color: 'black' }]}>
+                    <ListItem.Subtitle style={[{ color: 'white' }]}>
                       {l.subtitle}
                     </ListItem.Subtitle>
                   </ListItem.Content>
-                  <ListItem.Chevron color="black" />
+                  <ListItem.Chevron color="blue" name='pencil' type='font-awesome'/>
                 </ListItem>
               ))}
             </View>

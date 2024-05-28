@@ -70,7 +70,7 @@ const Ratings: React.FunctionComponent<RatingsComponentProps> = () => {
             type="star"
             fractions={1}
             startingValue={3.6}
-            readonly
+            readonly={true}
             imageSize={40}
             onFinishRating={ratingCompleted}
             style={{ paddingVertical: 10 }}
