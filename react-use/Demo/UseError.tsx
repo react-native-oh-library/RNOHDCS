@@ -7,9 +7,9 @@ import { useError } from "react-use";
 
   const handleButtonClick = () => {
     try {
-      throw new Error('这是一个测试错误！')
+      console.error(new Error('这是一个测试错误！'));
     } catch (err: any) {
-      error(err);
+      console.error(error(err));
     }
   }
 
