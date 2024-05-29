@@ -27,6 +27,8 @@ function logger({getState, dispatch}) {
 const increment = createAction<number | undefined>('counter/increment')
 console.log('toolkit ------ createAction  success')
 const listenerMiddleware = createListenerMiddleware()
+let temp = (Object.keys(listenerMiddleware).length!=0)?'success':'error'
+console.log('toolkit ------ createListenerMiddleware' + temp)
 const effectFn = (action, listenerApi, name) => {
   console.log('toolkit ------ listenerMiddleware  startListening: ' + name)
   listenerApi.cancelActiveListeners()
@@ -73,10 +75,10 @@ listenerMiddleware.startListening({
 })
 
 export let middAddListen = () => {
-  console.log('toolkit ------  getDefaultMiddleware  logger:' + addListener({
+  console.log('toolkit ------  getDefaultMiddleware  logger:' + JSON.stringify(addListener({
     actionCreator: increment,
     effect: effectFnactionCreator
-  }))
+  })))
   return addListener({
     actionCreator: increment,
     effect: effectFnactionCreator
@@ -84,10 +86,10 @@ export let middAddListen = () => {
 }
 
 export let middRemoveListen = () => {
-  console.log('toolkit ------  getDefaultMiddleware  logger:' + removeListener({
+  console.log('toolkit ------  getDefaultMiddleware  logger:' + JSON.stringify(removeListener({
     actionCreator: increment,
     effect: effectFnactionCreator
-  }))
+  })))
   return removeListener({
     actionCreator: increment,
     effect: effectFnactionCreator
@@ -95,7 +97,7 @@ export let middRemoveListen = () => {
 }
 
 export let middClearsListen = () => {
-  console.log('toolkit ------  getDefaultMiddleware  logger:' + clearAllListeners())
+  console.log('toolkit ------  getDefaultMiddleware  logger:' + JSON.stringify(clearAllListeners()))
   return clearAllListeners()
 }
 
