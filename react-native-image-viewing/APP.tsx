@@ -50,7 +50,7 @@ const ImageList = ({ images, shift = 0, onPress }: Props) => (
         activeOpacity={0.8}
         onPress={() => {onPress(index)}}
       >
-        <Image source={{ uri: imageUrl }} key={`${index}`} doubleTapToZoomEnabled={true} style={styles1.image} />
+        <Image source={ imageUrl } key={`${index}`} doubleTapToZoomEnabled={true} style={styles1.image} />
       </TouchableOpacity>
     ))}
   </View>
