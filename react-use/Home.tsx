@@ -58,6 +58,7 @@ import UseUpdateDemo from './Demo/UseUpdate';
 import UseUpdateEffectDemo from './Demo/UseUpdateEffect';
 import CreateReducerContextDemo from './Demo/CreateReducerContext';
 import CreateMemoDemo from './Demo/CreateMemo';
+import UseTimeoutDemo from './Demo/UseTimeout'
 
 function ReactUseDemo() {
     return (
@@ -113,7 +114,7 @@ function ReactUseDemo() {
                 <Page name="Dev:UseStateHistoryDemo "><UseStateHistoryDemo /></Page>
                 <Page name="Dev:UseThrottleDemo "><UseThrottleDemo /></Page>
                 <Page name="Dev:UseThrottleFnDemo "><UseThrottleFnDemo /></Page>
-                <Page name="Dev:UseTimeoutDemo "><UseMountDemo /></Page>
+                <Page name="Dev:UseTimeoutDemo "><UseTimeoutDemo /></Page>
                 <Page name="Dev:UseTimeoutFnDemo "><UseTimeoutFnDemo /></Page>
                 <Page name="Dev:UseToggleDemo "><UseToggleDemo /></Page>
                 <Page name="Dev:UseTweenDemo "><UseTweenDemo /></Page>
