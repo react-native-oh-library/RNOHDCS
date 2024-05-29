@@ -58,7 +58,7 @@ import UseUpdateDemo from './Demo/UseUpdate';
 import UseUpdateEffectDemo from './Demo/UseUpdateEffect';
 import CreateReducerContextDemo from './Demo/CreateReducerContext';
 import CreateMemoDemo from './Demo/CreateMemo';
-import UseTimeoutDemo from './Demo/UseTimeout'
+import UseTimeoutDemo from './Demo/UseTimeout';
 
 function ReactUseDemo() {
     return (
