@@ -27,7 +27,7 @@ function logger({getState, dispatch}) {
 const increment = createAction<number | undefined>('counter/increment')
 console.log('toolkit ------ createAction  success')
 const listenerMiddleware = createListenerMiddleware()
-let temp = (Object.keys(listenerMiddleware).length !== 0 ) ? 'success' : 'error'
+let temp = Object.keys(listenerMiddleware).length ? 'success' : 'error'
 console.log('toolkit ------ createListenerMiddleware' + temp)
 const effectFn = (action, listenerApi, name) => {
   console.log('toolkit ------ listenerMiddleware  startListening: ' + name)
