@@ -666,7 +666,7 @@ const AxiosDemo = () => {
           <Text style={styles.requestAddressUrl}>{requestAddress}</Text>
         </View>
         <View style={styles.requestResult}>
-          <Text style={styles.requestResultTeaxt}>请求地址：</Text>
+          <Text style={styles.requestResultTeaxt}>请求结果：</Text>
           <Text style={styles.requestResultState}>{requestStatus}{'\n'}{requestResult}</Text>
         </View>
         <View style={styles.requestResult}>
