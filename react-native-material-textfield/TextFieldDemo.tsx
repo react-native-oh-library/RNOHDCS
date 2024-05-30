@@ -14,99 +14,92 @@
  * limitations under the License.
  */
 
-import React, {useState} from 'react';
-import {  StyleSheet,SafeAreaView,Platform,ScrollView,View,Button} from 'react-native';
+import React from 'react';
+import {  StyleSheet,Platform,Button} from 'react-native';
 import {
-  TextField,
+  TextField
 } from 'react-native-material-textfield';
-
-
 let defaults = {
   firstname: 'Eddard',
-  lastname: 'Stark',
+  lastname: 'Stark'
 };
+import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
 
-
-// 导出组件
-export default function TextfieldDemo() {
-  const [errors, setErrors] = useState({});  
-  const [combinedState, setCombinedState] = useState({  
-    ...defaults,  
-    secureTextEntry:true, // 从上面的 useState 中取得值  
-  }); 
+function TextfieldDemo() { 
   const firstnameRef  = React.createRef();;
   const lastnameRef  = React.createRef();
   const emailRef = React.createRef();
   const passwordRef = React.createRef();
+  const [firstnameErrors, setFirstnameRef] = React.useState('');
+  const [lastnameRefErrors, setLastnameRef] = React.useState('');
+  const [emailRefErrors, setEmailRef] = React.useState('');
+  const [passwordRefErrors, setpasswordRef] = React.useState('');
 
-  const onSubmit = () => {
-    let errors = {};
-    ['firstname', 'lastname','about', 'email', 'password']
-    .forEach((name) => {
-        const ref = name === 'firstname' ? firstnameRef :  
-                    name === 'lastname' ? lastnameRef :
-                    name === 'email' ? emailRef : 
-                    passwordRef;       
-        let value = ref.current ? ref.current.value() : ''; // 从 ref 中获取值 
-        if(!value) {
-          errors[name] = 'Should not be empty';
-        } else {
-          if('password' === name && value.length < 6) {
-            errors[name] = 'Too short';
-          }
-        }
-    });
-    setErrors(errors)
-  }
-
-  const onChangeText= () => {
-    ['firstname', 'lastname', 'email', 'password']
-    .forEach((name) => {
-      const ref = name === 'firstname' ? firstnameRef :  
-      name === 'lastname' ? lastnameRef :
-      name === 'email' ? emailRef : 
-      passwordRef;      
-      let value = ref.current ? ref.current.value() : ''; // 从 ref 中获取值  
-      setCombinedState({  
-        ...combinedState,  
-        // 例如，更新 text 属性  
-        [name]: value
-      });  
-    })
-  }
- 
-
+  const onFirstnameChangeText = (text: React.SetStateAction<string>) => {
+    if(!text) {
+      setFirstnameRef('Should not be empty')
+    } else {
+      setFirstnameRef('')
+    }
+  };
+  
+  const onLastnameRefChangeText = (text: React.SetStateAction<string>) => {
+    if(!text) {
+      setLastnameRef('Should not be empty')
+    } else {
+      setEmailRef('')
+    }
+  };
+  
+  const onEmialChangeText = (text: React.SetStateAction<string>) => {
+    if(!text) {
+      setEmailRef('Should not be empty')
+    } else {
+      setEmailRef('')
+    } 
+  };
+  
+  const onPasswordChangeText = (text: React.SetStateAction<string>) => {
+    if(!text) {
+      setpasswordRef('Should not be empty')
+    } else if(text.length < 6){
+      setpasswordRef('Too short')
+    } else {
+      setpasswordRef('')
+    }
+  };
+  
   return (
-    <SafeAreaView style={styles.safeContainer}>
-        <ScrollView
-            style={styles.scroll}
-            contentContainerStyle={styles.contentContainer}
-            keyboardShouldPersistTaps='handled'
-          >
-          <View style={styles.container}>
-              <TextField
+    <Tester>
+    <TestSuite name='MaterialTextfielText' >
+        <TestCase itShould='Default Material Textfiel Text'>
+          <TextField
                 ref={firstnameRef}
-                value={defaults.firstname}
-                autoCorrect={false}
-                enablesReturnKeyAutomatically={true}
-                returnKeyType='next'
-                label='First Name'
-                onChangeText={onChangeText}
-                error={errors.firstname}
-              />
-
-             <TextField
-                ref={lastnameRef}
                 value={defaults.lastname}
                 autoCorrect={false}
                 enablesReturnKeyAutomatically={true}      
                 returnKeyType='next'
-                label='Last Name'
-                onChangeText={onChangeText}
-                error={errors.lastname}
-              />  
+                label='first Name'
+                onChangeText = {onFirstnameChangeText}
+                error={firstnameErrors}
+              />    
+        </TestCase>
+        <TestCase itShould='Flat input large font'>
+            <TextField
+                  ref={lastnameRef}
+                  value={defaults.firstname}
+                  fontSize= {26}
+                  autoCorrect={false}
+                  enablesReturnKeyAutomatically={true}      
+                  returnKeyType='next'
+                  label='Last Name'
+                  onChangeText = {onLastnameRefChangeText}
+                  error={lastnameRefErrors}
+                />    
+        </TestCase>
 
-              <TextField
+        <TestCase itShould='Flat input email large font'>
+             <TextField
                 ref={emailRef}
                 keyboardType='email-address'
                 autoCapitalize='none'
@@ -114,11 +107,14 @@ export default function TextfieldDemo() {
                 enablesReturnKeyAutomatically={true}
                 returnKeyType='next'
                 label='Email Address'
-                onChangeText={onChangeText}
-                error={errors.email}
-              />
+                fontSize= {26}
+                onChangeText = {onEmialChangeText}
+                error={emailRefErrors}
+              />  
+        </TestCase>
 
-              <TextField 
+        <TestCase itShould='Flat input password large font'>
+            <TextField 
                 ref={passwordRef}
                 autoCapitalize='none'
                 autoCorrect={false}
@@ -126,20 +122,22 @@ export default function TextfieldDemo() {
                 returnKeyType='done'
                 label='Password'
                 title='Choose wisely'
+                secureTextEntry = {true}
                 maxLength={30}
-                onChangeText={onChangeText}
+                fontSize= {26}
+                onChangeText = {onPasswordChangeText}
                 characterRestriction={20}
-                error={errors.password}
-              />
-
-             <Button title='运行' color='#841584' onPress={onSubmit}></Button>
-              
-          </View>
-        </ScrollView>
-
-    </SafeAreaView>
-  );
+                error={passwordRefErrors}
+              />   
+        </TestCase>
+    
+     </TestSuite>
+    </Tester>
+  )
 }
+
+export default TextfieldDemo ;
+
 
 const styles = StyleSheet.create({
   safeContainer: {
