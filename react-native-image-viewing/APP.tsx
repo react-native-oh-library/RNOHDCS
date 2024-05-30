@@ -8,7 +8,7 @@ import {
   StyleSheet,
   Text,
   View,
-  Image, ScrollView, TouchableOpacity 
+  Image, ScrollView, TouchableOpacity,Button
 } from "react-native";
 import memoize from "lodash/memoize";
 import get from "lodash/get";
@@ -78,6 +78,7 @@ export default function App() {
   const [currentImageIndex, setImageIndex] = useState(0);
   const [images, setImages] = useState(architecture);
   const [isVisible, setIsVisible] = useState(false);
+  const [animationType, setAnimationType] = useState('slide');
 
   const onSelect = (images, index) => {
     setImageIndex(index);
@@ -105,6 +106,10 @@ export default function App() {
     )
   );
 
+  const setType = () => {
+    setAnimationType(animationType === 'slide' ? 'fade' : 'slide')
+  }
+
   return (
     <SafeAreaView style={styles.root}>
       <ImageList
@@ -114,6 +119,7 @@ export default function App() {
       />
       <View style={styles.about}>
         <Text style={styles.name}>[ react-native-image-viewing ]</Text>
+        <Button title="切换动画效果" onPress={setType}></Button>
       </View>
       <ImageViewing
         images={getImageSource(images)}
@@ -123,7 +129,7 @@ export default function App() {
         OnImageIndexChange={OnImageIndexChange}
         presentationStyle="fullScreen"
         backgroundColor="#f00"
-        animationType="slide"
+        animationType={animationType}
         onLongPress={onLongPress}
         delayLongPress={2000}
         keyExtreactor={(imageSrc,index) => {
