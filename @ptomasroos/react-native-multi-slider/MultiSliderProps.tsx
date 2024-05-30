@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { StyleSheet, View, Text, ScrollView, Alert, Animated, Image } from 'react-native';
-import MultiSlider from 'react-native-multi-slider';
+import MultiSlider from '@ptomasroos/react-native-multi-slider';
 
 const AnimatedView = Animated.createAnimatedComponent(View);
 
@@ -91,13 +91,13 @@ class CustomMarker extends React.Component<any> {
           }
           resizeMode="contain"
         />
-        <Text style={markerStyles.text}>{this.props.valueSuffix}{this.props.currentValue}</Text>
+        <Text style={markerStyles.text}>{this.props.valuePrefix}{this.props.currentValue}{this.props.valueSuffix}</Text>
       </View>
     );
   }
 }
 
-function MultiSliderProps(){
+export default function MultiSliderProps(){
 
     let testRef = React.useRef<View>(null)
     let [currentTestId, setCurrentTestId] = React.useState('')
@@ -132,7 +132,7 @@ function MultiSliderProps(){
             <View style={styles.container}>
                 <Text style={styles.title}>MultiSlider功能验证</Text>
                 <View style={styles.sliders}>
-                    <Text style={styles.text}>values（设置values）</Text>
+                    <Text style={styles.text}>values（设置values，1和6）</Text>
                     <MultiSlider values={[1, 6]} />
 
                     <Text style={styles.text}>onValuesChangeStart（值开始变化触发回调）</Text>
@@ -156,15 +156,22 @@ function MultiSliderProps(){
                     <Text style={styles.text}>customMarker（自定义光标）</Text>
                     <MultiSlider  customMarker={CustomMarker} /> 
 
-                    <Text style={styles.text}>customMarkerLeft/Right（自定义左右光标）</Text>
+                    <Text style={styles.text}>customMarkerLeft/Right</Text>
+                    <Text style={styles.text}>自定义左右光标：默认未启用</Text>
                     <MultiSlider 
-                    values={[1, 1]} 
+                    values={[0, 10]} 
                     customMarkerLeft={() => <CustomMarker/>} 
                     customMarkerRight={() => <CustomMarker pressed />} 
                     />
 
-                    <Text style={styles.text}>isMarkersSeparated（禁止两个光标重叠）</Text>
-                    <MultiSlider values={[1, 10]} isMarkersSeparated={true}  />
+                    <Text style={styles.text}>isMarkersSeparated</Text>
+                    <Text style={styles.text}>自定义左右光标：启用</Text>
+                    <MultiSlider 
+                    values={[0, 10]} 
+                    isMarkersSeparated={true}
+                    customMarkerLeft={() => <CustomMarker/>} 
+                    customMarkerRight={() => <CustomMarker pressed />} 
+                    />
 
                     <Text style={styles.text}>min（滑块可用最小值3）</Text>
                     <MultiSlider  enableLabel min={3} />
@@ -190,49 +197,49 @@ function MultiSliderProps(){
                     />
 
                     <Text style={styles.text}>valuePrefix（值的前缀 b）</Text>
-                    <MultiSlider values={[1, 10]} customMarker={CustomMarker} valuePrefix='b' />
+                    <MultiSlider values={[0, 10]} customMarker={CustomMarker} valuePrefix='b' />
 
                     <Text style={{...styles.text, marginTop: 20}}>valueSuffix（值的后缀 a）</Text>
-                    <MultiSlider values={[1, 10]} customMarker={CustomMarker} valueSuffix='a' />
+                    <MultiSlider values={[0, 10]} customMarker={CustomMarker} valueSuffix='a' />
 
-                    <Text style={styles.text}>enabledOne（启用第一个光标）</Text>
-                    <MultiSlider values={[1, 10]} enabledOne={false} />
+                    <Text style={styles.text}>enabledOne（禁用第一个光标）</Text>
+                    <MultiSlider values={[0, 10]} enabledOne={false} />
 
-                    <Text style={styles.text}>enabledTwo（启用第二个光标）</Text>
-                    <MultiSlider values={[1, 10]} enabledTwo={false} />
+                    <Text style={styles.text}>enabledTwo（禁用第二个光标）</Text>
+                    <MultiSlider values={[0, 10]} enabledTwo={false} />
 
-                    <Text style={styles.text}>stepsAs（自定义步骤标签）</Text>
-                    <MultiSlider values={[1, 10]} step={2} showSteps stepsAs={
+                    <Text style={styles.text}>stepsAs</Text>
+                    <Text style={styles.text}>自定义步骤标签，默认展示</Text>
+                    <MultiSlider values={[0, 10]} step={2} showSteps stepsAs={
                       [
                         {index: 1, stepLabel: 't1', prefix: 'a1', suffix: 'b1'}, 
                         {index: 2, stepLabel: 't2', prefix: 'a2', suffix: 'b2'}
                       ]}
                     />
 
-                    <Text style={styles.text}>showStepLabels、showStepLabels（显示自定义步骤标签）</Text>
-                    <MultiSlider values={[1, 10]} showSteps showStepLabels={false} stepsAs={
+                    <Text style={styles.text}>showStepLabels</Text>
+                    <Text style={styles.text}>隐藏/显示自定义步骤标签，这里隐藏</Text>
+                    <MultiSlider values={[0, 10]} step={2} showSteps showStepLabels={false} stepsAs={
                       [
-                        {index: 1, stepLabel: 't1', prefix: 'a1', suffix: 'b1'}, 
-                        {index: 2, stepLabel: 't2', prefix: 'a2', suffix: 'b2'}
+                        {index: 1, stepLabel: 't', prefix: 'a', suffix: 'b'}, 
+                        {index: 2, stepLabel: 't', prefix: 'a', suffix: 'b'}
                       ]}
                     />
 
                     <Text style={styles.text}>showStepMarkers（显示步骤对应的刻度点）</Text>
-                    <MultiSlider values={[1, 10]} step={2} showSteps showStepMarkers={false} stepsAs={
-                      [
-                        {index: 1, stepLabel: 't1', prefix: 'a1', suffix: 'b1'}, 
-                        {index: 2, stepLabel: 't2', prefix: 'a2', suffix: 'b2'}
-                      ]}
-                    />                                                             
+                    <MultiSlider values={[0, 10]} step={2} showSteps showStepMarkers/>                                                             
 
                     <Text style={styles.text}>onToggleOne</Text>
-                    <MultiSlider values={[1, 10]} onToggleOne={onToggleOne} />
+                    <Text style={styles.text}>点击第一个光标回调</Text>
+                    <MultiSlider values={[0, 10]} onToggleOne={onToggleOne} />
 
                     <Text style={styles.text}>onToggleTwo</Text>
-                    <MultiSlider values={[1, 10]} onToggleTwo={onToggleTwo} />
+                    <Text style={styles.text}>点击第二个光标回调</Text>
+                    <MultiSlider values={[0, 10]} onToggleTwo={onToggleTwo} />
 
-                    <Text style={styles.text}>allowOverlap（允许光标重叠）</Text>
-                    <MultiSlider values={[1, 10]} enableLabel allowOverlap={false} />
+                    <Text style={styles.text}>allowOverlap</Text>
+                    <Text style={styles.text}>允许/禁止光标重叠，默认禁止，这里允许</Text>
+                    <MultiSlider values={[0, 10]} enableLabel allowOverlap={true} />
 
                     <Text style={styles.text}>snapped（步进式移动光标）</Text>
                     <MultiSlider
@@ -248,31 +255,33 @@ function MultiSliderProps(){
                       step={3}
                     />                      
 
-                    <View style={{marginTop: 60, marginBottom: 120}}>
+                    <View style={{marginTop: 60, marginBottom: 150}}>
                       <Text style={styles.text}>vertical（垂直方向）</Text>
                       <MultiSlider  vertical />
                     </View>
 
-                    <Text style={styles.text}>markerOffsetX（横向偏移）</Text>
-                    <MultiSlider  markerOffsetX={10} />
+                    <Text style={styles.text}>markerOffsetX（横向偏移20）</Text>
+                    <MultiSlider  markerOffsetX={20} />
 
-                    <Text style={styles.text}>markerOffsetY（纵向偏移）</Text>
-                    <MultiSlider  markerOffsetY={10} />
+                    <Text style={styles.text}>markerOffsetY（纵向偏移20）</Text>
+                    <MultiSlider  markerOffsetY={20} />
 
                     <Text style={styles.text}>markerSize（光标与边缘的距离）</Text>
                     <MultiSlider  markerSize={50} />                    
 
-                    <Text style={styles.text}>minMarkerOverlapDistance（避免大光标重叠）</Text>
-                    <MultiSlider values={[1, 10]} minMarkerOverlapDistance={100} />
+                    <Text style={styles.text}>minMarkerOverlapDistance</Text>
+                    <Text style={styles.text}>避免大光标重叠，间隔100</Text>
+                    <MultiSlider values={[0, 10]} minMarkerOverlapDistance={100} />
 
-                    <Text style={styles.text}>minMarkerOverlapStepDistance（避免大光标重叠）</Text>
-                    <MultiSlider values={[1, 300]} step={3} allowOverlap={false} smoothSnapped minMarkerOverlapStepDistance={2}  />                    
+                    <Text style={styles.text}>minMarkerOverlapStepDistance</Text>
+                    <Text style={styles.text}>避免大光标重叠，间隔2步</Text>
+                    <MultiSlider values={[0, 300]} step={3} allowOverlap={false} smoothSnapped minMarkerOverlapStepDistance={2}  />                    
 
                     <Text style={styles.text}>imageBackgroundSource（背景图片）</Text>
                     <MultiSlider  imageBackgroundSource={require('./logo-og.png')} />
 
                     <Text style={styles.text} >testID（设置testID）</Text>
-                    <MultiSlider values={[1, 6]} testID={'666'} ref={testRef} />
+                    <MultiSlider values={[0, 6]} testID={'666'} ref={testRef} />
                     <Text onPress={getCurrentTestId}>{currentTestId || '点击获取testID'}</Text>
                 </View>
             </View>
@@ -336,7 +345,7 @@ const styles = StyleSheet.create({
     },
     sliders: {
       margin: 20,
-      width: 280,
+      // width: 280,
     },
     text: {
       alignSelf: 'center',
@@ -350,5 +359,3 @@ const styles = StyleSheet.create({
       justifyContent: 'space-around',
     },
   });
-
-export default MultiSliderProps;
