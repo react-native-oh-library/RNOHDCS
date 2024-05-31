@@ -91,17 +91,11 @@ export function ZipArchiveDemo() {
 
     // 解压时是否需要密码
     const isUnzipWithPassword = () => {
-        console.log(`isPasswordProtected--- ${needPassword}`)
         if (unzipPassword) {
             if (zipPassword === '') {
                 Alert.alert('错误', '请先进行压缩并设置密码');
                 return;
             }
-
-            // if (unzipPassword === '') {
-            //     setUnzipPassword(zipPassword); // 默认使用压缩密码作为解压密码
-            //     return;
-            // }
 
             if (unzipPassword === zipPassword) {
                 handleGetUncompressedSize();
@@ -136,12 +130,9 @@ export function ZipArchiveDemo() {
         isPasswordProtected(newZipPath)
             .then((res) => {
                 if (res) {
-                    console.log(`isPasswordProtected---1 ${JSON.stringify(res)}`)
                     needPassword = true;
-                    // setUnzipPassword('')
                     setShowInput(true);
                 } else {
-                    console.log(`isPasswordProtected---0 ${JSON.stringify(res)}`)
                     if (compressedFilePath) {
                         if (needPassword === false) {
                             setShowInput(false);
@@ -183,7 +174,6 @@ export function ZipArchiveDemo() {
                 setProgress(currentProgress);
                 console.log(`current progress: ${currentProgress}%`);
             } else {
-                // setProgress(null);
                 clearInterval(interval); // 达到最大值后清除 interval
                 setIsProgressPing(false);
             }
@@ -198,14 +188,12 @@ export function ZipArchiveDemo() {
                     setIsProgressPing(false);
 
                     if (data.progress === 100) {
-                        // setProgress(null);
                         clearInterval(interval);
                     }
                 }
             } catch (error) {
                 console.log(`subscribe error: ${error}`);
                 clearInterval(interval);
-                // setProgress(null);
             }
         })
     }
@@ -238,17 +226,16 @@ export function ZipArchiveDemo() {
         getUncompressedSize(newZipPath)
             .then((uncompressSize) => {
                 setUncompressSize(uncompressSize);
-                console.log(`uncompressSize----111:${uncompressSize}`)
+                console.log(`uncompressSize success:${uncompressSize}`)
             })
             .catch((err) => {
-                console.log(`getUncompressedSize:${err}`)
+                console.log(`getUncompressedSize err:${err}`)
             })
     }
 
     return (
         <View style={styles.content}>
             <View style={styles.buttonSix}>
-                {/* {isProgressPing && */}
                 <View>
                     <Text>解压缩后的大小:{uncompressSize ? uncompressSize : '0'}字节</Text>
                     <View style={styles.progressBar}>
@@ -256,7 +243,6 @@ export function ZipArchiveDemo() {
                     </View>
                     <Text style={styles.percentageText}>{progress}%</Text>
                 </View>
-                {/* } */}
             </View>
 
             <View >
@@ -268,7 +254,15 @@ export function ZipArchiveDemo() {
                         style={{ borderWidth: 1, padding: 10, width: '70%' }}
                     />
                     <TextInput
-                        style={{ height: 100, borderColor: 'gray', borderWidth: 1, width: 200, padding: 10, marginBottom: 10, marginTop: 10 }}
+                        style={{ 
+                            height: 100, 
+                            borderColor: 'gray', 
+                            borderWidth: 1, 
+                            width: 200, 
+                            padding: 10, 
+                            marginBottom: 10, 
+                            marginTop: 10 
+                        }}
                         onChangeText={text => setFileContent(text)}
                         value={fileContent}
                         placeholder="文件内容"
