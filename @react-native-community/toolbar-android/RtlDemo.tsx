@@ -40,6 +40,7 @@ function App({ }): JSX.Element {
         </Text>
       </View>
 
+
     </View>
   )
 }
