@@ -1,10 +1,45 @@
 import { RootSiblingParent } from 'react-native-root-siblings';
 import React,{ useState } from 'react';
-import { ScrollView, StyleSheet, View, Text, TouchableHighlight, TextInput, Switch, Button, Alert } from 'react-native';
+import {StyleSheet, View, Text, TouchableHighlight, TextInput, Switch, Button, Alert } from 'react-native';
 import Toast from 'react-native-root-toast';
+import {TestSuite,Tester,TestCase} from '@rnoh/testerino';
 
 export function ReactNativeRootToastExample() {
+    return (
+        <RootSiblingParent>
+            <Tester>
+                <TestSuite name = "root toast">
+                    <TestCase itShould='toast 组件式'>
+                        <ToastComponentry></ToastComponentry>
+                    </TestCase>
+                    <TestCase itShould='toast 函数式'>
+                        <ToastFunction></ToastFunction>
+                    </TestCase>
+                </TestSuite>
+            </Tester>
+        </RootSiblingParent>
+    );
+}
+
+const ToastComponentry = () => {
+    const [visible,setVisible] = useState(false);
+    function startPToast(){ setVisible(true); }
+    function hidePToast(){ setVisible(false); }
+    return(
+        <RootSiblingParent>
+            <Toast visible={visible} position={50} shadow={false} animation={false} hideOnPress={false} >This is a message</Toast>
+            <Button title = "开一个弹窗" onPress = {startPToast} />
+            <Button title = "关掉这个弹窗" onPress = {hidePToast} />
+        </RootSiblingParent>
+    );
+}
+
+const ToastFunction = () => {
     let { durations, positions } = Toast;
+    let toast: any = null;
+    const [ptext,setPtext] = useState("顶部");
+    const [delay,setDelay] = useState(0);
+    const [totext,setToPtext] = useState("");
     const messages = [
         'Mr. and Mrs. Dursley, of number four Privet Drive, were proud to say that they were perfectly normal, thank you very much.',
         '“I am not worried, Harry,” said Dumbledore, his voice a little stronger despite the freezing water. “I am with you.”',
@@ -107,8 +142,6 @@ export function ReactNativeRootToastExample() {
         }
     });
 
-    let toast: any = null;
-
     const [dataState, setDataState] = useState(
         {
             duration: durations.LONG,//弹窗持续时间
@@ -165,119 +198,70 @@ export function ReactNativeRootToastExample() {
 
     let text_durtion = dataState.duration == durations.LONG ?"长":"短";
     
-    const [ptext,setPtext] = useState("顶部");
-    const [delay,setDelay] = useState(0);
-    const [totext,setToPtext] = useState("");
     function a(){
         switch(dataState.position){
             case positions.TOP: dataState.position = positions.BOTTOM; setPtext("底部"); break;
             case positions.BOTTOM: dataState.position = positions.TOP; setPtext("顶部");break;
         }
     }
-    let PToast :any = null;
-    function startPToast(){
-        PToast = Toast.show("超长待机弹窗实例", {
-            duration: 99999999,
-            position: 20,
-            shadow: true,
-            animation: true,
-            hideOnPress: false,
-            delay: 0,
-            onHidden: () => {
-                PToast.destroy();
-                PToast = null;
-            },
-        });
-    }
-
-    function hidePToast(){ Toast.hide(PToast); }
-
-    return (
+    
+  
+    return(
         <RootSiblingParent>
-            <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-                
-                <View style={styles.fieldContainer}>
-                    <Button title = "弹窗高度" onPress = {a} />
-                    <Text style={styles.fieldText}> {ptext}</Text>
-                </View>
-                <View style={styles.fieldContainer}>
-                    <Text style={styles.fieldText}>弹窗持续时间 {text_durtion}</Text>
-                    <Switch 
-                        onValueChange={value_ => setDataState({...dataState,duration:value_ ? durations.LONG:durations.SHORT })} 
-                        value={dataState.duration == durations.LONG} 
-                    />
-                </View>
-                <View style={styles.fieldContainer}>
-                    <Text style={styles.fieldText}>弹窗延时 (ms)</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChange={({ nativeEvent: { text } }) => 
-                        {  setDelay(parseInt(text)) }}
-                        value={(delay + '')}
-                        keyboardType={'decimal-pad'}
-                    />
-                </View>
+            <View style={styles.fieldContainer}>
+            <Button title = "弹窗高度" onPress = {a} />
+            <Text style={styles.fieldText}> {ptext}</Text>
+            </View>
+            <View style={styles.fieldContainer}>
+                <Text style={styles.fieldText}>弹窗持续时间 {text_durtion}</Text>
+                <Switch 
+                    onValueChange={value_ => setDataState({...dataState,duration:value_ ? durations.LONG:durations.SHORT })} 
+                    value={dataState.duration == durations.LONG} 
+                />
+            </View>
+            <View style={styles.fieldContainer}>
+                <Text style={styles.fieldText}>弹窗延时 (ms)</Text>
+                <TextInput
+                    style={styles.input}
+                    onChange={({ nativeEvent: { text } }) => 
+                    { setDelay(parseInt(text)) }}
+                    value={(delay + '')}
+                    keyboardType={'decimal-pad'}
+                />
+            </View>
 
-                <View style={styles.fieldContainer} >
-                    <Text style={styles.fieldText}>背景阴影</Text>
-                    <Switch onValueChange={value => setDataState({...dataState,shadow:value})} value={dataState.shadow} />
-                </View>
-                <View style={styles.fieldContainer} >
-                    <Text style={styles.fieldText}>出现/消失动画</Text>
-                    <Switch onValueChange={value => setDataState({...dataState,animation:value})} value={dataState.animation} />
-                </View>
-                <View style={styles.fieldContainer} >
-                    <Text style={styles.fieldText}>点击消失</Text>
-                    <Switch onValueChange={value => setDataState({...dataState,hideOnPress:value})} value={dataState.hideOnPress} />
-                </View>
-                <View style={styles.fieldContainer} >
-                    <Text style={styles.fieldText}>背景颜色</Text>
-                    <Switch onValueChange={value => setDataState({...dataState,backgroundColor:value})} value={dataState.backgroundColor} />
-                </View>
-                <View style={styles.fieldContainer} >
-                    <Text style={styles.fieldText}>背景阴影颜色</Text>
-                    <Switch onValueChange={value => setDataState({...dataState,shadowColor:value})} value={dataState.shadowColor} />
-                </View>
-                <View style={styles.fieldContainer} >
-                    <Text style={styles.fieldText}>字体颜色</Text>
-                    <Switch onValueChange={value => setDataState({...dataState,textColor:value})} value={dataState.textColor} />
-                </View>
-                <View style={styles.fieldContainer} >
-                    <Text style={styles.fieldText}>透明度</Text>
-                    <Switch onValueChange={value => setDataState({...dataState,opacity:value})} value={dataState.opacity} />
-                </View>
+            <View style={styles.fieldContainer} >
+                <Text style={styles.fieldText}>背景阴影</Text>
+                <Switch onValueChange={value => setDataState({...dataState,shadow:value})} value={dataState.shadow} />
+            </View>
+            <View style={styles.fieldContainer} >
+                <Text style={styles.fieldText}>出现/消失动画</Text>
+                <Switch onValueChange={value => setDataState({...dataState,animation:value})} value={dataState.animation} />
+            </View>
+            <View style={styles.fieldContainer} >
+                <Text style={styles.fieldText}>点击消失</Text>
+                <Switch onValueChange={value => setDataState({...dataState,hideOnPress:value})} value={dataState.hideOnPress} />
+            </View>
+            <View style={styles.fieldContainer} >
+                <Text style={styles.fieldText}>背景颜色</Text>
+                <Switch onValueChange={value => setDataState({...dataState,backgroundColor:value})} value={dataState.backgroundColor} />
+            </View>
+            <View style={styles.fieldContainer} >
+                <Text style={styles.fieldText}>背景阴影颜色</Text>
+                <Switch onValueChange={value => setDataState({...dataState,shadowColor:value})} value={dataState.shadowColor} />
+            </View>
+            <View style={styles.fieldContainer} >
+                <Text style={styles.fieldText}>字体颜色</Text>
+                <Switch onValueChange={value => setDataState({...dataState,textColor:value})} value={dataState.textColor} />
+            </View>
+            <View style={styles.fieldContainer} >
+                <Text style={styles.fieldText}>透明度</Text>
+                <Switch onValueChange={value => setDataState({...dataState,opacity:value})} value={dataState.opacity} />
+            </View>
 
-                <TouchableHighlight style={styles.button} underlayColor="green" onPress={show} >
-                    <Text style={styles.buttonText}>显示弹窗 {totext}</Text>
-                </TouchableHighlight>
-                <View>
-                    <Text>---------------------------------------------------------------------</Text>
-                </View>
-                <View style={styles.fieldContainer}>
-                    <Text>关闭弹窗函数示例</Text>
-                    <Button title = "开一个弹窗" onPress = {startPToast} />
-                    <Button title = "关掉这个弹窗" onPress = {hidePToast} />
-                </View>
-                <View style={styles.code}>
-                    <Text style={styles.codeTittle}>CODE:</Text>
-                    <Text style={styles.codeText}>
-                        {`Toast.show(`}
-                        <Text style={styles.string}>'{dataState.message}'</Text>{`,
-                            {
-                                position:`} <Text style={styles.value}>{dataState.position}</Text>{`,
-                                delay:`} <Text style={styles.value}>{delay}</Text>{`,
-                                shadow:`} <Text style={styles.value}>{dataState.shadow ? 'true' : 'false'}</Text>{`,
-                                animation:`} <Text style={styles.value}>{dataState.animation ? 'true' : 'false'}</Text>{`,
-                                hideOnPress:`} <Text style={styles.value}>{dataState.hideOnPress ? 'true' : 'false'}</Text>{`,
-                                backgroundColor:`} <Text style={styles.value}>{dataState.backgroundColor ? 'true' : 'false'}</Text>{`,
-                                shadowColor:`} <Text style={styles.value}>{dataState.shadowColor ? 'true' : 'false'}</Text>{`,
-                                opacity:`} <Text style={styles.value}>{dataState.opacity ? '1.0' : '0.1'}</Text>{`,
-                                textColor:`} <Text style={styles.value}>{dataState.textColor ? 'true' : 'false'}</Text>{`
-                            }
-                        );`}
-                    </Text>
-                </View>
-            </ScrollView>
+            <TouchableHighlight style={styles.button} underlayColor="green" onPress={show} >
+                <Text style={styles.buttonText}>显示弹窗 {totext}</Text>
+            </TouchableHighlight>
         </RootSiblingParent>
     );
-}
+};
