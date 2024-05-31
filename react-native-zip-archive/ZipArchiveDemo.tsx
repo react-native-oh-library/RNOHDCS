@@ -76,7 +76,7 @@ export function ZipArchiveDemo() {
             Alert.alert('错误', '请输入密码');
             return;
         }
-
+       
         if (createdFilePath) {
             handleProgress();//进度条
             zipWithPassword(newSourcePath, newZipPath, password)
@@ -97,12 +97,16 @@ export function ZipArchiveDemo() {
     // 解压时是否需要密码
     const isUnzipWithPassword = () => {
         if (unzipPassword) {
+            if (zipPassword === '') {
+                Alert.alert('错误', '请先进行压缩并设置密码');
+                return;
+            }
+
             if (unzipPassword === zipPassword) {
                 handleGetUncompressedSize();
                 handleProgress();//进度条
-                unzipWithPassword(newZipPath, newFolder, unzipPassword)
+                unzipWithPassword(newZipPath,newFolder, unzipPassword)
                     .then(() => {
-                        setShowInput(false);
                         Alert.alert('成功', '已使用密码解压文件');
                     })
                     .catch(error => {
@@ -121,6 +125,7 @@ export function ZipArchiveDemo() {
     const handleUnzipPress = () => {
         if (this.needPassword) {
             isUnzipWithPassword();
+            setShowInput(true);
             return;
         }
         isPasswordProtected(newZipPath)
@@ -131,10 +136,9 @@ export function ZipArchiveDemo() {
                 } else {
                     if (compressedFilePath) {
                         if (needPassword === false) {
-                            setShowInput(false);
                             handleGetUncompressedSize();
                             handleProgress();//进度条
-                            unzip(newZipPath, newFolder, 'UTF-8')
+                            unzip(newZipPath, newFolder,'UTF-8')
                                 .then(() => {
                                     console.log(`unzip success`)
                                     Alert.alert('成功', '已解压');
@@ -220,7 +224,7 @@ export function ZipArchiveDemo() {
     // getUncompressedSize
     const handleGetUncompressedSize = () => {
         getUncompressedSize(newZipPath)
-            .then((uncompressSize: any) => {
+            .then((uncompressSize:any) => {
                 setUncompressSize(uncompressSize);
                 console.log(`uncompressSize success:${uncompressSize}`)
             })
@@ -269,7 +273,7 @@ export function ZipArchiveDemo() {
             </View>
 
             <View style={styles.buttonSix}>
-                <Button title='压缩' onPress={() => {
+                <Button title='压缩' disabled={!createdFilePath} onPress={() => {
                     if (createdFilePath) {
                         handleProgress();//进度条
                         zip(newSourcePath, newZipPath)
@@ -295,7 +299,7 @@ export function ZipArchiveDemo() {
                 />
             </View>
             <View style={styles.buttonSix}>
-                <Button title='密码压缩' onPress={handleZipPress} />
+                <Button title='密码压缩' disabled={!createdFilePath} onPress={handleZipPress} />
             </View>
 
             {showInput && (
@@ -309,11 +313,11 @@ export function ZipArchiveDemo() {
             )}
 
             <View style={styles.buttonSix}>
-                <Button title="解压" onPress={handleUnzipPress} />
+                <Button title="解压" disabled={!createdFilePath} onPress={handleUnzipPress} />
             </View>
 
             <View>
-                <Button title='unzipAssets解压' onPress={handleUnzipAssets} />
+                <Button title='unzipAssets解压' disabled={!createdFilePath} onPress={handleUnzipAssets} />
                 {loading ? (
                     <View>
                         <ActivityIndicator size="large" color='#0000ff' />
