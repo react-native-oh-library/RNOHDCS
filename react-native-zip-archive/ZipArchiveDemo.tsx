@@ -76,34 +76,33 @@ export function ZipArchiveDemo() {
             Alert.alert('错误', '请输入密码');
             return;
         }
-        handleProgress();//进度条
-        zipWithPassword(newSourcePath, newZipPath, password)
-            .then(() => {
-                console.log(`password--11:${password}`)
-                setZipPassword(password);
-                setCompressedFilePath(newZipPath)
-                Alert.alert('成功', '已使用密码创建压缩');
-            })
-            .catch(error => {
-                Alert.alert('错误', `创建压缩文件失败: ${error}`);
-            });
+
+        if (createdFilePath) {
+            handleProgress();//进度条
+            zipWithPassword(newSourcePath, newZipPath, password)
+                .then(() => {
+                    console.log(`password--11:${password}`)
+                    setZipPassword(password);
+                    setCompressedFilePath(newZipPath)
+                    Alert.alert('成功', '已使用密码创建压缩');
+                })
+                .catch(error => {
+                    Alert.alert('错误', `创建压缩文件失败: ${error}`);
+                });
+        } else {
+            Alert.alert('无文件可供压缩');
+        }
     };
 
     // 解压时是否需要密码
     const isUnzipWithPassword = () => {
         if (unzipPassword) {
-            if (zipPassword === '') {
-                Alert.alert('错误', '请先进行压缩并设置密码');
-                return;
-            }
-
             if (unzipPassword === zipPassword) {
                 handleGetUncompressedSize();
                 handleProgress();//进度条
-                unzipWithPassword(newFolder, newZipPath, unzipPassword)
+                unzipWithPassword(newZipPath, newFolder, unzipPassword)
                     .then(() => {
                         setShowInput(false);
-                        console.log(`password--12:${zipPassword}`)
                         Alert.alert('成功', '已使用密码解压文件');
                     })
                     .catch(error => {
@@ -120,17 +119,14 @@ export function ZipArchiveDemo() {
 
     // 密码解压&解压
     const handleUnzipPress = () => {
-        if (needPassword) {
-            if (showInput) {
-                isUnzipWithPassword();
-                setShowInput(true);
-                return;
-            }
+        if (this.needPassword) {
+            isUnzipWithPassword();
+            return;
         }
         isPasswordProtected(newZipPath)
             .then((res) => {
                 if (res) {
-                    needPassword = true;
+                    this.needPassword = true;
                     setShowInput(true);
                 } else {
                     if (compressedFilePath) {
@@ -138,7 +134,7 @@ export function ZipArchiveDemo() {
                             setShowInput(false);
                             handleGetUncompressedSize();
                             handleProgress();//进度条
-                            unzip(newFolder, newZipPath, 'UTF-8')
+                            unzip(newZipPath, newFolder, 'UTF-8')
                                 .then(() => {
                                     console.log(`unzip success`)
                                     Alert.alert('成功', '已解压');
@@ -224,7 +220,7 @@ export function ZipArchiveDemo() {
     // getUncompressedSize
     const handleGetUncompressedSize = () => {
         getUncompressedSize(newZipPath)
-            .then((uncompressSize) => {
+            .then((uncompressSize: any) => {
                 setUncompressSize(uncompressSize);
                 console.log(`uncompressSize success:${uncompressSize}`)
             })
@@ -254,14 +250,14 @@ export function ZipArchiveDemo() {
                         style={{ borderWidth: 1, padding: 10, width: '70%' }}
                     />
                     <TextInput
-                        style={{ 
-                            height: 100, 
-                            borderColor: 'gray', 
-                            borderWidth: 1, 
-                            width: 200, 
-                            padding: 10, 
-                            marginBottom: 10, 
-                            marginTop: 10 
+                        style={{
+                            height: 100,
+                            borderColor: 'gray',
+                            borderWidth: 1,
+                            width: 200,
+                            padding: 10,
+                            marginBottom: 10,
+                            marginTop: 10
                         }}
                         onChangeText={text => setFileContent(text)}
                         value={fileContent}
@@ -270,13 +266,6 @@ export function ZipArchiveDemo() {
                     />
                     <Button title="创建文件" onPress={createFile} />
                 </View>
-
-                {createdFilePath ? (
-                    <View>
-                        <Text>新建的文件路径：</Text>
-                        <Text>{createdFilePath}</Text>
-                    </View>
-                ) : null}
             </View>
 
             <View style={styles.buttonSix}>
@@ -295,15 +284,7 @@ export function ZipArchiveDemo() {
                         Alert.alert('无文件可供压缩');
                     }
                 }} />
-
-                {compressedFilePath ? (
-                    <View>
-                        <Text>压缩后的文件路径：</Text>
-                        <Text>{compressedFilePath}</Text>
-                    </View>
-                ) : null}
             </View>
-
 
             <View>
                 <TextInput
@@ -351,11 +332,11 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 100
+        marginTop: 56
     },
     buttonSix: {
         width: '65%',
-        marginBottom: 30,
+        marginBottom: 10,
         marginTop: 20
     },
     input: {
