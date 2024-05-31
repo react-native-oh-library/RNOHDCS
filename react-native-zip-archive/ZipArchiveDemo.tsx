@@ -4,8 +4,8 @@ import { pathParameters, zip, unzip, zipWithPassword, unzipWithPassword, subscri
 import { ProgressBar } from 'react-native-paper';
 
 export function ZipArchiveDemo() {
-    const [fileName, setFileName] = useState('');//创建文件
-    const [fileContent, setFileContent] = useState('');//内容
+    const [fileName, setFileName] = useState('');
+    const [fileContent, setFileContent] = useState('');
     const [createdFilePath, setCreatedFilePath] = useState('');
     const [compressedFilePath, setCompressedFilePath] = useState('');
 
