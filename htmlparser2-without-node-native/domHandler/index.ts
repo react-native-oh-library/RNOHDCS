@@ -50,6 +50,7 @@ const defaultOpts: DomHandlerOptions = {
 interface ParserInterface {
     startIndex: number | null;
     endIndex: number | null;
+    
 }
 
 type Callback = (error: Error | null, dom: ChildNode[]) => void;
