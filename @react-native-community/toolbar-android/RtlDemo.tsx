@@ -25,8 +25,8 @@ function App({ }): JSX.Element {
         rtl={true}
         style={styles.toolbar}
         actions={[
-          { title: 'Action1', icon: require('../assets/icon_phone.png'), show: 'ifRoom', showWithText: true },
-          { title: 'Action2', icon: require('../assets/icon_copy.png'), show: 'ifRoom', showWithText: true }
+          { title: 'Action1', icon: require('../assets/icon_phone.png'), show: 'ifRoom2', showWithText: true },
+          { title: 'Action2', icon: require('../assets/icon_copy.png'), show: 'ifRoom2', showWithText: true }
         ]}
         overflowIcon={require('../assets/relay.png')}
         onIconClicked={() => setState({ message: 'Clicked nav icon' })}
