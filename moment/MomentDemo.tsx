@@ -143,8 +143,10 @@ export function MomentDemo() {
         <Text>14.作为对象:{JSON.stringify(moment().toObject())}</Text>
         <Text>15.作为字符串:{JSON.stringify(moment().toString())}</Text>
         <Text>16.检查:{moment().inspect()}</Text>
+         <Text></Text>
 
         <Text style={{fontSize: 20, fontWeight: '600'}}>查询</Text>
+         <Text></Text>
         <Text>
           1.检查一个 moment 在另一个 moment 之前(true/false):
         </Text>
@@ -153,7 +155,7 @@ export function MomentDemo() {
          </Text>
         <Text>
             运行结果:{moment('2023-10-20').isBefore('2024-02-26') ? 'true' : 'false'}
-         </Text>
+         </Text> <Text></Text>
 
         <Text>
           2.检查检查一个 moment 与另一个 moment 相同:
@@ -164,7 +166,7 @@ export function MomentDemo() {
         </Text>
          <Text>
           运行结果:{moment('2010-10-20').isSame('2011-01-01', 'year') ? 'true' : 'false'}
-         </Text>
+         </Text> <Text></Text>
 
         <Text>
           3.检查一个 moment 在另一个 moment 之后:
@@ -174,7 +176,7 @@ export function MomentDemo() {
         </Text>
          <Text>
          运行结果: {moment('2010-10-20').isAfter('2010-10-19') ? 'true' : 'false'}
-         </Text>
+         </Text> <Text></Text>
 
         <Text>
           4.是否相同或之前:
@@ -184,7 +186,7 @@ export function MomentDemo() {
         </Text>
          <Text>
          运行结果: {moment('2010-10-20').isSameOrBefore('2010-10-20') ? 'true' : 'flase'}
-         </Text>
+         </Text> <Text></Text>
 
         <Text>
           5.是否相同或之后 :
@@ -194,7 +196,7 @@ export function MomentDemo() {
         </Text>
          <Text>
          运行结果: {moment('2010-10-20').isSameOrAfter('2010-10-21') ? 'true' : 'flase'}
-         </Text>
+         </Text> <Text></Text>
 
         <Text>
           6.检查某个 moment 是否位于其他两个 moment 之间:
@@ -206,25 +208,24 @@ export function MomentDemo() {
          运行结果: {moment('2010-10-20').isBetween('2010-10-19', '2010-10-25')
                             ? 'true'
                             : 'false'}
-         </Text>
+         </Text> <Text></Text>
 
         <Text>
           7.检查当前 moment 是否处于夏令时 :
         </Text>
          <Text>
          运行结果: {moment([2011, 2, 12]).isDST() ? 'true' : 'false'}
-         </Text>
-
+         </Text> <Text></Text>
 
         <Text>
           8.判断当前年份是否为闰年 :{moment([2024]).isLeapYear() ? '是' : '否'}
-        </Text>
+        </Text> <Text></Text>
 
         <Text>
           9.检查变量是否为 moment 对象 : moment.isMoment(moment()) :
           {moment.isMoment(moment()) ? 'true' : 'flase'} / moment.isMoment(new
           Date()) : {moment.isMoment(new Date()) ? 'true' : 'false'}
-        </Text>
+        </Text> <Text></Text>
         <Text>
           10.检查变量是否为原生 js Date 对象 :moment.isDate(new Date()) ：
         </Text>
