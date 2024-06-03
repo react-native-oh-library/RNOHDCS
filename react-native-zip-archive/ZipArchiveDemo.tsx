@@ -315,18 +315,6 @@ export function ZipArchiveDemo() {
             <View style={styles.buttonSix}>
                 <Button title="解压" disabled={!createdFilePath} onPress={handleUnzipPress} />
             </View>
-
-            <View>
-                <Button title='unzipAssets解压' disabled={!createdFilePath} onPress={handleUnzipAssets} />
-                {loading ? (
-                    <View>
-                        <ActivityIndicator size="large" color='#0000ff' />
-                        <Text>正在解压文件...</Text>
-                    </View>
-                ) : (
-                    <Text>{unzipStatus}</Text>
-                )}
-            </View>
         </View>
     )
 }
