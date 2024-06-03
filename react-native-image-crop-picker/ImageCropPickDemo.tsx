@@ -736,7 +736,7 @@ const styles = StyleSheet.create({
         height: 36,
         color: 'black',
         borderColor: 'gray',
-        bordeWidth: 1
+        borderWidth: 1
     },
     switchType: {
         width: 60,
