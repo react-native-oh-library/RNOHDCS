@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Button, StyleSheet, TextInput, Alert, Text, ActivityIndicator } from 'react-native';
 import { pathParameters, zip, unzip, zipWithPassword, unzipWithPassword, subscribe, creteFile, isPasswordProtected, unzipAssets, getUncompressedSize } from 'react-native-zip-archive';
-import { ProgressBar } from 'react-native-paper';
 
 export function ZipArchiveDemo() {
     const [fileName, setFileName] = useState('');
@@ -314,18 +313,6 @@ export function ZipArchiveDemo() {
 
             <View style={styles.buttonSix}>
                 <Button title="解压" disabled={!createdFilePath} onPress={handleUnzipPress} />
-            </View>
-
-            <View>
-                <Button title='unzipAssets解压' disabled={!createdFilePath} onPress={handleUnzipAssets} />
-                {loading ? (
-                    <View>
-                        <ActivityIndicator size="large" color='#0000ff' />
-                        <Text>正在解压文件...</Text>
-                    </View>
-                ) : (
-                    <Text>{unzipStatus}</Text>
-                )}
             </View>
         </View>
     )
