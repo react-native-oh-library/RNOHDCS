@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
-import FlipCard from 'react-native-flip-card'
-import { Text, View, StyleSheet, ScrollView,TouchableOpacity } from 'react-native';
-
+import React, {useState} from 'react';
+import FlipCard from 'react-native-flip-card';
+import {
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
+import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 export const FlipCardExample = () => {
   const styles = StyleSheet.create({
     container: {
@@ -23,7 +29,8 @@ export const FlipCardExample = () => {
     },
     card: {
       width: 200,
-      marginTop:20
+      marginTop: 20,
+      marginBottom: 5,
     },
     face: {
       flex: 1,
@@ -54,51 +61,32 @@ export const FlipCardExample = () => {
     },
     img: {
       flex: 1,
-      height: 64
-    }
+      height: 64,
+    },
   });
-  const [flip,setFlip] = useState(false);
-var CARDS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  const MyFlipCard = ({val}) => {
-    return (
-      <View style={{margin: 3}}>
-        <FlipCard
-          style={styles.card}
-        >
-          {/* Face Side */}
-          <View style={styles.face}>
-            <Text>Card {val}</Text>
-          </View>
-          {/* Back Side */}
-          <View style={styles.back}>
-            <Text>The back side</Text>
-          </View>
-        </FlipCard>
-      </View>
-    )
-  }
-const createCard = (val, i) => <MyFlipCard key={i} val={val}/>
+  const [flip, setFlip] = useState(false);
 
   return (
-    <View style={styles.container} >
-      <ScrollView>
-        <Text style={styles.welcome}>Flip Card Example</Text>
-        <View>
-          <Text style={styles.welcome}>Minimal</Text>
-          <FlipCard 
-          style={{ marginBottom: 5 }}>
-            {/* Face Side */}
-            <View style={styles.face}>
-              <Text>The Face</Text>
-            </View>
-            {/* Back Side */}
-            <View style={styles.back}>
-              <Text>The Back</Text>
-            </View>
-          </FlipCard>
+    <Tester style={{flex: 1}}>
+      <TestSuite name="flipCard">
+        <ScrollView>
 
-          <Text style={styles.welcome}>Customized</Text>
-          <FlipCard
+        <TestCase itShould="Minimal" tags={['C_API']}>
+          <View>
+              <FlipCard style={{marginBottom: 5}}>
+                <View style={styles.face}>
+                  <Text>The Face</Text>
+                </View>
+                <View style={styles.back}>
+                  <Text>The Back</Text>
+                </View>
+              </FlipCard>
+          </View>
+        </TestCase>
+
+        <TestCase itShould="Customized" tags={['C_API']}>
+          <View>
+            <FlipCard
             flip={flip}
             friction={3}
             perspective={500}
@@ -108,19 +96,26 @@ const createCard = (val, i) => <MyFlipCard key={i} val={val}/>
             style={styles.card}
             alignHeight={true}
             // alignWidth={true}
-            onFlipStart={(isFlipStart) => { console.log('isFlipStart', isFlipStart) }}
-            useNativeDriver={true}
-          >
+            onFlipStart={isFlipStart => {
+              console.log('isFlipStart', isFlipStart);
+            }}
+            useNativeDriver={true}>
             {/* Face Side */}
             <View style={styles.face}>
               <Text>The Face</Text>
             </View>
             {/* Back Side */}
             <View style={styles.back}>
-              <Text style={{fontSize:50}} > The Back </Text>
+              <Text style={{fontSize: 50}}> The Back </Text>
             </View>
           </FlipCard>
-          <FlipCard
+          </View>
+          
+        </TestCase>
+
+        <TestCase itShould="Customized1" tags={['C_API']}>
+          <View>
+           <FlipCard
             flip={flip}
             friction={10}
             perspective={4000}
@@ -130,8 +125,9 @@ const createCard = (val, i) => <MyFlipCard key={i} val={val}/>
             style={styles.card}
             alignHeight={true}
             // alignWidth={true}
-            onFlipEnd={(isFlipEnd) => { console.log('isFlipEnd', isFlipEnd) }}
-          >
+            onFlipEnd={isFlipEnd => {
+              console.log('isFlipEnd', isFlipEnd);
+            }}>
             {/* Face Side */}
             <View style={styles.face}>
               <Text>The Face</Text>
@@ -147,24 +143,25 @@ const createCard = (val, i) => <MyFlipCard key={i} val={val}/>
               <Text>c</Text>
               <Text>k</Text>
             </View>
-          </FlipCard>
-        </View>
-        <View>
+          </FlipCard> 
+          </View>
+          
+        </TestCase>
+
+        <TestCase itShould="Flip" tags={['C_API']}>
+          <View>
             <TouchableOpacity
               style={styles.button}
-              onPress={()=>{setFlip({flip: !flip})}}
-              >
+              onPress={() => {
+                setFlip({flip: !flip});
+              }}>
               <Text style={styles.buttonText}>Flip</Text>
             </TouchableOpacity>
           </View>
-          <View>
-            {CARDS.map(createCard)}
-          </View>
-      </ScrollView>
+        </TestCase>          
+        </ScrollView>
 
-    </View>
-  )
-
-
-}
-
+      </TestSuite>
+    </Tester>
+  );
+};

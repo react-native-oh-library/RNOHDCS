@@ -1,83 +1,74 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-    Image,
-    ScrollView,
     StyleSheet,
     Text,
     TouchableOpacity,
     View,
     SafeAreaView,
-    Alert,
+    StatusBar,
+    Platform,
 } from 'react-native';
-
 import Lightbox from 'react-native-lightbox-v2';
-
-
-const BASE_PADDING = 10;
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 
 
 export const ReactNativeLightBoxExample = () => {
-    let [info, setInfo] = useState('')
-
-    const callBack = (type: any) => {
-        setInfo(type)
-        Alert.alert(type)
-    }
-
-    let eventObject = {
-        willClose: () => callBack('willClose'),
-        onClose: () => callBack('onClose'),
-        onOpen: () => callBack('onOpen'),
-        didOpen: () => callBack('didOpen'),
-        onLongPress: () => callBack('onLongPress'),
-        onLayout: () => callBack('onLayout'),
-        doubleTapCallback: () => callBack('doubleTapCallback'),
-        longPressCallback: () => callBack('longPressCallback'),
-    }
-
     return (
-        <View style={styles.container}>
-            <View>
-                <Text>eventCallBack {info}</Text>
-            </View>
-            <View style={styles.text}>
-                <Text>eventCallBack </Text>
-            </View>
-            <Lightbox {...eventObject}>
-                <View style={styles.customHeaderBox}>
-                    <Text>I have eventCallBack</Text>
-                </View>
-            </Lightbox>
+        <SafeAreaView>
+            <Tester style={{ flex: 1 }}>
+                <TestSuite name='lightbox render'>
+                    <TestCase itShould='renderHeader close button' tags={['C_API']}>
+                        <View style={styles.container}>
+                            <Lightbox
+                                renderHeader={close => (
+                                    <TouchableOpacity onPress={close} style={styles.closeButtonContainer}>
+                                        <Text style={styles.closeButton}>Close</Text>
+                                    </TouchableOpacity>
+                                )}
+                            >
+                                <View style={styles.box}>
+                                    <Text>I have a custom Header</Text>
+                                </View>
+                            </Lightbox>
+                        </View>
 
-            <View style={styles.text}><Text>renderHeader </Text></View>
-            <Lightbox
-                renderHeader={close => (
-                    <TouchableOpacity onPress={close}>
-                        <Text style={styles.closeButton}>Close</Text>
-                    </TouchableOpacity>
-                )}>
-                <View style={styles.customHeaderBox}>
-                    <Text>I have a custom header</Text>
-                </View>
-            </Lightbox>
-            <View style={styles.text}><Text>renderContent </Text></View>
-            <Lightbox
-                renderContent={() =>
-                    <View style={styles.customHeaderBox}>
-                        <Text style={{ color: 'red' }}>renderContent</Text>
-                    </View>}>
-                <View style={styles.customHeaderBox}>
-                    <Text>I have a custom renderContent</Text>
-                </View>
-            </Lightbox>
-        </View>
+                    </TestCase>
+                    <TestCase itShould='renderContent' tags={['C_API']}>
+                        <View style={styles.container}>
+                            <Lightbox
+                                renderContent={() =>
+                                    <View style={[styles.box, { backgroundColor: 'red' }]}>
+                                        <Text>renderContent</Text>
+                                    </View>
+                                }>
+                                <View style={styles.box}>
+                                    <Text>I have a custom Content</Text>
+                                </View>
+                            </Lightbox>
+                        </View>
+                    </TestCase>
+                </TestSuite>
+            </Tester >
+        </SafeAreaView>
     )
-
 }
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: BASE_PADDING,
+        padding: 10,
         backgroundColor: 'white'
+    },
+    box: {
+        height: 150,
+        backgroundColor: '#6C7A89',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    closeButtonContainer: {
+        ...Platform.select({
+            harmony: {
+                marginTop: StatusBar.currentHeight
+            }
+        })
     },
     closeButton: {
         color: 'white',
@@ -88,29 +79,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         margin: 10,
         alignSelf: 'flex-end',
-    },
-    customHeaderBox: {
-        height: 150,
-        backgroundColor: '#6C7A89',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-
-    row: {
-        flexDirection: 'row',
-        marginLeft: -BASE_PADDING,
-        marginRight: -BASE_PADDING,
-    },
-    col: {
-        flex: 1,
-    },
-
-    contain: {
-        flex: 1,
-        height: 150,
-    },
-    text: {
-        marginVertical: BASE_PADDING * 2,
     }
 });
 
+
+
+export default ReactNativeLightBoxExample
