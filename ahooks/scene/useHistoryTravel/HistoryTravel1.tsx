@@ -15,7 +15,7 @@ export function HistoryTravel1(){
 
   return (
     <View>
-      <TextInput value={value || ''} onChangeText={setValue} />
+      <TextInput value={value || ''} onChangeText={setValue} style={{ borderWidth: 1, fontSize: 16 }} />
       <View style={{ marginHorizontal: 8 }}>
       <Button
         title="back"

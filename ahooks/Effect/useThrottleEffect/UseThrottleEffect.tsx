@@ -20,7 +20,7 @@ export function UseThrottleEffect() {
         value={value}
         onChangeText={(text) => setValue(text)}
         placeholder="Typed value"
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+        style={{ height: 40, borderColor: 'gray', borderWidth: 1, fontSize: 16 }}
       />
       <Text style={{ marginTop: 16 }}>
         <FlatList

@@ -9,19 +9,21 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, Alert, ActivityIndicator, StyleSheet } from 'react-native';
 import { useRequest } from 'ahooks';
 
-function editUsername(username: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (Math.random() > 0.5) {
-        resolve();
-      } else {
-        reject(new Error('Failed to modify username'));
-      }
-    }, 1000);
-  });
-}
+
 
 export function BasicManualRunAsync() {
+  function editUsername(username: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (flag) {
+          resolve();
+        } else {
+          reject(new Error('Failed to modify username'));
+        }
+      }, 1000);
+    });
+  }
+  const [flag,setFlag] = useState(true)
   const [state, setState] = useState('');
 
   const { loading, runAsync } = useRequest(editUsername, {
@@ -46,6 +48,10 @@ export function BasicManualRunAsync() {
         placeholder="Please enter username"
         style={styles.input}
       />
+      <Button
+          onPress={()=>setFlag(!flag)}
+          title={flag}
+        />
       {loading ? (
         <ActivityIndicator />
       ) : (
@@ -67,6 +73,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     width: 240,
+    fontSize: 16
   },
 });
 

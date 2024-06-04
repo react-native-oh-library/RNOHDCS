@@ -5,6 +5,7 @@ import { PortalProvider } from '@gorhom/portal';
 import {
     BasicCancel,
     BasicDefault,
+    BasicDefaultFalse,
     BasicLifeCycle,
     BasicManualRun,
     BasicManualRunAsync,
@@ -113,6 +114,9 @@ function Hooks() {
                     </Page>
                     <Page name="TEST:Request_BasicDefault">
                         <BasicDefault />
+                    </Page>
+                    <Page name="TEST:Request_BasicDefaultFalse">
+                        <BasicDefaultFalse />
                     </Page>
                     <Page name="TEST:Request_BasicLifeCycle">
                         <BasicLifeCycle />

@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
     paddingHorizontal: 10,
     height: 40,
+    fontSize: 16 
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -119,5 +120,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     height: 40,
     width: 60,
+    fontSize: 16 
   },
 });
