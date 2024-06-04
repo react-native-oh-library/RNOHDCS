@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Animated, View, Text, PanResponder, ScrollView, StyleSheet, NativeEventEmitter, NativeModules, TouchableHighlight, FlatList, Alert } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {View, Text, StyleSheet, NativeEventEmitter, NativeModules, TouchableHighlight, FlatList, Alert } from 'react-native';
 import { TestSuite, Tester } from '@rnoh/testerino';
 import { Button, TestCase } from '../components';
 import ReactNativeBleManager from '@react-native-oh-tpl/react-native-ble-manager/src/NativeGeneratedBleManagerTurboModule';
@@ -375,6 +375,53 @@ export default function BleManagerDemos() {
                                 ReactNativeBleManager.startNotification(item.id,'00001888-0000-1000-8000-00805F9B34FB', '00001820-0000-1000-8000-00805F9B34FB')
                                 setState(100)
                             }} label={'startNotification'}></Button>
+                        }
+                        assert={({ expect, state }) => {
+                            expect(state).to.be.eq(100);
+                        }}
+                    />
+                    <TestCase.Manual
+                        itShould="removePeripheral"
+                        tags={["C_API"]}
+                        initialState={0}
+                        arrange={({ setState }) =>
+                            <Button onPress={() => {
+                                ReactNativeBleManager.removePeripheral(item.id)
+                                setState(100)
+                            }} label={'removePeripheral'}></Button>
+                        }
+                        assert={({ expect, state }) => {
+                            expect(state).to.be.eq(100);
+                        }}
+                    />
+                    <TestCase.Manual
+                        itShould="isScanning"
+                        tags={["C_API"]}
+                        initialState={0}
+                        arrange={({ setState }) =>
+                            <Button onPress={() => {
+                                ReactNativeBleManager.isScanning().then((res)=>{
+                                    console.log('res++++',res)
+                                    Alert.alert(JSON.stringify(res))
+                                })
+                                setState(100)
+                            }} label={'isScanning'}></Button>
+                        }
+                        assert={({ expect, state }) => {
+                            expect(state).to.be.eq(100);
+                        }}
+                    />
+                    <TestCase.Manual
+                        itShould="isPeripheralConnected"
+                        tags={["C_API"]}
+                        initialState={0}
+                        arrange={({ setState }) =>
+                            <Button onPress={() => {
+                                ReactNativeBleManager.isPeripheralConnected(item.id,['00001888-0000-1000-8000-00805F9B34FB']).then((res)=>{
+                                    Alert.alert(JSON.stringify(res))
+                                })
+                                setState(100)
+                            }} label={'isPeripheralConnected'}></Button>
                         }
                         assert={({ expect, state }) => {
                             expect(state).to.be.eq(100);
