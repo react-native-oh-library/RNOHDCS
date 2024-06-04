@@ -2,12 +2,15 @@ import React,{useState} from "react";
 import{View,TextInput,Button,Text} from "react-native"
 import {CustomQrCode,CustomQrCodeImg,CustomQrCodeSvg,CustomQrCodeTable,CustomQrCodeAsc} from './qrcodeDemo'
 
+let maxLength = 78; //输入框的极限值
+
+
 export function QrcodeDemoCreateUrl() {
     const [qrcode,setQrcode] = useState('hello word')
     const [ip,setIp] = useState('hello word')
-    const [msg,setMsg] = useState('请最多输入78个字符')
+    const [msg,setMsg] = useState(`请最多输入${maxLength}个字符`)
     const setCode = () => {
-        if(ip.length > 78) {
+        if(ip.length > maxLength) {
             setMsg(`输入已达到最大限制，无法生成。目前长度：${ip.length}`)
         } else {
             setMsg(`目前长度：${ip.length}`)
@@ -22,7 +25,7 @@ export function QrcodeDemoCreateUrl() {
             <TextInput value={ip} onChangeText={(value) => {handLeOnChange(value)}}></TextInput>
             <View style={{padding:10}}><Text>{msg}</Text></View>
             <Button title="点击生成" onPress={() => {setCode()}}></Button>
-            {ip.length > 78 ? <></> : <CustomQrCode text={qrcode} style={{width:200,height:200}}></CustomQrCode>}
+            {ip.length > maxLength ? <></> : <CustomQrCode text={qrcode} style={{width:200,height:200}}></CustomQrCode>}
         </View>
     )
 }
@@ -30,9 +33,9 @@ export function QrcodeDemoCreateUrl() {
 export function QrcodeDemoCreateImg() {
     const [qrcode,setQrcode] = useState('hello word')
     const [ip,setIp] = useState('hello word')
-    const [msg,setMsg] = useState('请最多输入78个字符')
+    const [msg,setMsg] = useState(`请最多输入${maxLength}个字符`)
     const setCode = () => {
-        if(ip.length > 78) {
+        if(ip.length > maxLength) {
             setMsg(`输入已达到最大限制，无法生成。目前长度：${ip.length}`)
         } else {
             setMsg(`目前长度：${ip.length}`)
@@ -47,7 +50,7 @@ export function QrcodeDemoCreateImg() {
             <TextInput value={ip} onChangeText={(value) => {handLeOnChange(value)}}></TextInput>
             <View style={{padding:10}}><Text>{msg}</Text></View>
             <Button title="点击生成" onPress={() => {setCode()}}></Button>
-            {ip.length > 78 ? <></> : <CustomQrCodeImg text={qrcode} style={{width:200,height:200}}></CustomQrCodeImg>}
+            {ip.length > maxLength ? <></> : <CustomQrCodeImg text={qrcode} style={{width:200,height:200}}></CustomQrCodeImg>}
         </View>
     )
 }
@@ -55,9 +58,9 @@ export function QrcodeDemoCreateImg() {
 export function QrcodeDemoCreateSvg() {
     const [qrcode,setQrcode] = useState('hello word')
     const [ip,setIp] = useState('hello word')
-    const [msg,setMsg] = useState('请最多输入78个字符')
+    const [msg,setMsg] = useState(`请最多输入${maxLength}个字符`)
     const setCode = () => {
-        if(ip.length > 78) {
+        if(ip.length > maxLength) {
             setMsg(`输入已达到最大限制，无法生成。目前长度：${ip.length}`)
         } else {
             setMsg(`目前长度：${ip.length}`)
@@ -72,7 +75,7 @@ export function QrcodeDemoCreateSvg() {
             <TextInput value={ip} onChangeText={(value) => {handLeOnChange(value)}}></TextInput>
             <View style={{padding:10}}><Text>{msg}</Text></View>
             <Button title="点击生成" onPress={() => {setCode()}}></Button>
-            {ip.length > 78 ? <></> : <CustomQrCodeSvg text={qrcode} style={{width:200,height:200}}></CustomQrCodeSvg>}
+            {ip.length > maxLength ? <></> : <CustomQrCodeSvg text={qrcode} style={{width:200,height:200}}></CustomQrCodeSvg>}
         </View>
     )
 }
@@ -80,9 +83,9 @@ export function QrcodeDemoCreateSvg() {
 export function QrcodeDemoCreateTable() {
     const [qrcode,setQrcode] = useState('hello word')
     const [ip,setIp] = useState('hello word')
-    const [msg,setMsg] = useState('请最多输入78个字符')
+    const [msg,setMsg] = useState(`请最多输入${maxLength}个字符`)
     const setCode = () => {
-        if(ip.length > 78) {
+        if(ip.length > maxLength) {
             setMsg(`输入已达到最大限制，无法生成。目前长度：${ip.length}`)
         } else {
             setMsg(`目前长度：${ip.length}`)
@@ -97,7 +100,7 @@ export function QrcodeDemoCreateTable() {
             <TextInput value={ip} onChangeText={(value) => {handLeOnChange(value)}}></TextInput>
             <View style={{padding:10}}><Text>{msg}</Text></View>
             <Button title="点击生成" onPress={() => {setCode()}}></Button>
-            {ip.length > 78 ? <></> : <CustomQrCodeTable text={qrcode} style={{width:200,height:200}}></CustomQrCodeTable>}
+            {ip.length > maxLength ? <></> : <CustomQrCodeTable text={qrcode} style={{width:200,height:200}}></CustomQrCodeTable>}
 
         </View>
     )
@@ -106,9 +109,9 @@ export function QrcodeDemoCreateTable() {
 export function QrcodeDemoCreateAsc() {
     const [qrcode,setQrcode] = useState('hello word')
     const [ip,setIp] = useState('hello word')
-    const [msg,setMsg] = useState('请最多输入78个字符')
+    const [msg,setMsg] = useState(`请最多输入${maxLength}个字符`)
     const setCode = () => {
-        if(ip.length > 78) {
+        if(ip.length > maxLength) {
             setMsg(`输入已达到最大限制，无法生成。目前长度：${ip.length}`)
         } else {
             setMsg(`目前长度：${ip.length}`)
@@ -123,7 +126,7 @@ export function QrcodeDemoCreateAsc() {
             <TextInput value={ip} onChangeText={(value) => {handLeOnChange(value)}}></TextInput>
             <View style={{padding:10}}><Text>{msg}</Text></View>
             <Button title="点击生成" onPress={() => {setCode()}}></Button>
-            {ip.length > 78 ? <></> : <CustomQrCodeAsc text={qrcode} style={{width:200,height:200}}></CustomQrCodeAsc>}
+            {ip.length > maxLength ? <></> : <CustomQrCodeAsc text={qrcode} style={{width:200,height:200}}></CustomQrCodeAsc>}
         </View>
     )
 }
