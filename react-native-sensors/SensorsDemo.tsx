@@ -50,7 +50,7 @@ export const App = () => {
     }
     const handleChangeText = (text) => {
         if (!text) {
-            alert('请输入间隔时间，且不能为空！');
+            alert('请输入间隔时间，且不能为空');
             return
         }
         const numericValue = text.replace(/[^0-9]/g, "");
