@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { View, Text,TextInput ,Button } from 'react-native';
+import { View, Text ,Button } from 'react-native';
 import useSpring from 'react-use/lib/useSpring';
 
  const UseSpringDemo = () => {

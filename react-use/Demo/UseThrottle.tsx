@@ -9,6 +9,7 @@ import { useThrottle } from 'react-use';
   return (
     <View>
       <TextInput
+      style={{ borderWidth: 1,fontSize: 16 }}
         value={value}
         placeholder='键入...'
         onChangeText={(value) => {
