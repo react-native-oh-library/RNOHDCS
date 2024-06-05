@@ -1,13 +1,16 @@
 var React = require('react-native');
 var {
   StyleSheet,
-  View,
   TouchableOpacity,
   Text
 } = React;
 
 import { phonecall, text, textWithoutEncoding, email, web } from 'react-native-communications';
-
+import {
+  Tester,
+  TestSuite,
+  TestCase
+} from '@rnoh/testerino';
 
 const RNCommunications = () => {
   const handleButton1Press = () => {
@@ -15,7 +18,7 @@ const RNCommunications = () => {
   }
 
   const handleButton2Press = () => {
-    email(['yqd382@163.com'], null, null, 'My Subject', 'My body text')
+    email(['yourmail@outlook.com'], null, null, 'My Subject', 'My body text')
   }
 
   const handleButton3Press = () => {
@@ -31,23 +34,39 @@ const RNCommunications = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={handleButton1Press}>
-        <Text>Make phonecall</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={handleButton2Press}>
-        <Text>Send an email</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={handleButton3Press}>
-        <Text>Send a text only phonenumber</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={handleButton4Press}>
-        <Text>web to baidu</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={handleButton5Press}>
-        <Text>Send a textWithoutEncoding</Text>
-      </TouchableOpacity>
-    </View>
+    <Tester style={{ flex: 1 }}>
+      <TestSuite name="RNCommunications">
+        <TestCase itShould="open the call interface" tags={['C_API']}>
+          <TouchableOpacity style={styles.button} onPress={handleButton1Press}>
+            <Text>Make phonecall</Text>
+          </TouchableOpacity>
+        </TestCase>
+
+        <TestCase itShould="open the email" tags={['C_API']}>
+          <TouchableOpacity style={styles.button} onPress={handleButton2Press}>
+            <Text>Send an email</Text>
+          </TouchableOpacity>
+        </TestCase>
+
+        <TestCase itShould="open the text message" tags={['C_API']}>
+          <TouchableOpacity style={styles.button} onPress={handleButton3Press}>
+            <Text>Send a text only phonenumber</Text>
+          </TouchableOpacity>
+        </TestCase>
+
+        <TestCase itShould="open the browser" tags={['C_API']}>
+          <TouchableOpacity style={styles.button} onPress={handleButton4Press}>
+            <Text>web to baidu</Text>
+          </TouchableOpacity>
+        </TestCase>
+
+        <TestCase itShould="open the text message without encoding" tags={['C_API']}>
+          <TouchableOpacity style={styles.button} onPress={handleButton5Press}>
+            <Text>Send a textWithoutEncoding</Text>
+          </TouchableOpacity>
+        </TestCase>
+      </TestSuite>
+    </Tester>
   );
 };
 
