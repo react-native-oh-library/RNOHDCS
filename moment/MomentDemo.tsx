@@ -182,20 +182,20 @@ export function MomentDemo() {
           4.是否相同或之前:
         </Text>
         <Text>
-         moment('2010-10-20').isSameOrBefore('2010-10-20') ? 'true' : 'flase'
+         moment('2010-10-20').isSameOrBefore('2010-10-20') ? 'true' : 'false'
         </Text>
          <Text>
-         运行结果: {moment('2010-10-20').isSameOrBefore('2010-10-20') ? 'true' : 'flase'}
+         运行结果: {moment('2010-10-20').isSameOrBefore('2010-10-20') ? 'true' : 'false'}
          </Text> <Text></Text>
 
         <Text>
           5.是否相同或之后 :
         </Text>
         <Text>
-         moment('2010-10-20').isSameOrAfter('2010-10-21') ? 'true' : 'flase'
+         moment('2010-10-20').isSameOrAfter('2010-10-21') ? 'true' : 'false'
         </Text>
          <Text>
-         运行结果: {moment('2010-10-20').isSameOrAfter('2010-10-21') ? 'true' : 'flase'}
+         运行结果: {moment('2010-10-20').isSameOrAfter('2010-10-21') ? 'true' : 'false'}
          </Text> <Text></Text>
 
         <Text>
@@ -223,19 +223,19 @@ export function MomentDemo() {
 
         <Text>
           9.检查变量是否为 moment 对象 : moment.isMoment(moment()) :
-          {moment.isMoment(moment()) ? 'true' : 'flase'} / moment.isMoment(new
+          {moment.isMoment(moment()) ? 'true' : 'false'} / moment.isMoment(new
           Date()) : {moment.isMoment(new Date()) ? 'true' : 'false'}
         </Text> <Text></Text>
         <Text>
           10.检查变量是否为原生 js Date 对象 :moment.isDate(new Date()) ：
         </Text>
          <Text>
-          moment.isDate(new Date()) ? 'true' : 'flase'} /
-          moment.isDate(moment())： {moment.isDate(moment()) ? 'true' : 'flase'
+          {moment.isDate(new Date()) ? 'true' : 'false'} /
+          moment.isDate(moment())： {moment.isDate(moment()) ? 'true' : 'false'}
         </Text>
          <Text>
-          运行结果:{moment.isDate(new Date()) ? 'true' : 'flase'} /
-          moment.isDate(moment())： {moment.isDate(moment()) ? 'true' : 'flase'}
+          运行结果:{moment.isDate(new Date()) ? 'true' : 'false'} /
+          moment.isDate(moment())： {moment.isDate(moment()) ? 'true' : 'false'}
         </Text>
 
         <View

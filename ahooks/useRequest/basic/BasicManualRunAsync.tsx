@@ -50,7 +50,7 @@ export function BasicManualRunAsync() {
       />
       <Button
           onPress={()=>setFlag(!flag)}
-          title={flag}
+          title={String(flag)}
         />
       {loading ? (
         <ActivityIndicator />

@@ -60,7 +60,7 @@ export function HistoryTravel2(){
         <TextInput
           value={step}
           onChangeText={setStep}
-          keyboardType="numeric"
+          keyboardType="phone-pad"
           style={styles.stepInput}
         />
         <Button title="Go" onPress={onGo} />

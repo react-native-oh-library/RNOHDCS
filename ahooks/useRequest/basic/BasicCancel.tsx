@@ -51,7 +51,7 @@ export function BasicCancel() {
         />
         <Button
           onPress={()=>setFlag(!flag)}
-          title={flag}
+          title={String(flag)}
         />
       </View>
     </View>

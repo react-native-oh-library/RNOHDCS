@@ -83,7 +83,6 @@ import {
     UseUpdate
 } from './Effect';
 
-import { MutationObserver } from './Dom'
 
 import {
     ChangeControllableValue,
@@ -337,9 +336,6 @@ function Hooks() {
                 </View>
 
                 <View>
-                    <Page name="DOM:MutationObserver ">
-                        <MutationObserver />
-                    </Page>
                     <Page name="Advanced:ChangeControllableValue ">
                         <ChangeControllableValue />
                     </Page>

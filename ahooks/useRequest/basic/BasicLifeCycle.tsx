@@ -46,7 +46,7 @@ export function BasicLifeCycle() {
       />
       <Button
           onPress={()=>setFlag(!flag)}
-          title={flag}
+          title={String(flag)}
         />
       {loading ? (
         <ActivityIndicator style={styles.loader} />

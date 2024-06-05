@@ -68,7 +68,7 @@ export function BasicMutate(){
       <Button onPress={onChange} title="Edit" />
       <Button
           onPress={()=>setFlag(!flag)}
-          title={flag}
+          title={String(flag)}
         />
     </View>
   );
