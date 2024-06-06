@@ -29,7 +29,6 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import toArray from 'dayjs/plugin/toArray'
 import toObject from 'dayjs/plugin/toObject'
 import updateLocale from 'dayjs/plugin/updateLocale'
-//import utc from 'dayjs/plugin/utc'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
 import weekYear from 'dayjs/plugin/weekYear'
 import weekday from 'dayjs/plugin/weekday'
@@ -65,7 +64,6 @@ const PluginDemo = () => {
   dayjs.extend(toArray)
   dayjs.extend(toObject)
   dayjs.extend(updateLocale)
-  //dayjs.extend(utc)
   dayjs.extend(weekOfYear)
   dayjs.extend(weekYear)
 dayjs.extend(weekday)
