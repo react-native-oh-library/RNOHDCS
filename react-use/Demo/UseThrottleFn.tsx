@@ -20,6 +20,7 @@ import { useThrottleFn } from 'react-use';
     <View>
       <TextInput
         value={value}
+        style={{ borderWidth: 1, fontSize: 16 }}
         placeholder='节流输入...'
         onChangeText={(value) => {
           setStatus('已停止更新')

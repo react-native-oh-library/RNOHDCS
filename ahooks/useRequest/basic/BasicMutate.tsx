@@ -17,19 +17,21 @@ function getUsername(): Promise<string> {
   });
 }
 
-function editUsername(username: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (Math.random() > 0.5) {
-        resolve();
-      } else {
-        reject(new Error('Failed to modify username'));
-      }
-    }, 1000);
-  });
-}
+
 
 export function BasicMutate(){
+  function editUsername(username: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (flag) {
+          resolve();
+        } else {
+          reject(new Error('Failed to modify username'));
+        }
+      }, 1000);
+    });
+  }
+  const [flag,setFlag] = useState(true)
   const lastRef = useRef<string>();
 
   const [state, setState] = useState('');
@@ -61,9 +63,13 @@ export function BasicMutate(){
         onChangeText={setState}
         value={state}
         placeholder="Please enter username"
-        style={{ width: 240, height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 16 }}
+        style={{ width: 240, height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 16, fontSize: 16 }}
       />
       <Button onPress={onChange} title="Edit" />
+      <Button
+          onPress={()=>setFlag(!flag)}
+          title={String(flag)}
+        />
     </View>
   );
 };

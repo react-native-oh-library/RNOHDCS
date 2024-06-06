@@ -1,5 +1,6 @@
 export * from './useRequest/basic/BasicCancel';
 export * from './useRequest/basic/BasicDefault';
+export * from './useRequest/basic/BasicDefaultFalse';
 export * from './useRequest/basic/BasicLifeCycle';
 export * from './useRequest/basic/BasicManualRun';
 export * from './useRequest/basic/BasicManualRunAsync';

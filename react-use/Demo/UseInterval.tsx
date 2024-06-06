@@ -17,7 +17,7 @@ import {useInterval,useToggle} from 'react-use';
     return (
       <View>
          <Text>delay:</Text>
-         <TextInput style={{ height:40, borderColor:'gray',borderWidth:1}} 
+         <TextInput style={{ height:40, borderColor:'gray',borderWidth:1, fontSize: 16}} 
          onChangeText={text => setDelay(Number(text))} value={delay.toString()}/>
         <Text>count: {count}</Text>
         <Text>
