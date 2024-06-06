@@ -106,12 +106,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 50,
-    padding: 8
+    padding: 15
   },
   navigationContainer: {
     flex: 1,
     paddingTop: 50,
-    padding: 8
+    padding: 0
   },
   textCommon: {
     marginBottom: 10,
