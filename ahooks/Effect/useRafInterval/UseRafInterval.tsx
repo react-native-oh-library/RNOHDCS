@@ -8,7 +8,7 @@
 
 import React, { useState } from 'react';
 import { useRafInterval } from 'ahooks';
-import { View } from 'react-native';
+import { View,Text } from 'react-native';
 
 export function UseRafInterval() {
   const [count, setCount] = useState(0);

@@ -21,7 +21,7 @@ import { useDebounce } from "react-use";
       <TextInput
         value={val}
         placeholder="去抖输入..."
-        style={{ borderWidth: 1 }}
+        style={{ borderWidth: 1,fontSize: 16 }}
         onChangeText={(value) => {
           setState('正在等待键入停止...');
           setVal(value);

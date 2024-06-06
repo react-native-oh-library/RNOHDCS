@@ -20,7 +20,7 @@ export function UncontrolledControllableValue(props: any) {
         value={state}         
         onChangeText={(text: string) => setState(text)}         
         keyboardType='default'         
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginTop: 40, width: 350, marginLeft: 20, marginBottom: 20 }}       
+        style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginTop: 40, width: 350, marginLeft: 20, marginBottom: 20, fontSize: 16}}       
       />       
       <Button         
         title='Clear'         

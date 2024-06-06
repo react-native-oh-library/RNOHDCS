@@ -14,7 +14,7 @@ import { useEnsuredForwardedRef, useRaf } from 'react-use';
 
   return (
     <View>
-      <TextInput style={{borderWidth:1}} ref={ensuredInputref}/>
+      <TextInput style={{borderWidth:1, fontSize: 16}} ref={ensuredInputref}/>
       <Button title='Focus Input' onPress={handleClick} />
     </View>
   );
