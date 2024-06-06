@@ -7,8 +7,8 @@ const OperationDemo = () => {
 
   const [addNum, setAddNum] = useState(1)
   const [subtractNum, setSubtractNum] = useState(1)
-  const [add, setAdd] = useState(dayjs().format('YYYY-MM-DD'))
-  const [subtract, setSubtract] = useState(dayjs().format('YYYY-MM-DD'))
+  const [add, setAdd] = useState(dayjs().format('YYYY-MM-DD HH:mm:ss'))
+  const [subtract, setSubtract] = useState(dayjs().format('YYYY-MM-DD HH:mm:ss'))
   const [start, setStart] = useState<OpUnitType>('w')
 
 
@@ -16,11 +16,11 @@ const OperationDemo = () => {
     switch (type) {
       case 'add':
         setAddNum(addNum + 1)
-        setAdd(dayjs().add(addNum, 'day').format('YYYY-MM-DD'))
+        setAdd(dayjs().add(addNum, 'day').format('YYYY-MM-DD HH:mm:ss'))
         break;
       case 'subtract':
         setSubtractNum(subtractNum + 1)
-        setSubtract(dayjs().subtract(subtractNum, 'day').format('YYYY-MM-DD'))
+        setSubtract(dayjs().subtract(subtractNum, 'day').format('YYYY-MM-DD HH:mm:ss'))
         break;
       default:
         break;
@@ -62,7 +62,7 @@ const OperationDemo = () => {
             <Button title="hour" onPress={() => setDateStartOrEnd('h')} />
           </View>
         </View>
-        <Text style={styles.textCommon}>设置到一个时间的开始:{dayjs().startOf(start).format('YYYY-MM-DD HH:mm:ss')}</Text>
+        <Text style={styles.textCommon}>设置到一个时间的开始:{dayjs().startOf(start).format('YYYY-MM-DD HH:mm:ss')} </Text>
         <Text style={styles.textCommon}>设置到一个时间的末尾:{dayjs().endOf(start).format('YYYY-MM-DD HH:mm:ss')}</Text>
       </View>
     </View>
