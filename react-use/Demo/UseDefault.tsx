@@ -10,7 +10,7 @@ import { useDefault } from 'react-use';
   return (
     <View>
       <Text>User: {user.name}</Text>
-      <TextInput style={{ borderWidth: 1 }} onChangeText={newValue => setUser({ name: newValue })} />
+      <TextInput style={{ borderWidth: 1,fontSize: 16 }} onChangeText={newValue => setUser({ name: newValue })} />
       <Button title='set to null' onPress={() => setUser(null)} />
     </View>
   );
