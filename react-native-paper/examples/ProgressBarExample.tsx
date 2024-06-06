@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { Alert, View,StyleSheet,Animated } from 'react-native';
+import {StyleSheet,Animated } from 'react-native';
 import {Button,  ProgressBarProps,ProgressBar,MD2Theme,
   MD3Theme,
   MD3Colors,
   MD2Colors,
-  useTheme,Text} from 'react-native-paper';
-import ScreenWrapper from '../ScreenWrapper';
+  useTheme} from 'react-native-paper';
 import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
 
 function ProgressBarDemo() { 

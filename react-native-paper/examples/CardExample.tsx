@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View } from "react-native"
-import { Alert } from 'react-native-harmony';
+import { Alert } from 'react-native';
 import { Avatar, Button, Card, Text, TouchableRipple } from 'react-native-paper';
 
 const LeftContent = props => <Avatar.Icon {...props} icon="folder" />

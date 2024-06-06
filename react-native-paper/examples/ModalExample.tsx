@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { View } from 'react-native-harmony';
 import { Modal, Portal, Text, Button, PaperProvider } from 'react-native-paper';
 
 import {TestSuite,TestCase,Tester} from '@rnoh/testerino';

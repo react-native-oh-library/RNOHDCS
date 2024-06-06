@@ -1,10 +1,7 @@
 import * as React from 'react';
 import { BottomNavigation, Text } from 'react-native-paper';
-
-
-
 import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
-import { View } from 'react-native-harmony';
+import { View } from 'react-native';
 
 function HelperTextDemo() { 
   return (
