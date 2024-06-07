@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Pressable, TouchableOpacity } from 'react-native';
 import { useTheme, Text, makeStyles } from '@rneui/themed';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino'
 
 type TextComponentProps = {};
 
@@ -19,35 +20,39 @@ const TextComponent: React.FunctionComponent<TextComponentProps> = () => {
   const styles = useStyles();
 
   return (
-    <>
-      <Text style={{fontSize:24,fontWeight:'bold',color:theme.colors.primary}}>Theme</Text>
-      <View style={styles.view}>
-        <Text>Simply select colors using the palette below.</Text>
-        <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-          {COLORS.map((color) => (
-            <TouchableOpacity
-              key={color}
-              style={{
-                backgroundColor: '#' + color,
-                height: 50,
-                width: '100%',
-                marginBottom: 10,
-              }}
-              onPress={() => {
-                updateTheme({
-                  lightColors: {
-                    primary: '#' + color,
-                  },
-                  darkColors: {
-                    primary: '#' + color,
-                  },
-                });
-              }}
-            />
-          ))}
+    <Tester>
+      <TestSuite name='Theme'>
+      <TestCase itShould='Rounded Buttons' tags={['C_API']}>
+        <Text style={{ fontSize: 24, fontWeight: 'bold', color: theme.colors.primary }}>Theme</Text>
+        <View style={styles.view}>
+          <Text>Simply select colors using the palette below.</Text>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+            {COLORS.map((color) => (
+              <TouchableOpacity
+                key={color}
+                style={{
+                  backgroundColor: '#' + color,
+                  height: 50,
+                  width: '100%',
+                  marginBottom: 10,
+                }}
+                onPress={() => {
+                  updateTheme({
+                    lightColors: {
+                      primary: '#' + color,
+                    },
+                    darkColors: {
+                      primary: '#' + color,
+                    },
+                  });
+                }}
+              />
+            ))}
+          </View>
         </View>
-      </View>
-    </>
+        </TestCase>
+      </TestSuite>
+    </Tester>
   );
 };
 
