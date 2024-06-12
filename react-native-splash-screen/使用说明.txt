@@ -1,0 +1,11 @@
+1. 修改harmony\entry\src\main\ets\entryability\EntryAbility.ets，增加onWindowStageCreate方法，代码参考文件夹内EntryAbility.ets
+
+2. 增加启动图片，路径：harmony\entry\src\main\resources\base\media\splashIcon.png
+
+3. 修改启动图片配置，路径：harmony\entry\src\main\resources\module.json5
+    将"startWindowIcon": "$media:icon"修改为"startWindowIcon": "$media:splashIcon"
+
+4. 增加启动页，路径：harmony\entry\src\main\ets\pages\SplashScreenPage.ets
+
+5. 修改harmony\entry\src\main\resources\base\profile\main_pages.json
+    "src"内增加"pages/SplashScreenPage"
