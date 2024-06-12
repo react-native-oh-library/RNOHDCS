@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Slider, Text, Icon } from '@rneui/themed';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino'
 
 type SlidersComponentProps = {};
 
@@ -21,64 +22,64 @@ const Sliders: React.FunctionComponent<SlidersComponentProps> = () => {
   };
 
   return (
-    <>
-      <Text style={styles.titleStyle}>Slider</Text>
-      <Text style={styles.subTitleStyle}>Slider Horizontal</Text>
-
-      <View style={[styles.contentView]}>
-        <Slider
-          // debugTouchArea
-          value={value}
-          onValueChange={setValue}
-          maximumValue={100}
-          minimumValue={0}
-          step={1}
-          allowTouchTrack
-          trackStyle={{ height: 5, backgroundColor: 'transparent' }}
-          thumbStyle={{ height: 20, width: 20, backgroundColor: 'transparent' }}
-          thumbProps={{
-            children: (
-              <Icon
-                name="heartbeat"
-                type="font-awesome"
-                size={20}
-                reverse
-                containerStyle={{ bottom: 20, right: 20 }}
-                color={color()}
-              />
-            ),
-          }}
-        />
-        <Text style={{ paddingTop: 20 }}>Value: {value}</Text>
-      </View>
-      <Text style={styles.subTitleStyle}>Slider Vertical</Text>
-      <View style={styles.verticalContent}>
-        <Slider
-          debugTouchArea
-          value={vertValue}
-          onValueChange={setVertValue}
-          maximumValue={50}
-          minimumValue={20}
-          step={1}
-          orientation="vertical"
-          // allowTouchTrack
-          thumbStyle={{ height: 20, width: 16, backgroundColor: 'transparent' }}
-          thumbProps={{
-            children: (
-              <Icon
-                name="heartbeat"
-                type="font-awesome"
-                size={20}
-                reverse
-                containerStyle={{ bottom: 20, right: 20 }}
-                color="#f50"
-              />
-            ),
-          }}
-        />
-      </View>
-      <Text style={{ paddingLeft: 25 }}>Value: {vertValue}</Text>
-    </>
+    <Tester>
+      <TestSuite name='Slider'>
+        <TestCase itShould='Slider Horizontal' tags={['C_API']}>
+          <View style={[styles.contentView]}>
+            <Slider
+              value={value}
+              onValueChange={setValue}
+              maximumValue={100}
+              minimumValue={0}
+              step={1}
+              allowTouchTrack
+              trackStyle={{ height: 5, backgroundColor: 'transparent' }}
+              thumbStyle={{ height: 20, width: 20, backgroundColor: 'transparent' }}
+              thumbProps={{
+                children: (
+                  <Icon
+                    name="heartbeat"
+                    type="font-awesome"
+                    size={20}
+                    reverse
+                    containerStyle={{ bottom: 20, right: 20 }}
+                    color={color()}
+                  />
+                ),
+              }}
+            />
+            <Text style={{ paddingTop: 20, color: '#000' }}>Value: {value}</Text>
+          </View>
+        </TestCase>
+        <TestCase itShould='Slider Vertical' tags={['C_API']}>
+          <View style={{ ...styles.verticalContent, height: 400 }}>
+            <Slider
+              value={vertValue}
+              onValueChange={setVertValue}
+              maximumValue={50}
+              minimumValue={20}
+              step={1}
+              orientation="vertical"
+              allowTouchTrack
+              thumbStyle={{ height: 20, width: 16, backgroundColor: 'transparent' }}
+              thumbProps={{
+                children: (
+                  <Icon
+                    name="heartbeat"
+                    type="font-awesome"
+                    size={20}
+                    reverse
+                    containerStyle={{ bottom: 20, right: 20 }}
+                    color="#f50"
+                  />
+                ),
+              }}
+            />
+          </View>
+          <Text style={{ paddingLeft: 25, color: '#000' }}>Value: {vertValue}</Text>
+        </TestCase>
+      </TestSuite>
+    </Tester>
   );
 };
 
@@ -91,9 +92,7 @@ const styles = StyleSheet.create({
   },
   verticalContent: {
     padding: 20,
-    flex: 1,
     flexDirection: 'row',
-    height: 500,
     justifyContent: 'center',
     alignItems: 'stretch',
   },

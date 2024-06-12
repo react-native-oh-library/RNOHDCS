@@ -13,26 +13,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from 'react';
-import { Button} from 'react-native';
+import React, {useState } from 'react';
+import { Button,View,Text,StyleSheet} from 'react-native';
 import { createThumbnail }  from 'react-native-create-thumbnail';
 import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
 
 function CreateThumbnailDemo() { 
+
+  const [text, setText] = useState('');
+
   return (
     <Tester>
       <TestSuite name='CreateThumbnail'>
+      
        <TestCase
           itShould="Create video thumbnail"
           initialState={null as any}
           arrange={({setState}) => (
-            <Button title='运行' color='#841584' onPress= {async() => {
-              let obj = await createThumbnail({ 
-                url:'https://media.w3.org/2010/05/sintel/trailer.mp4',
-                timeStamp: 10000
-              });
-              setState(obj)
-            }}></Button>
+            
+            <View>
+              <Text style={styles.baseText}>
+                返回结果
+              </Text>
+              <Text style={styles.inputArea}>
+                {text}
+              </Text>
+               <Button title='运行' color='#841584' onPress= {async() => {
+                let obj = await createThumbnail({ 
+                  url:'https://media.w3.org/2010/05/sintel/trailer.mp4',
+                  timeStamp: 10000
+                })
+                setText(JSON.stringify(obj))
+                setState(obj)
+                }}>
+            </Button>
+            </View>
           )}
           assert={({expect, state}) => {
             expect(state).to.have.property('path')
@@ -42,4 +57,23 @@ function CreateThumbnailDemo() {
     </Tester>
   )
 }
+
+const styles = StyleSheet.create({
+  baseText: {
+    fontWeight: 'bold',
+    textAlign:'center',
+    fontSize:16
+  },
+
+  inputArea: {
+    width:'100%',
+    height:160,
+    borderColor:'#000000',
+    marginTop:8,
+    justifyContent:'center',
+    alignItems:'center',
+  },
+
+})
+
 export default CreateThumbnailDemo;

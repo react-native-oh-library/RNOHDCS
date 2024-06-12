@@ -24,7 +24,7 @@ export function HistoryTravel3(){
         <Text>backLength: {backLength}</Text>
         <Text>forwardLength: {forwardLength}</Text>
       </View>
-      <TextInput value={value || ''} onChangeText={setValue} />
+      <TextInput value={value || ''} onChangeText={setValue} style={{ borderWidth: 1, fontSize: 16 }} />
       <View 
         style={{ marginHorizontal: 8 }}>
       <Button

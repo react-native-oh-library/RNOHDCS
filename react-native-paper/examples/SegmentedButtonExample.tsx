@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { List} from 'react-native-paper';
-
 import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
 import { SegmentedButtonDefault,SegmentedButtonCustomColorCheck,SegmentedButtonDisabled,SegmentedButtonMultiselect} from './SegementedButtons';
 import { ScrollView } from 'react-native-harmony';

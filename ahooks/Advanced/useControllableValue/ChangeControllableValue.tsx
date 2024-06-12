@@ -19,7 +19,7 @@ const ControllableComponent = (props: any) => {
       onChangeText={(text) => {
         setState(text);
       }}
-      style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+      style={{ height: 40, borderColor: 'gray', borderWidth: 1, fontSize: 16 }}
     />
   );
 };

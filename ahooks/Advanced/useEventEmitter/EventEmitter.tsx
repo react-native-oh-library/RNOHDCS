@@ -29,7 +29,7 @@ const InputBox = ({ focus$ }: { focus$: any }) => {
   focus$.useSubscription(() => {
     inputRef.current.focus();
   });
-  return <TextInput ref={inputRef} placeholder="Enter reply" style={{ width: '100%', padding: 4 }} />;
+  return <TextInput ref={inputRef} placeholder="Enter reply" style={{ width: '100%', padding: 4, borderWidth: 1, fontSize: 16}} />;
 };
 
 export function EventEmitter() {

@@ -2,6 +2,7 @@ import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { Avatar, Icon } from '@rneui/themed';
 import { Text } from '@rneui/base';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino'
 
 type AvatarData = {
   image_url: string;
@@ -53,155 +54,158 @@ type AvatarComponentProps = {};
 
 const Avatars: React.FunctionComponent<AvatarComponentProps> = () => {
   return (
-    <>
-      <Text style={styles.titleStyle}>Avatars</Text>
-      <ScrollView>
-        <Text style={styles.subTitleStyle}>Photo Avatars</Text>
-        {dataList.map((chunk, chunkIndex) => (
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              marginBottom: 30,
-            }}
-            key={chunkIndex}
-          >
-            {chunk.map((l, i) => (
+    <Tester>
+      <TestSuite name='Avatars'>
+        <ScrollView>
+          <TestCase itShould='Photo Avatars' tags={['C_API']}>
+            {dataList.map((chunk, chunkIndex) => (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-around',
+                  marginBottom: 30,
+                }}
+                key={chunkIndex}
+              >
+                {chunk.map((l, i) => (
+                  <Avatar
+                    size={64}
+                    rounded
+                    source={l.image_url ? { uri: l.image_url } : {}}
+                    key={`${chunkIndex}-${i}`}
+                  />
+                ))}
+              </View>
+            ))}
+          </TestCase>
+          <TestCase itShould='Icon Avatars' tags={['C_API']}>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                marginBottom: 30,
+              }}
+            >
               <Avatar
                 size={64}
                 rounded
-                source={l.image_url ? { uri: l.image_url } : {}}
-                key={`${chunkIndex}-${i}`}
+                icon={{ name: 'pencil', type: 'font-awesome' }}
+                containerStyle={{ backgroundColor: '#6733b9' }}
               />
-            ))}
-          </View>
-        ))}
-        <Text style={styles.subTitleStyle}>Icon Avatars</Text>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            marginBottom: 30,
-          }}
-        >
-          <Avatar
-            size={64}
-            rounded
-            icon={{ name: 'pencil', type: 'font-awesome' }}
-            containerStyle={{ backgroundColor: '#6733b9' }}
-          />
-          <Avatar
-            size={64}
-            rounded
-            icon={{ name: 'rocket', type: 'font-awesome' }}
-            containerStyle={{ backgroundColor: '#00a7f7' }}
-          />
-          <Avatar
-            size={64}
-            rounded
-            icon={{ name: 'heartbeat', type: 'font-awesome' }}
-            containerStyle={{ backgroundColor: '#eb1561' }}
-          />
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            marginBottom: 30,
-          }}
-        >
-          <Avatar
-            size={64}
-            rounded
-            icon={{
-              name: 'users',
-              type: 'font-awesome',
-              color: '#cdde20',
-            }}
-            containerStyle={{
-              borderColor: 'grey',
-              borderStyle: 'solid',
-              borderWidth: 1,
-            }}
-          />
-          <Avatar
-            size={64}
-            rounded
-            icon={{ name: 'bank', type: 'font-awesome', color: '#009688' }}
-            containerStyle={{
-              borderColor: 'grey',
-              borderStyle: 'solid',
-              borderWidth: 1,
-            }}
-          />
-          <Avatar
-            size={64}
-            rounded
-            icon={{ name: 'apple', type: 'font-awesome', color: '#ff5606' }}
-            containerStyle={{
-              borderColor: 'grey',
-              borderStyle: 'solid',
-              borderWidth: 1,
-            }}
-          />
-        </View>
-
-        <Text style={styles.subTitleStyle}>Letter Avatars</Text>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            marginBottom: 30,
-          }}
-        >
-          <Avatar
-            size={64}
-            rounded
-            title="Fc"
-            containerStyle={{ backgroundColor: '#3d4db7' }}
-          />
-          <Avatar
-            size={64}
-            rounded
-            title="P"
-            containerStyle={{ backgroundColor: 'coral' }}
-          />
-          <Avatar
-            size={64}
-            rounded
-            title="Rd"
-            containerStyle={{ backgroundColor: 'purple' }}
-          />
-        </View>
-
-        <Text style={styles.subTitleStyle}>Badged Avatars</Text>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            marginBottom: 40,
-          }}
-        >
-          <Avatar
-            size={64}
-            rounded
-            icon={{ name: 'pencil', type: 'font-awesome' }}
-            containerStyle={{ backgroundColor: 'orange' }}
-          >
-            <Avatar.Accessory size={24} />
-          </Avatar>
-          <Avatar
-            size={64}
-            rounded
-            source={{ uri: 'https://randomuser.me/api/portraits/women/57.jpg' }}
-            containerStyle={{ backgroundColor: 'grey' }}
-          >
-            <Avatar.Accessory size={23} name='pencil' type='font-awesome' color='#00aced'>
-            </Avatar.Accessory>
-          </Avatar>
-        </View>
-      </ScrollView>
-    </>
+              <Avatar
+                size={64}
+                rounded
+                icon={{ name: 'rocket', type: 'font-awesome' }}
+                containerStyle={{ backgroundColor: '#00a7f7' }}
+              />
+              <Avatar
+                size={64}
+                rounded
+                icon={{ name: 'heartbeat', type: 'font-awesome' }}
+                containerStyle={{ backgroundColor: '#eb1561' }}
+              />
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                marginBottom: 30,
+              }}
+            >
+              <Avatar
+                size={64}
+                rounded
+                icon={{
+                  name: 'users',
+                  type: 'font-awesome',
+                  color: '#cdde20',
+                }}
+                containerStyle={{
+                  borderColor: 'grey',
+                  borderStyle: 'solid',
+                  borderWidth: 1,
+                }}
+              />
+              <Avatar
+                size={64}
+                rounded
+                icon={{ name: 'bank', type: 'font-awesome', color: '#009688' }}
+                containerStyle={{
+                  borderColor: 'grey',
+                  borderStyle: 'solid',
+                  borderWidth: 1,
+                }}
+              />
+              <Avatar
+                size={64}
+                rounded
+                icon={{ name: 'apple', type: 'font-awesome', color: '#ff5606' }}
+                containerStyle={{
+                  borderColor: 'grey',
+                  borderStyle: 'solid',
+                  borderWidth: 1,
+                }}
+              />
+            </View>
+          </TestCase>
+          <TestCase itShould='Letter Avatars' tags={['C_API']}>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                marginBottom: 30,
+              }}
+            >
+              <Avatar
+                size={64}
+                rounded
+                title="Fc"
+                containerStyle={{ backgroundColor: '#3d4db7' }}
+              />
+              <Avatar
+                size={64}
+                rounded
+                title="P"
+                containerStyle={{ backgroundColor: 'coral' }}
+              />
+              <Avatar
+                size={64}
+                rounded
+                title="Rd"
+                containerStyle={{ backgroundColor: 'purple' }}
+              />
+            </View>
+          </TestCase>
+          <TestCase itShould='Badged Avatars' tags={['C_API']}>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                marginBottom: 40,
+              }}
+            >
+              <Avatar
+                size={64}
+                rounded
+                icon={{ name: 'pencil', type: 'font-awesome' }}
+                containerStyle={{ backgroundColor: 'orange' }}
+              >
+                <Avatar.Accessory size={24} />
+              </Avatar>
+              <Avatar
+                size={64}
+                rounded
+                source={{ uri: 'https://randomuser.me/api/portraits/women/57.jpg' }}
+                containerStyle={{ backgroundColor: 'grey' }}
+              >
+                <Avatar.Accessory size={23} name='pencil' type='font-awesome' color='#00aced'>
+                </Avatar.Accessory>
+              </Avatar>
+            </View>
+          </TestCase>
+        </ScrollView>
+      </TestSuite>
+    </Tester>
   );
 };
 

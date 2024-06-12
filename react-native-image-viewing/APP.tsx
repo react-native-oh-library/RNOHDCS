@@ -126,7 +126,7 @@ export default function App() {
         imageIndex={currentImageIndex}
         visible={isVisible}
         onRequestClose={onRequestClose}
-        OnImageIndexChange={OnImageIndexChange}
+        onImageIndexChange={OnImageIndexChange}
         presentationStyle="fullScreen"
         backgroundColor="#f00"
         animationType={animationType}

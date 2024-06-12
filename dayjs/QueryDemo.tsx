@@ -20,7 +20,7 @@ const QueryDemo = () => {
         setIsSameQueryBool(dayjs(dayjs().format('YYYY-MM-DD')).isSame(dayjs(value)))
         break;
         case 'isAfter':
-          setIsAfterQueryBool(dayjs(dayjs().format('YYYY-MM-DD')).isAfter(dayjs(value)))
+        setIsAfterQueryBool(dayjs(dayjs().format('YYYY-MM-DD')).isAfter(dayjs(value)))
           break;
       default:
         break;
@@ -72,9 +72,9 @@ const QueryDemo = () => {
 
       <View style={styles.viewBox}>
         <View style={styles.flexRowCenter}>
-          <Text style={[styles.textCommon, {marginRight:20}]}>Is Dayjs, 判断否为 Day.js 对象。</Text>
+          <Text style={[styles.textCommon, {marginRight:20}]}>Is Dayjs, 判断是否为 Day.js 对象。</Text>
         </View>
-        <Text style={styles.textCommon}>传入DayJSd对象：<Text style={styles.formatLabel}>{dayjs.isDayjs(dayjs())  ? '是' : '否'}</Text></Text>
+        <Text style={styles.textCommon}>传入DayJS对象：<Text style={styles.formatLabel}>{dayjs.isDayjs(dayjs())  ? '是' : '否'}</Text></Text>
         <Text style={styles.textCommon}>传入非对象：<Text style={styles.formatLabel}>{dayjs.isDayjs(new Date())  ? '是' : '否'}</Text></Text>
       </View>
     </View>
@@ -144,7 +144,8 @@ const styles = StyleSheet.create({
     width: 200,
     height: 40,
     borderWidth: 1,
-    borderRadius: 10
+    borderRadius: 10,
+    fontSize: 16
   }
 });
 

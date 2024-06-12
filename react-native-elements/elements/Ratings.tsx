@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Platform, ScrollView } from 'react-native';
 import { Rating, AirbnbRating } from '@rneui/themed';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino'
 
 const WATER_IMAGE = require('./images/water.png');
 
@@ -13,97 +14,101 @@ const Ratings: React.FunctionComponent<RatingsComponentProps> = () => {
 
   const ratingProps = {};
   return (
-    <View style={styles.container}>
-      <Text style={styles.titleStyle}>Ratings</Text>
-      <ScrollView style={styles.viewContainer}>
-        <Text
-          style={[
-            styles.titleText,
-            { marginTop: 30, color: '#e74c3c', fontSize: 22 },
-          ]}
-        >
-          Airbnb-style Tap Ratings
-        </Text>
-        <AirbnbRating />
-        <AirbnbRating
-          count={11}
-          reviews={[
-            'Terrible',
-            'Bad',
-            'Meh',
-            'OK',
-            'Good',
-            'Hmm...',
-            'Very Good',
-            'Wow',
-            'Amazing',
-            'Unbelievable',
-            'Jesus',
-          ]}
-          defaultRating={11}
-          size={20}
-        />
-        <Text
-          style={[
-            styles.titleText,
-            { marginTop: 30, color: '#9b59b6', fontSize: 22 },
-          ]}
-        >
-          Whatsapp-style Swipe Ratings
-        </Text>
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginBottom: 30,
-          }}
-        >
-          <Rating
-            showRating
-            imageSize={40}
-            onFinishRating={ratingCompleted}
-            {...ratingProps}
-            style={{ paddingVertical: 10 }}
-          />
-          <Rating
-            showRating
-            type="star"
-            fractions={1}
-            startingValue={3.6}
-            readonly={true}
-            imageSize={40}
-            onFinishRating={ratingCompleted}
-            style={{ paddingVertical: 10 }}
-          />          
-          <Rating
-            type="custom"
-            ratingImage={WATER_IMAGE}
-            ratingColor="#3498db"
-            ratingCount={10}
-            imageSize={30}
-            onFinishRating={ratingCompleted}
-            showRating
-            style={{ paddingVertical: 10 }}
-          />
-          <Rating
-            type="heart"
-            ratingCount={3}
-            fractions={2}
-            startingValue={1.57}
-            imageSize={40}
-            onFinishRating={ratingCompleted}
-            showRating
-            style={styles.rating}
-          />
-        </View>
-      </ScrollView>
-    </View>
+    <Tester>
+      <TestSuite name='Ratings'>
+        <ScrollView style={{ ...styles.viewContainer }}>
+          <TestCase itShould='Airbnb-style Tap Ratings' tags={['C_API']}>
+            <Text
+              style={[
+                styles.titleText,
+                { marginTop: 30, color: '#e74c3c', fontSize: 22 },
+              ]}
+            >
+              Airbnb-style Tap Ratings
+            </Text>
+            <AirbnbRating />
+          </TestCase>
+          <TestCase itShould='Airbnb-style Tap Ratings' tags={['C_API']}>
+            <AirbnbRating
+              count={11}
+              reviews={[
+                'Terrible',
+                'Bad',
+                'Meh',
+                'OK',
+                'Good',
+                'Hmm...',
+                'Very Good',
+                'Wow',
+                'Amazing',
+                'Unbelievable',
+                'Jesus',
+              ]}
+              defaultRating={11}
+              size={20}
+            />
+          </TestCase>
+          <TestCase itShould='Whatsapp-style Swipe Ratings' tags={['C_API']}>
+            <Text
+              style={[
+                styles.titleText,
+                { marginTop: 30, color: '#9b59b6', fontSize: 22 },
+              ]}
+            >
+              Whatsapp-style Swipe Ratings
+            </Text>
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginBottom: 30,
+              }}
+            >
+              <Rating
+                showRating
+                imageSize={40}
+                onFinishRating={ratingCompleted}
+                {...ratingProps}
+                style={{ paddingVertical: 10 }}
+              />
+              <Rating
+                showRating
+                type="star"
+                fractions={1}
+                startingValue={3.6}
+                readonly={true}
+                imageSize={40}
+                onFinishRating={ratingCompleted}
+                style={{ paddingVertical: 10 }}
+              />
+              <Rating
+                type="custom"
+                ratingImage={WATER_IMAGE}
+                ratingColor="#3498db"
+                ratingCount={10}
+                imageSize={30}
+                onFinishRating={ratingCompleted}
+                showRating
+                style={{ paddingVertical: 10 }}
+              />
+              <Rating
+                type="heart"
+                ratingCount={3}
+                fractions={2}
+                startingValue={1.57}
+                imageSize={40}
+                onFinishRating={ratingCompleted}
+                showRating
+                style={styles.rating}
+              />
+            </View>
+          </TestCase>
+        </ScrollView>
+      </TestSuite>
+    </Tester>
   );
 };
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   headingContainer: {
     paddingTop: 50,
   },
@@ -121,7 +126,7 @@ const styles = StyleSheet.create({
     color: '#34495e',
   },
   viewContainer: {
-    flex: 1,
+    // flex: 1,
   },
   rating: {
     paddingVertical: 10,

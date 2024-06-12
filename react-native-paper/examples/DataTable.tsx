@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { DataTable, Card } from 'react-native-paper';
 type ItemsState = Array<{
@@ -10,14 +10,103 @@ type ItemsState = Array<{
 }>;
 import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
 
+const numberOfItemsPerPageList = [2, 3, 4];
+
+const items = [
+  {
+    key: 1,
+    name: 'Page 1',
+  },
+  {
+    key: 2,
+    name: 'Page 2',
+  },
+  {
+    key: 3,
+    name: 'Page 3',
+  },
+];
+
+
 export function DataTableText() {
+
+  const [page, setPage] = React.useState(0);
+  const [numberOfItemsPerPage, onItemsPerPageChange] = React.useState(numberOfItemsPerPageList[0]);
+  const from = page * numberOfItemsPerPage;
+  const to = Math.min((page + 1) * numberOfItemsPerPage, items.length);
+
   return (
     <Tester>
-       <TestSuite name='DataTable' >
+      <ScrollView>
+        <TestSuite name='DataTable' >
           <TestCase itShould='Default DataTable'>
             <DataTableDemo></DataTableDemo>
           </TestCase>
+
+          <TestCase itShould='DataTable.Cell'>
+            <DataTable.Row>
+              <DataTable.Cell numeric>1</DataTable.Cell>
+              <DataTable.Cell numeric>2</DataTable.Cell>
+              <DataTable.Cell numeric>3</DataTable.Cell>
+              <DataTable.Cell numeric>4</DataTable.Cell>
+            </DataTable.Row>
+          </TestCase>
+
+          <TestCase itShould='DataTable.Header'>
+          <DataTable>
+             <DataTable.Header>
+              <DataTable.Title
+                sortDirection='descending'
+              >
+                Dessert
+                  </DataTable.Title>
+                  <DataTable.Title numeric>Calories</DataTable.Title>
+                  <DataTable.Title numeric>Fat (g)</DataTable.Title>
+                </DataTable.Header>
+            </DataTable>
+          </TestCase>
+
+          
+          <TestCase itShould='DataTable.Row'>
+            <DataTable.Row>
+            <DataTable.Cell numeric>1</DataTable.Cell>
+            <DataTable.Cell numeric>2</DataTable.Cell>
+            <DataTable.Cell numeric>3</DataTable.Cell>
+            <DataTable.Cell numeric>4</DataTable.Cell>
+            </DataTable.Row>
+          </TestCase>
+
+          <TestCase itShould='DataTable.Title'>
+          <DataTable>
+            <DataTable.Header>
+              <DataTable.Title
+                sortDirection='descending'
+              >
+                Dessert
+              </DataTable.Title>
+              <DataTable.Title numeric>Calories</DataTable.Title>
+              <DataTable.Title numeric>Fat (g)</DataTable.Title>
+            </DataTable.Header>
+          </DataTable>
+          </TestCase>
+
+          <TestCase itShould='DataTable.Pagination'>
+          <DataTable>
+            <DataTable.Pagination
+              page={page}
+              numberOfPages={Math.ceil(items.length / numberOfItemsPerPage)}
+              onPageChange={page => setPage(page)}
+              label={`${from + 1}-${to} of ${items.length}`}
+              showFastPaginationControls
+              numberOfItemsPerPageList={numberOfItemsPerPageList}
+              numberOfItemsPerPage={numberOfItemsPerPage}
+              onItemsPerPageChange={onItemsPerPageChange}
+              selectPageDropdownLabel={'Rows per page'}
+            />
+          </DataTable>
+          </TestCase>
        </TestSuite>
+      </ScrollView>
     </Tester>
   )
 }
@@ -130,7 +219,6 @@ const styles = StyleSheet.create({
   content: {
     padding: 8,
     backgroundColor:'white',
-    flex:1
   },
   first: {
     flex: 2,
