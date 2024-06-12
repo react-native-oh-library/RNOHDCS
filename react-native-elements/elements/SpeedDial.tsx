@@ -1,60 +1,40 @@
 import React from 'react';
 import { SpeedDial } from '@rneui/themed';
-import { Text } from 'react-native';
+import { View } from 'react-native';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino'
 
 export default () => {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <>
-      <Text style={{fontSize:24,fontWeight:'bold'}}>Speed Dial</Text>
-      <SpeedDial
-        isOpen={open}
-        labelPressable
-        placement="right"
-        overlayColor="transparent"
-        icon={{ name: 'pencil',type: 'font-awesome', color: '#fff' }}
-        openIcon={{ name: 'remove',type: 'font-awesome', color: '#fff' }}
-        onOpen={() => setOpen(!open)}
-        onClose={() => setOpen(!open)}
-      >
-        <SpeedDial.Action
-          icon={{ name: 'plus',type: 'font-awesome', color: '#fff' }}
-          title="Add"
-          onPress={() => console.log('Added Event')}
-        />
-        <SpeedDial.Action
-          icon={{ name: 'minus',type: 'font-awesome', color: '#fff' }}
-          title="Delete"
-          onPress={() => console.log('Delete Event')}
-        />
-      </SpeedDial>
-      <SpeedDial
-        placement="left"
-        isOpen={open}
-        overlayColor="transparent"
-        icon={{ name: 'pencil',type: 'font-awesome', color: '#fff' }}
-        openIcon={{ name: 'remove',type: 'font-awesome', color: '#fff' }}
-        onOpen={() => setOpen(!open)}
-        onClose={() => setOpen(!open)}
-        labelPressable
-      >
-        <SpeedDial.Action
-          icon={{ name: 'plus',type: 'font-awesome',  color: '#fff' }}
-          title="Add"
-          onPress={() => console.log('Added Event')}
-        />
-        <SpeedDial.Action
-          icon={{ name: 'plus',type: 'font-awesome', color: '#fff' }}
-          title="Add"
-          onPress={() => console.log('Added Event')}
-        />
-        <SpeedDial.Action
-          icon={{ name: 'minus',type: 'font-awesome', color: '#fff' }}
-          title="Delete"
-          onPress={() => console.log('Delete Event')}
-        />
-      </SpeedDial>
-    </>
+    <Tester>
+      <TestSuite name='Speed Dial'>
+        <TestCase itShould='Rounded Buttons' tags={['C_API']}>
+          <View style={{ height: '90%', width: '100%' }}>
+            <SpeedDial
+              isOpen={open}
+              labelPressable
+              placement="right"
+              overlayColor="transparent"
+              icon={{ name: 'pencil', type: 'font-awesome', color: '#fff', style: { marginLeft: 5, marginBottom: 7 } }}
+              openIcon={{ name: 'remove', type: 'font-awesome', color: '#fff', style: { marginLeft: 5, marginBottom: 7 } }}
+              onOpen={() => setOpen(!open)}
+              onClose={() => setOpen(!open)}
+            >
+              <SpeedDial.Action
+                icon={{ name: 'plus', type: 'font-awesome', color: '#fff', style: { marginLeft: 5, marginBottom: 7 } }}
+                title="Add"
+                onPress={() => console.log('Added Event')}
+              />
+              <SpeedDial.Action
+                icon={{ name: 'minus', type: 'font-awesome', color: '#fff', style: { marginLeft: 5, marginBottom: 7 } }}
+                title="Delete"
+                onPress={() => console.log('Delete Event')}
+              />
+            </SpeedDial>
+          </View>
+        </TestCase>
+      </TestSuite>
+    </Tester>
   );
 };

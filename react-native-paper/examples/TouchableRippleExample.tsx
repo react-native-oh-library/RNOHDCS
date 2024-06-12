@@ -14,8 +14,6 @@ function TouchableRippleDemo() {
     </Tester>
   )
 }
-
-
 const RippleExample = () => {
   return (
     <View style = {{width:'100%',height:500}}>

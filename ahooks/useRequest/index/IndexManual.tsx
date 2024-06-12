@@ -30,7 +30,7 @@ export function IndexManual() {
         onChangeText={(text) => setState(text)}
         value={state}
         placeholder="Please enter username"
-        style={{ width: 240, marginRight: 16 }}
+        style={{ width: 240, marginRight: 16, borderWidth: 1, fontSize: 16 }}
       />
       <Button disabled={loading} title="button" onPress={() => run(state)} />
     </View>

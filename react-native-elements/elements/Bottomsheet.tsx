@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BottomSheet, Button, ListItem } from '@rneui/themed';
 import { StyleSheet, Text } from 'react-native';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino'
 
 type BottomSheetComponentProps = {};
 
@@ -20,31 +21,35 @@ const BottomSheetComponent: React.FunctionComponent<
   ];
 
   return (
-    <>
-      <Text style={styles.titleStyle}>BottomSheet</Text>
-      <Button
-        title="Open Bottom Sheet with handler"
-        onPress={() => setIsVisible(true)}
-        buttonStyle={styles.button}
-      />
-      <BottomSheet
-        modalProps={{}}
-        onBackdropPress={() => setIsVisible(false)}
-        isVisible={isVisible}
-      >
-        {list.map((l, i) => (
-          <ListItem
-            key={i}
-            containerStyle={l.containerStyle}
-            onPress={l.onPress}
+    <Tester>
+      <TestSuite name='BottomSheet'>
+        <TestCase itShould='Rounded Buttons' tags={['C_API']}>
+          <Button
+            title="Open Bottom Sheet with handler"
+            onPress={() => setIsVisible(true)}
+            buttonStyle={styles.button}
+          />
+          <BottomSheet
+            modalProps={{}}
+            onBackdropPress={() => setIsVisible(false)}
+            isVisible={isVisible}
+            containerStyle={{ marginBottom: 38 }}
           >
-            <ListItem.Content>
-              <ListItem.Title style={l.titleStyle}>{l.title}</ListItem.Title>
-            </ListItem.Content>
-          </ListItem>
-        ))}
-      </BottomSheet>
-    </>
+            {list.map((l, i) => (
+              <ListItem
+                key={i}
+                containerStyle={l.containerStyle}
+                onPress={l.onPress}
+              >
+                <ListItem.Content>
+                  <ListItem.Title style={l.titleStyle}>{l.title}</ListItem.Title>
+                </ListItem.Content>
+              </ListItem>
+            ))}
+          </BottomSheet>
+        </TestCase>
+      </TestSuite>
+    </Tester>
   );
 };
 

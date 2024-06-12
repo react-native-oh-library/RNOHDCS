@@ -17,7 +17,7 @@ export  function CookieState1() {
       value={message}
       placeholder="Please enter some words..."
       onChange={(e:any) => setMessage(e.target.value)}
-      style={{ width: 300 }}
+      style={{ width: 300, borderWidth: 1, fontSize: 16 }}
     />
   );
 };

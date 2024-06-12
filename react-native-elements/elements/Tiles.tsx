@@ -1,27 +1,29 @@
 import React from 'react';
 import { Text, View, ScrollView } from 'react-native';
 import { Tile } from '@rneui/themed';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino'
 
 type TilesComponentProps = {};
 
 const Tiles: React.FunctionComponent<TilesComponentProps> = () => {
   return (
-    <>
-      <Text style={{fontSize:24,fontWeight:'bold'}}>Tiles</Text>
-      <View style={{ alignItems: 'center' }}>
-        <ScrollView style={{ paddingVertical: 10 }}>
-          <Tile
-            imageSrc={{
-              uri: 'https://www.mediastorehouse.com/p/191/sunset-porthmeor-beach-st-ives-cornwall-11702500.jpg.webp',
-            }}
-            title="When I admire the wonders of a sunset or the beauty of the moon, my soul expands in the worship of the creator."
-            titleStyle={{ fontSize: 15 }}
-            featured
-            caption="Mahatma Gandhi"
-            activeOpacity={1}
-            width={310}
-          />
-          <View style={{ paddingTop: 20 }}>
+    <Tester>
+      <ScrollView style={{ paddingVertical: 10 }}>
+        <TestSuite name='Tile'>
+          <TestCase itShould='Text Tile' tags={['C_API']}>
+            <Tile
+              imageSrc={{
+                uri: 'https://www.mediastorehouse.com/p/191/sunset-porthmeor-beach-st-ives-cornwall-11702500.jpg.webp',
+              }}
+              title="When I admire the wonders of a sunset or the beauty of the moon, my soul expands in the worship of the creator."
+              titleStyle={{ fontSize: 15 }}
+              featured
+              caption="Mahatma Gandhi"
+              activeOpacity={1}
+              width={310}
+            />
+          </TestCase>
+          <TestCase itShould='Icon Tile' tags={['C_API']}>
             <Tile
               imageSrc={{
                 uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
@@ -39,38 +41,40 @@ const Tiles: React.FunctionComponent<TilesComponentProps> = () => {
               }}
               width={310}
             />
-          </View>
+          </TestCase>
           <View style={{ paddingTop: 20, paddingBottom: 100 }}>
-            <Tile
-              imageSrc={{
-                uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Half_Dome_from_Glacier_Point%2C_Yosemite_NP_-_Diliff.jpg/320px-Half_Dome_from_Glacier_Point%2C_Yosemite_NP_-_Diliff.jpg',
-              }}
-              title="Half Dome, Yosemite"
-              titleStyle={{
-                fontSize: 20,
-                textAlign: 'center',
-                paddingBottom: 3,
-              }}
-              activeOpacity={1}
-              width={310}
-              contentContainerStyle={{ height: 70 }}
-              style={{ paddingBottom: 20 }}
-            >
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
+            <TestCase itShould='Image Tile' tags={['C_API']}>
+              <Tile
+                imageSrc={{
+                  uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Half_Dome_from_Glacier_Point%2C_Yosemite_NP_-_Diliff.jpg/320px-Half_Dome_from_Glacier_Point%2C_Yosemite_NP_-_Diliff.jpg',
                 }}
+                title="Half Dome, Yosemite"
+                titleStyle={{
+                  fontSize: 20,
+                  textAlign: 'center',
+                  paddingBottom: 3,
+                }}
+                activeOpacity={1}
+                width={310}
+                contentContainerStyle={{ height: 70 }}
+                style={{ paddingBottom: 20 }}
               >
-                <Text style={{ color: 'green' }}>Visit</Text>
-                <Text style={{ color: '#397af8' }}>Find out More</Text>
-              </View>
-            </Tile>
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <Text style={{ color: 'green' }}>Visit</Text>
+                  <Text style={{ color: '#397af8' }}>Find out More</Text>
+                </View>
+              </Tile>
+            </TestCase>
           </View>
-        </ScrollView>
-      </View>
-    </>
+        </TestSuite>
+      </ScrollView>
+    </Tester>
   );
 };
 

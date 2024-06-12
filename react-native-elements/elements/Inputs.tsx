@@ -19,6 +19,7 @@ import {
   ThemeProvider,
   InputProps,
 } from '@rneui/themed';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino'
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const dummySearchBarProps = {
@@ -45,348 +46,371 @@ const Inputs: React.FunctionComponent<InputsComponentProps> = () => {
 
   const InputFieldsStyle = {
     borderWidth: 0,
-    backgroundColor:'white'
+    backgroundColor: 'white'
   };
 
   const inputProps = {};
   return (
+
     <KeyboardAvoidingView
       style={styles.keyboardAvoidingView}
       behavior={'padding'}
       enabled
       keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 84}
     >
-      <Text style={styles.titleStyle}>Inputs</Text>
       <ScrollView keyboardShouldPersistTaps="handled">
-        <View>
-          <Text style={styles.subTitleStyle}>Search Bars</Text>
-        </View>
-        <SearchBarCustom
-          placeholder="iOS searchbar"
-          platform="ios"
-          style={InputFieldsStyle}
-          {...dummySearchBarProps}
-        />
-        <SearchBarCustom
-          placeholder="Android searchbar"
-          platform="android"
-          style={InputFieldsStyle}
-          {...dummySearchBarProps}
-        />
-        <SearchBarCustom
-          placeholder="Default searchbar"
-          style={InputFieldsStyle}
-          {...dummySearchBarProps}
-        />
-        <View style={{ paddingTop: 30 }}>
-          <Text style={styles.subTitleStyle}>Inputs</Text>
-        </View>
-        <View style={{ alignItems: 'center', marginBottom: 16 }}>
-          <Input
-            {...(inputProps as InputProps)}
-            containerStyle={{ width: '90%' }}
-            placeholder="Input with label"
-            label="LABEL"
-            labelStyle={{ marginTop: 16 }}
-            style={InputFieldsStyle}
-          />
-          <Input
-            {...(inputProps as InputProps)}
-            containerStyle={styles.inputContainerStyle}
-            placeholder="Simple input"
-            style={InputFieldsStyle}
-          />
-          <Input
-            {...(inputProps as InputProps)}
-            leftIcon={
-              <Icon
-                name="map-marker"
-                type="font-awesome"
-                color="#86939e"
-                size={25}
-              />
-            }
-            leftIconContainerStyle={{ marginLeft: 0, marginRight: 10 }}
-            containerStyle={styles.inputContainerStyle}
-            placeholder="Input with left icon"
-            style={InputFieldsStyle}
-          />
-          <Input
-            {...(inputProps as InputProps)}
-            rightIcon={
-              <Icon
-                name="chevron-right"
-                type="font-awesome"
-                color="#86939e"
-                size={25}
-              />
-            }
-            containerStyle={styles.inputContainerStyle}
-            placeholder="Input with right icon"
-            style={InputFieldsStyle}
-          />
-          <Input
-            {...(inputProps as InputProps)}
-            containerStyle={styles.inputContainerStyle}
-            placeholder="Input with error message"
-            errorMessage="Invalid input"
-            style={InputFieldsStyle}
-          />
-          <InputWithAnimatedErrorMessage
-            {...(inputProps as InputProps)}
-            containerStyle={styles.inputContainerStyle}
-            placeholder="Input with animated error"
-            errorMessage="This field must be left blank."
-            renderErrorMessage={true}
-            style={InputFieldsStyle}
-          />
-          <Input
-            {...(inputProps as InputProps)}
-            containerStyle={[styles.inputContainerStyle]}
-            placeholder="Shake input"
-            style={InputFieldsStyle}
-            ref={(ref) => (shakeInput = ref)}
-            rightIcon={
-              <Button
-                title="Shake"
-                onPress={() => {
-                  shakeInput && shakeInput.shake();
-                  Vibration.vibrate(1000);
-                }}
-              />
-            }
-            errorMessage="Shake me on error !"
-          />
-        </View>
-        <View style={styles.contentView}>
-          <View
-            style={{
-              backgroundColor: '#2F343B',
-              width: '100%',
-              alignItems: 'center',
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 30,
-                marginVertical: 10,
-                fontWeight: '300',
-                marginTop: 10,
-                color: 'white',
-              }}
-            >
-              Login
-            </Text>
-            <View>
-              <View style={styles.triangleLeft} />
-              <Input
-                {...(inputProps as InputProps)}
-                inputContainerStyle={{
-                  borderWidth: 1,
-                  borderColor: 'white',
-                  borderLeftWidth: 0,
-                  height: 50,
-                  width: '80%',
-                  backgroundColor: 'white',
-                }}
-                leftIcon={
-                  <Icon
-                    name="mail-forward"
-                    type="font-awesome"
-                    color="black"
-                    size={25}
-                  />
-                }
-                leftIconContainerStyle={{
-                  marginRight: 10,
-                }}
-                containerStyle={{ paddingHorizontal: 0 }}
-                placeholder="Email"
-                placeholderTextColor="black"
-                autoCapitalize="none"
-                autoCorrect={false}
-                keyboardAppearance="light"
+        <Tester>
+          <TestSuite name='SearchBar'>
+            <TestCase itShould='Android searchbarAndroid searchbar' tags={['C_API']}>
+              <SearchBarCustom
+                placeholder="Android searchbar"
+                platform="android"
                 style={InputFieldsStyle}
-                keyboardType="email-address"
-                returnKeyType="next"
-                onSubmitEditing={() => {
-                  passwordInput.focus();
-                }}
-                blurOnSubmit={false}
+                {...dummySearchBarProps}
               />
-              <View style={styles.triangleRight} />
-            </View>
-            <View style={[{ marginBottom: 30, marginTop: 1 }]}>
-              <View style={styles.triangleLeft} />
-              <Input
-                inputContainerStyle={{
-                  borderWidth: 1,
-                  borderColor: 'white',
-                  borderLeftWidth: 0,
-                  height: 50,
-                  width: '80%',
-                  backgroundColor: 'white',
-                }}
-                leftIconContainerStyle={{
-                  marginRight: 10,
-                }}
-                containerStyle={{ paddingHorizontal: 0 }}
-                leftIcon={
-                  <Icon
-                    name="lock"
-                    type="font-awesome"
-                    color="black"
-                    size={25}
-                  />
-                }
-                placeholder="Password"
-                placeholderTextColor="black"
-                autoCapitalize="none"
-                keyboardAppearance="light"
-                // secureTextEntry={true}
-                autoCorrect={false}
+            </TestCase>
+            <TestCase itShould='Default searchbar' tags={['C_API']}>
+              <SearchBarCustom
+                placeholder="Default searchbar"
                 style={InputFieldsStyle}
-                keyboardType="default"
-                returnKeyType="done"
-                ref={(input) => (passwordInput = input)}
-                blurOnSubmit={true}
+                {...dummySearchBarProps}
               />
-              <View style={styles.triangleRight} />
+            </TestCase>
+          </TestSuite>
+          <TestSuite name='Inputs'>
+            <View style={{ alignItems: 'center', marginBottom: 16 }}>
+              <TestCase itShould='Input with label' tags={['C_API']}>
+                <Input
+                  {...(inputProps as InputProps)}
+                  containerStyle={{ width: '90%' }}
+                  placeholder="Input with label"
+                  label="LABEL"
+                  labelStyle={{ marginTop: 16 }}
+                  style={InputFieldsStyle}
+                />
+              </TestCase>
+              <TestCase itShould='Simple input' tags={['C_API']}>
+                <Input
+                  {...(inputProps as InputProps)}
+                  containerStyle={styles.inputContainerStyle}
+                  placeholder="Simple input"
+                  style={InputFieldsStyle}
+                />
+              </TestCase>
+              <TestCase itShould='Input with left icon' tags={['C_API']}>
+                <Input
+                  {...(inputProps as InputProps)}
+                  leftIcon={
+                    <Icon
+                      name="map-marker"
+                      type="font-awesome"
+                      color="#86939e"
+                      size={25}
+                    />
+                  }
+                  leftIconContainerStyle={{ marginLeft: 0, marginRight: 10 }}
+                  containerStyle={styles.inputContainerStyle}
+                  placeholder="Input with left icon"
+                  style={InputFieldsStyle}
+                />
+              </TestCase>
+              <TestCase itShould='Input with right icon' tags={['C_API']}>
+                <Input
+                  {...(inputProps as InputProps)}
+                  rightIcon={
+                    <Icon
+                      name="chevron-right"
+                      type="font-awesome"
+                      color="#86939e"
+                      size={25}
+                    />
+                  }
+                  containerStyle={styles.inputContainerStyle}
+                  placeholder="Input with right icon"
+                  style={InputFieldsStyle}
+                />
+              </TestCase>
+              <TestCase itShould='Input with error message' tags={['C_API']}>
+                <Input
+                  {...(inputProps as InputProps)}
+                  containerStyle={styles.inputContainerStyle}
+                  placeholder="Input with error message"
+                  errorMessage="Invalid input"
+                  style={InputFieldsStyle}
+                />
+              </TestCase>
+              <TestCase itShould='Input with animated error' tags={['C_API']}>
+                <InputWithAnimatedErrorMessage
+                  {...(inputProps as InputProps)}
+                  containerStyle={styles.inputContainerStyle}
+                  placeholder="Input with animated error"
+                  errorMessage="This field must be left blank."
+                  renderErrorMessage={true}
+                  style={InputFieldsStyle}
+                />
+              </TestCase>
+              <TestCase itShould='Shake input' tags={['C_API']}>
+                <Input
+                  {...(inputProps as InputProps)}
+                  containerStyle={[styles.inputContainerStyle]}
+                  placeholder="Shake input"
+                  style={InputFieldsStyle}
+                  ref={(ref) => (shakeInput = ref)}
+                  rightIcon={
+                    <Button
+                      title="Shake"
+                      onPress={() => {
+                        shakeInput && shakeInput.shake();
+                        Vibration.vibrate(1000);
+                      }}
+                    />
+                  }
+                  errorMessage="Shake me on error !"
+                />
+              </TestCase>
             </View>
+          </TestSuite>
+
+          <View>
+            <TestSuite name='Login'>
+              <TestCase itShould='Login' tags={['C_API']}>
+                <View
+                  style={{
+                    backgroundColor: '#2F343B',
+                    width: '100%',
+                    alignItems: 'center',
+                  }}
+                >
+
+                  <Text
+                    style={{
+                      fontSize: 30,
+                      marginVertical: 10,
+                      fontWeight: '300',
+                      marginTop: 10,
+                      color: 'white',
+                    }}
+                  >
+                    Login
+                  </Text>
+                  <View>
+                    <View style={styles.triangleLeft} />
+                    <Input
+                      {...(inputProps as InputProps)}
+                      inputContainerStyle={{
+                        borderWidth: 1,
+                        borderColor: 'white',
+                        borderLeftWidth: 0,
+                        height: 50,
+                        width: '80%',
+                        backgroundColor: 'white',
+                      }}
+                      leftIcon={
+                        <Icon
+                          name="mail-forward"
+                          type="font-awesome"
+                          color="black"
+                          size={25}
+                        />
+                      }
+                      leftIconContainerStyle={{
+                        marginRight: 10,
+                      }}
+                      containerStyle={{ paddingHorizontal: 0 }}
+                      placeholder="Email"
+                      placeholderTextColor="black"
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      keyboardAppearance="light"
+                      style={InputFieldsStyle}
+                      keyboardType="email-address"
+                      returnKeyType="next"
+                      onSubmitEditing={() => {
+                        passwordInput.focus();
+                      }}
+                      blurOnSubmit={false}
+                    />
+                    <View style={styles.triangleRight} />
+                  </View>
+                  <View style={[{ marginBottom: 30, marginTop: 1 }]}>
+                    <View style={styles.triangleLeft} />
+                    <Input
+                      inputContainerStyle={{
+                        borderWidth: 1,
+                        borderColor: 'white',
+                        borderLeftWidth: 0,
+                        height: 50,
+                        width: '80%',
+                        backgroundColor: 'white',
+                      }}
+                      leftIconContainerStyle={{
+                        marginRight: 10,
+                      }}
+                      containerStyle={{ paddingHorizontal: 0 }}
+                      leftIcon={
+                        <Icon
+                          name="lock"
+                          type="font-awesome"
+                          color="black"
+                          size={25}
+                        />
+                      }
+                      placeholder="Password"
+                      placeholderTextColor="black"
+                      autoCapitalize="none"
+                      keyboardAppearance="light"
+                      secureTextEntry={true}
+                      autoCorrect={false}
+                      style={InputFieldsStyle}
+                      keyboardType="default"
+                      returnKeyType="done"
+                      ref={(input) => (passwordInput = input)}
+                      blurOnSubmit={true}
+                    />
+                    <View style={styles.triangleRight} />
+                  </View>
+                </View>
+              </TestCase>
+            </TestSuite>
+
+            <TestSuite name='Sing Up'>
+              <TestCase itShould='Sing Up' tags={['C_API']}>
+                <ThemeProvider
+                  theme={{
+                    Input: {
+                      containerStyle: {
+                        width: SCREEN_WIDTH - 50,
+                      },
+                      inputContainerStyle: {
+                        borderRadius: 40,
+                        borderWidth: 1,
+                        borderColor: 'rgba(110, 120, 170, 1)',
+                        height: 50,
+                        marginVertical: 10,
+                      },
+                      placeholderTextColor: 'rgba(110, 120, 177, 1)',
+                      inputStyle: {
+                        marginLeft: 10,
+                        color: 'white',
+                      },
+                      keyboardAppearance: 'light',
+                      blurOnSubmit: false,
+                    },
+                  }}
+                >
+                  <View
+                    style={{
+                      backgroundColor: 'rgba(46, 50, 72, 1)',
+                      width: '100%',
+                      alignItems: 'center',
+                      paddingBottom: 30,
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color: 'white',
+                        fontSize: 30,
+                        marginVertical: 10,
+                        fontWeight: '300',
+                      }}
+                    >
+                      Sign up
+                    </Text>
+                    <Input
+                      {...(inputProps as InputProps)}
+                      leftIcon={
+                        <Icon
+                          name="user"
+                          type="font-awesome"
+                          style={{ marginLeft: 12 }}
+                          color="rgba(110, 120, 170, 1)"
+                          size={25}
+                        />
+                      }
+                      placeholder="Username"
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      keyboardType="email-address"
+                      style={InputFieldsStyle}
+                      returnKeyType="next"
+                      onSubmitEditing={() => {
+                        email2Input.focus();
+                      }}
+                    />
+                    <Input
+                      {...(inputProps as InputProps)}
+                      leftIcon={
+                        <Icon
+                          name="mail-forward"
+                          type="font-awesome"
+                          style={{ marginLeft: 10 }}
+                          color="rgba(110, 120, 170, 1)"
+                          size={25}
+                        />
+                      }
+                      placeholder="Email"
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      keyboardType="email-address"
+                      style={InputFieldsStyle}
+                      returnKeyType="next"
+                      ref={(input) => (email2Input = input)}
+                      onSubmitEditing={() => {
+                        password2Input.focus();
+                      }}
+                    />
+                    <Input
+                      {...(inputProps as InputProps)}
+                      leftIcon={
+                        <Icon
+                          name="lock"
+                          type="font-awesome"
+                          style={{ marginLeft: 10 }}
+                          color="rgba(110, 120, 170, 1)"
+                          size={25}
+                        />
+                      }
+                      placeholder="Password"
+                      autoCapitalize="none"
+                      secureTextEntry={true}
+                      autoCorrect={false}
+                      keyboardType="default"
+                      style={InputFieldsStyle}
+                      returnKeyType="next"
+                      ref={(input) => (password2Input = input)}
+                      onSubmitEditing={() => {
+                        confirmPassword2Input.current.focus();
+                      }}
+                    />
+                    <Input
+                      {...(inputProps as InputProps)}
+                      leftIcon={
+                        <Icon
+                          name="lock"
+                          type="font-awesome"
+                          style={{ marginLeft: 10 }}
+                          color="rgba(110, 120, 170, 1)"
+                          size={25}
+                        />
+                      }
+                      placeholder="Confirm Password"
+                      autoCapitalize="none"
+                      keyboardAppearance="light"
+                      secureTextEntry={true}
+                      autoCorrect={false}
+                      keyboardType="default"
+                      returnKeyType="done"
+                      style={InputFieldsStyle}
+                      ref={(input) => (confirmPassword2Input = input)}
+                      blurOnSubmit
+                    />
+                  </View>
+                </ThemeProvider>
+              </TestCase>
+            </TestSuite>
           </View>
 
-          <ThemeProvider
-            theme={{
-              Input: {
-                containerStyle: {
-                  width: SCREEN_WIDTH - 50,
-                },
-                inputContainerStyle: {
-                  borderRadius: 40,
-                  borderWidth: 1,
-                  borderColor: 'rgba(110, 120, 170, 1)',
-                  height: 50,
-                  marginVertical: 10,
-                },
-                placeholderTextColor: 'rgba(110, 120, 177, 1)',
-                inputStyle: {
-                  marginLeft: 10,
-                  color: 'white',
-                },
-                keyboardAppearance: 'light',
-                blurOnSubmit: false,
-              },
-            }}
-          >
-            <View
-              style={{
-                backgroundColor: 'rgba(46, 50, 72, 1)',
-                width: '100%',
-                alignItems: 'center',
-                paddingBottom: 30,
-              }}
-            >
-              <Text
-                style={{
-                  color: 'white',
-                  fontSize: 30,
-                  marginVertical: 10,
-                  fontWeight: '300',
-                }}
-              >
-                Sign up
-              </Text>
-              <Input
-                {...(inputProps as InputProps)}
-                leftIcon={
-                  <Icon
-                    name="user"
-                    type="font-awesome"
-                    style={{ marginLeft: 12 }}
-                    color="rgba(110, 120, 170, 1)"
-                    size={25}
-                  />
-                }
-                placeholder="Username"
-                autoCapitalize="none"
-                autoCorrect={false}
-                keyboardType="email-address"
-                style={InputFieldsStyle}
-                returnKeyType="next"
-                onSubmitEditing={() => {
-                  email2Input.focus();
-                }}
-              />
-              <Input
-                {...(inputProps as InputProps)}
-                leftIcon={
-                  <Icon
-                    name="mail-forward"
-                    type="font-awesome"
-                    style={{ marginLeft: 10 }}
-                    color="rgba(110, 120, 170, 1)"
-                    size={25}
-                  />
-                }
-                placeholder="Email"
-                autoCapitalize="none"
-                autoCorrect={false}
-                keyboardType="email-address"
-                style={InputFieldsStyle}
-                returnKeyType="next"
-                ref={(input) => (email2Input = input)}
-                onSubmitEditing={() => {
-                  password2Input.focus();
-                }}
-              />
-              <Input
-                {...(inputProps as InputProps)}
-                leftIcon={
-                  <Icon
-                    name="lock"
-                    type="font-awesome"
-                    style={{ marginLeft: 10 }}
-                    color="rgba(110, 120, 170, 1)"
-                    size={25}
-                  />
-                }
-                placeholder="Password"
-                autoCapitalize="none"
-                // secureTextEntry={true}
-                autoCorrect={false}
-                keyboardType="default"
-                style={InputFieldsStyle}
-                returnKeyType="next"
-                ref={(input) => (password2Input = input)}
-                onSubmitEditing={() => {
-                  confirmPassword2Input.current.focus();
-                }}
-              />
-              <Input
-                {...(inputProps as InputProps)}
-                leftIcon={
-                  <Icon
-                    name="lock"
-                    type="font-awesome"
-                    style={{ marginLeft: 10 }}
-                    color="rgba(110, 120, 170, 1)"
-                    size={25}
-                  />
-                }
-                placeholder="Confirm Password"
-                autoCapitalize="none"
-                keyboardAppearance="light"
-                secureTextEntry={true}
-                autoCorrect={false}
-                keyboardType="default"
-                returnKeyType="done"
-                style={InputFieldsStyle}
-                ref={(input) => (confirmPassword2Input = input)}
-                blurOnSubmit
-              />
-            </View>
-          </ThemeProvider>
-        </View>
+        </Tester>
       </ScrollView>
     </KeyboardAvoidingView>
   );

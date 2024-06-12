@@ -17,7 +17,7 @@ import {useHarmonicIntervalFn,useToggle} from 'react-use';
     return (
       <View>
          <Text>delay:</Text>
-         <TextInput style={{ height:40, borderColor:'gray',borderWidth:1}} value={delay.toString()}
+         <TextInput style={{ height:40, borderColor:'gray',borderWidth:1, fontSize: 16}} value={delay.toString()}
          onChangeText={text => setDelay(Number(text))} />
         <Text>count: {count}</Text>
         <Text>

@@ -5,6 +5,7 @@ import { PortalProvider } from '@gorhom/portal';
 import {
     BasicCancel,
     BasicDefault,
+    BasicDefaultFalse,
     BasicLifeCycle,
     BasicManualRun,
     BasicManualRunAsync,
@@ -82,7 +83,6 @@ import {
     UseUpdate
 } from './Effect';
 
-import { MutationObserver } from './Dom'
 
 import {
     ChangeControllableValue,
@@ -113,6 +113,9 @@ function Hooks() {
                     </Page>
                     <Page name="TEST:Request_BasicDefault">
                         <BasicDefault />
+                    </Page>
+                    <Page name="TEST:Request_BasicDefaultFalse">
+                        <BasicDefaultFalse />
                     </Page>
                     <Page name="TEST:Request_BasicLifeCycle">
                         <BasicLifeCycle />
@@ -333,9 +336,6 @@ function Hooks() {
                 </View>
 
                 <View>
-                    <Page name="DOM:MutationObserver ">
-                        <MutationObserver />
-                    </Page>
                     <Page name="Advanced:ChangeControllableValue ">
                         <ChangeControllableValue />
                     </Page>

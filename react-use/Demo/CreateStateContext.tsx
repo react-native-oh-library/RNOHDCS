@@ -9,7 +9,7 @@ const ComponentA = () => {
   return (
     <View>
       <Text>Component A:</Text>
-      <TextInput style={{borderWidth:1}} value={text} onChangeText={value => setText(value)} />
+      <TextInput style={{borderWidth:1, fontSize: 16}} value={text} onChangeText={value => setText(value)} />
     </View>
   );
 };

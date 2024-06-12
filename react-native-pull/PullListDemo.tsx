@@ -1,3 +1,4 @@
+
 import React, { Component, useState } from 'react';
 import {
   StyleSheet,
@@ -5,6 +6,7 @@ import {
   View,
   ActivityIndicator,
   Dimensions,
+  RefreshControl
 } from 'react-native';
 import {PullList} from 'react-native-pull';
 
@@ -20,44 +22,58 @@ const PullListDemo = () => {
 
    const [count, setCount] = useState(0);
    const [data, setData] = useState(testObj);
-    const [stateList, setStateList] = useState([
-      {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        title: 'First Item',
-      },
-      {
-        id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-        title: 'Second Item',
-      },
-      {
-        id: '58694a0f-3da1-471f-bd96-145571e29d72',
-        title: 'Third Item',
-      },
-      {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb2cba',
-        title: 'First Item1',
-      },
-      {
-        id: '3ac68afc-c605-48d3-a4f8-fbd91a397f63',
-        title: 'Second Item2',
-      },
-      {
-        id: '58694a0f-3da1-471f-bd96-145573e29d72',
-        title: 'Third Item3',
-      },
-      {
-        id: 'bd7acbea-c1b1-26c2-aed5-3ad53abb2cba',
-        title: 'First Item4',
-      },
-      {
-        id: '3ac68afc-c605-4843-a4f8-fbd91a397f63',
-        title: 'Second Item5',
-      },
-      {
-        id: '58694a0f-3da1-451f-bd96-145573e29d72',
-        title: 'Third Item6',
-      },
-    ]);
+    const [stateList, setStateList] = useState(
+         [
+                 {
+                   id: 1,
+                   title: '------>Item1',
+                 },
+                 {
+                   id: 2,
+                   title: '------>Item2',
+                 },
+                 {
+                   id: 3,
+                   title: '------>Item3',
+                 },
+                 {
+                   id: 4,
+                   title: '------>Item4',
+                 },
+                 {
+                   id: 5,
+                   title: '------>Item5',
+                 },
+                 {
+                   id: 6,
+                   title: '------>Item6',
+                 },
+                 {
+                   id: 7,
+                   title: '------>Item7',
+                 },
+                 {
+                   id: 8,
+                   title: '------>Item8',
+                 },
+                 {
+                   id: 9,
+                   title: '------>Item9',
+                 },
+                  {
+                    id: 10,
+                    title: '------>Item10',
+                  },
+                  {
+                    id: 11,
+                    title: '------>Item11',
+                  },
+                  {
+                    id: 12,
+                    title: '------>Item12',
+                  },
+               ]
+    );
 
    const onPulling = () => {
       testObj.pulling='pulling--------->'
@@ -74,6 +90,56 @@ const PullListDemo = () => {
         testObj.pullrelease='pullrelease--------->'
         setData(testObj)
         setTimeout(() => {
+         setStateList([
+                                       {
+                                         id: 1,
+                                         title: '------>Item1',
+                                       },
+                                       {
+                                         id: 2,
+                                         title: '------>Item2',
+                                       },
+                                       {
+                                         id: 3,
+                                         title: '------>Item3',
+                                       },
+                                       {
+                                         id: 4,
+                                         title: '------>Item4',
+                                       },
+                                       {
+                                         id: 5,
+                                         title: '------>Item5',
+                                       },
+                                       {
+                                         id: 6,
+                                         title: '------>Item6',
+                                       },
+                                       {
+                                         id: 7,
+                                         title: '------>Item7',
+                                       },
+                                       {
+                                         id: 8,
+                                         title: '------>Item8',
+                                       },
+                                       {
+                                         id: 9,
+                                         title: '------>Item9',
+                                       },
+                                        {
+                                          id: 10,
+                                          title: '------>Item10',
+                                        },
+                                        {
+                                          id: 11,
+                                          title: '------>Item11',
+                                        },
+                                        {
+                                          id: 12,
+                                          title: '------>Item12',
+                                        },
+                                     ]);
             resolve();
         }, 3000);
     };
@@ -86,11 +152,11 @@ const PullListDemo = () => {
 
     const topIndicatorRender = (pulling, pullok, pullrelease) => {
       if (pulling) {
-          setCount('下拉刷新pulling...')
+          setCount('当前PullList状态: pulling...')
       } else if (pullok) {
-          setCount('松开刷新pullok......')
+          setCount('当前PullList状态: pullok......')
       } else if (pullrelease) {
-          setCount('玩命刷新中pullrelease......')
+          setCount('当前PullList状态: pullrelease......')
       }
 
   return (
@@ -133,50 +199,75 @@ const PullListDemo = () => {
     }
 
    const loadMore = () => {
-      const list = [ {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        title: 'First Item',
-      }]
+      const list = []
+      const num = stateList.length
         for(var i = 0; i < 5; i++) {
             list.push({
-                id: (i + 1) + '',
-                title: `this is ${i}`,
+                id: (i + 1 + num) + '',
+                title: `------>Item${(i+num+1)}`,
             })
         }
        setTimeout(() => {
           setStateList([...stateList,...list]);
         }, 1000);
     }
+
+    const [refreshing, setRefreshing] = useState(false)
+    const onRefresh = () => {
+      // 加载数据的逻辑
+      setRefreshing(true)
+      // 数据加载完成后
+      setTimeout(() => {
+        setRefreshing(false)
+      }, 2000); // 假设数据加载需要2秒
+    };
+    const refreshControl = (
+      <RefreshControl
+        refreshing={refreshing}
+        onRefresh={onRefresh}
+        tintColor="#ff0000" // 可选，设置刷新指示器的颜色
+        title="Loading..." // 可选，设置刷新时显示的文本
+        colors={['#ff0000', '#00ff00', '#0000ff']} // 可选，设置刷新指示器的颜色数组
+        progressBackgroundColor="#ffffff" // 可选，设置进度背景色
+      />
+    );
+
     return (
       <View style={[styles.container]}>
-		<PullList style={{width: Dimensions.get('window').width}}
-          onPulling={onPulling}
-          onPullOk={onPullOk}
-          isPullEnd={true}
-          onPullRelease={onPullRelease}
-          onPushing={onPushing}
-          topIndicatorRender={topIndicatorRender}
-          topIndicatorHeight={60}
-          pageSize={5}
-          initialListSize={5}
-          onEndReached={loadMore}
-          onEndReachedThreshold={60}
-          renderItem={renderRow}
-          ListFooterComponent={renderFooter}
-          ListHeaderComponent={renderHeader}
-          data={stateList}
-          keyExtractor={(item:any) => item.id}
-        />
+      <PullList style={{width: Dimensions.get('window').width}}
+            onPulling={onPulling}
+            onPullOk={onPullOk}
+            isPullEnd={true}
+            onPullRelease={onPullRelease}
+            onPushing={onPushing}
+            topIndicatorRender={topIndicatorRender}
+            topIndicatorHeight={60}
+            pageSize={5}
+            scrollViewProps={{
+                scrollEventThrottle: 16, // 减少滚动事件的延迟，提高滚动的响应性
+              }}
+            initialListSize={5}
+            onEndReached={loadMore}
+            onEndReachedThreshold={60}
+            renderItem={renderRow}
+            ListFooterComponent={renderFooter}
+            ListHeaderComponent={renderHeader}
+            data={stateList}
+            keyExtractor={(item:any) => item.id}
+           //  refreshControl={refreshControl}
+          />
       </View>
     );
 };
 
 const styles = StyleSheet.create({
-  container: {
+ container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'column',
     backgroundColor: '#F5FCFF',
+    width:'100%',
+    height:'100%',
+    overflow: 'scroll'
   },
   welcome: {
     fontSize: 20,

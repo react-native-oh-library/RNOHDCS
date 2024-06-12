@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { View, StyleSheet, Text, Image, Alert, ScrollView } from 'react-native';
+import {StyleSheet, Image, Alert, ScrollView } from 'react-native';
 import {
   Chip,
   MD2Theme,

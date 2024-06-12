@@ -69,5 +69,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 8,
     paddingHorizontal: 10,
+    fontSize: 16
   },
 });

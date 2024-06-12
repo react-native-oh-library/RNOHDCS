@@ -14,7 +14,7 @@ const UseMultiStateValidatorDemo = () => {
     <View>
       <Text>两个数字是否都大于等于5，当两个数字都满足条件时，会显示一条绿色的'Validation Passed!'消息</Text>
       <TextInput
-        style={{ borderWidth: 1 }}
+        style={{ borderWidth: 1, fontSize: 16 }}
         value={number1.toString()}
         placeholder='默认为0'
         keyboardType='numeric'
@@ -23,7 +23,7 @@ const UseMultiStateValidatorDemo = () => {
         }}
       />
       <TextInput
-        style={{ borderWidth: 1 }}
+        style={{ borderWidth: 1, fontSize: 16 }}
         value={number2.toString()}
         placeholder='默认为0'
         keyboardType='numeric'

@@ -32,7 +32,7 @@ export function UseAsyncEffectInterrupt() {
     <View>
       <TextInput
         value={value}
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+        style={{ height: 40, borderColor: 'gray', borderWidth: 1, fontSize: 16 }}
         onChangeText={(text) => {
           setValue(text);
         }}

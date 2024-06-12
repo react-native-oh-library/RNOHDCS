@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, ScrollView } from 'react-native';
 import { Avatar, Button, Icon, Theme, withTheme } from '@rneui/themed';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino'
 
 type UserData = {
   name: string;
@@ -190,120 +191,122 @@ const ListContent = (props: ListContentType) => {
   };
 
   return (
-    <>
-      <ScrollView>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'column',
-            borderRadius: 5,
-            alignItems: 'center',
-            marginHorizontal: 10,
-            height: 250,
-            marginBottom: 10,
-          }}
-        >
-          <View style={{ flex: 3, flexDirection: 'row' }}>
-            <View
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <Avatar
-                size={145}
-                source={{
-                  uri: 'https://randomuser.me/api/portraits/men/1.jpg',
-                }}
-                avatarStyle={{ borderRadius: 145 / 2 }}
-                overlayContainerStyle={{ backgroundColor: 'transparent' }}
-              />
-            </View>
-            <View
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <View
-                style={{
-                  flex: 1,
-                  marginTop: 10,
-                  justifyContent: 'center',
-                }}
-              >
-                <Text
-                  style={{
-                    fontFamily: 'bold',
-                    fontSize: 25,
-                    marginLeft: -15,
-                  }}
-                >
-                  Paul Allen
-                </Text>
-              </View>
-            </View>
-          </View>
-          <View
-            style={{
-              width: 300,
-              borderWidth: 0.5,
-              borderColor: 'rgba(222, 223, 226, 1)',
-              marginHorizontal: 20,
-              height: 1,
-              marginVertical: 10,
-            }}
-          />
+    <TestSuite name='List'>
+      <TestCase itShould='ListDemo' tags={['C_API']}>
+        <ScrollView>
           <View
             style={{
               flex: 1,
-              flexDirection: 'row',
+              flexDirection: 'column',
+              borderRadius: 5,
               alignItems: 'center',
+              marginHorizontal: 10,
+              height: 250,
+              marginBottom: 10,
             }}
           >
-            <View style={{ flex: 1, alignItems: 'center' }}>
-              <Button
-                title="View Profile"
-                buttonStyle={{
-                  height: 33,
-                  width: 120,
-                  backgroundColor: 'rgba(222, 223, 226, 1)',
-                  borderRadius: 5,
-                  paddingVertical: 5,
+            <View style={{ flex: 3, flexDirection: 'row' }}>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }}
-                titleStyle={{
-                  fontFamily: 'regular',
-                  fontSize: 13,
-                  color: 'gray',
+              >
+                <Avatar
+                  size={145}
+                  source={{
+                    uri: 'https://randomuser.me/api/portraits/men/1.jpg',
+                  }}
+                  avatarStyle={{ borderRadius: 145 / 2 }}
+                  overlayContainerStyle={{ backgroundColor: 'transparent' }}
+                />
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }}
-                onPress={() => console.log('aye')}
-              />
+              >
+                <View
+                  style={{
+                    flex: 1,
+                    marginTop: 10,
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontFamily: 'bold',
+                      fontSize: 25,
+                      marginLeft: -15,
+                    }}
+                  >
+                    Paul Allen
+                  </Text>
+                </View>
+              </View>
             </View>
-            <View style={{ flex: 1, alignItems: 'center' }}>
-              <Button
-                title="Add User"
-                buttonStyle={{
-                  height: 33,
-                  width: 120,
-                  backgroundColor: 'rgba(113, 154, 112, 1)',
-                  borderRadius: 5,
-                  paddingVertical: 5,
-                }}
-                titleStyle={{
-                  fontFamily: 'regular',
-                  fontSize: 13,
-                  color: 'white',
-                }}
-                onPress={() => console.log('aye')}
-              />
+            <View
+              style={{
+                width: 300,
+                borderWidth: 0.5,
+                borderColor: 'rgba(222, 223, 226, 1)',
+                marginHorizontal: 20,
+                height: 1,
+                marginVertical: 10,
+              }}
+            />
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}
+            >
+              <View style={{ flex: 1, alignItems: 'center' }}>
+                <Button
+                  title="View Profile"
+                  buttonStyle={{
+                    height: 33,
+                    width: 120,
+                    backgroundColor: 'rgba(222, 223, 226, 1)',
+                    borderRadius: 5,
+                    paddingVertical: 5,
+                  }}
+                  titleStyle={{
+                    fontFamily: 'regular',
+                    fontSize: 13,
+                    color: 'gray',
+                  }}
+                  onPress={() => console.log('aye')}
+                />
+              </View>
+              <View style={{ flex: 1, alignItems: 'center' }}>
+                <Button
+                  title="Add User"
+                  buttonStyle={{
+                    height: 33,
+                    width: 120,
+                    backgroundColor: 'rgba(113, 154, 112, 1)',
+                    borderRadius: 5,
+                    paddingVertical: 5,
+                  }}
+                  titleStyle={{
+                    fontFamily: 'regular',
+                    fontSize: 13,
+                    color: 'white',
+                  }}
+                  onPress={() => console.log('aye')}
+                />
+              </View>
             </View>
           </View>
-        </View>
-        <View style={{ marginBottom: 10 }}>{renderListCards()}</View>
-      </ScrollView>
-    </>
+          <View style={{ marginBottom: 10 }}>{renderListCards()}</View>
+        </ScrollView>
+      </TestCase>
+    </TestSuite>
   );
 };
 
