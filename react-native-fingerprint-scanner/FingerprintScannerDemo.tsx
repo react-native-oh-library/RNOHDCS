@@ -16,7 +16,7 @@ export function FingerprintScannerDemo() {
         >
           <TouchableOpacity
             onPress={() => {
-              FingerprintScanner.authenticate({ title: '1111' })
+              FingerprintScanner.authenticate({ title: '指纹认证' })
             }}
           >
             <Text style={{lineHeight: 35, fontSize: 22}}>调用指纹验证器</Text>
