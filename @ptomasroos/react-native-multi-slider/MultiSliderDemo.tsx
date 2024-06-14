@@ -116,7 +116,7 @@ class CustomMarker extends React.Component<any> {
   }
 }
 
-export default function MultiSliderDemoTester() {
+export function MultiSliderDemoTester() {
   let testRef = React.useRef<View>(null);
 
   // 滑动指标配置
@@ -298,27 +298,90 @@ export default function MultiSliderDemoTester() {
                 </View>
               </TestCase.Example>
 
-              <TestCase.Example tags={["C_API"]} itShould="style（滑块样式）">
+              <TestCase.Example
+                tags={["C_API"]}
+                itShould="containerStyle（滑块容器样式）"
+              >
                 <View style={styles.sliderSmall}>
                   <MultiSlider
                     containerStyle={{
                       backgroundColor: "lightblue",
                       padding: 10,
                     }}
-                    trackStyle={{ backgroundColor: "gray", height: 5 }}
-                    selectedStyle={{ backgroundColor: "blue" }}
-                    unselectedStyle={{ backgroundColor: "lightgray" }}
+                  />
+                </View>
+              </TestCase.Example>
+
+              <TestCase.Example
+                tags={["C_API"]}
+                itShould="trackStyle（轨道样式：默认）"
+              >
+                <View style={styles.sliderSmall}>
+                  <MultiSlider
+                    trackStyle={{ backgroundColor: "red", height: 5 }}
+                  />
+                </View>
+              </TestCase.Example>
+
+              <TestCase.Example
+                tags={["C_API"]}
+                itShould="selectedStyle（轨道样式：滑过后）"
+              >
+                <View style={styles.sliderSmall}>
+                  <MultiSlider
+                    selectedStyle={{ backgroundColor: "green", height: 5 }}
+                  />
+                </View>
+              </TestCase.Example>
+
+              <TestCase.Example
+                tags={["C_API"]}
+                itShould="unselectedStyle（轨道样式：未滑过）"
+              >
+                <View style={styles.sliderSmall}>
+                  <MultiSlider
+                    unselectedStyle={{ backgroundColor: "red", height: 5 }}
+                  />
+                </View>
+              </TestCase.Example>
+
+              <TestCase.Example
+                tags={["C_API"]}
+                itShould="markerContainerStyle（光标容器样式）"
+              >
+                <View style={styles.sliderSmall}>
+                  <MultiSlider
                     markerContainerStyle={{
                       backgroundColor: "transparent",
                       borderColor: "blue",
                       borderWidth: 2,
                     }}
+                  />
+                </View>
+              </TestCase.Example>
+
+              <TestCase.Example
+                tags={["C_API"]}
+                itShould="markerStyle（光标样式）"
+              >
+                <View style={styles.sliderSmall}>
+                  <MultiSlider
                     markerStyle={{
-                      backgroundColor: "blue",
+                      backgroundColor: "red",
                       width: 20,
                       height: 20,
                       borderRadius: 10,
                     }}
+                  />
+                </View>
+              </TestCase.Example>
+
+              <TestCase.Example
+                tags={["C_API"]}
+                itShould="pressedMarkerStyle（接触光标后的样式）"
+              >
+                <View style={styles.sliderSmall}>
+                  <MultiSlider
                     pressedMarkerStyle={{ backgroundColor: "darkblue" }}
                   />
                 </View>
@@ -387,6 +450,24 @@ export default function MultiSliderDemoTester() {
 
               <TestCase.Example
                 tags={["C_API"]}
+                itShould="stepStyle（自定义步骤标签样式）"
+              >
+                <View style={styles.sliderMiddle}>
+                  <MultiSlider
+                    values={[0, 10]}
+                    step={2}
+                    showSteps
+                    stepStyle={{
+                      backgroundColor: "red",
+                      width: 10,
+                      height: 10,
+                    }}
+                  />
+                </View>
+              </TestCase.Example>
+
+              <TestCase.Example
+                tags={["C_API"]}
                 itShould="showStepLabels（隐藏/显示自定义步骤标签，这里隐藏）"
               >
                 <View style={styles.sliderMiddle}>
@@ -405,6 +486,25 @@ export default function MultiSliderDemoTester() {
 
               <TestCase.Example
                 tags={["C_API"]}
+                itShould="stepLabelStyle（自定义步骤标签label样式）"
+              >
+                <View style={styles.sliderMiddle}>
+                  <MultiSlider
+                    values={[0, 10]}
+                    step={2}
+                    showSteps
+                    showStepLabels={true}
+                    stepLabelStyle={{ color: "red" }}
+                    stepsAs={[
+                      { index: 1, stepLabel: "t", prefix: "a", suffix: "b" },
+                      { index: 2, stepLabel: "t", prefix: "a", suffix: "b" },
+                    ]}
+                  />
+                </View>
+              </TestCase.Example>
+
+              <TestCase.Example
+                tags={["C_API"]}
                 itShould="showStepMarkers（显示步骤对应的刻度点）"
               >
                 <View style={styles.sliderMiddle}>
@@ -413,6 +513,24 @@ export default function MultiSliderDemoTester() {
                     step={2}
                     showSteps
                     showStepMarkers
+                  />
+                </View>
+              </TestCase.Example>
+
+              <TestCase.Example
+                tags={["C_API"]}
+                itShould="stepMarkerStyle（自定义步骤刻度点样式）"
+              >
+                <View style={styles.sliderMiddle}>
+                  <MultiSlider
+                    values={[0, 10]}
+                    step={2}
+                    showSteps
+                    showStepMarkers
+                    stepMarkerStyle={{
+                      backgroundColor: "red",
+                      width: 10,
+                    }}
                   />
                 </View>
               </TestCase.Example>
