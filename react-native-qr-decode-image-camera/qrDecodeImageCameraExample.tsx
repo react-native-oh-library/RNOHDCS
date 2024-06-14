@@ -66,26 +66,6 @@ export const QRreaderExp = () => {
                     setScanned(false);
                   }}
                   flashMode={flashMode} //闪光灯
-                  //   cornerColor="red" // 扫描框角落颜色
-                  // borderColor="green" //  边框颜色
-                  // borderWidth={10}  // 扫描框边框宽度 默认是0 是0的话边框颜色不显示
-                  //   maskColor="gray" //遮罩层颜色
-                  // isShowScanBar={true}  //是否显示扫描线
-                  //   hintText={null} // 提示文字
-                  // hintTextStyle={{color:"red",fontSize:20}} //提示字符串样式
-                  // hintTextPosition={50} // 提示文本位置
-                  // scanBarMargin={26}  //扫描线左边距和右边距
-                  // scanBarHeight={10}   //扫描线高度
-                  // scanBarColor="blue"  //扫描线颜色
-                  // scanBarAnimateTime={2500}  //扫描线时间
-                  // bottomHeight={200}  // 底部预留高度
-                  // cornerOffsetSize={3}  // ?
-                  // cornerBorderWidth={1}  // 角落边框宽度
-                  // cornerBorderLength={30}  // 角落边框长度
-                  //   rectHeight={200} //扫描框高度
-                  //   rectWidth={200} //扫描框宽度
-                  // finderX={20} // 扫描框X轴偏移量
-                  //   finderY={20} // 扫描框Y轴偏移量
                   renderTopView={() => (
                     <View
                       style={{
