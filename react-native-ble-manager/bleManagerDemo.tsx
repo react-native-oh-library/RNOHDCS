@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import {View, Text, StyleSheet, NativeEventEmitter, NativeModules, TouchableHighlight, FlatList, Alert } from 'react-native';
-import { TestSuite, Tester } from '@rnoh/testerino';
-import { Button, TestCase } from '../components';
+import { View, Text, StyleSheet, NativeEventEmitter, NativeModules, TouchableHighlight, FlatList, Alert, Button } from 'react-native';
+import { TestSuite, Tester} from '@rnoh/testerino';
+import {TestCase} from '../components';
 import ReactNativeBleManager from 'react-native-ble-manager';
 import { Peripheral } from 'react-native-ble-manager';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+
+
 
 export enum BleState {
     Unknown = "unknown",
@@ -63,93 +65,6 @@ export default function BleManagerDemos() {
         bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', handleDiscoverPeripheral),
     ];
 
-    const connectPeripheral = async (peripheral: Peripheral) => {
-        try {
-            if (peripheral) {
-                setPeripherals(map => {
-                    let p = map.get(peripheral.id);
-                    if (p) {
-                        p.connecting = true;
-                        return new Map(map.set(p.id, p));
-                    }
-                    return map;
-                });
-
-                await ReactNativeBleManager.connect(peripheral.id);
-                console.debug(`[connectPeripheral][${peripheral.id}] connected.`);
-
-                setPeripherals(map => {
-                    let p = map.get(peripheral.id);
-                    if (p) {
-                        p.connecting = false;
-                        p.connected = true;
-                        return new Map(map.set(p.id, p));
-                    }
-                    return map;
-                });
-
-                const peripheralData = await ReactNativeBleManager.retrieveServices(peripheral.id);
-                console.debug(
-                    `[connectPeripheral][${peripheral.id}] retrieved peripheral services`,
-                    peripheralData,
-                );
-
-                setPeripherals(map => {
-                    let p = map.get(peripheral.id);
-                    if (p) {
-                        return new Map(map.set(p.id, p));
-                    }
-                    return map;
-                });
-
-                const rssi = await ReactNativeBleManager.readRSSI(peripheral.id);
-                console.debug(
-                    `[connectPeripheral][${peripheral.id}] retrieved current RSSI value: ${rssi}.`,
-                );
-
-                if (peripheralData.characteristics) {
-                    for (let characteristic of peripheralData.characteristics) {
-                        if (characteristic.descriptors) {
-                            for (let descriptor of characteristic.descriptors) {
-                                try {
-                                    let data = await ReactNativeBleManager.readDescriptor(
-                                        peripheral.id,
-                                        characteristic.service,
-                                        characteristic.characteristic,
-                                        descriptor.uuid,
-                                    );
-                                    console.debug(
-                                        `[connectPeripheral][${peripheral.id}] ${characteristic.service} ${characteristic.characteristic} ${descriptor.uuid} descriptor read as:`,
-                                        data,
-                                    );
-                                } catch (error) {
-                                    console.error(
-                                        `[connectPeripheral][${peripheral.id}] failed to retrieve descriptor ${descriptor} for characteristic ${characteristic}:`,
-                                        error,
-                                    );
-                                }
-                            }
-                        }
-                    }
-                }
-
-                setPeripherals(map => {
-                    let p = map.get(peripheral.id);
-                    if (p) {
-                        p.rssi = rssi;
-                        return new Map(map.set(p.id, p));
-                    }
-                    return map;
-                });
-            }
-        } catch (error) {
-            console.error(
-                `[connectPeripheral][${peripheral.id}] connectPeripheral error`,
-                error,
-            );
-        }
-    };
-
     const renderItem = ({ item }: { item: Peripheral }) => {
         return (
             <TouchableHighlight>
@@ -162,302 +77,309 @@ export default function BleManagerDemos() {
                     <Text style={styles.peripheralId}>{item.id}</Text>
                     <Text style={styles.peripheralId}>{`${item.advertising.isConnectable}`}</Text>
                     <TestCase.Manual
-                        itShould="connect"
+                        itShould="connect:蓝牙连接"
                         tags={["C_API"]}
-                        initialState={0}
+                        initialState={false}
                         arrange={({ setState }) =>
                             <Button onPress={() => {
-                                ReactNativeBleManager.connect(item.id);
-                                setState(100)
-                            }} label={'connect'}></Button>
+                                ReactNativeBleManager.connect(item.id).then(() => {
+                                    setState(true)
+                                    setResult('connect is success')
+                                });
+                            }} title={'connect'}></Button>
                         }
                         assert={({ expect, state }) => {
-                            expect(state).to.be.eq(100);
+                            expect(state).to.be.eq(true);
                         }}
                     />
                     <TestCase.Manual
-                        itShould="createBond"
+                        itShould="retrieveServices:发现服务"
                         tags={["C_API"]}
-                        initialState={0}
+                        initialState={false}
                         arrange={({ setState }) =>
                             <Button onPress={() => {
-                                ReactNativeBleManager.createBond(item.id);
-                                setState(100)
-                            }} label={'createBond'}></Button>
+                                ReactNativeBleManager.retrieveServices(item.id, ['00001888-0000-1000-8000-00805F9B34FB']).then((res) => {
+                                    setState(true)
+                                    setResult('retrieveServices is success')
+                                });
+                            }} title={'retrieveServices'}></Button>
                         }
                         assert={({ expect, state }) => {
-                            expect(state).to.be.eq(100);
+                            expect(state).to.be.eq(true);
                         }}
                     />
                     <TestCase.Manual
-                        itShould="retrieveServices"
+                        itShould="createBond:绑定设备"
                         tags={["C_API"]}
-                        initialState={0}
+                        initialState={false}
                         arrange={({ setState }) =>
                             <Button onPress={() => {
-                                ReactNativeBleManager.retrieveServices(item.id, ['00001888-0000-1000-8000-00805F9B34FB']);
-                                setState(100)
-                            }} label={'retrieveServices'}></Button>
+                                ReactNativeBleManager.createBond(item.id).then(() => {
+                                    setState(true)
+                                    setResult('createBond is success')
+                                }).catch(()=>{
+                                    setResult('createBond is bond')
+                                });
+                            }} title={'createBond'}></Button>
                         }
                         assert={({ expect, state }) => {
-                            expect(state).to.be.eq(100);
+                            expect(state).to.be.eq(true);
                         }}
                     />
                     <TestCase.Manual
-                        itShould="getBondedPeripherals"
+                        itShould="getBondedPeripherals:获取绑定的设备"
                         tags={["C_API"]}
-                        initialState={0}
+                        initialState={false}
                         arrange={({ setState }) =>
                             <Button onPress={async () => {
-                                const list = await ReactNativeBleManager.getBondedPeripherals();
-                                Alert.alert(JSON.stringify(list))
-                                setState(100)
-                            }} label={'getBondedPeripherals'}></Button>
+                                const res = await ReactNativeBleManager.getBondedPeripherals();
+                                setState(res.length > 0 ?true:false)
+                                setResult(JSON.stringify(res))
+                            }} title={'getBondedPeripherals'}></Button>
                         }
                         assert={({ expect, state }) => {
-                            expect(state).to.be.eq(100);
+                            expect(state).to.be.eq(true);
                         }}
                     />
                     <TestCase.Manual
-                        itShould="getConnectedPeripherals"
+                        itShould="getConnectedPeripherals:获取连接的设备"
                         tags={["C_API"]}
-                        initialState={0}
+                        initialState={false}
                         arrange={({ setState }) =>
                             <Button onPress={async () => {
                                 const res = await ReactNativeBleManager.getConnectedPeripherals()
-                                Alert.alert(JSON.stringify(res))
-                                setState(100)
-                            }} label={'getConnectedPeripherals'}></Button>
+                                setState(res.length > 0 ?true:false)
+                                setResult(JSON.stringify(res))
+                            }} title={'getConnectedPeripherals'}></Button>
                         }
                         assert={({ expect, state }) => {
-                            expect(state).to.be.eq(100);
+                            expect(state).to.be.eq(true);
                         }}
                     />
                     <TestCase.Manual
-                        itShould="getDiscoveredPeripherals"
+                        itShould="getDiscoveredPeripherals:获取服务的设备"
                         tags={["C_API"]}
-                        initialState={0}
+                        initialState={false}
                         arrange={({ setState }) =>
                             <Button onPress={async () => {
-                                const list =await ReactNativeBleManager.getDiscoveredPeripherals();
-                                Alert.alert(JSON.stringify(list))
-                                setState(100)
-                            }} label={'getDiscoveredPeripherals'}></Button>
+                                const res = await ReactNativeBleManager.getDiscoveredPeripherals();
+                                setState(res.length > 0 ?true:false)
+                                setResult(JSON.stringify(res))
+                            }} title={'getDiscoveredPeripherals'}></Button>
                         }
                         assert={({ expect, state }) => {
-                            expect(state).to.be.eq(100);
+                            expect(state).to.be.eq(true);
                         }}
                     />
                     <TestCase.Manual
-                        itShould="write"
+                        itShould="write:写入"
                         tags={["C_API"]}
-                        initialState={0}
+                        initialState={false}
                         arrange={({ setState }) =>
                             <Button onPress={() => {
-                                ReactNativeBleManager.write(item.id, '00001888-0000-1000-8000-00805F9B34FB', '00001820-0000-1000-8000-00805F9B34FB', [1]);
-                                setState(100)
-                            }} label={'write'}></Button>
+                                ReactNativeBleManager.write(item.id, '00001888-0000-1000-8000-00805F9B34FB', '00001820-0000-1000-8000-00805F9B34FB', [1]).then(() => {
+                                    setState(true)
+                                    setResult('写入成功')
+                                });
+                            }} title={'write'}></Button>
                         }
                         assert={({ expect, state }) => {
-                            expect(state).to.be.eq(100);
+                            expect(state).to.be.eq(true);
                         }}
                     />
                     <TestCase.Manual
-                        itShould="writeDescriptor"
+                        itShould="writeDescriptor:写入描述符"
                         tags={["C_API"]}
-                        initialState={0}
+                        initialState={false}
                         arrange={({ setState }) =>
                             <Button onPress={() => {
-                                ReactNativeBleManager.writeDescriptor(item.id, '00001888-0000-1000-8000-00805F9B34FB', '00001820-0000-1000-8000-00805F9B34FB', '00002903-0000-1000-8000-00805F9B34FB', [0,1]);
-                                setState(100)
-                            }} label={'writeDescriptor'}></Button>
+                                ReactNativeBleManager.writeDescriptor(item.id, '00001888-0000-1000-8000-00805F9B34FB', '00001820-0000-1000-8000-00805F9B34FB', '00002903-0000-1000-8000-00805F9B34FB', [0, 1]).then(() => {
+                                    setState(true)
+                                    setResult('成功写入描述符')
+                                });
+                            }} title={'writeDescriptor'}></Button>
                         }
                         assert={({ expect, state }) => {
-                            expect(state).to.be.eq(100);
+                            expect(state).to.be.eq(true);
                         }}
                     />
                     <TestCase.Manual
-                        itShould="read"
+                        itShould="read:读取"
                         tags={["C_API"]}
-                        initialState={0}
+                        initialState={false}
                         arrange={({ setState }) =>
                             <Button onPress={() => {
                                 ReactNativeBleManager.read(item.id, '00001888-0000-1000-8000-00805F9B34FB', '00001820-0000-1000-8000-00805F9B34FB').then((res) => {
-                                    Alert.alert(JSON.stringify(res))
+                                    setState(res.length > 0 ? true : false)
+                                    setResult(JSON.stringify(res))
                                 });
-                                setState(100)
-                            }} label={'read'}></Button>
+                            }} title={'read'}></Button>
                         }
                         assert={({ expect, state }) => {
-                            expect(state).to.be.eq(100);
+                            expect(state).to.be.eq(true);
                         }}
                     />
                     <TestCase.Manual
-                        itShould="readDescriptor"
+                        itShould="readDescriptor:读取描述符"
                         tags={["C_API"]}
-                        initialState={0}
+                        initialState={false}
                         arrange={({ setState }) =>
                             <Button onPress={() => {
-                                ReactNativeBleManager.readDescriptor(item.id, '00001888-0000-1000-8000-00805F9B34FB', '00001820-0000-1000-8000-00805F9B34FB', '00002903-0000-1000-8000-00805F9B34FB').then((res)=>{
-                                    Alert.alert(JSON.stringify(res))
+                                ReactNativeBleManager.readDescriptor(item.id, '00001888-0000-1000-8000-00805F9B34FB', '00001820-0000-1000-8000-00805F9B34FB', '00002903-0000-1000-8000-00805F9B34FB').then((res) => {
+                                    setState(res.length > 0 ? true : false)
+                                    setResult(JSON.stringify(res))
                                 });
-                                setState(100)
-                            }} label={'readDescriptor'}></Button>
+                            }} title={'readDescriptor'}></Button>
                         }
                         assert={({ expect, state }) => {
-                            expect(state).to.be.eq(100);
+                            expect(state).to.be.eq(true);
                         }}
                     />
                     <TestCase.Manual
-                        itShould="readRSSI"
+                        itShould="readRSSI:读取蓝牙信号强度"
                         tags={["C_API"]}
-                        initialState={0}
+                        initialState={false}
                         arrange={({ setState }) =>
                             <Button onPress={() => {
                                 ReactNativeBleManager.readRSSI(item.id).then((res) => {
-                                    Alert.alert(res + '')
+                                    setState(res !==0 ? true :false)
+                                    setResult(res + '')
+                                }).catch(()=>{
+
                                 });
-                                setState(100)
-                            }} label={'readRSSI'}></Button>
+                            }} title={'readRSSI'}></Button>
                         }
                         assert={({ expect, state }) => {
-                            expect(state).to.be.eq(100);
+                            expect(state).to.be.eq(true);
                         }}
                     />
                     <TestCase.Manual
-                        itShould="requestMTU"
+                        itShould="requestMTU:请求MTU"
                         tags={["C_API"]}
-                        initialState={0}
+                        initialState={false}
                         arrange={({ setState }) =>
                             <Button onPress={() => {
-                                ReactNativeBleManager.requestMTU(item.id,10).then((res) => {
-                                    Alert.alert(res + '')
+                                ReactNativeBleManager.requestMTU(item.id, 10).then((res) => {
+                                    setState(Math.abs(res) >= 0 ? true :false)
+                                    setResult(res + '')
                                 });
-                                setState(100)
-                            }} label={'requestMTU'}></Button>
+                            }} title={'requestMTU'}></Button>
                         }
                         assert={({ expect, state }) => {
-                            expect(state).to.be.eq(100);
+                            expect(state).to.be.eq(true);
                         }}
                     />
                     <TestCase.Manual
-                        itShould="checkState"
+                        itShould="checkState:检查蓝牙状态"
                         tags={["C_API"]}
-                        initialState={0}
+                        initialState={false}
                         arrange={({ setState }) =>
                             <Button onPress={() => {
                                 ReactNativeBleManager.checkState().then((res) => {
-                                    Alert.alert(JSON.stringify(res))
+                                    setState(res.includes(BleState.On))
+                                    setResult(JSON.stringify(res))
                                 });
-                                setState(100)
-                            }} label={'checkState'}></Button>
+                            }} title={'checkState'}></Button>
                         }
                         assert={({ expect, state }) => {
-                            expect(state).to.be.eq(100);
+                            expect(state).to.be.eq(true);
                         }}
                     />
                     <TestCase.Manual
-                        itShould="startNotification"
+                        itShould="startNotification:发送通知"
                         tags={["C_API"]}
-                        initialState={0}
+                        initialState={false}
                         arrange={({ setState }) =>
                             <Button onPress={() => {
-                                ReactNativeBleManager.startNotification(item.id,'00001888-0000-1000-8000-00805F9B34FB', '00001820-0000-1000-8000-00805F9B34FB')
-                                setState(100)
-                            }} label={'startNotification'}></Button>
-                        }
-                        assert={({ expect, state }) => {
-                            expect(state).to.be.eq(100);
-                        }}
-                    />
-                    <TestCase.Manual
-                        itShould="removePeripheral"
-                        tags={["C_API"]}
-                        initialState={0}
-                        arrange={({ setState }) =>
-                            <Button onPress={() => {
-                                ReactNativeBleManager.removePeripheral(item.id)
-                                setState(100)
-                            }} label={'removePeripheral'}></Button>
-                        }
-                        assert={({ expect, state }) => {
-                            expect(state).to.be.eq(100);
-                        }}
-                    />
-                    <TestCase.Manual
-                        itShould="isScanning"
-                        tags={["C_API"]}
-                        initialState={0}
-                        arrange={({ setState }) =>
-                            <Button onPress={() => {
-                                ReactNativeBleManager.isScanning().then((res)=>{
-                                    Alert.alert(JSON.stringify(res))
+                                ReactNativeBleManager.startNotification(item.id, '00001888-0000-1000-8000-00805F9B34FB', '00001820-0000-1000-8000-00805F9B34FB').then(() => {
+                                    setState(true)
+                                    setResult('startNotification is success')
                                 })
-                                setState(100)
-                            }} label={'isScanning'}></Button>
+                            }} title={'startNotification'}></Button>
                         }
                         assert={({ expect, state }) => {
-                            expect(state).to.be.eq(100);
+                            expect(state).to.be.eq(true);
                         }}
                     />
                     <TestCase.Manual
-                        itShould="isPeripheralConnected"
+                        itShould="isScanning:正在扫描"
                         tags={["C_API"]}
-                        initialState={0}
+                        initialState={false}
                         arrange={({ setState }) =>
                             <Button onPress={() => {
-                                ReactNativeBleManager.isPeripheralConnected(item.id,['00001888-0000-1000-8000-00805F9B34FB']).then((res)=>{
-                                    Alert.alert(JSON.stringify(res))
+                                ReactNativeBleManager.isScanning().then((res) => {
+                                    setState(res)
+                                    setResult(JSON.stringify(res))
                                 })
-                                setState(100)
-                            }} label={'isPeripheralConnected'}></Button>
+                            }} title={'isScanning'}></Button>
                         }
                         assert={({ expect, state }) => {
-                            expect(state).to.be.eq(100);
-                        }}
-                    />
-                     <TestCase.Manual
-                        itShould="stopScan"
-                        tags={["C_API"]}
-                        initialState={0}
-                        arrange={({ setState }) =>
-                            <Button onPress={() => {
-                                ReactNativeBleManager.stopScan()
-                                setState(100)
-                            }} label={'stopScan'}></Button>
-                        }
-                        assert={({ expect, state }) => {
-                            expect(state).to.be.eq(100);
-                        }}
-                    />
-                     <TestCase.Manual
-                        itShould="disconnect"
-                        tags={["C_API"]}
-                        initialState={0}
-                        arrange={({ setState }) =>
-                            <Button onPress={() => {
-                                ReactNativeBleManager.disconnect(item.id, true)
-                                setState(100)
-                            }} label={'disconnect'}></Button>
-                        }
-                        assert={({ expect, state }) => {
-                            expect(state).to.be.eq(100);
+                            expect(state).to.be.eq(true);
                         }}
                     />
                     <TestCase.Manual
-                        itShould="removeBond"
+                        itShould="isPeripheralConnected:是否连接"
                         tags={["C_API"]}
-                        initialState={0}
+                        initialState={false}
                         arrange={({ setState }) =>
                             <Button onPress={() => {
-                                ReactNativeBleManager.removeBond(item.id).then(() => {
-                                    Alert.alert('此接口为系统接口，三方库无法调用')
-                                });
-                                setState(100)
-                            }} label={'removeBond'}></Button>
+                                ReactNativeBleManager.isPeripheralConnected(item.id, ['00001888-0000-1000-8000-00805F9B34FB']).then((res) => {
+                                    setResult(JSON.stringify(res))
+                                    setState(res)
+                                })
+                                
+                            }} title={'isPeripheralConnected'}></Button>
                         }
                         assert={({ expect, state }) => {
-                            expect(state).to.be.eq(100);
+                            expect(state).to.be.eq(true);
+                        }}
+                    />
+                    <TestCase.Manual
+                        itShould="stopScan:停止扫描"
+                        tags={["C_API"]}
+                        initialState={false}
+                        arrange={({ setState }) =>
+                            <Button onPress={() => {
+                                ReactNativeBleManager.stopScan().then(() => {
+                                    setResult('停止扫描')
+                                    setState(true)
+                                })
+                            }} title={'stopScan'}></Button>
+                        }
+                        assert={({ expect, state }) => {
+                            expect(state).to.be.eq(true);
+                        }}
+                    />
+                    <TestCase.Manual
+                        itShould="disconnect:断开连接"
+                        tags={["C_API"]}
+                        initialState={false}
+                        arrange={({ setState }) =>
+                            <Button onPress={() => {
+                                ReactNativeBleManager.disconnect(item.id, true).then(() => {
+                                    setResult('成功断开连接')
+                                    setState(true)
+                                })
+                            }} title={'disconnect'}></Button>
+                        }
+                        assert={({ expect, state }) => {
+                            expect(state).to.be.eq(true);
+                        }}
+                    />
+                    <TestCase.Manual
+                        itShould="removePeripheral:移除设备"
+                        tags={["C_API"]}
+                        initialState={false}
+                        arrange={({ setState }) =>
+                            <Button onPress={() => {
+                                ReactNativeBleManager.removePeripheral(item.id).then(() => {
+                                    setResult('removePeripheral is success')
+                                    setState(true)
+                                })
+                            }} title={'removePeripheral'}></Button>
+                        }
+                        assert={({ expect, state }) => {
+                            expect(state).to.be.eq(true);
                         }}
                     />
                 </View>
@@ -465,66 +387,82 @@ export default function BleManagerDemos() {
         )
     }
     return (
-        <Tester>
-            <TestSuite name='Ble.manager'>
-                <TestCase.Manual
-                    itShould="enableBluetooth"
-                    tags={["C_API"]}
-                    initialState={0}
-                    arrange={({ setState }) =>
-                        <Button onPress={() => {
-                            ReactNativeBleManager.enableBluetooth();
-                            setState(100)
-                        }} label={'enableBluetooth'}></Button>
-                    }
-                    assert={({ expect, state }) => {
-                        expect(state).to.be.eq(100);
-                    }}
-                />
-                <TestCase.Manual
-                    itShould="start"
-                    tags={["C_API"]}
-                    initialState={0}
-                    arrange={({ setState }) =>
-                        <Button onPress={() => {
-                            ReactNativeBleManager.start();
-                            setState(100)
-                        }} label={'start'}></Button>
-                    }
-                    assert={({ expect, state }) => {
-                        expect(state).to.be.eq(100);
-                    }}
-                />
-                <TestCase.Manual
-                    itShould="scan"
-                    tags={["C_API"]}
-                    initialState={0}
-                    arrange={({ setState }) =>
-                        <Button onPress={() => {
+        <View>
+            <Tester>
+            <View style={styles.inputArea}>
+                <Text style={styles.baseText}>
+                    {result}
+                </Text>
+            </View>
+                <TestSuite name='Ble.manager'>
+                    <TestCase.Manual
+                        itShould="enableBluetooth:打开蓝牙"
+                        tags={["C_API"]}
+                        initialState={false}
+                        arrange={({ setState }) =>
+                            <Button onPress={() => {
+                                ReactNativeBleManager.enableBluetooth().then(() => {
+                                    setResult('成功打开蓝牙')
+                                    setState(true)
+                                }).catch(()=>{
+                                    setResult('蓝牙已打开')
+                                    setState(true)
+                                });
+                            }} title={'enableBluetooth'}></Button>
+                        }
+                        assert={({ expect, state }) => {
+                            expect(state).to.be.eq(true);
+                        }}
+                    />
+                    <TestCase.Manual
+                        itShould="start:初始化蓝牙"
+                        tags={["C_API"]}
+                        initialState={false}
+                        arrange={({ setState }) =>
+                            <Button onPress={() => {
+                                ReactNativeBleManager.start().then(() => {
+                                    setResult('蓝牙初始化成功')
+                                    setState(true)
+                                });
+                            }} title='start'></Button>
+                        }
+                        assert={({ expect, state }) => {
+                            expect(state).to.be.eq(true);
+                        }}
+                    />
+                    <TestCase.Manual
+                        itShould="scan:扫描蓝牙"
+                        tags={["C_API"]}
+                        initialState={false}
+                        arrange={({ setState }) =>
+                            <Button onPress={() => {
                                 ReactNativeBleManager.scan(
-                                ['00001888-0000-1000-8000-00805F9B34FB'], 0, true, {
-                                companion: true,
-                                matchMode: BleScanMatchMode,
-                                scanMode: BleScanMode,
-                                reportDelay: 1,
-                                exactAdvertisingName: ''
-                            });
-                            setState(100)
-                        }} label={'scan'}></Button>
-                    }
-                    assert={({ expect, state }) => {
-                        expect(state).to.be.eq(100);
-                    }}
-                />
-                <FlatList
-                    data={Array.from(peripherals.values())}
-                    contentContainerStyle={{ rowGap: 12 }}
-                    renderItem={renderItem}
-                    keyExtractor={item => item.id}
-                    style={{ width: '100%', height: 400 }}
-                />
-            </TestSuite>
-        </Tester>
+                                    ['00001888-0000-1000-8000-00805F9B34FB'], 0, true, {
+                                    companion: true,
+                                    matchMode: BleScanMatchMode.Aggressive,
+                                    scanMode: BleScanMode.Balanced,
+                                    reportDelay: 1,
+                                    exactAdvertisingName: ''
+                                }).then(() => {
+                                    setResult('扫描蓝牙中')
+                                    setState(true)
+                                });
+                            }} title={'scan'}></Button>
+                        }
+                        assert={({ expect, state }) => {
+                            expect(state).to.be.eq(true);
+                        }}
+                    />
+                    <FlatList
+                        data={Array.from(peripherals.values())}
+                        contentContainerStyle={{ rowGap: 12 }}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                        style={{ width: '100%', height: 300 }}
+                    />
+                </TestSuite>
+            </Tester>
+        </View>
     )
 }
 
@@ -553,8 +491,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         fontSize: 16,
-        ellipsizeMode: 'tail',
-        numberOfLines: 2
     },
     titleArea: {
         width: '90%',
@@ -575,13 +511,14 @@ const styles = StyleSheet.create({
     },
 
     inputArea: {
-        width: '90%',
-        height: '10%',
+        width: '100%',
+        height: '15%',
         borderWidth: 2,
         borderColor: '#000000',
         marginTop: 8,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: "white"
     },
     baseArea: {
         width: '100%',
