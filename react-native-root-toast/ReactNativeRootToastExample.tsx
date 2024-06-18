@@ -3,6 +3,7 @@ import React,{ useState } from 'react';
 import {StyleSheet, View, Text, TouchableHighlight, TextInput, Switch, Button, Alert } from 'react-native';
 import Toast from 'react-native-root-toast';
 import {TestSuite,Tester,TestCase} from '@rnoh/testerino';
+import { number } from 'yargs';
 
 export function ReactNativeRootToastExample() {
     return (
@@ -38,7 +39,6 @@ const ToastFunction = () => {
     let { durations, positions } = Toast;
     let toast: any = null;
     const [ptext,setPtext] = useState("顶部");
-    const [delay,setDelay] = useState(0);
     const [totext,setToPtext] = useState("");
     const messages = [
         'Mr. and Mrs. Dursley, of number four Privet Drive, were proud to say that they were perfectly normal, thank you very much.',
@@ -168,11 +168,11 @@ const ToastFunction = () => {
             shadow: dataState.shadow,
             animation: dataState.animation,
             hideOnPress: dataState.hideOnPress,
-            delay: delay,
+            delay: dataState.delay,
             backgroundColor: dataState.backgroundColor ? 'blue' : '',
             shadowColor: dataState.shadowColor ? 'yellow' : '',
             textColor: dataState.textColor ? 'purple' : '',
-            opacity:dataState.opacity?1.0:0.1,
+            opacity:dataState.opacity?0.1:1.0,
             onPress: () => {
                 Alert.alert('You clicked me!')
             },
@@ -205,7 +205,17 @@ const ToastFunction = () => {
         }
     }
     
-  
+
+    function chkPrice(obj:any) { //方法1
+      obj = obj.replace(/[^\d.]/g, "");
+      //必须保证第一位为数字而不是. 
+      obj = obj.replace(/^\./g, "");
+      //保证只有出现一个.而没有多个. 
+      obj = obj.replace(/\.{2,}/g, ".");
+      //保证.只出现一次，而不能出现两次以上 
+      obj = obj.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+      return obj;
+  }
     return(
         <RootSiblingParent>
             <View style={styles.fieldContainer}>
@@ -223,10 +233,13 @@ const ToastFunction = () => {
                 <Text style={styles.fieldText}>弹窗延时 (ms)</Text>
                 <TextInput
                     style={styles.input}
+                    defaultValue = {'0'}
+                    maxLength = {7}
+                    multiline={false}
+                    keyboardType='numeric'
                     onChange={({ nativeEvent: { text } }) => 
-                    { setDelay(parseInt(text)) }}
-                    value={(delay + '')}
-                    keyboardType={'decimal-pad'}
+                    { setDataState({...dataState,delay: Number(chkPrice(text))}) }}
+                    value={(dataState.delay + '')}
                 />
             </View>
 
