@@ -2,7 +2,6 @@ import { ActionSheetProvider, connectActionSheet, ActionSheetProps } from '@expo
 import * as React from 'react';
 import { useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, SafeAreaView, Button } from 'react-native';
-//此处引入原文档中的 https://github.com/expo/react-native-action-sheet/tree/master/example/ShowActionSheetButton.tsx 文件
 import ShowActionSheetButton from './ShowActionSheetButton';
 
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
