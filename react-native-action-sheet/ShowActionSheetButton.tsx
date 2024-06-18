@@ -1,11 +1,6 @@
 import { ActionSheetOptions } from '@expo/react-native-action-sheet';
-// import { MaterialIcons, Entypo } from '@expo/vector-icons';
 import * as React from 'react';
 import { Text, View, TextStyle, ViewStyle, findNodeHandle, Button } from 'react-native';
-
-// const icon = (name: React.ComponentProps<typeof MaterialIcons>['name']) => (
-//   <MaterialIcons key={name} name={name} size={24} />
-// );
 
 interface Props {
   title: string;
@@ -54,11 +49,7 @@ export default class ShowActionSheetButton extends React.PureComponent<Props> {
       useModal,
     } = this.props;
 
-    // Same interface as https://facebook.github.io/react-native/docs/actionsheetios.html
     const options = ['Delete', 'Disabled', 'Save', 'Cancel'];
-    // const icons = withIcons
-    // ? [icon('delete'), icon('save'), icon('share'), icon('cancel')]
-    // : undefined;
     const title = withTitle ? 'Choose An Action' : undefined;
     const message = withMessage
       ? 'This library tries to mimic the native share sheets as close as possible.'
@@ -138,19 +129,6 @@ export default class ShowActionSheetButton extends React.PureComponent<Props> {
         style={{
           margin: 6,
         }}>
-        {/* <Entypo.Button
-          name="code"
-          backgroundColor="#3e3e3e"
-          onPress={this._showActionSheet}
-          ref={this._anchorRef}>
-          <Text
-            style={{
-              fontSize: 15,
-              color: '#fff',
-            }}>
-            {title}
-          </Text>
-        </Entypo.Button> */}
 
         <Button
           onPress={this._showActionSheet}
