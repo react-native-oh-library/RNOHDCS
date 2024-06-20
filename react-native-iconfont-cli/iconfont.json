@@ -1,0 +1,8 @@
+{
+    "symbol_url": "http://at.alicdn.com/t/font_1373348_ghk94ooopqr.js",
+    "use_typescript": true,
+    "save_dir": "./iconfont_cli/iconfont",
+    "trim_icon_prefix": "icon",
+    "default_icon_size": 20,
+    "local_svgs": "./iconfont_cli/localSvgs"
+  }
