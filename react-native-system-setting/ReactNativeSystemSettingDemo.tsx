@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import SystemSetting, { EmitterSubscription } from 'react-native-system-setting'
 import { ScrollView, Text, View, StyleSheet, TouchableOpacity } from 'react-native'
-import { TestCase } from '../components/TestCase'
-import { Tester, TestSuite } from '@rnoh/testerino'
-import App from './../App';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino'
 
 let volumeEvent: EmitterSubscription
 let bluetoothEvent: EmitterSubscription
@@ -32,7 +30,7 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                             style={styles.moduleContent}>
                             蓝牙状态:{bluetoothEnabled === true ? '开启' : '关闭'}
                         </Text>
-                        <TestCase.Manual
+                        <TestCase
                             tags={['C_API']}
                             itShould='获取蓝牙状态'
                             initialState={undefined as any}
@@ -54,7 +52,7 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                                 expect(state).to.be.true
                             }}
                         />
-                        <TestCase.Example
+                        <TestCase
                             tags={['C_API']}
                             itShould='切换蓝牙状态(跳转设置)'
                         >
@@ -69,8 +67,8 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                             >
                                 <Text style={styles.buttonText}>切换蓝牙状态(跳转设置)</Text>
                             </TouchableOpacity>
-                        </TestCase.Example>
-                        <TestCase.Example
+                        </TestCase>
+                        <TestCase
                             tags={['C_API']}
                             itShould='切换蓝牙状态'
                         >
@@ -84,9 +82,9 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                             >
                                 <Text style={styles.buttonText}>切换蓝牙状态</Text>
                             </TouchableOpacity>
-                        </TestCase.Example>
+                        </TestCase>
 
-                        <TestCase.Example
+                        <TestCase
                             tags={['C_API']}
                             itShould='开启蓝牙状态监听器'
                         >
@@ -101,9 +99,9 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                             >
                                 <Text style={styles.buttonText}>开启蓝牙状态监听器</Text>
                             </TouchableOpacity>
-                        </TestCase.Example>
+                        </TestCase>
 
-                        <TestCase.Example
+                        <TestCase
                             tags={['C_API']}
                             itShould='关闭蓝牙状态监听器'
                         >
@@ -115,7 +113,7 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                             >
                                 <Text style={styles.buttonText}>关闭蓝牙状态监听器</Text>
                             </TouchableOpacity>
-                        </TestCase.Example>
+                        </TestCase>
                     </View>
                 </TestSuite>
                 <TestSuite name='Breghtness'>
@@ -128,7 +126,7 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                             style={styles.moduleContent}>
                             亮度值(-1为默认系统亮度):{brightness}
                         </Text>
-                        <TestCase.Manual
+                        <TestCase
                             tags={['C_API']}
                             itShould='获取亮度数值'
                             initialState={undefined as any}
@@ -152,7 +150,7 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                                 expect(state).to.be.true
                             }}
                         />
-                        <TestCase.Example
+                        <TestCase
                             tags={['C_API']}
                             itShould='设置亮度数值'
                         >
@@ -164,8 +162,8 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                             >
                                 <Text style={styles.buttonText}>设置亮度数值(25)</Text>
                             </TouchableOpacity>
-                        </TestCase.Example>
-                        <TestCase.Manual
+                        </TestCase>
+                        <TestCase
                             tags={['C_API']}
                             itShould='获取应用亮度数值'
                             initialState={undefined as any}
@@ -189,7 +187,7 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                                 expect(state).to.be.true
                             }}
                         />
-                        <TestCase.Example
+                        <TestCase
                             tags={['C_API']}
                             itShould='设置应用亮度数值'
                         >
@@ -201,8 +199,8 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                             >
                                 <Text style={styles.buttonText}>设置应用亮度数值(76)</Text>
                             </TouchableOpacity>
-                        </TestCase.Example>
-                        <TestCase.Example
+                        </TestCase>
+                        <TestCase
                             tags={['C_API']}
                             itShould='还原系统亮度数值'
                         >
@@ -214,9 +212,9 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                             >
                                 <Text style={styles.buttonText}>还原系统亮度数值</Text>
                             </TouchableOpacity>
-                        </TestCase.Example>
+                        </TestCase>
 
-                        <TestCase.Example
+                        <TestCase
                             tags={['C_API']}
                             itShould='设置亮度模式(跳转设置)'
                         >
@@ -228,8 +226,8 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                             >
                                 <Text style={styles.buttonText}>设置亮度模式(跳转设置)</Text>
                             </TouchableOpacity>
-                        </TestCase.Example>
-                        <TestCase.Example
+                        </TestCase>
+                        <TestCase
                             tags={['C_API']}
                             itShould='保存当前亮度'
                         >
@@ -241,8 +239,8 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                             >
                                 <Text style={styles.buttonText}>保存当前亮度</Text>
                             </TouchableOpacity>
-                        </TestCase.Example>
-                        <TestCase.Manual
+                        </TestCase>
+                        <TestCase
                             tags={['C_API']}
                             itShould='还原保存的亮度'
                             initialState={undefined as any}
@@ -277,7 +275,7 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                             style={styles.moduleContent}>
                             媒体音量:{volume}
                         </Text>
-                        <TestCase.Manual
+                        <TestCase
                             tags={['C_API']}
                             itShould='获取媒体音量'
                             initialState={undefined as any}
@@ -299,7 +297,7 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                                 expect(state).to.be.true
                             }}
                         />
-                        <TestCase.Example
+                        <TestCase
                             tags={['C_API']}
                             itShould='增加音量监听器'
                         >
@@ -313,8 +311,8 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                             >
                                 <Text style={styles.buttonText}>增加音量监听器</Text>
                             </TouchableOpacity>
-                        </TestCase.Example>
-                        <TestCase.Example
+                        </TestCase>
+                        <TestCase
                             tags={['C_API']}
                             itShould='移除音量监听器'
                         >
@@ -327,7 +325,7 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                             >
                                 <Text style={styles.buttonText}>移除音量监听器</Text>
                             </TouchableOpacity>
-                        </TestCase.Example>
+                        </TestCase>
                     </View>
                 </TestSuite>
                 <TestSuite name='Wifi'>
@@ -340,7 +338,7 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                             style={styles.moduleContent}>
                             Wifi状态:{wifi}
                         </Text>
-                        <TestCase.Manual
+                        <TestCase
                             tags={['C_API']}
                             itShould='获取Wifi状态'
                             initialState={undefined as any}
@@ -362,7 +360,7 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                                 expect(state).to.be.true
                             }}
                         />
-                        <TestCase.Example
+                        <TestCase
                             tags={['C_API']}
                             itShould='切换WIFI状态(跳转设置)'
                         >
@@ -376,7 +374,7 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                             >
                                 <Text style={styles.buttonText}>切换WIFI状态(跳转设置)</Text>
                             </TouchableOpacity>
-                        </TestCase.Example>
+                        </TestCase>
                     </View>
                 </TestSuite>
                 <TestSuite name='Airplane'>
@@ -389,7 +387,7 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                             style={styles.moduleContent}>
                             飞行模式状态:
                         </Text>
-                        <TestCase.Example
+                        <TestCase
                             tags={['C_API']}
                             itShould='切换WIFI状态(跳转设置)'
                         >
@@ -403,7 +401,7 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                             >
                                 <Text style={styles.buttonText}>切换飞行模式状态(跳转设置)</Text>
                             </TouchableOpacity>
-                        </TestCase.Example >
+                        </TestCase>
                     </View>
                 </TestSuite>
                 <TestSuite name='Location'>
@@ -416,7 +414,7 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                             style={styles.moduleContent}>
                             位置服务状态:{location}
                         </Text>
-                        <TestCase.Manual
+                        <TestCase
                             tags={['C_API']}
                             itShould='获取位置服务状态'
                             initialState={undefined as any}
@@ -438,7 +436,7 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                                 expect(state).to.be.true
                             }}
                         />
-                        <TestCase.Example
+                        <TestCase
                             tags={['C_API']}
                             itShould='切换位置服务状态(跳转设置)'
                         >
@@ -452,8 +450,8 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                             >
                                 <Text style={styles.buttonText}>切换位置服务状态(跳转设置)</Text>
                             </TouchableOpacity>
-                        </TestCase.Example>
-                        <TestCase.Example
+                        </TestCase>
+                        <TestCase
                             tags={['C_API']}
                             itShould='打开应用程序的设置页面'
                         >
@@ -465,7 +463,7 @@ const SystemSettingDemo: React.FC = (): JSX.Element => {
                             >
                                 <Text style={styles.buttonText}>打开应用程序的设置页面</Text>
                             </TouchableOpacity>
-                        </TestCase.Example
+                        </TestCase
                         >
                     </View>
                 </TestSuite>
