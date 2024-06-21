@@ -11,12 +11,12 @@ export function TabNavigatorTest() {
     return (
         <Tester>
             <TestSuite name="TabNavigator">
-                <TestCase.Example itShould="Test sceneStyle and tabBarStyle prop of TabNavigator">
+                <TestCase.Example itShould="Test sceneStyle and tabBarStyle prop of TabNavigator, set sceneStyle and tabBarStyle height 100">
                     <View style={styles.container}>
                         <TabNavigatorSceneAndTabBarStyleTest />
                     </View>
                 </TestCase.Example>
-                <TestCase.Example itShould="Test tabBarShadowStyle prop of TabNavigator">
+                <TestCase.Example itShould="Test tabBarShadowStyle prop of TabNavigator,set height 10 and backgroundColor[#32CD32]">
                     <View style={styles.container}>
                         <TabNavigatorTabBarShadowStyleTest />
                     </View>
@@ -26,27 +26,27 @@ export function TabNavigatorTest() {
                         <TabNavigatorHidesTabTouchTest />
                     </View>
                 </TestCase.Example>
-                <TestCase.Example itShould="Test title props of TabNavigator">
+                <TestCase.Example itShould="Test title props of TabNavigator, Customize the titleStyle and selectedTitleStyle of the first tab. set titleStyle[#8E2323], selectedTitleStyle[#E3CF57]">
                     <View style={styles.container}>
                         <TabNavigatorTitlePropsTest />
                     </View>
                 </TestCase.Example>
-                <TestCase.Example itShould="Test icon props of TabNavigator">
+                <TestCase.Example itShould="Test icon props of TabNavigator, Customize the icon of a tab and the icon when selected.">
                     <View style={styles.container}>
                         <TabNavigatorIconPropsTest />
                     </View>
                 </TestCase.Example>
-                <TestCase.Example itShould="Test badgeText prop of TabNavigator">
+                <TestCase.Example itShould="Test badgeText prop of TabNavigator, set badgeText 1">
                     <View style={styles.container}>
                         <TabNavigatorBadgeTextPropTest />
                     </View>
                 </TestCase.Example>
-                <TestCase.Example itShould="Test renderBadge prop of TabNavigator">
+                <TestCase.Example itShould="Test renderBadge prop of TabNavigator, add a Custom Text Component">
                     <View style={styles.container}>
                         <TabNavigatorBadgePropTest />
                     </View>
                 </TestCase.Example>
-                <TestCase.Example itShould="Test tabStyle prop of TabNavigator">
+                <TestCase.Example itShould="Test tabStyle prop of TabNavigator, set tabStyle backgroundColor[#E9C2A6]">
                     <View style={styles.container}>
                         <TabNavigatorTabStyleTest />
                     </View>
@@ -61,7 +61,7 @@ export function TabNavigatorTest() {
                         <TabNavigatorAccessibleTest />
                     </View>
                 </TestCase.Example>
-                <TestCase.Example itShould="Test accessibilityLabel prop of TabNavigator">
+                <TestCase.Example itShould="Test accessibilityLabel prop of TabNavigator, set accessibilityLabel[Custom AccessibilityLabel]">
                     <View style={styles.container}>
                         <TabNavigatorAccessibilityLabelTest />
                     </View>
@@ -179,7 +179,7 @@ function TabNavigatorTitlePropsTest() {
                 selected={selectedTab === 'home'}
                 title="Home"
                 titleStyle={{ color: "#8E2323" }}
-                selectedTitleStyle={{ color: "#3496f0" }}
+                selectedTitleStyle={{ color: "#E3CF57" }}
                 onPress={() => setSelectedTab('home')}>
                 <Home />
             </TabNavigator.Item>
