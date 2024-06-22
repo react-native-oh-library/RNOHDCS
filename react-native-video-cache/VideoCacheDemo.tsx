@@ -1,42 +1,44 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import convertToCache, { convertAsync } from "react-native-video-cache";
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino'
+
+const url = "https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4";
 
 export default function App() {
-    const url =
-        "https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4";
-    const [asyncVersion, setAsyncVersion] = useState<string>('');
-    useEffect(() => {
-        convertAsync(url).then(setAsyncVersion);
-    }, [])
+    const [asyncData, setAsyncData] = useState<string>('')
+
     return (
-        <View style={styles.container}>
-            <Text style={styles.welcome}>☆Original URL☆</Text>
-            <Text style={styles.instructions}>{url}</Text>
-            <Text style={styles.welcome}>☆Proxy URL for Video Component☆</Text>
-            <Text style={styles.instructions}>{JSON.stringify(convertToCache(url))}</Text>
-            <Text style={styles.welcome}>☆Async Proxy URL☆</Text>
-            <Text style={styles.instructions}>{asyncVersion}</Text>
-        </View>
+        <Tester>
+            <TestSuite name="VideoCache">
+                <TestCase
+                    tags={['C_API']}
+                    itShould='convertToCache(返回链接为http://127.0.0.1开头且绑定随机端口号则为成功)'
+                    initialState={undefined as any}
+                    arrange={({ setState }) => {
+                        return (
+                            <TouchableOpacity
+                                onPress={async () => {
+                                    const proxyUrl = await convertAsync(url)
+                                    setAsyncData(proxyUrl)
+                                    if (Object.prototype.toString.call(proxyUrl) === '[object String]') {
+                                        setState(proxyUrl.startsWith('http://'))
+                                    } else {
+                                        setState(false)
+                                    }
+                                }}
+                                style={{ height: 30 }}
+                            >
+                                <Text style={{ textAlign: 'center', lineHeight: 25 }}>同步获取代理地址</Text>
+                            </TouchableOpacity>
+                        )
+                    }}
+                    assert={async ({ expect, state }) => {
+                        expect(state).to.be.true
+                    }}
+                />
+                <Text style={{ color: '#fff' }}>{'syncData(同步接口返回):' + asyncData}</Text>
+            </TestSuite>
+        </Tester>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#F5FCFF",
-        padding: 20
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: "center",
-        margin: 10,
-    },
-    instructions: {
-        textAlign: "center",
-        color: "#333333",
-        marginBottom: 5,
-    },
-});
