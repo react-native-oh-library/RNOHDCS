@@ -1,3 +1,8 @@
+import React, { Component } from 'react';
+import { AppRegistry, StyleSheet, Text, View, FlatList, Button } from 'react-native';
+import { name as appName } from './app.json';
+import Storage from 'react-native-storage';
+import { AsyncStorage } from 'react-native'
 ///初始化
 const storage = new Storage({
     // 最大容量，默认值1000条数据循环存储
@@ -334,4 +339,4 @@ var styles = StyleSheet.create({
     },
   });
 
-  export default StorageDemo;
+  AppRegistry.registerComponent(appName, () => StorageDemo);
