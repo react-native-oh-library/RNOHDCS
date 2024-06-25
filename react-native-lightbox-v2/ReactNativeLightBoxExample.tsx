@@ -14,7 +14,7 @@ import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 
 export const ReactNativeLightBoxExample = () => {
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{ flex: 1 }}>
             <Tester style={{ flex: 1 }}>
                 <TestSuite name='lightbox render'>
                     <TestCase itShould='renderHeader close button' tags={['C_API']}>
@@ -31,7 +31,6 @@ export const ReactNativeLightBoxExample = () => {
                                 </View>
                             </Lightbox>
                         </View>
-
                     </TestCase>
                     <TestCase itShould='renderContent' tags={['C_API']}>
                         <View style={styles.container}>

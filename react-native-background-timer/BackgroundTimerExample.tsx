@@ -1,8 +1,7 @@
 import { View, Button, StyleSheet, Text, TextInput, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 import BackgroundTimer from "react-native-background-timer";
-import { Tester, TestSuite } from '@rnoh/testerino';
-import { TestCase } from '../components';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 
 export function BackgroundTimerExample() {
     let [count, setCount] = useState(0);
@@ -65,10 +64,10 @@ export function BackgroundTimerExample() {
     }
     return (
         <Tester>
-            <TestSuite name="TesterFeatherExample">
-                <TestCase.Example
+            <TestSuite name="BackgroundTimerExample">
+                <TestCase
                     tags={['C_API']}
-                    itShould="TesterFeatherExample">
+                    itShould="BackgroundTimerExample">
                  <ScrollView>
                     <View style={{ flexDirection: 'column', flex: 1, backgroundColor: 'white' }}>
                         <View style={styles.container}>
@@ -144,7 +143,7 @@ export function BackgroundTimerExample() {
                         <Text style={styles.textStyle}>{text}</Text>
                     </View>
                     </ScrollView>
-                </TestCase.Example>
+                </TestCase>
             </TestSuite>
         </Tester>
     );
