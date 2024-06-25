@@ -1,6 +1,5 @@
 import { View, StyleSheet, ScrollView, Text } from 'react-native';
-import { Tester, TestSuite } from '@rnoh/testerino';
-import { TestCase } from '../components';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 import * as Icon from "react-native-feather";
 import React from 'react';
 
@@ -8,13 +7,13 @@ export const FeatherExample = () => {
 
   return (
     <Tester>
-      <TestSuite name="FeatherExample">
-        <TestCase.Example
-          tags={['C_API']}
-          itShould="TesterFeatherExample">
-          <ScrollView>
-            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent:'space-between' }}>
-              <Icon.Activity stroke='black' width={40} height={40} fill="white" collapsable />
+      <ScrollView>
+        <TestSuite name="FeatherExample">
+          <TestCase
+            tags={['C_API']}
+            itShould="基本图标,线条(stroke)为黑色,长宽(height/width)均为40,默认填充色(fill)为白色">
+            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }} >
+              <Icon.Activity stroke='black' width={40} height={40} fill="white" />
               <Icon.Airplay stroke='black' width={40} height={40} fill="white" />
               <Icon.AlignCenter stroke='black' width={40} height={40} fill="white" />
               <Icon.AlignJustify stroke='black' width={40} height={40} fill="white" />
@@ -282,15 +281,57 @@ export const FeatherExample = () => {
               <Icon.Video stroke='black' width={40} height={40} fill="white" />
               <Icon.VideoOff stroke='black' width={40} height={40} fill="white" />
               <Icon.Volume stroke='black' width={40} height={40} fill="white" />
-              </View>
-              <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',  marginBottom: 140  }}>
+            </View>
+            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
               <Icon.Volume1 stroke='black' width={40} height={40} fill="white" />
               <Icon.Volume2 stroke='black' width={40} height={40} fill="white" />
               <Icon.VolumeX stroke='black' width={40} height={40} fill="white" />
-              </View>
-          </ScrollView>
-        </TestCase.Example>
-      </TestSuite>
+            </View>
+          </TestCase>
+        </TestSuite>
+
+        <TestSuite name="FeatherExample2">
+          <TestCase
+            tags={['C_API']}
+            itShould="线条(stroke)为蓝色,长宽(height/width)均为40,默认填充色(fill)为白色">
+            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }} >
+              <Icon.Activity stroke='blue' width={40} height={40} fill="white" />
+              <Icon.Airplay stroke='blue' width={40} height={40} fill="white" />
+              <Icon.AlignCenter stroke='blue' width={40} height={40} fill="white" />
+              <Icon.AlignJustify stroke='blue' width={40} height={40} fill="white" />
+              <Icon.AlignLeft stroke='blue' width={40} height={40} fill="white" />
+              <Icon.AlignRight stroke='blue' width={40} height={40} fill="white" />
+              <Icon.Archive stroke='blue' width={40} height={40} fill="white" />
+              <Icon.ZapOff stroke='blue' width={40} height={40} fill="white" />
+            </View>
+          </TestCase>
+        </TestSuite>
+
+        <TestSuite name="FeatherExample3">
+          <TestCase
+            tags={['C_API']}
+            itShould="线条(stroke)为黑色,长宽(height/width)均为100,默认填充色(fill)为白色">
+            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }} >
+              <Icon.Activity stroke='black' width={100} height={100} fill="white" />
+              <Icon.Airplay stroke='black' width={100} height={100} fill="white" />
+              <Icon.AlignCenter stroke='black' width={100} height={100} fill="white" />
+            </View>
+          </TestCase>
+        </TestSuite>
+
+        <TestSuite name="FeatherExample4">
+          <TestCase
+            tags={['C_API']}
+            itShould="线条(stroke)为黑色,长宽(height/width)均为40,默认填充色(fill)为绿色">
+            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }} >
+              <Icon.Activity stroke='black' width={40} height={40} fill="green" />
+              <Icon.Airplay stroke='black' width={40} height={40} fill="green" />
+              <Icon.Archive stroke='black' width={40} height={40} fill="green" />
+              <Icon.Star stroke='black' width={40} height={40} fill="green" />
+            </View>
+          </TestCase>
+        </TestSuite>
+      </ScrollView>
     </Tester>
   );
 };
