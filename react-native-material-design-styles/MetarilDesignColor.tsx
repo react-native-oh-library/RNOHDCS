@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import {  View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { Tester } from '@rnoh/testerino';
 import { Button, TestCase } from '../components';
-import { typography, color } from 'react-native-material-design-styles';
+import { typography, color ,defaultTheme} from 'react-native-material-design-styles';
 const typographyStyle = StyleSheet.create(typography);
 const colorStyle = StyleSheet.create(color);
 export function MetariDesignColorTest() {
@@ -16,8 +16,8 @@ export function MetariDesignColorTest() {
                 </TestCase.Example>
                 <TestCase.Example itShould="paperFontDisplay1">
                     <Text style={titleStyle}>Display4</Text>
-                    <Button label='changeStyle' onPress={() => { 
-                        setTitleStyle([typographyStyle.paperFontDisplay1,colorStyle.paperPink100])
+                    <Button label='changeStyle' onPress={() => {
+                        setTitleStyle([typographyStyle.paperFontDisplay1, colorStyle.paperPink100])
                     }}></Button>
                 </TestCase.Example>
                 <TestCase.Example itShould="paperFontDisplay3">
@@ -25,13 +25,6 @@ export function MetariDesignColorTest() {
                 </TestCase.Example>
                 <TestCase.Example itShould="paperFontDisplay2">
                     <Text style={typographyStyle.paperFontDisplay2}>Display2</Text>
-                </TestCase.Example>
-                <TestCase.Example itShould="paperFontDisplay1">
-                    <Text style={typographyStyle.paperFontDisplay1}>Display1</Text>
-                </TestCase.Example>
-
-                <TestCase.Example itShould="paperFontHeadline">
-                    <Text style={typographyStyle.paperFontHeadline}>Headline</Text>
                 </TestCase.Example>
                 <TestCase.Example itShould="paperFontTitle">
                     <Text style={typographyStyle.paperFontTitle}>Title</Text>
@@ -45,7 +38,6 @@ export function MetariDesignColorTest() {
                 <TestCase.Example itShould="paperFontBody1">
                     <Text style={typographyStyle.paperFontBody1}>Body1</Text>
                 </TestCase.Example>
-
                 <TestCase.Example itShould="paperFontCaption">
                     <Text style={typographyStyle.paperFontCaption}>Caption</Text>
                 </TestCase.Example>
@@ -58,12 +50,8 @@ export function MetariDesignColorTest() {
                 <TestCase.Example itShould="paperFontCode1">
                     <Text style={typographyStyle.paperFontCode1}>Code1</Text>
                 </TestCase.Example>
-                <TestCase.Example itShould="paperFontHeadline">
+                <TestCase.Example itShould="paperTeal500">
                     <Text style={[typographyStyle.paperFontHeadline, typographyStyle.paperTeal500]}>Text Color</Text>
-                </TestCase.Example>
-
-                <TestCase.Example itShould="paperFontTitle paperPink500">
-                    <Text style={[typographyStyle.paperFontTitle, typographyStyle.paperPink500]}>paperPink500</Text>
                 </TestCase.Example>
                 <TestCase.Example itShould="paperFontTitle paperPink50">
                     <Text style={[typographyStyle.paperFontTitle, typographyStyle.paperPink50]}>paperPink50</Text>
@@ -77,7 +65,6 @@ export function MetariDesignColorTest() {
                 <TestCase.Example itShould="paperFontTitle paperPink100">
                     <Text style={[typographyStyle.paperFontTitle, colorStyle.paperPink100]}>paperPink100</Text>
                 </TestCase.Example>
-
                 <TestCase.Example itShould="paperFontTitle paperPink200">
                     <Text style={[typographyStyle.paperFontTitle, colorStyle.paperPink200]}>paperPink200</Text>
                 </TestCase.Example>
@@ -93,8 +80,6 @@ export function MetariDesignColorTest() {
                 <TestCase.Example itShould="paperFontTitle paperPink600">
                     <Text style={[typographyStyle.paperFontTitle, colorStyle.paperPink600]}>paperPink600</Text>
                 </TestCase.Example>
-
-
                 <TestCase.Example itShould="paperFontTitle paperPink700">
                     <Text style={[typographyStyle.paperFontTitle, colorStyle.paperPink700]}>paperPink700</Text>
                 </TestCase.Example>
@@ -110,15 +95,11 @@ export function MetariDesignColorTest() {
                 <TestCase.Example itShould="paperFontTitle paperPinkA200">
                     <Text style={[typographyStyle.paperFontTitle, colorStyle.paperPinkA200]}>paperPinkA200</Text>
                 </TestCase.Example>
-
                 <TestCase.Example itShould="paperFontTitle paperPinkA400">
                     <Text style={[typographyStyle.paperFontTitle, colorStyle.paperPinkA400]}>paperPinkA400</Text>
                 </TestCase.Example>
                 <TestCase.Example itShould="paperFontTitle paperPinkA700">
                     <Text style={[typographyStyle.paperFontTitle, colorStyle.paperPinkA700]}>paperPinkA700</Text>
-                </TestCase.Example>
-                <TestCase.Example itShould="color.paperBlue500.color">
-                    <View style={[styles.colorItem, { backgroundColor: color.paperBlue500.color }]}></View>
                 </TestCase.Example>
                 <TestCase.Example itShould="color.paperBlue50.color">
                     <View style={[styles.colorItem, { backgroundColor: color.paperBlue50.color }]}></View>
@@ -126,7 +107,6 @@ export function MetariDesignColorTest() {
                 <TestCase.Example itShould="color.paperBlue100.color">
                     <View style={[styles.colorItem, { backgroundColor: color.paperBlue100.color }]}></View>
                 </TestCase.Example>
-
                 <TestCase.Example itShould="color.paperBlue200.color">
                     <View style={[styles.colorItem, { backgroundColor: color.paperBlue200.color }]}></View>
                 </TestCase.Example>
@@ -142,7 +122,6 @@ export function MetariDesignColorTest() {
                 <TestCase.Example itShould="color.paperBlue600.color">
                     <View style={[styles.colorItem, { backgroundColor: color.paperBlue600.color }]}></View>
                 </TestCase.Example>
-
                 <TestCase.Example itShould="color.paperBlue700.color">
                     <View style={[styles.colorItem, { backgroundColor: color.paperBlue700.color }]}></View>
                 </TestCase.Example>
@@ -161,11 +140,19 @@ export function MetariDesignColorTest() {
                 <TestCase.Example itShould="color.paperBlueA700.color">
                     <View style={[styles.colorItem, { backgroundColor: color.paperBlueA700.color }]}></View>
                 </TestCase.Example>
+                <TestCase.Example itShould="defaultTheme.primaryColor.color">
+                    <View style={[styles.colorItem, { backgroundColor: defaultTheme.primaryColor.color }]}></View>
+                </TestCase.Example>
+                <TestCase.Example itShould="defaultTheme.darkThemeBaseColor.color">
+                    <View style={[styles.colorItem, { backgroundColor: defaultTheme.darkThemeBaseColor.color }]}></View>
+                </TestCase.Example>
+                <TestCase.Example itShould="defaultTheme.darkThemeTextColor.color">
+                    <View style={[styles.colorItem, { backgroundColor: defaultTheme.darkThemeDisabledColor.color }]}></View>
+                </TestCase.Example>
             </ScrollView>
         </Tester>
     )
 }
-
 const styles = StyleSheet.create({
     colorItem: {
         height: 50
