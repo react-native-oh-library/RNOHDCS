@@ -25,8 +25,8 @@ type Props = {
 };
 
 const configTest = {
-  manifest: require("../assets/bootsplash_manifest.json"),
-  logo: require("../assets/bootsplash_logo.png"),
+  manifest: require("./source/bootsplash_manifest.json"),
+  logo: require("./source/bootsplash_logo.png"),
   statusBarTranslucent: true,
   navigationBarTranslucent: false,
 
@@ -57,8 +57,8 @@ export const AnimatedBootSplash = ({ onAnimationEnd }: Props) => {
   const [opacity] = useState(() => new Animated.Value(1));
   const [translateY] = useState(() => new Animated.Value(0));
   const config = {
-    manifest: require("../assets/bootsplash_manifest.json"),
-    logo: require("../assets/bootsplash_logo.png"),
+    manifest: require("./source/bootsplash_manifest.json"),
+    logo: require("./source/bootsplash_logo.png"),
     statusBarTranslucent: true,
     navigationBarTranslucent: false,
 
