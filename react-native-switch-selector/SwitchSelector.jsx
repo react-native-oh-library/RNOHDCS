@@ -18,7 +18,7 @@ const SwitchSelectorDemo = () => {
     return (
         <Tester>
             <TestSuite name='SwitchSelector'>
-                <ScrollView style={{height:'93%'}}>
+                <ScrollView style={{ height: '93%' }}>
                     <TestCase itShould='Example1' tags={['C_API']}>
                         <View style={styles.module}>
                             <Text style={styles.moduleContent}>验证以下属性:</Text>
@@ -63,12 +63,12 @@ const SwitchSelectorDemo = () => {
                     <TestCase itShould='Example2' tags={['C_API']}>
                         <View style={styles.module}>
                             <Text style={styles.moduleContent}>验证以下属性:</Text>
-                            <Text style={styles.moduleContent}>fontSize(字体大小)</Text>
-                            <Text style={styles.moduleContent}>selectedColor(选中字体颜色)</Text>
-                            <Text style={styles.moduleContent}>buttonMargin(按钮外边距)</Text>
-                            <Text style={styles.moduleContent}>buttonColor(按钮颜色)</Text>
-                            <Text style={styles.moduleContent}>textColor(字体颜色)</Text>
-                            <Text style={styles.moduleContent}>backgroundColor(整体背景颜色)</Text>
+                            <Text style={styles.moduleContent}>fontSize(字体大小:22)</Text>
+                            <Text style={styles.moduleContent}>selectedColor(选中字体颜色:#007cfd)</Text>
+                            <Text style={styles.moduleContent}>buttonMargin(按钮外边距:20)</Text>
+                            <Text style={styles.moduleContent}>buttonColor(按钮颜色:#00b050)</Text>
+                            <Text style={styles.moduleContent}>textColor(字体颜色:#e24c3d)</Text>
+                            <Text style={styles.moduleContent}>backgroundColor(整体背景颜色:#000)</Text>
                             <SwitchSelector
                                 options={options}
                                 initial={0}
@@ -84,14 +84,14 @@ const SwitchSelectorDemo = () => {
                     <TestCase itShould='Example3' tags={['C_API']}>
                         <View style={styles.module}>
                             <Text style={styles.moduleContent}>验证以下属性:</Text>
-                            <Text style={styles.moduleContent}>borderColor(边框颜色)</Text>
-                            <Text style={styles.moduleContent}>borderWidth(边框宽度)</Text>
-                            <Text style={styles.moduleContent}>borderRadius(边框角弧度)</Text>
-                            <Text style={styles.moduleContent}>hasPadding(按钮与边框是否存在内边距)</Text>
-                            <Text style={styles.moduleContent}>animationDuration(切换动画速率)</Text>
-                            <Text style={styles.moduleContent}>valuePadding(按钮与边框内边距宽)</Text>
-                            <Text style={styles.moduleContent}>height(整体高)</Text>
-                            <Text style={styles.moduleContent}>bold(字体加粗)</Text>
+                            <Text style={styles.moduleContent}>borderColor(边框颜色:#7a44cf)</Text>
+                            <Text style={styles.moduleContent}>borderWidth(边框宽度:3)</Text>
+                            <Text style={styles.moduleContent}>borderRadius(边框角弧度:5)</Text>
+                            <Text style={styles.moduleContent}>hasPadding(按钮与边框是否存在内边距:true)</Text>
+                            <Text style={styles.moduleContent}>animationDuration(切换动画速率:1000ms)</Text>
+                            <Text style={styles.moduleContent}>valuePadding(按钮与边框内边距宽:10)</Text>
+                            <Text style={styles.moduleContent}>height(整体高:80)</Text>
+                            <Text style={styles.moduleContent}>bold(字体加粗:true)</Text>
                             <SwitchSelector
                                 options={options}
                                 initial={0}
@@ -109,11 +109,11 @@ const SwitchSelectorDemo = () => {
                     <TestCase itShould='Example4' tags={['C_API']}>
                         <View style={styles.module}>
                             <Text style={styles.moduleContent}>验证以下属性:</Text>
-                            <Text style={styles.moduleContent}>textStyle(未选中文字样式)</Text>
-                            <Text style={styles.moduleContent}>selectedTextStyle(选中文字样式)</Text>
-                            <Text style={styles.moduleContent}>textContainerStyle(未选中选项盒子样式)</Text>
-                            <Text style={styles.moduleContent}>selectedTextContainerStyle(选中选项盒子样式)</Text>
-                            <Text style={styles.moduleContent}>imageStyle(Icon样式)</Text>
+                            <Text style={styles.moduleContent}>textStyle(未选中文字样式:fontWeight: 900, fontSize: 14)</Text>
+                            <Text style={styles.moduleContent}>selectedTextStyle(选中文字样式:fontStyle: 'italic')</Text>
+                            <Text style={styles.moduleContent}>textContainerStyle(未选中选项盒子样式:backgroundColor: 'rgba(256,0,0,0.5)')</Text>
+                            <Text style={styles.moduleContent}>selectedTextContainerStyle(选中选项盒子样式:backgroundColor: 'rgb(0,0,256)')</Text>
+                            <Text style={styles.moduleContent}>imageStyle(Icon样式:backgroundColor: 'rgb(0,256,256)')</Text>
                             <SwitchSelector
                                 options={options}
                                 initial={0}
