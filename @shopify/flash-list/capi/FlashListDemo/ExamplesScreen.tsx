@@ -22,7 +22,6 @@ export const ExamplesScreen = () => {
   const data: ExampleItem[] = [
     { title: "List", destination: "List" },
     { title: "PaginatedList", destination: "PaginatedList" },
-    { title: "CustomDemoList", destination: "CustomDemoList" },
     { title: "Twitter Timeline", destination: "Twitter" },
     {
       title: "Contacts",

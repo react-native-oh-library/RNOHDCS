@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, View, Image, Text, ViewStyle } from "react-native";
-// import FastImage from "react-native-fast-image";
 
 import Author from "./models/Author";
 import Tweet from "./models/Tweet";
