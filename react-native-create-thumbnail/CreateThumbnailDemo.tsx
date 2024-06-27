@@ -72,7 +72,7 @@ function CreateThumbnailDemo() {
       key: 'style:Thumbnail format, can be one of:png',
       value: {
           url: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
-          format:true
+          format:false
       },
     },
     {
