@@ -1,7 +1,7 @@
 import { TestSuite, Tester, TestCase } from '@rnoh/testerino';
 import * as React from 'react';
 import { Switch, Text} from 'react-native';
-import NativeSampleView from "react-native-bars/src/NativeSampleView"; 
+import StatusBar from "react-native-bars"; 
 
 export function BarExample() {
 
@@ -12,9 +12,8 @@ export function BarExample() {
     <Tester>
       <TestSuite name='BarTesteDemo'>
         <TestCase itShould='statusBar' tags={['C_API']}>
-          <NativeSampleView     
+          <StatusBar     
             barStyle= {isEnabled ? "light-content" : "dark-content"} 
-            style={{ width: "100%", height: 200 }} 
           />
             <Text style={{color:"black"}}>关 dark-content/ 开 light-content</Text>
             <Switch
