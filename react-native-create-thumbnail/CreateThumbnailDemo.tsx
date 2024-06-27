@@ -22,7 +22,7 @@ import { string } from 'yargs';
 interface thumbnailClass {
     url: string;
     timeStamp?: number;
-    format?: string;
+    format?: boolean;
     dirSize?: number;
     headers?: object;
     cacheName?: string;
@@ -47,6 +47,13 @@ function CreateThumbnailDemo() {
       },
     },
     {
+      key: 'style:timeStamp is 2000',
+      value: {
+          url: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
+          timeStamp:2000
+      },
+    },
+    {
       key: 'style:headers is {Content-Type: "application/json"}',
       value: {
           url: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
@@ -58,7 +65,14 @@ function CreateThumbnailDemo() {
       key: 'style:Thumbnail format, can be one of:jpeg',
       value: {
           url: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
-          format:"jpeg"
+          format:true
+      },
+    },
+    {
+      key: 'style:Thumbnail format, can be one of:png',
+      value: {
+          url: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
+          format:true
       },
     },
     {
@@ -69,10 +83,24 @@ function CreateThumbnailDemo() {
       },
     },
     {
+      key: 'style:dirSize is 200',
+      value: {
+          url: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
+          dirSize:200
+      },
+    },
+    {
       key: 'style:cacheName is 20240625',
       value: {
           url: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
           cacheName:'20240625'
+      },
+    },
+    {
+      key: 'style:cacheName is aaaaaa',
+      value: {
+          url: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
+          cacheName:'aaaaaa'
       },
     },
   ]
@@ -81,7 +109,7 @@ function CreateThumbnailDemo() {
    let obje  = await createThumbnail({ 
       url:value.url,
       timeStamp:value.timeStamp,
-      format:"jpeg",
+      format:value.format ? "jpeg" : "png",
       dirSize:value.dirSize,
       headers:value.headers,
       cacheName:value.cacheName
@@ -144,6 +172,7 @@ const styles = StyleSheet.create({
     height:120,
     borderColor:'#000000',
     marginTop:8,
+  
     justifyContent:'center',
     alignItems:'center',
   },
