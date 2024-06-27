@@ -1,7 +1,6 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import CustomDemoList from "./CustomDemoList"
 import List from "./List";
 import PaginatedList from "./PaginatedList";
 import { } from "./Messages";
@@ -12,8 +11,6 @@ import { RootStackParamList } from "./constants";
 import { ExamplesScreen } from "./ExamplesScreen";
 import { DebugScreen } from "./Debug";
 import { Messages } from "./Messages";
-// import TwitterBenchmark from "./twitter/TwitterBenchmark";
-// import TwitterCustomCellContainer from "./twitter/CustomCellRendererComponent";
 import { Masonry } from "./Masonry";
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -27,7 +24,6 @@ const NavigationTree = () => {
           <Stack.Screen name="List" component={List} />
           <Stack.Screen name="PaginatedList" component={PaginatedList} />
           <Stack.Screen name="Twitter" component={Twitter} />
-          <Stack.Screen name="CustomDemoList" component={CustomDemoList} />
           <Stack.Screen name="Contacts" component={Contacts} />
           <Stack.Screen
             name="ContactsSectionList"
