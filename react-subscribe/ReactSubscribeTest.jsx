@@ -5,11 +5,6 @@ import {ReactSubscribeFetchTest} from './ReactSubscribeFetchTest';
 import {ReactSubscribeSubscribeTest} from './ReactSubscribeSubscribeTest';
 import { EventEmitter } from 'fbemitter';
 
-demoChange = (cd,interval) => {
-  return (
-    <ReactSubscribeTimerTest cd={60} interval={1000}/>
-  );
-}
 eventEmitter1 = new EventEmitter()
 
 export const ReactSubscribeTest = () => {
@@ -89,7 +84,7 @@ export const ReactSubscribeTest = () => {
         <TestCase
           tags={['C_API']}
           itShould="输入监听名称和消息后在不同的监听下展示输入消息">
-          <ReactSubscribeSubscribeTest eventEmitter1={eventEmitter1} eventEmitter2={eventEmitter1} eventEmitter3={new EventEmitter()}/>
+          <ReactSubscribeSubscribeTest eventEmitter1={eventEmitter1} eventEmitter2={eventEmitter1}/>
         </TestCase>
       </TestSuite>
     </Tester>
