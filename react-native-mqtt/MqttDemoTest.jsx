@@ -12,7 +12,7 @@ export const MqttDemoTest = () => {
   const [topic, setTopic] = React.useState('');
   const [arrivedMessage, setArrivedMessage] = React.useState('');
   const [onChangeMessage, setOnChangeMessage] = React.useState('');
-  return (
+  return (  
     <Tester>
       <TestSuite name="MqttDemoTest1">
         <TestCase tags={['C_API']} itShould="连接MQTT服务器"
