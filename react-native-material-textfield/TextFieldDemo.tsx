@@ -72,6 +72,16 @@ function TextfieldDemo() {
 
   const TextfielProps = [
     {
+      key: 'style:disabledLineWidth is 0.5',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        lineType:'solid',
+        disabledLineWidth:0.5
+      }
+    },
+    {
       key: 'style:inputContainerStyle is {"height":"70"}',
       value: {
         textColor: '#000000',
@@ -208,24 +218,6 @@ function TextfieldDemo() {
       }
     },
     {
-      key: 'style:enablesReturnKeyAutomatically is true',
-      value: {
-        textColor: '#000000',
-        value:'Stark',
-        label:'first Name',
-        enablesReturnKeyAutomatically:true,
-      }
-    },
-    {
-      key: 'style:enablesReturnKeyAutomatically is false',
-      value: {
-        textColor: '#000000',
-        value:'Stark',
-        label:'first Name',
-        enablesReturnKeyAutomatically:false,
-      }
-    },
-    {
       key: 'style:labelFontSize is 20',
       value: {
         textColor: '#000000',
@@ -339,7 +331,7 @@ function TextfieldDemo() {
         textColor: '#000000',
         value:'Stark',
         label:'first Name',
-        title:'Choose wisely'
+        title:'Choose'
       }
     },
     {
@@ -443,7 +435,7 @@ function TextfieldDemo() {
         textColor: '#000000',
         value:'Stark',
         label:'first Name',
-        lineType:'solid'
+        lineType:'dotted'
       }
     },
     {
@@ -497,7 +489,7 @@ function TextfieldDemo() {
         textColor: '#000000',
         value:'Stark',
         label:'first Name',
-        contentInset:{top:20,left:20,right:0,label:4,input:8}
+        contentInset:{top:5,left:20,right:0,label:4,input:8}
       }
     },
     {
