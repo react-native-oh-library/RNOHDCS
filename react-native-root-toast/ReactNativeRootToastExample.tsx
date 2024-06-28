@@ -1,6 +1,6 @@
 import { RootSiblingParent } from 'react-native-root-siblings';
-import React from 'react';
-import {StyleSheet, Button, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import {StyleSheet, Button, ScrollView, View } from 'react-native';
 import Toast from 'react-native-root-toast';
 import {TestSuite,Tester,TestCase} from '@rnoh/testerino';
 
@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
 
 export function ReactNativeRootToastExample() {
     let { durations, positions } = Toast;
+    const [visible,setVisible] = useState(false);
     let toast: any = null;
     function show(obj = {}) {
         let defaultObj = {
@@ -165,159 +166,206 @@ export function ReactNativeRootToastExample() {
     return (
         <RootSiblingParent>
             <ScrollView>
-            <Tester >
+            <Tester>
                 <TestSuite name = "react-native-root-toast">
-                    <TestCase itShould='duration LONG'
+                    <TestCase itShould='弹窗持续时间 duration LONG'
                         initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
                         arrange={
                             ({setState}) => ( <Button title={`LONG`} onPress={() => {show({duration:durations.LONG});setState(true)}} /> )
                         }
                     >
                     </TestCase>
-                    <TestCase itShould='duration SHORT'
+                    <TestCase itShould='弹窗持续时间duration SHORT'
                         initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
-                        arrange={
-                            ({setState}) => ( <Button title={`SHORT`} onPress={() => {show({duration:durations.SHORT});setState(true)}} /> )
-                        }
+                        arrange={ ({setState}) => (<Button title={`SHORT`} onPress={() => {show({duration:durations.SHORT});setState(true)}} /> )  }
                     >
                     </TestCase>
-                    <TestCase itShould='position TOP'
+                    <TestCase itShould='弹窗出现位置 position TOP'
                         initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
                         arrange={
                             ({setState}) => ( <Button title={`TOP`} onPress={() => {show({position:positions.TOP});setState(true)}} /> )
                         }
                     >
                     </TestCase>
-                    <TestCase itShould='position BOTTOM'
+                    <TestCase itShould='弹窗出现位置 position BOTTOM'
                         initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
                         arrange={
-                            ({setState}) => ( <Button title={`BOTTOM`} onPress={() => {show({position:positions.BOTTOM});setState(true)}} /> )
+                            ({setState}) => (  <Button title={`BOTTOM`} onPress={() => {show({position:positions.BOTTOM});setState(true)}} />  )
                         }
                     >
                     </TestCase>
-                    <TestCase itShould='shadow true'
+                    <TestCase itShould='边框阴影 shadow true'
                         initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
                         arrange={
-                            ({setState}) => ( <Button title={`shadow`} onPress={() => {show({shadow:true,shadowColor:'yellow'});setState(true)}} /> )
+                            ({setState}) => ( <Button title={`shadow true`} onPress={() => {show({shadow:true,shadowColor:'yellow'});setState(true)}} />)
                         }
                     >
                     </TestCase>
-                    <TestCase itShould='shadow false'
+                    <TestCase itShould='边框阴影 shadow false'
                         initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
                         arrange={
-                            ({setState}) => ( <Button title={`no shadow`} onPress={() => {show({shadow:false});setState(true)}} /> )
+                            ({setState}) => ( <Button title={`shadow false`} onPress={() => {show({shadow:false,shadowColor:'yellow'});setState(true)}} /> )
                         }
                     >
                     </TestCase>
-                    <TestCase itShould='shadowColor '
+                    <TestCase itShould='边框阴影颜色 shadowColor blue'
                         initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
                         arrange={
-                            ({setState}) => ( <Button title={`shadowColor red`} onPress={() => {show({shadow:true,shadowColor:'red'});setState(true)}} /> )
+                            ({setState}) =>(  <Button title={`shadowColor blue`} onPress={() => {show({shadow:true,shadowColor:'blue'});setState(true)}} /> )
                         }
                     >
                     </TestCase>
-                    <TestCase itShould='animation true'
+                    <TestCase itShould='边框阴影颜色 shadowColor red'
                         initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
                         arrange={
-                            ({setState}) => ( <Button title={`animation`} onPress={() => {show({animation:true});setState(true)}} /> )
+                            ({setState}) =>( <Button title={`shadowColor red`} onPress={() => {show({shadow:true,shadowColor:'red'});setState(true)}} /> )
                         }
                     >
                     </TestCase>
-                    <TestCase itShould='animation false'
+                    <TestCase itShould='出现动画 animation false（400ms）'
                         initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
                         arrange={
                             ({setState}) => ( <Button title={`animation false`} onPress={() => {show({animation:false});setState(true)}} /> )
                         }
                     >
                     </TestCase>
-                    <TestCase itShould='hideOnPress'
+                    <TestCase itShould='出现动画 animation true（400ms）'
                         initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
                         arrange={
-                            ({setState}) => ( <Button title={`hideOnPress true`} onPress={() => {show({duration:7000,hideOnPress:true});setState(true)}} /> )
+                            ({setState}) => ( <Button title={`animation true`} onPress={() => {show({animation:true});setState(true)}} />  )
                         }
                     >
                     </TestCase>
-                    <TestCase itShould='hideOnPress'
+                    <TestCase itShould='点击弹窗弹窗消失 hideOnPress false'
                         initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
                         arrange={
                             ({setState}) => ( <Button title={`hideOnPress false`} onPress={() => {show({duration:7000,hideOnPress:false});setState(true)}} /> )
                         }
                     >
                     </TestCase>
-                    <TestCase itShould='delay 3000'
+                    <TestCase itShould='点击弹窗弹窗消失 hideOnPress true'
                         initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
                         arrange={
-                            ({setState}) => ( <Button title={`delay`} onPress={() => {show({delay:1000});setState(true)}} /> )
+                            ({setState}) => ( <Button title={`hideOnPress true`} onPress={() => {show({duration:7000,hideOnPress:true});setState(true)}} /> )
                         }
                     >
                     </TestCase>
-                    <TestCase itShould='backgroundColor blue'
+                    <TestCase itShould='弹窗出现延迟 delay 4000'
                         initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
                         arrange={
-                            ({setState}) => ( <Button title={`backgroundColor`} onPress={() => {show({backgroundColor:'blue'});setState(true)}} /> )
+                            ({setState}) => ( <Button title={`delay 4000`} onPress={() => {show({delay:4000});setState(true)}} />  )
                         }
                     >
                     </TestCase>
-                    <TestCase itShould='textColor'
+                    <TestCase itShould='弹窗出现延迟 delay 400'
                         initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
                         arrange={
-                            ({setState}) => ( <Button title={`textColor`} onPress={() => {show({textColor:'purple'});setState(true)}} /> )
+                            ({setState}) => ( <Button title={`delay 400`} onPress={() => {show({delay:400});setState(true)}} />  )
                         }
                     >
                     </TestCase>
-                    <TestCase itShould='opacity 0.1'
+                    <TestCase itShould='弹窗文本框背景颜色 backgroundColor blue'
                         initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
                         arrange={
-                            ({setState}) => ( <Button title={`opacity`} onPress={() => {show({opacity:0.1});setState(true)}} /> )
+                            ({setState}) => ( <Button title={`backgroundColor blue`} onPress={() => {show({backgroundColor:'blue'});setState(true)}} />  )
                         }
                     >
                     </TestCase>
-                    <TestCase itShould='onPress'
+                    <TestCase itShould='弹窗文本框背景颜色 backgroundColor red'
+                        initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
+                        arrange={
+                            ({setState}) => ( <Button title={`backgroundColor red`} onPress={() => {show({backgroundColor:'red'});setState(true)}} />  )
+                        }
+                    >
+                    </TestCase>
+                    <TestCase itShould='文字颜色 textColor blue'
+                        initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
+                        arrange={
+                            ({setState}) => ( <Button title={`textColor blue`} onPress={() => {show({textColor:'blue'});setState(true)}} /> )
+                        }
+                    >
+                    </TestCase>
+                    <TestCase itShould='文字颜色 textColor purple'
+                        initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
+                        arrange={
+                            ({setState}) => ( <Button title={`textColor purple`} onPress={() => {show({textColor:'purple'});setState(true)}} /> )
+                        }
+                    >
+                    </TestCase>
+                    <TestCase itShould='弹框透明度 opacity 1'
+                        initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
+                        arrange={
+                            ({setState}) => ( <Button title={`opacity 1`} onPress={() => {show({opacity:1});setState(true)}} />  )
+                        }
+                    >
+                    </TestCase>
+                    <TestCase itShould='弹框透明度 opacity 0.1'
+                        initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
+                        arrange={
+                            ({setState}) => ( <Button title={`opacity 0.1`} onPress={() => {show({opacity:0.1});setState(true)}} /> )
+                        }
+                    >
+                    </TestCase>
+                    <TestCase itShould='点击弹框回调 onPress'
                         initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
                         arrange={
                             ({setState}) => ( <Button title={`onPress`} onPress={() => {show({_onPress:()=>{setState(true)}});}} /> )
                         }
                     >
                     </TestCase>
-                    <TestCase itShould='onShow'
+                    <TestCase itShould='弹框出现动画回调(前) onShow'
                         initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
                         arrange={
                             ({setState}) => ( <Button title={`onShow`} onPress={() => {show({_onShow:()=>{setState(true)}});}} /> )
                         }
                     >
                     </TestCase>
-                    <TestCase itShould='onShown'
+                    <TestCase itShould='弹框出现动画回调(后) onShown'
                         initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
                         arrange={
                             ({setState}) => ( <Button title={`onShown`} onPress={() => {show({_onShown:()=>{setState(true)}});}} /> )
                         }
                     >
                     </TestCase>
-                    <TestCase itShould='onHide'
+                    <TestCase itShould='弹框消失动画回调（前） onHide'
                         initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
                         arrange={
                             ({setState}) => ( <Button title={`onHide`} onPress={() => {show({_onHide:()=>{setState(true)}});}} /> )
                         }
                     >
                     </TestCase>
-                    <TestCase itShould='onHidden'
+                    <TestCase itShould='弹框消失动画回调（后）onHidden'
                         initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
                         arrange={
                             ({setState}) => ( <Button title={`onHidden`} onPress={() => {show({_onHidden:()=>{setState(true)}})}} /> )
                         }
                     >
                     </TestCase>
-                    <TestCase itShould='onHidden'
+                    <TestCase itShould='组件式弹框显隐 visible true'
                         initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
                         arrange={
-                            ({setState}) => ( <Button title={`onHidden`} onPress={() => {show({_onHidden:()=>{setState(true)}})}} /> )
+                            ({setState}) => ( <Button title={`visible true`} onPress={() => { setVisible(true);setState(true) }} /> )
+                        }
+                    >
+                    </TestCase>
+                    <TestCase itShould='组件式弹框显隐 visible false'
+                        initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
+                        arrange={
+                            ({setState}) => ( <Button title={`visible false`} onPress={() => { setVisible(false);setState(true) }} /> )
                         }
                     >
                     </TestCase>
                 </TestSuite>
             </Tester>
+
+            <Toast
+            visible={visible}
+            position={positions.TOP}
+            shadow={false}
+            animation={false}
+            hideOnPress={false}
+                >This is a message</Toast>
             </ScrollView>
         </RootSiblingParent>
     );
 }
-
