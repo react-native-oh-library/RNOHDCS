@@ -1,5 +1,5 @@
 import { RootSiblingParent } from 'react-native-root-siblings';
-import React from 'react';
+import React, { useState } from 'react';
 import {StyleSheet, Button, ScrollView, View } from 'react-native';
 import Toast from 'react-native-root-toast';
 import {TestSuite,Tester,TestCase} from '@rnoh/testerino';
@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
 
 export function ReactNativeRootToastExample() {
     let { durations, positions } = Toast;
+    const [visible,setVisible] = useState(false);
     let toast: any = null;
     function show(obj = {}) {
         let defaultObj = {
@@ -340,8 +341,30 @@ export function ReactNativeRootToastExample() {
                         }
                     >
                     </TestCase>
+                    <TestCase itShould='组件式弹框显隐 visible true'
+                        initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
+                        arrange={
+                            ({setState}) => ( <Button title={`visible true`} onPress={() => { setVisible(true);setState(true) }} /> )
+                        }
+                    >
+                    </TestCase>
+                    <TestCase itShould='组件式弹框显隐 visible false'
+                        initialState={false} assert={({expect, state}) => { expect(state).to.be.ok; }}
+                        arrange={
+                            ({setState}) => ( <Button title={`visible false`} onPress={() => { setVisible(false);setState(true) }} /> )
+                        }
+                    >
+                    </TestCase>
                 </TestSuite>
             </Tester>
+
+            <Toast
+            visible={visible}
+            position={positions.TOP}
+            shadow={false}
+            animation={false}
+            hideOnPress={false}
+                >This is a message</Toast>
             </ScrollView>
         </RootSiblingParent>
     );
