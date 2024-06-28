@@ -512,7 +512,7 @@ function TextfieldDemo() {
       }
     },
     {
-      key: 'style:error text Should not be empty',
+      key: 'function:ChangeText',
       value: {
         ref:passwordRef,
         value:'lastname',
