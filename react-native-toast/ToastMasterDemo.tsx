@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, Button } from 'react-native';
-import Toast from 'react-native-toast';
+import Toast from '@remobile/react-native-toast';
 
 function ToastMasterDemo() {
   return (
