@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 import {
   StyleSheet,
@@ -7,11 +7,9 @@ import {
   ScrollView,
   Animated,
   Image,
-  Button,
-} from "react-native";
-import { Tester, TestSuite } from "@rnoh/testerino";
-import { TestCase } from "../../components/TestCase";
-import MultiSlider from "@ptomasroos/react-native-multi-slider";
+} from 'react-native';
+import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
+import MultiSlider from '@ptomasroos/react-native-multi-slider';
 
 const AnimatedView = Animated.createAnimatedComponent(View);
 
@@ -23,7 +21,7 @@ const width = 50;
 const pointerWidth = width * 0.47;
 
 function LabelBase(props: any) {
-  const { position, value, leftDiff, pressed } = props;
+  const {position, value, leftDiff, pressed} = props;
   const scaleValue = React.useRef(new Animated.Value(0.1)); // Behaves oddly if set to 0
   const cachedPressed = React.useRef(pressed);
 
@@ -46,13 +44,12 @@ function LabelBase(props: any) {
           {
             left: position - width / 2,
             transform: [
-              { translateY: width },
-              { scale: scaleValue.current },
-              { translateY: -width },
+              {translateY: width},
+              {scale: scaleValue.current},
+              {translateY: -width},
             ],
           },
-        ]}
-      >
+        ]}>
         <View style={labelStyles.pointer} />
         <Text style={labelStyles.sliderLabelText}>{value}</Text>
       </AnimatedView>
@@ -101,8 +98,8 @@ class CustomMarker extends React.Component<any> {
           style={markerStyles.image}
           source={
             this.props.pressed
-              ? require("./ruby.png")
-              : require("./diamond.png")
+              ? require('./ruby.png')
+              : require('./diamond.png')
           }
           resizeMode="contain"
         />
@@ -116,590 +113,891 @@ class CustomMarker extends React.Component<any> {
   }
 }
 
+type SetStateProps = React.Dispatch<React.SetStateAction<boolean>>;
+
 export function MultiSliderDemoTester() {
   let testRef = React.useRef<View>(null);
 
-  // 滑动指标配置
-  const touchDimensionsConfig = {
-    height: 60,
-    width: 60,
-    borderRadius: 10,
-    slipDisplacement: 200,
-  };
-
+  const caseList = [
+    {
+      describe: 'values',
+      cn: '设置values，[1,6]',
+      key: 'getInitStatus_1',
+      name: 'getInitStatus',
+      style: styles.sliderSmall,
+      props: {
+        values: [1, 6],
+      },
+    },
+    {
+      describe: 'values',
+      cn: '设置values，[2,4]',
+      key: 'getInitStatus_2',
+      name: 'getInitStatus',
+      style: styles.sliderSmall,
+      props: {
+        values: [2, 4],
+      },
+    },
+    {
+      describe: 'onValuesChangeStart',
+      cn: '值开始变化触发回调',
+      key: 'onValuesChangeStart',
+      name: 'onValuesChangeStart',
+      style: styles.sliderSmall,
+      fn: (setState: SetStateProps) => {
+        return {
+          onValuesChangeStart: () => setState(true),
+        };
+      },
+    },
+    {
+      describe: 'onValuesChange',
+      cn: '值改变时回调触发回调',
+      key: 'onValuesChange',
+      name: 'onValuesChange',
+      style: styles.sliderSmall,
+      fn: (setState: SetStateProps) => {
+        return {
+          onValuesChange: () => setState(true),
+        };
+      },
+    },
+    {
+      describe: 'onValuesChangeFinish',
+      cn: '当值停止变化时回调',
+      key: 'onValuesChangeFinish',
+      name: 'onValuesChangeFinish',
+      style: styles.sliderSmall,
+      fn: (setState: SetStateProps) => {
+        return {
+          onValuesChangeFinish: () => setState(true),
+        };
+      },
+    },
+    {
+      describe: 'sliderLength',
+      cn: '滑块长度，100',
+      key: 'sliderLength_100',
+      name: 'sliderLength',
+      style: styles.sliderSmall,
+      props: {
+        sliderLength: 100,
+      },
+    },
+    {
+      describe: 'sliderLength',
+      cn: '滑块长度，200',
+      key: 'sliderLength_200',
+      name: 'sliderLength',
+      style: styles.sliderSmall,
+      props: {
+        sliderLength: 200,
+      },
+    },
+    {
+      describe: 'touchDimensions',
+      cn: 'touch范围，50',
+      key: 'touchDimensions_50',
+      name: 'touchDimensions',
+      style: styles.sliderSmall,
+      props: {
+        touchDimensions: {
+          height: 50,
+          width: 50,
+          borderRadius: 10,
+          slipDisplacement: 200,
+        },
+      },
+    },
+    {
+      describe: 'touchDimensions',
+      cn: 'touch范围，70',
+      key: 'touchDimensions_70',
+      name: 'touchDimensions',
+      style: styles.sliderSmall,
+      props: {
+        touchDimensions: {
+          height: 70,
+          width: 70,
+          borderRadius: 10,
+          slipDisplacement: 200,
+        },
+      },
+    },
+    {
+      describe: 'enableLabel',
+      cn: '自定义标签，开启',
+      key: 'enableLabel_t',
+      name: 'enableLabel',
+      style: styles.sliderSmall,
+      props: {
+        values: [0, 10],
+        enableLabel: true,
+        customLabel: CustomLabel,
+      },
+    },
+    {
+      describe: 'enableLabel',
+      cn: '自定义标签，关闭',
+      key: 'enableLabel_f',
+      name: 'enableLabel',
+      style: styles.sliderSmall,
+      props: {
+        values: [0, 10],
+        enableLabel: false,
+        customLabel: CustomLabel,
+      },
+    },
+    {
+      describe: 'customMarker',
+      cn: '自定义光标，默认',
+      key: 'customMarker',
+      name: 'customMarker',
+      style: styles.sliderSmall,
+      props: {
+        values: [0, 10],
+        customMarker: CustomMarker,
+      },
+    },
+    {
+      describe: 'customMarkerLeft',
+      cn: '自定义光标，左侧',
+      key: 'customMarkerLeft',
+      name: 'customMarkerLeft',
+      style: styles.sliderSmall,
+      props: {
+        values: [0, 10],
+        isMarkersSeparated: true,
+        customMarkerLeft: () => <CustomMarker />,
+      },
+    },
+    {
+      describe: 'customMarkerRight',
+      cn: '自定义光标，右侧',
+      key: 'customMarkerRight',
+      name: 'customMarkerRight',
+      style: styles.sliderSmall,
+      props: {
+        values: [0, 10],
+        isMarkersSeparated: true,
+        customMarkerRight: () => <CustomMarker />,
+      },
+    },
+    {
+      describe: 'isMarkersSeparated',
+      cn: '自定义光标，关闭',
+      key: 'isMarkersSeparated_f',
+      name: 'customMarkerRight',
+      style: styles.sliderSmall,
+      props: {
+        values: [0, 10],
+        isMarkersSeparated: false,
+        customMarkerLeft: () => <CustomMarker />,
+        customMarkerRight: () => <CustomMarker pressed />,
+      },
+    },
+    {
+      describe: 'isMarkersSeparated',
+      cn: '自定义光标，开启',
+      key: 'isMarkersSeparated_t',
+      name: 'customMarkerRight',
+      style: styles.sliderSmall,
+      props: {
+        values: [0, 10],
+        isMarkersSeparated: true,
+        customMarkerLeft: () => <CustomMarker />,
+        customMarkerRight: () => <CustomMarker pressed />,
+      },
+    },
+    {
+      describe: 'min',
+      cn: '滑块可用最小值，3',
+      key: 'min_3',
+      name: 'min',
+      style: styles.sliderSmall,
+      props: {
+        values: [3],
+        min: 3,
+        enableLabel: true,
+      },
+    },
+    {
+      describe: 'min',
+      cn: '滑块可用最小值，5',
+      key: 'min_5',
+      name: 'min',
+      style: styles.sliderSmall,
+      props: {
+        values: [5],
+        min: 5,
+        enableLabel: true,
+      },
+    },
+    {
+      describe: 'max',
+      cn: '滑块可用最大值，8',
+      key: 'max_8',
+      name: 'max',
+      style: styles.sliderSmall,
+      props: {
+        max: 8,
+        enableLabel: true,
+      },
+    },
+    {
+      describe: 'max',
+      cn: '滑块可用最大值，7',
+      key: 'max_7',
+      name: 'max',
+      style: styles.sliderSmall,
+      props: {
+        max: 7,
+        enableLabel: true,
+      },
+    },
+    {
+      describe: 'optionsArray',
+      cn: '节点标记，2，6，9',
+      key: 'optionsArray_a',
+      name: 'optionsArray',
+      style: styles.sliderSmall,
+      props: {
+        optionsArray: [2, 6, 9],
+        enableLabel: true,
+      },
+    },
+    {
+      describe: 'optionsArray',
+      cn: '节点标记，1，3，5',
+      key: 'optionsArray_b',
+      name: 'optionsArray',
+      style: styles.sliderSmall,
+      props: {
+        optionsArray: [1, 3, 5],
+        enableLabel: true,
+      },
+    },
+    {
+      describe: 'containerStyle',
+      cn: '滑块容器样式，#00BFFF',
+      key: 'containerStyle_a',
+      name: 'containerStyle',
+      style: styles.sliderSmall,
+      props: {
+        containerStyle: {backgroundColor: '#00BFFF', padding: 10},
+      },
+    },
+    {
+      describe: 'containerStyle',
+      cn: '滑块容器样式，#FF6A6A',
+      key: 'containerStyle_b',
+      name: 'containerStyle',
+      style: styles.sliderSmall,
+      props: {
+        containerStyle: {backgroundColor: '#FF6A6A', padding: 10},
+      },
+    },
+    {
+      describe: 'trackStyle',
+      cn: '轨道样式，默认，	#7FFF00',
+      key: 'trackStyle_a',
+      name: 'trackStyle',
+      style: styles.sliderSmall,
+      props: {
+        trackStyle: {backgroundColor: '#7FFF00', height: 5},
+      },
+    },
+    {
+      describe: 'trackStyle',
+      cn: '轨道样式，默认，	#8470FF',
+      key: 'trackStyle_b',
+      name: 'trackStyle',
+      style: styles.sliderSmall,
+      props: {
+        trackStyle: {backgroundColor: '#8470FF', height: 5},
+      },
+    },
+    {
+      describe: 'selectedStyle',
+      cn: '轨道样式，滑过后，#00CED1',
+      key: 'selectedStyle_a',
+      name: 'selectedStyle',
+      style: styles.sliderSmall,
+      props: {
+        selectedStyle: {backgroundColor: '#00CED1', height: 5},
+      },
+    },
+    {
+      describe: 'selectedStyle',
+      cn: '轨道样式，滑过后，#CD5C5C',
+      key: 'selectedStyle_b',
+      name: 'selectedStyle',
+      style: styles.sliderSmall,
+      props: {
+        selectedStyle: {backgroundColor: '#CD5C5C', height: 5},
+      },
+    },
+    {
+      describe: 'unselectedStyle',
+      cn: '轨道样式，未滑过，#FF69B4',
+      key: 'unselectedStyle_a',
+      name: 'unselectedStyle',
+      style: styles.sliderSmall,
+      props: {
+        unselectedStyle: {backgroundColor: '#FF69B4', height: 5},
+      },
+    },
+    {
+      describe: 'unselectedStyle',
+      cn: '轨道样式，未滑过，#8470FF',
+      key: 'unselectedStyle_b',
+      name: 'unselectedStyle',
+      style: styles.sliderSmall,
+      props: {
+        unselectedStyle: {backgroundColor: '#8470FF', height: 5},
+      },
+    },
+    {
+      describe: 'markerContainerStyle',
+      cn: '光标容器样式，#CD5C5C',
+      key: 'markerContainerStyle_a',
+      name: 'markerContainerStyle',
+      style: styles.sliderSmall,
+      props: {
+        markerContainerStyle: {
+          backgroundColor: 'transparent',
+          borderColor: '#CD5C5C',
+          borderWidth: 2,
+        },
+      },
+    },
+    {
+      describe: 'markerContainerStyle',
+      cn: '光标容器样式，#7FFF00',
+      key: 'markerContainerStyle_b',
+      name: 'markerContainerStyle',
+      style: styles.sliderSmall,
+      props: {
+        markerContainerStyle: {
+          backgroundColor: 'transparent',
+          borderColor: '#7FFF00',
+          borderWidth: 2,
+        },
+      },
+    },
+    {
+      describe: 'markerStyle',
+      cn: '光标样式，#EE7621',
+      key: 'markerStyle_a',
+      name: 'markerStyle',
+      style: styles.sliderSmall,
+      props: {
+        markerStyle: {
+          backgroundColor: '#EE7621',
+          width: 20,
+          height: 20,
+          borderRadius: 10,
+        },
+      },
+    },
+    {
+      describe: 'markerStyle',
+      cn: '光标样式，#EE00EE',
+      key: 'markerStyle_b',
+      name: 'markerStyle',
+      style: styles.sliderSmall,
+      props: {
+        markerStyle: {
+          backgroundColor: '#EE00EE',
+          width: 20,
+          height: 20,
+          borderRadius: 10,
+        },
+      },
+    },
+    {
+      describe: 'pressedMarkerStyle',
+      cn: '接触光标后的样式，#00CD66',
+      key: 'pressedMarkerStyle_a',
+      name: 'pressedMarkerStyle',
+      style: styles.sliderSmall,
+      props: {
+        pressedMarkerStyle: {backgroundColor: '#00CD66'},
+      },
+    },
+    {
+      describe: 'pressedMarkerStyle',
+      cn: '接触光标后的样式，#7B68EE',
+      key: 'pressedMarkerStyle_b',
+      name: 'pressedMarkerStyle',
+      style: styles.sliderSmall,
+      props: {
+        pressedMarkerStyle: {backgroundColor: '#7B68EE'},
+      },
+    },
+    {
+      describe: 'valuePrefix',
+      cn: '值的前缀',
+      key: 'valuePrefix',
+      name: 'valuePrefix',
+      style: styles.sliderMiddle,
+      props: {
+        values: [0, 10],
+        customMarker: CustomMarker,
+        valuePrefix: 'b',
+      },
+    },
+    {
+      describe: 'valueSuffix',
+      cn: '值的后缀',
+      key: 'valueSuffix',
+      name: 'valueSuffix',
+      style: styles.sliderMiddle,
+      props: {
+        values: [0, 10],
+        customMarker: CustomMarker,
+        valueSuffix: 'a',
+      },
+    },
+    {
+      describe: 'enabledOne',
+      cn: '第一个光标，禁用',
+      key: 'enabledOne_f',
+      name: 'enabledOne',
+      style: styles.sliderSmall,
+      props: {
+        values: [0, 10],
+        enabledOne: false,
+      },
+    },
+    {
+      describe: 'enabledOne',
+      cn: '第一个光标，启用',
+      key: 'enabledOne_t',
+      name: 'enabledOne',
+      style: styles.sliderSmall,
+      props: {
+        values: [0, 10],
+        enabledOne: true,
+      },
+    },
+    {
+      describe: 'enabledTwo',
+      cn: '第二个光标，禁用',
+      key: 'enabledTwo_f',
+      name: 'enabledTwo',
+      style: styles.sliderSmall,
+      props: {
+        values: [0, 10],
+        enabledTwo: false,
+      },
+    },
+    {
+      describe: 'enabledTwo',
+      cn: '第二个光标，启用',
+      key: 'enabledTwo_t',
+      name: 'enabledTwo',
+      style: styles.sliderSmall,
+      props: {
+        values: [0, 10],
+        enabledTwo: true,
+      },
+    },
+    {
+      describe: 'stepsAs',
+      cn: '自定义步骤标签',
+      key: 'stepsAs_t',
+      name: 'stepsAs',
+      style: styles.sliderMiddle,
+      props: {
+        values: [0, 10],
+        step: 2,
+        showSteps: true,
+        stepsAs: [
+          {index: 1, stepLabel: 't1', prefix: 'a1', suffix: 'b1'},
+          {index: 2, stepLabel: 't2', prefix: 'a2', suffix: 'b2'},
+        ],
+      },
+    },
+    {
+      describe: 'showSteps',
+      cn: '自定义步骤标签，启用',
+      key: 'showSteps_t',
+      name: 'showSteps',
+      style: styles.sliderMiddle,
+      props: {
+        values: [0, 10],
+        step: 2,
+        showSteps: true,
+        stepsAs: [
+          {index: 1, stepLabel: 't1', prefix: 'a1', suffix: 'b1'},
+          {index: 2, stepLabel: 't2', prefix: 'a2', suffix: 'b2'},
+        ],
+      },
+    },
+    {
+      describe: 'showSteps',
+      cn: '自定义步骤标签，关闭',
+      key: 'showSteps_f',
+      name: 'showSteps',
+      style: styles.sliderMiddle,
+      props: {
+        values: [0, 10],
+        step: 2,
+        showSteps: false,
+        stepsAs: [
+          {index: 1, stepLabel: 't1', prefix: 'a1', suffix: 'b1'},
+          {index: 2, stepLabel: 't2', prefix: 'a2', suffix: 'b2'},
+        ],
+      },
+    },
+    {
+      describe: 'stepStyle',
+      cn: '自定义步骤样式',
+      key: 'stepStyle',
+      name: 'stepStyle',
+      style: styles.sliderMiddle,
+      props: {
+        values: [0, 10],
+        step: 2,
+        showSteps: true,
+        stepStyle: {backgroundColor: 'red', width: 10, height: 10},
+      },
+    },
+    {
+      describe: 'stepLabelStyle',
+      cn: '自定义步骤标签label样式',
+      key: 'stepLabelStyle',
+      name: 'stepLabelStyle',
+      style: styles.sliderMiddle,
+      props: {
+        values: [0, 10],
+        step: 2,
+        showSteps: true,
+        stepLabelStyle: {color: 'red'},
+        stepsAs: [
+          {index: 1, stepLabel: 't', prefix: 'a', suffix: 'b'},
+          {index: 2, stepLabel: 't', prefix: 'a', suffix: 'b'},
+        ],
+      },
+    },
+    {
+      describe: 'showStepMarkers',
+      cn: '显示步骤对应的刻度点',
+      key: 'showStepMarkers',
+      name: 'showStepMarkers',
+      style: styles.sliderMiddle,
+      props: {
+        values: [0, 10],
+        step: 2,
+        showSteps: true,
+        showStepMarkers: true,
+      },
+    },
+    {
+      describe: 'stepMarkerStyle',
+      cn: '自定义步骤刻度点样式',
+      key: 'stepMarkerStyle',
+      name: 'stepMarkerStyle',
+      style: styles.sliderMiddle,
+      props: {
+        values: [0, 10],
+        step: 2,
+        showSteps: true,
+        showStepMarkers: true,
+        stepMarkerStyle: {
+          backgroundColor: 'red',
+          width: 10,
+        },
+      },
+    },
+    {
+      describe: 'onToggleOne',
+      cn: '点击第一个光标回调',
+      key: 'onToggleOne',
+      name: 'onToggleOne',
+      style: styles.sliderSmall,
+      fn: (setState: SetStateProps) => {
+        return {
+          values: [0, 10],
+          onToggleOne: () => setState(true),
+        };
+      },
+    },
+    {
+      describe: 'onToggleTwo',
+      cn: '点击第二个光标回调',
+      key: 'onToggleTwo',
+      name: 'onToggleTwo',
+      style: styles.sliderSmall,
+      fn: (setState: SetStateProps) => {
+        return {
+          values: [0, 10],
+          onToggleTwo: () => setState(true),
+        };
+      },
+    },
+    {
+      describe: 'allowOverlap',
+      cn: '光标重叠，允许',
+      key: 'allowOverlap_t',
+      name: 'allowOverlap',
+      style: styles.sliderSmall,
+      props: {
+        values: [0, 10],
+        allowOverlap: true,
+      },
+    },
+    {
+      describe: 'allowOverlap',
+      cn: '光标重叠，禁止',
+      key: 'allowOverlap_f',
+      name: 'allowOverlap',
+      style: styles.sliderSmall,
+      props: {
+        values: [0, 10],
+        allowOverlap: false,
+      },
+    },
+    {
+      describe: 'snapped',
+      cn: '步进式移动光标，开启',
+      key: 'snapped_t',
+      name: 'snapped',
+      style: styles.sliderSmall,
+      props: {
+        sliderLength: 300,
+        step: 3,
+        snapped: true,
+      },
+    },
+    {
+      describe: 'snapped',
+      cn: '步进式移动光标，关闭',
+      key: 'snapped_f',
+      name: 'snapped',
+      style: styles.sliderSmall,
+      props: {
+        sliderLength: 300,
+        step: 3,
+        snapped: false,
+      },
+    },
+    {
+      describe: 'smoothSnapped',
+      cn: '跳转最近节点，开启',
+      key: 'smoothSnapped_t',
+      name: 'smoothSnapped',
+      style: styles.sliderSmall,
+      props: {
+        sliderLength: 300,
+        step: 3,
+        smoothSnapped: true,
+      },
+    },
+    {
+      describe: 'smoothSnapped',
+      cn: '跳转最近节点，关闭',
+      key: 'smoothSnapped_f',
+      name: 'smoothSnapped',
+      style: styles.sliderSmall,
+      props: {
+        sliderLength: 300,
+        step: 3,
+        smoothSnapped: false,
+      },
+    },
+    {
+      describe: 'vertical',
+      cn: '垂直方向，开启',
+      key: 'vertical_t',
+      name: 'vertical',
+      style: {marginTop: 120, marginBottom: 180},
+      props: {
+        vertical: true,
+      },
+    },
+    {
+      describe: 'vertical',
+      cn: '垂直方向，关闭',
+      key: 'vertical_f',
+      name: 'vertical',
+      style: styles.sliderSmall,
+      props: {
+        vertical: false,
+      },
+    },
+    {
+      describe: 'markerOffsetX',
+      cn: '横向偏移，20',
+      key: 'markerOffsetX_a',
+      name: 'markerOffsetX',
+      style: styles.sliderSmall,
+      props: {
+        markerOffsetX: 20,
+      },
+    },
+    {
+      describe: 'markerOffsetX',
+      cn: '横向偏移，50',
+      key: 'markerOffsetX_b',
+      name: 'markerOffsetX',
+      style: styles.sliderSmall,
+      props: {
+        markerOffsetX: 50,
+      },
+    },
+    {
+      describe: 'markerOffsetY',
+      cn: '纵向偏移，10',
+      key: 'markerOffsetY_a',
+      name: 'markerOffsetY',
+      style: styles.sliderSmall,
+      props: {
+        markerOffsetY: 10,
+      },
+    },
+    {
+      describe: 'markerOffsetY',
+      cn: '纵向偏移，20',
+      key: 'markerOffsetY_b',
+      name: 'markerOffsetY',
+      style: styles.sliderSmall,
+      props: {
+        markerOffsetY: 20,
+      },
+    },
+    {
+      describe: 'markerSize',
+      cn: '光标与边缘的距离，50',
+      key: 'markerSize_50',
+      name: 'markerSize',
+      style: styles.sliderSmall,
+      props: {
+        markerSize: 50,
+      },
+    },
+    {
+      describe: 'markerSize',
+      cn: '光标与边缘的距离，80',
+      key: 'markerSize_80',
+      name: 'markerSize',
+      style: styles.sliderSmall,
+      props: {
+        markerSize: 80,
+      },
+    },
+    {
+      describe: 'minMarkerOverlapDistance',
+      cn: '避免大光标重叠，100',
+      key: 'minMarkerOverlapDistance_a',
+      name: 'minMarkerOverlapDistance',
+      style: styles.sliderSmall,
+      props: {
+        values: [0, 10],
+        minMarkerOverlapDistance: 100,
+      },
+    },
+    {
+      describe: 'minMarkerOverlapDistance',
+      cn: '避免大光标重叠，150',
+      key: 'minMarkerOverlapDistance_b',
+      name: 'minMarkerOverlapDistance',
+      style: styles.sliderSmall,
+      props: {
+        values: [0, 10],
+        minMarkerOverlapDistance: 150,
+      },
+    },
+    {
+      describe: 'minMarkerOverlapStepDistance',
+      cn: '避免大光标重叠，2步',
+      key: 'minMarkerOverlapStepDistance_a',
+      name: 'minMarkerOverlapStepDistance',
+      style: {...styles.sliderSmall, marginBottom: 50},
+      props: {
+        values: [0, 300],
+        step: 3,
+        allowOverlap: false,
+        smoothSnapped: true,
+        minMarkerOverlapStepDistance: 2,
+      },
+    },
+    {
+      describe: 'minMarkerOverlapStepDistance_b',
+      cn: '避免大光标重叠，1步',
+      key: 'minMarkerOverlapStepDistance',
+      name: 'minMarkerOverlapStepDistance',
+      style: {...styles.sliderSmall, marginBottom: 50},
+      props: {
+        values: [0, 300],
+        step: 3,
+        allowOverlap: false,
+        smoothSnapped: true,
+        minMarkerOverlapStepDistance: 1,
+      },
+    },
+    {
+      describe: 'testID',
+      cn: '设置testID',
+      key: 'testID',
+      name: 'testID',
+      style: styles.sliderSmall,
+      fn: (setState: SetStateProps) => {
+        return {
+          values: [0, 10],
+          ref: testRef,
+          testID: 'testId',
+          onValuesChangeStart: () => {
+            const testId = testRef.current?.props.testID || '';
+            setState(testId === 'testId');
+          },
+        };
+      },
+    },
+  ];
   return (
     <Tester>
       <ScrollView>
         <TestSuite name="react-native-multi-slider">
           <View style={styles.container}>
             <View style={styles.sliders}>
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="values（设置values，1和6）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider values={[1, 6]} />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Manual
-                itShould="onValuesChangeStart（值开始变化触发回调）"
-                tags={["C_API"]}
-                initialState={false}
-                arrange={({ setState }) => {
+              {caseList.map(item => {
+                if (item.fn) {
                   return (
-                    <View style={styles.sliderSmall}>
-                      <MultiSlider
-                        onValuesChangeStart={() => {
-                          setState(true);
-                        }}
-                      />
-                    </View>
+                    <TestCase
+                      key={item.key}
+                      itShould={item.describe + `（${item.cn}）`}
+                      tags={['C_API']}
+                      initialState={false}
+                      arrange={({setState}) => {
+                        return (
+                          <View style={item.style}>
+                            <MultiSlider {...item.fn(setState)} />
+                          </View>
+                        );
+                      }}
+                      assert={async ({expect, state}) => {
+                        expect(state).to.be.true;
+                      }}
+                    />
                   );
-                }}
-                assert={async ({ expect, state }) => {
-                  expect(state).to.be.true;
-                }}
-              />
-
-              <TestCase.Manual
-                itShould="onValuesChange（值改变时回调触发回调）"
-                tags={["C_API"]}
-                initialState={false}
-                arrange={({ setState }) => {
+                }
+                if (item.props) {
+                  const mProps = item.props as any;
                   return (
-                    <View style={styles.sliderSmall}>
-                      <MultiSlider
-                        onValuesChange={() => {
-                          setState(true);
-                        }}
-                      />
-                    </View>
+                    <TestCase
+                      key={item.key}
+                      tags={['C_API']}
+                      itShould={item.describe + `（${item.cn}）`}>
+                      <View style={item.style}>
+                        <MultiSlider {...mProps} />
+                      </View>
+                    </TestCase>
                   );
-                }}
-                assert={async ({ expect, state }) => {
-                  expect(state).to.be.true;
-                }}
-              />
-
-              <TestCase.Manual
-                itShould="onValuesChangeFinish（当值停止变化时回调）"
-                tags={["C_API"]}
-                initialState={false}
-                arrange={({ setState }) => {
-                  return (
-                    <View style={styles.sliderSmall}>
-                      <MultiSlider
-                        onValuesChangeFinish={() => {
-                          setState(true);
-                        }}
-                      />
-                    </View>
-                  );
-                }}
-                assert={async ({ expect, state }) => {
-                  expect(state).to.be.true;
-                }}
-              />
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="sliderLength（滑块长度100）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider sliderLength={100} />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="sliderLength（滑动指标borderRadius 50）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider touchDimensions={touchDimensionsConfig} />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="enableLabel（开启自定义标签）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider enableLabel customLabel={CustomLabel} />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="customMarker（自定义光标）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider customMarker={CustomMarker} />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="customMarkerLeft/Right（自定义左右光标：默认未启用）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider
-                    values={[0, 10]}
-                    customMarkerLeft={() => <CustomMarker />}
-                    customMarkerRight={() => <CustomMarker pressed />}
-                  />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="isMarkersSeparated（自定义左右光标：启用）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider
-                    values={[0, 10]}
-                    isMarkersSeparated={true}
-                    customMarkerLeft={() => <CustomMarker />}
-                    customMarkerRight={() => <CustomMarker pressed />}
-                  />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="min（滑块可用最小值3）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider values={[3]} enableLabel min={3} />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="max（滑块可用最大值8）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider enableLabel max={8} />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example tags={["C_API"]} itShould="step（滑块步长5）">
-                <View style={styles.sliderSmall}>
-                  <MultiSlider enableLabel step={5} />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="optionsArray（节点标记2，6，9）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider enableLabel optionsArray={[2, 6, 9]} />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="containerStyle（滑块容器样式）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider
-                    containerStyle={{
-                      backgroundColor: "lightblue",
-                      padding: 10,
-                    }}
-                  />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="trackStyle（轨道样式：默认）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider
-                    trackStyle={{ backgroundColor: "red", height: 5 }}
-                  />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="selectedStyle（轨道样式：滑过后）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider
-                    selectedStyle={{ backgroundColor: "green", height: 5 }}
-                  />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="unselectedStyle（轨道样式：未滑过）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider
-                    unselectedStyle={{ backgroundColor: "red", height: 5 }}
-                  />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="markerContainerStyle（光标容器样式）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider
-                    markerContainerStyle={{
-                      backgroundColor: "transparent",
-                      borderColor: "blue",
-                      borderWidth: 2,
-                    }}
-                  />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="markerStyle（光标样式）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider
-                    markerStyle={{
-                      backgroundColor: "red",
-                      width: 20,
-                      height: 20,
-                      borderRadius: 10,
-                    }}
-                  />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="pressedMarkerStyle（接触光标后的样式）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider
-                    pressedMarkerStyle={{ backgroundColor: "darkblue" }}
-                  />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="valuePrefix（值的前缀 b）"
-              >
-                <View style={styles.sliderMiddle}>
-                  <MultiSlider
-                    values={[0, 10]}
-                    customMarker={CustomMarker}
-                    valuePrefix="b"
-                  />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="valueSuffix（值的后缀 a）"
-              >
-                <View style={styles.sliderMiddle}>
-                  <MultiSlider
-                    values={[0, 10]}
-                    customMarker={CustomMarker}
-                    valueSuffix="a"
-                  />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="enabledOne（禁用第一个光标）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider values={[0, 10]} enabledOne={false} />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="enabledTwo（禁用第二个光标）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider values={[0, 10]} enabledTwo={false} />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="stepsAs（自定义步骤标签，默认展示）"
-              >
-                <View style={styles.sliderMiddle}>
-                  <MultiSlider
-                    values={[0, 10]}
-                    step={2}
-                    showSteps
-                    stepsAs={[
-                      { index: 1, stepLabel: "t1", prefix: "a1", suffix: "b1" },
-                      { index: 2, stepLabel: "t2", prefix: "a2", suffix: "b2" },
-                    ]}
-                  />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="stepStyle（自定义步骤标签样式）"
-              >
-                <View style={styles.sliderMiddle}>
-                  <MultiSlider
-                    values={[0, 10]}
-                    step={2}
-                    showSteps
-                    stepStyle={{
-                      backgroundColor: "red",
-                      width: 10,
-                      height: 10,
-                    }}
-                  />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="showStepLabels（隐藏/显示自定义步骤标签，这里隐藏）"
-              >
-                <View style={styles.sliderMiddle}>
-                  <MultiSlider
-                    values={[0, 10]}
-                    step={2}
-                    showSteps
-                    showStepLabels={false}
-                    stepsAs={[
-                      { index: 1, stepLabel: "t", prefix: "a", suffix: "b" },
-                      { index: 2, stepLabel: "t", prefix: "a", suffix: "b" },
-                    ]}
-                  />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="stepLabelStyle（自定义步骤标签label样式）"
-              >
-                <View style={styles.sliderMiddle}>
-                  <MultiSlider
-                    values={[0, 10]}
-                    step={2}
-                    showSteps
-                    showStepLabels={true}
-                    stepLabelStyle={{ color: "red" }}
-                    stepsAs={[
-                      { index: 1, stepLabel: "t", prefix: "a", suffix: "b" },
-                      { index: 2, stepLabel: "t", prefix: "a", suffix: "b" },
-                    ]}
-                  />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="showStepMarkers（显示步骤对应的刻度点）"
-              >
-                <View style={styles.sliderMiddle}>
-                  <MultiSlider
-                    values={[0, 10]}
-                    step={2}
-                    showSteps
-                    showStepMarkers
-                  />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="stepMarkerStyle（自定义步骤刻度点样式）"
-              >
-                <View style={styles.sliderMiddle}>
-                  <MultiSlider
-                    values={[0, 10]}
-                    step={2}
-                    showSteps
-                    showStepMarkers
-                    stepMarkerStyle={{
-                      backgroundColor: "red",
-                      width: 10,
-                    }}
-                  />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Manual
-                itShould="onToggleOne（点击第一个光标回调）"
-                tags={["C_API"]}
-                initialState={false}
-                arrange={({ setState }) => {
-                  return (
-                    <View style={styles.sliderSmall}>
-                      <MultiSlider
-                        values={[0, 10]}
-                        onToggleOne={() => setState(true)}
-                      />
-                    </View>
-                  );
-                }}
-                assert={async ({ expect, state }) => {
-                  expect(state).to.be.true;
-                }}
-              />
-
-              <TestCase.Manual
-                itShould="onToggleTwo（点击第二个光标回调）"
-                tags={["C_API"]}
-                initialState={false}
-                arrange={({ setState }) => {
-                  return (
-                    <View style={styles.sliderSmall}>
-                      <MultiSlider
-                        values={[0, 10]}
-                        onToggleTwo={() => setState(true)}
-                      />
-                    </View>
-                  );
-                }}
-                assert={async ({ expect, state }) => {
-                  expect(state).to.be.true;
-                }}
-              />
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="allowOverlap（允许/禁止光标重叠，默认禁止，这里允许）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider values={[0, 10]} allowOverlap={true} />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="snapped（步进式移动光标）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider sliderLength={300} step={3} snapped />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="smoothSnapped（跳转最近节点）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider smoothSnapped sliderLength={300} step={3} />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="vertical（垂直方向）"
-              >
-                <View style={{ marginTop: 120, marginBottom: 180 }}>
-                  <MultiSlider vertical />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="markerOffsetX（横向偏移20）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider markerOffsetX={20} />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="markerOffsetY（纵向偏移20）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider markerOffsetY={20} />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="markerSize（光标与边缘的距离）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider markerSize={50} />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="minMarkerOverlapDistance（避免大光标重叠，间隔100）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider
-                    values={[0, 10]}
-                    minMarkerOverlapDistance={100}
-                  />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="minMarkerOverlapStepDistance（避免大光标重叠，间隔2步）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider
-                    values={[0, 300]}
-                    step={3}
-                    allowOverlap={false}
-                    smoothSnapped
-                    minMarkerOverlapStepDistance={2}
-                  />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Example
-                tags={["C_API"]}
-                itShould="imageBackgroundSource（背景图片）"
-              >
-                <View style={styles.sliderSmall}>
-                  <MultiSlider
-                    imageBackgroundSource={require("./logo-og.png")}
-                  />
-                </View>
-              </TestCase.Example>
-
-              <TestCase.Manual
-                itShould="testID（设置testID）"
-                tags={["C_API"]}
-                initialState={"1"}
-                arrange={({ setState }) => {
-                  return (
-                    <View style={{ ...styles.sliderSmall, marginBottom: 20 }}>
-                      <MultiSlider
-                        values={[0, 6]}
-                        testID={"666"}
-                        ref={testRef}
-                      />
-                      <Button
-                        title="获取testID"
-                        onPress={() => {
-                          const testId = testRef.current?.props.testID || "";
-                          setState(testId);
-                        }}
-                      />
-                    </View>
-                  );
-                }}
-                assert={async ({ expect, state }) => {
-                  expect(state).equal("666");
-                }}
-              />
+                }
+              })}
             </View>
           </View>
         </TestSuite>
@@ -710,34 +1008,34 @@ export function MultiSliderDemoTester() {
 
 const labelStyles = StyleSheet.create({
   parentView: {
-    position: "relative",
+    position: 'relative',
   },
   sliderLabel: {
-    position: "absolute",
-    justifyContent: "center",
-    bottom: "100%",
+    position: 'absolute',
+    justifyContent: 'center',
+    bottom: '100%',
     width: width,
     height: width,
   },
   sliderLabelText: {
-    textAlign: "center",
+    textAlign: 'center',
     lineHeight: width,
     borderRadius: width / 2,
     borderWidth: 2,
-    borderColor: "#999",
-    backgroundColor: "#fff",
+    borderColor: '#999',
+    backgroundColor: '#fff',
     flex: 1,
     fontSize: 18,
-    color: "#aaa",
+    color: '#aaa',
   },
   pointer: {
-    position: "absolute",
+    position: 'absolute',
     bottom: -pointerWidth / 4,
     left: (width - pointerWidth) / 2,
-    transform: [{ rotate: "45deg" }],
+    transform: [{rotate: '45deg'}],
     width: pointerWidth,
     height: pointerWidth,
-    backgroundColor: "#999",
+    backgroundColor: '#999',
   },
 });
 
@@ -747,7 +1045,7 @@ const markerStyles = StyleSheet.create({
     width: 40,
   },
   text: {
-    alignSelf: "center",
+    alignSelf: 'center',
     paddingVertical: 20,
   },
   title: {
@@ -758,24 +1056,24 @@ const markerStyles = StyleSheet.create({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   sliders: {
     margin: 20,
-    // width: 280,
+    paddingBottom: 80,
   },
   text: {
-    alignSelf: "center",
+    alignSelf: 'center',
     paddingVertical: 20,
   },
   title: {
     fontSize: 30,
   },
   sliderOne: {
-    flexDirection: "row",
-    justifyContent: "space-around",
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
   sliderMiddle: {
     height: 80,
