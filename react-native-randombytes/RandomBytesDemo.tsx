@@ -6,7 +6,7 @@ import {
   TextInput,
   StyleSheet,
 } from 'react-native';
-import {randomBytes} from 'react-native-randombytes';
+import {randomBytes, seedSJCL} from 'react-native-randombytes';
 import {
    Tester,
    TestSuite,
@@ -73,6 +73,32 @@ export default function randomBytesDemo(): JSX.Element {
           }}
           assert={async ({expect, state}) => {
             expect((state as Buffer).byteLength).to.be.eq(Number(size));
+          }}
+        />
+
+        <TestCase
+          itShould="seedSJCL"
+          tags={['C_API']}
+          initialState={false}
+          arrange={({setState}) => {
+            return (
+              <TouchableOpacity
+                onPress={() => {
+                  seedSJCL((err: any) => {
+                    if (err) {
+                      setState(false);
+                    }
+                  })
+                  // 不走回调，则是加密调用成功
+                  setState(true);
+                }}
+                style={styles.btn}>
+                <Text style={styles.btnText}> seedSJCL </Text>
+              </TouchableOpacity>
+            );
+          }}
+          assert={async ({expect, state}) => {
+            expect(state).to.be.eq(true);
           }}
         />
 
