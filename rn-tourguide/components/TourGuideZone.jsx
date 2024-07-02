@@ -114,6 +114,23 @@ const props = [
     key: 'borderRadiusObject:{bottomRight:20}',
     value: { borderRadiusObject: { bottomRight: 20 } },
   },
+  {
+    key: 'style:{backgroundColor:"#9FA8DA"}',
+    value: {
+      style: {
+        backgroundColor: '#9FA8DA',
+      },
+    }
+  },
+  {
+    key: 'style:{backgroundColor:"#9FA8DA",borderWidth:10}',
+    value: {
+      style: {
+        backgroundColor: '#9FA8DA',
+        borderWidth: 10,
+      },
+    }
+  },
 ]
 
 
