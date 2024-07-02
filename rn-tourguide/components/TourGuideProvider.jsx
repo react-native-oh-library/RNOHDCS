@@ -23,6 +23,23 @@ const props = [
     }
   },
   {
+    key: 'wrapperStyle:{backgroundColor:"#9FA8DA"}',
+    value: {
+      wrapperStyle: { 
+        backgroundColor: '#9FA8DA',
+      },
+    }
+  },
+  {
+    key: 'wrapperStyle:{backgroundColor:"#9FA8DA",borderWidth:10}',
+    value: {
+      wrapperStyle: { 
+        backgroundColor: '#9FA8DA',
+        borderWidth:10, 
+      },
+    }
+  },
+  {
     key: 'animationDuration:500',
     value: { animationDuration: 500 },
   },

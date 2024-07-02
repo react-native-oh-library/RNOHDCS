@@ -70,6 +70,14 @@ const props = [
     value: { width: 150 },
   },
   {
+    key: 'height:280',
+    value: { width: 280 },
+  },
+  {
+    key: 'height:180',
+    value: { width: 180 },
+  },
+  {
     key: 'shape:circle',
     value: { shape: 'circle' },
   },
