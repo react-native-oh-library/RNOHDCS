@@ -1,7 +1,7 @@
 import { TestSuite, Tester, TestCase } from '@rnoh/testerino';
 import * as React from 'react';
 import { Switch, Text} from 'react-native';
-import StatusBar from "react-native-bars"; 
+import {StatusBar} from "react-native-bars"; 
 
 export function BarExample() {
 
