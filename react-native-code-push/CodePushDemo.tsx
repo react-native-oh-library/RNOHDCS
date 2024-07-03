@@ -19,7 +19,6 @@ class App extends Component<any,any>{
     syncImmediate() {
         CodePush.sync(
             {
-                installMode: CodePush.InstallMode.IMMEDIATE,
                 updateDialog: {
                     appendReleaseDescription: true, //是否显示更新description，默认为false
                     descriptionPrefix: '更新内容：', //更新说明的前缀。 默认是” Description:
