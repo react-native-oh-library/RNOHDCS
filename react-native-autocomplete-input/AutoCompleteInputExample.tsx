@@ -1,10 +1,8 @@
-
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, Pressable } from 'react-native';
 import AutocompleteInput from 'react-native-autocomplete-input';
 import { TestSuite, Tester } from '@rnoh/testerino';
 import { TestCase } from '../components';
-
 
 const styles = StyleSheet.create({
     view: {
@@ -40,14 +38,11 @@ const styles = StyleSheet.create({
         fontSize: 30
     },
 });
-
 interface AutocompleteItem {
     id: string;
     value: string;
 }
-
 const testArray: AutocompleteItem[] = [{ id: '1', value: 'Aabbbbbbb' }, { id: '2', value: 'BBFFFFF' }, { id: '3', value: 'ccccccbbb' }]
-
 function filterData(query: string): AutocompleteItem[] {
     if (query) {
         const filteredItems = testArray.filter(item => item.value.toLowerCase().includes(query.toLowerCase()));
@@ -56,15 +51,12 @@ function filterData(query: string): AutocompleteItem[] {
         return [];
     }
 }
-
 function compare(selectName: string, value: string): boolean {
     return selectName.toLowerCase().trim() === value.toLowerCase().trim();
 }
-
 function getFlagStr(flag: boolean): string {
     return flag + '';
 }
-
 class App extends Component {
     state = {
         query: '',
@@ -72,7 +64,6 @@ class App extends Component {
         selectName: '',
         showResults: false,
     }
-
     render() {
         const { query, isVisible, showResults } = this.state;
         const data = filterData(query);
@@ -117,7 +108,6 @@ class App extends Component {
                                             )
                                         },
                                     }}
-
                                 />
                             </View>
                         </TestCase.Example>
@@ -128,7 +118,6 @@ class App extends Component {
                                     data={data.length === 1 && compare(this.state.selectName, data[0].value) ? [] : data}
                                     value={query}
                                     onChangeText={(text) => {
-
                                         if (text.trim() !== this.state.selectName.trim()) {
                                             this.setState({
                                                 isVisible: false,
@@ -158,7 +147,6 @@ class App extends Component {
                                             )
                                         },
                                     }}
-
                                 />
                             </View>
                         </TestCase.Example>
@@ -198,9 +186,7 @@ class App extends Component {
                                             )
                                         },
                                     }}
-
                                 />
-
                             </View>
                         </TestCase.Example>
                         <TestCase.Example itShould="Test renderTextInput (An Custom Input Component){borderColor: '#f737e7',borderWidth: 2,height:50}" >
@@ -244,7 +230,6 @@ class App extends Component {
                                             )
                                         },
                                     }}
-
                                 />
                             </View>
                         </TestCase.Example>
@@ -285,7 +270,6 @@ class App extends Component {
                                             )
                                         },
                                     }}
-
                                 />
                             </View>
                         </TestCase.Example>
@@ -308,7 +292,6 @@ class App extends Component {
                                         }
                                         this.setState({ query: text });
                                     }}
-
                                     onShowResults={(showResults) => { this.state.showResults = showResults }}
                                     hideResults={true}
                                     flatListProps={{
@@ -326,7 +309,6 @@ class App extends Component {
                                             )
                                         },
                                     }}
-
                                 />
                             </View>
                         </TestCase.Example>
@@ -357,8 +339,7 @@ class App extends Component {
                                                         onPress={() => {
                                                             this.setState({ query: value, selectName: value, isVisible: true })
                                                         }}
-                                                        key={id}
-                                                    >
+                                                        key={id}>
                                                         <Text>{value}</Text>
                                                     </Pressable>
                                                 ))}
@@ -376,6 +357,4 @@ class App extends Component {
         );
     }
 }
-
-
 export default App;
