@@ -93,6 +93,7 @@ class CustomMarker extends React.Component<any> {
         <Text style={markerStyles.text}>
           {this.props.valuePrefix}
           {this.props.currentValue}
+          {this.props.valueSuffix}
         </Text>
         <Image
           style={markerStyles.image}
@@ -115,7 +116,7 @@ class CustomMarker extends React.Component<any> {
 
 type SetStateProps = React.Dispatch<React.SetStateAction<boolean>>;
 
-export function MultiSliderDemoTester() {
+export function MultiSliderDemo() {
   let testRef = React.useRef<View>(null);
 
   const caseList = [
@@ -223,6 +224,18 @@ export function MultiSliderDemoTester() {
           borderRadius: 10,
           slipDisplacement: 200,
         },
+      },
+    },
+    {
+      describe: 'customLabel',
+      cn: '自定义标签',
+      key: 'customLabel',
+      name: 'customLabel',
+      style: styles.sliderSmall,
+      props: {
+        values: [0, 10],
+        enableLabel: true,
+        customLabel: CustomLabel,
       },
     },
     {
@@ -354,6 +367,30 @@ export function MultiSliderDemoTester() {
       props: {
         max: 7,
         enableLabel: true,
+      },
+    },
+    {
+      describe: 'step',
+      cn: '步长，2',
+      key: 'step_2',
+      name: 'step',
+      style: styles.sliderMiddle,
+      props: {
+        values: [0, 10],
+        step: 2,
+        showSteps: true,
+      },
+    },
+    {
+      describe: 'step',
+      cn: '步长，3',
+      key: 'step_3',
+      name: 'step',
+      style: styles.sliderMiddle,
+      props: {
+        values: [0, 10],
+        step: 3,
+        showSteps: true,
       },
     },
     {
@@ -606,7 +643,7 @@ export function MultiSliderDemoTester() {
     },
     {
       describe: 'stepsAs',
-      cn: '自定义步骤标签',
+      cn: '自定义步骤标签，步骤名称step，前缀@，后缀%',
       key: 'stepsAs_t',
       name: 'stepsAs',
       style: styles.sliderMiddle,
@@ -615,8 +652,8 @@ export function MultiSliderDemoTester() {
         step: 2,
         showSteps: true,
         stepsAs: [
-          {index: 1, stepLabel: 't1', prefix: 'a1', suffix: 'b1'},
-          {index: 2, stepLabel: 't2', prefix: 'a2', suffix: 'b2'},
+          {index: 1, stepLabel: 'step', prefix: '@', suffix: '%'},
+          {index: 2, stepLabel: 'step', prefix: '@', suffix: '%'},
         ],
       },
     },
@@ -631,8 +668,8 @@ export function MultiSliderDemoTester() {
         step: 2,
         showSteps: true,
         stepsAs: [
-          {index: 1, stepLabel: 't1', prefix: 'a1', suffix: 'b1'},
-          {index: 2, stepLabel: 't2', prefix: 'a2', suffix: 'b2'},
+          {index: 1, stepLabel: 'step', prefix: '@', suffix: '%'},
+          {index: 2, stepLabel: 'step', prefix: '@', suffix: '%'},
         ],
       },
     },
@@ -647,8 +684,8 @@ export function MultiSliderDemoTester() {
         step: 2,
         showSteps: false,
         stepsAs: [
-          {index: 1, stepLabel: 't1', prefix: 'a1', suffix: 'b1'},
-          {index: 2, stepLabel: 't2', prefix: 'a2', suffix: 'b2'},
+          {index: 1, stepLabel: 'step', prefix: '@', suffix: '%'},
+          {index: 2, stepLabel: 'step', prefix: '@', suffix: '%'},
         ],
       },
     },
@@ -675,10 +712,44 @@ export function MultiSliderDemoTester() {
         values: [0, 10],
         step: 2,
         showSteps: true,
+        stepsAs: [
+          {index: 1, stepLabel: 'step', prefix: '@', suffix: '%'},
+          {index: 2, stepLabel: 'step', prefix: '@', suffix: '%'},
+        ],
+      },
+    },
+    {
+      describe: 'showStepLabels',
+      cn: '自定义步骤标签label，显示',
+      key: 'showStepLabels_t',
+      name: 'showStepLabels',
+      style: styles.sliderMiddle,
+      props: {
+        values: [0, 10],
+        step: 2,
+        showSteps: true,
+        showStepLabels: true,
+        stepsAs: [
+          {index: 1, stepLabel: 'step', prefix: '@', suffix: '%'},
+          {index: 2, stepLabel: 'step', prefix: '@', suffix: '%'},
+        ],
+      },
+    },
+    {
+      describe: 'showStepLabels',
+      cn: '自定义步骤标签label，隐藏',
+      key: 'showStepLabels_f',
+      name: 'showStepLabels',
+      style: styles.sliderMiddle,
+      props: {
+        values: [0, 10],
+        step: 2,
+        showSteps: true,
+        showStepLabels: false,
         stepLabelStyle: {color: 'red'},
         stepsAs: [
-          {index: 1, stepLabel: 't', prefix: 'a', suffix: 'b'},
-          {index: 2, stepLabel: 't', prefix: 'a', suffix: 'b'},
+          {index: 1, stepLabel: 'step', prefix: '@', suffix: '%'},
+          {index: 2, stepLabel: 'step', prefix: '@', suffix: '%'},
         ],
       },
     },
@@ -936,6 +1007,16 @@ export function MultiSliderDemoTester() {
         allowOverlap: false,
         smoothSnapped: true,
         minMarkerOverlapStepDistance: 1,
+      },
+    },
+    {
+      describe: 'imageBackgroundSource',
+      cn: '背景图片',
+      key: 'imageBackgroundSource',
+      name: 'imageBackgroundSource',
+      style: styles.sliderSmall,
+      props: {
+        imageBackgroundSource: require('./logo-og.png'),
       },
     },
     {
