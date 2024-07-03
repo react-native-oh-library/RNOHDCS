@@ -82,6 +82,16 @@ function TextfieldDemo() {
       }
     },
     {
+      key: 'style:disabledLineWidth is 1',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        lineType:'solid',
+        disabledLineWidth:1
+      }
+    },
+    {
       key: 'style:inputContainerStyle is {"height":"70"}',
       value: {
         textColor: '#000000',
