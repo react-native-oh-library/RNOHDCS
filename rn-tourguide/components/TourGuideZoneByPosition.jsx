@@ -71,11 +71,11 @@ const props = [
   },
   {
     key: 'height:280',
-    value: { width: 280 },
+    value: { height: 280 },
   },
   {
     key: 'height:180',
-    value: { width: 180 },
+    value: { height: 180 },
   },
   {
     key: 'shape:circle',
