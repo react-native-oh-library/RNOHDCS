@@ -42,7 +42,7 @@ function AppGuide() {
             </TourGuideProvider>
           </View>
         </TestCase>
-        <ScrollView style={Platform.OS != 'harmony' ? { marginBottom: 800 } : null}>
+        <ScrollView style={Platform.OS != 'harmony' ? { marginBottom: 800 } : { marginBottom: 550 }}>
           <TestCase
             itShould={'canStart'}
             tags={["C_API"]}
@@ -112,6 +112,16 @@ function AppGuide() {
               expect(state).to.be.eq(100);
             }}
           />
+          <TestCase
+            itShould={'TourGuideZone和TourGuideZoneByPosition都为组件'}
+            tags={["C_API"]}>
+              <Text>TourGuideZone为组件，显示页面中的引导区域弹窗步骤引导</Text>
+          </TestCase>
+          <TestCase
+            itShould={'TourGuideZoneByPosition都为组件'}
+            tags={["C_API"]}>
+              <Text>TourGuideZoneByPosition为组件，控制页面中引导区域显示位置</Text>
+          </TestCase>
         </ScrollView>
       </Tester>
     </View>

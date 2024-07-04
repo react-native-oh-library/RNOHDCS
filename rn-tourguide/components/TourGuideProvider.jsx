@@ -64,12 +64,12 @@ const props = [
     value: { backdropColor: 'rgba(0,0,0,.3)' },
   },
   {
-    key: 'verticalOffset:20',
-    value: { verticalOffset: 20 },
+    key: 'verticalOffset:0',
+    value: { verticalOffset: 0 },
   },
   {
-    key: 'verticalOffset:80',
-    value: { verticalOffset: 80 },
+    key: 'verticalOffset:20',
+    value: { verticalOffset: 20 },
   },
   {
     key: 'maskOffset:20',
