@@ -11,7 +11,6 @@ import {
   TourGuideZone,
   TourGuideZoneByPosition,
   useTourGuideController,
-  TourGuideContext,
 } from 'rn-tourguide';
 
 export default function (props) {
@@ -30,9 +29,7 @@ export default function (props) {
 
 const AppContent = (props) => {
   const iconProps = { size: 40, color: '#888' };
-
-  const { start, canStart, stop, eventEmitter } = useTourGuideController();
-
+  const { start, canStart, getCurrentStep, stop, eventEmitter } = useTourGuideController();
   React.useEffect(() => {
     if (canStart) {
       start();
@@ -52,30 +49,31 @@ const AppContent = (props) => {
         zone={1}
         text={'A react-native-copilot remastered! 🎉'}
         borderRadius={16}
+        {...props.providerprops}
         {...props.tourGuideZoneprops}
+        {...props.tourGuideZoneByPositionprops}
       >
         <Text style={styles.title}>
           {'Welcome to the demo of\n"rn-tourguide"'}
         </Text>
       </TourGuideZone>
       <TourGuideZone
+        {...props.tourGuideZoneprops}
+        {...props.tourGuideZoneByPositionprops}
         zone={2}
         shape={'rectangle_and_keep'}>
         <TouchableOpacity style={styles.button} onPress={() => start()}>
           <Text style={styles.buttonText}>START THE TUTORIAL!</Text>
         </TouchableOpacity>
       </TourGuideZone>
-      {Platform.OS !== 'web' ? (
+      {props.tourGuideZoneByPositionprops?.isZone ? (
         <TourGuideZoneByPosition
           zone={1}
           shape={'rectangle_and_keep'}
           isTourGuide
-          top={50}
-          left={50}
           width={64}
           height={64}
           {...props.tourGuideZoneByPositionprops}
-          {...props.tourGuideZoneprops}
         />
       ) : null}
     </View>
