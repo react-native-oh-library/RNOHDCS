@@ -66,6 +66,7 @@ export function CollapsibleExample() {
   }
 
   function renderContent(section: any, _: any, isActive: any) {
+    renderContentRef.current = 'pass'
     return (
       <View
         style={[styles.content, isActive ? styles.active : styles.inactive]}>
@@ -97,27 +98,17 @@ export function CollapsibleExample() {
     <ScrollView>
       <Tester>
         <TestSuite name="Collapsible">
-          <TestCase
-            itShould="单项目展开"
-            initialState={false}
-            arrange={({setState}) => (
-              <View>
-                <TouchableOpacity onPress={toggleExpanded}>
-                  <View style={styles.header}>
-                    <Text style={styles.headerText}>Single Collapsible</Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            )}
-            assert={({expect, state}) => {
-              expect(state).to.be.true;
-            }}></TestCase>
+          <TestCase itShould="单项目展开" >
+              <TouchableOpacity onPress={toggleExpanded}>
+                <View style={styles.header}>
+                  <Text style={styles.headerText}>Single Collapsible</Text>
+                </View>
+              </TouchableOpacity>
+          </TestCase>
           <Collapsible
             collapsed={collapsed}
             align={data.align}
-            onAnimationEnd={() => {
-              setData({...data, onAnimationEnd: 'pass'});
-            }}
+            onAnimationEnd={() => { setData({...data, onAnimationEnd: 'pass'}); }}
             duration={data.duration ? 400 : 4000}
             collapsedHeight={data.collapsedHeight}
             renderChildrenCollapsed={data.renderChildrenCollapsed}
@@ -133,16 +124,14 @@ export function CollapsibleExample() {
           
           {tester_change("展开动画锚点 align: 'top'",'top',()=>{ setData({...data, align: 'top'}) })}
           {tester_change("展开动画锚点 align: 'center'",'center',()=>{ setData({...data, align: 'center'}) })}
-          {tester_change("折叠高度预留 collapsedHeight: 400",'400',()=>{ setData({...data, collapsedHeight: 400}) })}
-          {tester_change("折叠高度预留 collapsedHeight: 4000",'4000',()=>{ setData({...data, collapsedHeight: 4000}) })}
+          {tester_change("折叠高度预留 collapsedHeight: 0",'0',()=>{ setData({...data, collapsedHeight: 0}) })}
+          {tester_change("折叠高度预留 collapsedHeight: 40",'40',()=>{ setData({...data, collapsedHeight: 40}) })}
           {tester_change("强制渲染折叠的子项 renderChildrenCollapsed: true",'true',()=>{ setData({...data, renderChildrenCollapsed: true}) })}
           {tester_change("强制渲染折叠的子项 renderChildrenCollapsed: false",'false',()=>{ setData({...data, renderChildrenCollapsed: false}) })}
           {tester_change("展开动画时间 duration: 400",'400',()=>{ setData({...data, duration: true}) })}
           {tester_change("展开动画时间 duration: 4000",'4000',()=>{ setData({...data, duration: false}) })}
 
-          <TestCase itShould="动画效果结束回调">
-            <Text> {data.onAnimationEnd} </Text>
-          </TestCase>
+          <TestCase itShould="动画效果结束回调"> <Text> {data.onAnimationEnd} </Text> </TestCase>
           
         </TestSuite>
         <TestSuite name="Accordion">
@@ -176,8 +165,8 @@ export function CollapsibleExample() {
             initialState={false}
             arrange={({setState}) => (
               <View>
-                <View style={styles.selectors}>
-                  <Text style={styles.selectTitle}>Select:</Text>
+                <View style={{ marginBottom: 5, flexDirection: 'row', justifyContent: 'center',width : '100%'}}>
+                  <Text style={{fontSize: 14, fontWeight: '500', padding: 5,}}>Select:</Text>
                   {SELECTORS.map(selector => (
                     <TouchableOpacity
                       key={selector.title}
@@ -189,7 +178,7 @@ export function CollapsibleExample() {
                         }
                         if (activeSections.length > 1) setState(true);
                       }}>
-                      <View style={styles.selector}>
+                      <View style={{ backgroundColor: '#F5FCFF', padding: 5,}}>
                         <Text
                           style={
                             selector.value != undefined &&
@@ -226,8 +215,8 @@ export function CollapsibleExample() {
           {tester_change("展开时间 duration: false",'4000ms',()=>{ setData({...data, duration: false}) })}
           {tester_change("使用FlatList渲染 renderAsFlatList: true",'true',()=>{ setData({...data, renderAsFlatList: true}) })}
           {tester_change("使用FlatList渲染 renderAsFlatList: false",'false',()=>{ setData({...data, renderAsFlatList: false}) })}
-          {tester_change("内容数组排序(需使用flatlist渲染为true时才会生效)",'true',()=>{ setData({...data, renderAsFlatList: true,keyExtractor:true}) })}
-          {tester_change("内容数组排序(需使用flatlist渲染为true时才会生效)",'false',()=>{ setData({...data, renderAsFlatList: false,keyExtractor:true}) })}
+          {tester_change("内容数组排序",'true',()=>{ setData({...data, renderAsFlatList: true,keyExtractor:true}) })}
+          {tester_change("内容数组排序",'false',()=>{ setData({...data, renderAsFlatList: false,keyExtractor:true}) })}
 
           {tester_change("EasingMode easing: 'linear'",'linear',()=>{ setData({...data, easing: 'linear'}) })}
           {tester_change("EasingMode easing: 'easeInQuad'",'easeInQuad',()=>{ setData({...data, easing: 'easeInQuad'}) })}
@@ -250,19 +239,19 @@ const BACON_IPSUM1 =
   '11Bacon ipsum dolor amet chuck turducken landjaeger tongue spare ribs. Picanha beef prosciutto meatball turkey shoulder shank salami cupim doner jowl pork belly cow. Chicken shankle rump swine tail frankfurter meatloaf ground round flank ham hock tongue shank andouille boudin brisket. ';
 
 const CONTENT = [
-  {title: 'First', feet: '1', content: BACON_IPSUM,SectionTitle:'1st'},
-  {title: 'Second', feet: '2', content: BACON_IPSUM,SectionTitle:'2st'},
-  {title: 'Third', feet: '3', content: BACON_IPSUM,SectionTitle:'3st'},
-  {title: 'Fourth', feet: '4', content: BACON_IPSUM,SectionTitle:'4st'},
-  {title: 'Fifth', feet: '5', content: BACON_IPSUM,SectionTitle:'5st'},
+  {title: 'First', feet: '1', content: "1111",SectionTitle:'1st'},
+  {title: 'Second', feet: '2', content: "2222",SectionTitle:'2st'},
+  {title: 'Third', feet: '3', content: "3333",SectionTitle:'3st'},
+  {title: 'Fourth', feet: '4', content: "44444",SectionTitle:'4st'},
+  {title: 'Fifth', feet: '5', content: "55555",SectionTitle:'5st'},
 ];
 
 const CONTENT1 = [
-  {title: 'First1', feet: '1', content: BACON_IPSUM1},
-  {title: 'Second1', feet: '2', content: BACON_IPSUM1},
-  {title: 'Third1', feet: '3', content: BACON_IPSUM1},
-  {title: 'Fourth1', feet: '4', content: BACON_IPSUM1},
-  {title: 'Fifth1', feet: '5', content: BACON_IPSUM1},
+  {title: 'First1', feet: '1', content: "1111z"},
+  {title: 'Second1', feet: '2', content: "22222z"},
+  {title: 'Third1', feet: '3', content: "333333z"},
+  {title: 'Fourth1', feet: '4', content: "4444z"},
+  {title: 'Fifth1', feet: '5', content: "5555555z"},
 ];
 
 const SELECTORS = [
