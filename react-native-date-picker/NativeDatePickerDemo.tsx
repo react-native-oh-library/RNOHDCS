@@ -1,34 +1,97 @@
-import { TestSuite, Tester, TestCase } from '@rnoh/testerino';
+import { TestSuite, Tester } from '@rnoh/testerino';
 import { useState } from 'react';
-import { ScrollView, StyleSheet,Button, Text } from 'react-native';
-import NativeDatePickerView from 'react-native-date-picker/src/NativeDatePickerView'
+import { ScrollView, StyleSheet, Text } from 'react-native';
+import {Button, TestCase} from '../components';
+import NativeDatePickerView from 'react-native-date-picker/src/index.js'
 export function NativeDatePickerViewCom() {
   const [modalOpen,setModalOpen] = useState(false)
   const [modalTimeOpen,setModalTimeOpen] = useState(false)
   const [modalDateTimeOpen,setModalDateTimeOpen] = useState(false)
   const [modalMaxOpen1,setModalMaxOpen1] = useState(false)
   const [modalMaxOpen2,setModalMaxOpen2] = useState(false)
-  const [modalMaxOpen3,setModalMaxOpen3] = useState(false)
+  const [modalMaxOpen3,setModalMaxOpen3] = useState(false) 
   
   return (
     <Tester>
       <ScrollView style={styles.container}>
       <TestSuite name='DatePickerDemo'>
-        <TestCase itShould='{modal:false,mode:date}' tags={['C_API']}>
+        <TestCase.Manual
+          itShould="trigger onShow event after modal is shown"
+          initialState={false}
+          arrange={({setState}) => (
+            <>
+              <Button title='打开时间modal,mode:datetime,maximumDate' onPress={()=>{
+                setModalMaxOpen3(true)
+              }}></Button>
+              <NativeDatePickerView
+                style={{ height: 'auto', width: '100%' }}
+                mode={'datetime'}
+                open={modalMaxOpen3}
+                date={new Date().toDateString()}
+                maximumDate={'2026-06-22'}
+                minimumDate={'2025-06-24'}
+                modal
+                onRequestClose={() => {
+                  setModalMaxOpen3(!modalMaxOpen3);
+                }}
+                onShow={() => {
+                  setState(true);
+                }}
+                onConfirm={() => {
+                  // onConfirm is clicked。
+                  setModalMaxOpen3(false)
+                }}
+                onCancel={() => {      
+                  // onCancel is clicked。
+                  setModalMaxOpen3(false)
+                }}
+              />
+          </>
+            // <ModalExample
+            //   onShow={() => {
+            //     setState(true);
+            //   }}
+            // />
+          )}
+          assert={({state, expect}) => {
+            expect(state).to.be.true;
+          }}
+        />
+        {/* <TestCase.Manual itShould='{modal:false,mode:date}'>
+        <ScrollView>
           <NativeDatePickerView
-            style={{ height: 300, width: '100%', }}
-            mode='date'
-            date={new Date().toDateString()}
+            style={{ height: 200, width: '100%', }}
+            mode={'date'}
+            modal={false}
           />
-        </TestCase>
-        <TestCase itShould='{modal:ture,mode:date}' tags={['C_API']}>
+          </ScrollView>
+        </TestCase.Manual>
+        <TestCase.Manual itShould='{modal:false,mode:datetime}'>
+        <ScrollView>
+          <NativeDatePickerView
+            style={{ height: 200, width: '100%', }}
+            mode={'datetime'}
+            modal={false}
+          />
+          </ScrollView>
+        </TestCase.Manual>
+        <TestCase.Manual itShould='modal:false,mode:time'>
+        <ScrollView>
+          <NativeDatePickerView
+            style={{ height: 200, width: '100%' }}
+            mode={'time'}
+            modal={false}
+          />
+          </ScrollView>
+        </TestCase.Manual>time
+        <TestCase.Manual itShould='{modal:ture,mode:date}'>
           <ScrollView>
           <Button title='打开日期modal,mode:date' onPress={()=>{
             setModalOpen(true)
           }}></Button>
           <NativeDatePickerView
             style={{ height: 'auto', width: '100%', }}
-            mode='date'
+            mode={'date'}
             modal
             open={modalOpen}
             date={new Date().toDateString()}
@@ -42,22 +105,15 @@ export function NativeDatePickerViewCom() {
             }}
           />
           </ScrollView>
-        </TestCase>
-        <TestCase itShould='modal:false,mode:time' tags={['C_API']}>
-          <NativeDatePickerView
-            style={{ height: 300, width: '100%' }}
-            mode='time'
-            date={new Date().toDateString()}
-          />
-        </TestCase>
-        <TestCase itShould='modal:true,mode:time' tags={['C_API']}>
+        </TestCase.Manual>
+        <TestCase.Manual itShould='modal:true,mode:time'>
           <ScrollView>
             <Button title="打开时间modal,mode:time" onPress={()=>{
               setModalTimeOpen(true)
             }}></Button>
           <NativeDatePickerView
             style={{ height: 'auto', width: '100%' }}
-            mode='time'
+            mode={'time'}
             modal
             open={modalTimeOpen}
             date={new Date().toDateString()}
@@ -71,15 +127,15 @@ export function NativeDatePickerViewCom() {
             }}
           />
           </ScrollView>
-        </TestCase>
-        <TestCase itShould='modal:true,mode:datetime' tags={['C_API']}>
+        </TestCase.Manual>
+        <TestCase.Manual itShould='modal:true,mode:datetime'>
         <ScrollView>
             <Button title="打开时间modal,mode:datetime" onPress={()=>{
               setModalDateTimeOpen(true)
             }}></Button>
           <NativeDatePickerView
             style={{ height: 'auto', width: '100%' }}
-            mode='datetime'
+            mode={'datetime'}
             open={modalDateTimeOpen}
             date={new Date().toDateString()}
             modal
@@ -93,15 +149,15 @@ export function NativeDatePickerViewCom() {
             }}
           />
           </ScrollView>
-        </TestCase>
-        <TestCase itShould='modal:true,mode:datetime,maximumDate:2024-06-24,minimumDate:2024-06-22' tags={['C_API']}>
+        </TestCase.Manual>
+        <TestCase.Manual itShould='modal:true,mode:datetime,maximumDate:2024-06-24,minimumDate:2024-06-22'>
         <ScrollView>
             <Button title='打开时间modal,mode:datetime,maximumDate' onPress={()=>{
               setModalMaxOpen1(true)
             }}></Button>
           <NativeDatePickerView
             style={{ height: 'auto', width: '100%' }}
-            mode='datetime'
+            mode={'datetime'}
             open={modalMaxOpen1}
             date={new Date().toDateString()}
             maximumDate={'2024-06-24'}
@@ -117,15 +173,15 @@ export function NativeDatePickerViewCom() {
             }}
           />
           </ScrollView>
-        </TestCase>
-        <TestCase itShould='modal:true,mode:datetime,maximumDate:2023-06-22,minimumDate:2021-06-24' tags={['C_API']}>
+        </TestCase.Manual>
+        <TestCase.Manual itShould='modal:true,mode:datetime,maximumDate:2023-06-22,minimumDate:2021-06-24'>
         <ScrollView>
             <Button title='打开时间modal,mode:datetime,maximumDate' onPress={()=>{
               setModalMaxOpen2(true)
             }}></Button>
           <NativeDatePickerView
             style={{ height: 'auto', width: '100%' }}
-            mode='datetime'
+            mode={'datetime'}
             open={modalMaxOpen2}
             date={new Date().toDateString()}
             maximumDate={'2023-06-22'}
@@ -141,15 +197,15 @@ export function NativeDatePickerViewCom() {
             }}
           />
           </ScrollView>
-        </TestCase>
-        <TestCase itShould='modal:true,mode:datetime,maximumDate:2026-06-22,minimumDate:2025-06-24' tags={['C_API']}>
+        </TestCase.Manual>
+        <TestCase.Manual itShould='modal:true,mode:datetime,maximumDate:2026-06-22,minimumDate:2025-06-24'>
         <ScrollView>
             <Button title='打开时间modal,mode:datetime,maximumDate' onPress={()=>{
               setModalMaxOpen3(true)
             }}></Button>
           <NativeDatePickerView
             style={{ height: 'auto', width: '100%' }}
-            mode='datetime'
+            mode={'datetime'}
             open={modalMaxOpen3}
             date={new Date().toDateString()}
             maximumDate={'2026-06-22'}
@@ -165,7 +221,7 @@ export function NativeDatePickerViewCom() {
             }}
           />
           </ScrollView>
-        </TestCase>
+        </TestCase.Manual> */}
       </TestSuite>
       </ScrollView>
     </Tester>
