@@ -33,7 +33,7 @@ export function BasicParams(){
         onChangeText={(text) => setState(text)}
         value={state}
         placeholder="Please enter userId"
-        style={{ width: 240, marginRight: 16 }}
+        style={{ width: 240, marginRight: 16, borderWidth: 1, fontSize: 16 }}
       />
       <Button title="GetUserName" onPress={onChange}/>
       <Text style={{ marginTop: 8 }}>UserId: {params[0]}</Text>

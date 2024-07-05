@@ -1,16 +1,15 @@
 import React, { useCallback } from 'react';
 import {
   Button,
-  TextInput,
-  SafeAreaView,
   SectionList,
   StyleSheet,
   TouchableWithoutFeedback,
+  ScrollView
 } from 'react-native';
 import { View, Text, Animation } from 'react-native-animatable';
-import Slider from '@react-native-community/slider';
 import AnimationCell from './AnimationCell';
 import { animationTypes } from './groupedAnimationTypes';
+import { Tester, TestSuite } from '@rnoh/testerino';
 
 const COLORS = [
   '#65b237', // green
@@ -36,7 +35,7 @@ const NATIVE_INCOMPATIBLE_ANIMATIONS = [
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    // backgroundColor: '#F5FCFF',
   },
   title: {
     fontSize: 28,
@@ -79,7 +78,6 @@ const styles = StyleSheet.create({
   },
   sectionHeader: {
     backgroundColor: '#F5FCFF',
-    padding: 15,
   },
   sectionHeaderText: {
     textAlign: 'center',
@@ -103,47 +101,57 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.slider}>
-        <Button title='点我一下' onPress={() => { setDuration(Math.round(Math.floor(Math.random() * 1000) + 1)) }}></Button>
-      </View>
+      <Tester style={{
+        flex: 1
+      }}>
+        <TestSuite name='动画速度'>
+          <View style={styles.slider}>
+            <Button title='动画速度减缓' onPress={() => { setDuration(Math.round(Math.floor(Math.random() * 1000) + 1)) }}></Button>
+          </View>
 
-      <TouchableWithoutFeedback onPress={() => setToggledOn(prev => !prev)}>
-        <Text
-          style={[styles.toggle, toggledOn && styles.toggledOn]}
-          transition={['color', 'rotate', 'fontSize']}>
-          Toggle me!
-        </Text>
-      </TouchableWithoutFeedback>
-      <Text animation="zoomInDown" delay={700} style={styles.instructions}>
-        Tap one of the following to animate for {duration} ms
-      </Text>
-      <View
-        animation="bounceInUp"
-        duration={1100}
-        delay={1400}
-        style={styles.container}>
-        <SectionList
-          contentInsetAdjustmentBehavior="automatic"
-          keyExtractor={item => item}
-          sections={animationTypes}
-          removeClippedSubviews={false}
-          renderSectionHeader={({ section }) => (
-            <View style={styles.sectionHeader}>
-              <Text style={styles.sectionHeaderText}>{section.title}</Text>
-            </View>
-          )}
-          renderItem={({ item, index }) => (
-            <AnimationCell
-              animationType={item}
-              color={COLORS[index % COLORS.length]}
-              onPress={handleRowPressed}
-              useNativeDriver={
-                NATIVE_INCOMPATIBLE_ANIMATIONS.indexOf(item) === -1
-              }
+          <TouchableWithoutFeedback onPress={() => setToggledOn(prev => !prev)}>
+            <Text
+              style={[styles.toggle, toggledOn && styles.toggledOn]}
+              transition={['color', 'rotate', 'fontSize']}>
+              Toggle me!
+            </Text>
+          </TouchableWithoutFeedback>
+          <Text animation="zoomInDown" delay={700} style={styles.instructions}>
+            Tap one of the following to animate for {duration} ms
+          </Text>
+        </TestSuite>
+
+        <ScrollView style={{ flex: 1 }}>
+          <View
+            animation="bounceInUp"
+            duration={1100}
+            delay={1400}
+            style={styles.container}>
+            <SectionList
+              contentInsetAdjustmentBehavior="automatic"
+              keyExtractor={item => item}
+              sections={animationTypes}
+              removeClippedSubviews={false}
+              renderSectionHeader={({ section }) => (
+                <View style={styles.sectionHeader}>
+                  <Text style={styles.sectionHeaderText}>{section.title}</Text>
+                </View>
+              )}
+              renderItem={({ item, index }) => (
+                <AnimationCell
+                  animationType={item}
+                  color={COLORS[index % COLORS.length]}
+                  onPress={handleRowPressed}
+                  useNativeDriver={
+                    NATIVE_INCOMPATIBLE_ANIMATIONS.indexOf(item) === -1
+                  }
+                />
+              )}
             />
-          )}
-        />
-      </View>
-    </View>
+          </View>
+        </ScrollView>
+      </Tester>
+    </View >
+
   );
 }

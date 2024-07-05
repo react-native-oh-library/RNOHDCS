@@ -12,11 +12,7 @@ import Mock from 'mockjs'; // 确保 Mockjs 在 React Native 中可用或寻找�
 function getUsername(): Promise<string> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (Math.random() > 0.5) {
         resolve(Mock.mock('@name'));
-      } else {
-        reject(new Error('Failed to get username'));
-      }
     }, 1000);
   });
 }

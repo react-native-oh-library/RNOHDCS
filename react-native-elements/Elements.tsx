@@ -13,7 +13,6 @@ import Lists2 from './elements/Lists2';
 import Inputs from './elements/Inputs';
 import Image from './elements/Image';
 import LinearProgress from './elements/LinearProgress';
-import Login from './elements/login/Index';
 import Pricing from './elements/Pricing';
 import Ratings from './elements/Ratings';
 import Settings from './elements/Settings';
@@ -21,7 +20,6 @@ import SpeedDial from './elements/SpeedDial';
 import Sliders from './elements/Sliders';
 import Skeleton from './elements/Skeleton';
 import SocialIcons from './elements/SocialIcons';
-import Fonts from './elements/Fonts';
 import BottomSheet from './elements/Bottomsheet';
 import Tooltip from './elements/Tooltip';
 import Dialogs from './elements/Dialogs';
@@ -32,11 +30,9 @@ import Theme from './elements/Theme';
 import Text from './elements/Text';
 import Tabs from './elements/Tabs';
 import Badge from './elements/Badge';
-import WhatsappClone from './elements/WhatsAppClone';
 import Divider from './elements/Divider';
 import { NavigationContainer, Page } from './elements/Navigation';
 import { ThemeProvider, createTheme } from '@rneui/themed';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const theme = createTheme({
   lightColors: {
@@ -57,6 +53,7 @@ const theme = createTheme({
 
 export default function SnapCarouselExample(): JSX.Element {
   return (
+
     <ThemeProvider theme={theme}>
       <NavigationContainer>
         <Page name="Avatars">
@@ -89,10 +86,6 @@ export default function SnapCarouselExample(): JSX.Element {
         <Page name="LinearProgress">
           <LinearProgress />
         </Page>
-
-        <Page name="Login">
-          <Login />
-        </Page>
         <Page name="Pricing">
           <Pricing />
         </Page>
@@ -114,9 +107,6 @@ export default function SnapCarouselExample(): JSX.Element {
 
         <Page name="SocialIcons">
           <SocialIcons />
-        </Page>
-        <Page name="Fonts">
-          <Fonts />
         </Page>
         <Page name="BottomSheet">
           <BottomSheet />
@@ -151,10 +141,6 @@ export default function SnapCarouselExample(): JSX.Element {
         </Page>
         <Page name="Badge">
           <Badge />
-        </Page>
-
-        <Page name="WhatsappClone">
-          <WhatsappClone />
         </Page>
         <Page name="Divider">
           <Divider />

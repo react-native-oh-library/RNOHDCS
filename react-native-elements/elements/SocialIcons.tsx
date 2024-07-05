@@ -1,7 +1,8 @@
 import React from 'react';
-import { View,Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { SocialIcon, SocialIconProps } from '@rneui/themed';
 import { SocialMediaType } from '@rneui/themed';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino'
 
 type IconData = {
   type: SocialMediaType;
@@ -108,7 +109,7 @@ const dataList: Partial<IconData>[][] = [
       type: 'vk',
     },
     {
-      type: 'whatsapp', 
+      type: 'whatsapp',
     },
   ]
 ];
@@ -118,33 +119,36 @@ type SocialIconsComponentProps = {};
 const SocialIcons: React.FunctionComponent<SocialIconsComponentProps> = () => {
   const socialProps = {};
   return (
-    <>
-      <Text style={{fontSize:24,fontWeight:'bold'}}>Social Icons</Text>
-      <ScrollView>
-        {dataList.map(
-          (chunk: Partial<IconData>[], chunkIndex: React.Key) => (
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-                marginTop: 10,
-                backgroundColor: '#4c4c4c',
-              }}
-              key={chunkIndex}
-            >
-              {chunk.map((l: Partial<IconData>, i: React.Key) => (
-                <SocialIcon
-                  {...(socialProps as SocialIconProps)}
-                  type={l.type}
-                  iconType={l.iconType ? l.iconType : 'font-awesome'}
-                  key={`${chunkIndex}-${i}`}
-                />
-              ))}
-            </View>
-          )
-        )}
-      </ScrollView>
-    </>
+    <Tester>
+      <TestSuite name='Social Icons'>
+        <TestCase itShould='Social Icons' tags={['C_API']}>
+          <ScrollView>
+            {dataList.map(
+              (chunk: Partial<IconData>[], chunkIndex: React.Key) => (
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-around',
+                    marginTop: 10,
+                    backgroundColor: '#4c4c4c',
+                  }}
+                  key={chunkIndex}
+                >
+                  {chunk.map((l: Partial<IconData>, i: React.Key) => (
+                    <SocialIcon
+                      {...(socialProps as SocialIconProps)}
+                      type={l.type}
+                      iconType={l.iconType ? l.iconType : 'font-awesome'}
+                      key={`${chunkIndex}-${i}`}
+                    />
+                  ))}
+                </View>
+              )
+            )}
+          </ScrollView>
+        </TestCase>
+      </TestSuite>
+    </Tester>
   );
 };
 

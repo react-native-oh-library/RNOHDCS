@@ -1,163 +1,333 @@
+import Orientation from 'react-native-orientation-locker';
 import {
-  Alert,
-  Button,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    ScrollView,
 } from 'react-native';
-import {useCallback, useEffect, useState} from 'react';
-import Orientation, {
-  OrientationLocker,
-  PORTRAIT,
-  LANDSCAPE,
-  useOrientationChange,
-  useDeviceOrientationChange,
-  useLockListener,
-} from 'react-native-orientation-locker';
+import { useEffect, useState } from 'react';
+import { Tester, TestSuite,TestCase } from '@rnoh/testerino';
 
-export function OrientationLockerExample() {
-  const [showVideo, setShowVideo] = useState(true);
-  const [orientation, setOrientation] = useState<string>();
-  const [isLock, setIsLock] = useState<boolean>(false);
-  const updateOrientation = (orientation: string) => {
-    console.info('---orientation-----22222', orientation);
-    setOrientation(orientation);
-  };
+export default function OrientationLockerExample() {
+    const [orientation, setOrientation] = useState<string>();
+    const updateOrientation = (orientation: string) => {
+        setOrientation(orientation);
+    };
+    const [LockListener, setLockListener] = useState<string>();
 
-  const updateDeviceOrientation = (orientation: string) => {
-    console.info('---updateDeviceOrientation-----1111111', orientation);
-    setOrientation(orientation);
-  };
+    const updateDeviceOrientation = (orientation: string) => {
+        setOrientation(orientation);
+    };
 
-  const updateLock = (orientation: string) => {
-    console.info('---updateLock-----', orientation);
-  };
+    useEffect(() => {
+        // 开启方向变化的监听
+        getDeviceOrientation();
+    }, []);
 
-  useEffect(() => {
-    // 开启方向变化的监听
-    getOrientationInt();
-  }, []);
+    const getDeviceOrientation = () => {
+        Orientation.getDeviceOrientation((deviceOrientation: string) => {
+            updateOrientation(deviceOrientation);
+            if (orientation) {
+                console.log(`当前屏幕方向为${orientation}`);
+            } else {
+                console.log('获取当前屏幕方向失败');
+            }
+        });
+    };
+
+    const setLockToPortrait = () => {
+        Orientation.lockToPortrait();
+    };
+    const setLockToLandscape = () => {
+        Orientation.lockToLandscape();
+    };
+    const setLockToLandscapeLeft = () => {
+        Orientation.lockToLandscapeLeft();
+    };
+    const setLockToLandscapeRight = () => {
+        Orientation.lockToLandscapeRight();
+    };
+    const unlockAllOrientations = () => {
+        Orientation.unlockAllOrientations();
+    };
+    const lockToPortraitUpsideDown = () => {
+        Orientation.lockToPortraitUpsideDown();
+    };
+    const lockToAllOrientationsButUpsideDown = () => {
+        Orientation.lockToAllOrientationsButUpsideDown();
+    };
+    const addTisten = () => {
+        Orientation.addDeviceOrientationListener(updateDeviceOrientation);
+    };
+    const cancelAddTisten = () => {
+        Orientation.removeDeviceOrientationListener(updateDeviceOrientation);
+    };
+    const addOtherTisten = () => {
+        Orientation.addOrientationListener(updateDeviceOrientation);
+    };
+    const cancelAddOtherTisten = () => {
+        Orientation.removeOrientationListener(updateDeviceOrientation);
+    };
+
+    const lockDidChange  = () => {
+        setLockListener('屏幕已锁定，无法进行旋转');
+    };
+    const addLockListener  = () => {
+        Orientation.addLockListener(lockDidChange); 
+    };
+
+    const removeLockListener  = () => {
+        Orientation.removeLockListener(updateDeviceOrientation);
+    };
+    const cancelAddALLTisten = () => {
+        Orientation.removeAllListeners(updateDeviceOrientation);
+    };
 
 
-  //获取方向
-  const getOrientationInt = () => {
-    Orientation.getOrientation((orientation: string) => {
-      updateOrientation(orientation);
-      if (orientation) {
-        Alert.alert(`当前屏幕方向为${orientation}`);
-      } else {
-        Alert.alert('获取当前屏幕方向失败');
-      }
-    });
-  };
 
-  // 锁定方向为纵向（竖屏）
-  const setLockToPortrait = () => {
-    Orientation.lockToPortrait();
-  };
-  // 锁定方向为横向（横屏）
-  const setLockToLandscape = () => {
-    Orientation.lockToLandscape();
-  };
-  // 锁定方向为横向，并且是向左旋转的方向
-  const setLockToLandscapeLeft = () => {
-    Orientation.lockToLandscapeLeft();
-  };
-  // 锁定方向为横向，并且是向右旋转的方向
-  const setLockToLandscapeRight = () => {
-    Orientation.lockToLandscapeRight();
-  };
-  // 解除方向的锁定，允许自由旋转
-  const unlockAllOrientations = () => {
-    Orientation.unlockAllOrientations();
-  };
+    return (
+        <Tester>
+            <ScrollView style={{ marginBottom: 50 }}>
+                <TestSuite name="orientation">
+                    <TestCase tags={['C_API']} itShould='当前屏幕方向为:'>
+                        <Text>{orientation}</Text>
+                    </TestCase>
+                    <TestCase tags={['C_API']} itShould='当前屏幕锁定状态为:'>
+                        <Text>{LockListener}</Text>
+                    </TestCase>
+                    
+                    <TestCase tags={['C_API']} itShould='开启监听'>
+                        <TouchableOpacity onPress={() => {
+                            addTisten();
+                        }}>
+                            <Text>点击此处开启监听</Text>
+                        </TouchableOpacity>
+                    </TestCase>
 
-  // 锁定上下的方向
-  const lockToPortraitUpsideDown = () => {
-    Orientation.lockToPortraitUpsideDown();
-  };
+                    <TestCase tags={['C_API']} itShould='取消监听'>
+                        <TouchableOpacity onPress={() => {
+                            cancelAddTisten();
+                        }}>
+                            <Text>点击此处取消监听</Text>
+                        </TouchableOpacity>
+                    </TestCase>
 
-  // 锁定除了上下的所有方向
-  const lockToAllOrientationsButUpsideDown = () => {
-    Orientation.lockToAllOrientationsButUpsideDown();
-  };
-  // 添加监听a
-  const addTisten = () => {
-    Orientation.addDeviceOrientationListener(updateDeviceOrientation);
-  };
-  // 取消监听
-  const cancelAddTisten = () => {
-    Orientation.removeDeviceOrientationListener(updateDeviceOrientation);
-  };
+                    <TestCase tags={['C_API']} itShould='开启监听2'>
+                        <TouchableOpacity onPress={() => {
+                            addOtherTisten();
+                        }}>
+                            <Text>点击此处开启监听2</Text>
+                        </TouchableOpacity>
+                    </TestCase>
 
-  return (
-    <View style={styles.container}>
-      <Text>{`Current Orientation----: ${orientation}`}</Text>
-      <TouchableOpacity
-        onPress={lockToPortraitUpsideDown}
-        style={styles.button}>
-        <Text style={styles.instructions}>锁定上下的方向</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={lockToAllOrientationsButUpsideDown}
-        style={styles.button}>
-        <Text style={styles.instructions}>锁定除了上下的所有方向</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={setLockToPortrait} style={styles.button}>
-        <Text style={styles.instructions}>锁定当前屏幕为竖屏</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={setLockToLandscape} style={styles.button}>
-        <Text style={styles.instructions}>锁定当前屏幕为横屏</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={setLockToLandscapeLeft} style={styles.button}>
-        <Text style={styles.instructions}>锁定当前屏幕为横屏,左旋转</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={setLockToLandscapeRight} style={styles.button}>
-        <Text style={styles.instructions}>锁定当前屏幕为横屏,右旋转</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={unlockAllOrientations} style={styles.button}>
-        <Text style={styles.instructions}>解锁当前屏幕旋转锁定</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={addTisten} style={styles.button}>
-        <Text style={styles.instructions}>添加监听</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={cancelAddTisten} style={styles.button}>
-        <Text style={styles.instructions}>取消监听</Text>
-      </TouchableOpacity>
-    </View>
-  );
+                    <TestCase tags={['C_API']} itShould='取消监听2'>
+                        <TouchableOpacity onPress={() => {
+                            cancelAddOtherTisten();
+                        }}>
+                            <Text>点击此处取消监听2</Text>
+                        </TouchableOpacity>
+                    </TestCase>
+
+                    <TestCase tags={['C_API']} itShould='开启监听3:监听屏幕锁定状态'>
+                        <TouchableOpacity onPress={() => {
+                            addLockListener();
+                        }}>
+                            <Text>点击此处开启监听3</Text>
+                        </TouchableOpacity>
+                    </TestCase>
+
+                    <TestCase tags={['C_API']} itShould='取消监听3:监听屏幕锁定状态'>
+                        <TouchableOpacity onPress={() => {
+                            removeLockListener();
+                        }}>
+                            <Text>点击此处取消监听3</Text>
+                        </TouchableOpacity>
+                    </TestCase>
+
+                    <TestCase tags={['C_API']} itShould='取消当前的监听器'>
+                        <TouchableOpacity onPress={() => {
+                            cancelAddALLTisten();
+                        }}>
+                            <Text>点击取消当前的监听器</Text>
+                        </TouchableOpacity>
+                    </TestCase>
+
+                    <TestCase
+                        itShould="锁定当前屏幕上下翻转"
+                        tags={['C_API']}
+                        initialState={{}}
+                        arrange={({ setState }) => {
+                            return (
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        lockToPortraitUpsideDown();
+                                        const time = setTimeout(() => {
+                                            Orientation.getOrientation(
+                                                (err: string, orientation: string) => {
+                                                    if (orientation) {
+                                                        setState(orientation);
+                                                    } else {
+                                                        console.log("当前屏幕上下翻转");
+                                                    }
+                                                },
+                                            );
+                                        }, 50);
+                                    }}
+                                    style={styles.button}>
+                                    <Text>锁定当前屏幕为上下翻转</Text>
+                                </TouchableOpacity>
+                            );
+                        }}
+                        assert={({ expect, state }) => {
+                            expect(state).equal('PORTRAIT');
+                        }}></TestCase>
+
+                    <TestCase
+                        itShould="锁定当前屏幕为竖屏"
+                        tags={['C_API']}
+                        initialState={{}}
+                        arrange={({ setState }) => {
+                            return (
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        setLockToPortrait();
+                                        const time = setTimeout(() => {
+                                            Orientation.getOrientation(
+                                                (err: string, orientation: string) => {
+                                                    if (orientation) {
+                                                        setState(orientation);
+                                                    } else {
+                                                        console.log("当前屏幕为竖屏");
+                                                    }
+                                                },
+                                            );
+                                        }, 50);
+                                    }}
+                                    style={styles.button}>
+                                    <Text>锁定当前屏幕为竖屏</Text>
+                                </TouchableOpacity>
+                            );
+                        }}
+                        assert={({ expect, state }) => {
+                            expect(state).equal('PORTRAIT');
+                        }}></TestCase>
+
+                    <TestCase
+                        itShould="锁定当前屏幕为横屏"
+                        tags={['C_API']}
+                        initialState={{}}
+                        arrange={({ setState }) => {
+                            return (
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        setLockToLandscape();
+                                        const time = setTimeout(() => {
+                                            Orientation.getOrientation(
+                                                (err: string, orientation: string) => {
+                                                    if (orientation) {
+                                                        setState(orientation);
+                                                    } else {
+                                                        console.log("当前屏幕为横屏");
+                                                    }
+                                                },
+                                            );
+                                        }, 50);
+                                    }}
+                                    style={styles.button}>
+                                    <Text>锁定当前屏幕为横屏</Text>
+                                </TouchableOpacity>
+                            );
+                        }}
+                        assert={({ expect, state }) => {
+                            expect(state).equal('LANDSCAPE');
+                        }}></TestCase>
+                    <TestCase
+                        itShould="锁定当前屏幕为横屏，右旋转"
+                        tags={['C_API']}
+                        initialState={{}}
+                        arrange={({ setState }) => {
+                            return (
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        setLockToLandscapeLeft();
+                                        const time = setTimeout(() => {
+                                            Orientation.getOrientation(
+                                                (err: string, orientation: string) => {
+                                                    if (orientation) {
+                                                        setState(orientation);
+                                                    } else {
+                                                        console.log("当前屏幕横屏，右旋转");
+                                                    }
+                                                },
+                                            );
+                                        }, 50);
+                                    }}
+                                    style={styles.button}>
+                                    <Text>锁定当前屏幕为横屏，右旋转</Text>
+                                </TouchableOpacity>
+                            );
+                        }}
+                        assert={({ expect, state }) => {
+                            expect(state).equal('LANDSCAPE_LEFT');
+                        }}></TestCase>
+                    <TestCase
+                        itShould="锁定当前屏幕为横屏，左旋转"
+                        tags={['C_API']}
+                        initialState={{}}
+                        arrange={({ setState }) => {
+                            return (
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        setLockToLandscapeRight();
+                                        const time = setTimeout(() => {
+                                            Orientation.getOrientation(
+                                                (err: string, orientation: string) => {
+                                                    if (orientation) {
+                                                        setState(orientation);
+                                                    } else {
+                                                        console.log("当前屏幕横屏，左旋转");
+                                                    }
+                                                },
+                                            );
+                                        }, 50);
+                                    }}
+                                    style={styles.button}>
+                                    <Text>锁定当前屏幕为横屏，左旋转</Text>
+                                </TouchableOpacity>
+                            );
+                        }}
+                        assert={({ expect, state }) => {
+                            expect(state).equal('LANDSCAPE_RIGHT');
+                        }}></TestCase>
+                </TestSuite>
+
+                <TestCase tags={['C_API']} itShould='解锁当前屏幕旋转锁定'>
+                    <TouchableOpacity onPress={() => {
+                        unlockAllOrientations();
+                        removeLockListener();
+                        setLockListener('屏幕已解锁,可以进行旋转');
+                    }}>
+                        <Text>解锁当前屏幕旋转锁定</Text>
+                    </TouchableOpacity>
+                </TestCase>
+            </ScrollView >
+        </Tester>
+    );
 }
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-    marginTop: 20,
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#eeeeee',
-    marginBottom: 0,
-  },
-  buttonContainer: {
-    flex: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-  button: {
-    padding: 5,
-    margin: 5,
-    borderWidth: 1,
-    borderColor: 'white',
-    borderRadius: 3,
-    backgroundColor: 'grey',
-  },
+
+    instructions: {
+        textAlign: 'center',
+        color: '#eeeeee',
+        marginBottom: 0,
+    },
+
+    button: {
+        padding: 5,
+        margin: 5,
+        borderWidth: 1,
+        borderColor: 'white',
+        borderRadius: 3,
+        backgroundColor: 'grey',
+    },
 });

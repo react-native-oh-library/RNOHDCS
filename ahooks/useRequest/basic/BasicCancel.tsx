@@ -2,19 +2,21 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, Alert, StyleSheet } from 'react-native';
 import { useRequest } from 'ahooks';
 
-function editUsername(username: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (Math.random() > 0.5) {
-        resolve();
-      } else {
-        reject(new Error('Failed to modify username'));
-      }
-    }, 1000);
-  });
-}
+
 
 export function BasicCancel() {
+  function editUsername(username: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (flag) {
+          resolve();
+        } else {
+          reject(new Error('Failed to modify username'));
+        }
+      }, 1000);
+    });
+  }
+  const [flag,setFlag] = useState(true)
   const [state, setState] = useState('');
 
   const { loading, run, cancel } = useRequest(editUsername, {
@@ -47,6 +49,10 @@ export function BasicCancel() {
           onPress={cancel}
           title="Cancel"
         />
+        <Button
+          onPress={()=>setFlag(!flag)}
+          title={String(flag)}
+        />
       </View>
     </View>
   );
@@ -64,6 +70,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     width: 240,
+    fontSize: 16,
   },
   buttonContainer: {
     flexDirection: 'row',

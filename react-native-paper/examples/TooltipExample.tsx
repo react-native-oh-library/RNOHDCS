@@ -2,19 +2,13 @@ import * as React from 'react';
 import { Platform, StyleSheet, View, Image, ScrollView } from 'react-native';
 
 import {
-  Appbar,
   Avatar,
-  Banner,
   Chip,
-  FAB,
   IconButton,
-  List,
   ToggleButton,
   Tooltip,
   Card,
 } from 'react-native-paper';
-
-import ScreenWrapper from '../ScreenWrapper';
 
 const DURATION_MEDIUM = 1500;
 const DURATION_LONG = 3000;

@@ -7,7 +7,8 @@ import {
   Avatar,
   Text,
 } from '@rneui/themed';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino'
 
 type DialogComponentProps = {};
 
@@ -59,112 +60,125 @@ const Dialogs: React.FunctionComponent<DialogComponentProps> = () => {
   ];
 
   return (
-    <View>
-      <Text style={styles.titleStyle}>Dialogs</Text>
-      <View style={styles.buttonContainer}>
-        <Button
-          title="Open Simple Dialog"
-          onPress={toggleDialog1}
-          buttonStyle={styles.button}
-        />
-        <Button
-          title="Open Mutli Action Dialog"
-          onPress={toggleDialog2}
-          buttonStyle={styles.button}
-        />
-        <Button
-          title="Open Loading Dialog"
-          onPress={toggleDialog3}
-          buttonStyle={styles.button}
-        />
-        <Button
-          title="Open Buttonless Dialog"
-          onPress={toggleDialog4}
-          buttonStyle={styles.button}
-        />
-        <Button
-          title="Open Custom Dialog 1"
-          onPress={toggleDialog5}
-          buttonStyle={styles.button}
-        />
-        <Button
-          title="Open Custom Dialog 2"
-          onPress={toggleDialog6}
-          buttonStyle={styles.button}
-        />
-      </View>
-      <Dialog isVisible={visible1} onBackdropPress={toggleDialog1}>
-        <Dialog.Title title="Dialog Title" />
-        <Text>Dialog body text. Add relevant information here.</Text>
-      </Dialog>
-      <Dialog isVisible={visible2} onBackdropPress={toggleDialog2}>
-        <Dialog.Title title="Dialog Title" />
-        <Text>Dialog body text. Add relevant information here.</Text>
-        <Dialog.Actions>
-          <Dialog.Button
-            title="ACTION 1"
-            onPress={() => console.log('Primary Action Clicked!')}
-          />
-          <Dialog.Button
-            title="ACTION 2"
-            onPress={() => console.log('Secondary Action Clicked!')}
-          />
-        </Dialog.Actions>
-      </Dialog>
-      <Dialog isVisible={visible3} onBackdropPress={toggleDialog3}>
-        <Dialog.Loading />
-      </Dialog>
-      <Dialog isVisible={visible4} onBackdropPress={toggleDialog4}>
-        <Dialog.Title title="Dialog Title" />
-        <Text>Dialog body text. Add relevant information here.</Text>
-      </Dialog>
-      <Dialog isVisible={visible5} onBackdropPress={toggleDialog5}>
-        <Dialog.Title title="Select Preference" />
-        {['Option 1', 'Option 2', 'Option 3'].map((l, i) => (
-          <CheckBox
-            key={i}
-            title={l}
-            containerStyle={{ borderWidth: 0 }}
-            checkedIcon="dot-circle-o"
-            uncheckedIcon="circle-o"
-            checked={checked === i + 1}
-            onPress={() => setChecked(i + 1)}
-          />
-        ))}
+    <Tester>
+      <TestSuite name='Dialogs'>
+        <ScrollView style={{height:'90%'}}>
+          <TestCase itShould='Open Simple Dialog' tags={['C_API']}>
+            <Button
+              title="Open Simple Dialog"
+              onPress={toggleDialog1}
+              buttonStyle={styles.button}
+            />
+          </TestCase>
+          <TestCase itShould='Open Mutli Action Dialog' tags={['C_API']}>
+            <Button
+              title="Open Mutli Action Dialog"
+              onPress={toggleDialog2}
+              buttonStyle={styles.button}
+            />
+          </TestCase>
+          <TestCase itShould='Open Loading Dialog' tags={['C_API']}>
+            <Button
+              title="Open Loading Dialog"
+              onPress={toggleDialog3}
+              buttonStyle={styles.button}
+            />
+          </TestCase>
+          <TestCase itShould='Open Buttonless Dialog' tags={['C_API']}>
+            <Button
+              title="Open Buttonless Dialog"
+              onPress={toggleDialog4}
+              buttonStyle={styles.button}
+            />
+          </TestCase>
+          <TestCase itShould='Open Custom Dialog 1' tags={['C_API']}>
+            <Button
+              title="Open Custom Dialog 1"
+              onPress={toggleDialog5}
+              buttonStyle={styles.button}
+            />
+          </TestCase>
+          <TestCase itShould='Open Custom Dialog 2' tags={['C_API']}>
+            <Button
+              title="Open Custom Dialog 2"
+              onPress={toggleDialog6}
+              buttonStyle={styles.button}
+            />
+          </TestCase>
+        </ScrollView>
+        <Dialog isVisible={visible1} onBackdropPress={toggleDialog1}>
+          <Dialog.Title title="Dialog Title" />
+          <Text>Dialog body text. Add relevant information here.</Text>
+        </Dialog>
+        <Dialog isVisible={visible2} onBackdropPress={toggleDialog2}>
+          <Dialog.Title title="Dialog Title" />
+          <Text>Dialog body text. Add relevant information here.</Text>
+          <Dialog.Actions>
+            <Dialog.Button
+              title="ACTION 1"
+              onPress={() => console.log('Primary Action Clicked!')}
+            />
+            <Dialog.Button
+              title="ACTION 2"
+              onPress={() => console.log('Secondary Action Clicked!')}
+            />
+          </Dialog.Actions>
+        </Dialog>
+        <Dialog isVisible={visible3} onBackdropPress={toggleDialog3}>
+          <Dialog.Loading />
+        </Dialog>
+        <Dialog isVisible={visible4} onBackdropPress={toggleDialog4}>
+          <Dialog.Title title="Dialog Title" />
+          <Text>Dialog body text. Add relevant information here.</Text>
+        </Dialog>
+        <Dialog isVisible={visible5} onBackdropPress={toggleDialog5}>
+          <Dialog.Title title="Select Preference" />
+          {['Option 1', 'Option 2', 'Option 3'].map((l, i) => (
+            <CheckBox
+              key={i}
+              title={l}
+              containerStyle={{ borderWidth: 0 }}
+              checkedIcon="dot-circle-o"
+              uncheckedIcon="circle-o"
+              checked={checked === i + 1}
+              onPress={() => setChecked(i + 1)}
+            />
+          ))}
 
-        <Dialog.Actions>
-          <Dialog.Button
-            title="CONFIRM"
-            onPress={() => {
-              console.log(`Option ${checked} was selected!`);
-              toggleDialog5();
-            }}
-          />
-          <Dialog.Button title="CANCEL" onPress={toggleDialog5} />
-        </Dialog.Actions>
-      </Dialog>
-      <Dialog isVisible={visible6} onBackdropPress={toggleDialog6}>
-        <Dialog.Title title="Choose Account" />
-        {userlist.map((l, i) => (
-          <ListItem
-            key={i}
-            containerStyle={{
-              marginHorizontal: -10,
-              borderRadius: 8,
-            }}
-            onPress={toggleDialog6}
-          >
-            <Avatar rounded source={{ uri: l.avatar_url }} />
-            <ListItem.Content>
-              <ListItem.Title style={{ fontWeight: '700' }}>
-                {l.name}
-              </ListItem.Title>
-              <ListItem.Subtitle>{l.subtitle}</ListItem.Subtitle>
-            </ListItem.Content>
-          </ListItem>
-        ))}
-      </Dialog>
-    </View>
+          <Dialog.Actions>
+            <Dialog.Button
+              title="CONFIRM"
+              onPress={() => {
+                console.log(`Option ${checked} was selected!`);
+                toggleDialog5();
+              }}
+            />
+            <Dialog.Button title="CANCEL" onPress={toggleDialog5} />
+          </Dialog.Actions>
+        </Dialog>
+        <Dialog isVisible={visible6} onBackdropPress={toggleDialog6}>
+          <Dialog.Title title="Choose Account" />
+          {userlist.map((l, i) => (
+            <ListItem
+              key={i}
+              containerStyle={{
+                marginHorizontal: -10,
+                borderRadius: 8,
+              }}
+              onPress={toggleDialog6}
+            >
+              <Avatar rounded source={{ uri: l.avatar_url }} />
+              <ListItem.Content>
+                <ListItem.Title style={{ fontWeight: '700' }}>
+                  {l.name}
+                </ListItem.Title>
+                <ListItem.Subtitle>{l.subtitle}</ListItem.Subtitle>
+              </ListItem.Content>
+            </ListItem>
+          ))}
+        </Dialog>
+      </TestSuite>
+    </Tester>
   );
 };
 

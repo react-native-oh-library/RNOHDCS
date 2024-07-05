@@ -16,7 +16,7 @@ const stateSet = ['first', 'second', 'third', 'fourth', 'fifth'];
       <Button title='上一个' onPress={() => prev()} />
       <Text style={{ margin: 1 }}></Text>
       <Button title='下一个' onPress={() => next()} />
-      <TextInput value={inp1} onChangeText={(value) => setInp1(parseInt(value))} style={{ borderWidth: 1, margin: 5 }} />
+      <TextInput value={inp1} onChangeText={(value) => setInp1(parseInt(value))} style={{ borderWidth: 1, margin: 5, fontSize: 16 }} />
       <Button title='通过索引设置（0-4）' onPress={() => setStateAt(inp1)} />
     </View>
   );

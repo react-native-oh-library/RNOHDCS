@@ -27,7 +27,7 @@ const ValueAssignmentDemo = () => {
       <Text style={styles.textCommon}>设置月份，固定传入13：{dayjs().month(13).month()}</Text>
       <Text style={styles.textCommon}>设置年份并且获取，固定传入2024：{dayjs().year(2024).year()}</Text>
       <Text style={styles.textCommon}>setter：年固定传入2024：{dayjs().set('year', 2024).get('year')}</Text>
-      <Text style={styles.textCommon}>setter：月固定传入8：{dayjs().set('month', 8).get('month')}</Text>
+      <Text style={styles.textCommon}>setter：月固定传入8：{dayjs().set('month', 8).get('month')} </Text>
       <Text style={styles.textCommon}>getter：年固定传入2022-05-05：{dayjs('2022-05-05').get('year')}</Text>
       <Text style={styles.textCommon}>getter：月固定传入2022-05-05：{dayjs('2022-05-05').get('month') + 1}</Text>
     </View>
@@ -96,7 +96,8 @@ const styles = StyleSheet.create({
     width: 200,
     height: 40,
     borderWidth: 1,
-    borderRadius: 10
+    borderRadius: 10,
+    fontSize: 16
   }
 });
 export default ValueAssignmentDemo

@@ -20,7 +20,7 @@ export function Throttle1(){
         value={value}
         onChangeText={(text) => setValue(text)}
         placeholder="Typed value"
-        style={{ width: 280, borderWidth: 1, borderColor: 'black', padding: 8 }}
+        style={{ width: 280, borderWidth: 1, borderColor: 'black', padding: 8, fontSize: 16 }}
       />
       <Text style={{ marginTop: 16 }}>throttledValue: {throttledValue}</Text>
     </View>

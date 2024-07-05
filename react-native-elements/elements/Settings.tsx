@@ -9,6 +9,7 @@ import {
   Switch,
 } from '@rneui/themed';
 import { ThemeReducerContext } from './ThemeReducer';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino'
 
 const ORANGE = '#FF9500';
 const BLUE = '#007AFF';
@@ -159,7 +160,7 @@ const Settings: React.FunctionComponent<SetttingsComponentProps> = () => {
     setSwitched(value);
   };
 
-  const searchbarProps = {};
+  // const searchbarProps = {};
 
   const renderItem = ({
     item: {
@@ -219,7 +220,7 @@ const Settings: React.FunctionComponent<SetttingsComponentProps> = () => {
   const ListHeaderComponent = () => (
     <View>
       <SearchBar
-        {...(searchbarProps as SearchBarProps)}
+        // {...(searchbarProps as SearchBarProps)}
         platform="ios"
         placeholder="Search"
       />
@@ -235,19 +236,22 @@ const Settings: React.FunctionComponent<SetttingsComponentProps> = () => {
   };
 
   return (
-    <>
-      <Text style={styles.titleStyle}>Settings Example</Text>
-      <SectionList
-        keyExtractor={keyExtractor}
-        ListHeaderComponent={ListHeaderComponent}
-        sections={sections}
-        renderItem={renderItem}
-        renderSectionHeader={renderSectionHeader}
-        ItemSeparatorComponent={ItemSeparatorComponent}
-        SectionSeparatorComponent={Divider}
-        stickySectionHeadersEnabled={false}
-      />
-    </>
+    <Tester>
+      <TestSuite name='Settings Example'>
+        <TestCase itShould='Settings Example' tags={['C_API']}>
+          <SectionList
+            keyExtractor={keyExtractor}
+            sections={sections}
+            renderItem={renderItem}
+            renderSectionHeader={renderSectionHeader}
+            ItemSeparatorComponent={ItemSeparatorComponent}
+            SectionSeparatorComponent={Divider}
+            stickySectionHeadersEnabled={false}
+            style={{height:'90%'}}
+          />
+        </TestCase>
+      </TestSuite>
+    </Tester>
   );
 };
 
@@ -266,7 +270,7 @@ const styles = StyleSheet.create({
   },
   headerSection: {
     height: 30,
-  },  
+  },
   titleStyle: {
     fontWeight: 'bold',
     fontSize: 24,

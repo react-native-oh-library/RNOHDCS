@@ -3,7 +3,6 @@ import { View, StyleSheet, ImageBackground, ScrollView } from 'react-native';
 
 import { ToggleButton, List } from 'react-native-paper';
 
-import ScreenWrapper from '../ScreenWrapper';
 import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
 
 type StatusState = 'checked' | 'unchecked';

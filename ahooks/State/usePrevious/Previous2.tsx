@@ -52,7 +52,7 @@ export function Previous2(){
       <Text style={{ marginBottom: 8 }}>previous job: {(previousJob || {}).job}</Text>
       <View style={{ marginTop: 8 }}>
         <TextInput
-          style={{ width: 220, borderWidth: 1, borderColor: '#e8e8e8', padding: 8 }}
+          style={{ width: 220, borderWidth: 1, borderColor: '#e8e8e8', padding: 8, fontSize: 16 }}
           value={nameInput}
           onChangeText={(text) => setNameInput(text)}
           placeholder="new name"
@@ -68,7 +68,7 @@ export function Previous2(){
       </View>
       <View style={{ marginTop: 8 }}>
         <TextInput
-          style={{ width: 220, borderWidth: 1, borderColor: '#e8e8e8', padding: 8 }}
+          style={{ width: 220, borderWidth: 1, borderColor: '#e8e8e8', padding: 8, fontSize: 16 }}
           value={jobInput}
           onChangeText={(text) => setJobInput(text)}
           placeholder="new job"

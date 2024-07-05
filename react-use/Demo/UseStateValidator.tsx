@@ -12,7 +12,7 @@ const DemoStateValidator :any= (s:any) => [s === '' ? null : (s * 1) % 2 === 0];
     <View>
       <Text>仅当数字为偶数时，以下字段有效：</Text>
       <TextInput
-        style={{ borderWidth: 1 }}
+        style={{ borderWidth: 1, fontSize: 16 }}
         placeholder='请输入数字.....'
         value={state.toString()}
         onChangeText={(value) => {
