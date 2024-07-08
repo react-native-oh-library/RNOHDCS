@@ -25,7 +25,8 @@ export class ReactSubscribeTimerTest extends React.Component {
     return (
       <View>
         <Button title='点击' onPress={() => this.timeClick()}>点击</Button>
-        {this.state.listening && <Timer interval={this.props.interval} onTimer={this.onTimer}><Text>There is still {this.state.cd} seconds to go.</Text></Timer>}
+        {this.state.listening && <Timer interval={this.props.interval} onTimer={this.onTimer}/>}
+        <Text>There is still {this.state.cd} seconds to go.</Text>
         <Text>点击按钮启动倒计时</Text>
       </View>
     );
