@@ -1,33 +1,107 @@
-import React, { useState, useRef } from 'react';
-import { View, StyleSheet, Text, Easing, findNodeHandle, ScrollView } from 'react-native';
-import { Button, Popover, Toast } from '@ant-design/react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, Text, Easing } from 'react-native';
+import { Popover } from '@ant-design/react-native';
 import { TestSuite, TestCase } from '@rnoh/testerino';
 
 const Item = Popover.Item;
 
 export default () => {
+  const [selected, setSelected] = useState<any>('');
+  let overlay = [1, 2, 3].map((i, index) => (
+    <Item key={index} value={`option ${i}`}>
+      <Text>option {i}</Text>
+    </Item>
+  ))
+  overlay = overlay.concat([
+    <Item key="4" value="disabled" disabled>
+      <Text style={{ color: '#ddd' }}>{'disabled opt'}</Text>
+    </Item>,
+    <Item key="6" value="button ct" style={{ backgroundColor: '#efeff4' }}>
+      <Text>{'关闭'}</Text>
+    </Item>
+  ]);
 
   return (
     <TestSuite name="PopoverTest">
-      <TestCase itShould="render a Popover defalut">
-        <PopoverDefalutTest />
+      <TestCase itShould="render a Popover overlay" tags={['C_API']}>
+        <PopoverOverlayTest />
       </TestCase>
-      <TestCase itShould="render a Popover Customizing">
+      <TestCase itShould="render a Popover onSelect()" tags={['C_API']} initialState={false}
+        arrange={({ setState }: any) =>
+          <React.Fragment>
+            <View style={{ alignItems: 'center' }}>
+              <Popover
+                overlay={overlay}
+                onSelect={(value: any) => {
+                  setSelected(value);
+                  setState(true);
+                }}
+              >
+                <Text style={{ margin: 10 }}>{'onSelect()'}</Text>
+              </Popover>
+              <Text>选择了:{selected}</Text>
+            </View>
+          </React.Fragment>
+        }
+        assert={({ expect, state }) => {
+          expect(state).to.be.eq(true);
+        }}>
+      </TestCase>
+      <TestCase itShould="render a Popover triggerStyle={{backgroundColor:'pink'}}" tags={['C_API']}>
+        <PopoverTriggerStyleTest />
+      </TestCase>
+      <TestCase itShould="render a Popover renderOverlayComponent={我是自定义组件title}" tags={['C_API']}>
         <PopoverCustomizingTest />
       </TestCase>
-      <TestCase itShould="render a Popover Animated">
-        <PopoverAnimatedTest />
+      <TestCase itShould="render a Popover duration={2000}" tags={['C_API']}>
+        <PopoverDurationTest />
       </TestCase>
-      <TestCase itShould="render a Popover auto postion">
-        <PopoverAutoPostionTest />
+      <TestCase itShould="render a Popover easing={(show) => (show ? Easing.in(Easing.ease) : Easing.step0)}" tags={['C_API']}>
+        <PopoverEasingTest />
+      </TestCase>
+      <TestCase itShould="render a Popover useNativeDriver={true}" tags={['C_API']}>
+        <PopoverUseNativeDriverTest />
+      </TestCase>
+      <TestCase itShould="render a Popover onDismiss()" initialState={false}
+        arrange={({ setState }: any) =>
+          <React.Fragment>
+            <View style={{ alignItems: 'center' }}>
+              <Popover
+                overlay={overlay}
+                duration={1000}
+                onDismiss={() => { setState(true); }}
+              >
+                <Text
+                  style={{
+                    margin: 16,
+                  }}>
+                  {'onDismiss()'}
+                </Text>
+              </Popover>
+            </View>
+          </React.Fragment>
+        }
+        assert={({ expect, state }) => {
+          expect(state).to.be.eq(true);
+        }}>
+      </TestCase>
+      <TestCase itShould="render a Popover.Item disabled" tags={['C_API']}>
+        <PopoverDisabledTest />
+      </TestCase>
+      <TestCase itShould="render a Popover.Item itemStyle={{ backgroundColor: '#efeff4' }}" tags={['C_API']}>
+        <PopoverItemStyleTest />
+      </TestCase>
+      <TestCase itShould="render a Popover.Item value" tags={['C_API']}>
+        <PopoverItemValueTest />
+      </TestCase>
+      <TestCase itShould="render a Popover placement=['top', 'bottom']" tags={['C_API']}>
+        <PopoverPlacementTest />
       </TestCase>
     </TestSuite>
   );
 };
 
-function PopoverDefalutTest() {
-  const ref = useRef(null);
-  const [selected, setSelected] = useState<string>('');
+function PopoverOverlayTest() {
   let overlay = [1, 2, 3].map((i, index) => (
     <Item key={index} value={`option ${i}`}>
       <Text>option {i}</Text>
@@ -43,25 +117,48 @@ function PopoverDefalutTest() {
   ]);
 
   return (
-    <ScrollView>
-      <Popover
-        overlay={overlay}
-        triggerStyle={styles.triggerStyle}
-        onSelect={(v) => {
-          Toast.info(`${v}被点击了`);
-          setSelected(v);
-        }
-        }>
-        <Button ref={ref}>{'菜单'}</Button>
-        <Text>{`选择了:${selected}`}</Text>
-      </Popover>
-    </ScrollView>
+    <React.Fragment>
+      <View style={{ alignItems: 'center' }}>
+        <Popover
+          overlay={overlay}
+        >
+          <Text style={{ margin: 10 }}>{'overlay'}</Text>
+        </Popover>
+      </View>
+    </React.Fragment>
+
+  )
+}
+
+function PopoverTriggerStyleTest() {
+  let overlay = [1, 2, 3].map((i, index) => (
+    <Item key={index} value={`option ${i}`}>
+      <Text>option {i}</Text>
+    </Item>
+  ))
+  overlay = overlay.concat([
+    <Item key="6" value="button ct" style={{ backgroundColor: '#efeff4' }}>
+      <Text>{'关闭'}</Text>
+    </Item>,
+  ]);
+
+  return (
+    <React.Fragment>
+      <View style={{ alignItems: 'center' }}>
+        <Popover
+          overlay={overlay}
+          triggerStyle={styles.triggerStyle}
+        >
+          <Text style={{ margin: 10 }}>{'triggerStyle'}</Text>
+        </Popover>
+      </View>
+    </React.Fragment>
   )
 }
 
 function PopoverCustomizingTest() {
   return (
-    <View style={{ marginTop: 20 }}>
+    <React.Fragment>
       <Popover
         overlay={
           <Popover.Item value={'test'}>
@@ -84,16 +181,16 @@ function PopoverCustomizingTest() {
         )}>
         <Text
           style={{
-            margin: 16,
+            margin: 10,
           }}>
           自定义组件
         </Text>
       </Popover>
-    </View>
+    </React.Fragment>
   )
 }
 
-function PopoverAnimatedTest() {
+function PopoverDurationTest() {
   let overlay = [1, 2, 3].map((i, index) => (
     <Item key={index} value={`option ${i}`}>
       <Text>option {i}</Text>
@@ -108,58 +205,230 @@ function PopoverAnimatedTest() {
     </Item>,
   ]);
   return (
-    <View style={{ marginTop: 20 }}>
-      <Popover
-        overlay={overlay}
-        useNativeDriver
-        duration={200}
-        easing={(show) => (show ? Easing.in(Easing.ease) : Easing.step0)}>
-        <Text
-          style={{
-            margin: 16,
-          }}>
-          自定义动画
-        </Text>
-      </Popover>
-    </View>
-  )
-}
-
-function PopoverAutoPostionTest() {
-  return (
-    <View style={{ alignItems: 'center' }}>
-      <Text
-        style={{
-          margin: 16,
-          color: 'red',
-        }}>
-        如果你设置了 placement 属性请确保你的内容够位置显示，默认是 auto
-        自动计算位置
-      </Text>
-      {['left', 'right', 'top', 'bottom'].map((p) => (
+    <React.Fragment>
+      <View style={{ alignItems: 'center' }}>
         <Popover
-          key={p}
-          overlay={
-            <Popover.Item value={p}>
-              <Text>自定义组件 {p}</Text>
-            </Popover.Item>
-          }
-          placement={p as any}>
+          overlay={overlay}
+          duration={1000}
+        >
           <Text
             style={{
               margin: 16,
             }}>
-            {p}
+            2s慢慢出现慢慢消失
           </Text>
         </Popover>
-      ))}
-    </View>
+      </View>
+    </React.Fragment>
   )
 }
 
+function PopoverEasingTest() {
+  let overlay = [1, 2, 3].map((i, index) => (
+    <Item key={index} value={`option ${i}`}>
+      <Text>option {i}</Text>
+    </Item>
+  ))
+  overlay = overlay.concat([
+    <Item key="4" value="disabled" disabled>
+      <Text style={{ color: '#ddd' }}>{'disabled opt'}</Text>
+    </Item>,
+    <Item key="6" value="button ct" style={{ backgroundColor: '#efeff4' }}>
+      <Text>{'关闭'}</Text>
+    </Item>,
+  ]);
+  return (
+    <React.Fragment>
+      <View style={{ alignItems: 'center' }}>
+        <Popover
+          overlay={overlay}
+          duration={500}
+          easing={(show) => (show ? Easing.in(Easing.ease) : Easing.step0)}
+        >
+          <Text
+            style={{
+              margin: 16,
+            }}>
+            2s慢慢出现快速消失
+          </Text>
+        </Popover>
+      </View>
+    </React.Fragment>
+  )
+}
+
+function PopoverUseNativeDriverTest() {
+  let overlay = [1, 2, 3].map((i, index) => (
+    <Item key={index} value={`option ${i}`}>
+      <Text>option {i}</Text>
+    </Item>
+  ))
+  overlay = overlay.concat([
+    <Item key="4" value="disabled" disabled>
+      <Text style={{ color: '#ddd' }}>{'disabled opt'}</Text>
+    </Item>,
+    <Item key="6" value="button ct" style={{ backgroundColor: '#efeff4' }}>
+      <Text>{'关闭'}</Text>
+    </Item>,
+  ]);
+  return (
+    <React.Fragment>
+      <View style={{ alignItems: 'center' }}>
+        <Popover
+          overlay={overlay}
+          duration={1000}
+          useNativeDriver={true}
+        >
+          <Text
+            style={{
+              margin: 16,
+            }}>
+            {'useNativeDriver={true}'}
+          </Text>
+        </Popover>
+      </View>
+    </React.Fragment>
+  )
+}
+
+function PopoverDisabledTest() {
+  let overlay = [1, 2, 3].map((i, index) => (
+    <Item key={index} value={`option ${i}`}>
+      <Text>option {i}</Text>
+    </Item>
+  ))
+  overlay = overlay.concat([
+    <Item key="4" value="disabled" disabled>
+      <Text style={{ color: '#ddd' }}>{'disabled opt'}</Text>
+    </Item>,
+    <Item key="6" value="button ct" style={{ backgroundColor: '#efeff4' }}>
+      <Text>{'关闭'}</Text>
+    </Item>,
+  ]);
+  return (
+    <React.Fragment>
+      <View style={{ alignItems: 'center' }}>
+        <Popover
+          overlay={overlay}
+          duration={200}
+          useNativeDriver={true}
+        >
+          <Text
+            style={{
+              margin: 16,
+            }}>
+            {'第4个禁用'}
+          </Text>
+        </Popover>
+      </View>
+    </React.Fragment>
+  )
+}
+
+function PopoverItemStyleTest() {
+  let overlay = [1, 2].map((i, index) => (
+    <Item key={index} value={`option ${i}`}>
+      <Text>option {i}</Text>
+    </Item>
+  ))
+  overlay = overlay.concat([
+    <Item key="6" value="button ct" style={{ backgroundColor: '#efeff4' }}>
+      <Text>{'关闭'}</Text>
+    </Item>,
+  ]);
+  return (
+    <React.Fragment>
+      <View style={{ alignItems: 'center' }}>
+        <Popover
+          overlay={overlay}
+          duration={200}
+          useNativeDriver={true}
+        >
+          <Text
+            style={{
+              margin: 16,
+            }}>
+            {'关闭的ItemStyle样式为灰色'}
+          </Text>
+        </Popover>
+      </View>
+    </React.Fragment>
+  )
+}
+
+function PopoverItemValueTest() {
+  const [value, setvalue] = useState('');
+  let overlay = [1, 2].map((i, index) => (
+    <Item key={index} value={`option ${i}`}>
+      <Text>option {i}</Text>
+    </Item>
+  ))
+  overlay = overlay.concat([
+    <Item key="6" value="button" style={{ backgroundColor: '#efeff4' }}>
+      <Text>{'关闭'}</Text>
+    </Item>,
+  ]);
+  return (
+    <React.Fragment>
+      <View style={{ alignItems: 'center' }}>
+        <Popover
+          overlay={overlay}
+          duration={200}
+          useNativeDriver={true}
+          onSelect={(value: any) => { setvalue(value) }}
+        >
+          <Text
+            style={{
+              margin: 16,
+            }}>
+            {'PopoverItem value值'}
+          </Text>
+        </Popover>
+        <Text>value:{value}</Text>
+      </View>
+    </React.Fragment>
+  )
+}
+
+function PopoverPlacementTest() {
+  let overlay = [1, 2].map((i, index) => (
+    <Item key={index} value={`option ${i}`}>
+      <Text>option {i}</Text>
+    </Item>
+  ))
+  overlay = overlay.concat([
+    <Item key="6" value="button ct" style={{ backgroundColor: '#efeff4' }}>
+      <Text>{'关闭'}</Text>
+    </Item>,
+  ]);
+  return (
+    <React.Fragment>
+      <View style={{ alignItems: 'center' }}>
+        {['top', 'bottom'].map((p) => (
+          <Popover
+            key={p}
+            overlay={
+              <Popover.Item value={p}>
+                <Text>自定义组件 {p}</Text>
+              </Popover.Item>
+            }
+            placement={p as any}>
+            <Text
+              style={{
+                margin: 16,
+              }}>
+              {p}
+            </Text>
+          </Popover>
+        ))}
+      </View>
+    </React.Fragment>
+  )
+}
 
 const styles = StyleSheet.create({
   triggerStyle: {
     paddingHorizontal: 6,
+    backgroundColor: 'pink'
   },
 })

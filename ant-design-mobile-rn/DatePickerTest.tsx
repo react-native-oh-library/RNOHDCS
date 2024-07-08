@@ -7,6 +7,9 @@ export default () => {
   const now = new Date();
   const [value, setValue] = useState<Date>(now);
   const [value1, setValue1] = useState<Date>(now);
+  const [value2, setValue2] = useState<any>('2024-06');
+  const [value3, setValue3] = useState<Date>(now);
+  const [value4, setValue4] = useState<Date>(now);
   const onChange = (value: any) => {
     setValue(value);
   }
@@ -51,21 +54,21 @@ export default () => {
     <TestSuite name="DatePickerTest">
       <TestCase itShould="render a DatePicker precision='month'" tags={['C_API']}>
         <List>
-          <DatePicker precision='month'>
-            <List.Item arrow="horizontal">Select Date</List.Item>
+          <DatePicker precision='month' value={value2} onChange={(val) => { setValue2(val) }} format={'YYYY-MM'}>
+            <List.Item arrow="horizontal">Select Month</List.Item>
           </DatePicker>
         </List>
       </TestCase>
       <TestCase itShould="render a DatePicker value={now}" tags={['C_API']}>
         <List>
-          <DatePicker value={now}>
+          <DatePicker value={value3} onChange={(val) => { setValue3(val) }}>
             <List.Item arrow="horizontal">Select Date</List.Item>
           </DatePicker>
         </List>
       </TestCase>
       <TestCase itShould="render a DatePicker defaultValue={now}" tags={['C_API']}>
         <List>
-          <DatePicker defaultValue={now}>
+          <DatePicker defaultValue={now} value={value4} onChange={(val) => { setValue4(val) }}>
             <List.Item arrow="horizontal">Select Date</List.Item>
           </DatePicker>
         </List>
@@ -84,19 +87,29 @@ export default () => {
           </DatePicker>
         </List>
       </TestCase>
-      <TestCase itShould="render a DatePicker onChange()" tags={['C_API']}>
-        <List>
-          <DatePicker value={value} onChange={(value: any) => { setValue(value) }}>
-            <List.Item arrow="horizontal">Select Date</List.Item>
-          </DatePicker>
-        </List>
+      <TestCase itShould="render a DatePicker onChange()" tags={['C_API']} initialState={false}
+        arrange={({ setState }: any) =>
+          <List>
+            <DatePicker value={value} onChange={(value: any) => { setValue(value); setState(true); }}>
+              <List.Item arrow="horizontal">Select Date</List.Item>
+            </DatePicker>
+          </List>
+        }
+        assert={({ expect, state }) => {
+          expect(state).to.be.eq(true);
+        }}>
       </TestCase>
-      <TestCase itShould="render a DatePicker onValueChange()" tags={['C_API']}>
-        <List>
-          <DatePicker value={value1} onValueChange={(value: any) => { setValue1(value) }}>
-            <List.Item arrow="horizontal">Select Date</List.Item>
-          </DatePicker>
-        </List>
+      <TestCase itShould="render a DatePicker onValueChange()" tags={['C_API']} initialState={false}
+        arrange={({ setState }: any) =>
+          <List>
+            <DatePicker value={value1} onValueChange={(value: any) => { setValue1(value); setState(true); }}>
+              <List.Item arrow="horizontal">Select Date</List.Item>
+            </DatePicker>
+          </List>
+        }
+        assert={({ expect, state }) => {
+          expect(state).to.be.eq(true);
+        }}>
       </TestCase>
       <TestCase itShould="render a DatePicker renderLabel" tags={['C_API']}>
         <List>
