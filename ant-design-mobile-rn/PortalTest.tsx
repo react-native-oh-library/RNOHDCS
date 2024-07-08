@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { Portal, Button, Icon, Provider } from '@ant-design/react-native';
+import { Portal, Button, Icon } from '@ant-design/react-native';
 import { TestSuite, TestCase } from '@rnoh/testerino';
 
 export default () => {

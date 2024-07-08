@@ -34,8 +34,8 @@ export default () => {
         arrange={({ setState }: any) =>
           <Button onPress={() => {
             Modal.alert('Title', 'alert content', [
-              { text: 'Cancel', onPress: () => console.log('cancel'), style: 'cancel' },
-              { text: 'OK', onPress: () => console.log('ok') },
+              { text: 'Cancel', onPress: () => { }, style: 'cancel' },
+              { text: 'OK', onPress: () => { } },
             ],
             );
             setState(true);
@@ -51,7 +51,7 @@ export default () => {
             Modal.prompt(
               'Name',
               'name message',
-              (password: any) => console.log(`password: ${password}`),
+              (password: any) => { },
               'default',
               '',
               ['please input name'],
@@ -84,8 +84,7 @@ export default () => {
             Modal.prompt(
               'Login',
               'Pleas input login information',
-              (login: any, password: any) =>
-                console.log(`login: ${login}, password: ${password}`),
+              (login: any, password: any) => { },
               'login-password',
               '',
               ['Please input name', 'Please input password'],
@@ -103,7 +102,7 @@ export default () => {
             Modal.prompt(
               'Input password',
               'password message',
-              (password: any) => console.log(`password: ${password}`),
+              (password: any) => { },
               'secure-text',
               'defaultValue',
             );
@@ -277,7 +276,7 @@ function ShowOncloseModal() {
         transparent={true}
         closable={true}
         animationType={'slide'}
-        onClose={()=>{setVisible(false)}}
+        onClose={() => { setVisible(false) }}
         footer={footerButtons}
       >
         <Text style={{ textAlign: 'center' }}>Content...</Text>
@@ -307,7 +306,7 @@ function ShowTitleModal() {
         transparent={true}
         closable={true}
         animationType={'slide'}
-        onClose={()=>{setVisible(false)}}
+        onClose={() => { setVisible(false) }}
         footer={footerButtons}
       >
         <Text style={{ textAlign: 'center' }}>Content...</Text>

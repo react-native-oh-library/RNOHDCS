@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Button, Drawer } from '@ant-design/react-native';
 import { TestSuite, TestCase } from '@rnoh/testerino';
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default () => {
   return (
@@ -23,7 +24,6 @@ class DrawerAntExample extends React.Component<any, any> {
   drawer: any
 
   onOpenChange = (isOpen: any) => {
-    console.log('是否打开了 Drawer', isOpen.toString())
   }
 
   render() {
@@ -62,7 +62,7 @@ class DrawerAntExample extends React.Component<any, any> {
     )
 
     return (
-      <View>
+      <GestureHandlerRootView>
         <Drawer
           sidebar={sidebar}
           position="left"
@@ -70,11 +70,13 @@ class DrawerAntExample extends React.Component<any, any> {
           drawerRef={(el: any) => (this.drawer = el)}
           onOpenChange={this.onOpenChange}
           drawerBackgroundColor="#ccc">
+          <View style={{ flex: 1, marginTop: 114, padding: 8 }}>
+            <Button onPress={() => this.drawer && this.drawer.openDrawer()}>
+              Open drawer
+            </Button>
+          </View>
         </Drawer>
-        <Button onPress={() => this.drawer && this.drawer.openDrawer()}>
-          Open drawer
-        </Button>
-      </View>
+      </GestureHandlerRootView>
     )
   }
 }
