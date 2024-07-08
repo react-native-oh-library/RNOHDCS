@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Dimensions, StyleSheet, SectionList, StatusBar } from 'react-native'
-import ScrollableTabView from '@itenl/react-native-scrollable-tabview';
+import ScrollableTabView, { DefaultTabBar } from '@itenl/react-native-scrollable-tabview';
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 
 class Screen1 extends React.Component {
@@ -436,13 +436,13 @@ export default class ScrollableTabviewExample extends React.Component {
   render() {
     return (
       <Tester>
-
         <ScrollView>
+
           <TestSuite name="TesterScrollableTabviewExample1" >
             <TestCase
               tags={['C_API']}
               itShould="整体效果1" >
-              <View style={{ width: '100%', height: 500 }}>
+              <View style={{ width: '100%', height: 1000 }}>
                 <ScrollableTabView
                   ref={(it) => (this.scrollableTabView = it)}
                   onTabviewChanged={(index, tabLabel) => {
@@ -511,7 +511,7 @@ export default class ScrollableTabviewExample extends React.Component {
                             });
                           }}
                         >
-                          <Text>清楚增加的Screen(即清除Stacks)</Text>
+                          <Text>清除增加的Screen(即清除Stacks)</Text>
                         </TouchableOpacity>
                       </View>
                     );
@@ -547,6 +547,7 @@ export default class ScrollableTabviewExample extends React.Component {
                   tabsEnableAnimated={true}
                   useScroll={this.state.useScroll}
                   toHeaderOnTab={true}
+                  onEndReachedThreshold={0.1}
                 >
                 </ScrollableTabView>
               </View>
@@ -557,7 +558,7 @@ export default class ScrollableTabviewExample extends React.Component {
             <TestCase
               tags={['C_API']}
               itShould="整体效果2">
-              <View style={{ width: '100%', height: 500 }}>
+              <View style={{ width: '100%', height: 800 }}>
                 <ScrollableTabView
                   stacks={[
                     {
@@ -811,40 +812,38 @@ export default class ScrollableTabviewExample extends React.Component {
           <TestSuite name="TesterScrollableTabviewExample7">
             <TestCase
               tags={['C_API']}
-              itShould="stickyHeader属性,让下滑时候,让头部固定。点击选择Screen">
-              <View style={{ width: '100%', height: 500 }}>
+              itShould="上划后,heads不会恢复">
+              <View style={{ width: '100%', height: 800 }}>
                 <ScrollableTabView
                   stacks={[
                     {
                       screen: () => {
-                        return (<View style={{ flex: 1, backgroundColor: 'red', height: 2000 }}><Text>第一个页面</Text></View>)
+                        return (<View style={{ flex: 1, backgroundColor: 'white', height: 2000 }}><Text>第一个页面</Text></View>)
                       },
-                    }, {
-                      screen: () => <View style={{ flex: 1, backgroundColor: 'grey', height: 2000 }}><Text>第二个页面</Text></View>,
                     },
-                    {
-                      screen: () => {
-                        return (
-                          <View
-                            style={{
-                              flex: 1,
-                              backgroundColor: "green",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              height: 2000
-                            }}
-                          >
-                            <Text>
-                              第三个页面
-                            </Text>
-                          </View>
-                        );
-                      },
-                    }
                   ]}
-                  stickyHeader={true}
-                >
-                </ScrollableTabView>
+                  mappingProps={{}}
+                  tabsStyle={{ backgroundColor: 'yellow', }}
+                  tabWrapStyle={{ zIndex: 1 }}
+                  tabInnerStyle={{ paddingLeft: 5 }}
+                  tabActiveOpacity={0}
+                  tabStyle={{ backgroundColor: 'orange', width: 100 }}
+                  textStyle={{ textAlign: 'center', color: 'green' }}
+                  textActiveStyle={{ fontSize: 30 }}
+                  tabUnderlineStyle={{ backgroundcolor: 'red', height: 10 }}
+                  firstIndex={0}
+                  syncToSticky={true}
+                  onEndReachedThreshold={0.4}
+                  onTabviewChanged={() => {
+                  }}
+                  fixedHeader={false}
+                  fillScreen={true}
+                  screenScrollThrottle={100}
+                  header={() => {
+                    return <View style={{ backgroundColor: 'pink', height: 80 }}><Text>header</Text></View>;
+                  }}
+                  stickyHeader={false}
+                ></ScrollableTabView>
               </View>
             </TestCase>
           </TestSuite>
@@ -1026,7 +1025,578 @@ export default class ScrollableTabviewExample extends React.Component {
             </TestCase>
           </TestSuite>
 
+          <TestSuite name="TesterScrollableTabviewExample11">
+            <TestCase
+              tags={['C_API']}
+              itShould="切换栏为白色,50">
+              <View style={{ width: '100%', height: 500 }}>
+                <ScrollableTabView
+                  stacks={[
+                    {
+                      screen: () => {
+                        return (<View style={{ flex: 1, backgroundColor: 'red', height: 2000 }}><Text>第一个页面</Text></View>)
+                      },
+                    }, {
+                      screen: () => <View style={{ flex: 1, backgroundColor: 'grey', height: 2000 }}><Text>第二个页面</Text></View>,
+                    },
+                    {
+                      screen: () => {
+                        return (
+                          <View
+                            style={{
+                              flex: 1,
+                              backgroundColor: "green",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              height: 2000
+                            }}
+                          >
+                            <Text>
+                              第三个页面
+                            </Text>
+                          </View>
+                        );
+                      },
+                    }
+                  ]}
+                  mappingProps={{}}
+                  tabsStyle={{ backgroundColor: 'black', }}
+                  tabWrapStyle={{ zIndex: 1 }}
+                  tabInnerStyle={{ paddingLeft: 5 }}
+                  tabActiveOpacity={0}
+                  tabStyle={{ backgroundColor: 'orange', width: 100 }}
+                  textStyle={{ textAlign: 'center', color: 'blue' }}
+                  textActiveStyle={{ fontSize: 22 }}
+                  tabUnderlineStyle={{ backgroundColor: 'white', height: 50 }}
+                  firstIndex={0}
+                  syncToSticky={true}
+                  onBeforeEndReached={next => {
+                    next();
+                  }}
+                  carouselProps={{}}
+                  sectionListProps={{}}
+                  toHeaderOnTab={false}
+                  tabsShown={true}
+                  onTabviewChanged={() => {
+                  }}
+                  screenScrollThrottle={20}
+                  stickyHeader={false}
+                ></ScrollableTabView>
+              </View>
+            </TestCase>
+          </TestSuite>
 
+          <TestSuite name="TesterScrollableTabviewExample12">
+            <TestCase
+              tags={['C_API']}
+              itShould="onEndReachedThreshold方法,需要配合onBeforeRefresh回调使用">
+              <View style={{ width: '100%', height: 20 }}>
+              <Text>该用例单独举例，见同目录下的ScrollableTabviewExample2.jsx</Text>
+              </View>
+            </TestCase>
+          </TestSuite>
+
+          <TestSuite name="TesterScrollableTabviewExample13">
+            <TestCase
+              tags={['C_API']}
+              itShould="左右滑动页面， 下滑栏2s后切换">
+              <View style={{ width: '100%', height: 500 }}>
+                <ScrollableTabView
+                  stacks={[
+                    {
+                      screen: () => {
+                        return (<View style={{ flex: 1, backgroundColor: 'red', height: 50 }}><Text>第一个页面</Text></View>)
+                      },
+                    }, {
+                      screen: () => <View style={{ flex: 1, backgroundColor: 'grey', height: 50 }}><Text>第二个页面</Text></View>,
+                    },
+                    {
+                      screen: () => {
+                        return (
+                          <View
+                            style={{
+                              flex: 1,
+                              backgroundColor: "green",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              height: 50
+                            }}
+                          >
+                            <Text>
+                              第三个页面
+                            </Text>
+                          </View>
+                        );
+                      },
+                    }
+                  ]}
+                  mappingProps={{}}
+                  tabsStyle={{ backgroundColor: 'black', }}
+                  tabWrapStyle={{ zIndex: 1 }}
+                  tabInnerStyle={{ paddingLeft: 5 }}
+                  tabActiveOpacity={0}
+                  tabStyle={{ backgroundColor: 'orange', width: 100 }}
+                  textStyle={{ textAlign: 'center', color: 'blue' }}
+                  textActiveStyle={{ fontSize: 22 }}
+                  tabUnderlineStyle={{ backgroundColor: 'white', height: 50 }}
+                  firstIndex={0}
+                  syncToSticky={true}
+                  onBeforeEndReached={next => {
+                    next();
+                  }}
+                  carouselProps={{}}
+                  sectionListProps={{}}
+                  toHeaderOnTab={false}
+                  tabsShown={true}
+                  onTabviewChanged={() => {
+                  }}
+                  screenScrollThrottle={2000}
+                  stickyHeader={false}
+                ></ScrollableTabView>
+              </View>
+            </TestCase>
+          </TestSuite>
+
+          <TestSuite name="TesterScrollableTabviewExample14">
+            <TestCase
+              tags={['C_API']}
+              itShould="上划后,head会自动恢复">
+              <View style={{ width: '100%', height: 200 }}>
+                <ScrollableTabView
+                  stacks={[
+                    {
+                      screen: () => {
+                        return (<View style={{ flex: 1, backgroundColor: 'white', height: 50 }}><Text>第一个页面</Text></View>)
+                      },
+                    },
+                  ]}
+                  mappingProps={{}}
+                  tabsStyle={{ backgroundColor: 'yellow', }}
+                  tabWrapStyle={{ zIndex: 1 }}
+                  tabInnerStyle={{ paddingLeft: 5 }}
+                  tabActiveOpacity={0}
+                  tabStyle={{ backgroundColor: 'orange', width: 100 }}
+                  textStyle={{ textAlign: 'center', color: 'green' }}
+                  textActiveStyle={{ fontSize: 30 }}
+                  tabUnderlineStyle={{ backgroundcolor: 'red', height: 10 }}
+                  firstIndex={0}
+                  syncToSticky={true}
+                  onEndReachedThreshold={0.4}
+                  onTabviewChanged={() => {
+                  }}
+                  fixedHeader={false}
+                  fillScreen={true}
+                  screenScrollThrottle={100}
+                  header={() => {
+                    return <View style={{ backgroundColor: 'pink', height: 80 }}><Text>header</Text></View>;
+                  }}
+                  stickyHeader={true}
+                ></ScrollableTabView>
+              </View>
+            </TestCase>
+          </TestSuite>
+
+          <TestSuite name="TesterScrollableTabviewExample15" >
+            <TestCase
+              tags={['C_API']}
+              itShould="当切到screen2,并且下滑产生数据,然后再向右滑动切换到screen1,title会改变" >
+              <View style={{ width: '100%', height: 500 }}>
+                <ScrollableTabView
+                  ref={(it) => (this.scrollableTabView = it)}
+                  onTabviewChanged={(index, tabLabel) => {
+                    // console.log(`${index},${tabLabel}`);
+                    this.refreshCurrentTab();
+                  }}
+                  mappingProps={{
+                    rootTime: this.state.rootTime,
+                  }}
+                  stacks={this.state.stacks}
+                  tabsStyle={{ borderTopWidth: 0.5, borderTopColor: "#efefef" }}
+                  tabWrapStyle={(item, index) => {
+                    if (index == 1) return { zIndex: 10 };
+                  }}
+                  useScrollStyle={{
+                    paddingHorizontal: 50,
+                  }}
+                  tabStyle={{
+                    marginLeft: 10,
+                    marginRight: 10,
+                    paddingHorizontal: 15,
+                    backgroundColor: "pink",
+                    width: 100,
+                  }}
+                  textStyle={{}}
+                  textActiveStyle={{
+                    color: "red",
+                  }}
+                  header={() => {
+                    return (
+                      <View
+                        style={{
+                          flex: 1,
+                          height: 180,
+                          backgroundColor: "pink",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Text>开始</Text>
+                        <Text>时间戳: {this.state.rootTime}</Text>
+                        <TouchableOpacity onPress={this.pushTips.bind(this)}>
+                          <Text>Push Tips</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={this.pushStack.bind(this)}>
+                          <Text>点击新增Screen(新增Stacks)</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={this.changeUseScroll.bind(this)}>
+                          <Text>
+                            是否使用滚动模式显示Screen: {this.state.useScroll.toString()}
+                          </Text>
+                          <Text>
+                            监听滚动Scroll: {this.state.scroll}
+                          </Text>
+                          <Text>
+                            监听横向滚动Scroll2Horizontal: {this.state.Scroll2Horizontal}
+                          </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                          onPress={() => {
+                            this.scrollableTabView.clearStacks(() => {
+                              this.setState({
+                                firstIndex: 0,
+                                stacks: this.initStacks(),
+                              });
+                            });
+                          }}
+                        >
+                          <Text>清除增加的Screen(即清除Stacks)</Text>
+                        </TouchableOpacity>
+                      </View>
+                    );
+                  }}
+                  firstIndex={this.state.firstIndex}
+                  title={<Title></Title>}
+                  titleArgs={{
+                    interpolateOpacity: {
+                      inputRange: [160, 320],
+                      outputRange: [0.5, 1],
+                      extrapolate: "clamp",
+                    },
+                    style: {},
+                  }}
+                  onScroll={({ nativeEvent }) => {
+                    this.state.scroll = nativeEvent.contentOffset.y;
+                  }}
+                  onScroll2Horizontal={({ nativeEvent }) => {
+                    this.state.Scroll2Horizontal = nativeEvent.contentOffset.x;
+                  }}
+                  onBeforeRefresh={async (next, toggled) => {
+                    toggled();
+                    setTimeout(() => {
+                      toggled();
+                      next();
+                    }, 3000);
+                  }}
+                  toTabsOnTab={false}
+                  oneTabHidden={true}
+                  enableCachePage={false}
+                  fixedTabs={false}
+                  tabsEnableAnimatedUnderlineWidth={30}
+                  tabsEnableAnimated={true}
+                  useScroll={this.state.useScroll}
+                  toHeaderOnTab={true}
+                >
+                </ScrollableTabView>
+              </View>
+            </TestCase>
+          </TestSuite>
+
+          <TestSuite name="TesterScrollableTabviewExample16" >
+            <TestCase
+              tags={['C_API']}
+              itShould="下划线动画,长度为200" >
+              <View style={{ width: '100%', height: 500 }}>
+                <ScrollableTabView
+                  ref={(it) => (this.scrollableTabView = it)}
+                  onTabviewChanged={(index, tabLabel) => {
+                    // console.log(`${index},${tabLabel}`);
+                    this.refreshCurrentTab();
+                  }}
+                  mappingProps={{
+                    rootTime: this.state.rootTime,
+                  }}
+                  stacks={this.state.stacks}
+                  tabsStyle={{ borderTopWidth: 0.5, borderTopColor: "#efefef" }}
+                  tabWrapStyle={(item, index) => {
+                    if (index == 1) return { zIndex: 10 };
+                  }}
+                  useScrollStyle={{
+                    paddingHorizontal: 50,
+                  }}
+                  tabStyle={{
+                    marginLeft: 10,
+                    marginRight: 10,
+                    paddingHorizontal: 15,
+                    backgroundColor: "pink",
+                    width: 100,
+                  }}
+                  textStyle={{}}
+                  textActiveStyle={{
+                    color: "red",
+                  }}
+                  header={() => {
+                    return (
+                      <View
+                        style={{
+                          flex: 1,
+                          height: 180,
+                          backgroundColor: "pink",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Text>开始</Text>
+                        <Text>时间戳: {this.state.rootTime}</Text>
+                        <TouchableOpacity onPress={this.pushTips.bind(this)}>
+                          <Text>Push Tips</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={this.pushStack.bind(this)}>
+                          <Text>点击新增Screen(新增Stacks)</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={this.changeUseScroll.bind(this)}>
+                          <Text>
+                            是否使用滚动模式显示Screen: {this.state.useScroll.toString()}
+                          </Text>
+                          <Text>
+                            监听滚动Scroll: {this.state.scroll}
+                          </Text>
+                          <Text>
+                            监听横向滚动Scroll2Horizontal: {this.state.Scroll2Horizontal}
+                          </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                          onPress={() => {
+                            this.scrollableTabView.clearStacks(() => {
+                              this.setState({
+                                firstIndex: 0,
+                                stacks: this.initStacks(),
+                              });
+                            });
+                          }}
+                        >
+                          <Text>清除增加的Screen(即清除Stacks)</Text>
+                        </TouchableOpacity>
+                      </View>
+                    );
+                  }}
+                  firstIndex={this.state.firstIndex}
+                  title={<Title></Title>}
+                  titleArgs={{
+                    interpolateOpacity: {
+                      inputRange: [160, 320],
+                      outputRange: [0.5, 1],
+                      extrapolate: "clamp",
+                    },
+                    style: {},
+                  }}
+                  onScroll={({ nativeEvent }) => {
+                    this.state.scroll = nativeEvent.contentOffset.y;
+                  }}
+                  onScroll2Horizontal={({ nativeEvent }) => {
+                    this.state.Scroll2Horizontal = nativeEvent.contentOffset.x;
+                  }}
+                  onBeforeRefresh={async (next, toggled) => {
+                    toggled();
+                    setTimeout(() => {
+                      toggled();
+                      next();
+                    }, 3000);
+                  }}
+                  toTabsOnTab={true}
+                  oneTabHidden={true}
+                  enableCachePage={true}
+                  fixedTabs={true}
+                  tabsEnableAnimatedUnderlineWidth={200}
+                  tabsEnableAnimated={true}
+                  useScroll={this.state.useScroll}
+                  toHeaderOnTab={true}
+                >
+                </ScrollableTabView>
+              </View>
+            </TestCase>
+          </TestSuite>
+
+          <TestSuite name="TesterScrollableTabviewExample17" >
+            <TestCase
+              tags={['C_API']}
+              itShould="toTabsOnTab为false,点击Screen2后,下滑,然后再次点击screen2.最上面的title不会收起" >
+              <View style={{ width: '100%', height: 500 }}>
+                <ScrollableTabView
+                  ref={(it) => (this.scrollableTabView = it)}
+                  onTabviewChanged={(index, tabLabel) => {
+                    // console.log(`${index},${tabLabel}`);
+                    this.refreshCurrentTab();
+                  }}
+                  mappingProps={{
+                    rootTime: this.state.rootTime,
+                  }}
+                  stacks={this.state.stacks}
+                  tabsStyle={{ borderTopWidth: 0.5, borderTopColor: "#efefef" }}
+                  tabWrapStyle={(item, index) => {
+                    if (index == 1) return { zIndex: 10 };
+                  }}
+                  useScrollStyle={{
+                    paddingHorizontal: 50,
+                  }}
+                  tabStyle={{
+                    marginLeft: 10,
+                    marginRight: 10,
+                    paddingHorizontal: 15,
+                    backgroundColor: "pink",
+                    width: 100,
+                  }}
+                  textStyle={{}}
+                  textActiveStyle={{
+                    color: "red",
+                  }}
+                  header={() => {
+                    return (
+                      <View
+                        style={{
+                          flex: 1,
+                          height: 180,
+                          backgroundColor: "pink",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Text>开始</Text>
+                        <Text>时间戳: {this.state.rootTime}</Text>
+                        <TouchableOpacity onPress={this.pushTips.bind(this)}>
+                          <Text>Push Tips</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={this.pushStack.bind(this)}>
+                          <Text>点击新增Screen(新增Stacks)</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={this.changeUseScroll.bind(this)}>
+                          <Text>
+                            是否使用滚动模式显示Screen: {this.state.useScroll.toString()}
+                          </Text>
+                          <Text>
+                            监听滚动Scroll: {this.state.scroll}
+                          </Text>
+                          <Text>
+                            监听横向滚动Scroll2Horizontal: {this.state.Scroll2Horizontal}
+                          </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                          onPress={() => {
+                            this.scrollableTabView.clearStacks(() => {
+                              this.setState({
+                                firstIndex: 0,
+                                stacks: this.initStacks(),
+                              });
+                            });
+                          }}
+                        >
+                          <Text>清除增加的Screen(即清除Stacks)</Text>
+                        </TouchableOpacity>
+                      </View>
+                    );
+                  }}
+                  firstIndex={this.state.firstIndex}
+                  title={<Title></Title>}
+                  titleArgs={{
+                    interpolateOpacity: {
+                      inputRange: [160, 320],
+                      outputRange: [0.5, 1],
+                      extrapolate: "clamp",
+                    },
+                    style: {},
+                  }}
+                  onScroll={({ nativeEvent }) => {
+                    this.state.scroll = nativeEvent.contentOffset.y;
+                  }}
+                  onScroll2Horizontal={({ nativeEvent }) => {
+                    this.state.Scroll2Horizontal = nativeEvent.contentOffset.x;
+                  }}
+                  onBeforeRefresh={async (next, toggled) => {
+                    toggled();
+                    setTimeout(() => {
+                      toggled();
+                      next();
+                    }, 3000);
+                  }}
+                  toTabsOnTab={false}
+                  oneTabHidden={true}
+                  enableCachePage={true}
+                  fixedTabs={true}
+                  tabsEnableAnimatedUnderlineWidth={200}
+                  tabsEnableAnimated={false}
+                  useScroll={this.state.useScroll}
+                >
+                </ScrollableTabView>
+              </View>
+            </TestCase>
+          </TestSuite>
+
+          <TestSuite name="TesterScrollableTabviewExample18">
+            <TestCase
+              tags={['C_API']}
+              itShould="未设置组件高度,设置fillscreen为true,点击可以全屏">
+              <View style={{ width: '100%', height: 500 }}>
+                <ScrollableTabView
+                  stacks={[
+                    {
+                      screen: () => {
+                        return (<View style={{ flex: 1, backgroundColor: 'red' }}><Text>第一个页面</Text></View>)
+                      },
+                    },
+                  ]}
+                  fillScreen={true}
+                ></ScrollableTabView>
+              </View>
+            </TestCase>
+          </TestSuite>
+
+          <TestSuite name="TesterScrollableTabviewExample19">
+            <TestCase
+              tags={['C_API']}
+              itShould="未设置组件高度,设置fillscreen为false,点击无法全屏">
+              <View style={{ width: '100%', height: 500 }}>
+                <ScrollableTabView
+                  stacks={[
+                    {
+                      screen: () => {
+                        return (<View style={{ flex: 1, backgroundColor: 'red' }}><Text>第一个页面</Text></View>)
+                      },
+                    },
+                  ]}
+                  fillScreen={false}
+                ></ScrollableTabView>
+              </View>
+            </TestCase>
+          </TestSuite>
+
+          <TestSuite name="TesterScrollableTabviewExample20">
+            <TestCase
+              tags={['C_API']}
+              itShould="这里设置一个一个tabs,并且oneTabHidden为true,故展示图应该空白色">
+              <View style={{ width: '100%', height: 50 }}>
+                <ScrollableTabView
+                  stacks={[
+                    {
+                      screen: () => {
+                        return (<View style={{ flex: 1, backgroundColor: 'red' }}><Text>第一个页面</Text></View>)
+                      },
+                    },
+                  ]}
+                  fillScreen={true}
+                  oneTabHidden={true}
+                ></ScrollableTabView>
+              </View>
+            </TestCase>
+          </TestSuite>
         </ScrollView>
       </Tester>
     );
@@ -1063,6 +1633,5 @@ const styles2 = StyleSheet.create({
     fontSize: 24,
   },
 });
-
 
 console.disableYellowBox = true;
