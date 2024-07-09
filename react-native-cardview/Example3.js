@@ -6,16 +6,16 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
-import CardView from '@react-native-oh-tpl/react-native-cardview';
+import CardView from 'react-native-cardview';
 
 export default class Example3 extends Component {
   render() {
     return (
-      // <SafeAreaView>
+      <SafeAreaView>
         <CardView
           cardElevation={3}
           cardMaxElevation={3}
-          cornerRadius={3}
+          cornerRadius={0}
           style={{
             height: 60,
             justifyContent: 'center',
@@ -43,7 +43,7 @@ export default class Example3 extends Component {
             </Text>
           </View>
         </CardView>
-      // </SafeAreaView>
+      </SafeAreaView>
     );
   }
 }
