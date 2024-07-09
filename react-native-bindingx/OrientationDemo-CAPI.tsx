@@ -8,18 +8,50 @@ import {
     TouchableHighlight,
     ToastAndroid,
     PanResponder,
-    Animated
+    Animated,
+    BackHandler
 } from 'react-native';
-import ReactBindingXModule from '@react-native-oh-tpl/react-native-bindingx'
+import bindingx from 'react-native-bindingx';
+
 export default class OrientationDemo extends React.Component {
     _token = ""
     componentWillUnmount(): void {
         this.onUnBind();
     }
+    componentDidMount(): void {
+        BackHandler.addEventListener(
+          'hardwareBackPress',
+          () => {
+            this.onUnBind();
+            return false;
+          },
+        );
+    }
+
+    constructor(props) {
+        super(props);
+        this.state = {
+        };
+    
+        this.props.navigation.setOptions({
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                this.onUnBind();
+                this.props.navigation.goBack();
+              }}
+            >
+              <Image source={require('./icon_back.png')} style={{marginLeft : 15}} />
+            </TouchableOpacity>
+          ),
+        });
+      }
+
+
     onBind() {
 
         let anchor = findNodeHandle(this.refs._anchor);
-        this._token = ReactBindingXModule.bind({
+        this._token = bindingx.bind({
             eventType: 'orientation',
             options: {
                 sceneType: '2d' //2d场景会返回x,y分量
@@ -37,12 +69,10 @@ export default class OrientationDemo extends React.Component {
                 }
             ]
         });
-
-        // this._token = token.token;
     }
 
     onUnBind() {
-        ReactBindingXModule.unbind({
+        bindingx.unbind({
             token: this._token,
             eventType: 'orientation'
         });

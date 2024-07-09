@@ -7,11 +7,12 @@ import {
     findNodeHandle,
     TouchableHighlight,
     ToastAndroid,
-    PanResponder
+    PanResponder,
+    BackHandler
 } from 'react-native';
 
 import { DeviceEventEmitter } from 'react-native';
-import ReactBindingXModule from '@react-native-oh-tpl/react-native-bindingx'
+import bindingx from 'react-native-bindingx';
 
 
 export default class TimingDemo extends React.Component {
@@ -20,6 +21,37 @@ export default class TimingDemo extends React.Component {
     componentWillUnmount(): void {
         this.onUnBind();
     }
+
+    componentDidMount(): void {
+        BackHandler.addEventListener(
+          'hardwareBackPress',
+          () => {
+            this.onUnBind();
+            return false;
+          },
+        );
+    }
+
+    
+    constructor(props) {
+        super(props);
+        this.state = {
+        };
+        this.props.navigation.setOptions({
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                this.onUnBind();
+                this.props.navigation.goBack();
+              }}
+            >
+              <Image source={require('./icon_back.png')} style={{marginLeft : 15}} />
+            </TouchableOpacity>
+    
+          ),
+        });
+      }
+
 
     onBind() {
 
@@ -34,7 +66,7 @@ export default class TimingDemo extends React.Component {
         let o_origin = `0.5*(1-t/${duration})+0.5`;
 
         let anchor = findNodeHandle(this.refs._anchor);
-        this._token = ReactBindingXModule.bind({
+        this._token = bindingx.bind({
             eventType: 'timing',
             exitExpression: exit_origin,
             props: [
@@ -55,12 +87,10 @@ export default class TimingDemo extends React.Component {
                 }
             ]
         });
-
-        // this._token = token.token;
     }
 
     onUnBind() {
-        ReactBindingXModule.unbind({
+        bindingx.unbind({
             token: this._token,
             eventType: 'timing'
         });
