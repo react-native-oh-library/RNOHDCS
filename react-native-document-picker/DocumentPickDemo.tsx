@@ -1,5 +1,4 @@
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
-// import {TestCase} from '../../components/TestCase';
 import React, {useState} from 'react';
 import {
   Text,
@@ -18,8 +17,8 @@ import {
   DocumentPickerOptions,
   isCancel,
   isInProgress,
-  perPlatformTypes,
 } from 'react-native-document-picker';
+const { perPlatformTypes } = require('react-native-document-picker').default;
 
 
 const typeList = Object.keys(types);
@@ -230,6 +229,24 @@ export default function DocumentPickerDemo(): JSX.Element {
 
         <TestSuite name="document picker">
 
+          {/* 展示常量 */}
+          <TestCase itShould='constant perPlatformTypes' modal={true} >
+            <ScrollView style={{height: 500}} >
+              {
+                Object.keys(perPlatformTypes).map(k => <View key={k} style={{marginTop: 20}}>
+                    <Text style={{fontWeight: '600'}}>{k}</Text>
+                    <Text>{JSON.stringify(perPlatformTypes[k])}</Text>
+                </View>)
+              }
+            </ScrollView>
+          </TestCase>
+
+          <TestCase itShould='constant types' modal={true} >
+            <ScrollView style={{height: 240}} >
+              <Text>{JSON.stringify(types)}</Text>
+            </ScrollView>
+          </TestCase>
+
           <TestCase
             itShould="选择文件"
             tags={['C_API']}
@@ -318,7 +335,7 @@ export default function DocumentPickerDemo(): JSX.Element {
               expect(state).to.be.true;
             }}
           />
-          
+
           <TestCase
             itShould="isInProgress"
             initialState={false}
