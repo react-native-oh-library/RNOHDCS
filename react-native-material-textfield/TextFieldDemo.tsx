@@ -14,49 +14,50 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import {  StyleSheet,Platform,Button} from 'react-native';
+import React,{useState}from 'react';
+import {  StyleSheet,Platform,ScrollView,View,Image, Text} from 'react-native';
 import {
   TextField
 } from 'react-native-material-textfield';
+
+import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
 let defaults = {
   firstname: 'Eddard',
   lastname: 'Stark'
 };
-import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
 
 function TextfieldDemo() { 
+
   const firstnameRef  = React.createRef();;
   const lastnameRef  = React.createRef();
-  const emailRef = React.createRef();
+
   const passwordRef = React.createRef();
-  const [firstnameErrors, setFirstnameRef] = React.useState('');
-  const [lastnameRefErrors, setLastnameRef] = React.useState('');
-  const [emailRefErrors, setEmailRef] = React.useState('');
-  const [passwordRefErrors, setpasswordRef] = React.useState('');
+  const [firstnameErrors, setFirstnameRef] = useState('');
+  const [lastnameRefErrors, setLastnameRef] = useState('');
+  const [passwordRefErrors, setpasswordRef] = useState('');
+  const [lableName, setLableName] = useState('onFoucus is false');
+  const [blurName, setBlurName] = useState('onBlur is false');
 
   const onFirstnameChangeText = (text: React.SetStateAction<string>) => {
+    console.info('text change'+text)
     if(!text) {
       setFirstnameRef('Should not be empty')
     } else {
       setFirstnameRef('')
     }
   };
+
   
   const onLastnameRefChangeText = (text: React.SetStateAction<string>) => {
     if(!text) {
       setLastnameRef('Should not be empty')
     } else {
-      setEmailRef('')
+      setLastnameRef('')
     }
   };
   
-  const onEmialChangeText = (text: React.SetStateAction<string>) => {
-    if(!text) {
-      setEmailRef('Should not be empty')
-    } else {
-      setEmailRef('')
-    } 
+  const onFormatText = (text:string) => {
+    return text.replace(/[^+\d]/g, '');
   };
   
   const onPasswordChangeText = (text: React.SetStateAction<string>) => {
@@ -68,98 +69,533 @@ function TextfieldDemo() {
       setpasswordRef('')
     }
   };
+
+  const TextfielProps = [
+    {
+      key: 'style:disabledLineWidth is 0.5',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        lineType:'solid',
+        disabledLineWidth:0.5
+      }
+    },
+    {
+      key: 'style:disabledLineWidth is 1',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        lineType:'solid',
+        disabledLineWidth:1
+      }
+    },
+    {
+      key: 'style:inputContainerStyle is {"height":"70"}',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        inputContainerStyle: {
+          height: 70,
+        }
+      }
+    },
+    {
+      key: 'style:formatText text.replace(/[^+\d]/g,"")',
+      value: {
+        label:'Phone number',
+        keyboardType:'phone-pad',
+        formatText:onFormatText,
+      }
+    },
+   
+    {
+      key: 'style:containerStyle is {"backgroundColor":"red"}',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        containerStyle: {
+          backgroundColor: 'red',
+          fontSize:26
+        }
+      }
+    },
+    {
+      key: 'style:labelTextStyle is {"backgroundColor":"red"}',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        labelTextStyle: {
+          backgroundColor: 'red',
+        }
+      }
+    },
+    {
+      key: 'style:titleTextStyle is {"backgroundColor":"red"}',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        title:'Choose wisely',
+        titleTextStyle: {
+          backgroundColor: 'red',
+        }
+      }
+    },
+    {
+      key: 'style:affixTextStyle is {"backgroundColor":"red"}',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        prefix:'prefix',
+        affixTextStyle: {
+          backgroundColor: 'red',
+        }
+      }
+    },
+    {
+      key: 'style:error text Should not be empty',
+      value: {
+        ref:firstnameRef,
+        value:'lastname',
+        enablesReturnKeyAutomatically:true,    
+        label:'first Name',
+        onChangeText:onFirstnameChangeText,
+        error:firstnameErrors
+      }
+    },
+    {
+      key: 'style:errorColor is blue',
+      value: {
+        ref:lastnameRef,
+        value:'lastname',
+        enablesReturnKeyAutomatically:true,    
+        label:'first Name',
+        onChangeText:onLastnameRefChangeText,
+        error:lastnameRefErrors,
+        errorColor:'blue'
+      }
+    },
+    {
+      key: 'style:errorColor is red',
+      value: {
+        ref:lastnameRef,
+        value:'lastname',
+        enablesReturnKeyAutomatically:true,    
+        label:'first Name',
+        onChangeText:onLastnameRefChangeText,
+        error:lastnameRefErrors,
+        errorColor:'red'
+      }
+    },
+    {
+      key: 'style:textColor is black',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name'
+      }
+    },
+    {
+      key: 'style:textColor is red',
+      value: {
+        textColor: '#FF0000',
+        value:'Stark',
+        label:'first Name'
+      }
+    },
+    {
+      key: 'style:fontSize is 26',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        fontSize:26
+      }
+    },
+    {
+      key: 'style:fontSize is 30',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        fontSize:30
+      }
+    },
+    {
+      key: 'style:labelFontSize is 20',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        enablesReturnKeyAutomatically:true,
+        labelFontSize:20
+      }
+    },
+    {
+      key: 'style:labelFontSize is 26',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        enablesReturnKeyAutomatically:true,
+        labelFontSize:26
+      }
+    },
+    {
+      key: 'style:lineWidth is 1',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        lineWidth:1
+      }
+    },
+    {
+      key: 'style:lineWidth is 5',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        lineWidth:5
+      }
+    },
+    {
+      key: 'style:activeLineWidth is 4',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        activeLineWidth:4
+      }
+    },
+    {
+      key: 'style:activeLineWidth is 10',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        activeLineWidth:10
+      }
+    },
+    {
+      key: 'style:tintColor is red',
+      value: {
+        textColor: '#FF0000',
+        value:'Stark',
+        label:'first Name',
+        tintColor:'red'
+      }
+    },
+    {
+      key: 'style:tintColor is black',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        tintColor:'red'
+      }
+    },
+    {
+      key: 'style:baseColor is blue',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        baseColor:'blue'
+      }
+    },
+    {
+      key: 'style:label is default name',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'default name',
+      }
+    },
+    {
+      key: 'style:label is frist name',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'frist name',
+      }
+    },
+    {
+      key: 'style:title is Choose wisely',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        title:'Choose wisely'
+      }
+    },
+    {
+      key: 'style:title is Choose ',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        title:'Choose'
+      }
+    },
+    {
+      key: 'style:title is prefix',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        prefix:'prefix'
+      }
+    },
+    {
+      key: 'style:title is prefix frist',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        prefix:'prefix frist'
+      }
+    },
+    {
+      key: 'style:title is suffix',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        suffix:'suffix'
+      }
+    },
+    {
+      key: 'style:title is suffix frist',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        suffix:'suffix frist'
+      }
+    },
+    {
+      key: 'style:lineType is solid',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        lineType:'solid'
+      }
+    },
+    {
+      key: 'style:lineType is dotted',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        lineType:'dotted'
+      }
+    },
+    {
+      key: 'style:lineType is dashed',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        lineType:'dashed'
+      }
+    },
+    {
+      key: 'style:animationDuration is 500',
+      value: {
+        textColor: '#000000',
+        label:'first Name',
+        animationDuration:500
+      }
+    },
+    {
+      key: 'style:animationDuration is 1000',
+      value: {
+        textColor: '#000000',
+        label:'first Name',
+        animationDuration:1000
+      }
+    },
+    {
+      key: 'style:characterRestriction is 50',
+      value: {
+        textColor: '#000000',
+        label:'first Name',
+        characterRestriction:50
+      }
+    },
+    {
+      key: 'style:characterRestriction is 200',
+      value: {
+        textColor: '#000000',
+        label:'first Name',
+        characterRestriction:200
+      }
+    },
+    {
+      key: 'style:disabledLineType is dotted',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        lineType:'dotted'
+      }
+    },
+    {
+      key: 'style:disabledLineType is solid',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        lineType:'solid'
+      }
+    },
+    {
+      key: 'style:disabledLineType is dashed',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        lineType:'dashed'
+      }
+    },
+    {
+      key: 'style:disabled is true',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        disabled:true
+      }
+    },
+    {
+      key: 'style:editable is true',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        editable:true
+      }
+    },
+    {
+      key: 'style:multiline is true',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        multiline:true
+      }
+    },
+    {
+      key: 'style:contentInset is {"top":"5","left":"20","right":"0","label":"4","input":"8"}',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        contentInset:{top:5,left:20,right:0,label:4,input:8}
+      }
+    },
+    {
+      key: 'style:labelOffset is {"x0":"2","y0":"2","x1":"4","y1":"4"}',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        labelOffset:{x0:2,y0:2,x1:4,y1:4}
+      }
+    },
+    {
+      key: 'style:keyboardType is email-address',
+      value: {
+        ref:passwordRef,
+        value:'lastname',
+        enablesReturnKeyAutomatically:true,    
+        label:'first Name',
+        keyboardType:'email-address'
+      }
+    },
+    {
+      key: 'function:ChangeText',
+      value: {
+        ref:passwordRef,
+        value:'lastname',
+        enablesReturnKeyAutomatically:true,    
+        label:'first Name',
+        onChangeText:onPasswordChangeText,
+        error:passwordRefErrors
+      }
+    },
+  ]
   
   return (
-    <Tester>
-    <TestSuite name='MaterialTextfielText' >
-        <TestCase itShould='Default Material Textfiel Text'>
-          <TextField
-                ref={firstnameRef}
-                value={defaults.lastname}
-                autoCorrect={false}
-                enablesReturnKeyAutomatically={true}      
-                returnKeyType='next'
-                label='first Name'
-                onChangeText = {onFirstnameChangeText}
-                error={firstnameErrors}
-              />    
-        </TestCase>
-        <TestCase itShould='Flat input large font'>
-            <TextField
-                  ref={lastnameRef}
-                  value={defaults.firstname}
-                  fontSize= {26}
-                  autoCorrect={false}
-                  enablesReturnKeyAutomatically={true}      
-                  returnKeyType='next'
-                  label='Last Name'
-                  onChangeText = {onLastnameRefChangeText}
-                  error={lastnameRefErrors}
-                />    
-        </TestCase>
-
-        <TestCase itShould='Flat input email large font'>
-             <TextField
-                ref={emailRef}
-                keyboardType='email-address'
-                autoCapitalize='none'
-                autoCorrect={false}
-                enablesReturnKeyAutomatically={true}
-                returnKeyType='next'
-                label='Email Address'
-                fontSize= {26}
-                onChangeText = {onEmialChangeText}
-                error={emailRefErrors}
-              />  
-        </TestCase>
-
-        <TestCase itShould='Flat input password large font'>
-            <TextField 
-                ref={passwordRef}
-                autoCapitalize='none'
-                autoCorrect={false}
-                enablesReturnKeyAutomatically={true}
-                returnKeyType='done'
-                label='Password'
-                title='Choose wisely'
-                secureTextEntry = {true}
-                maxLength={30}
-                fontSize= {26}
-                onChangeText = {onPasswordChangeText}
-                characterRestriction={20}
-                error={passwordRefErrors}
-              />   
-        </TestCase>
+    <ScrollView>
+        <Tester>
     
-     </TestSuite>
-    </Tester>
-  )
+        <TestCase itShould='renderLeftAccessory Text '>
+            <TextField
+                  value={defaults.lastname}
+                  label='first Name'
+                  renderLeftAccessory={() => (  
+                    <Image source={require('./assets/images/favorite.png')}></Image>
+                  )}  
+                />    
+          </TestCase>
+          <TestCase itShould='renderRightAccessory Text '>
+            <TextField
+                  value={defaults.lastname}
+                  label='first Name'
+                  renderRightAccessory={() => (  
+                    <Image source={require('./assets/images/favorite.png')}></Image>
+                  )}  
+                />    
+          </TestCase>npm 
+          <TestCase itShould='onFocus is true'>
+            <TextField
+                  label={lableName}
+                  onFocus={() => (  
+                    setLableName('onFocus true')
+                  )}  
+                />    
+          </TestCase>
+          <TestCase itShould='onBlur is true'>
+            <TextField
+                  label={blurName}
+                  onBlur={() => (  
+                
+                    setBlurName('onBlur true')
+                  )}  
+                />    
+          </TestCase>
+            {TextfielProps.map((item) => {
+                return (
+                    <TestCase itShould={item.key} tags={['Textfiel']} key={item.key}>
+                        <TextField 
+                           {...item.value}
+                          ></TextField>
+                    </TestCase>
+                );
+            })}
+        </Tester>
+    </ScrollView>
+   );
 }
+
 
 export default TextfieldDemo ;
 
-
 const styles = StyleSheet.create({
-  safeContainer: {
-    flex: 1,
-    backgroundColor: '#FFFFFF',
-  },
-  scroll: {
-    backgroundColor: 'transparent',
-  },
+  textArea: {
+    height: 30,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
 
-  container: {
-    margin: 8,
-    marginTop: Platform.select({ harmony:8,ios: 8,android: 32 }),
-    flex: 1,
   },
-
-  contentContainer: {
-    padding: 8,
-  },
-
-  buttonContainer: {
-    paddingTop: 8,
-    margin: 8,
-  }
 });

@@ -1,20 +1,56 @@
-import {Button, Text, View, Alert} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import RNRestart from 'react-native-restart';
-import {Tester, TestSuite} from '@rnoh/testerino';
-import {TestCase} from '../../components/TestCase';
+import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
 
-
-export default function RestartDemoTester() {
+export function RestartDemoTester() {
   return (
     <Tester>
       <TestSuite name="restart">
-        <TestCase.Example tags={['C_API']} itShould="restart">
-          <Button title="重启(restart)" onPress={() => RNRestart.restart()} />
-        </TestCase.Example>
-        <TestCase.Example tags={['C_API']} itShould="Restart">
-          <Button title="重启(Restart)" onPress={() => RNRestart.Restart()} />
-        </TestCase.Example>
+        <TestCase tags={['C_API']} itShould="restart">
+          <Text
+            style={styles.button}
+            onPress={() => RNRestart.restart('restart_a')}>
+            restart
+          </Text>
+        </TestCase>
+        <TestCase tags={['C_API']} itShould="Restart">
+          <Text
+            style={styles.button}
+            onPress={() => RNRestart.Restart('restart_b')}>
+            Restart
+          </Text>
+        </TestCase>
+        <TestCase
+          tags={['C_API']}
+          itShould="getReason"
+          initialState={'reason'}
+          arrange={({setState}) => {
+            return (
+              <Text
+                style={styles.button}
+                onPress={async () => {
+                  const reason = await RNRestart.getReason();
+                  setState(reason);
+                }}>
+                getReason
+              </Text>
+            );
+          }}
+          assert={async ({expect, state}) => {
+            expect(state).include('restart_');
+          }}
+        />
       </TestSuite>
     </Tester>
   );
 }
+
+const styles = StyleSheet.create({
+  button: {
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    backgroundColor: 'hsl(193, 95%, 68%)',
+    borderWidth: 2,
+    borderColor: 'hsl(193, 95%, 30%)',
+  },
+});
