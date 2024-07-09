@@ -8,7 +8,7 @@ import {
     TouchableHighlight,
     ToastAndroid,
     PanResponder,
-    BackHandler
+    BackHandler,TouchableOpacity,Image
 } from 'react-native';
 
 import { DeviceEventEmitter } from 'react-native';

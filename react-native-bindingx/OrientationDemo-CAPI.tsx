@@ -9,7 +9,7 @@ import {
     ToastAndroid,
     PanResponder,
     Animated,
-    BackHandler
+    BackHandler,TouchableOpacity,Image
 } from 'react-native';
 import bindingx from 'react-native-bindingx';
 
