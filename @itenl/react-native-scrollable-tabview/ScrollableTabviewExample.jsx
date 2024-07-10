@@ -1615,6 +1615,7 @@ export default class ScrollableTabviewExample extends React.Component {
               itShould="errorToThrow为true,先点击按键,再点击screen,会打印对应日志">
               <View style={{ width: '100%', height: 200 }}>
                 <Button
+                  title='errorToThrow 为 true'
                   onPress={() => {
                     const errorToThrow = true;
                     this.handleButtonClick(errorToThrow)
@@ -1639,6 +1640,7 @@ export default class ScrollableTabviewExample extends React.Component {
               itShould="errorToThrow为false,先点击按键,再点击screen,会打印对应日志">
               <View style={{ width: '100%', height: 200 }}>
                 <Button
+                  title='errorToThrow 为 false'
                   onPress={() => {
                     const errorToThrow = false;
                     this.handleButtonClick(errorToThrow)
