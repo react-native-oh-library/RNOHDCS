@@ -317,7 +317,7 @@ export default function HtmlViewExample() {
                 <TestSuite name="TesterHtmlViewExample15">
                     <TestCase
                         tags={['C_API']}
-                        itShould="段落换行控制,搭配paragraphBreak和lineBreak使用.当addLineBreaks为false,lineBreak换行操作不会生效">
+                        itShould="段落换行控制,搭配paragraphBreak和lineBreak使用.当addLineBreaks为true,lineBreak换行操作不会生效">
                         <HTMLView
                             value={htmlContent6}
                             addLineBreaks={true}
