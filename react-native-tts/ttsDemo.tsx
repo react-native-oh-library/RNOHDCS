@@ -1,6 +1,6 @@
 import {Text, StyleSheet, ScrollView} from 'react-native';
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
-import Tts from 'react-native-tts';
+import Tts, {TtsEvents} from 'react-native-tts';
 
 const speakText = `炎炎夏日，阳光如烈火般炙烤大地。`;
 
@@ -8,7 +8,47 @@ const speakText2 = `秋天，一抹深沉的金黄漫过天际，叶片如蝶般
 
 type SetStateProps = React.Dispatch<React.SetStateAction<boolean>>;
 
+type fnBackProps = Promise<boolean | string | number | void>;
+
 export function TTSDemo() {
+  const eventTypes: TtsEvents[] = [
+    'tts-start',
+    'tts-finish',
+    'tts-error',
+    'tts-cancel',
+    'tts-progress',
+  ];
+
+  const caseAddEventList = eventTypes.map(event => {
+    return {
+      describe: `addEventListener（${event}）`,
+      cn: '添加事件监听',
+      key: `addEventListener （${event}）`,
+      name: 'addEventListener',
+      value: event,
+      defineFn: (setState?: SetStateProps) => {
+        Tts.addEventListener(event, () => {
+          setState?.(true);
+        });
+      },
+    };
+  });
+
+  const caseRemoveEventList = eventTypes.map(event => {
+    return {
+      describe: `removeEventListener（${event}）`,
+      cn: '移除事件监听',
+      key: `removeEventListener （${event}）`,
+      name: 'removeEventListener',
+      value: event,
+      defineFn: (setState?: SetStateProps) => {
+        Tts.removeEventListener(event, () => {
+          setState?.(true);
+        });
+      },
+    };
+  });
+
   const caseList = [
     {
       describe: 'getInitStatus',
@@ -16,7 +56,7 @@ export function TTSDemo() {
       key: 'getInitStatus',
       name: 'getInitStatus',
       value: '',
-      fn: () => Tts.getInitStatus,
+      fn: (): fnBackProps => Tts.getInitStatus(),
     },
     {
       describe: 'speak（short）',
@@ -24,7 +64,7 @@ export function TTSDemo() {
       key: 'speak_a',
       name: 'speak',
       value: speakText,
-      fn: (setState?: SetStateProps) => {
+      defineFn: (setState?: SetStateProps) => {
         const id = Tts.speak(speakText);
         setState?.(!!id);
       },
@@ -35,42 +75,26 @@ export function TTSDemo() {
       key: 'speak_b',
       name: 'speak',
       value: speakText2,
-      fn: (setState?: SetStateProps) => {
+      defineFn: (setState?: SetStateProps) => {
         const id = Tts.speak(speakText2);
         setState?.(!!id);
       },
     },
     {
-      describe: 'stop（ignore）',
-      cn: '结束播放，忽略单词',
-      key: 'stop_ignore',
+      describe: 'stop',
+      cn: '结束播放',
+      key: 'stop',
       name: 'stop',
       value: false,
-      fn: () => Tts.stop(false),
+      fn: (): fnBackProps => Tts.stop(false),
     },
     {
-      describe: 'stop（wait）',
-      cn: '结束播放，等待单词',
-      key: 'stop_wait',
-      name: 'stop',
-      value: true,
-      fn: () => Tts.stop(true),
-    },
-    {
-      describe: 'pause（ignore）',
-      cn: '暂停播放，忽略单词',
-      key: 'pause_ignore',
+      describe: 'pause',
+      cn: '暂停播放',
+      key: 'pause',
       name: 'pause',
       value: false,
-      fn: () => Tts.pause(false),
-    },
-    {
-      describe: 'pause（wait）',
-      cn: '暂停播放，等待单词',
-      key: 'pause_wait',
-      name: 'pause',
-      value: true,
-      fn: () => Tts.pause(true),
+      fn: (): fnBackProps => Tts.pause(false),
     },
     {
       describe: 'resume',
@@ -78,15 +102,15 @@ export function TTSDemo() {
       key: 'resume',
       name: 'resume',
       value: '',
-      fn: () => Tts.resume(),
+      fn: (): fnBackProps => Tts.resume(),
     },
     {
-      describe: 'setDefaultRate（2）',
-      cn: '设置默认语速，语速为2',
-      key: 'setDefaultRate(2)',
+      describe: 'setDefaultRate（0.8）',
+      cn: '设置默认语速，语速为0.8',
+      key: 'setDefaultRate(0.8)',
       name: 'setDefaultRate',
-      value: 2,
-      fn: () => Tts.setDefaultRate(2),
+      value: 0.8,
+      fn: (): fnBackProps => Tts.setDefaultRate(0.8),
     },
     {
       describe: 'setDefaultRate（0.5）',
@@ -94,65 +118,52 @@ export function TTSDemo() {
       key: 'setDefaultRate(0.5)',
       name: 'setDefaultRate',
       value: 0.5,
-      fn: () => Tts.setDefaultRate(0.5),
+      fn: (): fnBackProps => Tts.setDefaultRate(0.5),
     },
     {
-      describe: 'setDefaultPitch(2)',
+      describe: 'setDefaultPitch(1)',
       cn: '设置默认音调',
-      key: 'setDefaultPitch(2)',
+      key: 'setDefaultPitch(1)',
       name: 'setDefaultPitch',
-      value: 2,
-      fn: () => Tts.setDefaultPitch(2),
+      value: 1,
+      fn: (): fnBackProps => Tts.setDefaultPitch(1),
     },
     {
-      describe: 'setDefaultPitch(0.5)',
+      describe: 'setDefaultPitch(1.5)',
       cn: '设置默认音调',
-      key: 'setDefaultPitch(0.5)',
+      key: 'setDefaultPitch(1.5)',
       name: 'setDefaultPitch',
-      value: 0.5,
-      fn: () => Tts.setDefaultPitch(0.5),
+      value: 1.5,
+      fn: (): fnBackProps => Tts.setDefaultPitch(1.5),
     },
     {
       describe: 'voices',
-      cn: '设置默认音调',
+      cn: '获取音色列表',
       key: 'voices',
       name: 'voices',
       value: '',
-      fn: (setState?: SetStateProps) => {
+      defineFn: (setState?: SetStateProps) => {
         Tts.voices().then(res => {
           setState?.(!!res.length);
         });
       },
     },
-    {
-      describe: 'addEventListener',
-      cn: '添加事件监听',
-      key: 'addEventListener',
-      name: 'addEventListener',
-      value: 'tts-start',
-      fn: (setState?: SetStateProps) => {
-        Tts.addEventListener('tts-start', () => {
-          setState?.(true);
-        });
-      },
-    },
-    {
-      describe: 'removeEventListener',
-      cn: '移除事件监听',
-      key: 'removeEventListener',
-      name: 'removeEventListener',
-      value: '',
-      fn: (setState?: SetStateProps) => {
-        Tts.removeEventListener('tts-start', () => {
-          setState?.(true);
-        });
-      },
-    },
+    ...caseAddEventList,
+    ...caseRemoveEventList,
   ];
   return (
     <Tester>
       <ScrollView>
         <TestSuite name="react-native-tts">
+          <TestCase tags={['C_API']} itShould="error回调专用">
+            <Text
+              style={styles.button}
+              onPress={() => {
+                Tts.speak(123);
+              }}>
+              触发异常
+            </Text>
+          </TestCase>
           {caseList.map(item => {
             return (
               <TestCase
@@ -164,7 +175,11 @@ export function TTSDemo() {
                   return (
                     <Text
                       style={styles.button}
-                      onPress={() => item.fn(setState)}>
+                      onPress={() =>
+                        item.defineFn
+                          ? item.defineFn(setState)
+                          : item.fn().then(() => setState(true))
+                      }>
                       {item.name}
                     </Text>
                   );
@@ -176,6 +191,7 @@ export function TTSDemo() {
             );
           })}
         </TestSuite>
+        <Text style={{marginBottom: 100}}></Text>
       </ScrollView>
     </Tester>
   );

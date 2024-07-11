@@ -19,6 +19,7 @@ import {
 function AppGuide() {
   const [isVisible, setIsVisible] = React.useState(false);
   const appContentRef = React.useRef(null);
+  const [currentTourKey, setCurrentTourKey] = React.useState('');
 
   const hideVisible = () => {
     setIsVisible(false)
@@ -42,7 +43,7 @@ function AppGuide() {
             </TourGuideProvider>
           </View>
         </TestCase>
-        <ScrollView style={Platform.OS != 'harmony' ? { marginBottom: 800 } : null}>
+        <ScrollView style={Platform.OS != 'harmony' ? { marginBottom: 800 } : { marginBottom: 550 }}>
           <TestCase
             itShould={'canStart'}
             tags={["C_API"]}
@@ -89,10 +90,14 @@ function AppGuide() {
             tags={["C_API"]}
             initialState={undefined}
             arrange={({ setState }) =>
-              <Button onPress={() => {
-                let t = appContentRef.current?.getTourKey()
-                setState(t ? true : false)
-              }} title={'tourKey'}></Button>
+              <>
+                <Text>tourKey:{currentTourKey}</Text>
+                <Button onPress={() => {
+                  let t = appContentRef.current?.getTourKey();
+                  setCurrentTourKey(t);
+                  setState(t ? true : false)
+                }} title={'tourKey'}></Button>
+              </>
             }
             assert={({ expect, state }) => {
               expect(state).to.be.eq(true);
@@ -112,6 +117,16 @@ function AppGuide() {
               expect(state).to.be.eq(100);
             }}
           />
+          <TestCase
+            itShould={'TourGuideZone和TourGuideZoneByPosition都为组件'}
+            tags={["C_API"]}>
+            <Text>TourGuideZone为组件，显示页面中的引导区域弹窗步骤引导</Text>
+          </TestCase>
+          <TestCase
+            itShould={'TourGuideZoneByPosition都为组件'}
+            tags={["C_API"]}>
+            <Text>TourGuideZoneByPosition为组件，控制页面中引导区域显示位置</Text>
+          </TestCase>
         </ScrollView>
       </Tester>
     </View>
