@@ -10,6 +10,10 @@ export function NativeDropDownPickerCom() {
       { label: 'Apple', value: 'apple', parent: "banana" },
       { label: 'Banana', value: 'banana' },
       { label: 'Pear', value: 'pear' },
+      { label: 'Pear2', value: 'pear2' },
+      { label: 'Pear3', value: 'pear3' },
+      { label: 'Pear4', value: 'pear4' },
+      { label: 'Pear5', value: 'pear5' },
     ]
   );
   const [open1, setOpen1] = useState(false);
@@ -48,10 +52,32 @@ export function NativeDropDownPickerCom() {
   const [value17, setValue17] = useState(null);
   const [open18, setOpen18] = useState(false);
   const [value18, setValue18] = useState(null);
+  const [open19, setOpen19] = useState(false);
+  const [value19, setValue19] = useState(null);
   return (
     <Tester>
       <ScrollView style={styles.container}>
         <TestSuite name='DropDownPickerDemo'>
+        <TestCase itShould='{textStyle:fontSize:20}'>
+            <ScrollView   style={{height:400,width:'100%'}}>
+              <DropDownPicker
+                open={open19}
+                value={value19}
+                items={items}
+                setOpen={setOpen19}
+                setValue={(e) => {
+                  setValue19(e)
+                }}
+                setItems={setItems}
+                textStyle={{fontSize:20}}
+                theme="DARK"
+                multiple={true}
+                maxHeight={300}
+                mode="BADGE"
+                badgeDotColors={["#e76f51", "#00b4d8", "#e9c46a", "#e76f51", "#8ac926", "#00b4d8", "#e9c46a"]}
+              />
+            </ScrollView>
+          </TestCase>
           <TestCase itShould='{mode:"SIMPLE"}'>
             <ScrollView   style={{height:250,width:'100%'}}>
               <DropDownPicker
