@@ -9,10 +9,11 @@ const CheckboxItem = Checkbox.CheckboxItem;
 
 export default () => {
   const [checked, setChecked] = useState(false);
+  const [checked1, setChecked1] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [checkboxItem1, setCheckboxItem1] = useState(true);
   const onChange = (e: { target: { checked: boolean } }) => {
-    console.log(`checked = ${e.target.checked}`)
+    setChecked1(e.target.checked);
   }
 
   const toggleChecked = () => {
@@ -24,7 +25,6 @@ export default () => {
   }
 
   const onChange2 = (e: { target: { checked: boolean } }) => {
-    console.log('checked = ', e.target.checked);
     setChecked(e.target.checked);
   }
   const label = `${checked ? 'Checked' : 'Unchecked'}-${disabled ? 'Disabled' : 'Enabled'}`
@@ -45,7 +45,7 @@ export default () => {
         arrange={({ setState }: any) =>
           <List>
             <List.Item
-              thumb={<Checkbox onChange={(e: { target: { checked: boolean } }) => {
+              thumb={<Checkbox checked={checked1} onChange={(e: { target: { checked: boolean } }) => {
                 onChange(e);
                 setState(true);
               }}>Checkbox</Checkbox>}

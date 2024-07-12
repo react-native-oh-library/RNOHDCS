@@ -106,11 +106,6 @@ export function IndexPage({ hasHeader }: { hasHeader: boolean }) {
             paddingHorizontal: 16,
             paddingVertical: 16,
           }}>
-          <Image
-            style={{width: 32, height: 32}}
-            resizeMode="contain"
-            source={require('../assets/react-native-logo.png')}
-          />
           <Text
             style={{
               color: '#EEE',

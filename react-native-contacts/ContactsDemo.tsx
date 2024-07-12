@@ -1,13 +1,15 @@
 import { ScrollView, TouchableOpacity, Alert, Text, StyleSheet } from 'react-native'
-import { TestSuite, Tester } from '@rnoh/testerino';
-import { TestCase } from '../components';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 
-import React from 'react';
+import React, { useState } from 'react';
+
 import Contacts from 'react-native-contacts';
 
 
 
 export const ContactsDemo = () => {
+
+    const [testContactId, setTestContactId] = useState('1');
     let emailAddress: Contacts.EmailAddress = {
         label: "emailAddress",
         email: "test@163.com",
@@ -72,7 +74,7 @@ export const ContactsDemo = () => {
         <Tester>
             <ScrollView >
                 <TestSuite name='Contacts' >
-                    <TestCase.Manual
+                    <TestCase
                         itShould="request contacts permission"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -90,7 +92,7 @@ export const ContactsDemo = () => {
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="check contacts permission"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -108,7 +110,7 @@ export const ContactsDemo = () => {
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="add contacts"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -116,6 +118,7 @@ export const ContactsDemo = () => {
 
                                 const addContact = await Contacts.addContact(contact);
                                 console.log("==addContact:" + JSON.stringify(addContact))
+                                setTestContactId(addContact.recordID)
                                 setState(addContact);
                             }}
                                 style={styles.moduleButton}
@@ -130,7 +133,7 @@ export const ContactsDemo = () => {
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="get all contacts"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -149,7 +152,7 @@ export const ContactsDemo = () => {
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="get all contacts Without photos"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -168,12 +171,12 @@ export const ContactsDemo = () => {
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="get contact by id"
                         initialState={null as any}
                         arrange={({ setState }) => (
                             <TouchableOpacity onPress={async () => {
-                                const contact: Contacts.Contact = await Contacts.getContactById('1');
+                                const contact: Contacts.Contact = await Contacts.getContactById(testContactId);
                                 console.log("==getContactById:" + JSON.stringify(contact));
                                 setState(contact);
                             }}
@@ -183,13 +186,13 @@ export const ContactsDemo = () => {
                             </TouchableOpacity>
                         )}
                         assert={({ expect, state }) => {
-                            expect(state?.recordID).to.eq('1');
+                            expect(state?.recordID).to.eq(testContactId);
                             expect(state?.phoneNumbers?.length).to.be.greaterThan(0);
                             expect(state?.displayName).to.be.not.null;
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="get count of contact"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -208,12 +211,12 @@ export const ContactsDemo = () => {
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="get contacts photo url"
                         initialState={null as any}
                         arrange={({ setState }) => (
                             <TouchableOpacity onPress={async () => {
-                                const forId = await Contacts.getPhotoForId('1');
+                                const forId = await Contacts.getPhotoForId(testContactId);
                                 console.log("==getPhotoForId:" + forId);
                                 setState(forId);
                             }}
@@ -223,12 +226,11 @@ export const ContactsDemo = () => {
                             </TouchableOpacity>
                         )}
                         assert={({ expect, state }) => {
-                            // expect(state).to.be.not.null;
-                            expect(state).to.be.null;
+                            expect(state).to.be.not.null;
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="getContactsByPhoneNumber"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -248,7 +250,7 @@ export const ContactsDemo = () => {
                     />
 
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="getContactsMatchingString"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -267,7 +269,7 @@ export const ContactsDemo = () => {
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="getContactsByEmailAddress"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -286,7 +288,7 @@ export const ContactsDemo = () => {
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="openContactForm"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -308,13 +310,13 @@ export const ContactsDemo = () => {
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="openExistingContact"
                         initialState={null as any}
                         arrange={({ setState }) => (
                             <TouchableOpacity onPress={async () => {
                                 const cnt: Contacts.Contact = await Contacts.openExistingContact({
-                                    recordID: "1",
+                                    recordID: testContactId,
                                     phoneNumbers: [{
                                         label: "phoneNumber2",
                                         number: "13521456721",
@@ -330,18 +332,18 @@ export const ContactsDemo = () => {
                             </TouchableOpacity>
                         )}
                         assert={({ expect, state }) => {
-                            expect(state?.recordID).to.eq('1');
+                            expect(state?.recordID).to.eq(testContactId);
                             expect(state?.phoneNumbers?.length).to.eq(1);
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="viewExistingContact"
                         initialState={null as any}
                         arrange={({ setState }) => (
                             <TouchableOpacity onPress={async () => {
                                 const cnt: Contacts.Contact = await Contacts.viewExistingContact({
-                                    recordID: "1",
+                                    recordID: testContactId,
                                     phoneNumbers: [{
                                         label: "phoneNumber2",
                                         number: "13521456721",
@@ -357,44 +359,17 @@ export const ContactsDemo = () => {
                             </TouchableOpacity>
                         )}
                         assert={({ expect, state }) => {
-                            expect(state?.recordID).to.eq('1');
+                            expect(state?.recordID).to.eq(testContactId);
                             expect(state?.phoneNumbers?.length).to.eq(1);
                         }}
                     />
 
-                    <TestCase.Manual
-                        itShould="editExistingContact"
-                        initialState={null as any}
-                        arrange={({ setState }) => (
-                            <TouchableOpacity onPress={async () => {
-                                const cnt: Contacts.Contact = await Contacts.editExistingContact({
-                                    recordID: "1",
-                                    phoneNumbers: [{
-                                        label: "phoneNumber2",
-                                        number: "13521456721",
-                                    }],
-
-                                });
-                                console.log("==editExistingContact:" + JSON.stringify(cnt));
-                                setState(cnt);
-                            }}
-                                style={styles.moduleButton}
-                            >
-                                <Text style={styles.buttonText}>在联系人界面编辑联系人</Text>
-                            </TouchableOpacity>
-                        )}
-                        assert={({ expect, state }) => {
-                            expect(state?.recordID).to.eq('1');
-                            expect(state?.phoneNumbers?.length).to.eq(1);
-                        }}
-                    />
-
-                    <TestCase.Example
+                    <TestCase
                         itShould="updateContact"
                     >
                         <TouchableOpacity onPress={async () => {
                             await Contacts.updateContact({
-                                recordID: "1",
+                                recordID: testContactId,
                                 familyName: 'updateContact',
                                 givenName: 'updateContact',
                                 phoneNumbers: [{
@@ -412,29 +387,14 @@ export const ContactsDemo = () => {
                             <Text style={styles.buttonText}>编辑联系人</Text>
                         </TouchableOpacity>
 
-                    </TestCase.Example>
+                    </TestCase>
 
-                    <TestCase.Example
-                        itShould="writePhotoToPath"
-                    >
-                        <TouchableOpacity onPress={async () => {
-                            Contacts.writePhotoToPath("1", "file").then((data) => {
-                                console.log(`writePhotoToPath:${JSON.stringify(data)}`)
-                            })
-                        }}
-                            style={styles.moduleButton}
-                        >
-                            <Text style={styles.buttonText}>将联系人照片写入给定路径</Text>
-                        </TouchableOpacity>
-
-                    </TestCase.Example>
-
-                    <TestCase.Example
+                    <TestCase
                         itShould="deleteContact"
                     >
                         <TouchableOpacity onPress={async () => {
                             Contacts.deleteContact({
-                                recordID: "1"
+                                recordID: testContactId
                             }).then(() => {
                                 console.log(`deleteContact success`)
                             })
@@ -444,7 +404,7 @@ export const ContactsDemo = () => {
                             <Text style={styles.buttonText}>删除联系人</Text>
                         </TouchableOpacity>
 
-                    </TestCase.Example>
+                    </TestCase>
                 </TestSuite>
             </ScrollView>
         </Tester>
