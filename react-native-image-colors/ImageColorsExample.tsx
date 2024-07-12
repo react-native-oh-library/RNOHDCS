@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import {getColors, cache} from 'react-native-image-colors';
 
-const imgCat = require('./cat.jpg');
+const imgCat = require('../assets/cat.jpg');
 const yunaUrl =
   'http://gips0.baidu.com/it/u=1690853528,2506870245&fm=3028&app=3028&f=JPEG&fmt=auto?w=1024&h=1024';
 const base =

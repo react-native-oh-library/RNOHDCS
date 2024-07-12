@@ -243,6 +243,7 @@ const DATA = [
 
 export default class ScrollableTabviewExample extends React.Component {
 
+
   constructor(props) {
     super(props);
     this.state = {
@@ -1615,6 +1616,7 @@ export default class ScrollableTabviewExample extends React.Component {
               itShould="errorToThrow为true,先点击按键,再点击screen,会打印对应日志">
               <View style={{ width: '100%', height: 200 }}>
                 <Button
+                  title='errorToThrow 为 true'
                   onPress={() => {
                     const errorToThrow = true;
                     this.handleButtonClick(errorToThrow)
@@ -1639,6 +1641,7 @@ export default class ScrollableTabviewExample extends React.Component {
               itShould="errorToThrow为false,先点击按键,再点击screen,会打印对应日志">
               <View style={{ width: '100%', height: 200 }}>
                 <Button
+                  title='errorToThrow 为 false'
                   onPress={() => {
                     const errorToThrow = false;
                     this.handleButtonClick(errorToThrow)
@@ -1810,6 +1813,16 @@ export default class ScrollableTabviewExample extends React.Component {
                   onEndReachedThreshold={0.1}
                 >
                 </ScrollableTabView>
+              </View>
+            </TestCase>
+          </TestSuite>
+
+          <TestSuite name="TesterScrollableTabviewExample26" >
+            <TestCase
+              tags={['C_API']}
+              itShould="syncToSticky为true/false" >
+              <View style={{ width: '100%', height: 80 }}>
+                <Text>因为该更新涉及到组件的生命周期,见ScrollableTabviewExample3和ScrollableTabviewExample4.jsx</Text>
               </View>
             </TestCase>
           </TestSuite>
