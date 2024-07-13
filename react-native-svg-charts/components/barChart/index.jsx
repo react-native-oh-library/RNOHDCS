@@ -1,6 +1,7 @@
 import { genCommonProps } from '../../genUtil';
 import { GenMain, TestItem } from '../../gen';
 
+import BarChartExample from './BarChartExample';
 import GroupedBarChartExample from './GroupedBarChartExample';
 import BarChartHorizontalWithLabels from './BarChartHorizontalWithLabels';
 import BarChartVerticalWithLabels from './BarChartVerticalWithLabels';
@@ -25,13 +26,13 @@ const barProps = [
   {
     type: 'spacingInner',
     key: 'spacingInner',
-    values: [{ spacingInner: 0.05 }, { spacingInner: 0.08 }],
+    values: [{ spacingInner: 0.05 }, { spacingInner: 0.5 }],
     title: 'spacingInner',
   },
   {
     type: 'spacingOuter',
     key: 'spacingOuter',
-    values: [{ spacingOuter: 0.05 }, { spacingOuter: 0.08 }],
+    values: [{ spacingOuter: 0.05 }, { spacingOuter: 1 }],
     title: 'spacingOuter',
   },
 ]
@@ -74,8 +75,24 @@ export default function () {
     <TestItem desc='XAxis'>
       <XAxisExample></XAxisExample>
     </TestItem>
-
-
-
+    <TestItem desc="style={{ flex: 1, marginLeft: 8 }}
+                    data={[ 50, 10, 40, 95, 85 ]}
+                    horizontal={true}
+                    svg={{ fill: 'rgba(134, 65, 244, 0.8)', }}
+                    contentInset={{ top: 10, bottom: 10 }}
+                    spacingInner={0.2}
+                    gridMin={0}">
+      <BarChartExample></BarChartExample>
+    </TestItem>
+    <TestItem desc="style={{ flex: 1, marginLeft: 8 }}
+                    data={[ 50, 10, 40, 95, 85 ]}
+                    horizontal={true}
+                    svg={{ fill: 'rgba(134, 65, 244, 0.8)', }}
+                    contentInset={{ top: 10, bottom: 10 }}
+                    spacingInner={0.2}
+                    gridMin={0}
+                    belowChart={false}">
+      <BarChartExample belowChart={false}></BarChartExample>
+    </TestItem>
   </GenMain >
 }

@@ -7,11 +7,11 @@ import PieChart from './pieChart';
 import progressCircle from './progressCircle';
 
 export default {
-    AreaChart,
-    StackedAreaChart,
-    BarChart,
-    StackedBarChart,
-    LineChart,
-    PieChart,
-    progressCircle,
+  AreaChart,
+  StackedAreaChart,
+  BarChart,
+  StackedBarChart,
+  LineChart,
+  PieChart,
+  progressCircle,
 }
