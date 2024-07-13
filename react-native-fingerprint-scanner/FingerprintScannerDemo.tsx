@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, Button, Alert, TouchableOpacity } from 'react-native';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
-import { TestCase } from '../components/TestCase'
+import { TestCase } from './TestCase'
 import { Tester, TestSuite } from '@rnoh/testerino'
 
 export function FingerprintScannerDemo() {
