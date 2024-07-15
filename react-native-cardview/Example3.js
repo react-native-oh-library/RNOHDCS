@@ -11,7 +11,7 @@ import CardView from '@react-native-oh-tpl/react-native-cardview';
 export default class Example3 extends Component {
   render() {
     return (
-      // <SafeAreaView>
+      <SafeAreaView>
         <CardView
           cardElevation={3}
           cardMaxElevation={3}
@@ -43,7 +43,7 @@ export default class Example3 extends Component {
             </Text>
           </View>
         </CardView>
-      // </SafeAreaView>
+      </SafeAreaView>
     );
   }
 }
