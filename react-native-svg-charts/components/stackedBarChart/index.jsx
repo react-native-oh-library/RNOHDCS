@@ -47,5 +47,11 @@ export default function () {
         </TestItem>
       })
     }
+    <TestItem desc="valueAccessor={ item=>{item.month}}">
+      <StackedBarChartExample valueAccessor='month'></StackedBarChartExample>
+    </TestItem>
+    <TestItem desc="valueAccessor={ item=>{item.apples}}">
+      <StackedBarChartExample valueAccessor='apples'></StackedBarChartExample>
+    </TestItem>
   </GenMain>
 };

@@ -8,8 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 import {useEffect, useState} from 'react';
-import {Tester, TestSuite} from '@rnoh/testerino';
-import {TestCase} from '../components';
+import {Tester, TestSuite,TestCase} from '@rnoh/testerino';
 
 export default function OrientationTestDemo() {
   const updateOrientation = (orientation: string) => {
@@ -50,13 +49,13 @@ export default function OrientationTestDemo() {
     <Tester>
       <ScrollView style={{marginBottom: 50}}>
         <TestSuite name="orientation">
-          <TestCase.Example tags={['C_API']} itShould="当前屏幕方向(API:getOrientation,addOrientationListener),默认开启监听">
+          <TestCase tags={['C_API']} itShould="当前屏幕方向(API:getOrientation,addOrientationListener),默认开启监听">
             <Text>{orientation}</Text>
-          </TestCase.Example>
-          <TestCase.Example tags={['C_API']} itShould="当前屏幕方具体方向为(API:getSpecificOrientation,addSpecificOrientationListener),默认开启监听">
+          </TestCase>
+          <TestCase tags={['C_API']} itShould="当前屏幕方具体方向为(API:getSpecificOrientation,addSpecificOrientationListener),默认开启监听">
             <Text>{specificOrientation}</Text>
-          </TestCase.Example>
-          <TestCase.Manual
+          </TestCase>
+          <TestCase
             itShould="锁定当前屏幕为竖屏(API:lockToPortrait)"
             tags={['C_API']}
             initialState={{}}
@@ -86,7 +85,7 @@ export default function OrientationTestDemo() {
               expect(state).equal('PORTRAIT');
             }}
           />
-          <TestCase.Manual
+          <TestCase
             itShould="锁定当前屏幕为横屏,反向横屏，且受控制中心的旋转开关控制(API:lockToLandscape)"
             tags={['C_API']}
             initialState={{}}
@@ -116,7 +115,7 @@ export default function OrientationTestDemo() {
               expect(state).equal('LANDSCAPE');
             }}
           />
-          <TestCase.Manual
+          <TestCase
             itShould="锁定当前屏幕为横屏(API:lockToLandscapeLeft)"
             tags={['C_API']}
             initialState={{}}
@@ -146,7 +145,7 @@ export default function OrientationTestDemo() {
               expect(state).equal('LANDSCAPE_LEFT');
             }}
           />
-          <TestCase.Manual
+          <TestCase
             itShould="锁定当前屏幕为反向横屏(API:lockToLandscapeRight)"
             tags={['C_API']}
             initialState={{}}
@@ -177,20 +176,20 @@ export default function OrientationTestDemo() {
             }}
           />
         </TestSuite>
-        <TestCase.Example tags={['C_API']} itShould="解锁当前屏幕旋转锁定(API:unlockAllOrientations)">
+        <TestCase tags={['C_API']} itShould="解锁当前屏幕旋转锁定(API:unlockAllOrientations)">
           <TouchableOpacity
             onPress={() => {
               Orientation.unlockAllOrientations();
             }}>
             <Text>解锁当前屏幕旋转锁定</Text>
           </TouchableOpacity>
-        </TestCase.Example>
-        <TestCase.Example tags={['C_API']} itShould="退出应用取消方向监听(API:removeOrientationListener)">
+        </TestCase>
+        <TestCase tags={['C_API']} itShould="退出应用取消方向监听(API:removeOrientationListener)">
             <Text>退出应用取消方向监听</Text>
-        </TestCase.Example>
-        <TestCase.Example tags={['C_API']} itShould="退出应用取消具体方向监听(API:removeSpecificOrientationListener)">
+        </TestCase>
+        <TestCase tags={['C_API']} itShould="退出应用取消具体方向监听(API:removeSpecificOrientationListener)">
             <Text>退出应用取消具体方向监听</Text>
-        </TestCase.Example>
+        </TestCase>
       </ScrollView>
     </Tester>
   );

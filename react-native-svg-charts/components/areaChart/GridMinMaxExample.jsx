@@ -4,32 +4,32 @@ import * as shape from 'd3-shape'
 
 class GridMinMaxExample extends React.PureComponent {
 
-    render() {
+  render() {
 
-        const data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80 ]
+    const data = [50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80]
 
-        const Line = ({ line }) => (
-            <Path
-                key={ 'line ' }
-                d={ line }
-                stroke={ 'rgb(134, 65, 244)' }
-                fillOpacity={ 0 }
-            />
-        )
+    const Line = ({ line }) => (
+      <Path
+        key={'line '}
+        d={line}
+        stroke={'rgb(134, 65, 244)'}
+        fillOpacity={0}
+      />
+    )
 
-        return (
-            <AreaChart
-                style={{ height: 200 }}
-                data={ data }
-                svg={{ fill: 'rgba(134, 65, 244, 0.2)' }}
-                curve={ shape.curveNatural }
-                gridMax={ 500 }
-                gridMin={ -500 }
-            >
-                <Line/>
-            </AreaChart>
-        )
-    }
+    return (
+      <AreaChart
+        style={{ height: 200 }}
+        data={data}
+        svg={{ fill: 'rgba(134, 65, 244, 0.2)' }}
+        curve={shape.curveNatural}
+        gridMax={500}
+        gridMin={-500}
+      >
+        <Line />
+      </AreaChart>
+    )
+  }
 
 }
 

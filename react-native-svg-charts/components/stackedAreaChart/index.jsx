@@ -5,7 +5,6 @@ import { GenMain, TestItem } from '../../gen';
 import AreaStackWithAxisExample from './AreaStackWithAxisExample';
 
 const stackedAreaChartProps = [
-
 ];
 
 const allCases = [
@@ -48,8 +47,43 @@ export default function () {
     }
     {
       offsetsProp.map((item) => {
-        return <TestItem key={item.lable} desc={item.lable}>
+        return <TestItem key={item.lable} desc={item.label}>
           <AreaStackWithAxisExample offset={d3[item.value]} showGrid={false}></AreaStackWithAxisExample>
+        </TestItem>
+      })
+    }
+
+    {
+      [
+        {
+          label: '{yAxis-min:10}',
+          value: 10,
+        },
+        {
+          label: '{yAxis-min:2000}',
+          value: 2000,
+        },
+      ].map((item) => {
+        console.log(item)
+        return <TestItem key={item.lable} desc={item.label}>
+          <AreaStackWithAxisExample min={item.value} showGrid={true}></AreaStackWithAxisExample>
+        </TestItem>
+      })
+    }
+    {
+      [
+        {
+          label: '{yAxis-max:6000}',
+          value: 6000,
+        },
+        {
+          label: '{yAxis-max:9000}',
+          value: 9000,
+        },
+      ].map((item) => {
+        console.log(item)
+        return <TestItem key={item.lable} desc={item.label}>
+          <AreaStackWithAxisExample max={item.value} showGrid={true}></AreaStackWithAxisExample>
         </TestItem>
       })
     }

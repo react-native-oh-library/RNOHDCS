@@ -1,6 +1,6 @@
 import * as shape from 'd3-shape';
 
-import { genCommonProps, cursProp } from '../../genUtil';
+import { genCommonProps, cursProp, yAxisMin, yAxisMax } from '../../genUtil';
 import { GenMain, TestItem } from '../../gen';
 
 import LineChartExample from './LineChartExample';
@@ -32,7 +32,7 @@ export default function () {
     basicProps={basicProps}
     comName='LineChart'
   >
-     {
+    {
       cursProp.map(item => {
         return <TestItem key={item.label} desc={item.label}>
           <LineChartExample curve={shape[item.value]}></LineChartExample>
@@ -57,11 +57,36 @@ export default function () {
     <TestItem desc="XAxis,YAxis">
       <AxesExample></AxesExample>
     </TestItem>
+    {
+      yAxisMin.map(item => {
+        return (
+          <TestItem desc={item.label} key={item.label}>
+            <AxesExample min={item.value}></AxesExample>
+          </TestItem>
+        )
+      })
+    }
+    {
+      yAxisMax.map(item => {
+        return (
+          <TestItem desc={item.label} key={item.label}>
+            <AxesExample max={item.value}></AxesExample>
+          </TestItem>
+        )
+      })
+    }
     <TestItem desc="children:Grid,children:Decorator">
       <DecoratorExample></DecoratorExample>
     </TestItem>
-    <TestItem desc="LineChartDoubleLineExample">
+    <TestItem desc="style={{ height: 200 }}
+        data={data}
+        contentInset={{ top: 20, bottom: 20 }}">
       <LineChartDoubleLineExample></LineChartDoubleLineExample>
+    </TestItem>
+    <TestItem desc="style={{ height: 200 }}
+        data={data}
+        contentInset={{ top: 20, bottom: 20 }},grid-belowChart:false">
+      <LineChartDoubleLineExample belowChart={false}></LineChartDoubleLineExample>
     </TestItem>
   </GenMain>
 };

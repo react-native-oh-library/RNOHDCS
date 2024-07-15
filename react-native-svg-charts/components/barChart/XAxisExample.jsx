@@ -18,6 +18,13 @@ class XAxisExample extends React.PureComponent {
                     curve={this.props.curve ? this.props.curve : null}
                     svg={{ fill: 'rgb(134, 65, 244)' }}
                 />
+                <BarChart
+                    style={{ flex: 1 }}
+                    data={data}
+                    gridMin={0}
+                    curve={this.props.curve ? this.props.curve : null}
+                    svg={{ fill: 'rgb(0, 65, 244)' }}
+                />
                 {
                     this.props.hideXAxis ? null : <XAxis
                         style={{ marginTop: 10 }}
