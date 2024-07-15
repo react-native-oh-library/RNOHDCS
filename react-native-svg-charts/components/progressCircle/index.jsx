@@ -59,6 +59,9 @@ export default function () {
     basicProps={basicProps}
     comName='ProgressCircle'
   >
+     <TestItem desc="LineChartDoubleLineExample">
+      <ProgressCircleExample></ProgressCircleExample>
+    </TestItem>
   </GenMain>
 
 };

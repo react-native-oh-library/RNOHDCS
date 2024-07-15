@@ -28,7 +28,7 @@ const pieProps = [
   {
     type: 'startAngle',
     key: 'startAngle',
-    values: [{ startAngle: Math.PI/4 }, { startAngle: Math.PI/2 }, { startAngle: Math.PI/1 }],
+    values: [{ startAngle: Math.PI / 4 }, { startAngle: Math.PI / 2 }, { startAngle: Math.PI / 1 }],
     title: 'startAngle',
   },
   {
@@ -36,7 +36,7 @@ const pieProps = [
     key: 'endAngle',
     values: [{ endAngle: Math.PI * 2 }, { endAngle: Math.PI }],
     title: 'endAngle',
-  }
+  },
 ]
 
 const allCases = [
@@ -71,7 +71,7 @@ const basicProps = {
       svg: { fill: '#ecb3ff' }
     }
   ],
-  valueAccessor:({ item }) => item.amount,
+  valueAccessor: ({ item }) => item.amount,
 
 }
 
@@ -80,7 +80,7 @@ export default function () {
   return <GenMain
     cases={allCases}
     basicProps={basicProps}
-    comName='PieChart'         
+    comName='PieChart'
   >
     <TestItem desc="PieChartWithLabelExample">
       <PieChartWithLabelExample></PieChartWithLabelExample>
@@ -88,14 +88,51 @@ export default function () {
     <TestItem desc="PieChartWithDifferentArcs">
       <PieChartWithDifferentArcs></PieChartWithDifferentArcs>
     </TestItem>
+    <TestItem desc="PieChartWithDynamicSlices">
+      <PieChartWithDynamicSlices></PieChartWithDynamicSlices>
+    </TestItem>
     <TestItem desc="PieChartWithCenteredLabels">
       <PieChartWithCenteredLabels></PieChartWithCenteredLabels>
+    </TestItem>
+    <TestItem desc="data=[
+    {
+      key: 1,
+      amount: 50,
+      svg: { fill: '#600080' },
+    },
+    {
+      key: 2,
+      amount: 50,
+      svg: { fill: '#9900cc' }
+    },
+    {
+      key: 3,
+      amount: 40,
+      svg: { fill: '#c61aff' }
+    },
+    {
+      key: 4,
+      amount: 95,
+      svg: { fill: '#d966ff' }
+    },
+    {
+      key: 5,
+      amount: 35,
+      svg: { fill: '#ecb3ff' }
+    }
+  ]sort={(a, b) => b.amount - a.amount}">
+      <PieChartWithCenteredLabels sort={'amount'}></PieChartWithCenteredLabels>
     </TestItem>
     <TestItem desc="PieChartWithCenteredLabels1">
       <PieChartWithCenteredLabels1></PieChartWithCenteredLabels1>
     </TestItem>
-    <TestItem desc="PieChartWithDynamicSlices">
-      <PieChartWithDynamicSlices></PieChartWithDynamicSlices>
-    </TestItem>
+    {
+      [{ labelRadius: 50 }, { labelRadius: 90 }].map(item => {
+        return (<TestItem key={JSON.stringify(item)} desc={JSON.stringify(item)}>
+          <PieChartWithCenteredLabels1 labelRadius={item.labelRadius} ></PieChartWithCenteredLabels1>
+        </TestItem>)
+      })
+    }
+   
   </GenMain>
 }
