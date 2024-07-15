@@ -95,13 +95,19 @@ export default () => {
       <TestCase itShould="render a DatePickerView maxDate={new Date(2025, 12, 1)}" tags={['C_API']}>
         <DatePickerView maxDate={new Date(2025, 12, 1)} />
       </TestCase>
-      <TestCase itShould="render a DatePickerView onChange()" tags={['C_API']}>
-        <DatePickerView
-          value={value}
-          onChange={(val) => {
-            setValue(val);
-          }}
-        />
+      <TestCase itShould="render a DatePickerView onChange()" tags={['C_API']} initialState={false}
+        arrange={({ setState }: any) =>
+          <DatePickerView
+            value={value}
+            onChange={(val) => {
+              setValue(val);
+              setState(true);
+            }}
+          />
+        }
+        assert={({ expect, state }) => {
+          expect(state).to.be.eq(true);
+        }}>
       </TestCase>
       <TestCase itShould="render a DatePickerView support renderLabel" tags={['C_API']}>
         <View>
@@ -109,14 +115,18 @@ export default () => {
           <DatePickerView defaultValue={now} renderLabel={labelRenderer} />
         </View>
       </TestCase>
-      <TestCase itShould="render a DatePickerView onValueChange()">
-        <DatePickerView
-          onChange={(val) => console.log('onChange', val)}
-          onValueChange={(val) => { console.log('onValueChange', val) }}
-          precision="week-day"
-          defaultValue={now}
-          renderLabel={weekdayLabelRenderer}
-        />
+      <TestCase itShould="render a DatePickerView onValueChange()" initialState={false}
+        arrange={({ setState }: any) =>
+          <DatePickerView
+            onValueChange={() => { setState(true) }}
+            precision="week-day"
+            defaultValue={now}
+            renderLabel={weekdayLabelRenderer}
+          />
+        }
+        assert={({ expect, state }) => {
+          expect(state).to.be.eq(true);
+        }}>
       </TestCase>
       <TestCase itShould="render a DatePickerView filter" tags={['C_API']}>
         <View>

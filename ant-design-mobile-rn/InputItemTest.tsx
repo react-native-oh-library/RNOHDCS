@@ -14,6 +14,7 @@ export default () => {
   const [password, setPassword] = useState('');
   const [foucs, setFoucs] = useState('');
   const [blur, setBlur] = useState('');
+  const [comfirm, setComfirm] = useState('');
 
   return (
     <TestSuite name="InputItemTest">
@@ -225,7 +226,8 @@ export default () => {
       <TestCase itShould="InputItem onVirtualKeyboardConfirm()" tags={['C_API']}>
         <InputItem
           clear
-          onVirtualKeyboardConfirm={() => { console.log(111) }}
+          value={comfirm}
+          onVirtualKeyboardConfirm={(val: any) => { setComfirm(val) }}
           placeholder="onVirtualKeyboardConfirm">
           onVirtualKeyboardConfirm
         </InputItem>

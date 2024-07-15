@@ -1,12 +1,95 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, NativeEventEmitter, NativeModules, TouchableHighlight, FlatList, Alert, Button } from 'react-native';
-import { TestSuite, Tester} from '@rnoh/testerino';
-import {TestCase} from '../components';
+import { View, Text, StyleSheet, NativeEventEmitter, NativeModules, TouchableHighlight, FlatList, Alert, Button, Platform } from 'react-native';
+import { TestSuite, Tester, TestCase as _TestCase } from '@rnoh/testerino';
+import { SmartManualTestCaseProps } from '@rnoh/testerino/src/react-native/ManualTestCase';
 import ReactNativeBleManager from 'react-native-ble-manager';
 import { Peripheral } from 'react-native-ble-manager';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 
+const TestCase = {
+    Manual: Manual,
+};
+
+type TesterTag = 'dev' | 'C_API';
+
+type TesterHarmonySkipProp =
+    | boolean
+    | string
+    | {
+        arkTS: string | boolean;
+        cAPI: string | boolean;
+    };
+type TesterSkipProp =
+    | {
+        android: string | boolean;
+        harmony: TesterHarmonySkipProp;
+    }
+    | string;
+
+function prepareSkipProp(
+    skipProp: TesterSkipProp | undefined,
+    tags: TesterTag[] | undefined,
+) {
+    const isCAPI =
+        'rnohArchitecture' in Platform.constants &&
+        Platform.constants.rnohArchitecture === 'C_API';
+    if (isCAPI && !tags?.includes('C_API')) {
+        return 'Not supported in C-Api architecture';
+    }
+
+    return skipProp
+        ? typeof skipProp === 'string'
+            ? skipProp
+            : Platform.select({
+                android: skipProp?.android,
+                harmony: prepareHarmonySkipProp(skipProp?.harmony),
+            })
+        : undefined;
+}
+
+function prepareHarmonySkipProp(
+    skipProp: TesterHarmonySkipProp,
+): string | boolean {
+    if (typeof skipProp === 'string' || typeof skipProp === 'boolean') {
+        return skipProp;
+    } else {
+        return 'rnohArchitecture' in Platform.constants &&
+            Platform.constants.rnohArchitecture === 'C_API'
+            ? skipProp?.cAPI
+            : skipProp?.arkTS;
+    }
+}
+
+function Manual<TState = undefined>({
+    itShould,
+    skip,
+    tags,
+    modal,
+    initialState,
+    arrange,
+    assert,
+}: {
+    itShould: string;
+    skip?: TesterSkipProp;
+    tags?: TesterTag[];
+    modal?: boolean;
+    initialState: TState;
+    arrange: SmartManualTestCaseProps<TState>['arrange'];
+    assert: SmartManualTestCaseProps<TState>['assert'];
+}) {
+    return (
+        <_TestCase
+            itShould={itShould}
+            modal={modal}
+            tags={tags}
+            skip={prepareSkipProp(skip, tags)}
+            initialState={initialState}
+            arrange={arrange}
+            assert={assert}
+        />
+    );
+}
 
 export enum BleState {
     Unknown = "unknown",
@@ -117,7 +200,7 @@ export default function BleManagerDemos() {
                                 ReactNativeBleManager.createBond(item.id).then(() => {
                                     setState(true)
                                     setResult('createBond is success')
-                                }).catch(()=>{
+                                }).catch(() => {
                                     setResult('createBond is bond')
                                 });
                             }} title={'createBond'}></Button>
@@ -133,7 +216,7 @@ export default function BleManagerDemos() {
                         arrange={({ setState }) =>
                             <Button onPress={async () => {
                                 const res = await ReactNativeBleManager.getBondedPeripherals();
-                                setState(res.length > 0 ?true:false)
+                                setState(res.length > 0 ? true : false)
                                 setResult(JSON.stringify(res))
                             }} title={'getBondedPeripherals'}></Button>
                         }
@@ -148,7 +231,7 @@ export default function BleManagerDemos() {
                         arrange={({ setState }) =>
                             <Button onPress={async () => {
                                 const res = await ReactNativeBleManager.getConnectedPeripherals()
-                                setState(res.length > 0 ?true:false)
+                                setState(res.length > 0 ? true : false)
                                 setResult(JSON.stringify(res))
                             }} title={'getConnectedPeripherals'}></Button>
                         }
@@ -163,7 +246,7 @@ export default function BleManagerDemos() {
                         arrange={({ setState }) =>
                             <Button onPress={async () => {
                                 const res = await ReactNativeBleManager.getDiscoveredPeripherals();
-                                setState(res.length > 0 ?true:false)
+                                setState(res.length > 0 ? true : false)
                                 setResult(JSON.stringify(res))
                             }} title={'getDiscoveredPeripherals'}></Button>
                         }
@@ -242,9 +325,9 @@ export default function BleManagerDemos() {
                         arrange={({ setState }) =>
                             <Button onPress={() => {
                                 ReactNativeBleManager.readRSSI(item.id).then((res) => {
-                                    setState(res !==0 ? true :false)
+                                    setState(res !== 0 ? true : false)
                                     setResult(res + '')
-                                }).catch(()=>{
+                                }).catch(() => {
 
                                 });
                             }} title={'readRSSI'}></Button>
@@ -260,7 +343,7 @@ export default function BleManagerDemos() {
                         arrange={({ setState }) =>
                             <Button onPress={() => {
                                 ReactNativeBleManager.requestMTU(item.id, 10).then((res) => {
-                                    setState(Math.abs(res) >= 0 ? true :false)
+                                    setState(Math.abs(res) >= 0 ? true : false)
                                     setResult(res + '')
                                 });
                             }} title={'requestMTU'}></Button>
@@ -327,7 +410,7 @@ export default function BleManagerDemos() {
                                     setResult(JSON.stringify(res))
                                     setState(res)
                                 })
-                                
+
                             }} title={'isPeripheralConnected'}></Button>
                         }
                         assert={({ expect, state }) => {
@@ -382,6 +465,23 @@ export default function BleManagerDemos() {
                             expect(state).to.be.eq(true);
                         }}
                     />
+                    {/* <TestCase.Manual
+                        itShould="removeBond:移除绑定设备"
+                        tags={["C_API"]}
+                        initialState={false}
+                        arrange={({ setState }) =>
+                            <Button onPress={() => {
+                                ReactNativeBleManager.removeBond(item.id).then(() => {
+                                    console.log('removeBond+++++')
+                                    setResult('此接口为系统接口,三方库无法调用')
+                                    setState(true)
+                                });
+                            }} title={'removeBond'}></Button>
+                        }
+                        assert={({ expect, state }) => {
+                            expect(state).to.be.eq(true);
+                        }}
+                    /> */}
                 </View>
             </TouchableHighlight>
         )
@@ -389,11 +489,11 @@ export default function BleManagerDemos() {
     return (
         <View>
             <Tester>
-            <View style={styles.inputArea}>
-                <Text style={styles.baseText}>
-                    {result}
-                </Text>
-            </View>
+                <View style={styles.inputArea}>
+                    <Text style={styles.baseText}>
+                        {result}
+                    </Text>
+                </View>
                 <TestSuite name='Ble.manager'>
                     <TestCase.Manual
                         itShould="enableBluetooth:打开蓝牙"
@@ -404,7 +504,7 @@ export default function BleManagerDemos() {
                                 ReactNativeBleManager.enableBluetooth().then(() => {
                                     setResult('成功打开蓝牙')
                                     setState(true)
-                                }).catch(()=>{
+                                }).catch(() => {
                                     setResult('蓝牙已打开')
                                     setState(true)
                                 });

@@ -1,5 +1,6 @@
 import * as shape from 'd3-shape';
-import { genCommonProps, cursProp } from '../../genUtil';
+import dateFns from 'date-fns';
+import { genCommonProps, cursProp, yScaleProp, xScaleProp } from '../../genUtil';
 import { GenMain, TestItem } from '../../gen';
 import AreaChartExample from './AreaChartExample';
 import GradientExample from './GradientExample';
@@ -7,6 +8,8 @@ import GridMinMaxExample from './GridMinMaxExample';
 import LayeredChartsExample from './LayeredChartsExample';
 import PartialAreaChartExample from './PartialAreaChartExample';
 import XAxisScaleTimeExample from './XAxisScaleTimeExample';
+import XAxisScaleTimeExample1 from './XAxisScaleTimeExample1';
+
 
 const areaProps = [
   {
@@ -65,6 +68,10 @@ export default function () {
     <TestItem desc="style={ StyleSheet.absoluteFill }">
       <LayeredChartsExample></LayeredChartsExample>
     </TestItem>
+    <TestItem desc="style={ StyleSheet.absoluteFill }
+        belowChart={false">
+      <LayeredChartsExample belowChart={false}></LayeredChartsExample>
+    </TestItem>
     <TestItem desc="contentInset={ top: 30, bottom: 30 },
         svg={fill: 'url(#gradient)',
         clipPath: 'url(#clip-path-1)'}">
@@ -73,5 +80,19 @@ export default function () {
     <TestItem desc='{data:[{"value":50,"date":"2017-12-30T22:00:00.000Z"},{"value":10,"date":"2017-12-31T01:00:00.000Z"},{"value":150,"date":"2017-12-31T07:00:00.000Z"},{"value":10,"date":"2017-12-31T10:00:00.000Z"},{"value":100,"date":"2017-12-31T13:00:00.000Z"},{"value":20,"date":"2017-12-31T16:00:00.000Z"}]},xAccessor={ ({ item }) => item.date },{xScale:scale.scaleTime}'>
       <XAxisScaleTimeExample></XAxisScaleTimeExample>
     </TestItem>
+    {
+      yScaleProp.map(item => {
+        return (<TestItem desc={item.label} key={item.label}>
+          <XAxisScaleTimeExample1 scale={item.value}></XAxisScaleTimeExample1>
+        </TestItem>)
+      })
+    }
+    {
+      xScaleProp.map(item => {
+        return (<TestItem desc={item.label} key={item.label}>
+          <XAxisScaleTimeExample1 scale={item.value}></XAxisScaleTimeExample1>
+        </TestItem>)
+      })
+    }
   </GenMain >
 }

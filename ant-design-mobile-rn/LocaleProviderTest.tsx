@@ -114,7 +114,7 @@ const LocaleProviderThemeExample = () => {
   const lightTheme = {
     fill_base: '#1890ff',
   };
-  const [theme, setTheme] = useState(lightTheme)
+  const [theme, setTheme] = useState(lightTheme);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const toggleTheme = () => {

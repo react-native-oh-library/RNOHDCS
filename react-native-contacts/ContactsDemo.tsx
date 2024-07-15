@@ -1,6 +1,5 @@
 import { ScrollView, TouchableOpacity, Alert, Text, StyleSheet } from 'react-native'
-import { TestSuite, Tester } from '@rnoh/testerino';
-import { TestCase } from '../components';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 
 import React, { useState } from 'react';
 
@@ -75,7 +74,7 @@ export const ContactsDemo = () => {
         <Tester>
             <ScrollView >
                 <TestSuite name='Contacts' >
-                    <TestCase.Manual
+                    <TestCase
                         itShould="request contacts permission"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -93,7 +92,7 @@ export const ContactsDemo = () => {
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="check contacts permission"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -111,7 +110,7 @@ export const ContactsDemo = () => {
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="add contacts"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -134,7 +133,7 @@ export const ContactsDemo = () => {
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="get all contacts"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -153,7 +152,7 @@ export const ContactsDemo = () => {
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="get all contacts Without photos"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -172,7 +171,7 @@ export const ContactsDemo = () => {
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="get contact by id"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -193,7 +192,7 @@ export const ContactsDemo = () => {
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="get count of contact"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -212,7 +211,7 @@ export const ContactsDemo = () => {
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="get contacts photo url"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -231,7 +230,7 @@ export const ContactsDemo = () => {
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="getContactsByPhoneNumber"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -251,7 +250,7 @@ export const ContactsDemo = () => {
                     />
 
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="getContactsMatchingString"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -270,7 +269,7 @@ export const ContactsDemo = () => {
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="getContactsByEmailAddress"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -289,7 +288,7 @@ export const ContactsDemo = () => {
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="openContactForm"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -311,7 +310,7 @@ export const ContactsDemo = () => {
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="openExistingContact"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -338,7 +337,7 @@ export const ContactsDemo = () => {
                         }}
                     />
 
-                    <TestCase.Manual
+                    <TestCase
                         itShould="viewExistingContact"
                         initialState={null as any}
                         arrange={({ setState }) => (
@@ -365,7 +364,7 @@ export const ContactsDemo = () => {
                         }}
                     />
 
-                    <TestCase.Example
+                    <TestCase
                         itShould="updateContact"
                     >
                         <TouchableOpacity onPress={async () => {
@@ -388,9 +387,9 @@ export const ContactsDemo = () => {
                             <Text style={styles.buttonText}>编辑联系人</Text>
                         </TouchableOpacity>
 
-                    </TestCase.Example>
+                    </TestCase>
 
-                    <TestCase.Example
+                    <TestCase
                         itShould="deleteContact"
                     >
                         <TouchableOpacity onPress={async () => {
@@ -405,7 +404,7 @@ export const ContactsDemo = () => {
                             <Text style={styles.buttonText}>删除联系人</Text>
                         </TouchableOpacity>
 
-                    </TestCase.Example>
+                    </TestCase>
                 </TestSuite>
             </ScrollView>
         </Tester>
