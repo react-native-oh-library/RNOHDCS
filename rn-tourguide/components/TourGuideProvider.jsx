@@ -1,5 +1,6 @@
-import React, { View, Text, useState } from 'react';
-import { ScrollView, Button } from 'react-native';
+import React, { useState } from 'react';
+import { ScrollView, Button, View, Text, } from 'react-native';
+import { useTourGuideController } from 'rn-tourguide';
 import { Tester, TestCase } from '@rnoh/testerino';
 
 import TourGuideProviderDemo from './TourGuideProviderDemo';
@@ -48,12 +49,12 @@ const props = [
     value: { animationDuration: 1000 },
   },
   {
-    key: 'startAtMount:true',
-    value: { startAtMount: true },
+    key: 'startAtMount:mount_002',
+    value: { startAtMount: 'mount_002', tourKey: 'mount_002' },
   },
   {
     key: 'startAtMount:mount_001',
-    value: { startAtMount: 'mount_001' },
+    value: { startAtMount: 'mount_001', tourKey: 'mount_001' },
   },
   {
     key: 'backdropColor:red',
@@ -98,6 +99,10 @@ const props = [
   {
     key: 'preventOutsideInteraction:true',
     value: { preventOutsideInteraction: true },
+  },
+  {
+    key: 'preventOutsideInteraction:false',
+    value: { preventOutsideInteraction: false },
   },
   {
     key: 'labels:{skip:"跳过"}',

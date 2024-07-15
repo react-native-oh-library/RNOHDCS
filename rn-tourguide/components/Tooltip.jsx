@@ -53,6 +53,7 @@ const props = [
     key: 'labels:{finish:"完成"}',
     value: {
       labels: { finish: '完成' },
+      isLastStep: true,
     },
   },
 ]
