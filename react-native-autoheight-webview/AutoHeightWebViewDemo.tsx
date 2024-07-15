@@ -1,179 +1,372 @@
-import React, {useState} from 'react';
+import React, { useRef, useState } from 'react';
+
+
 
 import {
-  ScrollView,
   StyleSheet,
+  View,
   Text,
-  TouchableOpacity,
-  Platform,
-  Linking,
+  ScrollView,
+  Animated,
+  Image,
+  Button
 } from 'react-native';
-
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 import AutoHeightWebView from 'react-native-autoheight-webview';
-
-import {
-  autoHeightHtml0,
-  autoHeightHtml1,
-  autoHeightScript,
-  autoWidthHtml0,
-  autoWidthHtml1,
-  autoWidthScript,
-  autoDetectLinkScript,
-  style0,
-  inlineBodyStyle,
-} from './config';
-
-const onShouldStartLoadWithRequest = result => {
-  console.log(result);
-  return true;
+type Props = {};
+type State = {
+  progress: number,
 };
 
-const onError = ({nativeEvent}) =>
-  console.error('WebView error: ', nativeEvent);
-
-const onMessage = event => {
-  const {data} = event.nativeEvent;
-  let messageData;
-  // maybe parse stringified JSON
-  try {
-    messageData = JSON.parse(data);
-  } catch (e) {
-    console.log(e.message);
-  }
-  if (typeof messageData === 'object') {
-    const {url} = messageData;
-    // check if this message concerns us
-    if (url && url.startsWith('http')) {
-      Linking.openURL(url).catch(error =>
-        console.error('An error occurred', error),
-      );
-    }
-  }
-};
-
-const onHeightLoadStart = () => console.log('height on load start');
-
-const onHeightLoad = () => console.log('height on load');
-
-const onHeightLoadEnd = () => console.log('height on load end');
-
-const onWidthLoadStart = () => console.log('width on load start');
-
-const onWidthLoad = () => console.log('width on load');
-
-const onWidthLoadEnd = () => console.log('width on load end');
-
-const Explorer = () => {
-  const [{widthHtml, heightHtml}, setHtml] = useState({
-    widthHtml: autoWidthHtml0,
-    heightHtml: autoHeightHtml0,
-  });
-  const changeSource = () =>
-    setHtml({
-      widthHtml: widthHtml === autoWidthHtml0 ? autoWidthHtml1 : autoWidthHtml0,
-      heightHtml:
-        heightHtml === autoHeightHtml0 ? autoHeightHtml1 : autoHeightHtml0,
-    });
-
-  const [{widthStyle, heightStyle}, setStyle] = useState({
-    heightStyle: null,
-    widthStyle: inlineBodyStyle,
-  });
-  const changeStyle = () =>
-    setStyle({
-      widthStyle:
-        widthStyle === inlineBodyStyle
-          ? style0 + inlineBodyStyle
-          : inlineBodyStyle,
-      heightStyle: heightStyle === null ? style0 : null,
-    });
-
-  const [{widthScript, heightScript}, setScript] = useState({
-    heightScript: autoDetectLinkScript,
-    widthScript: null,
-  });
-  const changeScript = () =>
-    setScript({
-      widthScript: widthScript == autoWidthScript ? autoWidthScript : null,
-      heightScript:
-        heightScript !== autoDetectLinkScript
-          ? autoDetectLinkScript
-          : autoHeightScript + autoDetectLinkScript,
-    });
-
-  const [heightSize, setHeightSize] = useState({height: 0, width: 0});
-  const [widthSize, setWidthSize] = useState({height: 0, width: 0});
-
-  return (
-    <ScrollView
-      style={{
-        paddingTop: 45,
-        backgroundColor: 'lightyellow',
-      }}
-      contentContainerStyle={{
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-      <AutoHeightWebView
-        customStyle={heightStyle}
-        onError={onError}
-        onLoad={onHeightLoad}
-        onLoadStart={onHeightLoadStart}
-        onLoadEnd={onHeightLoadEnd}
-        onShouldStartLoadWithRequest={onShouldStartLoadWithRequest}
-        onSizeUpdated={setHeightSize}
-        source={{html: heightHtml}}
-        customScript={heightScript}
-        onMessage={onMessage}
-      />
-      <Text style={{padding: 5}}>
-        height: {heightSize.height}, width: {heightSize.width}
-      </Text>
-      <AutoHeightWebView
-        style={{
-          marginTop: 15,
-        }}
-        customStyle={widthStyle}
-        onError={onError}
-        onLoad={onWidthLoad}
-        onLoadStart={onWidthLoadStart}
-        onLoadEnd={onWidthLoadEnd}
-        onShouldStartLoadWithRequest={onShouldStartLoadWithRequest}
-        onSizeUpdated={setWidthSize}
-        allowFileAccessFromFileURLs={true}
-        allowUniversalAccessFromFileURLs={true}
-        source={{
-          html: widthHtml,
-          baseUrl:
-            Platform.OS === 'android' ? 'file:///android_asset/' : 'web/',
-        }}
-        customScript={widthScript}
-      />
-      <Text style={{padding: 5}}>
-        height: {widthSize.height}, width: {widthSize.width}
-      </Text>
-      <TouchableOpacity onPress={changeSource} style={styles.button}>
-        <Text>change source</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={changeStyle} style={styles.button}>
-        <Text>change style</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={changeScript}
-        style={[styles.button, {marginBottom: 100}]}>
-        <Text>change script</Text>
-      </TouchableOpacity>
-    </ScrollView>
-  );
-};
-
-const styles = StyleSheet.create({
-  button: {
-    marginTop: 15,
-    backgroundColor: 'aliceblue',
-    borderRadius: 5,
-    padding: 5,
+const width = 50;
+const pointerWidth = width * 0.47;
+const labelStyles = StyleSheet.create({
+  parentView: {
+    position: 'relative',
+  },
+  sliderLabel: {
+    position: 'absolute',
+    justifyContent: 'center',
+    bottom: '100%',
+    width: width,
+    height: width,
+  },
+  sliderLabelText: {
+    textAlign: 'center',
+    lineHeight: width,
+    borderRadius: width / 2,
+    borderWidth: 2,
+    borderColor: '#999',
+    backgroundColor: '#fff',
+    flex: 1,
+    fontSize: 18,
+    color: '#aaa',
+  },
+  pointer: {
+    position: 'absolute',
+    bottom: -pointerWidth / 4,
+    left: (width - pointerWidth) / 2,
+    transform: [{ rotate: '45deg' }],
+    width: pointerWidth,
+    height: pointerWidth,
+    backgroundColor: '#999',
   },
 });
 
-export default Explorer;
+
+const styles = StyleSheet.create({
+  
+});
+
+
+
+
+export const AutoHeightWebViewwDemo = () => {
+  let html =  `
+  <p style="font-weight: 400;font-style: normal;font-size: 21px;line-height: 1.58;letter-spacing: -.003em;">
+ <span style="background-color: transparent !important;background-image: linear-gradient(to bottom, rgba(146, 249, 190, 1), rgba(146, 249, 190, 1));">If I pen a story about moving across the country to start a new job in a car with my husband, two cats, a dog, and a tarantula,”</span></p>
+  `
+  const [source, setSource] = useState(
+   html
+  )
+  const [scalesPageToFit, setScalesPageToFit] = useState(false)
+  const [styleValue,setStyleVlue] = useState(200)
+  const [customStyleValue,setCustomStyleVlue] = useState("")
+  const [showsHorizontalScrollIndicator,setShowsHorizontalScrollIndicator] = useState(false)
+  const [showsVerticalScrollIndicator,setShowsVerticalScrollIndicator] = useState(true)
+  const [originWhitelist,setOriginWhitelist] = useState<string[]>([])
+  const [viewportContent,setViewportContent] = useState("")
+  const [customScript,setCustomScript] = useState("")
+  const [files,setFlies] = useState<any>([])
+  const [size,setSize] = useState(0)
+ const viewRef = useRef(null)
+
+ 
+  return (
+    <Tester>
+      <ScrollView>
+        <TestSuite name="react-native-autoheight-webview">
+          <TestCase
+            key={"getInitStatus_1"}
+            itShould={`source change`}
+            tags={['C_API']}
+            initialState={false}
+
+            arrange={({ setState }) => {
+              const [isShow,setIsshow] = useState(true)
+              return (
+                <View style={{ flex: 1 }}>
+                 {isShow&& <AutoHeightWebView  source={{ html: source }} />}
+                  <Button title={"start"} onPress={() => {
+                    setSource(
+                      `<p style="font-weight: 400;font-style: normal;font-size: 21px;line-height: 1.58;letter-spacing: -.003em;">Tags are great for describing the essence of your story in a single word or phrase, but stories are rarely about a single thing. <span style="background-color: transparent !important;background-image: linear-gradient(to bottom, rgba(146, 249, 190, 1), rgba(146, 249, 190, 1));">If I pen a story about moving across the country to start a new job in a car with my husband, two cats, a dog, and a tarantula, I wouldn’t only tag the piece with “moving”. I’d also use the tags “pets”, “marriage”, “career change”, and “travel tips”.</span>
+                        <span>Add a new paragraph to verify the attributes </span>
+                      </p>`
+
+                    )
+                    setIsshow(false)
+                    setTimeout(()=> {setIsshow(true)},0)
+                    setState(true)
+                  }}></Button>
+                </View>
+              );
+            }}
+            assert={async ({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
+          <TestCase
+            key={"getInitStatus_2"}
+            itShould={`scalesPageToFit change`}
+            tags={['C_API']}
+            initialState={false}
+
+            arrange={({ setState }) => {
+              const [isShow,setIsshow] = useState(true)
+              return (
+                <View style={{ flex: 1 }}>
+                  {isShow&&<AutoHeightWebView source={{ html: html }} scalesPageToFit={scalesPageToFit} />}
+                  <Button title={"start"} onPress={() => {
+                    setScalesPageToFit(true)
+                    setIsshow(false)
+                    setTimeout(()=> {setIsshow(true)},0)
+                    setState(true)
+                  }}></Button>
+                </View>
+              );
+            }}
+            assert={async ({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
+          <TestCase
+            key={"getInitStatus_3"}
+            itShould={`style change  `}
+            tags={['C_API']}
+            initialState={false}
+
+            arrange={({ setState }) => {
+              const [isShow,setIsshow] = useState(true)
+              return (
+                <View style={{ flex: 1 }}>
+                 {isShow&& <AutoHeightWebView source={{ html: html }} style={{height:styleValue}}  />}
+                  <Button title={"start"} onPress={() => {
+                    setStyleVlue(500)
+                 
+                     setIsshow(false)
+                     setTimeout(()=> {setIsshow(true)},1000)
+                    setState(true)
+                   
+                  
+                  }}></Button>
+                </View>
+              );
+            }}
+            assert={async ({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
+            <TestCase
+            key={"getInitStatus_4"}
+            itShould={`showsHorizontalScrollIndicator change`}
+            tags={['C_API']}
+            initialState={false}
+
+            arrange={({ setState }) => {
+              const [isShow,setIsshow] = useState(true)
+              return (
+                <View style={{ flex: 1 }}>
+                  {isShow&&<AutoHeightWebView source={{ html: html }} showsHorizontalScrollIndicator={showsHorizontalScrollIndicator} />}
+                  <Button title={"start"} onPress={() => {
+                    setShowsHorizontalScrollIndicator(true)
+                    setIsshow(false)
+                    setTimeout(()=> {setIsshow(true)},0)
+                    setState(true)
+                  }}></Button>
+                </View>
+              );
+            }}
+            assert={async ({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
+           <TestCase
+            key={"getInitStatus_5"}
+            itShould={`showsVerticalScrollIndicator change`}
+            tags={['C_API']}
+            initialState={false}
+
+            arrange={({ setState }) => {
+              const [isShow,setIsshow] = useState(true)
+              return (
+                <View style={{ flex: 1 }}>
+                 {isShow&& <AutoHeightWebView source={{ html: html }} showsVerticalScrollIndicator={showsVerticalScrollIndicator}  style={{height:100}}/>}
+                  <Button title={"start"} onPress={() => {
+                    setShowsVerticalScrollIndicator(false)
+                    setIsshow(false)
+                    setTimeout(()=> {setIsshow(true)},0)
+                    setState(true)
+                  }}></Button>
+                </View>
+              );
+            }}
+            assert={async ({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
+            <TestCase
+            key={"getInitStatus_6"}
+            itShould={`originWhitelist change`}
+            tags={['C_API']}
+            initialState={false}
+
+            arrange={({ setState }) => {
+              const [isShow,setIsshow] = useState(true)
+              return (
+                <View style={{ flex: 1 }}>
+                {isShow&&  <AutoHeightWebView source={{ html: html }} originWhitelist={originWhitelist} />}
+                  <Button title={"start"} onPress={() => {
+                    setOriginWhitelist(["*"])
+                    setIsshow(false)
+                    setTimeout(()=> {setIsshow(true)},0)
+                    setState(true)
+                  }}></Button>
+                </View>
+              );
+            }}
+            assert={async ({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
+           <TestCase
+            key={"getInitStatus_7"}
+            itShould={`customStyle change`}
+            tags={['C_API']}
+            initialState={false}
+
+            arrange={({ setState }) => {
+            const [isShow,setIsshow] = useState(true)
+              return (
+                <View style={{ flex: 1 }}>
+                {
+                   isShow&&  <AutoHeightWebView source={{ html: html }} customStyle={customStyleValue} />
+                }
+                  <Button title={"start"} onPress={() => {
+                   setCustomStyleVlue(`
+                   * {
+                   font-family: 'Times New Roman';
+                 }
+                 p {
+                   font-size: 16px;
+                   color:red;
+                 }
+                   `)
+                   setIsshow(false)
+                   setTimeout(()=> {
+                    setIsshow(true)
+                   },1000)
+                    setState(true)
+                  }}></Button>
+                </View>
+              );
+            }}
+            assert={async ({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
+            <TestCase
+            key={"getInitStatus_8"}
+            itShould={`onSizeUpdated change`}
+            tags={['C_API']}
+            initialState={false}
+
+            arrange={({ setState }) => {
+              return (
+                <View style={{ flex: 1 }}>
+                  <AutoHeightWebView source={{ html: html }} onSizeUpdated={(size)=>{
+                    setSize(size.height)
+                  }} />
+                  <Button title={"start"} onPress={() => {
+                    if(size) {
+                      setState(true)
+                    }
+                    
+                  }}></Button>
+                </View>
+              );
+            }}
+            assert={async ({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
+           <TestCase
+            key={"getInitStatus_9"}
+            itShould={`viewportContent change`}
+            tags={['C_API']}
+            initialState={false}
+
+            arrange={({ setState }) => {
+              const [isShow,setIsshow] = useState(true)
+              return (
+                <View style={{ flex: 1 }}>
+                 {isShow&& <AutoHeightWebView source={{ html: html }} viewportContent={viewportContent} />}
+                  <Button title={"start"} onPress={() => {
+                  setViewportContent('width=device-width, user-scalable=no')
+                  setIsshow(false)
+                  setTimeout(()=> {setIsshow(true)},0)
+                    setState(true)
+                  }}></Button>
+                </View>
+              );
+            }}
+            assert={async ({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
+           <TestCase
+            key={"getInitStatus_10"}
+            itShould={`customScript change`}
+            tags={['C_API']}
+            initialState={false}
+
+            arrange={({ setState }) => {
+             
+              const [isShow,setIsshow] = useState(true)
+              return (
+                <View style={{ flex: 1 }}>
+                  {isShow&&<AutoHeightWebView source={{ html: html }}  customScript={customScript} />}
+                  <Button title={"start"} onPress={() => {
+                    
+                 
+                   
+                    
+                  setCustomScript(`document.body.style.background = 'lightyellow'; `)
+                  setIsshow(false)
+                  setTimeout(()=> {setIsshow(true)},0)
+                 setState(true)
+                    
+                  }}></Button>
+                </View>
+              );
+            }}
+            assert={async ({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
+      
+        </TestSuite>
+
+      </ScrollView>
+    </Tester>
+  );
+}
+
+const markerStyles = StyleSheet.create({
+  webviewContainer:{
+     height:300
+  },
+  webviewContainerChange:{
+  height:500
+  }
+});
+
