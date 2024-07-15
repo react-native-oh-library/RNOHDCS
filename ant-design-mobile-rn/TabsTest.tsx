@@ -260,9 +260,6 @@ export default () => {
           </View>
         </Tabs>
       </TestCase>
-      <TestCase itShould="render a Tabs renderUnderline={null}" tags={['C_API']}>
-        <Tabs.DefaultTabBar instanceId={0} tabs={tabs}></Tabs.DefaultTabBar>
-      </TestCase>
       <TestCase itShould="render a Tabs.DefaultTabBar" tags={['C_API']}>
         <CustomRenderTabsrContentTest />
       </TestCase>

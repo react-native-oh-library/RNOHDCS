@@ -1,12 +1,11 @@
-// import { StyleSheet, ScrollView, Text, TouchableOpacity } from 'react-native';
-import { Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { TestSuite } from '@rnoh/testerino';
-import { TestCase } from '../components';
-
+import { Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { Tester, TestSuite, TestCase as _TestCase } from '@rnoh/testerino';
+import { SmartManualTestCaseProps } from '@rnoh/testerino/src/react-native/ManualTestCase';
 import FileViewer from 'react-native-file-viewer';
 
 const FileUri = '/storage/Users/currentUser/Documents/1.jpg';
 const FileUriPDF = '/storage/Users/currentUser/Documents/1.pdf';
+const FileUriUND = '/storage/Users/currentUser/Documents/1.aaa';
 
 const openTest = (uri: string, option?: any): Promise<boolean> => {
   return new Promise((resolve, reject) => {
@@ -28,122 +27,189 @@ const openTest = (uri: string, option?: any): Promise<boolean> => {
 
 export function FileViewerDemo() {
   return (
-    <TestSuite name="FileViewer">
-      {/* <TestCase.Example itShould="FontSize 18" tags={['C_API']}>
-        <Text style={{fontSize: 18}}>Test FontSize</Text>
-      </TestCase.Example> */}
+    <ScrollView style={{ flex: 1, height: '100%' }}>
+      <Tester>
+        <TestSuite name="FileViewer">
+          <TestCase
+            itShould="default"
+            initialState={undefined as any}
+            arrange={({ setState }) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    openTest(FileUri).then(res => setState(res))
+                  }}
+                  style={styles.btn}>
+                  <Text style={styles.btnText}>OpenFile</Text>
+                </TouchableOpacity>
+              );
+            }}
+            assert={({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
 
-      <TestCase.Manual
-        itShould="be open be ture"
-        initialState={undefined as any}
-        arrange={({ setState }) => {
-          return (
-            <TouchableOpacity
-              onPress={() => {
-                openTest(FileUri).then(res => {
-                  setState(res);
-                });
-              }}
-              style={styles.btn}>
-              <Text style={styles.btnText}>OpenFile</Text>
-            </TouchableOpacity>
-          );
-        }}
-        assert={({ expect, state }) => {
-          expect(state).to.be.true;
-        }}
-      />
+          <TestCase
+            itShould="displayName string"
+            initialState={undefined as any}
+            arrange={({ setState }) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    openTest(FileUri, 'show_displayName string').then(res => setState(res))
+                  }}
+                  style={styles.btn}>
+                  <Text style={styles.btnText}>OpenFile(displayName)</Text>
+                </TouchableOpacity>
+              );
+            }}
+            assert={({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
 
-      <TestCase.Manual
-        itShould="displayName be open be ture"
-        initialState={undefined as any}
-        arrange={({ setState }) => {
-          return (
-            <TouchableOpacity
-              onPress={() => {
-                openTest(FileUri, 'show_displayName string').then(res => {
-                  setState(res);
-                });
-              }}
-              style={styles.btn}>
-              <Text style={styles.btnText}>OpenFile(displayName)</Text>
-            </TouchableOpacity>
-          );
-        }}
-        assert={({ expect, state }) => {
-          expect(state).to.be.true;
-        }}
-      />
+          <TestCase
+            itShould="displayName object"
+            initialState={undefined as any}
+            arrange={({ setState }) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    openTest(FileUri, { displayName: 'show_displayName object' }).then(res => setState(res))
+                  }}
+                  style={styles.btn}>
+                  <Text style={styles.btnText}>OpenFile(displayName)</Text>
+                </TouchableOpacity>
+              );
+            }}
+            assert={({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
 
-      <TestCase.Manual
-        itShould="showOpenWithDialog be open be ture"
-        initialState={undefined as any}
-        arrange={({ setState }) => {
-          return (
-            <TouchableOpacity
-              onPress={() => {
-                openTest(FileUri, { showOpenWithDialog: true }).then(res => {
-                  setState(res);
-                });
-              }}
-              style={styles.btn}>
-              <Text style={styles.btnText}>OpenFile(showOpenWithDialog)</Text>
-            </TouchableOpacity>
-          );
-        }}
-        assert={({ expect, state }) => {
-          expect(state).to.be.true;
-        }}
-      />
+          <TestCase
+            itShould="showOpenWithDialog=true"
+            initialState={undefined as any}
+            arrange={({ setState }) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    openTest(FileUriPDF, { showOpenWithDialog: true }).then(res => setState(res));
+                  }}
+                  style={styles.btn}>
+                  <Text style={styles.btnText}>OpenFile(showOpenWithDialog)</Text>
+                </TouchableOpacity>
+              );
+            }}
+            assert={({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
+          <TestCase
+            itShould="showOpenWithDialog=false"
+            initialState={undefined as any}
+            arrange={({ setState }) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    openTest(FileUriPDF, { showOpenWithDialog: false }).then(res => setState(res));
+                  }}
+                  style={styles.btn}>
+                  <Text style={styles.btnText}>OpenFile(showOpenWithDialog)</Text>
+                </TouchableOpacity>
+              );
+            }}
+            assert={({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
 
-      <TestCase.Manual
-        itShould="onDismiss be open be ture"
-        initialState={undefined as any}
-        arrange={({ setState }) => {
-          return (
-            <TouchableOpacity
-              onPress={() => {
-                openTest(FileUri, {
-                  showOpenWithDialog: true,
-                  onDismiss: () => {
-                    console.log('onDismiss ============== ');
-                    setState(true);
-                  },
-                }).then(res => {
-                  // setState(res);
-                });
-              }}
-              style={styles.btn}>
-              <Text style={styles.btnText}>OpenFile(onDismiss)</Text>
-            </TouchableOpacity>
-          );
-        }}
-        assert={({ expect, state }) => {
-          expect(state).to.be.true;
-        }}
-      />
+          <TestCase
+            itShould="onDismiss"
+            initialState={undefined as any}
+            arrange={({ setState }) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    openTest(FileUriPDF, {
+                      showOpenWithDialog: true,
+                      onDismiss: () => { setState(true) },
+                    })
+                  }}
+                  style={styles.btn}>
+                  <Text style={styles.btnText}>OpenFile(onDismiss)</Text>
+                </TouchableOpacity>
+              );
+            }}
+            assert={({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
 
-      <TestCase.Manual
-        itShould="showAppsSuggestions be open be ture"
-        initialState={undefined as any}
-        arrange={({ setState }) => {
-          return (
-            <TouchableOpacity
-              onPress={() => {
-                openTest(FileUriPDF, { showAppsSuggestions: true }).then(res => {
-                  setState(res);
-                });
-              }}
-              style={styles.btn}>
-              <Text style={styles.btnText}>OpenFile(showAppsSuggestions)</Text>
-            </TouchableOpacity>
-          );
-        }}
-        assert={({ expect, state }) => {
-          expect(state).to.be.true;
-        }}
-      />
-    </TestSuite>
+          <TestCase
+            itShould="showAppsSuggestions=true"
+            initialState={undefined as any}
+            arrange={({ setState }) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    openTest(FileUriUND, { showAppsSuggestions: true }).then(res => setState(res))
+                  }}
+                  style={styles.btn}>
+                  <Text style={styles.btnText}>OpenFile(showAppsSuggestions)</Text>
+                </TouchableOpacity>
+              );
+            }}
+            assert={({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
+          <TestCase
+            itShould="showAppsSuggestions=false"
+            initialState={undefined as any}
+            arrange={({ setState }) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    openTest(FileUriUND, { showAppsSuggestions: false }).then(res => setState(res))
+                  }}
+                  style={styles.btn}>
+                  <Text style={styles.btnText}>OpenFile(showAppsSuggestions)</Text>
+                </TouchableOpacity>
+              );
+            }}
+            assert={({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
+        </TestSuite>
+      </Tester>
+    </ScrollView>
+  );
+}
+
+// TestCase
+function TestCase<TState = undefined>({
+  itShould,
+  modal,
+  initialState,
+  arrange,
+  assert,
+}: {
+  itShould: string;
+  modal?: boolean;
+  initialState: TState;
+  arrange: SmartManualTestCaseProps<TState>['arrange'];
+  assert: SmartManualTestCaseProps<TState>['assert'];
+}) {
+  return (
+    <_TestCase
+      itShould={itShould}
+      modal={modal}
+      initialState={initialState}
+      arrange={arrange}
+      assert={assert}
+    />
   );
 }
 

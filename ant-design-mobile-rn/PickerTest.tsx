@@ -13,11 +13,15 @@ export default () => {
   const [value4, setvalue4] = useState<any>(new Date());
   const [value5, setvalue5] = useState<any>(new Date());
   const [value6, setvalue6] = useState<any>(new Date());
+  const [value7, setvalue7] = useState<any>(new Date());
+  const [value8, setvalue8] = useState<any>(new Date());
+  const [value9, setvalue9] = useState<any>(new Date());
+  const [value10, setvalue10] = useState<any>(new Date());
   return (
     <TestSuite name="PickerTest">
       <TestCase itShould="render a Picker data" tags={['C_API']}>
         <List>
-          <Picker data={datas}>
+          <Picker data={datas} value={value7} onChange={(value) => { setvalue7(value) }}>
             <List.Item arrow="horizontal">省市选择</List.Item>
           </Picker>
         </List>
@@ -38,7 +42,7 @@ export default () => {
       </TestCase>
       <TestCase itShould="render a Picker cols={2}" tags={['C_API']}>
         <List>
-          <Picker data={datas} cols={2}>
+          <Picker data={datas} cols={2} value={value8} onChange={(value) => { setvalue8(value) }}>
             <List.Item arrow="horizontal">省市选择</List.Item>
           </Picker>
         </List>
@@ -84,7 +88,7 @@ export default () => {
       </TestCase>
       <TestCase itShould="render a Picker title='请选择地址'" tags={['C_API']}>
         <List>
-          <Picker data={datas} title='请选择地址'>
+          <Picker data={datas} title='请选择地址' value={value9} onChange={(value) => { setvalue9(value) }}>
             <List.Item arrow="horizontal">选择地址</List.Item>
           </Picker>
         </List>
@@ -201,7 +205,7 @@ export default () => {
       </TestCase>
       <TestCase itShould="render a Picker triggerType='onLongPress'" tags={['C_API']}>
         <List>
-          <Picker data={datas} triggerType='onLongPress'>
+          <Picker data={datas} triggerType='onLongPress' value={value10} onChange={(value: any) => { setvalue10(value) }}>
             <List.Item arrow="horizontal">长按选址</List.Item>
           </Picker>
         </List>

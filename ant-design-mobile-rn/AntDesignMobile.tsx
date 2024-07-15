@@ -87,12 +87,12 @@ export function AntDesignMobile() {
         <Page name='PickerViewTest'><PickerViewTest /></Page>
         <Page name='TabsTest'><TabsTest /></Page>
         <Page name='ModalTest'><ModalTest /></Page>
+        <Page name='SliderAntTest'><SliderAntTest /></Page>
+        <Page name='ListViewTest'><ListViewTest /></Page>
+        <Page name='PopoverTest'><PopoverTest /></Page>
 
         <Page name='SwipeActionTest'><SwipeActionTest /></Page>
         <Page name='DrawerTest'><DrawerTest /></Page>
-        <Page name='SliderAntTest'><SliderAntTest /></Page>
-        <Page name='PopoverTest'><PopoverTest /></Page>
-        <Page name='ListViewTest'><ListViewTest /></Page>
       </ScrollView>
     </NavigationContainer>
   )

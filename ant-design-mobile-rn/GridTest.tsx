@@ -46,6 +46,12 @@ export default () => {
           data={data}
           columnNum={1}
           isCarousel
+          carouselProps={{
+            style: {
+              width: '100%',
+              height: 120,
+            },
+          }}
         />
       </TestCase>
       <TestCase itShould="render a Grid carouselProps" tags={['C_API']}>

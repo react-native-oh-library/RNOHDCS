@@ -5,73 +5,72 @@ import { Slider } from '@ant-design/react-native';
 import { TestSuite, TestCase } from '@rnoh/testerino';
 
 export default () => {
-  const [changedValue, setChangedValue] = useState(0.15);
-  const [value, setValue] = useState(0);
-  const [value1, setValue1] = useState(0.5);
-  const [value2, setValue2] = useState(0);
-  const [value3, setValue3] = useState(0.25);
-  const [value4, setValue4] = useState(0.15);
-  const [value5, setValue5] = useState(0.15);
-
-  const onAfterChange = (value: any) => {
-    setChangedValue(value);
-  }
+  const [value, setValue] = useState(1);
+  const [value1, setValue1] = useState(1);
+  const [value2, setValue2] = useState(1);
+  const [value3, setValue3] = useState(1);
+  const [value4, setValue4] = useState(1);
+  const [value5, setValue5] = useState(5);
+  const [value6, setValue6] = useState(5);
 
   return (
     <TestSuite name="SliderAntTest">
-      <TestCase itShould="render a SliderTest">
+      <TestCase itShould="render a Slider min={1}">
         <View>
-          <Text>Default settings</Text>
-          <Slider value={value} onChange={(value: any) => setValue(value)} step={1} />
+          <Slider value={value} min={1} max={10} onChange={(value: any) => setValue(value)} step={1} />
         </View>
       </TestCase>
-      <TestCase itShould="render a SliderTest has defaultValue">
+      <TestCase itShould="render a Slider max={20}">
         <View>
-          <Text>Initial value: 0.5</Text>
-          <Slider defaultValue={value1} value={value1} onChange={(value: any) => setValue1(value)} step={1} />
+          <Slider value={value1} min={1} max={20} onChange={(value: any) => setValue1(value)} step={2} />
         </View>
       </TestCase>
-      <TestCase itShould="support min and max">
+      <TestCase itShould="render a Slider step={4}">
         <View>
-          <Text>min: 0, max: 1</Text>
-          <Slider
-            min={0}
-            max={1}
-            step={1}
-            value={value2}
-            onChange={(value: any) => setValue2(value)}
-          />
+          <Slider value={value2} min={1} max={20} onChange={(value: any) => setValue2(value)} step={4} />
+          <Text>value:{value2}</Text>
         </View>
       </TestCase>
-      <TestCase itShould="support step">
+      <TestCase itShould="render a Slider value">
         <View>
-          <Text>step: 0.25</Text>
-          <Slider step={0.25} value={value3} onChange={(value: any) => setValue3(value)} />
+          <Slider value={value3} min={1} max={20} onChange={(value: any) => setValue3(value)} step={2} />
+          <Text>value:{value3}</Text>
         </View>
       </TestCase>
-      <TestCase itShould="support disabled">
+      <TestCase itShould="render a Slider defaultValue={5}">
         <View>
-          <Slider disabled={true} defaultValue={0.25} step={1} />
+          <Slider defaultValue={5} min={1} max={20} onChange={(value: any) => setValue4(value)} step={2} />
         </View>
       </TestCase>
-      <TestCase itShould="support onAfterChange()">
-        <Text>onAfterChange value: {changedValue}</Text>
-        <Slider
-          defaultValue={value4}
-          step={1}
-          onChange={(value: any) => setValue4(value)}
-          onAfterChange={(value: any) => onAfterChange(value)}
-        />
-      </TestCase>
-      <TestCase itShould="support minimumTrackTintColor and maximumTrackTintColor">
+      <TestCase itShould="render a Slider disabled={true}">
         <View>
-          <Slider
-            step={1}
-            defaultValue={value5}
-            onChange={(value: any) => setValue5(value)}
-            minimumTrackTintColor="red"
-            maximumTrackTintColor="blue"
-          />
+          <Slider disabled={true} min={1} max={20} />
+        </View>
+      </TestCase>
+      <TestCase itShould="render a Slider onChange()" initialState={false}
+        arrange={({ setState }: any) =>
+          <Slider value={value5} min={1} max={20} onChange={(value: any) => { setValue5(value); setState(true); }} />
+        }
+        assert={({ expect, state }) => {
+          expect(state).to.be.eq(true);
+        }}>
+      </TestCase>
+      <TestCase itShould="render a Slider onAfterChange()" initialState={false}
+        arrange={({ setState }: any) =>
+          <Slider value={value6} min={1} max={20} onAfterChange={(value: any) => { setValue6(value); setState(true); }} />
+        }
+        assert={({ expect, state }) => {
+          expect(state).to.be.eq(true);
+        }}>
+      </TestCase>
+      <TestCase itShould="render a Slider maximumTrackTintColor='red'">
+        <View>
+          <Slider min={1} max={20} defaultValue={4} maximumTrackTintColor='red' />
+        </View>
+      </TestCase>
+      <TestCase itShould="render a Slider  minimumTrackTintColor='blue'">
+        <View>
+          <Slider min={1} max={20} defaultValue={4} minimumTrackTintColor='blue' />
         </View>
       </TestCase>
     </TestSuite>
