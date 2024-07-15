@@ -37,130 +37,129 @@ const props = [
   },
   {
     key: 'top:40',
-    value: { top: 40, isZone: true  },
+    value: { top: 40, isZone: true },
   },
   {
     key: 'left:10',
-    value: { left: 20, isZone: true  },
+    value: { left: 20, isZone: true },
   },
   {
     key: 'left:40',
-    value: { left: 40, isZone: true  },
+    value: { left: 40, isZone: true },
   },
   {
     key: 'right:20',
-    value: { right: 20, isZone: true  },
+    value: { right: 20, isZone: true },
   },
   {
     key: 'right:40',
-    value: { right: 40, isZone: true  },
+    value: { right: 40, isZone: true },
   },
   {
     key: 'bottom:100',
-    value: { bottom: 100, isZone: true  },
+    value: { bottom: 100, isZone: true },
   },
   {
     key: 'bottom:200',
-    value: { bottom: 200, isZone: true  },
+    value: { bottom: 200, isZone: true },
   },
   {
     key: 'width:80',
-    value: { width: 80, isZone: true  },
+    value: { width: 80, isZone: true },
   },
   {
     key: 'width:150',
-    value: { width: 150, isZone: true  },
+    value: { width: 150, isZone: true },
   },
   {
     key: 'height:50',
-    value: { height: 50, isZone: true  },
+    value: { height: 50, isZone: true },
   },
   {
     key: 'height:100',
-    value: { height: 100, isZone: true  },
+    value: { height: 100, isZone: true },
   },
   {
     key: 'shape:circle',
-    value: { shape: 'circle', isZone: true  },
+    value: { shape: 'circle', isZone: true },
   },
   {
     key: 'shape:rectangle',
-    value: { shape: 'rectangle', isZone: true  },
+    value: { shape: 'rectangle', isZone: true },
   },
   {
     key: 'shape:circle_and_keep',
-    value: { shape: 'circle_and_keep', isZone: true  },
+    value: { shape: 'circle_and_keep', isZone: true },
   },
   {
     key: 'shape:rectangle_and_keep',
-    value: { shape: 'rectangle_and_keep', isZone: true  },
+    value: { shape: 'rectangle_and_keep', isZone: true },
   },
   {
-    key: 'borderRadiusObject:{topLeft:5}',
-    value: { borderRadiusObject: { topLeft: 5 }, isZone: true  },
+    key: 'borderRadiusObject:{topLeft:5, left: 20}',
+    value: { borderRadiusObject: { topLeft: 5 }, left: 20, isZone: true },
   },
   {
-    key: 'borderRadiusObject:{topLeft:20}',
-    value: { borderRadiusObject: { topLeft: 20 }, isZone: true  },
+    key: 'borderRadiusObject:{topLeft:20, left: 20}',
+    value: { borderRadiusObject: { topLeft: 20 }, left: 20, isZone: true },
   },
   {
     key: 'borderRadiusObject:{topRight:5}',
-    value: { borderRadiusObject: { topRight: 5 }, isZone: true  },
+    value: { borderRadiusObject: { topRight: 5 }, left: 20, isZone: true },
   },
   {
     key: 'borderRadiusObject:{topRight:20}',
-    value: { borderRadiusObject: { topRight: 20 }, isZone: true  },
+    value: { borderRadiusObject: { topRight: 20 }, left: 20, isZone: true },
   },
   {
     key: 'borderRadiusObject:{bottomLeft:5}',
-    value: { borderRadiusObject: { bottomLeft: 5 }, isZone: true  },
+    value: { borderRadiusObject: { bottomLeft: 5 }, left: 20, isZone: true },
   },
   {
     key: 'borderRadiusObject:{bottomLeft:20}',
-    value: { borderRadiusObject: { bottomLeft: 20 }, isZone: true  },
+    value: { borderRadiusObject: { bottomLeft: 20 }, left: 20, left: 20, isZone: true },
   },
   {
     key: 'borderRadiusObject:{bottomRight:5}',
-    value: { borderRadiusObject: { bottomRight: 5 }, isZone: true  },
+    value: { borderRadiusObject: { bottomRight: 5 }, left: 20, isZone: true },
   },
   {
     key: 'borderRadiusObject:{bottomRight:20}',
-    value: { borderRadiusObject: { bottomRight: 20 }, isZone: true  },
+    value: { borderRadiusObject: { bottomRight: 20 }, left: 20, isZone: true },
   },
   {
     key: 'containerStyle:{backgroundColor:"red"}',
-    value: { containerStyle: { backgroundColor: 'red' }, isZone: true  },
+    value: { containerStyle: { backgroundColor: 'red' }, isZone: true },
   },
   {
     key: 'containerStyle:{backgroundColor:"blue"}',
-    value: { containerStyle: { backgroundColor: 'blue' }, isZone: true  },
+    value: { containerStyle: { backgroundColor: 'blue' }, isZone: true },
   },
   {
     key: 'keepTooltipPosition:false',
-    value: { keepTooltipPosition: false, isZone: true  },
+    value: { keepTooltipPosition: false, isZone: true },
   },
   {
     key: 'keepTooltipPosition:true',
-    value: { keepTooltipPosition: true, isZone: true  },
+    value: { keepTooltipPosition: true, isZone: true },
   },
   {
     key: 'tooltipBottomOffset:10',
-    value: { tooltipBottomOffset: 10, isZone: true  },
+    value: { tooltipBottomOffset: 10, top: 40, isZone: true },
   },
   {
     key: 'tooltipBottomOffset:40',
-    value: { tooltipBottomOffset: 40, isZone: true  },
+    value: { tooltipBottomOffset: 40, top: 40, isZone: true },
   },
   {
     key: 'text:test_001',
-    value: { text: 'test_001', isZone: true  },
+    value: { text: 'test_001', isZone: true },
   },
   {
     key: 'text:test_002',
-    value: { text: 'test_002', isZone: true  },
+    value: { text: 'test_002', isZone: true },
   },
 ]
-
 
 export default function () {
 

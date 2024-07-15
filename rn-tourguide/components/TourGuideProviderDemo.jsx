@@ -66,14 +66,16 @@ const AppContent = (props) => {
           <Text style={styles.buttonText}>START THE TUTORIAL!</Text>
         </TouchableOpacity>
       </TourGuideZone>
-      {props.tourGuideZoneByPositionprops?.isZone ? (
+      {props.tourGuideZoneByPositionprops?.isZone 
+      || props.tourGuideZoneprops?.isZone ? (
         <TourGuideZoneByPosition
           zone={1}
-          shape={'rectangle_and_keep'}
           isTourGuide
+          shape={'rectangle_and_keep'}
           width={64}
           height={64}
           {...props.tourGuideZoneByPositionprops}
+          {...props.tourGuideZoneprops}
         />
       ) : null}
     </View>

@@ -81,11 +81,11 @@ const props = [
   },
   {
     key: 'tooltipBottomOffset:10',
-    value: { tooltipBottomOffset: 10 },
+    value: { tooltipBottomOffset: 10, top: 40, isZone: true },
   },
   {
     key: 'tooltipBottomOffset:40',
-    value: { tooltipBottomOffset: 40 },
+    value: { tooltipBottomOffset: 40, top: 40, isZone: true },
   },
   {
     key: 'borderRadiusObject:{topLeft:5}',
