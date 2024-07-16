@@ -96,11 +96,11 @@ const props = [
     value: { shape: 'rectangle_and_keep', isZone: true },
   },
   {
-    key: 'borderRadiusObject:{topLeft:5, left: 20}',
+    key: 'borderRadiusObject:{topLeft:5}, left: 20',
     value: { borderRadiusObject: { topLeft: 5 }, left: 20, isZone: true },
   },
   {
-    key: 'borderRadiusObject:{topLeft:20, left: 20}',
+    key: 'borderRadiusObject:{topLeft:20}, left: 20',
     value: { borderRadiusObject: { topLeft: 20 }, left: 20, isZone: true },
   },
   {
