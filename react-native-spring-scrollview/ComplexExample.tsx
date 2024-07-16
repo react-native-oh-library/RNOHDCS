@@ -7,9 +7,9 @@ import {
   TextInput,
   View
 } from "react-native";
-import { SpringScrollView } from "@react-native-oh-tpl/react-native-spring-scrollview";
-import { NormalHeader } from "@react-native-oh-tpl/react-native-spring-scrollview/src/NormalHeader";
-import { NormalFooter } from "@react-native-oh-tpl/react-native-spring-scrollview/src/NormalFooter";
+import { SpringScrollView } from "react-native-spring-scrollview";
+import { NormalHeader } from "react-native-spring-scrollview/src/NormalHeader";
+import { NormalFooter } from "react-native-spring-scrollview/src/NormalFooter";
 
 export default class ComplexExample extends React.Component {
   _refs;

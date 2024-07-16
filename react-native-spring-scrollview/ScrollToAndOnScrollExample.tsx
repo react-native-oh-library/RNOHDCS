@@ -8,7 +8,7 @@ import {
   Animated,
   ScrollView,
 } from 'react-native';
-import {SpringScrollView} from '@react-native-oh-tpl/react-native-spring-scrollview';
+import {SpringScrollView} from 'react-native-spring-scrollview';
 
 const AnimatedSpringScrollView = Animated.createAnimatedComponent(SpringScrollView);
 export default class ScrollToAndOnScrollExample extends React.Component {

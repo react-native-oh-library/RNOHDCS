@@ -1,8 +1,8 @@
 import React from 'react';
 import {StyleSheet, Text, Platform, View, TouchableOpacity} from 'react-native';
-import {SpringScrollView} from '@react-native-oh-tpl/react-native-spring-scrollview';
-import { CommonLottieHeader } from "@react-native-oh-tpl/react-native-spring-scrollview/src/Customize/CommonLottieHeader";
-import { CommonLottieFooter } from "@react-native-oh-tpl/react-native-spring-scrollview/src/Customize/CommonLottieFooter";
+import {SpringScrollView} from 'react-native-spring-scrollview';
+import { CommonLottieHeader } from "react-native-spring-scrollview/src/Customize/CommonLottieHeader";
+import { CommonLottieFooter } from "react-native-spring-scrollview/src/Customize/CommonLottieFooter";
 export default class RefreshAndLoadingExample extends React.Component {
   _scrollView;
   _step = 13;
