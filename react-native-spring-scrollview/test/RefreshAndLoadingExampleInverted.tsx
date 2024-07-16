@@ -3,7 +3,7 @@ import {StyleSheet, Text, Platform, View, TouchableOpacity} from 'react-native';
 import {SpringScrollView} from 'react-native-spring-scrollview';
 import { CommonLottieHeader } from "react-native-spring-scrollview/src/Customize/CommonLottieHeader";
 import { CommonLottieFooter } from "react-native-spring-scrollview/src/Customize/CommonLottieFooter";
-export default class RefreshAndLoadingExample extends React.Component {
+export default class RefreshAndLoadingExampleInverted extends React.Component {
   _scrollView;
   _step = 13;
 
@@ -54,16 +54,20 @@ export default class RefreshAndLoadingExample extends React.Component {
     }, 3000);
   };
 }
+
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      marginTop: Platform.OS === "ios" ? 20 : 0
-    },
-    text: {
-      paddingVertical: 20,
-      fontSize: 16,
-      textAlign: "center",
-      backgroundColor: "white",
-      transform: [{ scaleY: -1 }]
-    }
-  });
+  container: {
+    flex: 1,
+    marginTop: Platform.OS === "ios" ? 20 : 0,
+    height:300
+  },
+  text: {
+    paddingVertical: 20,
+    fontSize: 16,
+    textAlign: "center",
+    backgroundColor: "white",
+    transform: [{ scaleY: -1 }]
+  }
+});
+
+

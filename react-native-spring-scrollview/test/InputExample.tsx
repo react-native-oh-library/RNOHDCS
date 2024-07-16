@@ -12,7 +12,7 @@ export default class InputExample extends React.Component {
       <SpringScrollView
         style={styles.container}
         tapToHideKeyboard={true}
-        inputToolBarHeight={-20}
+        inputToolBarHeight={-100}
         textInputRefs={[this._topInput, this._bottomInput]}
       >
         <TextInput
@@ -32,17 +32,19 @@ export default class InputExample extends React.Component {
     );
   }
 }
+
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-    },
-    input: {
-      marginHorizontal: 20,
-      marginVertical: 20,
-    },
-    text: {
-      marginHorizontal: 20,
-      marginVertical: 300,
-      fontSize: 30,
-    },
-  });
+  container: {
+    flex: 1,
+    height:700
+  },
+  input: {
+    marginHorizontal: 20,
+    marginVertical: 20,
+  },
+  text: {
+    marginHorizontal: 20,
+    marginVertical: 300,
+    fontSize: 30,
+  },
+});

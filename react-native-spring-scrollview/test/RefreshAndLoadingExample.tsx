@@ -24,7 +24,7 @@ export default class RefreshAndLoadingExample extends React.Component {
         style={styles.container}
         onRefresh={this._onRefresh}
         onLoading={this._onLoading}
-        inverted={true}
+        inverted={false}
         refreshHeader={CommonLottieHeader}
         loadingFooter={CommonLottieFooter}
       >
@@ -54,16 +54,17 @@ export default class RefreshAndLoadingExample extends React.Component {
     }, 3000);
   };
 }
+
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      marginTop: Platform.OS === "ios" ? 20 : 0
-    },
-    text: {
-      paddingVertical: 20,
-      fontSize: 16,
-      textAlign: "center",
-      backgroundColor: "white",
-      transform: [{ scaleY: -1 }]
-    }
-  });
+  container: {
+    flex: 1,
+    marginTop: Platform.OS === "ios" ? 20 : 0,
+    height:300
+  },
+  text: {
+    paddingVertical: 20,
+    fontSize: 16,
+    textAlign: "center",
+    backgroundColor: "white",
+  }
+});
