@@ -1,5 +1,5 @@
-import matrices from '@react-native-oh-tpl/react-native-color-matrix-image-filters/rn-color-matrices'
-import { concatColorMatrices } from '@react-native-oh-tpl/react-native-color-matrix-image-filters'
+import matrices from 'react-native-color-matrix-image-filters/rn-color-matrices'
+import { concatColorMatrices } from 'react-native-color-matrix-image-filters'
 
 export const ColorMatrices = {
   matrices,
