@@ -1,5 +1,5 @@
 import React from 'react';
-import {SpringScrollView} from '@react-native-oh-tpl/react-native-spring-scrollview';
+import {SpringScrollView} from 'react-native-spring-scrollview';
 import {TextInput, StyleSheet, Text, ScrollView, View} from 'react-native';
 
 export default class InputExample extends React.Component {

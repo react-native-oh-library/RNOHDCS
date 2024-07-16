@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {SpringScrollView} from '@react-native-oh-tpl/react-native-spring-scrollview';
+import {SpringScrollView} from 'react-native-spring-scrollview';
 
 export default class BouncesAndScrollEnabledExample extends React.Component {
   state = {
