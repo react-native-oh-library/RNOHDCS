@@ -74,7 +74,7 @@ export default function OrientationTestDemo() {
                           }
                         },
                       );
-                    }, 50);
+                    }, 500);
                   }}
                   style={styles.button}>
                   <Text>锁定当前屏幕为竖屏</Text>
@@ -104,7 +104,7 @@ export default function OrientationTestDemo() {
                           }
                         },
                       );
-                    }, 50);
+                    }, 500);
                   }}
                   style={styles.button}>
                   <Text>锁定当前屏幕为横屏,反向横屏，且受控制中心的旋转开关控制</Text>
@@ -134,7 +134,7 @@ export default function OrientationTestDemo() {
                           }
                         },
                       );
-                    }, 50);
+                    }, 500);
                   }}
                   style={styles.button}>
                   <Text>锁定当前屏幕为横屏</Text>
@@ -164,7 +164,7 @@ export default function OrientationTestDemo() {
                           }
                         },
                       );
-                    }, 50);
+                    }, 500);
                   }}
                   style={styles.button}>
                   <Text>锁定当前屏幕为反向横屏</Text>
