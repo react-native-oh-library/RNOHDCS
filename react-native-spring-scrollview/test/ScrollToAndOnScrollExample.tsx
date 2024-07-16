@@ -34,6 +34,10 @@ export default class ScrollToAndOnScrollExample extends React.Component {
           onMomentumScrollBegin={this.onMomentumScrollBegin}
           onMomentumScrollEnd={this._onMomentumScrollEnd}
           onNativeContentOffsetExtract={this._nativeOffset}
+          onScroll={this._onScroll}
+          bounces={true}
+          onSizeChange={this._onSizeChange}
+          onContentSizeChange={this._onContentSizeChange}
           >
           {arr.map((i, index) => (
             <Text key={index} style={styles.text}>
@@ -49,7 +53,8 @@ export default class ScrollToAndOnScrollExample extends React.Component {
       </View>
     );
   }
-_stickyHeaderStyle = {
+
+  _stickyHeaderStyle = {
     position: 'absolute',
     top: 20,
     left: 0,
@@ -59,6 +64,22 @@ _stickyHeaderStyle = {
     alignItems: 'center',
     backgroundColor: 'red',
     transform: [{translateY: this._nativeOffset.y}],
+  };
+
+
+  _onSizeChange= (wh) => {
+    console.log('_onSizeChange wh:'+JSON.stringify(wh));
+
+  };
+
+  _onContentSizeChange= (wh) => {
+    console.log('_onContentSizeChange wh:'+JSON.stringify(wh));
+
+  };
+
+
+  _onScroll = offset => {
+    console.log("_onScroll", offset.nativeEvent);
   };
 
   _scrollTo = () => {
@@ -88,6 +109,7 @@ _stickyHeaderStyle = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height:300
   },
   scrollTo: {
     marginTop: Platform.OS === 'ios' ? 20 : 0,
