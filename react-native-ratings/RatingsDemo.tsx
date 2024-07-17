@@ -299,7 +299,7 @@ export function RatingsDemo() {
             itShould="Tester Scrollable Tabview Example(ratingImage=assets/expo.png)">
             <Rating
               type="custom"
-              ratingImage={require('../assets/expo.png')}
+              ratingImage={require('./assets/expo.png')}
               ratingColor="#3498db"
               ratingBackgroundColor="#c8c7c8"
               ratingCount={6}
@@ -313,7 +313,7 @@ export function RatingsDemo() {
             itShould="Tester Scrollable Tabview Example(ratingImage=assets/react-native-logo.png)">
             <Rating
               type="custom"
-              ratingImage={require('../assets/react-native-logo.png')}
+              ratingImage={require('./assets/react-native-logo.png')}
               ratingColor="#3498db"
               ratingBackgroundColor="#c8c7c8"
               ratingCount={6}
@@ -328,7 +328,7 @@ export function RatingsDemo() {
             itShould="Tester Scrollable Tabview Example(ratingColor=blue)">
             <Rating
               type="custom"
-              ratingImage={require('../assets/expo.png')}
+              ratingImage={require('./assets/expo.png')}
               ratingColor="blue"
               ratingCount={5}
               imageSize={30}
@@ -341,7 +341,7 @@ export function RatingsDemo() {
             itShould="Tester Scrollable Tabview Example(ratingColor=red)">
             <Rating
               type="custom"
-              ratingImage={require('../assets/expo.png')}
+              ratingImage={require('./assets/expo.png')}
               ratingColor="red"
               ratingCount={5}
               imageSize={30}
@@ -355,7 +355,7 @@ export function RatingsDemo() {
             itShould="Tester Scrollable Tabview Example(ratingBackgroundColor=blue)">
             <Rating
               type="custom"
-              ratingImage={require('../assets/expo.png')}
+              ratingImage={require('./assets/expo.png')}
               ratingBackgroundColor="blue"
               ratingCount={5}
               imageSize={30}
@@ -368,7 +368,7 @@ export function RatingsDemo() {
             itShould="Tester Scrollable Tabview Example(ratingBackgroundColor=red)">
             <Rating
               type="custom"
-              ratingImage={require('../assets/expo.png')}
+              ratingImage={require('./assets/expo.png')}
               ratingBackgroundColor="red"
               ratingCount={5}
               imageSize={30}
@@ -606,7 +606,7 @@ export function RatingsDemo() {
             itShould="Tester Scrollable Tabview Example(starImage=assets/expo.png)">
             <AirbnbRating
               count={5}
-              starImage={require('../assets/expo.png')}
+              starImage={require('./assets/expo.png')}
               reviews={["Terrible", "Bad", "Okay", "Good", "Great"]}
               size={20}
               onFinishRating={ratingCompleted}
@@ -617,7 +617,7 @@ export function RatingsDemo() {
             itShould="Tester Scrollable Tabview Example(starImage=assets/react-native-logo.png)">
             <AirbnbRating
               count={5}
-              starImage={require('../assets/react-native-logo.png')}
+              starImage={require('./assets/react-native-logo.png')}
               reviews={["Terrible", "Bad", "Okay", "Good", "Great"]}
               size={20}
               onFinishRating={ratingCompleted}
@@ -629,7 +629,7 @@ export function RatingsDemo() {
             itShould="Tester Scrollable Tabview Example(starContainerStyle=backgroundColor: red)">
             <AirbnbRating
               count={5}
-              starImage={require('../assets/react-native-logo.png')}
+              starImage={require('./assets/react-native-logo.png')}
               reviews={["Terrible", "Bad", "Okay", "Good", "Great"]}
               size={20}
               starContainerStyle={{ backgroundColor: "red" }}
@@ -642,7 +642,7 @@ export function RatingsDemo() {
             itShould="Tester Scrollable Tabview Example(starContainerStyle=backgroundColor: blue)">
             <AirbnbRating
               count={5}
-              starImage={require('../assets/react-native-logo.png')}
+              starImage={require('./assets/react-native-logo.png')}
               reviews={["Terrible", "Bad", "Okay", "Good", "Great"]}
               size={20}
               starContainerStyle={{ backgroundColor: "blue"}}
@@ -655,7 +655,7 @@ export function RatingsDemo() {
             itShould="Tester Scrollable Tabview Example(ratingContainerStyle=backgroundColor: red)">
             <AirbnbRating
               count={5}
-              starImage={require('../assets/react-native-logo.png')}
+              starImage={require('./assets/react-native-logo.png')}
               reviews={["Terrible", "Bad", "Okay", "Good", "Great"]}
               size={20}
               ratingContainerStyle={{ backgroundColor: "red" }}
@@ -668,7 +668,7 @@ export function RatingsDemo() {
             itShould="Tester Scrollable Tabview Example(ratingContainerStyle=backgroundColor: blue)">
             <AirbnbRating
               count={5}
-              starImage={require('../assets/react-native-logo.png')}
+              starImage={require('./assets/react-native-logo.png')}
               reviews={["Terrible", "Bad", "Okay", "Good", "Great"]}
               size={20}
               ratingContainerStyle={{ backgroundColor: "blue" }}
