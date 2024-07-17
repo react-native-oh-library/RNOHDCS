@@ -22,6 +22,10 @@ export default function OrientationLockerExample() {
     useEffect(() => {
         // 开启方向变化的监听
         getDeviceOrientation();
+        return () => {
+        // 退出应用销毁监听
+        cancelAddAllListen();
+      };
     }, []);
 
     const getDeviceOrientation = () => {
@@ -56,16 +60,16 @@ export default function OrientationLockerExample() {
     const lockToAllOrientationsButUpsideDown = () => {
         Orientation.lockToAllOrientationsButUpsideDown();
     };
-    const addTisten = () => {
+    const addListen = () => {
         Orientation.addDeviceOrientationListener(updateDeviceOrientation);
     };
-    const cancelAddTisten = () => {
+    const cancelAddListen = () => {
         Orientation.removeDeviceOrientationListener(updateDeviceOrientation);
     };
-    const addOtherTisten = () => {
+    const addOtherListen = () => {
         Orientation.addOrientationListener(updateDeviceOrientation);
     };
-    const cancelAddOtherTisten = () => {
+    const cancelAddOtherListen = () => {
         Orientation.removeOrientationListener(updateDeviceOrientation);
     };
 
@@ -79,7 +83,7 @@ export default function OrientationLockerExample() {
     const removeLockListener  = () => {
         Orientation.removeLockListener(updateDeviceOrientation);
     };
-    const cancelAddALLTisten = () => {
+    const cancelAddAllListen = () => {
         Orientation.removeAllListeners(updateDeviceOrientation);
     };
 
@@ -98,7 +102,7 @@ export default function OrientationLockerExample() {
                     
                     <TestCase tags={['C_API']} itShould='开启监听'>
                         <TouchableOpacity onPress={() => {
-                            addTisten();
+                            addListen();
                         }}>
                             <Text>点击此处开启监听</Text>
                         </TouchableOpacity>
@@ -106,7 +110,7 @@ export default function OrientationLockerExample() {
 
                     <TestCase tags={['C_API']} itShould='取消监听'>
                         <TouchableOpacity onPress={() => {
-                            cancelAddTisten();
+                            cancelAddListen();
                         }}>
                             <Text>点击此处取消监听</Text>
                         </TouchableOpacity>
@@ -114,7 +118,7 @@ export default function OrientationLockerExample() {
 
                     <TestCase tags={['C_API']} itShould='开启监听2'>
                         <TouchableOpacity onPress={() => {
-                            addOtherTisten();
+                            addOtherListen();
                         }}>
                             <Text>点击此处开启监听2</Text>
                         </TouchableOpacity>
@@ -122,7 +126,7 @@ export default function OrientationLockerExample() {
 
                     <TestCase tags={['C_API']} itShould='取消监听2'>
                         <TouchableOpacity onPress={() => {
-                            cancelAddOtherTisten();
+                            cancelAddOtherListen();
                         }}>
                             <Text>点击此处取消监听2</Text>
                         </TouchableOpacity>
@@ -144,12 +148,8 @@ export default function OrientationLockerExample() {
                         </TouchableOpacity>
                     </TestCase>
 
-                    <TestCase tags={['C_API']} itShould='取消当前的监听器'>
-                        <TouchableOpacity onPress={() => {
-                            cancelAddALLTisten();
-                        }}>
-                            <Text>点击取消当前的监听器</Text>
-                        </TouchableOpacity>
+                    <TestCase tags={['C_API']} itShould='退出应用,销毁监听器(生命周期里面调用removeAllListeners)'>
+                          <Text>退出应用,销毁监听</Text>
                     </TestCase>
 
                     <TestCase
