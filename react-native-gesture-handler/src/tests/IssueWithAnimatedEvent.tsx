@@ -12,8 +12,8 @@ const circleRadius = 30;
 const url =
   'https://res.vmallres.com/pimages/uomcdn/CN/pms/202304/sbom/4002010007801/group/800_800_9B1356F1330EADDCB20D35D2AE1F46E0.jpg';
 
-class Circle extends Component {
-  constructor(props) {
+export class IssueWithAnimatedEvent extends Component {
+  constructor(props: any) {
     super(props);
 
     this.state = {
@@ -100,8 +100,4 @@ class Circle extends Component {
       </GestureHandlerRootView>
     );
   }
-}
-
-export default function App() {
-  return <Circle />;
 }
