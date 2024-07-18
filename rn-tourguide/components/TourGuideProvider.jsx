@@ -1,5 +1,6 @@
-import React, { View, Text, useState } from 'react';
-import { ScrollView, Button } from 'react-native';
+import React, { useState } from 'react';
+import { ScrollView, Button, View, Text, } from 'react-native';
+import { useTourGuideController } from 'rn-tourguide';
 import { Tester, TestCase } from '@rnoh/testerino';
 
 import TourGuideProviderDemo from './TourGuideProviderDemo';
@@ -23,6 +24,23 @@ const props = [
     }
   },
   {
+    key: 'wrapperStyle:{backgroundColor:"#9FA8DA"}',
+    value: {
+      wrapperStyle: { 
+        backgroundColor: '#9FA8DA',
+      },
+    }
+  },
+  {
+    key: 'wrapperStyle:{backgroundColor:"#9FA8DA",borderWidth:10}',
+    value: {
+      wrapperStyle: { 
+        backgroundColor: '#9FA8DA',
+        borderWidth:10, 
+      },
+    }
+  },
+  {
     key: 'animationDuration:500',
     value: { animationDuration: 500 },
   },
@@ -31,12 +49,12 @@ const props = [
     value: { animationDuration: 1000 },
   },
   {
-    key: 'startAtMount:true',
-    value: { startAtMount: true },
+    key: 'startAtMount:mount_002',
+    value: { startAtMount: 'mount_002', tourKey: 'mount_002' },
   },
   {
     key: 'startAtMount:mount_001',
-    value: { startAtMount: 'mount_001' },
+    value: { startAtMount: 'mount_001', tourKey: 'mount_001' },
   },
   {
     key: 'backdropColor:red',
@@ -47,12 +65,12 @@ const props = [
     value: { backdropColor: 'rgba(0,0,0,.3)' },
   },
   {
-    key: 'verticalOffset:20',
-    value: { verticalOffset: 20 },
+    key: 'verticalOffset:0',
+    value: { verticalOffset: 0 },
   },
   {
-    key: 'verticalOffset:80',
-    value: { verticalOffset: 80 },
+    key: 'verticalOffset:20',
+    value: { verticalOffset: 20 },
   },
   {
     key: 'maskOffset:20',
@@ -81,6 +99,10 @@ const props = [
   {
     key: 'preventOutsideInteraction:true',
     value: { preventOutsideInteraction: true },
+  },
+  {
+    key: 'preventOutsideInteraction:false',
+    value: { preventOutsideInteraction: false },
   },
   {
     key: 'labels:{skip:"跳过"}',

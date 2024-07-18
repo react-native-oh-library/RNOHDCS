@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import FileUpload from 'react-native-fileupload';
+import Toast from 'react-native-toast';
 
 export default class FileUploadDemo extends Component {
 
@@ -12,18 +13,29 @@ export default class FileUploadDemo extends Component {
           
           'Content-Type': 'multipart/form-data',
         },
-        files: [
-          {
-            name: 'file',
-            filename: 'assets_placeholder2000x2000.jpg',
-            filetype: 'jpg',
-          },
-        ]
+        fields: {
+          name: 'hello',value: 'world',
+      },
+      files: [
+        {
+          name: 'file',// optional
+          filename: 'assets_placeholder2000x2000.jpg',
+          filepath: '/xxx/assets_placeholder2000x2000.jpg',
+          filetype: 'jpg',// optional
+        },
+        {
+          name: 'one', // optional
+          filename: 'one.w4a',
+          filepath: '/xxx/one.w4a', 
+          filetype: 'audio/x-m4a',// optional
+        },
+      ]
     };
-    FileUpload.upload(obj).then((result)=>{
-      console.log("fileUplodae successfully!",result);
-    },(error)=>{
-      console.log("fileUplodae fail!",error);
+    FileUpload.upload(obj, function(err,result) {
+      console.log("upload",err,result);
+      if(err || result) {
+        Toast.showShortCenter(err + result)
+      }
     })
   }
   render() {

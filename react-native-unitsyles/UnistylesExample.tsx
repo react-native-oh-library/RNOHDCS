@@ -3,73 +3,86 @@ import { UnistylesRuntime, createStyleSheet, useStyles,UnistylesRegistry,mq,Unis
 import React,{useEffect} from 'react'; 
 import {TestSuite,Tester,TestCase} from '@rnoh/testerino';
 
-
 export function UnistylesExample() {
     let anti_shake = true;
     const hasSomeCoolFeatures = true;
     const { styles, theme } = useStyles(stylesheet,{ colors: hasSomeCoolFeatures,sizes: !hasSomeCoolFeatures});
     const renderCount = React.useRef(0)
     useEffect(() => () => { UnistylesRuntime.removePlugin(autoGuidelinePlugin) }, [])
-    const isAutoGuidelinePluginEnabled = UnistylesRuntime.enabledPlugins.includes(autoGuidelinePlugin.name)
 
     return(
         <ScrollView>
             <Tester>
                 <TestSuite name='unistyles' >
-                    <TestCase itShould='变更主题对象'  >
-                        <View style={styles.container}>
-                            <Text style={styles.text}> 当前主题:{UnistylesRuntime.themeName} 重新渲染的次数:{renderCount.current++}</Text><Text style={styles.theme}> Colors: {JSON.stringify(theme.colors, null, 2)} </Text>
-                            <Button title="变更light主题" onPress={() => {
-                                    anti_shake = !anti_shake
-                                    if(anti_shake){
-                                        UnistylesRuntime.setAdaptiveThemes(false);
-                                        UnistylesRuntime.setTheme('light');
-                                        UnistylesRuntime.updateTheme('light', theme => ({
-                                            ...theme,
-                                            colors: { ...theme.colors, typography: theme.colors.typography === '#000000' ? theme.colors.blood : '#000000' }
-                                        }))
-                                    }
-                                }}
-                            />
-                        </View>
+                    <TestCase itShould = '主题名称'>
+                        <Text style={styles.text}> 当前主题:{UnistylesRuntime.themeName} 重新渲染的次数:{renderCount.current++}</Text><Text style={styles.theme}> Colors: {JSON.stringify(theme.colors, null, 2)} </Text>
                     </TestCase>
-                    <TestCase itShould='页面样式数据'>
-                        <Text style={styles.text}> 这个页面正在使用 {UnistylesRuntime.themeName} 主题.</Text>
+                    <TestCase itShould='变更主题对象 UnistylesRuntime.updateTheme("light", theme => ({ ...theme, colors: { ...theme.colors, typography: "#ff6b6b" } }))'>
+                        <Button title="变更light主题 #ff6b6b" onPress={() => { 
+                          UnistylesRuntime.setAdaptiveThemes(false);
+                          UnistylesRuntime.setTheme('light');
+                          UnistylesRuntime.updateTheme('light', theme => ({ ...theme, colors: { ...theme.colors, typography: theme.colors.blood } }))
+                        }}
+                        />
                     </TestCase>
-                    <TestCase itShould='更改页面主题' >
-                    <Button title="更改页面主题" color={theme.colors.accent} onPress={() => {
-                        anti_shake = !anti_shake
-                        if(anti_shake){
-                            UnistylesRuntime.setAdaptiveThemes(false);
-                            UnistylesRuntime.setTheme(UnistylesRuntime.themeName === 'light' ? 'premium' : 'light')
-                            console.log(UnistylesRuntime.themeName);
-                            
-                        }
-                    }} />
+                    <TestCase itShould='变更主题对象 UnistylesRuntime.updateTheme("light", theme => ({ ...theme, colors: { ...theme.colors, typography: "#000000" } }))'>
+                        <Button title="变更light主题 #000000" onPress={() => { 
+                                UnistylesRuntime.setAdaptiveThemes(false);
+                                UnistylesRuntime.setTheme('light');
+                                UnistylesRuntime.updateTheme('light', theme => ({ ...theme, colors: { ...theme.colors, typography: '#000000' } }))
+                            }}
+                        />
                     </TestCase>
-                    <TestCase itShould='适应系统主题' >
-                    <Button title="启用自适应主题" onPress={() => {
-                        anti_shake = !anti_shake
-                        if(anti_shake){ UnistylesRuntime.setAdaptiveThemes(true) }
-                    }} />
+                    <TestCase itShould='更改页面主题'>
+                        <Button title="更改页面主题 UnistylesRuntime.setTheme('light')" color={theme.colors.accent} onPress={() => {
+                            anti_shake = !anti_shake
+                            if(anti_shake){
+                                UnistylesRuntime.setAdaptiveThemes(false);
+                                UnistylesRuntime.setTheme('light')
+                            }
+                        }} />
                     </TestCase>
-                    <TestCase itShould='插件'>
+                    <TestCase itShould='更改页面主题'>
+                        <Button title="更改页面主题 UnistylesRuntime.setTheme('premium')" color={theme.colors.accent} onPress={() => {
+                            anti_shake = !anti_shake
+                            if(anti_shake){
+                                UnistylesRuntime.setAdaptiveThemes(false);
+                                UnistylesRuntime.setTheme('premium')
+                            }
+                        }} />
+                    </TestCase>
+                    <TestCase itShould='启用自适应主题'>
+                        <Text style={styles.container}>{" 系统主题:"+UnistylesRuntime.colorScheme}</Text>
+                        <Button title="启用自适应主题 UnistylesRuntime.setAdaptiveThemes(true)" onPress={() => { UnistylesRuntime.setAdaptiveThemes(true) } } />
+                    </TestCase>
+                    <TestCase itShould='关闭自适应主题'>
+                        <Text style={styles.container}>{" 系统主题:"+UnistylesRuntime.colorScheme}</Text>
+                        <Button title="关闭自适应主题 UnistylesRuntime.setAdaptiveThemes(false)" onPress={() => {  UnistylesRuntime.setAdaptiveThemes(false)  }} />
+                    </TestCase>
+                    <TestCase itShould='启用插件'>
                         <View style={styles.unscaledBox}></View><Text>前缀为unscaled的样式会被插件跳过,已启用的插件{UnistylesRuntime.enabledPlugins}</Text>
                         <Button
-                            title={isAutoGuidelinePluginEnabled ? '关闭插件' : '启用插件'}
-                            onPress={() => {anti_shake = !anti_shake; if(anti_shake){ 
-                                isAutoGuidelinePluginEnabled ? UnistylesRuntime.removePlugin(autoGuidelinePlugin) : UnistylesRuntime.addPlugin(autoGuidelinePlugin)
-                            } }}
+                            title={'启用插件'}
+                            onPress={() => { UnistylesRuntime.addPlugin(autoGuidelinePlugin) } }
+                        />
+                    </TestCase>
+                    <TestCase itShould='关闭插件'>
+                        <View style={styles.unscaledBox}></View><Text>前缀为unscaled的样式会被插件跳过,已启用的插件{UnistylesRuntime.enabledPlugins}</Text>
+                        <Button
+                            title={'关闭插件'}
+                            onPress={() => {UnistylesRuntime.removePlugin(autoGuidelinePlugin) }}
                         />
                     </TestCase>
                     <TestCase itShould='在StyleSheets中使用runtime'>
                         <View style={styles.box}>
-                            <Text>占据了屏幕一半大小的方块width:{styles.box.width}  861 height:{styles.box.height}</Text>
+                            <Text>占据了屏幕一半大小的方块width:{styles.box.width} height:{styles.box.height}</Text>
                         </View>
                     </TestCase>
-                    <TestCase itShould='动态函数式样式表'>
-                        <View id='view' style={styles.dynamicFunction(2)}><Text>accent</Text></View>
+                    <TestCase itShould='动态函数式样式表 styles.dynamicFunction(1)'>
                         <View style={styles.dynamicFunction(1)}><Text>barbie</Text></View>
+                    </TestCase>
+                    <TestCase itShould='动态函数式样式表 styles.dynamicFunction(2)'>
+                        <View style={styles.dynamicFunction(2)}><Text>accent</Text></View>
                     </TestCase>
                     <TestCase itShould='媒体查询'>
                         <Text>你的屏幕大小是:{UnistylesRuntime.screen.width}x{UnistylesRuntime.screen.height};当宽大于500时背景是{theme.colors.backgroundColor}，宽大于900时背景为{theme.colors.aloes} </Text>
@@ -77,8 +90,11 @@ export function UnistylesExample() {
                     <TestCase itShould='字体大小偏好'>
                         <Text>{"现在的字体大小偏好设置为:"+UnistylesRuntime.contentSizeCategory}</Text>
                     </TestCase>
-                    <TestCase itShould='在StyleSheets中使用variants'>
+                    <TestCase itShould='在StyleSheets中使用variants style={styles.box_variants}'>
                         <View style={styles.box_variants}></View>
+                    </TestCase>
+                    <TestCase itShould='在StyleSheets中使用variants style={styles.box_variants1}'>
+                        <View style={styles.box_variants1}></View>
                     </TestCase>
 
                 </TestSuite>
@@ -150,6 +166,23 @@ const stylesheet = createStyleSheet((theme, runtime) => ({
             sizes: {
                 true: { width: 200, height: 200 },
                 false: { width: 50, height: 50 },
+                default: { width: 100, height: 100 },
+                other: { width: 150, height: 150 }
+            }
+        }
+    },
+    box_variants1: {
+        borderRadius: 10,
+        variants: {
+            colors: {
+                false: { backgroundColor: theme.colors.barbie },
+                true: { backgroundColor: theme.colors.blood },
+                default: { backgroundColor: theme.colors.sky },
+                other: { backgroundColor: theme.colors.typography }
+            },
+            sizes: {
+                false: { width: 200, height: 200 },
+                true: { width: 50, height: 50 },
                 default: { width: 100, height: 100 },
                 other: { width: 150, height: 150 }
             }

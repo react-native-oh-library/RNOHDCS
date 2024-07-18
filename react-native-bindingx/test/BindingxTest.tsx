@@ -4,9 +4,9 @@ import { TestSuite } from '@rnoh/testerino';
 import { TestCase } from '../../components';
 import { createStackNavigator } from "@react-navigation/stack";
 import PanDemo from '../PanDemo-CAPI'
-import OrientationDemo from '../OrientationDemo-CAPI'
-import ScrollViewDemo from '../ScrollViewDemo-CAPI'
-import TimingDemo from '../TimingDemo-CAPI'
+import OrientationDemo from './OrientationDemo-CAPI'
+import ScrollViewDemo from './ScrollViewDemo-CAPI'
+import TimingDemo from './TimingDemo-CAPI'
 
 const Stack = createStackNavigator();
 export const BindingxTest = () => {

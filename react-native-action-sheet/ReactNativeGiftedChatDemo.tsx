@@ -50,51 +50,139 @@ class App extends React.Component<Props, State> {
 
       <Tester>
         <TestSuite name="ShowActionSheet">
-
-        <TestCase itShould='render default actionSheet' tags={['C_API']} >
-        <ShowActionSheetButton
-          title="default actionSheet"
-          withIcons
-          onSelection={this._updateSelectionText}
-          showActionSheetWithOptions={showActionSheetWithOptions}
-        />
-
-        </TestCase>
-
-
-        <TestCase itShould='render actionSheet with title & message' tags={['C_API']} >
-        <ShowActionSheetButton
-          title="Title Message"
-          withTitle
-          withMessage
-          withIcons
-          onSelection={this._updateSelectionText}
-          showActionSheetWithOptions={showActionSheetWithOptions}
-        />
-        </TestCase>
-
-        <TestCase itShould='render actionSheet with Use Separators' tags={['C_API']} >
-        <ShowActionSheetButton
-          title="Use Separators"
-          withTitle
-          withIcons
-          withSeparators
-          onSelection={this._updateSelectionText}
-          showActionSheetWithOptions={showActionSheetWithOptions}
-        />
-        </TestCase>
+          <TestCase itShould='render Options Only' tags={['C_API']} >
+            <ShowActionSheetButton
+              title="Options Only"
+              onSelection={this._updateSelectionText}
+              showActionSheetWithOptions={showActionSheetWithOptions}
+            />
+          </TestCase>
+          
+          <TestCase itShould='render Title' tags={['C_API']} >
+            <ShowActionSheetButton
+              title="Title"
+              withTitle
+              onSelection={this._updateSelectionText}
+              showActionSheetWithOptions={showActionSheetWithOptions}
+              />
+          </TestCase>
         
-        <TestCase itShould='render actionSheet with Custom Styles' tags={['C_API']} >
-        <ShowActionSheetButton
-          title="Custom Styles"
-          withTitle
-          withMessage
-          withIcons
-          withCustomStyles
-          onSelection={this._updateSelectionText}
-          showActionSheetWithOptions={showActionSheetWithOptions}
-        />
-        </TestCase>
+          <TestCase itShould='render Cancel Button Tint Color' tags={['C_API']} >
+            <ShowActionSheetButton
+              title="Cancel Button Tint Color"
+              withCancelButtonTintColor
+              onSelection={this._updateSelectionText}
+              showActionSheetWithOptions={showActionSheetWithOptions}
+              />
+          </TestCase>
+
+          <TestCase itShould='render iPad Anchor' tags={['C_API']} >
+            <ShowActionSheetButton
+              title="iPad Anchor"
+              withAnchor
+              withTitle
+              onSelection={this._updateSelectionText}
+              showActionSheetWithOptions={showActionSheetWithOptions}
+              />
+          </TestCase>
+
+          <TestCase itShould='render Nested Action Sheets' tags={['C_API']} >
+            <ShowActionSheetButton
+              title="Nested Action Sheets"
+              onSelection={(index) => {
+                if (!index || index < 3) {
+                  showActionSheetWithOptions(
+                    {
+                      title: 'Sub Action Sheet',
+                      options: ['One', 'Two', 'Three', 'Done'],
+                      cancelButtonIndex: 3,
+                    },
+                    this._updateSelectionText
+                  );
+                }
+              }}
+            showActionSheetWithOptions={showActionSheetWithOptions}
+            />
+          </TestCase>
+          
+          <TestCase itShould='render Share Menu' tags={['C_API']} >
+            <ShowActionSheetButton
+              title="Share Menu"
+              showActionSheetWithOptions={() =>
+                showActionSheetWithOptions(
+                  {
+                    title: 'Share Menu',
+                    options: ['Share', 'Cancel'],
+                    cancelButtonIndex: 1,
+                  },
+                  (i) => {
+                    i === 0 && this._onShare();
+                  }
+                )
+              }
+            />
+          </TestCase>
+        
+          <TestCase itShould='render default actionSheet' tags={['C_API']} >
+            <ShowActionSheetButton
+              title="default actionSheet"
+              withIcons
+              onSelection={this._updateSelectionText}
+              showActionSheetWithOptions={showActionSheetWithOptions}
+            />
+          </TestCase>
+
+          <TestCase itShould='render actionSheet with title & message' tags={['C_API']} >
+            <ShowActionSheetButton
+              title="Title Message"
+              withTitle
+              withMessage
+              withIcons
+              onSelection={this._updateSelectionText}
+              showActionSheetWithOptions={showActionSheetWithOptions}
+            />
+          </TestCase>
+
+          <TestCase itShould='render actionSheet with Use Separators' tags={['C_API']} >
+            <ShowActionSheetButton
+              title="Use Separators"
+              withTitle
+              withIcons
+              withSeparators
+              onSelection={this._updateSelectionText}
+              showActionSheetWithOptions={showActionSheetWithOptions}
+            />
+          </TestCase>
+        
+          <TestCase itShould='render actionSheet with Custom Styles' tags={['C_API']} >
+            <ShowActionSheetButton
+              title="Custom Styles"
+              withCustomStyles
+              onSelection={this._updateSelectionText}
+              showActionSheetWithOptions={showActionSheetWithOptions}
+            />
+          </TestCase>
+
+          <TestCase itShould='render actionSheet with Title Styles' tags={['C_API']} >
+            <ShowActionSheetButton
+              title="Title Styles"
+              withTitle
+              withCustomStyles
+              onSelection={this._updateSelectionText}
+              showActionSheetWithOptions={showActionSheetWithOptions}
+            />
+          </TestCase>
+
+          <TestCase itShould='render actionSheet with Message Styles' tags={['C_API']} >
+            <ShowActionSheetButton
+              title="Message Styles"
+              withTitle
+              withMessage
+              withCustomStyles
+              onSelection={this._updateSelectionText}
+              showActionSheetWithOptions={showActionSheetWithOptions}
+            />
+          </TestCase>
         </TestSuite>
       </Tester>
     );

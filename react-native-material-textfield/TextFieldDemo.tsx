@@ -72,6 +72,26 @@ function TextfieldDemo() {
 
   const TextfielProps = [
     {
+      key: 'style:disabledLineWidth is 0.5',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        lineType:'solid',
+        disabledLineWidth:0.5
+      }
+    },
+    {
+      key: 'style:disabledLineWidth is 1',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        lineType:'solid',
+        disabledLineWidth:1
+      }
+    },
+    {
       key: 'style:inputContainerStyle is {"height":"70"}',
       value: {
         textColor: '#000000',
@@ -162,9 +182,29 @@ function TextfieldDemo() {
       }
     },
     {
-      key: 'style:textColor is Blank',
+      key: 'style:errorColor is red',
+      value: {
+        ref:lastnameRef,
+        value:'lastname',
+        enablesReturnKeyAutomatically:true,    
+        label:'first Name',
+        onChangeText:onLastnameRefChangeText,
+        error:lastnameRefErrors,
+        errorColor:'red'
+      }
+    },
+    {
+      key: 'style:textColor is black',
       value: {
         textColor: '#000000',
+        value:'Stark',
+        label:'first Name'
+      }
+    },
+    {
+      key: 'style:textColor is red',
+      value: {
+        textColor: '#FF0000',
         value:'Stark',
         label:'first Name'
       }
@@ -179,12 +219,22 @@ function TextfieldDemo() {
       }
     },
     {
-      key: 'style:enablesReturnKeyAutomatically is true',
+      key: 'style:fontSize is 30',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        fontSize:30
+      }
+    },
+    {
+      key: 'style:labelFontSize is 20',
       value: {
         textColor: '#000000',
         value:'Stark',
         label:'first Name',
         enablesReturnKeyAutomatically:true,
+        labelFontSize:20
       }
     },
     {
@@ -207,6 +257,15 @@ function TextfieldDemo() {
       }
     },
     {
+      key: 'style:lineWidth is 5',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        lineWidth:5
+      }
+    },
+    {
       key: 'style:activeLineWidth is 4',
       value: {
         textColor: '#000000',
@@ -216,7 +275,25 @@ function TextfieldDemo() {
       }
     },
     {
+      key: 'style:activeLineWidth is 10',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        activeLineWidth:10
+      }
+    },
+    {
       key: 'style:tintColor is red',
+      value: {
+        textColor: '#FF0000',
+        value:'Stark',
+        label:'first Name',
+        tintColor:'red'
+      }
+    },
+    {
+      key: 'style:tintColor is black',
       value: {
         textColor: '#000000',
         value:'Stark',
@@ -242,12 +319,29 @@ function TextfieldDemo() {
       }
     },
     {
+      key: 'style:label is frist name',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'frist name',
+      }
+    },
+    {
       key: 'style:title is Choose wisely',
       value: {
         textColor: '#000000',
         value:'Stark',
         label:'first Name',
         title:'Choose wisely'
+      }
+    },
+    {
+      key: 'style:title is Choose ',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        title:'Choose'
       }
     },
     {
@@ -260,6 +354,15 @@ function TextfieldDemo() {
       }
     },
     {
+      key: 'style:title is prefix frist',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        prefix:'prefix frist'
+      }
+    },
+    {
       key: 'style:title is suffix',
       value: {
         textColor: '#000000',
@@ -269,12 +372,47 @@ function TextfieldDemo() {
       }
     },
     {
+      key: 'style:title is suffix frist',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        suffix:'suffix frist'
+      }
+    },
+    {
       key: 'style:lineType is solid',
       value: {
         textColor: '#000000',
         value:'Stark',
         label:'first Name',
         lineType:'solid'
+      }
+    },
+    {
+      key: 'style:lineType is dotted',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        lineType:'dotted'
+      }
+    },
+    {
+      key: 'style:lineType is dashed',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        lineType:'dashed'
+      }
+    },
+    {
+      key: 'style:animationDuration is 500',
+      value: {
+        textColor: '#000000',
+        label:'first Name',
+        animationDuration:500
       }
     },
     {
@@ -294,12 +432,38 @@ function TextfieldDemo() {
       }
     },
     {
+      key: 'style:characterRestriction is 200',
+      value: {
+        textColor: '#000000',
+        label:'first Name',
+        characterRestriction:200
+      }
+    },
+    {
       key: 'style:disabledLineType is dotted',
       value: {
         textColor: '#000000',
         value:'Stark',
         label:'first Name',
+        lineType:'dotted'
+      }
+    },
+    {
+      key: 'style:disabledLineType is solid',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
         lineType:'solid'
+      }
+    },
+    {
+      key: 'style:disabledLineType is dashed',
+      value: {
+        textColor: '#000000',
+        value:'Stark',
+        label:'first Name',
+        lineType:'dashed'
       }
     },
     {
@@ -335,7 +499,7 @@ function TextfieldDemo() {
         textColor: '#000000',
         value:'Stark',
         label:'first Name',
-        contentInset:{top:20,left:20,right:0,label:4,input:8}
+        contentInset:{top:5,left:20,right:0,label:4,input:8}
       }
     },
     {
@@ -358,7 +522,7 @@ function TextfieldDemo() {
       }
     },
     {
-      key: 'style:error text Should not be empty',
+      key: 'function:ChangeText',
       value: {
         ref:passwordRef,
         value:'lastname',
@@ -391,7 +555,7 @@ function TextfieldDemo() {
                     <Image source={require('./assets/images/favorite.png')}></Image>
                   )}  
                 />    
-          </TestCase>
+          </TestCase>npm 
           <TestCase itShould='onFocus is true'>
             <TextField
                   label={lableName}
