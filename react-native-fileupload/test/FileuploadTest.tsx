@@ -5,17 +5,21 @@ import FileUpload from 'react-native-fileupload';
 
 export function FileUploadTest() {
     let obj = {
-        uploadUrl: 'http://47.108.234.230:9990/upload',
+        uploadUrl: 'http://1.2.27.270:9990/upload',// Real server Url
         method: 'POST',
         headers: {
             'Content-Type': 'multipart/form-data',
         },
+        fields: {
+            name: 'hello',value: 'world',
+        },
         files: [
-            {
-                name: 'file',
-                filename: 'assets_placeholder2000x2000.jpg',
-                filetype: 'jpg',
-            },
+          {
+            name: 'file',// optional
+            filename: 'assets_placeholder2000x2000.jpg',
+            filepath: '/xxx/assets_placeholder2000x2000.jpg',
+            filetype: 'jpg',// optional
+          },
         ],
     };
     return (
@@ -23,13 +27,10 @@ export function FileUploadTest() {
             <TestCase.Logical
                 itShould="File upload message:"
                 fn={({ expect }: any) => {
-                    FileUpload.upload(obj)
-                        .then(result => {
-                            expect(result.message).to.not.be.undefined;
-                        })
-                        .catch(err => {
-                            expect(err.message).to.not.be.undefined;
-                        });
+                    let result = FileUpload.upload(obj, function(err,result) {
+                        console.log("upload",err,result);
+                    })
+                    expect(result).to.not.be.undefined;
                 }}
             />
         </TestSuite>
