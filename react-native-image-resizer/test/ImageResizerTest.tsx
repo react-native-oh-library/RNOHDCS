@@ -10,43 +10,39 @@ import type {
   ResizeMode,
   Response,
 } from '@bam.tech/react-native-image-resizer';
-import { TestSuite ,Tester } from '@rnoh/testerino';
+import { TestSuite, Tester } from '@rnoh/testerino';
 import { TestCase } from '../components';
 
 function RNImageResizerTest() {
   const [selectedMode, setMode] = useState<ResizeMode>('contain');
   const [onlyScaleDown, setOnlyScaleDown] = useState(false);
-  const [imageUri, setImageUri] = useState<null | string>();
   const [sizeTarget, setSizeTarget] = useState(80);
-  const [resizedImage, setResizedImage] = useState<null | Response>();
   return (
     <TestSuite name="ImageResizer">
       <TestCase.Logical
-      itShould="ImageResizer.createResizedImage"  
-      fn={({expect}: any) => {
-        if (!imageUri) return;
-    setResizedImage(null);
-    try {
-      let result = ImageResizer.createResizedImage(
-        imageUri,
-        sizeTarget,
-        sizeTarget,
-        'JPEG',
-        100,
-        0,
-        undefined,
-        false,
-        {
-          mode: selectedMode,
-          onlyScaleDown,
-        }
-      );
-      expect((result)).to.not.be.undefined;
-    } catch (error) {
-      expect((error)).to.not.be.undefined;
-    }
-    }}
-    />
+        itShould="ImageResizer.createResizedImage"
+        fn={async ({ expect }: any) => {
+          try {
+            let result = await ImageResizer.createResizedImage(
+              '/data/storage/el2/base/haps/entry/cache/1.jpeg',
+              sizeTarget,
+              sizeTarget,
+              'JPEG',
+              100,
+              0,
+              undefined,
+              false,
+              {
+                mode: selectedMode,
+                onlyScaleDown,
+              }
+            );
+            expect((result)).to.not.be.undefined;
+          } catch (error) {
+            expect((error)).to.not.be.undefined;
+          }
+        }}
+      />
     </TestSuite>
   );
 }
@@ -54,15 +50,15 @@ function RNImageResizerTest() {
 function App() {
   return (
     <View>
-    <StatusBar />
-    <SafeAreaView style={{backgroundColor: '#222'}}>
+      <StatusBar />
+      <SafeAreaView style={{ backgroundColor: '#222' }}>
         <Tester >
-          <ScrollView style={{width: '100%'}}>
-            <RNImageResizerTest/>
+          <ScrollView style={{ width: '100%' }}>
+            <RNImageResizerTest />
           </ScrollView>
         </Tester>
-    </SafeAreaView>
-  </View>
+      </SafeAreaView>
+    </View>
   );
 }
 
