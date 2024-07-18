@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
+import { View, StyleSheet, Text, Image, ScrollView } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 import { TestSuite, Tester, TestCase } from '@rnoh/testerino';
 
@@ -10,81 +10,83 @@ export function TabNavigatorTest() {
     return (
         <Tester>
             <TestSuite name="TabNavigator">
-                <TestCase itShould="Test sceneStyle and tabBarStyle prop of TabNavigator, set sceneStyle and tabBarStyle height 100">
-                    <View style={styles.container}>
-                        <TabNavigatorSceneAndTabBarStyleTest />
-                    </View>
-                </TestCase>
-                <TestCase itShould="Test sceneStyle and tabBarStyle prop of TabNavigator, set sceneStyle height 150 and set tabBarStyle height 50">
-                    <View style={styles.container}>
-                        <TabNavigatorSceneAndTabBarStyle1Test />
-                    </View>
-                </TestCase>
-                <TestCase itShould="Test tabBarShadowStyle prop of TabNavigator,set height 10 and backgroundColor[#32CD32]">
-                    <View style={styles.container}>
-                        <TabNavigatorTabBarShadowStyleTest />
-                    </View>
-                </TestCase>
-                <TestCase itShould="Test tabBarShadowStyle prop of TabNavigator,set height 5 and backgroundColor[#FFE4C4]">
-                    <View style={styles.container}>
-                        <TabNavigatorTabBarShadowStyle1Test />
-                    </View>
-                </TestCase>
-                <TestCase itShould="Test hidesTabTouch prop of TabNavigator, set hidesTabTouch true, no transparent effect when touch Tab">
-                    <View style={styles.container}>
-                        <TabNavigatorHidesTabTouchTest />
-                    </View>
-                </TestCase>
-                <TestCase itShould="Test title props of TabNavigator, Customize the titleStyle and selectedTitleStyle, set titleStyle[#8E2323], selectedTitleStyle[#E3CF57] of the first tab">
-                    <View style={styles.container}>
-                        <TabNavigatorTitlePropsTest />
-                    </View>
-                </TestCase>
-                <TestCase itShould="Test icon props of TabNavigator, Customize the icon of a tab and the icon when selected.">
-                    <View style={styles.container}>
-                        <TabNavigatorIconPropsTest />
-                    </View>
-                </TestCase>
-                <TestCase itShould="Test badgeText prop of TabNavigator, set badgeText 1">
-                    <View style={styles.container}>
-                        <TabNavigatorBadgeTextPropTest />
-                    </View>
-                </TestCase>
-                <TestCase itShould="Test renderBadge prop of TabNavigator, add a Custom Text Component">
-                    <View style={styles.container}>
-                        <TabNavigatorBadgePropTest />
-                    </View>
-                </TestCase>
-                <TestCase itShould="Test tabStyle prop of TabNavigator, set tabStyle backgroundColor[#E9C2A6]">
-                    <View style={styles.container}>
-                        <TabNavigatorTabStyleTest />
-                    </View>
-                </TestCase>
-                <TestCase itShould="Test tabStyle prop of TabNavigator, set tabStyle backgroundColor[#FFFACD]">
-                    <View style={styles.container}>
-                        <TabNavigatorTabStyle1Test />
-                    </View>
-                </TestCase>
-                <TestCase itShould="Test allowFontScaling prop of TabNavigator, set first tab allowFontScaling true, font size will change with system settings">
-                    <View style={styles.container}>
-                        <TabNavigatorFontScalingTest />
-                    </View>
-                </TestCase>
-                <TestCase itShould="Test accessible prop of TabNavigator, set first tab accessible false, the barrier-free function cannot obtain the tab component.">
-                    <View style={styles.container}>
-                        <TabNavigatorAccessibleTest />
-                    </View>
-                </TestCase>
-                <TestCase itShould="Test accessibilityLabel prop of TabNavigator, set accessibilityLabel[Custom AccessibilityLabel]">
-                    <View style={styles.container}>
-                        <TabNavigatorAccessibilityLabelTest />
-                    </View>
-                </TestCase>
-                <TestCase itShould="hide the tab bar">
-                    <View style={styles.container}>
-                        <TabNavigatorWithNoTabTest />
-                    </View>
-                </TestCase>
+                <ScrollView>
+                    <TestCase itShould="Test sceneStyle and tabBarStyle prop of TabNavigator, set sceneStyle and tabBarStyle height 100">
+                        <View style={styles.container}>
+                            <TabNavigatorSceneAndTabBarStyleTest />
+                        </View>
+                    </TestCase>
+                    <TestCase itShould="Test sceneStyle and tabBarStyle prop of TabNavigator, set sceneStyle height 150 and set tabBarStyle height 50">
+                        <View style={styles.container}>
+                            <TabNavigatorSceneAndTabBarStyle1Test />
+                        </View>
+                    </TestCase>
+                    <TestCase itShould="Test tabBarShadowStyle prop of TabNavigator,set height 10 and backgroundColor[#32CD32]">
+                        <View style={styles.container}>
+                            <TabNavigatorTabBarShadowStyleTest />
+                        </View>
+                    </TestCase>
+                    <TestCase itShould="Test tabBarShadowStyle prop of TabNavigator,set height 5 and backgroundColor[#FFE4C4]">
+                        <View style={styles.container}>
+                            <TabNavigatorTabBarShadowStyle1Test />
+                        </View>
+                    </TestCase>
+                    <TestCase itShould="Test hidesTabTouch prop of TabNavigator, set hidesTabTouch true, no transparent effect when touch Tab">
+                        <View style={styles.container}>
+                            <TabNavigatorHidesTabTouchTest />
+                        </View>
+                    </TestCase>
+                    <TestCase itShould="Test title props of TabNavigator, Customize the titleStyle and selectedTitleStyle, set titleStyle[#8E2323], selectedTitleStyle[#E3CF57] of the first tab">
+                        <View style={styles.container}>
+                            <TabNavigatorTitlePropsTest />
+                        </View>
+                    </TestCase>
+                    <TestCase itShould="Test icon props of TabNavigator, Customize the icon of a tab and the icon when selected.">
+                        <View style={styles.container}>
+                            <TabNavigatorIconPropsTest />
+                        </View>
+                    </TestCase>
+                    <TestCase itShould="Test badgeText prop of TabNavigator, set badgeText 1">
+                        <View style={styles.container}>
+                            <TabNavigatorBadgeTextPropTest />
+                        </View>
+                    </TestCase>
+                    <TestCase itShould="Test renderBadge prop of TabNavigator, add a Custom Text Component">
+                        <View style={styles.container}>
+                            <TabNavigatorBadgePropTest />
+                        </View>
+                    </TestCase>
+                    <TestCase itShould="Test tabStyle prop of TabNavigator, set tabStyle backgroundColor[#E9C2A6]">
+                        <View style={styles.container}>
+                            <TabNavigatorTabStyleTest />
+                        </View>
+                    </TestCase>
+                    <TestCase itShould="Test tabStyle prop of TabNavigator, set tabStyle backgroundColor[#FFFACD]">
+                        <View style={styles.container}>
+                            <TabNavigatorTabStyle1Test />
+                        </View>
+                    </TestCase>
+                    <TestCase itShould="Test allowFontScaling prop of TabNavigator, set first tab allowFontScaling true, font size will change with system settings">
+                        <View style={styles.container}>
+                            <TabNavigatorFontScalingTest />
+                        </View>
+                    </TestCase>
+                    <TestCase itShould="Test accessible prop of TabNavigator, set first tab accessible false, the barrier-free function cannot obtain the tab component.">
+                        <View style={styles.container}>
+                            <TabNavigatorAccessibleTest />
+                        </View>
+                    </TestCase>
+                    <TestCase itShould="Test accessibilityLabel prop of TabNavigator, set accessibilityLabel[Custom AccessibilityLabel]">
+                        <View style={styles.container}>
+                            <TabNavigatorAccessibilityLabelTest />
+                        </View>
+                    </TestCase>
+                    <TestCase itShould="hide the tab bar">
+                        <View style={styles.container}>
+                            <TabNavigatorWithNoTabTest />
+                        </View>
+                    </TestCase>
+                </ScrollView>
             </TestSuite>
         </Tester>
     );
