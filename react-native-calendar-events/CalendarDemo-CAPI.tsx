@@ -16,8 +16,7 @@ import {
   Platform,
 } from 'react-native';
 import {Header, Colors} from 'react-native/Libraries/NewAppScreen';
-import RNCalendarEvents from '@react-native-oh-tpl/react-native-calendar-events';
-import {CalendarType, EventType, ServiceType, RecurrenceFrequency} from "@react-native-oh-tpl/react-native-calendar-events/src/calendarType"
+import RNCalendarEvents from 'react-native-calendar-events';
 
 const sourceStruct = {
   /** The Account name */
@@ -29,7 +28,7 @@ const sourceStruct = {
 //saveEvent
 const calendarOptions = {
   title: 'test1',
-  type: CalendarType.LOCAL,
+  type: 'local',
   displayName: "testSaveCalendar"
 };
 
@@ -40,7 +39,7 @@ const location = {
   latitude: 31,
 }
 const eventService = {
-  type: ServiceType.MEETING,
+  type: 'Meeting',
   uri: "",
   description: "testEventService",
 }
@@ -49,12 +48,12 @@ const attendees = {
   email: "testEmail",
 }
 const recurrenceRuleHarmony = {
-  recurrenceFrequency: RecurrenceFrequency.WEEKLY,
+  recurrenceFrequency: 2,
   expire: 0,
 }
 const eventDetails = {
   id: 1,
-  type: EventType.NORMAL,
+  type: 0,
   title: 'testEvent',
   location: location,
   startTime: new Date().getTime() + 60 * 60 * 1000 * 3,
