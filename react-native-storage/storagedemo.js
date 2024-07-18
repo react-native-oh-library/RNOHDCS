@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, FlatList, Button } from 'react-native';
-import { name as appName } from './app.json';
+import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
 import Storage from 'react-native-storage';
 import { AsyncStorage } from 'react-native'
 ///初始化
@@ -242,12 +241,12 @@ const storage = new Storage({
         <View style={styles.textdata}>
           <Text style = {styles.textkey}>{JSON.stringify(userA)}</Text>
           <Text style = {styles.textkey}>{JSON.stringify(userB)}</Text>
-          <Button label='save userA' style={styles.toolbarButton} onPress={() => this.saveStorageFun(1)}/>
-          <Button label='save userB' style={styles.toolbarButton} onPress={() =>this.saveStorageFun(2)}/>
-          <Button label='get user key all ids' style={styles.toolbarButton} onPress={() =>this.getIdsForKeyStorageFun('user')}/>
-          <Button label='remove user key one data' style={styles.toolbarButton} onPress={() =>this.removeStorageFun(1)}/>
-          <Button label='clearMapStorage' style={styles.toolbarButton} onPress={() =>this.clearMapStorageFun()}/>
-          <Button label='read storage data' style={styles.toolbarButton} onPress={() =>this.getBatchDataWithIdsStorageFun()}/>
+          <Button title='save userA' style={styles.toolbarButton} onPress={() => this.saveStorageFun(1)}/>
+          <Button title='save userB' style={styles.toolbarButton} onPress={() =>this.saveStorageFun(2)}/>
+          <Button title='get user key all ids' style={styles.toolbarButton} onPress={() =>this.getIdsForKeyStorageFun('user')}/>
+          <Button title='remove user key one data' style={styles.toolbarButton} onPress={() =>this.removeStorageFun(1)}/>
+          <Button title='clearMapStorage' style={styles.toolbarButton} onPress={() =>this.clearMapStorageFun()}/>
+          <Button title='read storage data' style={styles.toolbarButton} onPress={() =>this.getBatchDataWithIdsStorageFun()}/>
         </View>
         <FlatList
           data={this.state.listData}
@@ -338,5 +337,4 @@ var styles = StyleSheet.create({
       flex: 1,
     },
   });
-
-  AppRegistry.registerComponent(appName, () => StorageDemo);
+  export default StorageDemo;
