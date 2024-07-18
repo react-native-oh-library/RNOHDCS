@@ -6,7 +6,7 @@ import React from 'react';
 export const FeatherExample = () => {
 
     return (
-
+          <Tester>
             <ScrollView>
                 <TestSuite name="FeatherExample">
                     <TestCase
@@ -346,6 +346,6 @@ export const FeatherExample = () => {
                     </TestCase>
                 </TestSuite>
             </ScrollView>
-
+          </Tester>
     );
 };
