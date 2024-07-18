@@ -8,7 +8,6 @@ export const MaskedTextMaskService = () => {
     value: '',
     raw: '',
   });
-
   const [masktoRow, setMasktoRow] = useState({
     value: '',
     raw: '',

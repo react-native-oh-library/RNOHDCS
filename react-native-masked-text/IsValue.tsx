@@ -54,11 +54,11 @@ export const ISValue = () => {
   return (
     <Tester style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        <TestSuite name="接口测试">
+        <TestSuite name="isValue接口测试">
           {/* custom通过测试 */}
           <TestCase
             tags={['C_API']}
-            itShould="点击确认，判断 isValid接口在custom类型是否正确"
+            itShould="custom (isValid接口在custom类型是否正确)"
             initialState={false}
             arrange={({setState, reset}) => (
               <View style={{flexDirection: 'column'}}>
@@ -113,7 +113,7 @@ export const ISValue = () => {
           {/* CNPJ测试 */}
           <TestCase
             tags={['C_API']}
-            itShould="点击确认，判断 isValid接口是否正确，正确的cnpj示例：54.651.716/0011-50"
+            itShould="CNPJ (isValid接口是否正确，正确的cnpj示例：54.651.716/0011-50)"
             initialState={false}
             arrange={({setState, reset}) => (
               <View style={{flexDirection: 'column'}}>
@@ -157,7 +157,7 @@ export const ISValue = () => {
           {/* credit-card通过测试 */}
           <TestCase
             tags={['C_API']}
-            itShould="点击确认，判断 isValid接口在credit-card是否正确"
+            itShould="credit-card (isValid接口在credit-card是否正确)"
             initialState={false}
             arrange={({setState, reset}) => (
               <View style={{flexDirection: 'column'}}>
@@ -208,7 +208,7 @@ export const ISValue = () => {
           {/* cel-phone通过测试 */}
           <TestCase
             tags={['C_API']}
-            itShould="点击确认，判断 isValid接口在cel-phone是否正确"
+            itShould="cel-phone (isValid接口在cel-phone是否正确)"
             initialState={false}
             arrange={({setState, reset}) => (
               <View style={{flexDirection: 'column'}}>
@@ -258,7 +258,7 @@ export const ISValue = () => {
           {/* cpf测试通过 */}
           <TestCase
             tags={['C_API']}
-            itShould="点击确认，判断 isValid接口是否正确,正确的cpf示例：007.408.869-67"
+            itShould="CPF (isValid接口是否正确,正确的cpf示例：007.408.869-67)"
             initialState={false}
             arrange={({setState, reset}) => (
               <View style={{flexDirection: 'column'}}>
@@ -302,7 +302,7 @@ export const ISValue = () => {
           {/* money通过测试 */}
           <TestCase
             tags={['C_API']}
-            itShould="点击确认，判断 isValid接口在money是否正确"
+            itShould="money (isValid接口在money是否正确)"
             initialState={false}
             arrange={({setState, reset}) => (
               <View style={{flexDirection: 'column'}}>
@@ -354,7 +354,7 @@ export const ISValue = () => {
           {/* zip-code通过测试 */}
           <TestCase
             tags={['C_API']}
-            itShould="点击确认，判断 isValid接口在zip-code是否正确"
+            itShould="zip-code (isValid接口在zip-code是否正确)"
             initialState={false}
             arrange={({setState, reset}) => (
               <View style={{flexDirection: 'column'}}>
@@ -397,7 +397,7 @@ export const ISValue = () => {
           {/* only-numbers通过测试 */}
           <TestCase
             tags={['C_API']}
-            itShould="点击确认，判断 isValid接口在only-numbers是否正确"
+            itShould="Only Numbers (isValid接口在only-numbers是否正确)"
             initialState={false}
             arrange={({setState, reset}) => (
               <View style={{flexDirection: 'column'}}>
@@ -440,7 +440,7 @@ export const ISValue = () => {
           {/* Datetime通过测试 */}
           <TestCase
             tags={['C_API']}
-            itShould="点击确认，判断 isValid接口在Datetime是否正确"
+            itShould="Datetime (isValid接口在Datetime是否正确)"
             initialState={false}
             arrange={({setState, reset}) => (
               <View style={{flexDirection: 'column'}}>
@@ -485,6 +485,7 @@ export const ISValue = () => {
             }}
           />
         </TestSuite>
+        
       </ScrollView>
     </Tester>
   );
