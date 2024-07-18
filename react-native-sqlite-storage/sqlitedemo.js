@@ -2,8 +2,7 @@
  * @format
  */
 import React, {Component} from 'react';
-import {AppRegistry, StyleSheet, Text, View, FlatList} from 'react-native';
-import {name as appName} from './app.json';
+import { StyleSheet, Text, View, FlatList} from 'react-native';
 import SQLite from 'react-native-sqlite-storage';
 SQLite.DEBUG(true);
 SQLite.enablePromise(false);
@@ -451,4 +450,4 @@ var styles = StyleSheet.create({
     flex: 1,
   },
 });
-AppRegistry.registerComponent(appName, () => SQLiteDemo);
+export default SQLiteDemo;
