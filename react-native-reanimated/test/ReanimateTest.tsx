@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
-import { TestSuite } from '@rnoh/testerino';
-import { TestCase } from '../../components';
+import { View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 import CancelAnimationExp from '../example/CancelAnimationExp';
 import UseDerivedValueExp from '../example/useDerivedValueExp';
 import WithDecayExp from '../example/withDecayExp';
@@ -13,8 +12,8 @@ import UseAnimatedPropsExp from '../example/useAnimatedPropsExp'
 import UseAnimatedReactionExp from '../example/useAnimatedReactionExp'
 import CreateAnimatedComponentExp from '../example/createAnimatedComponentExp'
 import AnimatedTextExp from '../example/AnimatedTextExp'
-import AnimatedListExample from '.../example/AnimatedListExample'
-import BasicLayoutAnimation from '.../example/BasicLayoutAnimation'
+import AnimatedListExample from '../example/AnimatedListExample'
+import BasicLayoutAnimation from '../example/BasicLayoutAnimation'
 import ScrollToExp from '../example/ScrollToExp'
 import KeyframeExp from '../example/KeyframeExp'
 import ScrollViewOffsetExample from '../example/ScrollViewOffsetExample'
@@ -37,196 +36,264 @@ import ReactionsCounterExample from '../example/ReactionsCounterExample'
 
 export const ReanimatedTest = () => {
     return (
-        <TestSuite name="Reanimated">
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="CancelAnimationExp">
-                <CancelAnimationExp />
-            </TestCase.Example>
+        <Tester style={{ flex: 1, marginTop: 30 }}>
+            <ScrollView>
+                <TestSuite name="Reanimated">
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="CancelAnimationExp">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <CancelAnimationExp />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="UseDerivedValueExp">
-                <UseDerivedValueExp />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="UseDerivedValueExp">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <UseDerivedValueExp />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="WithDecayExp">
-                <WithDecayExp />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="WithDecayExp">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <WithDecayExp />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="WithDelayExp">
-                <WithDelayExp />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="WithDelayExp">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <WithDelayExp />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="MeasureExp">
-                <MeasureExp />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="MeasureExp">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <MeasureExp />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="RunUIExp">
-                <RunUIExp />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="RunUIExp">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <RunUIExp />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="WithSequenceExp">
-                <WithSequenceExp />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="WithSequenceExp">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <WithSequenceExp />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="UseAnimatedPropsExp">
-                <UseAnimatedPropsExp />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="UseAnimatedPropsExp">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <UseAnimatedPropsExp />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="UseAnimatedReactionExp">
-                <UseAnimatedReactionExp />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="UseAnimatedReactionExp">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <UseAnimatedReactionExp />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="CreateAnimatedComponentExp">
-                <CreateAnimatedComponentExp />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="CreateAnimatedComponentExp">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <CreateAnimatedComponentExp />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="AnimatedTextExp">
-                <AnimatedTextExp />
-            </TestCase.Example>
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="AnimatedListExample">
-                <AnimatedListExample />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="AnimatedTextExp">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <AnimatedTextExp />
+                        </View>
+                    </TestCase>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="AnimatedListExample">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <AnimatedListExample />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="BasicLayoutAnimation">
-                <BasicLayoutAnimation />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="BasicLayoutAnimation">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <BasicLayoutAnimation />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="ScrollToExp">
-                <ScrollToExp />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="ScrollToExp">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <ScrollToExp />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="KeyframeExp">
-                <KeyframeExp />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="KeyframeExp">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <KeyframeExp />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="ScrollViewOffsetExample">
-                <ScrollViewOffsetExample />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="ScrollViewOffsetExample">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <ScrollViewOffsetExample />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="ScrollHandlerExp">
-                <ScrollHandlerExp />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="ScrollHandlerExp">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <ScrollHandlerExp />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="InvertedFlatListExample">
-                <InvertedFlatListExample />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="InvertedFlatListExample">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <InvertedFlatListExample />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="AnimatedKeyboardExample">
-                <AnimatedKeyboardExample />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="AnimatedKeyboardExample">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <AnimatedKeyboardExample />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="AnimatedSensorGravityExample">
-                <AnimatedSensorGravityExample />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="AnimatedSensorGravityExample">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <AnimatedSensorGravityExample />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="CustomLayoutTransitionExample">
-                <CustomLayoutTransitionExample />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="CustomLayoutTransitionExample">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <CustomLayoutTransitionExample />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="WorkletRuntimeExample">
-                <WorkletRuntimeExample />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="WorkletRuntimeExample">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <WorkletRuntimeExample />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="CustomLayoutAnimationScreen">
-                <CustomLayoutAnimationScreen />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="CustomLayoutAnimationScreen">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <CustomLayoutAnimationScreen />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="DragAndSnapExample">
-                <DragAndSnapExample />
-            </TestCase.Example>
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="ColorInterpolationExample">
-                <ColorInterpolationExample />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="DragAndSnapExample">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <DragAndSnapExample />
+                        </View>
+                    </TestCase>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="ColorInterpolationExample">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <ColorInterpolationExample />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="DefaultAnimations">
-                <DefaultAnimations />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="DefaultAnimations">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <DefaultAnimations />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="GetViewPropExample">
-                <GetViewPropExample />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="GetViewPropExample">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <GetViewPropExample />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="FrameCallbackExample">
-                <FrameCallbackExample />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="FrameCallbackExample">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <FrameCallbackExample />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="PagerExample">
-                <PagerExample />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="PagerExample">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <PagerExample />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="ChessboardExample">
-                <ChessboardExample />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="ChessboardExample">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <ChessboardExample />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="DispatchCommandExample">
-                <DispatchCommandExample />
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="DispatchCommandExample">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <DispatchCommandExample />
+                        </View>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="ReactionsCounterExample">
-                <ReactionsCounterExample />
-            </TestCase.Example>
-        </TestSuite>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="ReactionsCounterExample">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <ReactionsCounterExample />
+                        </View>
+                    </TestCase>
+                </TestSuite>
+            </ScrollView>
+        </Tester>
     );
 };
