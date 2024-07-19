@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, Text, View, StyleSheet, Alert } from 'react-native';
+import { View, StyleSheet, Alert } from 'react-native';
 import { MapView, Circle, Polygon, Polyline, Marker, LatLng, CameraPosition, voidEvent,MapPoi } from 'react-native-amap3d';
 
 import type * as ReactNative from "react-native";
@@ -65,24 +65,18 @@ function AMapDemo() {
         compassEnabled = { true}
         myLocationButtonEnabled = { true}
         initialCameraPosition = {{
-          targetInfo: {
-            latitude: 39.91095,
-              longitude: 116.37296,
-          },
-          zoom: 8,
+            target: {
+              latitude: 39.91095,
+                longitude: 116.37296,
+            },
+            zoom: 8,
+          }
         }
-      }
       onPress = {(event: ReactNative.NativeSyntheticEvent<LatLng>)=> {
         console.info("AMapViewEventType map3d demo " + event.nativeEvent.latitude + "===" + event.nativeEvent.longitude)
       }}
       onLongPress = {(event: ReactNative.NativeSyntheticEvent<LatLng>)=> {
         console.info("AMapViewEventType map3d demo longevent===" + event.nativeEvent.latitude + "===" + event.nativeEvent.longitude)
-      }}
-      onCameraMove = {(event: ReactNative.NativeSyntheticEvent<CameraPosition>)=> {
-        console.info("AMapViewEventType map3d demo " + event.nativeEvent.target?.latitude + "===" + event.nativeEvent.target?.longitude)
-      }}
-      onCameraIdle = {(event: ReactNative.NativeSyntheticEvent<CameraPosition>)=> {
-        console.info("AMapViewEventType map3d demo " + event.nativeEvent.target?.latitude + "===" + event.nativeEvent.target?.longitude)
       }}
       onPressPoi = {(event: ReactNative.NativeSyntheticEvent<MapPoi>)=> {
         console.info("AMapViewEventType map3d demo " + event.nativeEvent.position?.latitude + "===" + event.nativeEvent.position?.longitude)
