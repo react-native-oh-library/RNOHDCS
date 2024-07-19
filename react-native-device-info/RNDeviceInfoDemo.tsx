@@ -67,7 +67,6 @@ export default class App extends Component {
      deviceJSON.readableVersion = DeviceInfo.getReadableVersion();
      deviceJSON.buildNumber = DeviceInfo.getBuildNumber();
      deviceJSON.isTablet = DeviceInfo.isTablet();
-     deviceJSON.isLowRamDevice = DeviceInfo.isLowRamDevice()
      deviceJSON.appName = DeviceInfo.getApplicationName();
      deviceJSON.brand = DeviceInfo.getBrand();
      deviceJSON.model = DeviceInfo.getModel();
@@ -133,6 +132,7 @@ export default class App extends Component {
     let deviceJSON = {};
 
     try {
+      deviceJSON.isLowRamDevice = await DeviceInfo.isLowRamDevice()
       deviceJSON.manufacturer = await DeviceInfo.getManufacturer();
       deviceJSON.powerStatus = await DeviceInfo.getPowerState();                                  
       deviceJSON.buildId = await DeviceInfo.getBuildId();
