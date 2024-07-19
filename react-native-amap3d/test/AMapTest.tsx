@@ -55,11 +55,11 @@ export function AMap3dTest() {
     }
 
     const _onCameraMove = (event: ReactNative.NativeSyntheticEvent<CameraPosition>) => {
-        console.info("AMapViewEventType map3d demo  ===" + "===" + event.nativeEvent.targetInfo?.longitude)
+        console.info("AMapViewEventType map3d demo onCameraMove")
     }
 
     const _onCameraIdle = (event: ReactNative.NativeSyntheticEvent<CameraPosition>) => {
-        console.info("AMapViewEventType map3d demo  ===" + "===" + event.nativeEvent.targetInfo?.longitude)
+        console.info("AMapViewEventType map3d demo onCameraIdle")
     }
 
     const _onPressPoi = (event: ReactNative.NativeSyntheticEvent<MapPoi>) => {
