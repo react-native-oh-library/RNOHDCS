@@ -69,10 +69,10 @@ export function TestScreen(props: Props) {
         duration = 500;
         break;
       case "slow":
-        duration = 4000;
+        duration = 1500;
         break;
       case "debug":
-        duration = 8000;
+        duration = 3000;
         debug = true;
         break;
     }
@@ -116,7 +116,7 @@ export function TestScreen(props: Props) {
 
   return (
     <View style={styles.container}>
-      {!navigation ? <NavBar title={test.name} /> : undefined}
+      {/* {!navigation ? <NavBar title={test.name} /> : undefined} */}
       {cloneElement(end ? test.end : test.start, {
         navigation,
       })}
