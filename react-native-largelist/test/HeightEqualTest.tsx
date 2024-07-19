@@ -1,6 +1,5 @@
-import {TestSuite} from '@rnoh/testerino';
+import {TestSuite, TestCase} from '@rnoh/testerino';
 import React, {Component} from 'react';
-import {TestCase} from '../../components';
 import {
   TouchableHighlight,
   StyleSheet,
@@ -31,7 +30,7 @@ export default class HeightEqualTest extends Component {
     }
     return (
       <TestSuite name="HeightEqualTest">
-        <TestCase.Example itShould="HeightEqual">
+        <TestCase itShould="HeightEqual">
           <LargeList
             data={data}
             initialContentOffset={{x: 0, y: 0}}
@@ -50,7 +49,7 @@ export default class HeightEqualTest extends Component {
               },
             }) => console.log('onScroll:', x, y)}
           />
-        </TestCase.Example>
+        </TestCase>
       </TestSuite>
     );
   }

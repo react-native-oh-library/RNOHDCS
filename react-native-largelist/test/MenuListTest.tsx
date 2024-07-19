@@ -1,6 +1,5 @@
-import {TestSuite} from '@rnoh/testerino';
+import {TestSuite, TestCase} from '@rnoh/testerino';
 import React, {Component} from 'react';
-import {TestCase} from '../../components';
 import {
   StyleSheet,
   Text,
@@ -34,7 +33,7 @@ export default class MenuListTest extends Component {
     this._buttonRefs.forEach(btn => buttons.concat(btn));
     return (
       <TestSuite name="MenuListTest">
-        <TestCase.Example itShould="showsVerticalScrollIndicator、bounces">
+        <TestCase itShould="showsVerticalScrollIndicator、bounces">
           <View style={styles.container}>
             <LargeList
               style={styles.lc}
@@ -55,7 +54,7 @@ export default class MenuListTest extends Component {
               renderIndexPath={this.renderItem}
             />
           </View>
-        </TestCase.Example>
+        </TestCase>
       </TestSuite>
     );
   }

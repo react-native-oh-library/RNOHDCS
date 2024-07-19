@@ -1,5 +1,4 @@
-import { TestSuite, Tester } from '@rnoh/testerino';
-import { TestCase } from '../components';
+import { TestSuite, Tester, TestCase } from '@rnoh/testerino';
 import * as React from 'react';
 import { Button, View } from 'react-native';
 import Toast from 'react-native-simple-toast';
@@ -7,37 +6,37 @@ import Toast from 'react-native-simple-toast';
 export function SimpleToastTest() {
     return (
         <TestSuite name="SimpleToast">
-            <TestCase.Logical
+            <TestCase
                 itShould="Toast.SHORT"
                 fn={({ expect }: any) => {
                     expect(Toast.SHORT).to.eql(2000);
                 }}
             />
-            <TestCase.Logical
+            <TestCase
                 itShould="Toast.LONG"
                 fn={({ expect }: any) => {
                     expect(Toast.LONG).to.eql(3500);
                 }}
             />
-            <TestCase.Logical
+            <TestCase
                 itShould="Toast.TOP"
                 fn={({ expect }: any) => {
                     expect(Toast.TOP).to.eql(0);
                 }}
             />
-            <TestCase.Logical
+            <TestCase
                 itShould="Toast.BOTTOM"
                 fn={({ expect }: any) => {
                     expect(Toast.BOTTOM).to.eql(1);
                 }}
             />
-            <TestCase.Logical
+            <TestCase
                 itShould="Toast.CENTER"
                 fn={({ expect }: any) => {
                     expect(Toast.CENTER).to.eql(2);
                 }}
             />
-            <TestCase.Example
+            <TestCase
                 itShould="Toast.show">
                 <Button
                     title={'simple toast'}
@@ -45,8 +44,8 @@ export function SimpleToastTest() {
                         Toast.show('This is a toast.', Toast.SHORT);
                     }}
                 />
-            </TestCase.Example>
-            <TestCase.Example
+            </TestCase>
+            <TestCase
                 itShould="Toast.showWithGravity">
                 <Button
                     onPress={() => {
@@ -60,8 +59,8 @@ export function SimpleToastTest() {
                     }}
                     title="toast on top of Modal"
                 />
-            </TestCase.Example>
-            <TestCase.Example
+            </TestCase>
+            <TestCase
                 itShould="Toast.showWithGravityAndOffset">
                 <Button
                     title={'toast with offset'}
@@ -75,7 +74,7 @@ export function SimpleToastTest() {
                         );
                     }}
                 />
-            </TestCase.Example>
+            </TestCase>
         </TestSuite>
     );
 }

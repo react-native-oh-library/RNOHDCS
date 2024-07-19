@@ -1,6 +1,5 @@
-import {TestSuite} from '@rnoh/testerino';
+import {TestSuite, TestCase} from '@rnoh/testerino';
 import React, {Component} from 'react';
-import {TestCase} from '../../components';
 import {Text, TouchableOpacity, View, Image, StyleSheet} from 'react-native';
 import { NormalHeader } from "react-native-spring-scrollview/src/NormalHeader";
 import { NormalFooter } from "react-native-spring-scrollview/src/NormalFooter";
@@ -15,7 +14,7 @@ export default class RefreshAndLoadingTest extends Component {
   render() {
     return (
       <TestSuite name="RefreshAndLoadingTest">
-        <TestCase.Example itShould="RefreshAndLoading">
+        <TestCase itShould="RefreshAndLoading">
           <LargeList
             ref={ref => (this._largeList = ref)}
             data={this.state.data}
@@ -31,7 +30,7 @@ export default class RefreshAndLoadingTest extends Component {
             renderHeader={this._renderHeader}
             renderFooter={this._renderFooter}
           />
-        </TestCase.Example>
+        </TestCase>
       </TestSuite>
     );
   }

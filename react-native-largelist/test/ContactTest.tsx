@@ -1,4 +1,4 @@
-import {TestSuite} from '@rnoh/testerino';
+import {TestSuite, TestCase} from '@rnoh/testerino';
 import React, {Component} from 'react';
 import {TestCase} from '../../components';
 import {
@@ -22,7 +22,7 @@ export default class ContactTest extends Component {
     render() {
       return (
         <TestSuite name="ContactTest">
-          <TestCase.Example itShould="headerStickyEnabled">
+          <TestCase itShould="headerStickyEnabled">
             <LargeList
               heightForSection={() => 40}
               renderSection={this._renderSection}
@@ -34,7 +34,7 @@ export default class ContactTest extends Component {
               headerStickyEnabled
               renderEmpty={this._renderEmpty}
             />
-          </TestCase.Example>
+          </TestCase>
         </TestSuite>
       );
     }

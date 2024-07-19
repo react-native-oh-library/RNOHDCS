@@ -1,7 +1,6 @@
-import { TestSuite } from '@rnoh/testerino';
+import { TestSuite, TestCase } from '@rnoh/testerino';
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
-import { TestCase } from '../../components';
 import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button';
 
 export default class RadioButtonTest extends Component {
@@ -22,7 +21,7 @@ export default class RadioButtonTest extends Component {
     render() {
         return (
             <TestSuite name="RadioButton">
-                <TestCase.Example itShould="Basic RadioButton View">
+                <TestCase itShould="Basic RadioButton View">
                     <View style={basicStyles.container}>
                         <RadioGroup
                             onSelect={(index, value) => this.onSelect(index, value)}
@@ -43,8 +42,8 @@ export default class RadioButtonTest extends Component {
 
                         <Text style={basicStyles.text}>{this.state.text}</Text>
                     </View>
-                </TestCase.Example>
-                <TestCase.Example itShould="Custom RadioButton View">
+                </TestCase>
+                <TestCase itShould="Custom RadioButton View">
                     <View style={customStyles.container}>
                         <RadioGroup
                             size={24}
@@ -84,7 +83,7 @@ export default class RadioButtonTest extends Component {
 
                         <Text style={customStyles.text}>{this.state.text}</Text>
                     </View>
-                </TestCase.Example>
+                </TestCase>
             </TestSuite>
         );
     }

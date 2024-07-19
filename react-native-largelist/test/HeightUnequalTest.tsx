@@ -1,6 +1,5 @@
-import {TestSuite} from '@rnoh/testerino';
+import {TestSuite, TestCase} from '@rnoh/testerino';
 import React, {Component} from 'react';
-import {TestCase} from '../../components';
 import {StyleSheet, Text, View} from 'react-native';
 import {LargeList} from 'react-native-largelist';
 import {CommonLottieHeader} from 'react-native-spring-scrollview/src/Customize/CommonLottieHeader';
@@ -27,7 +26,7 @@ export default class HeightUnequalTest extends Component {
     }
     return (
         <TestSuite name="HeightUnequalTest">
-          <TestCase.Example itShould="HeightUnequal">
+          <TestCase itShould="HeightUnequal">
             <LargeList
               data={data}
               ref={ref => (this._list = ref)}
@@ -42,7 +41,7 @@ export default class HeightUnequalTest extends Component {
               onRefresh={this._onRefresh}
               onLoading={this._onLoading}
             />
-          </TestCase.Example>
+          </TestCase>
         </TestSuite>
       );
     }

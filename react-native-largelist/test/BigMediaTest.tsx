@@ -1,6 +1,5 @@
-import {TestSuite} from '@rnoh/testerino';
+import {TestSuite, TestCase} from '@rnoh/testerino';
 import React, {Component} from 'react';
-import {TestCase} from '../../components';
 import {
   ImageBackground,
   StyleSheet,
@@ -16,7 +15,7 @@ export default class BigMediaTest extends Component {
     render() {
       return (
         <TestSuite name="BigMediaTest">
-          <TestCase.Example itShould="MediaWrapper">
+          <TestCase itShould="MediaWrapper">
             <LargeList
               data={pics}
               heightForSection={() => 50}
@@ -27,7 +26,7 @@ export default class BigMediaTest extends Component {
               renderFooter={this._renderFooter}
               renderScaleHeaderBackground={this._renderHeaderBackground}
             />
-          </TestCase.Example>
+          </TestCase>
         </TestSuite>
       );
     }

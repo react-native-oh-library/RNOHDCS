@@ -1,5 +1,4 @@
-import {TestSuite} from '@rnoh/testerino';
-import {TestCase} from '../../components';
+import {TestSuite, TestCase} from '@rnoh/testerino';
 import {
   ScrollView,
   View,
@@ -11,7 +10,7 @@ import {
 export function CenterContentTest() {
   return (
     <TestSuite name="centerContent">
-      <TestCase.Example
+      <TestCase
         tags={['C_API']}
         modal
         itShould="Content is not centered (centerContent is false)">
@@ -22,8 +21,8 @@ export function CenterContentTest() {
             </Text>
           </ScrollView>
         </View>
-      </TestCase.Example>
-      <TestCase.Example
+      </TestCase>
+      <TestCase
         tags={['C_API']}
         modal
         itShould="Content is centered (centerContent is true and the content is smaller than the scroll view)">
@@ -35,8 +34,8 @@ export function CenterContentTest() {
             </Text>
           </ScrollView>
         </View>
-      </TestCase.Example>
-      <TestCase.Example
+      </TestCase>
+      <TestCase
         tags={['C_API']}
         modal
         itShould="Content is not centered (centerContent is true and the content is larger than the scroll view)">
@@ -55,7 +54,7 @@ export function CenterContentTest() {
             </Text>
           </ScrollView>
         </View>
-      </TestCase.Example>
+      </TestCase>
       <TestCase.Manual
         tags={['C_API']}
         modal
