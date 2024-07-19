@@ -1,6 +1,5 @@
-import { TestSuite } from '@rnoh/testerino';
+import { TestSuite, TestCase, Tester } from '@rnoh/testerino';
 import React from 'react';
-import { TestCase } from '../components';
 import { Text, View, StatusBarStyle, StyleSheet } from 'react-native';
 import {
     SafeAreaView,
@@ -52,9 +51,11 @@ export function SafeAreaViewTest() {
     }
     setEdges();
     return (
+        <Tester>
         <TestSuite name="SafeAreaViewTest">
-            <TestCase.Example tags={['C_API']} itShould="SafeAreaView">
+            <TestCase tags={['C_API']} itShould="SafeAreaView">
                 <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+                <View style={{ width: '100%', height: 500 }}>
                     <SafeAreaView
                         style={{
                             flex: 1,
@@ -177,9 +178,11 @@ export function SafeAreaViewTest() {
                             </View>
                         </View>
                     </SafeAreaView>
+                </View>
                 </SafeAreaProvider>
-            </TestCase.Example>
+            </TestCase>
         </TestSuite>
+        </Tester>
     );
 }
 
