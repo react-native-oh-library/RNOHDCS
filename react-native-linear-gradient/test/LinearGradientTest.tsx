@@ -6,7 +6,7 @@ import LinearGradient from 'react-native-linear-gradient'';
 export function LinearGradientApiTest() {
   return (
     <TestSuite name="LinearGradient">
-      <TestCase.Example itShould="angleCenter">
+      <TestCase itShould="angleCenter">
         <LinearGradient
           angleCenter={{x: 0.5, y: 0.5}}
           colors={['green', 'blue', 'red']}
@@ -14,7 +14,7 @@ export function LinearGradientApiTest() {
           end={{x: 0, y: 0}}
           style={styles.gradient}>
         </LinearGradient>
-      </TestCase.Example>
+      </TestCase>
     </TestSuite>
   );
 }

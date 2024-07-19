@@ -1,7 +1,6 @@
 import Storage from 'react-native-storage';
 import { AsyncStorage } from 'react-native'
-import {TestSuite, Tester} from '@rnoh/testerino';
-import { TestCase } from '../components';
+import {TestSuite, Tester, TestCase} from '@rnoh/testerino';
 import * as React from "react";
 import {
   SafeAreaView,
@@ -54,7 +53,7 @@ import {
     };
     return (
         <TestSuite name="AsyncStorage">
-            <TestCase.Logical
+            <TestCase
                 itShould="AsyncStorage.save"
                 fn={async ({expect}:any)=>{
                     await storage.save({
@@ -94,7 +93,7 @@ import {
                     })
                 }}
             />
-            <TestCase.Logical
+            <TestCase
                 itShould="AsyncStorage.load"
                 fn={async ({expect}:any)=>{
                     await storage.load({
@@ -112,7 +111,7 @@ import {
                 }}
             />
            
-            <TestCase.Logical
+            <TestCase
                 itShould="AsyncStorage.getIdsForKey"
                 fn={async ({expect}:any)=>{
                     await storage.getIdsForKey(key).then(ids => {
@@ -124,7 +123,7 @@ import {
                     });
                 }}
             />
-            <TestCase.Logical
+            <TestCase
                 itShould="AsyncStorage.getAllDataForKey"
                 fn={async ({expect}:any)=>{
                     await storage.getAllDataForKey(key).then(users => {
@@ -133,7 +132,7 @@ import {
                     });
               }}
             />
-            <TestCase.Logical
+            <TestCase
                 itShould="AsyncStorage.getBatchDataWithIds"
                 fn={async ({expect}:any)=>{
                     await storage.save({
@@ -161,7 +160,7 @@ import {
                     });
                 }}
             />
-            <TestCase.Logical
+            <TestCase
                 itShould="AsyncStorage.remove"
                 fn={async ({expect}:any)=>{
                     await storage.remove({
@@ -175,7 +174,7 @@ import {
                     })
                 }}
             />
-            <TestCase.Logical
+            <TestCase
                 itShould="AsyncStorage.clearMapForKey"
                 fn={async ({expect}:any)=>{
                     await storage.clearMapForKey(key);
@@ -190,7 +189,7 @@ import {
                 }}
             />
            
-            <TestCase.Logical
+            <TestCase
                 itShould="AsyncStorage.getBatchData"
                 fn={async ({expect}:any)=>{
                     storage.getBatchData([
@@ -200,7 +199,7 @@ import {
                     })
                 }}
             />
-            <TestCase.Logical
+            <TestCase
                 itShould="AsyncStorage.clearMap"
                 fn={async ({expect} : any) => {
                     await storage.clearMap();

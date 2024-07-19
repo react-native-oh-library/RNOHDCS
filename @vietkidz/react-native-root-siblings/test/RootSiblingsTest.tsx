@@ -1,4 +1,4 @@
-import { TestSuite } from '@rnoh/testerino';
+import { TestSuite, TestCase } from '@rnoh/testerino';
 import React from 'react';
 import {
     View,
@@ -7,7 +7,6 @@ import {
     TouchableHighlight,
     Dimensions,
 } from 'react-native';
-import { TestCase } from '../../components';
 import RootSiblings, { RootSiblingParent, RootSiblingPortal } from 'react-native-root-siblings';
 
 var id = 0;
@@ -43,7 +42,7 @@ const updateSibling = () => {
 export default function DropShadowTest() {
     return (
         <TestSuite name="DropShadow">
-            <TestCase.Example itShould="DropShadow View">
+            <TestCase itShould="DropShadow View">
                 <View style={{ backgroundColor: 'green', height: 700, flex: 1 }}>
                     <RootSiblingParent>
                         <RootSiblingPortal>
@@ -65,7 +64,7 @@ export default function DropShadowTest() {
                         </RootSiblingPortal>
                     </RootSiblingParent>
                 </View>
-            </TestCase.Example>
+            </TestCase>
         </TestSuite>
     );
 }

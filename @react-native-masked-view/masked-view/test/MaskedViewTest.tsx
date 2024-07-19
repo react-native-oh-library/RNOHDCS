@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, StyleSheet, Text, TextInput, Image, Button, Animated, Easing, } from 'react-native';
-import { TestSuite } from '@rnoh/testerino';
-import { TestCase } from '../components';
+import { TestSuite, TestCase} from '@rnoh/testerino';
 import heartImage from './heart.png';
 import MaskedView from '@react-native-masked-view/masked-view';
 
@@ -43,7 +42,7 @@ export const MaskedViewTest = () => {
   }, []);
   return (
     <TestSuite name="MaskedView">
-      <TestCase.Example
+      <TestCase
         tags={['C_API']}
         itShould="MaskedView for view">
         <MaskedView
@@ -61,8 +60,8 @@ export const MaskedViewTest = () => {
             <View style={{ width: '25%', height: '100%', backgroundColor: Colors.chineseWhite }} />
           </View>
         </MaskedView>
-      </TestCase.Example>
-      <TestCase.Example
+      </TestCase>
+      <TestCase
         tags={['C_API']}
         itShould="MaskedView for image">
         <MaskedView
@@ -79,8 +78,8 @@ export const MaskedViewTest = () => {
             style={styles.image}
           />
         </MaskedView>
-      </TestCase.Example>
-      <TestCase.Example
+      </TestCase>
+      <TestCase
         tags={['C_API']}
         itShould="MaskedView for test">
         <MaskedView
@@ -106,8 +105,8 @@ export const MaskedViewTest = () => {
             </Text>
           </View>
         </MaskedView>
-      </TestCase.Example>
-      <TestCase.Example
+      </TestCase>
+      <TestCase
         tags={['C_API']}
         itShould="MaskedView for animated">
         {!animDone ? <View style={[StyleSheet.absoluteFill, styles.backgroundFillBlue]}></View> : null}
@@ -138,7 +137,7 @@ export const MaskedViewTest = () => {
             <Button title="Login" />
           </Animated.View>
         </MaskedView>
-      </TestCase.Example>
+      </TestCase>
     </TestSuite>
   );
 };

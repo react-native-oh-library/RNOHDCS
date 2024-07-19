@@ -1,7 +1,6 @@
-import { TestSuite } from '@rnoh/testerino';
+import { TestSuite, TestCase } from '@rnoh/testerino';
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, TouchableHighlight, Animated } from 'react-native';
-import { TestCase } from '../../components';
 import Modal from 'react-native-root-modal';
 
 export default class RootModal extends Component {
@@ -32,7 +31,7 @@ export default class RootModal extends Component {
   render() {
     return (
       <TestSuite name="Root Modal">
-        <TestCase.Example itShould="Modal">
+        <TestCase itShould="Modal">
           <View style={ModalStyles.container}>
             <TouchableHighlight
               style={ModalStyles.button}
@@ -52,7 +51,7 @@ export default class RootModal extends Component {
               </View>
             </Modal>
           </View>
-        </TestCase.Example>
+        </TestCase>
       </TestSuite>
     );
   }

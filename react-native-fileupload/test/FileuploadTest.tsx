@@ -1,6 +1,5 @@
-import { TestSuite } from '@rnoh/testerino';
+import { TestSuite, TestCase } from '@rnoh/testerino';
 import React from 'react';
-import { TestCase } from '../../components';
 import FileUpload from 'react-native-fileupload';
 
 export function FileUploadTest() {
@@ -24,7 +23,7 @@ export function FileUploadTest() {
     };
     return (
         <TestSuite name="FileUpload">
-            <TestCase.Logical
+            <TestCase
                 itShould="File upload message:"
                 fn={({ expect }: any) => {
                     let result = FileUpload.upload(obj, function(err,result) {

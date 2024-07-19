@@ -1,10 +1,9 @@
-import {TestSuite} from '@rnoh/testerino';
+import {TestSuite, TestCase} from '@rnoh/testerino';
 import React, {Component} from 'react';
 import {
   View,
   Text,
 } from 'react-native';
-import {TestCase} from '../../components';
 import {WaterfallList} from 'react-native-largelist';
 
 export default class WaterfallListTest extends Component {
@@ -14,7 +13,7 @@ export default class WaterfallListTest extends Component {
   render() {
     return (
       <TestSuite name="WaterfallList">
-        <TestCase.Example itShould="WaterfallList view">
+        <TestCase itShould="WaterfallList view">
           <WaterfallList
             data={this.state.data}
             ref={ref => (this._list = ref)}
@@ -31,7 +30,7 @@ export default class WaterfallListTest extends Component {
               setTimeout(() => this._list.endLoading(), 2000);
             }}
           />
-        </TestCase.Example>
+        </TestCase>
       </TestSuite>
     );
   }

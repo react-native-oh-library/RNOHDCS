@@ -1,5 +1,4 @@
-import { TestSuite, Tester } from '@rnoh/testerino';
-import { TestCase } from '../components';
+import { TestSuite, Tester, TestCase } from '@rnoh/testerino';
 import * as React from 'react';
 import sinon from 'sinon';
 import SafeModule from 'react-native-safe-module';
@@ -14,13 +13,13 @@ export function SafeModuleTest() {
 
   return (
     <TestSuite name="SafeModule">
-      <TestCase.Logical
+      <TestCase
         itShould="throws if no definition is passed in"
         fn={({ expect }: any) => {
           expect(() => SafeModule.create()).to.throw();
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="throws if no module name is passed in"
         fn={({ expect }: any) => {
           expect(() => SafeModule.create({
@@ -28,7 +27,7 @@ export function SafeModuleTest() {
           })).to.throw();
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="throws if no mock is passed in"
         fn={({ expect }: any) => {
           expect(() => SafeModule.create({
@@ -36,7 +35,7 @@ export function SafeModuleTest() {
           })).to.throw();
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="uses the mock if module is not found"
         fn={({ expect }: any) => {
           const moduleName = uniqueModuleName();
@@ -51,7 +50,7 @@ export function SafeModuleTest() {
           expect(mock.foo).to.eql(1);
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="uses module in preference to mock"
         fn={({ expect }: any) => {
           const moduleName = uniqueModuleName();
@@ -70,7 +69,7 @@ export function SafeModuleTest() {
           expect(mock.foo).to.eql(1);
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="isEventEmitter option creates an EventEmitter"
         fn={({ expect }: any) => {
           const moduleName = uniqueModuleName();

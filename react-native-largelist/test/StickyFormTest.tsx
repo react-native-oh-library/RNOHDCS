@@ -1,11 +1,10 @@
-import {TestSuite} from '@rnoh/testerino';
+import {TestSuite, TestCase} from '@rnoh/testerino';
 import React, {Component} from 'react';
 import {
   View,
   StyleSheet,
   Text
 } from 'react-native';
-import {TestCase} from '../../components';
 import {StickyForm} from 'react-native-largelist';
 import type {IndexPath} from 'react-native-largelist';
 
@@ -15,7 +14,7 @@ export default class StickyFormTest extends Component {
   render() {
     return (
       <TestSuite name="StickyFormTest">
-        <TestCase.Example itShould="Sticky">
+        <TestCase itShould="Sticky">
           <StickyForm
             style={{backgroundColor: 'white'}}
             contentStyle={{alignItems: 'flex-start', width: '200%'}}
@@ -35,7 +34,7 @@ export default class StickyFormTest extends Component {
               setTimeout(() => this._list!.endLoading(), 2000);
             }}
           />
-        </TestCase.Example>
+        </TestCase>
       </TestSuite>
     );
   }

@@ -1,7 +1,6 @@
-import { TestSuite } from '@rnoh/testerino';
+import { TestSuite, TestCase } from '@rnoh/testerino';
 import React, { Component } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import { TestCase } from '../../components';
 import Switch from 'react-native-switch-pro';
 
 export default class SwitchProTest extends Component {
@@ -12,7 +11,7 @@ export default class SwitchProTest extends Component {
     render() {
         return (
             <TestSuite name="DropShadow">
-                <TestCase.Example itShould="DropShadow View">
+                <TestCase itShould="DropShadow View">
                     <View style={styles.container}>
                         <Switch />
                         <Text>uncontrolled</Text>
@@ -39,7 +38,7 @@ export default class SwitchProTest extends Component {
                             }}
                         />
                     </View>
-                </TestCase.Example>
+                </TestCase>
             </TestSuite>
         );
     }

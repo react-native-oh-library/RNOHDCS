@@ -1,6 +1,5 @@
-import {TestSuite} from '@rnoh/testerino';
+import {TestSuite, TestCase} from '@rnoh/testerino';
 import React, {Component} from 'react';
-import {TestCase} from '../../components';
 import {
   Text,
   TouchableOpacity,
@@ -22,7 +21,7 @@ export default class MessageTest extends Component {
   render() {
     return (
       <TestSuite name="MessageTest">
-        <TestCase.Example itShould="pagingEnabled">
+        <TestCase itShould="pagingEnabled">
           <LargeList
             pagingEnabled
             ref={ref => (this.largeList = ref)}
@@ -32,7 +31,7 @@ export default class MessageTest extends Component {
             renderIndexPath={this._renderItem}
             data={this.messages}
           />
-        </TestCase.Example>
+        </TestCase>
       </TestSuite>
     );
   }
