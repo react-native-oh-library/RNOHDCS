@@ -87,11 +87,11 @@ export function Md5TestExample() {
             <Text>明文:{bmd5} 密文:{RNMd5.b64_md5(bmd5)} <Button title = "随机明文" onPress={() => { set_bmd5(generateRandomString(10)) }}></Button></Text>
           </TestCase>
         
-          <TestCase itShould='hex_md5方法'>
+          <TestCase itShould='str_md5方法'>
             <Text>明文:{smd5} 密文:{RNMd5.str_md5(smd5)} <Button title = "随机明文" onPress={() => { set_smd5(generateRandomString(10)) }}></Button></Text>
           </TestCase>
           
-          <TestCase itShould='hex_md5方法'>
+          <TestCase itShould='hex_hmac_md5方法'>
             <Text>明文:{hmd5_h} key:{hmd5_h_key} 密文:{RNMd5.hex_hmac_md5(hmd5_h,hmd5_h_key)} <Button title = "随机明文" onPress={() => { set_hmd5_h(generateRandomString(10));set_hmd5_h_key(generateRandomString(10)) }}></Button></Text>
           </TestCase> 
 
