@@ -140,6 +140,10 @@ export const MqttDemoTest = () => {
             cleanSession: true,
             clientId: 'mqttTestDemo' + Math.random().toString(16).substring(2, 8)
         };
+        //此服务器存在时效性，如遇到无法使用，请在确保网络的前提下尝试以下开源服务器:
+        //Host: iot.eclipse.org
+        //Port: 443
+        //SSL: true
 
         //连接成功时
         function onConnect() {
