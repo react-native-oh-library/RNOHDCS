@@ -1,4 +1,4 @@
-import {TestSuite,Tester}from '@rnoh/testerino';
+import {TestSuite, Tester, TestCase}from '@rnoh/testerino';
 import * as React from 'react';
 import {
    SafeAreaView,
@@ -7,14 +7,12 @@ import {
    StatusBar,
    Alert
  } from "react-native";
-import { TestCase } from '../components';
 import  RNCalendarEvents  from "react-native-calendar-events";
-import {CalendarType, EventType, ServiceType, RecurrenceFrequency} from "@react-native-oh-tpl/react-native-calendar-events/src/calendarType";
 
 function RNCalendarEventsTest() {
    const calendarOptions = {
       title: 'test1',
-      type: CalendarType.LOCAL,
+      type: 'local',
       displayName: "testSaveCalendar"
     };
     const location = {
@@ -23,7 +21,7 @@ function RNCalendarEventsTest() {
       latitude: 31,
     }
     const eventService = {
-      type: ServiceType.MEETING,
+      type: 'Meeting',
       uri: "",
       description: "testEventService",
     }
@@ -32,12 +30,12 @@ function RNCalendarEventsTest() {
       email: "testEmail",
     }
     const recurrenceRuleHarmony = {
-      recurrenceFrequency: RecurrenceFrequency.WEEKLY,
+      recurrenceFrequency: 2,
       expire: 0,
     }
     const eventDetails = {
       id: 1,
-      type: EventType.NORMAL,
+      type: 0,
       title: 'testEvent',
       location: location,
       startTime: new Date().getTime() + 60 * 60 * 1000 * 3,
