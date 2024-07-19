@@ -96,13 +96,6 @@ class VoiceTest extends Component<Props, State> {
     });
   };
 
-  // onSpeechVolumeChanged = (e: any) => {
-  //   console.log('onSpeechVolumeChanged: ', e);
-  //   this.setState({
-  //     pitch: e.value,
-  //   });
-  // };
-
   _startRecognizing = async () => {
     this.setState({
       recognized: '',
