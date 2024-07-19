@@ -1,132 +1,68 @@
-import { TestSuite } from '@rnoh/testerino';
-import React, { useState, useRef } from 'react';
-import { TestCase } from '../components';
-import { View, Text, FlatList, StyleSheet, Animated, Image } from 'react-native';
-import { SmartRefreshControl, AnyHeader } from 'react-native-smartrefreshlayout';
+import React from 'react';
+import { ScrollView, View } from 'react-native';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
+import SmartRefreshLayoutAnyHeader from '../capi-demo/SmartRefreshLayoutAnyHeader';
+import SmartRefreshLayoutAutoRefreshExample from '../capi-demo/SmartRefreshLayoutAutoRefreshExample';
+import SmartRefreshLayoutClassiscHeader from '../capi-demo/SmartRefreshLayoutClassiscHeader';
+import SmartRefreshLayoutDefaultHeader from '../capi-demo/SmartRefreshLayoutDefaultHeader'
+import SmartRefreshLayoutMaterialHeader from '../capi-demo/SmartRefreshLayoutMaterialHeader'
+import SmartRefreshLayoutStoreHouseHeader from '../capi-demo/SmartRefreshLayoutStoreHouseHeader'
 
-function SmartrefreshlayoutTest() {
-    const [text, setText] = useState('状态11');
-    const [text1, setText1] = useState('刷新时间');
-
-    const [headerHeight, setHeaderHeight] = useState(69);
-    const [anyheaderHeight, setAnyHeaderHeight] = useState(0);
-
-    const [imgHeight, setImgHeight] = useState(0.0);
-    const [color, setColor] = useState('#ffff00');
-    const generateArray = (size: number) => {
-        const arr = new Array(size);
-        for (let i = 0; i < size; i++) {
-            arr[i] = { id: i, text: `Item ${i}` };
-        }
-        return arr;
-    };
-    const [data, setData] = useState(generateArray(100));
-
-    const ItemView = ({ item }) => (
-        <View style={styles.item}>
-            <Text
-                style={styles.itemText}
-                onPress={() => {
-                    console.log('tyBrave itemText:' + item.text);
-                }}>
-                {item.text}
-            </Text>
-        </View>
-    );
-    let smartRefreshControlRef: React.RefObject<SmartRefreshControl> =
-        useRef(null);
+export const SmartRefreshTest = () => {
     return (
-        <TestSuite name="Smartrefreshlayout">
-            <TestCase.Example tags={['C_API']} itShould="SafeAreaView">
-                <View>
-                    <SmartRefreshControl
-                        ref={smartRefreshControlRef}
-                        primaryColor={color}
-                        autoRefresh={{ refresh: false, time: 5000 }}
-                        headerHeight={headerHeight}
-                        style={{ height: '100%', width: '100%', backgroundColor: '#ffffff' }}
-                        onReleaseToRefresh={e => {
-                            setText('onPullDownToRefresh' + JSON.stringify(e.nativeEvent));
-                        }}
-                        onRefresh={() => {
-                            setText1('时间：' + new Date().getTime() + 'onRefresh触发刷新');
-                            setTimeout(() => {
-                                smartRefreshControlRef.current.finishRefresh({
-                                    delayed: -1,
-                                    success: true,
-                                });
-                            }, 5000);
-                            console.log('tyBrave RN onRefresh');
-                            setText1('时间：' + new Date().getTime() + 'onRefresh刷新完成');
-                        }}
-                        onHeaderReleasing={(data: any) => {
-                            console.log(
-                                'tyBrave RN onHeaderReleasing' +
-                                JSON.stringify(data.nativeEvent),
-                            );
-                        }}
-                        onHeaderPulling={(data: any) => {
-                            console.log(
-                                'tyBrave RN onHeaderPulling' + JSON.stringify(data.nativeEvent),
-                            );
-                        }}
-                        onPullDownToRefresh={() => {
-                            console.log('tyBrave RN onPullDownToRefresh');
-                        }}
-                        onHeaderMoving={(data: any) => {
-                            console.log(
-                                'tyBrave RN onHeaderMoving' + data.nativeEvent.offset,
-                            );
-                            setAnyHeaderHeight(data.nativeEvent.offset);
-                            if (data.nativeEvent.offset > 69) {
-                                return;
-                            }
-                            setImgHeight(data.nativeEvent.offset);
-                        }}
-                        HeaderComponent={
-                            <AnyHeader style={{ width: '100%', height: 0 }}>
-                                <Animated.View
-                                    style={{
-                                        height: 69,
-                                        width: '100%',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        backgroundColor: 'red',
-                                    }}>
-                                    <Image
-                                        style={{ width: imgHeight, height: imgHeight }}
-                                        source={require('./img/load.gif')}
-                                    />
-                                </Animated.View>
-                            </AnyHeader>
-                        }>
-                        <FlatList
-                            style={{
-                                flex: 1,
-                                height: '100%',
-                                width: '100%',
-                                backgroundColor: '#ffffff',
-                            }}
-                            data={data}
-                            renderItem={({ item }) => <ItemView item={item} />}
-                            keyExtractor={item => item.id.toString()}
-                        />
-                    </SmartRefreshControl>
-                </View>
-            </TestCase.Example>
-        </TestSuite>
-    );
-}
-const styles = StyleSheet.create({
-    item: {
-        backgroundColor: '#f9f9f9',
-        padding: 10,
-        marginVertical: 8,
-        marginHorizontal: 16,
-    },
-    itemText: {
-        fontSize: 16,
-    },
-});
+        <Tester style={{ flex: 1, marginTop: 30 }}>
+            <ScrollView>
+                <TestSuite name="Reanimated">
+                    <TestCase
+                        tags={['dev']}
+                        itShould="SmartRefreshLayoutAnyHeader">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <SmartRefreshLayoutAnyHeader />
+                        </View>
+                    </TestCase>
 
-export default SmartrefreshlayoutTest;
+                    <TestCase
+                        tags={['dev']}
+                        itShould="SmartRefreshLayoutAutoRefreshExample">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <SmartRefreshLayoutAutoRefreshExample />
+                        </View>
+                    </TestCase>
+
+                    <TestCase
+                        tags={['dev']}
+                        itShould="SmartRefreshLayoutClassiscHeader">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <SmartRefreshLayoutClassiscHeader />
+                        </View>
+                    </TestCase>
+
+                    <TestCase
+                        tags={['dev']}
+                        itShould="SmartRefreshLayoutDefaultHeader">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <SmartRefreshLayoutDefaultHeader />
+                        </View>
+                    </TestCase>
+
+                    <TestCase
+                        tags={['dev']}
+                        itShould="SmartRefreshLayoutMaterialHeader">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <SmartRefreshLayoutMaterialHeader />
+                        </View>
+                    </TestCase>
+
+                    <TestCase
+                        tags={['dev']}
+                        itShould="SmartRefreshLayoutStoreHouseHeader">
+                        <View style={{ width: '100%', height: 500 }}>
+                            <SmartRefreshLayoutStoreHouseHeader />
+                        </View>
+                    </TestCase>
+
+                </TestSuite>
+            </ScrollView>
+        </Tester>
+    );
+};
