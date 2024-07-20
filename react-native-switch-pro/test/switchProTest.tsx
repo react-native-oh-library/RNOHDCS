@@ -11,10 +11,10 @@ export default class SwitchProTest extends Component {
     render() {
         return (
             <Tester>
-                <TestSuite name="DropShadow">
-                    <TestCase itShould="DropShadow View">
+                <TestSuite name="SwitchPro">
+                    <TestCase itShould="SwitchPro View">
                         <View style={styles.container}>
-                            <Switch />
+                            <Switch circleColorActive='white' circleColorInactive='white' />
                             <Text>uncontrolled</Text>
                             <Switch
                                 label={2}
