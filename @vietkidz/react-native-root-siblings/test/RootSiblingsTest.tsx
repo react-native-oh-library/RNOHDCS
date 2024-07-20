@@ -39,11 +39,11 @@ const updateSibling = () => {
             </View>,
         );
 };
-export default function DropShadowTest() {
+export default function RootSiblingsTest() {
     return (
         <Tester>
-            <TestSuite name="DropShadow">
-                <TestCase itShould="DropShadow View">
+            <TestSuite name="RootSiblings">
+                <TestCase itShould="RootSiblings View">
                     <View style={{ backgroundColor: 'green', height: 700, flex: 1 }}>
                         <RootSiblingParent>
                             <RootSiblingPortal>
