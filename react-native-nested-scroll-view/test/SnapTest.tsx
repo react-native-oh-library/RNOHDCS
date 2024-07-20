@@ -1,7 +1,6 @@
 import {TestSuite, TestCase} from '@rnoh/testerino';
 import {ScrollViewProps} from 'react-native';
 import {ScrollViewComparator, getScrollViewContent} from './fixtures';
-import {} from '../../components';
 
 const ITEM_HEIGHT = 50;
 

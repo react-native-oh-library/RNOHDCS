@@ -4,8 +4,9 @@ import {
   getScrollViewContent,
   getScrollViewContentHorizontal,
 } from './fixtures';
-import {ScrollView, StyleSheet, View, Button} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import React from 'react';
+import {Button} from './button';
 
 export function ScrollBarsTest() {
   return (

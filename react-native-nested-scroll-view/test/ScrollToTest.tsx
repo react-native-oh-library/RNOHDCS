@@ -5,10 +5,10 @@ import {
   StyleSheet,
   ScrollViewProps,
   Text,
-  Button
 } from 'react-native';
 import {COMMON_PROPS} from './fixtures';
 import React, {useRef} from 'react';
+import {Button} from './button';
 
 export function ScrollToTest() {
   return (
@@ -25,7 +25,7 @@ export function ScrollToTest() {
         itShould="scroll down on button press (with animation)">
         <ScrollToTestCase animated={true} />
       </TestCase>
-      <TestCase.Manual
+      <TestCase
         tags={['C_API']}
         modal
         itShould="call onScroll once when scrolling without animation"
@@ -40,7 +40,7 @@ export function ScrollToTest() {
           expect(state).to.eq(1);
         }}
       />
-      <TestCase.Manual
+      <TestCase
         tags={['C_API']}
         modal
         itShould="call onScroll multiple times when scrolling with animation"
