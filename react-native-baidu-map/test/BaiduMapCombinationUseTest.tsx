@@ -1,4 +1,4 @@
-import { TestCase, TestSuite } from '@rnoh/testerino';
+import { Tester } from '@rnoh/testerino';
 import React from 'react';
 import { Location, MapView, Overlay } from 'react-native-baidu-map';
 
@@ -17,13 +17,11 @@ export function BaiduMapCombinationUseTest() {
     console.log('baidumap _onMapLoaded');
   }
   return (
-    <TestSuite name="PlatformColor">
-      <TestCase itShould="PageView initialPage props"
-      >
+    <Tester>
    <MapView
                 center={{ latitude: 38.914935, longitude: 115.403119 }}
-                zoom={12.0}
-                mapType={1}
+                zoom={9.0}
+                mapType={2}
                 trafficEnabled={true}
                 zoomGesturesEnabled={true}
                 scrollGesturesEnabled={true}
@@ -47,6 +45,11 @@ export function BaiduMapCombinationUseTest() {
                     }} icon={{ uri: "https://maponline0.bdimg.com/sty/map_icons2x/MapRes/huochezhan.png?udt=20230227" }} />
 
                 <Overlay.Marker
+                    perspective = {true}
+                    flat = {true}
+                    rotate = {20}
+                    animateType= {'drop'}
+                    alpha={0.5}
                     location={{ latitude: 40.044935, longitude: 115.603119 }} onClick={() => {
                         console.log("baidumap Marker CLICK2")
                     }} icon={{ uri: "https://maponline0.bdimg.com/sty/map_icons2x/MapRes/huochezhan.png?udt=20230227" }} />
@@ -68,9 +71,7 @@ export function BaiduMapCombinationUseTest() {
                     rotate={10}
                     text='overlay Text test' />
             </MapView>
-      </TestCase>
-
-    </TestSuite>
+    </Tester>
   );
 }
 
