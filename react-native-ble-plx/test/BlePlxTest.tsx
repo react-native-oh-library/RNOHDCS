@@ -17,6 +17,7 @@ const bleManager = new BleManager()
 
 export function BlePlxTest() {
   return (
+    <Tester>
     <TestSuite name="BlePlx">
       <TestCase
         itShould="addListener"
@@ -512,5 +513,6 @@ export function BlePlxTest() {
         }}
       />
     </TestSuite>
+    </Tester>
   );
 }

@@ -1,6 +1,5 @@
-import {TestSuite, TestCase} from '@rnoh/testerino';
-import React, {Component} from 'react';
-import {TestCase} from '../../components';
+import { TestSuite, TestCase, Tester } from '@rnoh/testerino';
+import React, { Component } from 'react';
 import {
   TextInput,
   StyleSheet,
@@ -9,18 +8,19 @@ import {
   View,
   Image,
 } from 'react-native';
-import {LargeList} from 'react-native-largelist';
-import {contacts} from '../RNlargelistExample/LargeListExamples/DataSource';
+import { LargeList } from 'react-native-largelist';
+import { contacts } from '../RNlargelistExample/LargeListExamples/DataSource';
 
 export default class ContactTest extends Component {
-    largeList: any;
-  
-    constructor(props: any) {
-      super(props);
-      this.state = {data: contacts};
-    }
-    render() {
-      return (
+  largeList: any;
+
+  constructor(props: any) {
+    super(props);
+    this.state = { data: contacts };
+  }
+  render() {
+    return (
+      <Tester>
         <TestSuite name="ContactTest">
           <TestCase itShould="headerStickyEnabled">
             <LargeList
@@ -36,21 +36,22 @@ export default class ContactTest extends Component {
             />
           </TestCase>
         </TestSuite>
-      );
-    }
-    _renderHeader = () => {
-      return (
-        <View style={{backgroundColor: 'white'}}>
-          <TextInput
-            style={styles.search}
-            placeholder="Please type first letter to search"
-            onSubmitEditing={this._search}
-            returnKeyType="done"
-          />
-        </View>
-      );
-    };
-    
+      </Tester>
+    );
+  }
+  _renderHeader = () => {
+    return (
+      <View style={{ backgroundColor: 'white' }}>
+        <TextInput
+          style={styles.search}
+          placeholder="Please type first letter to search"
+          onSubmitEditing={this._search}
+          returnKeyType="done"
+        />
+      </View>
+    );
+  };
+
   _renderEmpty = () => {
     return (
       <View style={styles.empty}>
@@ -62,7 +63,7 @@ export default class ContactTest extends Component {
   _renderFooter = () => {
     return (
       <View>
-        <Text style={{marginVertical: 20, alignSelf: 'center'}}>
+        <Text style={{ marginVertical: 20, alignSelf: 'center' }}>
           This is the footer
         </Text>
       </View>
@@ -78,7 +79,7 @@ export default class ContactTest extends Component {
     );
   };
 
-  _renderItem = ({section: section, row: row}) => {
+  _renderItem = ({ section: section, row: row }) => {
     const contact = this.state.data[section].items[row];
     return (
       <TouchableOpacity style={styles.row}>
@@ -91,42 +92,41 @@ export default class ContactTest extends Component {
     );
   };
 
-  _search = ({nativeEvent: {text: text}}) => {
+  _search = ({ nativeEvent: { text: text } }) => {
     const notFound = contacts.every(contract => {
       if (contract.header === text) {
-        this.setState({data: [contract]});
+        this.setState({ data: [contract] });
         return false;
       }
       return true;
     });
     if (notFound) {
-      this.setState({data: []});
+      this.setState({ data: [] });
     }
   };
 }
 
 const styles = StyleSheet.create({
-    search: {
-      margin: 10,
-      fontSize: 18,
-    },
-    empty: {
-      marginVertical: 20,
-      alignSelf: 'center',
-    },
-    section: {
-      flex: 1,
-      backgroundColor: '#EEE',
-      justifyContent: 'center',
-    },
-    sectionText: {
-      fontSize: 20,
-      marginLeft: 10,
-    },
-    row: {flex: 1, flexDirection: 'row', alignItems: 'center'},
-    image: {marginLeft: 16, width: 44, height: 44},
-    rContainer: {marginLeft: 20},
-    title: {fontSize: 18},
-    subtitle: {fontSize: 14, marginTop: 8},
-  });
-  
+  search: {
+    margin: 10,
+    fontSize: 18,
+  },
+  empty: {
+    marginVertical: 20,
+    alignSelf: 'center',
+  },
+  section: {
+    flex: 1,
+    backgroundColor: '#EEE',
+    justifyContent: 'center',
+  },
+  sectionText: {
+    fontSize: 20,
+    marginLeft: 10,
+  },
+  row: { flex: 1, flexDirection: 'row', alignItems: 'center' },
+  image: { marginLeft: 16, width: 44, height: 44 },
+  rContainer: { marginLeft: 20 },
+  title: { fontSize: 18 },
+  subtitle: { fontSize: 14, marginTop: 8 },
+});

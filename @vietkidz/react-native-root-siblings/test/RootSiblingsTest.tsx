@@ -1,4 +1,4 @@
-import { TestSuite, TestCase } from '@rnoh/testerino';
+import { TestSuite, TestCase, Tester } from '@rnoh/testerino';
 import React from 'react';
 import {
     View,
@@ -41,31 +41,33 @@ const updateSibling = () => {
 };
 export default function DropShadowTest() {
     return (
-        <TestSuite name="DropShadow">
-            <TestCase itShould="DropShadow View">
-                <View style={{ backgroundColor: 'green', height: 700, flex: 1 }}>
-                    <RootSiblingParent>
-                        <RootSiblingPortal>
-                            <View style={styles.container}>
-                                <TouchableHighlight style={styles.button} onPress={addSibling}>
-                                    <Text style={styles.buttonText}>Add element</Text>
-                                </TouchableHighlight>
-                                <TouchableHighlight
-                                    style={styles.button}
-                                    onPress={destroySibling}>
-                                    <Text style={styles.buttonText}>Destroy element</Text>
-                                </TouchableHighlight>
-                                <TouchableHighlight
-                                    style={styles.button}
-                                    onPress={updateSibling}>
-                                    <Text style={styles.buttonText}>Update element</Text>
-                                </TouchableHighlight>
-                            </View>
-                        </RootSiblingPortal>
-                    </RootSiblingParent>
-                </View>
-            </TestCase>
-        </TestSuite>
+        <Tester>
+            <TestSuite name="DropShadow">
+                <TestCase itShould="DropShadow View">
+                    <View style={{ backgroundColor: 'green', height: 700, flex: 1 }}>
+                        <RootSiblingParent>
+                            <RootSiblingPortal>
+                                <View style={styles.container}>
+                                    <TouchableHighlight style={styles.button} onPress={addSibling}>
+                                        <Text style={styles.buttonText}>Add element</Text>
+                                    </TouchableHighlight>
+                                    <TouchableHighlight
+                                        style={styles.button}
+                                        onPress={destroySibling}>
+                                        <Text style={styles.buttonText}>Destroy element</Text>
+                                    </TouchableHighlight>
+                                    <TouchableHighlight
+                                        style={styles.button}
+                                        onPress={updateSibling}>
+                                        <Text style={styles.buttonText}>Update element</Text>
+                                    </TouchableHighlight>
+                                </View>
+                            </RootSiblingPortal>
+                        </RootSiblingParent>
+                    </View>
+                </TestCase>
+            </TestSuite>
+        </Tester>
     );
 }
 

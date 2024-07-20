@@ -1,4 +1,4 @@
-import { TestCase, TestSuite } from '@rnoh/testerino';
+import { TestCase, TestSuite, Tester } from '@rnoh/testerino';
 import React from 'react';
 import PagerView from 'react-native-pager-view';
 import { View, Text, Button,TextInput } from 'react-native';
@@ -12,6 +12,7 @@ export function PageViewTest() {
   const pagerRef3 = React.useRef<PagerView>(null);
 
   return (
+    <Tester>
     <TestSuite name="PlatformColor">
       <TestCase itShould="PageView initialPage props"
       >
@@ -982,6 +983,7 @@ export function PageViewTest() {
       </TestCase>
 
     </TestSuite>
+    </Tester>
   );
 }
 

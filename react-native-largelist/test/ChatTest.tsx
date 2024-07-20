@@ -1,4 +1,4 @@
-import {TestSuite, TestCase} from '@rnoh/testerino';
+import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 import React, {Component} from 'react';
 import {LargeList} from 'react-native-largelist';
 import {iconArray} from '../RNlargelistExample/LargeListExamples/icons';
@@ -18,6 +18,7 @@ export default class ChartListTest extends Component {
   
   render() {
     return (
+      <Tester>
       <TestSuite name="ChartListTest">
         <TestCase itShould="LargeList: inverted">
           <LargeList
@@ -39,6 +40,7 @@ export default class ChartListTest extends Component {
           </View>
         </TestCase>
       </TestSuite>
+      </Tester>
     );
   }
   

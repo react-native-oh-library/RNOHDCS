@@ -1,9 +1,9 @@
-import {TestSuite, TestCase} from '@rnoh/testerino';
-import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {LargeList} from 'react-native-largelist';
-import {CommonLottieHeader} from 'react-native-spring-scrollview/src/Customize/CommonLottieHeader';
-import {CommonLottieFooter} from 'react-native-spring-scrollview/src/Customize/CommonLottieFooter';
+import { TestSuite, TestCase, Tester } from '@rnoh/testerino';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { LargeList } from 'react-native-largelist';
+import { CommonLottieHeader } from 'react-native-spring-scrollview/src/Customize/CommonLottieHeader';
+import { CommonLottieFooter } from 'react-native-spring-scrollview/src/Customize/CommonLottieFooter';
 
 export default class HeightUnequalTest extends Component {
   _sectionCount = 1;
@@ -12,19 +12,20 @@ export default class HeightUnequalTest extends Component {
 
   constructor(props: any) {
     super(props);
-    this.state = {select: 0};
+    this.state = { select: 0 };
   }
 
   render() {
     const data = [];
     for (let section = 0; section < this._sectionCount; ++section) {
-      const sContent = {items: []};
+      const sContent = { items: [] };
       for (let row = 0; row < this._rowCount; ++row) {
         sContent.items.push(row);
       }
       data.push(sContent);
     }
     return (
+      <Tester>
         <TestSuite name="HeightUnequalTest">
           <TestCase itShould="HeightUnequal">
             <LargeList
@@ -32,7 +33,7 @@ export default class HeightUnequalTest extends Component {
               ref={ref => (this._list = ref)}
               heightForSection={() => 50}
               renderSection={this._renderSection}
-              heightForIndexPath={({section: section, row: row}) =>
+              heightForIndexPath={({ section: section, row: row }) =>
                 row % 2 ? 50 : 100
               }
               renderIndexPath={this._renderIndexPath}
@@ -43,24 +44,25 @@ export default class HeightUnequalTest extends Component {
             />
           </TestCase>
         </TestSuite>
-      );
-    }
-    _onRefresh = () => {
-      setTimeout(() => this._list!.endRefresh(), 2000);
-    };
-    _onLoading = () => {
-      setTimeout(() => this._list!.endLoading(true), 2000);
-    };
-  
-    _renderSection = (section: number) => {
-      return (
-        <View style={styles.section}>
-          <Text>Section {section}</Text>
-        </View>
-      );
-    };
-    
-  _renderIndexPath = ({section: section, row: row}) => {
+      </Tester>
+    );
+  }
+  _onRefresh = () => {
+    setTimeout(() => this._list!.endRefresh(), 2000);
+  };
+  _onLoading = () => {
+    setTimeout(() => this._list!.endLoading(true), 2000);
+  };
+
+  _renderSection = (section: number) => {
+    return (
+      <View style={styles.section}>
+        <Text>Section {section}</Text>
+      </View>
+    );
+  };
+
+  _renderIndexPath = ({ section: section, row: row }) => {
     return (
       <View style={styles.row}>
         <Text>
