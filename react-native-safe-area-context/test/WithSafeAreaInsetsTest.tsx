@@ -1,14 +1,14 @@
 import React from 'react';
 import { TestCase, Tester, TestSuite } from '@rnoh/testerino';
 import { View } from 'react-native';
-import SafeAreaBasic from './demo/SafeAreaDemo-CAPI';
+import {Element} from './demo/withSafeAreaInsets';
 
-export function SafeAreaViewTest() {
+export function WithSafeAreaInsetsTest() {
 
     return (
         <Tester >
             <View style={{ width: '100%', height: '100%' }}>
-                <SafeAreaBasic />
+                <Element />
             </View>
         </Tester >
     );
