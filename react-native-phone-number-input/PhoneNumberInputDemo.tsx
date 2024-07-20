@@ -1,10 +1,10 @@
 import React, {useState, useRef} from 'react';
-import {StyleSheet, View, ScrollView, Text, Image} from 'react-native';
+import {StyleSheet, View, ScrollView, Text, Image, Button} from 'react-native';
 import PhoneInput from 'react-native-phone-number-input';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
 
 export const PNIPropsDemo = () => {
+  const [valuetext, setValuetext] = useState('');
   const [value, setValue] = useState('');
   const [value1, setValue1] = useState('');
   const [countryCode, setCountryCode] = useState('');
@@ -13,12 +13,29 @@ export const PNIPropsDemo = () => {
   const [valid, setValid] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const phoneInput = useRef<PhoneInput>(null);
+  const [valuea, setValuea] = useState('');
+  const [valueapi, setValueapi] = useState('');
+  const [countryCodeapi, setCountryCodeapi] = useState('');
+  const [formattedValueapi, setFormattedValueapi] = useState('');
+  const phoneInput1 = useRef<PhoneInput>(null);
+  const phoneInput2 = useRef<PhoneInput>(null);
+  const phoneInput3 = useRef<PhoneInput>(null);
+  const phoneInput4 = useRef<PhoneInput>(null);
+  const [disabled1, setDisabled1] = useState(false);
 
   return (
-    <View style={styles.container}>
-      <ScrollView style={styles.containers}>
+    <ScrollView>
+      <View style={styles.containers}>
         <Tester>
-          <TestSuite name="测试defaultCode属性，选择默认的国家">
+          <TestSuite name="autoFocus(进入页面是否自动跳出键盘)">
+            <TestCase tags={['C_API']} itShould="autoFocus: true">
+              <PhoneInput autoFocus={true} />
+            </TestCase>
+            <TestCase tags={['C_API']} itShould="autoFocus: false">
+              <PhoneInput autoFocus={false} />
+            </TestCase>
+          </TestSuite>
+          <TestSuite name="defaultCode(选择默认的国家)">
             <TestCase tags={['C_API']} itShould="defaultCode:'HK'">
               <PhoneInput
                 ref={phoneInput}
@@ -37,7 +54,6 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow
-                autoFocus
               />
             </TestCase>
             <TestCase tags={['C_API']} itShould="defaultCode:'CH'">
@@ -58,11 +74,18 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow
-                autoFocus
               />
             </TestCase>
           </TestSuite>
-          <TestSuite name="测试withShadow属性，组件是否有阴影">
+          <TestSuite name="withDarkTheme(国家选择器主题色)">
+            <TestCase tags={['C_API']} itShould="withDarkTheme:true">
+              <PhoneInput withDarkTheme={true} />
+            </TestCase>
+            <TestCase tags={['C_API']} itShould="withDarkTheme:false">
+              <PhoneInput withDarkTheme={false} />
+            </TestCase>
+          </TestSuite>
+          <TestSuite name="withShadow(组件是否有阴影)">
             <TestCase tags={['C_API']} itShould="withShadow: true">
               <PhoneInput
                 ref={phoneInput}
@@ -81,7 +104,6 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow={true}
-                autoFocus
               />
             </TestCase>
             <TestCase tags={['C_API']} itShould="withShadow: false">
@@ -102,55 +124,10 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow={false}
-                autoFocus
               />
             </TestCase>
           </TestSuite>
-          <TestSuite name="测试autoFocus属性，是否自动跳出键盘">
-            <TestCase tags={['C_API']} itShould="autoFocus: true">
-              <PhoneInput
-                ref={phoneInput}
-                defaultValue={value}
-                disableArrowIcon={true}
-                defaultCode="HK"
-                layout="first"
-                onChangeText={text => {
-                  setValue(text);
-                }}
-                onChangeFormattedText={text => {
-                  setFormattedValue(text);
-                  setCountryCode(phoneInput.current?.getCountryCode() || '');
-                }}
-                countryPickerProps={{withAlphaFilter: true}}
-                disabled={disabled}
-                withDarkTheme
-                withShadow={true}
-                autoFocus={true}
-              />
-            </TestCase>
-            <TestCase tags={['C_API']} itShould="autoFocus: false">
-              <PhoneInput
-                ref={phoneInput}
-                defaultValue={value}
-                disableArrowIcon={true}
-                defaultCode="HK"
-                layout="first"
-                onChangeText={text => {
-                  setValue(text);
-                }}
-                onChangeFormattedText={text => {
-                  setFormattedValue(text);
-                  setCountryCode(phoneInput.current?.getCountryCode() || '');
-                }}
-                countryPickerProps={{withAlphaFilter: true}}
-                disabled={disabled}
-                withDarkTheme
-                withShadow={true}
-                autoFocus={false}
-              />
-            </TestCase>
-          </TestSuite>
-          <TestSuite name="测试defaultValue属性，默认的输入值">
+          <TestSuite name="defaultValue(默认的输入值)">
             <TestCase tags={['C_API']} itShould="defaultValue: 20242024">
               <PhoneInput
                 ref={phoneInput}
@@ -169,7 +146,6 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow={false}
-                autoFocus={false}
               />
             </TestCase>
             <TestCase tags={['C_API']} itShould="defaultValue: 20252025">
@@ -190,11 +166,10 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow={false}
-                autoFocus={false}
               />
             </TestCase>
           </TestSuite>
-          <TestSuite name="测试value属性，输入值">
+          <TestSuite name="value(输入值)">
             <TestCase tags={['C_API']} itShould="value: 20232023">
               <PhoneInput
                 ref={phoneInput}
@@ -214,7 +189,6 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow={false}
-                autoFocus={false}
               />
             </TestCase>
             <TestCase tags={['C_API']} itShould="value: 20222022">
@@ -236,11 +210,26 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow={false}
-                autoFocus={false}
               />
             </TestCase>
           </TestSuite>
-          <TestSuite name="测试disableArrowIcon属性，是否有箭头图标">
+          <TestSuite name="disable(禁用国家选择器)">
+            <TestCase tags={['C_API']} itShould="disable:true">
+              <PhoneInput disabled={disabled1} />
+              <Button
+              title='禁用，disable:true'
+              onPress={()=>{ setDisabled1(true);}}
+              />
+              <Button
+              title='取消禁用，disable:false'
+              onPress={()=>{ setDisabled1(false);}}
+              />
+            </TestCase>
+            <TestCase tags={['C_API']} itShould="disable:false">
+              <PhoneInput disabled={false} />
+            </TestCase>
+          </TestSuite>
+          <TestSuite name="disableArrowIcon(是否有箭头图标)">
             <TestCase tags={['C_API']} itShould="disableArrowIcon: true">
               <PhoneInput
                 ref={phoneInput}
@@ -258,7 +247,6 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow={false}
-                autoFocus={false}
               />
             </TestCase>
             <TestCase tags={['C_API']} itShould="disableArrowIcon: false">
@@ -278,11 +266,10 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow={false}
-                autoFocus={false}
               />
             </TestCase>
           </TestSuite>
-          <TestSuite name="测试placeholder属性，显示占位符">
+          <TestSuite name="placeholder(显示占位符)">
             <TestCase tags={['C_API']} itShould="placeholder: 请输入电话号码">
               <PhoneInput
                 ref={phoneInput}
@@ -300,7 +287,6 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow={false}
-                autoFocus={false}
                 placeholder={'请输入电话号码'}
               />
             </TestCase>
@@ -321,43 +307,38 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow={false}
-                autoFocus={false}
                 placeholder={'please input'}
               />
             </TestCase>
           </TestSuite>
-          <TestSuite name="测试onChangeText属性，输入文本的事件">
-            <TestCase tags={['C_API']} itShould="onChangeText">
-              <Text
-                style={{
-                  height: 40,
-                  marginLeft: 100,
-                  lineHeight: 40,
-                }}>
-                {'value:' + `${value1}`}
-              </Text>
+          <TestSuite name="onChangeCountry(国家选择事件)">
+            <TestCase
+              tags={['C_API']}
+              itShould="onChangeCountry(返回的当前国家)">
+              <Text>当前国家为：{valuea}</Text>
               <PhoneInput
-                ref={phoneInput}
-                disableArrowIcon={true}
-                defaultCode="HK"
-                layout="first"
-                onChangeText={text => {
-                  setValue1(text);
+                onChangeCountry={valuea => {
+                  setValuea(valuea.cca2);
                 }}
-                onChangeFormattedText={text => {
-                  setFormattedValue(text);
-                  setCountryCode(phoneInput.current?.getCountryCode() || '');
-                }}
-                countryPickerProps={{withAlphaFilter: true}}
-                disabled={disabled}
-                withDarkTheme
-                withShadow={false}
-                autoFocus={false}
-                placeholder={'请输入电话号码'}
               />
             </TestCase>
           </TestSuite>
-          <TestSuite name="测试onChangeFormattedText属性，生成格式化文本的事件">
+          <TestSuite name="onChangeText(输入文本的事件)">
+            <TestCase tags={['C_API']} itShould="onChangeText">
+              <View style={{height: 150}}>
+                <Text style={{height: 40, fontSize: 20}}>
+                  输入文本：{`${valuetext}`}
+                </Text>
+                <PhoneInput
+                  withDarkTheme={true}
+                  onChangeText={text => {
+                    setValuetext(text);
+                  }}
+                />
+              </View>
+            </TestCase>
+          </TestSuite>
+          <TestSuite name="onChangeFormattedText(生成格式化文本的事件)">
             <TestCase tags={['C_API']} itShould="onChangeFormattedText">
               <Text
                 style={{
@@ -383,12 +364,11 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow={false}
-                autoFocus={false}
                 placeholder={'请输入电话号码'}
               />
             </TestCase>
           </TestSuite>
-          <TestSuite name="测试containerStyle属性，组件的样式">
+          <TestSuite name="containerStyle(组件的样式)">
             <TestCase
               tags={['C_API']}
               itShould="containerStyle: {{backgroundColor: 'red', marginLeft: 20,height:100}}">
@@ -414,7 +394,6 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow={false}
-                autoFocus={false}
                 placeholder={'请输入电话号码'}
               />
             </TestCase>
@@ -438,12 +417,11 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow={false}
-                autoFocus={false}
                 placeholder={'please input'}
               />
             </TestCase>
           </TestSuite>
-          <TestSuite name="测试textContainerStyle属性，组件文本的样式">
+          <TestSuite name="textContainerStyle(组件文本的样式)">
             <TestCase
               tags={['C_API']}
               itShould="textContainerStyle: {{backgroundColor:'pink',marginLeft:20,marginTop:20,height:10}}">
@@ -471,7 +449,6 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow
-                autoFocus
               />
             </TestCase>
             <TestCase
@@ -496,14 +473,13 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow
-                autoFocus
               />
             </TestCase>
           </TestSuite>
-          <TestSuite name="测试renderDropdownImage属性，箭头图标的替换">
+          <TestSuite name="renderDropdownImage(箭头图标的替换)">
             <TestCase
               tags={['C_API']}
-              itShould="renderDropdownImage,引入Image组件，导入图片作为角标icon">
+              itShould="renderDropdownImage(引入Image组件，导入图片作为角标icon)">
               <PhoneInput
                 renderDropdownImage={
                   <Image
@@ -529,7 +505,6 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow
-                autoFocus
               />
             </TestCase>
             <TestCase
@@ -555,11 +530,10 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow
-                autoFocus
               />
             </TestCase>
           </TestSuite>
-          <TestSuite name="测试textInputProps属性，文本输入框的属性样式">
+          <TestSuite name="textInputProps(文本输入框的属性样式)">
             <TestCase
               tags={['C_API']}
               itShould="textInputProps = {{maxLength:8,placeholderTextColor:'red',selectionColor:'green'}}">
@@ -585,7 +559,6 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow
-                autoFocus
               />
             </TestCase>
             <TestCase
@@ -614,11 +587,10 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow
-                autoFocus
               />
             </TestCase>
           </TestSuite>
-          <TestSuite name="测试textInputStyle属性，文本输入框的样式">
+          <TestSuite name="textInputStyle(文本输入框的样式)">
             <TestCase
               tags={['C_API']}
               itShould="textInputStyle:{{color:'red',fontSize:20}}">
@@ -640,7 +612,6 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow
-                autoFocus
               />
             </TestCase>
             <TestCase
@@ -664,11 +635,10 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow
-                autoFocus
               />
             </TestCase>
           </TestSuite>
-          <TestSuite name="测试codeTextStyle属性，国家电话区号的样式">
+          <TestSuite name="codeTextStyle(国家电话区号的样式)">
             <TestCase
               tags={['C_API']}
               itShould="codeTextStyle = {{color:'red',fontSize:20}}">
@@ -690,7 +660,6 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow
-                autoFocus
               />
             </TestCase>
             <TestCase
@@ -714,11 +683,10 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow
-                autoFocus
               />
             </TestCase>
           </TestSuite>
-          <TestSuite name="测试flagButtonStyle属性，标志按钮的样式">
+          <TestSuite name="flagButtonStyle(标志按钮的样式)">
             <TestCase
               tags={['C_API']}
               itShould="flagButtonStyle = {{backgroundColor:'red',marginRight:20}}">
@@ -745,7 +713,6 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow
-                autoFocus
               />
             </TestCase>
             <TestCase
@@ -770,11 +737,10 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow
-                autoFocus
               />
             </TestCase>
           </TestSuite>
-          <TestSuite name="测试countryPickerButtonStyle属性，国家选择器按钮的样式">
+          <TestSuite name="countryPickerButtonStyle(国家选择器按钮的样式)">
             <TestCase
               tags={['C_API']}
               itShould="countryPickerButtonStyle = {{backgroundColor:'red',marginRight:20,marginTop:20}}">
@@ -800,7 +766,6 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow
-                autoFocus
               />
             </TestCase>
             <TestCase
@@ -828,11 +793,10 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow
-                autoFocus
               />
             </TestCase>
           </TestSuite>
-          <TestSuite name="测试layout属性，组件的布局，是否有国家icon">
+          <TestSuite name="layout(组件的布局，是否有国家icon)">
             <TestCase tags={['C_API']} itShould=" layout=first">
               <PhoneInput
                 ref={phoneInput}
@@ -851,7 +815,6 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow
-                autoFocus
               />
             </TestCase>
             <TestCase tags={['C_API']} itShould="layout=second">
@@ -872,13 +835,228 @@ export const PNIPropsDemo = () => {
                 disabled={disabled}
                 withDarkTheme
                 withShadow
-                autoFocus
               />
             </TestCase>
           </TestSuite>
+          <TestSuite name="filterProps(国家选择器入参筛选)">
+            <TestCase
+              tags={['C_API']}
+              itShould="filterProps={{placeholder: 'Enter ',color:'red'}}">
+              <PhoneInput filterProps={{placeholder: 'Enter'}} />
+            </TestCase>
+          </TestSuite>
+          <TestSuite name="countryPickerProps(国家选择器入参)">
+            <TestCase
+              tags={['C_API']}
+              itShould="countryPickerProps={{withAlphaFilter: true}}(国家选择器有索引)">
+              <PhoneInput countryPickerProps={{withAlphaFilter: true}} />
+            </TestCase>
+            <TestCase
+              tags={['C_API']}
+              itShould="countryPickerProps={{withAlphaFilter: false}}(国家选择器无索引)">
+              <PhoneInput countryPickerProps={{withAlphaFilter: false}} />
+            </TestCase>
+          </TestSuite>
+          <TestSuite name="API">
+            <TestCase
+              tags={['C_API']}
+              itShould="getCountryCode(获取国家代码)"
+              initialState={false}
+              arrange={({setState, reset}) => (
+                <>
+                  <PhoneInput
+                    ref={phoneInput1}
+                    defaultValue={value}
+                    disableArrowIcon={true}
+                    defaultCode="AX"
+                    layout="first"
+                    onChangeText={text => {
+                      setValue(text);
+                    }}
+                    onChangeFormattedText={text => {
+                      setFormattedValueapi(text);
+                      setCountryCodeapi(
+                        phoneInput1.current?.getCountryCode() || '',
+                      );
+                    }}
+                    countryPickerProps={{withAlphaFilter: true}}
+                    disabled={disabled}
+                    withDarkTheme={false}
+                    withShadow={false}
+                    renderDropdownImage={<h1>Hello, world!</h1>}
+                  />
+                  <View style={styles.view}>
+                    <Button
+                      title="测试getCountryCode接口,获取国家代码"
+                      onPress={() => {
+                        if (
+                          phoneInput1.current?.getCountryCode() ==
+                          countryCodeapi
+                        ) {
+                          setState(true);
+                        }
+                      }}
+                    />
+                    <Button title="reset" onPress={reset} />
+                  </View>
+                </>
+              )}
+              assert={({state, expect}) => {
+                expect(state).to.be.true;
+              }}
+            />
+            <TestCase
+              tags={['C_API']}
+              itShould="getCallingCode(获取国家电话区号，如+86)"
+              initialState={false}
+              arrange={({setState, reset}) => (
+                <>
+                  <PhoneInput
+                    ref={phoneInput2}
+                    defaultValue={value}
+                    disableArrowIcon={true}
+                    defaultCode="AX"
+                    layout="first"
+                    onChangeText={text => {
+                      setValueapi(text);
+                    }}
+                    onChangeFormattedText={text => {
+                      setFormattedValueapi(text);
+                      setCountryCodeapi(
+                        phoneInput2.current?.getCountryCode() || '',
+                      );
+                    }}
+                    countryPickerProps={{withAlphaFilter: true}}
+                    disabled={disabled}
+                    withDarkTheme={false}
+                    withShadow={false}
+                    renderDropdownImage={<h1>Hello, world!</h1>}
+                  />
+                  <View style={{marginBottom: 20}}>
+                    <Button
+                      title="测试getCallingCode接口，获取国家电话区号，如+86"
+                      onPress={() => {
+                        if (
+                          phoneInput2.current?.getCallingCode() ==
+                          formattedValueapi.slice(
+                            1,
+                            formattedValueapi.length - valueapi.length,
+                          )
+                        ) {
+                          setState(true);
+                        }
+                      }}
+                    />
+                  </View>
+                  <Button title="reset" onPress={reset} />
+                </>
+              )}
+              assert={({state, expect}) => {
+                expect(state).to.be.true;
+              }}
+            />
+            <TestCase
+              tags={['C_API']}
+              itShould="getNumberAfterPossiblyEliminatingZero(获取输入的电话号码和加了区号的电话号码)"
+              initialState={false}
+              arrange={({setState, reset}) => (
+                <>
+                  <PhoneInput
+                    ref={phoneInput3}
+                    defaultValue={value}
+                    disableArrowIcon={true}
+                    defaultCode="AX"
+                    layout="first"
+                    onChangeText={text => {
+                      setValueapi(text);
+                    }}
+                    onChangeFormattedText={text => {
+                      setFormattedValueapi(text);
+                      setCountryCodeapi(
+                        phoneInput3.current?.getCountryCode() || '',
+                      );
+                    }}
+                    countryPickerProps={{withAlphaFilter: true}}
+                    disabled={disabled}
+                    withDarkTheme={false}
+                    withShadow={false}
+                    renderDropdownImage={<h1>Hello, world!</h1>}
+                  />
+                  <View style={styles.view}>
+                    <View style={{width: '60%'}}>
+                      <Button
+                        title="调用getNumberAfterPossiblyEliminatingZero接口"
+                        onPress={() => {
+                          let res =
+                            phoneInput3.current?.getNumberAfterPossiblyEliminatingZero();
+                          console.log(res);
+                          if (
+                            phoneInput3.current?.getNumberAfterPossiblyEliminatingZero()
+                              .number == valueapi &&
+                            phoneInput3.current?.getNumberAfterPossiblyEliminatingZero()
+                              .formattedNumber == formattedValueapi
+                          ) {
+                            setState(true);
+                          }
+                        }}
+                      />
+                    </View>
+                    <Button title="reset" onPress={reset} />
+                  </View>
+                </>
+              )}
+              assert={({state, expect}) => {
+                expect(state).to.be.true;
+              }}
+            />
+            <TestCase
+              tags={['C_API']}
+              itShould="isValidNumber(校验生成的电话号码)"
+              initialState={false}
+              arrange={({setState, reset}) => (
+                <>
+                  <PhoneInput
+                    ref={phoneInput4}
+                    defaultValue={value}
+                    disableArrowIcon={true}
+                    defaultCode="AX"
+                    layout="first"
+                    onChangeText={text => {
+                      setValueapi(text);
+                    }}
+                    onChangeFormattedText={text => {
+                      setFormattedValueapi(text);
+                      setCountryCodeapi(
+                        phoneInput4.current?.getCountryCode() || '',
+                      );
+                    }}
+                    countryPickerProps={{withAlphaFilter: true}}
+                    disabled={disabled}
+                    withDarkTheme={false}
+                    withShadow={false}
+                    renderDropdownImage={<h1>Hello, world!</h1>}
+                  />
+                  <View style={styles.view}>
+                    <Button
+                      title="调用isValidNumber接口"
+                      onPress={() => {
+                        if (phoneInput4.current?.isValidNumber(valueapi)) {
+                          setState(true);
+                        }
+                      }}
+                    />
+                    <Button title="reset" onPress={reset} />
+                  </View>
+                </>
+              )}
+              assert={({state, expect}) => {
+                expect(state).to.be.true;
+              }}
+            />
+          </TestSuite>
         </Tester>
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 
@@ -890,6 +1068,10 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: Colors.lighter,
+  },
+  view: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
 });
