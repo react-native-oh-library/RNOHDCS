@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
-import { TestSuite } from '@rnoh/testerino';
-import { TestCase } from '../../components';
+import { View, StyleSheet, Text, Image, ScrollView } from 'react-native';
+import { TestSuite, TestCase, Tester } from '@rnoh/testerino';
 import {
     Achromatomaly,
     Achromatopsia,
@@ -45,283 +44,287 @@ import {
 declare const require: (name: string) => number
 export const ColorMatrixImageFiltersTest = () => {
     return (
-        <TestSuite name="ColorMatrixImageFilters">
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Achromatomaly">
-                <Achromatomaly>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Achromatomaly>
-            </TestCase.Example>
+        <Tester>
+            <ScrollView>
+                <TestSuite name="ColorMatrixImageFilters">
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Achromatomaly">
+                        <Achromatomaly>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Achromatomaly>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Achromatopsia">
-                <Achromatopsia>
-                    <Image style={styles.image} source={require('.../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Achromatopsia>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Achromatopsia">
+                        <Achromatopsia>
+                            <Image style={styles.image} source={require('.../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Achromatopsia>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Brightness">
-                <Brightness>
-                    <Image style={styles.image} source={require('.../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Brightness>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Brightness">
+                        <Brightness>
+                            <Image style={styles.image} source={require('.../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Brightness>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Browni">
-                <Browni>
-                    <Image style={styles.image} source={require('.../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Browni>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Browni">
+                        <Browni>
+                            <Image style={styles.image} source={require('.../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Browni>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="ColorTone">
-                <ColorTone>
-                    <Image style={styles.image} source={require('.../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </ColorTone>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="ColorTone">
+                        <ColorTone>
+                            <Image style={styles.image} source={require('.../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </ColorTone>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Contrast">
-                <Contrast>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Contrast>
-            </TestCase.Example>
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Cool">
-                <Cool>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Cool>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Contrast">
+                        <Contrast>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Contrast>
+                    </TestCase>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Cool">
+                        <Cool>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Cool>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Deuteranomaly">
-                <Deuteranomaly>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Deuteranomaly>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Deuteranomaly">
+                        <Deuteranomaly>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Deuteranomaly>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Deuteranopia">
-                <Deuteranopia>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Deuteranopia>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Deuteranopia">
+                        <Deuteranopia>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Deuteranopia>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="DuoTone">
-                <DuoTone>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </DuoTone>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="DuoTone">
+                        <DuoTone>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </DuoTone>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Grayscale">
-                <Grayscale>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Grayscale>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Grayscale">
+                        <Grayscale>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Grayscale>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="HueRotate">
-                <HueRotate>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </HueRotate>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="HueRotate">
+                        <HueRotate>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </HueRotate>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Invert">
-                <Invert>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Invert>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Invert">
+                        <Invert>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Invert>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Kodachrome">
-                <Kodachrome>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Kodachrome>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Kodachrome">
+                        <Kodachrome>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Kodachrome>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Lsd">
-                <Lsd>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Lsd>
-            </TestCase.Example>
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="LuminanceToAlpha">
-                <LuminanceToAlpha>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </LuminanceToAlpha>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Lsd">
+                        <Lsd>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Lsd>
+                    </TestCase>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="LuminanceToAlpha">
+                        <LuminanceToAlpha>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </LuminanceToAlpha>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Night">
-                <Night>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Night>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Night">
+                        <Night>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Night>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Nightvision">
-                <Nightvision>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Nightvision>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Nightvision">
+                        <Nightvision>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Nightvision>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Normal">
-                <Normal>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Normal>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Normal">
+                        <Normal>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Normal>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Polaroid">
-                <Polaroid>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Polaroid>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Polaroid">
+                        <Polaroid>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Polaroid>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Predator">
-                <Predator>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Predator>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Predator">
+                        <Predator>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Predator>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Protanomaly">
-                <Protanomaly>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Protanomaly>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Protanomaly">
+                        <Protanomaly>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Protanomaly>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Protanopia">
-                <Protanopia>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Protanopia>
-            </TestCase.Example>
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="RGBA">
-                <RGBA>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </RGBA>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Protanopia">
+                        <Protanopia>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Protanopia>
+                    </TestCase>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="RGBA">
+                        <RGBA>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </RGBA>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Saturate">
-                <Saturate secondColor={'red'}>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Saturate>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Saturate">
+                        <Saturate secondColor={'red'}>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Saturate>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Sepia">
-                <Sepia>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Sepia>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Sepia">
+                        <Sepia>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Sepia>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Technicolor">
-                <Technicolor>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Technicolor>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Technicolor">
+                        <Technicolor>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Technicolor>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Temperature">
-                <Temperature>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Temperature>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Temperature">
+                        <Temperature>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Temperature>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Threshold">
-                <ColorMatrix matrix={concatColorMatrices(threshold(10))}>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </ColorMatrix>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Threshold">
+                        <ColorMatrix matrix={concatColorMatrices(threshold(10))}>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </ColorMatrix>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Tint">
-                <Tint>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Tint>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Tint">
+                        <Tint>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Tint>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="ToBGR">
-                <ToBGR>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </ToBGR>
-            </TestCase.Example>
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Tritanomaly">
-                <Tritanomaly>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Tritanomaly>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="ToBGR">
+                        <ToBGR>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </ToBGR>
+                    </TestCase>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Tritanomaly">
+                        <Tritanomaly>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Tritanomaly>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Tritanopia">
-                <Tritanopia>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Tritanopia>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Tritanopia">
+                        <Tritanopia>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Tritanopia>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Vintage">
-                <Vintage>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Vintage>
-            </TestCase.Example>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Vintage">
+                        <Vintage>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Vintage>
+                    </TestCase>
 
-            <TestCase.Example
-                tags={['C_API']}
-                itShould="Warm">
-                <Warm>
-                    <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
-                </Warm>
-            </TestCase.Example>
-        </TestSuite>
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="Warm">
+                        <Warm>
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
+                        </Warm>
+                    </TestCase>
+                </TestSuite>
+            </ScrollView>
+        </Tester>
     );
 };
 

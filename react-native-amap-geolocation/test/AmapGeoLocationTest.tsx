@@ -1,9 +1,10 @@
-import { TestSuite, TestCase } from '@rnoh/testerino';
+import { TestSuite, TestCase, Tester } from '@rnoh/testerino';
 import * as React from 'react';
 import Geolocation from "react-native-amap-geolocation";
 
 export function GeolocationTest() {
     return (
+        <Tester>
         <TestSuite name="Geolocation">
             <TestCase
                 itShould="Geolocation.init"
@@ -102,5 +103,6 @@ export function GeolocationTest() {
                 }}
             />
         </TestSuite>
+        </Tester>
     );
 }
