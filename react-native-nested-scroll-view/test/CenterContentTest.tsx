@@ -55,7 +55,7 @@ export function CenterContentTest() {
           </ScrollView>
         </View>
       </TestCase>
-      <TestCase.Manual
+      <TestCase
         tags={['C_API']}
         modal
         itShould="Handle touches in centered ScrollView"

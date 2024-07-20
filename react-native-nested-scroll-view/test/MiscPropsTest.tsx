@@ -1,5 +1,5 @@
 import {TestSuite, TestCase} from '@rnoh/testerino';
-import {Platform, ScrollView, StyleSheet, View, Button} from 'react-native';
+import {Platform, ScrollView, StyleSheet, View} from 'react-native';
 import React from 'react';
 import {
   COMMON_PROPS,
@@ -7,6 +7,7 @@ import {
   getScrollViewContentHorizontal,
 } from './fixtures';
 import {useEffect, useRef, useState} from 'react';
+import {Button} from './button';
 
 function ObjectDisplayer(props: {
   renderContent: (setObject: (obj: Object) => void) => any;
@@ -14,11 +15,11 @@ function ObjectDisplayer(props: {
   const [object, setObject] = useState<Object>();
 
   return (
-    <View style={{width: '100%'}}>
+    <View style={{width: '100%', height: '100%'}}>
       <Text
         style={{
           width: '100%',
-          height: 128,
+          padding: 16,
           fontSize: 8,
           backgroundColor: '#EEE',
         }}>
