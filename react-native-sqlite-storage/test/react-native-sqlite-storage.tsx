@@ -1,5 +1,4 @@
-import {TestSuite, Tester} from '@rnoh/testerino';
-import { TestCase } from '../components';
+import { TestSuite, Tester, TestCase } from '@rnoh/testerino';
 import * as React from "react";
 import {
   SafeAreaView,
@@ -17,21 +16,21 @@ import { alias } from 'yargs';
 function RNSqliteStorageSTest() {
     return (
      <TestSuite name="SqliteStorages">
-        <TestCase.Logical
+        <TestCase
           tags={['C_API']}
           itShould=" SqliteStorage qid"
           fn={({expect}:any) => {
               expect(SqliteStorage.qid).to.be.undefined;
           }}
         />
-        <TestCase.Logical
+        <TestCase
           tags={['C_API']}
           itShould="SqliteStorage sql"
           fn={({expect}:any) => {
               expect(SqliteStorage.sql).to.be.undefined;
           }}
         />
-         <TestCase.Logical
+         <TestCase
           tags={['C_API']}
           itShould="SqliteStorage params"
           fn={({expect}:any) => {
@@ -58,7 +57,7 @@ function success() {}
 function error(){} 
  return (
    <TestSuite name="SqliteStoragef">
-        <TestCase.Logical
+        <TestCase
          itShould="SqliteStorage.echoStringValue"
          fn={({expect}: any) => {
           try {
@@ -70,7 +69,7 @@ function error(){}
         }}  
 
       /> 
-        <TestCase.Logical
+        <TestCase
          itShould="SqliteStorage.open"
          fn={({expect}: any) => {
           try {
@@ -82,7 +81,7 @@ function error(){}
         }}
       />  
 
-      <TestCase.Logical
+      <TestCase
          itShould="SqliteStorage.delete"
          fn={({expect}: any) => {
           try {
@@ -93,7 +92,7 @@ function error(){}
           } 
         }}
       />   
-      <TestCase.Logical
+      <TestCase
          itShould="SqliteStorage.attach"
          fn={({expect}: any) => {
           try {
@@ -104,7 +103,7 @@ function error(){}
           }
         }}
       /> 
-      <TestCase.Logical
+      <TestCase
          itShould="SqliteStorage.backgroundExecuteSqlBatch"
          fn={({expect}: any) => {
           try {
@@ -115,7 +114,7 @@ function error(){}
           }  
         }}
       /> 
-      <TestCase.Logical
+      <TestCase
          itShould="SqliteStorage.execute"
          fn={({expect}: any) => {
           try {
@@ -133,7 +132,7 @@ function error(){}
           } 
         }}
       />
-      <TestCase.Logical
+      <TestCase
          itShould="SqliteStorage.startDatabase"
          fn={({expect}: any) => {
           try {
@@ -150,7 +149,7 @@ function error(){}
           } 
         }}
       /> 
-<TestCase.Logical
+<TestCase
          itShould="SqliteStorage.closeDatabase"
          fn={({expect}: any) => {
           try {
@@ -161,7 +160,7 @@ function error(){}
           }  
         }}
       />
-       <TestCase.Logical
+       <TestCase
          itShould="SqliteStorage.deleteDatabase"
          fn={({expect}: any) => {
           try {
@@ -172,7 +171,7 @@ function error(){}
           } 
         }}
       />
-      <TestCase.Logical
+      <TestCase
          itShould="SqliteStorage.executeSqlBatchDatabase"
          fn={({expect}: any) => {
           try {
@@ -194,7 +193,7 @@ function error(){}
         }}
       />
       
-      <TestCase.Logical
+      <TestCase
          itShould="SqliteStorage.attachDatabase"
          fn={({expect}: any) => {
           try {
@@ -208,7 +207,7 @@ function error(){}
           } 
         }}
       />
-      <TestCase.Logical
+      <TestCase
          itShould="SqliteStorage.INIT"
          fn={({expect}: any) => {
           try {
@@ -219,7 +218,7 @@ function error(){}
           } 
         }}
       />
-      <TestCase.Logical
+      <TestCase
          itShould="SqliteStorage.saveFileToCache"
          fn={({expect}: any) => {
           try {

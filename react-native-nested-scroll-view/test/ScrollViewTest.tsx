@@ -1,49 +1,53 @@
-import {View, ScrollView, Text, StyleSheet} from 'react-native';
-import {TestSuite, TestCase} from '@rnoh/testerino';
-import React, {useState} from 'react';
-import {Button} from '../../components';
-import {StylesTest} from './StylesTest';
-import {ContentContainerStyleTest} from './ContentContainerStyleTest';
-import {ScrollBarsTest} from './ScrollBarsTest';
-import {StickyHeadersTest} from './StickyHeadersTest';
-import {PointerEventsTest} from './PointerEventsTest';
-import {SnapTest} from './SnapTest';
-import {MomentumCallbacksTest} from './MomentumCallbacksTest';
-import {KeyboardTest} from './KeyboardTest';
-import {MiscPropsTest} from './MiscPropsTest';
-import {ScrollToTest} from './ScrollToTest';
-import {CenterContentTest} from './CenterContentTest';
+import { View, ScrollView, Text, StyleSheet } from 'react-native';
+import { TestSuite, TestCase, Tester } from '@rnoh/testerino';
+import React, { useState } from 'react';
+import { Button } from './button';
+import { StylesTest } from './StylesTest';
+import { ContentContainerStyleTest } from './ContentContainerStyleTest';
+import { ScrollBarsTest } from './ScrollBarsTest';
+import { StickyHeadersTest } from './StickyHeadersTest';
+import { PointerEventsTest } from './PointerEventsTest';
+import { SnapTest } from './SnapTest';
+import { MomentumCallbacksTest } from './MomentumCallbacksTest';
+import { KeyboardTest } from './KeyboardTest';
+import { MiscPropsTest } from './MiscPropsTest';
+import { ScrollToTest } from './ScrollToTest';
+import { CenterContentTest } from './CenterContentTest';
 
 export function ScrollViewTest() {
   return (
-    <TestSuite name="ScrollView">
-      <StylesTest />
-      <ContentContainerStyleTest />
-      <ScrollBarsTest />
-      <StickyHeadersTest />
-      <PointerEventsTest />
-      <SnapTest />
-      <MomentumCallbacksTest />
-      <KeyboardTest />
-      <ScrollToTest />
-      <MiscPropsTest />
-      <CenterContentTest />
-      <TestCase
-        modal
-        itShould="maintain scroll position when adding/removing elements">
-        <AppendingList />
-      </TestCase>
-      <TestCase
-        modal
-        skip // https://gl.swmansion.com/rnoh/react-native-harmony/-/issues/498
-        itShould="fill the remaining space of scroll view with yellow color but the element inside scroll view remains transparent">
-        <ScrollViewEndFillColorTest />
-      </TestCase>
-    </TestSuite>
+    <ScrollView>
+      <Tester>
+        <TestSuite name="ScrollView">
+          <StylesTest />
+          <ContentContainerStyleTest />
+          <ScrollBarsTest />
+          <StickyHeadersTest />
+          <PointerEventsTest />
+          <SnapTest />
+          <MomentumCallbacksTest />
+          <KeyboardTest />
+          <ScrollToTest />
+          <MiscPropsTest />
+          <CenterContentTest />
+          <TestCase
+            modal
+            itShould="maintain scroll position when adding/removing elements">
+            <AppendingList />
+          </TestCase>
+          <TestCase
+            modal
+            skip // https://gl.swmansion.com/rnoh/react-native-harmony/-/issues/498
+            itShould="fill the remaining space of scroll view with yellow color but the element inside scroll view remains transparent">
+            <ScrollViewEndFillColorTest />
+          </TestCase>
+        </TestSuite>
+      </Tester>
+    </ScrollView>
   );
 }
 
-const Item = (props: {label: string; mode: 'dark' | 'light'}) => {
+const Item = (props: { label: string; mode: 'dark' | 'light' }) => {
   const stylesheet = StyleSheet.create({
     dark: {
       backgroundColor: '#47443D',
@@ -68,7 +72,7 @@ const Item = (props: {label: string; mode: 'dark' | 'light'}) => {
   );
 };
 
-const ITEMS = Array.from({length: 20}, (_, index) => (
+const ITEMS = Array.from({ length: 20 }, (_, index) => (
   <Item
     label={`Item${index}`}
     key={`item${index}`}

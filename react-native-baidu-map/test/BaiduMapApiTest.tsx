@@ -1,4 +1,4 @@
-import { TestCase, TestSuite } from '@rnoh/testerino';
+import { Tester } from '@rnoh/testerino';
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { MapApp, Location, BaiduMapManager, MapView } from 'react-native-baidu-map';
@@ -33,9 +33,7 @@ export function BaiduMapApiTest() {
     });
 
     return (
-      <TestSuite name="PlatformColor">
-        <TestCase itShould="PageView initialPage props"
-        >
+      <Tester>
           <View >
             <View style={[styles.button, { marginLeft: 100, marginTop: 40 }]}
               onTouchEnd={() => {
@@ -54,13 +52,11 @@ export function BaiduMapApiTest() {
               zoomControlsVisible={true}
               showsUserLocation={true}
               locationData={{ latitude: 38.914935, longitude: 115.403119 }}
-              style={{ width: '100%', height: 600 }}
+              style={{ width: '100%', height: '100%' }}
             >
             </MapView>
           </View>
-        </TestCase>
-
-      </TestSuite>
+      </Tester>
     );
   }
 

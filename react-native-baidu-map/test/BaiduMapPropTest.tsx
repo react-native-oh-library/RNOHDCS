@@ -1,4 +1,4 @@
-import { TestCase, TestSuite } from '@rnoh/testerino';
+import { Tester } from '@rnoh/testerino';
 import React from 'react';
 import { Location, MapView } from 'react-native-baidu-map';
 
@@ -19,28 +19,24 @@ export function BaiduMapPropTest() {
 
 
   return (
-    <TestSuite name="PlatformColor">
-      <TestCase itShould="PageView initialPage props"
-      >
+    <Tester>
         <MapView
           center={{ latitude: 38.914935, longitude: 115.403119 }}
           zoom={12.0}
           mapType={1}
-          trafficEnabled={true}
-          zoomGesturesEnabled={true}
-          scrollGesturesEnabled={true}
-          zoomControlsVisible={true}
-          showsUserLocation={true}
+          trafficEnabled={false}
+          zoomGesturesEnabled={false}
+          scrollGesturesEnabled={false}
+          zoomControlsVisible={false}
+          showsUserLocation={false}
           locationData={{ latitude: 38.914935, longitude: 115.403119 }}
           onMapClick={_onMapClick}
           onMapLoaded={_onMapLoaded}
           onMapDoubleClick={_onMapDoubleClick}
-          style={{ width: '100%', height: 600 }}
+          style={{ width: '100%', height: "100%" }}
         >
         </MapView>
-      </TestCase>
-
-    </TestSuite>
+    </Tester>
   );
 }
 

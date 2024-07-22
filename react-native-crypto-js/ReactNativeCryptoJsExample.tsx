@@ -1,113 +1,119 @@
-import React,{ useState } from 'react';
-import {Buffer} from 'buffer';
-import {
-  ScrollView,
-  Text,
-  View,
-  TextInput,
-  Button,
-  Alert
-} from 'react-native';
+import React, { useState } from 'react';
+import { ScrollView, View, Text, Button } from 'react-native';
+import { AES, enc,  MD5, HmacMD5} from "react-native-crypto-js";
+// import CryptoJS from "rn-crypto-js";
+import { Tester, TestCase } from '@rnoh/testerino';
 
-//import CryptoJS from "react-native-crypto-js";
-import CryptoJS from "rn-crypto-js";
- 
+export default function CryptoJSTest() {
+  const [cryptText, setCryptText] = useState('testAES');
+  const [decryptText, setDecryptCryptText] = useState('');
+  const [cryptText1, setCryptText1] = useState('testMD5');
+  const [cryptText2, setCryptText2] = useState('testHmacMD5');
 
-function encrypt_str(text:string){
+  const AddAESEncryptTest = (props: {
+    setState: React.Dispatch<React.SetStateAction<string>>;
+  }) => {
+    const encrypt = () => {
+      let bytes = AES.encrypt(cryptText, 'mySecretKey').toString();
+      setCryptText(bytes);
+      props.setState(bytes);
+    };
 
- let ciphertext =  CryptoJS.AES.encrypt(text, 'secret key 123').toString();
-  Alert.alert('加密后：', ciphertext,  [{text: 'OK'}]);
-  return ciphertext;
-}
+    return (
+      <View style={{ height: 50 }}>
+        <Text>{cryptText}</Text>
+        <Button title="AES加密" onPress={encrypt} />
+      </View>
+    );
+  };
 
-function decrypt_str(text:string){
- let bytes  = CryptoJS.AES.decrypt(text, 'secret key 123');
- let originalText = bytes.toString(CryptoJS.enc.Utf8);
-//  Clipboard.setString(originalText);
-//  Alert.alert(originalText);
- Alert.alert('解密后：', originalText,  [{text: 'OK'}]);
- return originalText;
-}
+  const AddAESDecryptTest = (props: {
+    setState: React.Dispatch<React.SetStateAction<string>>;
+  }) => {
+    const decrypt = () => {
+      let bytes = AES.decrypt(cryptText, 'mySecretKey').toString(enc.Utf8);
+      setDecryptCryptText(bytes);
+      props.setState(bytes);
+    };
 
+    return (
+      <View style={{ height: 50 }}>
+        <Text>{decryptText}</Text>
+        <Button title="AES解密" onPress={decrypt} />
+      </View>
+    );
+  };
+  const AddMD5DecryptTest = (props: {
+    setState: React.Dispatch<React.SetStateAction<string>>;
+  }) => {
+    const encrypt = () => {
+      let bytes = MD5(cryptText1).toString();
+      setCryptText1(bytes);
+      props.setState(bytes);
+    };
 
+    return (
+      <View style={{ height: 50 }}>
+        <Text>{cryptText1}</Text>
+        <Button title="MD5加密" onPress={encrypt} />
+      </View>
+    );
+  };
+  const AddHmacMD5DecryptTest = (props: {
+    setState: React.Dispatch<React.SetStateAction<string>>;
+  }) => {
+    const encrypt = () => {
+      let bytes = HmacMD5(cryptText2, 'mySecretKey').toString();
+      setCryptText2(bytes);
+      props.setState(bytes);
+    };
 
-function encrypt_obj(text:string){
+    return (
+      <View style={{ height: 50 }}>
+        <Text>{cryptText2}</Text>
+        <Button title="HmacMD5加密" onPress={encrypt} />
+      </View>
+    );
+  };
 
- let ciphertext =  CryptoJS.AES.encrypt(JSON.stringify(text), 'secret key 123').toString();
-//  Clipboard.setString(ciphertext);
-//  Alert.alert(ciphertext);
-// let ciphertext =  CryptoJS.DES.encrypt(CryptoJS.enc.Utf8.parse(JSON.stringify(text)), CryptoJS.enc.Utf8.parse('secret key 123'), {
-//   mode: CryptoJS.mode.ECB, // 使用 ECB 模式
-//   padding: CryptoJS.pad.Pkcs7, // 使用 PKCS7 填充
-// }).toString();
- Alert.alert('加密后：', ciphertext,  [{text: 'OK'}]);
- return ciphertext;
-}
-
-function decrypt_obj(text:string){
-    let bytes  = CryptoJS.AES.decrypt(text, 'secret key 123');
-    let originalText =JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-    // Clipboard.setString(originalText);
-    // Alert.alert(originalText);
-    Alert.alert('解密后：', originalText,  [{text: 'OK'}]);
-    return originalText;
-}
-
-function MD5_encrypt_str(text:string){
-  let ciphertext =  CryptoJS.MD5(text).toString();
-  Alert.alert('加密后：', ciphertext,  [{text: 'OK'}]);
-  return ciphertext;
-
-}
-
-
-function HMD5_encrypt_str(text:string){
-  //let ciphertext =  CryptoJS.HmacMD5(text,'secret key 123').toString();
-  let ciphertext = CryptoJS.HmacSHA256(text,'secret key 123').toString();
-  Alert.alert('加密后：', ciphertext,  [{text: 'OK'}]);
-  return ciphertext;
-
-}
-
-export const ReactNativeCryptoJsExample = () => {
-  const [cryptText, setCryptText] = useState('test 123');
-  const [cryptText1, setCryptText1] = useState('test123');
-  const [cryptText2, setCryptText2] = useState('test123');
-  const [decryptText, setDecryptText] = useState('');
-  const [cryptObj, setCryptObj] = useState('[{id: 1}, {id: 2}]');
-  const [decryptObj, setDecryptObj] = useState('');
   return (
-    <ScrollView style={{backgroundColor: 'yellow'}} bounces>
-      <Text> 测试使用AES算法加解密字符串</Text>
-       <View style={{padding: 10}}>
-            <TextInput  style={{height: 40}}  placeholder="请输入内容!" onChangeText={(cryptText: React.SetStateAction<string>) => setCryptText(cryptText)} defaultValue={cryptText} />
-            </View>
-            <Button onPress={() => { setDecryptText(encrypt_str(cryptText)) }} title="加密字符串"/>
-
-            <View style={{padding: 10}}>
-            <TextInput  style={{height: 40}}  placeholder="请输入内容!" onChangeText={(decryptText: React.SetStateAction<string>) => setDecryptText(decryptText)} defaultValue={decryptText} />
-            </View>
-            <Button onPress={() => {decrypt_str(decryptText)}} title="解密字符串"/>
-        <Text> 测试使用AES算法加解密字符串</Text>
-        <View style={{padding: 10}}>
-            <TextInput  style={{height: 40}}  placeholder="请输入内容!" onChangeText={(cryptObj: React.SetStateAction<string>) => setCryptObj(cryptObj)} defaultValue={cryptObj} />
-            </View>
-            <Button onPress={() => { setDecryptObj(encrypt_obj(cryptObj)) }} title="加密对象"/>
-
-            <View style={{padding: 10}}>
-            <TextInput  style={{height: 40}}  placeholder="请输入内容!" onChangeText={(decryptObj: React.SetStateAction<string>) => setDecryptObj(decryptObj)} defaultValue={decryptObj} />
-            </View>
-            <Button onPress={() => {decrypt_obj(decryptObj)}} title="解密对象"/>
-        <Text> 测试使用MD5算法加密字符串</Text>
-        <View style={{padding: 10}}>
-            <TextInput  style={{height: 40}}  placeholder="请输入内容!" onChangeText={(cryptText1: React.SetStateAction<string>) =>setCryptText1(cryptText1)} defaultValue={cryptText1} />
-            </View>
-            <Button onPress={() => { MD5_encrypt_str(cryptText1) }} title="加密"/>
-        <Text> 测试使用HmacMD5算法加密字符串</Text>
-        <View style={{padding: 10}}>
-            <TextInput  style={{height: 40}}  placeholder="请输入内容!" onChangeText={(cryptText2: React.SetStateAction<string>) =>setCryptText2(cryptText2)} defaultValue={cryptText2} />
-            </View>
-            <Button onPress={() => { HMD5_encrypt_str(cryptText2) }} title="加密"/>
-    </ScrollView>
+    <View>
+      <ScrollView>
+        <Tester>
+          <TestCase
+            itShould="Test using the AES algorithm to encrypt."
+            initialState={''}
+            arrange={({ setState }) => <AddAESEncryptTest setState={setState} />}
+            assert={({ expect, state }) => {
+              expect(state).to.be.string;
+            }}
+          />
+          <TestCase
+            itShould="Test using the AES algorithm to decrypt."
+            initialState={''}
+            arrange={({ setState }) => <AddAESDecryptTest setState={setState} />}
+            assert={({ expect, state }) => {
+              expect(state).equal('testAES');
+            }}
+          />
+          <TestCase
+            itShould="Test using the MD5 algorithm to encrypt."
+            initialState={''}
+            arrange={({ setState }) => <AddMD5DecryptTest setState={setState} />}
+            assert={({ expect, state }) => {
+              expect(state).to.be.string;
+            }}
+          />
+          <TestCase
+            itShould="Test using the HmacMD5 algorithm to encrypt."  // 该库使用HmacMD5加密会报错，可以使用rn-crypto-js
+            initialState={''}
+            arrange={({ setState }) => <AddHmacMD5DecryptTest setState={setState} />}
+            assert={({ expect, state }) => {
+              expect(state).to.be.string;
+            }}
+          />
+        </Tester>
+      </ScrollView>
+    </View>
   );
-};
+}

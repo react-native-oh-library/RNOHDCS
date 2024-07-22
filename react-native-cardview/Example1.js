@@ -9,12 +9,12 @@ import {
 } from 'react-native';  
 import CardView from '@react-native-oh-tpl/react-native-cardview';
 
-export default class HorizontalSlider extends CardView {  
+export default class Example1 extends CardView {  
   constructor() {  
     super();  
   
     this.state = {  
-      value: 1, 
+      value: 20, 
       data: [
         { id: 1, addr: 'Hello' },
         { id: 2, addr: 'Hi, Nice to meet you' },
@@ -49,7 +49,7 @@ export default class HorizontalSlider extends CardView {
       };
     });
   }
-    deleteData(id) {
+      deleteData(id) {
     let filteredData = this.state.data.filter(item => {
       return item.id !== id;
     });
@@ -102,8 +102,8 @@ export default class HorizontalSlider extends CardView {
             }}
             cardElevation={value}
             cardMaxElevation={value}
-            cornerRadius={5}
-            cornerOverlap={false}
+            cornerRadius={0}
+           
           > 
             <View style={styles.child}>
               <View style={styles.titleView}>
@@ -123,8 +123,7 @@ export default class HorizontalSlider extends CardView {
       </SafeAreaView>  
     );  
   }  
-}  
-  
+}
 const styles = StyleSheet.create({  
   container: {  
     flex: 1,  
@@ -169,3 +168,4 @@ const styles = StyleSheet.create({
     marginTop: 40
   } 
 });
+  

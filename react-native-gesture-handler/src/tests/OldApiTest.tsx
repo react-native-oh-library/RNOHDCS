@@ -1,4 +1,4 @@
-import {TestCase, TestSuite} from '@rnoh/testerino';
+import {TestCase, TestSuite, Tester} from '@rnoh/testerino';
 import {forwardRef, useRef, useState} from 'react';
 import {Animated, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {
@@ -12,19 +12,21 @@ import {IssueWithAnimatedEvent} from './IssueWithAnimatedEvent';
 
 export function OldApiTest() {
   return (
-    <TestSuite name="old API">
-      <TestCase
-        itShould="export State object"
-        fn={({expect}) => {
-          expect(State).to.be.not.undefined;
-        }}
-      />
-      <TappingTest />
-      <PanningTest />
-      <TestCase itShould="keep updating displayed gesture event object when dragging circle (Animated.event + onGestureEvent)">
-        <IssueWithAnimatedEvent />
-      </TestCase>
-    </TestSuite>
+    <Tester>
+      <TestSuite name="old API">
+        <TestCase
+          itShould="export State object"
+          fn={({expect}) => {
+            expect(State).to.be.not.undefined;
+          }}
+        />
+        <TappingTest />
+        <PanningTest />
+        <TestCase itShould="keep updating displayed gesture event object when dragging circle (Animated.event + onGestureEvent)">
+          <IssueWithAnimatedEvent />
+        </TestCase>
+      </TestSuite>
+    </Tester>
   );
 }
 

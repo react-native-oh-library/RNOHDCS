@@ -6,6 +6,7 @@ import {
   PanGestureHandler,
   PanGestureHandlerEventPayload,
 } from 'react-native-gesture-handler';
+import { Tester } from '@rnoh/testerino';
 
 const {width} = Dimensions.get('screen');
 const circleRadius = 30;
@@ -54,50 +55,52 @@ export class IssueWithAnimatedEvent extends Component {
 
   render() {
     return (
-      <GestureHandlerRootView>
-        <View style={{width: 256, height: 200}}>
-          <Text
-            style={{
-              width: 256,
-              height: 128,
-              fontSize: 8,
-              backgroundColor: '#EEE',
-            }}>
-            {this.state === undefined
-              ? 'undefined'
-              : JSON.stringify(this.state)}
-          </Text>
-        </View>
-        <PanGestureHandler onGestureEvent={this._onPanGestureEvent}>
-          <Animated.View
-            style={{
-              height: 150,
-              justifyContent: 'center',
-            }}>
-            <Animated.Image
-              style={[
-                {
-                  backgroundColor: '#42a5f5',
-                  borderRadius: circleRadius,
-                  height: circleRadius * 2,
-                  width: circleRadius * 2,
-                },
-                {
-                  transform: [
-                    {
-                      translateX: Animated.add(
-                        this._touchX,
-                        new Animated.Value(-circleRadius),
-                      ),
-                    },
-                  ],
-                },
-              ]}
-              source={{uri: url}}
-            />
-          </Animated.View>
-        </PanGestureHandler>
-      </GestureHandlerRootView>
-    );
+      <Tester>
+        <GestureHandlerRootView>
+          <View style={{width: 256, height: 200}}>
+            <Text
+              style={{
+                width: 256,
+                height: 128,
+                fontSize: 8,
+                backgroundColor: '#EEE',
+              }}>
+              {this.state === undefined
+                ? 'undefined'
+                : JSON.stringify(this.state)}
+            </Text>
+          </View>
+          <PanGestureHandler onGestureEvent={this._onPanGestureEvent}>
+            <Animated.View
+              style={{
+                height: 150,
+                justifyContent: 'center',
+              }}>
+              <Animated.Image
+                style={[
+                  {
+                    backgroundColor: '#42a5f5',
+                    borderRadius: circleRadius,
+                    height: circleRadius * 2,
+                    width: circleRadius * 2,
+                  },
+                  {
+                    transform: [
+                      {
+                        translateX: Animated.add(
+                          this._touchX,
+                          new Animated.Value(-circleRadius),
+                        ),
+                      },
+                    ],
+                  },
+                ]}
+                source={{uri: url}}
+              />
+            </Animated.View>
+          </PanGestureHandler>
+        </GestureHandlerRootView>
+      );
+    </Tester>
   }
 }

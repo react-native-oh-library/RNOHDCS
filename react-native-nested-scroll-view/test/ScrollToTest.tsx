@@ -1,4 +1,4 @@
-import {TestSuite} from '@rnoh/testerino';
+import {TestSuite, TestCase} from '@rnoh/testerino';
 import {
   View,
   ScrollView,
@@ -8,24 +8,24 @@ import {
 } from 'react-native';
 import {COMMON_PROPS} from './fixtures';
 import React, {useRef} from 'react';
-import {Button, TestCase} from '../../components';
+import {Button} from './button';
 
 export function ScrollToTest() {
   return (
     <TestSuite name="scrollTo">
-      <TestCase.Example
+      <TestCase
         tags={['C_API']}
         modal
         itShould="scroll down on button press (no animation)">
         <ScrollToTestCase animated={false} />
-      </TestCase.Example>
-      <TestCase.Example
+      </TestCase>
+      <TestCase
         tags={['C_API']}
         modal
         itShould="scroll down on button press (with animation)">
         <ScrollToTestCase animated={true} />
-      </TestCase.Example>
-      <TestCase.Manual
+      </TestCase>
+      <TestCase
         tags={['C_API']}
         modal
         itShould="call onScroll once when scrolling without animation"
@@ -40,7 +40,7 @@ export function ScrollToTest() {
           expect(state).to.eq(1);
         }}
       />
-      <TestCase.Manual
+      <TestCase
         tags={['C_API']}
         modal
         itShould="call onScroll multiple times when scrolling with animation"
@@ -50,20 +50,20 @@ export function ScrollToTest() {
           expect(state).to.be.greaterThan(10);
         }}
       />
-      <TestCase.Example
+      <TestCase
         modal
         itShould="scroll overflow top/bottom when clicking a button"
         skip={''} // iOS only - https://gl.swmansion.com/rnoh/react-native-harmony/-/issues/315
       >
         <ScrollToOverflowEnabledBasicTest />
-      </TestCase.Example>
-      <TestCase.Example
+      </TestCase>
+      <TestCase
         modal
         itShould="scroll overflow left/right when clicking a button"
         skip={''} // iOS only - https://gl.swmansion.com/rnoh/react-native-harmony/-/issues/315
       >
         <ScrollToOverflowEnabledHorizontalTest />
-      </TestCase.Example>
+      </TestCase>
     </TestSuite>
   );
 }

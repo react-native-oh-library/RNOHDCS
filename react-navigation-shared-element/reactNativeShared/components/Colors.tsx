@@ -4,7 +4,7 @@ export const Colors = {
   //back: "#222222",
   //text: "#FFFFFF",
   gray: "#888888",
-  navBar: "#ffe256",
+  navBar: "#ffffff",
   //navBar: "royalblue",
   separator: "#DDDDDD",
   empty: "#F0F0F0",
