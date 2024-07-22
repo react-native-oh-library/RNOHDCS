@@ -65,6 +65,19 @@ export function AMap3dTest() {
     const _onMarkerPress = () => {
         Alert.alert("onPress")
     }
+
+    const _onMarkerDragStart = () => {
+        console.info("AMapViewEventType map3d marker onDragStart")
+    }
+
+    const _onMarkerDrag = () => {
+        console.info("AMapViewEventType map3d marker onDrag")
+    }
+
+    const _onMarkerDragEnd = () => {
+        Alert.alert("onDragEnd")
+    }
+
     const _onPolylinePress = () => {
         console.info("AMapViewEventType map3d polyline onPress width 200")
     }
@@ -145,8 +158,9 @@ export function AMap3dTest() {
                             anchor = { 0.5, 1}
                             position={{ latitude: 39.806901, longitude: 116.397972 }}
                             onPress={_onMarkerPress}
-                            onDragEnd={({ nativeEvent }) =>
-                                Alert.alert(`onDragEnd: ${nativeEvent.latitude}, ${nativeEvent.longitude}`)}
+                            onDragStart={_onMarkerDragStart}
+                            onDrag={_onMarkerDrag}
+                            onDragEnd={_onMarkerDragEnd}
                             zIndex = {1}
                         />
                     </MapView>
