@@ -168,16 +168,22 @@ const storage = new Storage({
 
   //获取某个key下的所有数据(仅key-id数据)
   getAllDataForKeyStorageFun = (key) => {
+    this.updateProgress("getAllDataForKey start ...")
     storage.getAllDataForKey(key).then(users => {
       console.log(users);
       console.log("test==== >>>>storage=getAllDataForKeyStorageFun==="+JSON.stringify(users));
+      this.updateProgress("getAllDataForKey :"+JSON.stringify(users))
+      this.updateProgress("getAllDataForKey success")
     });
   }
 
   // !! 清除某个key下的所有数据(仅key-id数据)
   clearMapForKeyStorageFun= (key) =>{
-    storage.clearMapForKey(key);
-    console.log("test==== >>>>storage=clearMapForKeyStorageFun===");
+    this.updateProgress("clearMapForKeyStorage start ...")
+    storage.clearMapForKey(key).then(() => {
+      this.updateProgress("clearMapForKeyStorage success")
+      this.loadStorageFun(userA)
+    });
   }
 
   // !! 清空map，移除所有"key-id"数据（但会保留只有key的数据）
@@ -191,6 +197,7 @@ const storage = new Storage({
   }
    //读取批量数据
    getBatchDataStorageFun = () => {
+    this.updateProgress("getBatchData start ...");
     console.log("test==== >>>>storage=getBatchDataStorageFun===start...");
     // 使用和load方法一样的参数读取批量数据，但是参数是以数组的方式提供。
     // 会在需要时分别调用相应的sync方法，最后统一返回一个有序数组。
@@ -200,6 +207,8 @@ const storage = new Storage({
 	    // { key: 'balance' },
 	    { key: 'user'}
     ]).then(results => {
+      this.updateProgress("getBatchData success "+JSON.stringify(results));
+      this.updateProgress("getBatchData success");
       console.log("test==== >>>>storage=getBatchDataStorageFun==="+JSON.stringify(results));
       // results.forEach( result => {
       //   console.log("test==== >>>>storage=getBatchDataStorageFun==="+JSON.stringify(result));
@@ -215,7 +224,8 @@ const storage = new Storage({
       // ids: ['1001', '1002', '1003'],
       ids:userids
     }).then(retData => {
-      this.updateProgress("storage data: "+JSON.stringify(retData));
+      this.updateProgress("getIdsForKeyStorage data: "+JSON.stringify(retData));
+      this.updateProgress("getIdsForKeyStorage success");
       console.log("test==== >>>>storage=getBatchDataWithIdsStorageFun==="+JSON.stringify(retData));
     }).catch(err => {
       console.log("test==== >>>>storage====getBatchDataWithIdsStorageFun===Error   "+err.message);
@@ -245,7 +255,10 @@ const storage = new Storage({
           <Button title='save userB' style={styles.toolbarButton} onPress={() =>this.saveStorageFun(2)}/>
           <Button title='get user key all ids' style={styles.toolbarButton} onPress={() =>this.getIdsForKeyStorageFun('user')}/>
           <Button title='remove user key one data' style={styles.toolbarButton} onPress={() =>this.removeStorageFun(1)}/>
+          <Button title='getAllDataForKeyStorage' style={styles.toolbarButton} onPress={() =>this.getAllDataForKeyStorageFun('user')}/>
           <Button title='clearMapStorage' style={styles.toolbarButton} onPress={() =>this.clearMapStorageFun()}/>
+          <Button title='clearMapForKeyStorage' style={styles.toolbarButton} onPress={() =>this.clearMapForKeyStorageFun('user')}/>
+          <Button title='batch storage data' style={styles.toolbarButton} onPress={() =>this.getBatchDataStorageFun()}/>
           <Button title='read storage data' style={styles.toolbarButton} onPress={() =>this.getBatchDataWithIdsStorageFun()}/>
         </View>
         <FlatList
