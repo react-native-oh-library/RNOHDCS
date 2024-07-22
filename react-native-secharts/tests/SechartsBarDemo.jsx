@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Button, StyleSheet, Text, findNodeHandle } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { Echarts, echarts } from 'react-native-secharts';
 
 export default class SechartsBar extends Component {
@@ -8,7 +8,7 @@ export default class SechartsBar extends Component {
     this.state = {
       image: '',
       value: null,
-      option1: option = option = {
+      option1: {
         xAxis: {
           type: 'category',
           data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
@@ -40,14 +40,16 @@ export default class SechartsBar extends Component {
             backgroundColor={'#468B58'}
             renderLoading={() => <View style={{ backgroundColor: 'rgba(255,255,0,0)' }} />} />
         </View>
-        <View><Text>{!this.state.value ? '这里显示被点击的值' : '被点击的值：'+this.state.value}</Text>
-                </View>
+        <View>
+        <Text>点击图表红色部分可触发onPress方法</Text>
+          <Text>{!this.state.value ? '这里显示被点击的值' : '被点击的值：' + this.state.value}</Text>
+        </View>
       </View>
     );
   }
   onPress = (e) => {
     this.setState({ value: e.value })
-}
+  }
 
 }
 const styles = StyleSheet.create({
