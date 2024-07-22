@@ -2,13 +2,6 @@ import   Tooltip  from 'react-native-walkthrough-tooltip';
 import {Text,StyleSheet,TouchableHighlight, Alert, View} from 'react-native';
 import { useState } from 'react';
 
-// accessible（鸿蒙模拟器未生效） 已解决
-// allowChildInteraction（鸿蒙模拟器未生效） 使用RN的View-pointerEvents属性未生效
-// closeOnChildInteraction（鸿蒙模拟器未生效）已解决 
-// disableShadow（未见三方库使用该属性） 废弃
-// supportedOrientations(rn文档支持iOS平台) 
-// useInteractionManager（鸿蒙模拟器未生效）
-
 export function  TooltipCompent (){
 const [toolTipVisible,setToolTipVisible] = useState(false);
 return(
