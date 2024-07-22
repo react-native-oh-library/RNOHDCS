@@ -1,7 +1,7 @@
 import { TestCase, TestSuite, Tester } from '@rnoh/testerino';
 import React from 'react';
 import PagerView from 'react-native-pager-view';
-import { View, Text, Button,TextInput } from 'react-native';
+import { View, Text, Button,TextInput,ScrollView } from 'react-native';
 
 
 
@@ -13,6 +13,7 @@ export function PageViewTest() {
 
   return (
     <Tester>
+   <ScrollView>   
     <TestSuite name="PlatformColor">
       <TestCase itShould="PageView initialPage props"
       >
@@ -147,6 +148,71 @@ export function PageViewTest() {
       </TestCase>
 
 
+      <TestCase itShould="PageView pageMargin props"
+      >
+        <PagerView
+          style={{
+            flex: 1,
+            width: '100%',
+            height: 200,
+            backgroundColor: '#6D8585',
+          }}
+          pageMargin={20}>
+          <View
+            style={{
+              alignItems: 'center',
+              width: '100%',
+              height: 200,
+              backgroundColor: '#E6713E',
+            }}
+            key="1">
+            <Text
+              style={{
+                width: '100%',
+                height: 100,
+                fontWeight: 'bold',
+              }}>
+              First page
+            </Text>
+          </View>
+          <View
+            style={{
+              alignItems: 'center',
+              width: '100%',
+              height: 200,
+              backgroundColor: '#7A8CF2',
+            }}
+            key="2">
+            <Text
+              style={{
+                width: '100%',
+                height: '100%',
+                fontWeight: 'bold',
+              }}>
+              Second page
+            </Text>
+          </View>
+          <View
+            style={{
+              alignItems: 'center',
+              width: '100%',
+              height: 200,
+              backgroundColor: '#F28CE9',
+            }}
+            key="3">
+            <Text
+              style={{
+                width: '100%',
+                height: '100%',
+                fontWeight: 'bold',
+              }}>
+              Third page
+            </Text>
+          </View>
+        </PagerView>
+      </TestCase>
+
+
       <TestCase itShould="PageView offscreenPageLimit props"
       >
         <PagerView
@@ -212,7 +278,7 @@ export function PageViewTest() {
       </TestCase>
 
 
-      <TestCase itShould="PageView orientation props">
+      <TestCase itShould="PageView orientation props(vertical)">
         <PagerView
           style={{
             flex: 1,
@@ -220,7 +286,7 @@ export function PageViewTest() {
             height: 200,
             backgroundColor: '#6D8585',
           }}
-          orientation={"horizontal"}>
+          orientation={"vertical"}>
           <View
             style={{
               alignItems: 'center',
@@ -275,7 +341,7 @@ export function PageViewTest() {
         </PagerView>
       </TestCase>
 
-      <TestCase itShould="PageView direction props">
+      <TestCase itShould="PageView layoutDirection props">
         <PagerView
           style={{
             flex: 1,
@@ -283,7 +349,7 @@ export function PageViewTest() {
             height: 200,
             backgroundColor: '#6D8585',
           }}
-          layoutDirection={'rtl'}
+          layoutDirection={'ltr'}
         >
           <View
             style={{
@@ -340,7 +406,7 @@ export function PageViewTest() {
       </TestCase>
 
 
-      <TestCase itShould="PageView scrollEnabled props">
+      <TestCase itShould="PageView scrollEnabled props(false)">
         <PagerView
           style={{
             flex: 1,
@@ -348,7 +414,7 @@ export function PageViewTest() {
             height: 200,
             backgroundColor: '#6D8585',
           }}
-          scrollEnabled={true}>
+          scrollEnabled={false}>
           <View
             style={{
               alignItems: 'center',
@@ -983,6 +1049,7 @@ export function PageViewTest() {
       </TestCase>
 
     </TestSuite>
+    </ScrollView>
     </Tester>
   );
 }
