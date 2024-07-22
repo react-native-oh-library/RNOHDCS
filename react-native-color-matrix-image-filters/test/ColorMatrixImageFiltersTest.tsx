@@ -59,7 +59,7 @@ export const ColorMatrixImageFiltersTest = () => {
                         tags={['C_API']}
                         itShould="Achromatopsia">
                         <Achromatopsia>
-                            <Image style={styles.image} source={require('.../mini-parrot.jpg')} resizeMode={'stretch'} />
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
                         </Achromatopsia>
                     </TestCase>
 
@@ -67,7 +67,7 @@ export const ColorMatrixImageFiltersTest = () => {
                         tags={['C_API']}
                         itShould="Brightness">
                         <Brightness>
-                            <Image style={styles.image} source={require('.../mini-parrot.jpg')} resizeMode={'stretch'} />
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
                         </Brightness>
                     </TestCase>
 
@@ -75,7 +75,7 @@ export const ColorMatrixImageFiltersTest = () => {
                         tags={['C_API']}
                         itShould="Browni">
                         <Browni>
-                            <Image style={styles.image} source={require('.../mini-parrot.jpg')} resizeMode={'stretch'} />
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
                         </Browni>
                     </TestCase>
 
@@ -83,7 +83,7 @@ export const ColorMatrixImageFiltersTest = () => {
                         tags={['C_API']}
                         itShould="ColorTone">
                         <ColorTone>
-                            <Image style={styles.image} source={require('.../mini-parrot.jpg')} resizeMode={'stretch'} />
+                            <Image style={styles.image} source={require('../mini-parrot.jpg')} resizeMode={'stretch'} />
                         </ColorTone>
                     </TestCase>
 
