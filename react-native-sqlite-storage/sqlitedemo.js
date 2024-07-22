@@ -359,6 +359,22 @@ class SQLiteDemo extends Component {
     this.loadAndQueryDB();
   };
 
+  attachDatabase = () =>{
+    if (db!=null) {
+      this.updateProgress('Attach database ...');
+      let dbMaster = SQLite.openDatabase('test2.db',database_version,database_displayname,database_size,
+        () => {
+          dbMaster.attach( database_name, database_displayname, () => console.log("Database attached successfully"), () => console.log("ERROR"))
+          this.updateProgress('Attach database successfully');
+        },
+        this.errorCB,
+      );
+    } else {
+      this.updateProgress('Database not open');
+    } 
+
+  }
+
   renderProgressEntry = entry => {
     return (
       <View style={listStyles.li}>
@@ -375,6 +391,9 @@ class SQLiteDemo extends Component {
         <View style={styles.toolbar}>
           <Text style={styles.toolbarButton} onPress={this.runDemo}>
             Run Demo
+          </Text>
+          <Text style={styles.toolbarButton} onPress={this.attachDatabase}>
+            Attach DB
           </Text>
           <Text style={styles.toolbarButton} onPress={this.closeDatabase}>
             Close DB
