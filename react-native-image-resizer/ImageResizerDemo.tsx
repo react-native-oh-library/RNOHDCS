@@ -24,6 +24,7 @@ import ImageResizer from '@bam.tech/react-native-image-resizer';
 import type {
   ResizeMode,
   Response,
+  ResizeFormat
 } from '@bam.tech/react-native-image-resizer';
 import { launchImageLibrary } from 'react-native-image-picker';
 
@@ -53,12 +54,61 @@ const onlyScaleDownOptions: { label: string; value: boolean }[] = [
   },
 ];
 
+const compressFormatOptions: { label: string; value: ResizeFormat }[] = [
+  {
+    label: 'JPEG',
+    value: 'JPEG',
+  },
+  {
+    label: 'PNG',
+    value: 'PNG',
+  },
+  {
+    label: 'WEBP',
+    value: 'WEBP',
+  }
+];
+
+const rotationOptions: { label: string; value: number }[] = [
+  {
+    label: '0',
+    value: 0,
+  },
+  {
+    label: '90',
+    value: 90,
+  },
+  {
+    label: '180',
+    value: 180,
+  },
+  {
+    label: '270',
+    value: 270,
+  }
+];
+
+const keepMetaOptions: { label: string; value: boolean }[] = [
+  {
+    label: 'true',
+    value: true,
+  },
+  {
+    label: 'false',
+    value: false,
+  },
+];
+
 function ImageResizerDemo() {
   const [selectedMode, setMode] = useState<ResizeMode>('contain');
   const [onlyScaleDown, setOnlyScaleDown] = useState(false);
   const [imageUri, setImageUri] = useState<null | string>();
   const [sizeTarget, setSizeTarget] = useState(80);
   const [resizedImage, setResizedImage] = useState<null | Response>();
+  const [compressFormat, setCompressFormat] = useState<ResizeFormat>('JPEG');
+  const [quality, setQuality] = useState(100);
+  const [rotation, setRotation] = useState(0);
+  const [keepMeta, setKeepMeta] = useState(false);
 
   const resize = async () => {
     if (!imageUri) return;
@@ -70,11 +120,11 @@ function ImageResizerDemo() {
         imageUri,
         sizeTarget,
         sizeTarget,
-        'JPEG',
-        100,
-        0,
+        compressFormat,
+        quality,
+        rotation,
         undefined,
-        false,
+        keepMeta,
         {
           mode: selectedMode,
           onlyScaleDown,
@@ -86,7 +136,7 @@ function ImageResizerDemo() {
       Alert.alert('Unable to resize the photo');
     }
   };
-  
+
   const selectImageFromPicker = async () => {
     launchImageLibrary({ mediaType: 'photo' }, (response) => {
       if (!response || !response.assets) return;
@@ -108,7 +158,7 @@ function ImageResizerDemo() {
           <Text>{'Select an image (react-native-image-picker)'}</Text>
         </TouchableOpacity>
       </View>
-     
+
       <Text style={styles.instructions}>This is the original image:</Text>
       {imageUri ? (
         <Image
@@ -119,6 +169,48 @@ function ImageResizerDemo() {
       ) : null}
 
       <Text style={styles.instructions}>Resized image:</Text>
+      <Text>Format: </Text>
+      <View style={styles.optionContainer}>
+        {compressFormatOptions.map((formatOption) => (
+          <TouchableOpacity
+            style={styles.buttonOption}
+            onPress={() => setCompressFormat(formatOption.value)}
+            key={formatOption.label}
+          >
+            <Text>{`${formatOption.label} ${compressFormat === formatOption.value ? '✅' : ''
+              }`}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      <Text>Rotation: </Text>
+      <View style={styles.optionContainer}>
+        {rotationOptions.map((rotationOption) => (
+          <TouchableOpacity
+            style={styles.buttonOption}
+            onPress={() => setRotation(rotationOption.value)}
+            key={rotationOption.label}
+          >
+            <Text>{`${rotationOption.label} ${rotation === rotationOption.value ? '✅' : ''
+              }`}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      <Text>keepMeta </Text>
+      <View style={styles.optionContainer}>
+        {keepMetaOptions.map((keepMetaOptions) => (
+          <TouchableOpacity
+            style={styles.buttonOption}
+            onPress={() => setKeepMeta(keepMetaOptions.value)}
+            key={keepMetaOptions.label}
+          >
+            <Text>{`${keepMetaOptions.label} ${keepMeta === keepMetaOptions.value ? '✅' : ''
+              }`}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
       <Text>Mode: </Text>
       <View style={styles.optionContainer}>
         {modeOptions.map((mode) => (
@@ -127,9 +219,8 @@ function ImageResizerDemo() {
             onPress={() => setMode(mode.value)}
             key={mode.label}
           >
-            <Text>{`${mode.label} ${
-              selectedMode === mode.value ? '✅' : ''
-            }`}</Text>
+            <Text>{`${mode.label} ${selectedMode === mode.value ? '✅' : ''
+              }`}</Text>
           </TouchableOpacity>
         ))}
       </View>
@@ -142,12 +233,21 @@ function ImageResizerDemo() {
             onPress={() => setOnlyScaleDown(scaleDownOption.value)}
             key={scaleDownOption.label}
           >
-            <Text>{`${scaleDownOption.label} ${
-              onlyScaleDown === scaleDownOption.value ? '✅' : ''
-            }`}</Text>
+            <Text>{`${scaleDownOption.label} ${onlyScaleDown === scaleDownOption.value ? '✅' : ''
+              }`}</Text>
           </TouchableOpacity>
         ))}
       </View>
+
+      <Text>quality(0 ~ 100): </Text>
+      <TextInput
+        style={styles.textInput}
+        placeholder={quality.toString()}
+        keyboardType="decimal-pad"
+        onChangeText={(text) => {
+          setQuality(Number(text));
+        }}
+      />
 
       <Text>Target size: </Text>
       <TextInput
@@ -171,12 +271,14 @@ function ImageResizerDemo() {
           />
           <Text>Width: {resizedImage.width}</Text>
           <Text>Height: {resizedImage.height}</Text>
+          <Text>OutPutPath: {resizedImage.path}</Text>
+          <Text>Name: {resizedImage.name}</Text>
         </>
       ) : null}
     </ScrollView>
   );
-};  
-  
+};
+
 const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: '#F5FCFF',
@@ -231,5 +333,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ImageResizerDemo;  
-  
+export default ImageResizerDemo;
