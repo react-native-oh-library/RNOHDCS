@@ -118,6 +118,8 @@ export function ReactNativeZoomableViewExample() {
               {tester_change("移动 moveBy(30, 0)",'→',()=>{ zoomableViewRef.current!.moveBy(30, 0) })}
               {tester_change("设置缩放等级 zoomTo(1)",'1',()=>{ zoomableViewRef.current!.zoomTo(1);})}
               {tester_change("设置缩放等级 zoomTo(5)",'5',()=>{ zoomableViewRef.current!.zoomTo(5);})}
+              {tester_change("设置缩放等级 zoomBy(1.1)",'1.1',()=>{ zoomableViewRef.current!.zoomBy(1.1);})}
+              {tester_change("设置缩放等级 zoomBy(5)",'5',()=>{ zoomableViewRef.current!.zoomBy(5);})}
               {tester_change("开启手势缩放 zoomEnabled : true",'true',()=>{ _setState({...state,zoomEnabled:true}) })}
               {tester_change("关闭手势缩放 zoomEnabled : false",'false',()=>{ _setState({...state,zoomEnabled:false}) })}
               {tester_change("开启手势移动 panEnabled : true",'true',()=>{ _setState({...state,panEnabled:true}) })}
