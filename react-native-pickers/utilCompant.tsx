@@ -11,5 +11,5 @@ export function tester_change(title:string,buttonTitle:string,pressEvent:Functio
 }
   
 export function tester_back_string(title:string,string:any){
-  return(  <TestCase itShould={title}> <Text>{string}</Text> </TestCase> )
+  return(  <TestCase itShould={title}><Text>{string}</Text></TestCase> )
 }
