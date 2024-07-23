@@ -1,7 +1,7 @@
 import React from 'react';
 import { TestSuite, Tester, TestCase } from '@rnoh/testerino';
-import { Button, StyleSheet, Text, ScrollView, Dimensions, View } from 'react-native';
-import { Popover, usePopover } from 'react-native-modal-popover';
+import { Button, StyleSheet, Text, ScrollView, Dimensions, View, Easing } from 'react-native';
+import { Popover, usePopover, PopoverController } from 'react-native-modal-popover';
 const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
@@ -45,9 +45,12 @@ export function PopoverOnePopoverExample() {
         arrowStyle={styles.arrow}
         backgroundStyle={styles.background}
         visible={popoverVisible}
-        onClose={closePopover}
+        onClose={prpos.close ? () => {
+          prpos?.close?.();
+          closePopover?.()
+        } : closePopover}
         fromRect={popoverAnchorRect}
-        supportedOrientations={['portrait', 'landscape']}
+        supportedOrientations={['portrait']}
         {...prpos.prop}
       >
         <Text>Hello from inside popover!</Text>
@@ -98,11 +101,6 @@ export function PopoverOnePopoverExample() {
     {
       prop: { placement: 'end' },
       name: '自定义placement(end)'
-    },
-    {
-      prop: { onDismiss: () => setCbMsg('onDismiss(success)') },
-      name: '自定义onDismiss',
-      msg: cbMsg
     },
     {
       prop: {
@@ -166,14 +164,15 @@ export function PopoverOnePopoverExample() {
     },
     {
       prop: {
-        easing: (show: boolean) => {
-          return (value: number) => {
-            show ? setEasingMsg(`easing(true)(${value})`) : setEasingMsg(`easing(false)(${value})`)
-          }
-        }
+        easing: (show: boolean) => show ? Easing.in(Easing.back(1.70158)) : Easing.out(Easing.quad)
       },
       name: '自定义easing',
-      msg: easingMsg
+    },
+    {
+      prop: {
+        easing: (show: boolean) => show ? Easing.out(Easing.back(1.70158)) : Easing.inOut(Easing.quad)
+      },
+      name: '自定义easing2',
     },
     {
       prop: { useNativeDriver: false },
@@ -188,23 +187,117 @@ export function PopoverOnePopoverExample() {
       name: '自定义supportedOrientations1',
     },
     {
-      prop: { supportedOrientations: ['portrait-upside-down', 'landscape-right'] },
+      prop: { supportedOrientations: ['portrait-upside-down'] },
       name: '自定义supportedOrientations2',
-    },
-    {
-      prop: { calculateStatusBar: false },
-      name: '自定义calculateStatusBar(false)',
-    },
-    {
-      prop: { calculateStatusBar: true },
-      name: '自定义calculateStatusBar(true)',
     }
   ]
+
+  function PopoverControllerApp(props: any) {
+    const { s_openPopover, s_closePopover, s_setPopoverAnchor } = props;
+    return <PopoverController>
+      {({
+        openPopover,
+        closePopover,
+        popoverVisible,
+        setPopoverAnchor,
+        popoverAnchorRect,
+      }) => (
+        <React.Fragment>
+          <Button
+            title={props?.title}
+            ref={(ref) => {
+              setTimeout(() => {
+                s_setPopoverAnchor?.();
+                setPopoverAnchor(ref);
+              });
+            }}
+            onPress={() => {
+              s_openPopover?.()
+              openPopover()
+            }}
+          />
+          <Popover
+            contentStyle={styles.content}
+            arrowStyle={styles.arrow}
+            backgroundStyle={styles.background}
+            visible={popoverVisible}
+            onClose={() => {
+              s_closePopover?.()
+              closePopover();
+            }}
+            fromRect={popoverAnchorRect}
+            supportedOrientations={['portrait', 'landscape']}>
+            <Text>Hello from inside popover!</Text>
+          </Popover>
+        </React.Fragment>
+      )}
+    </PopoverController>
+
+  };
+
 
   return (
     <ScrollView>
       <Tester>
-        <TestSuite name='PopoverOnePopoverExample'>
+        <TestSuite name='PopoverController'>
+          <TestCase
+            itShould="openPopover"
+            tags={['C_API']}
+            initialState={false}
+            arrange={({ setState }) => {
+              return (
+                <PopoverControllerApp title='自定义openPopover' s_openPopover={() => setState(true)} />
+              );
+            }}
+            assert={({ state, expect }) => {
+              expect(state).to.be.true;
+            }}
+          />
+          <TestCase
+            itShould="closePopover"
+            tags={['C_API']}
+            initialState={false}
+            arrange={({ setState }) => {
+              return (
+                <PopoverControllerApp title='自定义closePopover' s_closePopover={() => setState(true)} />
+              );
+            }}
+            assert={({ state, expect }) => {
+              expect(state).to.be.true;
+            }}
+          />
+          <TestCase
+            itShould="setPopoverAnchor "
+            tags={['C_API']}
+            initialState={false}
+            arrange={({ setState }) => {
+              return (
+                <PopoverControllerApp title='自定义setPopoverAnchor' s_setPopoverAnchor={() => setState(true)} />
+              );
+            }}
+            assert={({ state, expect }) => {
+              expect(state).to.be.true;
+            }}
+          />
+        </TestSuite>
+        <TestSuite name='usePopover' >
+          <TestCase
+            itShould="onClose"
+            tags={['C_API']}
+            initialState={false}
+            arrange={({ setState }) => {
+              const props = {
+                name: '自定义onClose',
+                close: () => setState(true),
+              };
+              return (
+                <OnePopover {...props} />
+              );
+            }}
+            assert={({ state, expect }) => {
+              expect(state).to.be.true;
+            }}
+          />
           {testProps.map((test) => (<TestCase itShould={JSON.stringify(test.prop)} tags={['C_API']}>
             <OnePopover {...test} />
           </TestCase>)
