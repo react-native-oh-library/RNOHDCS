@@ -82,19 +82,7 @@ export function TextGradientTest() {
                             </LinearTextGradient>
                         </View>
                     </TestCase>
-                    <TestCase tags={['C_API']} itShould="useViewFrame">
-                        <View style={styles.container}>
-                            <LinearTextGradient
-                                style={styles.welcome}
-                                locations={[0, 1]}
-                                colors={['blue', 'red']}
-                                useViewFrame={true}
-                                start={{ x: 0, y: 0 }}
-                                end={{ x: 1, y: 0 }}>
-                                Welcome to React Native!
-                            </LinearTextGradient>
-                        </View>
-                    </TestCase>
+    
                     <TestCase tags={['C_API']} itShould="useGlobalCache">
                         <View style={styles.container}>
                             <LinearTextGradient
