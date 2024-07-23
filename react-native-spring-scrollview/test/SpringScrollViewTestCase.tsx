@@ -6,8 +6,7 @@ import {
   Platform,
   Animated
 } from 'react-native';
-import { TestSuite,Tester } from '@rnoh/testerino';
-import { TestCase } from '../../components';
+import { TestSuite,Tester, TestCase } from '@rnoh/testerino';
 import {ScrollView } from 'react-native';
 import RefreshAndLoadingExample from './RefreshAndLoadingExample'
 import RefreshAndLoadingExampleInverted from './RefreshAndLoadingExampleInverted'
@@ -23,35 +22,35 @@ export const SpringScrollViewTestCase = () => {
         <TestSuite name="SpringScrollView">
   
 
-            <TestCase.Example
+            <TestCase
                 tags={['C_API']}
                 itShould="onRefresh onLoading refreshHeader loadingFooter allLoaded">
                 <RefreshAndLoadingExample />
-            </TestCase.Example>
+            </TestCase>
 
-            <TestCase.Example
+            <TestCase
                 tags={['C_API']}
                 itShould="inverted">
                 <RefreshAndLoadingExampleInverted />
-            </TestCase.Example>
+            </TestCase>
 
-            <TestCase.Example
+            <TestCase
                 tags={['C_API']}
                 itShould="onTouchBegin onTouchFinish onMomentumScrollBegin onMomentumScrollEnd onNativeContentOffsetExtract scrollTo scroll scrollToBegin scrollToEnd bounces onSizeChange onContentSizeChange">
                 <ScrollToAndOnScrollExample />
-            </TestCase.Example>
+            </TestCase>
 
-            <TestCase.Example
+            <TestCase
                 tags={['C_API']}
                 itShould="initialContentOffset directionalLockEnabled contentStyle">
                 <BouncesAndScrollEnabledExample />
-            </TestCase.Example>
+            </TestCase>
 
-            <TestCase.Example
+            <TestCase
                 tags={['C_API']}
                 itShould="textInputRefs tapToHideKeyboard inputToolBarHeight">
                 <InputExample />
-            </TestCase.Example>
+            </TestCase>
         </TestSuite>
         </ScrollView>
         </Tester>

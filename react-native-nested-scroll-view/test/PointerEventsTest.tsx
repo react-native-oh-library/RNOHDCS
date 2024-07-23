@@ -1,7 +1,7 @@
 import {TestCase, TestSuite} from '@rnoh/testerino';
 import {Platform, ScrollView, View} from 'react-native';
 import {getScrollViewContent} from './fixtures';
-import {Button} from '../../components';
+import {Button} from './button';
 
 export function PointerEventsTest() {
   return (

@@ -120,7 +120,6 @@ export default class App extends Component {
     deviceJSON.supported64BitAbis = DeviceInfo.supported64BitAbisSync();
     deviceJSON.hasGms = DeviceInfo.hasGmsSync();
     deviceJSON.hasHms = DeviceInfo.hasHmsSync();
-    deviceJSON.isKeyboardConnected = DeviceInfo.isKeyboardConnectedSync();
     deviceJSON.isMouseConnected = DeviceInfo.isMouseConnectedSync();
     deviceJSON.isWiredHeadphonesConnected = DeviceInfo.isWiredHeadphonesConnectedSync();
     deviceJSON.isBluetoothHeadphonesConnected = DeviceInfo.isBluetoothHeadphonesConnectedSync();
@@ -132,7 +131,10 @@ export default class App extends Component {
     let deviceJSON = {};
 
     try {
-      deviceJSON.isLowRamDevice = await DeviceInfo.isLowRamDevice()
+      deviceJSON.hasNotch = await DeviceInfo.hasNotch();
+      deviceJSON.macAddress = await DeviceInfo.getMacAddress();
+      deviceJSON.uniqueId = await DeviceInfo.getUniqueId();
+      deviceJSON.isLowRamDevice = await DeviceInfo.isLowRamDevice();
       deviceJSON.manufacturer = await DeviceInfo.getManufacturer();
       deviceJSON.powerStatus = await DeviceInfo.getPowerState();                                  
       deviceJSON.buildId = await DeviceInfo.getBuildId();

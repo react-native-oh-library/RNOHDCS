@@ -1,7 +1,6 @@
-import { TestSuite } from '@rnoh/testerino';
+import { TestSuite, TestCase, Tester } from '@rnoh/testerino';
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, TouchableHighlight, Animated } from 'react-native';
-import { TestCase } from '../../components';
 import Modal from 'react-native-root-modal';
 
 export default class RootModal extends Component {
@@ -31,29 +30,31 @@ export default class RootModal extends Component {
 
   render() {
     return (
-      <TestSuite name="Root Modal">
-        <TestCase.Example itShould="Modal">
-          <View style={ModalStyles.container}>
-            <TouchableHighlight
-              style={ModalStyles.button}
-              underlayColor="#aaa"
-              onPress={this.showModal}>
-              <Text>Show Modal</Text>
-            </TouchableHighlight>
-            <Modal visible={this.state.visible} style={ModalStyles.modal}>
+      <Tester>
+        <TestSuite name="Root Modal">
+          <TestCase itShould="Modal">
+            <View style={ModalStyles.container}>
               <TouchableHighlight
-                style={[ModalStyles.button, ModalStyles.close]}
+                style={ModalStyles.button}
                 underlayColor="#aaa"
-                onPress={this.hideModal}>
-                <Text>Close</Text>
+                onPress={this.showModal}>
+                <Text>Show Modal</Text>
               </TouchableHighlight>
-              <View style={ModalStyles.modalContainer}>
-                <Text style={ModalStyles.text}>Amazing!</Text>
-              </View>
-            </Modal>
-          </View>
-        </TestCase.Example>
-      </TestSuite>
+              <Modal visible={this.state.visible} style={ModalStyles.modal}>
+                <TouchableHighlight
+                  style={[ModalStyles.button, ModalStyles.close]}
+                  underlayColor="#aaa"
+                  onPress={this.hideModal}>
+                  <Text>Close</Text>
+                </TouchableHighlight>
+                <View style={ModalStyles.modalContainer}>
+                  <Text style={ModalStyles.text}>Amazing!</Text>
+                </View>
+              </Modal>
+            </View>
+          </TestCase>
+        </TestSuite>
+      </Tester>
     );
   }
 }
@@ -64,7 +65,7 @@ const ModalStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff',
-    height: 400
+    height: 700
   },
   button: {
     backgroundColor: '#ccc',

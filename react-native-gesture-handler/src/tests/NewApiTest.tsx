@@ -1,4 +1,4 @@
-import {TestCase, TestSuite} from '@rnoh/testerino';
+import {TestCase, TestSuite, Tester} from '@rnoh/testerino';
 import React from 'react';
 import {useState} from 'react';
 import {
@@ -21,6 +21,7 @@ import {PALETTE} from '../constants';
 
 export function NewApiTest() {
   return (
+    <Tester>
     <TestSuite name="new API">
       <TestSuite name="Gesture.Rotation">
         <TestCase
@@ -498,6 +499,7 @@ export function NewApiTest() {
         </ScrollView>
       </TestCase>
     </TestSuite>
+    </Tester>
   );
 }
 
@@ -517,32 +519,34 @@ function Example(props: {
   }, []);
 
   return (
-    <View style={styles.testCaseContainer}>
-      {props.onReset && (
-        <View style={{position: 'absolute', top: 0, right: 0}}>
-          <Button
-            title="Reset"
-            onPress={() => {
-              props.onReset!(setBackgroundColor);
-            }}
-          />
-        </View>
-      )}
-      <GestureDetector gesture={gesture}>
-        <View
-          style={{
-            width: props.size ?? 128,
-            height: props.size ?? 128,
-            alignSelf: 'center',
-            backgroundColor,
-            justifyContent: 'center',
-          }}>
-          <Text style={{color: 'white', fontSize: 12, textAlign: 'center'}}>
-            {props.label}
-          </Text>
-        </View>
-      </GestureDetector>
-    </View>
+    <Tester>
+      <View style={styles.testCaseContainer}>
+        {props.onReset && (
+          <View style={{position: 'absolute', top: 0, right: 0}}>
+            <Button
+              title="Reset"
+              onPress={() => {
+                props.onReset!(setBackgroundColor);
+              }}
+            />
+          </View>
+        )}
+        <GestureDetector gesture={gesture}>
+          <View
+            style={{
+              width: props.size ?? 128,
+              height: props.size ?? 128,
+              alignSelf: 'center',
+              backgroundColor,
+              justifyContent: 'center',
+            }}>
+            <Text style={{color: 'white', fontSize: 12, textAlign: 'center'}}>
+              {props.label}
+            </Text>
+          </View>
+        </GestureDetector>
+      </View>
+    </Tester>
   );
 }
 

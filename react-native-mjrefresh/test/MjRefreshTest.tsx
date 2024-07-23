@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text } from 'react-native';
-import { TestSuite } from '@rnoh/testerino';
-import { TestCase } from '../components';
+import { TestSuite, Tester, TestCase } from '@rnoh/testerino';
 import { MJRefreshControl } from "react-native-mjrefresh";
 
 export const MjRefreshTest = () => {
@@ -14,6 +13,7 @@ export const MjRefreshTest = () => {
     let mjRefreshRef: React.RefObject<MJRefreshControl>;
 
     return (
+        <Tester>
         <TestSuite name="MjRefresh">
             <TestCase.Example
                 tags={['C_API']}
@@ -59,5 +59,6 @@ export const MjRefreshTest = () => {
                 }
             </TestCase.Example>
         </TestSuite>
+        </Tester>
     );
 };

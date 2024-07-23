@@ -7,6 +7,7 @@ import {
   Text,
   View,
 } from 'react-native';
+import { TestSuite, Tester, TestCase } from '@rnoh/testerino';
 
 import SimpleGradient from './SimpleGradient';
 import SimpleGradientSecond from './SimpleGradientSecond';
@@ -29,34 +30,36 @@ const Section: React.FC<{
 
 function LinearGradientDemo() {
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar
-        backgroundColor="#ffffff00"
-        barStyle={'dark-content'}
-        translucent={true}
-      />
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <Section title="Simple Gradient">
-          <SimpleGradient />
-        </Section>
-        
-        <Section title="Angle Gradient">
-          <AngleGradient />
-        </Section>
-        <Section title="Animated Gradient">
-          <AnimatedGradient />
-        </Section>
-        <Section title="Gradient Timer">
-          <GradientTimer />
-        </Section>
-        <Section title="Simple Gradient Second">
-          <SimpleGradientSecond />
-        </Section>
-        <Section title="Gradient Buttons">
-          <GradientButtons />
-        </Section>
-      </ScrollView>
-    </SafeAreaView>
+    <Tester>
+      <SafeAreaView style={styles.container}>
+        <StatusBar
+          backgroundColor="#ffffff00"
+          barStyle={'dark-content'}
+          translucent={true}
+        />
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
+          <Section title="Simple Gradient">
+            <SimpleGradient />
+          </Section>
+          
+          <Section title="Angle Gradient">
+            <AngleGradient />
+          </Section>
+          <Section title="Animated Gradient">
+            <AnimatedGradient />
+          </Section>
+          <Section title="Gradient Timer">
+            <GradientTimer />
+          </Section>
+          <Section title="Simple Gradient Second">
+            <SimpleGradientSecond />
+          </Section>
+          <Section title="Gradient Buttons">
+            <GradientButtons />
+          </Section>
+        </ScrollView>
+      </SafeAreaView>
+    </Tester>
   );
 };
 

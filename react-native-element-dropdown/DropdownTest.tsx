@@ -6,6 +6,7 @@ import {
   View,
   ScrollView,
   ViewProps,
+  Button,
   Image,
 } from 'react-native';
 import {
@@ -14,8 +15,7 @@ import {
   SelectCountry,
   IDropdownRef,
 } from 'react-native-element-dropdown';
-import {TestSuite} from '@rnoh/testerino';
-import {Button, TestCase} from '../components';
+import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
 const imageSource = require('./assets/react-native-logo.png');
 const data = [
@@ -37,8 +37,6 @@ const Row = (
       props.fullWidth && {
         width: '100%',
         justifyContent: 'space-between',
-        padding: 10,
-        paddingHorizontal: 50,
       },
     ]}
   />
@@ -66,13 +64,13 @@ const DropdownDemo = (props?: any) => {
           onPress={() => {
             ref.current?.open();
           }}
-          label="Open dropdown list"
+          title="Open dropdown list"
         />
         <Button
           onPress={() => {
             ref.current?.close();
           }}
-          label="Close dropdown list"
+          title="Close dropdown list"
         />
       </Row>
       <Dropdown
@@ -137,13 +135,13 @@ const MultiSelectDemo = (props?: any) => {
           onPress={() => {
             ref.current?.open();
           }}
-          label="Open dropdown list"
+          title="Open dropdown list"
         />
         <Button
           onPress={() => {
             ref.current?.close();
           }}
-          label="Close dropdown list"
+          title="Close dropdown list"
         />
       </Row>
 
@@ -152,7 +150,7 @@ const MultiSelectDemo = (props?: any) => {
         excludeItems={[{label: 'Item 1', value: '1', image: imageSource}]}
         maxSelect={3}
         activeColor="#FF8A2D2D"
-        mode="auto"
+        mode="modal"
         disable={disabled}
         style={styles.dropdown}
         placeholderStyle={styles.placeholderStyle}
@@ -170,7 +168,7 @@ const MultiSelectDemo = (props?: any) => {
         onChange={item => {
           setSelected(item);
         }}
-        renderLeftIcon={() => <Text style={{color: 'blue'}}>icon</Text>}
+        renderLeftIcon={() =><Image style={{width:15,height:15}} source={imageSource}/>}
         {...props}
       />
     </>
@@ -198,22 +196,18 @@ const SelectCountryDemo = (props?: any) => {
           onPress={() => {
             ref.current?.open();
           }}
-          label="Open dropdown list"
+          title="Open dropdown list"
         />
         <Button
           onPress={() => {
             ref.current?.close();
           }}
-          label="Close dropdown list"
+          title="Close dropdown list"
         />
       </Row>
       <SelectCountry
-        confirmSelectItem
-        onConfirmSelectItem={() => {}}
-        ref={ref}
-        activeColor="#FF8A2D2D"
-        mode="modal"
         disable={disabled}
+        ref={ref}
         style={styles.dropdown}
         selectedTextStyle={styles.selectedTextStyle}
         placeholderStyle={styles.placeholderStyle}
@@ -224,44 +218,44 @@ const SelectCountryDemo = (props?: any) => {
         value={country}
         data={data}
         valueField="value"
-        labelField="label"
         imageField="image"
         placeholder="Select country"
         searchPlaceholder="Search..."
-        onChange={(e: any) => {
+        onChange={e => {
           setCountry(e.value);
         }}
-        imageStyle={{width: 15, height: 15}}
-        {...props}
+        labelField={'label'}
       />
     </>
   );
 };
 export const DropdownTest = () => {
   return (
-    <ScrollView>
-      <TestSuite name="Dropdown Demo ">
-        <TestCase.Example itShould="dropdownPosition='auto'">
-          <DropdownDemo />
-        </TestCase.Example>
-        <TestCase.Example itShould="dropdownPosition='top'">
-          <DropdownDemo dropdownPosition="top" />
-        </TestCase.Example>
-        <TestCase.Example itShould="dropdownPosition='bottom'">
-          <DropdownDemo dropdownPosition="bottom" />
-        </TestCase.Example>
-      </TestSuite>
-      <TestSuite name="MultiSelect Demo">
-        <TestCase.Example itShould="maxSelect=3 excludeItems=item1">
-          <MultiSelectDemo />
-        </TestCase.Example>
-      </TestSuite>
-      <TestSuite name="SelectCountry Demo">
-        <TestCase.Example itShould="modal mode">
-          <SelectCountryDemo />
-        </TestCase.Example>
-      </TestSuite>
-    </ScrollView>
+    <Tester>
+      <ScrollView>
+        <TestSuite name="Dropdown Demo ">
+          <TestCase itShould="dropdownPosition='auto'">
+            <DropdownDemo />
+          </TestCase>
+          <TestCase itShould="dropdownPosition='top'">
+            <DropdownDemo dropdownPosition="top" />
+          </TestCase>
+          <TestCase itShould="dropdownPosition='bottom'">
+            <DropdownDemo dropdownPosition="bottom" />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="MultiSelect Demo">
+          <TestCase itShould="maxSelect=3 excludeItems=item1">
+            <MultiSelectDemo />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="SelectCountry Demo">
+          <TestCase itShould="">
+            <SelectCountryDemo />
+          </TestCase>
+        </TestSuite>
+      </ScrollView>
+    </Tester>
   );
 };
 

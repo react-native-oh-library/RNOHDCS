@@ -1,5 +1,4 @@
-import { TestSuite, Tester } from '@rnoh/testerino';
-import { TestCase } from '../components';
+import { TestSuite, Tester, TestCase } from '@rnoh/testerino';
 import * as React from 'react';
 import {
   BleManager,
@@ -18,8 +17,9 @@ const bleManager = new BleManager()
 
 export function BlePlxTest() {
   return (
+    <Tester>
     <TestSuite name="BlePlx">
-      <TestCase.Logical
+      <TestCase
         itShould="addListener"
         fn={({ expect }: any) => {
           try {
@@ -30,7 +30,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="removeListeners"
         fn={({ expect }: any) => {
           try {
@@ -41,7 +41,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="createClient"
         fn={({ expect }: any) => {
           try {
@@ -52,7 +52,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="destroyClient"
         fn={({ expect }: any) => {
           try {
@@ -63,7 +63,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="cancelTransaction"
         fn={({ expect }: any) => {
           try {
@@ -74,7 +74,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="setLogLevel"
         fn={({ expect }: any) => {
           try {
@@ -85,7 +85,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="logLevel"
         fn={({ expect }: any) => {
           try {
@@ -96,7 +96,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="enable"
         fn={({ expect }: any) => {
           try {
@@ -107,7 +107,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="disable"
         fn={({ expect }: any) => {
           try {
@@ -118,7 +118,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="state"
         fn={({ expect }: any) => {
           try {
@@ -129,7 +129,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="startDeviceScan"
         fn={({ expect }: any) => {
           let result = bleManager.startDeviceScan(null, true, (error) => {
@@ -138,7 +138,7 @@ export function BlePlxTest() {
           expect(result).to.not.be.undefined;
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="requestConnectionPriorityForDevice"
         fn={({ expect }: any) => {
           try {
@@ -149,7 +149,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="readRSSIForDevice"
         fn={({ expect }: any) => {
           try {
@@ -160,7 +160,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="requestMTUForDevice"
         fn={({ expect }: any) => {
           try {
@@ -171,7 +171,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="requestMTUForDevice"
         fn={({ expect }: any) => {
           try {
@@ -182,7 +182,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="devices"
         fn={({ expect }: any) => {
           try {
@@ -193,7 +193,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="connectedDevices"
         fn={({ expect }: any) => {
           try {
@@ -204,7 +204,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="connectToDevice"
         fn={({ expect }: any) => {
           try {
@@ -215,7 +215,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="cancelDeviceConnection"
         fn={({ expect }: any) => {
           try {
@@ -226,7 +226,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="isDeviceConnected"
         fn={({ expect }: any) => {
           try {
@@ -237,7 +237,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="discoverAllServicesAndCharacteristicsForDevice"
         fn={({ expect }: any) => {
           try {
@@ -248,7 +248,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="servicesForDevice"
         fn={({ expect }: any) => {
           try {
@@ -259,7 +259,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="characteristicsForDevice"
         fn={({ expect }: any) => {
           try {
@@ -270,7 +270,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="characteristicsForService"
         fn={({ expect }: any) => {
           try {
@@ -281,7 +281,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="descriptorsForDevice"
         fn={({ expect }: any) => {
           try {
@@ -292,7 +292,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="descriptorsForService"
         fn={({ expect }: any) => {
           try {
@@ -303,7 +303,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="descriptorsForCharacteristic"
         fn={({ expect }: any) => {
           try {
@@ -314,7 +314,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="readCharacteristicForDevice"
         fn={({ expect }: any) => {
           try {
@@ -325,7 +325,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="readCharacteristicForService"
         fn={({ expect }: any) => {
           try {
@@ -336,7 +336,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="readCharacteristic"
         fn={({ expect }: any) => {
           try {
@@ -347,7 +347,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="writeCharacteristicForDevice"
         fn={({ expect }: any) => {
           try {
@@ -358,7 +358,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="writeCharacteristicForService"
         fn={({ expect }: any) => {
           try {
@@ -369,7 +369,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="writeCharacteristic"
         fn={({ expect }: any) => {
           try {
@@ -380,7 +380,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="monitorCharacteristicForDevice"
         fn={({ expect }: any) => {
           try {
@@ -391,7 +391,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="monitorCharacteristicForService"
         fn={({ expect }: any) => {
           try {
@@ -402,7 +402,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="monitorCharacteristic"
         fn={({ expect }: any) => {
           try {
@@ -413,7 +413,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="readDescriptorForDevice"
         fn={({ expect }: any) => {
           try {
@@ -424,7 +424,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="readDescriptorForService"
         fn={({ expect }: any) => {
           try {
@@ -435,7 +435,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="readDescriptorForService"
         fn={({ expect }: any) => {
           try {
@@ -446,7 +446,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="readDescriptorForCharacteristic"
         fn={({ expect }: any) => {
           try {
@@ -457,7 +457,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="readDescriptor"
         fn={({ expect }: any) => {
           try {
@@ -468,7 +468,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="writeDescriptorForDevice"
         fn={({ expect }: any) => {
           try {
@@ -479,7 +479,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="writeDescriptorForService"
         fn={({ expect }: any) => {
           try {
@@ -490,7 +490,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="writeDescriptorForCharacteristic"
         fn={({ expect }: any) => {
           try {
@@ -501,7 +501,7 @@ export function BlePlxTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
         itShould="writeDescriptor"
         fn={({ expect }: any) => {
           try {
@@ -513,5 +513,6 @@ export function BlePlxTest() {
         }}
       />
     </TestSuite>
+    </Tester>
   );
 }

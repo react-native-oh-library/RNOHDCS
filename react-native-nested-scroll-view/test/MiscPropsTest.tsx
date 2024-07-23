@@ -1,4 +1,4 @@
-import {TestSuite} from '@rnoh/testerino';
+import {TestSuite, TestCase} from '@rnoh/testerino';
 import {Platform, ScrollView, StyleSheet, View} from 'react-native';
 import React from 'react';
 import {
@@ -7,20 +7,41 @@ import {
   getScrollViewContentHorizontal,
 } from './fixtures';
 import {useEffect, useRef, useState} from 'react';
-import {Button, ObjectDisplayer, TestCase} from '../../components';
+import {Button} from './button';
+
+function ObjectDisplayer(props: {
+  renderContent: (setObject: (obj: Object) => void) => any;
+}) {
+  const [object, setObject] = useState<Object>();
+
+  return (
+    <View style={{width: '100%', height: '100%'}}>
+      <Text
+        style={{
+          width: '100%',
+          padding: 16,
+          fontSize: 8,
+          backgroundColor: '#EEE',
+        }}>
+        {object === undefined ? 'undefined' : JSON.stringify(object)}
+      </Text>
+      {props.renderContent(setObject)}
+    </View>
+  );
+}
 
 export function MiscPropsTest() {
   return (
     <TestSuite name="misc props">
-      <TestCase.Example
+      <TestCase
         itShould="scroll should be disabled"
         tags={['C_API']}
         modal>
         <View style={styles.wrapperView}>
           <ScrollView {...COMMON_PROPS} scrollEnabled={false} />
         </View>
-      </TestCase.Example>
-      <TestCase.Example
+      </TestCase>
+      <TestCase
         itShould="display horizontal scroll view"
         modal
         tags={['C_API']}>
@@ -33,25 +54,25 @@ export function MiscPropsTest() {
             {getScrollViewContentHorizontal({})}
           </ScrollView>
         </View>
-      </TestCase.Example>
-      <TestCase.Example
+      </TestCase>
+      <TestCase
         tags={['C_API']}
         modal
         itShould="display ScrollView with the third view at the top (contentOffset)">
         <ContentOffsetTestCase />
-      </TestCase.Example>
-      <TestCase.Example
+      </TestCase>
+      <TestCase
         tags={['C_API']}
         modal
         itShould="scroll when contentOffset property is changed (contentOffset)">
         <ToggleContentOffsetTestCase />
-      </TestCase.Example>
-      <TestCase.Example
+      </TestCase>
+      <TestCase
         modal
         itShould="toggle backface visibility on button press (the component should become invisible)">
         <BackfaceVisibilityTestCase />
-      </TestCase.Example>
-      <TestCase.Example
+      </TestCase>
+      <TestCase
         modal
         skip={Platform.select({android: 'fails', harmony: 'fails on Android'})}
         itShould="display ScrollView with different contentInsets (contentInset)"
@@ -63,16 +84,16 @@ export function MiscPropsTest() {
             contentInset={{top: 10, right: 20, bottom: 30, left: 40}}
           />
         </View>
-      </TestCase.Example>
-      <TestCase.Example
+      </TestCase>
+      <TestCase
         tags={['C_API']}
         modal
         itShould="display current contentHeight (onContentSizeChange)">
         <View style={{height: 500}}>
           <OnContentSizeChangeTestCase />
         </View>
-      </TestCase.Example>
-      <TestCase.Example
+      </TestCase>
+      <TestCase
         tags={['C_API']}
         modal
         itShould="display onScroll native event throttled every second">
@@ -92,8 +113,8 @@ export function MiscPropsTest() {
             }}
           />
         </View>
-      </TestCase.Example>
-      <TestCase.Example
+      </TestCase>
+      <TestCase
         tags={['C_API']}
         modal
         itShould="the left scrollview should decelerate faster (stops earlier) than the right one (decelarationRate)">
@@ -101,9 +122,9 @@ export function MiscPropsTest() {
           <ScrollView {...COMMON_PROPS} decelerationRate={0.8} />
           <ScrollView {...COMMON_PROPS} decelerationRate={0.999} />
         </View>
-      </TestCase.Example>
+      </TestCase>
 
-      <TestCase.Example
+      <TestCase
         tags={['C_API']}
         modal
         itShould="the left scrollview should bounce (briefly scroll beyond the content to show the view below and then come back to top/bottom accordingly)">
@@ -111,8 +132,8 @@ export function MiscPropsTest() {
           <ScrollView {...COMMON_PROPS} />
           <ScrollView {...COMMON_PROPS} bounces={false} />
         </View>
-      </TestCase.Example>
-      <TestCase.Example
+      </TestCase>
+      <TestCase
         tags={['C_API']}
         modal
         itShould="the left scrollview should bounce (briefly scroll beyond the content to show the view below and then come back to top/bottom accordingly) (alwaysBounceVertical)">
@@ -132,8 +153,8 @@ export function MiscPropsTest() {
             {getScrollViewContent({amountOfChildren: 2})}
           </ScrollView>
         </View>
-      </TestCase.Example>
-      <TestCase.Example
+      </TestCase>
+      <TestCase
         tags={['C_API']}
         modal
         itShould="the top scrollview should bounce (briefly scroll beyond the content to show the view below and then come back to left/right accordingly) (alwaysBounceHorizontal)">
@@ -155,16 +176,16 @@ export function MiscPropsTest() {
             {getScrollViewContentHorizontal({amountOfChildren: 2})}
           </ScrollView>
         </View>
-      </TestCase.Example>
-      <TestCase.Example
+      </TestCase>
+      <TestCase
         modal
         skip={Platform.select({android: 'fails', harmony: 'fails on Android'})}
         itShould="scroll outside of the content when pressing the button (scrollToOverflowEnabled)"
         //https://gl.swmansion.com/rnoh/react-native-harmony/-/issues/315
       >
         <ScrollToOverflowEnabledTestCase />
-      </TestCase.Example>
-      <TestCase.Example
+      </TestCase>
+      <TestCase
         modal
         skip={'https://gl.swmansion.com/rnoh/react-native-harmony/-/issues/312'}
         itShould="the left scrollview should allow for nested scroll while the right one shouldn't (nestedScrollEnabled)">
@@ -206,18 +227,18 @@ export function MiscPropsTest() {
             {getScrollViewContent({})}
           </ScrollView>
         </View>
-      </TestCase.Example>
-      <TestCase.Example
+      </TestCase>
+      <TestCase
         modal
         itShould="scroll down on the btn press, but prevent scrolling by dragging (scrollEnabled)">
         <ScrollEnabledTestCase />
-      </TestCase.Example>
-      <TestCase.Example
+      </TestCase>
+      <TestCase
         modal
         skip={'https://gl.swmansion.com/rnoh/react-native-harmony/-/issues/499'}
         itShould="render scroll view with different fading edge length (fadingEdgeLength)">
         <ScrollViewFadingEdgeLengthTest />
-      </TestCase.Example>
+      </TestCase>
     </TestSuite>
   );
 }

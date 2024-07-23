@@ -1,7 +1,6 @@
-import { TestSuite } from '@rnoh/testerino';
+import { TestSuite, TestCase, Tester } from '@rnoh/testerino';
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, TouchableHighlight, Animated } from 'react-native';
-import { TestCase } from '../../components';
 import { AnimatedModal } from 'react-native-root-modal';
 
 export default class AnimatedModalTest extends Component {
@@ -64,48 +63,50 @@ export default class AnimatedModalTest extends Component {
 
     render() {
         return (
-            <TestSuite name="AnimatedModal">
-                <TestCase.Example itShould="AnimatedModal">
-                    <View style={styles.container}>
-                        <TouchableHighlight
-                            style={styles.button}
-                            underlayColor="#aaa"
-                            onPress={this.slideModal}
-                        >
-                            <Text>Slide</Text>
-                        </TouchableHighlight>
-                        <TouchableHighlight
-                            style={styles.button}
-                            underlayColor="#aaa"
-                            onPress={this.scaleModal}
-                        >
-                            <Text>Scale</Text>
-                        </TouchableHighlight>
-                        <AnimatedModal
-                            visible={this.state.visible}
-                            setValue={1}
-                            style={[styles.modal, {
-                                transform: [
-                                    { scale: this.state.scale.__getValue() },
-                                    { translateX: this.state.x.__getValue() }
-                                ]
-                            }]}
-                        >
+            <Tester>
+                <TestSuite name="AnimatedModal">
+                    <TestCase itShould="AnimatedModal">
+                        <View style={styles.container}>
                             <TouchableHighlight
-                                style={[styles.button, styles.close]}
+                                style={styles.button}
                                 underlayColor="#aaa"
-                                onPress={this.hideModal}
+                                onPress={this.slideModal}
                             >
-                                <Text>Close</Text>
+                                <Text>Slide</Text>
                             </TouchableHighlight>
+                            <TouchableHighlight
+                                style={styles.button}
+                                underlayColor="#aaa"
+                                onPress={this.scaleModal}
+                            >
+                                <Text>Scale</Text>
+                            </TouchableHighlight>
+                            <AnimatedModal
+                                visible={this.state.visible}
+                                setValue={1}
+                                style={[styles.modal, {
+                                    transform: [
+                                        { scale: this.state.scale.__getValue() },
+                                        { translateX: this.state.x.__getValue() }
+                                    ]
+                                }]}
+                            >
+                                <TouchableHighlight
+                                    style={[styles.button, styles.close]}
+                                    underlayColor="#aaa"
+                                    onPress={this.hideModal}
+                                >
+                                    <Text>Close</Text>
+                                </TouchableHighlight>
 
-                            <View style={styles.modalContainer}>
-                                <Text style={styles.text}>You can set any animation on Modal element</Text>
-                            </View>
-                        </AnimatedModal>
-                    </View>
-                </TestCase.Example>
-            </TestSuite>
+                                <View style={styles.modalContainer}>
+                                    <Text style={styles.text}>You can set any animation on Modal element</Text>
+                                </View>
+                            </AnimatedModal>
+                        </View>
+                    </TestCase>
+                </TestSuite>
+            </Tester>
         );
     }
 }
@@ -116,7 +117,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#fff',
-        height: 400
+        height: 700
     },
     modal: {
         top: 0,

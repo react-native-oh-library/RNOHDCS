@@ -54,8 +54,6 @@ export default class SechartsPie extends Component {
                 <View>
                     <Echarts ref={this.echart1} 
                     option={this.state.option1} 
-                    onPress={this.onPress} 
-                    height={400} 
                     backgroundColor={'white'} 
                     renderLoading={()=><View style={{backgroundColor: 'rgba(255,255,0,0)'}}/>}/>
                 </View>

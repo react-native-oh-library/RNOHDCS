@@ -1,15 +1,17 @@
 import {useState} from 'react';
 import {ScrollView, Text, View} from 'react-native';
-import {Button, TestCase} from '../../components';
+import {Button} from './button';
+import {TestCase} from '@rnoh/testerino';
+
 
 export function MomentumCallbacksTest() {
   return (
-    <TestCase.Example
+    <TestCase
       itShould="display amount of on drag/momentum begin/end events (drag fails on C-API)"
       modal
       tags={['C_API']}>
       <MomentumTestCase />
-    </TestCase.Example>
+    </TestCase>
   );
 }
 

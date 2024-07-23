@@ -1,7 +1,6 @@
-import {TestSuite} from '@rnoh/testerino';
-import React, {Component} from 'react';
-import {TestCase} from '../../components';
-import {Text, TouchableOpacity, View, Image, StyleSheet} from 'react-native';
+import { TestSuite, TestCase, Tester } from '@rnoh/testerino';
+import React, { Component } from 'react';
+import { Text, TouchableOpacity, View, Image, StyleSheet } from 'react-native';
 import { NormalHeader } from "react-native-spring-scrollview/src/NormalHeader";
 import { NormalFooter } from "react-native-spring-scrollview/src/NormalFooter";
 import { LargeList } from "react-native-largelist";
@@ -11,28 +10,30 @@ export default class RefreshAndLoadingTest extends Component {
   _largeList: any;
   _index = 0;
 
-  state = {data: [contacts[0]], allLoaded: false};
+  state = { data: [contacts[0]], allLoaded: false };
   render() {
     return (
-      <TestSuite name="RefreshAndLoadingTest">
-        <TestCase.Example itShould="RefreshAndLoading">
-          <LargeList
-            ref={ref => (this._largeList = ref)}
-            data={this.state.data}
-            heightForSection={() => 40}
-            renderSection={this._renderSection}
-            heightForIndexPath={() => 60}
-            renderIndexPath={this._renderItem}
-            refreshHeader={NormalHeader}
-            onRefresh={this._onRefresh}
-            loadingFooter={NormalFooter}
-            onLoading={this._onLoading}
-            allLoaded={this.state.allLoaded}
-            renderHeader={this._renderHeader}
-            renderFooter={this._renderFooter}
-          />
-        </TestCase.Example>
-      </TestSuite>
+      <Tester>
+        <TestSuite name="RefreshAndLoadingTest">
+          <TestCase itShould="RefreshAndLoading">
+            <LargeList
+              ref={ref => (this._largeList = ref)}
+              data={this.state.data}
+              heightForSection={() => 40}
+              renderSection={this._renderSection}
+              heightForIndexPath={() => 60}
+              renderIndexPath={this._renderItem}
+              refreshHeader={NormalHeader}
+              onRefresh={this._onRefresh}
+              loadingFooter={NormalFooter}
+              onLoading={this._onLoading}
+              allLoaded={this.state.allLoaded}
+              renderHeader={this._renderHeader}
+              renderFooter={this._renderFooter}
+            />
+          </TestCase>
+        </TestSuite>
+      </Tester>
     );
   }
   _renderHeader = () => {
@@ -82,8 +83,8 @@ export default class RefreshAndLoadingTest extends Component {
       </TouchableOpacity>
     );
   };
-  
-  _renderItem = ({section: section, row: row}) => {
+
+  _renderItem = ({ section: section, row: row }) => {
     const contact = this.state.data[section].items[row];
     return (
       <TouchableOpacity style={styles.row}>
@@ -115,9 +116,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginVertical: 30,
   },
-  row: {flex: 1, flexDirection: 'row', alignItems: 'center'},
-  image: {marginLeft: 16, width: 44, height: 44},
-  rContainer: {marginLeft: 20},
-  title: {fontSize: 18},
-  subtitle: {fontSize: 14, marginTop: 8},
+  row: { flex: 1, flexDirection: 'row', alignItems: 'center' },
+  image: { marginLeft: 16, width: 44, height: 44 },
+  rContainer: { marginLeft: 20 },
+  title: { fontSize: 18 },
+  subtitle: { fontSize: 14, marginTop: 8 },
 });

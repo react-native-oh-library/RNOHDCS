@@ -10,8 +10,7 @@ import type {
   ResizeMode,
   Response,
 } from '@bam.tech/react-native-image-resizer';
-import { TestSuite, Tester } from '@rnoh/testerino';
-import { TestCase } from '../components';
+import { TestSuite, Tester, TestCase } from '@rnoh/testerino';
 
 function RNImageResizerTest() {
   const [selectedMode, setMode] = useState<ResizeMode>('contain');
@@ -19,7 +18,7 @@ function RNImageResizerTest() {
   const [sizeTarget, setSizeTarget] = useState(80);
   return (
     <TestSuite name="ImageResizer">
-      <TestCase.Logical
+      <TestCase
         itShould="ImageResizer.createResizedImage"
         fn={async ({ expect }: any) => {
           try {

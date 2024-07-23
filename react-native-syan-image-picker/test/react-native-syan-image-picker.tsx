@@ -1,5 +1,4 @@
-import {TestSuite, Tester} from '@rnoh/testerino';
-import { TestCase } from '../components';
+import {TestSuite, Tester,TestCase} from '@rnoh/testerino';
 import * as React from "react";
 import {
   SafeAreaView,
@@ -11,56 +10,56 @@ import SyanImagePicker from "react-native-syan-image-picker";
 function RNSyanImagePickerTest() {
     return (
      <TestSuite name="SyanImagePicker">
-        <TestCase.Logical
+        <TestCase
           tags={['C_API']}
           itShould="SyanImagePicker  imageCount"
           fn={({expect}:any) => {
               expect(SyanImagePicker.imageCount).to.undefined;
           }}
         />
-        <TestCase.Logical
+        <TestCase
           tags={['C_API']}
           itShould="SyanImagePicker  isCamera"
           fn={({expect}:any) => {
               expect(SyanImagePicker.isCamera).to.be.undefined;
           }}
         />
-        <TestCase.Logical
+        <TestCase
           tags={['C_API']}
           itShould="SyanImagePicker isCrop"
           fn={({expect}:any) => {
               expect(SyanImagePicker.isCrop).to.be.undefined;
             }} 
         />
-        <TestCase.Logical
+        <TestCase
           tags={['C_API']}
           itShould="SyanImagePicker compress"
           fn={({expect}:any) => {
               expect(SyanImagePicker.compress).to.be.undefined;
             }} 
         />
-        <TestCase.Logical
+        <TestCase
           tags={['C_API']}
           itShould="SyanImagePicker quality"
           fn={({expect}:any) => {
               expect(SyanImagePicker.quality).to.be.undefined;
             }} 
         />
-        <TestCase.Logical
+        <TestCase
           tags={['C_API']}
           itShould="SyanImagePicker enableBase64"
           fn={({expect}:any) => {
               expect(SyanImagePicker.enableBase64).to.be.undefined;
             }} 
         />
-        <TestCase.Logical
+        <TestCase
           tags={['C_API']}
           itShould="SyanImagePicker videoCount"
           fn={({expect}:any) => {
               expect(SyanImagePicker.videoCount).to.be.undefined;
             }} 
         />
-        <TestCase.Logical
+        <TestCase
           tags={['C_API']}
           itShould="SyanImagePicker allowPickingMultipleVideo"
           fn={({expect}:any) => {
@@ -68,49 +67,49 @@ function RNSyanImagePickerTest() {
             }} 
         />
 
-        <TestCase.Logical
+        <TestCase
           tags={['C_API']}
           itShould="SyanImagePicker width"
           fn={({expect}:any) => {
               expect(SyanImagePicker.width).to.be.undefined;
             }} 
         />
-        <TestCase.Logical
+        <TestCase
           tags={['C_API']}
           itShould="SyanImagePicker height"
           fn={({expect}:any) => {
               expect(SyanImagePicker.height).to.be.undefined;
             }} 
         />
-        <TestCase.Logical
+        <TestCase
           tags={['C_API']}
           itShould="SyanImagePicker  original_uri"
           fn={({expect}:any) => {
               expect(SyanImagePicker.original_uri).to.be.undefined;
             }} 
         />
-        <TestCase.Logical
+        <TestCase
           tags={['C_API']}
           itShould="SyanImagePicker uri"
           fn={({expect}:any) => {
               expect(SyanImagePicker.uri).to.be.undefined;
             }} 
         />
- <TestCase.Logical
+ <TestCase
           tags={['C_API']}
           itShould="SyanImagePicker type"
           fn={({expect}:any) => {
               expect(SyanImagePicker.type).to.be.undefined;
             }} 
         />
-        <TestCase.Logical
+        <TestCase
           tags={['C_API']}
           itShould="SyanImagePicker size"
           fn={({expect}:any) => {
               expect(SyanImagePicker.size).to.be.undefined;
             }} 
         />
-        <TestCase.Logical
+        <TestCase
           tags={['C_API']}
           itShould="SyanImagePicker base64"
           fn={({expect}:any) => {
@@ -118,7 +117,7 @@ function RNSyanImagePickerTest() {
             }} 
         />
 
-        <TestCase.Logical
+        <TestCase
          itShould="SyanImagePicker.showImagePicker"
          fn={({expect}: any) => {
             let showImagePicker =  SyanImagePicker.showImagePicker( {
@@ -141,7 +140,7 @@ function RNSyanImagePickerTest() {
            
         }}
       />
-      <TestCase.Logical
+      <TestCase
          itShould="SyanImagePicker.asyncShowImagePicker"
          fn={({expect}: any) => {
           try {
@@ -154,7 +153,7 @@ function RNSyanImagePickerTest() {
         }}
       />
 
-      <TestCase.Logical
+      <TestCase
          itShould="SyanImagePicker.openCamera"
          fn={({expect}: any) => {
             let openCamera =  SyanImagePicker.openCamera({isCrop: true, showCropCircle: true, showCropFrame: false},
@@ -166,7 +165,7 @@ function RNSyanImagePickerTest() {
               },);
         }}
       />
-       <TestCase.Logical
+       <TestCase
          itShould="SyanImagePicker.asyncOpenCamera"
          fn={({expect}: any) => {
             try {
@@ -183,7 +182,7 @@ function RNSyanImagePickerTest() {
             } 
         }}
       />
-      <TestCase.Logical
+      <TestCase
          itShould="SyanImagePicker.deleteCache"
          fn={({expect}: any) => {
           try {
@@ -195,7 +194,7 @@ function RNSyanImagePickerTest() {
 
         }}
       />
-      <TestCase.Logical
+      <TestCase
          itShould="SyanImagePicker.removePhotoAtIndex"
          fn={({expect}: any) => {
           try {
@@ -207,7 +206,7 @@ function RNSyanImagePickerTest() {
 
         }}
       />
-      <TestCase.Logical
+      <TestCase
          itShould="SyanImagePicker.removeAllPhoto"
          fn={({expect}: any) => {
           try {
@@ -218,7 +217,7 @@ function RNSyanImagePickerTest() {
           }
         }}
       />
-      <TestCase.Logical
+      <TestCase
          itShould="SyanImagePicker.openVideoPicker"
          fn={({expect}: any) => {
             let openVideoPicker =  SyanImagePicker.openVideoPicker( {allowPickingMultipleVideo: true},

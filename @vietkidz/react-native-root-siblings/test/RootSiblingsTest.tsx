@@ -1,4 +1,4 @@
-import { TestSuite } from '@rnoh/testerino';
+import { TestSuite, TestCase, Tester } from '@rnoh/testerino';
 import React from 'react';
 import {
     View,
@@ -7,7 +7,6 @@ import {
     TouchableHighlight,
     Dimensions,
 } from 'react-native';
-import { TestCase } from '../../components';
 import RootSiblings, { RootSiblingParent, RootSiblingPortal } from 'react-native-root-siblings';
 
 var id = 0;
@@ -40,33 +39,35 @@ const updateSibling = () => {
             </View>,
         );
 };
-export default function DropShadowTest() {
+export default function RootSiblingsTest() {
     return (
-        <TestSuite name="DropShadow">
-            <TestCase.Example itShould="DropShadow View">
-                <View style={{ backgroundColor: 'green', height: 700, flex: 1 }}>
-                    <RootSiblingParent>
-                        <RootSiblingPortal>
-                            <View style={styles.container}>
-                                <TouchableHighlight style={styles.button} onPress={addSibling}>
-                                    <Text style={styles.buttonText}>Add element</Text>
-                                </TouchableHighlight>
-                                <TouchableHighlight
-                                    style={styles.button}
-                                    onPress={destroySibling}>
-                                    <Text style={styles.buttonText}>Destroy element</Text>
-                                </TouchableHighlight>
-                                <TouchableHighlight
-                                    style={styles.button}
-                                    onPress={updateSibling}>
-                                    <Text style={styles.buttonText}>Update element</Text>
-                                </TouchableHighlight>
-                            </View>
-                        </RootSiblingPortal>
-                    </RootSiblingParent>
-                </View>
-            </TestCase.Example>
-        </TestSuite>
+        <Tester>
+            <TestSuite name="RootSiblings">
+                <TestCase itShould="RootSiblings View">
+                    <View style={{ backgroundColor: 'green', height: 700, flex: 1 }}>
+                        <RootSiblingParent>
+                            <RootSiblingPortal>
+                                <View style={styles.container}>
+                                    <TouchableHighlight style={styles.button} onPress={addSibling}>
+                                        <Text style={styles.buttonText}>Add element</Text>
+                                    </TouchableHighlight>
+                                    <TouchableHighlight
+                                        style={styles.button}
+                                        onPress={destroySibling}>
+                                        <Text style={styles.buttonText}>Destroy element</Text>
+                                    </TouchableHighlight>
+                                    <TouchableHighlight
+                                        style={styles.button}
+                                        onPress={updateSibling}>
+                                        <Text style={styles.buttonText}>Update element</Text>
+                                    </TouchableHighlight>
+                                </View>
+                            </RootSiblingPortal>
+                        </RootSiblingParent>
+                    </View>
+                </TestCase>
+            </TestSuite>
+        </Tester>
     );
 }
 

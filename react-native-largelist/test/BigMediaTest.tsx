@@ -1,6 +1,5 @@
-import {TestSuite} from '@rnoh/testerino';
-import React, {Component} from 'react';
-import {TestCase} from '../../components';
+import { TestSuite, TestCase, Tester } from '@rnoh/testerino';
+import React, { Component } from 'react';
 import {
   ImageBackground,
   StyleSheet,
@@ -9,14 +8,15 @@ import {
   View,
   Image,
 } from 'react-native';
-import {LargeList} from 'react-native-largelist';
-import {MediaWrapper} from 'react-native-largelist';
+import { LargeList } from 'react-native-largelist';
+import { MediaWrapper } from 'react-native-largelist';
 
 export default class BigMediaTest extends Component {
-    render() {
-      return (
+  render() {
+    return (
+      <Tester>
         <TestSuite name="BigMediaTest">
-          <TestCase.Example itShould="MediaWrapper">
+          <TestCase itShould="MediaWrapper">
             <LargeList
               data={pics}
               heightForSection={() => 50}
@@ -27,43 +27,44 @@ export default class BigMediaTest extends Component {
               renderFooter={this._renderFooter}
               renderScaleHeaderBackground={this._renderHeaderBackground}
             />
-          </TestCase.Example>
+          </TestCase>
         </TestSuite>
-      );
-    }
-    _renderSection = (section: number) => {
-      return (
-        <View style={styles.section}>
-          <Text>Section {section}</Text>
-        </View>
-      );
-    };
-    
-  _renderIndexPath = ({section: section, row: row}, mediaWrapperParam) => {
+      </Tester>
+    );
+  }
+  _renderSection = (section: number) => {
+    return (
+      <View style={styles.section}>
+        <Text>Section {section}</Text>
+      </View>
+    );
+  };
+
+  _renderIndexPath = ({ section: section, row: row }, mediaWrapperParam) => {
     return (
       <View style={styles.row}>
         {true ? (
           <MediaWrapper
-            style={{width: 300, height: 300}}
+            style={{ width: 300, height: 300 }}
             mediaWrapperParam={mediaWrapperParam}
             renderLoading={() => (
               <Image
                 fadeDuration={0}
-                style={{width: 128, height: 128}}
+                style={{ width: 128, height: 128 }}
                 source={require('./icons/loading.gif')}
               />
             )}
             loadEndFunc="onLoadEnd">
             <Image
               fadeDuration={0}
-              style={{flex: 1}}
-              source={{uri: pics[section].items[row]}}
+              style={{ flex: 1 }}
+              source={{ uri: pics[section].items[row] }}
             />
           </MediaWrapper>
         ) : (
           <Image
-            style={{width: 300, height: 300}}
-            source={{uri: pics[section].items[row]}}
+            style={{ width: 300, height: 300 }}
+            source={{ uri: pics[section].items[row] }}
           />
         )}
         <Text>
@@ -73,11 +74,11 @@ export default class BigMediaTest extends Component {
       </View>
     );
   };
-  
+
   _renderHeaderBackground = () => {
     return (
       <ImageBackground
-        style={{flex: 1}}
+        style={{ flex: 1 }}
         source={require('./icons/ScaleHeader.jpg')}
       />
     );
@@ -101,45 +102,45 @@ export default class BigMediaTest extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-    },
-    header: {
-      alignSelf: 'center',
-      marginVertical: 50,
-    },
-    section: {
-      flex: 1,
-      backgroundColor: 'gray',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    row: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    line: {
-      position: 'absolute',
-      left: 0,
-      right: 0,
-      bottom: 0,
-      height: 1,
-      backgroundColor: '#EEE',
-    },
-  });
-  
+  container: {
+    flex: 1,
+  },
+  header: {
+    alignSelf: 'center',
+    marginVertical: 50,
+  },
+  section: {
+    flex: 1,
+    backgroundColor: 'gray',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  row: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  line: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: 1,
+    backgroundColor: '#EEE',
+  },
+});
+
 const pics = [
-    {
-      items: [
-        'https://images.unsplash.com/photo-1624916888351-a18f955a1b93?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ0NTE1Nw&ixlib=rb-1.2.1&q=80&w=300',
-        'https://images.unsplash.com/photo-1626743702655-543c7789cd4d?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ0NTI4MQ&ixlib=rb-1.2.1&q=80&w=300',
-        'https://images.unsplash.com/flagged/photo-1625836014110-880aae477f2b?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ0NTI5NQ&ixlib=rb-1.2.1&q=80&w=300',
-        'https://images.unsplash.com/photo-1626938929084-9a208ef71966?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ0NTMwNw&ixlib=rb-1.2.1&q=80&w=300',
-        'https://images.unsplash.com/photo-1626772699189-70c18061e19f?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ0NTMxNg&ixlib=rb-1.2.1&q=80&w=300',
-        'https://images.unsplash.com/photo-1625154530002-54c2165faa17?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ0NTMyNw&ixlib=rb-1.2.1&q=80&w=300',
-        'https://images.unsplash.com/photo-1626619640460-7909f3d69043?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ0NTMzNw&ixlib=rb-1.2.1&q=80&w=300',
-        'https://images.unsplash.com/photo-1625424629172-4de23aa6dd9a?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ0NTM0NQ&ixlib=rb-1.2.1&q=80&w=300',
+  {
+    items: [
+      'https://images.unsplash.com/photo-1624916888351-a18f955a1b93?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ0NTE1Nw&ixlib=rb-1.2.1&q=80&w=300',
+      'https://images.unsplash.com/photo-1626743702655-543c7789cd4d?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ0NTI4MQ&ixlib=rb-1.2.1&q=80&w=300',
+      'https://images.unsplash.com/flagged/photo-1625836014110-880aae477f2b?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ0NTI5NQ&ixlib=rb-1.2.1&q=80&w=300',
+      'https://images.unsplash.com/photo-1626938929084-9a208ef71966?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ0NTMwNw&ixlib=rb-1.2.1&q=80&w=300',
+      'https://images.unsplash.com/photo-1626772699189-70c18061e19f?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ0NTMxNg&ixlib=rb-1.2.1&q=80&w=300',
+      'https://images.unsplash.com/photo-1625154530002-54c2165faa17?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ0NTMyNw&ixlib=rb-1.2.1&q=80&w=300',
+      'https://images.unsplash.com/photo-1626619640460-7909f3d69043?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ0NTMzNw&ixlib=rb-1.2.1&q=80&w=300',
+      'https://images.unsplash.com/photo-1625424629172-4de23aa6dd9a?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ0NTM0NQ&ixlib=rb-1.2.1&q=80&w=300',
       'https://images.unsplash.com/photo-1626304757781-669070badc44?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ1NDEyOA&ixlib=rb-1.2.1&q=80&w=300',
       'https://images.unsplash.com/photo-1627297511458-b18880b542a9?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ1NDEzNw&ixlib=rb-1.2.1&q=80&w=300',
       'https://images.unsplash.com/photo-1625893356075-7ba34a92d241?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ1NDE0NA&ixlib=rb-1.2.1&q=80&w=300',
@@ -153,7 +154,7 @@ const pics = [
   },
   {
     items: [
-        'https://images.unsplash.com/photo-1625029117304-2f0299e7b544?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ1NDIxMQ&ixlib=rb-1.2.1&q=80&w=300',
+      'https://images.unsplash.com/photo-1625029117304-2f0299e7b544?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ1NDIxMQ&ixlib=rb-1.2.1&q=80&w=300',
       'https://images.unsplash.com/photo-1625089168404-39770c5803b4?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ1NDIxNw&ixlib=rb-1.2.1&q=80&w=300',
       'https://images.unsplash.com/photo-1625449743379-39dc56f49380?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ1NDI0MA&ixlib=rb-1.2.1&q=80&w=300',
       'https://images.unsplash.com/photo-1627088271575-b0745fca4356?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ1NDI1MQ&ixlib=rb-1.2.1&q=80&w=300',
@@ -170,7 +171,7 @@ const pics = [
   },
   {
     items: [
-        'https://images.unsplash.com/photo-1625766991377-c6a785264ede?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ1NDMyMw&ixlib=rb-1.2.1&q=80&w=300',
+      'https://images.unsplash.com/photo-1625766991377-c6a785264ede?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ1NDMyMw&ixlib=rb-1.2.1&q=80&w=300',
       'https://images.unsplash.com/photo-1624916888608-0d65572fc732?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ1NDMyOQ&ixlib=rb-1.2.1&q=80&w=300',
       'https://images.unsplash.com/photo-1625144778908-a0cac2794cd3?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ1NDMzNQ&ixlib=rb-1.2.1&q=80&w=300',
       'https://images.unsplash.com/photo-1625088886134-7d4d45bbeaf4?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzQ1NDM1MA&ixlib=rb-1.2.1&q=80&w=300',

@@ -7,7 +7,7 @@ export default class SechartsCandlestick extends Component {
     super(props);
     this.state = {
       image: '',
-      option1: option = {
+      option1: {
         xAxis: {
           data: ['2017-10-24', '2017-10-25', '2017-10-26', '2017-10-27']
         },
@@ -35,9 +35,6 @@ export default class SechartsCandlestick extends Component {
         <View>
           <Echarts ref={this.echart1}
             option={this.state.option1}
-            onPress={this.onPress}
-            height={400}
-            backgroundColor={'white'}
             renderLoading={() => <View style={{ backgroundColor: 'rgba(255,255,0,0)' }} />} />
         </View>
       </View>

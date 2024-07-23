@@ -1,6 +1,6 @@
 
 import { SafeAreaView, View,StyleSheet} from 'react-native';
-import {NavigationContainer, Page} from '../../components';
+import {NavigationContainer, Page} from './Navigation';
 import {PortalHost, PortalProvider} from '@gorhom/portal';
 import {DatePickerExample} from './DatepickerDemo';
 import {AlertDialogExample} from './AlertDialogDemo';

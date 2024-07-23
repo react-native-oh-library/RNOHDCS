@@ -417,6 +417,16 @@ const RNDeviceInfoTest = () =>  {
                     expect(DeviceInfo.getLastUpdateTimeSync()).to.be.a('number');
                 }}
             />
+             <TestCase
+                itShould="DeviceInfo.getMacAddress"
+                fn={({ expect }: any) => {
+                    DeviceInfo.getMacAddress().then((result) => {
+                        expect(result).to.be.a('string');
+                    }).catch((error) => {
+                        expect(error).to.not.be.undefined;
+                    })
+                }}
+            />
             <TestCase
                 itShould="DeviceInfo.getManufacturer"
                 fn={({ expect }: any) => {
@@ -667,6 +677,16 @@ const RNDeviceInfoTest = () =>  {
                 itShould="DeviceInfo.hasHmsSync"
                 fn={({ expect }: any) => {
                     expect(DeviceInfo.hasHmsSync()).to.be.a('Boolean');
+                }}
+            />
+            <TestCase
+                itShould="DeviceInfo.hasNotch"
+                fn={({ expect }: any) => {
+                    DeviceInfo.hasNotch().then((result) => {
+                        expect(result).to.be.a('Boolean');
+                    }).catch((err) => {
+                        expect(err).to.not.be.undefined;
+                    });
                 }}
             />
             <TestCase
