@@ -14,18 +14,21 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     containerStyle: {
-        borderColor: "#ee7700",
+        backgroundColor:'red',
+        borderColor: '#ee7700',
         borderWidth: 5,
         borderRadius: 15,
         width: '100%'
+
     },
     inputContainerStyle: {
-        borderWidth: 5,
-        borderColor: "green",
+        marginLeft:20,
+        marginTop:20,
+        width:'50%'
     },
     listContainerStyle: {
         borderWidth: 10,
-        borderColor: "yellow",
+        borderColor: 'yellow',
     },
     itemText: {
         paddingTop: 10,
@@ -62,11 +65,12 @@ class App extends Component {
         isVisible: true,
         selectName: '',
         showResults: false,
+        showResultsFlags: false,
     }
     render() {
-        const { query, isVisible, showResults } = this.state;
+        const { query, isVisible, showResults ,showResultsFlags} = this.state;
         const data = filterData(query);
-        const showResultFlag = getFlagStr(showResults);
+        const flag = getFlagStr(showResultsFlags);
         return (
             <ScrollView >
                 <Tester>
@@ -110,7 +114,7 @@ class App extends Component {
                                 />
                             </View>
                         </TestCase>
-                        <TestCase itShould="Test inputContainerStyle { borderWidth: 5,borderColor: 'green' }">
+                        <TestCase itShould="Test inputContainerStyle { marginLeft:20, marginTop:20,width:'50%' }">
                             <View style={{ backgroundColor: '#d1f8f7', height: 200, paddingTop: 10 }}>
                                 <AutocompleteInput
                                     inputContainerStyle={styles.inputContainerStyle}
@@ -234,7 +238,7 @@ class App extends Component {
                         </TestCase>
                         <TestCase itShould="Test onShowResults (when the autocomplete suggestions appear or disappear will be called)" >
                             <View style={{ backgroundColor: '#d1f8f7', height: 200, paddingTop: 10 }}>
-                                <Text>suggestions isShow:{showResultFlag}</Text>
+                                <Text>suggestions isShow:{flag}</Text>
                                 <AutocompleteInput
                                     data={data.length === 1 && compare(this.state.selectName, data[0].value) ? [] : data}
                                     value={query}
@@ -252,7 +256,7 @@ class App extends Component {
                                         }
                                         this.setState({ query: text });
                                     }}
-                                    onShowResults={(showResults) => { this.state.showResults = showResults }}
+                                    onShowResults={(showResults) => { this.state.showResultsFlags = showResults }}
                                     hideResults={isVisible}
                                     flatListProps={{
                                         keyExtractor: (_, idx) => String(idx),
