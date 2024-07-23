@@ -132,6 +132,8 @@ function AMapDemo() {
         zIndex = { 1}
         position = {{ latitude: 39.806901, longitude: 116.397972 }}
         onPress = {() => Alert.alert("onPress")}
+        onDragStart = {() => { console.info("AMapViewEventType map3d Marker onDragStart") }}
+        onDrag = {() => { console.info("AMapViewEventType map3d Marker onDrag") }}
         onDragEnd = {({ nativeEvent }) =>
         Alert.alert(`onDragEnd: ${nativeEvent.latitude}, ${nativeEvent.longitude}`)}
       />
