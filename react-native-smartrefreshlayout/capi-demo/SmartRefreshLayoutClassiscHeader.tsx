@@ -106,6 +106,9 @@ const App = () => {
         onPullDownToRefresh={() => {
           console.log("Smart RN onPullDownToRefresh")
         }}
+        onHeaderReleased={() => {
+          console.log("Smart RN onHeaderReleased")
+        }}
         onHeaderMoving={(data: any) => {
           if (data.nativeEvent.offset > headerHeight - 20) {
             return;
