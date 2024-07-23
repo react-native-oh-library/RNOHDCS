@@ -120,22 +120,27 @@ export function  TooltipBackgroundColor (props:any){
       </Tooltip>
       )
   }
-
+  
   export function  TooltipCloseOnChildInteraction (props:any){
     const {closeOnChildInteraction} =props
     const [toolTipCloseOnChildInteractionVisible,setToolTipCloseOnChildInteractionVisible] = useState(false);
+    const [textChildInteraction,setTextChildInteraction] = useState(1);
+    const onclikcloseOnChildInteraction =()=>{
+      setTextChildInteraction( textChildInteraction+1)
+      setToolTipCloseOnChildInteractionVisible(false)
+    }
       return(
       <View>
       <Tooltip 
         isVisible={toolTipCloseOnChildInteractionVisible}
-        content={<Text>气泡关闭子交互属性测试!</Text>}
+        content={<Text onPress={() => {console.log('Triggered') }}>气泡关闭子交互属性测试!</Text>}
         placement="top"
-        onClose={() => setToolTipCloseOnChildInteractionVisible(false)}
+        onClose={() =>onclikcloseOnChildInteraction() }
         closeOnChildInteraction={closeOnChildInteraction}
         contentStyle={{margin:5}}
       >
       <TouchableHighlight onPress={() => setToolTipCloseOnChildInteractionVisible(!toolTipCloseOnChildInteractionVisible)}>
-      <Text style={{color:'red',fontWeight:'900'}}>点击气泡关闭子交互属性属性测试</Text>
+      <Text style={{color:'red',fontWeight:'900'}}>点击气泡关闭子交互属性属性测试<Text style={{color:'blue',fontWeight:'900'}}>子交互{textChildInteraction}</Text></Text>
     </TouchableHighlight>
       </Tooltip>
     </View>
