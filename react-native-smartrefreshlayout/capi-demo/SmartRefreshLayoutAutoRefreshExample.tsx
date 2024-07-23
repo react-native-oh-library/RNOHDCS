@@ -49,6 +49,9 @@ const SmartRefreshLayoutAutoRefreshExample = () => {
         onPullDownToRefresh={() => {
           console.log("Smart RN onPullDownToRefresh")
         }}
+        onHeaderReleased={() => {
+          console.log("Smart RN onHeaderReleased")
+        }}
         onHeaderMoving={(data: any) => {
           const { percent, offset } = data.nativeEvent;
           if (percent <= 1) {
