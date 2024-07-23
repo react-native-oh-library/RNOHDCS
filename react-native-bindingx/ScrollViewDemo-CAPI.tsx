@@ -79,6 +79,10 @@ export default class ScrollViewDemo extends React.Component {
         });
     }
 
+    onUnBindAll() {
+        bindingx.unbindAll();
+    }
+
     getComputedStyle() {
         let target = findNodeHandle(this.refs._target);
         bindingx.getComputedStyle(target).then(data => {
@@ -112,6 +116,16 @@ export default class ScrollViewDemo extends React.Component {
                     style={styles.button}
                 >
                     <Text style={styles.text}>Unbind</Text>
+                </TouchableHighlight>
+
+
+                <TouchableHighlight
+                    onPress={() => {
+                        this.onUnBindAll()
+                    }}
+                    style={styles.button}
+                >
+                    <Text style={styles.text}>UnBindAll</Text>
                 </TouchableHighlight>
 
                 <TouchableHighlight
