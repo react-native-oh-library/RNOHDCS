@@ -27,6 +27,7 @@ export default class RefreshAndLoadingExample extends React.Component {
         inverted={true}
         refreshHeader={CommonLottieHeader}
         loadingFooter={CommonLottieFooter}
+        allLoaded={this.state.allLoaded}
       >
         {arr.map(item => (
           <Text key={item} style={styles.text}>
