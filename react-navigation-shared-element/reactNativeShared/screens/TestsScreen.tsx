@@ -5,6 +5,7 @@ import { Router, NavBar, ListItem, Colors } from "../components";
 import { getTestGroup, Test, TestGroup } from "../types";
 import { TestScreen } from "./TestScreen";
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
+import React from "react";
 
 const styles = StyleSheet.create({
   container: {
@@ -31,7 +32,6 @@ type Props = {
 export function TestsScreen(props: Props) {
   const { title, navigation, description } = props;
   const tests: (Test | TestGroup)[] = props.tests;
-
   const onPressItem = useCallback(
     (test: Test | TestGroup) => {
       const resolvedDescription =
@@ -54,10 +54,8 @@ export function TestsScreen(props: Props) {
       },
     [navigation, description]
   );
-
   return (
     <View style={styles.container}>
-      {/* {!navigation ? <NavBar title={title || "Tests"} /> : undefined} */}
       <ScrollView style={styles.content} endFillColor={Colors.empty}>
         <Tester>
           <TestSuite name='Shared Element Demo'>
