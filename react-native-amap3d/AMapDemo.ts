@@ -67,7 +67,7 @@ function AMapDemo() {
         initialCameraPosition = {{
             target: {
               latitude: 39.91095,
-                longitude: 116.37296,
+              longitude: 116.37296,
             },
             zoom: 8,
           }
@@ -127,8 +127,8 @@ function AMapDemo() {
       <Marker
         draggable={ true }
         flat = { true}
-        centerOffset = { 0.5, 1}
-        anchor = { 0.5, 1}
+        centerOffset = {{x:0.5,y:1}}
+        anchor = {{x:0.5,y:1}}
         zIndex = { 1}
         position = {{ latitude: 39.806901, longitude: 116.397972 }}
         onPress = {() => Alert.alert("onPress")}
@@ -137,8 +137,8 @@ function AMapDemo() {
         onDragEnd = {({ nativeEvent }) =>
         Alert.alert(`onDragEnd: ${nativeEvent.latitude}, ${nativeEvent.longitude}`)}
       />
-      < /MapView>
-    < /View>
+      </MapView>
+    </View>
 );
 };
 

@@ -46,52 +46,13 @@ export function AMap3dTest() {
         { latitude: 39.806901, longitude: 116.597972 },
     ];
 
-    const _onPress = (event: ReactNative.NativeSyntheticEvent<LatLng>) => {
-        console.info("AMapViewEventType map3d demo  ===" + event.nativeEvent.latitude + "===" + event.nativeEvent.longitude)
-    }
-
-    const _onLongPress = (event: ReactNative.NativeSyntheticEvent<LatLng>) => {
-        console.info("AMapViewEventType map3d demo longevent===" + event.nativeEvent.latitude + "===" + event.nativeEvent.longitude)
-    }
-	
-    const _onPressPoi = (event: ReactNative.NativeSyntheticEvent<MapPoi>) => {
-        console.info("AMapViewEventType map3d demo onPressPoi")
-    }
-
-    const _onLoad = (event: ReactNative.NativeSyntheticEvent<voidEvent>) => {
-        Alert.alert("onLoad successful")
-    }
-
-    const _onMarkerPress = () => {
-        Alert.alert("onPress")
-    }
-
-    const _onMarkerDragStart = () => {
-        console.info("AMapViewEventType map3d marker onDragStart")
-    }
-
-    const _onMarkerDrag = () => {
-        console.info("AMapViewEventType map3d marker onDrag")
-    }
-
-    const _onMarkerDragEnd = () => {
-        Alert.alert("onDragEnd")
-    }
-
-    const _onPolylinePress = () => {
-        console.info("AMapViewEventType map3d polyline onPress width 200")
-    }
     return (
         <Tester>
             <TestSuite name="PlatformColor">
                 <TestCase itShould="MapView initialPage props">
                     <MapView
-                        mapType={1}
+                        mapType={3}
                         myLocationEnabled={true}
-                        onPress={_onPress}
-                        onLongPress={_onLongPress}
-                        onPressPoi={_onPressPoi}
-                        onLoad={_onLoad}
                         tiltGesturesEnabled={true}
                         rotateGesturesEnabled={true}
                         scrollGesturesEnabled={true}
@@ -110,42 +71,36 @@ export function AMap3dTest() {
                                 latitude: 39.91095,
                                 longitude: 116.37296,
                             },
-                            zoom: 8,
+                            zoom: 3,
                         }}
                             > 
                         <Circle
                             strokeWidth={5}
-                            strokeColor="rgba(0, 0, 255, 0.5)"
-                            fillColor="rgba(255, 0, 0, 0.5)"
-                            radius={500}
+                            strokeColor="rgba(0, 128, 255, 0.5)"
+                            fillColor="rgba(255, 0, 128, 0.5)"
+                            radius={2000}
                             zIndex = {1}
                             center={{ latitude: 39.906901, longitude: 116.397972 }}
                         />
                         <Circle
                             strokeWidth={10}
-                            strokeColor="rgba(22, 69, 55, 0.5)"
-                            fillColor="rgba(36, 21, 36, 0.5)"
-                            radius={500}
+                            strokeColor="rgba(128, 69, 55, 0.5)"
+                            fillColor="rgba(36, 21, 128, 0.5)"
+                            radius={1000}
                             center={{ latitude: 39.966901, longitude: 116.397972 }}
                         />
                         
                         <Polygon
                             strokeWidth={5}
                             strokeColor="rgba(0, 0, 255, 0.5)"
-                            fillColor="rgba(255, 0, 0, 0.5)"
+                            fillColor="rgba(255, 0, 128, 0.5)"
                             points={points}
                             zIndex = {1}
                         />
-                        <Polygon
-                            strokeWidth={10}
-                            strokeColor="rgba(95, 36, 202, 0.5)"
-                            fillColor="rgba(255, 235, 123, 0.5)"
-                            points={points2}
-                        />
-                        <Polyline width={100}  color="rgba(0, 255, 0, 0.5)" points={line1} onPress={_onPolylinePress} />
+                        <Polyline width={100}  color="rgba(0, 255, 255, 0.5)" points={line1}  />
                         <Polyline
                             width={100}
-                            colors={["#f44336", "#4caf50", "#00ff23"]}
+                            colors={["#741236", "#4caf50", "#123654"]}
                             points={line3}
                             zIndex = {1}
                             geodesic = { true}
@@ -153,14 +108,10 @@ export function AMap3dTest() {
                         />
                         <Marker
                             draggable={ true }
-                            flat = { true}
-                            centerOffset = {{x:0.5,y:1}}
-                            anchor = {{x:0.5,y:1}}
-                            position={{ latitude: 39.806901, longitude: 116.397972 }}
-                            onPress={_onMarkerPress}
-                            onDragStart={_onMarkerDragStart}
-                            onDrag={_onMarkerDrag}
-                            onDragEnd={_onMarkerDragEnd}
+                            flat = { false}
+                            centerOffset = {{x:0.5,y:0.5}}
+                            anchor = {{x:0.5,y:0.5}}
+                            position={{ latitude: 40.806901, longitude: 116.397972 }}
                             zIndex = {1}
                         />
                     </MapView>
