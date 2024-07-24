@@ -48,7 +48,7 @@ export const ActionBtnTest = () => {
   const [itemHide, setItemHide] = useState(false)
   const [itemShadow, setItemShadow] = useState("red")
   const [resetToken,setRestToken] = useState(1)
-
+  const [backgroundTappable,setBackgroundTappable] =useState(false)
 
   const styles = StyleSheet.create({
     btnShow: {
@@ -133,6 +133,38 @@ export const ActionBtnTest = () => {
                     setRestToken(2)
                     setActive(false)
                     setState(true)
+                  }}></Button>
+                </View>
+              );
+            }}
+            assert={async ({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
+                <TestCase
+            key={`getInitStatus_31`}
+            itShould={"ActionButton展开时背景是否可以点击  ActionButton backgroundTappable属性"}
+            tags={['C_API']}
+            initialState={false}
+            arrange={({ setState }) => {
+              return (
+                <View style={{ flex: 1,height:200 }}>
+                   {
+                  <ActionButton  bgColor="green" backgroundTappable={backgroundTappable} >
+                       <ActionButton.Item
+                      size={itemSize}
+                      buttonColor="#9b59b6"
+                      title={itemTitle}
+                     
+                    >
+                      <Text>1</Text>
+                    </ActionButton.Item>
+                    </ActionButton>
+                   }
+                  <Button title={"active"} onPress={() => {
+                  setBackgroundTappable(true)
+                    setState(true)
+                
                   }}></Button>
                 </View>
               );
@@ -936,7 +968,7 @@ export const ActionBtnTest = () => {
           />
           <TestCase
             key={`getInitStatus_28`}
-            itShould={"展示与隐藏子按钮阴影   ActionButton.Item hideLabelShadow属性"}
+            itShould={"展示与隐藏子按钮左侧文字的阴影   ActionButton.Item hideLabelShadow属性"}
             tags={['C_API']}
             initialState={false}
             arrange={({ setState }) => {
@@ -1005,6 +1037,7 @@ export const ActionBtnTest = () => {
               expect(state).to.be.true;
             }}
           />
+     
           
         </TestSuite>
       
