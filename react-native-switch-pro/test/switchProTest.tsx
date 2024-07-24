@@ -48,10 +48,11 @@ export default class SwitchProTest extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#5174a2',
+        height: 500,
+        width: 350,
     },
     welcome: {
         fontSize: 20,
