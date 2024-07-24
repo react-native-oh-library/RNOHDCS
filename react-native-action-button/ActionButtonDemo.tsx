@@ -80,13 +80,14 @@ export const ActionBtnTest = () => {
                     <ActionButton.Item
                       buttonColor="#9b59b6"
                       title="New Task"
-                      onPress={() => console.log("notes tapped!")}
+                      onPress={() => {}}
                     >
                       <Text>1</Text>
                     </ActionButton.Item>
                     <ActionButton.Item
                       buttonColor="#3498db"
                       title="Notifications"
+                      onPress={()=> {}}
                     >
                       <Text>2</Text>
                     </ActionButton.Item>
@@ -115,7 +116,7 @@ export const ActionBtnTest = () => {
                     <ActionButton.Item
                       buttonColor="#9b59b6"
                       title="New Task"
-                      onPress={() => console.log("notes tapped!")}
+                      onPress={()=> {}}
                     >
                       <Text>1</Text>
                      
@@ -123,6 +124,7 @@ export const ActionBtnTest = () => {
                     <ActionButton.Item
                       buttonColor="#3498db"
                       title="Notifications"
+                      onPress={()=> {}}
                     >
                       <Text>2</Text>
                       
@@ -155,7 +157,7 @@ export const ActionBtnTest = () => {
                       size={itemSize}
                       buttonColor="#9b59b6"
                       title={itemTitle}
-                     
+                      onPress={()=> {}}
                     >
                       <Text>1</Text>
                     </ActionButton.Item>
@@ -188,7 +190,7 @@ export const ActionBtnTest = () => {
                     <ActionButton.Item
                       buttonColor="#9b59b6"
                       title="New Task"
-                      onPress={() => console.log("notes tapped!")}
+                      onPress={()=> {}}
                     >
                       <Text>1</Text>
                      
@@ -196,6 +198,7 @@ export const ActionBtnTest = () => {
                     <ActionButton.Item
                       buttonColor="#3498db"
                       title="Notifications"
+                      onPress={()=> {}}
                     >
                       <Text>2</Text>
                       
@@ -229,7 +232,7 @@ export const ActionBtnTest = () => {
                     <ActionButton.Item
                       buttonColor="#9b59b6"
                       title="New Task"
-                      onPress={() => console.log("notes tapped!")}
+                      onPress={()=> {}}
                     >
                       <Text>1</Text>
                      
@@ -237,6 +240,7 @@ export const ActionBtnTest = () => {
                     <ActionButton.Item
                       buttonColor="#3498db"
                       title="Notifications"
+                      onPress={()=> {}}
                     >
                       <Text>2</Text>
                      
@@ -270,7 +274,7 @@ export const ActionBtnTest = () => {
                        <ActionButton.Item
                          buttonColor="#9b59b6"
                          title="New Task"
-                         onPress={() => console.log("notes tapped!")}
+                         onPress={()=> {}}
                        >
                          <Text>1</Text>
                        </ActionButton.Item>
@@ -301,7 +305,7 @@ export const ActionBtnTest = () => {
                     <ActionButton.Item
                       buttonColor="#9b59b6"
                       title="New Task"
-                      onPress={() => console.log("notes tapped!")}
+                      onPress={()=> {}}
                     >
                       <Text>1</Text>
                     </ActionButton.Item>
@@ -327,9 +331,9 @@ export const ActionBtnTest = () => {
                 <View style={{ flex: 1,height:200 }}>
                   <ActionButton style={{zIndex:10}} bgOpacity={bgOpacity}  buttonColor="green" bgColor={"#ff0000"} autoInactive={false}>
                     <ActionButton.Item
-                      
+                     
                       title="New Task"
-                      onPress={() => console.log("notes tapped!")}
+                      onPress={() => {}}
                     >
                       <Text>1</Text>
                     </ActionButton.Item>
@@ -357,7 +361,7 @@ export const ActionBtnTest = () => {
                   <ActionButton bgColor={bgColor}  autoInactive={false}>
                     <ActionButton.Item
                       title="New Task"
-                      onPress={() => console.log("notes tapped!")}
+                      onPress={()=> {}}
                     >
                       <Text>1</Text>
                     </ActionButton.Item>
@@ -385,7 +389,7 @@ export const ActionBtnTest = () => {
                     <ActionButton.Item
                       buttonColor="#9b59b6"
                       title="New Task"
-                      onPress={() => console.log("notes tapped!")}
+                      onPress={()=> {}}
                     >
                       <Text>1</Text>
                     </ActionButton.Item>
@@ -413,7 +417,7 @@ export const ActionBtnTest = () => {
                     <ActionButton.Item
                       buttonColor="#9b59b6"
                       title="New Task"
-                      onPress={() => console.log("notes tapped!")}
+                      onPress={()=> {}}
                     >
                       <Text>1</Text>
                     </ActionButton.Item>
@@ -441,14 +445,14 @@ export const ActionBtnTest = () => {
                     <ActionButton.Item
                       buttonColor="#9b59b6"
                       title="New Task"
-                      onPress={() => console.log("notes tapped!")}
+                      onPress={()=> {}}
                     >
                       <Text>1</Text>
                     </ActionButton.Item>
                     <ActionButton.Item
                       buttonColor="#9b59b6"
                       title="New Task2"
-                      onPress={() => console.log("notes tapped!")}
+                      onPress={()=> {}}
                     >
                       <Text>2</Text>
                     </ActionButton.Item>
@@ -476,7 +480,7 @@ export const ActionBtnTest = () => {
                     <ActionButton.Item
                       buttonColor="#9b59b6"
                       title="New Task"
-                      onPress={() => console.log("notes tapped!")}
+                      onPress={()=> {}}
                     >
                       <Text>1</Text>
                     </ActionButton.Item>
@@ -507,7 +511,7 @@ export const ActionBtnTest = () => {
                        <ActionButton.Item
                          buttonColor="#9b59b6"
                          title="New Task"
-                         onPress={() => console.log("notes tapped!")}
+                         onPress={()=> {}}
                        >
                          <Text>1</Text>
                        </ActionButton.Item>
@@ -540,7 +544,7 @@ export const ActionBtnTest = () => {
                     <ActionButton.Item
                       buttonColor="#9b59b6"
                       title="New Task"
-                      onPress={() => console.log("notes tapped!")}
+                      onPress={()=> {}}
                     >
                       <Text>1</Text>
                     </ActionButton.Item>
@@ -568,7 +572,7 @@ export const ActionBtnTest = () => {
                     <ActionButton.Item
                       buttonColor="#9b59b6"
                       title="New Task"
-                      onPress={() => console.log("notes tapped!")}
+                      onPress={()=> {}}
                     >
                       <Text>1</Text>
                     </ActionButton.Item>
@@ -642,7 +646,7 @@ export const ActionBtnTest = () => {
                        <ActionButton.Item
                       buttonColor="#9b59b6"
                       title="New Task"
-                      onPress={() => console.log("notes tapped!")}
+                      onPress={()=> {}}
                     >
                       <Text>1</Text>
                     </ActionButton.Item>
@@ -685,7 +689,7 @@ export const ActionBtnTest = () => {
                       <ActionButton.Item
                         buttonColor="#9b59b6"
                         title="New Task"
-                        onPress={() => console.log("notes tapped!")}
+                        onPress={()=> {}}
                       >
                         <Text>1</Text>
                       </ActionButton.Item>
@@ -719,7 +723,7 @@ export const ActionBtnTest = () => {
                     <ActionButton.Item
                       buttonColor="#9b59b6"
                       title="New Task"
-                      onPress={() => console.log("notes tapped!")}
+                      onPress={()=> {}}
                     >
                       <Text>1</Text>
                     </ActionButton.Item>
@@ -780,6 +784,7 @@ export const ActionBtnTest = () => {
                       size={itemSize}
                       buttonColor="#9b59b6"
                       title={itemTitle}
+                      onPress={()=> {}}
                     >
                       <Text>1</Text>
                     </ActionButton.Item>
@@ -842,6 +847,7 @@ export const ActionBtnTest = () => {
                       buttonColor="#9b59b6"
                       title={itemTitle}
                       textStyle={{color:itemTextStyle}}
+                      onPress={()=> {}}
                     >
                       <Text>1</Text>
                     </ActionButton.Item>
@@ -875,6 +881,7 @@ export const ActionBtnTest = () => {
                       buttonColor="#9b59b6"
                       title={itemTitle}
                       textContainerStyle={{backgroundColor:itemTextContainer}}
+                      onPress={()=> {}}
                     >
                       <Text>1</Text>
                     </ActionButton.Item>
@@ -907,6 +914,7 @@ export const ActionBtnTest = () => {
                       buttonColor="#9b59b6"
                       title={itemTitle}
                       spaceBetween={itemBetween}
+                      onPress={()=> {}}
                     >
                       <Text>1</Text>
                     </ActionButton.Item>
@@ -915,6 +923,7 @@ export const ActionBtnTest = () => {
                       buttonColor="red"
                       title={itemTitle}
                       spaceBetween={itemBetween}
+                      onPress={()=> {}}
                     >
                       <Text>2</Text>
                     </ActionButton.Item>
@@ -982,7 +991,7 @@ export const ActionBtnTest = () => {
                         buttonColor="#9b59b6"
                         title={itemTitle}
                         hideLabelShadow={itemHide}
-                        
+                        onPress={()=> {}}
                         shadowStyle={{ shadowOffset: { width: 10, height: 10 }, shadowColor: "red", shadowOpacity: 1,elevation:5, shadowRadius:3 }}
                       >
                         <Text>1</Text>
@@ -1020,6 +1029,7 @@ export const ActionBtnTest = () => {
                       buttonColor="#9b59b6"
                       title={itemTitle}
                       shadowStyle={{ shadowOffset: { width: 50, height: 50 }, shadowColor: itemShadow, shadowOpacity: 1,elevation:20 }}
+                      onPress={()=> {}}
                     >
                       <Text>1</Text>
                     </ActionButton.Item>
