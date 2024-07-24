@@ -50,7 +50,7 @@ export function PopoverOnePopoverExample() {
           closePopover?.()
         } : closePopover}
         fromRect={popoverAnchorRect}
-        supportedOrientations={['portrait']}
+        supportedOrientations={['portrait', 'landscape']}
         {...prpos.prop}
       >
         <Text>Hello from inside popover!</Text>
@@ -181,14 +181,6 @@ export function PopoverOnePopoverExample() {
     {
       prop: { useNativeDriver: true },
       name: '自定义useNativeDriver(true)',
-    },
-    {
-      prop: { supportedOrientations: ['portrait-upside-down', 'landscape-left'] },
-      name: '自定义supportedOrientations1',
-    },
-    {
-      prop: { supportedOrientations: ['portrait-upside-down'] },
-      name: '自定义supportedOrientations2',
     }
   ]
 
