@@ -44,5 +44,5 @@ const styles = StyleSheet.create({
         shadowOpacity: 1,
         shadowRadius: 30,
     },
-    container: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+    container: { alignItems: 'center', justifyContent: 'center' },
 });
