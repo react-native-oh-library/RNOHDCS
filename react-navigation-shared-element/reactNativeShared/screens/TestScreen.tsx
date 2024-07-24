@@ -16,6 +16,46 @@ import {
   TransitionConfig,
 } from "../transitions";
 import { Test, SharedElementsConfig } from "../types";
+import { IndexPage } from "../../../components";
+
+export type SharedElementNodeType =
+  | "startNode"
+  | "endNode"
+  | "startAncestor"
+  | "endAncestor";
+
+export type SharedElementContentType =
+  | "none"
+  | "snapshotView"
+  | "snapshotImage"
+  | "image";
+
+
+export type SharedElementMeasureData = {
+  node: SharedElementNodeType;
+  layout: {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    visibleX: number;
+    visibleY: number;
+    visibleWidth: number;
+    visibleHeight: number;
+    contentX: number;
+    contentY: number;
+    contentWidth: number;
+    contentHeight: number;
+  };
+  contentType: SharedElementContentType;
+  style: {
+    borderRadius: number;
+  };
+};
+
+export type SharedElementOnMeasureEvent = {
+  nativeEvent: SharedElementMeasureData;
+};
 
 type Props = {
   test: Test;
@@ -32,6 +72,17 @@ const durationValues: DurationValue[] = ["fast", "slow", "debug"];
 
 let GLOBAL_TRANSITION_VALUE: TransitionValue = "slide";
 let GLOBAL_DURATION_VALUE: DurationValue = "fast";
+
+const onMeasureNode = (event: SharedElementOnMeasureEvent) => {
+  const { nativeEvent } = event;
+  const { onMeasure } = this.props;
+  this.setState({
+    [`${nativeEvent.node}`]: nativeEvent,
+  });
+  if (onMeasure) {
+    onMeasure(event);
+  }
+};
 
 function getSharedElements(test: Test): SharedElementsConfig {
   const props = {
@@ -58,7 +109,6 @@ export function TestScreen(props: Props) {
   const test = navigation?.getParam("test") ?? props.test;
   const description = navigation?.getParam("description") ?? props.description;
   const end = navigation?.getParam("end") ?? props.end;
-
   const onPressButton = useCallback(() => {
     let duration: number;
     let debug = false;
@@ -87,6 +137,9 @@ export function TestScreen(props: Props) {
         transitionConfig = scaleCenter(duration);
     }
     transitionConfig.debug = debug;
+    if(transitionConfig.debug){
+      props.test.onMeasure = onMeasureNode
+    } 
 
     const sharedElements = getSharedElements(test);
     if (end) {
@@ -116,7 +169,6 @@ export function TestScreen(props: Props) {
 
   return (
     <View style={styles.container}>
-      {/* {!navigation ? <NavBar title={test.name} /> : undefined} */}
       {cloneElement(end ? test.end : test.start, {
         navigation,
       })}
@@ -149,7 +201,7 @@ export function TestScreen(props: Props) {
             onPress={onPressButton}
           />
         </View>
-        <Text style={styles.body}>{test.description || description}</Text>
+        <Text style={styles.body}>{'当开启测量时onMeasure是否被调用：'+ !!(props.test.onMeasure)}</Text>
       </View>
     </View>
   );
