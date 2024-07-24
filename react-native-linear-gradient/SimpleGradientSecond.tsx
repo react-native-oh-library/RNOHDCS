@@ -60,11 +60,11 @@ const SimpleGradientSecond = () => {
         />
       
         <LinearGradient
-          angle={120}
+          angle={45}
           useAngle={true}
           colors={['green', 'blue', 'red']}
           angleCenter={{x: 0.5, y: 0.5}}
-          locations={[0, 0.5, 1]}
+          locations={[0, 0.8, 1]}
           style={styles.gradient}
         />
         
