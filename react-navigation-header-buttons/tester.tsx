@@ -1,25 +1,50 @@
 import React, {useState} from 'react';
-import {Button, View, Text, Alert} from 'react-native';
+import {Button, View, Text, Alert, ScrollView} from 'react-native';
 import {
   HeaderButtons,
   Item,
   HiddenItem,
   OverflowMenu,
   Divider,
-  ItemProps,
-  HiddenItemProps,
   HeaderButtonProps,
   HeaderButton,
   HeaderButtonsComponentType,
   defaultRenderVisibleButton,
-  overflowMenuPressHandlerDropdownMenu,
 } from 'react-navigation-header-buttons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { Icon } from 'galio-framework';
-import Entypo from 'react-native-vector-icons/Entypo';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import FAIcon from 'react-native-vector-icons/FontAwesome';
-export function OtherPage({navigation}) {
+export const MaterialHeaderButton: HeaderButtonsComponentType = props => {
+  return (
+    <HeaderButton
+      {...props}
+      renderButton={itemProps => {
+        const {color, iconName} = itemProps;
+        return iconName ? (
+          <MaterialIcons name={iconName} color={color} size={23} />
+        ) : (
+          defaultRenderVisibleButton(itemProps)
+        );
+      }}
+    />
+  );
+};
+export function HeaderButtonsTester({navigation}) {
+  const MaterialHeaderButton = (props: HeaderButtonProps) => {
+    return (
+      <View>
+        <Text>{props.title}</Text>
+      </View>
+    );
+  };
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: '导航栏',
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <Item title="this is a item" />
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
   return (
     <View
       style={{
@@ -27,45 +52,15 @@ export function OtherPage({navigation}) {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <Text onPress={() => navigation.goBack()} style={{color: 'red'}}>
-        {`
-       OtherPage  Back
-        `}
+      <Text>
+        HeaderButton默认渲染按钮的组件
+        HeaderButtonComponent中可以接收来自Item中的props
       </Text>
     </View>
   );
 }
 
-function MaterialHeaderButton(props): HeaderButtonsComponentType {
-  // the `props` here come from <Item ... />
-  // you may access them and pass something else to `HeaderButton` if you like
-  return (
-    <HeaderButton
-      // the usual way to render:
-      // IconComponent={MaterialIcons}
-      // iconSize={23}
-      // you can customize the colors, by default colors from React navigation theme will be used
-      // pressColor="blue"
-      {...props}
-      // alternative way to customize what is rendered:
-      renderButton={itemProps => {
-        // access anything that was defined on <Item ... />
-        const {color, iconName} = itemProps;
-
-        return iconName ? (
-            <MaterialIcons
-            color={color}
-            name={iconName}
-            size={23}></MaterialIcons>
-        ) :
-          // will render text with default styles
-          defaultRenderVisibleButton(itemProps)
-      }}
-    />
-  );
-}
-
-export function HeaderButtons_children({navigation}) {
+export function HeaderButtons_childrenTester({navigation}) {
   const ChildrenCom = () => {
     return (
       <View>
@@ -90,121 +85,15 @@ export function HeaderButtons_children({navigation}) {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <Button
-        title="OtherPage"
-        onPress={() => navigation.navigate('OtherPage')}
-      />
+      <Text>HeaderButtons组件可以接收children</Text>
     </View>
   );
 }
 
-export function HeaderButtons_HeaderButtonComponent({navigation}) {
-  const MaterialHeaderButton = (props: HeaderButtonProps) => {
-    return (
-      <View>
-        <Text style={{color: 'white'}}>{props.title}</Text>
-      </View>
-    );
-  };
+export function HeaderButtons_Left_true({navigation}) {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       title: '导航栏',
-      headerRight: () => (
-        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
-          <Item title="this is a item" />
-        </HeaderButtons>
-      ),
-    });
-  }, [navigation]);
-  return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-      <Button
-        title="OtherPage"
-        onPress={() => navigation.navigate('OtherPage')}
-      />
-      <Text>
-        HeaderButton默认渲染按钮的组件
-        HeaderButtonComponent中可以接收来自Item中的props
-      </Text>
-    </View>
-  );
-}
-export function HeaderButtons_preset({navigation}) {
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      title: 'Buttons in tab bar',
-      headerRight: () => (
-        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
-          <Button title="search" onPress={() => Alert.alert('search')} />
-        </HeaderButtons>
-      ),
-    });
-  }, [navigation]);
-  return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-      <Button
-        title="OtherPage"
-        onPress={() => navigation.navigate('OtherPage')}
-      />
-      <Text>
-        HeaderButtons
-        中的preset属性用来添加额外边距,为stackHeader时不额外添加边距
-      </Text>
-    </View>
-  );
-}
-export function HeaderButtons_presetTab({navigation}) {
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      title: 'Buttons in tab bar',
-      headerRight: () => (
-        <HeaderButtons
-          HeaderButtonComponent={MaterialHeaderButton}
-          preset={'tabHeader'}>
-          <Button title="search" onPress={() => Alert.alert('search')} />
-        </HeaderButtons>
-      ),
-    });
-  }, [navigation]);
-  return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-      <Button
-        title="OtherPage"
-        onPress={() => navigation.navigate('OtherPage')}
-      />
-      <Text>
-        HeaderButtons
-        中的preset属性用来添加额外边距,为"tabHeader"时增加Search的外边距,默认为"stackHeader"
-        如果不加left属性，默认添加额外的右边距
-      </Text>
-    </View>
-  );
-}
-export function HeaderButtons_left({navigation}) {
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      title: '导航栏',
-      // headerTitleAlign:"center",
-      headerRight: () => (
-        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
-          <Item title="item" />
-        </HeaderButtons>
-      ),
       headerLeft: () => (
         <HeaderButtons
           preset="tabHeader"
@@ -217,39 +106,13 @@ export function HeaderButtons_left({navigation}) {
           />
         </HeaderButtons>
       ),
-    });
-  }, [navigation]);
-  return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-      <Button
-        title="OtherPage"
-        onPress={() => navigation.navigate('OtherPage')}
-      />
-      <Text>HeaderButtons属性left为true，额外添加左边距</Text>
-    </View>
-  );
-}
-export function HeaderButtons_leftF({navigation}) {
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      title: '导航栏',
-      // headerTitleAlign:"center",
       headerRight: () => (
-        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
-          <Item title="item" />
-        </HeaderButtons>
-      ),
-      headerLeft: () => (
         <HeaderButtons
           preset="tabHeader"
+          left
           HeaderButtonComponent={MaterialHeaderButton}>
           <Item
-            title="Test Left"
+            title="Test Right"
             style={{backgroundColor: 'pink', marginRight: 10}}
             onPress={() => Alert.alert('Test')}
           />
@@ -264,16 +127,138 @@ export function HeaderButtons_leftF({navigation}) {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <Button
-        title="OtherPage"
-        onPress={() => navigation.navigate('OtherPage')}
-      />
-      <Text>HeaderButtons属性left为false,不额外添加边距</Text>
+      <Text>
+        HeaderButtons属性left为true时并且
+        preset属性为"tabHeader"时，额外添加左边距
+      </Text>
     </View>
   );
 }
 
-export function HeaderButtons_Item({navigation}) {
+export function HeaderButtons_Left_false({navigation}) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: '导航栏',
+      headerLeft: () => (
+        <HeaderButtons
+          preset="tabHeader"
+          left={false}
+          HeaderButtonComponent={MaterialHeaderButton}>
+          <Item
+            title="Test Left"
+            style={{backgroundColor: 'pink', marginRight: 10}}
+            onPress={() => Alert.alert('Test')}
+          />
+        </HeaderButtons>
+      ),
+      headerRight: () => (
+        <HeaderButtons
+          preset="tabHeader"
+          left={false}
+          HeaderButtonComponent={MaterialHeaderButton}>
+          <Item
+            title="Test Right"
+            style={{backgroundColor: 'pink', marginRight: 10}}
+            onPress={() => Alert.alert('Test')}
+          />
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <Text>
+        HeaderButtons属性left为true时并且
+        preset属性为"tabHeader"时，额外添加左边距
+      </Text>
+    </View>
+  );
+}
+
+export function HeaderButtons_Preset_tabHeader({navigation}) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: '导航栏',
+      headerLeft: () => (
+        <HeaderButtons
+          preset="tabHeader"
+          left
+          HeaderButtonComponent={MaterialHeaderButton}>
+          <Item
+            title="Test Left"
+            style={{backgroundColor: 'pink', marginRight: 10}}
+            onPress={() => Alert.alert('Test')}
+          />
+        </HeaderButtons>
+      ),
+      headerRight: () => (
+        <HeaderButtons
+          preset="tabHeader"
+          left
+          HeaderButtonComponent={MaterialHeaderButton}>
+          <Item
+            title="Test Right"
+            style={{backgroundColor: 'pink', marginRight: 10}}
+            onPress={() => Alert.alert('Test')}
+          />
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <Text>HeaderButtons属性preset为tabHeader时为标题添加额外的边距</Text>
+    </View>
+  );
+}
+
+export function HeaderButtons_Preset_stackHeader({navigation}) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: '导航栏',
+      headerLeft: () => (
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <Item
+            title="Test Left"
+            style={{backgroundColor: 'pink', marginRight: 10}}
+            onPress={() => Alert.alert('Test')}
+          />
+        </HeaderButtons>
+      ),
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <Item
+            title="Test Right"
+            style={{backgroundColor: 'pink', marginRight: 10}}
+            onPress={() => Alert.alert('Test')}
+          />
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <Text>HeaderButtons属性preset为stackHeader时不添加额外边距</Text>
+    </View>
+  );
+}
+
+export function HeaderButtons_Item_Title({navigation}) {
   const itemCom = (props: HeaderButtonsComponentType) => {
     return <Text {...props}> {props.title} </Text>;
   };
@@ -299,7 +284,8 @@ export function HeaderButtons_Item({navigation}) {
     </View>
   );
 }
-export function HeaderButtons_Item_style({navigation}) {
+
+export function HeaderButtons_Item_Style({navigation}) {
   const itemCom = (props: HeaderButtonsComponentType) => {
     return <Text {...props}> {props.title} </Text>;
   };
@@ -321,12 +307,14 @@ export function HeaderButtons_Item_style({navigation}) {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <Text>组件Item里面的属性可以通过props传递给HeaderButtonComponent</Text>
+      <Text>
+        组件Item里面的属性可以通过props传递给HeaderButtonComponent,这里的组件Item里面的属性可以通过props传递给HeaderButtonComponent是一个Text
+      </Text>
     </View>
   );
 }
 
-export function HeaderButtons_Item_onPress({navigation}) {
+export function HeaderButtons_Item_OnPress({navigation}) {
   const itemCom = (props: HeaderButtonsComponentType) => {
     return <Text {...props}> {props.title} </Text>;
   };
@@ -347,25 +335,19 @@ export function HeaderButtons_Item_onPress({navigation}) {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <Text>组件Item里面的属性可以通过props传递给HeaderButtonComponent</Text>
+      <Text>点击触发onPress</Text>
     </View>
   );
 }
 
-export function HeaderButtons_Item_iconName({navigation}) {
-  const itemCom = (props: HeaderButtonsComponentType) => {
-    return (
-      <Text {...props}>
-        {props.title}---iconName:{props.iconName}{' '}
-      </Text>
-    );
-  };
+export function HeaderButtons_Item_IconName({navigation}) {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       title: 'Item_iconName',
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
-          <Item title="iconName" iconName="search" />
+          <Item iconName="search" />
+          <Item iconName="lock" />
         </HeaderButtons>
       ),
     });
@@ -377,20 +359,55 @@ export function HeaderButtons_Item_iconName({navigation}) {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <Text>组件Item里面的属性可以通过props传递给HeaderButtonComponent</Text>
+      <Text>
+        这里展示的是传入的iconName属性，icon组件库使用的是react-native-vector-icons三方库
+      </Text>
     </View>
   );
 }
 
-export function HeaderButtons_OverflowMenu({navigation}) {
+export function HeaderButtons_Item_ButtonStyle({navigation}) {
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      title: 'OverflowMenu1',
+      title: 'Item_buttonStyle',
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <Item title="search" buttonStyle={{color: 'yellow'}} />
+          <Item
+            title="lock"
+            buttonStyle={{color: 'red', backgroundColor: 'black', fontSize: 12}}
+          />
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <Text>这里展示的是传入的buttonStyle属性</Text>
+    </View>
+  );
+}
+
+export function HeaderButtons_OverflowMenu_OverflowIcon({navigation}) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'OverflowMenu',
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
           <OverflowMenu
-            style={{marginRight: 20, backgroundColor: '#fff111'}}
-            OverflowIcon={() => <Text>这里设置icon</Text>}>
+            OverflowIcon={() => {
+              return (
+                <View>
+                  <MaterialIcons name="more-horiz" size={25} />
+                  <MaterialIcons name="settings" size={25} />
+                </View>
+              );
+            }}>
             <View>
               <Text>'</Text>
             </View>
@@ -406,15 +423,63 @@ export function HeaderButtons_OverflowMenu({navigation}) {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <Text>这个页面展示了OverflowMenu的OverflowIcon、style属性</Text>
+      <Text>这个页面展示了OverflowMenu的OverflowIcon属性</Text>
     </View>
   );
 }
 
-export function HeaderButtons_OverflowMenu2({navigation}) {
+export function HeaderButtons_OverflowMenu_Style({navigation}) {
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      title: 'OverflowMenu2',
+      title: 'OverflowMenu',
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <OverflowMenu
+            style={{backgroundColor: 'yellow'}}
+            OverflowIcon={() => {
+              return (
+                <View>
+                  <MaterialIcons name="more-horiz" size={25} />
+                </View>
+              );
+            }}>
+            <View>
+              <Text>'</Text>
+            </View>
+          </OverflowMenu>
+          <OverflowMenu
+            style={{backgroundColor: 'red', marginRight: 30}}
+            OverflowIcon={() => {
+              return (
+                <View>
+                  <MaterialIcons name="more-horiz" size={25} />
+                </View>
+              );
+            }}>
+            <View>
+              <Text>'</Text>
+            </View>
+          </OverflowMenu>
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <Text>这个页面展示了OverflowMenu的style属性</Text>
+    </View>
+  );
+}
+
+export function HeaderButtons_OverflowMenu_OnPress({navigation}) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'OverflowMenu',
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
           <OverflowMenu
@@ -437,74 +502,23 @@ export function HeaderButtons_OverflowMenu2({navigation}) {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <Text>这个页面展示了OverflowMenu的children、onPress</Text>
-    </View>
-  );
-}
-export function HeaderButtons_OverflowMenu3({navigation}) {
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      title: 'OverflowMenu3',
-      headerRight: () => (
-        <OverflowMenu
-          pressOpacity={0.8}
-          style={{backgroundColor: '#fff111'}}
-          OverflowIcon={() => <Text>PressMe</Text>}>
-          <HiddenItem title="child1" onPress={() => Alert.alert('child1')} />
-          <Divider />
-          <HiddenItem title="child2" onPress={() => Alert.alert('child2')} />
-          <Divider />
-          <Text>this is a text</Text>
-        </OverflowMenu>
-      ),
-    });
-  }, [navigation]);
-  return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-      <Text>
-        这个页面展示了OverflowMenu的left、preset、other props(例如 pressOpacity=
-        {0.8} 按钮透明度与tab2相比更深)
-      </Text>
-      <Text>
-        preset属性用来添加额外边距,为"tabHeader"时增加额外的外边距,默认为"stackHeader"
-        如果不加left属性，默认添加额外的右边距,反之如果left为true则添加额外的左边距,展示效果与下面的HeaderButtons组件的left、preset属性一致
-      </Text>
+      <Text>这个页面展示了OverflowMenu的onPress</Text>
     </View>
   );
 }
 
-export function HeaderButtons_HiddenItem({navigation}) {
+export function HeaderButtons_OverflowMenu_Children({navigation}) {
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      title: 'HiddenItem',
+      title: 'OverflowMenu',
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
           <OverflowMenu
             style={{backgroundColor: '#fff111'}}
             OverflowIcon={() => <Text>PressMe</Text>}>
-            <Text> HiddenItem </Text>
+            <HiddenItem title="child1" onPress={() => Alert.alert('child1')} />
             <Divider />
-            <HiddenItem title="this is title" />
-            <Divider />
-            <HiddenItem
-              title="style"
-              style={{backgroundColor: '#fff111'}}
-              titleStyle={{color: 'blue', fontSize: 30}}
-            />
-            <Divider />
-            <HiddenItem
-              title="PressMe"
-              onPress={() => {
-                Alert.alert('click');
-              }}
-            />
-            <Divider />
-            <HiddenItem title="disabled(true)" disabled />
+            <HiddenItem title="child2" onPress={() => Alert.alert('child2')} />
           </OverflowMenu>
         </HeaderButtons>
       ),
@@ -517,31 +531,358 @@ export function HeaderButtons_HiddenItem({navigation}) {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <Text>
-        这个页面展示了HiddenItem的title、style、titleStyle、onPress、disabled
-      </Text>
+      <Text>这个页面展示了OverflowMenu的child</Text>
     </View>
   );
 }
 
-export function HeaderButtons_HeaderButton({navigation}) {
-  const aMaterialHeaderButton = props => (
-    <HeaderButton
-      IconComponent={() => <Text>Icon</Text>}
-      iconSize={30}
-      color="blue"
-      {...props}
-    />
+export function HeaderButtons_OverflowMenu_Preset_stackHeader({navigation}) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'OverflowMenu',
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <OverflowMenu
+            style={{backgroundColor: '#fff111'}}
+            OverflowIcon={() => <Text>PressMe</Text>}>
+            <HiddenItem title="child1" onPress={() => Alert.alert('child1')} />
+            <Divider />
+            <HiddenItem title="child2" onPress={() => Alert.alert('child2')} />
+          </OverflowMenu>
+        </HeaderButtons>
+      ),
+      headerLeft: () => (
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <OverflowMenu
+            style={{backgroundColor: '#fff111'}}
+            OverflowIcon={() => <Text>PressMe</Text>}>
+            <HiddenItem title="child1" onPress={() => Alert.alert('child1')} />
+            <Divider />
+            <HiddenItem title="child2" onPress={() => Alert.alert('child2')} />
+          </OverflowMenu>
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <Text>这个页面展示了OverflowMenu的Preset:stackHeader 不额外添加边距</Text>
+    </View>
   );
+}
+
+export function HeaderButtons_OverflowMenu_Preset_tabHeader({navigation}) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'OverflowMenu',
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <OverflowMenu
+            preset="tabHeader"
+            style={{backgroundColor: '#fff111'}}
+            OverflowIcon={() => <Text>PressMe</Text>}>
+            <HiddenItem title="child1" onPress={() => Alert.alert('child1')} />
+            <Divider />
+            <HiddenItem title="child2" onPress={() => Alert.alert('child2')} />
+          </OverflowMenu>
+        </HeaderButtons>
+      ),
+      headerLeft: () => (
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <OverflowMenu
+            preset="tabHeader"
+            left
+            style={{backgroundColor: '#fff111'}}
+            OverflowIcon={() => <Text>PressMe</Text>}>
+            <HiddenItem title="child1" onPress={() => Alert.alert('child1')} />
+            <Divider />
+            <HiddenItem title="child2" onPress={() => Alert.alert('child2')} />
+          </OverflowMenu>
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <Text>这个页面展示了OverflowMenu的Preset:tabHeader 额外添加边距</Text>
+    </View>
+  );
+}
+
+export function HeaderButtons_OverflowMenu_Left_true({navigation}) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'OverflowMenu',
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <OverflowMenu
+            preset="tabHeader"
+            left
+            style={{backgroundColor: '#fff111'}}
+            OverflowIcon={() => <Text>PressMe</Text>}>
+            <HiddenItem title="child1" onPress={() => Alert.alert('child1')} />
+            <Divider />
+            <HiddenItem title="child2" onPress={() => Alert.alert('child2')} />
+          </OverflowMenu>
+        </HeaderButtons>
+      ),
+      headerLeft: () => (
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <OverflowMenu
+            preset="tabHeader"
+            left
+            style={{backgroundColor: '#fff111'}}
+            OverflowIcon={() => <Text>PressMe</Text>}>
+            <HiddenItem title="child1" onPress={() => Alert.alert('child1')} />
+            <Divider />
+            <HiddenItem title="child2" onPress={() => Alert.alert('child2')} />
+          </OverflowMenu>
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <Text>这个页面展示了OverflowMenu的left(true) 额外添加左边距</Text>
+    </View>
+  );
+}
+
+export function HeaderButtons_OverflowMenu_Left_false({navigation}) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'OverflowMenu',
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <OverflowMenu
+            preset="tabHeader"
+            style={{backgroundColor: '#fff111'}}
+            OverflowIcon={() => <Text>PressMe</Text>}>
+            <HiddenItem title="child1" onPress={() => Alert.alert('child1')} />
+            <Divider />
+            <HiddenItem title="child2" onPress={() => Alert.alert('child2')} />
+          </OverflowMenu>
+        </HeaderButtons>
+      ),
+      headerLeft: () => (
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <OverflowMenu
+            preset="tabHeader"
+            style={{backgroundColor: '#fff111'}}
+            OverflowIcon={() => <Text>PressMe</Text>}>
+            <HiddenItem title="child1" onPress={() => Alert.alert('child1')} />
+            <Divider />
+            <HiddenItem title="child2" onPress={() => Alert.alert('child2')} />
+          </OverflowMenu>
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <Text>这个页面展示了OverflowMenu的left(false) 额外添加右边距</Text>
+    </View>
+  );
+}
+
+export function HeaderButtons_HiddenItem_Title({navigation}) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'HiddenItem',
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <OverflowMenu OverflowIcon={() => <Text>PressMe</Text>}>
+            <HiddenItem title="this is title1" />
+            <Divider />
+            <HiddenItem title="this is title2" />
+            <Divider />
+            <HiddenItem title="this is title3" />
+          </OverflowMenu>
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <Text>这个页面展示了HiddenItem的title</Text>
+    </View>
+  );
+}
+
+export function HeaderButtons_HiddenItem_Style({navigation}) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'HiddenItem',
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <OverflowMenu OverflowIcon={() => <Text>PressMe</Text>}>
+            <HiddenItem title="style1" style={{backgroundColor: 'yellow'}} />
+            <Divider />
+            <HiddenItem
+              title="style2"
+              style={{height: 80, backgroundColor: 'red'}}
+            />
+            <Divider />
+            <HiddenItem
+              title="style3"
+              style={{backgroundColor: 'gray', width: 80}}
+            />
+          </OverflowMenu>
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <Text>这个页面展示了HiddenItem的style属性</Text>
+    </View>
+  );
+}
+
+export function HeaderButtons_HiddenItem_TitleStyle({navigation}) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'HiddenItem',
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <OverflowMenu OverflowIcon={() => <Text>PressMe</Text>}>
+            <HiddenItem title="titleStyle1" titleStyle={{color: 'red'}} />
+            <Divider />
+            <HiddenItem
+              title="titleStyle2"
+              titleStyle={{color: 'blue', fontSize: 30}}
+            />
+            <Divider />
+            <HiddenItem
+              title="titleStyle3"
+              titleStyle={{color: 'yellow', fontSize: 10}}
+            />
+          </OverflowMenu>
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <Text>这个页面展示了HiddenItem的titleStyle属性</Text>
+    </View>
+  );
+}
+
+export function HeaderButtons_HiddenItem_OnPress({navigation}) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'HiddenItem',
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <OverflowMenu OverflowIcon={() => <Text>PressMe</Text>}>
+            <HiddenItem
+              title="PressMe"
+              onPress={() => {
+                Alert.alert('click');
+              }}
+              titleStyle={{color: 'red'}}
+            />
+          </OverflowMenu>
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <Text>这个页面展示了HiddenItem的onPress属性</Text>
+    </View>
+  );
+}
+
+export function HeaderButtons_HiddenItem_Disabled({navigation}) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'HiddenItem',
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <OverflowMenu OverflowIcon={() => <Text>PressMe</Text>}>
+            <HiddenItem
+              title="disabled(false)"
+              onPress={() => {
+                Alert.alert('click');
+              }}
+              titleStyle={{color: 'red'}}
+            />
+            <Divider />
+            <HiddenItem
+              disabled
+              title="disabled(true)"
+              onPress={() => {
+                Alert.alert('click');
+              }}
+            />
+          </OverflowMenu>
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <Text>这个页面展示了HiddenItem的disabled属性</Text>
+    </View>
+  );
+}
+
+export function HeaderButtons_HeaderButton_Title({navigation}) {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       title: 'HeaderButton',
       headerRight: () => (
-        <HeaderButtons HeaderButtonComponent={aMaterialHeaderButton}>
-          <Item
-            title="add"
-            iconName="search"
-            onPress={() => Alert.alert('click')}
+        <HeaderButtons>
+          <HeaderButton
+            title="this is a title"
+            renderButton={props => <Text>{props.title}</Text>}
           />
         </HeaderButtons>
       ),
@@ -554,16 +895,91 @@ export function HeaderButtons_HeaderButton({navigation}) {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <Text>
-        HeaderButton是所有onPress、title和图标相关的道具（颜色、大小）相遇以呈现实际按钮的地方。
-        PlatformPressable可以完全自定义使用该道具时其内部呈现的内容
-      </Text>
-      {/* <MaterialIcons
-            color={"red"}
-            name={"search"}
-            size={23}></MaterialIcons>
-      <Icon name="archive" family="FontAwesome" color={"red"} size={30} />
-      <FAIcon name='music'  color={"red"} size={30} /> */}
+      <Text>这个页面展示了HeaderButton的title属性</Text>
+    </View>
+  );
+}
+
+export function HeaderButtons_HeaderButton_RenderButton({navigation}) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'HeaderButton',
+      headerRight: () => (
+        <HeaderButtons>
+          <HeaderButton
+            renderButton={() => <Text>this is renderButton</Text>}
+          />
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <Text>这个页面展示了HeaderButton的renderButton属性</Text>
+    </View>
+  );
+}
+
+export function HeaderButtons_HeaderButton_Style({navigation}) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'HeaderButton',
+      headerRight: () => (
+        <HeaderButtons>
+          <HeaderButton
+            style={{color: 'red'}}
+            renderButton={(props) => <Text style={{color:"red"}} >STYLE</Text>}
+          />
+          <HeaderButton
+            style={{backgroundColor: 'red'}}
+            renderButton={(props) => <Text>STYLE</Text>}
+          />
+          <HeaderButton
+            renderButton={(props) => <Text style={{fontSize:6}}  >STYLE</Text>}
+          />
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <Text>这个页面展示了HeaderButton的style属性</Text>
+    </View>
+  );
+}
+
+export function HeaderButtons_HeaderButton_OnPress({navigation}) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'HeaderButton',
+      headerRight: () => (
+        <HeaderButtons>
+          <HeaderButton
+            onPress={() => Alert.alert('onPress')}
+            renderButton={(props) => <Text onPress={props.onPress} >this is renderButton</Text>}
+          />
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <Text>这个页面展示了HeaderButton的renderButton属性</Text>
     </View>
   );
 }
