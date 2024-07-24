@@ -12,7 +12,7 @@ export default class InputExample extends React.Component {
       <SpringScrollView
         style={styles.container}
         tapToHideKeyboard={true}
-        inputToolBarHeight={-100}
+        inputToolBarHeight={450}
         textInputRefs={[this._topInput, this._bottomInput]}
       >
         <TextInput
