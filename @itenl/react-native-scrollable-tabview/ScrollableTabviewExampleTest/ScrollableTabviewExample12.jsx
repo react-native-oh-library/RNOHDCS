@@ -189,7 +189,7 @@ export default class ScrollableTabviewExample9 extends React.Component {
         <TestSuite name="TesterScrollableTabviewExample12">
           <TestCase
             tags={['C_API']}
-            itShould="onEndReachedThreshold方法,需要配合onBeforeRefresh回调使用.'0'表示触底刷新，'1'表示非触底">
+            itShould="onEndReachedThreshold方法,需要配合onBeforeRefresh回调使用.'0'表示触底刷新，'1'表示非触底,使用前,请先点击Sceen1加载对应页面">
             <View style={{ width: '100%', height: 500 }}>
               <Button
                 title='0'

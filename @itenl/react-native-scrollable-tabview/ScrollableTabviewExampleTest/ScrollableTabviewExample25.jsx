@@ -225,27 +225,7 @@ class Title extends React.Component {
         );
     }
 }
-
-const DATA = [
-    {
-        title: 'Main dishes',
-        data: ['Pizza', 'Burger', 'Risotto'],
-    },
-    {
-        title: 'Sides',
-        data: ['French Fries', 'Onion Rings', 'Fried Shrimps'],
-    },
-    {
-        title: 'Drinks',
-        data: ['Water', 'Coke', 'Beer'],
-    },
-    {
-        title: 'Desserts',
-        data: ['Cheese Cake', 'Ice Cream'],
-    },
-];
-
-export default class ScrollableTabviewExample16 extends React.Component {
+export default class ScrollableTabviewExample25 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -447,19 +427,17 @@ export default class ScrollableTabviewExample16 extends React.Component {
             useScroll: !this.state.useScroll,
         });
     }
-
     render() {
         return (
             <Tester>
-                <TestSuite name="TesterScrollableTabviewExample16" >
+                <TestSuite name="TesterScrollableTabviewExample25" >
                     <TestCase
                         tags={['C_API']}
-                        itShould="下划线动画,长度为200" >
+                        itShould="title滑动的动画效果,titleArgs修改属性后,点击Screnn1,然后上划滑动title呈现白色.使用前,请先点击Sceen1,Sceen2和Sceen3,加载对应页面" >
                         <View style={{ width: '100%', height: 500 }}>
                             <ScrollableTabView
                                 ref={(it) => (this.scrollableTabView = it)}
                                 onTabviewChanged={(index, tabLabel) => {
-                                    // console.log(`${index},${tabLabel}`);
                                     this.refreshCurrentTab();
                                 }}
                                 mappingProps={{
@@ -533,8 +511,8 @@ export default class ScrollableTabviewExample16 extends React.Component {
                                 title={<Title></Title>}
                                 titleArgs={{
                                     interpolateOpacity: {
-                                        inputRange: [160, 320],
-                                        outputRange: [0.5, 1],
+                                        inputRange: [0, 1],
+                                        outputRange: [150, 0],
                                         extrapolate: "clamp",
                                     },
                                     style: {},
@@ -556,10 +534,11 @@ export default class ScrollableTabviewExample16 extends React.Component {
                                 oneTabHidden={true}
                                 enableCachePage={true}
                                 fixedTabs={true}
-                                tabsEnableAnimatedUnderlineWidth={200}
+                                tabsEnableAnimatedUnderlineWidth={50}
                                 tabsEnableAnimated={true}
                                 useScroll={this.state.useScroll}
                                 toHeaderOnTab={true}
+                                onEndReachedThreshold={0.5}
                             >
                             </ScrollableTabView>
                         </View>

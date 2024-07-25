@@ -433,7 +433,7 @@ export default class ScrollableTabviewExample15 extends React.Component {
         <TestSuite name="TesterScrollableTabviewExample14" >
           <TestCase
             tags={['C_API']}
-            itShould="在Screnn1的界面上划,head会自动恢复" >
+            itShould="在Screen1的界面上滑,head会自动恢复;Screen2不会.使用前,请先点击Sceen1,Sceen2,加载对应页面" >
             <View style={{ width: '100%', height: 500 }}>
               <ScrollableTabView
                 ref={(it) => (this.scrollableTabView = it)}
@@ -516,6 +516,7 @@ export default class ScrollableTabviewExample15 extends React.Component {
                 fixedHeader={false}
                 fillScreen={true}
                 screenScrollThrottle={100}
+                //stickyHeader配合head使用的，默认为true
                 stickyHeader={true}
               >
               </ScrollableTabView>

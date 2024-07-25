@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Dimensions, StyleSheet, SectionList, StatusBar, Button } from 'react-native'
+import { View, Text, Button } from 'react-native'
 import ScrollableTabView, { DefaultTabBar } from '@itenl/react-native-scrollable-tabview';
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 

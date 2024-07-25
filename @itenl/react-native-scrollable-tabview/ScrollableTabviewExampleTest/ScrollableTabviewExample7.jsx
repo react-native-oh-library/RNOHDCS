@@ -98,26 +98,7 @@ class Screen3 extends React.Component {
     }
 }
 
-const DATA = [
-    {
-        title: 'Main dishes',
-        data: ['Pizza', 'Burger', 'Risotto'],
-    },
-    {
-        title: 'Sides',
-        data: ['French Fries', 'Onion Rings', 'Fried Shrimps'],
-    },
-    {
-        title: 'Drinks',
-        data: ['Water', 'Coke', 'Beer'],
-    },
-    {
-        title: 'Desserts',
-        data: ['Cheese Cake', 'Ice Cream'],
-    },
-];
-
-export default class ScrollableTabviewExample10 extends React.Component {
+export default class ScrollableTabviewExample7 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -172,54 +153,40 @@ export default class ScrollableTabviewExample10 extends React.Component {
     render() {
         return (
             <Tester>
-                <ScrollView>
-                    <TestSuite name="TesterScrollableTabviewExample10">
-                        <TestCase
-                            tags={['C_API']}
-                            itShould="sectionListProps方法传入,展示对应的数据结构">
-                            <View style={{ width: '100%', height: 1100 }}>
-                                <ScrollableTabView
-                                    sectionListProps={{
-                                        sections: DATA,
-                                        keyExtractor: (item, index) => item + index,
-                                        renderItem: ({ item }) => (
-                                            <View style={styles2.item}>
-                                                <Text style={styles2.title}>{item}</Text>
-                                            </View>
-                                        ),
-                                        renderSectionHeader: ({ section: { title } }) => (
-                                            <Text style={styles2.header}>{title}</Text>
-                                        )
-                                    }}
-                                />
-                            </View>
-                        </TestCase>
-                    </TestSuite>
-                </ScrollView>
+                <TestSuite name="TesterScrollableTabviewExample7">
+                    <TestCase
+                        tags={['C_API']}
+                        itShould="在点击任意的Screnn后,上划后,heads不会恢复.使用前,请先点击Sceen1,Sceen2和Sceen3,加载对应页面">
+                        <View style={{ width: '100%', height: 800 }}>
+                            <ScrollableTabView
+                                stacks={this.state.stacks}
+                                firstIndex={this.state.firstIndex}
+                                mappingProps={{}}
+                                tabsStyle={{ backgroundColor: 'yellow', }}
+                                tabWrapStyle={{ zIndex: 1 }}
+                                tabInnerStyle={{ paddingLeft: 5 }}
+                                tabActiveOpacity={0}
+                                tabStyle={{ backgroundColor: 'orange', width: 100 }}
+                                textStyle={{ textAlign: 'center', color: 'green' }}
+                                textActiveStyle={{ fontSize: 30 }}
+                                tabUnderlineStyle={{ backgroundcolor: 'red', height: 10 }}
+                                syncToSticky={true}
+                                onEndReachedThreshold={0.4}
+                                onTabviewChanged={() => {
+                                }}
+                                fixedHeader={false}
+                                fillScreen={true}
+                                screenScrollThrottle={100}
+                                header={() => {
+                                    return <View style={{ backgroundColor: 'pink', height: 80 }}><Text>header</Text></View>;
+                                }}
+                            ></ScrollableTabView>
+                        </View>
+                    </TestCase>
+                </TestSuite>
             </Tester>
         );
     }
 }
-
-const styles2 = StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingTop: StatusBar.currentHeight,
-        marginHorizontal: 16,
-    },
-    item: {
-        backgroundColor: '#f9c2ff',
-        padding: 20,
-        marginVertical: 8,
-    },
-    header: {
-        fontSize: 32,
-        backgroundColor: '#fff',
-    },
-    title: {
-        fontSize: 24,
-    },
-});
-
 
 console.disableYellowBox = true;

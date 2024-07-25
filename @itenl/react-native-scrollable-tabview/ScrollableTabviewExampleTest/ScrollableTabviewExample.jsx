@@ -35,8 +35,6 @@ class Screen1 extends React.Component {
         style={{
           flex: 1,
           backgroundColor: "#f0f0f0",
-          alignItems: "center",
-          justifyContent: "center",
         }}
       >
         <Text>
@@ -182,24 +180,6 @@ class Sticky extends React.Component {
           justifyContent: "center",
         }}
       >
-        <Text>
-          this.props{" "}
-          {JSON.stringify(Object.keys(this.props).join("|"), null, 2)}
-        </Text>
-        {this.props.screenContext && (
-          <Text>
-            this.props.screenContext.props.rootTime:{" "}
-            {this.props.screenContext.props.rootTime}
-          </Text>
-        )}
-        <TouchableOpacity
-          onPress={() => {
-            this.props.screenContext.onRefresh();
-          }}
-          style={{ backgroundColor: "pink", width: 150, height: 50 }}
-        >
-          <Text>Call Screen method</Text>
-        </TouchableOpacity>
       </View>
     );
   }
@@ -226,27 +206,7 @@ class Title extends React.Component {
   }
 }
 
-const DATA = [
-  {
-    title: 'Main dishes',
-    data: ['Pizza', 'Burger', 'Risotto'],
-  },
-  {
-    title: 'Sides',
-    data: ['French Fries', 'Onion Rings', 'Fried Shrimps'],
-  },
-  {
-    title: 'Drinks',
-    data: ['Water', 'Coke', 'Beer'],
-  },
-  {
-    title: 'Desserts',
-    data: ['Cheese Cake', 'Ice Cream'],
-  },
-];
-
 export default class ScrollableTabviewExample extends React.Component {
-
 
   constructor(props) {
     super(props);
@@ -260,19 +220,6 @@ export default class ScrollableTabviewExample extends React.Component {
       errorText: ''
     };
   }
-
-  handleButtonClick = (errorToThrow) => {
-    try {
-      if (errorToThrow) {
-        this.state.errorText = 'error!!!!!!!,通过errorToThrow抛出'
-      } else {
-        this.state.errorText = 'error!!!!!!!,通过抛出系统console.error抛出'
-      }
-    } catch (error) {
-      console.error('Error occurred:', error);
-    }
-  };
-
   initStacks() {
     return [
       {
@@ -457,12 +404,11 @@ export default class ScrollableTabviewExample extends React.Component {
           <TestSuite name="TesterScrollableTabviewExample1" >
             <TestCase
               tags={['C_API']}
-              itShould="整体效果1" >
-              <View style={{ width: '100%', height: 1000 }}>
+              itShould="整体效果:该库为滑动组件库,是使用前,请先点击Sceen1和Sceen2,加载对应页面" >
+              <View style={{ width: '100%', height: 1500 }}>
                 <ScrollableTabView
                   ref={(it) => (this.scrollableTabView = it)}
                   onTabviewChanged={(index, tabLabel) => {
-                    // console.log(`${index},${tabLabel}`);
                     this.refreshCurrentTab();
                   }}
                   mappingProps={{
@@ -492,31 +438,39 @@ export default class ScrollableTabviewExample extends React.Component {
                       <View
                         style={{
                           flex: 1,
-                          height: 180,
+                          height: 300,
                           backgroundColor: "pink",
                           alignItems: "center",
                           justifyContent: "center",
                         }}
                       >
-                        <Text>开始</Text>
                         <Text>时间戳: {this.state.rootTime}</Text>
                         <TouchableOpacity onPress={this.pushTips.bind(this)}>
                           <Text>Push Tips</Text>
                         </TouchableOpacity>
+                        <Text>-----------------分割线-----------------</Text>
                         <TouchableOpacity onPress={this.pushStack.bind(this)}>
-                          <Text>点击新增Screen(新增Stacks)</Text>
+                          <Text>在Screen1界面点击新增Screen1(新增Stacks1)</Text>
                         </TouchableOpacity>
+                        <Text>-----------------分割线-----------------</Text>
                         <TouchableOpacity onPress={this.changeUseScroll.bind(this)}>
                           <Text>
                             是否使用滚动模式显示Screen: {this.state.useScroll.toString()}
                           </Text>
+                        </TouchableOpacity>
+                        <Text>-----------------分割线-----------------</Text>
+                        <TouchableOpacity onPress={this.changeUseScroll.bind(this)}>
                           <Text>
-                            监听滚动Scroll: {this.state.scroll}
+                            监听滚动Scroll(上下): {this.state.scroll}
                           </Text>
+                        </TouchableOpacity>
+                        <Text>-----------------分割线-----------------</Text>
+                        <TouchableOpacity onPress={this.changeUseScroll.bind(this)}>
                           <Text>
                             监听横向滚动Scroll2Horizontal: {this.state.Scroll2Horizontal}
                           </Text>
                         </TouchableOpacity>
+                        <Text>-----------------分割线-----------------</Text>
                         <TouchableOpacity
                           onPress={() => {
                             this.scrollableTabView.clearStacks(() => {
@@ -564,6 +518,7 @@ export default class ScrollableTabviewExample extends React.Component {
                   useScroll={this.state.useScroll}
                   toHeaderOnTab={true}
                   onEndReachedThreshold={0.1}
+                  tabUnderlineStyle={{ backgroundColor: '', height: 0, width: 0 }}
                 >
                 </ScrollableTabView>
               </View>
