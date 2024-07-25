@@ -87,7 +87,6 @@ export function AMap3dTest() {
                 <TestCase itShould="MapView initialPage props">
                     <MapView
                         mapType={1}
-                        myLocationEnabled={true}
                         onPress={_onPress}
                         onLongPress={_onLongPress}
                         onPressPoi={_onPressPoi}
@@ -100,7 +99,6 @@ export function AMap3dTest() {
                         maxZoom={18}
                         trafficEnabled={true}
                         labelsEnabled={true}
-                        buildingsEnabled={true}
                         scaleControlsEnabled={true}
                         zoomControlsEnabled={true}
                         compassEnabled={true}
@@ -148,14 +146,11 @@ export function AMap3dTest() {
                             colors={["#f44336", "#4caf50", "#00ff23"]}
                             points={line3}
                             zIndex = {1}
-                            geodesic = { true}
                             gradient = { true}
                         />
                         <Marker
                             draggable={ true }
                             flat = { true}
-                            centerOffset = {{x:0.5,y:1}}
-                            anchor = {{x:0.5,y:1}}
                             position={{ latitude: 39.806901, longitude: 116.397972 }}
                             onPress={_onMarkerPress}
                             onDragStart={_onMarkerDragStart}

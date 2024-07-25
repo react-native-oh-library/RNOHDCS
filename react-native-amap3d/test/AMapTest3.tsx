@@ -61,7 +61,6 @@ export function AMap3dTest() {
                         maxZoom={18}
                         trafficEnabled={true}
                         labelsEnabled={true}
-                        buildingsEnabled={true}
                         scaleControlsEnabled={true}
                         zoomControlsEnabled={true}
                         compassEnabled={true}
@@ -103,14 +102,11 @@ export function AMap3dTest() {
                             colors={["#741236", "#4caf50", "#123654"]}
                             points={line3}
                             zIndex = {1}
-                            geodesic = { true}
                             gradient = { true}
                         />
                         <Marker
                             draggable={ true }
                             flat = { false}
-                            centerOffset = {{x:0.5,y:0.5}}
-                            anchor = {{x:0.5,y:0.5}}
                             position={{ latitude: 40.806901, longitude: 116.397972 }}
                             zIndex = {1}
                         />

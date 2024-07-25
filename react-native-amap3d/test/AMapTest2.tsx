@@ -55,7 +55,6 @@ export function AMap3dTest() {
                         maxZoom={18}
                         trafficEnabled={false}
                         labelsEnabled={false}
-                        buildingsEnabled={false}
                         scaleControlsEnabled={false}
                         zoomControlsEnabled={false}
                         compassEnabled={false}
@@ -95,7 +94,6 @@ export function AMap3dTest() {
                             colors={["#f44336", "#523140", "#951234"]}
                             points={line3}
                             zIndex = {1}
-                            geodesic = { false}
                             gradient = { false}
                         />
                         <Marker
