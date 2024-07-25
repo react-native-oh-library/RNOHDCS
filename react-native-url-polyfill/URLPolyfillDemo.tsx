@@ -142,8 +142,20 @@ export const URLPolyfillDemo = () => {
             <Text allowFontScaling>{searchParams.has('rn', 'ReactNative') + ''}</Text>
           </TestCase>
 
+          <TestCase itShould='Method：has（cs,gitee）'>
+            <Text allowFontScaling>{searchParams.has('cs', 'gitee') + ''}</Text>
+          </TestCase>
+
+          <TestCase itShould='Method：getAll（def）'>
+            <Text allowFontScaling>{searchParams.getAll('def')}</Text>
+          </TestCase>
+
           <TestCase itShould='Method：getAll（abc）'>
             <Text allowFontScaling>{searchParams.getAll('abc')}</Text>
+          </TestCase>
+
+          <TestCase itShould='Method：get（def）'>
+            <Text allowFontScaling>{searchParams.get('def')}</Text>
           </TestCase>
 
           <TestCase itShould='Method：get（abc）'>
