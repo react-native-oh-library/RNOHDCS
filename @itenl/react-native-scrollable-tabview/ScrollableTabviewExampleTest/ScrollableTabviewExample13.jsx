@@ -22,7 +22,8 @@ class Screen1 extends React.Component {
             <View
                 style={{
                     flex: 1,
-                    backgroundColor: 'red'
+                    backgroundColor: 'red',
+                    height: 2000
                 }}
             >
                 <Text>
@@ -33,7 +34,38 @@ class Screen1 extends React.Component {
     }
 }
 
-export default class ScrollableTabviewExample18 extends React.Component {
+class Screen2 extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            time: Date.now(),
+        };
+    }
+
+    onRefresh = (toggled) => {
+        this.toggled = toggled;
+        this.toggled && this.toggled();
+        this.toggled && this.toggled();
+    };
+
+    render() {
+        return (
+            <View
+                style={{
+                    flex: 1,
+                    backgroundColor: 'grey',
+                    height: 2000
+                }}
+            >
+                <Text>
+                    第二个页面
+                </Text>
+            </View>
+        );
+    }
+}
+
+export default class ScrollableTabviewExample13 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -52,7 +84,11 @@ export default class ScrollableTabviewExample18 extends React.Component {
             {
                 screen: Screen1,
                 tabLabel: "Screen1",
-            }
+            },
+            {
+                screen: Screen2,
+                tabLabel: "Screen2",
+            },
         ];
     }
 
@@ -80,15 +116,35 @@ export default class ScrollableTabviewExample18 extends React.Component {
     render() {
         return (
             <Tester>
-                <TestSuite name="TesterScrollableTabviewExample18">
+                <TestSuite name="TesterScrollableTabviewExample13">
                     <TestCase
                         tags={['C_API']}
-                        itShould="未设置组件高度,设置fillscreen为true,默认填充为此外层盒子的大小">
+                        itShould="左右滑动页面,下滑栏2s后切换">
                         <View style={{ width: '100%', height: 500 }}>
                             <ScrollableTabView
                                 stacks={this.state.stacks}
                                 firstIndex={this.state.firstIndex}
-                                fillScreen={true}
+                                mappingProps={{}}
+                                tabsStyle={{ backgroundColor: 'black', }}
+                                tabWrapStyle={{ zIndex: 1 }}
+                                tabInnerStyle={{ paddingLeft: 5 }}
+                                tabActiveOpacity={0}
+                                tabStyle={{ backgroundColor: 'orange', width: 100 }}
+                                textStyle={{ textAlign: 'center', color: 'blue' }}
+                                textActiveStyle={{ fontSize: 22 }}
+                                tabUnderlineStyle={{ backgroundColor: 'white', height: 50 }}
+                                syncToSticky={true}
+                                onBeforeEndReached={next => {
+                                    next();
+                                }}
+                                carouselProps={{}}
+                                sectionListProps={{}}
+                                toHeaderOnTab={false}
+                                tabsShown={true}
+                                onTabviewChanged={() => {
+                                }}
+                                screenScrollThrottle={1000}
+                                stickyHeader={false}
                             ></ScrollableTabView>
                         </View>
                     </TestCase>

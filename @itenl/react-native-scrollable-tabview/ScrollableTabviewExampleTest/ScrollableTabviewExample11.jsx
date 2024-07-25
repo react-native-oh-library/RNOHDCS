@@ -156,7 +156,7 @@ export default class ScrollableTabviewExample11 extends React.Component {
                 <TestSuite name="TesterScrollableTabviewExample11">
                     <TestCase
                         tags={['C_API']}
-                        itShould="切换栏为白色,50">
+                        itShould="切换栏为白色,高度为50,使用前,请先点击Sceen1,Sceen2和Sceen3,加载对应页面">
                         <View style={{ width: '100%', height: 500 }}>
                             <ScrollableTabView
                                 stacks={this.state.stacks}
@@ -182,7 +182,10 @@ export default class ScrollableTabviewExample11 extends React.Component {
                                 onTabviewChanged={() => {
                                 }}
                                 screenScrollThrottle={20}
-                                stickyHeader={false}
+                                //stickyHeader和Header的用法一致,不过stickyHeader可以保持head在上滑的时候不会消失
+                                stickyHeader={() => {
+                                    return <View style={{ backgroundColor: 'pink', height: 80 }}><Text>stickyHeader</Text></View>;
+                                }}
                             ></ScrollableTabView>
                         </View>
                     </TestCase>

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Dimensions, StyleSheet, SectionList, StatusBar, Button } from 'react-native'
+import { View, Text } from 'react-native'
 import ScrollableTabView, { DefaultTabBar } from '@itenl/react-native-scrollable-tabview';
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 
@@ -65,39 +65,6 @@ class Screen2 extends React.Component {
     }
 }
 
-class Screen3 extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            time: Date.now(),
-        };
-    }
-
-    onRefresh = (toggled) => {
-        this.toggled = toggled;
-        this.toggled && this.toggled();
-        this.toggled && this.toggled();
-    };
-
-    render() {
-        return (
-            <View
-                style={{
-                    flex: 1,
-                    backgroundColor: "green",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: 2000
-                }}
-            >
-                <Text>
-                    第三个页面
-                </Text>
-            </View>
-        );
-    }
-}
-
 export default class ScrollableTabviewExample6 extends React.Component {
     constructor(props) {
         super(props);
@@ -121,11 +88,7 @@ export default class ScrollableTabviewExample6 extends React.Component {
             {
                 screen: Screen2,
                 tabLabel: "Screen2",
-            },
-            {
-                screen: Screen3,
-                tabLabel: "Screen3",
-            },
+            }
         ];
     }
 
@@ -156,7 +119,7 @@ export default class ScrollableTabviewExample6 extends React.Component {
                 <TestSuite name="TesterScrollableTabviewExample6">
                     <TestCase
                         tags={['C_API']}
-                        itShould="header处固定,不随上滑而隐藏">
+                        itShould="header处固定,不随上滑而隐藏.使用前,请先点击Sceen1,Sceen2,加载对应页面">
                         <View style={{ width: '100%', height: 500 }}>
                             <ScrollableTabView
                                 stacks={this.state.stacks}
@@ -169,17 +132,23 @@ export default class ScrollableTabviewExample6 extends React.Component {
                                 tabStyle={{ backgroundColor: 'orange', width: 100 }}
                                 textStyle={{ textAlign: 'center', color: 'green' }}
                                 textActiveStyle={{ fontSize: 30 }}
-                                tabUnderlineStyle={{ backgroundcolor: 'red', height: 10 }}
+                                tabUnderlineStyle={{ backgroundColor: 'yellow', height: 80 }}
+                                onBeforeEndReached={next => {
+                                    next();
+                                }}
                                 syncToSticky={true}
-                                onEndReachedThreshold={0.4}
                                 onTabviewChanged={() => {
                                 }}
                                 fixedHeader={true}
-                                screenScrollThrottle={100}
+                                screenScrollThrottle={50}
                                 fillScreen={false}
                                 header={() => {
                                     return <View style={{ backgroundColor: 'pink', height: 80 }}><Text>header</Text></View>;
                                 }}
+                                carouselProps={{}}
+                                sectionListProps={{}}
+                                toHeaderOnTab={false}
+                                tabsShown={true}
                             ></ScrollableTabView>
                         </View>
                     </TestCase>

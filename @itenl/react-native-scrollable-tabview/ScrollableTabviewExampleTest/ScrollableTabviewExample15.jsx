@@ -433,7 +433,7 @@ export default class ScrollableTabviewExample15 extends React.Component {
            <TestSuite name="TesterScrollableTabviewExample15" >
             <TestCase
               tags={['C_API']}
-              itShould="当切到Screen2,然后再切回Screen1.会状态事件戳一致改变.是因为enableCachePage为false,不会缓存Screen1,会不停的Screnn1" >
+              itShould="先点击Screen1,查看状态时间戳.然后点击Screen2,再切回Screen1.Screen1中的状态时间戳会改变.因为enableCachePage为false,不会缓存Screen1,会不停的刷新Screnn1" >
               <View style={{ width: '100%', height: 500 }}>
                 <ScrollableTabView
                   ref={(it) => (this.scrollableTabView = it)}

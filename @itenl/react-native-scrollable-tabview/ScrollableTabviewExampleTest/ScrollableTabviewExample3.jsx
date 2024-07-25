@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Dimensions, StyleSheet, SectionList, StatusBar, Button } from 'react-native'
+import { View, Text } from 'react-native'
 import ScrollableTabView, { DefaultTabBar } from '@itenl/react-native-scrollable-tabview';
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 
@@ -112,7 +112,7 @@ export default class ScrollableTabviewExample3 extends React.Component {
                 <TestSuite name="TesterScrollableTabviewExample3" >
                     <TestCase
                         tags={['C_API']}
-                        itShould="head可以下来,模拟刷新" >
+                        itShould="head可以下拉,模拟刷新.如果要使用Sceen1和Sceen2,使用前,请先点击Sceen1和Sceen2,加载对应页面.此处页面切换设置的是1s" >
                         <View style={{ width: '100%', height: 600 }}>
                             <ScrollableTabView
                                 stacks={this.state.stacks}
@@ -139,6 +139,8 @@ export default class ScrollableTabviewExample3 extends React.Component {
                                         </View>
                                     );
                                 }}
+                                //控制页面切换速度，这里是1S
+                                screenScrollThrottle={1000}
                             >
                             </ScrollableTabView>
                         </View>

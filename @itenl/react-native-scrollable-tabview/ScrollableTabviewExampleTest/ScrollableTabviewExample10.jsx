@@ -98,7 +98,26 @@ class Screen3 extends React.Component {
     }
 }
 
-export default class ScrollableTabviewExample9 extends React.Component {
+const DATA = [
+    {
+        title: 'Main dishes',
+        data: ['Pizza', 'Burger', 'Risotto'],
+    },
+    {
+        title: 'Sides',
+        data: ['French Fries', 'Onion Rings', 'Fried Shrimps'],
+    },
+    {
+        title: 'Drinks',
+        data: ['Water', 'Coke', 'Beer'],
+    },
+    {
+        title: 'Desserts',
+        data: ['Cheese Cake', 'Ice Cream'],
+    },
+];
+
+export default class ScrollableTabviewExample10 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -153,74 +172,54 @@ export default class ScrollableTabviewExample9 extends React.Component {
     render() {
         return (
             <Tester>
-                <TestSuite name="TesterScrollableTabviewExample9">
-                    <TestCase
-                        tags={['C_API']}
-                        itShould="badges显示Three tips">
-                        <View style={{ width: '100%', height: 500 }}>
-                            <ScrollableTabView
-                                badges={[
-                                    null,
-                                    [
-                                        <View
-                                            style={{
-                                                position: 'absolute',
-                                                zIndex: 200,
-                                                top: 200,
-                                                right: 0,
-                                            }}
-                                        >
-                                            <Text>new</Text>
-                                        </View>,
-                                        <View
-                                            style={{
-                                                position: 'absolute',
-                                                width: 150,
-                                                height: 50,
-                                                zIndex: 200,
-                                                marginTop: 215,
-                                                right: 0,
-                                                opacity: 0.6,
-                                                backgroundColor: 'pink',
-                                                justifyContent: 'center',
-                                                alignItems: 'center',
-                                            }}
-                                        >
-                                            <Text>Three Tips</Text>
-                                        </View>,
-                                    ],
-                                ]}
-                                stacks={this.state.stacks}
-                                firstIndex={this.state.firstIndex}
-                                mappingProps={{}}
-                                tabsStyle={{ backgroundColor: 'black', }}
-                                tabWrapStyle={{ zIndex: 1 }}
-                                tabInnerStyle={{ paddingLeft: 5 }}
-                                tabActiveOpacity={0}
-                                tabStyle={{ backgroundColor: 'white', width: 100 }}
-                                textStyle={{ textAlign: 'center', color: 'blue' }}
-                                textActiveStyle={{ fontSize: 22 }}
-                                tabUnderlineStyle={{ backgroundcolor: 'red', height: 10 }}
-                                syncToSticky={true}
-                                onEndReachedThreshold={0.4}
-                                onBeforeEndReached={next => {
-                                    next();
-                                }}
-                                carouselProps={{}}
-                                sectionListProps={{}}
-                                toHeaderOnTab={false}
-                                tabsShown={true}
-                                stickyHeader={true}
-                                onTabviewChanged={() => {
-                                }}
-                                screenScrollThrottle={100}
-                            ></ScrollableTabView>
-                        </View>
-                    </TestCase>
-                </TestSuite>
+                <ScrollView>
+                    <TestSuite name="TesterScrollableTabviewExample10">
+                        <TestCase
+                            tags={['C_API']}
+                            itShould="sectionListProps方法传入,展示对应的数据结构,仅只有数据展示,无其他功能">
+                            <View style={{ width: '100%', height: 1100 }}>
+                                <ScrollableTabView
+                                    sectionListProps={{
+                                        sections: DATA,
+                                        keyExtractor: (item, index) => item + index,
+                                        renderItem: ({ item }) => (
+                                            <View style={styles2.item}>
+                                                <Text style={styles2.title}>{item}</Text>
+                                            </View>
+                                        ),
+                                        renderSectionHeader: ({ section: { title } }) => (
+                                            <Text style={styles2.header}>{title}</Text>
+                                        )
+                                    }}
+                                />
+                            </View>
+                        </TestCase>
+                    </TestSuite>
+                </ScrollView>
             </Tester>
         );
     }
 }
+
+const styles2 = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingTop: StatusBar.currentHeight,
+        marginHorizontal: 16,
+    },
+    item: {
+        backgroundColor: '#f9c2ff',
+        padding: 20,
+        marginVertical: 8,
+    },
+    header: {
+        fontSize: 32,
+        backgroundColor: '#fff',
+    },
+    title: {
+        fontSize: 24,
+    },
+});
+
 
 console.disableYellowBox = true;

@@ -21,8 +21,8 @@ class Screen1 extends React.Component {
     return (
       <View
         style={{
-          flex: 1, 
-          backgroundColor: 'red', 
+          flex: 1,
+          backgroundColor: 'red',
           height: 2000
         }}
       >
@@ -58,7 +58,7 @@ class Screen2 extends React.Component {
         }}
       >
         <Text>
-        第二个页面
+          第二个页面
         </Text>
       </View>
     );
@@ -91,14 +91,14 @@ class Screen3 extends React.Component {
         }}
       >
         <Text>
-        第三个页面
+          第三个页面
         </Text>
       </View>
     );
   }
 }
 
-export default class ScrollableTabviewExample4 extends React.Component {
+export default class ScrollableTabviewExample2 extends React.Component {
 
   constructor(props) {
     super(props);
@@ -154,45 +154,37 @@ export default class ScrollableTabviewExample4 extends React.Component {
   render() {
     return (
       <Tester>
-          <TestSuite name="TesterScrollableTabviewExample4">
-            <TestCase
-              tags={['C_API']}
-              itShould="切换视图,并且视图可以上下滑动;切换title颜色修改">
-              <View style={{ width: '100%', height: 500 }}>
-                <ScrollableTabView
-                  stacks={this.state.stacks}
-                  firstIndex={this.state.firstIndex}
-                  tabsStyle={{ backgroundColor: 'black', }}
-                  tabWrapStyle={{ zIndex: 1 }}
-                  tabInnerStyle={{ paddingLeft: 5 }}
-                  tabActiveOpacity={0}
-                  tabStyle={{
-                    marginLeft: 10,
-                    marginRight: 10,
-                    paddingHorizontal: 15,
-                    backgroundColor: "pink",
-                    width: 100,
-                }}                  
-                 textStyle={{ textAlign: 'center', color: 'blue' }}
-                  textActiveStyle={{ fontSize: 22 }}
-                  tabUnderlineStyle={{ backgroundcolor: 'red', height: 10 }}
-
-                  syncToSticky={true}
-                  onEndReachedThreshold={0.4}
-                  onBeforeEndReached={next => {
-                    next();
-                  }}
-                  carouselProps={{}}
-                  sectionListProps={{}}
-                  toHeaderOnTab={false}
-                  tabsShown={true}
-                  onTabviewChanged={() => {
-                  }}
-                  screenScrollThrottle={100}
-                ></ScrollableTabView>
-              </View>
-            </TestCase>
-          </TestSuite>
+        <TestSuite name="TesterScrollableTabviewExample2">
+          <TestCase
+            tags={['C_API']}
+            itShould="整体效果:该库为滑动组件库,使用前,请先点击Sceen1,Sceen2和Sceen3,加载对应页面">
+            <View style={{ width: '100%', height: 800 }}>
+              <ScrollableTabView
+                stacks={this.state.stacks}
+                firstIndex={this.state.firstIndex}
+                mappingProps={{}}
+                tabsStyle={{ backgroundColor: 'yellow', }}
+                tabWrapStyle={{ zIndex: 1 }}
+                tabInnerStyle={{ paddingLeft: 5 }}
+                tabActiveOpacity={0}
+                tabStyle={{ backgroundColor: 'orange', width: 100 }}
+                textStyle={{ textAlign: 'center', color: 'green' }}
+                textActiveStyle={{ fontSize: 30 }}
+                tabUnderlineStyle={{ backgroundcolor: 'red', height: 10 }}
+                syncToSticky={true}
+                onEndReachedThreshold={0.4}
+                onTabviewChanged={() => {
+                }}
+                fixedHeader={false}
+                fillScreen={true}
+                screenScrollThrottle={100}
+                header={() => {
+                  return <View style={{ backgroundColor: 'pink', height: 80 }}><Text>header</Text></View>;
+                }}
+              ></ScrollableTabView>
+            </View>
+          </TestCase>
+        </TestSuite>
       </Tester>
     );
   }

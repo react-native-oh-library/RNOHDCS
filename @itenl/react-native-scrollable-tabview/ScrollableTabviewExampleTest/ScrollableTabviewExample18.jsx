@@ -33,7 +33,7 @@ class Screen1 extends React.Component {
     }
 }
 
-export default class ScrollableTabviewExample19 extends React.Component {
+export default class ScrollableTabviewExample18 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -83,12 +83,12 @@ export default class ScrollableTabviewExample19 extends React.Component {
                 <TestSuite name="TesterScrollableTabviewExample18">
                     <TestCase
                         tags={['C_API']}
-                        itShould="未设置组件高度,设置fillscreen为false,无法填充外层盒子的大小">
+                        itShould="未设置组件高度,设置fillscreen为true,默认填充为此外层盒子的大小.请点击Sceen1查看效果">
                         <View style={{ width: '100%', height: 500 }}>
                             <ScrollableTabView
                                 stacks={this.state.stacks}
                                 firstIndex={this.state.firstIndex}
-                                fillScreen={false}
+                                fillScreen={true}
                             ></ScrollableTabView>
                         </View>
                     </TestCase>

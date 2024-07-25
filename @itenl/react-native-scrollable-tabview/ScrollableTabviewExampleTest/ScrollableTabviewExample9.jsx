@@ -98,7 +98,7 @@ class Screen3 extends React.Component {
     }
 }
 
-export default class ScrollableTabviewExample13 extends React.Component {
+export default class ScrollableTabviewExample9 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -153,12 +153,43 @@ export default class ScrollableTabviewExample13 extends React.Component {
     render() {
         return (
             <Tester>
-                <TestSuite name="TesterScrollableTabviewExample13">
+                <TestSuite name="TesterScrollableTabviewExample9">
                     <TestCase
                         tags={['C_API']}
-                        itShould="左右滑动页面， 下滑栏2s后切换">
+                        itShould="badges显示Three tips.若要使用Sceen的滑动功能,使用前,请先点击Sceen1,Sceen2和Sceen3,加载对应页面">
                         <View style={{ width: '100%', height: 500 }}>
                             <ScrollableTabView
+                                badges={[
+                                    null,
+                                    [
+                                        <View
+                                            style={{
+                                                position: 'absolute',
+                                                zIndex: 200,
+                                                top: 200,
+                                                right: 0,
+                                            }}
+                                        >
+                                            <Text>new</Text>
+                                        </View>,
+                                        <View
+                                            style={{
+                                                position: 'absolute',
+                                                width: 150,
+                                                height: 50,
+                                                zIndex: 200,
+                                                marginTop: 215,
+                                                right: 0,
+                                                opacity: 0.6,
+                                                backgroundColor: 'pink',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                            }}
+                                        >
+                                            <Text>Three Tips</Text>
+                                        </View>,
+                                    ],
+                                ]}
                                 stacks={this.state.stacks}
                                 firstIndex={this.state.firstIndex}
                                 mappingProps={{}}
@@ -166,12 +197,12 @@ export default class ScrollableTabviewExample13 extends React.Component {
                                 tabWrapStyle={{ zIndex: 1 }}
                                 tabInnerStyle={{ paddingLeft: 5 }}
                                 tabActiveOpacity={0}
-                                tabStyle={{ backgroundColor: 'orange', width: 100 }}
+                                tabStyle={{ backgroundColor: 'white', width: 100 }}
                                 textStyle={{ textAlign: 'center', color: 'blue' }}
                                 textActiveStyle={{ fontSize: 22 }}
-                                tabUnderlineStyle={{ backgroundColor: 'white', height: 50 }}
-
+                                tabUnderlineStyle={{ backgroundcolor: 'red', height: 10 }}
                                 syncToSticky={true}
+                                onEndReachedThreshold={0.4}
                                 onBeforeEndReached={next => {
                                     next();
                                 }}
@@ -179,10 +210,10 @@ export default class ScrollableTabviewExample13 extends React.Component {
                                 sectionListProps={{}}
                                 toHeaderOnTab={false}
                                 tabsShown={true}
+                                stickyHeader={true}
                                 onTabviewChanged={() => {
                                 }}
-                                screenScrollThrottle={2000}
-                                stickyHeader={false}
+                                screenScrollThrottle={100}
                             ></ScrollableTabView>
                         </View>
                     </TestCase>
