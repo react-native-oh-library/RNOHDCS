@@ -85,7 +85,7 @@ const App = () => {
         onRefresh={() => {
           console.log("Smart RN onRefresh")
           setTimeout(() => {
-            meaterRefreshControlRef.current.finishRefresh({ delayed: -1, success: true });
+            meaterRefreshControlRef?.current?.finishRefresh({ delayed: -1, success: true });
           }, 5000);
         }}
         onHeaderReleasing={(data: any) => {
