@@ -51,7 +51,10 @@ export default class SechartsLine extends Component {
                         renderLoading={() => <View style={{ backgroundColor: '#468B58', width: 350, height: 400 }} ><Text>我是一个遮罩层</Text></View>}
                     />
                 </View>
+                <Text>点击图表中白色圆点可触发onPress方法</Text>
+                <Text>{!this.state.value ? '这里显示被点击的值' : '被点击的值：' + this.state.value}</Text>
                 <View style={styles.buttonContainer}>
+
                     <Text>点击此按钮可以重新设置option数据源改变图表</Text>
 
                     <Button
