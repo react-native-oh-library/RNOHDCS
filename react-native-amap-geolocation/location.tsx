@@ -48,8 +48,8 @@ const style = StyleSheet.create({
   button: {
     flexDirection: "column",
     marginRight: 8,
-    marginBottom: 8,
-    marginTop: 50
+    marginBottom: 5,
+    marginTop: 5
   },
   result: {
     fontFamily: Platform.OS === "ios" ? "menlo" : "monospace",
@@ -60,11 +60,31 @@ class AmapGeoLocationDemo extends React.Component {
   state = { location: null };
 
 
-  componentDidMount() {
-    // amap app key
-    Geolocation.init("aabbbcccc")
-  }
 
+  init = () => {
+    console.log("geolocation init");
+    Geolocation.init("aabbbcccc");
+  };
+
+  setDesiredAccuracy = () => {
+    console.log("geolocation setDesiredAccuracy");
+    Geolocation.setDesiredAccuracy(10000);
+  };
+
+  setAllowsBackgroundLocationUpdates = () => {
+    console.log("geolocation setAllowsBackgroundLocationUpdates");
+    Geolocation.setAllowsBackgroundLocationUpdates(true);
+  };
+
+  setDistanceFilter = () => {
+    console.log("geolocation setDistanceFilter");
+    Geolocation.setDistanceFilter(2000);
+  };
+
+  setLocationTimeout = () => {
+    console.log("geolocation setLocationTimeout");
+    Geolocation.setLocationTimeout(1000);
+  };
 
   start = () => {
     console.log("geolocation start");
@@ -128,6 +148,25 @@ class AmapGeoLocationDemo extends React.Component {
     const { location } = this.state;
     return (
       <ScrollView contentContainerStyle={style.body}>
+        <View style={style.button}>
+          <Button onPress={this.init} title="init" />
+        </View>
+
+        <View style={style.button}>
+          <Button onPress={this.setAllowsBackgroundLocationUpdates} title="setAllowsBackgroundLocationUpdates" />
+        </View>
+
+        <View style={style.button}>
+          <Button onPress={this.setDesiredAccuracy} title="setDesiredAccuracy" />
+        </View>
+
+        <View style={style.button}>
+          <Button onPress={this.setDistanceFilter} title="setDistanceFilter" />
+        </View>
+
+        <View style={style.button}>
+          <Button onPress={this.setLocationTimeout} title="setLocationTimeout" />
+        </View>
 
         <View style={style.button}>
           <Button onPress={this.start} title="start" />
