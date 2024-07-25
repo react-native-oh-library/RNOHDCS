@@ -111,7 +111,7 @@ export function AMap3dTest() {
                                 longitude: 116.37296,
                             },
                             zoom: 8,
-                        }
+                        }}
                             > 
                         <Circle
                             strokeWidth={5}
@@ -154,8 +154,8 @@ export function AMap3dTest() {
                         <Marker
                             draggable={ true }
                             flat = { true}
-                            centerOffset = { 0.5, 1}
-                            anchor = { 0.5, 1}
+                            centerOffset = {{x:0.5,y:1}}
+                            anchor = {{x:0.5,y:1}}
                             position={{ latitude: 39.806901, longitude: 116.397972 }}
                             onPress={_onMarkerPress}
                             onDragStart={_onMarkerDragStart}

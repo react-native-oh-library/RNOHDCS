@@ -1138,7 +1138,7 @@ export const MaskedTextDemo2 = () => {
             />
           </TestSuite>
         </TestSuite>
-        <TestSuite name="isValue">
+        <TestSuite name="isValid">
           {/* custom通过测试 */}
           <TestCase
             tags={['C_API']}

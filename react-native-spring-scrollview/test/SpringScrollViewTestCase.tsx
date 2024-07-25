@@ -22,9 +22,9 @@ export const SpringScrollViewTestCase = () => {
         <TestSuite name="SpringScrollView">
   
 
-            <TestCase
+           <TestCase
                 tags={['C_API']}
-                itShould="onRefresh onLoading refreshHeader loadingFooter allLoaded">
+                itShould="onRefresh onLoading BeginRefresh refreshHeader loadingFooter allLoaded">
                 <RefreshAndLoadingExample />
             </TestCase>
 
@@ -36,7 +36,7 @@ export const SpringScrollViewTestCase = () => {
 
             <TestCase
                 tags={['C_API']}
-                itShould="onTouchBegin onTouchFinish onMomentumScrollBegin onMomentumScrollEnd onNativeContentOffsetExtract scrollTo scroll scrollToBegin scrollToEnd bounces onSizeChange onContentSizeChange">
+                itShould="onTouchBegin onTouchFinish onMomentumScrollBegin onMomentumScrollEnd onNativeContentOffsetExtract scrollTo scroll scrollToBegin scrollToEnd bounces onScroll onSizeChange onContentSizeChange">
                 <ScrollToAndOnScrollExample />
             </TestCase>
 
@@ -49,7 +49,9 @@ export const SpringScrollViewTestCase = () => {
             <TestCase
                 tags={['C_API']}
                 itShould="textInputRefs tapToHideKeyboard inputToolBarHeight">
+                 <ScrollView>
                 <InputExample />
+                </ScrollView>  
             </TestCase>
         </TestSuite>
         </ScrollView>

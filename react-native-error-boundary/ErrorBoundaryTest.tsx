@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, useState } from 'react';
-import { View, Alert, Text, Button, StyleSheet } from 'react-native';
+import { View, Alert, Text, Button, StyleSheet, ScrollView } from 'react-native';
 import { TestSuite, Tester, TestCase } from '@rnoh/testerino';
 import ErrorBoundary from 'react-native-error-boundary';
 
@@ -9,47 +9,51 @@ export const ErrorBoundaryTest = () => {
     const [showFallback, setShowFallback] = useState(false);
 
     return (
-        <Tester>
-            <TestSuite name="ErrorBoundaryDefaultTest">
-                <TestCase itShould="Catch the exception, show a default error page">
-                    <ErrorBoundary>
-                        <Button
-                            title="Click the button, Trigger a Exception"
-                            onPress={() => {
-                                setShouldThrow(true);
-                            }}
-                        />
-                        {shouldThrow && (<MaybeThrows>Content</MaybeThrows>)}
-                    </ErrorBoundary>
-                </TestCase>
-            </TestSuite>
-            <TestSuite name="ErrorBoundaryHandleTest" >
-                <TestCase itShould="Catch the exception, show a default error page and a pop-up window that displays abnormal content defined by the onError api">
-                    <ErrorBoundary onError={errorHandler}>
-                        <Button
-                            title="Click the button, Trigger a Exception"
-                            onPress={() => {
-                                setShowErrorApi(true);
-                            }}
-                        />
-                        {showErrorApi && (<MaybeThrows>Content</MaybeThrows>)}
-                    </ErrorBoundary>
-                </TestCase>
-            </TestSuite>
-            <TestSuite name="ErrorBoundaryFallbackTest" >
-                <TestCase itShould="Catch the exception, show customized error page defined by the FallbackComponent api">
-                    <ErrorBoundary FallbackComponent={CustomFallback}>
-                        <Button
-                            title="Click the button, Trigger a Exception"
-                            onPress={() => {
-                                setShowFallback(true);
-                            }}
-                        />
-                        {showFallback && (<MaybeThrows>Content</MaybeThrows>)}
-                    </ErrorBoundary>
-                </TestCase>
-            </TestSuite>
-        </Tester>
+        <View style={{ flex: 1, paddingVertical: 48 }}>
+            <Tester>
+                <ScrollView>
+                    <TestSuite name="ErrorBoundaryDefaultTest">
+                        <TestCase itShould="Catch the exception, show a default error page">
+                            <ErrorBoundary>
+                                <Button
+                                    title="Click the button, Trigger a Exception"
+                                    onPress={() => {
+                                        setShouldThrow(true);
+                                    }}
+                                />
+                                {shouldThrow && (<MaybeThrows>Content</MaybeThrows>)}
+                            </ErrorBoundary>
+                        </TestCase>
+                    </TestSuite>
+                    <TestSuite name="ErrorBoundaryHandleTest" >
+                        <TestCase itShould="Catch the exception, show a default error page and a pop-up window that displays abnormal content defined by the onError api">
+                            <ErrorBoundary onError={errorHandler}>
+                                <Button
+                                    title="Click the button, Trigger a Exception"
+                                    onPress={() => {
+                                        setShowErrorApi(true);
+                                    }}
+                                />
+                                {showErrorApi && (<MaybeThrows>Content</MaybeThrows>)}
+                            </ErrorBoundary>
+                        </TestCase>
+                    </TestSuite>
+                    <TestSuite name="ErrorBoundaryFallbackTest" >
+                        <TestCase itShould="Catch the exception, show customized error page defined by the FallbackComponent api">
+                            <ErrorBoundary FallbackComponent={CustomFallback}>
+                                <Button
+                                    title="Click the button, Trigger a Exception"
+                                    onPress={() => {
+                                        setShowFallback(true);
+                                    }}
+                                />
+                                {showFallback && (<MaybeThrows>Content</MaybeThrows>)}
+                            </ErrorBoundary>
+                        </TestCase>
+                    </TestSuite>
+                </ScrollView>
+            </Tester>
+        </View>
     );
 };
 

@@ -49,6 +49,11 @@ export default class ComplexExample extends React.Component {
           setTimeout(() => this._scrollView?.endLoading(), 1000);
         }}
       >
+        <TouchableOpacity
+          style={styles.text}
+          onPress={() => this._scrollView?.beginRefresh()}>
+          <Text>BeginRefresh</Text>
+        </TouchableOpacity>
         {this._renderContent()}
       </SpringScrollView>
     );

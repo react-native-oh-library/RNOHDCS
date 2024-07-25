@@ -37,7 +37,7 @@ const SmartRefreshLayoutAutoRefreshExample = () => {
         onRefresh={() => {
           console.log("Smart RN onRefresh")
           setTimeout(() => {
-            smartRefreshControlRef.current.finishRefresh({ delayed: -1, success: true });
+            smartRefreshControlRef?.current?.finishRefresh({ delayed: -1, success: true });
           }, 5000);
         }}
         onHeaderReleasing={(data: any) => {
@@ -48,6 +48,9 @@ const SmartRefreshLayoutAutoRefreshExample = () => {
         }}
         onPullDownToRefresh={() => {
           console.log("Smart RN onPullDownToRefresh")
+        }}
+        onHeaderReleased={() => {
+          console.log("Smart RN onHeaderReleased")
         }}
         onHeaderMoving={(data: any) => {
           const { percent, offset } = data.nativeEvent;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
 import Storage from 'react-native-storage';
-import { AsyncStorage } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 ///初始化
 const storage = new Storage({
     // 最大容量，默认值1000条数据循环存储
@@ -25,39 +25,34 @@ const storage = new Storage({
     // sync方法的具体说明会在后文提到
     // sync: sync,
   });
-  var userids = [];
-  var key = '';
-  var userA = {
-    key:'user',
-    id:"1001",
-    name: 'A',
-    age: 20,
-    tags: ['geek', 'nerd', 'otaku'],
-  };
-  var userB = {
-    key:'user',
-    id:"1002",
-    name: 'B',
-    age: 28,
-    tags: ['test', 'john', 'storage'],
-  };
-  var loginA = {
-    key:'login',
-    id:"1003",
-    account: 'test123',
-    password: "123321",
-  };
-  var loginB = {
-    key:'login',
-    id:"1004",
-    account: 'test456',
-    password: "456654",
-  };
+
   const Item = ({title}) => (
     <View style={styles.item}>
       <Text style={styles.title}>{title}</Text>
     </View>
   );
+  storage.sync ={
+    async user1(params) {
+        const {
+            id,
+            syncParams:{
+                extraFetchOption,
+                someFlag
+            }
+        } = params;
+        //示例url api
+        const url = 'https://xgzz-apiqa.bydauto.com.cn/aiApi-ts-dev/v2/appBaseService/info';///对应的API链接获取远程数据
+        const response = await fetch(url,{
+            ...extraFetchOption
+        });
+        const responseText = await response.text();
+        console.log('user1${id} sync resp: ',responseText);
+        const json = JSON.parse(responseText);
+        if(json){
+            return json
+        }
+    }
+  }
  class StorageDemo extends Component {
     constructor() {
       super();
@@ -77,38 +72,45 @@ const storage = new Storage({
         listData,
       });
     };
-  
+
     componentWillUnmount = () => {
       this.timer && clearTimeout(this.timer);
     };
   
     ///保存
-    saveStorageFun = (type) => {///type:1代表userA；2代表userB
+    saveStorageFun = () => {
       console.log("test==== >>>>storage====saveStorageFun");
       this.updateProgress("saveStorage start...");
+      
       storage.save({
-        key: 'user', // 注意:请不要在key中使用_下划线符号!
-        id: type==1?userA.id:userB.id, // 注意:请不要在id中使用_下划线符号!
-        data: type==1?userA:userB,
-        // 如果不指定过期时间，则会使用defaultExpires参数
-        // 如果设为null，则永不过期
-        expires: 1000 * 3600 * 24
-      }).then(() => {
-        console.log("test==== >>>>storage====saveStorage  success");
-        this.updateProgress("saveStorage success");
-        this.loadStorageFun(type==1?userA:userB)
+        key:'user1',
+        id:'1001',
+        data: { id: 1001, name: 'Alice'},
+        expires: 1000 * 3600 *24
+        });
+      storage.save({
+        key:'user2',
+        id:'1002',
+        data: { id: 1002, name: 'Bob'},
+        expires: 1000 * 3600 *24
       });
-    
+      storage.save({
+        key:'user3',
+        id:'1003',
+        data: { id: 1003, name: 'Charlie'},
+        expires: 1000 * 3600 *24
+      });
+      this.updateProgress("saveStorage success");
     };
      //读取
-  loadStorageFun = (user) => {
+  loadStorageFun = () => {
     this.updateProgress("loadStorage start...");
     console.log("test==== >>>>storage====loadStorageFun");
     storage.load({
-      key: user.key,
-      id:user.id,
+      key: 'user1',
+      id: '1001',
       // autoSync(默认为true)意味着在没有找到数据或数据过期时自动调用相应的sync方法
-    autoSync: false,
+    autoSync: true,
 
     // // syncInBackground(默认为true)意味着如果数据过期，
     // // 在调用sync方法的同时先返回已经过期的数据。
@@ -138,28 +140,30 @@ const storage = new Storage({
   }
 
   //移除单个数据
-  removeStorageFun = (type) => {
-    this.updateProgress("removeStoreage start...");
-    storage.remove({
-      key:type==1?userA.key:userB.key,
-      id:type==1?userA.id:userB.id
-    }).then(() => {
+  removeStorageFun = () => {
+    this.updateProgress("remove user2 start...");
+    storage.remove({key: 'user2'}).then(() => {
       this.updateProgress("removeStoreage success");
-      this.loadStorageFun(type==1?userB:userA)
     }).catch(err => {
       this.updateProgress("removeStorage fail:"+err.message);
       console.log("test==== >>>>storage====removeStorageFunError   "+err.message);
     });
   }
+  //清除所有数据
+  removeAllStorageFun = (type) => {
+    this.updateProgress("clearAllStoreage start...");
+    storage.clearAll();
+    this.updateProgress("clearAllStorage success")
+  }
   // 获取某个key下的所有id(仅key-id数据)
-  getIdsForKeyStorageFun = (key) => {
+  getIdsForKeyStorageFun = () => {
     this.updateProgress("getIdsForKey start...");
-    storage.getIdsForKey(key).then(ids => {
+    storage.getIdsForKey('user1').then(ids => {
       this.updateProgress("getIdsForKey: "+JSON.stringify(ids));
       userids = ids
       console.log(ids);
       console.log("test==== >>>>storage=getIdsForKeyStorageFun==="+JSON.stringify(ids));
-      this.updateProgress("getIdsForKey success");
+      this.updateProgress("getIdsForKey success"+JSON.stringify(ids));
     }).catch(err => {
       this.updateProgress("getIdsForKeyStorage fail:"+err.message);
       console.log("test==== >>>>storage====getIdsForKeyStorageFun===Error   "+err.message);
@@ -167,64 +171,83 @@ const storage = new Storage({
   }
 
   //获取某个key下的所有数据(仅key-id数据)
-  getAllDataForKeyStorageFun = (key) => {
-    storage.getAllDataForKey(key).then(users => {
+  getAllDataForKeyStorageFun = () => {
+    this.updateProgress("getAllDataForKey start ...")
+    storage.getAllDataForKey('user3').then(users => {
       console.log(users);
       console.log("test==== >>>>storage=getAllDataForKeyStorageFun==="+JSON.stringify(users));
+      this.updateProgress("getAllDataForKey :"+JSON.stringify(users))
+      this.updateProgress("getAllDataForKey success")
     });
   }
 
   // !! 清除某个key下的所有数据(仅key-id数据)
-  clearMapForKeyStorageFun= (key) =>{
-    storage.clearMapForKey(key);
-    console.log("test==== >>>>storage=clearMapForKeyStorageFun===");
+  clearMapForKeyStorageFun= () =>{
+    this.updateProgress("clearMapForKeystart ...")
+    storage.clearMapForKey('user1').then(() => {
+      this.updateProgress("clearMapForKey success")
+    });
   }
 
   // !! 清空map，移除所有"key-id"数据（但会保留只有key的数据）
   clearMapStorageFun = () => {
     console.log("test==== >>>>storage=clearMapStorageFun===");
-    this.updateProgress("clearMapStorage start...")
+    this.updateProgress("clearMap start...")
     storage.clearMap().then(() => {
-      this.updateProgress("clearMapStorage success")
-      this.loadStorageFun(userA)
+      this.updateProgress("clearMap success")
     });
   }
    //读取批量数据
    getBatchDataStorageFun = () => {
+    this.updateProgress("getBatchData start ...");
     console.log("test==== >>>>storage=getBatchDataStorageFun===start...");
     // 使用和load方法一样的参数读取批量数据，但是参数是以数组的方式提供。
     // 会在需要时分别调用相应的sync方法，最后统一返回一个有序数组。
-    storage.getBatchData([
-	    // { key: 'loginState' },
-	    // { key: 'checkPoint', syncInBackground: false },
-	    // { key: 'balance' },
-	    { key: 'user'}
-    ]).then(results => {
+    storage.getBatchData([{key:'user1',id:'1001',syncInBackground:false},{key:'user2',id:'1002',syncInBackground:false},{key:'user3',id:'1003',syncInBackground:false}]).then(results => {
+      this.updateProgress("getBatchData success "+JSON.stringify(results));
+      this.updateProgress("getBatchData success");
       console.log("test==== >>>>storage=getBatchDataStorageFun==="+JSON.stringify(results));
-      // results.forEach( result => {
-      //   console.log("test==== >>>>storage=getBatchDataStorageFun==="+JSON.stringify(result));
-      // })
     })
   }
   //读取批量数据
   getBatchDataWithIdsStorageFun = () => {
-    storage.getIdsForKey('user').then(userids => {
-      //根据key和一个id数组来读取批量数据
-      storage.getBatchDataWithIds({
-      key: 'user',
-      // ids: ['1001', '1002', '1003'],
-      ids:userids
-    }).then(retData => {
-      this.updateProgress("storage data: "+JSON.stringify(retData));
-      console.log("test==== >>>>storage=getBatchDataWithIdsStorageFun==="+JSON.stringify(retData));
-    }).catch(err => {
-      console.log("test==== >>>>storage====getBatchDataWithIdsStorageFun===Error   "+err.message);
-    });
-    }).catch(err => {
-      this.updateProgress("getIdsForKeyStorage fail:"+err.message);
-      console.log("test==== >>>>storage====getIdsForKeyStorageFun===Error   "+err.message);
-    });
+    this.updateProgress("getBatchDataWithIds start...");
+    storage.getBatchDataWithIds({key:'user3',ids:['1003']}).then(retData => {
+        this.updateProgress("getBatchDataWithIds data: "+JSON.stringify(retData));
+        this.updateProgress("getBatchDataWithIds success");
+        console.log("test==== >>>>storage=getBatchDataWithIdsStorageFun==="+JSON.stringify(retData));
+      }).catch(err => {
+        console.log("test==== >>>>storage====getBatchDataWithIdsStorageFun===Error   "+err.message);
+      });
   }
+
+   syncStorageFun = () => {
+    this.updateProgress("syncStorage start...");
+    const params = {
+        id:'1001',
+        syncParams: {
+            extraFetchOption: {
+                method: 'GET',
+                headers:{ 'Content-Type': 'application/json'}
+            },
+            someFlag: true
+        }
+    }
+    storage.sync.user1(params).then(json => {
+        this.updateProgress('syncStorage data ===='+json.serverName);
+        storage.save({
+            key: 'user1',
+            id: '1002',
+            data:{id: 1004,name: json.serverName},
+        }).then(() => {
+            this.updateProgress('syncStorage success');
+        })
+    }).catch(error => {
+        this.updateProgress('syncStorage fail: '+error.message);
+    })
+    
+  }
+
 
   renderProgressEntry = entry => {
     return (
@@ -239,14 +262,27 @@ const storage = new Storage({
     return (
       <View style={styles.mainContainer}>
         <View style={styles.textdata}>
-          <Text style = {styles.textkey}>{JSON.stringify(userA)}</Text>
-          <Text style = {styles.textkey}>{JSON.stringify(userB)}</Text>
-          <Button title='save userA' style={styles.toolbarButton} onPress={() => this.saveStorageFun(1)}/>
-          <Button title='save userB' style={styles.toolbarButton} onPress={() =>this.saveStorageFun(2)}/>
-          <Button title='get user key all ids' style={styles.toolbarButton} onPress={() =>this.getIdsForKeyStorageFun('user')}/>
-          <Button title='remove user key one data' style={styles.toolbarButton} onPress={() =>this.removeStorageFun(1)}/>
-          <Button title='clearMapStorage' style={styles.toolbarButton} onPress={() =>this.clearMapStorageFun()}/>
-          <Button title='read storage data' style={styles.toolbarButton} onPress={() =>this.getBatchDataWithIdsStorageFun()}/>
+          <Button title='save (user1,user2,user3)' style={styles.toolbarButton} onPress={() => this.saveStorageFun()}/>
+          <View style = {{height:10}}/>
+          <Button title='sync (user1)' style={styles.toolbarButton} onPress={() => this.syncStorageFun()}/>
+          <View style = {{height:10}}/>
+          <Button title='load data (user1)' style={styles.toolbarButton} onPress={() =>this.loadStorageFun()}/>
+          <View style = {{height:10}}/>
+          <Button title='get batch data (user1,user2,user3)' style={styles.toolbarButton} onPress={() =>this.getBatchDataStorageFun()}/>
+          <View style = {{height:10}}/>
+          <Button title='get batch data with ids (user3)' style={styles.toolbarButton} onPress={() =>this.getBatchDataWithIdsStorageFun()}/>
+          <View style = {{height:10}}/>
+          <Button title='get ids For key (user1)' style={styles.toolbarButton} onPress={() =>this.getIdsForKeyStorageFun()}/>
+          <View style = {{height:10}}/>
+          <Button title='remove data (user2)' style={styles.toolbarButton} onPress={() =>this.removeStorageFun()}/>
+          <View style = {{height:10}}/>
+          <Button title='get AllData For Key (user3)' style={styles.toolbarButton} onPress={() =>this.getAllDataForKeyStorageFun()}/>
+          <View style = {{height:10}}/>
+          <Button title='clear Map' style={styles.toolbarButton} onPress={() =>this.clearMapStorageFun()}/>
+          <View style = {{height:10}}/>
+          <Button title='clear All' style={styles.toolbarButton} onPress={() =>this.removeAllStorageFun()}/>
+          <View style = {{height:10}}/>
+          <Button title='clear MapFor Key (user1)' style={styles.toolbarButton} onPress={() =>this.clearMapForKeyStorageFun()}/>
         </View>
         <FlatList
           data={this.state.listData}
@@ -321,20 +357,18 @@ var styles = StyleSheet.create({
       flexDirection: 'column',
     },
     textdata: {
-      paddingTop: 60,
       paddingBottom: 10,
       flexDirection: 'column',
     },
     toolbarButton: {
-      paddingTop: 10,
-      paddingBottom: 10,
-      margin: 10,
+      margin: 20,
       backgroundColor: 'blue',
       color: '#ffffff',
       textAlign: 'center',
     },
     mainContainer: {
       flex: 1,
+      padding:10
     },
   });
 

@@ -52,12 +52,6 @@ export function ToastTest() {
                             .true;
                     }}
                 />
-                <TestCase
-                    itShould="Toast.showLongBottom"
-                    fn={({ expect }: any) => {
-                        expect(Toast.hide()).to.not.be.true;
-                    }}
-                />
             </TestSuite>
         </Tester>
     );

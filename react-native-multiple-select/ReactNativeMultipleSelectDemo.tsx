@@ -144,17 +144,17 @@ export default function ReactNativeMultipleSelect() {
               <SelectExample1801></SelectExample1801>
             </TestCase>
           </TestSuite>
-          <TestSuite name='selectedText' key={'selectText'}>
+          <TestSuite name='selectedText' key={'selectedText'}>
             <TestCase itShould="selectedText是选中后标题框后的固定字符，比如设置成'选中个数'" tags={['C_API']}>
               <SelectExample1802></SelectExample1802>
             </TestCase>
           </TestSuite>
-          <TestSuite name='selectedItemIconColor' key={'selectText'}>
+          <TestSuite name='selectedItemIconColor' key={'selectedItemIconColor'}>
             <TestCase itShould="selectedItemIconColor是选中之后的图标，比如设置成黑色" tags={['C_API']}>
               <SelectExample1804></SelectExample1804>
             </TestCase>
           </TestSuite>
-          <TestSuite name='selectedItemTextColor' key={'selectText'}>
+          <TestSuite name='selectedItemTextColor' key={'selectedItemTextColor'}>
             <TestCase itShould="selectedItemTextColor是选中之后的字体颜色，比如设置成红色" tags={['C_API']}>
               <SelectExample1805></SelectExample1805>
             </TestCase>
@@ -269,7 +269,7 @@ export default function ReactNativeMultipleSelect() {
               <SelectExample40></SelectExample40>
             </TestCase>
           </TestSuite>
-          <TestSuite name='["items","uniqueKey","onSelectedItemsChange","selectedItems","displayKey"]' key={'removeSelected'}>
+          <TestSuite name='["items","uniqueKey","onSelectedItemsChange","selectedItems","displayKey"]' key={'displayKey1'}>
             <TestCase itShould="这些属性是列表固定的属性，items是下拉选项值，uniqueKey每个项目属性的唯一标识符，onSelectedItemsChange用于单选时触发，selectedItems所选项目键的列表,displayKey的默认值和item中的name名称一样" tags={['C_API']}>
               <SelectExample41></SelectExample41>
             </TestCase>

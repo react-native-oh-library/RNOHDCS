@@ -27,7 +27,13 @@ export default class RefreshAndLoadingExample extends React.Component {
         inverted={false}
         refreshHeader={CommonLottieHeader}
         loadingFooter={CommonLottieFooter}
+        allLoaded={this.state.allLoaded}
       >
+          <TouchableOpacity
+          style={styles.text}
+          onPress={() => this._scrollView?.beginRefresh()}>
+          <Text>BeginRefresh</Text>
+        </TouchableOpacity>
         {arr.map(item => (
           <Text key={item} style={styles.text}>
             This is a Refresh and Loading Test

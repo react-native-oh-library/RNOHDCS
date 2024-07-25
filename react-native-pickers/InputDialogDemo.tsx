@@ -21,7 +21,6 @@ export class InputDialogExample extends BaseComponent {
       btnBgColor: '#1097D5',
       placeholder: '请尽量说明问题，我们将尽快处理...',
       onSubmit:'',
-      onSubmit: null
     };
   }
 
@@ -38,8 +37,14 @@ export class InputDialogExample extends BaseComponent {
       { tester_change("titleColor #33ff33",'titleColor #33ff33',()=>{ this.setState({...this.state,titleColor:'#33ff33'});this.InputDialog.show() })}
       { tester_change("cancelText 返回",'cancelText 返回',()=>{ this.setState({...this.state,cancelText:'返回'});this.InputDialog.show() })}
       { tester_change("cancelText 返回11",'cancelText 返回11',()=>{ this.setState({...this.state,cancelText:'返回11'});this.InputDialog.show() })}
-      { tester_change("cancelSize12",'cancelSize12',()=>{ this.setState({...this.state,cancelSize:12});this.InputDialog.show() })}
-      { tester_change("cancelSize24",'cancelSize24',()=>{ this.setState({...this.state,cancelSize:24});this.InputDialog.show() })}
+      { tester_change("cancelSize 12",'cancelSize 12',()=>{ this.setState({...this.state,cancelSize:12});this.InputDialog.show() })}
+      { tester_change("cancelSize 24",'cancelSize 24',()=>{ this.setState({...this.state,cancelSize:24});this.InputDialog.show() })}
+      { tester_change("cancelColor #333333",'cancelText #333333',()=>{ this.setState({...this.state,cancelColor:'#333333'});this.InputDialog.show() })}
+      { tester_change("cancelColor #00ff00",'cancelText #00ff00',()=>{ this.setState({...this.state,cancelColor:'#00ff00'});this.InputDialog.show() })}
+      { tester_change("btnText 提交",'btnText 提交',()=>{ this.setState({...this.state,btnText:'提交'});this.InputDialog.show() })}
+      { tester_change("btnText 提交111",'btnText 提交111',()=>{ this.setState({...this.state,btnText:'提交111'});this.InputDialog.show() })}
+      { tester_change("btnTextSize 24",'btnTextSize 24',()=>{ this.setState({...this.state,btnTextSize:24});this.InputDialog.show() })}
+      { tester_change("btnTextSize 12",'btnTextSize 12',()=>{ this.setState({...this.state,btnTextSize:12});this.InputDialog.show() })}
       { tester_change("btnTextColor #f00fff",'btnTextColor #f00fff',()=>{ this.setState({...this.state,btnTextColor:'#f00fff'});this.InputDialog.show() })}
       { tester_change("btnTextColor #fff00f",'btnTextColor #fff00f',()=>{ this.setState({...this.state,btnTextColor:'#fff00f'});this.InputDialog.show() })}
       { tester_change("btnBgColor #1097D5",'btnBgColor #1097D5',()=>{ this.setState({...this.state,btnBgColor:'#1097D5'});this.InputDialog.show() })}

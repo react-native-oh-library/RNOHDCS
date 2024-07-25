@@ -85,7 +85,7 @@ const App = () => {
         onRefresh={() => {
           console.log("Smart RN onRefresh")
           setTimeout(() => {
-            meaterRefreshControlRef.current.finishRefresh({ delayed: -1, success: true });
+            meaterRefreshControlRef?.current?.finishRefresh({ delayed: -1, success: true });
           }, 5000);
         }}
         onHeaderReleasing={(data: any) => {
@@ -96,6 +96,9 @@ const App = () => {
         }}
         onPullDownToRefresh={() => {
           console.log("Smart RN onPullDownToRefresh")
+        }}
+        onHeaderReleased={() => {
+          console.log("Smart RN onHeaderReleased")
         }}
         onHeaderMoving={(data: any) => {
           if (data.nativeEvent.offset > headerHeight - 20) {
