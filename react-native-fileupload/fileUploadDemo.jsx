@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import FileUpload from 'react-native-fileupload';
-import Toast from 'react-native-toast';
+import Toast from '@remobile/react-native-toast';
 
 export default class FileUploadDemo extends Component {
 
@@ -24,7 +24,6 @@ export default class FileUploadDemo extends Component {
           filetype: 'jpg',// optional
         },
         {
-          name: 'one', // optional
           filename: 'one.w4a',
           filepath: '/xxx/one.w4a', 
           filetype: 'audio/x-m4a',// optional
