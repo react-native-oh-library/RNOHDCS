@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Button, StyleSheet, Text, findNodeHandle } from 'react-native';
+import { View, Button, StyleSheet, Text, ScrollView } from 'react-native';
 import { Echarts, echarts } from 'react-native-secharts';
 
 export default class SechartsCandlestick extends Component {
@@ -31,26 +31,22 @@ export default class SechartsCandlestick extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View>
-          <Echarts ref={this.echart1}
+      <ScrollView horizontal={true}>
+      <Echarts   width={500}  ref={this.echart1}
             option={this.state.option1}
-            renderLoading={() => <View style={{ backgroundColor: 'rgba(255,255,0,0)' }} />} />
-        </View>
-      </View>
+           />
+        </ScrollView>
     );
   }
 
 }
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    backgroundColor: '#F5FCFF'
-  },
-  buttonContainer: {
-    width: 300,
-    marginTop: 5
+      //flex: 1,
+      // justifyContent: 'center',
+      // alignItems: 'center',
+      width:500,
+      backgroundColor: '#F5FCFF',
+      overflowX:'scroll'
   }
 });
