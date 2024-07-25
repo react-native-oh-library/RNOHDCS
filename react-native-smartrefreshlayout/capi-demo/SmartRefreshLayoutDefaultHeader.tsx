@@ -94,7 +94,7 @@ const App = () => {
         onRefresh={() => {
           console.log("Smart RN onRefresh")
           setTimeout(() => {
-            defaultSmartRefreshControlRef.current.finishRefresh({ delayed: -1, success: true });
+            defaultSmartRefreshControlRef?.current?.finishRefresh({ delayed: -1, success: true });
           }, 5000);
         }}
         onHeaderReleasing={(data: any) => {
