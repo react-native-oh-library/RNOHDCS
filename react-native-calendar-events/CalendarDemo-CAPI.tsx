@@ -160,9 +160,16 @@ function CalendarDemo() {
                 <Button
                   title="removeCalendar"
                   onPress={() => {
-                    RNCalendarEvents.removeCalendar("1").then(
+                    RNCalendarEvents.findCalendars().then(
                       (result) => {
-                        Alert.alert('Remove Calendar', result + "");
+                        RNCalendarEvents.removeCalendar(result.length > 1 ? result[1].id : "1").then(
+                          (result) => {
+                            Alert.alert('Remove Calendar', result + "");
+                          },
+                          (result) => {
+                            console.error(result);
+                          },
+                        );
                       },
                       (result) => {
                         console.error(result);
@@ -174,9 +181,16 @@ function CalendarDemo() {
                 <Button
                   title="findEventById"
                   onPress={() => {
-                    RNCalendarEvents.findEventById("1").then(
+                    RNCalendarEvents.fetchAllEvents(fetchAllEventStartTime, fetchAllEventEndTime).then(
                       (result) => {
-                        Alert.alert('find Event', result + "");
+                        RNCalendarEvents.findEventById(result.length > 0 ? result[0].id : "1").then(
+                          (result) => {
+                            Alert.alert('find Event', result + "");
+                          },
+                          (result) => {
+                            console.error(result);
+                          },
+                        );
                       },
                       (result) => {
                         console.error(result);
@@ -216,9 +230,16 @@ function CalendarDemo() {
                 <Button
                   title="removeEvent"
                   onPress={() => {
-                    RNCalendarEvents.removeEvent("9").then(
+                    RNCalendarEvents.fetchAllEvents(fetchAllEventStartTime, fetchAllEventEndTime).then(
                       (result) => {
-                        Alert.alert('Remove event', result + "");
+                        RNCalendarEvents.removeEvent(result.length > 0 ? result[0].id : "1").then(
+                          (result) => {
+                            Alert.alert('Remove event', result + "");
+                          },
+                          (result) => {
+                            console.error(result);
+                          },
+                        );
                       },
                       (result) => {
                         console.error(result);
