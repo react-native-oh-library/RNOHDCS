@@ -40,7 +40,7 @@ export class SimpleItemsDialogExample extends BaseComponent {
       { tester_change(' cancelTextStyle','cancelTextStyle { color: "#999999" }',()=>{ this.setState({...this.state,cancelTextStyle:{ color: '#999999' }});this.SimpleItemsDialog.show() })}
       { tester_change(' cancelTextStyle','cancelTextStyle { color: "#990099" }',()=>{ this.setState({...this.state,cancelTextStyle:{ color: '#990099' }});this.SimpleItemsDialog.show() })}
       
-      {tester_back_string("onPickerConfirm",this.state.onPress)}
+      {tester_back_string("onPress",this.state.onPress)}
 
 
       <View style={{height:100}}></View>

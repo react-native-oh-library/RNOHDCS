@@ -49,7 +49,7 @@ export class SimpleChooseDialogExample extends BaseComponent {
       { tester_change("confirmTextColor #ffffff",'confirmTextColor #ffffff',()=>{ this.setState({...this.state,confirmTextColor:'#ffffff'});this.SimpleChooseDialog.show() })}
       { tester_change("confirmTextColor #ff00ff",'confirmTextColor #ff00ff',()=>{ this.setState({...this.state,confirmTextColor:'#ff00ff'});this.SimpleChooseDialog.show() })}
       
-      {tester_back_string("onPickerConfirm",this.state.onPress)}
+      {tester_back_string("onPress",this.state.onPress)}
       </TestSuite>
     </ScrollView>
     </Tester>
