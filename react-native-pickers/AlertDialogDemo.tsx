@@ -48,7 +48,7 @@ export class AlertDialogExample extends BaseComponent {
       { tester_change("positiveSize 20",'positiveSize 20',()=>{ this.setState({...this.state,positiveSize:20});this.AlertDialog.show() })}
       { tester_change("positiveSize 10",'positiveSize 10',()=>{ this.setState({...this.state,positiveSize:10});this.AlertDialog.show() })}
       
-      {tester_back_string("onPickerConfirm",this.state.onPress)}
+      {tester_back_string("onPress",this.state.onPress)}
       </TestSuite>
       </ScrollView>
     </Tester>

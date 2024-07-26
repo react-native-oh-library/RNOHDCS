@@ -29,12 +29,10 @@ export class PickerViewExample extends BaseComponent {
       { tester_change("itemSelectedColor 0x109005ff",'itemSelectedColor 0x109005ff',()=>{ this.setState({...this.state,itemSelectedColor:0x109005ff}); })}
       { tester_change("itemHeight 80",'itemHeight 80',()=>{ this.setState({...this.state,itemHeight:80}); })}
       { tester_change("itemHeight 20",'itemHeight 20',()=>{ this.setState({...this.state,itemHeight:20}); })}
-      { tester_change("itemWidth 100",'itemWidth 100',()=>{ this.setState({...this.state,itemWidth:100}); })}
-      { tester_change("itemWidth 200",'itemWidth 200',()=>{ this.setState({...this.state,itemWidth:200}); })}
       { tester_change("selectedIndex 2",'selectedIndex 2',()=>{ this.setState({...this.state,selectedIndex:2}); })}
       { tester_change("selectedIndex 0",'selectedIndex 0',()=>{ this.setState({...this.state,selectedIndex:0}); })}
       
-      {tester_back_string("onPickerConfirm",this.state.onPickerSelected)}
+      {tester_back_string("onPickerSelected",this.state.onPickerSelected)}
 
       
       <View style={{ width: this.mScreenWidth, height: this.props.itemHeight * 3 + this.getSize(15), flexDirection: 'row',  }}>

@@ -1,4 +1,4 @@
-import {View} from 'react-native';
+import {SafeAreaView, View,} from 'react-native';
 import {NavigationContainer, Page} from './Navigation';
 import {DatePickerExample} from './DatepickerDemo';
 import {AlertDialogExample} from './AlertDialogDemo';
@@ -16,6 +16,7 @@ export function PickersExample() {
 
   return(
     <View style={{backgroundColor: 'black'}}>
+		<SafeAreaView>
         <NavigationContainer>
               <Page name ='AlertDialogExample'>
                 <AlertDialogExample></AlertDialogExample>
@@ -44,13 +45,11 @@ export function PickersExample() {
               <Page name ='ToastComponentExample'>
                 <ToastComponentExample></ToastComponentExample>
               </Page>
-              <Page name ='BaseComponentExample'>
-                <BaseComponentExample></BaseComponentExample>
-              </Page>
               <Page name ='BaseDialogExample'>
                 <BaseDialogExample></BaseDialogExample>
               </Page>
           </NavigationContainer>
+		</SafeAreaView>
     </View>
   )
 }
