@@ -15,6 +15,7 @@ import {
 } from 'react-native-ble-plx'
 import { PermissionsAndroid, Platform } from 'react-native'
 // import Toast from 'react-native-toast-message'
+import Toast from 'react-native-simple-toast';
 
 const deviceNotConnectedErrorText = 'Device is not connected'
 
@@ -442,6 +443,12 @@ class BLEServiceInstance {
     //   text2: info
     // })
     console.info(info)
+  }
+
+  destory = () => {
+    this.manager.destory().then(()=>{
+      Toast.show('Done', Toast.SHORT);
+    })
   }
 }
 
