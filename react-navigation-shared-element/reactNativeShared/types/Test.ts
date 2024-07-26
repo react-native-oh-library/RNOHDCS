@@ -87,3 +87,4 @@ export function getTestGroup(test: Test | TestGroup): TestGroup | undefined {
   // @ts-ignore
   return test.tests ? test : undefined;
 }
+ 
