@@ -608,7 +608,7 @@ export default class SechartsOptionTest extends Component {
                   <TestSuite>
                     <TestCase itShould={"option:" + JSON.stringify(item.option)} >
                       <ScrollView horizontal={true} >
-                        <Echarts height={500} width={500} ref={React.createRef()}
+                        <Echarts height={500} width={800} ref={React.createRef()}
                           option={item.option}
                         />
                       </ScrollView>
