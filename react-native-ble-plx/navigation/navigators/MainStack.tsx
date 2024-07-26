@@ -10,6 +10,7 @@ export type MainStackParamList = {
   DEVICE_NRF_TEST_SCREEN: undefined
   DEVICE_CONNECT_DISCONNECT_TEST_SCREEN: undefined
   DEVICE_ON_DISCONNECT_TEST_SCREEN: undefined
+  OTHER_API_TESTER_SCREEN: undefined
 }
 
 const MainStack = createStackNavigator<MainStackParamList>();
@@ -52,6 +53,13 @@ export function MainStackComponent() {
         component={screenComponents.DeviceOnDisconnectTestScreen}
         options={{
           headerTitle: 'On disconnect test'
+        }}
+      />
+      <MainStack.Screen
+        name="OTHER_API_TESTER_SCREEN"
+        component={screenComponents.OtherScreen}
+        options={{
+          headerTitle: 'other api test'
         }}
       />
     </MainStack.Navigator>

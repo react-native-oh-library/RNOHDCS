@@ -102,6 +102,10 @@ export function DashboardScreen({ navigation }: DashboardScreenProps) {
       label="On disconnect test" 
       onPress={() => navigation.navigate('DEVICE_ON_DISCONNECT_TEST_SCREEN')} 
       />
+      <AppButton
+      label="Other Api test"
+      onPress={() => navigation.navigate('OTHER_API_TESTER_SCREEN')}
+      />
       <FlatList
         // style={{ flex: 1 ,backgroundColor:'#ff304d'}}
         data={foundDevices}
