@@ -71,7 +71,7 @@ export default class ScrollableTabviewExample6 extends React.Component {
         this.state = {
             rootTime: Date.now(),
             stacks: [],
-            firstIndex: 0,
+            firstIndex: 1,
             useScroll: false,
             scroll: "0",
             scroll2Horizontal: "0",
