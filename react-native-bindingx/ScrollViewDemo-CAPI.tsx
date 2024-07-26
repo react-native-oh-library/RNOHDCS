@@ -23,6 +23,11 @@ export default class ScrollViewDemo extends React.Component {
     _token = "";
 
     componentWillMount() {
+        let anchor = findNodeHandle(this.refs._anchor);
+        bindingx.prepare({
+          eventType: 'scroll',
+          anchor: anchor
+        });
     }
 
 

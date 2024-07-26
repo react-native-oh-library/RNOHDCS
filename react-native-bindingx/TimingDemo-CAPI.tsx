@@ -23,6 +23,11 @@ export default class TimingDemo extends React.Component {
     }
 
     componentDidMount(): void {
+        let anchor = findNodeHandle(this.refs._anchor);
+        bindingx.prepare({
+          eventType: 'timing',
+          anchor: anchor
+        });
         BackHandler.addEventListener(
           'hardwareBackPress',
           () => {

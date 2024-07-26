@@ -19,6 +19,11 @@ export default class OrientationDemo extends React.Component {
         this.onUnBind();
     }
     componentDidMount(): void {
+        let anchor = findNodeHandle(this.refs._anchor);
+        bindingx.prepare({
+          eventType: 'orientation',
+          anchor: anchor
+        });
         BackHandler.addEventListener(
           'hardwareBackPress',
           () => {
