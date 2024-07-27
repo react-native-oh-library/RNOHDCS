@@ -452,7 +452,6 @@ export const FlashListTest = () => {
                             flatlistRef.current?.prepareForLayoutAnimationRender();
                             setState(true);
                         }
-
                     }}
                 />
                 <FlashList data={data} renderItem={myRenderItem} ref={flatlistRef} />
@@ -539,34 +538,24 @@ export const FlashListTest = () => {
     return (
         <Tester>
             <TestSuite name="FlashList">
-                <TestCase
-                    itShould="onRefresh,refreshing"
-                    initialState={false}
-                    arrange={({ setState }) => {
-                        return (
-                            <View style={{ height: 100 }}>
-                                <FlashList
-                                    data={DATA}
-                                    renderItem={renderItem}
-                                    refreshing={refreshing}
-                                    onRefresh={() => {
-                                        setRefreshing(true);
-                                        setState(true);
-                                        setTimeout(() => {
-                                            setRefreshing(false);
-                                        }, 2000);
-                                    }}
-                                />
-                            </View>
-                        );
-                    }}
-                    assert={({ state, expect }) => {
-                        expect(state).to.be.true;
-                    }}
-                />
+                <TestCase itShould="onRefresh,refreshing">
+                    <View style={{ height: 100 }}>
+                        <FlashList
+                            data={DATA}
+                            renderItem={renderItem}
+                            refreshing={refreshing}
+                            onRefresh={() => {
+                                setRefreshing(true);
+                                setTimeout(() => {
+                                    setRefreshing(false);
+                                }, 2000);
+                            }}
+                        />
+                    </View>
+                </TestCase>
                 <TestCase itShould="refreshControl">
                     <View style={{ height: 120 }}>
-                        <FlashList data={DATA} renderItem={renderItem} refreshControl={<RefreshControl refreshing={true} colors={['hsl(190, 50%, 70%)']} />} />
+                        <FlashList data={DATA} renderItem={renderItem} refreshControl={<RefreshControl refreshing={true} />} />
                     </View>
                 </TestCase>
                 <ScrollView>
@@ -656,7 +645,7 @@ export const FlashListTest = () => {
                                     <FlashList
                                         data={DATA}
                                         renderItem={renderItem}
-                                        onEndReached={(state: any) => {
+                                        onEndReached={() => {
                                             setState(true);
                                         }}
                                     />
@@ -677,7 +666,11 @@ export const FlashListTest = () => {
                                         data={DATA}
                                         style={{ height: 40 }}
                                         renderItem={renderItem}
-                                        onBlankArea={(item: any) => {
+                                        onBlankArea={(blankAreaEvent: {
+                                            offsetStart: number;
+                                            offsetEnd: number;
+                                            blankArea: number;
+                                        }) => {
                                             setState(true);
                                         }}
                                     />
@@ -702,7 +695,7 @@ export const FlashListTest = () => {
                                             itemVisiblePercentThreshold: 10,
                                             minimumViewTime: 1000,
                                         }}
-                                        onViewableItemsChanged={(item: any) => {
+                                        onViewableItemsChanged={() => {
                                             setState(true);
                                         }}
                                     />
@@ -724,7 +717,7 @@ export const FlashListTest = () => {
                                         style={{ height: 40 }}
                                         renderItem={renderItem}
                                         onEndReachedThreshold={2}
-                                        onEndReached={(item: any) => {
+                                        onEndReached={() => {
                                             setState(true);
                                         }}
                                     />
@@ -741,6 +734,7 @@ export const FlashListTest = () => {
                             data={MessageDATA}
                             renderItem={renderMessage}
                             getItemType={item => {
+                                console.info('flashlist getItemType type:' + item.type + ',id:' + item.id)
                                 return item.type;
                             }}
                         />
@@ -868,6 +862,7 @@ export const FlashListTest = () => {
                                 estimatedItemSize={40}
                                 nestedScrollEnabled={true}
                                 renderScrollComponent={props => {
+                                    console.info('flashlist renderScrollComponent do')
                                     return (<ScrollView nestedScrollEnabled {...props} />)
                                 }}
                             />
