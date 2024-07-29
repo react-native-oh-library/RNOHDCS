@@ -159,7 +159,7 @@ export function CollapsibleExample() {
             renderAsFlatList={data.renderAsFlatList}
             disabled={data.disabled}
             easing={data.easing}
-            keyExtractor={(item, index) => { if(data.keyExtractor){ return index; } else{ return item.ekey } }}
+            keyExtractor={(item, index) => { if(data.keyExtractor){ return index; } else{ return item.ekey-1 } }}
           />
           <TestCase
             itShould="多项目展开"
