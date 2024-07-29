@@ -1,8 +1,7 @@
-/**
- * Basic [iOS] Example for react-native-blur
- * https://github.com/react-native-community/react-native-blur
- */
-import React, { useState} from 'react';
+import React, { useState } from 'react';
+
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
+
 import {
   Image,
   StyleSheet,
@@ -12,6 +11,8 @@ import {
   View,
   SafeAreaView,
   Dimensions,
+  ScrollView,
+  Button
 } from 'react-native';
 
 import {
@@ -19,11 +20,137 @@ import {
   BlurViewProps,
 } from '@react-native-community/blur';
 
-const Blurs = () => {
+
+export const CommunitrBlurDemo = () => {
   const [blurBlurType, setBlurBlurType] = useState<BlurViewProps['blurType']>('dark');
   const [blurAmount, setBlurAmount] = useState<number>(100);
-  useState<BlurViewProps['blurType']>('dark');
+  const blurtype:Array<BlurViewProps['blurType']> = ['light' , 'xlight' , 'thinMaterial' , 'chromeMaterialLight' , 'materialLight' , 'thickMaterialLight' , 'thinMaterialLight' , 'ultraThinMaterialLight']
+  const blurtypeDark:Array<BlurViewProps['blurType']> = [ 'dark' , 'prominent' , 'regular' , 'extraDark' , 'chromeMaterial' , 'material' , 'thickMaterial' , 'ultraThinMaterial' , 'chromeMaterialDark',"thickMaterialDark" ,
+   'materialDark'  , 'thinMaterialDark' , 'ultraThinMaterialDark']
+
+  return (
+    <Tester>
+      <ScrollView>
+        <TestSuite name="@react-native-community/blur">
+          <TestCase
+            key={"getInitStatus_1"}
+            itShould={`blurType 属性`}
+            tags={['C_API']}
+            initialState={false}
+
+            arrange={({ setState }) => {
+            
+              return (
+                <View style={{ flex: 1 ,height:500}}>
+                  <BlurDemo blurBlurType={blurBlurType} blurAmount={blurAmount} ></BlurDemo>
+                  <Button title={"start"} onPress={() => {
+                   
+                    setBlurBlurType("light")
+                 
+                    setState(true)
+                  }}></Button>
+                </View>
+              );
+            }}
+            assert={async ({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
+          <TestCase
+            key={"getInitStatus_2"}
+            itShould={`blurAmount 属性`}
+            tags={['C_API']}
+            initialState={false}
+
+            arrange={({ setState }) => {
+            
+              return (
+                <View style={{ flex: 1,height:500 }}>
+                  <BlurDemo blurBlurType={blurBlurType} blurAmount={blurAmount}></BlurDemo>
+                  <Button title={"start"} onPress={() => {
+                   
+                   setBlurAmount(20)
+                 
+                    setState(true)
+                  }}></Button>
+                </View>
+              );
+            }}
+            assert={async ({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
+     
+            {
+             blurtype.map((item,index)=> <TestCase
+      
+             key={`${index}_${item}`}
+             itShould={`blurType 属性 的${item}`}
+             tags={['C_API']}
+             initialState={false}
+ 
+             arrange={({ setState }) => {
+               const [blurTypeL,setBlurTypeL] =useState<BlurViewProps['blurType']>("thickMaterial")
+               return (
+                 <View style={{ flex: 1 ,height:500}}>
+                   <BlurDemo blurBlurType={blurTypeL} blurAmount={100} ></BlurDemo>
+                   <Button title={"start"} onPress={() => {
+                    
+                    setBlurTypeL(item)
+                  
+                     setState(true)
+                   }}></Button>
+                 </View>
+               );
+             }}
+             assert={async ({ expect, state }) => {
+               expect(state).to.be.true;
+             }}
+           />)
+          }
+          {
+             blurtypeDark.map((item,index)=> <TestCase
+             key={`${index}_${item}`}
+             itShould={`blurType 属性 的${item}`}
+             tags={['C_API']}
+             initialState={false}
+ 
+             arrange={({ setState }) => {
+               const [blurTypeD,setBlurTypeD] =useState<BlurViewProps['blurType']>("light")
+               return (
+                 <View style={{ flex: 1 ,height:500}}>
+                   <BlurDemo blurBlurType={blurTypeD} blurAmount={100} ></BlurDemo>
+                   <Button title={"start"} onPress={() => {
+                    
+                    setBlurTypeD(item)
+                  
+                     setState(true)
+                   }}></Button>
+                 </View>
+               );
+             }}
+             assert={async ({ expect, state }) => {
+               expect(state).to.be.true;
+             }}
+           />)
+          }
+          
+        </TestSuite>
+
+      </ScrollView>
+    </Tester>
+  );
+}
+
+interface IBlursProps {
+  blurBlurType:BlurViewProps['blurType'],
+  blurAmount:number
+}
+
+const Blurs:React.FC<IBlursProps> = ({blurBlurType,blurAmount}) => {
+ 
   const tintColor = blurBlurType === 'dark' ? 'white' : 'black';
+
 
   return (
     <View style={styles.container}>
@@ -31,89 +158,28 @@ const Blurs = () => {
         <BlurView
           blurType={blurBlurType}
           blurAmount={blurAmount}
-          reducedTransparencyFallbackColor='red'
+          reducedTransparencyFallbackColor="#000"
           style={[styles.blurView]}
         />
+         
         <Text style={[styles.text, { color: tintColor }]}>
-          Blur component ({Platform.OS})
+          Blur component1 ({Platform.OS})
         </Text>
-
-        <View style={styles.row}>
-          <Text onPress={() => {
-            setBlurBlurType('light')
-          }}>light</Text>
-
-          <Text onPress={() => {
-            setBlurBlurType('dark')
-          }}>dark</Text>
-
-          <Text onPress={() => {
-            setBlurBlurType('chromeMaterialLight')
-          }}>chromeMaterialLight click will crash</Text>
-{/* 
-
-  给鸿蒙平台设置在其他平台顶一顶
-  define of BlurViewPropsIOS
-  declare type BlurType = 'dark' | 'light' | 'xlight' | 'prominent' | 'regular' | 'extraDark' | 'chromeMaterial' | 'material' | 'thickMaterial' | 'thinMaterial' | 'ultraThinMaterial' | 'chromeMaterialDark' | 'materialDark' | 'thickMaterialDark' | 'thinMaterialDark' | 'ultraThinMaterialDark' | 'chromeMaterialLight' | 'materialLight' | 'thickMaterialLight' | 'thinMaterialLight' | 'ultraThinMaterialLight';
-
-  define of BlurViewPropsHarmony
-  declare type BlurType = 'dark' | 'light' | 'thickMaterialDark' | 'thinMaterialDark' | 'thickMaterialLight' | 'thinMaterialLight';
-
-  import type { BlurViewProps as BlurViewPropsIOS } from './components/BlurView.ios';
-  import type { BlurViewProps as BlurViewPropsAndroid } from './components/BlurView.android';
-  import type { BlurViewProps as BlurViewPropsHarmony } from './components/BlurView.harmony';
-  declare type BlurViewProps = BlurViewPropsIOS | BlurViewPropsAndroid | BlurViewPropsHarmony;
-
-  BlurViewProps is enum 
-  chromeMaterialLight is define in BlurViewPropsIOS but not in BlurViewPropsHarmony.
-  chromeMaterialLight 在 BlurViewPropsIOS中声明了，在 BlurViewPropsHarmony没有，
-  所以在鸿蒙平台上设置 BlurViewProps= chromeMaterialLight，语法不会报错。但执行会闪退。
-
-  包错日志见 blurCrash.txt
-*/}
-
-        {/* <Text onPress={() => {
-            setBlurBlurType('thickMaterialDark')
-          }}>thickMaterialDark</Text>
-          <Text onPress={() => {
-            setBlurBlurType('thinMaterialLight')
-          }}>thinMaterialLight</Text> */}
-        </View>
-        <View style={styles.row}>
-          <Text onPress={() => {
-            setBlurAmount(20)
-          }}>20</Text>
-
-          <Text onPress={() => {
-            setBlurAmount(40)
-          }}>40</Text>
-
-          <Text onPress={() => {
-            setBlurAmount(60)
-          }}>60</Text>
-          <Text onPress={() => {
-            setBlurAmount(80)
-          }}>80</Text>
-
-          <Text onPress={() => {
-            setBlurAmount(100)
-          }}>100</Text>
-        </View>
       </View>
     </View>
   );
 };
 
-const BlurDemo = () => {
-  const [showBlurs, setShowBlurs] = React.useState(true);
+const BlurDemo:React.FC<IBlursProps> = ({blurBlurType,blurAmount})=> {
+  const [showBlurs, setShowBlurs] = React.useState(false);
   return (
     <View style={styles.container}>
       <Image
-        source={require('../assets/bgimage.jpeg')}
+        source={{uri:"https://avatars0.githubusercontent.com/u/15728691?s=460&v=4"}}
         resizeMode="cover"
         style={styles.img}
       />
-      {showBlurs ? <Blurs /> : null}
+      {showBlurs ? <Blurs blurBlurType={blurBlurType} blurAmount={blurAmount}/> : null}
 
       <SafeAreaView style={styles.blurToggle}>
         <Switch
@@ -122,6 +188,7 @@ const BlurDemo = () => {
         />
       </SafeAreaView>
     </View>
+   
   );
 };
 
@@ -166,8 +233,8 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     bottom: 0,
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width,
+    height: 400,
+    width: "100%",
   },
   text: {
     fontSize: 20,
@@ -184,4 +251,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BlurDemo;
+
+
