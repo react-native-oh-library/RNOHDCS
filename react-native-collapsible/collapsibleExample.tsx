@@ -64,7 +64,7 @@ export function CollapsibleExample() {
   function renderHeader(section: any, _: any, isActive: any) {
     renderHeaderRef.current = 'pass'
     return (
-      <View>
+      <View style={{padding:10}}>
         <Pressable onPress={() => { setSections(_); }}>
           <Text style={styles.headerText}>{section.title}</Text>
         </Pressable>
@@ -110,11 +110,15 @@ export function CollapsibleExample() {
             renderChildrenCollapsed={data.renderChildrenCollapsed}
             >
             <View style={styles.content}>
-              <View style={{backgroundColor:'red',height:'100'}}><Text>{' '} Bacon ipsum dolor amet chuck turducken landjaeger tongue spare ribs{buttonEvent+' '}</Text></View>
+              <View style={{backgroundColor:'red',height:'50'}}><Text>{' '} Bacon ipsum dolor amet chuck turducken landjaeger tongue spare ribs{buttonEvent+' '}</Text></View>
               <Button title='这是一个按钮' onPress={()=>{ 
                   setButtonEvent('点击') 
-                  if(time){ clearInterval(time); }
-                  time = setInterval(()=>{ setButtonEvent('') },1000);
+                  if(time){
+                    clearInterval(time);
+                  }
+                  time = setInterval(()=>{
+                    setButtonEvent('')
+                  },1000);
                 }}></Button>
             </View>
           </Collapsible>
@@ -127,7 +131,7 @@ export function CollapsibleExample() {
           {tester_change("在折叠视图上启用指针事件 enablePointerEvents: true",'true',()=>{ setData({...data, enablePointerEvents:true});setCollapsed(true); })}
           {tester_change("在折叠视图上启用指针事件 enablePointerEvents: false",'false',()=>{ setData({...data, enablePointerEvents:false});setCollapsed(true); })}
           {tester_change("折叠高度预留 collapsedHeight: 0",'0',()=>{ setData({...data, collapsedHeight: 0}) })}
-          {tester_change("折叠高度预留 collapsedHeight: 40",'40',()=>{ setData({...data, collapsedHeight: 40}) })}
+          {tester_change("折叠高度预留 collapsedHeight: 100",'100',()=>{ setData({...data, collapsedHeight: 100}) })}
           {tester_change("强制渲染折叠的子项 renderChildrenCollapsed: true",'true',()=>{ setData({...data, renderChildrenCollapsed: true}) })}
           {tester_change("强制渲染折叠的子项 renderChildrenCollapsed: false",'false',()=>{ setData({...data, renderChildrenCollapsed: false}) })}
           {tester_change("展开动画时间 duration: 400",'400',()=>{ setData({...data, duration: true}) })}
@@ -197,8 +201,8 @@ export function CollapsibleExample() {
           {tester_change("容器样式 containerStyle: {backgroundColor: '#00fff0'}",'{backgroundColor:#00fff0}',()=>{ setData({...data, containerStyle: { backgroundColor: '#00fff0'},sectionContainerStyle: { }}) })}
           {tester_change("触摸组件属性 touchableProps: {style:{height:30}}",`{style:{height:30}}`,()=>{ setData({...data, touchableProps: {style:{height:30}}}) })}
           {tester_change("触摸组件属性 touchableProps: {style:{}}",'{style:{}}',()=>{ setData({...data, touchableProps: {style:{}}}) })}
-          {tester_change("容器样式 sectionContainerStyle: {backgroundColor:#F500FF}",'{backgroundColor:#F500FF}',()=>{ setData({...data, sectionContainerStyle: { backgroundColor: '#0000FF'}}) })}
-          {tester_change("容器样式 sectionContainerStyle: {backgroundColor:#00fff0}",'{backgroundColor:#00fff0}',()=>{ setData({...data, sectionContainerStyle: { backgroundColor: '#54cc00'}}) })}
+          {tester_change("容器样式 sectionContainerStyle: {backgroundColor:#0000FF}",'{backgroundColor:#0000FF}',()=>{ setData({...data, sectionContainerStyle: { backgroundColor: '#0000FF'}}) })}
+          {tester_change("容器样式 sectionContainerStyle: {backgroundColor:#54cc00}",'{backgroundColor:#54cc00}',()=>{ setData({...data, sectionContainerStyle: { backgroundColor: '#54cc00'}}) })}
           {tester_change("展开动画锚点 align: 'top'",'top',()=>{setData({...data, align: 'top'})})}
           {tester_change("展开动画锚点 align: 'bottom'",'bottom',()=>{setData({...data, align: 'bottom'})})}
           {tester_change("点击头部时背景色 underlayColor: true",'black',()=>{ setData({...data, underlayColor: true}) })}
@@ -217,8 +221,8 @@ export function CollapsibleExample() {
           {tester_change("展开时间 duration: false",'4000ms',()=>{ setData({...data, duration: false}) })}
           {tester_change("使用FlatList渲染 renderAsFlatList: true",'true',()=>{ setData({...data, renderAsFlatList: true}) })}
           {tester_change("使用FlatList渲染 renderAsFlatList: false",'false',()=>{ setData({...data, renderAsFlatList: false}) })}
-          {tester_change("keyExtractor true",'true',()=>{ setData({...data, keyExtractor: true,renderAsFlatList:true}) })}
-          {tester_change("keyExtractor false",'false',()=>{ setData({...data, keyExtractor: false,renderAsFlatList:true}) })}
+          {tester_change("keyExtractor true",'true',()=>{ setData({...data, keyExtractor: true}) })}
+          {tester_change("keyExtractor false",'false',()=>{ setData({...data, keyExtractor: false}) })}
           {tester_change("EasingMode easing: 'linear'",'linear',()=>{ setData({...data, easing: 'linear'}) })}
           {tester_change("EasingMode easing: 'easeInQuad'",'easeInQuad',()=>{ setData({...data, easing: 'easeInQuad'}) })}
 
