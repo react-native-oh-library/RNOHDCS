@@ -2,7 +2,7 @@ import React from 'react';
 import {SpringScrollView} from 'react-native-spring-scrollview';
 import {TextInput, StyleSheet, Text, ScrollView, View} from 'react-native';
 
-export default class InputExample extends React.Component {
+export default class InputTapToHideKeyboardFalseExample extends React.Component {
   _topInput = React.createRef();
   _bottomInput = React.createRef();
 
@@ -11,8 +11,8 @@ export default class InputExample extends React.Component {
     return (
       <SpringScrollView
         style={styles.container}
-        tapToHideKeyboard={true}
-        inputToolBarHeight={-20}
+        tapToHideKeyboard={false}
+        inputToolBarHeight={30}
         textInputRefs={[this._topInput, this._bottomInput]}
       >
         <TextInput

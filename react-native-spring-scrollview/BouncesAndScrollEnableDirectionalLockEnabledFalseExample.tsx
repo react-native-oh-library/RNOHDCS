@@ -2,13 +2,11 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {SpringScrollView} from 'react-native-spring-scrollview';
 
-export default class BouncesAndScrollEnabledExample extends React.Component {
+export default class BouncesAndScrollEnableDirectionalLockEnabledFalseExample extends React.Component {
   state = {
     contentCount: 20,
     bounces: true,
-    scrollEnabled: true,
-    showsVerticalScrollIndicator: true,
-    showsHorizontalScrollIndicator: true
+    scrollEnabled: true
   };
 
   render() {
@@ -17,7 +15,8 @@ export default class BouncesAndScrollEnabledExample extends React.Component {
     return (
       <SpringScrollView
         {...this.state}
-        directionalLockEnabled
+        directionalLockEnabled={false}
+        scrollEnabled={true}
         contentStyle={{width: '300%', backgroundColor: 'lightgray'}}
         initialContentOffset={{x: 0, y: 550}}>
         {arr.map((i, index) => (

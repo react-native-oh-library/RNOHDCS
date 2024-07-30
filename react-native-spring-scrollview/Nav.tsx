@@ -1,12 +1,16 @@
 import React from "react";
 import { NavigationContainer,NavigationState } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import RefreshAndLoadingExample from './RefreshAndLoadingExample'
+import RefreshAndLoadingInvertTrueExample from './RefreshAndLoadingInvertTrueExample'
 import ScrollToAndOnScrollExample from './ScrollToAndOnScrollExample'
-import BouncesAndScrollEnabledExample from './BouncesAndScrollEnabledExample'
-import ComplexExample from './ComplexExample'
-import InputExample from './InputExample'
-
+import BouncesAndScrollEnableDirectionalLockEnabledFalseExample from './BouncesAndScrollEnableDirectionalLockEnabledFalseExample'
+import ComplexBouncesFalseExample from './ComplexBouncesFalseExample'
+import InputTapToHideKeyboardTrueExample from './InputTapToHideKeyboardTrueExample'
+import RefreshAndLoadingInvertFalseExample from './RefreshAndLoadingInvertFalseExample'
+import ComplexBouncesTrueExample from './ComplexBouncesTrueExample'
+import BouncesAndScrollEnableDirectionalLockEnabledTrueExample from './BouncesAndScrollEnableDirectionalLockEnabledTrueExample'
+import BouncesAndScrollEnabledFalseExample from './BouncesAndScrollEnabledFalseExample'
+import InputTapToHideKeyboardFalseExample from './InputTapToHideKeyboardFalseExample'
 import HomeDemo from './Home'
 const Stack = createStackNavigator();
 export class Nav extends React.Component {
@@ -15,12 +19,16 @@ export class Nav extends React.Component {
          >
             <Stack.Navigator initialRouteName="Home">
                 <Stack.Screen name="Home" component={HomeDemo} />
-                <Stack.Screen name="ComplexExample" component={ComplexExample} />
-                <Stack.Screen name="RefreshAndLoadingExample" component={RefreshAndLoadingExample} />
+                <Stack.Screen name="InputTapToHideKeyboardTrueExample" component={InputTapToHideKeyboardTrueExample} />
+                <Stack.Screen name="InputTapToHideKeyboardFalseExample" component={InputTapToHideKeyboardFalseExample} />
+                <Stack.Screen name="ComplexBouncesFalseExample" component={ComplexBouncesFalseExample} />
+                <Stack.Screen name="ComplexBouncesTrueExample" component={ComplexBouncesTrueExample} />
+                <Stack.Screen name="RefreshAndLoadingInvertFalseExample" component={RefreshAndLoadingInvertFalseExample} />
+                <Stack.Screen name="RefreshAndLoadingInvertTrueExample" component={RefreshAndLoadingInvertTrueExample} />
                 <Stack.Screen name="ScrollToAndOnScrollExample" component={ScrollToAndOnScrollExample} />
-                <Stack.Screen name="BouncesAndScrollEnabledExample" component={BouncesAndScrollEnabledExample} />
-                <Stack.Screen name="InputExample" component={InputExample} />
-
+                <Stack.Screen name="BouncesDirectionalLockEnabledFalseExample" component={BouncesAndScrollEnableDirectionalLockEnabledFalseExample} />
+                <Stack.Screen name="BouncesDirectionalLockEnabledTrueExample" component={BouncesAndScrollEnableDirectionalLockEnabledTrueExample} />
+                <Stack.Screen name="BouncesAndScrollEnabledFalseExample" component={BouncesAndScrollEnabledFalseExample} />
             </Stack.Navigator>
         </NavigationContainer>;
     };

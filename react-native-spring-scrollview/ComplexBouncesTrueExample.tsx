@@ -11,13 +11,13 @@ import { SpringScrollView } from "react-native-spring-scrollview";
 import { NormalHeader } from "react-native-spring-scrollview/src/NormalHeader";
 import { NormalFooter } from "react-native-spring-scrollview/src/NormalFooter";
 
-export default class ComplexExample extends React.Component {
+
+export default class ComplexBouncesTrueExample extends React.Component {
   _refs;
   _scrollView;
   constructor(props) {
     super(props);
     this.state = {
-      scrollEnabled: true,
       refreshing: false,
       loading: false,
       number: 8
@@ -29,33 +29,30 @@ export default class ComplexExample extends React.Component {
   }
 
   render() {
-    return (
-      <SpringScrollView
-        style={styles.container}
-        ref={ref => (this._scrollView = ref)}
-        contentStyle={styles.content}
-        showsVerticalScrollIndicator={false}
-        bounces={true}
-        scrollEnabled={this.state.scrollEnabled}
-        textInputRefs={this._refs}
-        inputToolBarHeight={20}
-        refreshHeader={NormalHeader}
-        onRefresh={() => {
-          setTimeout(() => this._scrollView?.endRefresh(), 1000);
-        }}
-        loadingFooter={NormalFooter}
-        loadingFooterHeight={80}
-        onLoading={() => {
-          setTimeout(() => this._scrollView?.endLoading(), 1000);
-        }}
-      >
+    return (    
+        <SpringScrollView
+          style={styles.container}
+          ref={ref => (this._scrollView = ref)}
+          contentStyle={styles.content}
+          bounces={true}
+          textInputRefs={this._refs}
+          refreshHeader={NormalHeader}
+          onRefresh={() => {
+            setTimeout(() => this._scrollView?.endRefresh(), 1000);
+          }}
+          loadingFooter={NormalFooter}
+          loadingFooterHeight={80}
+          onLoading={() => {
+            setTimeout(() => this._scrollView?.endLoading(), 1000);
+          }}
+        >
         <TouchableOpacity
           style={styles.text}
           onPress={() => this._scrollView?.beginRefresh()}>
           <Text>BeginRefresh</Text>
         </TouchableOpacity>
-        {this._renderContent()}
-      </SpringScrollView>
+          {this._renderContent()}
+        </SpringScrollView>
     );
   }
 
