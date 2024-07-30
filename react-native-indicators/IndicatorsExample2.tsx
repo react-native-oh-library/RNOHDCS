@@ -35,6 +35,34 @@ export function IndicatorsExample2() {
       Comp: BallIndicator,
       mame: 'BallIndicator',
       props: {
+        color: 'white',
+        animationDuration: 1000,
+        animationEasing: Easing.linear,
+        animating: false,
+        interaction: false,
+        hidesWhenStopped: true,
+        count: 8,
+        size: 40
+      },
+    },
+    {
+      Comp: BallIndicator,
+      mame: 'BallIndicator',
+      props: {
+        color: 'white',
+        animationDuration: 1000,
+        animationEasing: Easing.linear,
+        animating: false,
+        interaction: true,
+        hidesWhenStopped: false,
+        count: 8,
+        size: 40
+      },
+    },
+    {
+      Comp: BallIndicator,
+      mame: 'BallIndicator',
+      props: {
         color: 'red',
         animationDuration: 500,
         animationEasing: Easing.ease,
@@ -62,6 +90,32 @@ export function IndicatorsExample2() {
       Comp: PulseIndicator,
       mame: 'PulseIndicator',
       props: {
+        animationDuration: 1000,
+        animationEasing: Easing.linear,
+        animating: false,
+        interaction: false,
+        hidesWhenStopped: true,
+        color: 'white',
+        size: 60
+      },
+    },
+    {
+      Comp: PulseIndicator,
+      mame: 'PulseIndicator',
+      props: {
+        animationDuration: 1000,
+        animationEasing: Easing.linear,
+        animating: false,
+        interaction: true,
+        hidesWhenStopped: false,
+        color: 'white',
+        size: 60
+      },
+    },
+    {
+      Comp: PulseIndicator,
+      mame: 'PulseIndicator',
+      props: {
         animationDuration: 500,
         animationEasing: Easing.ease,
         animating: true,
@@ -80,6 +134,38 @@ export function IndicatorsExample2() {
         animating: true,
         interaction: false,
         hidesWhenStopped: false,
+        color: 'white',
+        size: 60,
+        count: 8,
+        minScale: 0.2,
+        maxScale: 1
+      },
+    },
+    {
+      Comp: SkypeIndicator,
+      mame: 'SkypeIndicator',
+      props: {
+        animationDuration: 1000,
+        animationEasing: Easing.linear,
+        animating: false,
+        interaction: false,
+        hidesWhenStopped: false,
+        color: 'white',
+        size: 60,
+        count: 8,
+        minScale: 0.2,
+        maxScale: 1
+      },
+    },
+    {
+      Comp: SkypeIndicator,
+      mame: 'SkypeIndicator',
+      props: {
+        animationDuration: 1000,
+        animationEasing: Easing.linear,
+        animating: false,
+        interaction: true,
+        hidesWhenStopped: true,
         color: 'white',
         size: 60,
         count: 8,
@@ -123,6 +209,38 @@ export function IndicatorsExample2() {
       Comp: WaveIndicator,
       mame: 'WaveIndicator',
       props: {
+        animationDuration: 1000,
+        animationEasing: Easing.linear,
+        animating: false,
+        interaction: true,
+        hidesWhenStopped: false,
+        color: 'white',
+        size: 60,
+        count: 8,
+        waveFactor: 0.54,
+        waveMode: 'fill'
+      },
+    },
+    {
+      Comp: WaveIndicator,
+      mame: 'WaveIndicator',
+      props: {
+        animationDuration: 1000,
+        animationEasing: Easing.linear,
+        animating: false,
+        interaction: false,
+        hidesWhenStopped: true,
+        color: 'white',
+        size: 60,
+        count: 8,
+        waveFactor: 0.54,
+        waveMode: 'fill'
+      },
+    },
+    {
+      Comp: WaveIndicator,
+      mame: 'WaveIndicator',
+      props: {
         animationDuration: 500,
         animationEasing: Easing.ease,
         animating: true,
@@ -144,6 +262,34 @@ export function IndicatorsExample2() {
         animating: true,
         interaction: false,
         hidesWhenStopped: false,
+        color: 'white',
+        size: 60,
+        count: 12
+      },
+    },
+    {
+      Comp: UIActivityIndicator,
+      mame: 'UIActivityIndicator',
+      props: {
+        animationDuration: 1000,
+        animationEasing: Easing.linear,
+        animating: false,
+        interaction: true,
+        hidesWhenStopped: false,
+        color: 'white',
+        size: 60,
+        count: 12
+      },
+    },
+    {
+      Comp: UIActivityIndicator,
+      mame: 'UIActivityIndicator',
+      props: {
+        animationDuration: 1000,
+        animationEasing: Easing.linear,
+        animating: false,
+        interaction: false,
+        hidesWhenStopped: true,
         color: 'white',
         size: 60,
         count: 12
