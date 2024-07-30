@@ -36,9 +36,21 @@ const SignatureCaputureAllDemo = () => {
                         showNativeButtons={true}
                     />
                 </TestCase>
+                <TestCase modal itShould='showNaitveButtons: false'>
+                    <BasicSignatureComponent
+                        backgroundColor="#fff"
+                        strokeColor="#2883d2"
+                        showNativeButtons={false}
+                    />
+                </TestCase>
                 <TestCase modal itShould='showTitleLabel: true'>
                     <BasicSignatureComponent
                         showTitleLabel={true}
+                    />
+                </TestCase>
+                <TestCase modal itShould='showTitleLabel: false'>
+                    <BasicSignatureComponent
+                        showTitleLabel={false}
                     />
                 </TestCase>
                 <TestCase modal itShould='showBorder: true'>
@@ -46,6 +58,13 @@ const SignatureCaputureAllDemo = () => {
                         backgroundColor="#fff"
                         strokeColor="#2883d2"
                         showBorder={true}
+                    />
+                </TestCase>
+                <TestCase modal itShould='showBorder: false'>
+                    <BasicSignatureComponent
+                        backgroundColor="#fff"
+                        strokeColor="#2883d2"
+                        showBorder={false}
                     />
                 </TestCase>
                 <TestCase modal itShould='minStrokeWidth: 1 | maxStrokeWidth: 4'>
@@ -85,11 +104,14 @@ const SignatureCaputureAllDemo = () => {
                 <TestCase modal itShould='ViewMode'>
                     <SignatureViewModeDemo />
                 </TestCase>
-                <TestCase modal itShould='maxSize: 50'>
-                    <SignatureSaveImageDemo maxSize={50} />
+                <TestCase modal itShould='maxSize 不设置'>
+                    <SignatureSaveImageDemo />
                 </TestCase>
-                <TestCase modal itShould='maxSize: 100'>
-                    <SignatureSaveImageDemo maxSize={100} />
+                <TestCase modal itShould='maxSize: 500'>
+                    <SignatureSaveImageDemo maxSize={500} />
+                </TestCase>
+                <TestCase modal itShould='maxSize: 600'>
+                    <SignatureSaveImageDemo maxSize={600} />
                 </TestCase>
             </TestSuite>
         </Tester>
@@ -145,7 +167,6 @@ function SignatureSaveImageDemo(props: any) {
                 backgroundColor="#fff"
                 strokeColor="#2883d2"
                 showSaveButton={true}
-                maxSize={160}
                 onSaveEvent={(ev: any) => {
                     setsaveRes(JSON.stringify(ev))
                 }}
