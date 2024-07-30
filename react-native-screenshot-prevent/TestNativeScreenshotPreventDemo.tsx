@@ -20,7 +20,7 @@ import {
 } from 'react-native';
 import RNScreenshotPrevent, {
   addListener,
-} from '@react-native-oh-tpl/react-native-screenshot-prevent';
+} from 'react-native-screenshot-prevent';
 
 type TesterSkipProp =
   | {
