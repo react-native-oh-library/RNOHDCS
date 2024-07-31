@@ -8,16 +8,15 @@ import {
     TouchableHighlight,
     ToastAndroid,
     PanResponder,
-    Animated
+    Animated,
+    ScrollView
 } from 'react-native';
 export default class HomeDemo extends React.Component  {
     render() {
         return (
+            <ScrollView>
             <View style={styles.container}>
-
-
-              
-<TouchableHighlight
+              <TouchableHighlight
                     onPress={() => { this.props.navigation.navigate("InputTapToHideKeyboardTrueExample") }}
                     style={styles.button}
                 >
@@ -88,6 +87,7 @@ export default class HomeDemo extends React.Component  {
                 </TouchableHighlight>
 
             </View>
+            </ScrollView>
         );
     }
 }
@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#F5FCFF',
+        marginBottom: 50
     },
     instructions: {
         textAlign: 'center',
