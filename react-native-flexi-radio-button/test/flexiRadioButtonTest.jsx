@@ -1,4 +1,4 @@
-import { TestSuite, TestCase, Tester } from '@rnoh/testerino';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, Image, ScrollView } from 'react-native';
 import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button';
@@ -28,6 +28,7 @@ export default class RadioButtonTest extends Component {
                                 <RadioGroup
                                     onSelect={(index, value) => this.onSelect(index, value)}
                                     activeColor='blue'
+                                    style={{ backgroundColor: '#4ce5a0' }}
                                 >
                                     <RadioButton value={'item1'}>
                                         <Text>This is item #1</Text>
@@ -48,7 +49,7 @@ export default class RadioButtonTest extends Component {
                         <TestCase itShould="Custom RadioButton View">
                             <View style={customStyles.container}>
                                 <RadioGroup
-                                    size={24}
+                                    size={60}
                                     thickness={2}
                                     color="#9575b2"
                                     highlightColor="#ccc8b9"
@@ -78,7 +79,7 @@ export default class RadioButtonTest extends Component {
                                         <Text>Green Dot</Text>
                                     </RadioButton>
 
-                                    <RadioButton value="blue color" color="blue">
+                                    <RadioButton value="blue color" color="blue" style={{ backgroundColor: '#4ce5a0' }}>
                                         <Text>Blue Dot</Text>
                                     </RadioButton>
                                 </RadioGroup>
@@ -92,12 +93,13 @@ export default class RadioButtonTest extends Component {
         );
     }
 }
+
 let basicStyles = StyleSheet.create({
     container: {
         marginTop: 40,
         padding: 20,
-        height: 500,
-        width: 350,
+        height: 400,
+        width: 350
     },
     text: {
         padding: 10,
@@ -109,7 +111,7 @@ let customStyles = StyleSheet.create({
     container: {
         marginTop: 40,
         height: 500,
-        width: 350,
+        width: 350
     },
     text: {
         padding: 10,
