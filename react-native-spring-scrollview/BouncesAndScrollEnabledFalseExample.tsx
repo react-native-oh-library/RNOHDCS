@@ -21,12 +21,7 @@ export default class BouncesAndScrollEnabledFalseExample extends React.Component
         initialContentOffset={{x: 0, y: 750}}>
         {arr.map((i, index) => (
           <TouchableOpacity
-            key={index}
-            onPress={() => {
-              this.setState((p) => ({
-                contentCount: p.contentCount === 1 ? 100 : 1,
-              }));
-            }}>
+            key={index}>
             <Text style={styles.text}>
               Modify the 'contentCount','bounces' and 'scrollEnabled' state in
               BouncesExample.js to check if VerticalScrollView works well.
