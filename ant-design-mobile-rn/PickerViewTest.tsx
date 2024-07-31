@@ -38,7 +38,10 @@ export default () => {
         <PickerView data={datas} />
       </TestCase>
       <TestCase itShould="render a PickerView value" tags={['C_API']}>
-        <PickerView data={datas} value={value1} onChange={(value: any) => { setvalue1(value) }} />
+        <View style={{padding:10}}>
+          <Text>value:{value1}</Text>
+          <PickerView data={datas} value={value1} onChange={(value: any) => { setvalue1(value) }} />
+        </View>
       </TestCase>
       <TestCase itShould="render a PickerView cascade={false}" tags={['C_API']}>
         <PickerView data={basicColumns} cascade={false} />

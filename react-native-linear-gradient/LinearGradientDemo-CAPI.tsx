@@ -39,7 +39,6 @@ function LinearGradientDemo() {
         <Section title="Simple Gradient">
           <SimpleGradient />
         </Section>
-        
         <Section title="Angle Gradient">
           <AngleGradient />
         </Section>

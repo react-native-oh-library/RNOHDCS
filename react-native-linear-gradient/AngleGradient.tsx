@@ -47,7 +47,16 @@ const AngleGradient = () => {
           start={{x: 0, y: 0}}
           end={{x: 1, y: 0}}
           style={styles.gradient}>
-          </LinearGradient>
+        </LinearGradient>
+        <LinearGradient
+          angle={angle}
+          useAngle={false}
+          angleCenter={{x: 0.5, y: 0.5}}
+          colors={['#d02828', '#832020', '#000000']}
+          start={{x: 0, y: 0}}
+          end={{x: 1, y: 0}}
+          style={styles.gradient}>
+        </LinearGradient>
       </Pressable>
       <View style={styles.rightContainer}>
       <Animated.View

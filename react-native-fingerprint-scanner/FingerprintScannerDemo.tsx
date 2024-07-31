@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View, Button, Alert, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { Text, TouchableOpacity } from 'react-native';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
-import { TestCase } from '../components/TestCase'
-import { Tester, TestSuite } from '@rnoh/testerino'
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino'
 
 export function FingerprintScannerDemo() {
-
 
   return (
     <Tester style={{ flex: 1 }}>
       <TestSuite name='指纹认证'>
-        <TestCase.Example
+        <TestCase
           tags={['C_API']}
           itShould='调用指纹验证器'
         >
@@ -19,10 +17,10 @@ export function FingerprintScannerDemo() {
               FingerprintScanner.authenticate({ title: '指纹认证' })
             }}
           >
-            <Text style={{lineHeight: 35, fontSize: 22}}>调用指纹验证器</Text>
+            <Text style={{ lineHeight: 35, fontSize: 22 }}>调用指纹验证器</Text>
           </TouchableOpacity>
-        </TestCase.Example>
-        <TestCase.Manual
+        </TestCase>
+        <TestCase
           tags={['C_API']}
           itShould='检查指纹扫描是否可用'
           initialState={undefined as any}
@@ -34,7 +32,7 @@ export function FingerprintScannerDemo() {
                   setState(enabled)
                 }}
               >
-                <Text style={{lineHeight: 35, fontSize: 22}}>检查指纹扫描是否可用</Text>
+                <Text style={{ lineHeight: 35, fontSize: 22 }}>检查指纹扫描是否可用</Text>
               </TouchableOpacity>
             )
           }}
@@ -42,7 +40,7 @@ export function FingerprintScannerDemo() {
             expect(state).to.be.string
           }}
         />
-        <TestCase.Manual
+        <TestCase
           tags={['C_API']}
           itShould='获取指纹验证失败message'
           initialState={undefined as any}
@@ -54,7 +52,7 @@ export function FingerprintScannerDemo() {
                   setState(Object.prototype.toString.call(enabled) === '[object Object]')
                 }}
               >
-                <Text style={{lineHeight: 35, fontSize: 22}}>指纹验证失败方法</Text>
+                <Text style={{ lineHeight: 35, fontSize: 22 }}>指纹验证失败方法</Text>
               </TouchableOpacity>
             )
           }}
@@ -62,7 +60,7 @@ export function FingerprintScannerDemo() {
             expect(state).to.be.true
           }}
         />
-         <TestCase.Manual
+        <TestCase
           tags={['C_API']}
           itShould='取消监听指纹监听'
           initialState={undefined as any}
@@ -74,7 +72,7 @@ export function FingerprintScannerDemo() {
                   setState(true)
                 }}
               >
-                <Text style={{lineHeight: 35, fontSize: 22}}>取消监听指纹监听</Text>
+                <Text style={{ lineHeight: 35, fontSize: 22 }}>取消监听指纹监听</Text>
               </TouchableOpacity>
             )
           }}
@@ -84,6 +82,5 @@ export function FingerprintScannerDemo() {
         />
       </TestSuite>
     </Tester>
-
   );
 }

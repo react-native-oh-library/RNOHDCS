@@ -1,303 +1,255 @@
-import { ScrollView, StyleSheet, View, Text } from 'react-native';
-import RTNPermissions, { NotificationsResponse, Permission, PermissionStatus } from 'react-native-permissions';
-import React, { useState } from 'react';
-import { Button } from '../components';
+import React, { useRef, useState } from 'react';
 
-const permissionNormal: Permission[] = [
-    'ohos.permission.APPROXIMATELY_LOCATION',
-    'ohos.permission.CAMERA',
-    'ohos.permission.MICROPHONE',
-    'ohos.permission.READ_CALENDAR',
-    'ohos.permission.WRITE_CALENDAR',
-    'ohos.permission.ACTIVITY_MOTION',
-    'ohos.permission.READ_HEALTH_DATA',
-    'ohos.permission.DISTRIBUTED_DATASYNC',
-    'ohos.permission.READ_MEDIA',
-    'ohos.permission.MEDIA_LOCATION',
-    'ohos.permission.ACCESS_BLUETOOTH',
-]
 
-export function PermissionsExample() {
-    const [result, setResult] = useState('');
+
+
+import {
+    StyleSheet,
+    View,
+    Text,
+    ScrollView,
+    Animated,
+    Image,
+    Button
+
+} from 'react-native';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
+import RTNPermissions, { Permission, NotificationsResponse } from "@react-native-oh-tpl/react-native-permissions";
+
+
+
+
+
+
+export const PermissionTest = () => {
+    const permissionNormal: Permission[] = [
+        "ohos.permission.APPROXIMATELY_LOCATION",
+        "ohos.permission.CAMERA",
+        "ohos.permission.MICROPHONE",
+        "ohos.permission.READ_CALENDAR",
+        "ohos.permission.WRITE_CALENDAR",
+        "ohos.permission.ACTIVITY_MOTION",
+        "ohos.permission.READ_HEALTH_DATA",
+        "ohos.permission.DISTRIBUTED_DATASYNC",
+        "ohos.permission.READ_MEDIA",
+        "ohos.permission.MEDIA_LOCATION",
+        "ohos.permission.ACCESS_BLUETOOTH",
+        'ohos.permission.READ_IMAGEVIDEO'
+    ];
+
+    const [camer, setCamer] = useState("还未获取")
+    const [checkNotifications, setCheckNotifications] = useState<string>("还未获取")
+    const [checkMultiple, setCheckMultiple] = useState("还未获取")
+
 
     return (
-        <View style={styles.container}>
-            <Text> - blocked：未授权。</Text>
-            <Text> - granted：已授权。</Text>
-            <Text> - unavailable：未授权，表示请求无效，可能原因有：</Text>
-            <Text> - 权限名非法。</Text>
-            <Text> - 未在设置文件中声明目标权限。</Text>
+        <Tester>
+            <ScrollView>
+                <TestSuite name="react-native-permissions">
+                    <TestCase
+                        key={"getInitStatus_1"}
+                        itShould={`check change`}
+                        tags={['C_API']}
+                        initialState={false}
 
-            <Text style={styles.text}>{result}</Text>
+                        arrange={({ setState }) => {
 
-            <ScrollView style={styles.buttonArea}>
+                            return (
+                                <View style={{ flex: 1 }}>
+                                    <Text >{camer}</Text>
+                                    <Button title="查询相机权限"
+                                        onPress={async () => {
+                                            let check = await RTNPermissions.check("ohos.permission.CAMERA");
+                                            setCamer(check)
+                                            setState(true)
 
-                <View style={styles.view}>
-                    <Button label={'打开设置页面'}
-                        onPress={() => {
-                            RTNPermissions.openSettings();
-                        }} />
-                </View>
-
-                <View style={styles.view}>
-                    <Button label={'查询相机权限'}
-                        onPress={async () => {
-                            let check: PermissionStatus | undefined = await RTNPermissions.check('ohos.permission.CAMERA');
-                            setResult(check + '');
-                            check = undefined
-                        }} />
-                    <Button label={'设置相机权限'}
-                        onPress={async () => {
-                            let request: PermissionStatus | undefined = await RTNPermissions.request('ohos.permission.CAMERA');
-                            setResult(request);
-                            request = undefined
-                        }} />
-                </View>
-
-                <View style={styles.view}>
-                    <Button label={'查询麦克风权限'}
-                        onPress={async () => {
-                            let check: PermissionStatus | undefined = await RTNPermissions.check('ohos.permission.MICROPHONE');
-                            setResult(check + '');
-                            check = undefined
-                        }} />
-                    <Button label={'设置麦克风权限'}
-                        onPress={async () => {
-                            let request: PermissionStatus | undefined = await RTNPermissions.request('ohos.permission.MICROPHONE');
-                            setResult(request);
-                            request = undefined
-                        }} />
-                </View>
-
-                <View style={styles.view}>
-                    <Button label={'查询日历读取权限'}
-                        onPress={async () => {
-                            let check: PermissionStatus | undefined = await RTNPermissions.check('ohos.permission.READ_CALENDAR');
-                            setResult(check + '');
-                            check = undefined
-                        }} />
-                    <Button label={'设置日历读取权限'}
-                        onPress={async () => {
-                            let request: PermissionStatus | undefined = await RTNPermissions.request('ohos.permission.READ_CALENDAR');
-                            setResult(request);
-                            request = undefined
-                        }} />
-                </View>
-
-                <View style={styles.view}>
-                    <Button label={'查询日历添加、移除或更改日历活动权限'}
-                        onPress={async () => {
-                            let check: PermissionStatus | undefined = await RTNPermissions.check('ohos.permission.WRITE_CALENDAR');
-                            setResult(check + '');
-                            check = undefined
-                        }} />
-                    <Button label={'设置日历添加、移除或更改日历活动权限'}
-                        onPress={async () => {
-                            let request: PermissionStatus | undefined = await RTNPermissions.request('ohos.permission.WRITE_CALENDAR');
-                            setResult(request);
-                            request = undefined
-                        }} />
-                </View>
-
-                <View style={styles.view}>
-                    <Button label={'查询健身运动权限'}
-                        onPress={async () => {
-                            let check: PermissionStatus | undefined = await RTNPermissions.check('ohos.permission.ACTIVITY_MOTION');
-                            setResult(check + '');
-                            check = undefined
-                        }} />
-                    <Button label={'设置健身运动权限'}
-                        onPress={async () => {
-                            let request: PermissionStatus | undefined = await RTNPermissions.request('ohos.permission.ACTIVITY_MOTION');
-                            setResult(request);
-                            request = undefined
-                        }} />
-                </View>
-
-                <View style={styles.view}>
-                    <Button label={'查询身体传感器权限'}
-                        onPress={async () => {
-                            let check: PermissionStatus | undefined = await RTNPermissions.check('ohos.permission.READ_HEALTH_DATA');
-                            setResult(check + '');
-                            check = undefined
-                        }} />
-                    <Button label={'设置身体传感器权限'}
-                        onPress={async () => {
-                            let request = await RTNPermissions.request('ohos.permission.READ_HEALTH_DATA');
-                            setResult(request);
-                        }} />
-                </View>
-
-                <View style={styles.view}>
-                    <Button label={'查询多设备协同权限'}
-                        onPress={async () => {
-                            let check: PermissionStatus | undefined = await RTNPermissions.check('ohos.permission.DISTRIBUTED_DATASYNC');
-                            setResult(check + '');
-                            check = undefined
-                        }} />
-                    <Button label={'设置多设备协同权限'}
-                        onPress={async () => {
-                            let request: PermissionStatus | undefined = await RTNPermissions.request('ohos.permission.DISTRIBUTED_DATASYNC');
-                            setResult(request);
-                            request = undefined
-                        }} />
-                </View>
-
-                <View style={styles.view}>
-                    <Button label={'查询蓝牙权限'}
-                        onPress={async () => {
-                            let check: PermissionStatus | undefined = await RTNPermissions.check('ohos.permission.ACCESS_BLUETOOTH');
-                            setResult(check + '');
-                            check = undefined
-                        }} />
-                    <Button label={'设置蓝牙权限'}
-                        onPress={async () => {
-                            let request: PermissionStatus | undefined = await RTNPermissions.request('ohos.permission.ACCESS_BLUETOOTH');
-                            setResult(request);
-                            request = undefined
-                        }} />
-                </View>
-
-                <View style={styles.view}>
-                    <Button
-                        label={'查询通知权限'}
-                        onPress={async () => {
-                            let checkNotifications: NotificationsResponse | undefined = await RTNPermissions.checkNotifications();
-                            setResult(JSON.stringify(checkNotifications.status));
-                            checkNotifications = undefined
+                                        }}></Button>
+                                </View>
+                            );
+                        }}
+                        assert={async ({ expect, state }) => {
+                            expect(state).to.be.true;
                         }}
                     />
-                    <Button
-                        label={'设置通知权限'}
-                        onPress={async () => {
-                            let requestNotifications: NotificationsResponse | undefined = await RTNPermissions.requestNotifications([]);
-                            setResult('granted');
-                            requestNotifications = undefined
+
+                    <TestCase
+                        key={"getInitStatus_2"}
+                        itShould={`checkNotifications change`}
+                        tags={['C_API']}
+                        initialState={false}
+
+                        arrange={({ setState }) => {
+
+                            return (
+                                <View style={{ flex: 1 }}>
+                                    <Text>{checkNotifications}</Text>
+                                    <Button title="检查通知权限"
+                                        onPress={async () => {
+                                            let check = await RTNPermissions.checkNotifications();
+                                            setCheckNotifications(JSON.stringify(check))
+                                            setState(true)
+
+                                        }}></Button>
+                                </View>
+                            );
+                        }}
+                        assert={async ({ expect, state }) => {
+                            expect(state).to.be.true;
                         }}
                     />
-                </View>
-
-                <View style={styles.view}>
-                    <Button label={'查询读取用户外部存储中的媒体文件信息权限'}
-                        onPress={async () => {
-                            let check: PermissionStatus | undefined = await RTNPermissions.check('ohos.permission.READ_MEDIA');
-                            setResult(check + '');
-                            check = undefined
-                        }} />
-                    <Button label={'设置读取用户外部存储中的媒体文件信息权限'}
-                        onPress={async () => {
-                            let request: PermissionStatus | undefined = await RTNPermissions.request('ohos.permission.READ_MEDIA');
-                            setResult(request);
-                            request = undefined
-                        }} />
-                </View>
 
 
-                <View style={styles.view}>
-                    <Button label={'查询访问图片与视频权限'}
-                        onPress={async () => {
-                            let check: PermissionStatus | undefined = await RTNPermissions.check('ohos.permission.MEDIA_LOCATION');
-                            setResult(check + '');
-                            check = undefined
-                        }} />
-                    <Button label={'设置访问图片与视频权限'}
-                        onPress={async () => {
-                            let request: PermissionStatus | undefined = await RTNPermissions.request('ohos.permission.MEDIA_LOCATION');
-                            setResult(request);
-                            request = undefined
-                        }} />
-                </View>
+                    <TestCase
+                        key={"getInitStatus_4"}
+                        itShould={`request change`}
+                        tags={['C_API']}
+                        initialState={false}
 
-                <View style={styles.view}>
-                    <Button
-                        label={'查询应用获取设备位置信息权限'}
-                        onPress={async () => {
-                            let check: PermissionStatus | undefined = await RTNPermissions.check('ohos.permission.APPROXIMATELY_LOCATION');
-                            setResult(check + '');
-                            check = undefined
+                        arrange={({ setState }) => {
+
+                            return (
+                                <View style={{ flex: 1 }}>
+                                    <Button
+                                        title="设置相机权限"
+                                        onPress={async () => {
+                                            let request = await RTNPermissions.request("ohos.permission.CAMERA");
+
+                                            setState(true)
+                                        }}
+                                    />
+                                </View>
+                            );
+                        }}
+                        assert={async ({ expect, state }) => {
+                            expect(state).to.be.true;
                         }}
                     />
-                    <Button
-                        label={'设置应用获取设备位置信息权限'}
-                        onPress={async () => {
-                            let request: PermissionStatus | undefined = await RTNPermissions.request('ohos.permission.APPROXIMATELY_LOCATION');
-                            setResult(request);
-                            request = undefined
-                        }}
-                    />
-                </View>
 
-                <View style={styles.view}>
-                    <Button
-                        label={'查询多个权限'}
-                        onPress={async () => {
-                            let checkMultiple: Record<Permission, PermissionStatus> | undefined = await RTNPermissions.checkMultiple(permissionNormal);
-                            setResult(JSON.stringify(checkMultiple));
-                            checkMultiple = undefined
-                        }}
-                    />
-                    <Button
-                        label={'设置多个权限'}
-                        onPress={async () => {
-                            let requestMultiple: Record<Permission, PermissionStatus> | undefined = await RTNPermissions.requestMultiple(permissionNormal);
-                            setResult(JSON.stringify(requestMultiple));
-                            requestMultiple = undefined
+                    <TestCase
+                        key={"getInitStatus_5"}
+                        itShould={`requestNotifications change`}
+                        tags={['C_API']}
+                        initialState={false}
 
+                        arrange={({ setState }) => {
+
+                            return (
+                                <View style={{ flex: 1 }}>
+                                    <Button
+                                        title="设置通知权限"
+                                        onPress={async () => {
+                                            let request = await RTNPermissions.requestNotifications(["alert"]);
+
+                                            setState(true)
+                                        }}
+                                    />
+                                </View>
+                            );
+                        }}
+                        assert={async ({ expect, state }) => {
+                            expect(state).to.be.true;
                         }}
                     />
-                </View>
+
+                    <TestCase
+                        key={"getInitStatus_6"}
+                        itShould={`checkMultiple change`}
+                        tags={['C_API']}
+                        initialState={false}
+
+                        arrange={({ setState }) => {
+
+                            return (
+
+                                <View style={{ flex: 1 }}>
+                                    <Text>{checkMultiple}</Text>
+                                    <Button
+                                        title={"查询多个权限"}
+                                        onPress={async () => {
+                                            let checkMultiple = await RTNPermissions.checkMultiple(
+                                                permissionNormal
+                                            );
+                                            setCheckMultiple(JSON.stringify(checkMultiple))
+
+                                            setState(true)
+                                        }}
+                                    />
+                                </View>
+                            );
+                        }}
+                        assert={async ({ expect, state }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
+
+                    <TestCase
+                        key={"getInitStatus_7"}
+                        itShould={`requestMultiple change`}
+                        tags={['C_API']}
+                        initialState={false}
+
+                        arrange={({ setState }) => {
+
+                            return (
+                                <View style={{ flex: 1 }}>
+                                    <Button
+                                        title={"设置多个权限"}
+                                        onPress={async () => {
+                                            let requestMultiple = await RTNPermissions.requestMultiple(
+                                                permissionNormal
+                                            );
+                                            setState(true)
+                                        }}
+                                    />
+                                </View>
+                            );
+                        }}
+                        assert={async ({ expect, state }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
+
+                    <TestCase
+                        key={"getInitStatus_3"}
+                        itShould={`openSettings change`}
+                        tags={['C_API']}
+                        initialState={false}
+
+                        arrange={({ setState }) => {
+
+                            return (
+                                <View style={{ flex: 1 }}>
+                                    <Button title="打开设置页"
+                                        onPress={async () => {
+                                            let check = await RTNPermissions.openSettings();
+
+                                            setState(true)
+
+                                        }}></Button>
+                                </View>
+                            );
+                        }}
+                        assert={async ({ expect, state }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
+
+
+
+
+                </TestSuite>
 
             </ScrollView>
-        </View>
+        </Tester>
     );
 }
 
-
-const styles = StyleSheet.create({
-    container: {
-        width: '100%',
-        height: '100%'
+const markerStyles = StyleSheet.create({
+    webviewContainer: {
+        height: 300
     },
-    textArea: {
-        width: '100%',
-        height: '50%',
-        borderWidth: 1,
-        borderColor: 'black',
-        marginBottom: 10
-    },
-    buttonArea: {
-        width: '100%',
-        height: '50%',
-        marginBottom: 20
-    },
-    view: {
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-evenly',
-        flexWrap: 'wrap',
-        margin: 5,
-    },
-    button: {
-        backgroundColor: '#17a3f5',
-        paddingHorizontal: 16,
-        paddingVertical: 10,
-        borderRadius: 24,
-        alignItems: 'center',
-        justifyContent: 'center',
-        elevation: 4,
-        width: '40%',
-        marginTop: 5
-    },
-    buttonText: {
-        color: '#FFFFFF',
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    text: {
-        width: '100%',
-        textAlign: 'center',
-        margin: 10,
-        padding: 10
+    webviewContainerChange: {
+        height: 500
     }
 });
+

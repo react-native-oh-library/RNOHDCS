@@ -1,37 +1,39 @@
-import { TestSuite } from '@rnoh/testerino';
+import { TestSuite, TestCase, Tester } from '@rnoh/testerino';
 import React from 'react';
-import { TestCase } from '../../components';
 import FileUpload from 'react-native-fileupload';
 
 export function FileUploadTest() {
     let obj = {
-        uploadUrl: 'http://47.108.234.230:9990/upload',
+        uploadUrl: 'http://1.2.27.270:9990/upload',// Real server Url
         method: 'POST',
         headers: {
             'Content-Type': 'multipart/form-data',
         },
+        fields: {
+            name: 'hello', value: 'world',
+        },
         files: [
             {
-                name: 'file',
+                name: 'file',// optional
                 filename: 'assets_placeholder2000x2000.jpg',
-                filetype: 'jpg',
+                filepath: '/xxx/assets_placeholder2000x2000.jpg',
+                filetype: 'jpg',// optional
             },
         ],
     };
     return (
-        <TestSuite name="FileUpload">
-            <TestCase.Logical
-                itShould="File upload message:"
-                fn={({ expect }: any) => {
-                    FileUpload.upload(obj)
-                        .then(result => {
-                            expect(result.message).to.not.be.undefined;
+        <Tester>
+            <TestSuite name="FileUpload">
+                <TestCase
+                    itShould="File upload message:"
+                    fn={({ expect }: any) => {
+                        let result = FileUpload.upload(obj, function (err, result) {
+                            console.log("upload", err, result);
                         })
-                        .catch(err => {
-                            expect(err.message).to.not.be.undefined;
-                        });
-                }}
-            />
-        </TestSuite>
+                        expect(result).to.not.be.undefined;
+                    }}
+                />
+            </TestSuite>
+        </Tester>
     );
 }

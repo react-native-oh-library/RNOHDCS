@@ -48,12 +48,6 @@ function ToastMasterDemo() {
           Toast.showLongBottom('This is a long bottom toast.');
         }}
       />
-      <Button
-        title={'hide'}
-        onPress={() => {
-          Toast.hide();
-        }}
-      />
     </View>
   );
 }

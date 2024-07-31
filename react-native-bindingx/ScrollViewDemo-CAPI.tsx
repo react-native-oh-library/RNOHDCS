@@ -14,7 +14,7 @@ import {
     DeviceEventEmitter,
     Animated
 } from 'react-native';
-import ReactBindingXModule from '@react-native-oh-tpl/react-native-bindingx'
+import bindingx from 'react-native-bindingx';
 
 
 export default class ScrollViewDemo extends React.Component {
@@ -23,6 +23,11 @@ export default class ScrollViewDemo extends React.Component {
     _token = "";
 
     componentWillMount() {
+        let anchor = findNodeHandle(this.refs._anchor);
+        bindingx.prepare({
+          eventType: 'scroll',
+          anchor: anchor
+        });
     }
 
 
@@ -32,7 +37,7 @@ export default class ScrollViewDemo extends React.Component {
         let text = findNodeHandle(this.refs._text);
 
 
-        this._token = ReactBindingXModule.bind({
+        this._token = bindingx.bind({
             eventType: 'scroll',
             anchor: anchor,
             props: [
@@ -73,15 +78,19 @@ export default class ScrollViewDemo extends React.Component {
 
     onUnBind() {
         let anchor = findNodeHandle(this.refs._anchor);
-        ReactBindingXModule.unbind({
+        bindingx.unbind({
             token: anchor,
             eventType: 'scroll'
         });
     }
 
+    onUnBindAll() {
+        bindingx.unbindAll();
+    }
+
     getComputedStyle() {
         let target = findNodeHandle(this.refs._target);
-        ReactBindingXModule.getComputedStyle(target).then(data => {
+        bindingx.getComputedStyle(target).then(data => {
             console.log('ReactBindingXModule getComputedStyle:' + JSON.stringify(data));
         });
     }
@@ -112,6 +121,16 @@ export default class ScrollViewDemo extends React.Component {
                     style={styles.button}
                 >
                     <Text style={styles.text}>Unbind</Text>
+                </TouchableHighlight>
+
+
+                <TouchableHighlight
+                    onPress={() => {
+                        this.onUnBindAll()
+                    }}
+                    style={styles.button}
+                >
+                    <Text style={styles.text}>UnBindAll</Text>
                 </TouchableHighlight>
 
                 <TouchableHighlight

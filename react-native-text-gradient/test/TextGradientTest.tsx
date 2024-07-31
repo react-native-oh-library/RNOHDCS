@@ -1,34 +1,75 @@
-import { TestSuite } from '@rnoh/testerino';
+import { TestSuite, TestCase, Tester } from '@rnoh/testerino';
 import React from 'react';
 import {
     View,
     StyleSheet,
+    ScrollView,
     Text
 } from 'react-native';
-import { TestCase } from '../components';
 import { LinearTextGradient } from 'react-native-text-gradient';
 
 export function TextGradientTest() {
     return (
-        <TestSuite name="FileUpload">
-            <TestCase.Example tags={['C_API']} itShould="LinearTextGradient">
-                <View style={styles.container}>
-                    <LinearTextGradient
-                        style={styles.welcome}
-                        locations={[0, 1]}
-                        colors={['blue', 'red']}
-                        start={{ x: 0, y: 0 }}
-                        end={{ x: 1, y: 0 }}>
-                        Welcome to React Native!
-                    </LinearTextGradient>
-                    <Text style={styles.instructions}>To get started, edit App.js</Text>
-                    <Text style={styles.instructions}>
-                        {'Double tap R on your keyboard to reload,\n' +
-                            'Shake or press menu button for dev menu'}
-                    </Text>
-                </View>
-            </TestCase.Example>
-        </TestSuite>
+        <Tester>
+            <ScrollView>
+                <TestSuite name="LinearTextGradient">
+                    <TestCase tags={['C_API']} itShould="locations">
+                        <View style={styles.container}>
+                            <LinearTextGradient
+                                style={styles.welcome}
+                                locations={[0, 1]}
+                                colors={['blue', 'red']}
+                                start={{ x: 0, y: 0 }}
+                                end={{ x: 1, y: 0 }}>
+                                Welcome to React Native!
+                            </LinearTextGradient>
+                        </View>
+                    </TestCase>
+
+
+                    <TestCase tags={['C_API']} itShould="colors">
+                        <View style={styles.container}>
+                            <LinearTextGradient
+                                style={styles.welcome}
+                                locations={[0, 1]}
+                                colors={['#00FF00', 'red']}
+                                start={{ x: 0, y: 0 }}
+                                end={{ x: 1, y: 0 }}>
+                                Welcome to React Native!
+                            </LinearTextGradient>
+                        </View>
+                    </TestCase>
+
+
+
+                    <TestCase tags={['C_API']} itShould="start">
+                        <View style={styles.container}>
+                            <LinearTextGradient
+                                style={styles.welcome}
+                                locations={[0, 1]}
+                                colors={['blue', 'red']}
+                                start={{ x: 1, y: 0 }}
+                                end={{ x: 1, y: 0 }}>
+                                Welcome to React Native!
+                            </LinearTextGradient>
+                        </View>
+                    </TestCase>
+
+                    <TestCase tags={['C_API']} itShould="end">
+                        <View style={styles.container}>
+                            <LinearTextGradient
+                                style={styles.welcome}
+                                locations={[0, 1]}
+                                colors={['blue', 'red']}
+                                start={{ x: 0, y: 0 }}
+                                end={{ x: 0, y: 1 }}>
+                                Welcome to React Native!
+                            </LinearTextGradient>
+                        </View>
+                    </TestCase>
+                </TestSuite>
+            </ScrollView>
+        </Tester>
     );
 }
 

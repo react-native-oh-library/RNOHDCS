@@ -55,7 +55,7 @@ export class RefreshAndLoadingExample extends React.Component {
 
   _onRefresh = () => {
     setTimeout(() => {
-      this._largeList.endRefresh();
+      this._largeList?.endRefresh();
       this._index = 0;
       this.setState({
         data: [contacts[this._index]],
@@ -66,7 +66,7 @@ export class RefreshAndLoadingExample extends React.Component {
 
   _onLoading = () => {
     setTimeout(() => {
-      this._largeList.endLoading();
+      this._largeList?.endLoading();
       this.setState(p => ({
         data: p.data.concat(contacts[++this._index]),
         allLoaded: this._index > 2

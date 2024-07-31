@@ -97,7 +97,7 @@ export function ModalDemo() {
           />
 
           <TestCase
-            itShould="animation=slideInUp animationOut=slideOutDown"
+            itShould="animationIn=slideInUp animationOut=slideOutDown"
             initialState={undefined as any}
             arrange={({ setState }) => {
               return (
@@ -119,7 +119,7 @@ export function ModalDemo() {
           />
 
           <TestCase
-            itShould="animation=slideInLeft animationOut=slideOutRight"
+            itShould="animationIn=slideInLeft animationOut=slideOutRight"
             initialState={undefined as any}
             arrange={({ setState }) => {
               return (
@@ -776,7 +776,7 @@ export function ModalDemo() {
           />
 
           <TestCase
-            itShould="scrollOffset>0 scrollOffsetMax=100 scrollTo=fn propagateSwipe=true scrollHorizontal=true"
+            itShould="scrollOffset>0 scrollOffsetMax=100 scrollTo=fn propagateSwipe=true scrollHorizontal=false"
             initialState={undefined as any}
             arrange={({ setState }) => {
               return (
@@ -793,6 +793,7 @@ export function ModalDemo() {
                     scrollOffset={scrollOffset}
                     scrollOffsetMax={100} // content height - ScrollView height
                     propagateSwipe={true}
+                    scrollHorizontal={false}
                     style={styles.modal}>
                     <View style={styles.scrollableModal}>
                       <ScrollView
@@ -824,7 +825,7 @@ export function ModalDemo() {
           />
 
           <TestCase
-            itShould="scrollOffset>0 scrollOffsetMax=50 scrollTo=fn propagateSwipe=true scrollHorizontal=true"
+            itShould="scrollOffset>0 scrollOffsetMax=50 scrollTo=fn propagateSwipe=true scrollHorizontal=false"
             initialState={undefined as any}
             arrange={({ setState }) => {
               return (
@@ -841,6 +842,7 @@ export function ModalDemo() {
                     scrollOffset={scrollOffset}
                     scrollOffsetMax={50} // content height - ScrollView height
                     propagateSwipe={true}
+                    scrollHorizontal={false}
                     style={styles.modal}>
                     <View style={styles.scrollableModal}>
                       <ScrollView
@@ -871,7 +873,7 @@ export function ModalDemo() {
             }}
           />
           <TestCase
-            itShould="scrollOffset>0 scrollOffsetMax=50 scrollTo=null propagateSwipe=true scrollHorizontal=true"
+            itShould="scrollOffset>0 scrollOffsetMax=50 scrollTo=null propagateSwipe=true scrollHorizontal=false"
             initialState={undefined as any}
             arrange={({ setState }) => {
               return (
@@ -888,6 +890,7 @@ export function ModalDemo() {
                     scrollOffset={scrollOffset}
                     scrollOffsetMax={50} // content height - ScrollView height
                     propagateSwipe={true}
+                    scrollHorizontal={false}
                     style={styles.modal}>
                     <View style={styles.scrollableModal}>
                       <ScrollView
@@ -1046,7 +1049,7 @@ export function ModalDemo() {
                     onBackButtonPress={() => {
                       toggleModal('useNativeDriver')
                     }}>
-                    <DefaultModalContent onPress={() => toggleModal('useNativeDriver')} />
+                    <DefaultModalContent nobtn={true} onPress={() => toggleModal('useNativeDriver')} />
                   </Modal>
                 </View>
               );
@@ -1073,7 +1076,7 @@ export function ModalDemo() {
                     onBackButtonPress={() => {
                       toggleModal('useNativeDriver2')
                     }}>
-                    <DefaultModalContent onPress={() => toggleModal('useNativeDriver2')} />
+                    <DefaultModalContent nobtn={true} onPress={() => toggleModal('useNativeDriver2')} />
                   </Modal>
                 </View>
               );
@@ -1249,11 +1252,14 @@ export function ModalDemo() {
 type Props = {
   onPress: () => any;
   input?: boolean;
+  nobtn?: boolean;
 };
 const DefaultModalContent: React.FC<Props> = props => (
   <View style={styles.content}>
     <Text style={styles.contentTitle}>Hi 👋!</Text>
-    <Button onPress={props.onPress} title="Close" />
+    {props.nobtn ? null : (
+      <Button onPress={props.onPress} title="Close" />
+    )}
     {props.input ? (
       <TextInput
         style={{ height: 50, width: 150, backgroundColor: '#eee' }}
@@ -1317,7 +1323,7 @@ const styles = StyleSheet.create({
     marginTop: 50, fontSize: 17,
   },
   content: {
-    backgroundColor: 'white', padding: 22, justifyContent: 'center', alignItems: 'center', borderRadius: 4, borderColor: 'rgba(0, 0, 0, 0.1)',
+    backgroundColor: 'white', padding: 22, justifyContent: 'center', alignItems: 'center', borderRadius: 4, borderColor: 'rgba(0, 0, 0, 0.1)'
   },
   contentTitle: {
     fontSize: 20, marginBottom: 12,

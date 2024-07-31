@@ -3,10 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  RefreshControl,
-  // Pressable,
-  Button,
-  ScrollView,
 } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 
@@ -60,12 +56,12 @@ const List = () => {
         style={{
           backgroundColor: item > 17 ? "red" : backgroundColor,
           height: item % 2 === 0 ? 100 : 100,
-          width:100
+          width: 100
         }}
       >
-        <Text style = {{
+        <Text style={{
           height: item % 2 === 0 ? 100 : 100,
-          width:100
+          width: 100
         }}> Cell Id: {item}</Text>
       </View>
     );
@@ -73,16 +69,16 @@ const List = () => {
 
   const renderHeader = () => {
     return (
-      <View style={{ backgroundColor: 'lightblue' }}>
-        <Text style={{ width: 100, height: 100}}>List Header</Text>
+      <View >
+        <Text style={{ width: 100, height: 100 }}>List Header</Text>
       </View>
     );
   };
 
   const renderFooter = () => {
     return (
-      <View style={{ backgroundColor: 'lightblue' }}>
-        <Text style={{ width: 100, height: 100  }}>List Footer</Text>
+      <View >
+        <Text style={{ width: 100, height: 100 }}>List Footer</Text>
       </View>
     );
   };
@@ -99,74 +95,78 @@ const List = () => {
   };
 
   const Divider = () => {
-    return <View style={styles.divider}/>;
+    return <View style={styles.divider} />;
   }
 
-  const CellRendererComponent = React.forwardRef<View, { item: string; index: number; style: any }>(
-    ({ item, index, style }, ref) => {
-      // 自定义渲染单元格的逻辑
-      return <View ref={ref} style={style}>{item}</View>;
-    }
-  );
   return (
     <>
-      <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
-        <Text style={styles.infoText}>onBlankArea: {onBlankArea_pass?'Pass':'Not Triggered'};  </Text>
-        <Text style={styles.infoText}>onEndReached: {onEndReached_pass?'Pass':'Not Triggered'};  </Text>
-        <Text style={styles.infoText}>onLoad: {onLoad_pass?'Pass':'Not Triggered'};  </Text>
-        <Text style={styles.infoText}>onViewableItemsChanged: {onViewableItemsChanged_pass?'Pass':'Not Triggered'};  </Text>
-        <Text style={styles.infoText}>onRefresh: {onRefresh_pass?'Pass':'Not Triggered'};  </Text>
-      </View>     
-      <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+        <Text style={styles.infoText}>onBlankArea: {onBlankArea_pass ? 'Pass' : 'Not Triggered'};  </Text>
+        <Text style={styles.infoText}>onEndReached: {onEndReached_pass ? 'Pass' : 'Not Triggered'};  </Text>
+        <Text style={styles.infoText}>onLoad: {onLoad_pass ? 'Pass' : 'Not Triggered'};  </Text>
+        <Text style={styles.infoText}>onViewableItemsChanged: {onViewableItemsChanged_pass ? 'Pass' : 'Not Triggered'};  </Text>
+        <Text style={styles.infoText}>onRefresh: {onRefresh_pass ? 'Pass' : 'Not Triggered'};  </Text>
+      </View>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
         <View
           style={styles.button}
-          onTouchEnd={() =>
+          onTouchEnd={() => {
             list.current?.scrollToEnd()
-          }>
+            list.current?.recordInteraction()
+          }}>
+          <Text style={styles.buttonText}>recordInteraction()</Text>
+        </View>
+        <View
+          style={styles.button}
+          onTouchEnd={() => {
+            list.current?.scrollToEnd()
+            list.current?.recordInteraction()
+          }}>
           <Text style={styles.buttonText}>scrollToEnd()</Text>
         </View>
         <View
           style={styles.button}
           onTouchEnd={() =>
-            list.current?.scrollToIndex({index: 20})
+            list.current?.scrollToIndex({ index: 20 })
           }>
           <Text style={styles.buttonText}>scrollToIndex(20)</Text>
         </View>
         <View
           style={styles.button}
-          onTouchEnd={() =>setEmptyListEnabled(!emptyListEnabled)}
-        >
-          <Text style={styles.buttonText}>EmptyListEnabled: {emptyListEnabled ? 'true': 'false'}</Text>
+          onTouchEnd={() =>
+            list.current?.scrollToItem({ animated: true, item: data[2] })
+          }>
+          <Text style={styles.buttonText}>scrollToItem(3)</Text>
         </View>
         <View
           style={styles.button}
-          onTouchEnd={() =>setHorizontal(!horizontal)}
+          onTouchEnd={() => setEmptyListEnabled(!emptyListEnabled)}
         >
-          <Text style={styles.buttonText}>Horizontal: {horizontal ? 'true': 'false'}</Text>
+          <Text style={styles.buttonText}>EmptyListEnabled: {emptyListEnabled ? 'true' : 'false'}</Text>
         </View>
         <View
           style={styles.button}
-          onTouchEnd={() =>setInverted(!inverted)}
+          onTouchEnd={() => setHorizontal(!horizontal)}
         >
-          <Text style={styles.buttonText}>Inverted: {inverted ? 'true': 'false'}</Text>
+          <Text style={styles.buttonText}>Horizontal: {horizontal ? 'true' : 'false'}</Text>
         </View>
         <View
           style={styles.button}
-          onTouchEnd={() =>setRefreshing(!refreshing)}
+          onTouchEnd={() => setInverted(!inverted)}
         >
-          <Text style={styles.buttonText}>Refreshing: {refreshing ? 'true': 'false'}</Text>
+          <Text style={styles.buttonText}>Inverted: {inverted ? 'true' : 'false'}</Text>
+        </View>
+        <View
+          style={styles.button}
+          onTouchEnd={() => setRefreshing(!refreshing)}
+        >
+          <Text style={styles.buttonText}>Refreshing: {refreshing ? 'true' : 'false'}</Text>
         </View>
       </View>
       <FlashList
         ref={list}
         horizontal={horizontal}
         refreshing={refreshing}
-      //   onContentSizeChange={() => {
-      //     // list.current.scrollToEnd();
-      //     // list.current.scrollToIndex({index: 30});
-      //     // list.current.scrollToItem({item: 30});
-      //     list.current.scrollToOffset({offset: 300})
-      // }}
         onRefresh={() => {
           setRefreshing(true);
           setRefresh(true);
@@ -174,7 +174,6 @@ const List = () => {
             setRefreshing(false);
           }, 2000);
         }}
-        // refreshControl={<RefreshControl refreshing={true} colors={['hsl(190, 50%, 70%)']}/>}
         keyExtractor={(item: number) => {
           return item.toString();
         }}
@@ -184,32 +183,36 @@ const List = () => {
         renderItem={renderItem}
         estimatedItemSize={100}
         numColumns={3}
-        estimatedListSize={{width:384,height:753}}
-        drawDistance={10}
+        estimatedListSize={{ width: 384, height: 753 }}
+        drawDistance={300}
         overScrollMode={'always'}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={true}
         onEndReachedThreshold={1}
         overrideItemLayout={overrideItemLayout}
-        // CellRendererComponent={CellRendererComponent}
         data={emptyListEnabled ? [] : data}
         ListHeaderComponent={renderHeader}
+        ListHeaderComponentStyle={styles.listHeader}
         ListFooterComponent={renderFooter}
+        ListFooterComponentStyle={styles.listFooter}
+        estimatedFirstItemOffset={170}
+        disableHorizontalListHeightMeasurement={true}
+        progressViewOffset={0}
         ListEmptyComponent={Empty()}
         ItemSeparatorComponent={Divider}
-        // initialScrollIndex={40}
+        initialScrollIndex={1}
         inverted={inverted}
-        contentContainerStyle={{padding: 50}}
+        contentContainerStyle={{ padding: 50 }}
         viewabilityConfig={{
           waitForInteraction: true,
           itemVisiblePercentThreshold: 10,
           minimumViewTime: 1000,
         }}
         disableAutoLayout={true}
-        onBlankArea={()=>setBlankArea(true)}
-        onEndReached={()=>setEndReached(true)}
-        onLoad={()=>setLoad(true)}
-        onViewableItemsChanged={()=>setViewableItemsChanged(true)}
+        onBlankArea={() => setBlankArea(true)}
+        onEndReached={() => setEndReached(true)}
+        onLoad={() => setLoad(true)}
+        onViewableItemsChanged={() => setViewableItemsChanged(true)}
       />
     </>
   );
@@ -229,7 +232,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   infoText: {
-    fontSize:10,
+    fontSize: 10,
   },
   button: {
     width: 180,
@@ -251,9 +254,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   divider: {
-    width: "100%",
+    width: 1,
     height: 10,
     backgroundColor: "#DDD"
-  }
+  },
+  listFooter: {
+    padding: 10,
+    backgroundColor: 'lightblue'
+  },
+  listHeader: {
+    padding: 10,
+    backgroundColor: 'lightblue'
+  },
 
 });

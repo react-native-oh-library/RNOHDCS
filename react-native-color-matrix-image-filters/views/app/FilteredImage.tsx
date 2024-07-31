@@ -1,6 +1,6 @@
 import React from 'react'
 import { Image, ImageStyle, ImageURISource } from 'react-native'
-import { ColorMatrix, Matrix } from '@react-native-oh-tpl/react-native-color-matrix-image-filters'
+import { ColorMatrix, Matrix } from 'react-native-color-matrix-image-filters'
 import { ResizeMode } from '../../domain'
 
 type Props = {

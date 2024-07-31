@@ -5,6 +5,7 @@ import {
   ScreenTransitionContext,
   withScreenTransitionContext,
 } from "./RouterScreenTransitionContext";
+import { Text, View } from "react-native";
 
 export interface ScreenTransitionProps {
   sharedId?: string;
@@ -60,7 +61,18 @@ export const RouterScreenTransition = withScreenTransitionContext(
 
     render() {
       const { sharedId, screenTransitionContext, ...otherProps } = this.props;
-      return <SharedElement {...otherProps} onNode={this.onSetNode} />;
+      const childrens = otherProps.children;
+      // return <SharedElement {...otherProps} onNode={this.onSetNode} />;
+      return (
+        <View>
+          <SharedElement {...otherProps} onNode={this.onSetNode}></SharedElement>
+          <View >
+            <Text>{'onNode是否被调用：'+ !!(this.onSetNode)}</Text>
+            <Text>childrens: {childrens + ""}</Text>
+          </View>
+        </View>
+        
+      )
     }
   }
 );

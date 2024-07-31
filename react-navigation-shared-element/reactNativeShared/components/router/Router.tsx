@@ -24,7 +24,7 @@ import {
   ScreenTransitionContextOnSharedElementsUpdatedEvent,
 } from "./RouterScreenTransitionContext";
 
-enableScreens();
+enableScreens(false);
 
 const styles = StyleSheet.create({
   container: {

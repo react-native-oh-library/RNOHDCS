@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, Pressable } from 'react-native';
 import AutocompleteInput from 'react-native-autocomplete-input';
-import { TestSuite, Tester } from '@rnoh/testerino';
-import { TestCase } from '../components';
+import { TestSuite, Tester, TestCase } from '@rnoh/testerino';
 
 const styles = StyleSheet.create({
     view: {
@@ -15,18 +14,21 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     containerStyle: {
-        borderColor: "#ee7700",
+        backgroundColor:'red',
+        borderColor: '#ee7700',
         borderWidth: 5,
         borderRadius: 15,
         width: '100%'
+
     },
     inputContainerStyle: {
-        borderWidth: 5,
-        borderColor: "green",
+        marginLeft:20,
+        marginTop:20,
+        width:'50%'
     },
     listContainerStyle: {
         borderWidth: 10,
-        borderColor: "yellow",
+        borderColor: 'yellow',
     },
     itemText: {
         paddingTop: 10,
@@ -63,16 +65,17 @@ class App extends Component {
         isVisible: true,
         selectName: '',
         showResults: false,
+        showResultsFlags: false,
     }
     render() {
-        const { query, isVisible, showResults } = this.state;
+        const { query, isVisible, showResults ,showResultsFlags} = this.state;
         const data = filterData(query);
-        const showResultFlag = getFlagStr(showResults);
+        const flag = getFlagStr(showResultsFlags);
         return (
-            <Tester>
-                <ScrollView >
+            <ScrollView >
+                <Tester>
                     <TestSuite name="AutoCompleteInput (eg:input 'bb')">
-                        <TestCase.Example itShould="Test containerStyle { borderColor: '#ee7700',borderWidth: 5,borderRadius: 15,width: '100%' }">
+                        <TestCase itShould="Test containerStyle { borderColor: '#ee7700',borderWidth: 5,borderRadius: 15,width: '100%' }">
                             <View style={{ backgroundColor: '#d1f8f7', height: 200, paddingTop: 10 }}>
                                 <AutocompleteInput
                                     containerStyle={styles.containerStyle}
@@ -110,8 +113,8 @@ class App extends Component {
                                     }}
                                 />
                             </View>
-                        </TestCase.Example>
-                        <TestCase.Example itShould="Test inputContainerStyle { borderWidth: 5,borderColor: 'green' }">
+                        </TestCase>
+                        <TestCase itShould="Test inputContainerStyle { marginLeft:20, marginTop:20,width:'50%' }">
                             <View style={{ backgroundColor: '#d1f8f7', height: 200, paddingTop: 10 }}>
                                 <AutocompleteInput
                                     inputContainerStyle={styles.inputContainerStyle}
@@ -149,8 +152,8 @@ class App extends Component {
                                     }}
                                 />
                             </View>
-                        </TestCase.Example>
-                        <TestCase.Example itShould="Test listContainerStyle { borderWidth: 10,borderColor: 'yellow' }">
+                        </TestCase>
+                        <TestCase itShould="Test listContainerStyle { borderWidth: 10,borderColor: 'yellow' }">
                             <View style={{ backgroundColor: '#d1f8f7', height: 200, paddingTop: 10 }}>
                                 <AutocompleteInput
                                     listContainerStyle={styles.listContainerStyle}
@@ -188,8 +191,8 @@ class App extends Component {
                                     }}
                                 />
                             </View>
-                        </TestCase.Example>
-                        <TestCase.Example itShould="Test renderTextInput (An Custom Input Component){borderColor: '#f737e7',borderWidth: 2,height:50}" >
+                        </TestCase>
+                        <TestCase itShould="Test renderTextInput (An Custom Input Component){borderColor: '#f737e7',borderWidth: 2,height:50}" >
                             <View style={{ backgroundColor: '#d1f8f7', height: 200, paddingTop: 10 }}>
                                 <AutocompleteInput
                                     data={data.length === 1 && compare(this.state.selectName, data[0].value) ? [] : data}
@@ -232,10 +235,10 @@ class App extends Component {
                                     }}
                                 />
                             </View>
-                        </TestCase.Example>
-                        <TestCase.Example itShould="Test onShowResults (when the autocomplete suggestions appear or disappear will be called)" >
+                        </TestCase>
+                        <TestCase itShould="Test onShowResults (when the autocomplete suggestions appear or disappear will be called)" >
                             <View style={{ backgroundColor: '#d1f8f7', height: 200, paddingTop: 10 }}>
-                                <Text>suggestions isShow:{showResultFlag}</Text>
+                                <Text>suggestions isShow:{flag}</Text>
                                 <AutocompleteInput
                                     data={data.length === 1 && compare(this.state.selectName, data[0].value) ? [] : data}
                                     value={query}
@@ -253,7 +256,7 @@ class App extends Component {
                                         }
                                         this.setState({ query: text });
                                     }}
-                                    onShowResults={(showResults) => { this.state.showResults = showResults }}
+                                    onShowResults={(showResults) => { this.state.showResultsFlags = showResults }}
                                     hideResults={isVisible}
                                     flatListProps={{
                                         keyExtractor: (_, idx) => String(idx),
@@ -272,8 +275,8 @@ class App extends Component {
                                     }}
                                 />
                             </View>
-                        </TestCase.Example>
-                        <TestCase.Example itShould="Test hideResults (Set to 'true' to hide the suggestion list.)" >
+                        </TestCase>
+                        <TestCase itShould="Test hideResults (Set to 'true' to hide the suggestion list.)" >
                             <View style={{ backgroundColor: '#d1f8f7', height: 200, paddingTop: 10 }}>
                                 <AutocompleteInput
                                     data={data.length === 1 && compare(this.state.selectName, data[0].value) ? [] : data}
@@ -311,8 +314,8 @@ class App extends Component {
                                     }}
                                 />
                             </View>
-                        </TestCase.Example>
-                        <TestCase.Example itShould="Test renderResultList(This allows you to replace <FlatList /> with another component)" >
+                        </TestCase>
+                        <TestCase itShould="Test renderResultList(This allows you to replace <FlatList /> with another component)" >
                             <View style={{ backgroundColor: '#d1f8f7', height: 200, paddingTop: 10 }}>
                                 <AutocompleteInput
                                     value={query}
@@ -349,12 +352,14 @@ class App extends Component {
                                     hideResults={isVisible}
                                 />;
                             </View>
-                        </TestCase.Example>
+                        </TestCase>
+
                     </TestSuite>
                     <View style={{ height: 500 }}></View>
-                </ScrollView>
-            </Tester>
+                </Tester>
+            </ScrollView>
         );
     }
 }
+
 export default App;

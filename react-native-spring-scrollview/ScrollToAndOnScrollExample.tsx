@@ -8,7 +8,7 @@ import {
   Animated,
   ScrollView,
 } from 'react-native';
-import {SpringScrollView} from '@react-native-oh-tpl/react-native-spring-scrollview';
+import {SpringScrollView} from 'react-native-spring-scrollview';
 
 const AnimatedSpringScrollView = Animated.createAnimatedComponent(SpringScrollView);
 export default class ScrollToAndOnScrollExample extends React.Component {
@@ -26,6 +26,15 @@ export default class ScrollToAndOnScrollExample extends React.Component {
         <TouchableOpacity style={styles.scrollTo} onPress={this._scrollTo}>
           <Text>Tap to ScrollTo y=200</Text>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.scrollTo} onPress={this._scroll}>
+          <Text>scroll</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.scrollTo} onPress={this._scrollToBegin}>
+          <Text>scrollToBegin</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.scrollTo} onPress={this._scrollToEnd}>
+          <Text>scrollToEnd</Text>
+        </TouchableOpacity>
         <SpringScrollView
           style={styles.container}
           ref={(ref) => (this._scrollView = ref)}
@@ -34,6 +43,10 @@ export default class ScrollToAndOnScrollExample extends React.Component {
           onMomentumScrollBegin={this.onMomentumScrollBegin}
           onMomentumScrollEnd={this._onMomentumScrollEnd}
           onNativeContentOffsetExtract={this._nativeOffset}
+          onScrollBeginDrag={this._onScrollBeginDrag}
+          onSizeChange={this._onSizeChange}
+          onContentSizeChange={this._onContentSizeChange}
+          onScroll={this._onScroll}
           >
           {arr.map((i, index) => (
             <Text key={index} style={styles.text}>
@@ -43,7 +56,9 @@ export default class ScrollToAndOnScrollExample extends React.Component {
             </Text>
           ))}
           <Animated.View style={this._stickyHeaderStyle}>
+          <TouchableOpacity  onPress={this._onNativeContentOffsetExtract}>
             <Text>Test `onNativeContentOffsetExtract`</Text>
+           </TouchableOpacity>
           </Animated.View>
         </SpringScrollView>
       </View>
@@ -61,7 +76,38 @@ _stickyHeaderStyle = {
     transform: [{translateY: this._nativeOffset.y}],
   };
 
+  _onScroll = offset => {
+    console.log("onScroll", offset.nativeEvent);
+  };
+
+  _onSizeChange= (wh) => {
+    console.log('onSizeChange:'+JSON.stringify(wh));
+
+  };
+
+  _onContentSizeChange= (wh) => {
+    console.log('onContentSizeChange:'+JSON.stringify(wh));
+
+  };
+
+  _onNativeContentOffsetExtract = () => {
+    console.log('onNativeContentOffsetExtract');
+  };
+
+  _onScrollBeginDrag = () => {
+    console.log('onScrollBeginDrag');
+  };
+
+  _scroll = () => {
+    console.log('scroll');
+    if (this._scrollView) {
+      this._scrollView
+        .scroll({x: 0, y: 200});
+    }
+  };
+
   _scrollTo = () => {
+    console.log('scrollTo');
     if (this._scrollView) {
       this._scrollView
         .scrollTo({x: 0, y: 200})
@@ -69,19 +115,34 @@ _stickyHeaderStyle = {
     }
   };
 
+  _scrollToBegin = () => {
+    console.log('scrollToBegin');
+    if (this._scrollView) {
+      this._scrollView.scrollToBegin(true);
+    }
+  };
+
+  _scrollToEnd = () => {
+    console.log('scrollToEnd');
+    if (this._scrollView) {
+      this._scrollView.scrollToEnd(true);
+    }
+  };
+
+
   _onTouchBegin = () => {
-    console.log('jslog onTouchBegin');
+    console.log('onTouchBegin');
   };
 
   _onTouchEnd = () => {
-    console.log('jslog onTouchEnd11111');
+    console.log('onTouchEnd');
   };
 
   onMomentumScrollBegin = () => {
-    console.log('jslog onMomentumScrollBegin');
+    console.log('onMomentumScrollBegin');
   };
   _onMomentumScrollEnd = () => {
-    console.log('jslog onMomentumScrollEnd');
+    console.log('onMomentumScrollEnd');
   };
 }
 

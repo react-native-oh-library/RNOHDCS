@@ -1,5 +1,4 @@
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
-// import {TestCase} from '../../components/TestCase';
 import React, {useState} from 'react';
 import {
   Text,
@@ -8,6 +7,7 @@ import {
   StyleSheet,
   Switch,
   ScrollView,
+  Platform,
 } from 'react-native';
 import {
   pick,
@@ -16,7 +16,9 @@ import {
   pickSingle,
   DocumentPickerOptions,
   isCancel,
+  isInProgress,
 } from 'react-native-document-picker';
+const { perPlatformTypes } = require('react-native-document-picker').default;
 
 
 const typeList = Object.keys(types);
@@ -91,7 +93,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({onSelectValue}) => {
         }}>
         <View style={{width: '100%'}}>
           <Text style={{fontSize: 20, fontWeight: '600', margin: 6}}>
-            picker 的文件类型
+            picker 的文件类型(type)
           </Text>
         </View>
         {typeUi.map(s => (
@@ -190,7 +192,7 @@ export default function DocumentPickerDemo(): JSX.Element {
 
         <View style={{width: '100%'}}>
           <Text style={{fontSize: 20, fontWeight: '600', margin: 6}}>
-            是否多选
+            是否多选(allowMultiSelection)
           </Text>
         </View>
 
@@ -200,7 +202,7 @@ export default function DocumentPickerDemo(): JSX.Element {
 
         <View style={{width: '100%'}}>
           <Text style={{fontSize: 20, fontWeight: '600', margin: 6}}>
-            copyTo文件夹
+            copyTo文件夹(copyTo)
           </Text>
         </View>
 
@@ -226,6 +228,24 @@ export default function DocumentPickerDemo(): JSX.Element {
         </View>
 
         <TestSuite name="document picker">
+
+          {/* 展示常量 */}
+          <TestCase itShould='constant perPlatformTypes' modal={true} >
+            <ScrollView style={{height: 500}} >
+              {
+                Object.keys(perPlatformTypes).map(k => <View key={k} style={{marginTop: 20}}>
+                    <Text style={{fontWeight: '600'}}>{k}</Text>
+                    <Text>{JSON.stringify(perPlatformTypes[k])}</Text>
+                </View>)
+              }
+            </ScrollView>
+          </TestCase>
+
+          <TestCase itShould='constant types' modal={true} >
+            <ScrollView style={{height: 240}} >
+              <Text>{JSON.stringify(types)}</Text>
+            </ScrollView>
+          </TestCase>
 
           <TestCase
             itShould="选择文件"
@@ -290,6 +310,54 @@ export default function DocumentPickerDemo(): JSX.Element {
               expect(state).to.have.property('uri');
             }}
           />
+
+          <TestCase
+            itShould="isCancel"
+            initialState={false}
+            arrange={({setState}) => {
+              return (
+                <TouchableOpacity
+                  onPress={async () => {
+                    try {
+                      const res = await pick(pickOpt);
+                      setPickResult(JSON.stringify(res));
+                      return res;
+                    } catch (err) {
+                      setState(isCancel(err));
+                    }
+                  }}
+                  style={styles.btn}>
+                  <Text style={styles.btnText}> isCancel </Text>
+                </TouchableOpacity>
+              );
+            }}
+            assert={async ({expect, state}) => {
+              expect(state).to.be.true;
+            }}
+          />
+
+          <TestCase
+            itShould="isInProgress"
+            initialState={false}
+            arrange={({setState}) => {
+              return (
+                <TouchableOpacity
+                  onPress={async () => {
+                    const err = {
+                      code: 'ASYNC_OP_IN_PROGRESS'
+                    };
+                    setState(isInProgress(err));
+                  }}
+                  style={styles.btn}>
+                  <Text style={styles.btnText}> isInProgress </Text>
+                </TouchableOpacity>
+              );
+            }}
+            assert={async ({expect, state}) => {
+              expect(state).to.be.true;
+            }}
+          />
+          
         </TestSuite>
 
         <View style={{width: '100%'}}>
