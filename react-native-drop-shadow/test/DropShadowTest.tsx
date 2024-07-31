@@ -7,26 +7,44 @@ export function DropShadowTest() {
     return (
         <Tester>
             <TestSuite name="DropShadow">
-                <TestCase itShould="DropShadow View">
+                <TestCase itShould="DropShadow: shadowRadius、shadowColor、shadowOpacity">
                     <View style={styles.container}>
                         <DropShadow style={styles.shadow}>
                             <View style={styles.box} />
                         </DropShadow>
                     </View>
                 </TestCase>
-                <TestCase itShould="render light blue shadow shifted towards bottom and right">
-                    <View
-                        style={{
-                            width: 64,
-                            height: 64,
-                            margin: 8,
-                            backgroundColor: 'green',
-                            shadowColor: 'blue',
-                            shadowOffset: { width: 16, height: 16 },
-                            shadowOpacity: 0.25,
-                            shadowRadius: 16,
-                        }}
-                    />
+                <TestCase itShould="DropShadow: shadowColor、shadowRadius">
+                    <View style={styles.container}>
+                        <DropShadow
+                            style={{
+                                shadowColor: 'rgb(0 0 0)',
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 0,
+                                },
+                                shadowOpacity: 1,
+                                shadowRadius: 30,
+                            }}>
+                            <View style={styles.box} />
+                        </DropShadow>
+                    </View>
+                </TestCase>
+                <TestCase itShould="DropShadow: shadowOffset, shadowColor、shadowOpacity">
+                    <View style={styles.container}>
+                        <DropShadow
+                            style={{
+                                shadowColor: 'blue',
+                                shadowOffset: {
+                                    width: 10,
+                                    height: 50,
+                                },
+                                shadowOpacity: 0.6,
+                                shadowRadius: 120,
+                            }}>
+                            <View style={styles.box} />
+                        </DropShadow>
+                    </View>
                 </TestCase>
             </TestSuite>
         </Tester>
@@ -41,8 +59,8 @@ const styles = StyleSheet.create({
             width: 0,
             height: 0,
         },
-        shadowOpacity: 1,
+        shadowOpacity: 0,
         shadowRadius: 30,
     },
-    container: { alignItems: 'center', justifyContent: 'center' },
+    container: { alignItems: 'center', justifyContent: 'center', height: 200 },
 });
