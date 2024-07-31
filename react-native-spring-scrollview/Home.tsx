@@ -16,36 +16,69 @@ export default class HomeDemo extends React.Component  {
             <View style={styles.container}>
 
 
-               <TouchableHighlight
-                    onPress={() => { this.props.navigation.navigate("InputExample") }}
+              
+<TouchableHighlight
+                    onPress={() => { this.props.navigation.navigate("InputTapToHideKeyboardTrueExample") }}
                     style={styles.button}
                 >
-                    <Text style={styles.text}>InputExample</Text>
-                </TouchableHighlight>
-
-
-                <TouchableHighlight
-                    onPress={() => { this.props.navigation.navigate("BouncesAndScrollEnabledExample") }}
-                    style={styles.button}
-                >
-                    <Text style={styles.text}>BouncesAndScrollEnabledExample</Text>
-                </TouchableHighlight>
-
-
-                <TouchableHighlight
-                    onPress={() => { this.props.navigation.navigate("RefreshAndLoadingExample") }}
-                    style={styles.button}
-                >
-                    <Text style={styles.text}>RefreshAndLoadingExample</Text>
+                    <Text style={styles.text}>InputTapToHideKeyboardTrueExample</Text>
                 </TouchableHighlight>
 
                 <TouchableHighlight
-                    onPress={() => { this.props.navigation.navigate("ComplexExample") }}
+                    onPress={() => { this.props.navigation.navigate("InputTapToHideKeyboardFalseExample") }}
                     style={styles.button}
                 >
-                    <Text style={styles.text}>ComplexExample</Text>
+                    <Text style={styles.text}>InputTapToHideKeyboardFalseExample</Text>
                 </TouchableHighlight>
 
+                <TouchableHighlight
+                    onPress={() => { this.props.navigation.navigate("BouncesDirectionalLockEnabledTrueExample") }}
+                    style={styles.button}
+                >
+                    <Text style={styles.text}>BouncesDirectionalLockEnabledTrueExample</Text>
+                </TouchableHighlight>
+
+                <TouchableHighlight
+                    onPress={() => { this.props.navigation.navigate("BouncesDirectionalLockEnabledFalseExample") }}
+                    style={styles.button}
+                >
+                    <Text style={styles.text}>BouncesDirectionalLockEnabledFalseExample</Text>
+                </TouchableHighlight>
+
+                <TouchableHighlight
+                    onPress={() => { this.props.navigation.navigate("BouncesAndScrollEnabledFalseExample") }}
+                    style={styles.button}
+                >
+                    <Text style={styles.text}>BouncesAndScrollEnabledFalseExample</Text>
+                </TouchableHighlight>                
+
+                <TouchableHighlight
+                    onPress={() => { this.props.navigation.navigate("RefreshAndLoadingInvertFalseExample") }}
+                    style={styles.button}
+                >
+                    <Text style={styles.text}>RefreshAndLoadingInvertFalseExample</Text>
+                </TouchableHighlight>
+
+                <TouchableHighlight
+                    onPress={() => { this.props.navigation.navigate("RefreshAndLoadingInvertTrueExample") }}
+                    style={styles.button}
+                >
+                    <Text style={styles.text}>RefreshAndLoadingInvertTrueExample</Text>
+                </TouchableHighlight>
+
+                <TouchableHighlight
+                    onPress={() => { this.props.navigation.navigate("ComplexBouncesFalseExample") }}
+                    style={styles.button}
+                >
+                    <Text style={styles.text}>ComplexBouncesFalseExample</Text>
+                </TouchableHighlight>
+
+                <TouchableHighlight
+                    onPress={() => { this.props.navigation.navigate("ComplexBouncesTrueExample") }}
+                    style={styles.button}
+                >
+                    <Text style={styles.text}>ComplexBouncesTrueExample</Text>
+                </TouchableHighlight>
 
                 <TouchableHighlight
                     onPress={() => { this.props.navigation.navigate("ScrollToAndOnScrollExample") }}
@@ -53,7 +86,6 @@ export default class HomeDemo extends React.Component  {
                 >
                     <Text style={styles.text}>ScrollToAndOnScrollExample</Text>
                 </TouchableHighlight>
-            
 
             </View>
         );
