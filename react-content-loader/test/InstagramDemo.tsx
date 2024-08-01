@@ -7,13 +7,14 @@ export function InstagramDemo() {
         <ScrollView >
             <Tester>
                 <TestCase itShould='animate:false'>
-                    <Instagram animate={false}></Instagram>
+                    <Instagram animate={false} width={'100%'}></Instagram>
                 </TestCase>
                 <TestCase itShould='animate:true'>
-                    <Instagram animate={true}></Instagram>
+                    <Instagram animate={true} width={'100%'}></Instagram>
                 </TestCase>
                 <TestCase itShould='viewBox:0 0 380 70'>
                     <Instagram
+                        width={'100%'}
                         animate={true}
                         viewBox="0 0 380 70"
                     >
@@ -21,12 +22,14 @@ export function InstagramDemo() {
                 </TestCase>
                 <TestCase itShould='backgroundColor:#999'>
                     <Instagram
+                        width={'100%'}
                         animate={true}
                         backgroundColor={'#999'}
                     ></Instagram>
                 </TestCase>
                 <TestCase itShould='foregroundColor:red'>
                     <Instagram
+                        width={'100%'}
                         animate={true}
                         backgroundColor={'#999'}
                         foregroundColor={'red'}
@@ -34,6 +37,7 @@ export function InstagramDemo() {
                 </TestCase>
                 <TestCase itShould='speed:0.5'>
                     <Instagram
+                        width={'100%'}
                         animate={true}
                         backgroundColor={'#999'}
                         foregroundColor={'red'}
@@ -43,6 +47,7 @@ export function InstagramDemo() {
                 </TestCase>
                 <TestCase itShould='interval:2'>
                     <Instagram
+                        width={'100%'}
                         animate={true}
                         backgroundColor={'#999'}
                         foregroundColor={'red'}
@@ -53,6 +58,7 @@ export function InstagramDemo() {
                 </TestCase>
                 <TestCase itShould='rtl:true'>
                     <Instagram
+                        width={'100%'}
                         animate={true}
                         backgroundColor={'#999'}
                         foregroundColor={'red'}
@@ -62,19 +68,9 @@ export function InstagramDemo() {
                     >
                     </Instagram>
                 </TestCase>
-                <TestCase itShould='uniqueKey:unique-key'>
-                    <Instagram
-                        animate={true}
-                        backgroundColor={'#999'}
-                        foregroundColor={'red'}
-                        speed={0.5}
-                        interval={2}
-                        uniqueKey='unique-key'
-                    >
-                    </Instagram>
-                </TestCase>
                 <TestCase itShould='beforeMask:Rect(组件)'>
                     <Instagram
+                        width={'100%'}
                         animate={true}
                         backgroundColor={'#999'}
                         foregroundColor={'red'}

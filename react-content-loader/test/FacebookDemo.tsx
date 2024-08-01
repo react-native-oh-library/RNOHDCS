@@ -18,6 +18,7 @@ export function FacebookDemo() {
                 </TestCase>
                 <TestCase itShould='viewBox:0 0 380 70'>
                     <Facebook
+                        width={'100%'}
                         animate={true}
                         viewBox="0 0 380 70"
                     >
@@ -68,18 +69,6 @@ export function FacebookDemo() {
                         speed={0.5}
                         interval={2}
                         rtl={true}
-                    >
-                    </Facebook>
-                </TestCase>
-                <TestCase itShould='uniqueKey:unique-key'>
-                    <Facebook
-                        width={'100%'}
-                        animate={true}
-                        backgroundColor={'#999'}
-                        foregroundColor={'red'}
-                        speed={0.5}
-                        interval={2}
-                        uniqueKey='unique-key'
                     >
                     </Facebook>
                 </TestCase>

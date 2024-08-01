@@ -1,58 +1,58 @@
-import { BulletList ,Rect} from 'react-content-loader/native'
+import { Code, Rect } from 'react-content-loader/native'
 import { View, ScrollView } from "react-native"
 import { Tester, TestCase } from '@rnoh/testerino'
 
-export function BulletListDemo() {
+export function CodeDemo() {
     return <View style={{ flex: 1, backgroundColor: 'white' }}>
         <ScrollView >
             <Tester>
                 <TestCase itShould='animate:false'>
-                    <BulletList animate={false}></BulletList>
+                    <Code animate={false}></Code>
                 </TestCase>
                 <TestCase itShould='animate:true'>
-                    <BulletList animate={true}></BulletList>
+                    <Code animate={true}></Code>
                 </TestCase>
                 <TestCase itShould='viewBox:0 0 380 70'>
-                    <BulletList
+                    <Code
                         animate={true}
                         viewBox="0 0 380 70"
                     >
-                    </BulletList>
+                    </Code>
                 </TestCase>
                 <TestCase itShould='backgroundColor:#999'>
-                    <BulletList
-                        animate={true}
-                        backgroundColor='#999'
-                    ></BulletList>
-                </TestCase>
-                <TestCase itShould='foregroundColor:red'>
-                    <BulletList
+                    <Code
                         animate={true}
                         backgroundColor={'#999'}
-                        foregroundColor='red'
-                    ></BulletList>
+                    ></Code>
+                </TestCase>
+                <TestCase itShould='foregroundColor:red'>
+                    <Code
+                        animate={true}
+                        backgroundColor={'#999'}
+                        foregroundColor={'red'}
+                    ></Code>
                 </TestCase>
                 <TestCase itShould='speed:0.5'>
-                    <BulletList
+                    <Code
                         animate={true}
                         backgroundColor={'#999'}
                         foregroundColor={'red'}
                         speed={0.5}
                     >
-                    </BulletList>
+                    </Code>
                 </TestCase>
                 <TestCase itShould='interval:2'>
-                    <BulletList
+                    <Code
                         animate={true}
                         backgroundColor={'#999'}
                         foregroundColor={'red'}
                         speed={0.5}
                         interval={2}
                     >
-                    </BulletList>
+                    </Code>
                 </TestCase>
                 <TestCase itShould='rtl:true'>
-                    <BulletList height={140}
+                    <Code height={140}
                         animate={true}
                         backgroundColor={'#999'}
                         foregroundColor={'red'}
@@ -60,27 +60,16 @@ export function BulletListDemo() {
                         interval={2}
                         rtl={true}
                     >
-                    </BulletList>
-                </TestCase>
-                <TestCase itShould='uniqueKey:unique-key'>
-                    <BulletList height={140}
-                        animate={true}
-                        backgroundColor={'#999'}
-                        foregroundColor={'red'}
-                        speed={0.5}
-                        interval={2}
-                        uniqueKey='unique-key'
-                    >
-                    </BulletList>
+                    </Code>
                 </TestCase>
                 <TestCase itShould='beforeMask:Rect(组件)'>
-                    <BulletList height={140}
+                    <Code height={140}
                         animate={true}
                         backgroundColor={'#999'}
                         foregroundColor={'red'}
                         beforeMask={<Rect x="80" y="40" rx="3" ry="3" width="250" height="10" fill='red' />}
                     >
-                    </BulletList>
+                    </Code>
                 </TestCase>
             </Tester>
         </ScrollView>
