@@ -1,127 +1,67 @@
 import React, { useState } from 'react';
 import base64 from 'react-native-base64';
 import {
-  ScrollView,
-  Text,
-  View,
-  Button
+   ScrollView,
+   StyleSheet,
+   Text,
+   TextInput,
+   useColorScheme,
+   View,
 } from 'react-native';
-import { Tester, TestCase } from '@rnoh/testerino';
+import {
+   Colors,
+} from 'react-native/Libraries/NewAppScreen';
 
-export default function Base64Test() {
-  const [word, setWord] = useState('react native');
-  const [decodeWord, setdecodeWord] = useState('');
-  const [testWord, setTestWord] = useState('react native');
-  const [Unit8ArrayWord, setUnit8ArrayWord] = useState('');
-  const [decodeUnit8ArrayWord, setdecodeUnit8ArrayWord] = useState('');
+export function Base64Page(): JSX.Element {
+   const isDarkMode = useColorScheme() === 'dark';
 
-  const AddBase64Encode = (props: {
-    setState: React.Dispatch<React.SetStateAction<string>>;
-  }) => {
-    const encrypt = () => {
-      const encodeWord = base64.encode(word);
-      setWord(encodeWord);
-      props.setState(encodeWord);
-    };
+   // 输入文字
+   const [word, setWord] = useState('react native');
+   // 编码输入文字
+   const encodeWord = base64.encode(word);
+   // 解码输入文字
+   const decodeWord = base64.decode(encodeWord);
+   // 解码结果 是否 和原文字相同
+   const wordEqualDecodeWord = `word equal decode word: ${word === decodeWord}`
+   // 将word 转为 unit8 array
+   const byteArrayWord = Uint8Array.from(word.split(''), w => w.charCodeAt(0));
+   // 对 unit 8 array 进行编码
+   const encodeWordFromByteArray = base64.encodeFromByteArray(byteArrayWord);
+   // 对 上一步结果进行解码
+   const decodeFromByteArray = base64.decode(encodeWordFromByteArray);
 
-    return (
-      <View style={{ height: 50 }}>
-        <Text>{word}</Text>
-        <Button title="编码" onPress={encrypt} />
-      </View>
-    );
-  };
-
-  const AddBase64Decode = (props: {
-    setState: React.Dispatch<React.SetStateAction<string>>;
-  }) => {
-    const encrypt = () => {
-      const decodeWord = base64.decode(word);
-      setdecodeWord(decodeWord);
-      props.setState(decodeWord);
-    };
-
-    return (
-      <View style={{ height: 50 }}>
-        <Text>{decodeWord}</Text>
-        <Button title="解码" onPress={encrypt} />
-      </View>
-    );
-  };
-
-  const AddBase64EncodeUnit8Array = (props: {
-    setState: React.Dispatch<React.SetStateAction<string>>;
-  }) => {
-    const encrypt = () => {
-      const byteArrayWord = Uint8Array.from(testWord.split(''), w => w.charCodeAt(0)); // 将字符串转为Uint8Array格式
-      const encodeWord = base64.encodeFromByteArray(byteArrayWord);
-      setUnit8ArrayWord(encodeWord);
-      props.setState(encodeWord);
-    };
-
-    return (
-      <View style={{ height: 50 }}>
-        <Text>{Unit8ArrayWord}</Text>
-        <Button title="Unit8Array编码" onPress={encrypt} />
-      </View>
-    );
-  };
-
-  const AddBase64DecodeUnit8Array = (props: {
-    setState: React.Dispatch<React.SetStateAction<string>>;
-  }) => {
-    const encrypt = () => {
-      const decodeWord = base64.decode(Unit8ArrayWord);
-      setdecodeUnit8ArrayWord(decodeWord);
-      props.setState(decodeWord);
-    };
-
-    return (
-      <View style={{ height: 50 }}>
-        <Text>{decodeUnit8ArrayWord}</Text>
-        <Button title="Unit8Array解码" onPress={encrypt} />
-      </View>
-    );
-  };
+   const backgroundStyle = {
+      backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+   };
 
   return (
-    <View>
-      <ScrollView>
-        <Tester>
-          <TestCase
-            itShould="Test encoding word."
-            initialState={''}
-            arrange={({ setState }) => <AddBase64Encode setState={setState} />}
-            assert={({ expect, state }) => {
-              expect(state).to.be.string;
-            }}
-          />
-          <TestCase
-            itShould="Test decoding word."
-            initialState={''}
-            arrange={({ setState }) => <AddBase64Decode setState={setState} />}
-            assert={({ expect, state }) => {
-              expect(state).equal('react native');
-            }}
-          />
-          <TestCase
-            itShould="Test encoding the word of Uint8Array."
-            initialState={''}
-            arrange={({ setState }) => <AddBase64EncodeUnit8Array setState={setState} />}
-            assert={({ expect, state }) => {
-              expect(state).to.be.string;
-            }}
-          />
-          <TestCase
-            itShould="Test decoding the word of Uint8Array."
-            initialState={''}
-            arrange={({ setState }) => <AddBase64DecodeUnit8Array setState={setState} />}
-            assert={({ expect, state }) => {
-              expect(state).equal('react native');
-            }}
-          />
-        </Tester>
+      <ScrollView
+        contentInsetAdjustmentBehavior="automatic"
+        style={backgroundStyle}>
+        <View
+          style={{ backgroundColor: isDarkMode ? Colors.black : Colors.white, }}>
+          <View style={styles.cardView}>
+            <Text>Test Word: </Text>
+            <TextInput
+              style={styles.TextInput}
+              onChangeText={setWord}
+              value={word}
+            ></TextInput>
+            <Text style={{marginTop: 12}}>encode Result: <Text style={{color: 'orange'}}>{encodeWord}</Text></Text>
+            <Text style={{marginTop: 12}}>decode Result: <Text style={{color: 'orange'}}>{decodeWord}</Text></Text>
+            <Text style={{marginTop: 12}}>encodeFromByteArray Result: <Text style={{color: 'orange'}}>{encodeWordFromByteArray}</Text></Text>
+            <Text style={{marginTop: 12}}>decode the value above Result: <Text style={{color: 'orange'}}>{decodeFromByteArray}</Text></Text>
+          </View>
+        </View>
       </ScrollView>
-    </View>
-  )
+  );
+
 }
+
+const styles = StyleSheet.create({
+   cardView: { margin: 10, backgroundColor: '#f0f0f0', display: 'flex', padding: 10, borderRadius: 8 },
+   TextInput: {height: 40, borderColor: '#ccc', borderWidth: 1, borderRadius: 4, width: '90%'},
+   highlight: {
+      fontWeight: '700',
+   },
+});
