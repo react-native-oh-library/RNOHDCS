@@ -408,7 +408,7 @@ function TabNavigatorFontScalingTest() {
                 selectedTitleStyle={{ color: "#3496f0" }}
                 renderIcon={() => <Image source={HOME_IMAGE[0]} style={styles.iconSize} />}
                 renderSelectedIcon={() => <Image source={HOME_IMAGE[1]} style={styles.iconSize} />}
-                allowFontScaling={false}
+                allowFontScaling={true}
                 onPress={() => setSelectedTab('home')}>
                 <Home />
             </TabNavigator.Item>
@@ -433,6 +433,8 @@ function TabNavigatorAccessibleTest() {
                 selected={selectedTab === 'home'}
                 title="Home"
                 selectedTitleStyle={{ color: "#3496f0" }}
+                renderIcon={() => <Image source={HOME_IMAGE[0]} style={styles.iconSize} />}
+                renderSelectedIcon={() => <Image source={HOME_IMAGE[1]} style={styles.iconSize} />}
                 accessible={false}
                 onPress={() => setSelectedTab('home')}>
                 <Home />
@@ -441,6 +443,9 @@ function TabNavigatorAccessibleTest() {
                 selected={selectedTab === 'profile'}
                 title="Profile"
                 selectedTitleStyle={{ color: "#3496f0" }}
+                renderIcon={() => <Image source={PROFILE_IMAGE[0]} style={styles.iconSize} />}
+                renderSelectedIcon={() => <Image source={PROFILE_IMAGE[1]} style={styles.iconSize} />}
+                accessible={true}
                 onPress={() => setSelectedTab('profile')}>
                 <Profile />
             </TabNavigator.Item>
@@ -468,8 +473,6 @@ function TabNavigatorAccessibilityLabelTest() {
                 selectedTitleStyle={{ color: "#3496f0" }}
                 renderIcon={() => <Image source={PROFILE_IMAGE[0]} style={styles.iconSize} />}
                 renderSelectedIcon={() => <Image source={PROFILE_IMAGE[1]} style={styles.iconSize} />}
-                accessible={false}
-                accessibilityLabel="Custom ProfileLabel accessible false"
                 onPress={() => setSelectedTab('profile')}>
                 <Profile />
             </TabNavigator.Item>
