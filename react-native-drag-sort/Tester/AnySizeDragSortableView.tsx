@@ -102,7 +102,7 @@ const renderBottomViewComp = <View style={styles.abottom}>
     <Text style={styles.abottom_desc}>我是底部组件</Text>
 </View>;
 
-export class T_AnySizeDragSortableViewDemo extends Component {
+export class T_AnySizeDragSortableView extends Component {
     constructor(props: {}) {
         super(props);
         const dataSourceA = []
@@ -324,3 +324,4 @@ export class T_AnySizeDragSortableViewDemo extends Component {
     }
 
 }
+export default T_AnySizeDragSortableView

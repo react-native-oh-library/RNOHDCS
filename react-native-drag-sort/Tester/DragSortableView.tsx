@@ -34,7 +34,7 @@ const STYLES = StyleSheet.create({
 const newData = [{ id: 1, title: "活动 1" }, { id: 2, title: "活动 2" }, { id: 3, title: "活动 3" },
 { id: 4, title: "活动 4" }, { id: 3, title: "活动 5" }, { id: 4, title: "活动 6" }]
 
-export const T_DragSort = () => {
+export const T_DragSortableView = () => {
 
     const [dataSource, setDataSource] = useState([
         { id: 1, title: "任务 1" }, { id: 2, title: "任务 2" }, { id: 3, title: "任务 3" },
@@ -535,3 +535,4 @@ export const T_DragSort = () => {
         </Tester >
     );
 }
+export default T_DragSortableView
