@@ -242,575 +242,485 @@ class RotateAnimation extends Animation {
 
 export function ModalsTest() {
     return (
-        <Tester key="ModalsTest" style={{ flex: 1 }}>
-            <ScrollView style={{ flex: 1 }}>
-
-
-                <TestSuite name="Modals">
-
-                    <TestCase.Manual
-                        itShould="Show Modal - Default Animation with set props onShow and onDismiss"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalExample
-                                onDismiss={() => {
-                                    setState(true)
-                                }}
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-                    <TestCase.Manual
-                        itShould="show modal with set props width=0.5 and height=0.5 "
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalExample
-                                width={0.5}
-                                height={0.5}
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-                    <TestCase.Manual
-                        itShould="show modal with set props rounded and useNativeDriver"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalRoundedExample
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-                    <TestCase.Manual
-                        itShould="show modal with set props style and modalStyle"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalStyleExample
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-                    <TestCase.Manual
-                        itShould="show modal with set props hasOverlay、 overlayOpacity、overlayBackgroundColor and overlayPointerEvents"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalOverlayExample
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-                    <TestCase.Manual
-                        itShould="show modal with set props modalAnimation and animationDuration"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalAnimateExample
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-                    <TestCase.Manual
-                        itShould="show modal with set props onTouchOutside and onHardwareBackPress"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalTouchExample
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-                    <TestCase.Manual
-                        itShould="show modal with set props swipeDirection 、 swipeThreshold、onMove、onSwiping、onSwipeRelease、onSwipingOut and onSwipeOut"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalSwipeExample
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-
-                    <TestCase.Manual
-                        itShould="show modal with set props modalTitle 、 footer"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalExample
-                                modalTitle={<Text>I am cust modal title</Text>}
-                                footer={<Text>I am cust modal footer</Text>}
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-                    <TestCase.Manual
-                        itShould="show modal with use ModalTitle、 ModalFooter、ModalButton、ModalContent"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalCustExample
-
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-                </TestSuite>
-
-
-                <TestSuite name="BottomModal">
-
-                    <TestCase.Manual
-                        itShould="show with title"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <BottomModalExample
-                                modalTitle={
-                                    <ModalTitle
-                                        title="Bottom Modal"
-                                        hasTitleBar
-                                    />
-                                }
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-
-                    <TestCase.Manual
-                        itShould="show without title"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <BottomModalExample
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-
-                    <TestCase.Manual
-                        itShould="show with set props height=0.8 "
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalExample
-                                isBottom={true}
-                                height={0.8}
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-                    <TestCase.Manual
-                        itShould="show with set props rounded and useNativeDriver"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalRoundedExample
-                                isBottom={true}
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-                    <TestCase.Manual
-                        itShould="show with set props style and modalStyle"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalStyleExample
-                                isBottom={true}
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-                    <TestCase.Manual
-                        itShould="show with set props hasOverlay、 overlayOpacity、overlayBackgroundColor and overlayPointerEvents"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalOverlayExample
-                                isBottom={true}
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-                    <TestCase.Manual
-                        itShould="show with set props modalAnimation and animationDuration"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalAnimateExample
-                                isBottom={true}
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-                    <TestCase.Manual
-                        itShould="show with set props onTouchOutside and onHardwareBackPress"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalTouchExample
-                                isBottom={true}
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-                    <TestCase.Manual
-                        itShould="show with set props swipeDirection 、 swipeThreshold、onMove、onSwiping、onSwipeRelease、onSwipingOut and onSwipeOut"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalSwipeExample
-                                isBottom={true}
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-
-                    <TestCase.Manual
-                        itShould="show with set props modalTitle 、 footer"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalExample
-                                modalTitle={<Text>I am cust modal title</Text>}
-                                footer={<Text>I am cust modal footer</Text>}
-                                isBottom={true}
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-                    <TestCase.Manual
-                        itShould="show with use ModalTitle、 ModalFooter、ModalButton、ModalContent"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalCustExample
-                                isBottom={true}
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-                </TestSuite>
-
-                <TestSuite name="ModalPortal">
-
-                    <TestCase.Manual
-                        itShould="show with call show 、update、dismiss、dismissAll、get props ref、size"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalSinglePortalExample
-
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-
-
-                </TestSuite>
-
-
-                <TestSuite name="DraggableView">
-
-                    <TestCase.Manual
-                        itShould="show DraggableView"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <DraggableViewExample
-
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-
-
-                </TestSuite>
-
-
-                <TestSuite name="ModalTitle">
-
-                    <TestCase.Manual
-                        itShould="show ModalTitle with set props title、align、style、textStyle、hasTitleBar"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalTitleExample
-                                title=''
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-
-
-                </TestSuite>
-
-                <TestSuite name="ModalContent">
-
-                    <TestCase.Manual
-                        itShould="show ModalContent with set props style、children"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalContentExample
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-
-                </TestSuite>
-
-                <TestSuite name="ModalButton">
-
-                    <TestCase.Manual
-                        itShould="show ModalButton with set props text、align、style、textStyle、activeOpacity、disabled、bordered、onPress"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalButtonExample
-                                text=''
-                                onPress={() => { }}
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-
-                </TestSuite>
-
-                <TestSuite name="ModalFooter">
-
-                    <TestCase.Manual
-                        itShould="show ModalFooter with set props style、bordered、children"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <ModalFooterExample
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-                </TestSuite>
-
-                <TestSuite name="Backdrop">
-
-                    <TestCase.Manual
-                        itShould="show Backdrop with set props visible、opacity、onPress、backgroundColor、animationDuration、pointerEvents、useNativeDriver"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <BackdropExample
-                                visible={false}
-                                opacity={1}
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-                </TestSuite>
-
-
-                <TestSuite name="ScaleAnimation">
-
-                    <TestCase.Manual
-                        itShould="show scaleAnimation with set props useNativeDriver、initialValue and call in、out、getAnimations"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <AnimationExample
-                                scaleVisible={true}
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-                </TestSuite>
-
-                <TestSuite name="FadeAnimation">
-
-                    <TestCase.Manual
-                        itShould="show fadeAnimation with set props useNativeDriver、initialValue、animationDuration and call in、out、getAnimations"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <AnimationExample
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-                </TestSuite>
-
-                <TestSuite name="SlideAnimation">
-
-                    <TestCase.Manual
-                        itShould="show slideAnimation with set props useNativeDriver、initialValue、slideFrom and call in、out、getAnimations"
-                        initialState={false}
-                        arrange={({ setState }) => (
-                            <AnimationExample
-                                sliderVisible={true}
-                                onShow={() => {
-                                    setState(true);
-                                }}
-                            />
-                        )}
-                        assert={({ state, expect }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-                </TestSuite>
-
-
-
-            </ScrollView>
-        </Tester>
-
+        <View style={{ flex: 1 }}>
+            <Tester key="ModalsTest" style={{ flex: 1 }}>
+                <ScrollView style={{ flex: 1 }}>
+
+
+                    <TestSuite name="Modals">
+
+                        <TestCase.Manual
+                            itShould="Show Modal - Default Animation with set props onShow and onDismiss"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <ModalExample
+                                    onDismiss={() => {
+                                        setState(true)
+                                    }}
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+
+                        <TestCase.Manual
+                            itShould="show modal with set props width=0.5 and height=0.5 "
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <ModalExample
+                                    width={0.5}
+                                    height={0.5}
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+                        <TestCase.Manual
+                            itShould="show modal with set props rounded and useNativeDriver"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <ModalRoundedExample
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+                        <TestCase.Manual
+                            itShould="show modal with set props style and modalStyle"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <ModalStyleExample
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+
+                        <TestCase.Manual
+                            itShould="show modal with set props hasOverlay、 overlayOpacity、overlayBackgroundColor and overlayPointerEvents"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <ModalOverlayExample
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+
+                        <TestCase.Manual
+                            itShould="show modal with set props modalAnimation and animationDuration"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <ModalAnimateExample
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+
+                        <TestCase.Manual
+                            itShould="show modal with set props onTouchOutside and onHardwareBackPress"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <ModalTouchExample
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+
+                        <TestCase.Manual
+                            itShould="show modal with set props swipeDirection 、 swipeThreshold、onMove、onSwiping、onSwipeRelease、onSwipingOut and onSwipeOut"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <ModalSwipeExample
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+
+
+                        <TestCase.Manual
+                            itShould="show modal with set props modalTitle 、 footer"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <ModalExample
+                                    modalTitle={<Text>I am cust modal title</Text>}
+                                    footer={<Text>I am cust modal footer</Text>}
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+
+                    </TestSuite>
+
+
+                    <TestSuite name="BottomModal">
+
+                        <TestCase.Manual
+                            itShould="show with set props height=0.8 "
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <ModalExample
+                                    isBottom={true}
+                                    height={0.8}
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+                        <TestCase.Manual
+                            itShould="show with set props rounded and useNativeDriver"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <ModalRoundedExample
+                                    isBottom={true}
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+                        <TestCase.Manual
+                            itShould="show with set props style and modalStyle"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <ModalStyleExample
+                                    isBottom={true}
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+
+                        <TestCase.Manual
+                            itShould="show with set props hasOverlay、 overlayOpacity、overlayBackgroundColor and overlayPointerEvents"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <ModalOverlayExample
+                                    isBottom={true}
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+
+                        <TestCase.Manual
+                            itShould="show with set props modalAnimation and animationDuration"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <ModalAnimateExample
+                                    isBottom={true}
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+
+                        <TestCase.Manual
+                            itShould="show with set props onTouchOutside and onHardwareBackPress"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <ModalTouchExample
+                                    isBottom={true}
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+
+                        <TestCase.Manual
+                            itShould="show with set props swipeDirection 、 swipeThreshold、onMove、onSwiping、onSwipeRelease、onSwipingOut and onSwipeOut"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <ModalSwipeExample
+                                    isBottom={true}
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+
+
+                        <TestCase.Manual
+                            itShould="show with set props modalTitle 、 footer"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <ModalExample
+                                    modalTitle={<Text>I am cust modal title</Text>}
+                                    footer={<Text>I am cust modal footer</Text>}
+                                    isBottom={true}
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+
+                    </TestSuite>
+
+
+                    <TestSuite name="DraggableView">
+
+                        <TestCase.Manual
+                            itShould="show DraggableView"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <DraggableViewExample
+
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+
+
+
+                    </TestSuite>
+
+
+                    <TestSuite name="ModalTitle">
+
+                        <TestCase.Manual
+                            itShould="show ModalTitle with set props title、align、style、textStyle、hasTitleBar"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <ModalTitleExample
+                                    title=''
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+
+
+
+                    </TestSuite>
+
+                    <TestSuite name="ModalContent">
+
+                        <TestCase.Manual
+                            itShould="show ModalContent with set props style、children"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <ModalContentExample
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+
+
+                    </TestSuite>
+
+                    <TestSuite name="ModalButton">
+
+                        <TestCase.Manual
+                            itShould="show ModalButton with set props text、align、style、textStyle、activeOpacity、disabled、bordered、onPress"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <ModalButtonExample
+                                    text=''
+                                    onPress={() => { }}
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+
+
+                    </TestSuite>
+
+                    <TestSuite name="ModalFooter">
+
+                        <TestCase.Manual
+                            itShould="show ModalFooter with set props style、bordered、children"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <ModalFooterExample
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+
+                    </TestSuite>
+
+                    <TestSuite name="Backdrop">
+
+                        <TestCase.Manual
+                            itShould="show Backdrop with set props visible、opacity、onPress、backgroundColor、animationDuration、pointerEvents、useNativeDriver"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <BackdropExample
+                                    visible={false}
+                                    opacity={1}
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+
+                    </TestSuite>
+
+
+                    <TestSuite name="ScaleAnimation">
+
+                        <TestCase.Manual
+                            itShould="show scaleAnimation with set props useNativeDriver、initialValue and call in、out、getAnimations"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <AnimationExample
+                                    scaleVisible={true}
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+
+                    </TestSuite>
+
+                    <TestSuite name="FadeAnimation">
+
+                        <TestCase.Manual
+                            itShould="show fadeAnimation with set props useNativeDriver、initialValue、animationDuration and call in、out、getAnimations"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <AnimationExample
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+
+                    </TestSuite>
+
+                    <TestSuite name="SlideAnimation">
+
+                        <TestCase.Manual
+                            itShould="show slideAnimation with set props useNativeDriver、initialValue、slideFrom and call in、out、getAnimations"
+                            initialState={false}
+                            arrange={({ setState }) => (
+                                <AnimationExample
+                                    sliderVisible={true}
+                                    onShow={() => {
+                                        setState(true);
+                                    }}
+                                />
+                            )}
+                            assert={({ state, expect }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+
+                    </TestSuite>
+
+
+
+                </ScrollView>
+            </Tester>
+            <ModalPortal />
+        </View>
     );
 }
 
@@ -1433,245 +1343,6 @@ const ModalAnimateExample = (props: ModalProps & { isBottom?: boolean }) => {
 }
 
 
-const ModalCustExample = (props: ModalProps & { withTextInput?: boolean, isBottom?: boolean }) => {
-    const [modalVisible, setModalVisible] = useState(false);
-
-    const ModalWrap = props.isBottom ? BottomModal : Modal;
-    return (
-        <View style={{ flex: 1 }}>
-            <Text style={[styles.textStyle, { color: 'black' }]}>
-                {modalVisible ? 'shown' : 'hidden'}
-            </Text>
-            <ModalWrap
-                overlayOpacity={0.5}
-                {...props}
-                visible={modalVisible}
-                onTouchOutside={() => {
-                    setModalVisible(false)
-                }}
-                onHardwareBackPress={() => {
-                    setModalVisible(false)
-                    return true;
-                }}
-                modalTitle={<ModalTitle title='I am modalTitle Node' style={{ backgroundColor: '#00f190' }}></ModalTitle>}
-                footer={<ModalFooter style={{ backgroundColor: '#f1f900' }}>
-                    <ModalButton
-                        text="CANCEL"
-                        bordered
-                        align="center"
-                        textStyle={{ color: 'red' }}
-                        onPress={() => {
-                            setModalVisible(false)
-                        }}
-                        key="button-1"
-                    />
-                    <ModalButton
-                        text="OK"
-                        bordered
-                        align="center"
-                        activeOpacity={0.5}
-                        onPress={() => {
-                            setModalVisible(false)
-                        }}
-                        key="button-2"
-                    />
-                </ModalFooter>}
-            >
-                <ModalContent>
-                    <View style={styles.modalView}>
-                        <Text style={styles.modalText}>Hello World!</Text>
-                        {props.withTextInput && <TextInput style={styles.textInput} />}
-                        <Button label="Hide Modal" onPress={() => setModalVisible(false)} />
-                    </View>
-                </ModalContent>
-            </ModalWrap>
-            <Button label="Show Modal" onPress={() => setModalVisible(true)} />
-        </View>
-    );
-};
-
-
-const ModalSinglePortalExample = (props: ModalProps & { withTextInput?: boolean }) => {
-    const [modalVisible, setModalVisible] = useState(false);
-    const [countModalLen, setCountModalLen] = useState(ModalPortal.size);
-    const [getCountValue, setGetCountValue] = useState(false);
-    const [getRefValue, setGetRefValue] = useState(false);
-    const [switchDismiss, setSwitchDismiss] = useState(false);
-    const [switchDismissAll, setSwitchDismissAll] = useState(false);
-    const [switchUpdate, setSwitchUpdate] = useState(false);
-
-    let currentModalKey: string = '';
-
-    const showOneModal = () => {
-        let key = ModalPortal.show(<Modal
-            overlayOpacity={0.5}
-            {...props}
-            visible={true}
-            height={0.5}
-            onTouchOutside={() => {
-                ModalPortal.dismiss(key);
-                setSwitchDismiss(true);
-                if (props.onShow) {
-                    props.onShow();
-                }
-            }}
-            onHardwareBackPress={() => {
-                ModalPortal.dismiss(key);
-                setSwitchDismiss(true);
-                if (props.onShow) {
-                    props.onShow();
-                }
-                return true;
-            }}
-            swipeDirection={['down']}
-            onSwipeOut={() => {
-                ModalPortal.dismiss(key);
-                setSwitchDismiss(true);
-                if (props.onShow) {
-                    props.onShow();
-                }
-            }}
-        >
-            <View style={styles.modalView}>
-                <Text style={styles.modalText}>{`-ModalPortal size:${ModalPortal.size + 1}`}</Text>
-                <Button label="call show other Modal" onPress={() => show()} />
-                <Button label="call dismiss" onPress={() => {
-                    ModalPortal.dismiss(key as string);
-                    setSwitchDismiss(true);
-                    if (props.onShow) {
-                        props.onShow();
-                    }
-                }} />
-            </View>
-        </Modal>) as any;
-        currentModalKey = key;
-        setCountModalLen(ModalPortal.size);
-    }
-
-    const show = () => {
-
-        let key = ModalPortal.show(<Modal
-            overlayOpacity={0.5}
-            {...props}
-            visible={true}
-            onTouchOutside={() => {
-            }}
-            onHardwareBackPress={() => {
-                ModalPortal.dismiss(key);
-                return true;
-            }}
-            swipeDirection={['down']}
-            onSwipeOut={() => {
-                ModalPortal.dismiss(key);
-            }}
-            modalTitle={<ModalTitle title={`get size:${ModalPortal.size}`} style={{ backgroundColor: '#00f190' }}></ModalTitle>}
-            footer={<ModalFooter style={{ backgroundColor: '#f1f900' }}>
-                <ModalButton
-                    text="call dismiss"
-                    bordered
-                    align="center"
-                    textStyle={{ color: 'red', fontSize: 14 }}
-                    onPress={() => {
-                        dismiss()
-
-                    }}
-                    key="button-1"
-                />
-                <ModalButton
-                    text="call update"
-                    bordered
-                    align="center"
-                    textStyle={{ fontSize: 14 }}
-                    activeOpacity={0.5}
-                    onPress={() => {
-                        update()
-                    }}
-                    key="button-2"
-                />
-            </ModalFooter>}
-        >
-            <ModalContent>
-                <View style={styles.modalView}>
-                    <Text style={styles.modalText}>i am content</Text>
-                    <Button label="call dismissAll" onPress={() => dismissAll()} />
-                </View>
-            </ModalContent>
-        </Modal>) as any;
-        currentModalKey = key;
-        setCountModalLen(ModalPortal.size);
-    }
-
-    const dismiss = (key?: string) => {
-        let someKey = (currentModalKey ? currentModalKey : key || '') as string;
-        if (someKey.length) {
-            ModalPortal.dismiss(someKey);
-            setSwitchDismiss(true);
-        }
-        if (props.onShow) {
-            props.onShow();
-        }
-    }
-
-    const update = (key?: string) => {
-        let someKey = (currentModalKey ? currentModalKey : key || '') as string;
-        if (someKey.length) {
-            ModalPortal.update(someKey, { overlayBackgroundColor: 'blue', overlayOpacity: 0.1 });
-            setSwitchUpdate(true);
-        }
-
-
-        if (props.onShow) {
-            props.onShow();
-        }
-    }
-
-    const dismissAll = () => {
-        ModalPortal.dismissAll();
-        setSwitchDismissAll(true);
-        if (props.onShow) {
-            props.onShow();
-        }
-    }
-
-    return (
-        <View style={{ flex: 1 }}>
-            <Text style={[styles.textStyle, { color: 'black' }]}>
-                show: {modalVisible ? 'call' : ''}
-            </Text>
-
-            <Text>size:{`${(getCountValue ? ModalPortal.size : '')}`}</Text>
-            <Text>ref:{`${getRefValue ? ModalPortal.ref : ''}`}</Text>
-
-            <Text>dismiss:{`${(switchDismiss ? 'call' : '')}`}</Text>
-            <Text>dismissAll:{`${(switchDismissAll ? 'call' : '')}`}</Text>
-            <Text>update:{`${(switchUpdate ? 'call' : '')}`}</Text>
-
-            <View style={styles.bottomView}>
-                <Button label="call Show" onPress={() => {
-                    setModalVisible(true);
-                    showOneModal();
-                    if (props.onShow) {
-                        props.onShow();
-                    }
-                }} />
-                <Button label="get size" onPress={() => {
-                    setGetCountValue(true);
-                    if (props.onShow) {
-                        props.onShow();
-                    }
-                }} />
-                <Button label="get ref" onPress={() => {
-                    setGetRefValue(true);
-                    if (props.onShow) {
-                        props.onShow();
-                    }
-                }} />
-            </View>
-        </View>
-    );
-};
-
-
 const ModalTitleExample = (props: (ModalTitleProps & { onShow?: () => void })) => {
     const [modalVisible, setModalVisible] = useState(true);
     const [switchTitleVisible, setSwitchTitleVisible] = useState(false);
@@ -1709,7 +1380,7 @@ const ModalTitleExample = (props: (ModalTitleProps & { onShow?: () => void })) =
                     }} />
                 </Text>
                 <Text>
-                    {"set style:" + (switchStyle ? "{backgroundColor:'blue'}" : "")}
+                    {"set style:" + (switchStyle ? "{backgroundColor:'#5f0ff1'}" : "")}
                     <Switch value={switchStyle} onValueChange={(val: boolean) => {
                         setSwitchStyle(val);
                         if (props.onShow) {
@@ -1817,7 +1488,7 @@ const ModalButtonExample = (props: (ModalButtonProps & { onShow?: () => void }))
                     }} />
                 </Text>
                 <Text>
-                    {"set style:" + (switchStyle ? "{backgroundColor:'blue'}" : "")}
+                    {"set style:" + (switchStyle ? "{backgroundColor:'#5f0ff1'}" : "")}
                     <Switch value={switchStyle} onValueChange={(val: boolean) => {
                         setSwitchStyle(val);
                         if (props.onShow) {
@@ -1918,7 +1589,7 @@ const ModalContentExample = (props: (ModalContentProps & { onShow?: () => void }
             <View style={{}}>
 
                 <Text>
-                    {"set style:" + (switchStyle ? "{backgroundColor:'blue'}" : "")}
+                    {"set style:" + (switchStyle ? "{backgroundColor:'#5f0ff1'}" : "")}
                 </Text>
 
                 <View style={styles.bottomView}>
@@ -1993,7 +1664,7 @@ const ModalFooterExample = (props: (ModalFooterProps & { onShow?: () => void }))
 
             <View style={{}}>
                 <Text>
-                    {"set style:" + (switchStyle ? "{backgroundColor:'blue'}" : "")}
+                    {"set style:" + (switchStyle ? "{backgroundColor:'#5f0ff1'}" : "")}
                     <Switch value={switchStyle} onValueChange={(val: boolean) => {
                         setSwitchStyle(val);
                         if (props.onShow) {
@@ -2059,7 +1730,7 @@ const BackdropExample = (props: (BackdropProps & { onShow?: () => void })) => {
                     useNativeDriver={switchUseNativeDriver}
                     animationDuration={switchAnimationDuration ? 1000 : 200}
                     pointerEvents={!switchDisabled ? 'none' : 'auto'}
-                    opacity={switchActivityOpacity ? 0.2 : 0.5}
+                    opacity={switchActivityOpacity ? 0.2 : 1.0}
                     onPress={() => {
                         setSwitchTapCK(true);
                         setModalVisible(false);
