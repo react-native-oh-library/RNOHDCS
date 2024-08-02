@@ -5,7 +5,6 @@ import CheckBox from 'react-native-check-box';
 
 //data的类型
 type dataType = {
-  name: string,
   checked: boolean,
 }
 
@@ -20,13 +19,11 @@ export default function CheckBoxTest() {
 
   };
   const [data, setData] = useState<dataType>({
-    name: "TEST",
     checked: true
   });
   const changeState = (data: dataType) => {
     data.checked = !data.checked;
     setData({
-      name: "TEST",
       checked: data.checked
     });
   };
@@ -96,7 +93,7 @@ export default function CheckBoxTest() {
                 style={{ flex: 1, padding: 10 }} //设置复选框的样式
                 onClick={() => changeState(data)} //点击复选框的回调函数
                 isChecked={data.checked} //复选框选中的状态
-                leftText={data.name} //左侧文本
+                leftText={"Test"} //左侧文本
                 leftTextStyle={{ fontSize: 20, fontWeight: '700', color: 'red' }} //左侧文本样式
               />
             </View>
@@ -107,7 +104,7 @@ export default function CheckBoxTest() {
                 style={{ flex: 1, padding: 10 }} //设置复选框的样式
                 onClick={() => changeState(data)} //点击复选框的回调函数
                 isChecked={data.checked} //复选框选中的状态
-                leftText={data.name} //左侧文本
+                leftText={"测试"} //左侧文本
                 leftTextStyle={{ fontSize: 20, fontWeight: '700', color: 'yellow' }} //左侧文本样式
               />
             </View>
@@ -118,7 +115,7 @@ export default function CheckBoxTest() {
                 style={{ flex: 1, padding: 10 }} //设置复选框的样式
                 onClick={() => changeState(data)} //点击复选框的回调函数
                 isChecked={data.checked} //复选框选中的状态
-                rightTextView={<Text style={{ fontSize: 20, fontWeight: '700', color: 'red' }}>测试</Text>}
+                rightTextView={<Text style={{ fontSize: 20, fontWeight: '700', color: 'red' }}>Test</Text>}
               />
             </View>
           </TestCase>
@@ -138,7 +135,7 @@ export default function CheckBoxTest() {
                 style={{ flex: 1, padding: 10 }} //设置复选框的样式
                 onClick={() => changeState(data)} //点击复选框的回调函数
                 isChecked={data.checked} //复选框选中的状态
-                rightText={data.name} //右侧文本
+                rightText={"Test"} //右侧文本
                 rightTextStyle={{ fontSize: 20, fontWeight: '700', color: 'red' }} //右侧文本样式
               />
             </View>
@@ -149,7 +146,7 @@ export default function CheckBoxTest() {
                 style={{ flex: 1, padding: 10 }} //设置复选框的样式
                 onClick={() => changeState(data)} //点击复选框的回调函数
                 isChecked={data.checked} //复选框选中的状态
-                rightText={data.name} //右侧文本
+                rightText={"测试"} //右侧文本
                 rightTextStyle={{ fontSize: 20, fontWeight: '700', color: 'yellow' }} //右侧文本样式
               />
             </View>
@@ -162,7 +159,7 @@ export default function CheckBoxTest() {
                 isChecked={data.checked} //复选框选中的状态
                 checkedImage={
                   <Image
-                  source={require('../assets/react-native-check-box-checkedImage.png')}
+                  source={require('./assets/react-native-check-box-checkedImage.png')}
                   ></Image>
                 } //设置选中图片
               />
@@ -176,7 +173,7 @@ export default function CheckBoxTest() {
                 isChecked={data.checked} //复选框选中的状态
                 unCheckedImage={
                   <Image
-                  source={require('../assets/react-native-check-box-uncheckedImage.png')}
+                  source={require('./assets/react-native-check-box-uncheckedImage.png')}
                   ></Image>
                 } //设置未选中图片
               />
@@ -230,6 +227,17 @@ export default function CheckBoxTest() {
                 isChecked={data.checked} //复选框选中的状态
                 checkedCheckBoxColor='red' //设置选中状态下复选框颜色，checkBoxColor这个属性会失效
                 uncheckedCheckBoxColor='blue'//设置未选中状态下复选框颜色，checkBoxColor这个属性会失效
+              />
+            </View>
+          </TestCase>
+          <TestCase itShould="set checked checkbox color to yellow and unchecked checkbox color to green" tags={['C_API']}>
+            <View style={{ height: 40 }}>
+              <CheckBox
+                style={{ flex: 1, padding: 10 }} //设置复选框的样式
+                onClick={() => changeState(data)} //点击复选框的回调函数
+                isChecked={data.checked} //复选框选中的状态
+                checkedCheckBoxColor='yellow' //设置选中状态下复选框颜色，checkBoxColor这个属性会失效
+                uncheckedCheckBoxColor='green'//设置未选中状态下复选框颜色，checkBoxColor这个属性会失效
               />
             </View>
           </TestCase>
