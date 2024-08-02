@@ -1,6 +1,5 @@
 import {
   ScrollView,
-  Animated,
   Easing,
   View,
   Button,
@@ -13,6 +12,7 @@ import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 import React, {useState, useRef} from 'react';
 
 import ModalBox from 'react-native-modalbox';
+
 
 export const ModalBoxDemo = () => {
   const [isOpenVal, setIsOpenVal] = useState(false);
@@ -59,7 +59,7 @@ export const ModalBoxDemo = () => {
   };
   return (
     <Tester>
-      <ScrollView>
+      <ScrollView style={{margin: 10, height: '90%'}}>
         <TestSuite name="属性">
           <TestCase itShould="点击按钮后打开弹框，点击‘close ModalBox’关闭弹框">
             <Button title="isOpen" onPress={() => setIsOpenVal(!isOpenVal)} />
@@ -380,38 +380,6 @@ export const ModalBoxDemo = () => {
               <Text style={[styles.modalText]}>easing: 自定义easing函数</Text>
             </ModalBox>
           </TestCase>
-          <TestCase itShould="没有动画，渲染后立即打开">
-            <Button
-              title="startOpen：true"
-              onPress={() => setIsOpenVal18(!isOpenVal18)}
-            />
-            <Button
-              title="startOpen：false"
-              onPress={() => setIsOpenVal31(!isOpenVal31)}
-            />
-            <ModalBox
-              style={[styles.modal]}
-              isOpen={isOpenVal18}
-              coverScreen={true}
-              backdropPressToClose={true}
-              startOpen={true}
-              onClosed={() => console.log('Modal closed')}
-              onOpened={() => console.log('Modal opened')}
-              onClosingState={() => console.log('Modal closing state changed')}>
-              <Text style={[styles.modalText]}>startOpen is true</Text>
-            </ModalBox>
-            <ModalBox
-              style={[styles.modal]}
-              isOpen={isOpenVal31}
-              coverScreen={true}
-              backdropPressToClose={true}
-              startOpen={false}
-              onClosed={() => console.log('Modal closed')}
-              onOpened={() => console.log('Modal opened')}
-              onClosingState={() => console.log('Modal closing state changed')}>
-              <Text style={[styles.modalText]}>startOpen is false</Text>
-            </ModalBox>
-          </TestCase>
           <TestCase itShould="设置弹框显示在最上层">
             <Button
               title="coverScreen:true"
@@ -447,7 +415,7 @@ export const ModalBoxDemo = () => {
               isOpen={isOpenVal20}
               keyboardTopOffset={0}
               coverScreen={true}
-              position='bottom'
+              position="bottom"
               backdropPressToClose={true}>
               <Text style={[styles.modalText]}>keyboardTopOffset: 默认</Text>
               <TextInput
@@ -467,7 +435,7 @@ export const ModalBoxDemo = () => {
               isOpen={isOpenVal30}
               keyboardTopOffset={300}
               coverScreen={true}
-              position='bottom'
+              position="bottom"
               backdropPressToClose={true}>
               <Text style={[styles.modalText]}>keyboardTopOffset: 300</Text>
               <TextInput
@@ -508,7 +476,7 @@ export const ModalBoxDemo = () => {
           <TestCase itShould="调用方法打开和关闭弹框">
             <Button title="open" onPress={openModalBox} />
             <Button title="close" onPress={closeModalBox} />
-            <ModalBox ref={btnRef1} style={[styles.modal]} backdrop={false}>
+            <ModalBox ref={btnRef1} style={[styles.modal2]} backdrop={false}>
               <Text style={[styles.modalText]}>ModalBox open</Text>
             </ModalBox>
           </TestCase>
@@ -583,6 +551,7 @@ export const ModalBoxDemo = () => {
         </TestSuite>
       </ScrollView>
     </Tester>
+
   );
 };
 
@@ -597,6 +566,12 @@ const styles = StyleSheet.create({
   modal1: {
     height: 300,
     width: 300,
+  },
+  modal2: {
+    height: 300,
+    width: 150,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
   },
   modalText: {
     fontSize: 20,
