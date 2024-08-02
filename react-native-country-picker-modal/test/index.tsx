@@ -223,7 +223,7 @@ const Demo38 = () => {
 
 export const CountryPickerTest = () => {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView>
       <TestSuite name="region">
         <TestCase itShould="区域：region = Africa">
           <Demo />
@@ -432,7 +432,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    // marginTop: 100,
+    marginTop: 100,
   },
   instructions: {
     fontSize: 14,
