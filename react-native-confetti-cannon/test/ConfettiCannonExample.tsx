@@ -95,92 +95,92 @@ export default function ConfettiCannonExample() {
         <ScrollView style={{height: '80%'}}>
           <Tester>
             <TestSuite name="react-native-confetti-cannon">
-              {renderElement('start', () => {
+              {renderElement('启动动画 start', () => {
                 $ref.current.start();
               })}
-              {renderElement('stop', () => {
+              {renderElement('暂停动画 stop', () => {
                 if (isStart) {
                   $ref.current.stop();
                 }
               })}
-              {renderElement('resume', () => {
+              {renderElement('重启动画 resume', () => {
                 if (isStart && isStop) {
                   $ref.current.resume();
                 }
               })}
 
-              <TestCase itShould="onAnimationStart">
+              <TestCase itShould="组件生命周期 组件启动就会触发 onAnimationStart">
                 <Text>{isStartText}</Text>
               </TestCase>
-              <TestCase itShould="onAnimationStop">
+              <TestCase itShould="组件生命周期 组件暂停就会触发 onAnimationStop">
                 <Text>{isStopText}</Text>
               </TestCase>
-              <TestCase itShould="onAnimationResume">
+              <TestCase itShould="组件生命周期 组件重启就会触发 onAnimationResume">
                 <Text>{isResumeText}</Text>
               </TestCase>
-              <TestCase itShould="onAnimationEnd">
+              <TestCase itShould="组件生命周期 组件结束就会触发 onAnimationEnd">
                 <Text>{isEndText}</Text>
               </TestCase>
 
-              {renderElement('count 20', () => {
+              {renderElement('纸屑数量 count 20', () => {
                 setCount(20);
               })}
-              {renderElement('count 50', () => {
+              {renderElement('纸屑数量 count 50', () => {
                 setCount(50);
               })}
 
-              {renderElement('origin {x: 200, y: 200}', () => {
+              {renderElement('纸屑爆炸的原始起点 origin {x: 200, y: 200}', () => {
                 setOrigin({x: 200, y: 200});
               })}
-              {renderElement('origin {x: -10, y: -10}', () => {
+              {renderElement('纸屑爆炸的原始起点 origin {x: -10, y: -10}', () => {
                 setOrigin({x: -10, y: -10});
               })}
 
-              {renderElement('explosionSpeed 3000', () => {
+              {renderElement('上升到顶部的时间 explosionSpeed 3000', () => {
                 setExplosionSpeed(3000);
               })}
-              {renderElement('explosionSpeed 1000', () => {
+              {renderElement('上升到顶部的时间 explosionSpeed 1000', () => {
                 setExplosionSpeed(1000);
               })}
 
-              {renderElement('fallSpeed 3000', () => {
+              {renderElement('坠落到底部的时间 fallSpeed 3000', () => {
                 setFallSpeed(3000);
               })}
-              {renderElement('fallSpeed 1000', () => {
+              {renderElement('坠落到底部的时间 fallSpeed 1000', () => {
                 setFallSpeed(1000);
               })}
 
-              {renderElement('fadeOut true', () => {
+              {renderElement('纸屑坠落后是否停留在底部 fadeOut true', () => {
                 setFadeOut(true);
               })}
-              {renderElement('fadeOut false', () => {
+              {renderElement('纸屑坠落后是否停留在底部 fadeOut false', () => {
                 setFadeOut(false);
               })}
 
-              {renderElement("colors `['red', 'blue', 'green']`", () => {
+              {renderElement("纸屑的颜色 colors `['red', 'blue', 'green']`", () => {
                 setColors(['red', 'blue', 'green']);
               })}
-              {renderElement('colors undefined', () => {
+              {renderElement('纸屑的颜色 colors undefined', () => {
                 setColors(undefined);
               })}
 
-              {renderElement('autoStart false', () => {
+              {renderElement('是否自动启动 autoStart false', () => {
                 setAutoStart(false);
               })}
-              {renderElement('autoStart true', () => {
+              {renderElement('是否自动启动 autoStart true', () => {
                 setAutoStart(true);
                 $ref.current.start();
               })}
 
               <TestCase
-                itShould={'autoStartDelay 5000'}
+                itShould={'延迟启动 autoStartDelay 5000'}
                 initialState={false}
                 assert={({expect, state}) => {
                   expect(state).to.be.true;
                 }}
                 arrange={({setState}) => (
                   <Button
-                    title={'autoStartDelay 5000'}
+                    title={'延迟启动 autoStartDelay 5000'}
                     onPress={() => {
                       setAutoStartDelay(5000);
                       setTimeout(() => {
@@ -191,14 +191,14 @@ export default function ConfettiCannonExample() {
                 )}></TestCase>
 
               <TestCase
-                itShould={'autoStartDelay 3000'}
+                itShould={'延迟启动 autoStartDelay 3000'}
                 initialState={false}
                 assert={({expect, state}) => {
                   expect(state).to.be.true;
                 }}
                 arrange={({setState}) => (
                   <Button
-                    title={'autoStartDelay 3000'}
+                    title={'延迟启动 autoStartDelay 3000'}
                     onPress={() => {
                       setAutoStartDelay(3000);
                       setTimeout(() => {
