@@ -95,7 +95,7 @@ export function ScrollViewComparator({
         style={{flexDirection: 'row', width: '100%', alignItems: 'flex-end'}}>
         <View style={{flex: 1}}>
           <Text style={{fontSize: 12}}>{JSON.stringify(lhsProps)}</Text>
-          <View style={{height: scrollViewLength}}>
+          <View style={{height: 500}}>
             <ScrollView
               style={{flex: 1, height: scrollViewLength}}
               {...{...commonProps, ...lhsProps}}
@@ -105,7 +105,7 @@ export function ScrollViewComparator({
         <View style={{width: 4, height: '100%', backgroundColor: 'gray'}} />
         <View style={{flex: 1}}>
           <Text style={{fontSize: 12}}>{JSON.stringify(rhsProps)}</Text>
-          <View style={{height: scrollViewLength}}>
+          <View style={{height: 500}}>
             <ScrollView {...{...commonProps, ...rhsProps}} style={{flex: 1}} />
           </View>
         </View>
