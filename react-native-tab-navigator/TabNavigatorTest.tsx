@@ -37,6 +37,11 @@ export function TabNavigatorTest() {
                                 <TabNavigatorHidesTabTouchTest />
                             </View>
                         </TestCase>
+                        <TestCase itShould="Test hidesTabTouch prop of TabNavigator, set hidesTabTouch false, it will have transparent effect when touch Tab">
+                            <View style={styles.container}>
+                                <TabNavigatorHidesTabTouchFalseTest />
+                            </View>
+                        </TestCase>
                         <TestCase itShould="Test title props and selected prop of TabNavigator, Customize the titleStyle and selectedTitleStyle, set titleStyle[#8E2323], selectedTitleStyle[#E3CF57] of the first tab. When the first tab is selected, the color of the title changes to the selectedTitleStyle color.">
                             <View style={styles.container}>
                                 <TabNavigatorTitlePropsTest />
@@ -226,6 +231,28 @@ function TabNavigatorHidesTabTouchTest() {
         <TabNavigator
             style={styles.tabContainer}
             hidesTabTouch={true}>
+            <TabNavigator.Item
+                selected={selectedTab === 'home'}
+                title="Home"
+                onPress={() => setSelectedTab('home')}>
+                <Home />
+            </TabNavigator.Item>
+            <TabNavigator.Item
+                selected={selectedTab === 'profile'}
+                title="Profile"
+                onPress={() => setSelectedTab('profile')}>
+                <Profile />
+            </TabNavigator.Item>
+        </TabNavigator>
+    );
+}
+
+function TabNavigatorHidesTabTouchFalseTest() {
+    const [selectedTab, setSelectedTab] = useState('home');
+    return (
+        <TabNavigator
+            style={styles.tabContainer}
+            hidesTabTouch={false}>
             <TabNavigator.Item
                 selected={selectedTab === 'home'}
                 title="Home"
