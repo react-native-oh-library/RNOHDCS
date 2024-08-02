@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import {NavigationContainer, Page} from './Navigation';
 import {PortalProvider} from '@gorhom/portal';
-import testSuiteByName from './components';
+import testSuiteByName from './tester';
 
 const comList = Object.keys(testSuiteByName).map(testSuiteName => {
   return {
