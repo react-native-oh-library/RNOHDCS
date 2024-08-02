@@ -35,7 +35,7 @@ const firstIndicatorStyles = {
 };
 
 const arr = [
-  'Approval床前明月光疑是地上霜举头望明月',
+  'Approval Processing Shipping Delivery',
   'Processing',
   'Shipping',
   'Delivery',
@@ -45,7 +45,7 @@ const arr = [
 export default function App() {
   const [currentPage, setCurrentPage] = React.useState<number>(0);
   const [labels, setLabels] = React.useState([
-    'Approval床前明月光疑是地上霜举头望明月',
+    'Approval Processing Shipping Delivery',
     'Processing',
     'Shipping',
     'Delivery',
@@ -114,6 +114,22 @@ export default function App() {
     test.current = 'pass';
   };
 
+  const renderLabel = ({
+    position,
+    stepStatus,
+    label,
+    currentPosition,
+  }: {
+    position: number;
+    stepStatus: string;
+    label: string;
+    currentPosition: number;
+  }) => {
+    return (      
+      <Text>6</Text>
+    );
+  };
+
   const renderElement = (title: string, fn: Function) => (
     <TestCase
       itShould={title}
@@ -151,15 +167,15 @@ export default function App() {
               <Text>{test.current}</Text>
             </TestCase>
 
-            {renderElement('指示器大小 stepIndicatorSize 30 -> 50', () => {
+            {renderElement('步骤指示器大小 stepIndicatorSize 30 -> 50', () => {
               setIndicatorStyles({...indicatorStyles, stepIndicatorSize: 50});
             })}
-            {renderElement('指示器大小 stepIndicatorSize 50 -> 30', () => {
+            {renderElement('步骤指示器大小 stepIndicatorSize 50 -> 30', () => {
               setIndicatorStyles({...indicatorStyles, stepIndicatorSize: 30});
             })}
 
             {renderElement(
-              '选中的每个指示器大小 currentStepIndicatorSize 50 -> 80',
+              '当前步骤指示器大小 currentStepIndicatorSize 50 -> 80',
               () => {
                 setIndicatorStyles({
                   ...indicatorStyles,
@@ -168,7 +184,7 @@ export default function App() {
               },
             )}
             {renderElement(
-              '选中的每个指示器大小 currentStepIndicatorSize 80 -> 50',
+              '当前步骤指示器大小 currentStepIndicatorSize 80 -> 50',
               () => {
                 setIndicatorStyles({
                   ...indicatorStyles,
@@ -177,13 +193,13 @@ export default function App() {
               },
             )}
 
-            {renderElement('线的宽度 separatorStrokeWidth 0 -> 10', () => {
+            {renderElement('分隔线宽度 separatorStrokeWidth 0 -> 10', () => {
               setIndicatorStyles({
                 ...indicatorStyles,
                 separatorStrokeWidth: 10,
               });
             })}
-            {renderElement('线的宽度 separatorStrokeWidth 10 -> 0', () => {
+            {renderElement('分隔线宽度 separatorStrokeWidth 10 -> 0', () => {
               setIndicatorStyles({
                 ...indicatorStyles,
                 separatorStrokeWidth: 0,
@@ -191,7 +207,7 @@ export default function App() {
             })}
 
             {renderElement(
-              '还没完成的线的宽度 separatorStrokeUnfinishedWidth 10 -> 20',
+              '未完成的步骤分隔线宽度 separatorStrokeUnfinishedWidth 10 -> 20',
               () => {
                 setIndicatorStyles({
                   ...indicatorStyles,
@@ -200,7 +216,7 @@ export default function App() {
               },
             )}
             {renderElement(
-              '还没完成的线的宽度 separatorStrokeUnfinishedWidth 20 -> 10',
+              '未完成的步骤分隔线宽度 separatorStrokeUnfinishedWidth 20 -> 10',
               () => {
                 setIndicatorStyles({
                   ...indicatorStyles,
@@ -210,7 +226,7 @@ export default function App() {
             )}
 
             {renderElement(
-              '已完成的线的宽度 separatorStrokeFinishedWidth 3 -> 8',
+              '已完成步骤分隔线宽度 separatorStrokeFinishedWidth 3 -> 8',
               () => {
                 setIndicatorStyles({
                   ...indicatorStyles,
@@ -219,7 +235,7 @@ export default function App() {
               },
             )}
             {renderElement(
-              '已完成的线的宽度 separatorStrokeFinishedWidth 8 -> 3',
+              '已完成步骤分隔线宽度 separatorStrokeFinishedWidth 8 -> 3',
               () => {
                 setIndicatorStyles({
                   ...indicatorStyles,
@@ -331,7 +347,7 @@ export default function App() {
             )}
 
             {renderElement(
-              '还没完成的进度条颜色 separatorUnFinishedColor #00b6ff -> black',
+              '未完成的进度条颜色 separatorUnFinishedColor #00b6ff -> black',
               () => {
                 setIndicatorStyles({
                   ...indicatorStyles,
@@ -340,7 +356,7 @@ export default function App() {
               },
             )}
             {renderElement(
-              '还没完成的进度条颜色 separatorUnFinishedColor black -> #00b6ff',
+              '未完成的进度条颜色 separatorUnFinishedColor black -> #00b6ff',
               () => {
                 setIndicatorStyles({
                   ...indicatorStyles,
@@ -369,7 +385,7 @@ export default function App() {
             )}
 
             {renderElement(
-              '还没完成的指示器填充色 stepIndicatorUnFinishedColor #b3b3b3 -> grey',
+              '未完成的指示器填充色 stepIndicatorUnFinishedColor #b3b3b3 -> grey',
               () => {
                 setIndicatorStyles({
                   ...indicatorStyles,
@@ -378,7 +394,7 @@ export default function App() {
               },
             )}
             {renderElement(
-              '还没完成的指示器填充色 stepIndicatorUnFinishedColor grey -> #b3b3b3',
+              '未完成的指示器填充色 stepIndicatorUnFinishedColor grey -> #b3b3b3',
               () => {
                 setIndicatorStyles({
                   ...indicatorStyles,
@@ -574,6 +590,15 @@ export default function App() {
                 stepCount={5}
                 customStyles={firstIndicatorStyles}
                 renderStepIndicator={renderStepIndicator}
+                currentPosition={currentPage}
+                onPress={onStepPress}
+                labels={arr}
+              />
+            </TestCase>
+
+            <TestCase itShould="自定义labels renderLabel={renderLabel}">
+              <StepIndicator
+                renderLabel={renderLabel}
                 currentPosition={currentPage}
                 onPress={onStepPress}
                 labels={arr}
