@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
 
 
 
-export const  TestTransitiongroup =()=> {
+const  TestTransitiongroup =()=> {
     const [showTexta,setShowTexta]=useState(false)
     const [showTextb,setShowTextb]=useState(false)
     const [showTextc,setShowTextc]=useState(false)
@@ -255,5 +255,7 @@ export const  TestTransitiongroup =()=> {
         </Tester>
     );
 }
+
+export default TestTransitiongroup
 
 
