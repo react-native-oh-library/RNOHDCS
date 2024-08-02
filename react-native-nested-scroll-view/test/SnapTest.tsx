@@ -71,7 +71,7 @@ function SnapTestCases(props: {scrollViewProps: ScrollViewProps}) {
           scrollViewLength={ITEM_HEIGHT * 5}
           commonProps={{
             ...props.scrollViewProps,
-            children: getScrollViewContent({amountOfChildren: 25}),
+            children: getScrollViewContent({amountOfChildren: 100}),
           }}
           lhsProps={{}}
           rhsProps={{snapToInterval: ITEM_HEIGHT * 2}}
