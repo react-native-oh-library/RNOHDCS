@@ -18,8 +18,8 @@ export class SagasScreen extends React.Component {
   render() {
     return (
       <Tester>
-        <TestSuite name="SagasTest">
-          <TestCase tags={['C_API']} itShould="SagasTest"
+        <TestSuite name="networkSaga示例">
+          <TestCase tags={['C_API']} itShould="Connected to Internet YES(网络在线) NO(网络离线)"
             initialState={''}
             arrange={({ setState }) =>
               <Provider store={store}>
