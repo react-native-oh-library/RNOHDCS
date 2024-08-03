@@ -21,7 +21,6 @@ export const PNIPropsDemo = () => {
   const phoneInput2 = useRef<PhoneInput>(null);
   const phoneInput3 = useRef<PhoneInput>(null);
   const phoneInput4 = useRef<PhoneInput>(null);
-  const [disabled1, setDisabled1] = useState(false);
 
   return (
     <ScrollView>
@@ -211,22 +210,6 @@ export const PNIPropsDemo = () => {
                 withDarkTheme
                 withShadow={false}
               />
-            </TestCase>
-          </TestSuite>
-          <TestSuite name="disable(禁用国家选择器)">
-            <TestCase tags={['C_API']} itShould="disable:true">
-              <PhoneInput disabled={disabled1} />
-              <Button
-              title='禁用，disable:true'
-              onPress={()=>{ setDisabled1(true);}}
-              />
-              <Button
-              title='取消禁用，disable:false'
-              onPress={()=>{ setDisabled1(false);}}
-              />
-            </TestCase>
-            <TestCase tags={['C_API']} itShould="disable:false">
-              <PhoneInput disabled={false} />
             </TestCase>
           </TestSuite>
           <TestSuite name="disableArrowIcon(是否有箭头图标)">
