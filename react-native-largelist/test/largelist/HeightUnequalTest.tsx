@@ -25,9 +25,9 @@ export default class HeightUnequalTest extends Component {
       data.push(sContent);
     }
     return (
-      <Tester>
-        <TestSuite name="HeightUnequalTest">
-          <TestCase itShould="HeightUnequal">
+      <TestSuite name="HeightUnequalTest">
+        <TestCase modal itShould="onRefresh、refreshHeader、onLoading">
+          <View style={{ height: 600, width: 350 }}>
             <LargeList
               data={data}
               ref={ref => (this._list = ref)}
@@ -42,16 +42,16 @@ export default class HeightUnequalTest extends Component {
               onRefresh={this._onRefresh}
               onLoading={this._onLoading}
             />
-          </TestCase>
-        </TestSuite>
-      </Tester>
+          </View>
+        </TestCase>
+      </TestSuite>
     );
   }
   _onRefresh = () => {
-    setTimeout(() => this._list!.endRefresh(), 2000);
+    setTimeout(() => this._list?.endRefresh(), 2000);
   };
   _onLoading = () => {
-    setTimeout(() => this._list!.endLoading(true), 2000);
+    setTimeout(() => this._list?.endLoading(true), 2000);
   };
 
   _renderSection = (section: number) => {

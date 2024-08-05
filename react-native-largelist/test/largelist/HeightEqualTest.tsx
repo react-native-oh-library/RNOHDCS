@@ -7,12 +7,18 @@ import {
   TouchableOpacity,
   View,
   ImageBackground,
+  Animated,
 } from 'react-native';
 import { LargeList } from 'react-native-largelist';
 
 export default class HeightEqualTest extends Component {
-  _sectionCount = 10;
+  _sectionCount = 3;
   _rowCount = 10;
+  _nativeOffset = {
+    x: new Animated.Value(0),
+    y: new Animated.Value(0),
+  };
+  _scrollView;
 
   constructor(props: any) {
     super(props);
@@ -29,9 +35,11 @@ export default class HeightEqualTest extends Component {
       data.push(sContent);
     }
     return (
-      <Tester>
-        <TestSuite name="HeightEqualTest">
-          <TestCase itShould="HeightEqual">
+      <TestSuite name="HeightEqualTest">
+        <TestCase
+          modal
+          itShould="initialContentOffset、onTouchBegin、onTouchEnd、onScroll、renderHeader、renderFooter、onMomentumScrollBegin、onMomentumScrollEnd、onNativeContentOffsetExtract、groupCount、groupMinHeight">
+          <View style={{ height: 600, width: 350 }}>
             <LargeList
               data={data}
               initialContentOffset={{ x: 0, y: 0 }}
@@ -49,12 +57,34 @@ export default class HeightEqualTest extends Component {
                   contentOffset: { x, y },
                 },
               }) => console.log('onScroll:', x, y)}
+              onMomentumScrollBegin={this.onMomentumScrollBegin}
+              onMomentumScrollEnd={this.onMomentumScrollEnd}
+              onNativeContentOffsetExtract={this._nativeOffset}
+              groupCount={12}
+              groupMinHeight={600}
             />
-          </TestCase>
-        </TestSuite>
-      </Tester>
+            <Animated.View style={this._stickyHeaderStyle}>
+              <TouchableOpacity onPress={this._onNativeContentOffsetExtract}>
+                <Text>Test `onNativeContentOffsetExtract`</Text>
+              </TouchableOpacity>
+            </Animated.View>
+          </View>
+        </TestCase>
+      </TestSuite>
     );
   }
+
+  _stickyHeaderStyle = {
+    position: 'absolute',
+    top: 80,
+    left: 0,
+    right: 0,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#95959591',
+    transform: [{ translateY: this._nativeOffset.y }],
+  };
 
   _renderSection = (section: number) => {
     return (
@@ -99,6 +129,17 @@ export default class HeightEqualTest extends Component {
       </TouchableHighlight>
     );
   };
+  _onNativeContentOffsetExtract = () => {
+    console.log('onNativeContentOffsetExtract');
+  };
+
+  onMomentumScrollBegin = () => {
+    console.log('onMomentumScrollBegin');
+  };
+
+  onMomentumScrollEnd = () => {
+    console.log('onMomentumScrollEnd');
+  };
 }
 
 const styles = StyleSheet.create({
@@ -127,5 +168,13 @@ const styles = StyleSheet.create({
     bottom: 0,
     height: 1,
     backgroundColor: '#EEE',
+  },
+  scrollTo: {
+    marginTop: 0,
+    backgroundColor: 'gray',
+    zIndex: 100,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

@@ -1,21 +1,21 @@
-import { TestSuite, TestCase, Tester } from '@rnoh/testerino';
-import React, { Component } from 'react';
-import { Text, TouchableOpacity, View, Image, StyleSheet } from 'react-native';
-import { NormalHeader } from "react-native-spring-scrollview/src/NormalHeader";
-import { NormalFooter } from "react-native-spring-scrollview/src/NormalFooter";
-import { LargeList } from "react-native-largelist";
-import { contacts } from "../RNlargelistExample/LargeListExamples/DataSource";
+import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
+import React, {Component} from 'react';
+import {Text, TouchableOpacity, View, Image, StyleSheet} from 'react-native';
+import {NormalHeader} from 'react-native-spring-scrollview/src/NormalHeader';
+import {NormalFooter} from 'react-native-spring-scrollview/src/NormalFooter';
+import {LargeList} from 'react-native-largelist';
+import {contacts} from './DataSource';
 
 export default class RefreshAndLoadingTest extends Component {
-  _largeList: any;
+  _largeList: LargeList;
   _index = 0;
 
-  state = { data: [contacts[0]], allLoaded: false };
+  state = {data: [contacts[0]], allLoaded: false};
   render() {
     return (
-      <Tester>
-        <TestSuite name="RefreshAndLoadingTest">
-          <TestCase itShould="RefreshAndLoading">
+      <TestSuite name="RefreshAndLoadingTest">
+        <TestCase modal itShould="RefreshAndLoading: refreshHeader、onRefresh、allLoaded、onLoading、loadingFooter">
+          <View style={{height: 600, width: 350}}>
             <LargeList
               ref={ref => (this._largeList = ref)}
               data={this.state.data}
@@ -31,9 +31,9 @@ export default class RefreshAndLoadingTest extends Component {
               renderHeader={this._renderHeader}
               renderFooter={this._renderFooter}
             />
-          </TestCase>
-        </TestSuite>
-      </Tester>
+          </View>
+        </TestCase>
+      </TestSuite>
     );
   }
   _renderHeader = () => {
@@ -56,8 +56,8 @@ export default class RefreshAndLoadingTest extends Component {
 
   _onRefresh = () => {
     setTimeout(() => {
-      this._largeList.endRefresh();
-      this._index = 0;
+      this._largeList?.endRefresh();
+      this._index = 0;      
       this.setState({
         data: [contacts[this._index]],
         allLoaded: this._index > 2,
@@ -67,10 +67,11 @@ export default class RefreshAndLoadingTest extends Component {
 
   _onLoading = () => {
     setTimeout(() => {
-      this._largeList.endLoading();
+      if(this.state.data.length>20) return;
+      this._largeList?.endLoading();
       this.setState(p => ({
         data: p.data.concat(contacts[++this._index]),
-        allLoaded: this._index > 2,
+        allLoaded: true,
       }));
     }, 2000);
   };
@@ -90,8 +91,12 @@ export default class RefreshAndLoadingTest extends Component {
       <TouchableOpacity style={styles.row}>
         <Image source={contact.icon} style={styles.image} />
         <View style={styles.rContainer}>
-          <Text style={styles.title}>{contact.name}</Text>
-          <Text style={styles.subtitle}>{contact.phone}</Text>
+          <Text style={styles.title}>
+            {contact.name}
+          </Text>
+          <Text style={styles.subtitle}>
+            {contact.phone}
+          </Text>
         </View>
       </TouchableOpacity>
     );
@@ -116,9 +121,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginVertical: 30,
   },
-  row: { flex: 1, flexDirection: 'row', alignItems: 'center' },
-  image: { marginLeft: 16, width: 44, height: 44 },
-  rContainer: { marginLeft: 20 },
-  title: { fontSize: 18 },
-  subtitle: { fontSize: 14, marginTop: 8 },
+  row: {flex: 1, flexDirection: 'row', alignItems: 'center'},
+  image: {marginLeft: 16, width: 44, height: 44},
+  rContainer: {marginLeft: 20},
+  title: {fontSize: 18},
+  subtitle: {fontSize: 14, marginTop: 8},
 });

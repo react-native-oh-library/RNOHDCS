@@ -14,9 +14,9 @@ import { MediaWrapper } from 'react-native-largelist';
 export default class BigMediaTest extends Component {
   render() {
     return (
-      <Tester>
-        <TestSuite name="BigMediaTest">
-          <TestCase itShould="MediaWrapper">
+      <TestSuite name="BigMediaTest">
+        <TestCase modal itShould="heightForSection、renderSection、heightForIndexPath、data、renderIndexPath、renderHeader、renderFooter">
+          <View style={{ height: 600, width: 350 }}>
             <LargeList
               data={pics}
               heightForSection={() => 50}
@@ -27,9 +27,9 @@ export default class BigMediaTest extends Component {
               renderFooter={this._renderFooter}
               renderScaleHeaderBackground={this._renderHeaderBackground}
             />
-          </TestCase>
-        </TestSuite>
-      </Tester>
+          </View>
+        </TestCase>
+      </TestSuite>
     );
   }
   _renderSection = (section: number) => {
