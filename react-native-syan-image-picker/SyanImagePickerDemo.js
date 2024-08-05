@@ -1,3 +1,5 @@
+//此demo依赖于 react-native-video(https://github.com/react-native-oh-library/react-native-video) 三方库，具体使用方式，请参考 https://gitee.com/react-native-oh-library/usage-docs/blob/master/zh-cn/react-native-video.md
+
 import React, {Component} from 'react';
 import {
     StyleSheet,
@@ -8,6 +10,8 @@ import {
     TouchableOpacity,
     Dimensions
 } from 'react-native';
+
+import RNCVideo from 'react-native-video';
 
 import SYImagePicker from "react-native-syan-image-picker";
 
@@ -33,6 +37,7 @@ export default class App extends Component<{}> {
                 enableBase64: true,
             }, (err, photos) => {
                 if (!err) {
+                	  this.setState({video: []});
                     this.setState({
                         photos: photos,
                     });
@@ -65,6 +70,7 @@ export default class App extends Component<{}> {
                 enableBase64: true,
             }, (err, photos) => {
                 if (!err) {
+                	  this.setState({video: []});
                     this.setState({
                         photos: photos,
                     });
@@ -100,6 +106,7 @@ export default class App extends Component<{}> {
                 compress: false,
                 enableBase64: false,
             });
+            this.setState({video: []});
             // 选择成功
             this.setState({
                 photos: photos,
@@ -126,6 +133,7 @@ export default class App extends Component<{}> {
             imageCount: 3,
             enableBase64: true,
         }).then(photos => {
+        	      this.setState({video: []});
                 this.setState({
                     photos: photos,
                 });
@@ -150,6 +158,7 @@ export default class App extends Component<{}> {
             {isCrop: true, showCropCircle: true, showCropFrame: false},
             (err, photos) => {
                 if (!err) {
+                	  this.setState({video: []});
                     this.setState({
                         photos: photos,
                     });
@@ -176,6 +185,7 @@ export default class App extends Component<{}> {
                 showCropCircle: true,
                 showCropFrame: false
             });
+            this.setState({video: []});
             this.setState({
                 photos: photos,
             });
@@ -204,8 +214,9 @@ export default class App extends Component<{}> {
             {allowPickingMultipleVideo: true, videoCount: 10},
             (err, res) => {
                 if (!err) {
+                	  this.setState({photos: []});
                     this.setState({
-                        photos: res,
+                        video: res,
                     });
                     {res.map((item, index) => {
                         console.log("rn_syan_image_picker handleOpenVideoPicker result: ",
@@ -227,8 +238,9 @@ export default class App extends Component<{}> {
             {allowPickingMultipleVideo: false},
             (err, res) => {
                 if (!err) {
+                	  this.setState({photos: []});
                     this.setState({
-                        photos: res,
+                        video: res,
                     });
                     {res.map((item, index) => {
                         console.log("rn_syan_image_picker handleOpenVideoPickerNotAllowPickingMultipleVideo result: ",
@@ -258,6 +270,7 @@ export default class App extends Component<{}> {
 
     render() {
         const {photos} = this.state;
+        const {video} = this.state;
         return (
             <View style={styles.container}>
                 <View style={styles.scroll}>
@@ -275,6 +288,19 @@ export default class App extends Component<{}> {
                     <Button title={'通过索引删除图片(第一张)'} onPress={this.handleRemoveAtIndex}/>
                 </View>
                 <ScrollView style={{flex: 1}} contentContainerStyle={styles.scroll}>
+                
+                    {video.map((item, index) => {
+                        const videoSource = {
+                            uri: item.uri, isNetwork: false
+                        };
+                        return (
+                            <RNCVideo
+                                style={styles.video}
+                                source={videoSource}>
+                            </RNCVideo>
+                        );
+                    })}
+                
                     {photos.map((item, index) => {
                         let source = {uri: item.uri};
                         return (
@@ -325,5 +351,10 @@ const styles = StyleSheet.create({
         width: (width - 80) / 3,
         height: (width - 80) / 3,
         backgroundColor: '#F0F0F0',
+    },
+    video: {
+        margin: 10,
+        width: (width - 80) / 3,
+        height: (width - 80) / 4,
     }
 });
