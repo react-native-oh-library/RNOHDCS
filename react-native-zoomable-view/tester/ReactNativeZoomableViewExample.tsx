@@ -117,6 +117,8 @@ export function ReactNativeZoomableViewExample() {
             <TestSuite name='react-native-zoomable-view'>
               {tester_change("移动 moveBy(-30, 0)",'←',()=>{ ;zoomableViewRef.current!.moveBy(-30, 0) })}
               {tester_change("移动 moveBy(30, 0)",'→',()=>{ zoomableViewRef.current!.moveBy(30, 0) })}
+              {tester_change("移动 moveTo(10, 10)",'10, 10',()=>{ zoomableViewRef.current!.moveTo(10, 10) })}
+              {tester_change("移动 moveTo(50, 50)",'50, 50',()=>{ zoomableViewRef.current!.moveTo(50, 50) })}
               {tester_change("设置缩放等级 zoomTo(1)",'1',()=>{ zoomableViewRef.current!.zoomTo(1);})}
               {tester_change("设置缩放等级 zoomTo(5)",'5',()=>{ zoomableViewRef.current!.zoomTo(5);})}
               {tester_change("设置缩放等级 zoomBy(1.1)",'1.1',()=>{ zoomableViewRef.current!.zoomBy(1.1);})}
