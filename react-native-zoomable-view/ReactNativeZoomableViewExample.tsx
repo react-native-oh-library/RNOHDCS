@@ -5,7 +5,8 @@ import { ReactNativeZoomableView } from '@openspacelabs/react-native-zoomable-vi
 
 export function ReactNativeZoomableViewExample() {
     const zoomableViewRef = createRef<ReactNativeZoomableView>();
-   
+    const [onLongPress,setOnLongPress] = useState(' ');
+
     const [state,_setState] = useState({
         zoomEnabled:true,
         panEnabled:true,
@@ -26,7 +27,7 @@ export function ReactNativeZoomableViewExample() {
         contentHeight:150,
         panBoundaryPadding:0,
         bindToBorders:true,
-        disablePanOnInitialZoom : false
+        disablePanOnInitialZoom : false,
     });
 
      const stateString = useRef({
@@ -64,7 +65,7 @@ export function ReactNativeZoomableViewExample() {
   }
   
   function tester_back_string(title:string,string:any){
-    return(  <TestCase itShould={title}> <Text>{string}</Text> </TestCase> )
+    return(  <TestCase itShould={title}><Text>{string}</Text></TestCase> )
   }
 
     return(
@@ -102,7 +103,7 @@ export function ReactNativeZoomableViewExample() {
               onZoomBefore= {(event, gestureState, zoomableViewEventObject) => { stateString.current.onZoomBefore = 'pass';}}
               onZoomAfter= {(event, gestureState, zoomableViewEventObject) => {stateString.current.onZoomAfter = 'pass'}}
               onZoomEnd= {(event, gestureState, zoomableViewEventObject) => {stateString.current.onZoomEnd = 'pass'}}
-              onLongPress= {(event, gestureState, zoomableViewEventObject) => {stateString.current.onLongPress = 'pass'}}
+              onLongPress= {(event, gestureState, zoomableViewEventObject) => {setOnLongPress('pass') }}
              >
 
               <View style={styles.contents}>
@@ -153,7 +154,7 @@ export function ReactNativeZoomableViewExample() {
               {tester_change("内容宽度 contentWidth:300",'300',()=>{ _setState({...state,contentWidth:300}) })}
               {tester_change("内容宽度 contentWidth:500",'500',()=>{ _setState({...state,contentWidth:500}) })}
               {tester_change("内容高度 contentHeight:150",'150',()=>{ _setState({...state,contentHeight:150}) })}
-              {tester_change("内容高度 contentHeight:300",'300',()=>{ _setState({...state,contentHeight:300}) })}
+              {tester_change("内容高度 contentHeight:800",'800',()=>{ _setState({...state,contentHeight:800}) })}
               {tester_change("内容距边框padding panBoundaryPadding:500",'500',()=>{ _setState({...state,panBoundaryPadding:500}) })}
               {tester_change("内容距边框padding panBoundaryPadding:0",'0',()=>{ _setState({...state,panBoundaryPadding:0}) })}
               {tester_change("内容绑定在视图中 bindToBorders:true",'true',()=>{ _setState({...state,bindToBorders:true}) })}
@@ -169,7 +170,8 @@ export function ReactNativeZoomableViewExample() {
               {tester_back_string("onZoomBefore",stateString.current.onZoomBefore)}
               {tester_back_string("onZoomAfter",stateString.current.onZoomAfter)}
               {tester_back_string("onZoomEnd",stateString.current.onZoomEnd)}
-              {tester_back_string("onLongPress",stateString.current.onLongPress)}
+			        <TestCase itShould="onLongPress"> <Text>{onLongPress}</Text> <Button title = "Reset" onPress = {() =>{ setOnLongPress(' ')  }}></Button> </TestCase>
+              
               <View style={{height:300}}></View>
             </TestSuite>
           </ScrollView>
