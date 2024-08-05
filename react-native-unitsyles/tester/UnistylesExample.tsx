@@ -89,6 +89,21 @@ export function UnistylesExample() {
                     <TestCase itShould='在StyleSheets中使用variants style={styles.box_variants1}'>
                         <View style={styles.box_variants1}></View>
                     </TestCase>
+                    <TestCase itShould='UnistylesRuntime.insets'>
+                        <Text>top {UnistylesRuntime.insets.top} bottom {UnistylesRuntime.insets.bottom} left {UnistylesRuntime.insets.left} right {UnistylesRuntime.insets.right}</Text>
+                    </TestCase>
+                    <TestCase itShould='UnistylesRuntime.statusBar'>
+                        <Text>width {UnistylesRuntime.statusBar.width} height {UnistylesRuntime.statusBar.height}</Text>
+                    </TestCase>
+                    <TestCase itShould='UnistylesRuntime.navigationBar'>
+                        <Text>width {UnistylesRuntime.navigationBar.width} height {UnistylesRuntime.navigationBar.height}</Text>
+                    </TestCase>
+                    <TestCase itShould='UnistylesRuntime.orientation'>
+                        <Text>{UnistylesRuntime.orientation}</Text>
+                    </TestCase>
+                    <TestCase itShould='UnistylesRuntime.breakpoints'>
+                        <Text>{JSON.stringify(UnistylesRuntime.breakpoints)}</Text>
+                    </TestCase>
                 </TestSuite>
             </Tester>
         </ScrollView>
