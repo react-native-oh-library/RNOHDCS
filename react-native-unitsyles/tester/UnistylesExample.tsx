@@ -4,7 +4,6 @@ import React,{useEffect} from 'react';
 import {TestSuite,Tester,TestCase} from '@rnoh/testerino';
 
 export function UnistylesExample() {
-    let anti_shake = true;
     const hasSomeCoolFeatures = true;
     const { styles, theme } = useStyles(stylesheet,{ colors: hasSomeCoolFeatures,sizes: !hasSomeCoolFeatures});
     const renderCount = React.useRef(0)
@@ -35,20 +34,14 @@ export function UnistylesExample() {
                     </TestCase>
                     <TestCase itShould='更改页面主题'>
                         <Button title="更改页面主题 UnistylesRuntime.setTheme('light')" color={theme.colors.accent} onPress={() => {
-                            anti_shake = !anti_shake
-                            if(anti_shake){
-                                UnistylesRuntime.setAdaptiveThemes(false);
-                                UnistylesRuntime.setTheme('light')
-                            }
+                            UnistylesRuntime.setAdaptiveThemes(false);
+                            UnistylesRuntime.setTheme('light')
                         }} />
                     </TestCase>
                     <TestCase itShould='更改页面主题'>
                         <Button title="更改页面主题 UnistylesRuntime.setTheme('premium')" color={theme.colors.accent} onPress={() => {
-                            anti_shake = !anti_shake
-                            if(anti_shake){
-                                UnistylesRuntime.setAdaptiveThemes(false);
-                                UnistylesRuntime.setTheme('premium')
-                            }
+                            UnistylesRuntime.setAdaptiveThemes(false);
+                            UnistylesRuntime.setTheme('premium');
                         }} />
                     </TestCase>
                     <TestCase itShould='启用自适应主题'>
@@ -96,16 +89,11 @@ export function UnistylesExample() {
                     <TestCase itShould='在StyleSheets中使用variants style={styles.box_variants1}'>
                         <View style={styles.box_variants1}></View>
                     </TestCase>
-
                 </TestSuite>
             </Tester>
-        
         </ScrollView>
     );
 }
-
-
-
  
 const stylesheet = createStyleSheet((theme, runtime) => ({
     container: {
