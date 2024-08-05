@@ -3,37 +3,63 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
+  Animated
 } from 'react-native';
 import { WaterfallList } from 'react-native-largelist';
 
 export default class WaterfallListTest extends Component {
-  state = { data: [...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data] };
+  state = { data: [...data] };
   _list: WaterfallList;
+  waterfallList = {
+    x: new Animated.Value(10),
+    y: new Animated.Value(10),
+  };
 
   render() {
     return (
-      <Tester>
-        <TestSuite name="WaterfallList">
-          <TestCase itShould="WaterfallList view">
+      <TestSuite name="WaterfallList">
+        <TestCase modal itShould="WaterfallList:renderHeader、renderFooter、preferColumnWidth、onLoading、heightForItem、renderItem">
+          <View style={{ height: 600, width: 350 }}>
             <WaterfallList
               data={this.state.data}
               ref={ref => (this._list = ref)}
               heightForItem={item => item.height}
               preferColumnWidth={120}
-              numColumns={2}
               renderItem={this._renderItem}
               renderHeader={this._renderHeader}
               renderFooter={this._renderFooter}
               onRefresh={() => {
-                setTimeout(() => this._list.endRefresh(), 2000);
+                setTimeout(() => this._list?.endRefresh(), 2000);
               }}
               onLoading={() => {
-                setTimeout(() => this._list.endLoading(), 2000);
+                setTimeout(() => this._list?.endLoading(), 2000);
+              }}
+              onNativeContentOffsetExtract={(offset) => {
+                console.log('offset', offset);
+
               }}
             />
-          </TestCase>
-        </TestSuite>
-      </Tester>
+          </View>
+        </TestCase>
+        <TestCase modal itShould="WaterfallList:numColumns、onLoading、heightForItem、renderItem">
+          <View style={{ height: 600, width: 350 }}>
+            <WaterfallList
+              data={this.state.data}
+              ref={ref => (this._list = ref)}
+              heightForItem={item => item.height}
+              numColumns={3}
+              renderItem={this._renderItem}
+              onRefresh={() => {
+                setTimeout(() => this._list?.endRefresh(), 2000);
+              }}
+              onLoading={() => {
+                setTimeout(() => this._list?.endLoading(), 2000);
+              }}
+              onNativeContentOffsetExtract={this.waterfallList}
+            />
+          </View>
+        </TestCase>
+      </TestSuite>
     );
   }
 
