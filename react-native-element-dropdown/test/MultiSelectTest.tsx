@@ -13,7 +13,7 @@ import {
   IDropdownRef,
   MultiSelect,
 } from 'react-native-element-dropdown';
-import {TestSuite, TestCase} from '@rnoh/testerino';
+import {TestSuite, TestCase,Tester} from '@rnoh/testerino';
 
 const imageSource = require('../assets/react-native-logo.png');
 const data = [
@@ -365,6 +365,7 @@ const Demo26 = () => {
 export const MultiSelectTest = () => {
   return (
     <ScrollView>
+      <Tester>
       <View>
         <Text style={{color: '#fff', fontSize: 20}}>MultiSelectDemo</Text>
       </View>
@@ -562,6 +563,7 @@ export const MultiSelectTest = () => {
           <Demo26 />
         </TestCase>
       </TestSuite>
+      </Tester>
     </ScrollView>
   );
 };
