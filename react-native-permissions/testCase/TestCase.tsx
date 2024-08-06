@@ -1,8 +1,4 @@
 import React, { useRef, useState } from 'react';
-
-
-
-
 import {
     StyleSheet,
     View,
@@ -15,12 +11,6 @@ import {
 } from 'react-native';
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 import RTNPermissions, { Permission, NotificationsResponse } from "@react-native-oh-tpl/react-native-permissions";
-
-
-
-
-
-
 export const PermissionTest = () => {
     const permissionNormal: Permission[] = [
         "ohos.permission.APPROXIMATELY_LOCATION",
@@ -40,8 +30,6 @@ export const PermissionTest = () => {
     const [camer, setCamer] = useState("还未获取")
     const [checkNotifications, setCheckNotifications] = useState<string>("还未获取")
     const [checkMultiple, setCheckMultiple] = useState("还未获取")
-
-
     return (
         <Tester>
             <ScrollView>
@@ -233,9 +221,6 @@ export const PermissionTest = () => {
                             expect(state).to.be.true;
                         }}
                     />
-
-
-
 
                 </TestSuite>
 
