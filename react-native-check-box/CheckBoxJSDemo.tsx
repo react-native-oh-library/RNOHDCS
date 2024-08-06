@@ -14,7 +14,7 @@ export default class CheckBoxDemo extends Component<Props> {
     return (
       <View style={styles.container}>
         <CheckBox
-            style={{flex: 1, padding: 10}}
+            style={{flex: 1, padding: 70}}
             onClick={()=>{
               this.setState({
                   isChecked:!this.state.isChecked
