@@ -1,5 +1,5 @@
-import {TestCase, TestSuite} from '@rnoh/testerino';
-import React, {useState} from 'react';
+import { TestCase, TestSuite, Tester } from '@rnoh/testerino';
+import React, { useState } from 'react';
 import {
   Button,
   PixelRatio,
@@ -17,7 +17,7 @@ import CountryPicker, {
 } from 'react-native-country-picker-modal';
 
 const Demo = (props: any) => {
-  const {children, ...rest} = props;
+  const { children, ...rest } = props;
   const [countryCode, setCountryCode] = useState<CountryCode>('US');
   const [country, setCountry] = useState<Country>();
   const onSelect = (country: Country) => {
@@ -62,7 +62,7 @@ const Demo6 = () => {
   return (
     <>
       <Demo
-        modalProps={{visible}}
+        modalProps={{ visible }}
         onOpen={() => setVisible(true)}
         onClose={() => setVisible(false)}>
         <Button title={'open or close modal'} onPress={switchVisible} />
@@ -71,7 +71,7 @@ const Demo6 = () => {
   );
 };
 const Demo7 = () => {
-  return <Demo filterProps={{placeholder: '请选择国家/地区'}} />;
+  return <Demo filterProps={{ placeholder: '请选择国家/地区' }} />;
 };
 
 const Demo8 = () => {
@@ -158,7 +158,7 @@ const Demo30 = () => {
   return <Demo withFlag={false} />;
 };
 const Demo31 = () => {
-  return <Demo containerButtonStyle={{backgroundColor: 'pink'}} />;
+  return <Demo containerButtonStyle={{ backgroundColor: 'pink' }} />;
 };
 const Demo32 = () => {
   return (
@@ -184,7 +184,7 @@ const Demo34 = () => {
   return (
     <>
       <Demo
-        modalProps={{visible}}
+        modalProps={{ visible }}
         onClose={() => setVisible(false)}
         onOpen={() => setVisible(true)}
       />
@@ -224,197 +224,199 @@ const Demo38 = () => {
 export const CountryPickerTest = () => {
   return (
     <ScrollView>
-      <TestSuite name="region">
-        <TestCase itShould="区域：region = Africa">
-          <Demo />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="subregion">
-        <TestCase itShould="次区域subregion = Southern Asia">
-          <Demo2 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="countryCodes">
-        <TestCase itShould="countryCodes = AF">
-          <Demo3 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="theme">
-        <TestCase itShould="With dark theme">
-          <Demo4 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="translation">
-        <TestCase itShould="translation = common">
-          <Demo5 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="modalProps">
-        <TestCase itShould="通过按钮控制modal的开启和关闭">
-          <Demo6 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="filterProps">
-        <TestCase itShould="搜索框props,例如：placeholder: '请选择国家/地区'">
-          <Demo7 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="flatListProps">
-        <TestCase itShould="flatListProps">
-          <Demo8 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="withAlphaFilter：是否展示索引">
-        <TestCase itShould="展示索引">
-          <Demo9 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="withAlphaFilter：是否展示索引">
-        <TestCase itShould="不展示索引">
-          <Demo10 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="withCallingCode">
-        <TestCase itShould="withCallingCode =true">
-          <Demo11 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="withCallingCode：是否带调用代码">
-        <TestCase itShould="withCallingCode =false">
-          <Demo12 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="withCurrency：是否带currency">
-        <TestCase itShould="withCurrency =true">
-          <Demo13 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="withCurrency：是否带currency">
-        <TestCase itShould="withCurrency =false">
-          <Demo14 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="withEmoji：是否带emoji">
-        <TestCase itShould="是">
-          <Demo15 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="withEmoji：是否带emoji">
-        <TestCase itShould="否">
-          <Demo16 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="withCountryNameButton：是否带国家/地区按钮">
-        <TestCase itShould="withCountryNameButton =true">
-          <Demo17 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="withCountryNameButton：是否带国家/地区按钮">
-        <TestCase itShould="withCountryNameButton =false">
-          <Demo18 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="withCurrencyButton：是否带货币按钮">
-        <TestCase itShould="withCurrencyButton =true">
-          <Demo19 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="withCurrencyButton：是否带货币按钮">
-        <TestCase itShould="withCurrencyButton =true">
-          <Demo20 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="withCallingCodeButton:是否使用带CallingCode按钮">
-        <TestCase itShould="withCallingCodeButton =true">
-          <Demo21 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="withCallingCodeButton:是否使用带CallingCode按钮">
-        <TestCase itShould="withCallingCodeButton =false">
-          <Demo22 />
-        </TestCase>
-      </TestSuite>
+      <Tester>
+        <TestSuite name="region">
+          <TestCase itShould="区域：region = Africa">
+            <Demo />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="subregion">
+          <TestCase itShould="次区域subregion = Southern Asia">
+            <Demo2 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="countryCodes">
+          <TestCase itShould="countryCodes = AF">
+            <Demo3 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="theme">
+          <TestCase itShould="With dark theme">
+            <Demo4 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="translation">
+          <TestCase itShould="translation = common">
+            <Demo5 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="modalProps">
+          <TestCase itShould="通过按钮控制modal的开启和关闭">
+            <Demo6 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="filterProps">
+          <TestCase itShould="搜索框props,例如：placeholder: '请选择国家/地区'">
+            <Demo7 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="flatListProps">
+          <TestCase itShould="flatListProps">
+            <Demo8 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="withAlphaFilter：是否展示索引">
+          <TestCase itShould="展示索引">
+            <Demo9 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="withAlphaFilter：是否展示索引">
+          <TestCase itShould="不展示索引">
+            <Demo10 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="withCallingCode">
+          <TestCase itShould="withCallingCode =true">
+            <Demo11 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="withCallingCode：是否带调用代码">
+          <TestCase itShould="withCallingCode =false">
+            <Demo12 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="withCurrency：是否带currency">
+          <TestCase itShould="withCurrency =true">
+            <Demo13 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="withCurrency：是否带currency">
+          <TestCase itShould="withCurrency =false">
+            <Demo14 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="withEmoji：是否带emoji">
+          <TestCase itShould="是">
+            <Demo15 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="withEmoji：是否带emoji">
+          <TestCase itShould="否">
+            <Demo16 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="withCountryNameButton：是否带国家/地区按钮">
+          <TestCase itShould="withCountryNameButton =true">
+            <Demo17 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="withCountryNameButton：是否带国家/地区按钮">
+          <TestCase itShould="withCountryNameButton =false">
+            <Demo18 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="withCurrencyButton：是否带货币按钮">
+          <TestCase itShould="withCurrencyButton =true">
+            <Demo19 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="withCurrencyButton：是否带货币按钮">
+          <TestCase itShould="withCurrencyButton =true">
+            <Demo20 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="withCallingCodeButton:是否使用带CallingCode按钮">
+          <TestCase itShould="withCallingCodeButton =true">
+            <Demo21 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="withCallingCodeButton:是否使用带CallingCode按钮">
+          <TestCase itShould="withCallingCodeButton =false">
+            <Demo22 />
+          </TestCase>
+        </TestSuite>
 
-      <TestSuite name="withFlagButton:是否使用带flag按钮">
-        <TestCase itShould="withFlagButton =true">
-          <Demo23 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="withFlagButton:是否使用带flag按钮">
-        <TestCase itShould="withFlagButton =false">
-          <Demo24 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="withCloseButton:是否使用关闭按钮">
-        <TestCase itShould="withCloseButton =true">
-          <Demo25 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="withCloseButton:是否使用关闭按钮">
-        <TestCase itShould="withCloseButton =false">
-          <Demo26 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="withFilter:是否启用过滤搜索功能">
-        <TestCase itShould="withFilter =true">
-          <Demo27 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="withFilter:是否启用过滤搜索功能">
-        <TestCase itShould="withFilter =false">
-          <Demo28 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="withFlag:是否带flag功能">
-        <TestCase itShould="withFlag =true">
-          <Demo29 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="withFlag:是否带flag功能">
-        <TestCase itShould="withFlag =false">
-          <Demo30 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="containerButtonStyle">
-        <TestCase itShould="containerButton样式">
-          <Demo31 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="renderFlagButton">
-        <TestCase itShould="自定义按钮">
-          <Demo32 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="renderCountryFilter">
-        <TestCase itShould="自定义搜索过滤">
-          <Demo33 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="onOpen onClose ">
-        <TestCase itShould="">
-          <Demo34 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="disableNativeModal">
-        <TestCase itShould="disableNativeModal=true">
-          <Demo35 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="disableNativeModal">
-        <TestCase itShould="disableNativeModal=false">
-          <Demo36 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="preferredCountries">
-        <TestCase itShould="首先出现的国家=AF">
-          <Demo37 />
-        </TestCase>
-      </TestSuite>
-      <TestSuite name="withModal,默认展示modal">
-        <TestCase itShould="不展示modal">
-          <Demo38 />
-        </TestCase>
-      </TestSuite>
+        <TestSuite name="withFlagButton:是否使用带flag按钮">
+          <TestCase itShould="withFlagButton =true">
+            <Demo23 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="withFlagButton:是否使用带flag按钮">
+          <TestCase itShould="withFlagButton =false">
+            <Demo24 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="withCloseButton:是否使用关闭按钮">
+          <TestCase itShould="withCloseButton =true">
+            <Demo25 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="withCloseButton:是否使用关闭按钮">
+          <TestCase itShould="withCloseButton =false">
+            <Demo26 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="withFilter:是否启用过滤搜索功能">
+          <TestCase itShould="withFilter =true">
+            <Demo27 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="withFilter:是否启用过滤搜索功能">
+          <TestCase itShould="withFilter =false">
+            <Demo28 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="withFlag:是否带flag功能">
+          <TestCase itShould="withFlag =true">
+            <Demo29 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="withFlag:是否带flag功能">
+          <TestCase itShould="withFlag =false">
+            <Demo30 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="containerButtonStyle">
+          <TestCase itShould="containerButton样式">
+            <Demo31 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="renderFlagButton">
+          <TestCase itShould="自定义按钮">
+            <Demo32 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="renderCountryFilter">
+          <TestCase itShould="自定义搜索过滤">
+            <Demo33 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="onOpen onClose ">
+          <TestCase itShould="">
+            <Demo34 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="disableNativeModal">
+          <TestCase itShould="disableNativeModal=true">
+            <Demo35 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="disableNativeModal">
+          <TestCase itShould="disableNativeModal=false">
+            <Demo36 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="preferredCountries">
+          <TestCase itShould="首先出现的国家=AF">
+            <Demo37 />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="withModal,默认展示modal">
+          <TestCase itShould="不展示modal">
+            <Demo38 />
+          </TestCase>
+        </TestSuite>
+      </Tester>
     </ScrollView>
   );
 };
