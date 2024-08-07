@@ -30,11 +30,9 @@ function App({ }): JSX.Element | null {
 
   return (
     <View style={{ flex: 1 }}>
-      <SafeAreaView style={{ backgroundColor: '#222', flex: 1 }}>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <Tests />
         </GestureHandlerRootView>
-      </SafeAreaView>
     </View>
   );
 }
