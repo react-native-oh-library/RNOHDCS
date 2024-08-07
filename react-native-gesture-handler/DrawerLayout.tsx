@@ -86,7 +86,10 @@ function Tests() {
             <Button title="设置 statusBarAnimation('none')" onPress={() => { setStatusBarAnimation('none') }}></Button>
           </View>
           <View style={{ height: 50, marginTop: 12 }}>
-            <Button title="设置 hideStatusBar('true or false')" onPress={() => { setIsHide(!isHide); }}></Button>
+            <Button title="设置 hideStatusBar('true')" onPress={() => { setIsHide(true); }}></Button>
+          </View>
+          <View style={{ height: 50, marginTop: 12 }}>
+            <Button title="设置 hideStatusBar('false')" onPress={() => { setIsHide(false); }}></Button>
           </View>
           <View style={{ height: 50, marginTop: 12 }}>
             <Button title="设置 edgeWidth('300')" onPress={() => { setEdgeWidth(300); }}></Button>
