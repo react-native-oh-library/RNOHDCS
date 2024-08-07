@@ -108,35 +108,7 @@ const TestTransitiongroup = () => {
         <ScrollView>
             <Tester>
                 <ScrollView>
-                    <TestSuite name="react-native-community/progress-view">
-                        <TestCase
-                            key={"getInitStatus_1"}
-                            itShould={`show or hide`}
-                            tags={['C_API']}
-                            initialState={false}
-                            arrange={({ setState }) => {
-                                return (
-                                    <View style={{ flex: 1 }}>
-                                        <TransitionGroup>
-                                            {showTexta && (
-                                                <FadeInOutTransition>
-                                                    <View>
-                                                        <Text style={styles.text}>Hello, Transition Group!!</Text>
-                                                    </View>
-                                                </FadeInOutTransition>
-                                            )}
-                                        </TransitionGroup>
-                                        <Button onPress={() => {
-                                            setShowTexta(!showTexta)
-                                            setState(true)
-                                        }} label={"切换"}></Button>
-                                    </View>
-                                );
-                            }}
-                            assert={async ({ expect, state }) => {
-                                expect(state).to.be.true;
-                            }}
-                        />
+                    <TestSuite name="react-native-transitiongroup">
                         <TestCase
                             key={"getInitStatus_2"}
                             itShould={`animation inDuration=1000`}
@@ -165,8 +137,6 @@ const TestTransitiongroup = () => {
                                 expect(state).to.be.true;
                             }}
                         />
-
-
                         <TestCase
                             key={"inDelay"}
                             itShould={`animation inDelay=1000`}
@@ -225,11 +195,6 @@ const TestTransitiongroup = () => {
                             }}
                         />
 
-
-
-
-
-
                         <TestCase
                             key={"outDelay"}
                             itShould={`animation outDelay=1000`}
@@ -258,11 +223,6 @@ const TestTransitiongroup = () => {
                                 expect(state).to.be.true;
                             }}
                         />
-
-
-
-
-
                         <TestCase
                             key={"getInitStatus_3"}
                             itShould={`animation easing Easing.ease`}
@@ -330,18 +290,33 @@ const TestTransitiongroup = () => {
                             arrange={({ setState }) => {
                                 return (
                                     <View style={{ flex: 1 }}>
-                                        <TransitionGroup pointerEvents="box-none" onPress={(event) => {
-                                            setShowTexte("我被触发了22")
+                                        <TransitionGroup pointerEvents="box-none" style={{ backgroundColor: "pink" }}>
+                                            <FadeInOutTransition>
+                                            <View>
+                                                    <Text style={styles.text} >1111111</Text>
+                                                </View>
+                                            </FadeInOutTransition>
+                                        </TransitionGroup>
+                                    </View>
+                                );
+                            }}
+                            assert={async ({ expect, state }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
 
-                                        }} style={{ backgroundColor: "red" }}>
-                                            <FadeInOutTransition onPress={(event) => {
-                                                setShowTexte("我被触发了111")
-                                            }}>
+                        <TestCase
+                            key={"getInitStatus_5"}
+                            itShould={`backgroundColor: "yellow",padding:20"`}
+                            tags={['C_API']}
+                            initialState={false}
+                            arrange={({ setState }) => {
+                                return (
+                                    <View style={{ flex: 1 }}>
+                                        <TransitionGroup pointerEvents="box-none" style={{ backgroundColor: "yellow",padding:20 }}>
+                                            <FadeInOutTransition>
                                                 <View>
-                                                    <Text style={styles.text} onPress={(event) => {
-                                                        setShowTexte("我被触发了00")
-                                                        setState(true)
-                                                    }}>{showTexte}</Text>
+                                                    <Text style={styles.text} >1111111</Text>
                                                 </View>
                                             </FadeInOutTransition>
                                         </TransitionGroup>
