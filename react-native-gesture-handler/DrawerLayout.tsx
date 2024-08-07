@@ -23,7 +23,7 @@ import { NewApiTest, OldApiTest, SharedAPITest } from './src';
 
 type RootViewMode = 'Component' | 'HOC';
 
-const DEV_MODE = false;
+const IS_HIDE: boolean = false;
 
 function App({ }): JSX.Element | null {
   const [rootViewMode, setRootViewMode] = useState<RootViewMode>('Component');
@@ -86,10 +86,16 @@ function Tests() {
             <Button title="设置 statusBarAnimation('none')" onPress={() => { setStatusBarAnimation('none') }}></Button>
           </View>
           <View style={{ height: 50, marginTop: 12 }}>
-            <Button title="设置 hideStatusBar('true')" onPress={() => { setIsHide(true); }}></Button>
-          </View>
-          <View style={{ height: 50, marginTop: 12 }}>
-            <Button title="设置 hideStatusBar('false')" onPress={() => { setIsHide(false); }}></Button>
+            <Button title="设置 hideStatusBar('true or false')" onPress={() => {
+              if (this.IS_HIDE) {
+                this.IS_HIDE = false;
+                setIsHide(false);
+              } else {
+                setIsHide(true);
+                this.IS_HIDE = true;
+              }
+              }}>
+            </Button>
           </View>
           <View style={{ height: 50, marginTop: 12 }}>
             <Button title="设置 edgeWidth('300')" onPress={() => { setEdgeWidth(300); }}></Button>
