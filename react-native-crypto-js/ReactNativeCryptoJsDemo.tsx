@@ -7,9 +7,7 @@ import {
   Button,
   Alert
 } from 'react-native';
-
 import CryptoJS from "react-native-crypto-js";
-//import CryptoJS from "rn-crypto-js";
 
 //使用AES加密字符串
 function encrypt_str(text: string) {
@@ -48,18 +46,9 @@ function MD5_encrypt_str(text: string) {
 
 }
 
-//使用HmacMD5加密字符串
-function HMD5_encrypt_str(text: string) {
-  let ciphertext = CryptoJS.HmacMD5(text, 'secret key 123').toString();
-  Alert.alert('加密后：', ciphertext, [{ text: 'OK' }]);
-  return ciphertext;
-
-}
-
 export const ReactNativeCryptoJsExample = () => {
   const [cryptText, setCryptText] = useState('test 123');
   const [cryptText1, setCryptText1] = useState('test123');
-  const [cryptText2, setCryptText2] = useState('test123');
   const [decryptText, setDecryptText] = useState('');
   const [cryptObj, setCryptObj] = useState('[{id: 1}, {id: 2}]');
   const [decryptObj, setDecryptObj] = useState('');
@@ -75,6 +64,7 @@ export const ReactNativeCryptoJsExample = () => {
         <TextInput style={{ height: 40 }} placeholder="请输入内容!" onChangeText={(decryptText: React.SetStateAction<string>) => setDecryptText(decryptText)} defaultValue={decryptText} />
       </View>
       <Button onPress={() => { decrypt_str(decryptText) }} title="解密字符串" />
+
       <Text> 测试使用AES算法加解密对象</Text>
       <View style={{ padding: 10 }}>
         <TextInput style={{ height: 40 }} placeholder="请输入内容!" onChangeText={(cryptObj: React.SetStateAction<string>) => setCryptObj(cryptObj)} defaultValue={cryptObj} />
@@ -85,16 +75,12 @@ export const ReactNativeCryptoJsExample = () => {
         <TextInput style={{ height: 40 }} placeholder="请输入内容!" onChangeText={(decryptObj: React.SetStateAction<string>) => setDecryptObj(decryptObj)} defaultValue={decryptObj} />
       </View>
       <Button onPress={() => { decrypt_obj(decryptObj) }} title="解密对象" />
+
       <Text> 测试使用MD5算法加密字符串</Text>
       <View style={{ padding: 10 }}>
         <TextInput style={{ height: 40 }} placeholder="请输入内容!" onChangeText={(cryptText1: React.SetStateAction<string>) => setCryptText1(cryptText1)} defaultValue={cryptText1} />
       </View>
       <Button onPress={() => { MD5_encrypt_str(cryptText1) }} title="加密" />
-      <Text> 测试使用HmacMD5算法加密字符串</Text>
-      <View style={{ padding: 10 }}>
-        <TextInput style={{ height: 40 }} placeholder="请输入内容!" onChangeText={(cryptText2: React.SetStateAction<string>) => setCryptText2(cryptText2)} defaultValue={cryptText2} />
-      </View>
-      <Button onPress={() => { HMD5_encrypt_str(cryptText2) }} title="加密" />
     </ScrollView>
   );
 };
