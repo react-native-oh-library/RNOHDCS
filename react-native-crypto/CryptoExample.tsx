@@ -846,7 +846,6 @@ const TestCrypto = () => {
         const signature = signer.sign(private_Key, 'hex');
 
         setCreateSignature(signature)
-        console.log('Signature:', signature);
 
         // 验证签名
         const verifier = crypto.createVerify('sha256'); // 确保使用相同的算法
@@ -855,7 +854,6 @@ const TestCrypto = () => {
         const isVerified = verifier.verify(public_Key, signature, 'hex');
 
         setCreateVerify(isVerified.toString())
-        console.log('Signature verified:', isVerified);
     }
 
     function handleSign() {
@@ -869,7 +867,6 @@ const TestCrypto = () => {
         const signature = signer.sign(private_Key, 'hex');
 
         setSignature(signature)
-        console.log('Signature:', signature);
 
         // 验证签名
         const verifier = crypto.Verify('sha256'); // 确保使用相同的算法
@@ -878,7 +875,6 @@ const TestCrypto = () => {
         const isVerified = verifier.verify(public_Key, signature, 'hex');
 
         setVerify(isVerified.toString())
-        console.log('Signature verified:', isVerified);
     }
 
     return (
