@@ -10,8 +10,9 @@ import { Tester, TestCase } from '@rnoh/testerino';
 
 export default function Base64Test() {
   const [word, setWord] = useState('react native');
+  const [flag, setFlag] = useState(false);
   const [decodeWord, setdecodeWord] = useState('');
-  const [testWord, setTestWord] = useState('react native');
+  const [flag1, setFlag1] = useState(false);
   const [Unit8ArrayWord, setUnit8ArrayWord] = useState('');
   const [decodeUnit8ArrayWord, setdecodeUnit8ArrayWord] = useState('');
 
@@ -19,9 +20,12 @@ export default function Base64Test() {
     setState: React.Dispatch<React.SetStateAction<string>>;
   }) => {
     const encrypt = () => {
-      const encodeWord = base64.encode(word);
-      setWord(encodeWord);
-      props.setState(encodeWord);
+      if(!flag){
+        const encodeWord = base64.encode(word);
+        setWord(encodeWord);
+        props.setState(encodeWord);
+        setFlag(true);
+      }
     };
 
     return (
@@ -35,16 +39,19 @@ export default function Base64Test() {
   const AddBase64Decode = (props: {
     setState: React.Dispatch<React.SetStateAction<string>>;
   }) => {
-    const encrypt = () => {
-      const decodeWord = base64.decode(word);
-      setdecodeWord(decodeWord);
-      props.setState(decodeWord);
+    const decrypt = () => {
+      if(!flag1){
+        const decodeWord = base64.decode(word);
+        setdecodeWord(decodeWord);
+        props.setState(decodeWord);
+        setFlag1(true);
+      }
     };
 
     return (
       <View style={{ height: 50 }}>
         <Text>{decodeWord}</Text>
-        <Button title="解码" onPress={encrypt} />
+        <Button title="解码" onPress={decrypt} />
       </View>
     );
   };
@@ -52,15 +59,17 @@ export default function Base64Test() {
   const AddBase64EncodeUnit8Array = (props: {
     setState: React.Dispatch<React.SetStateAction<string>>;
   }) => {
+    const testWord = 'react native';
+    const byteArrayWord = Uint8Array.from(testWord.split(''), w => w.charCodeAt(0));
     const encrypt = () => {
-      const byteArrayWord = Uint8Array.from(testWord.split(''), w => w.charCodeAt(0)); // 将字符串转为Uint8Array格式
       const encodeWord = base64.encodeFromByteArray(byteArrayWord);
       setUnit8ArrayWord(encodeWord);
       props.setState(encodeWord);
     };
 
     return (
-      <View style={{ height: 50 }}>
+      <View style={{ height: 70 }}>
+        <Text>{byteArrayWord}</Text>
         <Text>{Unit8ArrayWord}</Text>
         <Button title="Unit8Array编码" onPress={encrypt} />
       </View>
