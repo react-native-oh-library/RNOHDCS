@@ -291,7 +291,7 @@ export const RnPlaceholderTest = () => {
                                             let w = width;
                                             setHeight(w + 10);
                                             setState(true);
-                                        }}>height++</Text>
+                                        }}>width++</Text>
                                     </View>
                                     <Placeholder
                                         Animation={Fade}
