@@ -128,7 +128,7 @@ export function ReactNativeZoomableViewExample() {
               {tester_change("开启手势移动 panEnabled : true",'true',()=>{ _setState({...state,panEnabled:true}) })}
               {tester_change("关闭手势移动 panEnabled : false",'false',()=>{ _setState({...state,panEnabled:false}) })}
               {tester_change("双击判定间隔最大时间 doubleTapDelay : 300",'300',()=>{ _setState({...state,doubleTapDelay:true}) })}
-              {tester_change("双击判定间隔最大时间 doubleTapDelay : 10000",'10000',()=>{ _setState({...state,panEnabled:false}) })}
+              {tester_change("双击判定间隔最大时间 doubleTapDelay : 10000",'10000',()=>{ _setState({...state,doubleTapDelay:false}) })}
               {tester_change("缩放中心 以点击点为缩放中心 doubleTapZoomToCenter : true",'true',()=>{ _setState({...state,doubleTapZoomToCenter:true}) })}
               {tester_change("缩放中心 以中心为缩放中心 doubleTapZoomToCenter : false",'false',()=>{ _setState({...state,doubleTapZoomToCenter:false}) })}
               {tester_change("双击缩放倍率 zoomStep : 0.1",'0.1',()=>{ _setState({...state,zoomStep:true}) })}
