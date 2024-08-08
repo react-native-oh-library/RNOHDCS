@@ -19,7 +19,7 @@ export const  ImagePickerTest =()=> {
                     <TestSuite name="react-native-image-picker">
                         <TestCase
                             key={"getInitStatus_1"}
-                            itShould={`Launch gallery to pick image or video`}
+                            itShould={`launchImageLibrary:Launch gallery to pick image or video`}
                             tags={['C_API']}
                             initialState={false}
 
@@ -66,7 +66,7 @@ export const  ImagePickerTest =()=> {
                         />
                         <TestCase
                             key={"getInitStatus_1"}
-                            itShould={`Launch camera to take photo or video`}
+                            itShould={`launchCamera:Launch camera to take photo or video`}
                             tags={['C_API']}
                             initialState={false}
                             arrange={({setState}) => {
@@ -112,7 +112,7 @@ export const  ImagePickerTest =()=> {
                         />
                         <TestCase
                             key={"getInitStatus_3"}
-                            itShould={`mediaType photo or video or mixed`}
+                            itShould={`launchImageLibrary:mediaType photo or video or mixed`}
                             tags={['C_API']}
                             initialState={false}
                             arrange={({setState}) => {
@@ -158,7 +158,7 @@ export const  ImagePickerTest =()=> {
                         />
                         <TestCase
                             key={"getInitStatus_4"}
-                            itShould={`cameraType 'back' or 'front'`}
+                            itShould={`launchCamera:cameraType 'back' or 'front'`}
                             tags={['C_API']}
                             initialState={false}
                             arrange={({setState}) => {
@@ -204,7 +204,7 @@ export const  ImagePickerTest =()=> {
 
                         <TestCase
                             key={"getInitStatus_5"}
-                            itShould={`includeBase64: creates base64 string of the image`}
+                            itShould={`launchImageLibrary:includeBase64: creates base64 string of the image`}
                             tags={['C_API']}
                             initialState={false}
                             arrange={({ setState }) => {
@@ -246,7 +246,7 @@ export const  ImagePickerTest =()=> {
                         />
                         <TestCase
                             key={"getInitStatus_6"}
-                            itShould={`saveToPhotos saves the image/video file captured to public photo`}
+                            itShould={`launchCamera:saveToPhotos saves the image/video file captured to public photo`}
                             tags={['C_API']}
                             initialState={false}
                             arrange={({setState}) => {
@@ -289,7 +289,7 @@ export const  ImagePickerTest =()=> {
                         />
                         <TestCase
                             key={"getInitStatus_7"}
-                            itShould={`selectionLimit Optional number of pictures`}
+                            itShould={`launchImageLibrary:selectionLimit Optional number of pictures`}
                             tags={['C_API']}
                             initialState={false}
                             arrange={({ setState }) => {
@@ -339,7 +339,7 @@ export const  ImagePickerTest =()=> {
 
                         <TestCase
                             key={"getInitStatus_8"}
-                            itShould={`Returned Asset Object`}
+                            itShould={`launchImageLibrary:Returned Asset Object`}
                             tags={['C_API']}
                             initialState={false}
                             arrange={({ setState }) => {
