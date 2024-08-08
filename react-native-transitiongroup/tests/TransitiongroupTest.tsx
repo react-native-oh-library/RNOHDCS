@@ -284,7 +284,7 @@ const TestTransitiongroup = () => {
 
                         <TestCase
                             key={"getInitStatus_5"}
-                            itShould={`animation style backgroundColor:"red"`}
+                            itShould={`animation style backgroundColor:"pink"`}
                             tags={['C_API']}
                             initialState={false}
                             arrange={({ setState }) => {
