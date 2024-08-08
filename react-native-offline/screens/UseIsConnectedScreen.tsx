@@ -1,19 +1,17 @@
-import { checkInternetConnection } from 'react-native-offline';
+import { useIsConnected } from 'react-native-offline';
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 import { View, Button, StyleSheet, Text } from 'react-native';
 import React from 'react';
 
 
-export const CheckInternetConnectionScreen = () => {
-    const DEFAULT_TIMEOUT = 3000;
-    const DEFAULT_PING_SERVER_URL = 'https://www.huawei.com/';
-    const DEFAULT_HTTP_METHOD = 'HEAD';
-    const DEFAULT_CUSTOM_HEADERS = {};
+export const UseIsConnectedScreen = () => {
+
     const [connectStatus, setConnectStatus] = React.useState('');
+    const isConnected = useIsConnected();
 
     return (
         <Tester>
-            <TestSuite name="checkInternetConnection示例">
+            <TestSuite name="useIsConnected示例">
                 <TestCase tags={['C_API']} itShould="Connected to Internet YES(网络在线) NO(网络离线)"
                     initialState={''}
                     arrange={({ setState }) =>
@@ -22,13 +20,7 @@ export const CheckInternetConnectionScreen = () => {
                                 <Button
                                     title='点击测试网络连接'
                                     color="#FF0000"
-                                    onPress={async () => {
-                                        const isConnected = await checkInternetConnection(
-                                            DEFAULT_PING_SERVER_URL,
-                                            DEFAULT_TIMEOUT,
-                                            true,
-                                            DEFAULT_HTTP_METHOD,
-                                            DEFAULT_CUSTOM_HEADERS)
+                                    onPress={() => {
                                         if (isConnected === true) {
                                             setState('success')
                                             setConnectStatus('YES')
@@ -80,6 +72,3 @@ const styles = StyleSheet.create({
         height: 20,
     },
 });
-
-
-

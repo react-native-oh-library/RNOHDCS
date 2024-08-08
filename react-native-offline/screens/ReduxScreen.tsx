@@ -22,8 +22,8 @@ export class ReduxScreen extends React.Component {
   render() {
     return (
       <Tester>
-        <TestSuite name="ReduxTest">
-          <TestCase tags={['C_API']} itShould="ReduxTest"
+        <TestSuite name="ReduxNetworkProvider和createNetworkMiddleware示例">
+          <TestCase tags={['C_API']} itShould="Connected to Internet YES(网络在线) NO(网络离线)"
             initialState={''}
             arrange={({ setState }) =>
               <Provider store={store}>
