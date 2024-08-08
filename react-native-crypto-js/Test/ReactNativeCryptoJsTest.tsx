@@ -5,6 +5,7 @@ import { Tester, TestCase } from '@rnoh/testerino';
 
 export function CryptoJSTest() {
   const [word, setWord] = useState('');
+  const [word1, setWord1] = useState('');
   const [secret, setSecret] = useState('');
   const [cryptText, setCryptText] = useState('');
   const [decryptText, setDecryptCryptText] = useState('');
@@ -28,12 +29,13 @@ export function CryptoJSTest() {
       </View>
     );
   };
+
   const AddMD5DecryptTest = (props: {
     setState: React.Dispatch<React.SetStateAction<string>>;
   }) => {
     const encrypt = () => {
-      if (word) {
-        let bytes = MD5(word).toString();
+      if (word1) {
+        let bytes = MD5(word1).toString();
         setCryptText1(bytes);
         props.setState(bytes);
       }
@@ -41,7 +43,15 @@ export function CryptoJSTest() {
 
     return (
       <View style={{ height: 70 }}>
-        <Text>待加密字符：{word}</Text>
+        <TextInput
+          placeholder="请输入待加密字符，如：react native "
+          style={styles.TextInput}
+          onChangeText={(newValue) => {
+            setWord1(newValue);
+          }}
+          value={word1}
+        ></TextInput>
+        <Text>待加密字符：{word1}</Text>
         <Text numberOfLines={2}>加密后：{cryptText1}</Text>
         <Button title="MD5加密" onPress={encrypt} />
       </View>
@@ -53,7 +63,7 @@ export function CryptoJSTest() {
       <ScrollView>
         <Tester>
           <TestCase
-            itShould="Test using the AES algorithm to encrypt."
+            itShould="Test using the AES algorithm to encrypt string or object."
             initialState={''}
             arrange={({ setState }) => {
               const encrypt = () => {
@@ -67,7 +77,7 @@ export function CryptoJSTest() {
               return (
                 <View style={{ height: 155 }}>
                   <TextInput
-                    placeholder='请输入待加密字符'
+                    placeholder="请输入待加密字符，如：{lang: 'Javascript'} 或者 react native "
                     style={styles.TextInput}
                     onChangeText={(newValue) => {
                       setWord(newValue);
@@ -75,7 +85,7 @@ export function CryptoJSTest() {
                     value={word}
                   ></TextInput>
                   <TextInput
-                    placeholder='请输入密钥'
+                    placeholder='请输入密钥，如：mySecret 或者 Secret'
                     style={styles.TextInput}
                     onChangeText={(newValue) => {
                       setSecret(newValue);
@@ -87,7 +97,7 @@ export function CryptoJSTest() {
                     style={styles.TextInput}
                     value={cryptText}
                   ></TextInput>
-                  <Button title="编码" onPress={encrypt} />
+                  <Button title="AES加密" onPress={encrypt} />
                 </View>
               );
             }}
@@ -95,9 +105,8 @@ export function CryptoJSTest() {
               expect(state).to.be.string;
             }}
           />
-
           <TestCase
-            itShould="Test using the AES algorithm to decrypt."
+            itShould="Test using the AES algorithm to decrypt string or object."
             initialState={''}
             arrange={({ setState }) => <AddAESDecryptTest setState={setState} />}
             assert={({ expect, state }) => {
@@ -107,7 +116,31 @@ export function CryptoJSTest() {
           <TestCase
             itShould="Test using the MD5 algorithm to encrypt."
             initialState={''}
-            arrange={({ setState }) => <AddMD5DecryptTest setState={setState} />}
+            arrange={({ setState }) => {
+              const encrypt = () => {
+                if (word1) {
+                  let bytes = MD5(word1).toString();
+                  setCryptText1(bytes);
+                  setState(bytes);
+                }
+              };
+
+              return (
+                <View style={{ height: 110 }}>
+                  <TextInput
+                    placeholder="请输入待加密字符，如：react native "
+                    style={styles.TextInput}
+                    onChangeText={(newValue) => {
+                      setWord1(newValue);
+                    }}
+                    value={word1}
+                  ></TextInput>
+                  <Text>待加密字符：{word1}</Text>
+                  <Text numberOfLines={2}>加密后：{cryptText1}</Text>
+                  <Button title="MD5加密" onPress={encrypt} />
+                </View>
+              );
+            }}
             assert={({ expect, state }) => {
               expect(state).to.be.string;
             }}
