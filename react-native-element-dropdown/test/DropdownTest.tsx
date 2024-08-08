@@ -9,7 +9,7 @@ import {
   Button,
 } from 'react-native';
 import {Dropdown, IDropdownRef} from 'react-native-element-dropdown';
-import {TestSuite, TestCase} from '@rnoh/testerino';
+import {TestSuite, TestCase,Tester} from '@rnoh/testerino';
 
 const imageSource = require('../assets/react-native-logo.png');
 const data = [
@@ -362,6 +362,7 @@ const Demo26 = () => {
 export const DropdownTest = () => {
   return (
     <ScrollView>
+      <Tester>
       <View>
         <Text style={{color: '#fff', fontSize: 20}}>DropdownDemo</Text>
       </View>
@@ -559,6 +560,7 @@ export const DropdownTest = () => {
           <Demo26 />
         </TestCase>
       </TestSuite>
+      </Tester>
     </ScrollView>
   );
 };

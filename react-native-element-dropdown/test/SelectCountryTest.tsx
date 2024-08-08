@@ -1,4 +1,4 @@
-import {TestCase, TestSuite} from '@rnoh/testerino';
+import {TestCase, TestSuite,Tester} from '@rnoh/testerino';
 import React, {useState} from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {SelectCountry} from 'react-native-element-dropdown';
@@ -47,6 +47,7 @@ const Demo1 = () => {
 export const SelectCountryTest = () => {
   return (
     <ScrollView>
+      <Tester>
       <View>
         <Text style={{color: '#fff', fontSize: 20}}>SelectCountryDemo</Text>
       </View>
@@ -60,6 +61,7 @@ export const SelectCountryTest = () => {
           <Demo1 />
         </TestCase>
       </TestSuite>
+      </Tester>
     </ScrollView>
   );
 };
