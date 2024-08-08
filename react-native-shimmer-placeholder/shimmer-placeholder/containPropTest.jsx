@@ -45,7 +45,7 @@ export default class ContainPropTest extends Component {
                 <Tester>
                     <TestSuite name="shimmer-placeholder">
                         <TestCase
-                            itShould="containerProps设置style，背景为绿色验证">
+                            itShould="Test containerProps prop: style {backgroundColor:green，padding: 10}">
                             <View>
                                 <View>
                                     <ShimmerPlaceholder
@@ -55,14 +55,12 @@ export default class ContainPropTest extends Component {
                                         <View>
                                             <ShimmerPlaceholder
                                                 containerProps={{ style: styles.container }}
-                                                // shimmerContainerProps={{ styles: styles.shimmer }}
-                                                // childrenContainerProps={{ style: styles.children }}
                                                 visible={this.state.containerProps.thisVisible}
                                                 LinearGradient={LinearGradient}
                                             >
                                                 <Text>ShimmerPlaceholder本层</Text>
                                             </ShimmerPlaceholder>
-                                            <Text>ShimmerPlaceholder最外层View，期望为绿色</Text>
+                                            <Text>ShimmerPlaceholder最外层View</Text>
                                             <Button
                                                 title={'本层'}
                                                 onPress={() => this.setState({
@@ -88,7 +86,7 @@ export default class ContainPropTest extends Component {
                             </View>
                         </TestCase>
                         <TestCase
-                            itShould="shimmerContainerProps验证">
+                            itShould="Test shimmerContainerProps prop: onTouchStart">
                             <View style={styles.commonContainer}>
                                 <Text>
                                     点击触发了：{this.state.shimmerContainerProps.clickTimes} 次
@@ -131,7 +129,7 @@ export default class ContainPropTest extends Component {
                                                     })} />
                                                 <Text>ShimmerPlaceholder本层</Text>
                                             </ShimmerPlaceholder>
-                                            <Text>ShimmerPlaceholder最外层View，期望为绿色</Text>
+                                            <Text>ShimmerPlaceholder最外层View</Text>
                                             <Button
                                                 title={'本层'}
                                                 onPress={() => this.setState({
@@ -155,7 +153,7 @@ export default class ContainPropTest extends Component {
                             </View>
                         </TestCase>
                         <TestCase
-                            itShould="childrenContainerProps验证">
+                            itShould="Test childrenContainerProps prop: onTouchStart">
                             <View style={styles.commonContainer}>
                                 <Text>
                                     点击触发了：{this.state.childrenContainerProps.clickTimes} 次
