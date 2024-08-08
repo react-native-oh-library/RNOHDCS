@@ -27,7 +27,7 @@ export class ToastComponentExample extends BaseComponent {
       <TestSuite name='ToastComponent'> 
       { tester_change("text 测试字符1111",'text 测试字符1111',()=>{ this.setState({...this.state,duration:3000});this.ToastComponent.show('测试字符1111') })}
       { tester_change("text 测试字符2222",'text 测试字符2222',()=>{ this.setState({...this.state,duration:3000});this.ToastComponent.show('测试字符2222') })}
-      { tester_change("duration 6000",'duration 6000',()=>{ this.setState({...this.state,duration:3000});this.ToastComponent.show('测试字符1111') })}
+      { tester_change("duration 6000",'duration 6000',()=>{ this.setState({...this.state,duration:6000});this.ToastComponent.show('测试字符1111') })}
       { tester_change("duration 1000",'duration 1000',()=>{ this.setState({...this.state,duration:1000});this.ToastComponent.show('测试字符1111') })}
       { tester_change("textColor #ff00ff",'textColor #ff00ff',()=>{ this.setState({...this.state,textColor:'#ff00ff'});this.ToastComponent.show('测试字符1111') })}
       { tester_change("textColor #ffffff",'textColor #ffffff',()=>{ this.setState({...this.state,textColor:'#ffffff'});this.ToastComponent.show('测试字符1111') })}

@@ -1,6 +1,5 @@
 import {
   ScrollView,
-  Animated,
   Easing,
   View,
   Button,
@@ -13,6 +12,7 @@ import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 import React, {useState, useRef} from 'react';
 
 import ModalBox from 'react-native-modalbox';
+
 
 export const ModalBoxDemo = () => {
   const [isOpenVal, setIsOpenVal] = useState(false);
@@ -40,6 +40,14 @@ export const ModalBoxDemo = () => {
   const [isOpenVal22, setIsOpenVal22] = useState(false);
   const [isOpenVal23, setIsOpenVal23] = useState(false);
   const [isOpenVal24, setIsOpenVal24] = useState(false);
+  const [isOpenVal25, setIsOpenVal25] = useState(false);
+  const [isOpenVal26, setIsOpenVal26] = useState(false);
+  const [isOpenVal27, setIsOpenVal27] = useState(false);
+  const [isOpenVal28, setIsOpenVal28] = useState(false);
+  const [isOpenVal29, setIsOpenVal29] = useState(false);
+  const [isOpenVal30, setIsOpenVal30] = useState(false);
+  const [isOpenVal31, setIsOpenVal31] = useState(false);
+  const [isOpenVal32, setIsOpenVal32] = useState(false);
 
   const btnRef1 = useRef(null);
 
@@ -51,7 +59,7 @@ export const ModalBoxDemo = () => {
   };
   return (
     <Tester>
-      <ScrollView>
+      <ScrollView style={{margin: 10, height: '90%'}}>
         <TestSuite name="属性">
           <TestCase itShould="点击按钮后打开弹框，点击‘close ModalBox’关闭弹框">
             <Button title="isOpen" onPress={() => setIsOpenVal(!isOpenVal)} />
@@ -110,9 +118,9 @@ export const ModalBoxDemo = () => {
               </Text>
             </ModalBox>
           </TestCase>
-          <TestCase itShould="向下滑动10px关闭弹框">
+          <TestCase itShould="向下滑动10关闭弹框">
             <Button
-              title="swipeThreshold"
+              title="swipeThreshold:10"
               onPress={() => setIsOpenVal4(!isOpenVal4)}
             />
             <ModalBox
@@ -122,13 +130,29 @@ export const ModalBoxDemo = () => {
               swipeToClose={true}
               swipeThreshold={10}>
               <Text style={[styles.modalText]}>
-                Close the the modal by swipe down 10px
+                Close the the modal by swipe down 10
               </Text>
             </ModalBox>
           </TestCase>
-          <TestCase itShould="弹框左上方20X20px区域可滑动关闭弹框">
+          <TestCase itShould="向下滑动100关闭弹框">
             <Button
-              title="swipeArea"
+              title="swipeThreshold:100"
+              onPress={() => setIsOpenVal25(!isOpenVal25)}
+            />
+            <ModalBox
+              style={[styles.modal]}
+              isOpen={isOpenVal25}
+              coverScreen={true}
+              swipeToClose={true}
+              swipeThreshold={100}>
+              <Text style={[styles.modalText]}>
+                Close the the modal by swipe down 100
+              </Text>
+            </ModalBox>
+          </TestCase>
+          <TestCase itShould="弹框左上方20X20区域可滑动关闭弹框">
+            <Button
+              title="swipeArea:20"
               onPress={() => setIsOpenVal5(!isOpenVal5)}
             />
             <ModalBox
@@ -139,6 +163,22 @@ export const ModalBoxDemo = () => {
               swipeArea={20}>
               <Text style={[styles.modalText]}>
                 Close the the modal by swipe down swipeArea:20
+              </Text>
+            </ModalBox>
+          </TestCase>
+          <TestCase itShould="弹框左上方100X100区域可滑动关闭弹框">
+            <Button
+              title="swipeArea:100"
+              onPress={() => setIsOpenVal26(!isOpenVal26)}
+            />
+            <ModalBox
+              style={[styles.modal]}
+              isOpen={isOpenVal26}
+              coverScreen={true}
+              swipeToClose={true}
+              swipeArea={100}>
+              <Text style={[styles.modalText]}>
+                Close the the modal by swipe down swipeArea:100
               </Text>
             </ModalBox>
           </TestCase>
@@ -211,7 +251,7 @@ export const ModalBoxDemo = () => {
           </TestCase>
           <TestCase itShould="背景遮罩层透明度，设置为0.5">
             <Button
-              title="backdropOpacity"
+              title="backdropOpacity:0.5"
               onPress={() => setIsOpenVal11(!isOpenVal11)}
             />
             <ModalBox
@@ -223,9 +263,23 @@ export const ModalBoxDemo = () => {
               <Text style={[styles.modalText]}>backdropOpacity: 0.5</Text>
             </ModalBox>
           </TestCase>
+          <TestCase itShould="背景遮罩层透明度，设置为0.8">
+            <Button
+              title="backdropOpacity:0.8"
+              onPress={() => setIsOpenVal27(!isOpenVal27)}
+            />
+            <ModalBox
+              style={[styles.modal]}
+              isOpen={isOpenVal27}
+              coverScreen={true}
+              backdropPressToClose={true}
+              backdropOpacity={0.8}>
+              <Text style={[styles.modalText]}>backdropOpacity: 0.8</Text>
+            </ModalBox>
+          </TestCase>
           <TestCase itShould="背景遮罩层颜色，设置为绿色">
             <Button
-              title="backdropColor"
+              title="backdropColor: 'green'"
               onPress={() => setIsOpenVal12(!isOpenVal12)}
             />
             <ModalBox
@@ -235,6 +289,20 @@ export const ModalBoxDemo = () => {
               backdropPressToClose={true}
               backdropColor={'green'}>
               <Text style={[styles.modalText]}>backdropColor: 'green'</Text>
+            </ModalBox>
+          </TestCase>
+          <TestCase itShould="背景遮罩层颜色，设置为黑色">
+            <Button
+              title="backdropColor: 'black'"
+              onPress={() => setIsOpenVal17(!isOpenVal17)}
+            />
+            <ModalBox
+              style={[styles.modal]}
+              isOpen={isOpenVal17}
+              coverScreen={true}
+              backdropPressToClose={true}
+              backdropColor={'black'}>
+              <Text style={[styles.modalText]}>backdropColor: 'black'</Text>
             </ModalBox>
           </TestCase>
           <TestCase itShould="自定义的背景内容，背景会显示文字">
@@ -258,7 +326,7 @@ export const ModalBoxDemo = () => {
           </TestCase>
           <TestCase itShould="弹框的打开和关闭动画持续时间，设置为1000ms">
             <Button
-              title="animationDuration"
+              title="animationDuration:1000"
               onPress={() => setIsOpenVal14(!isOpenVal14)}
             />
             <ModalBox
@@ -270,7 +338,21 @@ export const ModalBoxDemo = () => {
               <Text style={[styles.modalText]}>animationDuration:1000ms</Text>
             </ModalBox>
           </TestCase>
-          <TestCase itShould="设置弹框框的动画效果">
+          <TestCase itShould="弹框的打开和关闭动画持续时间，设置为3000ms">
+            <Button
+              title="animationDuration:3000"
+              onPress={() => setIsOpenVal29(!isOpenVal29)}
+            />
+            <ModalBox
+              style={[styles.modal]}
+              isOpen={isOpenVal29}
+              coverScreen={true}
+              backdropPressToClose={true}
+              animationDuration={3000}>
+              <Text style={[styles.modalText]}>animationDuration:3000ms</Text>
+            </ModalBox>
+          </TestCase>
+          <TestCase itShould="设置弹框的动画效果">
             <Button
               title="easing"
               onPress={() => setIsOpenVal15(!isOpenVal15)}
@@ -298,26 +380,9 @@ export const ModalBoxDemo = () => {
               <Text style={[styles.modalText]}>easing: 自定义easing函数</Text>
             </ModalBox>
           </TestCase>
-          <TestCase itShould="没有动画，渲染后立即打开">
-            <Button
-              title="startOpen"
-              onPress={() => setIsOpenVal18(!isOpenVal18)}
-            />
-            <ModalBox
-              style={[styles.modal]}
-              isOpen={isOpenVal18}
-              coverScreen={true}
-              backdropPressToClose={true}
-              startOpen={true}
-              onClosed={() => console.log('Modal closed')}
-              onOpened={() => console.log('Modal opened')}
-              onClosingState={() => console.log('Modal closing state changed')}>
-              <Text style={[styles.modalText]}>startOpen is true</Text>
-            </ModalBox>
-          </TestCase>
           <TestCase itShould="设置弹框显示在最上层">
             <Button
-              title="coverScreen"
+              title="coverScreen:true"
               onPress={() => setIsOpenVal19(!isOpenVal19)}
             />
             <ModalBox
@@ -328,19 +393,51 @@ export const ModalBoxDemo = () => {
               <Text style={[styles.modalText]}>coverScreen is true</Text>
             </ModalBox>
           </TestCase>
-          <TestCase itShould="设置弹框在键盘弹出时距离键盘顶部的偏移量">
+          <TestCase itShould="设置弹框显示在默认层">
             <Button
-              title="keyboardTopOffset"
-              onPress={() => setIsOpenVal20(!isOpenVal20)}
+              title="coverScreen:false"
+              onPress={() => setIsOpenVal28(!isOpenVal28)}
             />
             <ModalBox
               style={[styles.modal]}
-              isOpen={isOpenVal20}
-              coverScreen={true}
-              keyboardTopOffset={10}
-              position={'bottom'}
+              isOpen={isOpenVal28}
               backdropPressToClose={true}>
-              <Text style={[styles.modalText]}>keyboardTopOffset: 50</Text>
+              <Text style={[styles.modalText]}>coverScreen is false</Text>
+            </ModalBox>
+          </TestCase>
+          <TestCase itShould="设置弹框在键盘弹出时距离键盘顶部的偏移量为默认偏移量">
+            <Button
+              title="keyboardTopOffset:默认"
+              onPress={() => setIsOpenVal20(!isOpenVal20)}
+            />
+            <ModalBox
+              style={[styles.modal1]}
+              isOpen={isOpenVal20}
+              keyboardTopOffset={0}
+              coverScreen={true}
+              position="bottom"
+              backdropPressToClose={true}>
+              <Text style={[styles.modalText]}>keyboardTopOffset: 默认</Text>
+              <TextInput
+                placeholder="text"
+                placeholderTextColor="#9a73ef"
+                autoCapitalize="none"
+              />
+            </ModalBox>
+          </TestCase>
+          <TestCase itShould="设置弹框在键盘弹出时距离键盘顶部的偏移量：300">
+            <Button
+              title="keyboardTopOffset:300"
+              onPress={() => setIsOpenVal30(!isOpenVal30)}
+            />
+            <ModalBox
+              style={[styles.modal1]}
+              isOpen={isOpenVal30}
+              keyboardTopOffset={300}
+              coverScreen={true}
+              position="bottom"
+              backdropPressToClose={true}>
+              <Text style={[styles.modalText]}>keyboardTopOffset: 300</Text>
               <TextInput
                 placeholder="text"
                 placeholderTextColor="#9a73ef"
@@ -350,17 +447,37 @@ export const ModalBoxDemo = () => {
           </TestCase>
           <TestCase itShould="使用原生驱动，提高动画性能">
             <Button
-              title="useNativeDriver"
+              title="useNativeDriver：true"
               onPress={() => setIsOpenVal21(!isOpenVal21)}
+            />
+            <Button
+              title="useNativeDriver：false"
+              onPress={() => setIsOpenVal32(!isOpenVal32)}
             />
             <ModalBox
               style={[styles.modal]}
               isOpen={isOpenVal21}
-              coverScreen={true}
               easing={Easing.elastic(8)}
               useNativeDriver={true}
               backdropPressToClose={true}>
               <Text style={[styles.modalText]}>useNativeDriver is true</Text>
+            </ModalBox>
+            <ModalBox
+              style={[styles.modal]}
+              isOpen={isOpenVal32}
+              easing={Easing.elastic(8)}
+              useNativeDriver={false}
+              backdropPressToClose={true}>
+              <Text style={[styles.modalText]}>useNativeDriver is false</Text>
+            </ModalBox>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="方法">
+          <TestCase itShould="调用方法打开和关闭弹框">
+            <Button title="open" onPress={openModalBox} />
+            <Button title="close" onPress={closeModalBox} />
+            <ModalBox ref={btnRef1} style={[styles.modal2]} backdrop={false}>
+              <Text style={[styles.modalText]}>ModalBox open</Text>
             </ModalBox>
           </TestCase>
         </TestSuite>
@@ -432,17 +549,9 @@ export const ModalBoxDemo = () => {
             }}
           />
         </TestSuite>
-        <TestSuite name="方法">
-          <TestCase itShould="调佣方法打开和关闭弹框">
-            <Button title="open" onPress={openModalBox} />
-            <Button title="close" onPress={closeModalBox} />
-            <ModalBox ref={btnRef1} style={[styles.modal]} coverScreen={true}>
-              <Text style={[styles.modalText]}>ModalBox open</Text>
-            </ModalBox>
-          </TestCase>
-        </TestSuite>
       </ScrollView>
     </Tester>
+
   );
 };
 
@@ -453,6 +562,16 @@ const styles = StyleSheet.create({
     width: 300,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  modal1: {
+    height: 300,
+    width: 300,
+  },
+  modal2: {
+    height: 300,
+    width: 150,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
   },
   modalText: {
     fontSize: 20,

@@ -482,7 +482,7 @@ export const FlashListTest = () => {
     });
 
     const onViewableItemsChanged = () => {
-        console.info('flashlist onViewableItemsChanged');
+        console.log('flashlist onViewableItemsChanged');
     };
     const viewabilityConfigCallbackPairs = [
         {
@@ -553,12 +553,28 @@ export const FlashListTest = () => {
                         />
                     </View>
                 </TestCase>
-                <TestCase itShould="refreshControl">
-                    <View style={{ height: 120 }}>
-                        <FlashList data={DATA} renderItem={renderItem} refreshControl={<RefreshControl refreshing={true} />} />
+                <TestCase itShould="progressViewOffset">
+                    <View style={{ height: 100 }}>
+                        <FlashList
+                            data={DATA}
+                            renderItem={renderItem}
+                            refreshing={refreshing}
+                            onRefresh={() => {
+                                setRefreshing(true);
+                                setTimeout(() => {
+                                    setRefreshing(false);
+                                }, 2000);
+                            }}
+                            progressViewOffset={50}
+                        />
                     </View>
                 </TestCase>
                 <ScrollView>
+                    <TestCase itShould="refreshControl">
+                        <View style={{ height: 120 }}>
+                            <FlashList data={DATA} renderItem={renderItem} refreshControl={<RefreshControl refreshing={true} />} />
+                        </View>
+                    </TestCase>
                     <TestCase itShould="CellRendererComponent">
                         <FlashList
                             data={DATA}
@@ -682,7 +698,7 @@ export const FlashListTest = () => {
                         }}
                     />
                     <TestCase
-                        itShould="onViewableltemsChanged"
+                        itShould="viewabilityConfig,onViewableltemsChanged"
                         initialState={false}
                         arrange={({ setState }) => {
                             return (
@@ -734,19 +750,18 @@ export const FlashListTest = () => {
                             data={MessageDATA}
                             renderItem={renderMessage}
                             getItemType={item => {
-                                console.info('flashlist getItemType type:' + item.type + ',id:' + item.id)
+                                console.log('flashlist getItemType type:' + item.type + ',id:' + item.id)
                                 return item.type;
                             }}
                         />
                     </TestCase>
 
                     <TestCase itShould="data,renderItem">
-                        <FlashList style={{ height: 120 }} data={DATA} renderItem={renderItem} />
+                        <FlashList data={DATA} renderItem={renderItem} />
                     </TestCase>
 
                     <TestCase itShould="ListHeaderComponent">
                         <FlashList
-                            style={{ height: 120 }}
                             data={DATA}
                             renderItem={renderItem}
                             ListHeaderComponent={renderHeader}
@@ -754,7 +769,6 @@ export const FlashListTest = () => {
                     </TestCase>
                     <TestCase itShould="ListFooterComponent">
                         <FlashList
-                            style={{ height: 120 }}
                             data={DATA}
                             renderItem={renderItem}
                             ListFooterComponent={renderFooter}
@@ -762,7 +776,6 @@ export const FlashListTest = () => {
                     </TestCase>
                     <TestCase itShould="contentContainerStyle">
                         <FlashList
-                            style={{ height: 120 }}
                             data={DATA}
                             renderItem={renderItem}
                             contentContainerStyle={{ padding: 10, backgroundColor: 'blue' }}
@@ -770,7 +783,6 @@ export const FlashListTest = () => {
                     </TestCase>
                     <TestCase itShould="drawDistance">
                         <FlashList
-                            style={{ height: 120 }}
                             data={DATA}
                             renderItem={renderItem}
                             drawDistance={30}
@@ -819,7 +831,6 @@ export const FlashListTest = () => {
 
                     <TestCase itShould="overrideItemLayout">
                         <FlashList
-                            style={{ height: 120 }}
                             data={DATA}
                             numColumns={3}
                             renderItem={renderItem}
@@ -828,7 +839,6 @@ export const FlashListTest = () => {
                     </TestCase>
                     <TestCase itShould="disableAutoLayout">
                         <FlashList
-                            style={{ height: 120 }}
                             data={DATA}
                             renderItem={renderItem}
                             disableAutoLayout={true}
@@ -836,7 +846,6 @@ export const FlashListTest = () => {
                     </TestCase>
                     <TestCase itShould="disableHorizontalListHeightMeasurement">
                         <FlashList
-                            style={{ height: 120 }}
                             data={DATA}
                             renderItem={renderItem}
                             disableHorizontalListHeightMeasurement={true}
@@ -862,7 +871,7 @@ export const FlashListTest = () => {
                                 estimatedItemSize={40}
                                 nestedScrollEnabled={true}
                                 renderScrollComponent={props => {
-                                    console.info('flashlist renderScrollComponent do')
+                                    console.log('flashlist renderScrollComponent do')
                                     return (<ScrollView nestedScrollEnabled {...props} />)
                                 }}
                             />
@@ -923,16 +932,6 @@ export const FlashListTest = () => {
                                 data={DATA}
                                 renderItem={renderItem}
                                 viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs}
-                            />
-                        </View>
-                    </TestCase>
-                    <TestCase itShould="progressViewOffset">
-                        <View style={{ height: 100 }}>
-                            <FlashList
-                                data={DATA}
-                                renderItem={renderItem}
-                                progressViewOffset={50}
-                                showsVerticalScrollIndicator
                             />
                         </View>
                     </TestCase>

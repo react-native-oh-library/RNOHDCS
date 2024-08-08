@@ -17,8 +17,8 @@ export class ComponentsScreen extends React.Component {
   render() {
     return (
       <Tester>
-        <TestSuite name="NetworkProviderAndConsumerTest">
-          <TestCase tags={['C_API']} itShould="NetworkProviderAndConsumerTest"
+        <TestSuite name="NetworkProvider和NetworkConsumer示例">
+          <TestCase tags={['C_API']} itShould="Connected to Internet YES(网络在线) NO(网络离线)"
             initialState={''}
             arrange={({ setState }) =>
               <DummyNetworkContext.Consumer>

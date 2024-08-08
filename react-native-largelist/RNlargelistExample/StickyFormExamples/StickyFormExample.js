@@ -23,10 +23,10 @@ export class StickyFormExample extends React.Component {
         heightForIndexPath={() => 50}
         renderIndexPath={this._renderItem}
         onRefresh={() => {
-          setTimeout(() => this._list.endRefresh(), 2000);
+          setTimeout(() => this._list?.endRefresh(), 2000);
         }}
         onLoading={() => {
-          setTimeout(() => this._list.endLoading(), 2000);
+          setTimeout(() => this._list?.endLoading(), 2000);
         }}
       />
     );

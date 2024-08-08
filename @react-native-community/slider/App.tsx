@@ -120,7 +120,7 @@ export default function SliderExample() {
                                 <Button onPress={() => {
                                     setState(0)
                                 }} title="change to minimumValue" />
-                               
+
                             </View>
                         )
                     }}
@@ -175,6 +175,76 @@ export default function SliderExample() {
                     }}
                     assert={async ({ expect, state }) => {
                         expect(state).to.be.eq('red');
+                    }}
+                />
+                <TestCase
+                    itShould="lowerLimit: Slide lower limit. The user won't be able to slide below this limit."
+                    initialState={20}
+                    tags={['C_API']}
+                    arrange={({ setState, state }) => {
+                        return (
+                            <View >
+                                <Text>{"init lowerLimit  ： "}{JSON.stringify(20)}</Text>
+                                <Text>{"current minimumValue  ： "}{JSON.stringify(0)}</Text>
+                                {state === 20 ? <Slider
+                                    style={{ width: 200, height: 40 }}
+                                    minimumValue={0}
+                                    maximumValue={100}
+                                    lowerLimit={20}
+                                    minimumTrackTintColor={"#FFFFFF"}
+                                    maximumTrackTintColor={"#000000"}
+                                /> : <></>}
+                                {state === 50 ? <Slider
+                                    style={{ width: 200, height: 40 }}
+                                    minimumValue={0}
+                                    maximumValue={100}
+                                    lowerLimit={50}
+                                    minimumTrackTintColor={"#FFFFFF"}
+                                    maximumTrackTintColor={"#000000"}
+                                /> : <></>}
+                                <Button onPress={() => {
+                                    setState(50)
+                                }} title="change to lower limit:50" />
+                            </View>
+                        )
+                    }}
+                    assert={async ({ expect, state }) => {
+                        expect(state).to.be.eq(50);
+                    }}
+                />
+                <TestCase
+                    itShould="upperLimit: Slide upper limit. The user won't be able to slide above this limit."
+                    initialState={100}
+                    tags={['C_API']}
+                    arrange={({ setState, state }) => {
+                        return (
+                            <View >
+                                <Text>{"init upperLimit  ： "}{JSON.stringify(100)}</Text>
+                                <Text>{"current maximumValue  ： "}{JSON.stringify(100)}</Text>
+                                {state === 100 ? <Slider
+                                    style={{ width: 200, height: 40 }}
+                                    minimumValue={0}
+                                    maximumValue={100}
+                                    upperLimit={100}
+                                    minimumTrackTintColor={"#FFFFFF"}
+                                    maximumTrackTintColor={"#000000"}
+                                /> : <></>}
+                                {state === 80 ? <Slider
+                                    style={{ width: 200, height: 40 }}
+                                    minimumValue={0}
+                                    maximumValue={100}
+                                    upperLimit={80}
+                                    minimumTrackTintColor={"#FFFFFF"}
+                                    maximumTrackTintColor={"#000000"}
+                                /> : <></>}
+                                <Button onPress={() => {
+                                    setState(80)
+                                }} title="change to uppper limit:80" />
+                            </View>
+                        )
+                    }}
+                    assert={async ({ expect, state }) => {
+                        expect(state).to.be.eq(80);
                     }}
                 />
                 <TestCase

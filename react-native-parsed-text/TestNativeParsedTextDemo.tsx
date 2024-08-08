@@ -82,7 +82,7 @@ export function TestNativeParsedTextDemo({ filter }: { filter: Filter }) {
   const handleUrlPress2 = (phone, matchIndex /*: number*/) => {
     let p = { phone, matchIndex };
     setParam2(
-      JSON.stringify(p) + `---展示点击事件回调信息：${phone} has been pressed!`,
+      JSON.stringify(p) + `---展示点击事件回调信息：${phone} has been pressed!`
     );
   };
   const handleLongPress2 = () => {
@@ -91,7 +91,7 @@ export function TestNativeParsedTextDemo({ filter }: { filter: Filter }) {
   const handleUrlPress3 = (email, matchIndex /*: number*/) => {
     let p = { email, matchIndex };
     setParam3(
-      JSON.stringify(p) + `---展示点击事件回调信息：${email} has been pressed!`,
+      JSON.stringify(p) + `---展示点击事件回调信息：${email} has been pressed!`
     );
   };
   const handleLongPress3 = () => {
@@ -100,14 +100,14 @@ export function TestNativeParsedTextDemo({ filter }: { filter: Filter }) {
   const handleUrlPress4 = (name, matchIndex /*: number*/) => {
     let p = { name, matchIndex };
     setParam4(
-      JSON.stringify(p) + `---展示点击事件回调信息：${name} has been pressed!`,
+      JSON.stringify(p) + `---展示点击事件回调信息：${name} has been pressed!`
     );
   };
   const handleUrlPress5 = (matchString, matchIndex /*: number*/) => {
     let p = { matchString, matchIndex };
     setParam5(
       JSON.stringify(p) +
-        `---展示点击事件回调信息：${matchString} has been pressed!`,
+        `---展示点击事件回调信息：${matchString} has been pressed!`
     );
   };
   const renderText = (matchingString, matches) => {
@@ -119,7 +119,7 @@ export function TestNativeParsedTextDemo({ filter }: { filter: Filter }) {
     let p = { matchString, matchIndex };
     setParam7(
       JSON.stringify(p) +
-        `---展示点击事件回调信息：${matchString} has been pressed!`,
+        `---展示点击事件回调信息：${matchString} has been pressed!`
     );
   };
   const renderText2 = (matchingString, matches) => {
@@ -142,7 +142,10 @@ export function TestNativeParsedTextDemo({ filter }: { filter: Filter }) {
               <Text>{`parse:[{type: 'url',style: styles.url, onPress: handleUrlPress1}]`}</Text>
               <Text>{`url类型的正则表达式: /(https?:\/\/|www\.)[-a-zA-Z0-9@:%._\+~#=]{1,256}\.(xn--)?[a-z0-9-]{2,20}\b([-a-zA-Z0-9@:%_\+\[\],.~#?&\/=]*[-a-zA-Z0-9@:%_\+\]~#?&\/=])*/i`}</Text>
               <Text>{`匹配到的文本样式:{color:'red',...`}</Text>
-              <Text>{`展示匹配文本被点击时handleUrlPress1获取的参数,点击匹配文本有值，同时跳转浏览器，证明方法被调用:${param1}`}</Text>
+              <View>
+                <Text>{`展示匹配文本被点击时handleUrlPress1获取的参数,点击匹配文本有值，同时跳转浏览器，证明方法被调用:`}</Text>
+                <Text style={styles.markTextByRed}>{param1}</Text>
+              </View>
             </View>
             <View style={styles.outputpart}>
               <Text>展示组件效果：</Text>
@@ -165,8 +168,14 @@ export function TestNativeParsedTextDemo({ filter }: { filter: Filter }) {
               <Text>{`parse:[{type: 'phone',style: styles.phone, onPress: handleUrlPress2,onLongPress:handleLongPress2}]`}</Text>
               <Text>{`phone类型的正则表达式::  ${/[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,7}/}`}</Text>
               <Text>{`匹配到的文本样式::{color:'green',...`}</Text>
-              <Text>{`展示匹配文本被点击时handleUrlPress2获取的参数,点击匹配文本有值,证明方法被调用:${param2}`}</Text>
-              <Text>{`展示匹配文本被长按时handleLongPress2获取的参数,点击匹配文本有值,证明方法被调用:${param2l}`}</Text>
+              <View>
+                <Text>{`展示匹配文本被点击时handleUrlPress2获取的参数,点击匹配文本有值,证明方法被调用:`}</Text>
+                <Text style={styles.markTextByRed}>{param2}</Text>
+              </View>
+              <View>
+                <Text>{`展示匹配文本被长按时handleLongPress2获取的参数,点击匹配文本有值,证明方法被调用:`}</Text>
+                <Text style={styles.markTextByRed}>{param2l}</Text>
+              </View>
             </View>
             <View style={styles.outputpart}>
               <Text>展示组件效果：</Text>
@@ -193,8 +202,14 @@ export function TestNativeParsedTextDemo({ filter }: { filter: Filter }) {
               <Text>{`onLongPress：{handleLongPress3}，parse:[{type: 'email',style: styles.email, onPress: handleUrlPress3}]`}</Text>
               <Text>{`email类型的正则表达式: ${/\S+@\S+\.\S+/}`}</Text>
               <Text>{`匹配到的文本样式::{color:'blue',...`}</Text>
-              <Text>{`展示整个组件文本被长按时handleLongPress3获取的参数，点击整个组件文本有值,证明方法被调用:${param3l}`}</Text>
-              <Text>{`展示匹配文本被点击时handleUrlPress3方法返回的信息，点击匹配文本有值,证明方法被调用:${param3}`}</Text>
+              <View>
+                <Text>{`展示整个组件文本被长按时handleLongPress3获取的参数，点击整个组件文本有值,证明方法被调用:`}</Text>
+                <Text style={styles.markTextByRed}>{param3l}</Text>
+              </View>
+              <View>
+                <Text>{`展示匹配文本被点击时handleUrlPress3方法返回的信息，点击匹配文本有值,证明方法被调用:`}</Text>
+                <Text style={styles.markTextByRed}>{param3}</Text>
+              </View>
             </View>
             <View style={styles.outputpart}>
               <Text>展示组件效果：</Text>
@@ -220,9 +235,14 @@ export function TestNativeParsedTextDemo({ filter }: { filter: Filter }) {
             <View style={styles.inputpart}>
               <Text>测试组件输入：</Text>
               <Text>{`parse:[{pattern: /Bob|David/,style: styles.name, onPress: handleUrlPress4},{type: 'email',style: styles.email}]`}</Text>
-              <Text>{`pattern自定义正则表达式为：/Bob|David/，type:'email'类型的正则表达式为：${/\S+@\S+\.\S+/}`}</Text>
+              <Text
+                style={styles.markTextByBlue}
+              >{`提示：pattern自定义正则表达式为：/Bob|David/，type:'email'类型的正则表达式为：${/\S+@\S+\.\S+/}`}</Text>
               <Text>{`pattern匹配到的文本样式:{color:'purple',...},type:'email'正则匹配到的文本样式：{color:'blue',...}`}</Text>
-              <Text>{`展示pattern正则匹配文本被点击时handleUrlPress4方法获取的参数，点击匹配文本有值,证明方法被调用:${param4}`}</Text>
+              <View>
+                <Text>{`展示pattern正则/Bob|David/匹配文本被点击时handleUrlPress4方法获取的参数，点击匹配文本有值,证明方法被调用:`}</Text>
+                <Text style={styles.markTextByRed}>{param4}</Text>
+              </View>
             </View>
             <View style={styles.outputpart}>
               <Text>展示组件效果：</Text>
@@ -251,9 +271,17 @@ export function TestNativeParsedTextDemo({ filter }: { filter: Filter }) {
               <Text>{`[{pattern: /\[(@[^:]+):([^\]]+)\]/i, style: styles.username, onPress: handleUrlPress5, renderText: renderText}]`}</Text>
               <Text>{`pattern自定义正则表达式为:  ${/\[(@[^:]+):([^\]]+)\]/i}`}</Text>
               <Text>{`pattern匹配到的文本样式:{color:'orange',...}`}</Text>
-              <Text>{`展示pattern正则匹配文本被点击时handleUrlPress5获取的参数,点击匹配文本有值,证明方法被调用:${param5}`}</Text>
-              <Text>{`提示:renderText默认返回matches[0]`}</Text>
-              <Text>{`展示 renderText获取的参数,当pattern正则匹配到文本时，展示并渲染matches[0]，证明方法被调用:${param6}`}</Text>
+              <View>
+                <Text>{`展示pattern正则匹配文本被点击时handleUrlPress5获取的参数,点击匹配文本有值,证明方法被调用:`}</Text>
+                <Text style={styles.markTextByRed}>{param5}</Text>
+              </View>
+              <Text
+                style={styles.markTextByBlue}
+              >{`提示:renderText默认返回matches[0]`}</Text>
+              <View>
+                <Text>{`展示 renderText获取的参数,当pattern正则匹配到文本时，展示并渲染matches[0]，证明方法被调用:${param6}`}</Text>
+                <Text style={styles.markTextByRed}>{param6}</Text>
+              </View>
             </View>
             <View style={styles.outputpart}>
               <Text>展示组件效果：</Text>
@@ -318,11 +346,25 @@ export function TestNativeParsedTextDemo({ filter }: { filter: Filter }) {
               <Text>{`parse:[{pattern: /\d{17}[0-9|X]/, style: styles.idnumber, onPress: handleUrlPress6,renderText: renderText2}],childrenProps:{onLongPress:handleLongPressFunc}`}</Text>
               <Text>{`pattern自定义正则表达式为:  ${/\d{17}[0-9|X]/}`}</Text>
               <Text>{`pattern匹配到的文本样式为:{color:'#8cc540',...}`}</Text>
-              <Text>{`展示pattern正则匹配文本被点击时handleUrlPress6获取的参数,,点击匹配文本有值,证明方法被调用:${param7}`}</Text>
-              <Text>{`提示:renderText默认返回matches[0]`}</Text>
-              <Text>{`展示 renderText获取的参数,当pattern正则匹配到文本时，展示并渲染matches[0]，证明方法被调用:${param8}`}</Text>
-              <Text>{`提示:childrenProps属性传递onLongPress给所有匹配到的文本，当匹配文本被长按时handleLongPressFunc被执行`}</Text>
-              <Text>{`展示handleLongPressFunc方法执行了${param9}次`}</Text>
+              <View>
+                <Text>{`展示pattern正则匹配文本被点击时handleUrlPress6获取的参数,点击匹配文本有值,证明方法被调用:`}</Text>
+                <Text style={styles.markTextByRed}>{param7}</Text>
+              </View>
+
+              <Text
+                style={styles.markTextByBlue}
+              >{`提示:renderText默认返回matches[0]`}</Text>
+              <View>
+                <Text>{`展示 renderText获取的参数,当pattern正则匹配到文本时，展示并渲染matches[0]，证明方法被调用:`}</Text>
+                <Text style={styles.markTextByRed}>{param8}</Text>
+              </View>
+              <Text
+                style={styles.markTextByBlue}
+              >{`提示:childrenProps属性传递onLongPress给自身以及所有匹配到的文本，当自身或者匹配文本被长按时handleLongPressFunc被执行`}</Text>
+              <View>
+                <Text>{`展示handleLongPressFunc方法执行了`}</Text>
+                <Text style={styles.markTextByRed}>{`${param9}次`}</Text>
+              </View>
             </View>
             <View style={styles.outputpart}>
               <Text>展示组件效果：</Text>
@@ -361,6 +403,12 @@ const styles = StyleSheet.create({
   },
   inputpart: {
     marginBottom: 10,
+  },
+  markTextByBlue: {
+    color: "blue",
+  },
+  markTextByRed: {
+    color: "red",
   },
   output: {},
   url: {

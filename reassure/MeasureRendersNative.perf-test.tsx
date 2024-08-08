@@ -9,7 +9,7 @@ test('RN Button', async () => {
   await measureRenders(<Button title="test" />);
 });
 
-test('RN Button', async () => {
+test('RN Button runs 5', async () => {
   await measureRenders(<TextInput />, {runs: 5});
 });
 

@@ -1,114 +1,29 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, ScrollView, Image, Button } from 'react-native';
-import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
-import Modal from 'react-native-translucent-modal'
-//import { Modal } from 'react-native';
+import React, { useState } from "react";
+import { View, Image, Button, StyleSheet, Alert } from "react-native-harmony";
+// @ts-expect-error
+import Modal from "react-native-translucent-modal";
 
 const STYLES = StyleSheet.create({
     wrapper: {
         flex: 1,
     },
     imageBackground: {
-        flex: 1,
-        resizeMode: 'cover'
-    },
-    otherImage: {
-        width: 500,
-        height: 500
+        width: 300,
+        height: 200,
     }
 });
-export const T_ReactNativeTranslucentModal = () => {
+
+export const E_ReactNativeTranslucentModal: React.FC = (): JSX.Element => {
 
     const [visible, setVisible] = useState(false)
-    const [animationType, setAnimationType] = useState('none')//'slide', 'fade'
-    const [visibleOne, setVisibleOne] = useState(false)
-    const [visibleTwo, setVisibleTwo] = useState(false)
-    const [transparent, setTransparent] = useState(false)
 
-    return (
-        <Tester>
-            <TestSuite name="react-native-translucent-modal">
-                <ScrollView>
-
-                    <TestCase
-                        key={"visible"}
-                        itShould={`change visible`}
-                        tags={['C_API']}
-                        initialState={false}
-
-                        arrange={({ setState }) => {
-                            return (
-                                <View style={{ flex: 1 }}>
-                                    <Modal testID={'tm1'} visible={visible} onRequestClose={() => setVisible(false)}>
-                                        <Image source={require("../../assets/placeholder2000x2000.jpg")} style={STYLES.imageBackground} />
-                                    </Modal>
-                                    <Button title={"setVisible(true)"} onPress={() => {
-                                        setVisible(true); setState(true);
-                                    }} />
-                                </View>
-                            );
-                        }}
-                        assert={async ({ expect, state }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-                    <TestCase
-                        key={"animationType"}
-                        itShould={`change animationType`}
-                        tags={['C_API']}
-                        initialState={false}
-
-                        arrange={({ setState }) => {
-                            return (
-                                <View style={{ flex: 1 }}>
-                                    <Modal animationType={animationType} testID={'tm2'}
-                                        visible={visibleOne} onRequestClose={() => setVisibleOne(false)}>
-                                        <Image source={require("../../assets/placeholder2000x2000.jpg")} style={STYLES.otherImage} />
-                                    </Modal>
-                                    <Button title={"setAnimationType('slide')"} onPress={() => {
-                                        setAnimationType('slide'); setState(true);
-                                    }} />
-                                    <Button title={"setAnimationType('fade')"} onPress={() => {
-                                        setAnimationType('fade'); setState(true);
-                                    }} />
-                                    <Button title={"setVisibleOne(true)"} onPress={() => {
-                                        setVisibleOne(true)
-                                    }} />
-                                </View>
-                            );
-                        }}
-                        assert={async ({ expect, state }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-                    <TestCase
-                        key={"transparent"}
-                        itShould={`change transparent`}
-                        tags={['C_API']}
-                        initialState={false}
-
-                        arrange={({ setState }) => {
-                            return (
-                                <View style={{ flex: 1 }}>
-                                    <Modal transparent={transparent} testID={'tm3'}
-                                        visible={visibleTwo} onRequestClose={() => setVisibleTwo(false)}>
-                                        <Image source={require("../../assets/placeholder2000x2000.jpg")} style={STYLES.otherImage} />
-                                    </Modal>
-                                    <Button title={"setTransparent(true)"} onPress={() => {
-                                        setTransparent(true); setState(true);
-                                    }} />
-                                    <Button title={"setVisibleTwo(true)"} onPress={() => {
-                                        setVisibleTwo(true)
-                                    }} />
-                                </View>
-                            );
-                        }}
-                        assert={async ({ expect, state }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-                </ScrollView>
-            </TestSuite>
-        </Tester >
-    );
+    return <View style={STYLES.wrapper}>
+        <Modal transparent={false} animationType='slide'
+            visible={visible} onRequestClose={() => setVisible(!visible)}>
+            <Image source={{ uri: 'https://avatars0.githubusercontent.com/u/15728691?s=460&v=4' }} style={STYLES.imageBackground} />
+        </Modal>
+        <Button title="显示Modal" onPress={() => setVisible(true)}></Button>
+    </View>;
 }
+
+export default E_ReactNativeTranslucentModal

@@ -1,6 +1,6 @@
 import { TestSuite, TestCase, Tester } from '@rnoh/testerino';
 import React from 'react';
-import FileUpload from 'react-native-fileupload';
+import FileUpload from '@remobile/react-native-fileupload';
 
 export function FileUploadTest() {
     let obj = {

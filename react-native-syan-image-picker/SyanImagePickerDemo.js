@@ -1,153 +1,308 @@
+//此demo依赖于 react-native-video(https://github.com/react-native-oh-library/react-native-video) 三方库，具体使用方式，请参考 https://gitee.com/react-native-oh-library/usage-docs/blob/master/zh-cn/react-native-video.md
 
 import React, {Component} from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-  Dimensions
+    StyleSheet,
+    Text,
+    View,
+    Image,
+    ScrollView,
+    TouchableOpacity,
+    Dimensions
 } from 'react-native';
+
+import RNCVideo from 'react-native-video';
 
 import SYImagePicker from "react-native-syan-image-picker";
 
 const {width} = Dimensions.get('window');
 
 export default class App extends Component<{}> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      photos: [],
-    };
-  }
-
-  handleOpenImagePicker = () => {
-    SYImagePicker.showImagePicker(
-        {
-          imageCount: 1,
-          isRecordSelected: true,
-          isCrop: true,
-          showCropCircle: true,
-          quality: 90,
-          compress: true,
-          enableBase64: false,
-        },
-        (err, photos) => {
-          console.log('handleAsyncSelectPhoto showImagePicker', err, photos);
-          if (!err) {
-            this.setState({
-              photos,
-            });
-          } else {
-            console.log(err);
-          }
-        },
-    );
-  };
-
-  /**
-   * 使用方式sync/await
-   * 相册参数暂时只支持默认参数中罗列的属性；
-   * @returns {Promise<void>}
-   */
-  handleAsyncSelectPhoto = async () => {
-    SYImagePicker.removeAllPhoto();
-    this.setState({ photos: [] });
-    try {
-      const photos = await SYImagePicker.asyncShowImagePicker({
-        imageCount: 8,
-        showSelectedIndex: false,
-        isGif: true,
-        enableBase64: true,
-      });
-      console.log('handleAsyncSelectPhoto asyncShowImagePicker', photos);
-      // 选择成功
-      this.setState({
-        photos: [...this.state.photos, ...photos],
-      });
-    } catch (err) {
-      console.log(err);
-      // 取消选择，err.message为"取消"
+    constructor(props) {
+        super(props);
+        this.state = {
+            photos: [],
+            video: [],
+        };
     }
-  };
 
-  handlePromiseSelectPhoto = () => {
-    this.setState({ photos: [] });    
-    SYImagePicker.asyncShowImagePicker({imageCount: 3})
-        .then(photos => {
-          console.log(photos);
-          const arr = photos.map(v => {
-            return v;
-          });
-          // 选择成功
-          this.setState({
-            photos: [...this.state.photos, ...arr],
-          });
-        })
-        .catch(err => {
-          // 取消选择，err.message为"取消"
-        });
-  };
+    handleOpenImagePicker = () => {
+        SYImagePicker.showImagePicker(
+            {
+                isCamera: true,
+                imageCount: 1,
+                isCrop: true,
+                quality: 10,
+                compress: true,
+                enableBase64: true,
+            }, (err, photos) => {
+                if (!err) {
+                	  this.setState({video: []});
+                    this.setState({
+                        photos: photos,
+                    });
+                    {photos.map((item, index) => {
+                            console.log("rn_syan_image_picker showImagePicker result: ",
+                                "uri:" + item.uri + "-- " +
+                                "width:" + item.width + "-- " +
+                                "height:" + item.height + "-- " +
+                                "type:" + item.type + "-- " +
+                                "size:" + item.size + "-- " +
+                                "original_uri:" + item.original_uri + "-- " +
+                                "base64:" + item.base64 + "-- ");
+                        })
+                    }
+                } else {
+                    console.log(err);
+                }
+            },
+        );
+    };
 
-  handleLaunchCamera = async () => {
-    SYImagePicker.openCamera(
-        {isCrop: true, showCropCircle: true, showCropFrame: false},
-        (err, photos) => {
-          console.log("openCamera",err, photos);
-          if (!err) {
+    handleOpenImagePicker1 = () => {
+        SYImagePicker.showImagePicker(
+            {
+                isCamera: true,
+                imageCount: 1,
+                isCrop: true,
+                quality: 90,
+                compress: true,
+                enableBase64: true,
+            }, (err, photos) => {
+                if (!err) {
+                	  this.setState({video: []});
+                    this.setState({
+                        photos: photos,
+                    });
+                    {photos.map((item, index) => {
+                        console.log("rn_syan_image_picker showImagePicker result: ",
+                            "uri:" + item.uri + "-- " +
+                            "width:" + item.width + "-- " +
+                            "height:" + item.height + "-- " +
+                            "type:" + item.type + "-- " +
+                            "size:" + item.size + "-- " +
+                            "original_uri:" + item.original_uri + "-- " +
+                            "base64:" + item.base64 + "-- ");
+                    })
+                    }
+                } else {
+                    console.log(err);
+                }
+            },
+        );
+    };
+
+    /**
+     * 使用方式sync/await
+     * 相册参数暂时只支持默认参数中罗列的属性；
+     * @returns {Promise<void>}
+     */
+    handleAsyncSelectPhoto = async () => {
+        try {
+            const photos = await SYImagePicker.asyncShowImagePicker({
+                isCamera: false,
+                imageCount: 8,
+                isCrop: false,
+                compress: false,
+                enableBase64: false,
+            });
+            this.setState({video: []});
+            // 选择成功
             this.setState({
-              photos: [...this.state.photos, ...photos],
+                photos: photos,
             });
-          }
-        },
-    );
-  };
+            {photos.map((item, index) => {
+                console.log("rn_syan_image_picker handleAsyncSelectPhoto result: ",
+                    "uri:" + item.uri + "-- " +
+                    "width:" + item.width + "-- " +
+                    "height:" + item.height + "-- " +
+                    "type:" + item.type + "-- " +
+                    "size:" + item.size + "-- " +
+                    "original_uri:" + item.original_uri + "-- " +
+                    "base64:" + item.base64 + "-- ");
+            })}
+        } catch (err) {
+            console.log(err);
+            // 取消选择，err.message为"取消"
+        }
+    };
 
-  handleDeleteCache = () => {
-    SYImagePicker.deleteCache();
-  };
-
-  handleOpenVideoPicker = () => {
-    SYImagePicker.openVideoPicker(
-        {allowPickingMultipleVideo: true},
-        (err, res) => {
-          console.log(err, res);
-          if (!err) {
-            let photos = [...this.state.photos];
-            res.map(v => {
-              photos.push({...v, uri: v.coverUri});
+    handlePromiseSelectPhoto = () => {
+        this.setState({photos: []});
+        SYImagePicker.asyncShowImagePicker({
+            imageCount: 3,
+            enableBase64: true,
+        }).then(photos => {
+        	      this.setState({video: []});
+                this.setState({
+                    photos: photos,
+                });
+                {photos.map((item, index) => {
+                        console.log("rn_syan_image_picker handlePromiseSelectPhoto result: ",
+                            "uri:" + item.uri + "-- " +
+                            "width:" + item.width + "-- " +
+                            "height:" + item.height + "-- " +
+                            "type:" + item.type + "-- " +
+                            "size:" + item.size + "-- " +
+                            "original_uri:" + item.original_uri + "-- " +
+                            "base64:" + item.base64 + "-- ");
+                    })
+                }
+            }).catch(err => {
+                // 取消选择，err.message为"取消"
             });
+    };
+
+    handleLaunchCamera = async () => {
+        SYImagePicker.openCamera(
+            {isCrop: true, showCropCircle: true, showCropFrame: false},
+            (err, photos) => {
+                if (!err) {
+                	  this.setState({video: []});
+                    this.setState({
+                        photos: photos,
+                    });
+                    {photos.map((item, index) => {
+                            console.log("rn_syan_image_picker handleLaunchCamera result: ",
+                                "uri:" + item.uri + "-- " +
+                                "width:" + item.width + "-- " +
+                                "height:" + item.height + "-- " +
+                                "type:" + item.type + "-- " +
+                                "size:" + item.size + "-- " +
+                                "original_uri:" + item.original_uri + "-- " +
+                                "base64:" + item.base64 + "-- ");
+                        })
+                    }
+                }
+            },
+        );
+    };
+
+    handleSyncLaunchCamera = async () => {
+        try {
+            const photos = await SYImagePicker.asyncOpenCamera({
+                isCrop: true,
+                showCropCircle: true,
+                showCropFrame: false
+            });
+            this.setState({video: []});
             this.setState({
-              photos,
+                photos: photos,
             });
-            console.log("RN App receive openVideoPicker result: ",JSON.stringify(photos));
-          }
-        },
-    );
-  };
 
-  render() {
-    const {photos} = this.state;
-    return (
-        <View style={styles.container}>
-          <View style={styles.scroll}>
-            <Button title={'拍照'} onPress={this.handleLaunchCamera} />
-            <Button title={'开启压缩'} onPress={this.handleOpenImagePicker} />
-            <Button title={'关闭压缩'} onPress={this.handleAsyncSelectPhoto} />
-            <Button
-                title={'选择照片(Promise)带base64'}
-                onPress={this.handlePromiseSelectPhoto}
-            />
-            <Button title={'缓存清除'} onPress={this.handleDeleteCache} />
-            <Button title={'选择视频'} onPress={this.handleOpenVideoPicker} />
-          </View>
-          <ScrollView style={{flex: 1}} contentContainerStyle={styles.scroll}>
-          {photos.map((item, index) => {
-                        let source = { uri: item.uri };
-                        if (item.enableBase64) {
-                            source = { uri: item.base64 };
-                        }
+            {photos.map((item, index) => {
+                    console.log("rn_syan_image_picker handleSyncLaunchCamera result: ",
+                        "uri:" + item.uri + "-- " +
+                        "width:" + item.width + "-- " +
+                        "height:" + item.height + "-- " +
+                        "type:" + item.type + "-- " +
+                        "size:" + item.size + "-- " +
+                        "original_uri:" + item.original_uri + "-- " +
+                        "base64:" + item.base64 + "-- ");
+                })}
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    handleDeleteCache = () => {
+        SYImagePicker.deleteCache();
+    };
+
+    handleOpenVideoPicker = () => {
+        SYImagePicker.openVideoPicker(
+            {allowPickingMultipleVideo: true, videoCount: 10},
+            (err, res) => {
+                if (!err) {
+                	  this.setState({photos: []});
+                    this.setState({
+                        video: res,
+                    });
+                    {res.map((item, index) => {
+                        console.log("rn_syan_image_picker handleOpenVideoPicker result: ",
+                            "uri:" + item.uri + "-- " +
+                            "width:" + item.width + "-- " +
+                            "height:" + item.height + "-- " +
+                            "type:" + item.type + "--" +
+                            "size:" + item.size + "-- " +
+                            "original_uri:" + item.original_uri + "-- " +
+                            "base64:" + item.base64 + "-- ");
+                    })}
+                }
+            },
+        );
+    };
+
+    handleOpenVideoPickerNotAllowPickingMultipleVideo = () => {
+        SYImagePicker.openVideoPicker(
+            {allowPickingMultipleVideo: false},
+            (err, res) => {
+                if (!err) {
+                	  this.setState({photos: []});
+                    this.setState({
+                        video: res,
+                    });
+                    {res.map((item, index) => {
+                        console.log("rn_syan_image_picker handleOpenVideoPickerNotAllowPickingMultipleVideo result: ",
+                            "uri:" + item.uri + "-- " +
+                            "width:" + item.width + "-- " +
+                            "height:" + item.height + "-- " +
+                            "type:" + item.type + "-- " +
+                            "size:" + item.size + "-- " +
+                            "original_uri:" + item.original_uri + "-- " +
+                            "base64:" + item.base64 + "-- ");
+                    })}
+                }
+            },
+        );
+    };
+
+    handleRemoveAll=()=>{
+        SYImagePicker.removeAllPhoto();
+    }
+
+    handleRemoveAtIndex=()=>{
+        const {photos} = this.state;
+        if(!!photos && photos.length > 0){
+            SYImagePicker.removePhotoAtIndex(0);
+        }
+    }
+
+    render() {
+        const {photos} = this.state;
+        const {video} = this.state;
+        return (
+            <View style={styles.container}>
+                <View style={styles.scroll}>
+                    <Button title={'拍照'} onPress={this.handleLaunchCamera}/>
+                    <Button title={'拍照(异步)'} onPress={this.handleSyncLaunchCamera}/>
+                    <Button title={'开启压缩(quality=10)'} onPress={this.handleOpenImagePicker}/>
+                    <Button title={'开启压缩(quality=90)'} onPress={this.handleOpenImagePicker1}/>
+                    <Button title={'关闭压缩'} onPress={this.handleAsyncSelectPhoto}/>
+                    <Button title={'选择照片(Promise)带base64'} onPress={this.handlePromiseSelectPhoto}/>
+                    <Button title={'缓存清除'} onPress={this.handleDeleteCache}/>
+                    <Button title={'选择视频(allowPickingMultipleVideo=true)'} onPress={this.handleOpenVideoPicker}/>
+                    <Button title={'选择视频(allowPickingMultipleVideo=false)'}
+                            onPress={this.handleOpenVideoPickerNotAllowPickingMultipleVideo}/>
+                    <Button title={'刪除全部图片'} onPress={this.handleRemoveAll}/>
+                    <Button title={'通过索引删除图片(第一张)'} onPress={this.handleRemoveAtIndex}/>
+                </View>
+                <ScrollView style={{flex: 1}} contentContainerStyle={styles.scroll}>
+                
+                    {video.map((item, index) => {
+                        const videoSource = {
+                            uri: item.uri, isNetwork: false
+                        };
+                        return (
+                            <RNCVideo
+                                style={styles.video}
+                                source={videoSource}>
+                            </RNCVideo>
+                        );
+                    })}
+                
+                    {photos.map((item, index) => {
+                        let source = {uri: item.uri};
                         return (
                             <Image
                                 key={`image-${index}`}
@@ -156,45 +311,50 @@ export default class App extends Component<{}> {
                                 resizeMode={'contain'}
                             />
                         );
-                })}
-          </ScrollView>
-        </View>
-    );
-  }
+                    })}
+                </ScrollView>
+            </View>
+        );
+    }
 }
 
 const Button = ({title, onPress}) => {
-  return (
-      <TouchableOpacity style={styles.btn} onPress={onPress}>
-        <Text style={{color: '#fff', fontSize: 16}}>{title}</Text>
-      </TouchableOpacity>
-  );
+    return (
+        <TouchableOpacity style={styles.btn} onPress={onPress}>
+            <Text style={{color: '#fff', fontSize: 16}}>{title}</Text>
+        </TouchableOpacity>
+    );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5FCFF',
-    paddingTop: 40,
-  },
-  btn: {
-    backgroundColor: '#FDA549',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 44,
-    paddingHorizontal: 12,
-    margin: 5,
-    borderRadius: 22,
-  },
-  scroll: {
-    padding: 5,
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-  },
-  image: {
-    margin: 10,
-    width: (width - 80) / 3,
-    height: (width - 80) / 3,
-    backgroundColor: '#F0F0F0',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#F5FCFF',
+        paddingTop: 40,
+    },
+    btn: {
+        backgroundColor: '#FDA549',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 44,
+        paddingHorizontal: 12,
+        margin: 5,
+        borderRadius: 22,
+    },
+    scroll: {
+        padding: 5,
+        flexWrap: 'wrap',
+        flexDirection: 'row',
+    },
+    image: {
+        margin: 10,
+        width: (width - 80) / 3,
+        height: (width - 80) / 3,
+        backgroundColor: '#F0F0F0',
+    },
+    video: {
+        margin: 10,
+        width: (width - 80) / 3,
+        height: (width - 80) / 4,
+    }
 });

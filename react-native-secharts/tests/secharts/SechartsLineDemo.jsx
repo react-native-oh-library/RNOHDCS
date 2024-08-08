@@ -29,7 +29,8 @@ export default class SechartsLine extends Component {
                 series: [{
                     data: [820, 932, 901, 934, 1290, 1330, 1320],
                     type: 'line',
-                    areaStyle: {}
+                    areaStyle: {},
+                    symbolSize:20
                 }]
             },
             flag: false  // 这个布尔值是为了测试option1在setstate操作后不会被重置成初始状态。

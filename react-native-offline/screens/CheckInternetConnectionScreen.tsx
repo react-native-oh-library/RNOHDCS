@@ -13,14 +13,14 @@ export const CheckInternetConnectionScreen = () => {
 
     return (
         <Tester>
-            <TestSuite name="CheckInternetConnectionTest">
-                <TestCase tags={['C_API']} itShould="CheckInternetConnectionTest"
+            <TestSuite name="checkInternetConnection示例">
+                <TestCase tags={['C_API']} itShould="Connected to Internet YES(网络在线) NO(网络离线)"
                     initialState={''}
                     arrange={({ setState }) =>
                         <View>
                             <View style={styles.buttonsContainer}>
                                 <Button
-                                    title='CheckInternetConnection'
+                                    title='点击测试网络连接'
                                     color="#FF0000"
                                     onPress={async () => {
                                         const isConnected = await checkInternetConnection(
@@ -30,8 +30,12 @@ export const CheckInternetConnectionScreen = () => {
                                             DEFAULT_HTTP_METHOD,
                                             DEFAULT_CUSTOM_HEADERS)
                                         if (isConnected === true) {
-                                            setState('success');
-                                            setConnectStatus('success')
+                                            setState('success')
+                                            setConnectStatus('YES')
+                                        }
+                                        if (isConnected === false) {
+                                            setState('fail')
+                                            setConnectStatus('NO')
                                         }
                                     }}
                                 />

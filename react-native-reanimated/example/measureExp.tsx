@@ -17,12 +17,12 @@ export default function App() {
   const handlePress = () => {
     width.value = withTiming(width.value + 50, {}, () => {
       const measurement: MeasuredDimensions | null = measure(animatedRef);
-
       if (measurement === null) {
         return;
       }
-
+      console.log("reanimated---> measurement:"+JSON.stringify(measurement))
       runOnJS(setText)(Math.floor(measurement.width));
+
     });
   };
 

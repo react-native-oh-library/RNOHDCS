@@ -35,10 +35,38 @@ export function IndicatorsExample() {
       Comp: MaterialIndicator,
       mame: 'MaterialIndicator',
       props: {
+        animationDuration: 1000,
+        animationEasing: Easing.linear,
+        animating: false,
+        interaction: true,
+        hidesWhenStopped: false,
+        color: 'white',
+        size: 60,
+        trackWidth: 12
+      },
+    },
+    {
+      Comp: MaterialIndicator,
+      mame: 'MaterialIndicator',
+      props: {
+        animationDuration: 1000,
+        animationEasing: Easing.linear,
+        animating: false,
+        interaction: true,
+        hidesWhenStopped: true,
+        color: 'white',
+        size: 60,
+        trackWidth: 12
+      },
+    },
+    {
+      Comp: MaterialIndicator,
+      mame: 'MaterialIndicator',
+      props: {
         animationDuration: 500,
         animationEasing: Easing.ease,
         animating: true,
-        interaction: false,
+        interaction: true,
         hidesWhenStopped: false,
         color: 'red',
         size: 30,
@@ -62,10 +90,36 @@ export function IndicatorsExample() {
       Comp: PacmanIndicator,
       mame: 'PacmanIndicator',
       props: {
+        animationDuration: 1000,
+        animationEasing: Easing.linear,
+        animating: false,
+        interaction: false,
+        hidesWhenStopped: false,
+        color: 'white',
+        size: 60,
+      },
+    },
+    {
+      Comp: PacmanIndicator,
+      mame: 'PacmanIndicator',
+      props: {
+        animationDuration: 1000,
+        animationEasing: Easing.linear,
+        animating: false,
+        interaction: true,
+        hidesWhenStopped: true,
+        color: 'white',
+        size: 60,
+      },
+    },
+    {
+      Comp: PacmanIndicator,
+      mame: 'PacmanIndicator',
+      props: {
         animationDuration: 500,
         animationEasing: Easing.ease,
         animating: true,
-        interaction: false,
+        interaction: true,
         hidesWhenStopped: false,
         color: 'red',
         size: 30,
@@ -89,10 +143,38 @@ export function IndicatorsExample() {
       Comp: BarIndicator,
       mame: 'BarIndicator',
       props: {
+        animationDuration: 1000,
+        animationEasing: Easing.linear,
+        animating: false,
+        interaction: false,
+        hidesWhenStopped: false,
+        color: 'white',
+        size: 60,
+        count: 6
+      },
+    },
+    {
+      Comp: BarIndicator,
+      mame: 'BarIndicator',
+      props: {
+        animationDuration: 1000,
+        animationEasing: Easing.linear,
+        animating: false,
+        interaction: false,
+        hidesWhenStopped: true,
+        color: 'white',
+        size: 60,
+        count: 6
+      },
+    },
+    {
+      Comp: BarIndicator,
+      mame: 'BarIndicator',
+      props: {
         animationDuration: 500,
         animationEasing: Easing.ease,
         animating: true,
-        interaction: false,
+        interaction: true,
         hidesWhenStopped: false,
         color: 'red',
         size: 30,
@@ -111,6 +193,36 @@ export function IndicatorsExample() {
         color: 'white',
         size: 40,
         count: 6
+      },
+    },
+    {
+      Comp: DotIndicator,
+      mame: 'DotIndicator',
+      props: {
+        animationDuration: 500,
+        animationEasing: Easing.ease,
+        animating: false,
+        interaction: false,
+        hidesWhenStopped: true,
+        color: 'red',
+        size: 30,
+        count: 3,
+        style: styles.reverse
+      },
+    },
+    {
+      Comp: DotIndicator,
+      mame: 'DotIndicator',
+      props: {
+        animationDuration: 500,
+        animationEasing: Easing.ease,
+        animating: false,
+        interaction: true,
+        hidesWhenStopped: false,
+        color: 'red',
+        size: 30,
+        count: 3,
+        style: styles.reverse
       },
     },
     {
