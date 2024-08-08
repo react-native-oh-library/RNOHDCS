@@ -23,6 +23,7 @@ export function IndicatorsExample() {
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
+        animationEasing_: 'Easing.linear',
         animating: true,
         interaction: false,
         hidesWhenStopped: false,
@@ -37,6 +38,7 @@ export function IndicatorsExample() {
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
+        animationEasing_: 'Easing.linear',
         animating: false,
         interaction: true,
         hidesWhenStopped: false,
@@ -51,6 +53,7 @@ export function IndicatorsExample() {
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
+        animationEasing_: 'Easing.linear',
         animating: false,
         interaction: true,
         hidesWhenStopped: true,
@@ -65,6 +68,7 @@ export function IndicatorsExample() {
       props: {
         animationDuration: 500,
         animationEasing: Easing.ease,
+        animationEasing_: 'Easing.ease',
         animating: true,
         interaction: true,
         hidesWhenStopped: false,
@@ -79,6 +83,7 @@ export function IndicatorsExample() {
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
+        animationEasing_: 'Easing.linear',
         animating: true,
         interaction: false,
         hidesWhenStopped: false,
@@ -92,6 +97,7 @@ export function IndicatorsExample() {
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
+        animationEasing_: 'Easing.linear',
         animating: false,
         interaction: false,
         hidesWhenStopped: false,
@@ -105,6 +111,7 @@ export function IndicatorsExample() {
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
+        animationEasing_: 'Easing.linear',
         animating: false,
         interaction: true,
         hidesWhenStopped: true,
@@ -118,6 +125,7 @@ export function IndicatorsExample() {
       props: {
         animationDuration: 500,
         animationEasing: Easing.ease,
+        animationEasing_: 'Easing.ease',
         animating: true,
         interaction: true,
         hidesWhenStopped: false,
@@ -131,6 +139,7 @@ export function IndicatorsExample() {
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
+        animationEasing_: 'Easing.linear',
         animating: true,
         interaction: false,
         hidesWhenStopped: false,
@@ -145,6 +154,7 @@ export function IndicatorsExample() {
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
+        animationEasing_: 'Easing.linear',
         animating: false,
         interaction: false,
         hidesWhenStopped: false,
@@ -159,6 +169,7 @@ export function IndicatorsExample() {
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
+        animationEasing_: 'Easing.linear',
         animating: false,
         interaction: false,
         hidesWhenStopped: true,
@@ -173,6 +184,7 @@ export function IndicatorsExample() {
       props: {
         animationDuration: 500,
         animationEasing: Easing.ease,
+        animationEasing_: 'Easing.ease',
         animating: true,
         interaction: true,
         hidesWhenStopped: false,
@@ -187,6 +199,7 @@ export function IndicatorsExample() {
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
+        animationEasing_: 'Easing.linear',
         animating: true,
         interaction: false,
         hidesWhenStopped: false,
@@ -201,6 +214,7 @@ export function IndicatorsExample() {
       props: {
         animationDuration: 500,
         animationEasing: Easing.ease,
+        animationEasing_: 'Easing.ease',
         animating: false,
         interaction: false,
         hidesWhenStopped: true,
@@ -216,6 +230,7 @@ export function IndicatorsExample() {
       props: {
         animationDuration: 500,
         animationEasing: Easing.ease,
+        animationEasing_: 'Easing.ease',
         animating: false,
         interaction: true,
         hidesWhenStopped: false,
@@ -231,6 +246,7 @@ export function IndicatorsExample() {
       props: {
         animationDuration: 500,
         animationEasing: Easing.ease,
+        animationEasing_: 'Easing.ease',
         animating: true,
         interaction: false,
         hidesWhenStopped: false,
@@ -249,7 +265,6 @@ export function IndicatorsExample() {
             <TestCase itShould={copm.mame + ': ' + JSON.stringify(copm.props)} tags={['C_API']} key={copm.mame + index}>
               <View style={{ backgroundColor: '#01579B' }}>
                 <copm.Comp {...copm.props} />
-                {copm.msg && <Text>{copm.msg}</Text>}
               </View>
             </TestCase>
           )
@@ -264,7 +279,6 @@ export function IndicatorsExample() {
 const styles = {
   container: {
     height: height - 200,
-    //     flex: 1,
     backgroundColor: '#01579B',
     padding: 20,
   },
