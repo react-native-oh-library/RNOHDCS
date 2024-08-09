@@ -14,128 +14,12 @@ import {
 } from 'react-native-indicators';
 const { height } = Dimensions.get('window');
 
-export function IndicatorsExample2() {
+export function IndicatorsExample1() {
 
   const components = [
     {
-      Comp: BallIndicator,
-      mame: 'BallIndicator',
-      props: {
-        color: 'white',
-        animationDuration: 1000,
-        animationEasing: Easing.linear,
-        animationEasing_: 'Easing.linear',
-        animating: true,
-        interaction: true,
-        hidesWhenStopped: true,
-        count: 8,
-        size: 40
-      },
-    },
-    {
-      Comp: BallIndicator,
-      mame: 'BallIndicator',
-      props: {
-        color: 'white',
-        animationDuration: 1000,
-        animationEasing: Easing.linear,
-        animationEasing_: 'Easing.linear',
-        animating: false,
-        interaction: false,
-        hidesWhenStopped: true,
-        count: 8,
-        size: 40
-      },
-    },
-    {
-      Comp: BallIndicator,
-      mame: 'BallIndicator',
-      props: {
-        color: 'white',
-        animationDuration: 1000,
-        animationEasing: Easing.linear,
-        animationEasing_: 'Easing.linear',
-        animating: false,
-        interaction: true,
-        hidesWhenStopped: false,
-        count: 8,
-        size: 40
-      },
-    },
-    {
-      Comp: BallIndicator,
-      mame: 'BallIndicator',
-      props: {
-        color: 'red',
-        animationDuration: 500,
-        animationEasing: Easing.ease,
-        animationEasing_: 'Easing.ease',
-        animating: true,
-        interaction: false,
-        hidesWhenStopped: false,
-        count: 6,
-        size: 20
-      },
-    },
-    {
-      Comp: PulseIndicator,
-      mame: 'PulseIndicator',
-      props: {
-        animationDuration: 1000,
-        animationEasing: Easing.linear,
-        animationEasing_: 'Easing.linear',
-        animating: true,
-        interaction: true,
-        hidesWhenStopped: true,
-        color: 'white',
-        size: 60
-      },
-    },
-    {
-      Comp: PulseIndicator,
-      mame: 'PulseIndicator',
-      props: {
-        animationDuration: 1000,
-        animationEasing: Easing.linear,
-        animationEasing_: 'Easing.linear',
-        animating: false,
-        interaction: false,
-        hidesWhenStopped: true,
-        color: 'white',
-        size: 60
-      },
-    },
-    {
-      Comp: PulseIndicator,
-      mame: 'PulseIndicator',
-      props: {
-        animationDuration: 1000,
-        animationEasing: Easing.linear,
-        animationEasing_: 'Easing.linear',
-        animating: false,
-        interaction: true,
-        hidesWhenStopped: false,
-        color: 'white',
-        size: 60
-      },
-    },
-    {
-      Comp: PulseIndicator,
-      mame: 'PulseIndicator',
-      props: {
-        animationDuration: 500,
-        animationEasing: Easing.ease,
-        animationEasing_: 'Easing.ease',
-        animating: true,
-        interaction: false,
-        hidesWhenStopped: false,
-        color: 'red',
-        size: 40
-      },
-    },
-    {
-      Comp: SkypeIndicator,
-      mame: 'SkypeIndicator',
+      Comp: MaterialIndicator,
+      mame: 'MaterialIndicator',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -145,65 +29,57 @@ export function IndicatorsExample2() {
         hidesWhenStopped: false,
         color: 'white',
         size: 60,
-        count: 8,
-        minScale: 0.2,
-        maxScale: 1
+        trackWidth: 12
       },
     },
     {
-      Comp: SkypeIndicator,
-      mame: 'SkypeIndicator',
+      Comp: MaterialIndicator,
+      mame: 'MaterialIndicator',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
         animationEasing_: 'Easing.linear',
         animating: false,
-        interaction: false,
+        interaction: true,
         hidesWhenStopped: false,
         color: 'white',
         size: 60,
-        count: 8,
-        minScale: 0.2,
-        maxScale: 1
+        trackWidth: 12
       },
     },
     {
-      Comp: SkypeIndicator,
-      mame: 'SkypeIndicator',
+      Comp: MaterialIndicator,
+      mame: 'MaterialIndicator',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
-        animationEasing_: "Easing.linear",
+        animationEasing_: 'Easing.linear',
         animating: false,
         interaction: true,
         hidesWhenStopped: true,
         color: 'white',
         size: 60,
-        count: 8,
-        minScale: 0.2,
-        maxScale: 1
+        trackWidth: 12
       },
     },
     {
-      Comp: SkypeIndicator,
-      mame: 'SkypeIndicator',
+      Comp: MaterialIndicator,
+      mame: 'MaterialIndicator',
       props: {
         animationDuration: 500,
         animationEasing: Easing.ease,
         animationEasing_: 'Easing.ease',
         animating: true,
-        interaction: false,
+        interaction: true,
         hidesWhenStopped: false,
         color: 'red',
         size: 30,
-        count: 4,
-        minScale: 0.4,
-        maxScale: 2
+        trackWidth: 3
       },
     },
     {
-      Comp: WaveIndicator,
-      mame: 'WaveIndicator',
+      Comp: PacmanIndicator,
+      mame: 'PacmanIndicator',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -213,120 +89,171 @@ export function IndicatorsExample2() {
         hidesWhenStopped: false,
         color: 'white',
         size: 60,
-        count: 8,
-        waveFactor: 0.54,
-        waveMode: 'fill'
       },
     },
     {
-      Comp: WaveIndicator,
-      mame: 'WaveIndicator',
+      Comp: PacmanIndicator,
+      mame: 'PacmanIndicator',
+      props: {
+        animationDuration: 1000,
+        animationEasing: Easing.linear,
+        animationEasing_: 'Easing.linear',
+        animating: false,
+        interaction: false,
+        hidesWhenStopped: false,
+        color: 'white',
+        size: 60,
+      },
+    },
+    {
+      Comp: PacmanIndicator,
+      mame: 'PacmanIndicator',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
         animationEasing_: 'Easing.linear',
         animating: false,
         interaction: true,
-        hidesWhenStopped: false,
-        color: 'white',
-        size: 60,
-        count: 8,
-        waveFactor: 0.54,
-        waveMode: 'fill'
-      },
-    },
-    {
-      Comp: WaveIndicator,
-      mame: 'WaveIndicator',
-      props: {
-        animationDuration: 1000,
-        animationEasing: Easing.linear,
-        animationEasing_: 'Easing.linear',
-        animating: false,
-        interaction: false,
         hidesWhenStopped: true,
         color: 'white',
         size: 60,
-        count: 8,
-        waveFactor: 0.54,
-        waveMode: 'fill'
       },
     },
     {
-      Comp: WaveIndicator,
-      mame: 'WaveIndicator',
+      Comp: PacmanIndicator,
+      mame: 'PacmanIndicator',
       props: {
         animationDuration: 500,
         animationEasing: Easing.ease,
         animationEasing_: 'Easing.ease',
         animating: true,
-        interaction: false,
-        hidesWhenStopped: false,
-        color: 'red',
-        size: 30,
-        count: 4,
-        waveFactor: 1,
-        waveMode: 'outline'
-      },
-    },
-    {
-      Comp: UIActivityIndicator,
-      mame: 'UIActivityIndicator',
-      props: {
-        animationDuration: 1000,
-        animationEasing: Easing.linear,
-        animationEasing_: 'Easing.linear',
-        animating: true,
-        interaction: false,
-        hidesWhenStopped: false,
-        color: 'white',
-        size: 60,
-        count: 12
-      },
-    },
-    {
-      Comp: UIActivityIndicator,
-      mame: 'UIActivityIndicator',
-      props: {
-        animationDuration: 1000,
-        animationEasing: Easing.linear,
-        animationEasing_: 'Easing.linear',
-        animating: false,
         interaction: true,
         hidesWhenStopped: false,
-        color: 'white',
-        size: 60,
-        count: 12
+        color: 'red',
+        size: 30,
       },
     },
     {
-      Comp: UIActivityIndicator,
-      mame: 'UIActivityIndicator',
+      Comp: BarIndicator,
+      mame: 'BarIndicator',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
         animationEasing_: 'Easing.linear',
-        animating: false,
-        interaction: false,
-        hidesWhenStopped: true,
-        color: 'white',
-        size: 60,
-        count: 12
-      },
-    },
-    {
-      Comp: UIActivityIndicator,
-      mame: 'UIActivityIndicator',
-      props: {
-        animationDuration: 500,
-        animationEasing: Easing.ease,
-        animationEasing_: 'Easing.ease',
         animating: true,
         interaction: false,
         hidesWhenStopped: false,
-        color: 'red',
-        size: 30,
+        color: 'white',
+        size: 60,
         count: 6
+      },
+    },
+    {
+      Comp: BarIndicator,
+      mame: 'BarIndicator',
+      props: {
+        animationDuration: 1000,
+        animationEasing: Easing.linear,
+        animationEasing_: 'Easing.linear',
+        animating: false,
+        interaction: false,
+        hidesWhenStopped: false,
+        color: 'white',
+        size: 60,
+        count: 6
+      },
+    },
+    {
+      Comp: BarIndicator,
+      mame: 'BarIndicator',
+      props: {
+        animationDuration: 1000,
+        animationEasing: Easing.linear,
+        animationEasing_: 'Easing.linear',
+        animating: false,
+        interaction: false,
+        hidesWhenStopped: true,
+        color: 'white',
+        size: 60,
+        count: 6
+      },
+    },
+    {
+      Comp: BarIndicator,
+      mame: 'BarIndicator',
+      props: {
+        animationDuration: 500,
+        animationEasing: Easing.ease,
+        animationEasing_: 'Easing.ease',
+        animating: true,
+        interaction: true,
+        hidesWhenStopped: false,
+        color: 'red',
+        size: 30,
+        count: 3
+      },
+    },
+    {
+      Comp: DotIndicator,
+      mame: 'DotIndicator',
+      props: {
+        animationDuration: 1000,
+        animationEasing: Easing.linear,
+        animationEasing_: 'Easing.linear',
+        animating: true,
+        interaction: false,
+        hidesWhenStopped: false,
+        color: 'white',
+        size: 40,
+        count: 6
+      },
+    },
+    {
+      Comp: DotIndicator,
+      mame: 'DotIndicator',
+      props: {
+        animationDuration: 500,
+        animationEasing: Easing.ease,
+        animationEasing_: 'Easing.ease',
+        animating: false,
+        interaction: false,
+        hidesWhenStopped: true,
+        color: 'red',
+        size: 30,
+        count: 3,
+        style: styles.reverse
+      },
+    },
+    {
+      Comp: DotIndicator,
+      mame: 'DotIndicator',
+      props: {
+        animationDuration: 500,
+        animationEasing: Easing.ease,
+        animationEasing_: 'Easing.ease',
+        animating: false,
+        interaction: true,
+        hidesWhenStopped: false,
+        color: 'red',
+        size: 30,
+        count: 3,
+        style: styles.reverse
+      },
+    },
+    {
+      Comp: DotIndicator,
+      mame: 'DotIndicator',
+      props: {
+        animationDuration: 500,
+        animationEasing: Easing.ease,
+        animationEasing_: 'Easing.ease',
+        animating: true,
+        interaction: false,
+        hidesWhenStopped: false,
+        color: 'red',
+        size: 30,
+        count: 3,
+        style: styles.reverse
       },
     }
   ]
