@@ -538,9 +538,14 @@ export const ImageMarker = () => {
   // font color
   const [url_text_color1, seturl_text_color1] = useState('');
   const [url_text_color2, seturl_text_color2] = useState('');
+  // font name
+  const [url_text_fontName, seturl_text_fontName] = useState('');
   // font size
   const [url_text_fontSize30, seturl_text_fontSize30] = useState('');
   const [url_text_fontSize100, seturl_text_fontSize100] = useState('');
+  // font italic
+  const [url_text_italic, seturl_text_italic] = useState('');
+  const [url_text_skewX, seturl_text_skewX] = useState('');
   // underline
   const [url_text_underline, seturl_text_underline] = useState('');
   //strikeThrough
@@ -583,15 +588,59 @@ export const ImageMarker = () => {
   const [url_text_backgroundstyle_padding_x, seturl_text_backgroundstyle_padding_x] = useState('');
   const [url_text_backgroundstyle_padding_y, seturl_text_backgroundstyle_padding_y] = useState('');
 
+  // font name
+  const text_options_fontName: TextMarkOptions = {
+    backgroundImage: { src: require('./assets/code-images/1.png') },
+    watermarkTexts: [{
+      text: 'test text',
+      style: {
+        color: '#FF0000',
+        fontSize: 100,
+        fontName: 'stcaiyun'
+      }
+    }
+    ]
+  }
+
   // textBackgroundStyle
+  // italic
+  const text_options_italic: TextMarkOptions = {
+    backgroundImage: { src: require('./assets/code-images/1.png') },
+    watermarkTexts: [{
+      text: 'test text',
+      style: {
+        color: '#FF0000',
+        fontSize: 100,
+        textAlign: 'left',
+        italic: true
+      }
+    }
+    ]
+  }
+  // skewX
+  const text_options_skewX: TextMarkOptions = {
+    backgroundImage: { src: require('./assets/code-images/1.png') },
+    watermarkTexts: [{
+      text: 'test text',
+      style: {
+        color: '#FF0000',
+        fontSize: 100,
+        textAlign: 'center',
+        skewX: 0.5,
+
+      }
+    }
+    ]
+  }
   // textalain
   const text_options_textalain_left: TextMarkOptions = {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      style:{
-        fontSize:100,
-        textAlign:'left'
+      style: {
+        color: '#FF0000',
+        fontSize: 100,
+        textAlign: 'left'
       }
     }
     ]
@@ -600,9 +649,10 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      style:{
-        fontSize:100,
-        textAlign:'center'
+      style: {
+        color: '#FF0000',
+        fontSize: 100,
+        textAlign: 'center'
       }
     }
     ]
@@ -611,9 +661,10 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      style:{
-        fontSize:100,
-        textAlign:'right'
+      style: {
+        color: '#FF0000',
+        fontSize: 100,
+        textAlign: 'right'
       }
     }
     ]
@@ -624,6 +675,8 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
+        fontSize:100,
         textBackgroundStyle: {
           color: '#0FFF00',
           padding: '10%'
@@ -637,6 +690,8 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
+        fontSize:100,
         textBackgroundStyle: {
           color: '#0FFF00',
           padding: '10% 15%'
@@ -650,6 +705,8 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
+        fontSize:100,
         textBackgroundStyle: {
           color: '#0FFF00',
           padding: '10% 15% 20%'
@@ -663,6 +720,8 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
+        fontSize:100,
         textBackgroundStyle: {
           color: '#0FFF00',
           padding: '10% 15% 20% 5%'
@@ -676,6 +735,8 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
+        fontSize:100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingTop: '10%'
@@ -689,6 +750,8 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
+        fontSize:100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingLeft: '10%'
@@ -702,6 +765,8 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
+        fontSize:100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingRight: '10%'
@@ -715,6 +780,8 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
+        fontSize:100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingBottom: '10%'
@@ -728,6 +795,8 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
+        fontSize:100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingHorizontal: '10%'
@@ -741,6 +810,8 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
+        fontSize:100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingVertical: '10%'
@@ -754,6 +825,8 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
+        fontSize:100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingX: '10%'
@@ -767,6 +840,8 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
+        fontSize:100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingY: '10%'
@@ -783,8 +858,8 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         fontSize: 100,
+        color: '#FF0000',
         textBackgroundStyle: {
-
           color: '#0FFF00',
           cornerRadius: { all: { "x": "20%", "y": "30%" } }
         }
@@ -797,9 +872,9 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
         fontSize: 100,
         textBackgroundStyle: {
-
           cornerRadius: { topLeft: { "x": "20%", "y": "30%" } },
           color: '#0FFF00'
         }
@@ -812,9 +887,9 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
         fontSize: 100,
         textBackgroundStyle: {
-
           cornerRadius: { topRight: { "x": "20%", "y": "30%" } },
           color: '#0FFF00'
         }
@@ -827,9 +902,9 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
         fontSize: 100,
         textBackgroundStyle: {
-
           cornerRadius: { bottomLeft: { "x": "20%", "y": "30%" } },
           color: '#0FFF00'
         }
@@ -842,6 +917,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
         fontSize: 100,
         textBackgroundStyle: {
           cornerRadius: { bottomRight: { "x": "20%", "y": "30%" } },
@@ -857,6 +933,8 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
+        fontSize:100,
         textBackgroundStyle: {
           type: TextBackgroundType.stretchX,
           color: '#0FFF00'
@@ -870,6 +948,8 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
+        fontSize:100,
         textBackgroundStyle: {
           type: TextBackgroundType.stretchY,
           color: '#0FFF00'
@@ -884,6 +964,8 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#000000',
+        fontSize:100,
         textBackgroundStyle: {
           color: '#0FFF00'
         }
@@ -896,6 +978,8 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#000000',
+        fontSize:100,
         textBackgroundStyle: {
           color: '#FC0700'
         }
@@ -909,6 +993,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
         fontSize: 100,
         shadowStyle: {
           dx: 50,
@@ -925,6 +1010,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
         fontSize: 100,
         shadowStyle: {
           dx: 50,
@@ -943,6 +1029,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
         fontSize: 100,
         bold: true
       }
@@ -955,6 +1042,8 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
+        fontSize: 100,
         rotate: 30
       }
     }
@@ -966,6 +1055,8 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
+        fontSize: 100,
         rotate: 50
       }
     }
@@ -977,6 +1068,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
         fontSize: 100,
         underline: true
       }
@@ -989,6 +1081,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
         fontSize: 100,
         strikeThrough: true
       }
@@ -1001,6 +1094,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
         fontSize: 30
       }
     }
@@ -1011,6 +1105,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
+        color: '#FF0000',
         fontSize: 100
       }
     }
@@ -1022,7 +1117,8 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
-        color: '#FFFF00'
+        color: '#FFFF00',
+        fontSize: 100
       }
     }
     ]
@@ -1032,7 +1128,8 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       style: {
-        color: '#FC0700'
+        color: '#FC0700',
+        fontSize: 100
       }
     }
     ]
@@ -1043,6 +1140,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'text test1',
       style: {
+        color: '#FF0000',
         fontSize: 100,
       }
     }
@@ -1053,6 +1151,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'text test2',
       style: {
+        color: '#FF0000',
         fontSize: 100,
       }
     }
@@ -1063,7 +1162,10 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      position: { position: Position.topLeft }
+      position: { position: Position.topLeft },
+      style:{color: '#FFFF00',
+        fontSize:100,
+      }
     }
     ]
   }
@@ -1071,7 +1173,8 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      position: { position: Position.topRight }
+      position: { position: Position.topRight },
+      style:{color: '#FFFF00',fontSize:100,}
     }
     ]
   }
@@ -1079,7 +1182,8 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      position: { position: Position.topCenter }
+      position: { position: Position.topCenter },
+      style:{color: '#FFFF00',fontSize:100,}
     }
     ]
   }
@@ -1087,7 +1191,8 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      position: { position: Position.bottomLeft }
+      position: { position: Position.bottomLeft },
+      style:{color: '#FFFF00',fontSize:100,}
     }
     ]
   }
@@ -1095,7 +1200,8 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      position: { position: Position.bottomCenter }
+      position: { position: Position.bottomCenter },
+      style:{color: '#FFFF00',fontSize:100,}
     }
     ]
   }
@@ -1103,7 +1209,8 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      position: { position: Position.bottomRight }
+      position: { position: Position.bottomRight },
+      style:{color: '#FFFF00',fontSize:100,}
     }
     ]
   }
@@ -1111,7 +1218,8 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      position: { position: Position.center }
+      position: { position: Position.center },
+      style:{color: '#FFFF00',fontSize:100,}
     }
     ]
   }
@@ -1119,7 +1227,8 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      position: { X: 30, Y: 50 }
+      position: { X: 30, Y: 50 },
+      style:{color: '#FFFF00',fontSize:100,}
     }
     ]
   }
@@ -1127,7 +1236,8 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      position: { X: '10%', Y: '20%' }
+      position: { X: '10%', Y: '20%' },
+      style:{color: '#FFFF00',fontSize:100,}
     }
     ]
   }
@@ -1138,7 +1248,8 @@ export const ImageMarker = () => {
       alpha: 0.1
     },
     watermarkTexts: [{
-      text: 'test text'
+      text: 'test text',
+      style:{color: '#FFFF00',fontSize:100,}
     }
     ]
   }
@@ -1148,7 +1259,8 @@ export const ImageMarker = () => {
       alpha: 1
     },
     watermarkTexts: [{
-      text: 'test text'
+      text: 'test text',
+      style:{color: '#FFFF00',fontSize:100,}
     }
     ]
   }
@@ -1159,7 +1271,8 @@ export const ImageMarker = () => {
       scale: 0.5
     },
     watermarkTexts: [{
-      text: 'test text'
+      text: 'test text',
+      style:{color: '#FFFF00',fontSize:100,}
     }]
   }
   const text_options_scale1_5: TextMarkOptions = {
@@ -1168,7 +1281,8 @@ export const ImageMarker = () => {
       scale: 1.5
     },
     watermarkTexts: [{
-      text: 'test text'
+      text: 'test text',
+      style:{color: '#FFFF00',fontSize:100,}
     }]
   }
   // image rotate
@@ -1178,7 +1292,8 @@ export const ImageMarker = () => {
       rotate: 20
     },
     watermarkTexts: [{
-      text: 'test text'
+      text: 'test text',
+      style:{color: '#FFFF00',fontSize:100,}
     }]
   }
   const text_options_backrotate50: TextMarkOptions = {
@@ -1187,7 +1302,8 @@ export const ImageMarker = () => {
       rotate: 50
     },
     watermarkTexts: [{
-      text: 'test text'
+      text: 'test text',
+      style:{color: '#FFFF00',fontSize:100,}
     }]
   }
 
@@ -1195,14 +1311,16 @@ export const ImageMarker = () => {
   const text_options_qualityurl_20: TextMarkOptions = {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
-      text: 'test text'
+      text: 'test text',
+      style:{color: '#FFFF00',fontSize:100,}
     }],
     quality: 20
   }
   const text_options_qualityurl_100: TextMarkOptions = {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
-      text: 'test text'
+      text: 'test text',
+      style:{color: '#FFFF00',fontSize:100,}
     }],
     quality: 100
   }
@@ -1210,14 +1328,16 @@ export const ImageMarker = () => {
   const text_options_filename1: TextMarkOptions = {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
-      text: 'test text'
+      text: 'test text',
+      style:{color: '#FFFF00',fontSize:100,}
     }],
     filename: 'test1'
   }
   const text_options_filename2: TextMarkOptions = {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
-      text: 'test text'
+      text: 'test text',
+      style:{color: '#FFFF00',fontSize:100,}
     }],
     filename: 'test2'
   }
@@ -1225,26 +1345,37 @@ export const ImageMarker = () => {
   const text_options_filetype_png: TextMarkOptions = {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
-      text: 'test text'
+      text: 'test text',
+      style:{color: '#FFFF00',fontSize:100,}
     }],
     saveFormat: ImageFormat.png
   }
   const text_options_filetyoe_jpg: TextMarkOptions = {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
-      text: 'test text'
+      text: 'test text',
+      style:{color: '#FFFF00',fontSize:100,}
     }],
     saveFormat: ImageFormat.jpg
   }
   const text_options_filetyoe_base64: TextMarkOptions = {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
-      text: 'test text'
+      text: 'test text',
+      style:{color: '#FFFF00',fontSize:100,}
     }],
     saveFormat: ImageFormat.base64
   }
 
   // test style
+  // font name
+  const markTextFontName = () => {
+    Marker.markText(text_options_fontName).then((result) => {
+      seturl_text_fontName(result)
+    }).catch(error => {
+      console.log('error', error)
+    })
+  }
   // text alain
   const markTextTextAlainLeft = () => {
     Marker.markText(text_options_textalain_left).then((result) => {
@@ -1472,6 +1603,22 @@ export const ImageMarker = () => {
       console.log('error', error)
     })
   }
+  // skewX
+  const markTextskewX = () => {
+    Marker.markText(text_options_skewX).then((result) => {
+      seturl_text_skewX(result)
+    }).catch(error => {
+      console.log('error', error)
+    })
+  }
+  // text font italic
+  const markTextFontItalic = () => {
+    Marker.markText(text_options_italic).then((result) => {
+      seturl_text_italic(result)
+    }).catch(error => {
+      console.log('error', error)
+    })
+  }
   // text font size
   const markTextFontSize30 = () => {
     Marker.markText(text_options_fontSize30).then((result) => {
@@ -1682,7 +1829,7 @@ export const ImageMarker = () => {
     <Tester>
       <ScrollView>
         <TestSuite name='react-native-image-marker'>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' icon_topleft '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1698,11 +1845,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_icon_topLeft}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_icon_topLeft, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_icon_topLeft, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' icon_topright '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1718,11 +1865,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_icon_topRight}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_icon_topRight, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_icon_topRight, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' icon_topcenter '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1738,11 +1885,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_icon_topCenter}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_icon_topCenter, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_icon_topCenter, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' icon_bottomleft '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1758,11 +1905,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_icon_bottomLeft}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_icon_bottomLeft, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_icon_bottomLeft, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' icon_bottomcenter '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1778,11 +1925,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_icon_bottomCenter}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_icon_bottomCenter, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_icon_bottomCenter, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' icon_bottomright '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1798,11 +1945,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_icon_bottomRight}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_icon_bottomRight, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_icon_bottomRight, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' icon_center '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1818,11 +1965,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_icon_center}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_icon_center, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_icon_center, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' icon_xy '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1838,11 +1985,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_icon_xy}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_icon_xy, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_icon_xy, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' icon_xypercent '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1858,11 +2005,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_icon_xypercent}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_icon_xypercent, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_icon_xypercent, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' back_alpha0_1 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1878,11 +2025,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_backalpha0_1}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_backalpha0_1, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_backalpha0_1, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' back_alpha1'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1898,11 +2045,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_backalpha1}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_backalpha1, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_backalpha1, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' icon_alpha0_1 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1918,11 +2065,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_alpha0_1}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_alpha0_1, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_alpha0_1, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' icon_alpha1'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1938,11 +2085,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_alpha1}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_alpha1, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_alpha1, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' back_scale0_5 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1958,11 +2105,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_backscale0_5}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_backscale0_5, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_backscale0_5, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' back_scale1_5'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1978,11 +2125,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_backscale1_5}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_backscale1_5, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_backscale1_5, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' icon_scale0_5 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1998,11 +2145,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_scale0_5}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_scale0_5, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_scale0_5, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' icon_scale1_5'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2018,11 +2165,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_scale1_5}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_scale1_5, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_scale1_5, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' back_rotate_50 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2038,11 +2185,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_backrotate50}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_backrotate50, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_backrotate50, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' back_rotate_20'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2058,11 +2205,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_backrotate20}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_backrotate20, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_backrotate20, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' icon_rotate_50 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2078,11 +2225,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_rotate50}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_rotate50, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_rotate50, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' icon_rotate_20'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2098,11 +2245,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_rotate20}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_rotate20, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_rotate20, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' qualityurl_100 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2118,11 +2265,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {qualityurl_100}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: qualityurl_100, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: qualityurl_100, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' qualityurl_20'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2138,11 +2285,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {qualityurl_20}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: qualityurl_20, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: qualityurl_20, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' filename1'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2158,11 +2305,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {file1url}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: file1url, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: file1url, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' filename2'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2178,11 +2325,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {file2url}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: file2url, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: file2url, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould=' file type png'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2198,11 +2345,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {filetypeurl_png}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: filetypeurl_png, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: filetypeurl_png, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould='file type jpg'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2218,11 +2365,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {filetypeurl_jpg}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: filetypeurl_jpg, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: filetypeurl_jpg, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark image "}
+          <TestCase 
             itShould='file type base64'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2239,12 +2386,33 @@ export const ImageMarker = () => {
                   numberOfLines={1}>
                   {filetypeurl_base64}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: filetypeurl_base64, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: filetypeurl_base64, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          
-          <TestCase key={"mark text "}
+
+          <TestCase 
+            itShould=' text_fontName '
+            tags={['C_API']}>
+            <View style={styles.body}>
+              <View style={styles.sectionContainer}>
+                <Text style={styles.sectionTitle}>
+                  {"image marker"}
+                </Text>
+                <Button
+                  title="text_fontName"
+                  color="#9a73ef"
+                  onPress={markTextFontName}
+                />
+                <Text style={styles.sectionTitle}>
+                  {url_text_fontName}
+                </Text>
+                <Image resizeMode='contain' source={{ uri: url_text_fontName, width: 300, height: 150 }} />
+              </View>
+            </View>
+          </TestCase>
+
+          <TestCase 
             itShould=' text_textalain_left '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2260,12 +2428,12 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_textalain_left}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_textalain_left, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_textalain_left, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          
-          <TestCase key={"mark text "}
+
+          <TestCase 
             itShould=' text_textalain_center '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2281,12 +2449,12 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_textalain_center}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_textalain_center, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_textalain_center, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          
-          <TestCase key={"mark text "}
+
+          <TestCase 
             itShould=' text_textalain_right '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2302,11 +2470,51 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_textalain_right}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_textalain_right, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_textalain_right, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
+            itShould=' text_skewX '
+            tags={['C_API']}>
+            <View style={styles.body}>
+              <View style={styles.sectionContainer}>
+                <Text style={styles.sectionTitle}>
+                  {"image marker"}
+                </Text>
+                <Button
+                  title="text_skewX "
+                  color="#9a73ef"
+                  onPress={markTextskewX}
+                />
+                <Text style={styles.sectionTitle}>
+                  {url_text_skewX}
+                </Text>
+                <Image resizeMode='contain' source={{ uri: url_text_skewX, width: 300, height: 150 }} />
+              </View>
+            </View>
+          </TestCase>
+          <TestCase 
+            itShould=' text_italic '
+            tags={['C_API']}>
+            <View style={styles.body}>
+              <View style={styles.sectionContainer}>
+                <Text style={styles.sectionTitle}>
+                  {"image marker"}
+                </Text>
+                <Button
+                  title="text_italic "
+                  color="#9a73ef"
+                  onPress={markTextFontItalic}
+                />
+                <Text style={styles.sectionTitle}>
+                  {url_text_italic}
+                </Text>
+                <Image resizeMode='contain' source={{ uri: url_text_italic, width: 300, height: 150 }} />
+              </View>
+            </View>
+          </TestCase>
+          <TestCase 
             itShould=' text_fontSize_100 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2322,11 +2530,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_fontSize100}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_fontSize100, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_fontSize100, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_fontSize_30 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2342,11 +2550,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_fontSize30}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_fontSize30, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_fontSize30, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_color_red '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2362,11 +2570,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_color2}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_color2, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_color2, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_color_yellow '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2382,11 +2590,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_color1}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_color1, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_color1, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_test1 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2402,11 +2610,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_test1}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_test1, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_test1, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_test2 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2422,12 +2630,12 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_test2}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_test2, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_test2, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
 
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_backgroundStyle_padding_all1 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2443,11 +2651,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_backgroundstyle_padding_all1}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_all1, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_all1, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_backgroundStyle_padding_all2 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2463,11 +2671,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_backgroundstyle_padding_all2}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_all2, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_all2, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_backgroundStyle_padding_all3 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2483,11 +2691,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_backgroundstyle_padding_all3}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_all3, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_all3, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_backgroundStyle_padding_all4 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2503,12 +2711,12 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_backgroundstyle_padding_all4}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_all4, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_all4, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
 
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_backgroundStyle_padding_top '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2524,11 +2732,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_backgroundstyle_padding_top}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_top, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_top, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_backgroundStyle_padding_bottom '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2544,11 +2752,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_backgroundstyle_padding_bottom}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_bottom, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_bottom, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_backgroundStyle_padding_left '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2564,11 +2772,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_backgroundstyle_padding_left}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_left, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_left, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_backgroundStyle_padding_right '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2584,11 +2792,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_backgroundstyle_padding_right}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_right, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_right, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_backgroundStyle_padding_horizontal '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2604,11 +2812,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_backgroundstyle_padding_horizontal}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_horizontal, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_horizontal, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_backgroundStyle_padding_vertical '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2624,11 +2832,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_backgroundstyle_padding_vertical}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_vertical, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_vertical, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_backgroundStyle_padding_x '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2644,11 +2852,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_backgroundstyle_padding_x}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_x, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_x, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_backgroundStyle_padding_y '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2664,11 +2872,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_backgroundstyle_padding_y}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_y, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_y, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_backgroundStyle_cornerRadius_all '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2684,11 +2892,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_backgroundstyle_cornerRadius_all}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_cornerRadius_all, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_cornerRadius_all, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_backgroundStyle_cornerRadius_topLeft '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2704,11 +2912,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_backgroundstyle_cornerRadius_topLeft}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_cornerRadius_topLeft, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_cornerRadius_topLeft, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_backgroundStyle_cornerRadius_topRight '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2724,11 +2932,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_backgroundstyle_cornerRadius_topRight}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_cornerRadius_topRight, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_cornerRadius_topRight, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_backgroundStyle_cornerRadius_bottomLeft '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2744,11 +2952,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_backgroundstyle_cornerRadius_bottomLeft}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_cornerRadius_bottomLeft, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_cornerRadius_bottomLeft, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_backgroundStyle_cornerRadius_bottomRight '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2764,11 +2972,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_backgroundstyle_cornerRadius_bottomRight}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_cornerRadius_bottomRight, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_cornerRadius_bottomRight, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_backgroundStyle_type_stretchX '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2784,11 +2992,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_backgroundstyle_type_stretchX}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_type_stretchX, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_type_stretchX, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_backgroundStyle_type_stretchY '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2804,11 +3012,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_backgroundstyle_type_stretchY}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_type_stretchY, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_type_stretchY, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_backgroundStyle_color_green '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2824,11 +3032,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_backgroundstyle_color_green}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_color_green, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_color_green, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_backgroundStyle_color_red '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2844,11 +3052,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_backgroundstyle_color_red}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_color_red, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_color_red, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_shadowStyle1 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2864,11 +3072,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_shadowStyle1}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_shadowStyle1, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_shadowStyle1, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_shadowStyle2 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2884,11 +3092,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_shadowStyle2}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_shadowStyle2, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_shadowStyle2, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_bold '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2904,11 +3112,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_bold}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_bold, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_bold, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_rotate30 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2924,11 +3132,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_rotate30}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_rotate30, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_rotate30, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_rotate50'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2944,11 +3152,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_rotate50}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_rotate50, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_rotate50, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_underline '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2964,11 +3172,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_underline}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_underline, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_underline, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_strikeThrough '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2984,11 +3192,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_strikeThrough}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_strikeThrough, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_strikeThrough, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_topleft '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3004,11 +3212,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_topLeft}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_topLeft, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_topLeft, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_topright '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3024,11 +3232,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_topRight}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_topRight, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_topRight, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_topcenter '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3044,11 +3252,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_topCenter}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_topCenter, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_topCenter, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_bottomleft '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3064,11 +3272,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_bottomLeft}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_bottomLeft, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_bottomLeft, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_bottomcenter '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3084,11 +3292,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_bottomCenter}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_bottomCenter, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_bottomCenter, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_bottomright '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3104,11 +3312,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_bottomRight}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_bottomRight, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_bottomRight, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_center '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3124,11 +3332,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_center}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_center, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_center, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_xy '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3144,11 +3352,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_xy}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_xy, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_xy, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' text_xypercent '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3164,11 +3372,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_text_xypercent}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_xypercent, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_text_xypercent, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' back_alpha0_1 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3184,11 +3392,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_backalpha0_1_text}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_backalpha0_1_text, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_backalpha0_1_text, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' back_alpha1'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3204,11 +3412,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_backalpha1_text}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_backalpha1_text, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_backalpha1_text, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' back_scale0_5 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3224,11 +3432,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_backscale0_5_text}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_backscale0_5_text, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_backscale0_5_text, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' back_scale1_5'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3244,11 +3452,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_backscale1_5_text}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_backscale1_5_text, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_backscale1_5_text, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' back_rotate_50 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3264,11 +3472,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_backrotate50_text}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_backrotate50_text, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_backrotate50_text, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' back_rotate_20'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3284,11 +3492,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_backrotate20_text}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_backrotate20_text, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: url_backrotate20_text, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' qualityurl_100 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3304,11 +3512,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {textqualityurl_100}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: textqualityurl_100, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: textqualityurl_100, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' qualityurl_20'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3324,11 +3532,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {textqualityurl_20}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: textqualityurl_20, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: textqualityurl_20, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' filename1'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3344,11 +3552,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {textfile1url}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: textfile1url, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: textfile1url, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' filename2'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3364,11 +3572,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {textfile2url}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: textfile2url, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: textfile2url, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould=' file type png'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3384,11 +3592,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {textfiletypeurl_png}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: textfiletypeurl_png, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: textfiletypeurl_png, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould='file type jpg'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3404,11 +3612,11 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {textfiletypeurl_jpg}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: textfiletypeurl_jpg, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: textfiletypeurl_jpg, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
-          <TestCase key={"mark text "}
+          <TestCase 
             itShould='file type base64'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3425,7 +3633,7 @@ export const ImageMarker = () => {
                   numberOfLines={1}>
                   {textfiletypeurl_base64}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: textfiletypeurl_base64, width: 300, height: 300 }} />
+                <Image resizeMode='contain' source={{ uri: textfiletypeurl_base64, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
