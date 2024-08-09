@@ -1,297 +1,65 @@
-import React from 'react';
-import { View, Dimensions, ScrollView, Text, Easing } from 'react-native';
-import { TestSuite, Tester, TestCase } from '@rnoh/testerino';
-import {
-  BallIndicator,
-  BarIndicator,
-  DotIndicator,
-  MaterialIndicator,
-  PacmanIndicator,
-  PulseIndicator,
-  SkypeIndicator,
-  UIActivityIndicator,
-  WaveIndicator,
-} from 'react-native-indicators';
+import React, { useState } from 'react';
+import { View, Dimensions, Button } from 'react-native';
+import { IndicatorsExample1 } from './IndicatorsExample1'
+import { IndicatorsExample2 } from './IndicatorsExample2'
 const { height } = Dimensions.get('window');
 
-export function IndicatorsExample() {
 
-  const components = [
-    {
-      Comp: MaterialIndicator,
-      mame: 'MaterialIndicator',
-      props: {
-        animationDuration: 1000,
-        animationEasing: Easing.linear,
-        animationEasing_: 'Easing.linear',
-        animating: true,
-        interaction: false,
-        hidesWhenStopped: false,
-        color: 'white',
-        size: 60,
-        trackWidth: 12
-      },
-    },
-    {
-      Comp: MaterialIndicator,
-      mame: 'MaterialIndicator',
-      props: {
-        animationDuration: 1000,
-        animationEasing: Easing.linear,
-        animationEasing_: 'Easing.linear',
-        animating: false,
-        interaction: true,
-        hidesWhenStopped: false,
-        color: 'white',
-        size: 60,
-        trackWidth: 12
-      },
-    },
-    {
-      Comp: MaterialIndicator,
-      mame: 'MaterialIndicator',
-      props: {
-        animationDuration: 1000,
-        animationEasing: Easing.linear,
-        animationEasing_: 'Easing.linear',
-        animating: false,
-        interaction: true,
-        hidesWhenStopped: true,
-        color: 'white',
-        size: 60,
-        trackWidth: 12
-      },
-    },
-    {
-      Comp: MaterialIndicator,
-      mame: 'MaterialIndicator',
-      props: {
-        animationDuration: 500,
-        animationEasing: Easing.ease,
-        animationEasing_: 'Easing.ease',
-        animating: true,
-        interaction: true,
-        hidesWhenStopped: false,
-        color: 'red',
-        size: 30,
-        trackWidth: 3
-      },
-    },
-    {
-      Comp: PacmanIndicator,
-      mame: 'PacmanIndicator',
-      props: {
-        animationDuration: 1000,
-        animationEasing: Easing.linear,
-        animationEasing_: 'Easing.linear',
-        animating: true,
-        interaction: false,
-        hidesWhenStopped: false,
-        color: 'white',
-        size: 60,
-      },
-    },
-    {
-      Comp: PacmanIndicator,
-      mame: 'PacmanIndicator',
-      props: {
-        animationDuration: 1000,
-        animationEasing: Easing.linear,
-        animationEasing_: 'Easing.linear',
-        animating: false,
-        interaction: false,
-        hidesWhenStopped: false,
-        color: 'white',
-        size: 60,
-      },
-    },
-    {
-      Comp: PacmanIndicator,
-      mame: 'PacmanIndicator',
-      props: {
-        animationDuration: 1000,
-        animationEasing: Easing.linear,
-        animationEasing_: 'Easing.linear',
-        animating: false,
-        interaction: true,
-        hidesWhenStopped: true,
-        color: 'white',
-        size: 60,
-      },
-    },
-    {
-      Comp: PacmanIndicator,
-      mame: 'PacmanIndicator',
-      props: {
-        animationDuration: 500,
-        animationEasing: Easing.ease,
-        animationEasing_: 'Easing.ease',
-        animating: true,
-        interaction: true,
-        hidesWhenStopped: false,
-        color: 'red',
-        size: 30,
-      },
-    },
-    {
-      Comp: BarIndicator,
-      mame: 'BarIndicator',
-      props: {
-        animationDuration: 1000,
-        animationEasing: Easing.linear,
-        animationEasing_: 'Easing.linear',
-        animating: true,
-        interaction: false,
-        hidesWhenStopped: false,
-        color: 'white',
-        size: 60,
-        count: 6
-      },
-    },
-    {
-      Comp: BarIndicator,
-      mame: 'BarIndicator',
-      props: {
-        animationDuration: 1000,
-        animationEasing: Easing.linear,
-        animationEasing_: 'Easing.linear',
-        animating: false,
-        interaction: false,
-        hidesWhenStopped: false,
-        color: 'white',
-        size: 60,
-        count: 6
-      },
-    },
-    {
-      Comp: BarIndicator,
-      mame: 'BarIndicator',
-      props: {
-        animationDuration: 1000,
-        animationEasing: Easing.linear,
-        animationEasing_: 'Easing.linear',
-        animating: false,
-        interaction: false,
-        hidesWhenStopped: true,
-        color: 'white',
-        size: 60,
-        count: 6
-      },
-    },
-    {
-      Comp: BarIndicator,
-      mame: 'BarIndicator',
-      props: {
-        animationDuration: 500,
-        animationEasing: Easing.ease,
-        animationEasing_: 'Easing.ease',
-        animating: true,
-        interaction: true,
-        hidesWhenStopped: false,
-        color: 'red',
-        size: 30,
-        count: 3
-      },
-    },
-    {
-      Comp: DotIndicator,
-      mame: 'DotIndicator',
-      props: {
-        animationDuration: 1000,
-        animationEasing: Easing.linear,
-        animationEasing_: 'Easing.linear',
-        animating: true,
-        interaction: false,
-        hidesWhenStopped: false,
-        color: 'white',
-        size: 40,
-        count: 6
-      },
-    },
-    {
-      Comp: DotIndicator,
-      mame: 'DotIndicator',
-      props: {
-        animationDuration: 500,
-        animationEasing: Easing.ease,
-        animationEasing_: 'Easing.ease',
-        animating: false,
-        interaction: false,
-        hidesWhenStopped: true,
-        color: 'red',
-        size: 30,
-        count: 3,
-        style: styles.reverse
-      },
-    },
-    {
-      Comp: DotIndicator,
-      mame: 'DotIndicator',
-      props: {
-        animationDuration: 500,
-        animationEasing: Easing.ease,
-        animationEasing_: 'Easing.ease',
-        animating: false,
-        interaction: true,
-        hidesWhenStopped: false,
-        color: 'red',
-        size: 30,
-        count: 3,
-        style: styles.reverse
-      },
-    },
-    {
-      Comp: DotIndicator,
-      mame: 'DotIndicator',
-      props: {
-        animationDuration: 500,
-        animationEasing: Easing.ease,
-        animationEasing_: 'Easing.ease',
-        animating: true,
-        interaction: false,
-        hidesWhenStopped: false,
-        color: 'red',
-        size: 30,
-        count: 3,
-        style: styles.reverse
-      },
-    }
-  ]
+export function IndicatorsExample() {
+  const [showBtn, setSshowBtn] = useState(true)
+  const [showTest1, setShowTest1] = useState(false)
+  const [showTest2, setShowTest2] = useState(false)
   return (
-    <ScrollView>
-      <Tester >
-        <TestSuite name='IndicatorsExample' >
-          {components.map((copm, index) => (
-            <TestCase itShould={copm.mame + ': ' + JSON.stringify(copm.props)} tags={['C_API']} key={copm.mame + index}>
-              <View style={{ backgroundColor: '#01579B' }}>
-                <copm.Comp {...copm.props} />
-              </View>
-            </TestCase>
-          )
-          )}
-        </TestSuite>
-      </Tester>
-    </ScrollView>
+    <View style={showBtn ? { height, backgroundColor: '#01579B' } : styles.container}>
+      {showBtn && <View style={styles.row}>
+        <View style={styles.spacer} />
+        <Button title='打开Test1' onPress={() => {
+          setShowTest1(true);
+          setSshowBtn(false);
+        }}></Button>
+        <View style={styles.spacer} />
+        <Button title='打开Test2' onPress={() => {
+          setShowTest2(true);
+          setSshowBtn(false);
+        }}></Button>
+      </View>}
+      {showTest1 && <View style={styles.row}>
+        <View style={{ height: height - 150 }}>
+          <IndicatorsExample1 />
+        </View>
+        <View style={{ height: 50 }}>
+          <Button title='返回' onPress={() => {
+            setShowTest1(false);
+            setSshowBtn(true);
+          }}></Button>
+        </View>
+      </View>}
+      {showTest2 && <View style={styles.row}>
+        <View style={{ height: height - 150 }}>
+          <IndicatorsExample2 />
+        </View>
+        <View style={{ height: 50 }}>
+          <Button title='返回' onPress={() => {
+            setShowTest2(false);
+            setSshowBtn(true);
+          }}></Button>
+        </View>
+      </View>}
+    </View>
   );
 }
 
 
 const styles = {
   container: {
-    height: height - 200,
     backgroundColor: '#01579B',
-    padding: 20,
+    padding: 0,
   },
-
+  spacer: {
+    margin: 5,
+  },
   row: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-
-  reverse: {
-    transform: [{
-      rotate: '180deg',
-    }],
+    flex: 1
   },
 
   flex: {
