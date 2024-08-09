@@ -9,7 +9,7 @@ const ActionButtonDemo = () => {
         <Tester >
         <ScrollView style={styles.scrollView}>
           <TestSuite name='ActionButton speedDial'>
-            <TestCase itShould='props:actions,icon,transition speedDial'>
+            <TestCase itShould='props:actions(点击按钮之后显示的图标，标题，以及该图标的名称),icon(按钮的图标),transition（过度效果 speedDial） '>
               <View style={styles.view}>
                 <ActionButton
                   actions={[
@@ -27,7 +27,7 @@ const ActionButtonDemo = () => {
           </TestSuite>
           
           <TestSuite name='ActionButton onPress'>
-            <TestCase itShould='props:actions,icon,transition speedDial,onPress'>
+            <TestCase itShould='props:onPress(按下之后触发的回调)'>
               <View style={styles.view}>
                 <ActionButton
                   onPress={()=>setActionText("onPress actionText")}
@@ -48,8 +48,8 @@ const ActionButtonDemo = () => {
          
 
 
-          <TestSuite name='props:actions,icon,transition:toolbar'>
-            <TestCase itShould='props:actions,icon,transition'>
+          <TestSuite name='ActionButton transition(toolbar)'>
+            <TestCase itShould='props:transition(过渡效果 toolbar)'>
               <View style={styles.view}>
                 <ActionButton
                   actions={[{ icon: 'email', label: 'email', name: 'email' },
@@ -64,7 +64,7 @@ const ActionButtonDemo = () => {
           </TestSuite>
 
            <TestSuite name='ActionButton style'>
-            <TestCase itShould='props:actions,icon,transition speedDial,style(container,icon,positionContainer)'>
+            <TestCase itShould='props:style(快速拨号过渡效果，组件的样式)'>
               <View style={styles.view}>
                 <ActionButton
                   style={{container:{backgroundColor:'blue'},icon:{color:'red'},positionContainer:{top:2,bottom:2}}}
@@ -82,8 +82,8 @@ const ActionButtonDemo = () => {
             </TestCase>
           </TestSuite> 
           
-          <TestSuite name='props:actions,icon,transition:toolbar style'>
-            <TestCase itShould='props:actions,icon,transition,style(toolbarContainer)'>
+          <TestSuite name='ActionButton style'>
+            <TestCase itShould='props:style(工具栏过渡效果，组件的样式)'>
               <View style={styles.view}>
                 <ActionButton
                 style={{toolbarContainer:{backgroundColor:'blue'}}}
