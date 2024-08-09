@@ -422,7 +422,7 @@ const TestTransitiongroup = () => {
 
                         <TestCase
                             key={"getInitStatus_5"}
-                            itShould={`backgroundColor: "yellow",padding:20"`}
+                            itShould={`backgroundColor: "yellow",padding:30"`}
                             tags={['C_API']}
                             initialState={false}
                             arrange={({ setState }) => {
@@ -432,7 +432,7 @@ const TestTransitiongroup = () => {
                                             <FadeInOutTransition>
                                                 <View>
                                                     <Text style={{color:'red'}}>
-                                                   ` TransitionGroup  style= backgroundColor: "yellow", padding: 100, `
+                                                   ` TransitionGroup  style= backgroundColor: "yellow", padding: 30, `
 
                                                     </Text>
                                                 </View>
