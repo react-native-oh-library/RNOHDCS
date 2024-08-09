@@ -8,13 +8,13 @@ import { Tester, TestSuite, TestCase } from "@rnoh/testerino"
 import { backgroundColor } from '@shopify/restyle';
 
 const DrawerDemo = () => {
-  const imageComponent = <Image  source={require('../../assets/react-native-material-ui/avatar1.png')}  style={{width:75,height:75,borderRadius:50}}></Image>
+  const imageComponent = <Image  source={require('../image/avatar1.png')}  style={{width:75,height:75,borderRadius:50}}></Image>
   const [active,setActive] = useState(true)
   return (
     <Tester>
       <ScrollView style={{marginBottom:100}}>
-      <TestSuite name='Drawer'>
-        <TestCase itShould='props:'>
+      <TestSuite name='Drawer(抽屉桌面，是一个整体，所以props需要一起设置)'>
+        <TestCase itShould='props:style,children。DrawerHeaderPops:backgroundColor,DrawerAccount:avatar,accounts,footer,style'>
           <View style={{ height: 600 }}>
             <View style={styles.container}>
               <Drawer style={{container:{backgroundColor:"#fff"}}}>
@@ -58,12 +58,12 @@ const DrawerDemo = () => {
         </TestCase>
       </TestSuite>
 
-      <TestSuite name='Drawer'>
-        <TestCase itShould='props:'>
+      <TestSuite name='Drawer(抽屉桌面 此用例展示其他样式,背景为图片)'>
+        <TestCase itShould=''>
           <View style={{ height: 600 }}>
             <View style={styles.container}>
-              <Drawer style={{contentContainer:{backgroundColor:'red'}}}>
-                <Drawer.Header backgroundColor='red' image={imageComponent}>
+              <Drawer >
+                <Drawer.Header  image={imageComponent}>
                   <Drawer.Header.Account
                     avatar={<Avatar text="A" />}
                     accounts={[
@@ -78,7 +78,7 @@ const DrawerDemo = () => {
                       },
                       rightElement: 'arrow-drop-down',
                     }}
-                    style={{container:{backgroundColor:'red'},accountContainer:{margin:20},topContainer:{margin:20},inactiveAvatarContainer:{margin:10}}}
+                    style={{accountContainer:{margin:20},topContainer:{margin:20},inactiveAvatarContainer:{margin:10}}}
                   />
                 </Drawer.Header>
                 <Drawer.Section
@@ -106,7 +106,7 @@ const DrawerDemo = () => {
       </TestSuite>
 
 
-      <TestSuite name='Drawer'>
+      <TestSuite name='Drawer(抽屉桌面 此用例展示其他样式)'>
         <TestCase itShould='props:'>
           <View style={{ height: 600 }}>
             <View style={styles.container}>

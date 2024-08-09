@@ -5,7 +5,7 @@ const BadgeDemo = () => {
   return (
     <Tester >
       <ScrollView style={styles.scrollView}>
-        <TestSuite name='Badge with icons  '>
+        <TestSuite name='Badge with icons (带图标的徽章)'>
           <TestCase itShould='Props:text,children,,style'>
             <View style={styles.rowContainer}>
               <View style={styles.badgeContainer}>
@@ -39,7 +39,7 @@ const BadgeDemo = () => {
           </TestCase>
         </TestSuite>
 
-        <TestSuite name='Badge with button '>
+        <TestSuite name='Badge with button (带按钮的徽章)'>
           <TestCase itShould='Props:text,children,,style'>
             <View style={styles.rowContainer}>
               <View style={styles.badgeContainer}>
@@ -64,7 +64,7 @@ const BadgeDemo = () => {
           </TestCase>
         </TestSuite>
 
-        <TestSuite name='Badge with text '>
+        <TestSuite name='Badge with text(带文字的徽章) '>
           <TestCase itShould='Props:text,children'>
             <View style={styles.rowContainer}>
               <View style={styles.badgeContainer}>
@@ -76,7 +76,7 @@ const BadgeDemo = () => {
           </TestCase>
         </TestSuite>
 
-        <TestSuite name='Badge with Icon '>
+        <TestSuite name='Badge with Avatar(带图标头像的徽章) '>
           <TestCase itShould='Props:size,children,icon,style,'>
             <View style={styles.rowContainer}>
               <View style={styles.badgeContainer}>
@@ -106,7 +106,7 @@ const BadgeDemo = () => {
           </TestCase>
         </TestSuite>
 
-        <TestSuite name='Badge with strokes '>
+        <TestSuite name='Badge with strokes(带有比划的徽章) '>
           <TestCase itShould='Props:size,children,icon,style,,stroke'>
             <View style={styles.rowContainer}>
               <View style={styles.badgeContainer}>

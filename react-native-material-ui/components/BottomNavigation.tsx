@@ -9,7 +9,7 @@ const BottomNavigationDome = () => {
     <>
       <Tester>
         <ScrollView style={{marginBottom:100}}>
-          <TestSuite name="Bottom navigation">
+          <TestSuite name="Bottom navigation(底部导航栏，该组件是一个整体，需一起验证所有属性)">
             <TestCase itShould="BottomNavigation.ActionProps:key,icon,label,onPress  BottomNavigationProps:active,hidden,style">
               <View style={styles.rowContainer}>
                 <View
@@ -54,7 +54,7 @@ const BottomNavigationDome = () => {
             </TestCase>
           </TestSuite>
 
-          <TestSuite name="Bottom navigation">
+          <TestSuite name="Bottom navigation(底部导航栏，该组件是一个整体，需一起验证所有属性，该用例验证额外的样式属性)">
             <TestCase itShould="BottomNavigation.ActionProps:key,icon,label,onPress  BottomNavigationProps:active,hidden,style">
               <View style={styles.rowContainer}>
                 <View
