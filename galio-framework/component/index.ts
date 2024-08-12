@@ -12,6 +12,7 @@ import SliderDemo from "./Slider"
 import SwitchDemo from "./Switch"
 import TestDemo from "./Text"
 import ToastDemo from "./ToastNotification"
+import ReanimatedDemo from "./test"
 
 export default{
     AccordionDemo,
@@ -27,5 +28,6 @@ export default{
     SliderDemo,
     SwitchDemo,
     TestDemo,
-    ToastDemo
+    ToastDemo,
+    ReanimatedDemo
 }
