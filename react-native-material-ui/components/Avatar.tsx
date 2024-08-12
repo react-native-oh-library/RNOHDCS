@@ -2,12 +2,12 @@ import { Avatar } from 'react-native-material-ui';
 import { View, StyleSheet, Image,ScrollView } from 'react-native'
 import { Tester, TestSuite, TestCase } from "@rnoh/testerino"
  const AvatarDemo = () => {
-  const imageComponent = <Image  source={require('../../assets/react-native-material-ui/avatar1.png')}  style={{width:75,height:75,borderRadius:50}}></Image>
-  const imageComponentTwo = <Image  source={require('../../assets/react-native-material-ui/avatar2.jpg')}  style={{width:75,height:75,borderRadius:50}}></Image>
+  const imageComponent = <Image  source={require('../image/avatar1.png')}  style={{width:75,height:75,borderRadius:50}}></Image>
+  const imageComponentTwo = <Image  source={require('../image/avatar2.jpg')}  style={{width:75,height:75,borderRadius:50}}></Image>
   return (
     <Tester >
       <ScrollView style={styles.scrollView}>
-      <TestSuite name='Props:image'>
+      <TestSuite name='Avatar image (图片)'>
         <TestCase itShould='Props:image,style'>
          <View style={{backgroundColor:'#fff',width:'100%',height:100,flexDirection:'row'}}>
             <Avatar  image={imageComponent} style={{container:styles.container}} size={75}/> 
@@ -15,7 +15,7 @@ import { Tester, TestSuite, TestCase } from "@rnoh/testerino"
           </View>
         </TestCase>
       </TestSuite>
-      <TestSuite name='Props:icon'>
+      <TestSuite name='Avatar icon(图标)'>
         <TestCase itShould='Props:icon,style'>
         <View style={{backgroundColor:'#fff',width:'100%',height:100,flexDirection:'row'}}>
             <Avatar  icon='person' style={{container:{marginTop:20,marginLeft:10}}}/> 
@@ -24,7 +24,7 @@ import { Tester, TestSuite, TestCase } from "@rnoh/testerino"
         </TestCase>
           
       </TestSuite>
-      <TestSuite name='Props:iconColor'>
+      <TestSuite name='Props:iconColor(图标颜色)'>
         <TestCase itShould='Props:iconColor,style'>
         <View style={{backgroundColor:'#fff',width:'100%',height:100,flexDirection:'row'}}>
             <Avatar  icon='person' style={{container:{marginTop:20,marginLeft:10}}}  iconColor={'red'}/> 
@@ -33,7 +33,7 @@ import { Tester, TestSuite, TestCase } from "@rnoh/testerino"
         </TestCase>
           
       </TestSuite>
-      <TestSuite name='Props:iconSize'>
+      <TestSuite name='Props:iconSize(图标大小)'>
         <TestCase itShould='Props:iconSize,style'>
         <View style={{backgroundColor:'#fff',width:'100%',height:100,flexDirection:'row'}}>
             <Avatar  icon='person' style={{container:{marginTop:20,marginLeft:10}}} iconSize={10}/> 
@@ -42,7 +42,7 @@ import { Tester, TestSuite, TestCase } from "@rnoh/testerino"
         </TestCase>
           
       </TestSuite>
-      <TestSuite name='Props:text'>
+      <TestSuite name='Props:text(文字)'>
         <TestCase itShould='Props:text,style'>
         <View style={{backgroundColor:'#fff',width:'100%',height:100,flexDirection:'row'}}>
             <Avatar  text='A' style={{container:{marginTop:20,marginLeft:10}}}/> 
@@ -52,7 +52,7 @@ import { Tester, TestSuite, TestCase } from "@rnoh/testerino"
           
       </TestSuite>
 
-      <TestSuite name='Props:size'>
+      <TestSuite name='Props:size(大小)'>
         <TestCase itShould='Props:size,style'>
         <View style={{backgroundColor:'#fff',width:'100%',height:100,flexDirection:'row'}}>
             <Avatar icon='person' style={{container:{marginTop:20,marginLeft:10}}} size={30} iconSize={10}/> 

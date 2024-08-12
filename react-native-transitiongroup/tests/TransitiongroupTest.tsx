@@ -110,8 +110,8 @@ const TestTransitiongroup = () => {
                 <ScrollView>
                     <TestSuite name="react-native-transitiongroup">
                         <TestCase
-                            key={"getInitStatus_2"}
-                            itShould={`animation inDuration=1000`}
+                            key={"inDuration=500"}
+                            itShould={`animation inDuration=500`}
                             tags={['C_API']}
                             initialState={false}
                             arrange={({ setState }) => {
@@ -119,7 +119,7 @@ const TestTransitiongroup = () => {
                                     <View style={{ flex: 1 }}>
                                         <TransitionGroup>
                                             {showTextb && (
-                                                <FadeInOutTransition inDuration={1000}>
+                                                <FadeInOutTransition inDuration={500}>
                                                     <View>
                                                         <Text style={styles.text}>Hello, Transition Group!!</Text>
                                                     </View>
@@ -138,8 +138,36 @@ const TestTransitiongroup = () => {
                             }}
                         />
                         <TestCase
-                            key={"inDelay"}
-                            itShould={`animation inDelay=1000`}
+                            key={"inDuration=3000"}
+                            itShould={`animation inDuration=3000`}
+                            tags={['C_API']}
+                            initialState={false}
+                            arrange={({ setState }) => {
+                                return (
+                                    <View style={{ flex: 1 }}>
+                                        <TransitionGroup>
+                                            {showTextb && (
+                                                <FadeInOutTransition inDuration={3000}>
+                                                    <View>
+                                                        <Text style={styles.text}>Hello, Transition Group!!</Text>
+                                                    </View>
+                                                </FadeInOutTransition>
+                                            )}
+                                        </TransitionGroup>
+                                        <Button onPress={() => {
+                                            setShowTextb(!showTextb)
+                                            setState(true)
+                                        }} label={"切换"}></Button>
+                                    </View>
+                                );
+                            }}
+                            assert={async ({ expect, state }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+                        <TestCase
+                            key={"inDelay=500"}
+                            itShould={`animation inDelay=500`}
                             tags={['C_API']}
                             initialState={false}
                             arrange={({ setState }) => {
@@ -147,7 +175,35 @@ const TestTransitiongroup = () => {
                                     <View style={{ flex: 1 }}>
                                         <TransitionGroup>
                                             {showTextf && (
-                                                <FadeInOutTransition inDelay={1000}>
+                                                <FadeInOutTransition inDelay={500}>
+                                                    <View>
+                                                        <Text style={styles.text}>Hello, Transition Group!!</Text>
+                                                    </View>
+                                                </FadeInOutTransition>
+                                            )}
+                                        </TransitionGroup>
+                                        <Button onPress={() => {
+                                            setShowTextf(!showTextf)
+                                            setState(true)
+                                        }} label={"切换"}></Button>
+                                    </View>
+                                );
+                            }}
+                            assert={async ({ expect, state }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+                        <TestCase
+                            key={"inDelay=3000"}
+                            itShould={`animation inDelay=3000`}
+                            tags={['C_API']}
+                            initialState={false}
+                            arrange={({ setState }) => {
+                                return (
+                                    <View style={{ flex: 1 }}>
+                                        <TransitionGroup>
+                                            {showTextf && (
+                                                <FadeInOutTransition inDelay={3000}>
                                                     <View>
                                                         <Text style={styles.text}>Hello, Transition Group!!</Text>
                                                     </View>
@@ -166,9 +222,10 @@ const TestTransitiongroup = () => {
                             }}
                         />
 
+
                         <TestCase
-                            key={"getInitStatus_3"}
-                            itShould={`animation outDuration=1000`}
+                            key={"outDuration=500"}
+                            itShould={`animation outDuration=500`}
                             tags={['C_API']}
                             initialState={false}
                             arrange={({ setState }) => {
@@ -176,7 +233,37 @@ const TestTransitiongroup = () => {
                                     <View style={{ flex: 1 }}>
                                         <TransitionGroup>
                                             {showTextc && (
-                                                <FadeInOutTransition outDuration={1000}>
+                                                <FadeInOutTransition outDuration={500}>
+                                                    <View>
+                                                        <Text style={styles.text}>Hello, Transition Group!!</Text>
+                                                    </View>
+                                                </FadeInOutTransition>
+                                            )}
+                                        </TransitionGroup>
+                                        <Button onPress={() => {
+                                            setShowTextc(!showTextc)
+                                            setState(true)
+                                        }} label={"切换"}></Button>
+                                    </View>
+                                );
+                            }}
+                            assert={async ({ expect, state }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+
+
+                        <TestCase
+                            key={"outDuration=3000"}
+                            itShould={`animation outDuration=3000`}
+                            tags={['C_API']}
+                            initialState={false}
+                            arrange={({ setState }) => {
+                                return (
+                                    <View style={{ flex: 1 }}>
+                                        <TransitionGroup>
+                                            {showTextc && (
+                                                <FadeInOutTransition outDuration={3000}>
                                                     <View>
                                                         <Text style={styles.text}>Hello, Transition Group!!</Text>
                                                     </View>
@@ -196,8 +283,8 @@ const TestTransitiongroup = () => {
                         />
 
                         <TestCase
-                            key={"outDelay"}
-                            itShould={`animation outDelay=1000`}
+                            key={"outDelay500"}
+                            itShould={`animation outDelay=500`}
                             tags={['C_API']}
                             initialState={false}
                             arrange={({ setState }) => {
@@ -205,7 +292,35 @@ const TestTransitiongroup = () => {
                                     <View style={{ flex: 1 }}>
                                         <TransitionGroup>
                                             {showTextg && (
-                                                <FadeInOutTransition outDelay={1000}>
+                                                <FadeInOutTransition outDelay={500}>
+                                                    <View>
+                                                        <Text style={styles.text}>Hello, Transition Group!!</Text>
+                                                    </View>
+                                                </FadeInOutTransition>
+                                            )}
+                                        </TransitionGroup>
+                                        <Button onPress={() => {
+                                            setShowTextg(!showTextg)
+                                            setState(true)
+                                        }} label={"切换"}></Button>
+                                    </View>
+                                );
+                            }}
+                            assert={async ({ expect, state }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+                        <TestCase
+                            key={"outDelay3000"}
+                            itShould={`animation outDelay=3000`}
+                            tags={['C_API']}
+                            initialState={false}
+                            arrange={({ setState }) => {
+                                return (
+                                    <View style={{ flex: 1 }}>
+                                        <TransitionGroup>
+                                            {showTextg && (
+                                                <FadeInOutTransition outDelay={3000}>
                                                     <View>
                                                         <Text style={styles.text}>Hello, Transition Group!!</Text>
                                                     </View>
@@ -284,7 +399,7 @@ const TestTransitiongroup = () => {
 
                         <TestCase
                             key={"getInitStatus_5"}
-                            itShould={`animation style backgroundColor:"red"`}
+                            itShould={`animation style backgroundColor:"pink"`}
                             tags={['C_API']}
                             initialState={false}
                             arrange={({ setState }) => {
@@ -292,7 +407,7 @@ const TestTransitiongroup = () => {
                                     <View style={{ flex: 1 }}>
                                         <TransitionGroup pointerEvents="box-none" style={{ backgroundColor: "pink" }}>
                                             <FadeInOutTransition>
-                                            <View>
+                                                <View>
                                                     <Text style={styles.text} >1111111</Text>
                                                 </View>
                                             </FadeInOutTransition>
@@ -307,16 +422,19 @@ const TestTransitiongroup = () => {
 
                         <TestCase
                             key={"getInitStatus_5"}
-                            itShould={`backgroundColor: "yellow",padding:20"`}
+                            itShould={`backgroundColor: "yellow",padding:30"`}
                             tags={['C_API']}
                             initialState={false}
                             arrange={({ setState }) => {
                                 return (
                                     <View style={{ flex: 1 }}>
-                                        <TransitionGroup pointerEvents="box-none" style={{ backgroundColor: "yellow",padding:20 }}>
+                                        <TransitionGroup pointerEvents="box-none" style={{ backgroundColor: "yellow", padding: 30, }}>
                                             <FadeInOutTransition>
                                                 <View>
-                                                    <Text style={styles.text} >1111111</Text>
+                                                    <Text style={{color:'red'}}>
+                                                   ` TransitionGroup  style= backgroundColor: "yellow", padding: 30, `
+
+                                                    </Text>
                                                 </View>
                                             </FadeInOutTransition>
                                         </TransitionGroup>

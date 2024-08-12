@@ -113,27 +113,6 @@ export interface Cookie {
     );
 };
 
-const AddMenuFlushTest = (props: {
-  setState: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
-
-  const addCustomMenuItem = async() => {
-    CookieManager.flushForHarmony(() => {
-      if (webViewRef.current) {
-        //webViewRef.current.reload();
-      }
-    });
-    setResult("刷新cookie成功");
-    props.setState(true);
-  };
-
-  return (
-    <View style={styles.container}>
-      <Button title="刷新cookie" onPress={addCustomMenuItem} />
-    </View>
-  );
-};
-
 const AddMenuRemoveTest = (props: {
   setState: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
@@ -194,14 +173,7 @@ const AddMenuRemoveTest = (props: {
                     expect(state).to.be.true;
                 }}
             />
-            <TestCase
-                itShould="flushForHarmony"
-                initialState={false}
-                arrange={({ setState }) => <AddMenuFlushTest setState={setState} />}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                }}
-            />
+           
             <TestCase
                 itShould="removeSessionCookies"
                 initialState={false}

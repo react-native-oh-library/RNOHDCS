@@ -90,21 +90,7 @@ export default function CookiesPage() {
         }}
       >
         <Text>clearByName()【根据名称删除cookie】</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          CookieManager.flushForHarmony(() => {
-            if (webViewRef.current) {
-              webViewRef.current.reload();
-            }
-          });
-          setResult("刷新cookie成功");
-        }}
-      >
-        <Text>flush()【刷新cookie】</Text>
-      </TouchableOpacity>
+      </TouchableOpacity>   
 
       <TouchableOpacity
         style={styles.button}
