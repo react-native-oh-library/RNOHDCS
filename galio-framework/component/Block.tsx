@@ -81,7 +81,7 @@ const BlockDemo = () => {
                         )
                     })
                 }
-                <TestCase itShould="fluid:true" tags={['C_API']} >
+                <TestCase itShould="fluid:设置fluid样式为true" tags={['C_API']} >
                     <View style={{ height: 150 }}>
                         <Block
                             center={true}
@@ -91,7 +91,7 @@ const BlockDemo = () => {
                         </Block>
                     </View>
                 </TestCase>
-                <TestCase itShould="fluid:false" tags={['C_API']} >
+                <TestCase itShould="fluid:设置fluid样式为false" tags={['C_API']} >
                     <View style={{ height: 150 }}>
                         <Block
                             center={true}

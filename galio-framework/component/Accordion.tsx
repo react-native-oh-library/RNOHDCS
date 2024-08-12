@@ -45,7 +45,7 @@ const AccordionDemo = () => {
                     {result}
                 </Text>
             </View>
-            <Tester>
+            <Tester children={undefined}>
                 <TestCase itShould="dataArray:列表数组" tags={['C_API']} >
                     <View style={{ height: 150 }}>
                         <Accordion
@@ -194,7 +194,7 @@ const AccordionDemo = () => {
                         />
                     </View>
                 </TestCase>
-                <TestCase itShould="icon:Foundation name='home'" tags={['C_API']} >
+                <TestCase itShould="icon:Foundation name='home'" tags={['C_API']} skip="">
                     <View style={{ height: 150 }}>
                         <Accordion
                             dataArray={data}
@@ -809,7 +809,7 @@ const styles = StyleSheet.create({
         height: 100,
         backgroundColor: 'purple',
         borderBottomColor: 'red',
-        borderBottomWidth: 5
+        borderBottomWidth: 5,
     },
     headerStyle: {
         backgroundColor: '#5E72E4',

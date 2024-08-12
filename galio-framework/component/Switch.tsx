@@ -17,8 +17,10 @@ const SwitchDemo = () => {
         { disabled: true, onChange: onPressSwitch },
         { initialValue: true, onChange: onPressSwitch },
         { initialValue: false, onChange: onPressSwitch },
-        {onChange: onPressSwitch,trackColor:{false:'pink',true:'red'}},
-        {onChange: onPressSwitch,trackColor:{false:'blue',true:'purple'}},
+        { onChange: onPressSwitch, trackColor: { false: 'pink', true: 'red' } },
+        { onChange: onPressSwitch, trackColor: { false: 'blue', true: 'purple' } },
+        {ios_backgroundColor:'green',onChange: onPressSwitch,trackColor: {true: 'red' }},
+        {ios_backgroundColor:'green',onChange: onPressSwitch,trackColor: {false:'black',true: 'red' }}
     ]
     return (
         <ScrollView style={{ backgroundColor: "#fff" }}>

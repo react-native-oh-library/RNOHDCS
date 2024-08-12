@@ -50,7 +50,7 @@ export function NavigationContainer({
         registeredPageNames,
       }}>
       <View style={{width: '100%', height: '100%', flexDirection: 'column'}}>
-        <Page name="INDEX">
+        <Page name="INDEX" children={undefined}>
         <IndexPage hasHeader={hasHeader} />
         </Page>
         {children}

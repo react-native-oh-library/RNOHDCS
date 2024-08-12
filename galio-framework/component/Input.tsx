@@ -30,37 +30,37 @@ const InputDemo = () => {
         { left: true, icon: "heart", family: "AntDesign" },
         { left: false, icon: "frown", family: "AntDesign" },
         { right: true, icon: "heart", family: "AntDesign" },
-        {right: false, icon: "frown", family: "AntDesign" },
-        {icon: "frown", family: "AntDesign"},
-        {icon: "meho", family: "AntDesign"},
-        {icon: "cpu", family: "feather"},
-        {icon: "feather", family: "feather"},
-        {icon: "social-instagram", family: "simple-line-icon"},
-        {icon: "link", family: "simple-line-icon"},
-        {icon: "broom", family: "font-awesome-5"},
-        {icon: "carrot", family: "font-awesome-5"},
-        {icon: "certificate", family: "font-awesome"},
-        {icon: "github-alt", family: "font-awesome"},
-        {icon: "mixi", family: "entypo"},
-        {icon: "pin", family: "entypo"},
-        {icon: "redo", family: "evilicons"},
-        {icon: "retweet", family: "evilicons"},
-        {icon: "x", family: "foundation"},
-        {icon: "yen", family: "foundation"},
-        {icon: "fish", family: "ionicon"},
-        {icon: "headset", family: "ionicon"},
-        {icon: "beaker", family: "material-community"},
-        {icon: "beach", family: "material-community"},
-        {icon: "air", family: "material"},
-        {icon: "adjust", family: "material"},
-        {icon: "hubot", family: "octicon"},
-        {icon: "hourglass", family: "octicon"},
-        {icon: "plancast", family: "zocial"},
-        {icon: "yahoo", family: "zocial"},
-        {icon: "frown", family: "AntDesign",iconColor:'red'},
-        {icon: "meho", family: "AntDesign",iconColor:'blue'},
-        {icon: "app-store", family: "Entypo",iconColor:'blue'},
-        {icon: "bowl", family: "Entypo",iconColor:'skyblue'}
+        { right: false, icon: "frown", family: "AntDesign" },
+        { icon: "frown", family: "AntDesign" },
+        { icon: "meho", family: "AntDesign" },
+        { icon: "cpu", family: "feather" },
+        { icon: "feather", family: "feather" },
+        { icon: "social-instagram", family: "simple-line-icon" },
+        { icon: "link", family: "simple-line-icon" },
+        { icon: "broom", family: "font-awesome-5" },
+        { icon: "carrot", family: "font-awesome-5" },
+        { icon: "certificate", family: "font-awesome" },
+        { icon: "github-alt", family: "font-awesome" },
+        { icon: "mixi", family: "entypo" },
+        { icon: "pin", family: "entypo" },
+        { icon: "redo", family: "evilicons" },
+        { icon: "retweet", family: "evilicons" },
+        { icon: "x", family: "foundation" },
+        { icon: "yen", family: "foundation" },
+        { icon: "fish", family: "ionicon" },
+        { icon: "headset", family: "ionicon" },
+        { icon: "beaker", family: "material-community" },
+        { icon: "beach", family: "material-community" },
+        { icon: "air", family: "material" },
+        { icon: "adjust", family: "material" },
+        { icon: "hubot", family: "octicon" },
+        { icon: "hourglass", family: "octicon" },
+        { icon: "plancast", family: "zocial" },
+        { icon: "yahoo", family: "zocial" },
+        { icon: "frown", family: "AntDesign", iconColor: 'red' },
+        { icon: "meho", family: "AntDesign", iconColor: 'blue' },
+        { icon: "app-store", family: "Entypo", iconColor: 'blue' },
+        { icon: "bowl", family: "Entypo", iconColor: 'skyblue' }
     ]
     return (
         <ScrollView style={{ backgroundColor: '#fff' }}>
@@ -88,25 +88,31 @@ const InputDemo = () => {
                         />
                     </TestCase>
                     <TestCase itShould='bottomHelp: false'>
-                        <Input
-                            placeholder="Input with custom styling and help"
-                            help="Bottom help text"
-                            bottomHelp={false}
-                        />
+                        <View style={{ height: 150 }}>
+                            <Input
+                                placeholder="Input with custom styling and help"
+                                help="Bottom help text"
+                                bottomHelp={false}
+                            />
+                        </View>
                     </TestCase>
                     <TestCase itShould='topHelp: true'>
-                        <Input
-                            placeholder="Input with custom styling and help"
-                            help="Bottom help text"
-                            topHelp={true}
-                        />
+                        <View style={{ height: 300 }}>
+                            <Input
+                                placeholder="Input with custom styling and help"
+                                help="Bottom help text"
+                                topHelp={true}
+                            />
+                        </View>
                     </TestCase>
                     <TestCase itShould='topHelp: false'>
-                        <Input
-                            placeholder="Input with custom styling and help"
-                            help="Bottom help text"
-                            topHelp={false}
-                        />
+                        <View style={{ height: 400 }}>
+                            <Input
+                                placeholder="Input with custom styling and help"
+                                help="Bottom help text"
+                                topHelp={false}
+                            />
+                        </View>
                     </TestCase>
                 </Tester>
             }
