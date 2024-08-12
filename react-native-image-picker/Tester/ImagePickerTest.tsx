@@ -52,7 +52,7 @@ export const ImagePickerTest = () => {
                                         <Text style={{ width: 160, height: 34, borderRadius: 8, backgroundColor: 'hsl(190,50%,70%)', lineHeight: 28, marginTop: 10, fontWeight: 'bold', textAlign: 'center' }} onPress={() => {
                                             setMediaType(mediaType === 'photo' ? 'video' : 'mixed')
                                         }}>切换:{mediaType}</Text>
-                                        <Text style={{ color: 'black', width: 560, marginTop: 20 }}>{urlInfo}</Text>
+                                        <Text style={{ color: 'black', width: 400, marginTop: 20 }}>{urlInfo}</Text>
                                     </View>
                                 </View>
                             );
@@ -95,7 +95,7 @@ export const ImagePickerTest = () => {
                                         <Text style={{ width: 160, height: 34, borderRadius: 8, backgroundColor: 'hsl(190,50%,70%)', lineHeight: 28, marginTop: 10, fontWeight: 'bold', textAlign: 'center' }} onPress={() => {
                                             setMediaType(mediaType === 'photo' ? 'video' : 'photo')
                                         }}>切换:{mediaType}</Text>
-                                        <Text style={{ color: 'black', width: 560, marginTop: 20 }}>{urlInfo}</Text>
+                                        <Text style={{ color: 'black', width: 400, marginTop: 20 }}>{urlInfo}</Text>
 
                                     </View>
                                 </View>
