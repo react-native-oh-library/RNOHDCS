@@ -159,6 +159,24 @@ export const ElementsExamples = () => {
     }
 
 
+    // headerStyle: {
+    //     description: '标题样式,设置粉色背景',
+    //     type: 'preview',
+    //     valueList:[{
+
+    //     }],
+    //     props: {
+    //         headerStyle: {
+    //             backgroundColor: 'pink'
+    //         },
+    //     }
+    // },
+
+    // function app({props,...rest},name){
+
+    //     props[name]
+    // }
+
 
     const Stack = createNativeStackNavigator();
 
@@ -246,26 +264,73 @@ export const ElementsExamples = () => {
 
             headerStyle: {
                 description: '标题样式,设置粉色背景',
-                type: 'preview',
-                props: {
-                    headerStyle: {
+                value: {
+                    title: 'pink',
+                    value: {
                         backgroundColor: 'pink'
+                    }
+                },
+                valueList: [
+                    {
+                        title: 'pink',
+                        value: {
+                            backgroundColor: 'pink'
+                        }
                     },
-                }
+                    {
+                        title: 'red',
+                        value: {
+                            backgroundColor: 'red'
+                        }
+                    }
+                ]
             },
             headerTitleStyle: {
-                type: 'preview',
                 description: '头部标题样式,设为红色字体',
-                props: {
-                    headerTitleStyle: {
-                        color: 'red'
+                value: {
+                    title: 'pink',
+                    value: {
+                        color: 'pink'
                     }
-                }
+                },
+                valueList: [
+                    {
+                        title: 'pink',
+                        value: {
+                            color: 'pink'
+                        }
+                    },
+                    {
+                        title: 'red',
+                        value: {
+                            color: 'red'
+                        }
+                    }
+                ]
             },
             headerLeftContainerStyle: {
-                type: 'preview',
                 description: '头部左侧的容器样式，加个背景色',
-                props: {
+                value: {
+                    title: 'pink',
+                    value: {
+                        backgroundColor: 'pink'
+                    }
+                },
+                valueList: [
+                    {
+                        title: 'pink',
+                        value: {
+                            backgroundColor: 'pink'
+                        }
+                    },
+                    {
+                        title: 'red',
+                        value: {
+                            backgroundColor: 'red'
+                        }
+                    }
+                ],
+                extraOptions: {
                     headerLeft: (props: {}) => {
                         const navigation = useNavigation()
                         const index = useNavigationState((state) => state.index);
@@ -273,45 +338,87 @@ export const ElementsExamples = () => {
                             index !== 0 ? <HeaderBackButton {...props} onPress={() => navigation.goBack()} /> : null
                         )
                     },
-                    headerLeftContainerStyle: {
-                        backgroundColor: 'pink'
-                    }
+
                 }
             },
 
             headerRightContainerStyle: {
-                type: 'preview',
                 description: '头部右侧的容器样式，加个背景色',
-                props: {
-                    headerRightContainerStyle: {
-                        backgroundColor: 'orange'
+                value: {
+                    title: 'pink',
+                    value: {
+                        backgroundColor: 'pink'
                     }
-                }
+                },
+                valueList: [
+                    {
+                        title: 'pink',
+                        value: {
+                            backgroundColor: 'pink'
+                        }
+                    },
+                    {
+                        title: 'red',
+                        value: {
+                            backgroundColor: 'red'
+                        }
+                    }
+                ],
             },
             headerTitleContainerStyle: {
-                type: 'preview',
                 description: '头部标题的容器样式，加个背景色',
-                props: {
-                    headerTitleContainerStyle: {
+                value: {
+                    title: 'blue',
+                    value: {
                         backgroundColor: 'blue'
                     }
-                }
+                },
+                valueList: [
+                    {
+                        title: 'blue',
+                        value: {
+                            backgroundColor: 'blue'
+                        }
+                    },
+                    {
+                        title: 'pink',
+                        value: {
+                            backgroundColor: 'pink'
+                        }
+                    }
+                ]
             },
             headerBackgroundContainerStyle: {
-                type: 'preview',
-                description: '头部背景的容器样式，加个背景色',
-                props: {
-                    headerTitleContainerStyle: {
-                        backgroundColor: 'red'
+                description: '头部背景的容器样式，加个边框',
+                value: {
+                    title: 1,
+                    value: {
+                        borderWidth: 1
                     }
-                }
+                },
+                valueList: [
+                    {
+                        title: 1,
+                        value: {
+                            borderWidth: 1
+                        }
+                    },
+                    {
+                        title: 3,
+                        value: {
+                            borderWidth: 3
+                        }
+                    }
+                ],
+
             },
 
 
             headerTintColor: {
-                type: 'preview',
                 description: '头部的颜色,改成blue',
-                props: {
+                value: 'blue',
+                valueList: ['blue', 'red'],
+                extraOptions: {
                     headerLeft: (props: {}) => {
                         const navigation = useNavigation()
                         const index = useNavigationState((state) => state.index);
@@ -319,7 +426,6 @@ export const ElementsExamples = () => {
                             index !== 0 ? <HeaderBackButton {...props} onPress={() => navigation.goBack()} /> : null
                         )
                     },
-                    headerTintColor: 'blue'
                 }
             },
 
@@ -341,9 +447,10 @@ export const ElementsExamples = () => {
             // },
 
             headerPressOpacity: {
-                type: 'preview',
                 description: '头部按钮按压的透明度',
-                props: {
+                valueList: [0, 0.1, 1],
+                value: 0.1,
+                extraOptions: {
                     headerLeft: (props: {}) => {
                         const navigation = useNavigation()
                         const index = useNavigationState((state) => state.index);
@@ -351,7 +458,6 @@ export const ElementsExamples = () => {
                             index !== 0 ? <HeaderBackButton {...props} onPress={() => navigation.goBack()} /> : null
                         )
                     },
-                    headerPressOpacity: 0.1
                 }
             },
 
@@ -521,15 +627,15 @@ export const ElementsExamples = () => {
                                 return <ComButton index={index} title={title} key={title} />
                             }
                             if (!type) {
-                                return <TestSuite name={(platform ? `[${platform}]` : '') + (testName || title)} key={title + state?.[title].value}>
+                                return <TestSuite name={(platform ? `[${platform}]` : '') + (testName || title)} key={title + (checkIsObject(state?.[title].value) ? state?.[title].value.title : state?.[title].value)}>
                                     <ToggleButton title={'切换' + title} list={valueList} initValue={value} onChange={(val: any) => {
-                                        setState({
-                                            ...state,
-                                            [title]: {
-                                                ...state?.[title],
-                                                value: val
-                                            }
-                                        })
+                                                      setState({
+                                                        ...state,
+                                                        [title]: {
+                                                            ...state?.[title],
+                                                            value: val
+                                                        }
+                                                    })
                                     }}></ToggleButton>
                                     <TestCase itShould={description} tags={['C_API']}>
                                         <View style={styles.container}>
@@ -537,7 +643,7 @@ export const ElementsExamples = () => {
                                                 <Stack.Navigator
                                                     screenOptions={{
                                                         header: ({ options, route }: NativeStackHeaderProps) => {
-                                                            return <Header  title={getHeaderTitle(options, route.name)} {...{
+                                                            return <Header title={getHeaderTitle(options, route.name)} {...{
                                                                 [propName]: checkIsObject(state?.[title].value) ? state?.[title].value.value : state?.[title].value,
                                                                 ...extraOptions,
                                                             }} />
@@ -560,7 +666,7 @@ export const ElementsExamples = () => {
                                                 <Stack.Navigator
                                                     screenOptions={{
                                                         header: ({ options, route }) => (
-                                                            <Header  title={getHeaderTitle(options, route.name)} {...props} />
+                                                            <Header title={getHeaderTitle(options, route.name)} {...props} />
                                                         ),
                                                     }}
                                                 >
