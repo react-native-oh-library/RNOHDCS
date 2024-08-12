@@ -4,6 +4,8 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 let ImageSource = require('@/assets/expo.png')
 
+const MyTheme = require("./MyTheme");
+
 //检查一个数据的类型
 const checkType = (obj: any) => {
     return Object.prototype.toString.call(obj).slice(8, -1)
@@ -51,7 +53,6 @@ export default function DropDownPickerTest() {
                         flexDirection: 'row',
                     }}>
                         {
-
                             list.map((key: any, index: number) => {
                                 let title = key, value = key;
 
@@ -60,7 +61,6 @@ export default function DropDownPickerTest() {
                                     value = key.value
                                 }
 
-                                // console.log('render', title, value, state)
                                 return (
                                     <Pressable
                                         style={{
@@ -70,7 +70,6 @@ export default function DropDownPickerTest() {
                                             paddingHorizontal: 6,
                                         }}
                                         key={index + ''} onPress={() => {
-                                            // console.log(title, value)
                                             setState(title)
                                             onChange(key)
                                         }}
@@ -86,13 +85,12 @@ export default function DropDownPickerTest() {
         }
 
 
-
     interface State {
         //每个要测试的属性的数据形式
         [propName: string]: {
             tip?: string, //额外的提示语
             testName?: string, //展示在demo里的标题，用于替换默认的属性名
-            type?: 'custom' | 'preview' | 'callBack',  //demo有4种，type不设置为默认，可以切换值做查看；为custom代表自定义，需要在循环中添加if,自己写逻辑;preview为简单的展示，没有值可供切换，这种一般用在展示样式的属性中；callBack用在回调类属性，目的是匹配断言，触发回调时，让demo自动显示pass
+            type?: undefined | 'custom' | 'preview' | 'callBack',  //demo有4种，type不设置为默认，可以切换值做查看；为custom代表自定义，需要在循环中添加if,自己写逻辑;preview为简单的展示，没有值可供切换，这种一般用在展示样式的属性中；callBack用在回调类属性，目的是匹配断言，触发回调时，让demo自动显示pass
             description?: string, //此属性的具体描述，以及demo效果的描述
             props?: {
                 [propName: string]: any | any[], //type为preview时，添加的属性，有时需要额外属性来辅助正在测试的属性，可添加在这里
@@ -229,6 +227,12 @@ export default function DropDownPickerTest() {
                 value: false,
                 valueList: [false, true],
             },
+            testID: {
+                type: 'custom',
+                description: '测试用的ID',
+                value: 'ID1',
+                valueList: ['ID1', 'ID2']
+            },
             zIndex: {
                 description: '设置选框层级，当选框向下打开时生效',
                 value: 1000,
@@ -245,7 +249,6 @@ export default function DropDownPickerTest() {
                     dropDownDirection: 'TOP'
                 }
             },
-
             onChangeValue: {
                 type: 'callBack',
                 description: '设置值改变时触发',
@@ -513,14 +516,15 @@ export default function DropDownPickerTest() {
                     }
                 }
             },
-            searchWithRegionalAccents: {
-                description: '是否启用英国腔',
-                value: false,
-                valueList: [false, true],
-                extraOptions: {
-                    searchable: true,
-                }
-            },
+            // searchWithRegionalAccents: {
+            //     type: 'custom',
+            //     description: '是否启用带有地区口音的搜索,搜索a试试',
+            //     value: false,
+            //     valueList: [false, true],
+            //     extraOptions: {
+            //         searchable: true,
+            //     }
+            // },
             disableLocalSearch: {
                 description: '关闭本地搜索',
                 value: false,
@@ -792,10 +796,12 @@ export default function DropDownPickerTest() {
                     }
                 }
             },
-            // itemKey: {
-            //     description: '决定items里的哪个数据作为key,这个样例没有显示效果',
-            // },
-
+            itemKey: {
+                type: 'custom',
+                description: '决定items里的哪个数据作为key',
+                value: 'value',
+                valueList: ['value', 'label']
+            },
             closeAfterSelecting: {
                 description: '选择后即关闭选项框',
                 value: false,
@@ -1037,6 +1043,10 @@ export default function DropDownPickerTest() {
                     multiple: true,
                 }
             },
+            addTheme: {
+                type: 'custom',
+                description: '新增主题,这里自定义了一个主题，把默认颜色改成了blue,图标换成了自定义的',
+            },
             setTheme: {
                 type: 'custom',
                 description: '设置主题',
@@ -1049,8 +1059,6 @@ export default function DropDownPickerTest() {
             },
         }
     })
-
-
 
 
 
@@ -1114,6 +1122,26 @@ export default function DropDownPickerTest() {
                                         icon: () => <Image source={ImageSource} style={styles.iconStyle} />
                                     }
                                 }));
+
+                                const [items_custom2, setItems_custom2] = useState([
+                                    ...[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((e, i) => {
+                                        return {
+                                            label: 'Banana' + i,
+                                            value: 'banana' + i,
+                                            icon: () => <Image source={ImageSource} style={styles.iconStyle} />
+                                        }
+                                    }),
+                                    {
+                                        label: 'Àger',
+                                        value: 'Àger',
+                                        icon: () => <Image source={ImageSource} style={styles.iconStyle} />
+                                    },
+                                    {
+                                        label: 'āáǎà',
+                                        value: 'āáǎà',
+                                        icon: () => <Image source={ImageSource} style={styles.iconStyle} />
+                                    },
+                                ]);
 
                                 const [items_category, setItems_category] = useState([{
                                     label: 'Banana',
@@ -1319,10 +1347,8 @@ export default function DropDownPickerTest() {
                                                             listMode="SCROLLVIEW"
                                                         />
                                                     </View>
-
                                                 }}
                                             />
-
                                         </TestSuite>
                                     }
                                     if (title === 'open') {
@@ -1418,6 +1444,80 @@ export default function DropDownPickerTest() {
                                         </TestSuite>
                                     }
 
+                                    if (title === 'testID' || title === 'itemKey') {
+                                        return <TestSuite name={(testName || title)} key={title + state?.[title]?.value}>
+
+                                            <ToggleButton title={'切换' + title} list={valueList} initValue={value} onChange={(val: any) => {
+                                                setValue(null)
+                                                setState({
+                                                    ...state,
+                                                    [title]: {
+                                                        ...state?.[title],
+                                                        value: val
+                                                    }
+                                                })
+                                            }}></ToggleButton>
+                                            <TestCase itShould={description} tags={['C_API']}>
+                                                <View style={[styles.container]}>
+                                                    <View>
+                                                        <Text >当前值：{state?.[title]?.value}</Text>
+                                                    </View>
+                                                    <DropDownPicker
+                                                        style={[styles.dropDownPicker]}
+                                                        open={open}
+                                                        value={value2}
+                                                        items={items}
+                                                        loading={loading}
+                                                        setOpen={setOpen}
+                                                        setValue={setValue}
+                                                        setItems={setItems}
+                                                        listMode="SCROLLVIEW"
+                                                        {...{
+                                                            [title]: checkIsObject(state?.[title]?.value) ? state?.[title]?.value?.value : state?.[title]?.value,
+                                                            ...props,
+                                                            ...extraOptions,
+                                                        }}
+                                                    />
+                                                </View>
+                                            </TestCase>
+                                        </TestSuite>
+                                    }
+
+
+                                    if (title === 'searchWithRegionalAccents') {
+                                        return <TestSuite name={(testName || title)} key={title + state?.[title]?.value}>
+                                            <ToggleButton title={'切换' + title} list={valueList} initValue={value} onChange={(val: any) => {
+                                                setValue(null)
+                                                setState({
+                                                    ...state,
+                                                    [title]: {
+                                                        ...state?.[title],
+                                                        value: val
+                                                    }
+                                                })
+                                            }}></ToggleButton>
+                                            <TestCase itShould={description} tags={['C_API']}>
+                                                <View style={[styles.container]}>
+                                                    <DropDownPicker
+                                                        style={[styles.dropDownPicker]}
+                                                        open={open}
+                                                        value={value2}
+                                                        items={items_custom2}
+                                                        loading={loading}
+                                                        setOpen={setOpen}
+                                                        setValue={setValue}
+                                                        setItems={setItems_custom2}
+                                                        listMode="SCROLLVIEW"
+                                                        {...{
+                                                            [title]: checkIsObject(state?.[title]?.value) ? state?.[title]?.value?.value : state?.[title]?.value,
+                                                            ...props,
+                                                            ...extraOptions,
+                                                        }}
+                                                    />
+                                                </View>
+                                            </TestCase>
+                                        </TestSuite>
+                                    }
                                     if (title === 'customItemContainerStyle' || title === 'customItemLabelStyle') {
                                         return <TestSuite name={(testName || title)} key={title + state?.[title]?.value}>
                                             <TestCase itShould={description} tags={['C_API']}>
@@ -1597,6 +1697,38 @@ export default function DropDownPickerTest() {
                                     }
 
 
+                                    if (title === 'addTheme') {
+                                        return <TestSuite name={(testName || title)} key={title + state?.[title]?.value}>
+                                            <TestCase itShould={description} tags={['C_API']}>
+                                                <View style={[styles.container]}>
+                                                    <Button title='增加一个主题并切换' onPress={() => {
+                                                        DropDownPicker.addTheme("MyTheme", MyTheme);
+
+                                                        DropDownPicker.setTheme("MyTheme");
+
+                                                        Alert.alert('已修改并切换')
+                                                    }}></Button>
+                                                    <DropDownPicker
+                                                        style={[styles.dropDownPicker]}
+                                                        open={open}
+                                                        value={value2}
+                                                        items={items}
+                                                        loading={loading}
+                                                        setOpen={setOpen}
+                                                        setValue={setValue}
+                                                        setItems={setItems}
+                                                        listMode="SCROLLVIEW"
+                                                        {...{
+                                                            ['theme']: checkIsObject(state?.[title]?.value) ? state?.[title]?.value?.value : state?.[title]?.value,
+                                                            ...props,
+                                                            ...extraOptions,
+                                                        }}
+                                                    />
+                                                </View>
+                                            </TestCase>
+                                        </TestSuite>
+                                    }
+
                                     if (title === 'setTheme') {
                                         return <TestSuite name={(testName || title)} key={title + state?.[title]?.value}>
                                             {valueList.length ? <ToggleButton title={'切换' + title} list={valueList} initValue={value} onChange={(val: any) => {
@@ -1635,7 +1767,6 @@ export default function DropDownPickerTest() {
                                         </TestSuite>
                                     }
                                 }
-
                             })()
                         })
                     }
