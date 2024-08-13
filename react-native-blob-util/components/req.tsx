@@ -74,7 +74,7 @@ export function fetchBlobDown() {
 									appendExt: 'jpg',
 									path: '/data/storage/el2/base/haps/entry/files/another.jpg',
 									session: 'another_jpg'
-								}).fetch('GET', 'http://139.9.199.99:3000/tpc/download/blue.jpg')
+							}).fetch('GET', 'https://img-blog.csdnimg.cn/20191215043500229.png')
 							} catch (err) {
 								str = err.message
 								setErrMsg(str)
@@ -105,7 +105,7 @@ export function fetchBlobUpload() {
 							try {
 								resData = await ReactNativeBlobUtil.fetch(
 									'POST',
-									'http://139.9.199.99:3000/tpc/uploadBlob',
+									'https://mock.presstime.cn/mock/65dd9694a07c65d1ba49b371/example/http:/139.9.199.99:3000/tpc/post',
 									{
 										'content-type': 'application/octet-stream',
 										'Dropbox-API-Arg': JSON.stringify({
@@ -115,7 +115,7 @@ export function fetchBlobUpload() {
 											mute: false
 										})
 									},
-									ReactNativeBlobUtil.wrap('/another.jpg')
+									ReactNativeBlobUtil.wrap('/data/storage/el2/base/haps/entry/files/another.jpg')
 								)
 							} catch (err) {
 								str = err.message
