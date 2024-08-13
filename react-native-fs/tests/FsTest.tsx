@@ -21,8 +21,7 @@ function FsTest(): React.JSX.Element {
         //创建文件夹
         RNFS.mkdir(RNFS.DocumentDirectoryPath + "/" + mkdirParam).then(
             (result) => {
-                console.log("file mkdirParam： " + mkdirParam);
-                console.log("file Successfully created directory.");
+                console.log("file mkdirExample " + mkdirParam);
             },
             (err) => {
                 console.error("file mkdir: " + err.message);
@@ -31,14 +30,11 @@ function FsTest(): React.JSX.Element {
     };
 
 
-
-
     const existsExample = () => {
         //查找文件夹
         RNFS.exists(RNFS.DocumentDirectoryPath + "/" + existsParams).then(
             (result) => {
-                console.log("file exists " + result);
-                console.log("file Successfully created directory.");
+                console.log("file existsExample " + result);
             },
             (err) => {
                 console.error("file mkdir: " + err.message);
@@ -48,12 +44,14 @@ function FsTest(): React.JSX.Element {
 
     const readDirExample = () => {
         //读取文件夹
-        RNFS.readDir(RNFS.MainBundlePath) // On Android, use "RNFS.DocumentDirectoryPath" (MainBundlePath is not defined)
+        RNFS.readDir(RNFS.DocumentDirectoryPath) // On Android, use "RNFS.DocumentDirectoryPath" (MainBundlePath is not defined)
             .then((result) => {
+    
                 console.log('readDirExample', result);
-
-                // stat the first file
-                return Promise.all([RNFS.stat(result[0].path), result[0].path]);
+            
+            }).catch(err=>{
+                console.log('readDirExamplereadDirExample',err);
+                
             })
     };
 
@@ -67,7 +65,7 @@ function FsTest(): React.JSX.Element {
         // write the file
         RNFS.writeFile(path, 'Lorem ipsum dolor sit amet', 'utf8')//写入文件
             .then((success) => {
-                console.log('FILE WRITTEN!' + RNFS.DocumentDirectoryPath + '/2.txt', success);
+                console.log('writeFileExample' + RNFS.DocumentDirectoryPath + '/2.txt', success);
             })
             .catch((err) => {
                 console.log(err.message);
@@ -77,11 +75,11 @@ function FsTest(): React.JSX.Element {
 
     const unlinkExample = () => {
         // create a path you want to delete
-        var path = RNFS.DocumentDirectoryPath + '/1.txt';
+        var path = RNFS.DocumentDirectoryPath + '/2.txt';
 
         RNFS.unlink(path)//删除文件
             .then(() => {
-                console.log('FILE DELETED');
+                console.log('unlinkExample');
             })
             // `unlink` will throw an error, if the item to unlink does not exist
             .catch((err) => {
@@ -90,34 +88,16 @@ function FsTest(): React.JSX.Element {
     }
 
 
-
+    const [readFileParam, setReadFileParam] = useState("");
 
     const readFileExample = () => {
-        // get a list of files and directories in the main bundle
-        RNFS.readDir(RNFS.MainBundlePath) // On Android, use "RNFS.DocumentDirectoryPath" (MainBundlePath is not defined)
-            .then((result) => {
-                console.log('GOT RESULT', result);
-
-                // stat the first file
-                return Promise.all([RNFS.stat(result[0].path), result[0].path]);
-            })
-            .then((statResult) => {
-                if (statResult[0].isFile()) {
-                    // if we have a file, read it
-                    return RNFS.readFile(statResult[1], 'utf8');
-                }
-
-                return 'no file';
-            })
-            .then((contents) => {
-                // log the file contents
-                console.log(`log the file contentslog the file contents`);
-
-                console.log(contents);
-            })
-            .catch((err) => {
-                console.log(err.message, err.code);
-            });
+        RNFS.readFile(RNFS.DocumentDirectoryPath + `/${readFileParam}`)
+        .then((contents) => {
+            console.log("readFileExample",contents.length);
+        })
+        .catch((err) => {
+            console.log('ygb 读取失败：',err.message, err.code);
+        });
     }
 
 
@@ -126,7 +106,7 @@ function FsTest(): React.JSX.Element {
         var path = RNFS.DocumentDirectoryPath + '/2.txt';
         RNFS.appendFile(path, '新添加的文本', 'utf8')
             .then((success) => {
-                console.log('success');
+                console.log('appendFileExamplesuccess');
             })
             .catch((err) => {
                 console.log(err.message);
@@ -139,7 +119,7 @@ function FsTest(): React.JSX.Element {
         const path1 = RNFS.DocumentDirectoryPath + '/eee/4.txt';
         RNFS.copyFile(path, path1)
             .then((result) => {
-                console.log("复制path路径文件到path1", path, path1);
+                console.log("copyFileExample", path, path1);
             })
             .catch((err) => {
                 console.log(err.message);
@@ -154,7 +134,7 @@ function FsTest(): React.JSX.Element {
         const path1 = RNFS.DocumentDirectoryPath + '/eee/3.txt';
         RNFS.moveFile(path, path1)
             .then((result) => {
-                console.log("将path路径文件移动到path1", path, path1);
+                console.log("moveFileExample", path, path1);
             })
             .catch((err) => {
                 console.log(err.message);
@@ -198,10 +178,10 @@ function FsTest(): React.JSX.Element {
     const readFileAssetsExample = () => {//用户获取resources/rawfile/1.txt 目录下对应的rawfile文件内容，使用callback形式返回字节数组。
         RNFS.readFileAssets('1.txt').then(res => {
 
-            console.log("readFileAssetsExample", res);
+            console.log("downloadFileExample", res);
 
         }).catch((err) => {
-            console.log("readFileAssetsExample error", err);
+            console.log("downloadFileExample error", err);
         });
     }
 
@@ -304,7 +284,7 @@ function FsTest(): React.JSX.Element {
                                 return (
                                     <View style={{ height: 100, padding: 20 }}>
                                         <Button
-                                            title="readDir"
+                                            title="readDirExample"
                                             color="#9a73ef"
                                             onPress={() => { readDirExample(); setState(true) }}
                                         />
@@ -326,7 +306,7 @@ function FsTest(): React.JSX.Element {
                                 return (
                                     <View style={{ height: 100, padding: 20 }}>
                                         <Button
-                                            title="writeFile"
+                                            title="writeFileExample"
                                             color="#9a73ef"
                                             onPress={() => { writeFileExample(); setState(true) }}
                                         />
@@ -347,7 +327,7 @@ function FsTest(): React.JSX.Element {
                                 return (
                                     <View style={{ height: 100, padding: 20 }}>
                                         <Button
-                                            title="unlink"
+                                            title="unlinkExample"
                                             color="#9a73ef"
                                             onPress={() => { unlinkExample(); setState(true) }}
                                         />
@@ -366,8 +346,17 @@ function FsTest(): React.JSX.Element {
                             arrange={({ setState }) => {
                                 return (
                                     <View style={{ height: 100, padding: 20 }}>
+                                        <View>
+                                        <TextInput
+                                                style={styles.input}
+                                                placeholder="Folder Path"
+                                                onChangeText={(ReadFileParam) => setReadFileParam(ReadFileParam)}
+                                                placeholderTextColor="#9a73ef"
+                                                autoCapitalize="none"
+                                            />
+                                        </View>
                                         <Button
-                                            title="writeFile"
+                                            title="readFileExample"
                                             color="#9a73ef"
                                             onPress={() => { readFileExample(); setState(true) }}
                                         />
@@ -403,40 +392,7 @@ function FsTest(): React.JSX.Element {
 
                         <TestCase
                             key={"getInitStatus_5"}
-                            itShould="fs api DocumentDirectoryPath  to appendFile"
-                            tags={['C_API']}
-                            initialState={false}
-                            arrange={({ setState }) => {
-                                return (
-                                    <View style={{ height: 100, padding: 20 }}>
-                                        <View style={styles.sectionDescription}>
-                                            <TextInput
-                                                style={styles.input}
-                                                placeholder="Folder Path"
-                                                onChangeText={(mkdirParam) => setExistsParams(mkdirParam)}
-                                                placeholderTextColor="#9a73ef"
-                                                autoCapitalize="none"
-                                            />
-                                        </View>
-                                        <Button
-                                            title="existsExample"
-                                            color="#9a73ef"
-                                            onPress={() => { existsExample(); setState(true) }}
-                                        />
-                                    </View>
-                                );
-                            }}
-                            assert={async ({ expect, state }) => {
-                                expect(state).to.be.true;
-                            }}
-                        />
-
-
-
-
-                        <TestCase
-                            key={"getInitStatus_5"}
-                            itShould="fs api copyFile"
+                            itShould="fs api existsExample"
                             tags={['C_API']}
                             initialState={false}
                             arrange={({ setState }) => {
@@ -466,7 +422,7 @@ function FsTest(): React.JSX.Element {
 
                         <TestCase
                             key={"getInitStatus_5"}
-                            itShould="fs api copyFile"
+                            itShould="fs api copyFileExample"
                             tags={['C_API']}
                             initialState={false}
                             arrange={({ setState }) => {
