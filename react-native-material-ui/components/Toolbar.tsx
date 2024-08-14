@@ -23,8 +23,7 @@ const ToolbarDemo = () => {
               <Toolbar
                 centerElement="With menu"
                 rightElement={{
-                  actions: ['edit'],
-                  menu: { icon: 'star', labels: ['Item 1', 'Item 2'] },
+                  actions: ['edit']
                 }}
                 onRightElementPress={()=>{setTextRightElement('textRightElement')}}
               />
@@ -42,8 +41,7 @@ const ToolbarDemo = () => {
               <Toolbar
                 centerElement="With menu"
                 rightElement={{
-                  actions: ['edit'],
-                  menu: { icon: 'star', labels: ['Item 1', 'Item 2'] },
+                  actions: ['edit']
                 }}
                onPress={()=>setTextOnPress('TextonPress')}
               />
