@@ -18,15 +18,12 @@ import { FilterSelection } from './filter-selection'
 import { ImageSelection } from './image-selection'
 import { styles } from './styles'
 import { renderFilterControl } from './render-filter-control'
-import { ImagePicker, Alert } from '../../services'
 import { Filters, resizeModes } from '../../domain'
 import { FilteredImage } from './FilteredImage'
 
 declare const require: (name: string) => number
 
 const { filters: availableFilters, matrix } = Filters
-
-const injects = { ...ImagePicker, ...Alert }
 
 const defaultImage = { static: require('../../mini-parrot.jpg') }
 
@@ -55,7 +52,7 @@ const Root = () => {
       enterFullScreen,
       leaveFullScreen
     }
-  ] = useBacklash(() => ImageSelection.init(defaultImage), ImageSelection.updates, injects)
+  ] = useBacklash(() => ImageSelection.init(defaultImage), ImageSelection.updates)
 
   const renderFilter = usePipe([
     renderFilterControl,
