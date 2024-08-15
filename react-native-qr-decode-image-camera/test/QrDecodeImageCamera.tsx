@@ -1,13 +1,85 @@
 import React, {useState} from 'react';
-import {View, Text, Button, ScrollView, Image} from 'react-native';
+import {Button, View, Text, Alert, ScrollView,Switch} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import {QRreader, QRscanner} from 'react-native-qr-decode-image-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 import {launchImageLibrary} from 'react-native-image-picker';
-export const QRreaderExp = () => {
+const Stack = createStackNavigator();
+export const QRreaderExp = ({navigation}) => {
   const [reader, setReader] = useState<any>('');
-  const [flashMode, setFlashMode] = useState<boolean | null>(null);
   const [textInfo, setTextInfo] = useState<string>('');
-  const [showCamera, setShowCamera] = useState(false);
+  return (
+    <Tester>
+      <TestSuite name="qr-decode-image-camera">
+        <TestCase
+          itShould="QRReader"
+          tags={['C_API']}
+          initialState={undefined as any}
+          arrange={({setState}) => {
+            return (
+              <View>
+                <Button
+                  onPress={() => {
+                    launchImageLibrary(
+                      {mediaType: 'photo', selectionLimit: 1},
+                      data => {
+                        if (data.assets?.length) {
+                          const path = {
+                            uri: data.assets[0].originalPath,
+                          };
+                          QRreader(path)
+                            .then(res => {
+                              setReader(res?.[0]?.originalValue);
+                              setState(res?.[0]?.originalValue);
+                            })
+                            .catch(error => {
+                              console.log(error);
+                            });
+                        }
+                      },
+                    );
+                  }}
+                  title="点击选择二维码照片 "
+                />
+                <Text style={{fontSize: 20}}>{reader}</Text>
+              </View>
+            );
+          }}
+          assert={async ({expect, state}) => {
+            expect(state).to.be.eq(reader);
+          }}
+        />
+
+        <TestCase
+          itShould="QRScaner"
+          tags={['C_API']}
+          initialState={undefined as any}
+          arrange={({setState}) => {
+            return (
+              <View>
+                <Button
+                  onPress={() => {
+                    setTextInfo('');
+                    navigation.navigate('QRscannerExp');
+                  }}
+                  title="点击扫码"
+                />
+                <Text style={{fontSize: 20, color: 'red'}}>{textInfo}</Text>
+              </View>
+            );
+          }}
+          assert={async ({expect, state}) => {
+            expect(state).to.be.eq(textInfo);
+          }}
+        />
+      </TestSuite>
+    </Tester>
+  );
+};
+
+export const QRscannerExp = () => {
+  const [flashMode, setFlashMode] = useState<boolean | null>(null);
   const [maskColor, setMaskColor] = useState('#0000004D');
   const [borderColor, setBorderColor] = useState('#0000004D');
   const [cornerColor, setCornerColor] = useState('#22ff00');
@@ -39,18 +111,16 @@ export const QRreaderExp = () => {
   const [topViewStyle, setTopViewStyle] = useState<any>(null);
   const [bottomViewStyle, setBottomViewStyle] = useState<any>({height: 200});
   const [zoom, setZoom] = useState(0.2);
-  const [isRepeatScan,setIsRepeatScan] = useState(false);
-  const [scanRes,setSacnres] = useState("")
-  return showCamera ? (
+  const [isRepeatScan, setIsRepeatScan] = useState(false);
+  const [scanRes, setSacnres] = useState('');
+  return (
     <QRscanner
       onRead={e => {
-        console.log(e, 'click onRead');
-        if(isRepeatScan){
+        console.log("1111111111",e)
+        if (isRepeatScan) {
           setSacnres(JSON.stringify(e));
-          setTextInfo(JSON.stringify(e));
-        }else{
-          setShowCamera(false)
-          setTextInfo(JSON.stringify(e));
+        } else {
+          setSacnres(JSON.stringify(e));
         }
       }}
       isRepeatScan={isRepeatScan} //是否重复扫描
@@ -107,16 +177,14 @@ export const QRreaderExp = () => {
                 console.log('click 点击开启/关闭闪光灯');
               }}
             />
-            {/* <Button
-              title="更改相机聚焦值"
-              onPress={() => {
-               setZoom(1.5)
-              }}
-            /> */}
             <Button
               title={`是否重复扫描(${isRepeatScan ? '是' : '否'})`}
               onPress={() => {
-               setIsRepeatScan(true)
+                if (isRepeatScan) {
+                  setIsRepeatScan(false);
+                } else {
+                  setIsRepeatScan(true);
+                }
               }}
             />
             <Button
@@ -384,71 +452,15 @@ export const QRreaderExp = () => {
         </View>
       )}
     />
-  ) : (
-    <Tester>
-      <TestSuite name="qr-decode-image-camera">
-        <TestCase
-          itShould="QRReader"
-          tags={['C_API']}
-          initialState={undefined as any}
-          arrange={({setState}) => {
-            return (
-              <View>
-                <Button
-                  onPress={() => {
-                    launchImageLibrary(
-                      {mediaType: 'photo', selectionLimit: 1},
-                      data => {
-                        if (data.assets?.length) {
-                          const path = {
-                            uri: data.assets[0].originalPath,
-                          };
-                          QRreader(path)
-                            .then(res => {
-                              setReader(res?.[0]?.originalValue);
-                              setState(res?.[0]?.originalValue);
-                            })
-                            .catch(error => {
-                              console.log(error);
-                            });
-                        }
-                      },
-                    );
-                  }}
-                  title="点击选择二维码照片 "
-                />
-                <Text style={{fontSize: 20}}>{reader}</Text>
-              </View>
-            );
-          }}
-          assert={async ({expect, state}) => {
-            expect(state).to.be.eq(reader);
-          }}
-        />
-
-        <TestCase
-          itShould="QRScaner"
-          tags={['C_API']}
-          initialState={undefined as any}
-          arrange={({setState}) => {
-            return (
-              <View>
-                <Button
-                  onPress={() => {
-                    setTextInfo('');
-                    setShowCamera(true); // 开启摄像头
-                  }}
-                  title="点击扫码"
-                />
-                <Text style={{fontSize: 20, color: 'red'}}>{textInfo}</Text>
-              </View>
-            );
-          }}
-          assert={async ({expect, state}) => {
-            expect(state).to.be.eq(textInfo);
-          }}
-        />
-      </TestSuite>
-    </Tester>
   );
 };
+export default function QrDecodeImageCamera() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="QRreaderExp">
+        <Stack.Screen name="QRreaderExp" component={QRreaderExp} />
+        <Stack.Screen name="QRscannerExp" component={QRscannerExp} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
