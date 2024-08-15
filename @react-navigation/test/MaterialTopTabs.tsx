@@ -16,7 +16,7 @@ import {
     Animated
 } from 'react-native';
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
-import { NavigationContainer, ParamListBase,NavigationHelpers } from '@react-navigation/native';
+import { NavigationContainer, ParamListBase, NavigationHelpers } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import type {
@@ -120,7 +120,7 @@ export const MaterialTopTabsExample = () => {
                 <Text>Home!</Text>
             </View>
         );
-    }   
+    }
     function NotificationsScreen() {
         const [state, setState] = useState('')
         return (
@@ -285,6 +285,53 @@ export const MaterialTopTabsExample = () => {
 
     const HomeStack = createStackNavigator();
     const Tab = createMaterialTopTabNavigator();
+    const [screens, setScreens] = useState([] as string[]);
+
+    function HomeScreen1() {
+        React.useEffect(() => {
+            !screens.includes('Home') && setScreens([
+                ...screens,
+                'Home'
+            ])
+        }, []);
+
+
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text>Home!</Text>
+            </View>
+        );
+    }
+    function NotificationsScreen1() {
+        React.useEffect(() => {
+            !screens.includes('Notifications') && setScreens([
+                ...screens,
+                'Notifications'
+            ])
+        }, []);
+
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text>Notifications!</Text>
+            </View>
+        );
+
+    }
+
+    function SettingsScreen1() {
+        React.useEffect(() => {
+            !screens.includes('Settings') && setScreens([
+                ...screens,
+                'Settings'
+            ])
+        }, []);
+
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text>Settings!</Text>
+            </View>
+        );
+    }
 
     interface State {
         [propName: string]: {
@@ -307,7 +354,6 @@ export const MaterialTopTabsExample = () => {
             id: {
                 type: 'custom'
             },
-
             initialRouteName: {
                 type: 'preview',
                 description: '默认路由,设置为Settings',
@@ -347,9 +393,6 @@ export const MaterialTopTabsExample = () => {
                     'none'
                 ],
             },
-
-
-
             initialLayout: {
                 description: '默认布局,设置为比屏幕宽度小,有布局变化的过程',
                 value: '不设置',
@@ -369,13 +412,38 @@ export const MaterialTopTabsExample = () => {
             },
 
             sceneContainerStyle: {
-                type: 'preview',
-                description: '屏幕容器样式,设置为红色背景',
-                props: {
-                    sceneContainerStyle: {
+                // type: 'preview',
+                description: '屏幕容器样式',
+                value: {
+                    title: 'backgroundColor-red',
+                    value: {
                         backgroundColor: 'red',
                     }
-                }
+                },
+                valueList: [
+                    {
+                        title: 'backgroundColor-red',
+                        value: {
+                            backgroundColor: 'red',
+                        }
+                    }, {
+                        title: 'backgroundColor-blue',
+                        value: {
+                            backgroundColor: 'blue',
+                        }
+                    }, {
+                        title: 'borderWidth-1',
+                        value: {
+                            borderWidth: 1,
+                        }
+                    }, {
+                        title: 'borderWidth-5',
+                        value: {
+                            borderWidth: 5,
+                        }
+                    },
+                ]
+
             },
 
             style: {
@@ -876,7 +944,6 @@ export const MaterialTopTabsExample = () => {
                                 }
 
 
-
                                 if (title === 'tabBarIcon') {
                                     return <TestSuite name='tabBarIcon' key={'tabBarIcon'}>
                                         <TestCase itShould='tabBar图标' tags={['C_API']}>
@@ -938,6 +1005,8 @@ export const MaterialTopTabsExample = () => {
 
 
                                 if (title === 'lazy') {
+
+
                                     return <TestSuite name='lazy & lazyPreloadDistance & lazyPlaceholder' key={'lazy' + state?.['lazy'].value + 'lazyPreloadDistance' + state.lazyPreloadDistance.value}>
                                         <ToggleButton title={'切换lazy'} list={valueList} initValue={value} onChange={(val: any) => {
                                             setState({
@@ -947,6 +1016,8 @@ export const MaterialTopTabsExample = () => {
                                                     value: val
                                                 }
                                             })
+
+                                            setScreens([])
                                         }}></ToggleButton>
                                         <ToggleButton title={'切换lazyPreloadDistance'} list={state.lazyPreloadDistance.valueList || []} initValue={state.lazyPreloadDistance.value} onChange={(val: any) => {
                                             setState({
@@ -957,8 +1028,8 @@ export const MaterialTopTabsExample = () => {
                                                 }
                                             })
                                         }}></ToggleButton>
-
                                         <TestCase itShould='渲染lazy,懒加载页面时有个粉色预渲染页' tags={['C_API']}>
+                                            <Text>当前渲染页面：{JSON.stringify(screens)}</Text>
                                             <View style={styles.container}>
                                                 <NavigationContainer>
                                                     <Tab.Navigator
@@ -980,16 +1051,15 @@ export const MaterialTopTabsExample = () => {
                                                             }
                                                         }}
                                                     >
-                                                        <Tab.Screen name="Home" component={HomeScreen} />
-                                                        <Tab.Screen name="Notifications" component={NotificationsScreen} />
-                                                        <Tab.Screen name="Settings" component={SettingsScreen} />
+                                                        <Tab.Screen name="Home" component={HomeScreen1} />
+                                                        <Tab.Screen name="Notifications" component={NotificationsScreen1} />
+                                                        <Tab.Screen name="Settings" component={SettingsScreen1} />
                                                     </Tab.Navigator >
                                                 </NavigationContainer>
                                             </View>
                                         </TestCase>
                                     </TestSuite>
                                 }
-
 
 
                                 if (title === 'tabPress') {
@@ -1006,9 +1076,7 @@ export const MaterialTopTabsExample = () => {
                                                     React.useEffect(() => {
                                                         const unsubscribe = navigation.addListener('tabPress', (e: any) => {
                                                             // Prevent default behavior
-                                                            e.preventDefault();
-
-
+                                                            // e.preventDefault();
                                                             setState(true)
 
                                                         });

@@ -454,7 +454,7 @@ export const MaterialBottomTabsExample = () => {
                                                     React.useEffect(() => {
                                                         const unsubscribe = navigation.addListener('tabPress', (e: any) => {
                                                             // Prevent default behavior
-                                                            e.preventDefault();
+                                                            // e.preventDefault();
 
 
                                                             setState(true)

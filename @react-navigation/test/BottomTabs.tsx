@@ -14,7 +14,7 @@ import {
     TextInput
 } from 'react-native';
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
-import { NavigationContainer, ParamListBase ,NavigationHelpers} from '@react-navigation/native';
+import { NavigationContainer, ParamListBase, NavigationHelpers } from '@react-navigation/native';
 import { createStackNavigator, CardStyleInterpolators, HeaderStyleInterpolators, TransitionPresets } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import type {
@@ -212,6 +212,55 @@ export const BottomTabsExamples = () => {
 
     const Tab = createBottomTabNavigator();
     const Stack = createStackNavigator();
+
+
+    const [screens, setScreens] = useState([] as string[]);
+
+    function HomeScreen1() {
+        React.useEffect(() => {
+            !screens.includes('Home') && setScreens([
+                ...screens,
+                'Home'
+            ])
+        }, []);
+
+
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text>Home!</Text>
+            </View>
+        );
+    }
+    function NotificationsScreen1() {
+        React.useEffect(() => {
+            !screens.includes('Notifications') && setScreens([
+                ...screens,
+                'Notifications'
+            ])
+        }, []);
+
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text>Notifications!</Text>
+            </View>
+        );
+
+    }
+
+    function SettingsScreen1() {
+        React.useEffect(() => {
+            !screens.includes('Settings') && setScreens([
+                ...screens,
+                'Settings'
+            ])
+        }, []);
+
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text>Settings!</Text>
+            </View>
+        );
+    }
 
     interface State {
         [propName: string]: {
@@ -489,7 +538,7 @@ export const BottomTabsExamples = () => {
             },
 
             lazy: {
-                description: '是否懒加载,切换值查看setting是否被加载',
+                description: '是否懒加载',
                 type: 'custom',
                 options: true,
                 value: true,
@@ -782,18 +831,9 @@ export const BottomTabsExamples = () => {
                                         </TestCase>
                                     </TestSuite>
                                 }
-
                                 if (title === 'lazy') {
 
-                                    const SettingsScreen = ({ navigation }: Props) => {
 
-                                        Alert.alert('SettingsScreen已加载,lazy为false')
-                                        return (
-                                            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                                <Text>Settings!</Text>
-                                            </View>
-                                        );
-                                    }
                                     return <TestSuite name={(platform ? `[${platform}]` : '') + (testName || title)} key={title + state?.[title].value}>
                                         <ToggleButton title={'切换' + title} list={valueList} initValue={value} onChange={(val: any) => {
                                             setState({
@@ -803,9 +843,12 @@ export const BottomTabsExamples = () => {
                                                     value: val
                                                 }
                                             })
+                                            setScreens([])
+
                                         }}></ToggleButton>
                                         <TestCase itShould={description} tags={['C_API']}>
                                             <View style={styles.container}>
+                                                <Text>当前渲染页面：{JSON.stringify(screens)}</Text>
                                                 <NavigationContainer>
                                                     <Tab.Navigator
                                                         {...{
@@ -815,9 +858,9 @@ export const BottomTabsExamples = () => {
                                                             },
                                                         }}
                                                     >
-                                                        <Tab.Screen name="Home" component={HomeScreen} />
-                                                        <Tab.Screen name="Notifications" component={NotificationsScreen} />
-                                                        <Tab.Screen name="Settings" component={SettingsScreen} />
+                                                        <Tab.Screen name="Home" component={HomeScreen1} />
+                                                        <Tab.Screen name="Notifications" component={NotificationsScreen1} />
+                                                        <Tab.Screen name="Settings" component={SettingsScreen1} />
                                                     </Tab.Navigator >
                                                 </NavigationContainer>
                                             </View>
@@ -828,7 +871,7 @@ export const BottomTabsExamples = () => {
 
                                 if (title === 'tabPress') {
                                     return <TestSuite name='tabPress' key={'tabPress'}>
-                                        <TestCase itShould='点击tab时触发'
+                                        <TestCase itShould='点击Notifications的tab时触发'
                                             tags={['C_API']}
                                             initialState={false}
                                             assert={({ expect, state }) => {
@@ -839,7 +882,7 @@ export const BottomTabsExamples = () => {
                                                     const { navigation } = props;
                                                     React.useEffect(() => {
                                                         const unsubscribe = navigation.addListener('tabPress', (e: any) => {
-                                                            e.preventDefault();
+                                                            // e.preventDefault();
                                                             setState(true)
                                                         });
 
@@ -866,7 +909,7 @@ export const BottomTabsExamples = () => {
 
                                 if (title === 'tabLongPress') {
                                     return <TestSuite name='tabLongPress' key={'tabLongPress'}>
-                                        <TestCase itShould='长按tab时触发'
+                                        <TestCase itShould='长按Notifications的tab时触发'
                                             tags={['C_API']}
                                             initialState={false}
                                             assert={({ expect, state }) => {
