@@ -314,15 +314,15 @@ export const NativeStackExamples = () => {
             // },
 
 
-            // headerBackImageSource: {
-            //     type: 'preview',
-            //     description: '头部返回的图标源,替换图标',
-            //     props: {
-            //         screenOptions: {
-            //             headerBackImageSource: MyImage,
-            //         }
-            //     }
-            // },
+            headerBackImageSource: {
+                type: 'preview',
+                description: '头部返回的图标源,替换图标',
+                props: {
+                    screenOptions: {
+                        headerBackImageSource: MyImage,
+                    }
+                }
+            },
 
 
             // //ios
@@ -504,6 +504,16 @@ export const NativeStackExamples = () => {
                 }
             },
 
+            headerTitle: {
+                type: 'custom',
+                description: '头部标题',
+            },
+            headerTitleAlign: {
+                description: '头部标题对其方式',
+                options: true,
+                value: 'left',
+                valueList: ['left', 'center']
+            },
 
             headerTitleStyle: {
                 type: 'preview',
@@ -796,7 +806,7 @@ export const NativeStackExamples = () => {
     //组件按钮
     const [currentIndex, setIndex] = useState(0)
 
-    const ComButton = ({ index, title }:ComButtonProps) => {
+    const ComButton = ({ index, title }: ComButtonProps) => {
         return <Pressable onPress={() => {
             setIndex(index)
         }}>
@@ -805,7 +815,7 @@ export const NativeStackExamples = () => {
             </View>
         </Pressable>
     }
-
+    
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -941,6 +951,27 @@ export const NativeStackExamples = () => {
                                     </TestSuite>
                                 }
 
+                                if (title === 'headerTitle') {
+                                    return <TestSuite name='title' key={'headerTitle'}>
+                                        <TestCase itShould='页面名称，现改成中文' tags={['C_API']}>
+                                            <View style={styles.container}>
+                                                <NavigationContainer>
+                                                    <Stack.Navigator>
+                                                        <Stack.Screen name="Home" component={HomeScreen} options={{
+                                                            headerTitle: '主页1'
+                                                        }} />
+                                                        <Stack.Screen name="Notifications" component={NotificationsScreen} options={{
+                                                            headerTitle: '通知1'
+                                                        }} />
+                                                        <Stack.Screen name="Settings" component={SettingsScreen} options={{
+                                                            headerTitle: '设置1'
+                                                        }} />
+                                                    </Stack.Navigator >
+                                                </NavigationContainer>
+                                            </View>
+                                        </TestCase>
+                                    </TestSuite>
+                                }
 
                                 if (title === 'transitionStart') {
                                     return <TestSuite name='[ios,android]transitionStart' key={'transitionStart'}>
@@ -951,7 +982,7 @@ export const NativeStackExamples = () => {
                                                 expect(state).to.be.true;
                                             }}
                                             arrange={({ setState }) => {
-                                                const Home = ({ navigation }:Props) => {
+                                                const Home = ({ navigation }: Props) => {
                                                     return (
                                                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                                                             <Text>Home!</Text>
@@ -962,7 +993,7 @@ export const NativeStackExamples = () => {
                                                     );
                                                 }
 
-                                                const Event = ({ navigation }:Props) => {
+                                                const Event = ({ navigation }: Props) => {
                                                     React.useEffect(() => {
                                                         const unsubscribe = navigation.addListener('transitionStart', (e: any) => {
                                                             setState(true)
@@ -1014,7 +1045,7 @@ export const NativeStackExamples = () => {
                                                 expect(state).to.be.true;
                                             }}
                                             arrange={({ setState }) => {
-                                                const Home = ({ navigation }:Props) => {
+                                                const Home = ({ navigation }: Props) => {
                                                     return (
                                                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                                                             <Text>Home!</Text>
@@ -1025,7 +1056,7 @@ export const NativeStackExamples = () => {
                                                     );
                                                 }
 
-                                                const Event = ({ navigation }:Props) => {
+                                                const Event = ({ navigation }: Props) => {
                                                     React.useEffect(() => {
                                                         const unsubscribe = navigation.addListener('transitionEnd', (e: any) => {
                                                             setState(true)

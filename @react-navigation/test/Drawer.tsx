@@ -161,6 +161,55 @@ export const DrawerExample = () => {
     const Drawer = createDrawerNavigator();
     const HomeStack = createStackNavigator();
 
+
+    const [screens, setScreens] = useState([] as string[]);
+
+    function Feed1() {
+        React.useEffect(() => {
+            !screens.includes('Feed') && setScreens([
+                ...screens,
+                'Feed'
+            ])
+        }, []);
+
+
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text>Home!</Text>
+            </View>
+        );
+    }
+    function Notifications1() {
+        React.useEffect(() => {
+            !screens.includes('Notifications') && setScreens([
+                ...screens,
+                'Notifications'
+            ])
+        }, []);
+
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text>Notifications!</Text>
+            </View>
+        );
+
+    }
+
+    function Settings1() {
+        React.useEffect(() => {
+            !screens.includes('Settings') && setScreens([
+                ...screens,
+                'Settings'
+            ])
+        }, []);
+
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text>Settings!</Text>
+            </View>
+        );
+    }
+
     interface State {
         [propName: string]: {
             type?: 'custom' | 'preview',
@@ -232,7 +281,7 @@ export const DrawerExample = () => {
             },
 
             lazy: {
-                description: '是否懒加载,切换值查看setting是否被加载',
+                description: '是否懒加载',
                 type: 'custom',
                 options: true,
                 value: true,
@@ -555,15 +604,7 @@ export const DrawerExample = () => {
                                 }
 
                                 if (title === 'lazy') {
-                                    const SettingsScreen = ({ navigation }: Props) => {
-                                        Alert.alert('SettingsScreen已加载,lazy为false')
-                                        return (
-                                            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                                <Text>Settings!</Text>
-                                            </View>
-                                        );
-                                    }
-
+                               
                                     return <TestSuite name={title} key={title}>
                                         <ToggleButton title={'切换' + title} list={valueList} initValue={value} onChange={(val: any) => {
                                             setState({
@@ -573,16 +614,18 @@ export const DrawerExample = () => {
                                                     value: val
                                                 }
                                             })
+                                            setScreens([])
                                         }}></ToggleButton>
                                         <TestCase itShould={description} tags={['C_API']}>
+                                        <Text>当前渲染页面：{JSON.stringify(screens)}</Text>
                                             <View style={styles.container}>
                                                 <NavigationContainer>
                                                     <Drawer.Navigator screenOptions={{
                                                         lazy: state.lazy.value
                                                     }}>
-                                                        <Drawer.Screen name="Feed" component={Feed} />
-                                                        <Drawer.Screen name="Notifications" component={Notifications} />
-                                                        <Drawer.Screen name="Settings" component={SettingsScreen} />
+                                                        <Drawer.Screen name="Feed" component={Feed1} />
+                                                        <Drawer.Screen name="Notifications" component={Notifications1} />
+                                                        <Drawer.Screen name="Settings" component={Settings1} />
                                                     </Drawer.Navigator >
                                                 </NavigationContainer>
                                             </View>
@@ -711,7 +754,7 @@ export const DrawerExample = () => {
                                                     React.useEffect(() => {
                                                         const unsubscribe = navigation.addListener('drawerItemPress', (e: any) => {
                                                             // Prevent default behavior
-                                                            e.preventDefault();
+                                                            // e.preventDefault();
 
                                                             setState(true)
 

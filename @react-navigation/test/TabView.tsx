@@ -167,6 +167,77 @@ export const TabViewExamples = () => {
         );
     }
 
+    //懒加载使用
+    const [screens, setScreens] = useState([] as string[]);
+
+    const FirstRoute1 = () => {
+        React.useEffect(() => {
+            !screens.includes('First') && setScreens([
+                ...screens,
+                'First'
+            ])
+        }, []);
+
+        return <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#ff4081' }} >
+            <Text>FirstRoute</Text>
+        </View>
+    };
+
+    const SecondRoute1 = () => {
+        React.useEffect(() => {
+            !screens.includes('Second') && setScreens([
+                ...screens,
+                'Second'
+            ])
+        }, []);
+        return <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#673ab7' }} >
+            <Text>SecendRoute</Text>
+        </View>
+    };
+
+    const ThirdRoute1 = () => {
+        React.useEffect(() => {
+            !screens.includes('Third') && setScreens([
+                ...screens,
+                'Third'
+            ])
+        }, []);
+        return <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'orange' }} >
+            <Text>ThirdRoute</Text>
+        </View>
+    };
+
+    const MyTabView2 = (props: TabViewProps<Route> & { onIndexChange: () => void, tabBarOptions: TabBarProps<Route> }) => {
+        const { onIndexChange, tabBarOptions = {}, navigationState, renderScene, ...rest } = props
+        const [index, setIndex] = React.useState(0);
+        const [routes] = React.useState<Route[]>([
+            { key: 'first', title: 'First' },
+            { key: 'second', title: 'Second' },
+            { key: 'third', title: 'Third' },
+        ]);
+
+        const renderScene1 = SceneMap<SceneRendererProps>({
+            first: FirstRoute1,
+            second: SecondRoute1,
+            third: ThirdRoute1,
+        });
+
+        return (
+            <TabView
+                renderTabBar={(options: TabBarProps<Route>) => renderTabBar({ ...options, ...tabBarOptions })}
+                navigationState={{ index, routes }}
+                renderScene={renderScene1}
+                onIndexChange={(number) => {
+                    setIndex(number)
+                    onIndexChange && onIndexChange()
+                }}
+                initialLayout={{ width: layout.width }}
+                {...rest}
+            />
+        );
+    }
+
+
     interface State {
         [propName: string]: {
             platform?: string,
@@ -708,9 +779,7 @@ export const TabViewExamples = () => {
                                     </TestCase>
                                 </TestSuite>
                             } else {
-
                                 if (title === 'lazy') {
-
                                     return <TestSuite name={'lazy & lazyPreloadDistance & renderLazyPlaceholder'} key={title + state?.[title].value + state.lazyPreloadDistance + state.renderLazyPlaceholder}>
                                         <ToggleButton key={title} title={'切换' + title} list={valueList} initValue={value} onChange={(val: any) => {
                                             setState({
@@ -720,6 +789,8 @@ export const TabViewExamples = () => {
                                                     value: val
                                                 }
                                             })
+                                            
+                                            setScreens([])
                                         }}></ToggleButton>
 
                                         <ToggleButton key={'lazyPreloadDistance'} title={'切换lazyPreloadDistance'} list={state.lazyPreloadDistance.valueList || []} initValue={state.lazyPreloadDistance.value} onChange={(val: any) => {
@@ -732,8 +803,9 @@ export const TabViewExamples = () => {
                                             })
                                         }}></ToggleButton>
                                         <TestCase itShould={description} tags={['C_API']}>
+                                            <Text>当前渲染页面：{JSON.stringify(screens)}</Text>
                                             <View style={styles.container}>
-                                                <MyTabView {...{
+                                                <MyTabView2 {...{
                                                     [title]: state[title].value,
                                                     lazyPreloadDistance: state.lazyPreloadDistance.value,
                                                     renderLazyPlaceholder: () => <View style={[styles.absolute, {
