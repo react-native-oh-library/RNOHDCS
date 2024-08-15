@@ -1,0 +1,1 @@
+img 和 mocks文件夹，test ID文件与测试用例放在同一目录
