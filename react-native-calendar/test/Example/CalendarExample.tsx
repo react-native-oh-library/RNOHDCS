@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, ScrollView } from 'react-native';
-import { Calendar, CalendarList, Agenda, LocaleConfig } from 'react-native-calendars';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { Calendar, CalendarList, Agenda, CalendarProvider, AgendaList } from 'react-native-calendars';
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
+
+const leftArrowIcon = require('./img/previous.png');
 
 export function CalendarExample() {
     const [daySelected, setDaySelected] = useState('');
     const [dayLongSelected, setDayLongSelected] = useState('');
     const [monthSelected, setMonthSelected] = useState('');
+    const [day, setDay] = useState('');
+    const [day1, setDay1] = useState('');
+
 
     return <ScrollView style={styles.container}>
         <Tester>
@@ -88,44 +93,34 @@ export function CalendarExample() {
         <Tester>
             <TestSuite name='onVisibleMonthsChange'>
                 <TestCase itShould="test Calendar onVisibleMonthsChange function"
-                assert={({ expect, state }) => {
-                    expect(state).to.be.true;
-                }}
-                initialState={false}
-                tags={['C_API']}
-                 arrange={({ setState }) => {
-                    return  <CalendarList
-                        onVisibleMonthsChange={(months) => { 
-                            console.log('now these months are visible', months);
-                            setState(true) 
-                        }}
-                        pastScrollRange={3}
-                        futureScrollRange={3}
-                        scrollEnabled={true}
-                        showScrollIndicator={true}
-                        
-                    />
-                }}
-                >                  
+                    assert={({ expect, state }) => {
+                        expect(state).to.be.true;
+                    }}
+                    initialState={false}
+                    tags={['C_API']}
+                    arrange={({ setState }) => {
+                        return <Calendar
+                            onVisibleMonthsChange={(months) => {
+                                setState(true)
+                            }}
+                            pastScrollRange={2}
+                            futureScrollRange={2}
+                            scrollEnabled={true}
+                            showScrollIndicator={true}
+                            style={{
+                                borderWidth: 1,
+                                borderColor: 'gray',
+                                width: 350
+                            }}
+
+                        />
+                    }}
+                >
                 </TestCase>
             </TestSuite>
         </Tester>
 
-        <Tester>
-            <TestSuite name='hideArrows'>
-                <TestCase itShould="test Calendar hideArrows property with value true">
-                    <Calendar
-                        hideArrows={true}
-                    />
-                </TestCase>
 
-                <TestCase itShould="test Calendar hideArrows property with value false">
-                    <Calendar
-                        hideArrows={false}
-                    />
-                </TestCase>
-            </TestSuite>
-        </Tester>
 
         <Tester>
             <TestSuite name='showSixWeeks'>
@@ -159,114 +154,12 @@ export function CalendarExample() {
 
         <Tester>
             <TestSuite name='current'>
-                <TestCase itShould="test Calendar current property with value 2012-11">
+                <TestCase itShould="test Calendar current property with value 2012-03-05">
                     <Calendar
-                        current={'2012-11'}
-                    />
-                </TestCase>
-            </TestSuite>
-        </Tester>
-
-        <Tester>
-            <TestSuite name='initialDate'>
-                <TestCase itShould="test Calendar initialDate property with value 2012-05-01">
-                    <Calendar
-                        initialDate={'2012-05-01'}
-                    />
-                </TestCase>
-            </TestSuite>
-        </Tester>
-
-        <Tester>
-            <TestSuite name='monthFormat'>
-                <TestCase itShould="test Calendar monthFormat property with value 'yyyy MM'">
-                    <Calendar
-                        monthFormat={'yyyy MM'}
-                    />
-                </TestCase>
-            </TestSuite>
-        </Tester>
-
-        <Tester>
-            <TestSuite name='hideExtraDays'>
-                <TestCase itShould="test Calendar hideExtraDays property with value true">
-                    <Calendar
-                        hideExtraDays={true}
-                    />
-                </TestCase>
-                <TestCase itShould="test Calendar hideExtraDays property with value false">
-                    <Calendar
-                        hideExtraDays={false}
-                    />
-                </TestCase>
-            </TestSuite>
-        </Tester>
-
-        <Tester>
-            <TestSuite name='disableMonthChange'>
-                <TestCase itShould="test Calendar disableMonthChange property with value true">
-                    <Calendar
-                        disableMonthChange={true}
-                    />
-                </TestCase>
-                <TestCase itShould="test Calendar disableMonthChange property with value false">
-                    <Calendar
-                        disableMonthChange={false}
-                    />
-                </TestCase>
-            </TestSuite>
-        </Tester>
-
-        <Tester>
-            <TestSuite name='disableByDefault'>
-                <TestCase itShould="test Calendar disableByDefault property with value true">
-                    <Calendar
-                        disableByDefault={true}
-                    />
-                </TestCase>
-                <TestCase itShould="test Calendar disableByDefault property with value false">
-                    <Calendar
-                        disableByDefault={false}
-                    />
-                </TestCase>
-            </TestSuite>
-        </Tester>
-
-        <Tester>
-            <TestSuite name='firstDay'>
-                <TestCase itShould="test Calendar firstDay property with value 1">
-                    <Calendar
-                        firstDay={5}
-                    />
-                </TestCase>
-            </TestSuite>
-        </Tester>
-
-        <Tester>
-            <TestSuite name='hideDayNames'>
-                <TestCase itShould="test Calendar hideDayNames property with value true">
-                    <Calendar
-                        hideDayNames={true}
-                    />
-                </TestCase>
-                <TestCase itShould="test Calendar hideDayNames property with value false">
-                    <Calendar
-                        hideDayNames={false}
-                    />
-                </TestCase>
-            </TestSuite>
-        </Tester>
-
-        <Tester>
-            <TestSuite name='showWeekNumbers'>
-                <TestCase itShould="test Calendar showWeekNumbers property with value true">
-                    <Calendar
-                        showWeekNumbers={true}
-                    />
-                </TestCase>
-                <TestCase itShould="test Calendar showWeekNumbers property with value false">
-                    <Calendar
-                        showWeekNumbers={false}
+                        current={'2012-03-05'}
+                        markedDates={{
+                            '2012-03-05': { selected: true, marked: true, selectedColor: 'blue' }
+                        }}
                     />
                 </TestCase>
             </TestSuite>
@@ -303,6 +196,106 @@ export function CalendarExample() {
         </Tester>
 
         <Tester>
+            <TestSuite name='initialDate'>
+                <TestCase itShould="test Calendar initialDate property with value 2012-05-01">
+                    <Calendar
+                        initialDate={'2012-05-01'}
+                    />
+                </TestCase>
+            </TestSuite>
+        </Tester>
+
+        <Tester>
+            <TestSuite name='onPressArrowLeft and onPressArrowRight'>
+                <TestCase itShould="test Calendar arrow function ">
+                    <Calendar
+                        onPressArrowLeft={addMonth => addMonth()}
+                        onPressArrowRight={subtractMonth => subtractMonth()}
+                    />
+                </TestCase>
+            </TestSuite>
+        </Tester>
+
+        <Tester>
+            <TestSuite name='renderArrow'>
+                <TestCase itShould="test Calendar renderArrow property ">
+                    <Calendar
+                        renderArrow={leftArrowIcon}
+                    />
+                </TestCase>
+            </TestSuite>
+        </Tester>
+
+        <Tester>
+            <TestSuite name='disabledDaysIndexes'>
+                <TestCase itShould="test Calendar disabledDaysIndexes property with value 0-6">
+                    <Calendar
+                        theme={{
+                            textSectionTitleDisabledColor: '#d9e1e8'
+                        }}
+                        disabledDaysIndexes={[6]}
+                    />
+                </TestCase>
+            </TestSuite>
+        </Tester>
+
+        <Tester>
+            <TestSuite name='monthFormat'>
+                <TestCase itShould="test Calendar monthFormat property with value yyyy MM">
+                    <Calendar
+                        monthFormat={'yyyy MM'}
+                    />
+                </TestCase>
+            </TestSuite>
+        </Tester>
+
+        <Tester>
+            <TestSuite name='hideDayNames'>
+                <TestCase itShould="test Calendar hideDayNames property with value true">
+                    <Calendar
+                        hideDayNames={true}
+                    />
+                </TestCase>
+                <TestCase itShould="test Calendar hideDayNames property with value false">
+                    <Calendar
+                        hideDayNames={false}
+                    />
+                </TestCase>
+            </TestSuite>
+        </Tester>
+
+
+        <Tester>
+            <TestSuite name='hideArrows'>
+                <TestCase itShould="test Calendar hideArrows property with value true">
+                    <Calendar
+                        hideArrows={true}
+                    />
+                </TestCase>
+                <TestCase itShould="test Calendar hideArrows property with value false">
+                    <Calendar
+                        hideArrows={false}
+                    />
+                </TestCase>
+            </TestSuite>
+        </Tester>
+
+        <Tester>
+            <TestSuite name='hideExtraDays'>
+                <TestCase itShould="test Calendar hideExtraDays property with value true">
+                    <Calendar
+                        hideExtraDays={true}
+                    />
+                </TestCase>
+                <TestCase itShould="test Calendar hideExtraDays property with value false">
+                    <Calendar
+                        hideExtraDays={false}
+                    />
+                </TestCase>
+            </TestSuite>
+        </Tester>
+
+        <Tester>
             <TestSuite name='disableAllTouchEventsForDisabledDays'>
                 <TestCase itShould="test Calendar disableAllTouchEventsForDisabledDays property with value true">
                     <Calendar
@@ -312,6 +305,90 @@ export function CalendarExample() {
                 <TestCase itShould="test Calendar disableAllTouchEventsForDisabledDays property with value false">
                     <Calendar
                         disableAllTouchEventsForDisabledDays={false}
+                    />
+                </TestCase>
+            </TestSuite>
+        </Tester>
+
+        <Tester>
+            <TestSuite name='disableAllTouchEventsForInactiveDays'>
+                <TestCase itShould="test Calendar disableAllTouchEventsForInactiveDays property with value true">
+                    <Calendar
+                        disableAllTouchEventsForInactiveDays={true}
+                    />
+                </TestCase>
+                <TestCase itShould="test Calendar disableAllTouchEventsForInactiveDays property with value false">
+                    <Calendar
+                        disableAllTouchEventsForInactiveDays={false}
+                    />
+                </TestCase>
+            </TestSuite>
+        </Tester>
+        <Tester>
+            <TestSuite name='disableMonthChange'>
+                <TestCase itShould="test Calendar disableMonthChange property with value true">
+                    <Calendar
+                        disableMonthChange={true}
+                    />
+                </TestCase>
+                <TestCase itShould="test Calendar disableMonthChange property with value false">
+                    <Calendar
+                        disableMonthChange={false}
+                    />
+                </TestCase>
+            </TestSuite>
+        </Tester>
+
+        <Tester>
+            <TestSuite name='firstDay'>
+                <TestCase itShould="test Calendar firstDay property with value 1">
+                    <Calendar
+                        firstDay={5}
+                    />
+                </TestCase>
+            </TestSuite>
+        </Tester>
+
+        <Tester>
+            <TestSuite name='style'>
+                <TestCase itShould="test Calendar style property">
+                    <Calendar
+                        style={{
+                            borderWidth: 5,
+                            borderColor: 'blue',
+                            height: 280
+                        }}
+                    />
+                </TestCase>
+            </TestSuite>
+        </Tester>
+
+        <Tester>
+            <TestSuite name='dayComponent'>
+                <TestCase itShould="test Calendar dayComponent property">
+                    <Calendar
+                        dayComponent={({ date, state }) => {
+                            return (
+                                <View>
+                                    <Text style={{ textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}></Text>
+                                </View>
+                            );
+                        }}
+                    />
+                </TestCase>
+            </TestSuite>
+        </Tester>
+
+        <Tester>
+            <TestSuite name='showWeekNumbers'>
+                <TestCase itShould="test Calendar showWeekNumbers property with value true">
+                    <Calendar
+                        showWeekNumbers={true}
+                    />
+                </TestCase>
+                <TestCase itShould="test Calendar showWeekNumbers property with value false">
+                    <Calendar
+                        showWeekNumbers={false}
                     />
                 </TestCase>
             </TestSuite>
@@ -334,17 +411,31 @@ export function CalendarExample() {
 
         <Tester>
             <TestSuite name='allowSelectionOutOfRange'>
-                <TestCase itShould="test Calendar allowSelectionOutOfRange property with value true">
-                    <Calendar
-                        allowSelectionOutOfRange={true}
-                    />
-                </TestCase>
-                <TestCase itShould="test Calendar allowSelectionOutOfRange property with value false">
-                    <Calendar
-                        allowSelectionOutOfRange={false}
-                    />
-                </TestCase>
-            </TestSuite>
+                    <TestCase itShould="test Calendar allowSelectionOutOfRange property with value true">
+                        <Text>{day}</Text>
+                        <Calendar
+                            minDate={'2024-08-10'}
+                            allowSelectionOutOfRange={true}
+                            maxDate={'2024-08-25'}
+                            onDayPress={days => {
+                                setDay(JSON.stringify(days));
+                                console.log('selected day', days);
+                            }}
+                        />
+                    </TestCase>
+                    <TestCase itShould="test Calendar allowSelectionOutOfRange property with value false">
+                        <Text>{day1}</Text>
+                        <Calendar
+                            minDate={'2024-08-10'}
+                            allowSelectionOutOfRange={false}
+                            maxDate={'2024-08-25'}
+                            onDayPress={days => {
+                                setDay1(JSON.stringify(days));
+                                console.log('selected day', days);
+                            }}
+                        />
+                    </TestCase>
+                </TestSuite>
         </Tester>
 
         <Tester>
@@ -375,13 +466,13 @@ export function CalendarExample() {
         </Tester>
 
         <Tester>
-            <TestSuite name='headStyle'>
-                <TestCase itShould="test Calendar headStyle properties">
+            <TestSuite name='headerStyle'>
+                <TestCase itShould="test Calendar headerStyle properties">
                     <Calendar
-                        headStyle={{
+                        headerStyle={{
                             borderWidth: 2,
                             borderColor: 'green',
-                            height: 20
+
                         }}
                     />
                 </TestCase>
@@ -444,15 +535,6 @@ export function CalendarExample() {
             </TestSuite>
         </Tester>
 
-        <Tester>
-            <TestSuite name='customHeader'>
-                <TestCase itShould="test Calendar customHeader properties">
-                    <Calendar
-                        headStyle={styles}
-                    />
-                </TestCase>
-            </TestSuite>
-        </Tester>
     </ScrollView >
 }
 
@@ -468,7 +550,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
     },
     itemText: {
-        color: 'white',
+        color: 'blue',
         fontSize: 12,
     }
 })
