@@ -13,6 +13,6 @@ function* doSideEffect({ type }: { type: string }) {
 export default function* rootSaga() {  
   yield all([
     yield takeEvery(['ADD_ONE', 'SUB_ONE'], doSideEffect),
-    fork(networkSaga, { pingInterval: 20000 }),
+    fork(networkSaga, { pingServerUrl: 'https://www.huawei.com', pingInterval: 20000 }),
   ]);
 }
