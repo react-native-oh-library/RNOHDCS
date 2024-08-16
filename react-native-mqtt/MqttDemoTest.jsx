@@ -130,7 +130,7 @@ export const MqttDemoTest = () => {
 
         //MQ服务器配置
         const options = {
-            host: 'i1b2c58a.ala.dedicated.aliyun.emqxcloud.cn',
+            host: 'q0ee219b.ala.dedicated.huawei.emqxcloud.cn',
             port: 8083,
             path: '/mqtt',
             id: 'testId24614',
