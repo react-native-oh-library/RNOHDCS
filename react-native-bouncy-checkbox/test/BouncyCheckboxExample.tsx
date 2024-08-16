@@ -3,7 +3,7 @@ import { StyleSheet, ScrollView, Image, Pressable,Text } from 'react-native';
 import BouncyCheckbox, { BouncyCheckboxHandle } from "react-native-bouncy-checkbox";
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
 
-export function BouncyCheckboxExample() {
+export default function BouncyCheckboxExample() {
     const [backgroundColor, setBackgroundColor] = useState('white');
     const [isLongPressed, setIsLongPressed] = useState(false);
 
@@ -27,7 +27,7 @@ export function BouncyCheckboxExample() {
     const CustomImageComponent = () => {
         return (
             <Image
-                source={require("./local-assets/good.png")}
+                source={require("./assets/good.png")}
                 style={{ height: 15, width: 15 }}
             />
         );
@@ -209,7 +209,7 @@ export function BouncyCheckboxExample() {
                     iconComponent={
                         <Image
                             style={{ height: 15, width: 15 }}
-                            source={require("./local-assets/fuck.png")}
+                            source={require("./assets/fuck.png")}
                         />
                     }
                     />
@@ -221,7 +221,7 @@ export function BouncyCheckboxExample() {
             <TestSuite name='checkIconImageSource'>
                 <TestCase itShould="test BouncyCheckbox checkIconImageSource property">
                     <BouncyCheckbox
-                    checkIconImageSource={require("./local-assets/good.png")}
+                    checkIconImageSource={require("./assets/good.png")}
                     />
             </TestCase>
             </TestSuite>
@@ -344,14 +344,14 @@ export function BouncyCheckboxExample() {
         customText: {
             fontSize: 18,
             color: 'green',
-            marginLeft: 29, 
+            marginLeft: 29, // �ڸ�ѡ����ı�֮������һЩ���
         },
         checkbox: {
-            margin: 10,                       
-            borderWidth: 1,               
-            borderColor: '#007aff',       
-            borderRadius: 5,                
-            padding: 5,                 
+            margin: 10,                     // ��߾�  
+            borderWidth: 1,                 // �߿����  
+            borderColor: '#007aff',         // �߿���ɫ  
+            borderRadius: 5,                // Բ�Ǳ߿�  
+            padding: 5,                     // �ڱ߾�  
         },  
         button: {
             padding: 25,

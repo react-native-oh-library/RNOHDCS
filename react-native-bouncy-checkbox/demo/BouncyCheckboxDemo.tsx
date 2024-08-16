@@ -25,7 +25,7 @@ export default function BouncyCheckboxwy () {
         iconComponent={
             <Image
               style={{ height: 105, width: 105}}
-              source={require("./local-assets/smile.png")}
+              source={require("./assets/smile.png")}
             />
           }
         onPress={() => setCheckboxState(!checkboxState)}
