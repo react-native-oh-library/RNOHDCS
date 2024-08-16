@@ -95,7 +95,7 @@ const ImageSequenceDemo = (props: any) => {
             <View>
                 <View>
                     <Text>Current view size:width: {winWidth}, height:{winHeight}</Text>
-                    <Text>开启循环：<Switch onValueChange={value => setLoopData(value)}></Switch></Text>
+                    <Text>开启循环：<Switch value = {loopData} onValueChange = {setLoopData}></Switch></Text>
                     <View>
                         <Text>图片宽度/高度：</Text>
                         <View style={styles.box}>
