@@ -16,9 +16,7 @@ function VideoDemo(){
       <View style = {styles.container}>
        <VideoPlayer
             style = {styles.video}
-            source={require('./mov_bbb.mp4')}
-            //source = {{uri:'https://www.w3school.com.cn/example/html5/mov_bbb.mp4'}}
-            //source={{ uri: 'https://vjs.zencdn.net/v/oceans.mp4' }}
+            source={{ uri: 'https://vjs.zencdn.net/v/oceans.mp4' }}
             toggleResizeModeOnFullscreen = {true}
             controlAnimationTiming = {3000}
             doubleTapTime = {10}
@@ -30,7 +28,6 @@ function VideoDemo(){
             onBack = {handleOnBack}
             seekColor = {'#00FFFF'}
             tapAnywhereToPause = {true}
-            //paused = {true}
         />
      </View>
     );
