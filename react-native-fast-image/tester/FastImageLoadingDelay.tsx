@@ -1,10 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, FlatList, ScrollView, Platform } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Platform } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import {TestSuite, Tester, TestCase} from '@rnoh/testerino';
 
-function FastImageDemo(): JSX.Element {
+export function FastImageLoadingDelay(): JSX.Element {
   const source =[
     "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fsafe-img.xhscdn.com%2Fbw1%2F6651224a-b18d-4456-97b8-14c6daad236d%3FimageView2%2F2%2Fw%2F1080%2Fformat%2Fjpg&refer=http%3A%2F%2Fsafe-img.xhscdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1694154457&t=37e024c7f8fb33d10e154f32353baf4a",
+    "https://pic.616pic.com/ys_img/00/04/71/ntg7ib7rwj.jpg",
+    "https://bkimg.cdn.bcebos.com/pic/94cad1c8a786c9177f3e1dd6e16567cf3bc79e3df99e?x-bce-process=image/format,f_auto/watermark,image_d2F0ZXIvYmFpa2UyNzI,g_7,xp_5,yp_5,P_20/resize,m_lfit,limit_1,h_1080",
+    "https://t11.baidu.com/it/u=3861652677,179000897&fm=30&app=106&f=PNG?w=640&h=562&s=6D89BD558F206D0F4A6114EB03008038",
     "https://res.vmallres.com//uomcdn/CN/cms/202206/5B874DC0E45B0467105D3D3872A3E9A3.png",
     "https://res.vmallres.com//uomcdn/CN/cms/202206/5B874DC0E45B0467105D3D3872A3E9A3.png",
     "https://res.vmallres.com/portal/1.23.8.300/h5/images/logo_app.png",
@@ -119,17 +123,14 @@ function FastImageDemo(): JSX.Element {
     "https://res.vmallres.com/pimages//pages/cdnImages/17308188080618180371.jpg",
     "https://res3.vmallres.com/shopdc/pic/5a818c14-f886-41b6-ad48-56c94a430471.jpg",
   ]
-
   const [data, setData] = React.useState([]);
   const [time, setTime] = React.useState(0);
   const [startTime, setStartTime] = React.useState(0);
   const [lostStr, setLoadStr] = React.useState("点击加载");
   let endNum =0;
-  let clumns =3;
+  let clumns =6;
 
-
-
-  const onPress=()=> {
+  const loadOnPress=()=> {
     setLoadStr("开始加载")
     setTime(0)
     setStartTime((new Date()).valueOf())
@@ -141,13 +142,28 @@ function FastImageDemo(): JSX.Element {
     }
     setData(newData);
   }
+  const preloadOnPress=()=> {
+    let images = [];
+    for (const iterator of source) {
+      images.push({uri:iterator})
+    }
+    FastImage.preload(images);
+  }
+  const clearOnPress=()=> {
+    FastImage.clearDiskCache();
+    FastImage.clearMemoryCache();
+  }
 
   return (
     <View style={styles.container}>
-      <Text onPress={onPress} style={styles.label}>{lostStr}</Text>
-      <Text style={styles.label2}>用时{time}</Text>
-      <Text style={{paddingLeft:20}}>FastImage-RN-{Platform.OS}</Text>
-
+      <Tester>
+        <TestSuite name='加载速度测试'>
+          <TestCase itShould='平台'><Text style={{paddingLeft:20}}>FastImage-RN-{Platform.OS}</Text></TestCase>
+          <TestCase itShould='加载图片'><Text onPress={loadOnPress} style={styles.label}>{lostStr} 用时{time}</Text></TestCase>
+          <TestCase itShould='preload'><Text onPress={preloadOnPress} style={styles.label}>preload 预加载</Text></TestCase>
+          <TestCase itShould='清除缓存'><Text onPress={clearOnPress} style={styles.label}>清除缓存</Text></TestCase>
+        </TestSuite>
+      </Tester>
 
       <FlatList
         data={data}
@@ -161,6 +177,8 @@ function FastImageDemo(): JSX.Element {
         }} />
         <FastImage source={{ uri: source[item*clumns+1] }} style={styles.image} onLoadEnd={()=>{
           endNum++;
+          console.log(source[item*clumns+1]);
+          
           if(endNum == source.length ){
             setTime(((new Date()).valueOf() -startTime)/1000)
           }
@@ -170,12 +188,24 @@ function FastImageDemo(): JSX.Element {
             setTime(((new Date()).valueOf() -startTime)/1000)
           }
         }} />
-        {/* <FastImage source={{ uri: source[item*clumns+3] }} style={styles.image} onLoadEnd={()=>{
+        <FastImage source={{ uri: source[item*clumns+3] }} style={styles.image} onLoadEnd={()=>{
           endNum++;
           if(endNum == source.length ){
             setTime(((new Date()).valueOf() -startTime)/1000)
           }
-        }} /> */}
+        }} />
+        <FastImage source={{ uri: source[item*clumns+4] }} style={styles.image} onLoadEnd={()=>{
+          endNum++;
+          if(endNum == source.length ){
+            setTime(((new Date()).valueOf() -startTime)/1000)
+          }
+        }} />
+        <FastImage source={{ uri: source[item*clumns+5] }} style={styles.image} onLoadEnd={()=>{
+          endNum++;
+          if(endNum == source.length ){
+            setTime(((new Date()).valueOf() -startTime)/1000)
+          }
+        }} />
         </View>
         }
       />
@@ -195,20 +225,15 @@ const styles = StyleSheet.create({
     flexDirection:'row'
   },
   image: {
-    width: 100,
-    height: 100,
+    width: 50,
+    height: 50,
   },
   label: {
-    marginTop: Platform.OS === 'ios' ? 50 : 0,
     width: '100%',
-    fontSize: 30,
     textAlign: 'center',
   },
   label2: {
     width: '100%',
-    fontSize: 16,
     textAlign: 'center',
   },
 });
-
-export default FastImageDemo
