@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import Carousel from "react-native-snap-carousel";
 
-export default function SnapCarouselExample(): JSX.Element {
+export function SnapCarouselExample() {
   const ENTRIES1 = [
     {
       title: "Beautiful and dramatic Antelope Canyon",

@@ -5,7 +5,7 @@ import { Tester, TestCase } from '@rnoh/testerino';
 
 const { width: screenWidth } = Dimensions.get('window')
 
-export default function SnapCarousel(): JSX.Element {
+export function SnapCarousel(){
   const ENTRIES1 = [
     {
       title: "Beautiful and dramatic Antelope Canyon",
@@ -472,8 +472,7 @@ export default function SnapCarousel(): JSX.Element {
               hasParallaxImages={true}
             />
           </TestCase>
-          {/* 不支持 */}
-          <TestCase itShould="lockScrollWhileSnapping lockScrollTimeoutDuration  轮播滚动时 点击轮播图 动画效果停止">
+          <TestCase itShould="lockScrollWhileSnapping lockScrollTimeoutDuration  快速滚动 边缘值 禁止滚动 禁止滚动时长取 lockScrollTimeoutDuration">
             <Carousel
               data={ENTRIES1}
               renderItem={_renderItem}
@@ -482,10 +481,10 @@ export default function SnapCarousel(): JSX.Element {
               sliderHeight={200}
               itemHeight={100}
               lockScrollWhileSnapping={true}
-              lockScrollTimeoutDuration={1000}
+              lockScrollTimeoutDuration={5000}
             />
           </TestCase>
-          {/* 没效果 */}
+          {/* ios效果不明显 */}
           <TestCase itShould="activeAnimationType 自定义动画">
             <Carousel
               data={ENTRIES1}
