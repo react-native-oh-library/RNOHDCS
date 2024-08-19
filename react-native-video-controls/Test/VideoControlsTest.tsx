@@ -1,42 +1,62 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   ScrollView,
+  Text,
 } from 'react-native';
 
 import VideoPlayer from 'react-native-video-controls'
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
 
-function VideoTest(){
-    function handleEnterFullscreen  ()  {  
-      alert('this is onEnterFullscreen event Test');     
+function VideoPlayerTest(){
+    const [isFullScreen, setIsFullScreen] = useState(false);
+    const [isExitFullScreen, setExitFullScreen] = useState(false);
+    const [isHideControls, setHideControls] = useState(false);
+    const [isShowControls, setShowControls] = useState(false);
+    const [isError, setError] = useState(false);
+    const [isPause, setPause] = useState(false);
+    const [isPlay, setPlay] = useState(false);
+    const [isBack,setBack] = useState(false);
+    const [isEnd, setEnd] = useState(false);
+    
+    const handleEnterFullscreen = () => {  
+      console.log('this is onEnterFullscreen event Test');  
+      setIsFullScreen(true);
     };  
-    function handleExitFullscreen  ()  {  
-      alert('this is onExitFullscreen event Test');
+    const handleExitFullscreen = () => {  
+      console.log('this is onExitFullscreen event Test');
+      setExitFullScreen(true);
     }; 
-    function handleHideControls () {
-      alert('this is onHideControls event Test');
+    const handleHideControls = () => {
+      console.log('this is onHideControls event Test');
+      setHideControls(true);
     }
-    function handleShowControls () {
-      alert('this is onShowControls event Test');
+    const handleShowControls = () => {
+      console.log('this is onShowControls event Test');
+      setShowControls(true);
     }
-    function handleError () {
-      alert('this is onError event Test');
+    const handleError = () => { 
+      console.log('this is onError event Test');
+      setError(true);
     }
-    function handlePause () {
-      alert('this is onPause event Test');
+    const handlePause = () => {
+      console.log('this is onPause event Test');
+      setPause(true);
     }
-    function handlePlay () {
-      alert('this is Play event Test');
+    const handlePlay = () => {
+      console.log('this is onPlay event Test');
+      setPlay(true);
     }
-    function handleBack () {
-      alert('this is onBack event Test');
+    const handleBack = () => {
+      console.log('this is onBack event Test');
+      setBack(true);
     }
-    function handleEnd () {
-      alert('this is onEnd event Test');
+    const handleEnd = () => {
+      console.log('this is onEnd event Test');
+      setEnd(true);
     }
   
-      return (
+    return (
         <ScrollView style={styles.scollvewcontainer}>
             <Tester>
               <TestSuite name='default properties'>
@@ -242,6 +262,11 @@ function VideoTest(){
                     source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}} 
                     paused = {true}   
                   /> 
+                  {isFullScreen && (  
+                    <Text style={{ position: 'absolute', bottom: 50, left: '50%', transform: [{ translateX: -50 }], color: 'white' }}>  
+                      onEnterFullscreen run success!  
+                    </Text>  
+                  )}
                </TestCase>
                <TestCase itShould="test VideoPlayer onExitFullscreen function">
                  <VideoPlayer
@@ -250,6 +275,11 @@ function VideoTest(){
                     source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}    
                     paused = {true}
                   /> 
+                  {isExitFullScreen && (  
+                    <Text style={{ position: 'absolute', bottom: 50, left: '50%', transform: [{ translateX: -50 }], color: 'white' }}>  
+                      onExitFullscreen run success!  
+                    </Text>  
+                  )}
               </TestCase>
               <TestCase itShould="test VideoPlayer onHideControls function">
                  <VideoPlayer
@@ -258,6 +288,11 @@ function VideoTest(){
                     source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}    
                     paused = {true}
                   /> 
+                  {isHideControls && (  
+                    <Text style={{ position: 'absolute', bottom: 50, left: '50%', transform: [{ translateX: -50 }], color: 'white' }}>  
+                      onHideControls run success!
+                    </Text>  
+                  )}
               </TestCase>
               <TestCase itShould="test VideoPlayer onShowControls function">
                  <VideoPlayer
@@ -266,14 +301,24 @@ function VideoTest(){
                     source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}    
                     paused = {true}
                   /> 
+                  {isShowControls && (  
+                    <Text style={{ position: 'absolute', bottom: 50, left: '50%', transform: [{ translateX: -50 }], color: 'white' }}>  
+                      onShowControls run success!  
+                    </Text>  
+                  )}
               </TestCase>
               <TestCase itShould="test VideoPlayer onError function">
                  <VideoPlayer
                     controlTimeout = {90000}
                     onError={handleError}
-                    source={{uri: 'https:vjs.zencdn.net/v/oceans.mp'}}    
+                    source={{uri: 'https://vjs.zencdn.net/v/oceans.mp'}}    
                     paused = {true}
                   /> 
+                  {isError && (  
+                    <Text style={{ position: 'absolute', bottom: 50, left: '50%', transform: [{ translateX: -50 }], color: 'white' }}>  
+                      onError run success! 
+                    </Text>  
+                  )}
               </TestCase>
               <TestCase itShould="test VideoPlayer onPause function">
                  <VideoPlayer
@@ -282,6 +327,11 @@ function VideoTest(){
                     source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}    
                     paused = {true}
                   /> 
+                  {isPause && (  
+                    <Text style={{ position: 'absolute', bottom: 50, left: '50%', transform: [{ translateX: -50 }], color: 'white' }}>  
+                      onPause run success!  
+                    </Text>  
+                  )}
               </TestCase>
               <TestCase itShould="test VideoPlayer onPlay function">
                  <VideoPlayer
@@ -290,6 +340,11 @@ function VideoTest(){
                     source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}  
                     paused = {true}  
                   /> 
+                  {isPlay && (  
+                    <Text style={{ position: 'absolute', bottom: 50, left: '50%', transform: [{ translateX: -50 }], color: 'white' }}>  
+                      onPlay run success!  
+                    </Text>  
+                  )}
               </TestCase>
               <TestCase itShould="test VideoPlayer onBack function">
                  <VideoPlayer
@@ -298,19 +353,30 @@ function VideoTest(){
                     source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}    
                     paused = {true}
                   /> 
+                  {isBack && (  
+                    <Text style={{ position: 'absolute', bottom: 50, left: '50%', transform: [{ translateX: -50 }], color: 'white' }}>  
+                      onBack run success!  
+                    </Text>  
+                  )}
               </TestCase>
               <TestCase itShould="test VideoPlayer onEnd function">
                  <VideoPlayer
                     controlTimeout = {90000}
-                    onEnd={handleEnd}                 
+                    onEnd={handleEnd}
                     source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}    
                     paused = {true}
                   /> 
+                  {isEnd && (  
+                    <Text style={{ position: 'absolute', bottom: 50, left: '50%', transform: [{ translateX: -50 }], color: 'white' }}>  
+                      onEnd run success!
+                    </Text>  
+                  )}
               </TestCase>
              </TestSuite>
             </Tester>
         </ScrollView>
-      );
+    );
+      
   }
   const styles = StyleSheet.create({
     scollvewcontainer: {
@@ -332,4 +398,4 @@ function VideoTest(){
   });
 
   
-export default VideoTest;
+export default VideoPlayerTest;
