@@ -6,9 +6,6 @@ import {TestSuite, Tester, TestCase} from '@rnoh/testerino';
 export function FastImageLoadingDelay(): JSX.Element {
   const source =[
     "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fsafe-img.xhscdn.com%2Fbw1%2F6651224a-b18d-4456-97b8-14c6daad236d%3FimageView2%2F2%2Fw%2F1080%2Fformat%2Fjpg&refer=http%3A%2F%2Fsafe-img.xhscdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1694154457&t=37e024c7f8fb33d10e154f32353baf4a",
-    "https://pic.616pic.com/ys_img/00/04/71/ntg7ib7rwj.jpg",
-    "https://bkimg.cdn.bcebos.com/pic/94cad1c8a786c9177f3e1dd6e16567cf3bc79e3df99e?x-bce-process=image/format,f_auto/watermark,image_d2F0ZXIvYmFpa2UyNzI,g_7,xp_5,yp_5,P_20/resize,m_lfit,limit_1,h_1080",
-    "https://t11.baidu.com/it/u=3861652677,179000897&fm=30&app=106&f=PNG?w=640&h=562&s=6D89BD558F206D0F4A6114EB03008038",
     "https://res.vmallres.com//uomcdn/CN/cms/202206/5B874DC0E45B0467105D3D3872A3E9A3.png",
     "https://res.vmallres.com//uomcdn/CN/cms/202206/5B874DC0E45B0467105D3D3872A3E9A3.png",
     "https://res.vmallres.com/portal/1.23.8.300/h5/images/logo_app.png",
@@ -177,8 +174,6 @@ export function FastImageLoadingDelay(): JSX.Element {
         }} />
         <FastImage source={{ uri: source[item*clumns+1] }} style={styles.image} onLoadEnd={()=>{
           endNum++;
-          console.log(source[item*clumns+1]);
-          
           if(endNum == source.length ){
             setTime(((new Date()).valueOf() -startTime)/1000)
           }
@@ -229,11 +224,14 @@ const styles = StyleSheet.create({
     height: 50,
   },
   label: {
+    marginTop: Platform.OS === 'ios' ? 50 : 0,
     width: '100%',
+    fontSize: 30,
     textAlign: 'center',
   },
   label2: {
     width: '100%',
+    fontSize: 16,
     textAlign: 'center',
   },
 });
