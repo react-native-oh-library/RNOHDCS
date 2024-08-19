@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, Text, View, StyleSheet, Alert } from 'react-native';
-import { MapView, Circle, Polygon, Polyline, Marker, LatLng,  voidEvent ,MapPoi} from 'react-native-amap3d';
+import { MapView, Circle, Polygon, Polyline, Marker, LatLng, voidEvent, MapPoi } from 'react-native-amap3d';
 
 import type * as ReactNative from "react-native";
 
@@ -66,9 +66,9 @@ function AMapDemo() {
           target: {
             latitude: 39.906901, longitude: 115.397972
           },
-          zoom:5
-        }}
-		<Circle
+          zoom: 5
+        }}>
+        <Circle
           strokeWidth={5}
           strokeColor="rgba(0, 0, 255, 0.5)"
           fillColor="rgba(255, 0, 0, 0.5)"
@@ -92,7 +92,7 @@ function AMapDemo() {
           points={points2}
           zIndex={2}
         />
-        <Polyline width={200} color="rgba(0, 255, 0, 0.5)" points={line1} dotted={false}  />
+        <Polyline width={200} color="rgba(0, 255, 0, 0.5)" points={line1} dotted={false} />
         <Polyline
           width={100}
           gradient={true}
