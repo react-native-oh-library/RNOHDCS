@@ -2,7 +2,7 @@ import React, { Component, useState } from 'react';
 import { View, Text, Dimensions, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import Gallery from 'react-native-image-gallery';
 import { Tester, TestSuite } from '@rnoh/testerino';
-import {TestCase} from './testCase';
+import {TestCase} from './TestCase';
 const { height, width } = Dimensions.get('window');
 const flatListProps = {
     // 初始渲染的item数量  
