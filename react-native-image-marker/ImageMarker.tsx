@@ -12,6 +12,7 @@ import {
 
 export const ImageMarker = () => {
   // mark  image
+  const [netWorkImageUrl, setNetWorkImage] = useState('');
   // file name
   const [file1url, setFilename1] = useState('');
   const [file2url, setFilename2] = useState('');
@@ -47,6 +48,15 @@ export const ImageMarker = () => {
   const [url_icon_center, seturl_icon_center] = useState('');
   const [url_icon_xy, seturl_icon_xy] = useState('');
   const [url_icon_xypercent, seturl_icon_xypercent] = useState('');
+  // network image 
+  const image_options_network_image: ImageMarkOptions = {
+    backgroundImage: { src: 'https://developer.huawei.com/allianceCmsResource/resource/HUAWEI_Developer_VUE/images/yuekan/xintexing00.jpg' },
+    watermarkImages: [{
+      src: 'https://developer.huawei.com/allianceCmsResource/resource/HUAWEI_Developer_VUE/images/yingyongicon.png',
+      position: { position: Position.topLeft }
+    }
+    ]
+  }
   // image position
   const image_options_topLeft: ImageMarkOptions = {
     backgroundImage: { src: require('./assets/code-images/1.png') },
@@ -289,6 +299,14 @@ export const ImageMarker = () => {
     }
     ],
     saveFormat: ImageFormat.base64
+  }
+  // network image
+  const markImageNetWorkImage = () => {
+    Marker.markImage(image_options_network_image).then((result) => {
+      setNetWorkImage(result)
+    }).catch(error => {
+      console.log('error', error)
+    })
   }
   // image file name
   const markImageFilename1 = () => {
@@ -676,7 +694,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           padding: '10%'
@@ -691,7 +709,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           padding: '10% 15%'
@@ -706,7 +724,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           padding: '10% 15% 20%'
@@ -721,7 +739,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           padding: '10% 15% 20% 5%'
@@ -736,7 +754,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingTop: '10%'
@@ -751,7 +769,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingLeft: '10%'
@@ -766,7 +784,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingRight: '10%'
@@ -781,7 +799,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingBottom: '10%'
@@ -796,7 +814,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingHorizontal: '10%'
@@ -811,7 +829,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingVertical: '10%'
@@ -826,7 +844,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingX: '10%'
@@ -841,7 +859,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingY: '10%'
@@ -934,7 +952,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           type: TextBackgroundType.stretchX,
           color: '#0FFF00'
@@ -949,7 +967,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           type: TextBackgroundType.stretchY,
           color: '#0FFF00'
@@ -965,7 +983,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#000000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00'
         }
@@ -979,7 +997,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#000000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#FC0700'
         }
@@ -1163,8 +1181,9 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       position: { position: Position.topLeft },
-      style:{color: '#FFFF00',
-        fontSize:100,
+      style: {
+        color: '#FFFF00',
+        fontSize: 100,
       }
     }
     ]
@@ -1174,7 +1193,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       position: { position: Position.topRight },
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }
     ]
   }
@@ -1183,7 +1202,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       position: { position: Position.topCenter },
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }
     ]
   }
@@ -1192,7 +1211,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       position: { position: Position.bottomLeft },
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }
     ]
   }
@@ -1201,7 +1220,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       position: { position: Position.bottomCenter },
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }
     ]
   }
@@ -1210,7 +1229,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       position: { position: Position.bottomRight },
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }
     ]
   }
@@ -1219,7 +1238,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       position: { position: Position.center },
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }
     ]
   }
@@ -1228,7 +1247,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       position: { X: 30, Y: 50 },
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }
     ]
   }
@@ -1237,7 +1256,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       position: { X: '10%', Y: '20%' },
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }
     ]
   }
@@ -1249,7 +1268,7 @@ export const ImageMarker = () => {
     },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }
     ]
   }
@@ -1260,7 +1279,7 @@ export const ImageMarker = () => {
     },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }
     ]
   }
@@ -1272,7 +1291,7 @@ export const ImageMarker = () => {
     },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }]
   }
   const text_options_scale1_5: TextMarkOptions = {
@@ -1282,7 +1301,7 @@ export const ImageMarker = () => {
     },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }]
   }
   // image rotate
@@ -1293,7 +1312,7 @@ export const ImageMarker = () => {
     },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }]
   }
   const text_options_backrotate50: TextMarkOptions = {
@@ -1303,7 +1322,7 @@ export const ImageMarker = () => {
     },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }]
   }
 
@@ -1312,7 +1331,7 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }],
     quality: 20
   }
@@ -1320,7 +1339,7 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }],
     quality: 100
   }
@@ -1329,7 +1348,7 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }],
     filename: 'test1'
   }
@@ -1337,7 +1356,7 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }],
     filename: 'test2'
   }
@@ -1346,7 +1365,7 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }],
     saveFormat: ImageFormat.png
   }
@@ -1354,7 +1373,7 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }],
     saveFormat: ImageFormat.jpg
   }
@@ -1362,7 +1381,7 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }],
     saveFormat: ImageFormat.base64
   }
@@ -1829,7 +1848,27 @@ export const ImageMarker = () => {
     <Tester>
       <ScrollView>
         <TestSuite name='react-native-image-marker'>
-          <TestCase 
+          <TestCase
+            itShould=' icon_network '
+            tags={['C_API']}>
+            <View style={styles.body}>
+              <View style={styles.sectionContainer}>
+                <Text style={styles.sectionTitle}>
+                  {"network_image"}
+                </Text>
+                <Button
+                  title="network_image "
+                  color="#9a73ef"
+                  onPress={markImageNetWorkImage}
+                />
+                <Text style={styles.sectionTitle}>
+                  {netWorkImageUrl}
+                </Text>
+                <Image resizeMode='contain' source={{ uri: netWorkImageUrl, width: 300, height: 150 }} />
+              </View>
+            </View>
+          </TestCase>
+          <TestCase
             itShould=' icon_topleft '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1849,7 +1888,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' icon_topright '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1869,7 +1908,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' icon_topcenter '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1889,7 +1928,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' icon_bottomleft '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1909,7 +1948,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' icon_bottomcenter '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1929,7 +1968,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' icon_bottomright '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1949,7 +1988,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' icon_center '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1969,7 +2008,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' icon_xy '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -1989,7 +2028,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' icon_xypercent '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2009,7 +2048,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' back_alpha0_1 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2029,7 +2068,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' back_alpha1'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2049,7 +2088,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' icon_alpha0_1 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2069,7 +2108,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' icon_alpha1'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2089,7 +2128,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' back_scale0_5 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2109,7 +2148,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' back_scale1_5'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2129,7 +2168,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' icon_scale0_5 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2149,7 +2188,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' icon_scale1_5'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2169,7 +2208,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' back_rotate_50 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2189,7 +2228,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' back_rotate_20'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2209,7 +2248,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' icon_rotate_50 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2229,7 +2268,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' icon_rotate_20'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2249,7 +2288,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' qualityurl_100 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2269,7 +2308,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' qualityurl_20'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2289,7 +2328,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' filename1'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2309,7 +2348,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' filename2'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2329,7 +2368,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' file type png'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2349,7 +2388,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould='file type jpg'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2369,7 +2408,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould='file type base64'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2391,7 +2430,7 @@ export const ImageMarker = () => {
             </View>
           </TestCase>
 
-          <TestCase 
+          <TestCase
             itShould=' text_fontName '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2412,7 +2451,7 @@ export const ImageMarker = () => {
             </View>
           </TestCase>
 
-          <TestCase 
+          <TestCase
             itShould=' text_textalain_left '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2433,7 +2472,7 @@ export const ImageMarker = () => {
             </View>
           </TestCase>
 
-          <TestCase 
+          <TestCase
             itShould=' text_textalain_center '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2454,7 +2493,7 @@ export const ImageMarker = () => {
             </View>
           </TestCase>
 
-          <TestCase 
+          <TestCase
             itShould=' text_textalain_right '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2474,7 +2513,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_skewX '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2494,7 +2533,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_italic '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2514,7 +2553,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_fontSize_100 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2534,7 +2573,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_fontSize_30 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2554,7 +2593,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_color_red '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2574,7 +2613,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_color_yellow '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2594,7 +2633,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_test1 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2614,7 +2653,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_test2 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2635,7 +2674,7 @@ export const ImageMarker = () => {
             </View>
           </TestCase>
 
-          <TestCase 
+          <TestCase
             itShould=' text_backgroundStyle_padding_all1 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2655,7 +2694,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_backgroundStyle_padding_all2 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2675,7 +2714,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_backgroundStyle_padding_all3 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2695,7 +2734,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_backgroundStyle_padding_all4 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2716,7 +2755,7 @@ export const ImageMarker = () => {
             </View>
           </TestCase>
 
-          <TestCase 
+          <TestCase
             itShould=' text_backgroundStyle_padding_top '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2736,7 +2775,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_backgroundStyle_padding_bottom '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2756,7 +2795,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_backgroundStyle_padding_left '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2776,7 +2815,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_backgroundStyle_padding_right '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2796,7 +2835,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_backgroundStyle_padding_horizontal '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2816,7 +2855,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_backgroundStyle_padding_vertical '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2836,7 +2875,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_backgroundStyle_padding_x '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2856,7 +2895,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_backgroundStyle_padding_y '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2876,7 +2915,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_backgroundStyle_cornerRadius_all '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2896,7 +2935,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_backgroundStyle_cornerRadius_topLeft '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2916,7 +2955,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_backgroundStyle_cornerRadius_topRight '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2936,7 +2975,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_backgroundStyle_cornerRadius_bottomLeft '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2956,7 +2995,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_backgroundStyle_cornerRadius_bottomRight '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2976,7 +3015,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_backgroundStyle_type_stretchX '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2996,7 +3035,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_backgroundStyle_type_stretchY '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3016,7 +3055,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_backgroundStyle_color_green '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3036,7 +3075,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_backgroundStyle_color_red '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3056,7 +3095,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_shadowStyle1 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3076,7 +3115,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_shadowStyle2 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3096,7 +3135,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_bold '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3116,7 +3155,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_rotate30 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3136,7 +3175,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_rotate50'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3156,7 +3195,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_underline '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3176,7 +3215,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_strikeThrough '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3196,7 +3235,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_topleft '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3216,7 +3255,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_topright '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3236,7 +3275,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_topcenter '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3256,7 +3295,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_bottomleft '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3276,7 +3315,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_bottomcenter '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3296,7 +3335,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_bottomright '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3316,7 +3355,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_center '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3336,7 +3375,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_xy '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3356,7 +3395,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' text_xypercent '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3376,7 +3415,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' back_alpha0_1 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3396,7 +3435,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' back_alpha1'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3416,7 +3455,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' back_scale0_5 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3436,7 +3475,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' back_scale1_5'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3456,7 +3495,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' back_rotate_50 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3476,7 +3515,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' back_rotate_20'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3496,7 +3535,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' qualityurl_100 '
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3516,7 +3555,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' qualityurl_20'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3536,7 +3575,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' filename1'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3556,7 +3595,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' filename2'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3576,7 +3615,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould=' file type png'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3596,7 +3635,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould='file type jpg'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -3616,7 +3655,7 @@ export const ImageMarker = () => {
               </View>
             </View>
           </TestCase>
-          <TestCase 
+          <TestCase
             itShould='file type base64'
             tags={['C_API']}>
             <View style={styles.body}>
