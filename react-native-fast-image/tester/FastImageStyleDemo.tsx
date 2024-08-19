@@ -79,33 +79,33 @@ export function FastImageStyleDemo(): JSX.Element {
             <Image
               style={{width:300,height:300}}
               resizeMode='contain'
-              source={require('./image/bunny.png')}
+              source={{uri:'https://media.giphy.com/media/GEsoqZDGVoisw/giphy.gif'}}
             />
           </TestCase>
           <TestCase itShould='resizeMode cover'>
             <Image
-              style={{width:300,height:300}}
+              style={styles.resizeImage}
               resizeMode='cover'
-              source={require('./image/bunny.png')}
+              source={{uri:'https://media.giphy.com/media/GEsoqZDGVoisw/giphy.gif'}}
             />
           </TestCase>
           <TestCase itShould='resizeMode stretch'>
             <Image
-              style={{width:300,height:300}}
+              style={styles.resizeImage}
               resizeMode='stretch'
-              source={require('./image/bunny.png')}
+              source={{uri:'https://media.giphy.com/media/GEsoqZDGVoisw/giphy.gif'}}
             />
           </TestCase>
           <TestCase itShould='resizeMode center'>
             <Image
-              style={{width:300,height:300}}
+              style={styles.resizeImage}
               resizeMode='center'
-              source={require('./image/bunny.png')}
+              source={{uri:'https://media.giphy.com/media/GEsoqZDGVoisw/giphy.gif'}}
             />
           </TestCase>
           <TestCase itShould='borderRadius 50'>
             <Image
-              style={{borderRadius:50,width:240,height:240}}
+              style={styles.resizeImage}
               source={require('./image/fields.jpg')}
             />
           </TestCase>
@@ -143,4 +143,13 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
   },
+  resizeImage:{
+    height: 100,
+    width: 50,
+    backgroundColor: '#ddd',
+    margin: 20,
+    marginTop: 0,
+    marginBottom: 10,
+    flex: 0,
+},
 });
