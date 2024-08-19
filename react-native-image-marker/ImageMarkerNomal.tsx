@@ -4,14 +4,10 @@ import Marker, {
 import React, { useState } from "react";
 import { StyleSheet, ScrollView, Text, View, Button, Image } from "react-native";
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import {
-  Tester,
-  TestSuite,
-  TestCase
-} from '@rnoh/testerino';
 
-export const ImageMarker = () => {
+export const ImageMarkerNomal = () => {
   // mark  image
+  const [netWorkImageUrl, setNetWorkImage] = useState('');
   // file name
   const [file1url, setFilename1] = useState('');
   const [file2url, setFilename2] = useState('');
@@ -47,6 +43,15 @@ export const ImageMarker = () => {
   const [url_icon_center, seturl_icon_center] = useState('');
   const [url_icon_xy, seturl_icon_xy] = useState('');
   const [url_icon_xypercent, seturl_icon_xypercent] = useState('');
+  // network image 
+  const image_options_network_image: ImageMarkOptions = {
+    backgroundImage: { src: 'https://developer.huawei.com/allianceCmsResource/resource/HUAWEI_Developer_VUE/images/yuekan/xintexing00.jpg' },
+    watermarkImages: [{
+      src: 'https://developer.huawei.com/allianceCmsResource/resource/HUAWEI_Developer_VUE/images/yingyongicon.png',
+      position: { position: Position.topLeft }
+    }
+    ]
+  }
   // image position
   const image_options_topLeft: ImageMarkOptions = {
     backgroundImage: { src: require('./assets/code-images/1.png') },
@@ -289,6 +294,14 @@ export const ImageMarker = () => {
     }
     ],
     saveFormat: ImageFormat.base64
+  }
+  // network image
+  const markImageNetWorkImage = () => {
+    Marker.markImage(image_options_network_image).then((result) => {
+      setNetWorkImage(result)
+    }).catch(error => {
+      console.log('error', error)
+    })
   }
   // image file name
   const markImageFilename1 = () => {
@@ -676,7 +689,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           padding: '10%'
@@ -691,7 +704,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           padding: '10% 15%'
@@ -706,7 +719,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           padding: '10% 15% 20%'
@@ -721,7 +734,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           padding: '10% 15% 20% 5%'
@@ -736,7 +749,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingTop: '10%'
@@ -751,7 +764,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingLeft: '10%'
@@ -766,7 +779,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingRight: '10%'
@@ -781,7 +794,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingBottom: '10%'
@@ -796,7 +809,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingHorizontal: '10%'
@@ -811,7 +824,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingVertical: '10%'
@@ -826,7 +839,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingX: '10%'
@@ -841,7 +854,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00',
           paddingY: '10%'
@@ -934,7 +947,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           type: TextBackgroundType.stretchX,
           color: '#0FFF00'
@@ -949,7 +962,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#FF0000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           type: TextBackgroundType.stretchY,
           color: '#0FFF00'
@@ -965,7 +978,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#000000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#0FFF00'
         }
@@ -979,7 +992,7 @@ export const ImageMarker = () => {
       text: 'test text',
       style: {
         color: '#000000',
-        fontSize:100,
+        fontSize: 100,
         textBackgroundStyle: {
           color: '#FC0700'
         }
@@ -1163,8 +1176,9 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       position: { position: Position.topLeft },
-      style:{color: '#FFFF00',
-        fontSize:100,
+      style: {
+        color: '#FFFF00',
+        fontSize: 100,
       }
     }
     ]
@@ -1174,7 +1188,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       position: { position: Position.topRight },
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }
     ]
   }
@@ -1183,7 +1197,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       position: { position: Position.topCenter },
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }
     ]
   }
@@ -1192,7 +1206,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       position: { position: Position.bottomLeft },
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }
     ]
   }
@@ -1201,7 +1215,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       position: { position: Position.bottomCenter },
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }
     ]
   }
@@ -1210,7 +1224,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       position: { position: Position.bottomRight },
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }
     ]
   }
@@ -1219,7 +1233,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       position: { position: Position.center },
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }
     ]
   }
@@ -1228,7 +1242,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       position: { X: 30, Y: 50 },
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }
     ]
   }
@@ -1237,7 +1251,7 @@ export const ImageMarker = () => {
     watermarkTexts: [{
       text: 'test text',
       position: { X: '10%', Y: '20%' },
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }
     ]
   }
@@ -1249,7 +1263,7 @@ export const ImageMarker = () => {
     },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }
     ]
   }
@@ -1260,7 +1274,7 @@ export const ImageMarker = () => {
     },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }
     ]
   }
@@ -1272,7 +1286,7 @@ export const ImageMarker = () => {
     },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }]
   }
   const text_options_scale1_5: TextMarkOptions = {
@@ -1282,7 +1296,7 @@ export const ImageMarker = () => {
     },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }]
   }
   // image rotate
@@ -1293,7 +1307,7 @@ export const ImageMarker = () => {
     },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }]
   }
   const text_options_backrotate50: TextMarkOptions = {
@@ -1303,7 +1317,7 @@ export const ImageMarker = () => {
     },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }]
   }
 
@@ -1312,7 +1326,7 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }],
     quality: 20
   }
@@ -1320,7 +1334,7 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }],
     quality: 100
   }
@@ -1329,7 +1343,7 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }],
     filename: 'test1'
   }
@@ -1337,7 +1351,7 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }],
     filename: 'test2'
   }
@@ -1346,7 +1360,7 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }],
     saveFormat: ImageFormat.png
   }
@@ -1354,7 +1368,7 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }],
     saveFormat: ImageFormat.jpg
   }
@@ -1362,7 +1376,7 @@ export const ImageMarker = () => {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
       text: 'test text',
-      style:{color: '#FFFF00',fontSize:100,}
+      style: { color: '#FFFF00', fontSize: 100, }
     }],
     saveFormat: ImageFormat.base64
   }
@@ -1826,1541 +1840,1557 @@ export const ImageMarker = () => {
     })
   }
   return (
-      <ScrollView>
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="icon_topleft "
-                  color="#9a73ef"
-                  onPress={markImagetopleft}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_icon_topLeft}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_icon_topLeft, width: 300, height: 150 }} />
-              </View>
-            </View>
-     
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="icon_topright "
-                  color="#9a73ef"
-                  onPress={markImagetopright}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_icon_topRight}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_icon_topRight, width: 300, height: 150 }} />
-              </View>
-            </View>
-         
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="icon_topcenter "
-                  color="#9a73ef"
-                  onPress={markImagetopcenter}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_icon_topCenter}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_icon_topCenter, width: 300, height: 150 }} />
-              </View>
-            </View>
-       
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="icon_bottomleft "
-                  color="#9a73ef"
-                  onPress={markImagebottomleft}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_icon_bottomLeft}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_icon_bottomLeft, width: 300, height: 150 }} />
-              </View>
-            </View>
-          
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="icon_bottomcenter "
-                  color="#9a73ef"
-                  onPress={markImagebottomcenter}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_icon_bottomCenter}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_icon_bottomCenter, width: 300, height: 150 }} />
-              </View>
-            </View>
-    
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="icon_bottomright "
-                  color="#9a73ef"
-                  onPress={markImagebottomright}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_icon_bottomRight}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_icon_bottomRight, width: 300, height: 150 }} />
-              </View>
-            </View>
-      
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="icon_center "
-                  color="#9a73ef"
-                  onPress={markImagecenter}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_icon_center}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_icon_center, width: 300, height: 150 }} />
-              </View>
-            </View>
-      
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="icon_xy "
-                  color="#9a73ef"
-                  onPress={markImagexy}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_icon_xy}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_icon_xy, width: 300, height: 150 }} />
-              </View>
-            </View>
-         
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="icon_xypercent "
-                  color="#9a73ef"
-                  onPress={markImagexppercentt}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_icon_xypercent}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_icon_xypercent, width: 300, height: 150 }} />
-              </View>
-            </View>
-        
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="back_alpha0_1 "
-                  color="#9a73ef"
-                  onPress={markImagebackalpha0_1}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_backalpha0_1}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_backalpha0_1, width: 300, height: 150 }} />
-              </View>
-            </View>
-      
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="back_alpha1"
-                  color="#9a73ef"
-                  onPress={markImagebackalpha1}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_backalpha1}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_backalpha1, width: 300, height: 150 }} />
-              </View>
-            </View>
-      
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="icon_alpha0_1 "
-                  color="#9a73ef"
-                  onPress={markImagealpha0_1}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_alpha0_1}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_alpha0_1, width: 300, height: 150 }} />
-              </View>
-            </View>
+    <ScrollView>
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"network_image"}
+          </Text>
+          <Button
+            title="network_image "
+            color="#9a73ef"
+            onPress={markImageNetWorkImage}
+          />
+          <Text style={styles.sectionTitle}>
+            {netWorkImageUrl}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: netWorkImageUrl, width: 300, height: 150 }} />
+        </View>
+      </View>
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="icon_topleft "
+            color="#9a73ef"
+            onPress={markImagetopleft}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_icon_topLeft}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_icon_topLeft, width: 300, height: 150 }} />
+        </View>
+      </View>
 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="icon_alpha1"
-                  color="#9a73ef"
-                  onPress={markImagealpha1}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_alpha1}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_alpha1, width: 300, height: 150 }} />
-              </View>
-            </View>
-        
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="back_scale0_5 "
-                  color="#9a73ef"
-                  onPress={markImagebackscale0_5}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_backscale0_5}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_backscale0_5, width: 300, height: 150 }} />
-              </View>
-            </View>
-      
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="back_scale1_5"
-                  color="#9a73ef"
-                  onPress={markImagebackscale1_5}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_backscale1_5}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_backscale1_5, width: 300, height: 150 }} />
-              </View>
-            </View>
-        
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="icon_scale0_5 "
-                  color="#9a73ef"
-                  onPress={markImagescale0_5}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_scale0_5}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_scale0_5, width: 300, height: 150 }} />
-              </View>
-            </View>
-     
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="icon_scale1_5"
-                  color="#9a73ef"
-                  onPress={markImagescale1_5}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_scale1_5}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_scale1_5, width: 300, height: 150 }} />
-              </View>
-            </View>
-      
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="back_rotate_50 "
-                  color="#9a73ef"
-                  onPress={markImagebackrotate_50}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_backrotate50}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_backrotate50, width: 300, height: 150 }} />
-              </View>
-            </View>
-     
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="back_rotate_20"
-                  color="#9a73ef"
-                  onPress={markImagebackrotate_20}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_backrotate20}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_backrotate20, width: 300, height: 150 }} />
-              </View>
-            </View>
-       
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="icon_rotate_50 "
-                  color="#9a73ef"
-                  onPress={markImagerotate_50}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_rotate50}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_rotate50, width: 300, height: 150 }} />
-              </View>
-            </View>
-       
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="icon_rotate_20"
-                  color="#9a73ef"
-                  onPress={markImagerotate_20}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_rotate20}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_rotate20, width: 300, height: 150 }} />
-              </View>
-            </View>
-  
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="qualityurl_100 "
-                  color="#9a73ef"
-                  onPress={markImagequalityurl_100}
-                />
-                <Text style={styles.sectionTitle}>
-                  {qualityurl_100}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: qualityurl_100, width: 300, height: 150 }} />
-              </View>
-            </View>
-       
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="qualityurl_20"
-                  color="#9a73ef"
-                  onPress={markImagequalityurl_20}
-                />
-                <Text style={styles.sectionTitle}>
-                  {qualityurl_20}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: qualityurl_20, width: 300, height: 150 }} />
-              </View>
-            </View>
-      
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="filename test1"
-                  color="#9a73ef"
-                  onPress={markImageFilename1}
-                />
-                <Text style={styles.sectionTitle}>
-                  {file1url}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: file1url, width: 300, height: 150 }} />
-              </View>
-            </View>
-  
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="filename test2"
-                  color="#9a73ef"
-                  onPress={markImageFilename2}
-                />
-                <Text style={styles.sectionTitle}>
-                  {file2url}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: file2url, width: 300, height: 150 }} />
-              </View>
-            </View>
-     
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="filetype png"
-                  color="#9a73ef"
-                  onPress={markImageFiletypepng}
-                />
-                <Text style={styles.sectionTitle}>
-                  {filetypeurl_png}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: filetypeurl_png, width: 300, height: 150 }} />
-              </View>
-            </View>
-      
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="file type jpg"
-                  color="#9a73ef"
-                  onPress={markImageFiletypejpg}
-                />
-                <Text style={styles.sectionTitle}>
-                  {filetypeurl_jpg}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: filetypeurl_jpg, width: 300, height: 150 }} />
-              </View>
-            </View>
-     
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="file type base64"
-                  color="#9a73ef"
-                  onPress={markImageFiletypebase64}
-                />
-                <Text style={styles.sectionTitle} ellipsizeMode="tail"
-                  numberOfLines={1}>
-                  {filetypeurl_base64}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: filetypeurl_base64, width: 300, height: 150 }} />
-              </View>
-            </View>
-       
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_fontName"
-                  color="#9a73ef"
-                  onPress={markTextFontName}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_fontName}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_fontName, width: 300, height: 150 }} />
-              </View>
-            </View>
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="icon_topright "
+            color="#9a73ef"
+            onPress={markImagetopright}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_icon_topRight}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_icon_topRight, width: 300, height: 150 }} />
+        </View>
+      </View>
 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_textalain_left "
-                  color="#9a73ef"
-                  onPress={markTextTextAlainLeft}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_textalain_left}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_textalain_left, width: 300, height: 150 }} />
-              </View>
-            </View>
-       
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_textalain_center "
-                  color="#9a73ef"
-                  onPress={markTextTextAlainCenter}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_textalain_center}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_textalain_center, width: 300, height: 150 }} />
-              </View>
-            </View>
-         
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_textalain_right "
-                  color="#9a73ef"
-                  onPress={markTextTextAlainRight}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_textalain_right}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_textalain_right, width: 300, height: 150 }} />
-              </View>
-            </View>
- 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_skewX "
-                  color="#9a73ef"
-                  onPress={markTextskewX}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_skewX}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_skewX, width: 300, height: 150 }} />
-              </View>
-            </View>
-  
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_italic "
-                  color="#9a73ef"
-                  onPress={markTextFontItalic}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_italic}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_italic, width: 300, height: 150 }} />
-              </View>
-            </View>
-     
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_fontSize_100 "
-                  color="#9a73ef"
-                  onPress={markTextFontSize100}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_fontSize100}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_fontSize100, width: 300, height: 150 }} />
-              </View>
-            </View>
-       
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_fontSize_30 "
-                  color="#9a73ef"
-                  onPress={markTextFontSize30}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_fontSize30}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_fontSize30, width: 300, height: 150 }} />
-              </View>
-            </View>
-      
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_color_red "
-                  color="#9a73ef"
-                  onPress={markTextColor2}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_color2}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_color2, width: 300, height: 150 }} />
-              </View>
-            </View>
-       
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_color_yellow "
-                  color="#9a73ef"
-                  onPress={markTextColor1}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_color1}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_color1, width: 300, height: 150 }} />
-              </View>
-            </View>
-       
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_test1 "
-                  color="#9a73ef"
-                  onPress={markTextText1}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_test1}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_test1, width: 300, height: 150 }} />
-              </View>
-            </View>
-    
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_test2 "
-                  color="#9a73ef"
-                  onPress={markTextText2}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_test2}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_test2, width: 300, height: 150 }} />
-              </View>
-            </View>
-  
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_backgroundStyle_padding_all1 "
-                  color="#9a73ef"
-                  onPress={markTextbackgroundstylePaddingAll1}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_backgroundstyle_padding_all1}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_all1, width: 300, height: 150 }} />
-              </View>
-            </View>
-       
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_backgroundStyle_padding_all2 "
-                  color="#9a73ef"
-                  onPress={markTextbackgroundstylePaddingAll2}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_backgroundstyle_padding_all2}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_all2, width: 300, height: 150 }} />
-              </View>
-            </View>
-      
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_backgroundStyle_padding_all3 "
-                  color="#9a73ef"
-                  onPress={markTextbackgroundstylePaddingAll3}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_backgroundstyle_padding_all3}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_all3, width: 300, height: 150 }} />
-              </View>
-            </View>
-     
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_backgroundStyle_padding_all4 "
-                  color="#9a73ef"
-                  onPress={markTextbackgroundstylePaddingAll4}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_backgroundstyle_padding_all4}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_all4, width: 300, height: 150 }} />
-              </View>
-            </View>
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="icon_topcenter "
+            color="#9a73ef"
+            onPress={markImagetopcenter}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_icon_topCenter}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_icon_topCenter, width: 300, height: 150 }} />
+        </View>
+      </View>
 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_backgroundStyle_padding_top "
-                  color="#9a73ef"
-                  onPress={markTextbackgroundstylePaddingTop}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_backgroundstyle_padding_top}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_top, width: 300, height: 150 }} />
-              </View>
-            </View>
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="icon_bottomleft "
+            color="#9a73ef"
+            onPress={markImagebottomleft}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_icon_bottomLeft}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_icon_bottomLeft, width: 300, height: 150 }} />
+        </View>
+      </View>
 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_backgroundStyle_padding_bottom "
-                  color="#9a73ef"
-                  onPress={markTextbackgroundstylePaddingBottom}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_backgroundstyle_padding_bottom}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_bottom, width: 300, height: 150 }} />
-              </View>
-            </View>
-  
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_backgroundStyle_padding_left "
-                  color="#9a73ef"
-                  onPress={markTextbackgroundstylePaddingLeft}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_backgroundstyle_padding_left}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_left, width: 300, height: 150 }} />
-              </View>
-            </View>
- 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_backgroundStyle_padding_right "
-                  color="#9a73ef"
-                  onPress={markTextbackgroundstylePaddingRight}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_backgroundstyle_padding_right}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_right, width: 300, height: 150 }} />
-              </View>
-            </View>
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="icon_bottomcenter "
+            color="#9a73ef"
+            onPress={markImagebottomcenter}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_icon_bottomCenter}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_icon_bottomCenter, width: 300, height: 150 }} />
+        </View>
+      </View>
 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_backgroundStyle_padding_horizontal "
-                  color="#9a73ef"
-                  onPress={markTextbackgroundstylePaddingHorizontal}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_backgroundstyle_padding_horizontal}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_horizontal, width: 300, height: 150 }} />
-              </View>
-            </View>
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="icon_bottomright "
+            color="#9a73ef"
+            onPress={markImagebottomright}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_icon_bottomRight}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_icon_bottomRight, width: 300, height: 150 }} />
+        </View>
+      </View>
 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_backgroundStyle_padding_vertical "
-                  color="#9a73ef"
-                  onPress={markTextbackgroundstylePaddingVertical}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_backgroundstyle_padding_vertical}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_vertical, width: 300, height: 150 }} />
-              </View>
-            </View>
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="icon_center "
+            color="#9a73ef"
+            onPress={markImagecenter}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_icon_center}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_icon_center, width: 300, height: 150 }} />
+        </View>
+      </View>
 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_backgroundStyle_padding_x "
-                  color="#9a73ef"
-                  onPress={markTextbackgroundstylePaddingX}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_backgroundstyle_padding_x}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_x, width: 300, height: 150 }} />
-              </View>
-            </View>
-  
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_backgroundStyle_padding_y "
-                  color="#9a73ef"
-                  onPress={markTextbackgroundstylePaddingY}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_backgroundstyle_padding_y}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_y, width: 300, height: 150 }} />
-              </View>
-            </View>
-       
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_backgroundStyle_cornerRadius_all "
-                  color="#9a73ef"
-                  onPress={markTextbackgroundstyleCornerRadiusAll}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_backgroundstyle_cornerRadius_all}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_cornerRadius_all, width: 300, height: 150 }} />
-              </View>
-            </View>
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="icon_xy "
+            color="#9a73ef"
+            onPress={markImagexy}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_icon_xy}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_icon_xy, width: 300, height: 150 }} />
+        </View>
+      </View>
 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_backgroundStyle_cornerRadius_topLeft "
-                  color="#9a73ef"
-                  onPress={markTextbackgroundstyleCornerRadiustopLeft}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_backgroundstyle_cornerRadius_topLeft}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_cornerRadius_topLeft, width: 300, height: 150 }} />
-              </View>
-            </View>
-       
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_backgroundStyle_cornerRadius_topRight "
-                  color="#9a73ef"
-                  onPress={markTextbackgroundstyleCornerRadiustopRight}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_backgroundstyle_cornerRadius_topRight}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_cornerRadius_topRight, width: 300, height: 150 }} />
-              </View>
-            </View>
-    
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_backgroundStyle_cornerRadius_bottomLeft "
-                  color="#9a73ef"
-                  onPress={markTextbackgroundstyleCornerRadiusbottomLeft}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_backgroundstyle_cornerRadius_bottomLeft}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_cornerRadius_bottomLeft, width: 300, height: 150 }} />
-              </View>
-            </View>
-   
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_backgroundStyle_cornerRadius_bottomRight "
-                  color="#9a73ef"
-                  onPress={markTextbackgroundstyleCornerRadiusbottomRight}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_backgroundstyle_cornerRadius_bottomRight}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_cornerRadius_bottomRight, width: 300, height: 150 }} />
-              </View>
-            </View>
-  
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_backgroundStyle_type_stretchX "
-                  color="#9a73ef"
-                  onPress={markTextbackgroundstyleTypeStretchX}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_backgroundstyle_type_stretchX}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_type_stretchX, width: 300, height: 150 }} />
-              </View>
-            </View>
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="icon_xypercent "
+            color="#9a73ef"
+            onPress={markImagexppercentt}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_icon_xypercent}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_icon_xypercent, width: 300, height: 150 }} />
+        </View>
+      </View>
 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_backgroundStyle_type_stretchY "
-                  color="#9a73ef"
-                  onPress={markTextbackgroundstyleTypeStretchY}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_backgroundstyle_type_stretchY}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_type_stretchY, width: 300, height: 150 }} />
-              </View>
-            </View>
-   
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_backgroundStyle_color_green "
-                  color="#9a73ef"
-                  onPress={markTextbackgroundstyleColorGreen}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_backgroundstyle_color_green}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_color_green, width: 300, height: 150 }} />
-              </View>
-            </View>
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="back_alpha0_1 "
+            color="#9a73ef"
+            onPress={markImagebackalpha0_1}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_backalpha0_1}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_backalpha0_1, width: 300, height: 150 }} />
+        </View>
+      </View>
 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_backgroundStyle_color_red "
-                  color="#9a73ef"
-                  onPress={markTextbackgroundstyleColorRed}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_backgroundstyle_color_red}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_color_red, width: 300, height: 150 }} />
-              </View>
-            </View>
-  
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_shadowStyle1 "
-                  color="#9a73ef"
-                  onPress={markTextShadowStyle1}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_shadowStyle1}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_shadowStyle1, width: 300, height: 150 }} />
-              </View>
-            </View>
-  
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_shadowStyle2 "
-                  color="#9a73ef"
-                  onPress={markTextShadowStyle2}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_shadowStyle2}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_shadowStyle2, width: 300, height: 150 }} />
-              </View>
-            </View>
-      
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_bold "
-                  color="#9a73ef"
-                  onPress={markTextFontBold}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_bold}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_bold, width: 300, height: 150 }} />
-              </View>
-            </View>
-   
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_rotate30 "
-                  color="#9a73ef"
-                  onPress={markTextRotate30}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_rotate30}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_rotate30, width: 300, height: 150 }} />
-              </View>
-            </View>
-    
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_rotate50 "
-                  color="#9a73ef"
-                  onPress={markTextRotate50}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_rotate50}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_rotate50, width: 300, height: 150 }} />
-              </View>
-            </View>
-  
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_underline "
-                  color="#9a73ef"
-                  onPress={markTextUnderline}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_underline}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_underline, width: 300, height: 150 }} />
-              </View>
-            </View>
-    
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_strikeThrough "
-                  color="#9a73ef"
-                  onPress={markTextFontStrikeThrough}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_strikeThrough}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_strikeThrough, width: 300, height: 150 }} />
-              </View>
-            </View>
-      
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_topleft "
-                  color="#9a73ef"
-                  onPress={markTexttopleft}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_topLeft}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_topLeft, width: 300, height: 150 }} />
-              </View>
-            </View>
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="back_alpha1"
+            color="#9a73ef"
+            onPress={markImagebackalpha1}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_backalpha1}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_backalpha1, width: 300, height: 150 }} />
+        </View>
+      </View>
 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_topright "
-                  color="#9a73ef"
-                  onPress={markTexttopright}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_topRight}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_topRight, width: 300, height: 150 }} />
-              </View>
-            </View>
- 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_topcenter "
-                  color="#9a73ef"
-                  onPress={markTexttopcenter}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_topCenter}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_topCenter, width: 300, height: 150 }} />
-              </View>
-            </View>
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="icon_alpha0_1 "
+            color="#9a73ef"
+            onPress={markImagealpha0_1}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_alpha0_1}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_alpha0_1, width: 300, height: 150 }} />
+        </View>
+      </View>
 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_bottomleft "
-                  color="#9a73ef"
-                  onPress={markTextbottomleft}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_bottomLeft}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_bottomLeft, width: 300, height: 150 }} />
-              </View>
-            </View>
-       
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_bottomcenter "
-                  color="#9a73ef"
-                  onPress={markTextbottomcenter}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_bottomCenter}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_bottomCenter, width: 300, height: 150 }} />
-              </View>
-            </View>
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="icon_alpha1"
+            color="#9a73ef"
+            onPress={markImagealpha1}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_alpha1}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_alpha1, width: 300, height: 150 }} />
+        </View>
+      </View>
 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_bottomright "
-                  color="#9a73ef"
-                  onPress={markTextbottomright}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_bottomRight}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_bottomRight, width: 300, height: 150 }} />
-              </View>
-            </View>
-  
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_center "
-                  color="#9a73ef"
-                  onPress={markTextcenter}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_center}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_center, width: 300, height: 150 }} />
-              </View>
-            </View>
- 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_xy "
-                  color="#9a73ef"
-                  onPress={markTextxy}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_xy}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_xy, width: 300, height: 150 }} />
-              </View>
-            </View>
-  
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="text_xypercent "
-                  color="#9a73ef"
-                  onPress={markTextxppercentt}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_text_xypercent}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_text_xypercent, width: 300, height: 150 }} />
-              </View>
-            </View>
- 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="back_alpha0_1 "
-                  color="#9a73ef"
-                  onPress={markTextbackalpha0_1}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_backalpha0_1_text}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_backalpha0_1_text, width: 300, height: 150 }} />
-              </View>
-            </View>
-   
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="back_alpha1"
-                  color="#9a73ef"
-                  onPress={markTextbackalpha1}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_backalpha1_text}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_backalpha1_text, width: 300, height: 150 }} />
-              </View>
-            </View>
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="back_scale0_5 "
+            color="#9a73ef"
+            onPress={markImagebackscale0_5}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_backscale0_5}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_backscale0_5, width: 300, height: 150 }} />
+        </View>
+      </View>
 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="back_scale0_5 "
-                  color="#9a73ef"
-                  onPress={markTextbackscale0_5}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_backscale0_5_text}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_backscale0_5_text, width: 300, height: 150 }} />
-              </View>
-            </View>
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="back_scale1_5"
+            color="#9a73ef"
+            onPress={markImagebackscale1_5}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_backscale1_5}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_backscale1_5, width: 300, height: 150 }} />
+        </View>
+      </View>
 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="back_scale1_5"
-                  color="#9a73ef"
-                  onPress={markTextbackscale1_5}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_backscale1_5_text}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_backscale1_5_text, width: 300, height: 150 }} />
-              </View>
-            </View>
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="icon_scale0_5 "
+            color="#9a73ef"
+            onPress={markImagescale0_5}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_scale0_5}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_scale0_5, width: 300, height: 150 }} />
+        </View>
+      </View>
 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="back_rotate_50 "
-                  color="#9a73ef"
-                  onPress={markTextbackrotate_50}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_backrotate50_text}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_backrotate50_text, width: 300, height: 150 }} />
-              </View>
-            </View>
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="icon_scale1_5"
+            color="#9a73ef"
+            onPress={markImagescale1_5}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_scale1_5}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_scale1_5, width: 300, height: 150 }} />
+        </View>
+      </View>
 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="back_rotate_20"
-                  color="#9a73ef"
-                  onPress={markTextbackrotate_20}
-                />
-                <Text style={styles.sectionTitle}>
-                  {url_backrotate20_text}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: url_backrotate20_text, width: 300, height: 150 }} />
-              </View>
-            </View>
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="back_rotate_50 "
+            color="#9a73ef"
+            onPress={markImagebackrotate_50}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_backrotate50}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_backrotate50, width: 300, height: 150 }} />
+        </View>
+      </View>
 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="qualityurl_100 "
-                  color="#9a73ef"
-                  onPress={markTextqualityurl_100}
-                />
-                <Text style={styles.sectionTitle}>
-                  {textqualityurl_100}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: textqualityurl_100, width: 300, height: 150 }} />
-              </View>
-            </View>
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="back_rotate_20"
+            color="#9a73ef"
+            onPress={markImagebackrotate_20}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_backrotate20}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_backrotate20, width: 300, height: 150 }} />
+        </View>
+      </View>
 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="qualityurl_20"
-                  color="#9a73ef"
-                  onPress={markTextqualityurl_20}
-                />
-                <Text style={styles.sectionTitle}>
-                  {textqualityurl_20}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: textqualityurl_20, width: 300, height: 150 }} />
-              </View>
-            </View>
-    
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="filename test1"
-                  color="#9a73ef"
-                  onPress={markTextFilename1}
-                />
-                <Text style={styles.sectionTitle}>
-                  {textfile1url}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: textfile1url, width: 300, height: 150 }} />
-              </View>
-            </View>
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="icon_rotate_50 "
+            color="#9a73ef"
+            onPress={markImagerotate_50}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_rotate50}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_rotate50, width: 300, height: 150 }} />
+        </View>
+      </View>
 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="filename test2"
-                  color="#9a73ef"
-                  onPress={markTextFilename2}
-                />
-                <Text style={styles.sectionTitle}>
-                  {textfile2url}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: textfile2url, width: 300, height: 150 }} />
-              </View>
-            </View>
- 
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="filetype png"
-                  color="#9a73ef"
-                  onPress={markTextFiletypepng}
-                />
-                <Text style={styles.sectionTitle}>
-                  {textfiletypeurl_png}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: textfiletypeurl_png, width: 300, height: 150 }} />
-              </View>
-            </View>
-     
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="file type jpg"
-                  color="#9a73ef"
-                  onPress={markTextFiletypejpg}
-                />
-                <Text style={styles.sectionTitle}>
-                  {textfiletypeurl_jpg}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: textfiletypeurl_jpg, width: 300, height: 150 }} />
-              </View>
-            </View>
-        
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>
-                  {"image marker"}
-                </Text>
-                <Button
-                  title="file type base64"
-                  color="#9a73ef"
-                  onPress={markTextFiletypebase64}
-                />
-                <Text style={styles.sectionTitle} ellipsizeMode="tail"
-                  numberOfLines={1}>
-                  {textfiletypeurl_base64}
-                </Text>
-                <Image resizeMode='contain' source={{ uri: textfiletypeurl_base64, width: 300, height: 150 }} />
-              </View>
-            </View>
-      
-      </ScrollView>
-    );
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="icon_rotate_20"
+            color="#9a73ef"
+            onPress={markImagerotate_20}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_rotate20}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_rotate20, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="qualityurl_100 "
+            color="#9a73ef"
+            onPress={markImagequalityurl_100}
+          />
+          <Text style={styles.sectionTitle}>
+            {qualityurl_100}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: qualityurl_100, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="qualityurl_20"
+            color="#9a73ef"
+            onPress={markImagequalityurl_20}
+          />
+          <Text style={styles.sectionTitle}>
+            {qualityurl_20}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: qualityurl_20, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="filename test1"
+            color="#9a73ef"
+            onPress={markImageFilename1}
+          />
+          <Text style={styles.sectionTitle}>
+            {file1url}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: file1url, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="filename test2"
+            color="#9a73ef"
+            onPress={markImageFilename2}
+          />
+          <Text style={styles.sectionTitle}>
+            {file2url}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: file2url, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="filetype png"
+            color="#9a73ef"
+            onPress={markImageFiletypepng}
+          />
+          <Text style={styles.sectionTitle}>
+            {filetypeurl_png}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: filetypeurl_png, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="file type jpg"
+            color="#9a73ef"
+            onPress={markImageFiletypejpg}
+          />
+          <Text style={styles.sectionTitle}>
+            {filetypeurl_jpg}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: filetypeurl_jpg, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="file type base64"
+            color="#9a73ef"
+            onPress={markImageFiletypebase64}
+          />
+          <Text style={styles.sectionTitle} ellipsizeMode="tail"
+            numberOfLines={1}>
+            {filetypeurl_base64}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: filetypeurl_base64, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_fontName"
+            color="#9a73ef"
+            onPress={markTextFontName}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_fontName}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_fontName, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_textalain_left "
+            color="#9a73ef"
+            onPress={markTextTextAlainLeft}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_textalain_left}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_textalain_left, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_textalain_center "
+            color="#9a73ef"
+            onPress={markTextTextAlainCenter}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_textalain_center}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_textalain_center, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_textalain_right "
+            color="#9a73ef"
+            onPress={markTextTextAlainRight}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_textalain_right}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_textalain_right, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_skewX "
+            color="#9a73ef"
+            onPress={markTextskewX}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_skewX}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_skewX, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_italic "
+            color="#9a73ef"
+            onPress={markTextFontItalic}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_italic}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_italic, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_fontSize_100 "
+            color="#9a73ef"
+            onPress={markTextFontSize100}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_fontSize100}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_fontSize100, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_fontSize_30 "
+            color="#9a73ef"
+            onPress={markTextFontSize30}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_fontSize30}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_fontSize30, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_color_red "
+            color="#9a73ef"
+            onPress={markTextColor2}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_color2}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_color2, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_color_yellow "
+            color="#9a73ef"
+            onPress={markTextColor1}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_color1}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_color1, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_test1 "
+            color="#9a73ef"
+            onPress={markTextText1}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_test1}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_test1, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_test2 "
+            color="#9a73ef"
+            onPress={markTextText2}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_test2}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_test2, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_backgroundStyle_padding_all1 "
+            color="#9a73ef"
+            onPress={markTextbackgroundstylePaddingAll1}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_backgroundstyle_padding_all1}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_all1, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_backgroundStyle_padding_all2 "
+            color="#9a73ef"
+            onPress={markTextbackgroundstylePaddingAll2}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_backgroundstyle_padding_all2}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_all2, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_backgroundStyle_padding_all3 "
+            color="#9a73ef"
+            onPress={markTextbackgroundstylePaddingAll3}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_backgroundstyle_padding_all3}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_all3, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_backgroundStyle_padding_all4 "
+            color="#9a73ef"
+            onPress={markTextbackgroundstylePaddingAll4}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_backgroundstyle_padding_all4}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_all4, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_backgroundStyle_padding_top "
+            color="#9a73ef"
+            onPress={markTextbackgroundstylePaddingTop}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_backgroundstyle_padding_top}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_top, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_backgroundStyle_padding_bottom "
+            color="#9a73ef"
+            onPress={markTextbackgroundstylePaddingBottom}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_backgroundstyle_padding_bottom}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_bottom, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_backgroundStyle_padding_left "
+            color="#9a73ef"
+            onPress={markTextbackgroundstylePaddingLeft}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_backgroundstyle_padding_left}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_left, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_backgroundStyle_padding_right "
+            color="#9a73ef"
+            onPress={markTextbackgroundstylePaddingRight}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_backgroundstyle_padding_right}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_right, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_backgroundStyle_padding_horizontal "
+            color="#9a73ef"
+            onPress={markTextbackgroundstylePaddingHorizontal}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_backgroundstyle_padding_horizontal}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_horizontal, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_backgroundStyle_padding_vertical "
+            color="#9a73ef"
+            onPress={markTextbackgroundstylePaddingVertical}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_backgroundstyle_padding_vertical}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_vertical, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_backgroundStyle_padding_x "
+            color="#9a73ef"
+            onPress={markTextbackgroundstylePaddingX}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_backgroundstyle_padding_x}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_x, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_backgroundStyle_padding_y "
+            color="#9a73ef"
+            onPress={markTextbackgroundstylePaddingY}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_backgroundstyle_padding_y}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_padding_y, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_backgroundStyle_cornerRadius_all "
+            color="#9a73ef"
+            onPress={markTextbackgroundstyleCornerRadiusAll}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_backgroundstyle_cornerRadius_all}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_cornerRadius_all, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_backgroundStyle_cornerRadius_topLeft "
+            color="#9a73ef"
+            onPress={markTextbackgroundstyleCornerRadiustopLeft}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_backgroundstyle_cornerRadius_topLeft}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_cornerRadius_topLeft, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_backgroundStyle_cornerRadius_topRight "
+            color="#9a73ef"
+            onPress={markTextbackgroundstyleCornerRadiustopRight}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_backgroundstyle_cornerRadius_topRight}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_cornerRadius_topRight, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_backgroundStyle_cornerRadius_bottomLeft "
+            color="#9a73ef"
+            onPress={markTextbackgroundstyleCornerRadiusbottomLeft}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_backgroundstyle_cornerRadius_bottomLeft}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_cornerRadius_bottomLeft, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_backgroundStyle_cornerRadius_bottomRight "
+            color="#9a73ef"
+            onPress={markTextbackgroundstyleCornerRadiusbottomRight}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_backgroundstyle_cornerRadius_bottomRight}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_cornerRadius_bottomRight, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_backgroundStyle_type_stretchX "
+            color="#9a73ef"
+            onPress={markTextbackgroundstyleTypeStretchX}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_backgroundstyle_type_stretchX}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_type_stretchX, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_backgroundStyle_type_stretchY "
+            color="#9a73ef"
+            onPress={markTextbackgroundstyleTypeStretchY}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_backgroundstyle_type_stretchY}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_type_stretchY, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_backgroundStyle_color_green "
+            color="#9a73ef"
+            onPress={markTextbackgroundstyleColorGreen}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_backgroundstyle_color_green}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_color_green, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_backgroundStyle_color_red "
+            color="#9a73ef"
+            onPress={markTextbackgroundstyleColorRed}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_backgroundstyle_color_red}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_backgroundstyle_color_red, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_shadowStyle1 "
+            color="#9a73ef"
+            onPress={markTextShadowStyle1}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_shadowStyle1}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_shadowStyle1, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_shadowStyle2 "
+            color="#9a73ef"
+            onPress={markTextShadowStyle2}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_shadowStyle2}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_shadowStyle2, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_bold "
+            color="#9a73ef"
+            onPress={markTextFontBold}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_bold}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_bold, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_rotate30 "
+            color="#9a73ef"
+            onPress={markTextRotate30}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_rotate30}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_rotate30, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_rotate50 "
+            color="#9a73ef"
+            onPress={markTextRotate50}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_rotate50}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_rotate50, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_underline "
+            color="#9a73ef"
+            onPress={markTextUnderline}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_underline}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_underline, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_strikeThrough "
+            color="#9a73ef"
+            onPress={markTextFontStrikeThrough}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_strikeThrough}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_strikeThrough, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_topleft "
+            color="#9a73ef"
+            onPress={markTexttopleft}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_topLeft}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_topLeft, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_topright "
+            color="#9a73ef"
+            onPress={markTexttopright}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_topRight}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_topRight, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_topcenter "
+            color="#9a73ef"
+            onPress={markTexttopcenter}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_topCenter}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_topCenter, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_bottomleft "
+            color="#9a73ef"
+            onPress={markTextbottomleft}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_bottomLeft}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_bottomLeft, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_bottomcenter "
+            color="#9a73ef"
+            onPress={markTextbottomcenter}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_bottomCenter}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_bottomCenter, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_bottomright "
+            color="#9a73ef"
+            onPress={markTextbottomright}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_bottomRight}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_bottomRight, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_center "
+            color="#9a73ef"
+            onPress={markTextcenter}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_center}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_center, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_xy "
+            color="#9a73ef"
+            onPress={markTextxy}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_xy}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_xy, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="text_xypercent "
+            color="#9a73ef"
+            onPress={markTextxppercentt}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_text_xypercent}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_text_xypercent, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="back_alpha0_1 "
+            color="#9a73ef"
+            onPress={markTextbackalpha0_1}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_backalpha0_1_text}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_backalpha0_1_text, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="back_alpha1"
+            color="#9a73ef"
+            onPress={markTextbackalpha1}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_backalpha1_text}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_backalpha1_text, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="back_scale0_5 "
+            color="#9a73ef"
+            onPress={markTextbackscale0_5}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_backscale0_5_text}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_backscale0_5_text, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="back_scale1_5"
+            color="#9a73ef"
+            onPress={markTextbackscale1_5}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_backscale1_5_text}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_backscale1_5_text, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="back_rotate_50 "
+            color="#9a73ef"
+            onPress={markTextbackrotate_50}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_backrotate50_text}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_backrotate50_text, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="back_rotate_20"
+            color="#9a73ef"
+            onPress={markTextbackrotate_20}
+          />
+          <Text style={styles.sectionTitle}>
+            {url_backrotate20_text}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: url_backrotate20_text, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="qualityurl_100 "
+            color="#9a73ef"
+            onPress={markTextqualityurl_100}
+          />
+          <Text style={styles.sectionTitle}>
+            {textqualityurl_100}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: textqualityurl_100, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="qualityurl_20"
+            color="#9a73ef"
+            onPress={markTextqualityurl_20}
+          />
+          <Text style={styles.sectionTitle}>
+            {textqualityurl_20}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: textqualityurl_20, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="filename test1"
+            color="#9a73ef"
+            onPress={markTextFilename1}
+          />
+          <Text style={styles.sectionTitle}>
+            {textfile1url}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: textfile1url, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="filename test2"
+            color="#9a73ef"
+            onPress={markTextFilename2}
+          />
+          <Text style={styles.sectionTitle}>
+            {textfile2url}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: textfile2url, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="filetype png"
+            color="#9a73ef"
+            onPress={markTextFiletypepng}
+          />
+          <Text style={styles.sectionTitle}>
+            {textfiletypeurl_png}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: textfiletypeurl_png, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="file type jpg"
+            color="#9a73ef"
+            onPress={markTextFiletypejpg}
+          />
+          <Text style={styles.sectionTitle}>
+            {textfiletypeurl_jpg}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: textfiletypeurl_jpg, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+      <View style={styles.body}>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>
+            {"image marker"}
+          </Text>
+          <Button
+            title="file type base64"
+            color="#9a73ef"
+            onPress={markTextFiletypebase64}
+          />
+          <Text style={styles.sectionTitle} ellipsizeMode="tail"
+            numberOfLines={1}>
+            {textfiletypeurl_base64}
+          </Text>
+          <Image resizeMode='contain' source={{ uri: textfiletypeurl_base64, width: 300, height: 150 }} />
+        </View>
+      </View>
+
+    </ScrollView>
+  );
 }
 const styles = StyleSheet.create({
   body: {
