@@ -44,55 +44,57 @@ import CheckboxTest from './CheckboxTest';
 import ToastTest from './ToastTest';
 import LocaleProviderTest from './LocaleProviderTest';
 import { NavigationContainer, Page } from '../../components';
+import { Tester } from '@rnoh/testerino';
 
 export function AntDesignMobile() {
   return (
     <NavigationContainer>
       <ScrollView nestedScrollEnabled={true}>
-        <Page name='ButtonAntTest'><ButtonAntTest /></Page>
-        <Page name='AccordionTest'><AccordionTest /></Page>
-        <Page name='ActionSheetTest'><ActionSheetTest /></Page>
-        <Page name='CardTest'><CardTest /></Page>
-        <Page name='ListTest'><ListTest /></Page>
-        <Page name='ResultTest'><ResultTest /></Page>
-        <Page name='ToastTest'><ToastTest /></Page>
-        <Page name='ActivityIndicatorTest'><ActivityIndicatorTest /></Page>
-        <Page name='BadgeTest'><BadgeTest /></Page>
-        <Page name='TabBarTest'><TabBarTest /></Page>
-        <Page name='SearchBarTest'><SearchBarTest /></Page>
-        <Page name='NoticeBarTest'><NoticeBarTest /></Page>
-        <Page name='WingBlankTest'><WingBlankTest /></Page>
-        <Page name='WhiteSpaceTest'><WhiteSpaceTest /></Page>
-        <Page name='ViewTest'><ViewTest /></Page>
-        <Page name='GridTest'><GridTest /></Page>
-        <Page name='FlexTest'><FlexTest /></Page>
-        <Page name='TextareaItemTest'><TextareaItemTest /></Page>
-        <Page name='TagsTest'><TagsTest /></Page>
-        <Page name='SwitchTest'><SwitchTest /></Page>
-        <Page name='StepperTest'><StepperTest /></Page>
-        <Page name='RadioTest'><RadioTest /></Page>
-        <Page name='PaginationTest'><PaginationTest /></Page>
-        <Page name='ProgressTest'><ProgressTest /></Page>
-        <Page name='InputItemTest'><InputItemTest /></Page>
-        <Page name='CheckboxTest'><CheckboxTest /></Page>
-        <Page name='StepsTest'><StepsTest /></Page>
-        <Page name='CarouselTest'><CarouselTest /></Page>
-        <Page name='PortalTest'><PortalTest /></Page>
-        <Page name='LocaleProviderTest'><LocaleProviderTest /></Page>
-        <Page name='DatePickerViewTest'><DatePickerViewTest /></Page>
-        <Page name='IconAntTest'><IconAntTest /></Page>
-        <Page name='SegmentedControlTest'><SegmentedControlTest /></Page>
-        <Page name='DatePickerTest'><DatePickerTest /></Page>
-        <Page name='PickerTest'><PickerTest /></Page>
-        <Page name='PickerViewTest'><PickerViewTest /></Page>
-        <Page name='TabsTest'><TabsTest /></Page>
-        <Page name='ModalTest'><ModalTest /></Page>
-        <Page name='SliderAntTest'><SliderAntTest /></Page>
-        <Page name='ListViewTest'><ListViewTest /></Page>
-        <Page name='PopoverTest'><PopoverTest /></Page>
-
-        <Page name='SwipeActionTest'><SwipeActionTest /></Page>
-        <Page name='DrawerTest'><DrawerTest /></Page>
+        <Tester style={{ flex: 1 }}>
+          <Page name='ButtonAntTest'><ButtonAntTest /></Page>
+          <Page name='AccordionTest'><AccordionTest /></Page>
+          <Page name='ActionSheetTest'><ActionSheetTest /></Page>
+          <Page name='CardTest'><CardTest /></Page>
+          <Page name='ListTest'><ListTest /></Page>
+          <Page name='ResultTest'><ResultTest /></Page>
+          <Page name='ToastTest'><ToastTest /></Page>
+          <Page name='ActivityIndicatorTest'><ActivityIndicatorTest /></Page>
+          <Page name='BadgeTest'><BadgeTest /></Page>
+          <Page name='TabBarTest'><TabBarTest /></Page>
+          <Page name='SearchBarTest'><SearchBarTest /></Page>
+          <Page name='NoticeBarTest'><NoticeBarTest /></Page>
+          <Page name='WingBlankTest'><WingBlankTest /></Page>
+          <Page name='WhiteSpaceTest'><WhiteSpaceTest /></Page>
+          <Page name='ViewTest'><ViewTest /></Page>
+          <Page name='GridTest'><GridTest /></Page>
+          <Page name='FlexTest'><FlexTest /></Page>
+          <Page name='TextareaItemTest'><TextareaItemTest /></Page>
+          <Page name='TagsTest'><TagsTest /></Page>
+          <Page name='SwitchTest'><SwitchTest /></Page>
+          <Page name='StepperTest'><StepperTest /></Page>
+          <Page name='RadioTest'><RadioTest /></Page>
+          <Page name='PaginationTest'><PaginationTest /></Page>
+          <Page name='ProgressTest'><ProgressTest /></Page>
+          <Page name='InputItemTest'><InputItemTest /></Page>
+          <Page name='CheckboxTest'><CheckboxTest /></Page>
+          <Page name='StepsTest'><StepsTest /></Page>
+          <Page name='CarouselTest'><CarouselTest /></Page>
+          <Page name='PortalTest'><PortalTest /></Page>
+          <Page name='LocaleProviderTest'><LocaleProviderTest /></Page>
+          <Page name='DatePickerViewTest'><DatePickerViewTest /></Page>
+          <Page name='IconAntTest'><IconAntTest /></Page>
+          <Page name='SegmentedControlTest'><SegmentedControlTest /></Page>
+          <Page name='DatePickerTest'><DatePickerTest /></Page>
+          <Page name='PickerTest'><PickerTest /></Page>
+          <Page name='PickerViewTest'><PickerViewTest /></Page>
+          <Page name='TabsTest'><TabsTest /></Page>
+          <Page name='ModalTest'><ModalTest /></Page>
+          <Page name='SliderAntTest'><SliderAntTest /></Page>
+          <Page name='ListViewTest'><ListViewTest /></Page>
+          <Page name='PopoverTest'><PopoverTest /></Page>
+          <Page name='SwipeActionTest'><SwipeActionTest /></Page>
+          <Page name='DrawerTest'><DrawerTest /></Page>
+        </Tester>
       </ScrollView>
     </NavigationContainer>
   )
