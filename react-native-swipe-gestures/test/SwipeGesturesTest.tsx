@@ -5,11 +5,96 @@
  * @format
  */
 
-import React, { Component } from 'react';
-import { View, Text, StatusBar, SafeAreaView, Button } from 'react-native';
+import React, { Component, useEffect } from 'react';
+import { View, Text, StatusBar, SafeAreaView, Button, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
 import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
-import { NavigationContainer, Page } from '../components/Navigation';
+
+const NavigationContext = React.createContext<
+    | {
+        currentPageName: string;
+        navigateTo: (pageName: string) => void;
+        registerPageName: (pageName: string) => void;
+        registeredPageNames: string[];
+    }
+    | undefined
+>(undefined);
+
+export function NavigationContainer({
+    initialPage = 'test function',
+    children,
+}: {
+    initialPage?: string;
+    children: any;
+}) {
+    const [currentPageName, setCurrentPageName] = React.useState(initialPage);
+    const [registeredPageNames, setRegisteredPageNames] = React.useState<string[]>([]);
+
+    return (
+        <NavigationContext.Provider
+            value={{
+                currentPageName,
+                navigateTo: setCurrentPageName,
+                registerPageName: (pageName: string) => {
+                    setRegisteredPageNames(pageNames => {
+                        if (pageNames.includes(pageName)) {
+                            return pageNames;
+                        }
+                        return [...pageNames, pageName];
+                    });
+                },
+                registeredPageNames,
+            }}>
+            <Page name='test function' toName='test attribute'>
+                <SwipeGesturesFunction></SwipeGesturesFunction>
+            </Page>
+            {children}
+        </NavigationContext.Provider>
+    );
+}
+
+export function useNavigation() {
+    return React.useContext(NavigationContext)!;
+}
+
+export function Page({ name, toName, children }: { name: string; toName: string; children: any }) {
+    const { currentPageName, navigateTo, registerPageName } = useNavigation();
+
+    useEffect(() => {
+        if (name !== 'test function') {
+            registerPageName(name);
+        }
+    }, [name]);
+
+    return name === currentPageName ? (
+        <View style={{ width: '100%', height: '100%' }}>
+            {(
+                <TouchableOpacity
+                    onPress={() => {
+                        navigateTo(toName);
+                    }}>
+                    <Text style={styles.buttonText}>{toName}</Text>
+                </TouchableOpacity>
+            )}
+            {children}
+        </View>
+    ) : null;
+}
+
+const styles = StyleSheet.create({
+    container: {
+        width: '100%',
+        height: '100%',
+        backgroundColor: '#333',
+    },
+    buttonText: {
+        width: '100%',
+        fontWeight: 'bold',
+        paddingHorizontal: 16,
+        paddingVertical: 10,
+        color: 'blue',
+    },
+});
 
 class SwipeGesturesFunction extends Component {
     constructor(props) {
@@ -73,13 +158,12 @@ class SwipeGesturesFunction extends Component {
 
     render() {
         const config = {
-            velocityThreshold: 0.01,
-            directionalOffsetThreshold: 80
+            velocityThreshold: 0.3,
+            directionalOffsetThreshold: 80,
+            gestureIsClickThreshold: 5
         };
-
         return (
             <Tester>
-
                 <TestSuite name='slip up/down/left/right'>
                     <TestCase itShould='test onSwipe function'>
                         <GestureRecognizer
@@ -245,6 +329,7 @@ class SwipeGesturesAttribute extends Component {
         }
     }
     render() {
+
         return (
             <Tester>
                 <SwipeComponent config={this.state.config} />
@@ -327,14 +412,9 @@ function SwipeGesturesTest() {
             <StatusBar barStyle="light-content" />
             <SafeAreaView>
                 <NavigationContainer>
-                    <Page name='test function'>
-                        <SwipeGesturesFunction></SwipeGesturesFunction>
-                    </Page>
-
-                    <Page name='tets attribute'>
+                    <Page name='test attribute' toName='test function'>
                         <SwipeGesturesAttribute></SwipeGesturesAttribute>
                     </Page>
-
                 </NavigationContainer>
             </SafeAreaView>
         </View>
