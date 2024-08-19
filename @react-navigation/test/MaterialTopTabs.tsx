@@ -354,17 +354,17 @@ export const MaterialTopTabsExample = () => {
   const ViewStyle = [
 
     {
-      title: '{borderColor:pink,borderWidth:3}',
+      title: '{borderColor:pink,borderWidth:2}',
       value: {
         borderColor: 'pink',
-        borderWidth: 3
+        borderWidth: 2
       }
     },
     {
-      title: '{borderColor:red,borderWidth:10}',
+      title: '{borderColor:red,borderWidth:5}',
       value: {
         borderColor: 'red',
-        borderWidth: 10
+        borderWidth: 5
       }
     },
     {
@@ -566,7 +566,7 @@ export const MaterialTopTabsExample = () => {
             title: '{padding:10,backgroundColor:pink}',
             value: {
               padding: 10,
-              backgroundColor: 'green'
+              backgroundColor: 'pink'
             }
           },
           ...ViewStyle]
@@ -778,8 +778,8 @@ export const MaterialTopTabsExample = () => {
         extraOptions: {
           tabBarShowIcon: true,
           tabBarIcon: () => {
-            return <View>
-              <Text>
+            return <View style={{ width: 50, height: 50 }}>
+              <Text style={{ fontSize: 12 }}>
                 ico
               </Text>
             </View>
@@ -856,7 +856,7 @@ export const MaterialTopTabsExample = () => {
       },
       tabBarStyle: {
         type: 'screenOptions',
-        description: 'tabBar样式，加粉色背景',
+        description: 'tabBar样式',
         value: {
           title: 'backgroundColor:red',
           value: {
@@ -999,11 +999,7 @@ export const MaterialTopTabsExample = () => {
                   </TestCase>
                 </TestSuite>
               } else if (type === 'preview') {
-
                 let { screenOptions = {}, ...rest } = props || {}
-
-                console.log('props', JSON.stringify(props))
-
                 initOptions = {
                   screenOptions: {
                     ...initOptions.screenOptions,
@@ -1011,8 +1007,6 @@ export const MaterialTopTabsExample = () => {
                   },
                   ...rest
                 }
-
-
                 return <TestSuite name={title} key={title}>
                   <TestCase itShould={description} tags={['C_API']}>
                     <View style={styles.container}>
