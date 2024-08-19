@@ -59,7 +59,7 @@ export const TabViewExamples = () => {
             borderRadius: 2,
             flexWrap: 'wrap',
             flexDirection: 'row',
-            gap:10,
+            gap: 10,
           }}>
             {
               list.map((key: any, index: number) => {
@@ -99,7 +99,7 @@ export const TabViewExamples = () => {
 
 
   const FirstRoute = () => (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#ff4081' }} >
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
       <Text>FirstRoute</Text>
     </View>
   );
@@ -109,7 +109,7 @@ export const TabViewExamples = () => {
     const [state, setState] = useState('');
 
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#673ab7' }}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>SecondRoute</Text>
         <Text>{'State: ' + state}</Text>
         <TextInput style={styles.textInput} onChangeText={state => setState(state)}
@@ -119,7 +119,7 @@ export const TabViewExamples = () => {
   };
 
   const ThirdRoute = () => (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'orange' }} >
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
       <Text>ThirdRoute</Text>
     </View>
   );
@@ -471,48 +471,47 @@ export const TabViewExamples = () => {
       sceneContainerStyle: {
         description: '页面容器的样式',
         value: {
-          title: 'padding:20,backgroundColor:red',
+          title: 'backgroundColor:red',
           value: {
-            padding: 20,
             backgroundColor: 'red',
           }
         },
         valueList: [
           {
-            title: '{padding:20,backgroundColor:green}',
+            title: '{backgroundColor:green}',
             value: {
-              padding: 20,
               backgroundColor: 'green'
             }
           },
           {
-            title: '{padding:20,backgroundColor:pink}',
+            title: '{backgroundColor:pink}',
             value: {
-              padding: 20,
               backgroundColor: 'pink'
             }
           },
           ...ViewStyle]
       },
       pagerStyle: {
-        description: '页面里pagerView的样式,加个半透明效果',
+        description: '页面里pagerView的样式',
         value: {
-          title: ' margin: 20,',
+          title: 'margin: 20',
           value: {
             margin: 20,
           }
         },
         valueList: [
           {
-            title: '{ margin: 40}',
+            title: '{backgroundColor:red,margin: 40}',
             value: {
+              backgroundColor: 'red',
               margin: 40,
             }
           },
           {
-            title: '{ margin: 10}',
+            title: '{ backgroundColor:green,margin: 10}',
             value: {
-              margin: 40,
+              backgroundColor: 'green',
+              margin: 10,
             }
           },
           ...ViewStyle]
@@ -520,9 +519,8 @@ export const TabViewExamples = () => {
       style: {
         description: 'tabView的样式',
         value: {
-          title: 'padding:20,backgroundColor:red',
+          title: 'backgroundColor:red',
           value: {
-            padding: 20,
             backgroundColor: 'red',
           }
         },
@@ -535,9 +533,9 @@ export const TabViewExamples = () => {
             }
           },
           {
-            title: '{padding:20,backgroundColor:pink}',
+            title: '{padding:10,backgroundColor:pink}',
             value: {
-              padding: 20,
+              padding: 10,
               backgroundColor: 'pink'
             }
           },
@@ -807,7 +805,7 @@ export const TabViewExamples = () => {
           ...ViewStyle]
       },
       labelStyle: {
-        description: '标签样式,设置一个倾斜字体',
+        description: '标签样式',
         tabBarOptions: true,
         value: {
           title: '{color:red}',
@@ -815,7 +813,7 @@ export const TabViewExamples = () => {
             color: 'red'
           }
         },
-       valueList:TextStyle
+        valueList: TextStyle
       },
       contentContainerStyle: {
         description: '内容容器样式',
@@ -846,7 +844,7 @@ export const TabViewExamples = () => {
       },
       'style(TabBar)': {
         propName: 'style',
-        description: 'tabBar的样式,设置为红色背景',
+        description: 'tabBar的样式',
         tabBarOptions: true,
         value: {
           title: 'padding:20,backgroundColor:red',
@@ -857,9 +855,9 @@ export const TabViewExamples = () => {
         },
         valueList: [
           {
-            title: '{padding:20,backgroundColor:green}',
+            title: '{padding:10,backgroundColor:green}',
             value: {
-              padding: 20,
+              padding: 10,
               backgroundColor: 'green'
             }
           },
