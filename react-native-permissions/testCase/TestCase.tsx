@@ -221,6 +221,30 @@ export const PermissionTest = () => {
                             expect(state).to.be.true;
                         }}
                     />
+                    <TestCase
+                        key={"getInitStatus_8"}
+                        itShould={`openPhotoPicker change`}
+                        tags={['C_API']}
+                        initialState={false}
+
+                        arrange={({ setState }) => {
+
+                            return (
+                                <View style={{ flex: 1 }}>
+                                    <Button title="打开图片选择"
+                                        onPress={async () => {
+                                            let check = await RTNPermissions.openPhotoPicker();
+
+                                            setState(true)
+
+                                        }}></Button>
+                                </View>
+                            );
+                        }}
+                        assert={async ({ expect, state }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
 
                 </TestSuite>
 
