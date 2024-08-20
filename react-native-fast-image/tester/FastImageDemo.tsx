@@ -3,7 +3,7 @@ import { View, StyleSheet, SafeAreaView } from 'react-native';
 import { FastImageLoadingDelay } from './FastImageLoadingDelay';
 import { FastImageMothodDemo } from './FastImageMothodDemo';
 import { FastImageStyleDemo } from './FastImageStyleDemo';
-import { FastImagePriorityCacheDemo } from './FastImagePriorityCacheDemo';
+import { FastImageSourceDemo } from './FastImageSourceDemo';
 import {NavigationContainer, Page} from './Navigation';
 
 export default function FastImageDemo() {
@@ -15,7 +15,7 @@ export default function FastImageDemo() {
           <Page name='FastImageMothodDemo'><FastImageMothodDemo></FastImageMothodDemo></Page>
           <Page name='FastImageLoadingDelay'><FastImageLoadingDelay></FastImageLoadingDelay></Page>
           <Page name='FastImageStyleDemo'><FastImageStyleDemo></FastImageStyleDemo></Page>
-          <Page name='FastImagePriorityCacheDemo'><FastImagePriorityCacheDemo></FastImagePriorityCacheDemo></Page>
+          <Page name='FastImageSourceDemo'><FastImageSourceDemo></FastImageSourceDemo></Page>
         </NavigationContainer>
       </SafeAreaView>
     </View>
