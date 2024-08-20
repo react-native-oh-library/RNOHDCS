@@ -68,58 +68,58 @@ export default class ToastTest extends Component {
             <View style={styles.container}>
                 <Tester>
                     <ScrollView>
-                        <TestCase.Example itShould="1、position=top">
+                        <TestCase itShould="1、position=top">
                             {this.getButton({
                                 text: 'position=top',
                                 position: 'top',
                                 duration: DURATION.LENGTH_SHORT
                             })}
-                        </TestCase.Example>
-                        <TestCase.Example itShould="2、position=bottom">
+                        </TestCase>
+                        <TestCase itShould="2、position=bottom">
                             {this.getButton({
                                 text: 'position=bottom',
                                 position: 'bottom',
                                 duration: DURATION.LENGTH_SHORT
                             })}
-                        </TestCase.Example>
-                        <TestCase.Example itShould="3、position=center, duration=2000">
+                        </TestCase>
+                        <TestCase itShould="3、position=center, duration=2000">
                             {this.getButton({
                                 text: 'position=center',
                                 position: 'center',
                                 duration: 2000
                             })}
-                        </TestCase.Example>
-                        <TestCase.Example itShould="4、position=bottom，duration=4000">
+                        </TestCase>
+                        <TestCase itShould="4、position=bottom，duration=4000">
                             {this.getButton({
                                 text: 'position=bottom, duration=4000',
                                 position: 'bottom',
                                 duration: 4000
                             })}
-                        </TestCase.Example>
-                        <TestCase.Example itShould="5、position=bottom,custom style, duration=2000">
+                        </TestCase>
+                        <TestCase itShould="5、position=bottom,custom style, duration=2000">
                             {this.getButton({
                                 text: 'backgroundColor=red',
                                 position: 'bottom',
                                 duration: 2000,
                                 withStyle: true
                             })}
-                        </TestCase.Example>
-                        <TestCase.Example itShould="6、position=center，, duration=5000">
+                        </TestCase>
+                        <TestCase itShould="6、position=center，, duration=5000">
                             {this.getButton({
                                 text: 'duration=5000',
                                 position: 'center',
                                 duration: 5000
                             })}
-                        </TestCase.Example>
-                        <TestCase.Example itShould="7、position=bottom, duration=3000，positionValue=500">
+                        </TestCase>
+                        <TestCase itShould="7、position=bottom, duration=3000，positionValue=500">
                             {this.getButton({
                                 text: 'positionvalue=500',
                                 position: 'bottom',
                                 duration: 3000,
                                 positionValue: 500
                             })}
-                        </TestCase.Example>
-                        <TestCase.Example itShould="8、position=bottom, duration=3000, fadeInDuration=2000">
+                        </TestCase>
+                        <TestCase itShould="8、position=bottom, duration=3000, fadeInDuration=2000">
                             {this.getButton({
                                 text: 'fadeInDuration=2000',
                                 position: 'bottom',
@@ -128,8 +128,8 @@ export default class ToastTest extends Component {
                                 withStyle: true,
                                 backgroundColor: 'blue'
                             })}
-                        </TestCase.Example>
-                        <TestCase.Example itShould="9、position=bottom, duration=3000, fadeOutDuration=2000">
+                        </TestCase>
+                        <TestCase itShould="9、position=bottom, duration=3000, fadeOutDuration=2000">
                             {this.getButton({
                                 text: 'fadeOutDuration=2000',
                                 position: 'bottom',
@@ -138,8 +138,8 @@ export default class ToastTest extends Component {
                                 withStyle: true,
                                 backgroundColor: 'blue'
                             })}
-                        </TestCase.Example>
-                        <TestCase.Example itShould="10、position=bottom, duration=3000，positionValue=500, opacity=0.7, fadeInDuration=1000">
+                        </TestCase>
+                        <TestCase itShould="10、position=bottom, duration=3000，positionValue=500, opacity=0.7, fadeInDuration=1000">
                             {this.getButton({
                                 text: 'opacity=0.7',
                                 position: 'bottom',
@@ -147,8 +147,8 @@ export default class ToastTest extends Component {
                                 opacity: 0.7,
                                 fadeInDuration: 1000
                             })}
-                        </TestCase.Example>
-                        <TestCase.Example itShould="11、position=bottom, duration=3000，positionValue=500, opacity=0.3">
+                        </TestCase>
+                        <TestCase itShould="11、position=bottom, duration=3000，positionValue=500, opacity=0.3">
                             {this.getButton({
                                 text: 'opacity=0.3，fadeOutDuration=1000',
                                 position: 'bottom',
@@ -156,8 +156,8 @@ export default class ToastTest extends Component {
                                 opacity: 0.7,
                                 fadeOutDuration: 2000
                             })}
-                        </TestCase.Example>
-                        <TestCase.Example itShould="12、position=bottom，textStyle=blue', backgroundColor=green, duration=2000">
+                        </TestCase>
+                        <TestCase itShould="12、position=bottom，textStyle=blue', backgroundColor=green, duration=2000">
                             {this.getButton({
                                 text: 'color=blue，backgroundColor=green',
                                 position: 'bottom',
@@ -166,7 +166,7 @@ export default class ToastTest extends Component {
                                 backgroundColor: 'green',
                                 withStyle: true
                             })}
-                        </TestCase.Example>
+                        </TestCase>
 
                     </ScrollView>
                 </Tester>

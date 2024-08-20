@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 import HeaderImageScrollView, {
   TriggeringView,
 } from 'react-native-image-header-scroll-view';
-import {TestCase} from '../../components';
+import {TestCase} from './testCase';
 
 export function ImageHeaderPropertyTest() {
   const [bounces, setBounces] = useState(true);
