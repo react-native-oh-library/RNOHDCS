@@ -16,8 +16,8 @@ export function ReactNativeButtonTest() {
         setIsstate(!isState);
     };
 
-    const buttonStyle={ fontSize: 30, color: 'white', backgroundColor: 'green', margin: 20 }
-    const disabledButtonStyle={ fontSize: 30, color: 'grey', backgroundColor: 'lightgrey', margin: 20 }
+    const buttonStyle={ fontSize: 30, color: 'white', backgroundColor: 'green', margin: 10 }
+    const disabledButtonStyle={ fontSize: 30, color: 'grey', backgroundColor: 'lightgrey', margin: 10 }
 
     const currentStylestate = isState ? disabledButtonStyle : buttonStyle;
     const title = [
@@ -26,27 +26,34 @@ export function ReactNativeButtonTest() {
 
     return (
             <Tester>
-                <Button
-                    style={{ fontSize: 16, color: 'red' }}
-                    containerStyle={{padding: 15, height: 80, width: 80, borderRadius: 40, overflow: 'hidden', backgroundColor: 'pink', margin: 20,
-                    }}
-                >
+                <Text allowFontScaling={false} style={{color: 'red'}}>Default Button：</Text>
+                <Button>
                     默认Button
                 </Button>
 
+                <Text allowFontScaling={false} style={{color: 'red'}}>Cycle Button：</Text>
                 <Button
-                    style={{fontSize: 30, color: 'white', margin: 20}}
-                    containerStyle={{ padding: 15, overflow: 'hidden', borderRadius: 10, backgroundColor: 'pink', margin: 20 }}
-                    disabled={true} 
-                    styleDisabled={{fontSize: 40, color: 'red', margin: 20}}
-                    disabledContainerStyle={{ padding: 15, overflow: 'hidden', borderRadius: 60, backgroundColor: 'blue' }}
+                    style={{ fontSize: 16, color: 'red' }}
+                    containerStyle={{ padding: 25, height: 80, width: 80, borderRadius: 40, overflow: 'hidden', backgroundColor: 'pink' }}
+                >
+                    Button
+                </Button>
+
+                <Text allowFontScaling={false} style={{color: 'red'}}>disabled=true， allowFontScaling=true:</Text>
+                <Button
+                    style={{fontSize: 30, color: 'white'}}
+                    containerStyle={{ overflow: 'hidden', borderRadius: 15, backgroundColor: 'pink'}}
+                    disabled={true}   
+                    styleDisabled={{fontSize: 40, color: 'red'}}
+                    disabledContainerStyle={{ overflow: 'hidden', borderRadius: 20, backgroundColor: 'blue', margin: 10 }}
                 >
                     {title}
                 </Button>
 
+                <Text allowFontScaling={false} style={{color: 'red'}}>disabled=false， allowFontScaling=true, support onPress：</Text>
                 <Button
                     style={currentStylestate}
-                    containerStyle={{ padding: 15, overflow: 'hidden', borderRadius: 10, backgroundColor: 'pink', margin: 20 }}
+                    containerStyle={{ overflow: 'hidden', borderRadius: 15, backgroundColor: 'pink', margin: 10 }}
                     allowFontScaling={true}
                     disabled={false} 
                     onPress={_handlePress}
@@ -54,24 +61,41 @@ export function ReactNativeButtonTest() {
                     {title}
                 </Button>
 
+                <Text allowFontScaling={false} style={{color: 'red'}}>disabled=false, allowFontScaling=false, support onPress：</Text>
                 <Button
                     style={currentStylestate}
-                    containerStyle={{ padding: 15, overflow: 'hidden', borderRadius: 10, backgroundColor: 'pink', margin: 20 }}
-                    allowFontScaling={true}
+                    containerStyle={{ overflow: 'hidden', borderRadius: 10, backgroundColor: 'pink', margin: 10 }}
+                    allowFontScaling={false}
                     disabled={false} 
-                    onLongPress={_handleLongPress}
+                    onPress={_handlePress}
                 >
                     {title}
                 </Button>
 
+                <Text allowFontScaling={false} style={{color: 'red'}}>disabled=false, allowFontScaling=false, support onLongPress/onPressIn/onPressOut：</Text>
+                <Button
+                    style={currentStylestate}
+                    containerStyle={{ overflow: 'hidden', borderRadius: 10, backgroundColor: 'pink', margin: 10 }}
+                    allowFontScaling={false}
+                    disabled={false} 
+                    onLongPress={_handleLongPress}
+                    onPressIn={_handlePress}
+                    onPressOut={_handlePress}
+                    delayPressIn={50}
+                    delayLongPress={2000}
+                >
+                    {title}
+                </Button>
+
+                <Text allowFontScaling={false} style={{color: 'red'}}>disabled=false, father support onPress/onLongPress：</Text>
                 <Button
                     style={{ fontSize: 20, color: 'white', backgroundColor: 'green', margin: 20 }}
                     containerStyle={{ padding: 15, overflow: 'hidden', borderRadius: 10, backgroundColor: 'pink', margin: 20 }}
                     disabled={false}
                     accessibilityLabel="The button is press me"
                     childGroupStyle={{backgroundColor: 'black'}}
-                    onPress={() => _handlePress()}
-                    onLongPress={() => _handleLongPress()}
+                    onPress={_handlePress}
+                    onLongPress={ _handleLongPress }
                 >
                     father!
                     <Button
