@@ -5,43 +5,43 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import * as exampleByName from './examples';
-import {NavigationContainer, Page} from './components';
+
+import {NavigationContainer, Page} from './componets';
 import {PortalHost, PortalProvider} from '@gorhom/portal';
-import ActivityIndicatorDemo from './paper/examples/ActivityIndicatorDemo';
-import AppbarTest from './paper/examples/AppbarDemo';
-import AvatarDemo from './paper/examples/AvatarDemo'
-import BadgeExample from './paper/examples/BadgeExample';
-import BannerExample from './paper/examples/BannerExample';
-import ButtonExample from './paper/examples/ButtonExample';
-import CardExample from './paper/examples/CardExample';
-import CheckboxItemExample from './paper/examples/CheckboxItemExample';
-import ChipExample from './paper/examples/ChipExample';
-import DataTable from './paper/examples/DataTable';
-import Dialog from './paper/examples/Dialog';
-import DividerExample from './paper/examples/DividerExample';
-import DrawerExample from './paper/examples/DrawerExample'
-import FABExample from './paper/examples/FABExample';
-import HelperTextExample from './paper/examples/HelperTextExample';
-import IconExample from './paper/examples/IconExample';
-import IconButtonExample from './paper/examples/IconButtonExample'
-import ListAccordionExample from './paper/examples/ListAccordionExample';
-import MenuExample from './paper/examples/MenuExample';
-import ModalExample from './paper/examples/ModalExample';
-import ProgressBarExample from './paper/examples/ProgressBarExample';
-import SearchExample from './paper/examples/SearchExample';
-import SegmentedButtonExample from './paper/examples/SegmentedButtonExample';
-import SnackbarExample from './paper/examples/SnackbarExample';
-import SurfaceExample from './paper/examples/SurfaceExample';
-import SwitchExample from './paper/examples/SwitchExample';
-import TextExample from './paper/examples/TextExample';
-import TextInputExample from './paper/examples/TextInputExample';
-import ToggleButtonExample from './paper/examples/ToggleButtonExample';
-import TooltipExample from './paper/examples/TooltipExample';
-import TouchableRippleDemo from './paper/examples/TouchableRippleExample';
-import BottomNavigationExample from './paper/examples/BottomNavigationExample';
-import RadioButtonExample from './paper/examples/RadioButtonExample';
-const {TesterExample, ...remainingExampleByName} = exampleByName;
+import ActivityIndicatorDemo from './examples/ActivityIndicatorDemo';
+import AppbarTest from './examples/AppbarDemo';
+import AvatarDemo from './examples/AvatarDemo'
+import BadgeExample from './examples/BadgeExample';
+import BannerExample from './examples/BannerExample';
+import ButtonExample from './examples/ButtonExample';
+import CardExample from './examples/CardExample';
+import CheckboxItemExample from './examples/CheckboxItemExample';
+import ChipExample from './examples/ChipExample';
+import DataTable from './examples/DataTable';
+import Dialog from './examples/Dialog';
+import DividerExample from './examples/DividerExample';
+import DrawerExample from './examples/DrawerExample'
+import FABExample from './examples/FABExample';
+import HelperTextExample from './examples/HelperTextExample';
+import IconExample from './examples/IconExample';
+import IconButtonExample from './examples/IconButtonExample'
+import ListAccordionExample from './examples/ListAccordionExample';
+import MenuExample from './examples/MenuExample';
+import ModalExample from './examples/ModalExample';
+import ProgressBarExample from './examples/ProgressBarExample';
+import SearchExample from './examples/SearchExample';
+import SegmentedButtonExample from './examples/SegmentedButtonExample';
+import SnackbarExample from './examples/SnackbarExample';
+import SurfaceExample from './examples/SurfaceExample';
+import SwitchExample from './examples/SwitchExample';
+import TextExample from './examples/TextExample';
+import TextInputExample from './examples/TextInputExample';
+import ToggleButtonExample from './examples/ToggleButtonExample';
+import TooltipExample from './examples/TooltipExample';
+import TouchableRippleDemo from './examples/TouchableRippleExample';
+import BottomNavigationExample from './examples/BottomNavigationExample';
+import RadioButtonExample from './examples/RadioButtonExample';
+import PortalDemo from './examples/PortalDemo';
 
 function App() {
   return (
@@ -97,6 +97,7 @@ function App() {
             <Page name="EXAMPLE: DrawerExample">
               <DrawerExample/>
             </Page>
+    
             <Page name="EXAMPLE: FABExample">
               <FABExample/>
             </Page>
@@ -118,6 +119,9 @@ function App() {
             <Page name="EXAMPLE: ModalExample">
               <ModalExample/>
             </Page>
+            <Page name="EXAMPLE: PortalDemo">
+              <PortalDemo/>
+            </Page>
             <Page name="EXAMPLE: ProgressBarExample">
               <ProgressBarExample/>
             </Page>
@@ -127,7 +131,7 @@ function App() {
             <Page name="EXAMPLE: SearchExample">
               <SearchExample/>
             </Page>
-            <Page name="EXAMPLE: SegmentedButtonExample">
+            <Page name="EXAMPLE: RadioButtonExample">
               <RadioButtonExample/>
             </Page>
             <Page name="EXAMPLE: SnackbarExample">

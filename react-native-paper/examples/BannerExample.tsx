@@ -1,121 +1,260 @@
 import * as React from 'react';
 import {
-    Dimensions,
-    Image,
-    LayoutChangeEvent,
-    Platform,
+    ScrollView,
     StyleSheet,
-    View
+    View,
 } from 'react-native';
 
 import {
-    Banner, FAB, MD2Colors, MD3Colors, MD2Theme,
-    MD3Theme,
-    useTheme,
+    Banner, Button, MD2Colors,
 } from 'react-native-paper';
 import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
+import { useRef } from 'react';
+
+type elevation  = 0 | 1 | 2 | 3 | 4 | 5 ;
 
 export function BannerTest() {
+
+    const viewRef = useRef<View>(null);  
+    const measureView = () => {  
+        console.log('View is referenced');
+    }; 
+
+
+    const _onShowAnimationFinished =() => {
+        console.info("fuction onShowAnimationFinished")
+    }
+
+    const _onHideAnimationFinished =() => {
+        console.info("fuction onHideAnimationFinished")
+    }
+
+    const BannerProps = [
+        {
+          key: 'Banner style: visible ={true}',
+          value: {
+            visible:true,
+            actions:[
+                {
+                label: 'Fix it',                     
+                },
+                {
+                label: 'Learn more',
+                
+                },
+            ],
+            icon:'folder',
+            value:"There was a problem processing a transaction on your credit card."
+          }
+        },
+        {
+            key: 'Banner style: visible ={false}',
+            value: {
+              visible:false,
+              actions:[
+                  {
+                  label: 'Fix it',                     
+                  },
+                  {
+                  label: 'Learn more',
+                  
+                  },
+              ],
+              icon:'folder',
+              value:"There was a problem processing a transaction on your credit card."
+            }
+        },
+        {
+            key: 'Banner style: actions ={[{label:"Fix it"},{label:"Learn more"}]}',
+            value: {
+              visible:true,
+              actions:[
+                  {label: 'Fix it'},
+                  {label: 'Learn more'}
+              ],
+              icon:'folder',
+              value:"There was a problem processing a transaction on your credit card."
+            }
+          },
+          {
+            key: 'Banner style: contentStyle ={backgroundColor:MD2Colors.yellow500}',
+            value: {
+              visible:true,
+              actions:[
+                  {label: 'Fix it'},
+                  {label: 'Learn more'}
+              ],
+              icon:'folder',
+              value:"There was a problem processing a transaction on your credit card.",
+              contentStyle:{backgroundColor:MD2Colors.yellow500}
+            }
+          },
+          {
+            key: 'Banner style: elevation ={0}',
+            value: {
+              visible:true,
+              actions:[
+                  {label: 'Fix it'},
+                  {label: 'Learn more'}
+              ],
+              icon:'folder',
+              value:"There was a problem processing a transaction on your credit card.",
+              elevation:0 as elevation
+            }
+          },
+          {
+            key: 'Banner style: elevation ={1}',
+            value: {
+              visible:true,
+              actions:[
+                  {label: 'Fix it'},
+                  {label: 'Learn more'}
+              ],
+              icon:'folder',
+              value:"There was a problem processing a transaction on your credit card.",
+              elevation:1 as elevation
+            }
+          },
+          {
+            key: 'Banner style: elevation ={2}',
+            value: {
+              visible:true,
+              actions:[
+                  {label: 'Fix it'},
+                  {label: 'Learn more'}
+              ],
+              icon:'folder',
+              value:"There was a problem processing a transaction on your credit card.",
+              elevation:2 as elevation
+            }
+          },
+          {
+            key: 'Banner style: elevation ={3}',
+            value: {
+              visible:true,
+              actions:[
+                  {label: 'Fix it'},
+                  {label: 'Learn more'}
+              ],
+              icon:'folder',
+              value:"There was a problem processing a transaction on your credit card.",
+              elevation:3 as elevation
+            }
+          },
+          {
+            key: 'Banner style: elevation ={4}',
+            value: {
+              visible:true,
+              actions:[
+                  {label: 'Fix it'},
+                  {label: 'Learn more'}
+              ],
+              icon:'folder',
+              value:"There was a problem processing a transaction on your credit card.",
+              elevation:4 as elevation
+            }
+          },
+          {
+            key: 'Banner style: elevation ={5}',
+            value: {
+              visible:true,
+              actions:[
+                  {label: 'Fix it'},
+                  {label: 'Learn more'}
+              ],
+              icon:'folder',
+              value:"There was a problem processing a transaction on your credit card.",
+              elevation:5 as elevation
+            }
+          },
+          {
+            key: 'Banner style: maxFontSizeMultiplier ={1}(accessibilityLabel 属性，这是为了增强应用的无障碍性,该属性为屏幕阅读器提供了一个标签，这样视力障碍的用户就能通过语音助手了解界面上各个元素的功能)',
+            value: {
+              visible:true,
+              actions:[
+                  {label: 'Fix it'},
+                  {label: 'Learn more'}
+              ],
+              icon:'folder',
+              value:"There was a problem processing a transaction on your credit card.",
+              maxFontSizeMultiplier:1
+            }
+          },
+          {
+            key: 'Banner style: {backgroundColor:MD2Colors.yellow500}',
+            value: {
+              visible:true,
+              actions:[
+                  {label: 'Fix it'},
+                  {label: 'Learn more'}
+              ],
+              icon:'folder',
+              value:"There was a problem processing a transaction on your credit card.",
+              style:{backgroundColor:MD2Colors.yellow500}
+            }
+          },
+          {
+            key: 'Banner style: theme = { colors: { primary:"green"} }',
+            value: {
+              visible:true,
+              actions:[
+                  {label: 'Fix it'},
+                  {label: 'Learn more'}
+              ],
+              icon:'folder',
+              value:"There was a problem processing a transaction on your credit card.",
+              theme:{ colors: { primary: 'green' } }
+            }
+        },
+        {
+            key: 'Banner fuction: onShowAnimationFinished = {_onShowAnimationFinished}',
+            value: {
+              visible:true,
+              actions:[
+                  {label: 'Fix it'},
+                  {label: 'Learn more'}
+              ],
+              icon:'folder',
+              value:"There was a problem processing a transaction on your credit card.",
+              onShowAnimationFinished:_onShowAnimationFinished
+            }
+        },
+        {
+            key: 'Banner fuction: onHideAnimationFinished = {_onHideAnimationFinished}',
+            value: {
+              visible:true,
+              actions:[
+                  {label: 'Fix it'},
+                  {label: 'Learn more'}
+              ],
+              icon:'folder',
+              value:"There was a problem processing a transaction on your credit card.",
+              onHideAnimationFinished:_onHideAnimationFinished
+            }
+        },
+    ]
+
     return (
-        <Tester>
+        <ScrollView>
+         <Tester>
             <TestSuite name='Banner' >
-                <TestCase itShould='Two line text string with two actions'>
-                    <BannerExample></BannerExample>
-                </TestCase>  
+            {BannerProps.map((item) => {
+             return (
+                <TestCase  itShould={item.key}  key={item.key} > 
+                  <View style={{height:160,justifyContent:"center"}}>
+                   <Banner {...item.value}>
+                        {item.value.value}
+                    </Banner>
+                  </View>
+                </TestCase>
+              );
+            })}
             </TestSuite>
         </Tester>
+        </ScrollView>
     )
-
 }
 
-const BannerExample = () => {
-    const [visible, setVisible] = React.useState<boolean>(true);
-    const [useCustomTheme, setUseCustomTheme] = React.useState<boolean>(false);
-    const useExampleTheme = () => useTheme<MD2Theme | MD3Theme>();
-    const defaultTheme = useExampleTheme();
-    const [height, setHeight] = React.useState(0);
 
-    const handleLayout = ({ nativeEvent }: LayoutChangeEvent) => {
-        const { height: layoutHeight } = nativeEvent.layout;
-        setHeight(layoutHeight);
-    };
-
-    const customTheme = !defaultTheme.isV3
-        ? {
-            ...defaultTheme,
-            colors: {
-                text: MD2Colors.white,
-                surface: MD2Colors.blue200,
-                primary: MD2Colors.purple900,
-            },
-        }
-        : {
-            ...defaultTheme,
-            colors: {
-                onSurface: MD3Colors.tertiary100,
-                elevation: {
-                    level1: MD3Colors.tertiary50,
-                },
-                primary: MD3Colors.tertiary10,
-            },
-        };
-
-    return (
-        <View style={styles.container}>
-            <Banner
-                onLayout={handleLayout}
-                actions={[
-                    {
-                        label: `Set ${useCustomTheme ? 'default' : 'custom'} theme`,
-                        onPress: () => setUseCustomTheme(!useCustomTheme),
-                    },
-                    {
-                        label: 'Fix it',
-                        onPress: () => setVisible(false),
-                    },
-                ]}
-                icon={require('../assets/images/email-icon.png')}
-                visible={visible}
-                onShowAnimationFinished={() =>
-                    console.log('Completed opening animation')
-                }
-                onHideAnimationFinished={() =>
-                    console.log('Completed closing animation')
-                }
-                theme={useCustomTheme ? customTheme : defaultTheme}
-                style={styles.banner}
-            >
-                Two line text string with two actions. One to two lines is preferable on
-                mobile.
-            </Banner>
-        </View>
-    );
-};
-
-BannerExample.title = 'Banner';
-
-const styles = StyleSheet.create({
-    banner: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-    },
-    photo: {
-        flex: 1,
-        resizeMode: 'cover',
-    },
-    fab: {
-        alignSelf: 'center',
-        position: 'absolute',
-        bottom: 0,
-        margin: 16,
-    },
-    container: {
-        flex: 1,
-        backgroundColor: '#FFFFFF',
-        alignItems: 'center',
-    }
-});
 
 export default BannerTest;
