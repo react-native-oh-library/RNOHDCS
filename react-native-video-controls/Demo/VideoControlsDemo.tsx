@@ -1,34 +1,43 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   View,
+  Text,
 } from 'react-native';
 
 import VideoPlayer from 'react-native-video-controls'
 
-function VideoDemo(){
-    function handleOnBack (){
-      alert("this is onBack event test,because navigator properties depends on others parity");
-    }
-    return(
-      <View style = {styles.container}>
-       <VideoPlayer
-            style = {styles.video}
-            source={{ uri: 'https://vjs.zencdn.net/v/oceans.mp4' }}
-            toggleResizeModeOnFullscreen = {true}
-            controlAnimationTiming = {3000}
-            doubleTapTime = {10}
-            controlTimeout = {4000}
-            scrubbing = {5}
-            navigator = {null}
-            showOnStart = {false}
-            videoStyle = {styles.video}
-            onBack = {handleOnBack}
-            seekColor = {'#00FFFF'}
-            tapAnywhereToPause = {true}
-        />
-     </View>
-    );
+function VideoPlayerDemo() {
+  const [isBack, setOnBack] = useState(false);
+
+  function handleOnBack (){
+    console.log("this is onBack event test,because navigator properties depends on others third-parity");
+    setOnBack(true);
+  }
+  return(
+    <View style = {styles.container}>
+     <VideoPlayer
+          style = {styles.video}
+          source={{ uri: 'https://vjs.zencdn.net/v/oceans.mp4' }}
+          toggleResizeModeOnFullscreen = {true}
+          controlAnimationTiming = {3000}
+          doubleTapTime = {10}
+          controlTimeout = {4000}
+          scrubbing = {5}
+          navigator = {null}
+          showOnStart = {false}
+          videoStyle = {styles.video}
+          onBack = {handleOnBack}
+          seekColor = {'#00FFFF'}
+          tapAnywhereToPause = {true}
+      />
+      {isBack && (  
+        <Text style={{ position: 'absolute', bottom: 50, left: '50%', transform: [{ translateX: -50 }], color: 'white' }}>  
+          onBack run success!
+        </Text>  
+      )}
+   </View>
+  );
 }
 const styles = StyleSheet.create({
     container: {
@@ -43,4 +52,4 @@ const styles = StyleSheet.create({
     }, 
   });
 
-export default VideoDemo;
+export default VideoPlayerDemo;
