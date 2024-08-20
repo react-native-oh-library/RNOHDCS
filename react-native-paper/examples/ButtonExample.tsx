@@ -1,355 +1,406 @@
 import * as React from 'react';
-import { Image, ScrollView, StyleSheet, View } from 'react-native';
+import { AccessibilityRole, Image, ScrollView, StyleSheet, View } from 'react-native';
 
 import {
     Button,
-    List,
-    Text,
-    MD2Theme,
-    MD3Theme,
-    useTheme,
+    MD2Colors
+
 } from 'react-native-paper';
 import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
 
 export function ButtonTest() {
-    const useExampleTheme = () => useTheme<MD2Theme | MD3Theme>();
-    const theme = useExampleTheme();
 
-    const color = theme.isV3 ? theme.colors.inversePrimary : theme.colors.accent;
+    const ButtonProps = [
+        {
+          key: 'Button style: mode is text',
+          value: {
+            mode:'text' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal'
+          },
+          test:'text'
+        },
+        {
+            key: 'Button style: mode is outlined',
+            value: {
+              mode:'outlined' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal'
+            },
+            test:'outlined'
+          },
+          {
+            key: 'Button style: mode is contained',
+            value: {
+              mode:'contained' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal'
+            },
+            test:'contained'
+          },
+          {
+            key: 'Button style: mode is elevated',
+            value: {
+              mode:'elevated' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal'
+            },
+            test:'elevated'
+          },
+          {
+            key: 'Button style: mode is contained-tonal',
+            value: {
+              mode:'contained-tonal' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal'
+            },
+            test:'contained-tonal'
+          },
+          {
+            key: 'Button style: dark is true',
+            value: {
+              mode:'contained-tonal'as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              dark:true
+            },
+            test:'Default'
+          },
+          {
+            key: 'Button style: dark is false',
+            value: {
+              mode:'contained-tonal'as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              dark:false
+            },
+            test:'Default'
+          },
+          {
+            key: 'Button style: compact is true',
+            value: {
+              mode:'contained-tonal' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              dark:false,
+              compact:true
+            },
+            test:'Default'
+          },
+          {
+            key: 'Button style: compact is false',
+            value: {
+              mode:'contained-tonal' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              dark:false,
+              compact:false
+            },
+            test:'Default'
+          },
+          {
+            key: 'Button style: buttonColor  is MD2Colors.red100',
+            value: {
+              mode:'contained-tonal' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              buttonColor:MD2Colors.red100
+            },
+            test:'Default'
+          },
+          {
+            key: 'Button style: buttonColor  is MD2Colors.yellow100',
+            value: {
+              mode:'contained-tonal' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              buttonColor:MD2Colors.yellow100
+            },
+            test:'Default'
+          },
+          {
+            key: 'Button style: textColor  is MD2Colors.red100',
+            value: {
+              mode:'contained-tonal' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              textColor:MD2Colors.red100
+            },
+            test:'Default'
+          },
+          {
+            key: 'Button style: textColor  is MD2Colors.yellow100',
+            value: {
+              mode:'contained-tonal' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              textColor:MD2Colors.yellow100
+            },
+            test:'Default'
+          },
+          {
+            key: 'Button style: icon  is camera',
+            value: {
+              mode:'contained' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              icon:'camera'
+            },
+            test:'Icon'
+          },
+          {
+            key: 'Button style: disabled  is true',
+            value: {
+              mode:'contained' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              disabled:true
+            },
+            test:'Default'
+          },
+          {
+            key: 'Button style: disabled  is false',
+            value: {
+              mode:'contained' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              disabled:false
+            },
+            test:'Default'
+          },
+          {
+            key: 'Button style: children   is children text',
+            value: {
+              mode:'contained' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+            },
+            test:'children text'
+          },
+          {
+            key: 'Button style: uppercase  is true',
+            value: {
+              mode:'contained' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              uppercase:true
+            },
+            test:'children text'
+          },
+          {
+            key: 'Button style: uppercase  is false',
+            value: {
+              mode:'contained' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              uppercase:false
+            },
+            test:'children text'
+          },
+          {
+            key: 'Button style: background  is MD2Colors.red100',
+            value: {
+              mode:'contained' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              style:[styles.button,{backgroundColor:MD2Colors.red100}]
+            },
+            test:'children text'
+          },
+          {
+            key: 'Button style: accessibilityLabel  is accessibility Label(accessibilityLabel 属性，这是为了增强应用的无障碍性,该属性为屏幕阅读器提供了一个标签，这样视力障碍的用户就能通过语音助手了解界面上各个元素的功能)',
+            value: {
+              mode:'contained' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              style:[styles.button],
+              accessibilityLabel:'accessibility Label'
+            },
+            test:'children text'
+          },
+          {
+            key: 'Button style: accessibilityHint  is accessibility hint(accessibilityLabel 属性，这是为了增强应用的无障碍性,该属性为屏幕阅读器提供了一个标签，这样视力障碍的用户就能通过语音助手了解界面上各个元素的功能)',
+            value: {
+              mode:'contained' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              style:[styles.button],
+              accessibilityHint:'accessibility hint'
+            },
+            test:'children text'
+          },
+          {
+            key: 'Button style: accessibilityRole  is button(accessibilityLabel 属性，这是为了增强应用的无障碍性,该属性为屏幕阅读器提供了一个标签，这样视力障碍的用户就能通过语音助手了解界面上各个元素的功能)',
+            value: {
+              mode:'contained' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              style:[styles.button],
+              accessibilityRole:'button' as AccessibilityRole
+            },
+            test:'children text'
+          },
+          {
+            key: 'Button style: maxFontSizeMultiplier  is 2(maxFontSizeMultiplier属性主要用于解决在不同设备上，由于屏幕尺寸和分辨率的差异，导致文本字体大小过小或过大的问题)',
+            value: {
+              mode:'contained' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              style:[styles.button],
+              maxFontSizeMultiplier:2
+
+            },
+            test:'children text'
+          },
+          {
+            key: 'Button style: maxFontSizeMultiplier  is 4(maxFontSizeMultiplier属性主要用于解决在不同设备上，由于屏幕尺寸和分辨率的差异，导致文本字体大小过小或过大的问题)',
+            value: {
+              mode:'contained' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              style:[styles.button],
+              maxFontSizeMultiplier:4
+            },
+            test:'children text'
+          },
+          {
+            key: 'Button style: style is [styles.button,{backgroundColor:MD2Colors.yellow100}]',
+            value: {
+              mode:'contained' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              style:[styles.button,{backgroundColor:MD2Colors.yellow100}],
+            },
+            test:'children text'
+          },
+
+          {
+            key: 'Button style: labelStyle is {color:MD2Colors.black}',
+            value: {
+              mode:'contained' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              style:[styles.button,{backgroundColor:MD2Colors.yellow100}],
+              maxFontSizeMultiplier:4,
+              labelStyle:{color:MD2Colors.black}
+            },
+            test:'children text'
+          },
+          {
+            key: 'Button style: theme is { colors: { primary: "green" }',
+            value: {
+              mode:'contained' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              style:[styles.button],
+              theme:{ colors: { primary: 'green' }}
+            },
+            test:'children text'
+          },
+          {
+            key: 'Button style: testID is button',
+            value: {
+              mode:'contained' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              style:[styles.button],
+              testID:'button'
+            },
+            test:'children text'
+          },
+          {
+            key: 'Button style: testID is button1',
+            value: {
+              mode:'contained' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              style:[styles.button],
+              testID:'button1'
+            },
+            test:'children text'
+          },
+    ]
+
     return (
         <Tester>
         <ScrollView>
-        <TestSuite name='Button' >
-            <TestCase itShould={`Text button ${theme.isV3 ? '(text)' : ''}`}>
+        <TestSuite name='Button'>
+          <TestCase itShould={"Button style: rippleColor  is MD2Colors.red100"}>
             <View style={styles.row}>
-                    <Button onPress={() => { }} style={styles.button}>
+                    <Button onPress={() => { }} style={styles.button} rippleColor={MD2Colors.red100}>
                         Default
-                    </Button>
-                    <Button textColor={color} onPress={() => { }} style={styles.button}>
-                        Custom
-                    </Button>
-                    <Button disabled onPress={() => { }} style={styles.button}>
-                        Disabled
-                    </Button>
-                    <Button icon="camera" onPress={() => { }} style={styles.button}>
-                        Icon
-                    </Button>
-                    <Button loading onPress={() => { }} style={styles.button}>
-                        Loading
-                    </Button>
-                    <Button
-                        icon="camera"
-                        onPress={() => { }}
-                        style={styles.button}
-                        contentStyle={styles.flexReverse}
-                    >
-                        Icon right
                     </Button>
                 </View>
             </TestCase>  
-
-            <TestCase itShould='Contained-tonal button (tonal)'>
-                   <View style={styles.row}>
-                        <Button
-                            mode="contained-tonal"
-                            onPress={() => { }}
-                            style={styles.button}
-                            dark = {true}
-                        >
-                            Default
-                        </Button>
-                        <Button
-                            mode="contained-tonal"
-                            buttonColor={color}
-                            onPress={() => { }}
-                            style={styles.button}
-                        >
-                            Custom
-                        </Button>
-                        <Button
-                            mode="contained-tonal"
-                            disabled
-                            onPress={() => { }}
-                            style={styles.button}
-                        >
-                            Disabled
-                        </Button>
-                        <Button
-                            mode="contained-tonal"
-                            icon="camera"
-                            onPress={() => { }}
-                            style={styles.button}
-                        >
-                            Icon
-                        </Button>
-                        <Button
-                            mode="contained-tonal"
-                            loading
-                            onPress={() => { }}
-                            style={styles.button}
-                        >
-                            Loading
-                        </Button>
-                        <Button
-                            mode="contained-tonal"
-                            icon="camera"
-                            onPress={() => { }}
-                            style={styles.button}
-                            contentStyle={styles.flexReverse}
-                        >
-                            Icon right
-                        </Button>
-                    </View>
-            </TestCase>
-            <TestCase itShould={`Outlined button ${theme.isV3 ? '(outlined)' : ''}`}>
+            <TestCase itShould={"Button style: rippleColor  is MD2Colors.yellow100"}>
             <View style={styles.row}>
-                    <Button mode="outlined" onPress={() => { }} style={styles.button}>
+                    <Button onPress={() => { }} style={styles.button} rippleColor={MD2Colors.yellow100}>
                         Default
                     </Button>
-                    <Button
-                        mode="outlined"
-                        textColor={color}
-                        onPress={() => { }}
-                        style={styles.button}
-                    >
-                        Custom
-                    </Button>
-                    <Button
-                        mode="outlined"
-                        disabled
-                        onPress={() => { }}
-                        style={styles.button}
-                    >
-                        Disabled
-                    </Button>
-                    <Button
-                        mode="outlined"
-                        icon="camera"
-                        onPress={() => { }}
-                        style={styles.button}
-                    >
-                        Icon
-                    </Button>
-                    <Button
-                        mode="outlined"
-                        loading
-                        onPress={() => { }}
-                        style={styles.button}
-                    >
-                        Loading
-                    </Button>
-                    <Button
-                        mode="outlined"
-                        icon="camera"
-                        onPress={() => { }}
-                        style={styles.button}
-                        contentStyle={styles.flexReverse}
-                    >
-                        Icon right
-                    </Button>
                 </View>
-            </TestCase>
-            <TestCase itShould={`Contained button ${theme.isV3 ? '(filled)' : ''}`}>
+            </TestCase>  
+            <TestCase itShould={"Button style: loading  is true"}>
             <View style={styles.row}>
-                <Button mode="contained" onPress={() => {}} style={styles.button}>
-                    Default
-                </Button>
                 <Button
                     mode="contained"
-                    buttonColor={color}
-                    onPress={() => {}}
-                    style={styles.button}
-                >
-                    Custom
-                </Button>
-                <Button
-                    mode="contained"
-                    disabled
-                    onPress={() => {}}
-                    style={styles.button}
-                >
-                    Disabled
-                </Button>
-                <Button
-                    mode="contained"
-                    icon="camera"
-                    onPress={() => {}}
-                    style={styles.button}
-                >
-                    Icon
-                </Button>
-                <Button
-                    mode="contained"
-                    loading
+                    loading = {true}
                     onPress={() => {}}
                     style={styles.button}
                 >
                     Loading
                 </Button>
+                </View>
+            </TestCase>  
+            <TestCase itShould={"Button style: loading  is false"}>
+            <View style={styles.row}>
                 <Button
                     mode="contained"
-                    icon="camera"
+                    loading = {false}
                     onPress={() => {}}
                     style={styles.button}
-                    contentStyle={styles.flexReverse}
                 >
-                    Icon right
+                    Loading
                 </Button>
                 </View>
-            </TestCase>
-
-            <TestCase itShould='Elevated button (elevated)'>
-                <View style={styles.row}>
-                <Button mode="elevated" onPress={() => {}} style={styles.button}>
-                Default
-                </Button>
-                <Button
-                mode="elevated"
-                buttonColor={color}
-                onPress={() => {}}
-                style={styles.button}
-                >
-                Custom
-                </Button>
-                <Button
-                mode="elevated"
-                disabled
-                onPress={() => {}}
-                style={styles.button}
-                >
-                Disabled
-                </Button>
-                <Button
-                mode="elevated"
-                icon="camera"
-                onPress={() => {}}
-                style={styles.button}
-                >
-                Icon
-                </Button>
-                <Button
-                mode="elevated"
-                loading
-                onPress={() => {}}
-                style={styles.button}
-                >
-                Loading
-                </Button>
-                <Button
-                mode="elevated"
-                icon="camera"
-                onPress={() => {}}
-                style={styles.button}
-                contentStyle={styles.flexReverse}
-                >
-                Icon right
-                </Button>
-            </View>
-            </TestCase>
-
-            <TestCase itShould='Custom'>
+            </TestCase>  
+            <TestCase itShould={"Button function: onPress"}>
             <View style={styles.row}>
-                    <Button
-                        mode="outlined"
-                        icon={{
-                            uri: 'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400',
-                        }}
-                        onPress={() => { }}
-                        style={styles.button}
-                    >
-                        Remote image
-                    </Button>
-                    <Button
-                        mode="outlined"
-                        icon={require('../assets/images/favorite.png')}
-                        onPress={() => { }}
-                        style={styles.button}
-                    >
-                        Required asset
-                    </Button>
-                    <Button
-                        mode="outlined"
-                        icon={({ size }) => (
-                            <Image
-                                source={require('../assets/images/chameleon.jpg')}
-                                style={{ width: size, height: size, borderRadius: size / 2 }}
-                                accessibilityIgnoresInvertColors
-                            />
-                        )}
-                        onPress={() => { }}
-                        style={styles.button}
-                    >
-                        Custom component
-                    </Button>
-                    <Button
-                        icon="heart"
-                        mode="outlined"
-                        onPress={() => { }}
-                        style={styles.button}
-                        labelStyle={[styles.fontStyles, theme.isV3 && styles.md3FontStyles]}
-                    >
-                        Custom Font
-                    </Button>
-                    <Button mode="outlined" onPress={() => { }} style={styles.button}>
-                        <Text variant="titleLarge">Custom text</Text>
-                    </Button>
-                    <Button
-                        mode="outlined"
-                        onPress={() => { }}
-                        style={styles.customRadius}
-                    >
-                        Custom radius
-                    </Button>
-                    <Button mode="contained" onPress={() => { }} style={styles.noRadius}>
-                        Without radius
-                    </Button>
+                <Button
+                    mode="contained"
+                    loading = {false}
+                    onPress={() => {
+                        console.info('Button function: onPress')
+                    }}
+                    style={styles.button}
+                >
+                    Loading
+                </Button>
                 </View>
-
-                <View style={styles.row}>
-                    <Button
-                        mode="contained"
-                        onPress={() => { }}
-                        style={styles.flexGrow1Button}
-                    >
-                        flex-grow: 1
-                    </Button>
-                </View>
-                <View style={styles.row}>
-                    <Button
-                        mode="contained"
-                        onPress={() => { }}
-                        style={styles.width100PercentButton}
-                    >
-                        width: 100%
-                    </Button>
-                </View>
-            </TestCase>
-            <TestCase itShould='Compact'>
+            </TestCase>  
+            <TestCase itShould={"Button function: onPressIn"}>
             <View style={styles.row}>
-                    {(
-                        [
-                            'text',
-                            'outlined',
-                            'contained',
-                            'elevated',
-                            'contained-tonal',
-                        ] as const
-                    ).map((mode) => {
-                        return (
-                            <Button
-                                key={mode}
-                                mode={mode}
-                                compact
-                                onPress={() => { }}
-                                style={styles.button}
-                                icon="camera"
-                            >
-                                Compact {mode}
-                            </Button>
-                        );
-                    })}
+                <Button
+                    mode="contained"
+                    loading = {false}
+                    onPressIn={() => {
+                        console.info('Button function: onPressIn')
+                    }}
+                    style={styles.button}
+                >
+                    Loading
+                </Button>
                 </View>
-            </TestCase>
+            </TestCase>  
+            <TestCase itShould={"Button function: onPressOut"}>
+            <View style={styles.row}>
+                <Button
+                    mode="contained"
+                    loading = {false}
+                    onPressOut={() => {
+                        console.info('Button function: onPressOut')
+                    }}
+                    style={styles.button}
+                >
+                    Loading
+                </Button>
+                </View>
+            </TestCase>  
+            <TestCase itShould={"Button function: onLongPress"}>
+            <View style={styles.row}>
+                <Button
+                    mode="contained"
+                    loading = {false}
+                    onLongPress={() => {
+                        console.info('Button function: onLongPress')
+                    }}
+                    style={styles.button}
+                >
+                    Loading
+                </Button>
+                </View>
+            </TestCase>  
+            <TestCase itShould={"Button style: delayLongPress is 1000 (1秒延时长按)"}>
+            <View style={styles.row}>
+                <Button
+                    mode="contained"
+                    delayLongPress={1000}
+                    onLongPress={() => {
+                        console.info('Button function: onLongPress')
+                    }}
+
+                    style={styles.button}
+                >
+                    Loading
+                </Button>
+                </View>
+            </TestCase>  
+            <TestCase itShould={"Button style: delayLongPress is 10000 (10秒延时长按)"}>
+            <View style={styles.row}>
+                <Button
+                    mode="contained"
+                    delayLongPress={10000}
+                    onLongPress={() => {
+                        console.info('Button function: onLongPress')
+                    }}
+
+                    style={styles.button}
+                >
+                    Loading
+                </Button>
+                </View>
+            </TestCase>  
+            
+            {ButtonProps.map((item) => {
+                return (
+              <TestCase itShould={item.key}  key={item.key}>
+                <View style={styles.row}>
+                        <Button {...item.value}>
+                            {item.test}
+                        </Button>
+                    </View>
+                </TestCase>  
+                );
+            })}
         </TestSuite>
         </ScrollView>
     </Tester>

@@ -1,65 +1,129 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Animated, ScrollView, StyleSheet, View } from 'react-native';
 
 import {
     Badge,
     IconButton,
-    MD2Colors,
-    MD3Colors,
-    MD2Theme,
-    MD3Theme,
-    useTheme,
 } from 'react-native-paper';
 import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
+import { useEffect, useRef } from 'react';
 
 
 export function BadgeTest() {
-    const [visible, setVisible] = React.useState<boolean>(true);
-    const useExampleTheme = () => useTheme<MD2Theme | MD3Theme>();
-    const { isV3 } = useExampleTheme();
+    const animatedTextRef = useRef(null);  
+    const opacity = useRef(new Animated.Value(1)).current; 
+    useEffect(() => {  
+        // 动画逻辑：将不透明度从1变为0，再变回1  
+        Animated.sequence([  
+          Animated.timing(opacity, {  
+            toValue: 0, // 目标值：完全透明  
+            duration: 1000, // 动画时长  
+            useNativeDriver: true, // 使用原生驱动性能更好  
+          }),  
+          Animated.timing(opacity, {  
+            toValue: 1, // 目标值：完全不透明  
+            duration: 1000, // 动画时长  
+            useNativeDriver: true, // 使用原生驱动  
+          }),  
+        ]).start(); // 开始动画  
+      }, []); // 空依赖数组表示只运行一次  
+
+      const animatedStyle = {  
+        opacity: opacity.interpolate({  
+          inputRange: [0, 1],  
+          outputRange: [0, 1],  
+        }),  
+      };    
+
+    const BadgeProps = [
+        {
+          key: 'Avatar.Text: children is 3',
+          value: {
+            style:styles.badge,
+            visible:true
+          }
+        },
+        {
+            key: 'Avatar.Text: style is styles.badge',
+            value: {
+            style:styles.badge,
+            visible:true
+            }
+        },
+        {
+            key: 'Avatar.Text: visible is true',
+            value: {
+            style:styles.badge,
+            visible:true
+            }
+        },
+        {
+            key: 'Avatar.Text: visible is false',
+            value: {
+            style:styles.badge,
+            visible:false
+            }
+        },
+        {
+            key: 'Avatar.Text: size is 22',
+            value: {
+            style:styles.badge,
+            visible:true,
+            size:22
+            }
+        },
+        {
+            key: 'Avatar.Text: size is 24',
+            value: {
+            style:styles.badge,
+            visible:true,
+            size:24
+            }
+        },
+        {
+            key: 'Avatar.Text: theme is colors:{ primary: "green" }',
+            value: {
+            style:styles.badge,
+            theme:{ colors: { primary: 'green' }}
+            }
+        },
+    ]
+
     return (
-        <Tester> 
+        <ScrollView>
+         <Tester> 
           <TestSuite name='Badge'>
-            <TestCase itShould="Badge.Text">
+          <TestCase itShould={'Badge style:ref={animatedTextRef}'}  >
+          <View style={styles.row}>
+            <View style={styles.item}>
                 <View style={styles.row}>
-                        <View style={styles.item}>
-                            <IconButton icon="palette-swatch" size={36} style={styles.button} />
-                            <Badge visible={visible} style={styles.badge}>
-                                12
-                            </Badge>
-                        </View>
-                        <View style={styles.item}>
-                            <IconButton  icon="inbox" size={36} style={styles.button} />
-                            <Badge
-                                visible={visible}
-                                style={[
-                                    styles.badge,
-                                    {
-                                        backgroundColor: isV3
-                                            ? MD3Colors.primary80
-                                            : MD2Colors.blue500,
-                                    },
-                                ]}
-                            >
-                                999+
-                            </Badge>
-                        </View>
-                </View>
-            </TestCase>
-            <TestCase itShould="Badge.Dot">
-                <View style={styles.row}>
-                        <View style={styles.item}>
-                            <IconButton icon="book-open" size={50} style={styles.button} />
-                            <Badge visible={visible} style={styles.badge} size={isV3 ? 10 : 8} />
-                        </View>
-                        <View style={styles.item}>
-                            <IconButton icon="receipt" size={60} style={styles.button} />
-                            <Badge visible={visible} style={styles.badge} size={isV3 ? 20 : 10} />
-                        </View>
+                    <View style={styles.item}>
+                        <IconButton icon="palette-swatch" size={36} style={styles.button} />
+                        <Badge  style={[styles.badge,animatedStyle]} ref={animatedTextRef} >
+                            12
+                        </Badge>
                     </View>
-            </TestCase>
+                 </View>
+            </View>
+         </View>
+         </TestCase>
+          {BadgeProps.map((item) => {
+              return (
+                <TestCase  itShould={item.key}  key={item.key} > 
+                 <View style={styles.row}>
+                    <View style={styles.item}>
+                        <IconButton icon="palette-swatch" size={36} style={styles.button} />
+                        <Badge  {...item.value}>
+                            12
+                        </Badge>
+                    </View>
+                 </View>
+                </TestCase>
+              );
+          })}
           </TestSuite>
         </Tester>
+        </ScrollView>
     )
 }
 

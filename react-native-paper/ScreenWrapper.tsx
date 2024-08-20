@@ -14,7 +14,6 @@ import {
 } from "react-native-paper"
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-
 type Props = ScrollViewProps & {
     children: React.ReactNode;
     withScrollView?: boolean;
