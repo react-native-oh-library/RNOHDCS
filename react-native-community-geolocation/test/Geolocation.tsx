@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import {View, ScrollView, Text} from 'react-native';
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
-import {Button} from '../components';
+import {Button} from 'react-native';
 import Geo from '@react-native-community/geolocation';
 const Meun = [
   {
@@ -93,12 +93,12 @@ export const ProgressViewDemo = () => {
                 return (
                   <View style={{flex: 1}}>
                     {current===index&&<Button
-                      label={value}
+                      title={value}
                       onPress={() => {
                        
                       }}></Button>}
                     <Button
-                      label={item.label}
+                      title={item.label}
                       onPress={() => {
                         setCurrent(index)
                         item.onPress(setState,setValue);
