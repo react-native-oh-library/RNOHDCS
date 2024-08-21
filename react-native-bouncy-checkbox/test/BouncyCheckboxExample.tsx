@@ -4,7 +4,9 @@ import BouncyCheckbox, { BouncyCheckboxHandle } from "react-native-bouncy-checkb
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
 
 export default function BouncyCheckboxExample() {
-    const [backgroundColor, setBackgroundColor] = useState('white');
+    const [checkboxState, setCheckboxState] = React.useState(false)
+    const [isChecked, setIsChecked] = useState(false);
+    const [backgroundColor, setBackgroundColor] = useState('black');
     const [isLongPressed, setIsLongPressed] = useState(false);
 
     const handleCheckboxLongPress = (checked) => {
@@ -17,11 +19,9 @@ export default function BouncyCheckboxExample() {
 
     const handleCheckboxPress = (checked) => {
         setIsLongPressed(false);
-        if (checked) {
-            setBackgroundColor('red'); 
-        } else {
-            setBackgroundColor('white'); 
-        }
+        setIsChecked(!isChecked);  
+        // 根据状态更改背景颜色  
+        setBackgroundColor(isChecked ? 'black' : 'red');  
     };
 
     const CustomImageComponent = () => {
@@ -67,9 +67,12 @@ export default function BouncyCheckboxExample() {
             <TestCase itShould="test BouncyCheckbox onPress function">
                     <BouncyCheckbox
                     text="Press me!"
-                    fillColor={backgroundColor}
-                    unFillColor={backgroundColor}
+                    isChecked={isChecked}
                     onPress={handleCheckboxPress}
+                    iconStyle={{  
+                        borderColor: 'green',  
+                        backgroundColor: backgroundColor, 
+                      }}  
                     />
             </TestCase>
             </TestSuite>
@@ -80,9 +83,9 @@ export default function BouncyCheckboxExample() {
                     <BouncyCheckbox
                     text="Long press me!"
                     unFillColor="#FFFFFF"
-                    fillColor={isLongPressed ? "#000000" : "#FF0000"} 
                     onPress={handleCheckboxPress}
                     onLongPress={handleCheckboxLongPress}
+                    fillColor={isLongPressed ? "#000000" : "#FF0000"} 
                     />
                  </TestCase>
             </TestSuite>
@@ -127,9 +130,9 @@ export default function BouncyCheckboxExample() {
 
   
         <TestSuite name='size'>
-                <TestCase itShould="test BouncyCheckbox size property with value 25">
+                <TestCase itShould="test BouncyCheckbox size property with value 35">
                     <BouncyCheckbox
-                    size={25}
+                    size={35}
                     />
             </TestCase>
             </TestSuite>
@@ -185,6 +188,7 @@ export default function BouncyCheckboxExample() {
             <TestSuite name='fillColor'>
                 <TestCase itShould="test BouncyCheckbox fillColor property with value 'black'">
                     <BouncyCheckbox
+                    isChecked={true}
                     fillColor={'black'}
                     />
             </TestCase>
@@ -195,6 +199,7 @@ export default function BouncyCheckboxExample() {
             <TestSuite name='unFillColor'>
                 <TestCase itShould="test BouncyCheckbox unFillColor property with value 'red'">   
                     <BouncyCheckbox
+                    isChecked={false}
                     unFillColor={'red'}
                     />
             </TestCase>
@@ -221,6 +226,8 @@ export default function BouncyCheckboxExample() {
             <TestSuite name='checkIconImageSource'>
                 <TestCase itShould="test BouncyCheckbox checkIconImageSource property">
                     <BouncyCheckbox
+                    isChecked={checkboxState}
+                    onPress={() => setCheckboxState(!checkboxState)}
                     checkIconImageSource={require("./assets/good.png")}
                     />
             </TestCase>
@@ -347,11 +354,11 @@ export default function BouncyCheckboxExample() {
             marginLeft: 29, // �ڸ�ѡ����ı�֮������һЩ���
         },
         checkbox: {
-            margin: 10,                     // ��߾�  
-            borderWidth: 1,                 // �߿����  
-            borderColor: '#007aff',         // �߿���ɫ  
-            borderRadius: 5,                // Բ�Ǳ߿�  
-            padding: 5,                     // �ڱ߾�  
+            margin: 10,                    
+            borderWidth: 1,                 
+            borderColor: '#007aff',         
+            borderRadius: 5,                 
+            padding: 5,                 
         },  
         button: {
             padding: 25,
