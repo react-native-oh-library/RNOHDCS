@@ -62,6 +62,7 @@ function VideoPlayerTest(){
               <TestSuite name='default properties'>
                 <TestCase itShould="test VideoPlayer official web video">
                   <VideoPlayer
+                    title = 'oceans'
                     controlTimeout = {90000}
                     source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
                     style = {styles.video}
