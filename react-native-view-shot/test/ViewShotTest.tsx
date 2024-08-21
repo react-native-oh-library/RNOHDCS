@@ -67,7 +67,7 @@ export default function ViewShotTest() {
     setState: React.Dispatch<React.SetStateAction<boolean>>;
   }) => {
     const release = () => {
-      if(releaseUri){
+      if (releaseUri) {
         releaseCapture(releaseUri)
         props.setState(true);
       }
@@ -86,7 +86,7 @@ export default function ViewShotTest() {
         </View>
         <View style={{ marginTop: 15 }}>
           <Text numberOfLines={1} ellipsizeMode="middle">截图保存路径: {releaseUri}</Text>
-          <View style={{marginBottom:5}}>
+          <View style={{ marginBottom: 5 }}>
             <Button title="截图" onPress={capture} />
           </View>
           <Button title="释放截图截图" onPress={release} />
@@ -99,7 +99,7 @@ export default function ViewShotTest() {
     setState: React.Dispatch<React.SetStateAction<string>>;
   }) => {
     const capture = () => {
-      captureRef(myText8).then((res) => {
+      captureRef(myText8, { width: 100, height: 50 }).then((res) => {
         FS.readFile(res, 'base64').then((data) => {
           setWidthData(data);
           setWidthUri(res);
@@ -109,9 +109,9 @@ export default function ViewShotTest() {
     };
 
     return (
-      <View style={{ height: 200 }}>
+      <View style={{ height: 150 }}>
         <View>
-          <ViewShot ref={myText8} style={{ backgroundColor:'yellow',width:100,height:50}} children={<Text style={{color:'#000'}}>测试截图</Text>}></ViewShot>
+          <ViewShot ref={myText8} style={{ backgroundColor: 'yellow' }} children={<Text style={{ color: '#000' }}>测试截图</Text>}></ViewShot>
         </View>
         <View style={{ marginTop: 20 }}>
           <Image source={{ uri: `data:image/png;base64,${widthData}` }} style={{ width: 100, height: 50 }} />
@@ -126,7 +126,7 @@ export default function ViewShotTest() {
     setState: React.Dispatch<React.SetStateAction<string>>;
   }) => {
     const capture = () => {
-      captureRef(myText9).then((res) => {
+      captureRef(myText9, { width: 200, height: 100 }).then((res) => {
         FS.readFile(res, 'base64').then((data) => {
           setWidth1Data(data);
           setWidth1Uri(res);
@@ -136,15 +136,9 @@ export default function ViewShotTest() {
     };
 
     return (
-      <View style={{ height: 300 }}>
+      <View style={{ height: 200 }}>
         <View>
-          <ViewShot ref={myText9} style={{ backgroundColor:'blue',width:200,height:100}} >
-            <Text>测试截图</Text>
-            <Text>测试截图</Text>
-            <Text>测试截图</Text>
-            <Text>测试截图</Text>
-            <Text>测试截图</Text>
-          </ViewShot>
+          <ViewShot ref={myText9} style={{ backgroundColor: 'blue' }} children={<Text style={{ color: '#000' }}>测试截图</Text>}></ViewShot>
         </View>
         <View style={{ marginTop: 20 }}>
           <Image source={{ uri: `data:image/png;base64,${width1Data}` }} style={{ width: 200, height: 100 }} />
@@ -171,7 +165,7 @@ export default function ViewShotTest() {
     return (
       <View style={{ height: 300 }}>
         <View>
-          <ViewShot ref={myText1} style={{ width:200,height:100,backgroundColor:'red'}} children={<Text>测试截图</Text>}></ViewShot>
+          <ViewShot ref={myText1} style={{ width: 200, height: 100, backgroundColor: 'red' }} children={<Text>测试截图</Text>}></ViewShot>
         </View>
         <View style={{ marginTop: 20 }}>
           <Image source={{ uri: `data:image/png;base64,${textData}` }} style={{ width: 200, height: 100 }} />
@@ -198,10 +192,10 @@ export default function ViewShotTest() {
     return (
       <View style={{ height: 270 }}>
         <View>
-          <ViewShot ref={myButton} style={{width:200,height:100, backgroundColor: '#bfa'}} children={<Button title="测试截图" />}></ViewShot>
+          <ViewShot ref={myButton} style={{ width: 200, height: 100, backgroundColor: '#bfa' }} children={<Button title="测试截图" />}></ViewShot>
         </View>
         <View style={{ marginTop: 15 }}>
-        <Image source={{ uri: `data:image/png;base64,${buttonData}` }} style={{ width: 200, height: 100 }} />
+          <Image source={{ uri: `data:image/png;base64,${buttonData}` }} style={{ width: 200, height: 100 }} />
           <Text numberOfLines={1} ellipsizeMode="middle">截图保存路径: {buttonUri}</Text>
           <Button title="截图" onPress={capture} />
         </View>
@@ -305,7 +299,7 @@ export default function ViewShotTest() {
     setState: React.Dispatch<React.SetStateAction<string>>;
   }) => {
     const capture = () => {
-      captureRef(myText2, { quality: 1,format:"jpg" }).then((res) => {
+      captureRef(myText2, { quality: 1, format: "jpg" }).then((res) => {
         FS.readFile(res, 'base64').then((data) => {
           setQuality1nData(data);
           setQuality1Uri(res);
@@ -317,7 +311,7 @@ export default function ViewShotTest() {
     return (
       <View style={{ height: 300 }}>
         <View>
-          <ViewShot ref={myText2} style={{ width: 200, height: 100, backgroundColor: 'red' }} children={<Text style={{fontSize:50}}>测试截图</Text>}></ViewShot>
+          <ViewShot ref={myText2} style={{ width: 200, height: 100, backgroundColor: 'red' }} children={<Text style={{ fontSize: 50 }}>测试截图</Text>}></ViewShot>
         </View>
         <View style={{ marginTop: 15 }}>
           <Image source={{ uri: `data:image/png;base64,${quality1Data}` }} style={{ width: 200, height: 100 }} />
@@ -332,11 +326,11 @@ export default function ViewShotTest() {
     setState: React.Dispatch<React.SetStateAction<string>>;
   }) => {
     const capture = () => {
-      captureRef(myText3, { quality: 0.1,format:"jpg" }).then((res) => {
+      captureRef(myText3, { quality: 0.1, format: "jpg" }).then((res) => {
         FS.readFile(res, 'base64').then((data) => {
           setQuality2Data(data);
           setQuality2Uri(res);
-           props.setState(res);
+          props.setState(res);
         })
       })
     };
@@ -344,10 +338,10 @@ export default function ViewShotTest() {
     return (
       <View style={{ height: 300 }}>
         <View>
-          <ViewShot ref={myText3} style={{ width: 200, height: 100, backgroundColor: 'red' }} children={<Text style={{fontSize:50}}>测试截图</Text>}></ViewShot>
+          <ViewShot ref={myText3} style={{ width: 200, height: 100, backgroundColor: 'red' }} children={<Text style={{ fontSize: 50 }}>测试截图</Text>}></ViewShot>
         </View>
         <View style={{ marginTop: 15 }}>
-        <Image source={{ uri: `data:image/png;base64,${quality2Data}` }} style={{ width: 200, height: 100 }} />
+          <Image source={{ uri: `data:image/png;base64,${quality2Data}` }} style={{ width: 200, height: 100 }} />
           <Text numberOfLines={1} ellipsizeMode="middle">截图保存路径: {quality2Uri}</Text>
           <Button title="截图" onPress={capture} />
         </View>
@@ -423,7 +417,7 @@ export default function ViewShotTest() {
       </View>
     );
   };
-  
+
   return (
     <View>
       <ScrollView>
@@ -476,7 +470,7 @@ export default function ViewShotTest() {
               expect(state).to.be.string;
             }}
           />
-           <TestCase
+          <TestCase
             itShould="options的width为100,height为50"
             initialState={''}
             arrange={({ setState }) => <ViewShotWidth setState={setState} />}
@@ -484,7 +478,7 @@ export default function ViewShotTest() {
               expect(state).to.be.string;
             }}
           />
-           <TestCase
+          <TestCase
             itShould="options的width为200,height为100"
             initialState={''}
             arrange={({ setState }) => <ViewShotWidth1 setState={setState} />}
