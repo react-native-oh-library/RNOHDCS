@@ -7,7 +7,7 @@ import {
   Image,
   ImageSourcePropType,
 } from 'react-native';
-import {name} from './app.json';
+import {name} from '../app.json';
 
 type NotificationIOSProps = {
   imageSrc?: ImageSourcePropType;
