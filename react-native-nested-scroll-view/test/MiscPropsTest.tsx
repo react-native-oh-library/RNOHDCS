@@ -1,5 +1,5 @@
 import {TestSuite, TestCase} from '@rnoh/testerino';
-import {Platform, ScrollView, StyleSheet, View} from 'react-native';
+import {Platform, ScrollView, StyleSheet, Text,View} from 'react-native';
 import React from 'react';
 import {
   COMMON_PROPS,
