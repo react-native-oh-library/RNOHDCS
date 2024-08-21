@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import {View, ScrollView, Text} from 'react-native';
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
-import {Button} from '../components';
+import { Button } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Meun = [
@@ -174,8 +174,8 @@ export const ProgressViewDemo = () => {
   const display = () => {
     return (
       <>
-        <Button label={`当前key: ${key}`} onPress={() => {}}></Button>
-        <Button label={`当前value: ${value}`} onPress={() => {}}></Button>
+        <Button title={`当前key: ${key}`} onPress={() => {}}></Button>
+        <Button title={`当前value: ${value}`} onPress={() => {}}></Button>
 
       </>
     );
@@ -207,7 +207,7 @@ export const ProgressViewDemo = () => {
                   <View style={{flex: 1}}>
                      {current===index&&display()}
                     <Button
-                      label={item.label}
+                      title={item.label}
                       onPress={() => {
                         setCurrent(index)
                         item.onPress(setState);
