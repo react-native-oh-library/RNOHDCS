@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import {
   Animated,
   View,
@@ -9,7 +9,6 @@ import {
   StyleSheet,
 } from 'react-native';
 import BootSplash from 'react-native-bootsplash';
-import {TestSuite, Tester, TestCase} from '@rnoh/testerino';
 
 const styles = StyleSheet.create({
   container: {
@@ -34,14 +33,14 @@ type Props = {
 
 const useNativeDriver = Platform.OS !== 'web';
 
-const AnimatedBootSplash = ({onAnimationEnd}: Props) => {
+const AnimatedBootSplash = ({ onAnimationEnd }: Props) => {
   const [opacity] = useState(() => new Animated.Value(1));
   const [translateY] = useState(() => new Animated.Value(0));
 
-  const {container, logo /*, brand */} = BootSplash.useHideAnimation({
-    manifest: require('./source/bootsplash_manifest.json'),
+  const { container, logo /*, brand */ } = BootSplash.useHideAnimation({
+    manifest: require('../source/bootsplash_manifest.json'),
 
-    logo: require('./source/bootsplash_logo.png'),
+    logo: require('../source/bootsplash_logo.png'),
     // darkLogo: require("../assets/bootsplash/dark-logo.png"),
     // brand: require("../assets/bootsplash/brand.png"),
     // darkBrand: require("../assets/bootsplash/dark-brand.png"),
@@ -50,7 +49,7 @@ const AnimatedBootSplash = ({onAnimationEnd}: Props) => {
     navigationBarTranslucent: false,
 
     animate: () => {
-      const {height} = Dimensions.get('window');
+      const { height } = Dimensions.get('window');
 
       Animated.stagger(1000, [
         Animated.spring(translateY, {
@@ -75,10 +74,10 @@ const AnimatedBootSplash = ({onAnimationEnd}: Props) => {
   });
 
   return (
-    <Animated.View {...container} style={[container.style, {opacity}]}>
+    <Animated.View {...container} style={[container.style, { opacity }]}>
       <Animated.Image
         {...logo}
-        style={[logo.style, {transform: [{translateY}]}]}
+        style={[logo.style, { transform: [{ translateY }] }]}
       />
       {/* <Animated.Image {...brand} style={[brand.style, { opacity }]} /> */}
     </Animated.View>
@@ -88,7 +87,7 @@ const AnimatedBootSplash = ({onAnimationEnd}: Props) => {
 const UseHideAnimationTest = () => {
   const [visible, setVisible] = useState(true);
   return (
-    <View style={{height: '80%', width: '100%'}}>
+    <View style={{ height: '80%', width: '100%' }}>
       <View style={styles.container}>
         <Text style={styles.text}>Hello BootSplash</Text>
         {visible && (
@@ -105,7 +104,7 @@ const UseHideAnimationTest = () => {
   );
 };
 
-export const BootSplashTest = () => {
+export const BootSplashDemo = () => {
   const [visible, setVisible] = useState(true);
   useEffect(() => {
     StatusBar.setBarStyle('dark-content');
@@ -116,24 +115,8 @@ export const BootSplashTest = () => {
   }, []);
 
   return (
-    <View style={{top: 48}}>
-      <Tester style={{height: '100%', width: '100%'}}>
-        <TestSuite name="Bootsplash">
-          <TestCase
-            itShould="test Bootsplash hide"
-            fn={({expect}) => {
-              expect(BootSplash.hide()).ok;
-            }}></TestCase>
-          <TestCase
-            itShould="test Bootsplash isVisible"
-            fn={({expect}) => {
-              expect(BootSplash.isVisible()).ok;
-            }}></TestCase>
-          <TestCase modal itShould="test Bootsplash useHideAnimation">
-            <UseHideAnimationTest></UseHideAnimationTest>
-          </TestCase>
-        </TestSuite>
-      </Tester>
+    <View style={{ top: 48 }}>
+      <UseHideAnimationTest></UseHideAnimationTest>
       {visible && (
         <AnimatedBootSplash
           onAnimationEnd={() => {
