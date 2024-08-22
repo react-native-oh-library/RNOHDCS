@@ -7,15 +7,18 @@ import {
   View,
 } from 'react-native'
 
-import { AgendaExample } from './Example/AgendaExample'
-import { CalendarExample } from './Example/CalendarExample'
-import { CalendarListExample } from './Example/CalendarListExample'
-import { CalendarProviderExample } from './Example/CalendarProviderExample'
-import { AgendaListExample } from './Example/AgendaListExample'
-import { ExpandableCalendarExample } from './Example/ExpandableCalendarExample'
-import { TimelineExample } from './Example/TimelineExample'
+import  Calendar  from './Example/Calendar'
+import CalendarProvider  from './Example/CalendarProvider'
+import  AgendaList  from './Example/AgendaList'
+import ExpandableCalendar from './Example/ExpandableCalendar'
 import { WeekCalendarExample } from './Example/WeekCalendarExample'
+import CalendarList from './Example/CalendarList'
+import Timeline from './Example/timeLine'
+import Agenda from './Example/Agenda'
+
+
 import { NavigationContainer, Page } from './components/Navigation';
+
 
 
 function App() {
@@ -24,31 +27,32 @@ function App() {
       <SafeAreaView>
         <NavigationContainer>
 
+
           <Page name="测试 Calendar组件">
-            <CalendarExample></CalendarExample>
-          </Page>
-          <Page name="测试 Agenda组件">
-            <AgendaExample></AgendaExample>
-          </Page>
-          <Page name="测试 CalendarList组件">
-            <CalendarListExample></CalendarListExample>
+            <Calendar></Calendar>
           </Page>
           <Page name="测试 WeekCalendar组件">
             <WeekCalendarExample></WeekCalendarExample>
           </Page>
           <Page name="测试 CalendarProvider组件">
-            <CalendarProviderExample></CalendarProviderExample>
+            <CalendarProvider></CalendarProvider>
           </Page>
           <Page name="测试 AgendaList组件">
-            <AgendaListExample></AgendaListExample>
+            <AgendaList></AgendaList>
           </Page>
           <Page name="测试 ExpandableCalendar组件">
-            <ExpandableCalendarExample></ExpandableCalendarExample>
+            <ExpandableCalendar></ExpandableCalendar>
           </Page>
-          <Page name="测试 TimelineExample组件">
-            <TimelineExample></TimelineExample>
+          <Page name="测试 CalendarList组件">
+            <CalendarList></CalendarList>
           </Page>
-
+          <Page name="测试 Agenda组件">
+            <Agenda></Agenda>
+          </Page>
+          <Page name="测试 Timeline组件">
+            <Timeline></Timeline>
+          </Page>
+          
 
 
         </NavigationContainer>
