@@ -25,6 +25,14 @@ export function TextVideo(): JSX.Element {
                 }}
             />
             <TestCase
+                itShould={`posterResizeMode = {"stretch"}`}
+                initialState={false}
+                arrange={({ setState }) => <AddposterResizeModeTest setState={setState} />}
+                assert={({ state, expect }) => {
+                    expect(state).to.be.true;
+                }}
+            />
+            <TestCase
                 itShould="OnBuffer"
                 initialState={false}
                 arrange={({ setState }) => <AddMenuOnBufferTest setState={setState} />}
@@ -130,14 +138,74 @@ export function TextVideo(): JSX.Element {
                     expect(state).to.be.true;
                 }}
             />
-            
+            <TestCase
+                itShould="volume={0.2}"
+                initialState={false}
+                arrange={({ setState }) => <AddVolumeTest setState={setState} />}
+                assert={({ state, expect }) => {
+                    expect(state).to.be.true;
+                }}
+            />
+
         </TestSuite>
     );
 }
 
 //https://vod.vmall.com/asset/073cc2bab11eb7417e13a722bd9559d7/fe675e3e740a04d3a5295441af743036.mp4
 
+const AddVolumeTest = (props: {
+    setState: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+    const videoref = useRef<React.ElementRef<VideoComponentType>>(null);
+    const [paused, setPaused] = useState(true)
+    const [volume, setVolume] = useState(1)
+    const addRepeat = () => {
+        setPaused(!paused)
+    }
+    const addVolume = () => {
+        setVolume(0.2)
+    }
 
+    return (
+
+        <View style={{
+            height: 220,
+            width: "100%",
+            overflow: 'hidden',
+            alignItems: "center"
+
+        }}>
+            <View style={{
+                height: 150,
+                width: 200,
+                overflow: 'hidden',
+                justifyContent: 'center',
+
+            }}>
+
+                <RNCVideo
+                    ref={videoref}
+                    source={{ uri: "https://res.vmallres.com//uomcdn/CN/cms/202210/C75C7E20060F3E909F2998E13C3ABC03.mp4" }}
+                    //source={{ uri: "https://vod.vmall.com/asset/073cc2bab11eb7417e13a722bd9559d7/fe675e3e740a04d3a5295441af743036.mp4" }}
+                    controls={true}
+                    repeat={false}
+                    paused={paused}
+                    muted={false}
+                    resizeMode={"contain"}
+                    style={{ flex: 1 }}
+                    volume={volume}
+                />
+            </View>
+            <View style={{ marginTop: 20, flexDirection: "row" }}>
+                <Button title={paused ? "播放" : "暂停"} onPress={addRepeat} />
+
+                <Button title={"音量调整为0.2"} onPress={addVolume} />
+            </View>
+        </View>
+
+    );
+
+}
 const AddMenuonMutedTest = (props: {
     setState: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
@@ -165,20 +233,20 @@ const AddMenuonMutedTest = (props: {
                 justifyContent: 'center',
 
             }}>
-               
-                    <RNCVideo
-                        ref={videoref}
-                         source={{ uri: "https://res.vmallres.com//uomcdn/CN/cms/202210/C75C7E20060F3E909F2998E13C3ABC03.mp4" }}
-                        //source={{ uri: "https://vod.vmall.com/asset/073cc2bab11eb7417e13a722bd9559d7/fe675e3e740a04d3a5295441af743036.mp4" }}
-                        controls={true}
-                        repeat={true}
-                        paused={paused}
-                        muted={muted}
-                        resizeMode={"contain"}
-                        style={{ flex: 1 }}
-                    /> 
+
+                <RNCVideo
+                    ref={videoref}
+                    source={{ uri: "https://res.vmallres.com//uomcdn/CN/cms/202210/C75C7E20060F3E909F2998E13C3ABC03.mp4" }}
+                    //source={{ uri: "https://vod.vmall.com/asset/073cc2bab11eb7417e13a722bd9559d7/fe675e3e740a04d3a5295441af743036.mp4" }}
+                    controls={true}
+                    repeat={true}
+                    paused={paused}
+                    muted={muted}
+                    resizeMode={"contain"}
+                    style={{ flex: 1 }}
+                />
             </View>
-            <Button title={muted?"不静音":"静音"} onPress={addRepeat} />
+            <Button title={muted ? "不静音" : "静音"} onPress={addRepeat} />
         </View>
 
     );
@@ -483,7 +551,7 @@ const AddMenuOnLoadStartTest = (props: {
     setState: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
     const [show, setShow] = useState(false)
-    const addRepeat=()=>{
+    const addRepeat = () => {
         setShow(!show)
     }
     return (
@@ -501,7 +569,7 @@ const AddMenuOnLoadStartTest = (props: {
                 justifyContent: 'center',
 
             }}>
-                {show? <RNCVideo
+                {show ? <RNCVideo
                     source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
                     controls={true}
                     repeat={true}
@@ -511,12 +579,41 @@ const AddMenuOnLoadStartTest = (props: {
                         console.log("onLoadStart已触发")
                         Alert.alert("onLoadStart已触发")
                     }}
-                />:null}
-               
+                /> : null}
+
             </View>
             <Button title={"展示video"} onPress={addRepeat} />
         </View>
 
+
+    );
+
+}
+
+
+const AddposterResizeModeTest = (props: {
+    setState: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+
+    return (
+
+        <View style={{
+            height: 150,
+            width: "100%",
+            overflow: 'hidden',
+            justifyContent: 'center',
+
+        }}>
+            <RNCVideo
+                source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
+                controls={true}
+                repeat={true}
+                resizeMode={"contain"}
+                style={{ flex: 1 }}
+                poster={"https://res.vmallres.com/pimages/uomcdn/CN/pms/202304/sbom/4002010007801/group/800_800_9B1356F1330EADDCB20D35D2AE1F46E0.jpg"}
+                posterResizeMode="stretch"
+            />
+        </View>
 
     );
 
