@@ -8,8 +8,7 @@ import {
   createBottomSheetNavigator,
 } from '@th3rdwave/react-navigation-bottom-sheet';
 import * as React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import { number } from 'yargs';
+import { Button, StyleSheet, Text, View, TextInput } from 'react-native';
 
 
 
@@ -29,13 +28,6 @@ function HomeScreen({
       <Text style={{ color: 'black' }}>Home Screen</Text>
       <View style={styles.spacer} />
       <Button
-        title="Open sheet"
-        onPress={() => {
-          navigation.navigate('Sheet', { id: 1 });
-        }}
-      />
-      <View style={styles.spacer} />
-      <Button
         title="Open a big sheet"
         onPress={() => {
           navigation.navigate('BigSheet', { id: 1 });
@@ -51,11 +43,14 @@ const renderBackdrop = (props: BottomSheetBackdropProps) => (
 );
 
 interface propsProps {
-  onSnapTo?: boolean,
-  snapPoints: Array<string | number>
+  noSnapTo?: boolean,
+  snapPoints: Array<string | number>,
+  keyboardBehavior?: string,
+  keyboardBlurBehavior?: string
 }
 
 export function SimpleExample(props: propsProps) {
+
 
   function SheetScreen({
     route,
@@ -73,12 +68,6 @@ export function SimpleExample(props: propsProps) {
       <View style={[styles.container, styles.content]}>
         <Text>Sheet Screen {route.params.id}</Text>
         <View style={styles.spacer} />
-        <Button
-          title="Open new sheet"
-          onPress={() => {
-            navigation.navigate('Sheet', { id: route.params.id + 1 });
-          }}
-        />
         <View style={styles.spacer} />
         <Button
           title="Open new big sheet"
@@ -94,7 +83,11 @@ export function SimpleExample(props: propsProps) {
           }}
         />
         <View style={styles.spacer} />
-        {route.name === ('BigSheet' as unknown) && !props?.onSnapTo && (
+        {
+         (props?.keyboardBehavior || props?.keyboardBlurBehavior) && <TextInput style={{borderColor:'black', borderWidth: 1}} placeholder="Input here..." />
+        }
+        
+        {route.name === ('BigSheet' as unknown) && !props?.noSnapTo && (
           <>
             <Button
               title="Snap to top"
@@ -118,15 +111,10 @@ export function SimpleExample(props: propsProps) {
       >
         <BottomSheet.Screen name="Home" component={HomeScreen} />
         <BottomSheet.Screen
-          name="Sheet"
-          component={SheetScreen}
-          getId={({ params }) => `sheet-${params.id}`}
-        />
-        <BottomSheet.Screen
           name="BigSheet"
           component={SheetScreen}
           options={{
-            snapPoints: props.snapPoints,
+            ...props,
           }}
           getId={({ params }) => `sheet-${params.id}`}
         />
