@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   LayoutAnimation,
 } from 'react-native';
-import {name} from './app.json';
+import {name} from '../app.json';
 const reactNativeLogoSrc: ImageSourcePropType = {
   uri: 'https://reactnative.dev/docs/assets/favicon.png',
 };
@@ -55,7 +55,7 @@ const NotificationAndroid: React.FunctionComponent<
           </Text>
           <Image source={bigIcon} style={styles.bigIcon} />
           <Image
-            source={require('./assets/arrowup.png')}
+            source={require('../assets/arrowup.png')}
             style={styles.expandIcon}
           />
         </View>
@@ -91,7 +91,7 @@ const NotificationAndroid: React.FunctionComponent<
           </View>
           <Image source={bigIcon} style={styles.bigIcon} />
           <Image
-            source={require('./assets/arrowdown.png')}
+            source={require('../assets/arrowdown.png')}
             style={[styles.expandIcon, {alignSelf: 'auto'}]}
           />
         </View>

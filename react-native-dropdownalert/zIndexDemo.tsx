@@ -108,17 +108,14 @@ function ZIndexDemo(): React.JSX.Element {
   ];
 
   function _onSelect(items: ListItem[]): void {
-    console.log(1);
     setProcessing(true);
 
-    console.log(2);
     setTimeout(async () => {
       items.forEach(i => {
         alert.current(i.alertData);
       });
     }, 10);
     setProcessing(false);
-    console.log(3);
   }
 
   return (

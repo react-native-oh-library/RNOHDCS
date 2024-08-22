@@ -21,8 +21,8 @@ import DropdownAlert, {
   DropdownAlertDismissAction,
 } from 'react-native-dropdownalert';
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
-import NotificationAndroid from './NotificationAndroid';
-import NotificationIOS from './NotificationIOS';
+import NotificationAndroid from './Notification/NotificationAndroid';
+import NotificationIOS from './Notification/NotificationIOS';
 
 type ListItem = {
   name: string;
@@ -30,6 +30,7 @@ type ListItem = {
   alertData?: DropdownAlertData;
   alertProps?: DropdownAlertProps;
   color: ColorValue;
+  needMessage?:boolean |undefined
 };
 
 type ListItemIndex = {
@@ -44,6 +45,7 @@ function DropdownalertDemo(): React.JSX.Element {
     color: DropdownAlertColor.Default,
   };
   const [selected, setSelected] = useState(defaultSelected);
+  const [iMessage, setIMessage] = useState("");
   const [processing, setProcessing] = useState(false);
   let alert = useRef(
     (_data?: DropdownAlertData) => new Promise<DropdownAlertData>(res => res),
@@ -64,7 +66,7 @@ function DropdownalertDemo(): React.JSX.Element {
         message:
           '（I am message）The device battery is low. It will go into low power mode in 5 minutes.',
       },
-      color: DropdownAlertColor.Warn,
+      color: DropdownAlertColor.Warn
     },
     {
       name: 'Info',
@@ -149,7 +151,7 @@ function DropdownalertDemo(): React.JSX.Element {
         message: '',
         source: reactNativeLogoSrc,
         resolve: () => {
-          console.log('I am resolved');
+          setIMessage("I am resolved");
         },
       },
       alertProps: {
@@ -296,10 +298,12 @@ function DropdownalertDemo(): React.JSX.Element {
       },
       alertProps: {
         dismiss: () => {
-          console.log('dismiss');
+          setIMessage("I am dismiss");
         },
       },
       color: DropdownAlertColor.Warn,
+      needMessage:true
+
     },
     {
       name: 'alert',
@@ -312,10 +316,11 @@ function DropdownalertDemo(): React.JSX.Element {
       },
       alertProps: {
         alert: () => {
-          console.log('alert！！！');
+          setIMessage("I am alert!");
         },
       },
       color: DropdownAlertColor.Warn,
+      needMessage:true
     },
     {
       name: 'elevation 10 test',
@@ -397,7 +402,15 @@ function DropdownalertDemo(): React.JSX.Element {
         <Tester>
           <TestSuite name="drop down alert">
             {items.map((item: ListItem, index: number) => {
-              return (
+              return item.needMessage?(<TestCase itShould={item.itshould} key={index}>
+                                  <Text>show message:{iMessage}</Text>
+                <TouchableOpacity
+                  style={[styles.item, {backgroundColor: item.color}]}
+                  onPress={() => _onSelect(item)}
+                  disabled={processing}>
+                  <Text style={styles.name}>{item.name}</Text>
+                </TouchableOpacity>
+              </TestCase>):(
                 <TestCase itShould={item.itshould} key={index}>
                   <TouchableOpacity
                     style={[styles.item, {backgroundColor: item.color}]}
