@@ -4,14 +4,14 @@ import { View, StyleSheet, Button, Text, ScrollView } from 'react-native';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 
 
-export function CountdownCircleTime() {
+export default function CountdownCircleTime() {
   const [isPlaying, setIsPlaying] = useState(true)
   const [count, setCount] = useState(15)
 
   return (
     <Tester>
       <TestSuite name='SensitiveInfoDemo'>
-        <ScrollView style={{ height: 950 }}>
+        <ScrollView style={{ height: 700 }}>
           <View style={{ backgroundColor: "#000" }}>
             <TestCase
               itShould="倒计时器"
