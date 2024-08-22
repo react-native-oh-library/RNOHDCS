@@ -28,6 +28,10 @@ export function MenuTest() {
                   <Box w="90%" alignItems="center">
                     <Menu
                       w="190"
+                      defaultIsOpen={false}
+                      closeOnSelect={false}
+                      crossOffset={400}
+                      offset={50}
                       trigger={triggerProps => {
                         return (
                           <Pressable
@@ -37,7 +41,9 @@ export function MenuTest() {
                           </Pressable>
                         );
                       }}>
-                      <Menu.Item>Arial</Menu.Item>
+                      <Menu.Item _stack={{fontSize: 10, color: 'red'}}>
+                        Arial
+                      </Menu.Item>
                       <Menu.Item>Nunito Sans</Menu.Item>
                       <Menu.Item>Roboto</Menu.Item>
                       <Menu.Item>Poppins</Menu.Item>
@@ -103,6 +109,7 @@ export function MenuTest() {
                         );
                       }}>
                       <Menu.OptionGroup
+                        _stack={{fontSize: 20, color: 'red'}}
                         defaultValue="Arial"
                         title="free"
                         type="radio">
@@ -139,6 +146,7 @@ export function MenuTest() {
                       trigger={triggerProps => {
                         return (
                           <Button
+                          
                             alignSelf="center"
                             variant="solid"
                             {...triggerProps}>
@@ -146,7 +154,7 @@ export function MenuTest() {
                           </Button>
                         );
                       }}>
-                      <Menu.Item>Arial</Menu.Item>
+                      <Menu.Item >Arial</Menu.Item>
                       <Menu.Item>Nunito Sans</Menu.Item>
                       <Menu.Item>Roboto</Menu.Item>
                     </Menu>

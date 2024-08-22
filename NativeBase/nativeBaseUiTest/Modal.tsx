@@ -60,6 +60,7 @@ export function ModalTest() {
                   <Center>
                     <Button onPress={() => setShowModal(true)}>Button</Button>
                     <Modal
+                      isKeyboardDismissable={true}
                       isOpen={showModal}
                       onClose={() => setShowModal(false)}>
                       <Modal.Content maxWidth="400px">
@@ -521,7 +522,9 @@ export function ModalTest() {
                 <Text>Custom Backdrop Modal</Text>
                 <View style={styles.subSection}>
                   <Center>
-                    <Button onPress={() => setCustomShowModal(true)}>Button</Button>
+                    <Button onPress={() => setCustomShowModal(true)}>
+                      Button
+                    </Button>
                     <Modal
                       isOpen={customShowModal}
                       onClose={() => setCustomShowModal(false)}

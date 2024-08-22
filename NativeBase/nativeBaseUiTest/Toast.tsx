@@ -1,11 +1,5 @@
 import {View, StyleSheet, ScrollView, Text} from 'react-native';
-import {
-  Center,
-  Box,
-  VStack,
-  useToast,
-  Button,
-} from 'native-base';
+import {Center, Box, VStack, useToast, Button} from 'native-base';
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
 
 export function ToastTest() {
@@ -24,6 +18,12 @@ export function ToastTest() {
                       onPress={() =>
                         toast.show({
                           description: 'Hello world',
+                          accessibilityAnnouncement:
+                            'accessibilityAnnouncement',
+                          onCloseComplete() {
+                            console.log('1111111111');
+                          },
+                          avoidKeyboard: true,
                         })
                       }>
                       Show Toast
