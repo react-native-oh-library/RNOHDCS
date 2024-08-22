@@ -69,8 +69,9 @@ export function IconTest() {
             <TestCase itShould="add" tags={['dev']}>
               <Center>
                 <HStack space={3}>
-                  <Icon
-                    name="add"
+                    <Icon
+                    as={MaterialCommunityIcons}
+                    name="web"
                     color="coolGray.800"
                     _dark={{
                       color: 'warmGray.50',

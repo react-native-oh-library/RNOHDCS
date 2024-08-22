@@ -1,13 +1,8 @@
 import {View, StyleSheet, ScrollView, Text} from 'react-native';
-import {
-  IconButton,
-  Icon,
-  Box,
-  Center,
-  VStack,
-} from 'native-base';
+import {IconButton, Icon, Box, Center, VStack} from 'native-base';
 
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 export function IconButtonTest() {
   // 官网给给的文档就是通过组件写样式做成了卡片的样子
@@ -23,7 +18,16 @@ export function IconButtonTest() {
                   <Box alignItems="center">
                     <IconButton
                       colorScheme="danger"
-                      icon={<Icon name="emoji-happy" />}
+                      icon={
+                        <Icon
+                          as={Entypo}
+                          name="app-store"
+                          color="coolGray.800"
+                          _dark={{
+                            color: 'warmGray.50',
+                          }}
+                        />
+                      }
                       borderRadius="full"
                       _icon={{
                         color: 'orange.500',
@@ -70,6 +74,16 @@ export function IconButtonTest() {
                             // as: MaterialIcons,
                             name: 'menu',
                           }}
+                          icon={
+                            <Icon
+                              as={Entypo}
+                              name="app-store"
+                              color="coolGray.800"
+                              _dark={{
+                                color: 'warmGray.50',
+                              }}
+                            />
+                          }
                         />
                       ))}
                     </VStack>
@@ -95,6 +109,16 @@ export function IconButtonTest() {
                             // as: AntDesign,
                             name: 'search1',
                           }}
+                          icon={
+                            <Icon
+                              as={Entypo}
+                              name="app-store"
+                              color="coolGray.800"
+                              _dark={{
+                                color: 'warmGray.50',
+                              }}
+                            />
+                          }
                         />
                       ))}
                     </VStack>

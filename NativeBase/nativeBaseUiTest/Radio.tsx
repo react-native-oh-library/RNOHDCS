@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Button, View, StyleSheet, ScrollView, Text, TextInput } from 'react-native';
-import { AddIcon, Box, DeleteIcon, HStack, Radio, VStack } from 'native-base';
+import React from 'react';
+import {  View, StyleSheet, ScrollView } from 'react-native';
+import { AddIcon, DeleteIcon, HStack, Radio } from 'native-base';
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 export function RadioTest() {
     const [value, setValue] = React.useState("one");
@@ -315,10 +315,12 @@ export function RadioTest() {
                     >
                        <Radio.Group name="exampleGroup" colorScheme="success" accessibilityLabel="pick an option" onChange={value => {
                                     if (value === "2") {
+                                    // @ts-ignore
                                      myRef.current.setNativeProps({
                                         backgroundColor: "#00de0050"
                                       });
                                     } else {
+                                    // @ts-ignore
                                      myRef.current.setNativeProps({
                                         backgroundColor: "#fa000050"
                                       });

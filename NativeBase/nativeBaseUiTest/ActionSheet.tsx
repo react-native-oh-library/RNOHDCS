@@ -27,7 +27,7 @@ export function ActionSheetTest() {
                 <View style={styles.subSection}>
                   <Center>
                     <Button onPress={onOpen}>Actionsheet</Button>
-                    <Actionsheet isOpen={isOpen} onClose={onClose} size="full">
+                    <Actionsheet isOpen={isOpen} onClose={onClose} size="full" hideDragIndicator={true}>
                       <Actionsheet.Content>
                         <Box w="100%" h={60} px={4} justifyContent="center">
                           <Text

@@ -1,14 +1,6 @@
 import {useState} from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
-import {
-  Center,
-  Box,
-  VStack,
-  HStack,
-  Button,
-  Skeleton,
-  Text,
-} from 'native-base';
+import {Center, Box, VStack, HStack, Button, Skeleton, Text} from 'native-base';
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
 
 export function SkeletonTest() {
@@ -167,10 +159,16 @@ export function SkeletonTest() {
                         _light={{
                           borderColor: 'coolGray.200',
                         }}>
-                        <Skeleton h="40" isLoaded={isLoaded}>
-                        </Skeleton>
-                        <Skeleton.Text lines={4} px="4" isLoaded={isLoaded}>
-                          <Text px="4" fontSize={'md'} lineHeight={'20px'}>
+                        <Skeleton h="40" isLoaded={isLoaded}></Skeleton>
+                        <Skeleton.Text
+                          lines={1}
+                          _stack={{
+                            bg:'red'
+                          }}
+                          px="4"
+                          _line={{bg: 'red'}}
+                          isLoaded={isLoaded}>
+                          <Text px="3" fontSize={'lg'} lineHeight={'20px'}>
                             {text}
                           </Text>
                         </Skeleton.Text>

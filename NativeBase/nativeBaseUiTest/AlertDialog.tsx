@@ -9,6 +9,11 @@ export function AlertDialogTest() {
   const onClose = () => setIsOpen(false);
 
   const cancelRef = useRef(null);
+  const initialFocusRef = useRef(null);
+  const finalFocusRef = useRef(null);
+  console.log(cancelRef, 'cancelRef')
+  console.log(initialFocusRef, 'initialFocusRef')
+  console.log(finalFocusRef, 'finalFocusRef')
   return (
     <>
       <Tester>
@@ -26,7 +31,15 @@ export function AlertDialogTest() {
                     </Button>
                     <AlertDialog
                       leastDestructiveRef={cancelRef}
+                      initialFocusRef={initialFocusRef}
+                      finalFocusRef={finalFocusRef}
+                      size={30}
                       isOpen={isOpen}
+                      closeOnOverlayClick
+                      isKeyboardDismissable
+                      overlayVisible={true}
+                      backdropVisible={false}
+                      useRNModal={true}
                       onClose={onClose}>
                       <AlertDialog.Content>
                         <AlertDialog.CloseButton />

@@ -10,6 +10,7 @@ import {
   CloseIcon,
 } from 'native-base';
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 function Example() {
   return (
@@ -69,8 +70,16 @@ export function BadgeTest() {
                       base: 'auto',
                       md: 0,
                     }}>
-                    <Badge colorScheme="success">SUCCESS</Badge>
-                    <Badge colorScheme="danger">DANGER</Badge>
+                    <Badge
+                      colorScheme="success"
+                      startIcon={<MaterialIcons name="mic" size={20} />}>
+                      SUCCESS
+                    </Badge>
+                    <Badge
+                      colorScheme="danger"
+                      endIcon={<MaterialIcons name="mic" size={20} />}>
+                      DANGER
+                    </Badge>
                     <Badge colorScheme="info">INFO</Badge>
                     <Badge colorScheme="coolGray">DARK</Badge>
                   </HStack>
@@ -93,18 +102,28 @@ export function BadgeTest() {
                       }}>
                       {['solid', 'outline', 'subtle'].map(key => (
                         <VStack key={key} space={4}>
-                          <Badge variant={key} alignSelf="center">
+                          <Badge
+                            variant={key}
+                            alignSelf="center"
+                            rightIcon={<MaterialIcons name="mic" size={20} />}>
                             DEFAULT
                           </Badge>
                           <Badge
                             colorScheme="success"
                             alignSelf="center"
+                            _text={{bg: 'amber.400'}}
                             variant={key}>
                             SUCCESS
                           </Badge>
                           <Badge
+                            leftIcon={<MaterialIcons name="mic" size={20} />}
                             colorScheme="error"
                             alignSelf="center"
+                            _icon={{
+                              as: {MaterialIcons},
+                              size: 100,
+                              color: 'amber.900',
+                            }}
                             variant={key}>
                             ERROR
                           </Badge>

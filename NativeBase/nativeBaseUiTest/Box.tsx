@@ -87,8 +87,9 @@ export function BoxTest() {
                 <TestSuite name='safeAreaProps'>
                     <TestCase
                         itShould="safeAreaProps"
+                    
                         children={(<View style={styles.section}>
-                            <Box style={styles.box} backgroundColor='#87CEFA' safeAreaProps={{ safeAreaTop: 10, safeAreaBottom: 10, safeAreaLeft: 20, safeAreaRight: 20 }}>
+                            <Box  style={styles.box} backgroundColor='#87CEFA' safeAreaProps={{ safeAreaTop: 10, safeAreaBottom: 10, safeAreaLeft: 20, safeAreaRight: 20 }}>
                                 
                             </Box>
                         </View>)}

@@ -5,7 +5,7 @@ import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 export function FlexTest() {
     const getExampleFlex = (examplePara: Object) => {
         return (
-            <Flex {...examplePara} mb="2.5" mt="1.5">
+            <Flex {...examplePara} mb="2.5" mt="1.5" >
                 <Center size="16" bg="primary.100" _text={{
                     color: "coolGray.800"
                 }}>

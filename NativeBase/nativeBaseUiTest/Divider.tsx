@@ -93,7 +93,7 @@ export function DividerTest() {
                       <Text>Easy</Text>
                       <Divider
                         bg="indigo.500"
-                        thickness="2"
+                        thickness="5"
                         mx="2"
                         orientation="vertical"
                       />

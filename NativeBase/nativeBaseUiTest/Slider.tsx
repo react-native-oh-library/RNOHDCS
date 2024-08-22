@@ -28,6 +28,9 @@ export function SliderTest() {
                     onChange={v => {
                       setOnChangeValue(Math.floor(v));
                     }}
+                    sliderTrackHeight={20}
+                    orientation='horizontal'
+                    accessibilityLabel="Volume control slider"
                     onChangeEnd={v => {
                       v && setOnChangeEndValue(Math.floor(v));
                     }}>
@@ -46,19 +49,19 @@ export function SliderTest() {
               <View style={styles.section}>
                 <Text>颜色</Text>
                 <View style={styles.subSection}>
-                  <Slider defaultValue={70} colorScheme="orange">
+                  <Slider defaultValue={70} colorScheme="orange" isDisabled isReversed thumbSize={10} sliderTrackHeight={10}>
                     <Slider.Track>
                       <Slider.FilledTrack />
                     </Slider.Track>
                     <Slider.Thumb />
                   </Slider>
-                  <Slider defaultValue={70} colorScheme="emerald">
+                  <Slider defaultValue={70} colorScheme="emerald" isReadOnly _disabled={true} >
                     <Slider.Track>
                       <Slider.FilledTrack />
                     </Slider.Track>
                     <Slider.Thumb />
                   </Slider>
-                  <Slider defaultValue={70} colorScheme="indigo">
+                  <Slider defaultValue={70} colorScheme="indigo" step={5}>
                     <Slider.Track>
                       <Slider.FilledTrack />
                     </Slider.Track>
@@ -73,7 +76,7 @@ export function SliderTest() {
               <View style={styles.section}>
                 <Text>大小</Text>
                 <View style={styles.subSection}>
-                  <Slider defaultValue={40} size="sm">
+                  <Slider defaultValue={40} size="sm" _disabled={true}>
                     <Slider.Track>
                       <Slider.FilledTrack />
                     </Slider.Track>

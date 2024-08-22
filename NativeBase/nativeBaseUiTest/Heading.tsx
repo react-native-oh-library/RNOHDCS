@@ -30,7 +30,7 @@ export function HeadingTest() {
                         itShould="isTruncated"
                         tags={['dev']}
                     >
-                        <Heading isTruncated>
+                        <Heading isTruncated underline strikeThrough italic bold>
                             NativeBase is a simple, modular and accessible component library that
                             gives you building blocks to build you React applications.
                         </Heading>;

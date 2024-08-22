@@ -12,8 +12,13 @@ export function SwitchTest() {
               <View style={styles.section}>
                 <Text>开关大小</Text>
                 <View style={styles.subSection}>
-                  <Switch  size="sm" />
-                  <Switch size="md" />
+                  <Switch size="sm" isChecked />
+                  <Switch
+                    size="md"
+                    onToggle={(e) => {
+                      console.log(e);
+                    }}
+                  />
                   <Switch size="lg" />
                 </View>
               </View>
