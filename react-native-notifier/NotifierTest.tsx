@@ -18,28 +18,17 @@ import {
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { TestCase, Tester } from '@rnoh/testerino';
 
-export default function App() {
+export default function NotifierTest() {
   const notifierRef = React.useRef<NotifierRoot>(null);
   const [texts, setText] = React.useState('');
 
   return (
     <>
-      <SafeAreaView style={styles.container}>
+    <SafeAreaView style={{ flex: 1 }}>
         <GestureHandlerRootView style={{ flex: 1 }}>
-          <NotifierWrapper>
-            <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-              <Tester style={{ marginTop: -50 }}>
-                <TestCase itShould='基本测试'>
-                  <Button
-                    title="基本测试"
-                    onPress={() =>
-                      Notifier.showNotification({
-                        title: 'John Doe',
-                        description: '基本测试',
-                      })
-                    }
-                  />
-                </TestCase>
+          <NotifierWrapper >
+            <ScrollView >
+              <Tester>
                 <TestCase itShould='description属性测试，设置通知一秒后关闭（默认三秒）'>
                   <Button
                     title="duration"
@@ -101,71 +90,71 @@ export default function App() {
                   />
                 </TestCase>
                 <TestCase itShould='测试containerStyle，动画样式getContainerStyleClassicWithOverSwipe'>
-                  <Button
-                    title="动画样式"
-                    onPress={() =>
-                      notifierRef.current?.showNotification({
-                        title: 'Pulldown',
-                        description: 'Pulldown动画样式',
-                        containerStyle: getContainerStyleClassicWithOverSwipe,
-                        queueMode: 'standby',
-                      })
-                    }
-                  />
-                </TestCase>
-                <TestCase itShould='测试containerProps属性'>
-                  <Button
-                    title="containerProps"
-                    onPress={() =>
-                      notifierRef.current?.showNotification({
-                        title: 'containerProps',
-                        description: '测试containerProps属性',
-                        containerStyle: getContainerStyleOpacityOnly,
-                        containerProps: { needsOffscreenAlphaCompositing: true },
-                        queueMode: 'standby',
-                      })
-                    }
-                  />
-                </TestCase>
-                <TestCase itShould='测试In/Out动画样式'>
-                  <Button
-                    title="动画样式"
-                    onPress={() =>
-                      notifierRef.current?.showNotification({
-                        title: 'In/Out动',
-                        description: 'In/Out动画样式',
-                        containerStyle: getContainerStyleScaleOnly,
-                        queueMode: 'standby',
-                      })
-                    }
-                  />
-                </TestCase>
-                <TestCase itShould='测试Rotation动画样式'>
-                  <Button
-                    title="动画样式"
-                    onPress={() =>
-                      notifierRef.current?.showNotification({
-                        title: 'Rotation',
-                        description: 'Rotation动画样式',
-                        containerStyle: getContainerStyleScaleAndRotation,
-                        queueMode: 'standby',
-                      })
-                    }
-                  />
-                </TestCase>
-                <TestCase itShould='测试Bottom Position 动画样式'>
-                  <Button
-                    title="动画样式"
-                    onPress={() =>
-                      notifierRef.current?.showNotification({
-                        title: 'Bottom Position',
-                        description: 'Bottom Position 动画样式',
-                        containerStyle: getContainerStyleBottomPosition,
-                        swipeEnabled: false,
-                      })
-                    }
-                  />
-                </TestCase>
+                                    <Button
+                                        title="动画样式"
+                                        onPress={() =>
+                                            notifierRef.current?.showNotification({
+                                                title: 'Pulldown',
+                                                description: 'Pulldown动画样式',
+                                                containerStyle: getContainerStyleClassicWithOverSwipe,
+                                                queueMode: 'standby',
+                                            })
+                                        }
+                                    />
+                                </TestCase>
+                                <TestCase itShould='测试containerProps属性'>
+                                    <Button
+                                        title="containerProps"
+                                        onPress={() =>
+                                            notifierRef.current?.showNotification({
+                                                title: 'containerProps',
+                                                description: '测试containerProps属性',
+                                                containerStyle: getContainerStyleOpacityOnly,
+                                                containerProps: { needsOffscreenAlphaCompositing: true },
+                                                queueMode: 'standby',
+                                            })
+                                        }
+                                    />
+                                </TestCase>
+                                <TestCase itShould='测试In/Out动画样式'>
+                                    <Button
+                                        title="动画样式"
+                                        onPress={() =>
+                                            notifierRef.current?.showNotification({
+                                                title: 'In/Out动',
+                                                description: 'In/Out动画样式',
+                                                containerStyle: getContainerStyleScaleOnly,
+                                                queueMode: 'standby',
+                                            })
+                                        }
+                                    />
+                                </TestCase>
+                                <TestCase itShould='测试Rotation动画样式'>
+                                    <Button
+                                        title="动画样式"
+                                        onPress={() =>
+                                            notifierRef.current?.showNotification({
+                                                title: 'Rotation',
+                                                description: 'Rotation动画样式',
+                                                containerStyle: getContainerStyleScaleAndRotation,
+                                                queueMode: 'standby',
+                                            })
+                                        }
+                                    />
+                                </TestCase>
+                                <TestCase itShould='测试Bottom Position 动画样式'>
+                                    <Button
+                                        title="动画样式"
+                                        onPress={() =>
+                                            notifierRef.current?.showNotification({
+                                                title: 'Bottom Position',
+                                                description: 'Bottom Position 动画样式',
+                                                containerStyle: getContainerStyleBottomPosition,
+                                                swipeEnabled: false,
+                                            })
+                                        }
+                                    />
+                                </TestCase>
                 <TestCase itShould='测试queueMode-standby属性，将通知添加到队列末尾，默认为reset，清除通知队列并立即显示新通知。默认使用'>
                   <Button
                     title="queueMode-standby"
@@ -209,7 +198,7 @@ export default function App() {
                   />
                 </TestCase>
                 <TestCase itShould='测试clearQueueAPI，清楚队列通知'>
-                <Button title="clearQueue" onPress={() => Notifier.clearQueue()} />
+                  <Button title="clearQueue" onPress={() => Notifier.clearQueue()} />
                 </TestCase>
                 <TestCase itShould='测试swipeEnabled,滑动隐藏通知'>
                   <Button
@@ -387,7 +376,7 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <Text style={{ textAlign: 'center', marginTop: 10,color: 'red' }}><Text>函数回调log：</Text>{texts}</Text>
+                <Text style={{ textAlign: 'center', marginTop: 10, color: 'red' }}><Text>函数回调log：</Text>{texts}</Text>
                 <TestCase itShould='测试onShown方法'>
                   <Button
                     title="onShown"
@@ -459,7 +448,7 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试swipePixelsToClose属性，用户滑动关闭通知，默认20像素(未生效)'>
+                <TestCase itShould='测试swipePixelsToClose属性，用户滑动关闭通知，默认20像素'>
                   <Button
                     title="swipePixelsToClose"
                     onPress={() =>
@@ -470,7 +459,7 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试swipePixelsToClose属性，用户滑动关闭通知，设置10像素(未生效)'>
+                <TestCase itShould='测试swipePixelsToClose属性，用户滑动关闭通知，设置10像素'>
                   <Button
                     title="swipePixelsToClose"
                     onPress={() =>
@@ -482,7 +471,7 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试swipeEasing属性， Easing.bounce(未生效)'>
+                <TestCase itShould='测试swipeEasing属性， Easing.bounce'>
                   <Button
                     title="swipeEasing"
                     onPress={() =>
@@ -494,7 +483,7 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试swipeEasing属性， Easing.circle(未生效)'>
+                <TestCase itShould='测试swipeEasing属性， Easing.circle'>
                   <Button
                     title="swipeEasing"
                     onPress={() =>
@@ -506,7 +495,7 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试swipeAnimationDuration属性， 用户滑动动画速度，默认200(未生效)'>
+                <TestCase itShould='测试swipeAnimationDuration属性， 用户滑动动画速度，默认200'>
                   <Button
                     title="swipeAnimationDuration"
                     onPress={() =>
@@ -517,7 +506,7 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试swipeAnimationDuration属性， 用户滑动动画速度，设置1000(未生效)'>
+                <TestCase itShould='测试swipeAnimationDuration属性， 用户滑动动画速度，设置1000'>
                   <Button
                     title="swipeAnimationDuration"
                     onPress={() =>
@@ -553,33 +542,19 @@ export default function App() {
                   />
                 </TestCase>
                 <TestCase itShould='测试hideNotificationAPI，清楚通知'>
-                <Button title="Hide" onPress={() => Notifier.hideNotification()} />
+                  <Button title="Hide" onPress={() => Notifier.hideNotification()} />
                 </TestCase>
-               
+
               </Tester>
             </ScrollView>
           </NotifierWrapper>
+          <NotifierRoot ref={notifierRef} />
+
         </GestureHandlerRootView>
-      </SafeAreaView>
-      <NotifierRoot ref={notifierRef} />
+        </SafeAreaView>
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    flex: 1,
-  },
-  contentContainer: {
-    paddingVertical: 50,
-  },
-  modalContainer: {
-    flex: 1,
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    borderRadius: 25,
-    maxHeight: 500,
-    paddingHorizontal: 30,
-  },
 });
