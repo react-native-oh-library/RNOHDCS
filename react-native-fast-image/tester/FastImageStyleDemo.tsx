@@ -68,6 +68,13 @@ export function FastImageStyleDemo(): JSX.Element {
               source={require('./image/bunny.png')}
             />
           </TestCase>
+          <TestCase itShould='fallback true'>
+            <FastImage
+              style={styles.image}
+              fallback={true}
+              source={{uri:'http://fpoimg.com/250x250'}}
+            />
+          </TestCase>
           <TestCase itShould='fallback false'>
             <FastImage
               style={styles.image}
