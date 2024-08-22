@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet, ScrollView } from 'react-native';
 import { Calendar, CalendarList, CalendarProvider, WeekCalendar, ExpandableCalendar } from 'react-native-calendars';
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
-
-
+ 
 export function WeekCalendarExample() {
     return <ScrollView style={styles.container}>
         <Tester>
@@ -12,6 +11,7 @@ export function WeekCalendarExample() {
                     <CalendarProvider date={'2012-5-8'}>
                         <ExpandableCalendar
                             allowShadow={true}
+                            
                         />
                     </CalendarProvider>
                 </TestCase>
@@ -37,6 +37,7 @@ export function WeekCalendarExample() {
                     <CalendarProvider date={'2012-5-8'}>
                         <ExpandableCalendar
                             hideDayNames={true}
+                            style ={{  height: 160}}
                         />
                     </CalendarProvider>                  
                 </TestCase>
@@ -49,6 +50,7 @@ export function WeekCalendarExample() {
                     <CalendarProvider date={'2012-5-8'}>              
                         <ExpandableCalendar
                             hideDayNames={false}
+                            style ={{  height: 160}}
                         />
                     </CalendarProvider>                  
                 </TestCase>
