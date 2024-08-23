@@ -32,9 +32,9 @@ function Section(): JSX.Element {
     <View style={styles.sectionContainer}>
     <Text>default style</Text>
     <Slider value={0.2}/>
-    
+
     <Text>with min,max and custom tints</Text>
-    <Slider 
+    <Slider
      value={0.2}
      minimumTrackTintColor = '#1A9274'
      maximumTrackTintColor = '#D3D3D3'
@@ -42,7 +42,7 @@ function Section(): JSX.Element {
      />
 
     <Text>with style,thumbStyle,thumbStyle</Text>
-    <Slider 
+    <Slider
      value={0.2}
      minimumTrackTintColor = '#1073FF'
      thumbTintColor = '#FFFFFF'
@@ -74,7 +74,7 @@ function Section(): JSX.Element {
         value={0.2}
         thumbTouchSize = {{width: 40, height: 40}}
         thumbStyle = {styles.thumbStyle}
-        thumbImage = {require('./resources/slider.png')}
+        thumbImage = {require('../resources/slider.png')}
     />
 
     <Text>with animateTransitions</Text>
@@ -83,7 +83,6 @@ function Section(): JSX.Element {
         thumbTouchSize = {{width: 40, height: 40}}
         trackStyle = {styles.trackStyle}
         thumbStyle = {styles.thumbStyle}
-      // thumbImage = {{uri: 'https://developer.harmonyos.com/assets/image/diqiu.png'}}
         animateTransitions = {true}
         animationType = 'timing'
         animationConfig = {{
@@ -98,12 +97,12 @@ function Section(): JSX.Element {
     }}
     title="动画测试"
     color="#841584"
-    />  
+    />
     </View>
   );
 }
 
-function App(): JSX.Element {
+function SliderExample(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -124,7 +123,7 @@ function App(): JSX.Element {
           style={{
             backgroundColor: isDarkMode ? Colors.black : '#F3F3F3',
           }}>
-          <Section />       
+          <Section />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -151,4 +150,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default App;
+export default SliderExample;
