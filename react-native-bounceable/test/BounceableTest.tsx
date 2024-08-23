@@ -14,49 +14,22 @@ export function BounceableTest () {
         justifyContent: 'center',
       };
 
-
-    const onPress = () => {
-        if (flag) {
-            Alert.alert(
-                'Hint',
-                'Click on the effect, which is true',
-                [
-                  {text: 'NO', style: 'cancel'},
-                  {text: 'YES'},
-                ],
-                { cancelable: false }
-            );
-            flag = false;
-        } else {
-            Alert.alert(
-                'Hint',
-                'Click on the effect, which is false',
-                [
-                  {text: 'NO', style: 'cancel'},
-                  {text: 'YES'},
-                ],
-                { cancelable: false }
-            );
-            flag = true;
-        }
-      };
-
     return <ScrollView style={styles.container}>
         <Tester>
-        <TestSuite>
-            <TestCase itShould="Test the default touch feedback">
+        <TestSuite name='style'>
+            <TestCase itShould="Test the default touch feedback, Style default">
                 <RNBounceable>
                     <Text>Press Me</Text>
                 </RNBounceable>
             </TestCase>
 
-            <TestCase itShould="Test the text custom style">
+            <TestCase itShould="Test the text custom style, with value fontSize: 20, font color: 'red'">
                 <RNBounceable>
                     <Text style={styles.textStyle}>Press Me</Text>
                 </RNBounceable>
             </TestCase>
 
-            <TestCase itShould="Test Custom Styles (Single styles)">
+            <TestCase itShould="Test Custom Styles, with value backgroundColor: 'red' ">
                 <RNBounceable
                 style={customStyle}
                 >
@@ -64,23 +37,39 @@ export function BounceableTest () {
                 </RNBounceable>
             </TestCase>
 
-            <TestCase itShould="Test custom styles (multiple styles)">
+            <TestCase itShould="Test custom styles, with value backgroundColor: 'lightblue'">
                 <RNBounceable
                 style={[customStyle, styles.bounceStyle]}
                 >
                     <Text style={styles.textStyle}>Press Me</Text>
                 </RNBounceable>
             </TestCase>
+            </TestSuite>
 
-            <TestCase itShould="Test a custom click function">
-                <RNBounceable
-                style={[customStyle, styles.bounceStyle]}
-                onPress = {onPress}
-                >
-                    <Text style={styles.textStyle}>Press Me</Text>
-                </RNBounceable>
+            <TestSuite name='onPress'>
+            <TestCase itShould="Test a custom click function"
+                        assert={({ expect, state }) => {
+                            expect(state).to.be.true;
+                        }}
+                        initialState={false}
+                        tags={['C_API']}
+                        arrange={({ setState }) => {
+                          return (
+                      <RNBounceable
+                      style={[customStyle, styles.bounceStyle]}
+                      onPress ={()=>{
+                        setState(true);
+                        Alert.alert('onEnd event run success!');
+                      }} 
+                      >
+                          <Text style={styles.textStyle}>Press Me</Text>
+                      </RNBounceable>)
+                        }}
+            >
             </TestCase>
+            </TestSuite>
 
+            <TestSuite name='bounceEffectIn'>
             <TestCase itShould="Test to zoom out the animation when the button is pressed">
                 <RNBounceable
                 style={[customStyle, styles.bounceStyle]}
@@ -89,7 +78,9 @@ export function BounceableTest () {
                     <Text style={styles.textStyle}>Press Me</Text>
                 </RNBounceable>
             </TestCase>
+            </TestSuite>
 
+            <TestSuite name='bounceEffectOut'>
             <TestCase itShould="Test the enlarged animation effect when releasing the button">
                 <RNBounceable
                 style={[customStyle, styles.bounceStyle]}
@@ -98,7 +89,9 @@ export function BounceableTest () {
                     <Text style={styles.textStyle}>Press Me</Text>
                 </RNBounceable>
             </TestCase>
+            </TestSuite>
 
+            <TestSuite name='bounceVelocityIn'>
             <TestCase itShould="Test the animation of the speed when the button is pressed">
                 <RNBounceable
                 style={[customStyle, styles.bounceStyle]}
@@ -108,7 +101,9 @@ export function BounceableTest () {
                     <Text style={styles.textStyle}>Press Me</Text>
                 </RNBounceable>
             </TestCase>
+            </TestSuite>
 
+            <TestSuite name='bounceVelocityOut'>
             <TestCase itShould="Test the animation of the speed when the button is released">
                 <RNBounceable
                 style={[customStyle, styles.bounceStyle]}
@@ -118,7 +113,9 @@ export function BounceableTest () {
                     <Text style={styles.textStyle}>Press Me</Text>
                 </RNBounceable>
             </TestCase>
+            </TestSuite>
 
+            <TestSuite name='bouncinessIn'>
             <TestCase itShould="Test the animation effect of the elasticity coefficient when the button is pressed">
                 <RNBounceable
                 style={[customStyle, styles.bounceStyle]}
@@ -128,7 +125,9 @@ export function BounceableTest () {
                     <Text style={styles.textStyle}>Press Me</Text>
                 </RNBounceable>
             </TestCase>
+            </TestSuite>
 
+            <TestSuite name='bouncinessOut'>
             <TestCase itShould="Test the animation effect of the elastic coefficient when the button is released">
                 <RNBounceable
                 style={[customStyle, styles.bounceStyle]}
@@ -138,7 +137,7 @@ export function BounceableTest () {
                     <Text style={styles.textStyle}>Press Me</Text>
                 </RNBounceable>
             </TestCase>
-        </TestSuite>
+            </TestSuite>
         </Tester>
     </ScrollView>
 }
