@@ -58,21 +58,22 @@ export function FastImageStyleDemo(): JSX.Element {
             <FastImage
               style={styles.image}
               defaultSource={require('./image/bunny.png')}
+              source={{uri:'https://dummysssse.com'}}
               resizeMode={FastImage.resizeMode.contain}
             />
           </TestCase>
-          <TestCase itShould='fallback true'>
+          <TestCase itShould='fallback true source=require(./image/bunny.png)'>
             <FastImage
               style={styles.image}
               fallback={true}
               source={require('./image/bunny.png')}
             />
           </TestCase>
-          <TestCase itShould='fallback true'>
+          <TestCase itShould='fallback true source=uri:https://dummyimage.com/200x200/0000f0/fff&text=fallback={true}'>
             <FastImage
               style={styles.image}
               fallback={true}
-              source={{uri:'http://fpoimg.com/250x250'}}
+              source={{uri:'https://dummyimage.com/200x200/0000f0/fff&text=fallback={true}'}}
             />
           </TestCase>
           <TestCase itShould='fallback false'>
@@ -110,27 +111,33 @@ export function FastImageStyleDemo(): JSX.Element {
               source={{uri:'https://media.giphy.com/media/GEsoqZDGVoisw/giphy.gif'}}
             />
           </TestCase>
-          <TestCase itShould='borderRadius 50'>
+          <TestCase itShould='borderWidth:12,borderColor:#ff00ff,width:240,height:240,borderRadius:50'>
             <Image
-              style={styles.resizeImage}
+              style={{borderWidth:12,borderColor:'#ff00ff',width:240,height:240,borderRadius:50}}
               source={require('./image/fields.jpg')}
             />
           </TestCase>
-          <TestCase itShould='borderWidth:12, borderColor #ff00ff'>
+          <TestCase itShould='borderWidth:12,borderColor:#ff00ff,width:240,height:240'>
             <Image
               style={{borderWidth:12,borderColor:'#ff00ff',width:240,height:240}}
               source={require('./image/fields.jpg')}
             />
           </TestCase>
-          <TestCase itShould='borderWidth:5, borderColor #ff00ff'>
+          <TestCase itShould='borderWidth:5,borderColor:#ff00ff,width:240,height:240'>
             <Image
               style={{borderWidth:5,borderColor:'#ff00ff',width:240,height:240}}
               source={require('./image/fields.jpg')}
             />
           </TestCase>
-          <TestCase itShould='opacity 0.5'>
+          <TestCase itShould='opacity 0.7'>
             <Image
-              style={{opacity:0.5,width:240,height:240}}
+              style={{opacity:0.7,width:240,height:240}}
+              source={require('./image/fields.jpg')}
+            />
+          </TestCase>
+          <TestCase itShould='opacity 0.1'>
+            <Image
+              style={{opacity:0.1,width:240,height:240}}
               source={require('./image/fields.jpg')}
             />
           </TestCase>
