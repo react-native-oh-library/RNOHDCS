@@ -81,16 +81,12 @@ export const MaterialTopTabsExample = () => {
             gap: 10,
           }}>
             {
-
               list.map((key: any, index: number) => {
                 let title = key, value = key;
-
-
                 if (Object.prototype.toString.call(key).slice(8, -1) === 'Object') {
                   title = key.title;
                   value = key.value
                 }
-
                 // console.log('render', title, value, state)
                 return (
                   <Pressable
@@ -790,7 +786,7 @@ export const MaterialTopTabsExample = () => {
       },
 
       tabBarLabelStyle: {
-        description: 'tabBar标签样式，加个粉色背景',
+        description: 'tabBar标签样式',
         type: 'screenOptions',
         value: {
           title: '{color:red}',
@@ -993,9 +989,42 @@ export const MaterialTopTabsExample = () => {
                         <Tab.Navigator
                           {...initOptions}
                         >
-                          <Tab.Screen name="Home" component={HomeScreen} options={{ tabBarItemStyle: { width: contWidth / 3 } }} />
-                          <Tab.Screen name="Notifications" component={NotificationsScreen} options={{ tabBarItemStyle: { width: contWidth / 3 } }} />
-                          <Tab.Screen name="Settings" component={SettingsScreen} options={{ tabBarItemStyle: { width: contWidth / 3 } }} />
+                          <Tab.Screen name="Home" component={HomeScreen}
+                            options={{
+                              tabBarItemStyle: {
+                                width:
+                                  title === 'tabBarScrollEnabled' && state[title].value
+                                    ? contWidth / 3 + 20
+                                    : state[title].value?.value?.padding
+                                      ? (contWidth / 3 - state[title].value?.value?.padding)
+                                      : contWidth / 3,
+                              }
+                            }}
+                          />
+                          <Tab.Screen name="Notifications" component={NotificationsScreen}
+                            options={{
+                              tabBarItemStyle: {
+                                width:
+                                  title === 'tabBarScrollEnabled' && state[title].value
+                                    ? contWidth / 3 + 20
+                                    : state[title].value?.value?.padding
+                                      ? (contWidth / 3 - state[title].value?.value?.padding)
+                                      : contWidth / 3,
+                              }
+                            }}
+                          />
+                          <Tab.Screen name="Settings" component={SettingsScreen}
+                            options={{
+                              tabBarItemStyle: {
+                                width:
+                                  title === 'tabBarScrollEnabled' && state[title].value
+                                    ? contWidth / 3 + 20
+                                    : state[title].value?.value?.padding
+                                      ? (contWidth / 3 - state[title].value?.value?.padding)
+                                      : contWidth / 3,
+                              }
+                            }}
+                          />
                         </Tab.Navigator >
                       </NavigationContainer>
                     </View>
@@ -1029,9 +1058,7 @@ export const MaterialTopTabsExample = () => {
                 </TestSuite>
               } else if (type === 'screenOptions') {
                 return <TestSuite name={title} key={title}>
-                  
                   <ToggleButton title={'切换' + title} list={valueList} initValue={value} onChange={(val: any) => {
-                    console.log(title)
                     setState({
                       ...state,
                       [title]: {
