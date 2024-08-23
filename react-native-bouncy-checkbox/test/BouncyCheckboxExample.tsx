@@ -140,7 +140,7 @@ export default function BouncyCheckboxExample() {
 
    
         <TestSuite name='style'>
-                <TestCase itShould="test BouncyCheckbox style property">
+                <TestCase itShould="test BouncyCheckbox style property with value borderWidth: 1,borderColor: '#007aff'">
                     <BouncyCheckbox
                     text="please press me"
                     style={styles.checkbox}
@@ -151,7 +151,7 @@ export default function BouncyCheckboxExample() {
 
            
             <TestSuite name='textStyle'>
-                    <TestCase itShould="test BouncyCheckbox textStyle property">
+                    <TestCase itShould="test BouncyCheckbox textStyle property with value fontSize: 30,color: '#010101'">
                 <BouncyCheckbox
                     text="please press me!"
                     textStyle={styles.textStyle}
@@ -162,7 +162,7 @@ export default function BouncyCheckboxExample() {
 
          
             <TestSuite name='iconStyle'>
-                <TestCase itShould="test BouncyCheckbox iconStyle property">
+                <TestCase itShould="test BouncyCheckbox iconStyle property with value borderColor: green,borderWidth: 8,borderRadius: 0">
                     <BouncyCheckbox
                     iconStyle={{
                         borderColor: "green",
@@ -176,7 +176,7 @@ export default function BouncyCheckboxExample() {
 
         
             <TestSuite name='innerIconStyle'>
-                <TestCase itShould="test BouncyCheckbox innerIconStyle property">
+                <TestCase itShould="test BouncyCheckbox innerIconStyle property with value borderWidth: 5, borderColor: red ">
                     <BouncyCheckbox
                     innerIconStyle={{ borderWidth: 5, borderColor: "red" }}
                     />
@@ -236,7 +236,7 @@ export default function BouncyCheckboxExample() {
 
         
             <TestSuite name='textContainerStyle'>
-                <TestCase itShould="test BouncyCheckbox textContainerStyle property">
+                <TestCase itShould="test BouncyCheckbox textContainerStyle property with value backgroundColor: 'lightblue',borderWidth: 5">
                     <BouncyCheckbox
                     textContainerStyle={styles.textContainer}
                     />
@@ -247,6 +247,8 @@ export default function BouncyCheckboxExample() {
             <TestSuite name='ImageComponent'>
                 <TestCase itShould="test BouncyCheckbox ImageComponent property">
                     <BouncyCheckbox
+                        isChecked={checkboxState}
+                        onPress={() => setCheckboxState(!checkboxState)}
                         ImageComponent={CustomImageComponent}
                     />
             </TestCase>
@@ -338,27 +340,20 @@ export default function BouncyCheckboxExample() {
         },
         textContainer: {
             backgroundColor: 'lightblue',
-            borderWidth: 5,
-            borderColor: 'black',
-            padding: 5,
+            borderWidth: 5
         },
         textStyle: {
             fontSize: 30,
-            color: '#010101',
-            fontWeight: '600',
-            textDecorationLine: "none",
+            color: '#010101'
         },
         customText: {
             fontSize: 18,
             color: 'green',
-            marginLeft: 29, // �ڸ�ѡ����ı�֮������һЩ���
+            marginLeft: 29, 
         },
         checkbox: {
-            margin: 10,                    
-            borderWidth: 1,                 
-            borderColor: '#007aff',         
-            borderRadius: 5,                 
-            padding: 5,                 
+            borderWidth: 1,
+            borderColor: '#007aff'                     
         },  
         button: {
             padding: 25,
