@@ -15,7 +15,7 @@ import InFlatListExample from './InFlatListExample'
 import PopoverExample from './PopoverExample'
 
 const demos = [
-    { Component: BasicExample, name: 'Basic example', key: "BasicExample" },
+    { Component: BasicExample, name: 'MenuTrigger example', key: "BasicExample" },
     { Component: AdvancedExample, name: 'Advanced example', key: 'AdvancedExample' },
     { Component: ControlledExample, name: 'Controlled example', key: 'ControlledExample' },
     { Component: MenuMethodsExample, name: 'Controlling menu using menu methods', key: 'MenuMethodsExample' },
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
 
     },
     navItem: {
-      fontSize: 14,
+      fontSize: 18,
       color: '#00f'
     },
     demoPanel: {
