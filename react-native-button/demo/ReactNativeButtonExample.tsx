@@ -1,34 +1,38 @@
-import React, { Component } from 'react';  
+import React, { Component } from 'react';
 import Button from 'react-native-button';
-import { View, Text, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 
-export default function ReactNativeButtonExample () {
-    
-    const [disabled, setDisabled] = React.useState(false);
-    const [isState, setIsstate] = React.useState(false);
+export default class ReactNativeButtonExample extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          isState: false
+        };
+      }
 
-    const _handlePress = () => {
-        setDisabled(!disabled);
-    };
-    
-    const _handleLongPress = () => {
-        setIsstate(!isState);
-    };
+    _handlePress() {
+        this.setState(prevstate => ({
+            isState: !prevstate.isState,
+        })
+        );
+    }
 
-    return (
-        <View>
-            <Button
-                style={{ fontSize: 20, color: 'white', backgroundColor: 'green', margin: 20 }}
-                containerStyle={{ padding: 15, overflow: 'hidden', borderRadius: 10, backgroundColor: 'pink', margin: 20 }}
-                disabled={false}
-                accessibilityLabel="The button is press me"
-                childGroupStyle={{backgroundColor: 'black'}}
-                onPress={_handlePress}
-                onLongPress={_handleLongPress}
-            >
-                Press me!
-            </Button>    
-        </View>
-  );
+    render() {
+        const { isState } = this.state;
+        const currentStylestate = isState ? { padding: 15, overflow: 'hidden', borderRadius: 10, backgroundColor: 'pink', margin: 20 } : null;
+        return (
+            <View>
+                <Button
+                    style={{ fontSize: 20, color: 'white', backgroundColor: 'green', margin: 20 }}
+                    containerStyle={currentStylestate}
+                    disabled={false}
+                    accessibilityLabel="The button is press me"
+                    childGroupStyle={{backgroundColor: 'black'}}
+                    onPress={() => this._handlePress()}
+                >
+                    Press me!
+                </Button>
+            </View>
+        );
+    }
 };
- 
