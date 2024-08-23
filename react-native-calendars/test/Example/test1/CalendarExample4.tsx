@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView,Image } from 'react-native';
 import { Calendar, CalendarUtils } from 'react-native-calendars';
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
 
@@ -23,13 +23,13 @@ export function CalendarExample4(){
     return <ScrollView style={styles.container}>
       
         <Tester>
-            <TestSuite name='arrowsHitSlop'>
+            <TestSuite name='arrowsHitSlop'>            
                 <TestCase itShould="test Calendar arrowsHitSlop property ">
                     <Calendar
-                        arrowsHitSlop={35}
-                        renderArrow={direction => leftArrowIcon}
+                       arrowsHitSlop={35}
+                       renderArrow={direction => <Image source ={leftArrowIcon}/>}
                     />
-                </TestCase>s
+                </TestCase>
             </TestSuite>
         </Tester>
 
