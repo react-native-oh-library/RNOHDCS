@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import SectionFlex from './utils/SectionFlex'
 import FastImage from 'react-native-fast-image'
 import Button from './utils/Button'
@@ -20,6 +20,7 @@ export const FastImagePreloadExample = () => {
     return (
         <View>
             <SectionFlex style={styles.section}>
+                <Text>图片uri{url}</Text>
                 {show ? (
                     <FastImage style={styles.image} source={{ uri: url }} />
                 ) : (
