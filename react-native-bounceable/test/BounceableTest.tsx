@@ -23,17 +23,16 @@ export function BounceableTest () {
                 </RNBounceable>
             </TestCase>
 
-            <TestCase itShould="Test the text custom style, with value fontSize: 20, font color: 'red'">
+            <TestCase itShould="Test the text custom style, with value fontSize: 50">
                 <RNBounceable>
-                    <Text style={styles.textStyle}>Press Me</Text>
+                    <Text style={styles.textStyle_fontSize}>Press Me</Text>
                 </RNBounceable>
             </TestCase>
 
-            <TestCase itShould="Test Custom Styles, with value backgroundColor: 'red' ">
+            <TestCase itShould="Test Custom Styles, with value font Color: 'red' ">
                 <RNBounceable
-                style={customStyle}
                 >
-                    <Text style={styles.textStyle}>Press Me</Text>
+                    <Text style={styles.textStyle_fontColor}>Press Me</Text>
                 </RNBounceable>
             </TestCase>
 
@@ -41,7 +40,15 @@ export function BounceableTest () {
                 <RNBounceable
                 style={[customStyle, styles.bounceStyle]}
                 >
-                    <Text style={styles.textStyle}>Press Me</Text>
+                    <Text>Press Me</Text>
+                </RNBounceable>
+            </TestCase>
+
+            <TestCase itShould="Test custom styles, with value backgroundColor: 'red'">
+                <RNBounceable
+                style={customStyle}
+                >
+                    <Text>Press Me</Text>
                 </RNBounceable>
             </TestCase>
             </TestSuite>
@@ -62,7 +69,7 @@ export function BounceableTest () {
                         Alert.alert('onEnd event run success!');
                       }} 
                       >
-                          <Text style={styles.textStyle}>Press Me</Text>
+                          <Text>Press Me</Text>
                       </RNBounceable>)
                         }}
             >
@@ -75,7 +82,7 @@ export function BounceableTest () {
                 style={[customStyle, styles.bounceStyle]}
                 bounceEffectIn={0.1}
                 >
-                    <Text style={styles.textStyle}>Press Me</Text>
+                    <Text>Press Me</Text>
                 </RNBounceable>
             </TestCase>
             </TestSuite>
@@ -86,7 +93,7 @@ export function BounceableTest () {
                 style={[customStyle, styles.bounceStyle]}
                 bounceEffectOut={1.5}
                 >
-                    <Text style={styles.textStyle}>Press Me</Text>
+                    <Text>Press Me</Text>
                 </RNBounceable>
             </TestCase>
             </TestSuite>
@@ -98,7 +105,7 @@ export function BounceableTest () {
                 bounceEffectIn={0.1}
                 bounceVelocityIn={60}
                 >
-                    <Text style={styles.textStyle}>Press Me</Text>
+                    <Text>Press Me</Text>
                 </RNBounceable>
             </TestCase>
             </TestSuite>
@@ -110,7 +117,7 @@ export function BounceableTest () {
                 bounceEffectIn={0.1}
                 bounceVelocityOut={70}
                 >
-                    <Text style={styles.textStyle}>Press Me</Text>
+                    <Text>Press Me</Text>
                 </RNBounceable>
             </TestCase>
             </TestSuite>
@@ -122,7 +129,7 @@ export function BounceableTest () {
                 bounceEffectIn={0.1}
                 bouncinessIn={50}
                 >
-                    <Text style={styles.textStyle}>Press Me</Text>
+                    <Text>Press Me</Text>
                 </RNBounceable>
             </TestCase>
             </TestSuite>
@@ -134,7 +141,7 @@ export function BounceableTest () {
                 bounceEffectIn={0.1}
                 bouncinessOut={50}
                 >
-                    <Text style={styles.textStyle}>Press Me</Text>
+                    <Text>Press Me</Text>
                 </RNBounceable>
             </TestCase>
             </TestSuite>
@@ -150,8 +157,10 @@ const styles = StyleSheet.create({
     bounceStyle: {
       backgroundColor: 'lightblue'
     },
-    textStyle: {
-      fontSize: 20,
-      color: 'red',
+    textStyle_fontSize: {
+      fontSize: 50,
     },
+    textStyle_fontColor: {
+        color: 'red',
+      },
   });
