@@ -4,14 +4,23 @@ import SectionFlex from './utils/SectionFlex'
 import FastImage from 'react-native-fast-image'
 import Button from './utils/Button'
 // @ts-ignore
-import { useCacheBust } from './utils/useCacheBust'
 
-const IMAGE_URL =
-'https://media.giphy.com/media/ZLOLugEJcNtJxu9rnw/giphy.gif'
+const source = [ 
+"https://gitee.com/kongchuiyu1/test/raw/master/1.jpg",
+"https://gitee.com/kongchuiyu1/test/raw/master/1.jpg",
+"https://gitee.com/kongchuiyu1/test/raw/master/2.jpg",
+"https://gitee.com/kongchuiyu1/test/raw/master/3.jpg",
+"https://gitee.com/kongchuiyu1/test/raw/master/4.jpg",
+"https://gitee.com/kongchuiyu1/test/raw/master/5.jpg",
+"https://gitee.com/kongchuiyu1/test/raw/master/6.jpg",
+"https://gitee.com/kongchuiyu1/test/raw/master/7.jpg",
+"https://gitee.com/kongchuiyu1/test/raw/master/8.jpg",
+ ];
 
 export const FastImagePreloadExample = () => {
     const [show, setShow] = useState(false)
-    const { url, bust } = useCacheBust(IMAGE_URL)
+    const [i, setI] = useState(0);
+    const [ url, bust ] = useState('https://gitee.com/kongchuiyu1/test/raw/master/1724492090596.jpg')
 
     const preload = () => {
         FastImage.preload([{ uri: url }])
@@ -28,7 +37,16 @@ export const FastImagePreloadExample = () => {
                 )}
                 <View style={styles.buttons}>
                     <View style={styles.buttonView}>
-                        <Button text="Bust" onPress={bust} />
+                        <Button text="Bust" onPress={()=>{
+                            setShow(false);
+                            FastImage.clearMemoryCache();
+                            FastImage.clearDiskCache();
+                            setI(i+1);
+                            if(i>=source.length-1){
+                                setI(0);
+                            }
+                            bust(source[i]);
+                        }} />
                     </View>
                     <View style={styles.buttonView}>
                         <Button text="Preload" onPress={preload} />
@@ -36,7 +54,7 @@ export const FastImagePreloadExample = () => {
                     <View style={styles.buttonView}>
                         <Button
                             text={show ? 'Hide' : 'Show'}
-                            onPress={() => setShow((v) => !v)}
+                            onPress={() => {setShow((v) => !v)}}
                         />
                     </View>
                 </View>

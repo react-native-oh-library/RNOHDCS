@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, ScrollView} from 'react-native';
+import {StyleSheet, ScrollView,Image} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useCacheBust} from './utils/useCacheBust';
 import {TestSuite, Tester, TestCase} from '@rnoh/testerino';
@@ -37,7 +37,7 @@ export const FastImageSourceDemo = () => {
           </TestCase>
         </TestSuite>
         <TestSuite name="headers">
-          <TestCase itShould="(网站未做header验证，后台可以看到header传输)headers: headers: {
+          <TestCase itShould="(后台可以看到header传输)headers: headers: {
                   'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
                   'Accept-Language': 'en-US,en;q=0.9',
                   'Connection': 'close'
@@ -45,7 +45,7 @@ export const FastImageSourceDemo = () => {
             <FastImage
               style={styles.image}
               source={{
-                uri: "https://dummyimage.com/300x550",
+                uri: "https://res2.vmallres.com/pimages/uomcdn/CN/pms/202308/gbom/6941487297153/428_428_6AC44C47C8F772DEECF7DE49BF662D3Fmp.png",
                 headers: {
                   'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
                   'Accept-Language': 'en-US,en;q=0.9',
@@ -54,11 +54,11 @@ export const FastImageSourceDemo = () => {
               }}
             />
           </TestCase>
-          <TestCase itShould="(网站未做header验证，后台可以看到header传输)headers: undefined">
+          <TestCase itShould="(后台可以看到header传输)headers: undefined">
             <FastImage
               style={styles.image}
               source={{
-                uri: "https://dummyimage.com/300x551",
+                uri: "https://res2.vmallres.com/pimages/uomcdn/CN/pms/202308/gbom/6941487297153/428_428_6AC44C47C8F772DEECF7DE49BF662D3Fmp.png",
               }}
             />
           </TestCase>
