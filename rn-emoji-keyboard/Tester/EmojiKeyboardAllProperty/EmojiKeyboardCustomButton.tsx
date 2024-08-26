@@ -35,7 +35,7 @@ export  default function() {
             <Button onPress={() => setIsOpen(true)} title='open:custombutton' />
             <EmojiPicker 
             customButtons={[
-                <Text onPress={deleteLastEmoji}  style={styles.deleteIcon}>⬅</Text>
+                <Text key={'one'} onPress={deleteLastEmoji}  style={styles.deleteIcon}>⬅</Text>
               ]}
              allowMultipleSelections  onEmojiSelected={handlePick} open={isOpen} onClose={() => setIsOpen(false)} />
         </>
