@@ -1,11 +1,9 @@
 import React, {useRef, useState} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {useCacheBust} from './utils/useCacheBust';
-import SectionFlex from './utils/SectionFlex';
 import {TestSuite, Tester, TestCase} from '@rnoh/testerino';
 
-const IMAGE_URL = 'https://media.giphy.com/media/GEsoqZDGVoisw/giphy.gif';
+const IMAGE_URL = 'https://res.vmallres.com//uomcdn/CN/pms/202405/9F47CCC9E8C2DB0FE903BFC4135ADB8B.jpg';
 
 export const FastImageProgressExample = () => {
   const [state, setState] = useState<{
@@ -21,15 +19,12 @@ export const FastImageProgressExample = () => {
     end: undefined,
     layout: undefined
   });
-
-  const {url, bust} = useCacheBust(IMAGE_URL);
   const {mount, progress, end, start,layout} = state;
   return (
     <TestSuite name = 'progress'>
-      <SectionFlex onPress={bust} style={styles.section}>
-        <FastImage
+      <FastImage
           style={styles.image}
-          source={{ uri: url, }}
+          source={{ uri: IMAGE_URL, }}
           onLoadStart={() => setState(s => ({...s, start: Date.now()}))}
           onProgress={e => {
             const p = Math.round(
@@ -44,7 +39,6 @@ export const FastImageProgressExample = () => {
           onLoadEnd={() => {}}
           onLayout={(e) => {setState(s => ({...s, layout: e}));}}
         />
-      </SectionFlex>
       <TestCase itShould = 'onLoad'>
         <Text>
           onLoad
