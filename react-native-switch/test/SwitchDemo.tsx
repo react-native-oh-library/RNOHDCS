@@ -11,10 +11,10 @@ export default function SwitchDemo() {
     return (
         <ScrollView>
             <Tester>
-                <TestSuite name='SensitiveInfoDemo'>
+                <TestSuite name='SwitchDemo'>
                     <View style={styles.container}>
                         <TestCase
-                            itShould="activeText：开 inActiveText：关"
+                            itShould="activeText:开 inActiveText:关"
                             tags={["dev"]}
                             initialState={false}
                             arrange={({ setState }) =>
@@ -31,16 +31,16 @@ export default function SwitchDemo() {
                                     backgroundInactive={'gray'}
                                     circleActiveColor={'#30a566'}
                                     circleInActiveColor={'#fff'}
-                                    renderInsideCircle={() => ''} // custom component to render inside the Switch circle (Text, Image, etc.)
-                                    changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
-                                    innerCircleStyle={{ alignItems: "center", justifyContent: "center" }} // style for inner animated circle for what you (may) be rendering inside the circle
-                                    outerCircleStyle={{}} // style for outer animated circle
+                                    renderInsideCircle={() => ''}
+                                    changeValueImmediately={true}
+                                    innerCircleStyle={{ alignItems: "center", justifyContent: "center" }}
+                                    outerCircleStyle={{}}
                                     renderActiveText={true}
                                     renderInActiveText={true}
-                                    switchLeftPx={2} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
-                                    switchRightPx={2} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
-                                    switchWidthMultiplier={3} // multiplied by the `circleSize` prop to calculate total width of the Switch
-                                    switchBorderRadius={50} // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
+                                    switchLeftPx={2}
+                                    switchRightPx={2}
+                                    switchWidthMultiplier={3}
+                                    switchBorderRadius={50}
                                 />
                             }
                             assert={({ expect, state }) => {
@@ -66,16 +66,16 @@ export default function SwitchDemo() {
                                     backgroundInactive={'gray'}
                                     circleActiveColor={'#30a566'}
                                     circleInActiveColor={'#fff'}
-                                    renderInsideCircle={() => ''} // custom component to render inside the Switch circle (Text, Image, etc.)
-                                    changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
-                                    innerCircleStyle={{ alignItems: "center", justifyContent: "center" }} // style for inner animated circle for what you (may) be rendering inside the circle
-                                    outerCircleStyle={{}} // style for outer animated circle
+                                    renderInsideCircle={() => ''}
+                                    changeValueImmediately={true}
+                                    innerCircleStyle={{ alignItems: "center", justifyContent: "center" }}
+                                    outerCircleStyle={{}}
                                     renderActiveText={true}
                                     renderInActiveText={true}
-                                    switchLeftPx={2} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
-                                    switchRightPx={2} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
-                                    switchWidthMultiplier={3} // multiplied by the `circleSize` prop to calculate total width of the Switch
-                                    switchBorderRadius={50} // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
+                                    switchLeftPx={2}
+                                    switchRightPx={2}
+                                    switchWidthMultiplier={3}
+                                    switchBorderRadius={50}
                                 />
                             }
                             assert={({ expect, state }) => {
@@ -101,16 +101,16 @@ export default function SwitchDemo() {
                                     backgroundInactive={'#999fff'}
                                     circleActiveColor={'#30a566'}
                                     circleInActiveColor={'#fff'}
-                                    renderInsideCircle={() => ''} // custom component to render inside the Switch circle (Text, Image, etc.)
-                                    changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
-                                    innerCircleStyle={{ alignItems: "center", justifyContent: "center" }} // style for inner animated circle for what you (may) be rendering inside the circle
-                                    outerCircleStyle={{}} // style for outer animated circle
+                                    renderInsideCircle={() => ''}
+                                    changeValueImmediately={true}
+                                    innerCircleStyle={{ alignItems: "center", justifyContent: "center" }}
+                                    outerCircleStyle={{}}
                                     renderActiveText={true}
                                     renderInActiveText={true}
-                                    switchLeftPx={2} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
-                                    switchRightPx={2} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
-                                    switchWidthMultiplier={3} // multiplied by the `circleSize` prop to calculate total width of the Switch
-                                    switchBorderRadius={50} // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
+                                    switchLeftPx={2}
+                                    switchRightPx={2}
+                                    switchWidthMultiplier={3}
+                                    switchBorderRadius={50}
                                 />
                             }
                             assert={({ expect, state }) => {
@@ -136,16 +136,16 @@ export default function SwitchDemo() {
                                     backgroundInactive={'gray'}
                                     circleActiveColor={'#3ef'}
                                     circleInActiveColor={'#9fe'}
-                                    renderInsideCircle={() => ''} // custom component to render inside the Switch circle (Text, Image, etc.)
-                                    changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
-                                    innerCircleStyle={{ alignItems: "center", justifyContent: "center" }} // style for inner animated circle for what you (may) be rendering inside the circle
-                                    outerCircleStyle={{}} // style for outer animated circle
+                                    renderInsideCircle={() => ''}
+                                    changeValueImmediately={true}
+                                    innerCircleStyle={{ alignItems: "center", justifyContent: "center" }}
+                                    outerCircleStyle={{}}
                                     renderActiveText={true}
                                     renderInActiveText={true}
-                                    switchLeftPx={2} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
-                                    switchRightPx={2} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
-                                    switchWidthMultiplier={3} // multiplied by the `circleSize` prop to calculate total width of the Switch
-                                    switchBorderRadius={50} // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
+                                    switchLeftPx={2}
+                                    switchRightPx={2}
+                                    switchWidthMultiplier={3}
+                                    switchBorderRadius={50}
                                 />
                             }
                             assert={({ expect, state }) => {
@@ -171,16 +171,16 @@ export default function SwitchDemo() {
                                     backgroundInactive={'gray'}
                                     circleActiveColor={'#30a566'}
                                     circleInActiveColor={'#fff'}
-                                    renderInsideCircle={() => <Text>t</Text>} // custom component to render inside the Switch circle (Text, Image, etc.)
-                                    changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
-                                    innerCircleStyle={{ alignItems: "center", justifyContent: "center" }} // style for inner animated circle for what you (may) be rendering inside the circle
-                                    outerCircleStyle={{}} // style for outer animated circle
+                                    renderInsideCircle={() => <Text>t</Text>}
+                                    changeValueImmediately={true}
+                                    innerCircleStyle={{ alignItems: "center", justifyContent: "center" }}
+                                    outerCircleStyle={{}}
                                     renderActiveText={true}
                                     renderInActiveText={true}
-                                    switchLeftPx={2} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
-                                    switchRightPx={2} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
-                                    switchWidthMultiplier={3} // multiplied by the `circleSize` prop to calculate total width of the Switch
-                                    switchBorderRadius={50} // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
+                                    switchLeftPx={2}
+                                    switchRightPx={2}
+                                    switchWidthMultiplier={3}
+                                    switchBorderRadius={50}
                                 />
                             }
                             assert={({ expect, state }) => {
@@ -206,16 +206,16 @@ export default function SwitchDemo() {
                                     backgroundInactive={'gray'}
                                     circleActiveColor={'#30a566'}
                                     circleInActiveColor={'#fff'}
-                                    renderInsideCircle={() => ''} // custom component to render inside the Switch circle (Text, Image, etc.)
-                                    changeValueImmediately={false} // if rendering inside circle, change state immediately or wait for animation to complete
-                                    innerCircleStyle={{ borderColor: 'red' }} // style for inner animated circle for what you (may) be rendering inside the circle
-                                    outerCircleStyle={{ backgroundColor: 'yellow',borderRadius:10,width:"auto"}} // style for outer animated circle
+                                    renderInsideCircle={() => ''}
+                                    changeValueImmediately={false}
+                                    innerCircleStyle={{ borderColor: 'red' }}
+                                    outerCircleStyle={{ backgroundColor: 'yellow', borderRadius: 10, width: "auto" }}
                                     renderActiveText={false}
                                     renderInActiveText={true}
-                                    switchLeftPx={2} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
-                                    switchRightPx={2} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
-                                    switchWidthMultiplier={3} // multiplied by the `circleSize` prop to calculate total width of the Switch
-                                    switchBorderRadius={50} // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
+                                    switchLeftPx={2}
+                                    switchRightPx={2}
+                                    switchWidthMultiplier={3}
+                                    switchBorderRadius={50}
                                 />
                             }
                             assert={({ expect, state }) => {
@@ -241,16 +241,16 @@ export default function SwitchDemo() {
                                     backgroundInactive={'gray'}
                                     circleActiveColor={'#30a566'}
                                     circleInActiveColor={'#fff'}
-                                    renderInsideCircle={() => ''} // custom component to render inside the Switch circle (Text, Image, etc.)
-                                    changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
-                                    innerCircleStyle={{ alignItems: "center", justifyContent: "center" }} // style for inner animated circle for what you (may) be rendering inside the circle
-                                    outerCircleStyle={{}} // style for outer animated circle
+                                    renderInsideCircle={() => ''}
+                                    changeValueImmediately={true}
+                                    innerCircleStyle={{ alignItems: "center", justifyContent: "center" }}
+                                    outerCircleStyle={{}}
                                     renderActiveText={false}
                                     renderInActiveText={true}
-                                    switchLeftPx={2} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
-                                    switchRightPx={2} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
-                                    switchWidthMultiplier={3} // multiplied by the `circleSize` prop to calculate total width of the Switch
-                                    switchBorderRadius={50} // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
+                                    switchLeftPx={2}
+                                    switchRightPx={2}
+                                    switchWidthMultiplier={3}
+                                    switchBorderRadius={50}
                                 />
                             }
                             assert={({ expect, state }) => {
@@ -276,16 +276,16 @@ export default function SwitchDemo() {
                                     backgroundInactive={'gray'}
                                     circleActiveColor={'#30a566'}
                                     circleInActiveColor={'#fff'}
-                                    renderInsideCircle={() => ''} // custom component to render inside the Switch circle (Text, Image, etc.)
-                                    changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
-                                    innerCircleStyle={{ alignItems: "center", justifyContent: "center" }} // style for inner animated circle for what you (may) be rendering inside the circle
-                                    outerCircleStyle={{}} // style for outer animated circle
+                                    renderInsideCircle={() => ''}
+                                    changeValueImmediately={true}
+                                    innerCircleStyle={{ alignItems: "center", justifyContent: "center" }}
+                                    outerCircleStyle={{}}
                                     renderActiveText={true}
                                     renderInActiveText={true}
-                                    switchLeftPx={2} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
-                                    switchRightPx={2} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
-                                    switchWidthMultiplier={3} // multiplied by the `circleSize` prop to calculate total width of the Switch
-                                    switchBorderRadius={50} // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
+                                    switchLeftPx={2}
+                                    switchRightPx={2}
+                                    switchWidthMultiplier={3}
+                                    switchBorderRadius={50}
                                 />
                             }
                             assert={({ expect, state }) => {
@@ -311,16 +311,16 @@ export default function SwitchDemo() {
                                     backgroundInactive={'gray'}
                                     circleActiveColor={'#30a566'}
                                     circleInActiveColor={'#fff'}
-                                    renderInsideCircle={() => ''} // custom component to render inside the Switch circle (Text, Image, etc.)
-                                    changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
-                                    innerCircleStyle={{ alignItems: "center", justifyContent: "center" }} // style for inner animated circle for what you (may) be rendering inside the circle
-                                    outerCircleStyle={{}} // style for outer animated circle
+                                    renderInsideCircle={() => ''}
+                                    changeValueImmediately={true}
+                                    innerCircleStyle={{ alignItems: "center", justifyContent: "center" }}
+                                    outerCircleStyle={{}}
                                     renderActiveText={true}
                                     renderInActiveText={true}
-                                    switchLeftPx={1} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
-                                    switchRightPx={1} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
-                                    switchWidthMultiplier={3} // multiplied by the `circleSize` prop to calculate total width of the Switch
-                                    switchBorderRadius={50} // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
+                                    switchLeftPx={1}
+                                    switchRightPx={1}
+                                    switchWidthMultiplier={3}
+                                    switchBorderRadius={50}
                                 />
                             }
                             assert={({ expect, state }) => {
@@ -346,16 +346,16 @@ export default function SwitchDemo() {
                                     backgroundInactive={'gray'}
                                     circleActiveColor={'#30a566'}
                                     circleInActiveColor={'#fff'}
-                                    renderInsideCircle={() => ''} // custom component to render inside the Switch circle (Text, Image, etc.)
-                                    changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
-                                    innerCircleStyle={{ alignItems: "center", justifyContent: "center" }} // style for inner animated circle for what you (may) be rendering inside the circle
-                                    outerCircleStyle={{}} // style for outer animated circle
+                                    renderInsideCircle={() => ''}
+                                    changeValueImmediately={true}
+                                    innerCircleStyle={{ alignItems: "center", justifyContent: "center" }}
+                                    outerCircleStyle={{}}
                                     renderActiveText={true}
                                     renderInActiveText={true}
-                                    switchLeftPx={1} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
-                                    switchRightPx={1} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
-                                    switchWidthMultiplier={4} // multiplied by the `circleSize` prop to calculate total width of the Switch
-                                    switchBorderRadius={50} // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
+                                    switchLeftPx={1}
+                                    switchRightPx={1}
+                                    switchWidthMultiplier={4}
+                                    switchBorderRadius={50}
                                 />
                             }
                             assert={({ expect, state }) => {
@@ -381,16 +381,16 @@ export default function SwitchDemo() {
                                     backgroundInactive={'gray'}
                                     circleActiveColor={'#30a566'}
                                     circleInActiveColor={'#fff'}
-                                    renderInsideCircle={() => ''} // custom component to render inside the Switch circle (Text, Image, etc.)
-                                    changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
-                                    innerCircleStyle={{ alignItems: "center", justifyContent: "center" }} // style for inner animated circle for what you (may) be rendering inside the circle
-                                    outerCircleStyle={{}} // style for outer animated circle
+                                    renderInsideCircle={() => ''}
+                                    changeValueImmediately={true}
+                                    innerCircleStyle={{ alignItems: "center", justifyContent: "center" }}
+                                    outerCircleStyle={{}}
                                     renderActiveText={true}
                                     renderInActiveText={true}
-                                    switchLeftPx={2} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
-                                    switchRightPx={2} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
-                                    switchWidthMultiplier={3} // multiplied by the `circleSize` prop to calculate total width of the Switch
-                                    switchBorderRadius={10} // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
+                                    switchLeftPx={2}
+                                    switchRightPx={2}
+                                    switchWidthMultiplier={3}
+                                    switchBorderRadius={10}
                                 />
                             }
                             assert={({ expect, state }) => {
