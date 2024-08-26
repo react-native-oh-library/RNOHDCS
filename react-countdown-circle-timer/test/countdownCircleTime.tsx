@@ -7,11 +7,17 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 export default function CountdownCircleTime() {
   const [isPlaying, setIsPlaying] = useState(true)
   const [count, setCount] = useState(15)
+  const [result, setResult] = useState(0)
 
   return (
     <Tester>
-      <TestSuite name='SensitiveInfoDemo'>
-        <ScrollView style={{ height: 700 }}>
+      <TestSuite name='CountdownCircleTimerDemo'>
+        <ScrollView style={{ height: 700 }} stickyHeaderIndices={[0]}>
+          <View style={styles.inputArea}>
+            <Text style={styles.baseText}>
+              {count}
+            </Text>
+          </View>
           <View style={{ backgroundColor: "#000" }}>
             <TestCase
               itShould="倒计时器"
@@ -28,16 +34,12 @@ export default function CountdownCircleTime() {
                   strokeLinecap={'square'}
                   rotation={'clockwise'}
                   size={180}
-                  // colors="#aabbcc"
                   trailColor="#d9d9d9"
                   isGrowing={true}
                   trailStrokeWidth={10}
-                  // colors="url(#test-it)"
                   colors={['#004777', '#F7B801', '#A30000', '#A30000']}
                   colorsTime={[8, 6, 3, 0]}
                   onUpdate={(remainingTime) => {
-
-                    // Alert.alert(JSON.stringify(remainingTime))
                   }}
                   onComplete={() => ({ shouldRepeat: true })}
                 >
@@ -71,16 +73,13 @@ export default function CountdownCircleTime() {
                   strokeLinecap={'square'}
                   rotation={'clockwise'}
                   size={180}
-                  // colors="#aabbcc"
                   trailColor="#d9d9d9"
                   isGrowing={true}
                   trailStrokeWidth={10}
-                  // colors="url(#test-it)"
                   colors={['#004777', '#F7B801', '#A30000', '#A30000']}
                   colorsTime={[8, 6, 3, 0]}
                   onUpdate={(remainingTime) => {
                     setState(true)
-                    // Alert.alert(JSON.stringify(remainingTime))
                   }}
                   onComplete={() => ({ shouldRepeat: true })}
                 >
@@ -114,16 +113,13 @@ export default function CountdownCircleTime() {
                   strokeLinecap={'square'}
                   rotation={'clockwise'}
                   size={180}
-                  // colors="#aabbcc"
                   trailColor="#d9d9d9"
                   isGrowing={true}
                   trailStrokeWidth={10}
-                  // colors="url(#test-it)"
                   colors={['#004777', '#F7B801', '#A30000', '#A30000']}
                   colorsTime={[8, 6, 3, 0]}
                   onUpdate={(remainingTime) => {
                     setState(true)
-                    // Alert.alert(JSON.stringify(remainingTime))
                   }}
                   onComplete={() => ({ shouldRepeat: true })}
                 >
@@ -156,16 +152,13 @@ export default function CountdownCircleTime() {
                   strokeLinecap={'square'}
                   rotation={'clockwise'}
                   size={180}
-                  // colors="#aabbcc"
                   trailColor="#d9d9d9"
                   isGrowing={true}
                   trailStrokeWidth={10}
-                  // colors="url(#test-it)"
                   colors={['#004777', '#F7B801', '#A30000', '#A30000']}
                   colorsTime={[8, 6, 3, 0]}
                   onUpdate={(remainingTime) => {
                     setState(true)
-                    // Alert.alert(JSON.stringify(remainingTime))
                   }}
                   onComplete={() => ({ shouldRepeat: true })}
                 >
@@ -198,16 +191,13 @@ export default function CountdownCircleTime() {
                   strokeLinecap={'square'}
                   rotation={'clockwise'}
                   size={180}
-                  // colors="#aabbcc"
                   trailColor="#d9d9d9"
                   isGrowing={true}
                   trailStrokeWidth={10}
-                  // colors="url(#test-it)"
                   colors={['#004777', '#F7B801', '#A30000', '#A30000']}
                   colorsTime={[8, 6, 3, 0]}
                   onUpdate={(remainingTime) => {
                     setState(true)
-                    // Alert.alert(JSON.stringify(remainingTime))
                   }}
                   onComplete={() => ({ shouldRepeat: true })}
                 >
@@ -240,16 +230,13 @@ export default function CountdownCircleTime() {
                   strokeLinecap={'round'}
                   rotation={'clockwise'}
                   size={180}
-                  // colors="#aabbcc"
                   trailColor="#d9d9d9"
                   isGrowing={true}
                   trailStrokeWidth={10}
-                  // colors="url(#test-it)"
                   colors={['#004777', '#F7B801', '#A30000', '#A30000']}
                   colorsTime={[8, 6, 3, 0]}
                   onUpdate={(remainingTime) => {
                     setState(true)
-                    // Alert.alert(JSON.stringify(remainingTime))
                   }}
                   onComplete={() => ({ shouldRepeat: true })}
                 >
@@ -282,16 +269,13 @@ export default function CountdownCircleTime() {
                   strokeLinecap={'square'}
                   rotation={'counterclockwise'}
                   size={180}
-                  // colors="#aabbcc"
                   trailColor="#d9d9d9"
                   isGrowing={true}
                   trailStrokeWidth={10}
-                  // colors="url(#test-it)"
                   colors={['#004777', '#F7B801', '#A30000', '#A30000']}
                   colorsTime={[8, 6, 3, 0]}
                   onUpdate={(remainingTime) => {
                     setState(true)
-                    // Alert.alert(JSON.stringify(remainingTime))
                   }}
                   onComplete={() => ({ shouldRepeat: true })}>
                   {({ remainingTime }) => {
@@ -323,16 +307,13 @@ export default function CountdownCircleTime() {
                   strokeLinecap={'square'}
                   rotation={'clockwise'}
                   size={100}
-                  // colors="#aabbcc"
                   trailColor="#d9d9d9"
                   isGrowing={true}
                   trailStrokeWidth={10}
-                  // colors="url(#test-it)"
                   colors={['#004777', '#F7B801', '#A30000', '#A30000']}
                   colorsTime={[8, 6, 3, 0]}
                   onUpdate={(remainingTime) => {
                     setState(true)
-                    // Alert.alert(JSON.stringify(remainingTime))
                   }}
                   onComplete={() => ({ shouldRepeat: true })}>
                   {({ remainingTime }) => {
@@ -364,16 +345,13 @@ export default function CountdownCircleTime() {
                   strokeLinecap={'square'}
                   rotation={'clockwise'}
                   size={180}
-                  // colors="#aabbcc"
                   trailColor="#efd"
                   isGrowing={true}
                   trailStrokeWidth={10}
-                  // colors="url(#test-it)"
                   colors={['#004777', '#F7B801', '#A30000', '#A30000']}
                   colorsTime={[8, 6, 3, 0]}
                   onUpdate={(remainingTime) => {
                     setState(true)
-                    // Alert.alert(JSON.stringify(remainingTime))
                   }}
                   onComplete={() => ({ shouldRepeat: true })}>
                   {({ remainingTime }) => {
@@ -405,16 +383,13 @@ export default function CountdownCircleTime() {
                   strokeLinecap={'square'}
                   rotation={'clockwise'}
                   size={180}
-                  // colors="#aabbcc"
                   trailColor="#d9d9d9"
                   isGrowing={false}
                   trailStrokeWidth={10}
-                  // colors="url(#test-it)"
                   colors={['#004777', '#F7B801', '#A30000', '#A30000']}
                   colorsTime={[8, 6, 3, 0]}
                   onUpdate={(remainingTime) => {
                     setState(true)
-                    // Alert.alert(JSON.stringify(remainingTime))
                   }}
                   onComplete={() => ({ shouldRepeat: true })}
                 >
@@ -447,16 +422,13 @@ export default function CountdownCircleTime() {
                   strokeLinecap={'square'}
                   rotation={'clockwise'}
                   size={180}
-                  // colors="#aabbcc"
                   trailColor="#d9d9d9"
                   isGrowing={true}
                   trailStrokeWidth={100}
-                  // colors="url(#test-it)"
                   colors={['#004777', '#F7B801', '#A30000', '#A30000']}
                   colorsTime={[8, 6, 3, 0]}
                   onUpdate={(remainingTime) => {
                     setState(true)
-                    // Alert.alert(JSON.stringify(remainingTime))
                   }}
                   onComplete={() => ({ shouldRepeat: true })}
                 >
@@ -489,16 +461,13 @@ export default function CountdownCircleTime() {
                   strokeLinecap={'square'}
                   rotation={'clockwise'}
                   size={180}
-                  // colors="#aabbcc"
                   trailColor="#d9d9d9"
                   isGrowing={true}
                   trailStrokeWidth={10}
-                  // colors="url(#test-it)"
                   colors={['#0000FF', '#FFFF00', '#5C3317', '#D9D919']}
                   colorsTime={[15, 10, 7, 3, 0]}
                   onUpdate={(remainingTime) => {
-                    setState(remainingTime)
-                    // Alert.alert(JSON.stringify(remainingTime))
+                    setResult(remainingTime)
                   }}
                   onComplete={() => ({ shouldRepeat: true })}
                 >
@@ -531,22 +500,19 @@ export default function CountdownCircleTime() {
                   strokeLinecap={'square'}
                   rotation={'clockwise'}
                   size={180}
-                  // colors="#aabbcc"
                   trailColor="#d9d9d9"
                   isGrowing={true}
                   trailStrokeWidth={10}
-                  // colors="url(#test-it)"
                   colors={['#004777', '#F7B801', '#A30000', '#A30000']}
                   colorsTime={[8, 6, 3, 0]}
                   onUpdate={(remainingTime) => {
                     setState(true)
-                    // Alert.alert(JSON.stringify(remainingTime))
                   }}
                   onComplete={() => ({ shouldRepeat: true })}>
                   {({ remainingTime }) => {
                     return (
                       <View>
-                        <Text>{remainingTime}</Text>
+                        <Text>Time Remaining: {remainingTime} seconds</Text>
                       </View>)
                   }}
                 </CountdownCircleTimer>
@@ -571,15 +537,12 @@ export default function CountdownCircleTime() {
                   strokeLinecap={'square'}
                   rotation={'clockwise'}
                   size={180}
-                  // colors="#aabbcc"
                   trailColor="#d9d9d9"
                   isGrowing={true}
                   trailStrokeWidth={10}
-                  // colors="url(#test-it)"
                   colors={['#004777', '#F7B801', '#A30000', '#A30000']}
                   colorsTime={[8, 6, 3, 0]}
                   onUpdate={(remainingTime) => {
-                    // Alert.alert(JSON.stringify(remainingTime))
                   }}
                   onComplete={() => ({ shouldRepeat: false })}>
                   {({ remainingTime }) => {
@@ -617,5 +580,22 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     height: 200,
     width: 350,
+  },
+  inputArea: {
+    width: '100%',
+    height: 50,
+    borderWidth: 2,
+    borderColor: '#000000',
+    marginTop: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: "white"
+  },
+  baseText: {
+    width: '100%',
+    height: 50,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 16,
   },
 })
