@@ -278,7 +278,7 @@ const AutoLinkExample = () => {
                 url: {
                     tldMatches: true
                 },
-                text: "This is the string to parse for urls (github.com)"
+                text: "This is the string to parse for urls (https://example.org)"
             }
         },
         {
@@ -287,7 +287,7 @@ const AutoLinkExample = () => {
                 url: {
                     tldMatches: false
                 },
-                text: "This is the string to parse for urls (github.com)"
+                text: "This is the string to parse for urls (example.net)"
             }
         }
     ];
@@ -383,7 +383,7 @@ const AutoLinkExample = () => {
                         </View>
                     </TestCase>
                     <TestCase itShould="onPress: 点击事件" tags={['C_API']} >
-                        <View style={{ height: 40 }}>
+                        <View style={{ height: 50 }}>
                             <Autolink
                                 text="This is the string to parse for urls (https://github.com/joshswan/react-native-autolink) mentions/handles (@twitter)"
                                 mention='twitter'
@@ -392,7 +392,7 @@ const AutoLinkExample = () => {
                         </View>
                     </TestCase>
                     <TestCase itShould="onLongPress: 长按事件" tags={['C_API']} >
-                        <View style={{ height: 40 }}>
+                        <View style={{ height: 50 }}>
                             <Autolink
                                 text="This is the string to parse for urls (https://github.com/joshswan/react-native-autolink) mentions/handles (@instagram)"
                                 mention='instagram'
@@ -401,7 +401,7 @@ const AutoLinkExample = () => {
                         </View>
                     </TestCase>
                     <TestCase itShould="renderLink: 自定义渲染连接" tags={['C_API']} >
-                        <View style={{ height: 80 }}>
+                        <View style={{ height: 50 }}>
                             <Autolink
                                 text="This is the string to parse for urls (https://github.com/joshswan/react-native-autolink) @mention"
                                 mention='instagram'
@@ -444,19 +444,19 @@ const AutoLinkExample = () => {
                             />
                         </View>
                     </TestCase>
-                    <TestCase itShould="linkStyle: 应用于链接文本组件的样式，颜色是red(红色)" tags={['C_API']} >
-                        <View style={{ height: 40 }}>
+                    <TestCase itShould="linkStyle: 应用于链接文本组件的样式，颜色是red(红色),字体大小为18" tags={['C_API']} >
+                        <View style={{ height: 50 }}>
                             <Autolink
                                 text="This is the string to parse for urls (https://github.com/joshswan/react-native-autolink)"
-                                linkStyle={{ color: 'red' }}
+                                linkStyle={{ color: 'red',fontSize:18}}
                             />
                         </View>
                     </TestCase>
-                    <TestCase itShould="linkStyle: 应用于链接文本组件的样式，颜色是green(绿色)" tags={['C_API']} >
-                        <View style={{ height: 40 }}>
+                    <TestCase itShould="linkStyle: 应用于链接文本组件的样式，颜色是green(绿色)，字体大小为20，字体加粗" tags={['C_API']} >
+                        <View style={{ height: 50 }}>
                             <Autolink
                                 text="This is the string to parse for urls (https://github.com/joshswan/react-native-autolink)"
-                                linkStyle={{ color: 'green' }}
+                                linkStyle={{ color: 'green',fontWeight:'700',fontSize:20}}
                             />
                         </View>
                     </TestCase>
@@ -484,19 +484,6 @@ const AutoLinkExample = () => {
                                     {
                                         pattern: /[+]?[0-9]?\s?[(]?[0-9]{2}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{2}[-]?[0-9]{2,4}/g,
                                         style: { color: "blue", backgroundColor: 'red', textDecorationLine: 'underline' }
-                                    },
-                                ]}
-                            />
-                        </View>
-                    </TestCase>
-                    <TestCase itShould="matchers: 自定义匹配规则(415-555-5555)" tags={['C_API']} >
-                        <View style={{ height: 40 }}>
-                            <Autolink
-                                text="This is the phone numbers (415-555-5555)"
-                                matchers={[
-                                    {
-                                        pattern: /[+]?[0-9]?\s?[(]?[0-9]{2}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{2}[-]?[0-9]{2,4}/g,
-                                        style: { color: "red", backgroundColor: 'yellow', textDecorationLine: 'underline' }
                                     },
                                 ]}
                             />

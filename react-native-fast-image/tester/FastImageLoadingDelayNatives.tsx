@@ -9,7 +9,6 @@ export function FastImageLoadingDelayNatives(): JSX.Element {
   const [startTime, setStartTime] = React.useState(0);
   const [lostStr, setLoadStr] = React.useState("点击加载");
   let endNum =0;
-  let rows = 100;
   let clumns =7;
   
   const loadOnPress=()=> {
@@ -17,7 +16,7 @@ export function FastImageLoadingDelayNatives(): JSX.Element {
     setTime(0)
     setStartTime((new Date()).valueOf())
     const newData =[]
-    for(let i=0;i<rows;i++){
+    for(let i=0;i<source.length/clumns;i++){
       newData.push(i);
     }
     setData(newData);
@@ -39,47 +38,47 @@ export function FastImageLoadingDelayNatives(): JSX.Element {
 
       <ScrollView>
         {
-          data.map(item =>{ 
+          data.map((item,index) =>{ 
             return (
-        <View style={styles.item}>
+        <View style={styles.item} key={index}>
         
-        <Image source={{ uri: 'https://dummyimage.com/200x200/0000f0/fff&text='+source[item*clumns] }} style={styles.image} onLoadEnd={()=>{
+        <Image source={{ uri: source[item*clumns] }} style={styles.image} onLoadEnd={()=>{
           endNum++;
           if(endNum == source.length ){
             setTime(((new Date()).valueOf() -startTime)/1000)
           }
         }} />
-        <Image source={{ uri: 'https://dummyimage.com/200x200/0000f0/fff&text='+source[item*clumns+1] }} style={styles.image} onLoadEnd={()=>{
+        <Image source={{ uri: source[item*clumns+1] }} style={styles.image} onLoadEnd={()=>{
           endNum++;
           if(endNum == source.length ){
             setTime(((new Date()).valueOf() -startTime)/1000)
           }
         }} />
-        <Image source={{ uri: 'https://dummyimage.com/200x200/0000f0/fff&text='+source[item*clumns+2] }} style={styles.image} onLoadEnd={()=>{
+        <Image source={{ uri: source[item*clumns+2] }} style={styles.image} onLoadEnd={()=>{
           endNum++;
           if(endNum == source.length ){
             setTime(((new Date()).valueOf() -startTime)/1000)
           }
         }} />
-        <Image source={{ uri: 'https://dummyimage.com/200x200/0000f0/fff&text='+source[item*clumns+3] }} style={styles.image} onLoadEnd={()=>{
+        <Image source={{ uri: source[item*clumns+3] }} style={styles.image} onLoadEnd={()=>{
           endNum++;
           if(endNum == source.length ){
             setTime(((new Date()).valueOf() -startTime)/1000)
           }
         }} />
-        <Image source={{ uri: 'https://dummyimage.com/200x200/0000f0/fff&text='+source[item*clumns+4] }} style={styles.image} onLoadEnd={()=>{
+        <Image source={{ uri: source[item*clumns+4] }} style={styles.image} onLoadEnd={()=>{
           endNum++;
           if(endNum == source.length ){
             setTime(((new Date()).valueOf() -startTime)/1000)
           }
         }} />
-        <Image source={{ uri: 'https://dummyimage.com/200x200/0000f0/fff&text='+source[item*clumns+5] }} style={styles.image} onLoadEnd={()=>{
+        <Image source={{ uri: source[item*clumns+5] }} style={styles.image} onLoadEnd={()=>{
           endNum++;
           if(endNum == source.length ){
             setTime(((new Date()).valueOf() -startTime)/1000)
           }
         }} />
-        <Image source={{ uri: 'https://dummyimage.com/200x200/0000f0/fff&text='+source[item*clumns+6] }} style={styles.image} onLoadEnd={()=>{
+        <Image source={{ uri: source[item*clumns+6] }} style={styles.image} onLoadEnd={()=>{
           endNum++;
           if(endNum == source.length ){
             setTime(((new Date()).valueOf() -startTime)/1000)

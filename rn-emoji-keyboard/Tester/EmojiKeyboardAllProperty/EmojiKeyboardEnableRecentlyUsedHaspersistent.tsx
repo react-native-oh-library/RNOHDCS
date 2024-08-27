@@ -1,6 +1,6 @@
 
-import React from 'react';
-import { StyleSheet, Button, Text  } from 'react-native';
+import React from 'react'
+import { StyleSheet, Button, Text  } from 'react-native'
 import EmojiPicker,  {type EmojiType,useRecentPicksPersistence} from 'rn-emoji-keyboard'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
@@ -30,7 +30,7 @@ export default function() {
     return (
         <>
             <Text style={styles.textIcon}>{result || ' '}</Text>
-            <Button onPress={() =>openfen() } title='open:EnableRecentlyUsed' />
+            <Button onPress={() =>openfen() } title='open:EnableRecentlyUsedHaspersistent' />
             <EmojiPicker enableRecentlyUsed onEmojiSelected={handlePick} open={isOpen} onClose={() => setIsOpen(false)} />
         </>
     )
