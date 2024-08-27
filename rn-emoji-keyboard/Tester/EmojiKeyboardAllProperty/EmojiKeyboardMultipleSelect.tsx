@@ -29,7 +29,6 @@ export default function () {
       <Text style={styles.textIcon}>{currSelectedEmojis.join(' ')} </Text>
       <Button onPress={() => setIsOpen(true)} title="open:MultipleSelect" />
       <EmojiPicker
-      disableSafeArea
         allowMultipleSelections
         selectedEmojis={currSelectedNames}
         onEmojiSelected={handlePick}
