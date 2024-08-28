@@ -1,12 +1,12 @@
 import React, { useCallback, useState } from 'react';
 import { TestSuite, Tester, TestCase } from '@rnoh/testerino';
-import { View, Alert, Button, ScrollView, Text, StyleSheet } from 'react-native';
+import { View, Alert, Button, ScrollView, Text, StyleSheet, TextInput } from 'react-native';
 import RNDefaultPreference from 'react-native-default-preference'
 
 export function Preference() {
     const [resTest, setResTest] = useState('');
+    const [preName, setPreName] = useState('');
     const handleSetItem = useCallback((key: string, value: string) => {
-        Alert.alert('1234')
         RNDefaultPreference.set(key, value)
 
     }, []);
@@ -30,15 +30,15 @@ export function Preference() {
     }, [])
 
     const setMultiple = useCallback(() => {
-        RNDefaultPreference.setMultiple({ key1: 'value1', key2: 'value2', key3: 'value3' })
+        RNDefaultPreference.setMultiple({ key3: 'value3', key4: 'value4' })
     }, [])
 
     const getMultiple = useCallback(() => {
-        RNDefaultPreference.getMultiple(['key1', 'key2'])
+        RNDefaultPreference.getMultiple(['key3', 'key4']).then(res => { setResTest(JSON.stringify(res)) });
     }, [])
 
-    const setName = useCallback(() => {
-        RNDefaultPreference.setName('examples1')
+    const setName = useCallback((pname: string) => {
+        RNDefaultPreference.setName(pname ? pname : 'examples1')
     }, [])
 
     const getName = useCallback(() => {
@@ -54,9 +54,8 @@ export function Preference() {
                     {resTest}
                 </Text>
             </View>
-            <ScrollView >
-                <TestSuite name='SensitiveInfoDemo' >
-
+            <ScrollView style={{ marginTop: 50 }}>
+                <TestSuite name='PreferenceInfoDemo' >
                     <TestCase
                         itShould="存入键值对key:key1 value:value1"
                         tags={["dev"]}
@@ -64,7 +63,7 @@ export function Preference() {
                         arrange={({ setState }) =>
                             <Button onPress={async () => {
                                 try {
-                                     handleSetItem('key1', 'value1')
+                                    handleSetItem('key1', 'value1')
                                     setState(true)
                                 } catch {
                                     setState(false)
@@ -115,7 +114,7 @@ export function Preference() {
                     />
 
                     <TestCase
-                        itShould="取出键值对key2"
+                        itShould="取出键值对value2"
                         tags={["dev"]}
                         initialState={false}
                         arrange={({ setState }) =>
@@ -202,7 +201,7 @@ export function Preference() {
                     />
 
                     <TestCase
-                        itShould="判断指纹解锁是否可用"
+                        itShould="存入key3：value3,key4:value4"
                         tags={["dev"]}
                         initialState={false}
                         arrange={({ setState }) =>
@@ -223,7 +222,7 @@ export function Preference() {
                     />
 
                     <TestCase
-                        itShould="获取指纹解锁权限"
+                        itShould="获取key3;key4的value值"
                         tags={["dev"]}
                         initialState={false}
                         arrange={({ setState }) =>
@@ -244,20 +243,27 @@ export function Preference() {
                     />
 
                     <TestCase
-                        itShould="取消指纹认证"
+                        itShould="存入文件名"
                         tags={["dev"]}
                         initialState={false}
                         arrange={({ setState }) =>
-                            <Button onPress={async () => {
-                                try {
-                                    await setName()
-                                    setState(true)
-                                } catch {
-                                    setState(false)
-                                }
-
-
-                            }} title={'Add item using handlecancelFingerprintAuth'}></Button>
+                            <View>
+                                <Text>输入文件名</Text>
+                                <TextInput
+                                    style={{ borderBottomWidth: 1, marginBottom: 10 }}
+                                    onChangeText={(res) => {
+                                        setPreName(res)
+                                    }} />
+                                <Text>提交</Text>
+                                <Button onPress={async () => {
+                                    try {
+                                        await setName(preName)
+                                        setState(true)
+                                    } catch {
+                                        setState(false)
+                                    }
+                                }} title={'Add item using handlecancelFingerprintAuth'} />
+                            </View>
                         }
                         assert={({ expect, state }) => {
                             expect(state).to.be.eq(true);
@@ -265,7 +271,7 @@ export function Preference() {
                     />
 
                     <TestCase
-                        itShould="关闭指纹权限"
+                        itShould="获取文件名"
                         tags={["dev"]}
                         initialState={false}
                         arrange={({ setState }) =>
