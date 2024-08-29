@@ -8,13 +8,14 @@ export default function ViewShotContinuousTest() {
     setState: React.Dispatch<React.SetStateAction<string>>;
   }) => {
     const [mountUri, setMountUri] = useState('');
+    const [errMsg, setErrMsg] = useState('');
     const myText = React.useRef<ViewShot>(null);
     const getSuccess = (res) => {
       setMountUri(res);
     }
 
     const getError = (err) => {
-      console.log(err);
+      setErrMsg(err)
     }
     return (
       <View style={{ height: 80 }}>
@@ -22,7 +23,8 @@ export default function ViewShotContinuousTest() {
           <ViewShot ref={myText} style={{ backgroundColor: '#bfa' }} captureMode="continuous" onCaptureFailure={getError} onCapture={getSuccess} children={<Text>测试截图</Text>}></ViewShot>
         </View>
         <View style={{ marginTop: 20 }}>
-          <Text numberOfLines={1} ellipsizeMode="middle">截图保存路径：{mountUri}</Text>
+          <Text numberOfLines={1} ellipsizeMode="middle">截图成功路径：{mountUri}</Text>
+          <Text numberOfLines={1} ellipsizeMode="middle">截图失败信息：{errMsg}</Text>
         </View>
       </View>
     );
@@ -33,7 +35,7 @@ export default function ViewShotContinuousTest() {
       <ScrollView>
         <Tester>
           <TestCase
-            itShould="captureMode为continuous"
+            itShould="captureMode为continuous，onCapture属性返回截图成功的路径，onCaptureFailure属性返回截图失败信息"
             initialState={''}
             arrange={({ setState }) => <ViewShotContinuous setState={setState} />}
             assert={({ expect, state }) => {

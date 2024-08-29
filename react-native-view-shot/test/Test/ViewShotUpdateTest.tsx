@@ -3,7 +3,7 @@ import { View, Text, Button, ScrollView, TextInput, Image } from "react-native";
 import ViewShot from "react-native-view-shot";
 import { Tester, TestCase } from '@rnoh/testerino';
 
-export default function ViewShotTest() {
+export default function ViewShotUpdateTest() {
   const ViewShotUpdate = (props: {
     setState: React.Dispatch<React.SetStateAction<string>>;
   }) => {
@@ -30,7 +30,7 @@ export default function ViewShotTest() {
           <View style={{ marginBottom: 5 }}>
             <Button title="显示整体组件" onPress={() => { setFlag(true) }} />
           </View>
-          <Text>{txt}</Text>
+          <Text numberOfLines={1} ellipsizeMode="middle">{txt}</Text>
           <Button title="显示组件触发update模式" onPress={() => { setChangeMode(!mode) }} />
         </View>
       </View>
@@ -42,7 +42,7 @@ export default function ViewShotTest() {
       <ScrollView>
         <Tester>
           <TestCase
-            itShould="captureMode为update"
+            itShould="captureMode为update，onCapture接口返回截图成功的路径"
             initialState={''}
             arrange={({ setState }) => <ViewShotUpdate setState={setState} />}
             assert={({ expect, state }) => {

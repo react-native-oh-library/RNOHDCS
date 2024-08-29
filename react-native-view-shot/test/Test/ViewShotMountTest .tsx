@@ -34,7 +34,7 @@ export default function ViewShotMountTest() {
       <ScrollView>
         <Tester>
           <TestCase
-            itShould="captureMode为mount，"
+            itShould="captureMode为mount，onCapture接口返回截图成功的路径"
             initialState={''}
             arrange={({ setState }) => <ViewShotMount setState={setState} />}
             assert={({ expect, state }) => {
