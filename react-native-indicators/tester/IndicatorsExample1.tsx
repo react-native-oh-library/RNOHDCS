@@ -19,7 +19,7 @@ export function IndicatorsExample1() {
   const components = [
     {
       Comp: MaterialIndicator,
-      mame: 'MaterialIndicator',
+      mame: 'MaterialIndicator1',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -34,7 +34,7 @@ export function IndicatorsExample1() {
     },
     {
       Comp: MaterialIndicator,
-      mame: 'MaterialIndicator',
+      mame: 'MaterialIndicator2',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -49,7 +49,7 @@ export function IndicatorsExample1() {
     },
     {
       Comp: MaterialIndicator,
-      mame: 'MaterialIndicator',
+      mame: 'MaterialIndicator3',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -64,7 +64,7 @@ export function IndicatorsExample1() {
     },
     {
       Comp: MaterialIndicator,
-      mame: 'MaterialIndicator',
+      mame: 'MaterialIndicator4',
       props: {
         animationDuration: 500,
         animationEasing: Easing.ease,
@@ -79,7 +79,7 @@ export function IndicatorsExample1() {
     },
     {
       Comp: PacmanIndicator,
-      mame: 'PacmanIndicator',
+      mame: 'PacmanIndicator1',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -93,7 +93,7 @@ export function IndicatorsExample1() {
     },
     {
       Comp: PacmanIndicator,
-      mame: 'PacmanIndicator',
+      mame: 'PacmanIndicator2',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -107,7 +107,7 @@ export function IndicatorsExample1() {
     },
     {
       Comp: PacmanIndicator,
-      mame: 'PacmanIndicator',
+      mame: 'PacmanIndicator3',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -121,7 +121,7 @@ export function IndicatorsExample1() {
     },
     {
       Comp: PacmanIndicator,
-      mame: 'PacmanIndicator',
+      mame: 'PacmanIndicator4',
       props: {
         animationDuration: 500,
         animationEasing: Easing.ease,
@@ -135,7 +135,7 @@ export function IndicatorsExample1() {
     },
     {
       Comp: BarIndicator,
-      mame: 'BarIndicator',
+      mame: 'BarIndicator1',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -150,7 +150,7 @@ export function IndicatorsExample1() {
     },
     {
       Comp: BarIndicator,
-      mame: 'BarIndicator',
+      mame: 'BarIndicator2',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -165,7 +165,7 @@ export function IndicatorsExample1() {
     },
     {
       Comp: BarIndicator,
-      mame: 'BarIndicator',
+      mame: 'BarIndicator3',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -180,7 +180,7 @@ export function IndicatorsExample1() {
     },
     {
       Comp: BarIndicator,
-      mame: 'BarIndicator',
+      mame: 'BarIndicator4',
       props: {
         animationDuration: 500,
         animationEasing: Easing.ease,
@@ -195,7 +195,7 @@ export function IndicatorsExample1() {
     },
     {
       Comp: DotIndicator,
-      mame: 'DotIndicator',
+      mame: 'DotIndicator1',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -210,7 +210,7 @@ export function IndicatorsExample1() {
     },
     {
       Comp: DotIndicator,
-      mame: 'DotIndicator',
+      mame: 'DotIndicator2',
       props: {
         animationDuration: 500,
         animationEasing: Easing.ease,
@@ -226,7 +226,7 @@ export function IndicatorsExample1() {
     },
     {
       Comp: DotIndicator,
-      mame: 'DotIndicator',
+      mame: 'DotIndicator3',
       props: {
         animationDuration: 500,
         animationEasing: Easing.ease,
@@ -242,7 +242,7 @@ export function IndicatorsExample1() {
     },
     {
       Comp: DotIndicator,
-      mame: 'DotIndicator',
+      mame: 'DotIndicator4',
       props: {
         animationDuration: 500,
         animationEasing: Easing.ease,
