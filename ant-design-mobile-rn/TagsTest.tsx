@@ -15,19 +15,22 @@ export default () => {
           <Tag small>{'small'}</Tag>
         </View>
       </TestCase>
-      <TestCase itShould="Tag disabled" tags={['C_API']}>
+      <TestCase itShould="Tag disabled={true}, disabled={false}" tags={['C_API']}>
         <View style={{ backgroundColor: 'red' }}>
           <Tag disabled>Disabled</Tag>
+          <Tag disabled={false}>NO Disabled</Tag>
         </View>
       </TestCase>
-      <TestCase itShould="Tag closable" tags={['C_API']}>
+      <TestCase itShould="Tag closable={true}, closable={false}" tags={['C_API']}>
         <View style={{ backgroundColor: 'red' }}>
           <Tag closable>{'closable'}</Tag>
+          <Tag closable={false}>{'no closable'}</Tag>
         </View>
       </TestCase>
-      <TestCase itShould="Tag selected" tags={['C_API']}>
+      <TestCase itShould="Tag selected={true}, selected={false}" tags={['C_API']}>
         <View style={{ backgroundColor: 'red' }}>
           <Tag selected>Selected</Tag>
+          <Tag selected={false}>NO Selected</Tag>
         </View>
       </TestCase>
       <TestCase itShould="Tag onChange()" tags={['C_API']}>

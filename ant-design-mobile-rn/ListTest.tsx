@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { List } from '@ant-design/react-native';
 import { TestSuite, TestCase } from '@rnoh/testerino';
 
@@ -33,6 +33,12 @@ export default () => {
 
   return (
     <TestSuite name="ListTest">
+      <TestCase itShould="list renderHeader={<Text>头部渲染</Text>}" tags={['C_API']}>
+        <List renderHeader={<Text>头部渲染</Text>}><Item><Text>头部渲染</Text></Item></List>
+      </TestCase>
+      <TestCase itShould="list renderHeader={<Text>底部渲染</Text>}" tags={['C_API']}>
+        <List renderFooter={<Text>底部渲染</Text>}><Item><Text>底部渲染</Text></Item></List>
+      </TestCase>
       <TestCase itShould="list wrap=false" tags={['C_API']}>
         <List>
           <Item>
@@ -42,9 +48,9 @@ export default () => {
       </TestCase>
       <TestCase itShould="list wrap=true" tags={['C_API']}>
         <List>
-          <Item wrap>
-            文字超长折行文字超长折行文字超长折行文字超长折行文字超长折行  文字超长折行文字超长折行文字超长折行文字超长折行文字超长折行  文字超长折行文字超长折行文字超长折行文字超长折行文字超长折行
-          </Item>
+          <List.Item wrap>
+            文字超长折行文字超长折行文字超长折行文字超长折行文字超长折行文字超长折行文字超长折行
+          </List.Item>
         </List>
       </TestCase>
       <TestCase itShould="list arrow" tags={['C_API']}>
@@ -65,18 +71,29 @@ export default () => {
           </Item>
         </List>
       </TestCase>
-      <TestCase itShould="list multipleLine" tags={['C_API']}>
+      <TestCase itShould="list multipleLine={true}, multipleLine={false}" tags={['C_API']}>
+        <List>
+          <Item multipleLine={true} wrap extra="文字超长折行文字超长折行文字超长折行">
+            多行展示
+          </Item>
+        </List>
+        <List>
+          <Item multipleLine={false} extra="单行省略单行省略单行省略单行省略">
+            单行省略
+          </Item>
+        </List>
+      </TestCase>
+      <TestCase itShould="list <Brief>辅助文字内容辅助文字内容辅助文字内容</Brief>" tags={['C_API']}>
         <List>
           <Item
             extra={
               <View>
-                内容内容内容内容
-                <Brief style={{ textAlign: 'right' }}>辅助文字内容辅助文字内容辅助文字内容辅助文字内容辅助文字内容</Brief>
+                <Brief style={{ textAlign: 'right' }}>辅助文字内容辅助文字内容辅助文字内容</Brief>
               </View>
             }
-            multipleLine={true}
+            multipleLine
           >
-            <Brief>多行展示多行展示多行展示多行展示多行展示多行展示多行展示多行展示</Brief>
+            <Brief>辅助组件</Brief>
           </Item>
         </List>
       </TestCase>
@@ -131,3 +148,8 @@ export default () => {
   );
 };
 
+const styles = StyleSheet.create({
+  bcak: {
+    backgroundColor: '#888',
+  },
+});

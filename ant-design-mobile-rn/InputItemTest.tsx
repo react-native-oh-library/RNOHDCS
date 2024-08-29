@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { InputItem } from '@ant-design/react-native';
 import { TestSuite, TestCase } from '@rnoh/testerino';
 
@@ -71,29 +71,45 @@ export default () => {
       <TestCase itShould="InputItem placeholder='请输入...'" tags={['C_API']}>
         <InputItem placeholder='请输入...'></InputItem>
       </TestCase>
-      <TestCase itShould="InputItem editable={false}" tags={['C_API']}>
+      <TestCase itShould="InputItem editable={false}, editable={true}" tags={['C_API']}>
         <InputItem
           placeholder="不可编辑"
           editable={false}>
           输入框
         </InputItem>
+        <InputItem
+          placeholder="可编辑"
+          editable={true}>
+          输入框
+        </InputItem>
       </TestCase>
-      <TestCase itShould="InputItem disabled={true}" tags={['C_API']}>
+      <TestCase itShould="InputItem disabled={true}, disabled={false}" tags={['C_API']}>
         <View>
           <InputItem
             placeholder="disabled"
             disabled>
-            输入框
+            不可输入框
+          </InputItem>
+          <InputItem
+            placeholder="no disabled"
+            disabled={false}>
+            可输入框
           </InputItem>
         </View>
       </TestCase>
-      <TestCase itShould="InputItem clear={true}" tags={['C_API']}>
+      <TestCase itShould="InputItem clear={true}, clear={false}" tags={['C_API']}>
         <View>
           <InputItem
             clear={true}
             placeholder="clear"
           >
-            输入框
+            可清除输入框
+          </InputItem>
+          <InputItem
+            clear={false}
+            placeholder="no clear"
+          >
+            不可清除输入框
           </InputItem>
         </View>
       </TestCase>
@@ -150,12 +166,19 @@ export default () => {
           expect(state).to.be.eq(true);
         }}>
       </TestCase>
-      <TestCase itShould="InputItem error={true}" tags={['C_API']}>
+      <TestCase itShould="InputItem error={true}, error={false}" tags={['C_API']}>
         <View>
           <InputItem
             clear={true}
             error
             placeholder="error"
+          >
+            输入框
+          </InputItem>
+          <InputItem
+            clear={true}
+            error={false}
+            placeholder="no error"
           >
             输入框
           </InputItem>
@@ -223,27 +246,26 @@ export default () => {
           </InputItem>
         </View>
       </TestCase>
-      <TestCase itShould="InputItem onVirtualKeyboardConfirm()" tags={['C_API']}>
-        <InputItem
-          clear
-          value={comfirm}
-          onVirtualKeyboardConfirm={(val: any) => { setComfirm(val) }}
-          placeholder="onVirtualKeyboardConfirm">
-          onVirtualKeyboardConfirm
-        </InputItem>
-      </TestCase>
-      <TestCase itShould="InputItem locale={{ confirmLabel: '确认' }}" tags={['C_API']}>
-        <InputItem
-          clear
-          locale={{ confirmLabel: '确认' }}
-          placeholder="locale">
-          last
-        </InputItem>
+      <TestCase itShould="InputItem onVirtualKeyboardConfirm()" tags={['C_API']} initialState={false}
+        arrange={({ setState }: any) =>
+          <InputItem
+            clear
+            value={comfirm}
+            onVirtualKeyboardConfirm={(val: any) => { setComfirm(val); setState(true); }}
+            placeholder="onVirtualKeyboard">
+            Keyboard
+          </InputItem>
+        }
+        assert={({ expect, state }) => {
+          expect(state).to.be.eq(true);
+        }}>
       </TestCase>
       <TestCase itShould="InputItem last={true}" tags={['C_API']}>
         <InputItem
           clear
+
           last={true}
+          style={styles.input}
           placeholder="last">
           last
         </InputItem>
@@ -251,5 +273,15 @@ export default () => {
     </TestSuite>
   );
 };
+
+const styles = StyleSheet.create({
+  input: {
+    height: 30,
+    borderColor: 'red',
+    borderWidth: 4,
+    borderRadius: 4,
+    borderBottomWidth: 0,
+  },
+});
 
 
