@@ -342,7 +342,7 @@ export default function SliderExample() {
                                     maximumValue={100}
                                     step={10}
                                     onValueChange={(v) => {
-                                        setState(v)
+                                        setState(Math.trunc(v))
                                     }}
                                     minimumTrackTintColor={"#FFFFFF"}
                                     maximumTrackTintColor={"#000000"}
