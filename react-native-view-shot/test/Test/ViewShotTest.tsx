@@ -15,6 +15,8 @@ export default function ViewShotTest() {
   const myText7 = React.useRef<ViewShot>(null);
   const myText8 = React.useRef<ViewShot>(null);
   const myText9 = React.useRef<ViewShot>(null);
+  const myText10 = React.useRef<ViewShot>(null);
+  const myText11 = React.useRef<ViewShot>(null);
   const myButton = React.useRef<ViewShot>(null);
   const [textUri, setTextUri] = useState('');
   const [widthUri, setWidthUri] = useState('');
@@ -26,6 +28,7 @@ export default function ViewShotTest() {
   const [jpgUri, setJpgUri] = useState('');
   const [quality1Uri, setQuality1Uri] = useState('');
   const [quality2Uri, setQuality2Uri] = useState('');
+  const [quality3Uri, setQuality3Uri] = useState('');
   const [result1Uri, setResult1Uri] = useState('');
   const [result2Uri, setResult2Uri] = useState('');
   const [result3Uri, setResult3Uri] = useState('');
@@ -35,9 +38,11 @@ export default function ViewShotTest() {
   const [buttonData, setButtonData] = useState('');
   const [quality1Data, setQuality1nData] = useState('');
   const [quality2Data, setQuality2Data] = useState('');
+  const [quality3Data, setQuality3Data] = useState('');
   const [widthData, setWidthData] = useState('');
   const [width1Data, setWidth1Data] = useState('');
   const [releaseUri, setReleaseUri] = useState('');
+  const [refUri, setRefUri] = useState('');
 
   const ViewShotWindows = (props: {
     setState: React.Dispatch<React.SetStateAction<string>>;
@@ -62,6 +67,32 @@ export default function ViewShotTest() {
       </View>
     );
   };
+
+  const ViewShotRef = (props: {
+    setState: React.Dispatch<React.SetStateAction<string>>;
+  }) => {
+    const capture = () => {
+      captureRef(myText11).then((res) => {
+        setRefUri(res);
+        props.setState(res);
+      })
+    };
+
+    return (
+      <View style={{ height: 85 }}>
+        <View>
+          <ViewShot ref={myText11} style={{ backgroundColor: '#bfa' }} children={<Text>测试截图</Text>}></ViewShot>
+        </View>
+        <View style={{ marginTop: 15 }}>
+          <Text numberOfLines={1} ellipsizeMode="middle">截图保存路径: {refUri}</Text>
+          <View style={{ marginBottom: 5 }}>
+            <Button title="截图" onPress={capture} />
+          </View>
+        </View>
+      </View>
+    );
+  };
+
 
   const ViewShotRelease = (props: {
     setState: React.Dispatch<React.SetStateAction<boolean>>;
@@ -322,6 +353,33 @@ export default function ViewShotTest() {
     );
   };
 
+  const ViewShotQuality3 = (props: {
+    setState: React.Dispatch<React.SetStateAction<string>>;
+  }) => {
+    const capture = () => {
+      captureRef(myText3, { quality: 0.5, format: "jpg" }).then((res) => {
+        FS.readFile(res, 'base64').then((data) => {
+          setQuality3Data(data);
+          setQuality3Uri(res);
+          props.setState(res);
+        })
+      })
+    };
+
+    return (
+      <View style={{ height: 300 }}>
+        <View>
+          <ViewShot ref={myText10} style={{ width: 200, height: 100, backgroundColor: 'red' }} children={<Text style={{ fontSize: 50 }}>测试截图</Text>}></ViewShot>
+        </View>
+        <View style={{ marginTop: 15 }}>
+          <Image source={{ uri: `data:image/png;base64,${quality3Data}` }} style={{ width: 200, height: 100 }} />
+          <Text numberOfLines={1} ellipsizeMode="middle">截图保存路径: {quality3Uri}</Text>
+          <Button title="截图" onPress={capture} />
+        </View>
+      </View>
+    );
+  };
+
   const ViewShotQuality2 = (props: {
     setState: React.Dispatch<React.SetStateAction<string>>;
   }) => {
@@ -431,6 +489,14 @@ export default function ViewShotTest() {
             }}
           />
           <TestCase
+            itShould="组件截图captureRef"
+            initialState={''}
+            arrange={({ setState }) => <ViewShotRef setState={setState} />}
+            assert={({ expect, state }) => {
+              expect(state).to.be.string;
+            }}
+          />
+          <TestCase
             itShould="调用releaseCapture，释放沙箱中保存的图片，如以释放，再次点击会报错"
             initialState={false}
             arrange={({ setState }) => <ViewShotRelease setState={setState} />}
@@ -439,7 +505,7 @@ export default function ViewShotTest() {
             }}
           />
           <TestCase
-            itShould="子组件为Text标签，需要到沙箱临时目录查看截图"
+            itShould="children为Text标签，查看图片"
             initialState={''}
             arrange={({ setState }) => <ViewShotText setState={setState} />}
             assert={({ expect, state }) => {
@@ -447,7 +513,7 @@ export default function ViewShotTest() {
             }}
           />
           <TestCase
-            itShould="子组件为Button标签，需要到沙箱临时目录查看截图"
+            itShould="children为Button标签，查看图片"
             initialState={''}
             arrange={({ setState }) => <ViewShotButton setState={setState} />}
             assert={({ expect, state }) => {
@@ -506,6 +572,14 @@ export default function ViewShotTest() {
             itShould="options的quality为1且图片格式为有损格式jpg"
             initialState={''}
             arrange={({ setState }) => <ViewShotQuality1 setState={setState} />}
+            assert={({ expect, state }) => {
+              expect(state).to.be.string;
+            }}
+          />
+           <TestCase
+            itShould="options的quality为0.5且图片格式为有损格式jpg"
+            initialState={''}
+            arrange={({ setState }) => <ViewShotQuality3 setState={setState} />}
             assert={({ expect, state }) => {
               expect(state).to.be.string;
             }}
