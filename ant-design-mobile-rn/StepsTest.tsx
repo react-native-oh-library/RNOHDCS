@@ -9,7 +9,7 @@ const Step = Steps.Step;
 export default () => {
   return (
     <TestSuite name="StepsTest">
-      <TestCase itShould="render a Steps size=small" tags={['C_API']}>
+      <TestCase itShould="render a Steps size=small,size=normal" tags={['C_API']}>
         <StepsSmallTest />
       </TestCase>
       <TestCase itShould="render a Steps current={2}" tags={['C_API']}>
@@ -50,6 +50,19 @@ function StepsSmallTest() {
   return (
     <View>
       <Steps size="small" current={1}>
+        {steps1.map((item: any, index: any) => (
+          <Step
+            key={index}
+            title={
+              <View>
+                <Text>title:{item.title}</Text>
+              </View>
+            }
+            status={item.status}
+          />
+        ))}
+      </Steps>
+      <Steps current={1}>
         {steps1.map((item: any, index: any) => (
           <Step
             key={index}

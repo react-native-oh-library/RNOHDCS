@@ -60,6 +60,8 @@ export function FastImageStyleDemo(): JSX.Element {
               defaultSource={require('./image/bunny.png')}
               source={112}
               resizeMode={FastImage.resizeMode.contain}
+              onError={()=>{console.log('error'); }}
+              onLoadEnd={()=>{console.log('onLoadEnd'); }}
             />
           </TestCase>
           <TestCase itShould='fallback true source=require(./image/bunny.png)'>
