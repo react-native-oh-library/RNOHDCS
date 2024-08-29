@@ -20,6 +20,21 @@ export default () => {
       <TestCase itShould="render a ActivityIndicator Size=Large" tags={['C_API']}>
         <ActivityIndicatorSizeTest />
       </TestCase>
+      <TestCase itShould="render a ActivityIndicator Toast=false" tags={['C_API']}>
+        <View style={[styles.demo]}>
+          <WingBlank>
+            <Flex>
+              <Flex.Item>
+                <Text>Toast=false</Text>
+              </Flex.Item>
+              <Flex.Item>
+                <ActivityIndicator toast={false} />
+              </Flex.Item>
+            </Flex>
+          </WingBlank>
+          <WhiteSpace size="xl" style={{ backgroundColor: '#fff' }} />
+        </View>
+      </TestCase>
       <TestCase itShould="render a ActivityIndicator Toast" tags={['C_API']} initialState={undefined}
         arrange={({ setState }: any) =>
           <View style={{ padding: 5 }}>
@@ -45,7 +60,7 @@ export default () => {
           expect(state).to.be.eq(true);
         }}>
       </TestCase>
-      <TestCase itShould="render a ActivityIndicator animating=false" tags={['C_API']}>
+      <TestCase itShould="render a ActivityIndicator animating=false, animating={true}" tags={['C_API']}>
         <View style={[styles.demo]}>
           <WingBlank>
             <Flex>
@@ -58,6 +73,18 @@ export default () => {
             </Flex>
           </WingBlank>
           <WhiteSpace size="xl" style={{ backgroundColor: '#fff' }} />
+        </View>
+        <View style={[styles.demo]}>
+          <WingBlank>
+            <Flex>
+              <Flex.Item>
+                <Text>animating=true</Text>
+              </Flex.Item>
+              <Flex.Item>
+                <ActivityIndicator animating={true} />
+              </Flex.Item>
+            </Flex>
+          </WingBlank>
         </View>
       </TestCase>
     </TestSuite>

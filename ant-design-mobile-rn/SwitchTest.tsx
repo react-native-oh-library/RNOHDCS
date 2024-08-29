@@ -21,14 +21,17 @@ export default () => {
   }
   return (
     <TestSuite name="SwitchTest">
-      <TestCase itShould="render a Switch checked" tags={['C_API']}>
+      <TestCase itShould="render a Switch checked={true}, checked={false}" tags={['C_API']}>
         <Switch checked />
+        <Switch checked={false} />
       </TestCase>
-      <TestCase itShould="render a Switch defaultChecked={true}" tags={['C_API']}>
+      <TestCase itShould="render a Switch defaultChecked={true}, defaultChecked={false}" tags={['C_API']}>
         <Switch defaultChecked={true} />
+        <Switch defaultChecked={false} />
       </TestCase>
-      <TestCase itShould="render a Switch disabled" tags={['C_API']}>
+      <TestCase itShould="render a Switch disabled={true}, disabled={false}" tags={['C_API']}>
         <Switch disabled={true} />
+        <Switch disabled={false} />
       </TestCase>
       <TestCase itShould="render a Switch loading" tags={['C_API']}>
         <View>
@@ -50,8 +53,9 @@ export default () => {
           expect(state).to.be.eq(true);
         }}>
       </TestCase>
-      <TestCase itShould="render a Switch  color='red'" tags={['C_API']}>
+      <TestCase itShould="render a Switch color='red', color='yellow'" tags={['C_API']}>
         <Switch checked color="red" />
+        <Switch checked color="yellow" />
       </TestCase>
       <TestCase itShould="render a Switch  checkedChildren='开'" tags={['C_API']}>
         <Switch
