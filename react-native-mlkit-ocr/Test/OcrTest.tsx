@@ -20,14 +20,15 @@ function Button({ label, onPress }: { onPress: () => void; label: string }) {
         <TouchableHighlight
             underlayColor={PALETTE.REACT_CYAN_DARK}
             style={{
-                paddingVertical: 6,
+                paddingVertical: 4,
                 paddingHorizontal: 12,
                 backgroundColor: PALETTE.REACT_CYAN_LIGHT,
                 borderWidth: 2,
                 borderColor: PALETTE.REACT_CYAN_DARK,
+                height: 26,
             }}
             onPress={onPress}>
-            <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 16 }}>
+            <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 14 }}>
                 {label}
             </Text>
         </TouchableHighlight>
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export const OcrTest = () => {
+const OcrTest = () => {
     const [loading, setLoading] = React.useState<boolean>(false);
     const [result, setResult] = React.useState<MlkitOcrResult | undefined>();
 
@@ -62,99 +63,101 @@ export const OcrTest = () => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={{ flex: 1 }}>
+                <Tester style={{ flex: 1 }}>
 
-                {Array.isArray(result) && result?.length && (
-                    <View
-                        style={styles.scroll}
-                    >
-                        {result?.map((block) => {
-                            console.log("=================result>", JSON.stringify(result));
-                            console.log("=================block>", JSON.stringify(block));
+                    {Array.isArray(result) && result?.length && (
+                        <View
+                            style={styles.scroll}
+                        >
+                            {result?.map((block) => {
+                                console.log("=================result>", JSON.stringify(result));
+                                console.log("=================block>", JSON.stringify(block));
 
-                            return block.lines.map((line) => {
+                                return block.lines.map((line) => {
+                                    return (
+                                        <View
+                                            key={line.text}
+                                            style={{
+                                                backgroundColor: '#ccccccaf',
+                                            }}
+                                        >
+                                            <Text style={{ fontSize: 10 }}>{line.text}</Text>
+                                        </View>
+                                    );
+                                });
+                            })}
+                        </View>
+                    )}
+
+                    <TestSuite name="@react-native-oh-tpl/react-native-mlkit-ocr">
+                        <TestCase
+                            key={1}
+                            itShould={'call:detectFromUri 识别网络照片'}
+                            tags={['C_API']}
+                            initialState={false}
+                            arrange={({ setState }) => {
                                 return (
-                                    <View
-                                        key={line.text}
-                                        style={{
-                                            backgroundColor: '#ccccccaf',
-                                        }}
-                                    >
-                                        <Text style={{ fontSize: 10 }}>{line.text}</Text>
+                                    <View style={{ flex: 1 }}>
+                                        <Button
+                                            label="识别网络照片"
+                                            onPress={() => {
+                                                MlkitOcr.detectFromUri('https://res.vmallres.com//uomcdn/CN/pms/202407/E3B48F7290631FAF341FDB09CF907F03.jpg').then(res => {
+                                                    setTimeout(() => {
+                                                        setResult(res)
+                                                        setState(!!res)
+
+                                                        console.log("================uri=res", JSON.stringify(res))
+                                                    }, 1000)
+                                                }).catch(err => {
+                                                    console.log("=========", err);
+
+                                                })
+                                            }}
+                                        />
                                     </View>
                                 );
-                            });
-                        })}
-                    </View>
-                )}
+                            }}
+                            assert={async ({ expect, state }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
+                        <TestCase
+                            key={2}
+                            itShould={'call:detectFromFile 识别本地照片'}
+                            tags={['C_API']}
+                            initialState={false}
+                            arrange={({ setState }) => {
+                                return (
+                                    <View style={{ flex: 1 }}>
+                                        <Button
+                                            label="识别本地照片"
+                                            onPress={() => {
+                                                MlkitOcr.detectFromFile('assets/ocr_test.jpg').then(res => {
+                                                    setTimeout(() => {
+                                                        setResult(res)
+                                                        setState(!!res)
+                                                        console.log("================file=res", JSON.stringify(res))
+                                                    }, 1000)
+                                                }).catch(err => {
+                                                    console.log("=========", err);
 
-                <TestSuite name="@react-native-oh-tpl/react-native-mlkit-ocr">
-                    <TestCase
-                        key={1}
-                        itShould={'识别网络照片'}
-                        tags={['C_API']}
-                        initialState={false}
-                        arrange={({ setState }) => {
-                            return (
-                                <View style={{ flex: 1 }}>
-                                    <Button
-                                        label="识别网络照片"
-                                        onPress={() => {
-                                            MlkitOcr.detectFromUri('https://res.vmallres.com//uomcdn/CN/pms/202407/E3B48F7290631FAF341FDB09CF907F03.jpg').then(res => {
-                                                setTimeout(() => {
-                                                    setResult(res)
-                                                    setState(!!res)
+                                                })
+                                            }}
+                                        />
+                                    </View>
+                                );
+                            }}
+                            assert={async ({ expect, state }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
 
-                                                    console.log("================uri=res", JSON.stringify(res))
-                                                }, 1000)
-                                            }).catch(err => {
-                                                console.log("=========", err);
-
-                                            })
-                                        }}
-                                    />
-                                </View>
-                            );
-                        }}
-                        assert={async ({ expect, state }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-                    <TestCase
-                        key={2}
-                        itShould={'识别本地照片'}
-                        tags={['C_API']}
-                        initialState={false}
-                        arrange={({ setState }) => {
-                            return (
-                                <View style={{ flex: 1 }}>
-                                    <Button
-                                        label="识别本地照片"
-                                        onPress={() => {
-                                            MlkitOcr.detectFromFile('file://docs/storage/Users/currentUser/test/1.jpg').then(res => {
-                                                setTimeout(() => {
-                                                    setResult(res)
-                                                    setState(!!res)
-                                                    console.log("================file=res", JSON.stringify(res))
-                                                }, 1000)
-                                            }).catch(err => {
-                                                console.log("=========", err);
-
-                                            })
-                                        }}
-                                    />
-                                </View>
-                            );
-                        }}
-                        assert={async ({ expect, state }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-
-                </TestSuite>
-
+                    </TestSuite>
+                </Tester>
             </View>
         </SafeAreaView>
     );
 
 };
 
+export default OcrTest;
