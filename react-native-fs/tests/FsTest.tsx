@@ -682,7 +682,7 @@ function FsTest(): React.JSX.Element {
                             arrange={({ setState }) => {
                                 return (
                                     <View style={{ height: 100, padding: 20 }}>
-                                        <Text>{hashExampleData}</Text>
+                                        <Text>{RNFS.DocumentDirectoryPath + '/2.txt'}</Text>
                                         <Button
                                             title="touchExample"
                                             color="#9a73ef"
