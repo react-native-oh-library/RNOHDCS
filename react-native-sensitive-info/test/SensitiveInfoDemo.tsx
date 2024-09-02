@@ -5,14 +5,13 @@ import sensitive from 'react-native-sensitive-info'
 
 export function SensitiveInfo() {
   const [resTest, setResTest] = useState('');
-  const [isEnrollment, setIsEnrollment] = useState(false);
   const handleSetItem = useCallback((key: string, value: string) => {
 
     sensitive.setItem(key, value, {
       sharedPreferencesName: 'exampleApp',
       keychainService: 'exampleApp',
     })
-
+    setResTest('存入成功')
   }, []);
 
   const handleGetItem = useCallback((key: string) => {
@@ -30,6 +29,7 @@ export function SensitiveInfo() {
       sharedPreferencesName: 'exampleApp',
       keychainService: 'exampleApp',
     });
+    setResTest('删除成功')
   }, [])
 
   const handleGetAllItems = useCallback(() => {
@@ -67,20 +67,16 @@ export function SensitiveInfo() {
     }
   },[]);
 
-  const InvalidatedByBiometricEnrollment = useCallback(() => {
-    sensitive.setInvalidatedByBiometricEnrollment(true);
-    setIsEnrollment(!isEnrollment)
-    setResTest(JSON.stringify(isEnrollment))
-  },[]);
+
 
   return (
-    <Tester style={{ height: '100%' }}>
+    <Tester style={{ height: '100%'}}>
       <View style={styles.content}>
         <Text style={styles.contentTest}>
           {resTest}
         </Text>
       </View>
-      <ScrollView >
+      <ScrollView  style={{ marginTop: 20 }}>
         <TestSuite name='SensitiveInfoDemo' >
 
           <TestCase
@@ -146,7 +142,7 @@ export function SensitiveInfo() {
           />
 
           <TestCase
-            itShould="取出键值对key2"
+            itShould="取出键值对value2"
             tags={["dev"]}
             initialState={false}
             arrange={({ setState }) =>
