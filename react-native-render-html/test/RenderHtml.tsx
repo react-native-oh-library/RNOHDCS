@@ -11,6 +11,11 @@ import {
   Button,
   Alert
 } from 'react-native';
+import {
+  defaultHTMLElementModels,
+  HTMLContentModel,
+  TBlock
+} from '@native-html/transient-render-engine';
 import { findOne, isTag } from 'domutils';
 import RenderHtml, { Node, defaultSystemFonts, NodeWithChildren, CustomBlockRenderer } from 'react-native-render-html';
 import { TestCase, Tester, TestSuite } from '@rnoh/testerino';
@@ -124,7 +129,7 @@ const TestRenderHtml = () => {
 
           <TestCase
             key={'bypassAnonymousTPhrasingNodes'}
-            itShould={'The most simple one is that itsimplifies the render tree.' }
+            itShould={'The most simple one is that itsimplifies the render tree.'}
             tags={['C_API']}
             initialState={false}
             arrange={({ setState }) => {
@@ -1094,7 +1099,48 @@ This is
                       source={{
                         html: '<div>Hello-----</div>',
                       }}
-                    /> :null
+                    /> : null
+                  }
+                </View>
+              );
+            }}
+            assert={async ({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
+
+          <TestCase
+            key={'customHTMLElementModels'}
+            itShould={'Customize element models for target tags'}
+            tags={['C_API']}
+            initialState={false}
+            arrange={({ setState }) => {
+              const [btnState, setBtnState] = useState(false)
+              const htmlContent = '<div><span>Hi, custom</span></div>';
+              return (
+                <View style={{ flex: 1 }}>
+                  <Button title='customHTMLElementModels' onPress={() => {
+                    setBtnState(true)
+                    setState(true)
+                  }} />
+                  {
+                    btnState === true ? <RenderHtml
+                      source={{ html: htmlContent }}
+                      customHTMLElementModels={{
+                        ...defaultHTMLElementModels,
+                        button: defaultHTMLElementModels.button.extend({
+                          contentModel: HTMLContentModel.block
+                        })
+                      }}
+                      renderers={{
+                        button: ({
+                          TDefaultRenderer,
+                          ...props
+                        }) => (
+                          <TDefaultRenderer onPress={() => {}} {...props} />
+                        )
+                      }}
+                    /> : null
                   }
                 </View>
               );
