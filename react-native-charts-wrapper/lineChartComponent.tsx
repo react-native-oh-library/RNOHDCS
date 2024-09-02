@@ -14,32 +14,21 @@ import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
 const lineChartDemo = () => {
   const data = [
     { x: 1, y: 20 },
-    { x: 2, y: 65 },
+    { x: 2, y: 33 },
     { x: 3, y: 12 },
     { x: 4, y: 23 },
-    { x: 5, y: 35 }
+    { x: 5, y: 35 },
+    { x: 6, y: 23 },
+    { x: 7, y: 20 },
+    { x: 8, y: 31 },
+    { x: 9, y: 12 },
+    { x: 10, y: 36 },
+    { x: 11, y: 12 },
+    { x: 12, y: 15 }
   ]
   return (
     <Tester>
       <ScrollView>
-        <TestSuite name="LineChart 基础折线图">
-          <TestCase itShould="Props:data,viewStyle">
-            <View  style={{width: '100%', height: 300}}>
-            <LineChart
-              style={styles.chart}
-              data={{
-                dataSets: [
-                  {
-                    label: 'demo',
-                    values: data
-                  },
-                ],
-              }}
-            />
-            </View>
-           
-          </TestCase>
-        </TestSuite>
         <TestSuite name="LineChart 基础折线图(chartDescription：描述部件)">
           <TestCase itShould="Props:chartDescription,enabled:true,默认值就为true，不设置也能显示">
             <View  style={{width: '100%', height: 300}}>
@@ -139,7 +128,7 @@ const lineChartDemo = () => {
           </TestCase>
         </TestSuite>
 
-        <TestSuite name="LineChart 基础折线图(highlightPerTapEnabled：设置高亮 !!!!)">
+        <TestSuite name="LineChart 基础折线图(position)">
           <TestCase itShould="Props:position 描述文本在屏幕中的位置">
             <View  style={{width: '100%', height: 300}}>
             <LineChart
@@ -175,7 +164,7 @@ const lineChartDemo = () => {
           </TestCase>
         </TestSuite>
 
-         <TestSuite name="LineChart 基础折线图(touchEnabled:设置触摸!!!!)">
+         <TestSuite name="LineChart 基础折线图(touchEnabled:设置触摸)">
           <TestCase itShould="Props:touchEnabled  设置触摸">
             <View  style={{width: '100%', height: 300}}>
             <LineChart
@@ -184,11 +173,14 @@ const lineChartDemo = () => {
                 dataSets: [
                   {
                     label: 'demo',
-                    values: data
+                    values: data,
+                    config:{highlightEnabled:true,highlightColor:processColor('#000')}
                   },
                 ],
               }}
               touchEnabled={true}
+              highlightPerTapEnabled={true}
+              maxHighlightDistance={1000}
             />
             </View>
            

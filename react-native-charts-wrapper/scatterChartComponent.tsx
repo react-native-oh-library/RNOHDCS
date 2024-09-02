@@ -43,29 +43,6 @@ const ScatterChartDemo = () => {
   return (
     <Tester>
       <ScrollView style={{marginBottom: 70}}>
-        <TestSuite name="散点图(基础图表)">
-          <TestCase itShould="props:data,viewStyle">
-            <View style={{height: 300}}>
-              <ScatterChart
-                style={styles.chart}
-                data={{
-                  dataSets: [
-                    {
-                      label: 'demo',
-                      values: data,
-                      config: {color: processColor('#4f4'), visible: true},
-                    },
-                    {
-                      label: 'demo2',
-                      values: data2,
-                      config: {color: processColor('#f4f')},
-                    },
-                  ],
-                }}
-              />
-            </View>
-          </TestCase>
-        </TestSuite>
 
         <TestSuite name="散点图(barChart和lineChart类型图表的公共属性)">
           <TestCase itShould="props:visibleRange ">

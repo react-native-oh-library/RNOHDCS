@@ -35,38 +35,6 @@ const BubbleChartDemo = () => {
   return (
     <Tester>
       <ScrollView style={{ marginBottom: 70 }}>
-        <TestSuite name="bubble 基础气泡图:数据(data)">
-          <TestCase itShould="Props:visible:true 数据集的可见性 可见">
-            <View style={{ width: '100%', height: 300 }}>
-              <BubbleChart
-                style={styles.chart}
-                data={{
-                  dataSets: [
-                    {
-                      label: 'demo',
-                      values: data,
-                      config: {
-                        drawValues: true, visible: true
-                      },
-
-                    },
-                    {
-                      label: 'demo2',
-                      values: data1,
-                      config: {
-                        drawValues: true, visible: true
-                      },
-
-                    },
-                  ],
-
-                }}
-                maxVisibleValueCount={70}
-              />
-            </View>
-          </TestCase>
-        </TestSuite>
-
         <TestSuite name="bubble 基础气泡图:(X轴Y轴公共设置)">
           <TestCase itShould="enabled 是否设置X轴 Y轴 都为true">
             <View style={{ width: '100%', height: 300 }}>
@@ -294,6 +262,31 @@ const BubbleChartDemo = () => {
                 maxVisibleValueCount={70}
                 xAxis={{ enabled: true, textSize: 20 }}
                 yAxis={{ left: { enabled: true, textSize: 12 }, right: { enabled: true, textSize: 20 } }}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="bubble 基础气泡图:(X轴Y轴公共设置)">
+          <TestCase itShould="fontFamily 设置用于标签的文本字体 ">
+            <View style={{ width: '100%', height: 300 }}>
+              <BubbleChart
+                style={styles.chart}
+                data={{
+                  dataSets: [
+                    {
+                      label: 'demo',
+                      values: data,
+                      config: {
+                        drawValues: true, visible: true
+                      },
+
+                    },
+                  ],
+
+                }}
+                maxVisibleValueCount={70}
+                xAxis={{ enabled: true, textSize: 20 ,fontFamily:'monospace'}}
+                yAxis={{ left: { enabled: true, textSize: 12,fontFamily:'monospace' }, right: { enabled: true, textSize: 12,fontFamily:'monospace' } }}
               />
             </View>
           </TestCase>
@@ -670,6 +663,31 @@ const BubbleChartDemo = () => {
 
         <TestSuite name="bubble 基础气泡图:(X轴Y轴公共设置)">
           <TestCase itShould="drawLimitLinesBehindData 设置在实际数据下面绘制限制线,限制线在数据的下面 ,true。false的情况，其他用例均已覆盖">
+            <View style={{ width: '100%', height: 300 }}>
+              <BubbleChart
+                style={styles.chart}
+                data={{
+                  dataSets: [
+                    {
+                      label: 'demo',
+                      values: data,
+                      config: {
+                        drawValues: true, visible: true
+                      },
+
+                    },
+                  ],
+
+                }}
+                maxVisibleValueCount={70}
+                xAxis={{ enabled: true, limitLines: [{ limit: 3, label: "limitLine" }, { limit: 6, label: "limitLine" }],drawLimitLinesBehindData:true }}
+                yAxis={{ left: { enabled: true, }, right: { enabled: true } }}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="bubble 基础气泡图:(data)">
+          <TestCase itShould="highlightCircleWidth ">
             <View style={{ width: '100%', height: 300 }}>
               <BubbleChart
                 style={styles.chart}

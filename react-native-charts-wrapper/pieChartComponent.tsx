@@ -23,26 +23,6 @@ const PieChartDemo = () => {
   return (
     <Tester>
       <ScrollView style={{ marginBottom: 70 }}>
-        <TestSuite name='饼图 drawEntryLabels'>
-          <TestCase itShould='data viewProps,maxAngle(用于计算饼图圆的最大角度)'>
-            <View style={{ width: '100%', height: 300 }}>
-              <PieChart
-                style={styles.container}
-                data={{
-                  dataSets: [
-                    {
-                      label: 'demo',
-                      values: data,
-                    },
-                  ],
-                }}
-                animation={{ durationX: 1000, durationY: 1000 }}
-                maxAngle={360}
-
-              />
-            </View>
-          </TestCase>
-        </TestSuite>
 
         <TestSuite name='饼图'>
           <TestCase itShould='drawEntryLabels(true) 将此属性设置为true可将条目标签绘制到饼图扇区中'>
