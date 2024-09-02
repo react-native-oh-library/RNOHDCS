@@ -19,6 +19,10 @@ function FsTest(): React.JSX.Element {
     const [existsParams, setExistsParams] = useState("");
     const [readDirExampleData, setreadDirExampleData] = useState({})
     const [writeFileExampleData, setwriteFileExampleData] = useState('')
+    const [hashExampleData, sethashExampleData] = useState('')
+    const [readFileAssetsExampleData, setreadFileAssetsExampleData] = useState("")
+    const [existsAssetsExampleData, setexistsAssetsExampleData] = useState("")
+    const [existsExampleData, setexistsExampleData] = useState('')
     const mkdirExample = () => {
         //创建文件夹
         RNFS.mkdir(RNFS.DocumentDirectoryPath + "/" + mkdirParam).then(
@@ -37,6 +41,7 @@ function FsTest(): React.JSX.Element {
         RNFS.exists(RNFS.DocumentDirectoryPath + "/" + existsParams).then(
             (result) => {
                 console.log("file existsExample " + result);
+                setexistsExampleData(JSON.stringify(result))
             },
             (err) => {
                 console.error("file mkdir: " + err.message);
@@ -148,7 +153,7 @@ function FsTest(): React.JSX.Element {
 
 
 
-    const [readExampleData,setreadExampleData]=useState({})
+    const [readExampleData, setreadExampleData] = useState({})
     const readExample = () => {
         const path = RNFS.DocumentDirectoryPath + '/2.txt';
         RNFS.read(path, 1024, 0, 'utf8')
@@ -161,7 +166,7 @@ function FsTest(): React.JSX.Element {
             });
     }
 
-    const [starExampleData,setstarExampleData]=useState({})
+    const [starExampleData, setstarExampleData] = useState({})
     const starExample = () => {
         const path = RNFS.DocumentDirectoryPath + '/eee/3.txt';
         RNFS.stat(path)
@@ -182,9 +187,10 @@ function FsTest(): React.JSX.Element {
     }
 
     const readFileAssetsExample = () => {//用户获取resources/rawfile/1.txt 目录下对应的rawfile文件内容，使用callback形式返回字节数组。
-        RNFS.readFileAssets('1.txt','utf8').then(res => {
+        RNFS.readFileAssets('1.txt', 'utf8').then(res => {
 
             console.log("readFileAssetsExample", res);
+            setreadFileAssetsExampleData(res)
 
         }).catch((err) => {
             console.log("readFileAssetsExample error", err);
@@ -197,12 +203,45 @@ function FsTest(): React.JSX.Element {
         RNFS.existsAssets("assets").then(res => {
 
             console.log("existsAssetsExample", res);
+            setexistsAssetsExampleData(JSON.stringify(res))
 
         }).catch((err) => {
             console.log("existsAssetsExample error", err);
         });
     }
 
+
+    const hashExample = () => {//用户获取resources/rawfile/ 底下有没有assets
+        const path = RNFS.DocumentDirectoryPath + '/2.txt';
+        RNFS.hash(path, 'md5').then(res => {
+
+            console.log("hash", res);
+            sethashExampleData(res)
+
+        }).catch((err) => {
+            console.log("hash error", err);
+        });
+    }
+
+    const touchExample = () => {//用户获取resources/rawfile/ 底下有没有assets
+        const path = RNFS.DocumentDirectoryPath + '/2.txt';
+        RNFS.touch(path, new Date("2018-12-2")).then(res => {
+
+            console.log("touchExampletouchExampletouchExample", res);
+        }).catch((err) => {
+            console.log("hash error", err);
+        });
+    }
+
+    const writeExample = () => {//用户获取resources/rawfile/ 底下有没有assets
+        const path = RNFS.DocumentDirectoryPath + '/3.txt';
+        RNFS.write(path,"utxxxxxx").then(res => {
+
+            console.log("touchExampletouchExampletouchExample", res);
+        }).catch((err) => {
+            console.log("hash error", err);
+        });
+    }
 
 
 
@@ -413,7 +452,7 @@ function FsTest(): React.JSX.Element {
                             initialState={false}
                             arrange={({ setState }) => {
                                 return (
-                                    <View style={{ height: 100, padding: 20 }}>
+                                    <View style={{ height: 150, padding: 20 }}>
                                         <View style={styles.sectionDescription}>
                                             <TextInput
                                                 style={styles.input}
@@ -422,6 +461,7 @@ function FsTest(): React.JSX.Element {
                                                 placeholderTextColor="#9a73ef"
                                                 autoCapitalize="none"
                                             />
+                                            <Text>{existsExampleData}</Text>
                                         </View>
                                         <Button
                                             title="existsExample"
@@ -445,7 +485,7 @@ function FsTest(): React.JSX.Element {
                                 return (
                                     <View style={{ height: 140, padding: 20 }}>
                                         <Text>{RNFS.DocumentDirectoryPath + '/2.txt'} </Text>
-                                        
+
                                         <Text>{RNFS.DocumentDirectoryPath + '/3.txt'}</Text>
                                         <Button
                                             title="copyFileExample"
@@ -471,7 +511,7 @@ function FsTest(): React.JSX.Element {
                             arrange={({ setState }) => {
                                 return (
                                     <View style={{ height: 160, padding: 20 }}>
-                                        <Text>{ RNFS.DocumentDirectoryPath + '/3.txt'}</Text>
+                                        <Text>{RNFS.DocumentDirectoryPath + '/3.txt'}</Text>
                                         <Text>{RNFS.DocumentDirectoryPath + '/eee/3.txt'}</Text>
                                         <Text>先用第一个create dir创建一个eee目录</Text>
                                         <Button
@@ -537,7 +577,7 @@ function FsTest(): React.JSX.Element {
                         />
 
 
-            
+
 
 
                         <TestCase
@@ -548,9 +588,9 @@ function FsTest(): React.JSX.Element {
                             arrange={({ setState }) => {
                                 return (
                                     <View style={{ height: 100, padding: 20 }}>
-                                        <Text>{ RNFS.DocumentDirectoryPath + '/3.pdf'}</Text>
+                                        <Text>{RNFS.DocumentDirectoryPath + '/3.pdf'}</Text>
                                         <Text>
-                                            
+
                                         </Text>
                                         <Button
                                             title="downloadFileExample"
@@ -574,6 +614,7 @@ function FsTest(): React.JSX.Element {
                                 return (
                                     <View style={{ height: 100, padding: 20 }}>
                                         <Text>resources/rawfile/1.txt </Text>
+                                        <Text>{readFileAssetsExampleData}</Text>
                                         <Button
                                             title="readFileAssetsExample"
                                             color="#9a73ef"
@@ -597,6 +638,7 @@ function FsTest(): React.JSX.Element {
                                 return (
                                     <View style={{ height: 100, padding: 20 }}>
                                         <Text>//用户获取resources/rawfile/ 底下有没有assets</Text>
+                                        <Text>{existsAssetsExampleData}</Text>
                                         <Button
                                             title="existsAssetsExample"
                                             color="#9a73ef"
@@ -610,16 +652,72 @@ function FsTest(): React.JSX.Element {
                             }}
                         />
 
+                        <TestCase
+                            key={"starExample"}
+                            itShould="fs api hashExample"
+                            tags={['C_API']}
+                            initialState={false}
+                            arrange={({ setState }) => {
+                                return (
+                                    <View style={{ height: 100, padding: 20 }}>
+                                        <Text>{hashExampleData}</Text>
+                                        <Button
+                                            title="hashExample"
+                                            color="#9a73ef"
+                                            onPress={() => { hashExample(); setState(true) }}
+                                        />
+                                    </View>
+                                );
+                            }}
+                            assert={async ({ expect, state }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
 
+                        <TestCase
+                            key={"touchExample"}
+                            itShould="fs api touchExample"
+                            tags={['C_API']}
+                            initialState={false}
+                            arrange={({ setState }) => {
+                                return (
+                                    <View style={{ height: 100, padding: 20 }}>
+                                        <Text>{hashExampleData}</Text>
+                                        <Button
+                                            title="touchExample"
+                                            color="#9a73ef"
+                                            onPress={() => { touchExample(); setState(true) }}
+                                        />
+                                    </View>
+                                );
+                            }}
+                            assert={async ({ expect, state }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
 
+                        <TestCase
+                            key={"writeExample"}
+                            itShould="fs api writeExample"
+                            tags={['C_API']}
+                            initialState={false}
+                            arrange={({ setState }) => {
+                                return (
+                                    <View style={{ height: 100, padding: 20 }}>
+                                        <Text>{RNFS.DocumentDirectoryPath + '/3.txt'}</Text>
+                                        <Button
+                                            title="writeExample"
+                                            color="#9a73ef"
+                                            onPress={() => { writeExample(); setState(true) }}
+                                        />
+                                    </View>
+                                );
+                            }}
+                            assert={async ({ expect, state }) => {
+                                expect(state).to.be.true;
+                            }}
+                        />
                     </Tester>
-
-
-
-
-
-
-
                 </ScrollView>
             </SafeAreaView>
         </>
@@ -629,7 +727,7 @@ function FsTest(): React.JSX.Element {
 const styles = StyleSheet.create({
     scrollView: {
         backgroundColor: Colors.black,
-        paddingBottom: 100,
+        paddingBottom: 900,
     },
     sectionDescription: {
         marginBottom: 10,
