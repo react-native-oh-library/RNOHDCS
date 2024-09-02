@@ -1,105 +1,56 @@
-import React from 'react';
-import {StyleSheet, ScrollView} from 'react-native';
+import React, { useState } from 'react';
+import {StyleSheet, ScrollView,Image, Button} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useCacheBust} from './utils/useCacheBust';
 import {TestSuite, Tester, TestCase} from '@rnoh/testerino';
 
-const IMAGE_URLS = [
-  'http://fpoimg.com/100x100',
-  'http://fpoimg.com/200x200',
-  'http://fpoimg.com/400x400',
-  'http://fpoimg.com/100x300',
-  'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-  'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-];
 
 export const FastImageSourceDemo = () => {
-  const {query, bust} = useCacheBust('');
+
+  const [uri,setUri] = useState('');
+  const [uri1,setUri1] = useState('');
+  const [uri3,setUri3] = useState('');
+  const [uri4,setUri4] = useState('');
   return (
     <Tester>
       <ScrollView>
-        <TestSuite name="priority && cache">
-          <TestCase itShould="priority low">
-            <FastImage
-              style={styles.image}
-              source={{
-                uri: IMAGE_URLS[0],
-                priority: FastImage.priority.low,
-              }}
-            />
-          </TestCase>
-
-          <TestCase itShould="priority normal">
-            <FastImage
-              style={styles.image}
-              source={{
-                uri: IMAGE_URLS[1],
-                priority: FastImage.priority.normal,
-              }}
-            />
-          </TestCase>
-          <TestCase itShould="priority high">
-            <FastImage
-              style={styles.image}
-              source={{
-                uri: IMAGE_URLS[2],
-                priority: FastImage.priority.high,
-              }}
-            />
-          </TestCase>
-
-          <TestCase itShould="cache immutable">
-            <FastImage
-              style={styles.image}
-              source={{
-                uri: IMAGE_URLS[3],
-                cache: FastImage.cacheControl.immutable,
-              }}
-            />
-          </TestCase>
-          <TestCase itShould="cache web">
-            <FastImage
-              style={styles.image}
-              source={{
-                uri: IMAGE_URLS[4],
-                cache: FastImage.cacheControl.web,
-              }}
-            />
-          </TestCase>
-          <TestCase itShould="cache cacheOnly">
-            <FastImage
-              style={styles.image}
-              source={{
-                uri: IMAGE_URLS[5],
-                cache: FastImage.cacheControl.cacheOnly,
-              }}
-            />
-          </TestCase>
-        </TestSuite>
         <TestSuite name="uri">
-          <TestCase itShould="image 1">
+          <TestCase itShould="image 1 uri:https://i-blog.csdnimg.cn/blog_migrate/12ea5d8f226ea294f76a8e77cfaf24c5.jpeg">
+          <Button title='show' onPress={()=>{
+              setUri3("https://i-blog.csdnimg.cn/blog_migrate/12ea5d8f226ea294f76a8e77cfaf24c5.jpeg")
+            }}></Button>
             <FastImage
               style={styles.image}
               source={{
-                uri: "https://i-blog.csdnimg.cn/blog_migrate/12ea5d8f226ea294f76a8e77cfaf24c5.jpeg",
+                uri: uri3,
               }}
             />
           </TestCase>
-          <TestCase itShould="image 2">
+          <TestCase itShould="image 2 uri:https://i-blog.csdnimg.cn/blog_migrate/f7cd0c9c94a756902bc24ae4d115f13a.jpeg">
+          <Button title='show' onPress={()=>{
+              setUri4("https://i-blog.csdnimg.cn/blog_migrate/f7cd0c9c94a756902bc24ae4d115f13a.jpeg")
+            }}></Button>
             <FastImage
               style={styles.image}
               source={{
-                uri: "https://i-blog.csdnimg.cn/blog_migrate/f7cd0c9c94a756902bc24ae4d115f13a.jpeg",
+                uri: uri4,
               }}
             />
           </TestCase>
         </TestSuite>
         <TestSuite name="headers">
-          <TestCase itShould="has headers">
+          <TestCase itShould="(后台可以看到header传输)headers: headers: {
+                  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
+                  'Accept-Language': 'en-US,en;q=0.9',
+                  'Connection': 'close'
+                }">
+            <Button title='show' onPress={()=>{
+              setUri("https://res2.vmallres.com/pimages/uomcdn/CN/pms/202308/gbom/6941487297153/428_428_6AC44C47C8F772DEECF7DE49BF662D3Fmp.png")
+            }}></Button>
             <FastImage
               style={styles.image}
               source={{
-                uri: "http://fpoimg.com/300x300",
+                uri: uri,
                 headers: {
                   'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
                   'Accept-Language': 'en-US,en;q=0.9',
@@ -108,12 +59,13 @@ export const FastImageSourceDemo = () => {
               }}
             />
           </TestCase>
-          <TestCase itShould="no headers">
+          <TestCase itShould="(后台可以看到header传输)headers: undefined">
+            <Button title='show' onPress={()=>{
+                setUri1("https://res2.vmallres.com/pimages/uomcdn/CN/pms/202308/gbom/6941487297153/428_428_6AC44C47C8F772DEECF7DE49BF662D3Fmp.png")
+            }}></Button>
             <FastImage
               style={styles.image}
-              source={{
-                uri: "http://fpoimg.com/300x300",
-              }}
+              source={{ uri: uri1, }}
             />
           </TestCase>
         </TestSuite>

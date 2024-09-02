@@ -17,6 +17,7 @@ function VideoPlayerDemo() {
   return(
     <View style = {styles.container}>
      <VideoPlayer
+          title = 'oceans'
           style = {styles.video}
           source={{ uri: 'https://vjs.zencdn.net/v/oceans.mp4' }}
           toggleResizeModeOnFullscreen = {true}

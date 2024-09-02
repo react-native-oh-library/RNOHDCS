@@ -11,17 +11,17 @@ export default () => {
   const labelRenderer = (type: string, data: number) => {
     switch (type) {
       case 'year':
-        return data + '年'
+        return data + 'Y'
       case 'month':
-        return data + '月'
+        return data + 'M'
       case 'day':
-        return data + '日'
+        return data + 'D'
       case 'hour':
-        return data + '时'
+        return data + 'H'
       case 'minute':
-        return data + '分'
+        return data + 'Min'
       case 'second':
-        return data + '秒'
+        return data + 'S'
       default:
         return data
     }

@@ -19,7 +19,7 @@ export function IndicatorsExample2() {
   const components = [
     {
       Comp: BallIndicator,
-      mame: 'BallIndicator',
+      mame: 'BallIndicator1',
       props: {
         color: 'white',
         animationDuration: 1000,
@@ -34,7 +34,7 @@ export function IndicatorsExample2() {
     },
     {
       Comp: BallIndicator,
-      mame: 'BallIndicator',
+      mame: 'BallIndicator2',
       props: {
         color: 'white',
         animationDuration: 1000,
@@ -49,7 +49,7 @@ export function IndicatorsExample2() {
     },
     {
       Comp: BallIndicator,
-      mame: 'BallIndicator',
+      mame: 'BallIndicator3',
       props: {
         color: 'white',
         animationDuration: 1000,
@@ -64,7 +64,7 @@ export function IndicatorsExample2() {
     },
     {
       Comp: BallIndicator,
-      mame: 'BallIndicator',
+      mame: 'BallIndicator4',
       props: {
         color: 'red',
         animationDuration: 500,
@@ -79,7 +79,7 @@ export function IndicatorsExample2() {
     },
     {
       Comp: PulseIndicator,
-      mame: 'PulseIndicator',
+      mame: 'PulseIndicator1',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -93,7 +93,7 @@ export function IndicatorsExample2() {
     },
     {
       Comp: PulseIndicator,
-      mame: 'PulseIndicator',
+      mame: 'PulseIndicator2',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -107,7 +107,7 @@ export function IndicatorsExample2() {
     },
     {
       Comp: PulseIndicator,
-      mame: 'PulseIndicator',
+      mame: 'PulseIndicator3',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -121,7 +121,7 @@ export function IndicatorsExample2() {
     },
     {
       Comp: PulseIndicator,
-      mame: 'PulseIndicator',
+      mame: 'PulseIndicator4',
       props: {
         animationDuration: 500,
         animationEasing: Easing.ease,
@@ -135,7 +135,7 @@ export function IndicatorsExample2() {
     },
     {
       Comp: SkypeIndicator,
-      mame: 'SkypeIndicator',
+      mame: 'SkypeIndicator1',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -152,7 +152,7 @@ export function IndicatorsExample2() {
     },
     {
       Comp: SkypeIndicator,
-      mame: 'SkypeIndicator',
+      mame: 'SkypeIndicator2',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -169,7 +169,7 @@ export function IndicatorsExample2() {
     },
     {
       Comp: SkypeIndicator,
-      mame: 'SkypeIndicator',
+      mame: 'SkypeIndicator3',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -186,7 +186,7 @@ export function IndicatorsExample2() {
     },
     {
       Comp: SkypeIndicator,
-      mame: 'SkypeIndicator',
+      mame: 'SkypeIndicator4',
       props: {
         animationDuration: 500,
         animationEasing: Easing.ease,
@@ -203,7 +203,7 @@ export function IndicatorsExample2() {
     },
     {
       Comp: WaveIndicator,
-      mame: 'WaveIndicator',
+      mame: 'WaveIndicator1',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -220,7 +220,7 @@ export function IndicatorsExample2() {
     },
     {
       Comp: WaveIndicator,
-      mame: 'WaveIndicator',
+      mame: 'WaveIndicator2',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -237,7 +237,7 @@ export function IndicatorsExample2() {
     },
     {
       Comp: WaveIndicator,
-      mame: 'WaveIndicator',
+      mame: 'WaveIndicator3',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -254,7 +254,7 @@ export function IndicatorsExample2() {
     },
     {
       Comp: WaveIndicator,
-      mame: 'WaveIndicator',
+      mame: 'WaveIndicator4',
       props: {
         animationDuration: 500,
         animationEasing: Easing.ease,
@@ -271,7 +271,7 @@ export function IndicatorsExample2() {
     },
     {
       Comp: UIActivityIndicator,
-      mame: 'UIActivityIndicator',
+      mame: 'UIActivityIndicator1',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -286,7 +286,7 @@ export function IndicatorsExample2() {
     },
     {
       Comp: UIActivityIndicator,
-      mame: 'UIActivityIndicator',
+      mame: 'UIActivityIndicator2',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -301,7 +301,7 @@ export function IndicatorsExample2() {
     },
     {
       Comp: UIActivityIndicator,
-      mame: 'UIActivityIndicator',
+      mame: 'UIActivityIndicator3',
       props: {
         animationDuration: 1000,
         animationEasing: Easing.linear,
@@ -316,7 +316,7 @@ export function IndicatorsExample2() {
     },
     {
       Comp: UIActivityIndicator,
-      mame: 'UIActivityIndicator',
+      mame: 'UIActivityIndicator4',
       props: {
         animationDuration: 500,
         animationEasing: Easing.ease,

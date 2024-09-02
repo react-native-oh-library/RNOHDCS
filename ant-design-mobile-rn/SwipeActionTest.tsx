@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Alert } from 'react-native';
 import { SwipeAction, List } from '@ant-design/react-native';
 import { TestSuite, TestCase } from '@rnoh/testerino';
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -74,6 +75,15 @@ export function SwipeActionTest() {
           expect(state).to.be.eq(true);
         }}>
       </TestCase>
+      <TestCase itShould="render a SwipeAction Button style={{backgroundColor:pink}}">
+        <BasicSwipeButtonBackgroundColorExample />
+      </TestCase>
+      <TestCase itShould="render a SwipeAction Button text={操作,操作1}">
+        <BasicSwipeButtonTextExample />
+      </TestCase>
+      <TestCase itShould="render a SwipeAction Button onPress()">
+        <BasicSwipeButtonBackgroundColorExample />
+      </TestCase>
     </TestSuite>
   );
 };
@@ -124,6 +134,67 @@ class BasicSwipeRightExample extends React.Component<any, any> {
       },
     ]
 
+    return (
+      <List>
+        <GestureHandlerRootView>
+          <SwipeAction
+            right={right}
+          >
+            <List.Item extra="right buttons">
+            </List.Item>
+          </SwipeAction>
+        </GestureHandlerRootView>
+      </List>
+    )
+  }
+}
+
+class BasicSwipeButtonTextExample extends React.Component<any, any> {
+  render() {
+    const right = [
+      {
+        text: '操作',
+        backgroundColor: 'pink',
+        color: 'white',
+      },
+      {
+        text: '操作1',
+        backgroundColor: 'pink',
+        color: 'white',
+      },
+    ]
+
+    return (
+      <List>
+        <GestureHandlerRootView>
+          <SwipeAction
+            right={right}
+          >
+            <List.Item extra="right buttons">
+            </List.Item>
+          </SwipeAction>
+        </GestureHandlerRootView>
+      </List>
+    )
+  }
+}
+
+class BasicSwipeButtonBackgroundColorExample extends React.Component<any, any> {
+  render() {
+    const right = [
+      {
+        text: '操作',
+        backgroundColor: 'pink',
+        color: 'white',
+        onPress: () => Alert.alert('被点击')
+      },
+      {
+        text: '操作1',
+        backgroundColor: 'pink',
+        color: 'white',
+        onPress: () => Alert.alert('被点击')
+      },
+    ]
     return (
       <List>
         <GestureHandlerRootView>

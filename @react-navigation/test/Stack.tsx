@@ -450,6 +450,7 @@ export const StackExamples = () => {
           'horizontal',
           'horizontal-inverted',
           'vertical',
+          'vertical-inverted',
         ],
         extraOptions: {
           gestureEnabled: true
@@ -802,6 +803,7 @@ export const StackExamples = () => {
   const ComButton = ({ index, title }: ComButtonProps) => {
     return <Pressable onPress={() => {
       setIndex(index)
+      setScrollEnabled(true)
     }}>
       <View style={styles.comButton}>
         <Text style={styles.comButtonText}>打开{title}</Text>
@@ -809,11 +811,13 @@ export const StackExamples = () => {
     </Pressable>
   }
 
+  const [scrollEnabled, setScrollEnabled] = useState(true)
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar></StatusBar>
       <Tester style={{ flex: 1 }}>
-        <ScrollView>
+        <ScrollView scrollEnabled={scrollEnabled}>
           {
             Object.entries(state).map(([title, obj], index) => {
               let { platform, testName, type, props = {}, value, description = '', valueList = [], options, extraOptions } = obj
@@ -846,7 +850,14 @@ export const StackExamples = () => {
 
 
                 return <TestSuite name={(platform ? `[${platform}]` : '') + (testName || title)} key={title + state?.[title].value}>
+                  {title === 'gestureDirection' ?
+                    <Text style={{ color: 'yellow', fontSize: 10, margin: 10 }}>当gestureDirection值为vertical和vertical-inverted时，当前页面禁止滚动，可切换至其他属性激活页面滚动。</Text> : null}
                   <ToggleButton title={'切换' + title} list={valueList} initValue={value} onChange={(val: any) => {
+                    if (title === 'gestureDirection' && (val === 'vertical' || val === 'vertical-inverted')) {
+                      setScrollEnabled(false)
+                    } else {
+                      setScrollEnabled(true)
+                    }
                     setState({
                       ...state,
                       [title]: {

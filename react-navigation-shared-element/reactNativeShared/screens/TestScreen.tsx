@@ -172,6 +172,7 @@ export function TestScreen(props: Props) {
         navigation,
       })}
       <View style={styles.bottomContainer}>
+        <Text style={styles.tx}>{'下列按钮点击后请重新加载此页面（即返回上一个页面重新点进来）'}</Text>
         <View style={styles.buttonContainer}>
           <View style={styles.segmentContainer}>
             <SegmentedControl
@@ -246,5 +247,9 @@ const styles = StyleSheet.create({
   },
   body: {
     marginTop: 16,
+  },
+  tx: {
+    marginBottom: 10, 
+    fontSize: 14,
   },
 });

@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Picker, List, Button } from '@ant-design/react-native';
 import { TestSuite, TestCase } from '@rnoh/testerino';
 import datas from './pickerData/data.json';
@@ -17,33 +17,48 @@ export default () => {
   const [value8, setvalue8] = useState<any>(new Date());
   const [value9, setvalue9] = useState<any>(new Date());
   const [value10, setvalue10] = useState<any>(new Date());
+
   return (
     <TestSuite name="PickerTest">
       <TestCase itShould="render a Picker data" tags={['C_API']}>
         <List>
           <Picker data={datas} value={value7} onChange={(value) => { setvalue7(value) }}>
-            <List.Item arrow="horizontal">省市选择</List.Item>
+            <List.Item arrow="horizontal">{'省市选择'}</List.Item>
           </Picker>
         </List>
       </TestCase>
       <TestCase itShould="render a Picker value" tags={['C_API']}>
         <List>
           <Picker data={datas} value={value1} onChange={(value: any) => { setvalue1(value) }}>
-            <List.Item arrow="horizontal">省市选择</List.Item>
+            <List.Item arrow="horizontal">{'省市选择'}</List.Item>
+          </Picker>
+        </List>
+      </TestCase>
+      <TestCase itShould="render a Picker defaultValue={['湖北省','武汉市','洪山区']}" tags={['C_API']}>
+        <List>
+          <Picker data={datas} defaultValue={['42', '4201', '420111']}>
+            <List.Item arrow="horizontal">{'省市选择'}</List.Item>
+          </Picker>
+        </List>
+      </TestCase>
+      <TestCase itShould="render a Picker styles={{okText:{fontSize:30}}}" tags={['C_API']}>
+        <List>
+          <Picker data={datas} styles={{ okText: { fontSize: 30 } }}>
+            <List.Item arrow="horizontal">{'省市选择'}</List.Item>
           </Picker>
         </List>
       </TestCase>
       <TestCase itShould="render a Picker cascade={false}" tags={['C_API']}>
         <List>
           <Picker data={datas} value={value} onChange={(value: any) => { setvalue(value) }} cascade={false}>
-            <List.Item arrow="horizontal">省市选择</List.Item>
+            <List.Item arrow="horizontal">{'省市选择'}</List.Item>
           </Picker>
         </List>
       </TestCase>
       <TestCase itShould="render a Picker cols={2}" tags={['C_API']}>
         <List>
           <Picker data={datas} cols={2} value={value8} onChange={(value) => { setvalue8(value) }}>
-            <List.Item arrow="horizontal">省市选择</List.Item>
+            <List.Item arrow="horizontal">{'省市选择'}</List.Item>
           </Picker>
         </List>
       </TestCase>
@@ -51,7 +66,7 @@ export default () => {
         arrange={({ setState }: any) =>
           <List>
             <Picker data={datas} value={value2} onChange={(value: any) => { setvalue2(value); setState(true); }}>
-              <List.Item arrow="horizontal">省市选择</List.Item>
+              <List.Item arrow="horizontal">{'省市选择'}</List.Item>
             </Picker>
           </List>
         }
@@ -63,7 +78,7 @@ export default () => {
         arrange={({ setState }: any) =>
           <List>
             <Picker data={datas} value={value3} onPickerChange={(value: any) => { setvalue3(value); setState(true); }}>
-              <List.Item arrow="horizontal">省市选择</List.Item>
+              <List.Item arrow="horizontal">{'省市选择'}</List.Item>
             </Picker>
           </List>
         }
@@ -75,7 +90,7 @@ export default () => {
         arrange={({ setState }: any) =>
           <List>
             <Picker data={datas} value={value3} onVisibleChange={() => { setState(true); }}>
-              <List.Item arrow="horizontal">省市选择</List.Item>
+              <List.Item arrow="horizontal">{'省市选择'}</List.Item>
             </Picker>
           </List>
         }
@@ -111,7 +126,7 @@ export default () => {
         arrange={({ setState }: any) =>
           <List>
             <Picker data={datas} value={value4} onOk={(value) => { setvalue4(value); setState(true); }}>
-              <List.Item arrow="horizontal">省市选择</List.Item>
+              <List.Item arrow="horizontal">{'省市选择'}</List.Item>
             </Picker>
           </List>
         }
@@ -123,7 +138,7 @@ export default () => {
         arrange={({ setState }: any) =>
           <List>
             <Picker data={datas} value={value5} onDismiss={() => { setState(true); }}>
-              <List.Item arrow="horizontal">省市选择</List.Item>
+              <List.Item arrow="horizontal">{'省市选择'}</List.Item>
             </Picker>
           </List>
         }
@@ -143,42 +158,42 @@ export default () => {
       <TestCase itShould="render a Picker indicatorStyle={{ backgroundColor: 'red' }}" tags={['C_API']}>
         <List>
           <Picker data={datas} indicatorStyle={{ backgroundColor: 'red' }}>
-            <List.Item arrow="horizontal">省市选择</List.Item>
+            <List.Item arrow="horizontal">{'省市选择'}</List.Item>
           </Picker>
         </List>
       </TestCase>
       <TestCase itShould="render a Picker itemStyle={{backgroundColor:'pink'}}" tags={['C_API']}>
         <List>
           <Picker data={datas} itemStyle={{ backgroundColor: 'pink' }}>
-            <List.Item arrow="horizontal">省市选择</List.Item>
+            <List.Item arrow="horizontal">{'省市选择'}</List.Item>
           </Picker>
         </List>
       </TestCase>
       <TestCase itShould="render a Picker itemHeight={60}" tags={['C_API']}>
         <List>
           <Picker data={datas} itemHeight={60}>
-            <List.Item arrow="horizontal">省市选择</List.Item>
+            <List.Item arrow="horizontal">{'省市选择'}</List.Item>
           </Picker>
         </List>
       </TestCase>
       <TestCase itShould="render a Picker numberOfLines={3}" tags={['C_API']}>
         <List>
           <Picker data={datas} numberOfLines={3}>
-            <List.Item arrow="horizontal">省市选择</List.Item>
+            <List.Item arrow="horizontal">{'省市选择'}</List.Item>
           </Picker>
         </List>
       </TestCase>
       <TestCase itShould="render a Picker renderMaskTop backgroundColor='pink'" tags={['C_API']}>
         <List>
           <Picker data={datas} renderMaskTop={() => <View style={{ backgroundColor: 'pink', width: 400, height: 100 }}><Text>top</Text></View>}>
-            <List.Item arrow="horizontal">省市选择</List.Item>
+            <List.Item arrow="horizontal">{'省市选择'}</List.Item>
           </Picker>
         </List>
       </TestCase>
       <TestCase itShould="render a Picker renderMaskBottom backgroundColor='aqua'" tags={['C_API']}>
         <List>
           <Picker data={datas} renderMaskBottom={() => <View style={{ backgroundColor: 'aqua', width: 400, height: 100 }}><Text>bottom</Text></View>}>
-            <List.Item arrow="horizontal">省市选择</List.Item>
+            <List.Item arrow="horizontal">{'省市选择'}</List.Item>
           </Picker>
         </List>
       </TestCase>
@@ -192,14 +207,14 @@ export default () => {
       <TestCase itShould="render a Picker extra='请选择地址'" tags={['C_API']}>
         <List>
           <Picker data={datas} extra='请选择地址'>
-            <List.Item arrow="horizontal">省市选择</List.Item>
+            <List.Item arrow="horizontal">{'省市选择'}</List.Item>
           </Picker>
         </List>
       </TestCase>
       <TestCase itShould="render a Picker format=yyyy-mm-nn" tags={['C_API']}>
         <List>
           <Picker data={datas} format={(labels) => { return labels.join('-'); }} value={value6} onChange={(value) => { setvalue6(value) }}>
-            <List.Item arrow="horizontal">省市选择</List.Item>
+            <List.Item arrow="horizontal">{'省市选择'}</List.Item>
           </Picker>
         </List>
       </TestCase>
@@ -287,7 +302,7 @@ class PopupLoadingExample extends React.Component<any, any> {
             cols={3}
             value={this.state.value}
             onChange={this.onChange}>
-            <List.Item arrow="horizontal" onPress={this.onPress}>省市选择</List.Item>
+            <List.Item arrow="horizontal" onPress={this.onPress}>{'省市选择'}</List.Item>
           </Picker>
         </List>
       </View>
@@ -330,7 +345,7 @@ class PopuploadingContentExample extends React.Component<any, any> {
             cols={3}
             value={this.state.value}
             onChange={this.onChange}>
-            <List.Item arrow="horizontal" onPress={this.onPress}>省市选择</List.Item>
+            <List.Item arrow="horizontal" onPress={this.onPress}>{'省市选择'}</List.Item>
           </Picker>
         </List>
       </View>
@@ -404,10 +419,16 @@ class PikerDisabled extends React.Component<any, any> {
             cols={3}
             disabled={true}
           >
-            <List.Item arrow="horizontal">省市选择</List.Item>
+            <List.Item arrow="horizontal">{'省市选择'}</List.Item>
           </Picker>
         </List>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  picker: {
+    backgroundColor: 'green'
+  }
+});
