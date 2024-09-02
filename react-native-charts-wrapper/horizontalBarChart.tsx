@@ -26,13 +26,6 @@ const HorizontalBarChartDemo = () => {
     <Tester>
       <ScrollView style={{ marginBottom: 70 }}>
 
-      <TestSuite name="horizontalBarChart 水平柱状图">
-          <TestCase itShould="">
-            <View style={{ width: '100%', height: 300 }}>
-              <Text>此图表为柱状图的水平状态，和柱状图的props相同，无需重复编写测试用例,以下用例为所有图表的公共props，以及horizontalBarChart的基础图表</Text>
-            </View>
-          </TestCase>
-        </TestSuite>
 
         <TestSuite name="horizontalBarChart 基础水平柱状图:数据(data)">
           <TestCase itShould="Props:data">
@@ -56,7 +49,7 @@ const HorizontalBarChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="horizontalBarChart 水平柱状图">
-          <TestCase itShould="Props:dragDecelerationEnabled设置拖拽减速 !!!!">
+          <TestCase itShould="Props:dragDecelerationEnabled设置拖拽减速 ">
             <View style={{ width: '100%', height: 300 }}>
               <HorizontalBarChart
                 style={styles.chart}
@@ -167,7 +160,7 @@ const HorizontalBarChartDemo = () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="horizontalBarChart 水平柱状图(maxVisibleValueCount) !!!">
+        <TestSuite name="horizontalBarChart 水平柱状图(maxVisibleValueCount)">
           <TestCase itShould="Props:maxVisibleValueCount(最大为50,数据最大44,不显示) 设置值的最大条目数量 需配合drawValues 设置值，如果值有任意超过设置的最大条目，则值不显示，反之显示">
             <View style={{ width: '100%', height: 300 }}>
             <HorizontalBarChart

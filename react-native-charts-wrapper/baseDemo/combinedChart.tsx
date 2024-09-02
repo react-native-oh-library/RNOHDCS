@@ -9,9 +9,8 @@ import {
 } from 'react-native';
 
 import { CombinedChart } from 'react-native-charts-wrapper';
-import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
 
-const CombinedChartDemo = () => {
+const CombinedChartScreen = () => {
   const lineDataSet = [
     { x: 0, y: 3 },
     { x: 1, y: 15 },
@@ -85,9 +84,6 @@ const CombinedChartDemo = () => {
     { x: 8, y: 51, size: 5 },
   ]
   return (
-    <Tester>
-      <TestSuite name="组合图（基础图表）">
-        <TestCase itShould="props:drawValueAboveBar 所有值都绘制在其条形的上方，而不是下方 *他们的顶部">
           <View style={{ width: '100%', height: 500 }}>
             <CombinedChart
               style={styles.chart}
@@ -105,6 +101,8 @@ const CombinedChartDemo = () => {
                         fillColor: processColor('#f4f'),
                         mode: 'CUBIC_BEZIER',
                         axisDependency: 'LEFT',
+                        highlightEnabled: true,
+                        highlightColor: processColor('#000')
                       },
                     },
                   ],
@@ -118,7 +116,10 @@ const CombinedChartDemo = () => {
                         color: processColor('#c66'),
                         valueTextColor: processColor('#c66'),
                         valueTextSize: 10,
-                        axisDependency: 'LEFT'
+                        axisDependency: 'LEFT',
+                        highlightEnabled: true,
+                        highlightColor: processColor('#000'),
+                        highlightAlpha:255,
                       },
                     },
                     {
@@ -128,7 +129,10 @@ const CombinedChartDemo = () => {
                         color: processColor('#142'),
                         valueTextColor: processColor('#c66'),
                         valueTextSize: 10,
-                        axisDependency: 'LEFT'
+                        axisDependency: 'LEFT',
+                        highlightEnabled: true,
+                        highlightColor: processColor('#000'),
+                        highlightAlpha:255,
                       },
                     },
                   ],
@@ -139,7 +143,9 @@ const CombinedChartDemo = () => {
                     {
                       label: 'demo3',
                       values: bubbleDataSet,
-                      config:{colors:[processColor('#c46'),processColor('#55f'),processColor("#363")]}
+                      config:{colors:[processColor('#c46'),processColor('#55f'),processColor("#363")],
+                      highlightEnabled: true,
+                      highlightColor: processColor('#000')}
                     },
                   ],
                 },
@@ -148,7 +154,9 @@ const CombinedChartDemo = () => {
                     {
                       label: 'candleData',
                       values: candleDataSet,
-                      config:{decreasingColor:processColor('#444'),shadowColor:processColor('#ccc'),barSpace:0.3,valueTextSize:10,drawValues:false}
+                      config:{decreasingColor:processColor('#444'),shadowColor:processColor('#ccc'),barSpace:0.3,valueTextSize:10,drawValues:true,
+                      highlightEnabled: true,
+                      highlightColor: processColor('#000')}
                     },
                   ],
                 },
@@ -157,13 +165,14 @@ const CombinedChartDemo = () => {
                     {
                       label: 'scatterData',
                       values: scatterDataSet,
-                      config:{colors:[processColor('#4f4'),processColor('#d54')],scatterShapeSize:7.5,drawValues:true,valueTextSize:10}
+                      config:{colors:[processColor('#4f4'),processColor('#d54')],scatterShapeSize:7.5,drawValues:true,valueTextSize:10 ,
+                      highlightEnabled: true,
+                      highlightColor: processColor('#000'),}
                     },
                   ],
                 },
               }}
-              chartDescription={{ enabled: false }}
-              legend={{ enabled: true }}
+              legend={{ enabled: true,wordWrapEnabled:true }}
               maxVisibleValueCount={60}
               pinchZoom={false}
               drawGridBackground={false}
@@ -186,20 +195,14 @@ const CombinedChartDemo = () => {
               drawValueAboveBar={true}
               highlightPerDragEnabled={true}
               highlightFullBarEnabled={true}
+              maxHighlightDistance={1000}
             />
           </View>
-        </TestCase>
-      </TestSuite>
-      <TestSuite name='组合图'>
-        <TestCase itShould=''>
-           <Text>组合图的所有数据props都为其他图表的props,其他图表用例均已覆盖</Text>
-        </TestCase>
-      </TestSuite>
-    </Tester>
+
   );
 };
 
-export default CombinedChartDemo;
+export default CombinedChartScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
