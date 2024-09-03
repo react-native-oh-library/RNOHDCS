@@ -21,8 +21,8 @@ export function PDFFileFromTest() {
             <View style={{height: 500}}>
               <PDFView
                 style={{flex: 1}}
-                resource="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
-                resourceType="url"
+                resource="files.pdf"
+                resourceType="file"
                 fileFrom="files"
               />
             </View>
@@ -32,8 +32,8 @@ export function PDFFileFromTest() {
             <View style={{height: 500}}>
               <PDFView
                 style={{flex: 1}}
-                resource="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
-                resourceType="url"
+                resource="temp.pdf"
+                resourceType="file"
                 fileFrom="temp"
               />
             </View>
@@ -43,8 +43,8 @@ export function PDFFileFromTest() {
             <View style={{height: 500}}>
               <PDFView
                 style={{flex: 1}}
-                resource="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
-                resourceType="url"
+                resource="cache.pdf"
+                resourceType="file"
                 fileFrom="cache"
               />
             </View>
