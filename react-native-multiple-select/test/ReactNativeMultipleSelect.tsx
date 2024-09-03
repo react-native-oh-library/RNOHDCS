@@ -45,7 +45,7 @@ export default function ReactNativeMultipleSelect() {
       <Tester style={{ flex: 1 }}>
         <View style={styles.container}>
           <TestSuite name="altFontFamily" key={'altFontFamily'}>
-            <TestCase itShould="设置下拉框里面的字体" tags={['C_API']}>
+            <TestCase itShould="设置下拉框里面标题的字体" tags={['C_API']}>
               <SelectExampleT1></SelectExampleT1>
             </TestCase>
           </TestSuite>
@@ -107,11 +107,6 @@ export default function ReactNativeMultipleSelect() {
           <TestSuite name='searchIcon' key={'searchIcon'}>
             <TestCase itShould="searchIcon左边搜索图标，比如说设置成紫色" tags={['C_API']}>
               <SelectExample11></SelectExample11>
-            </TestCase>
-          </TestSuite>
-          <TestSuite name='itemFontFamily' key={'itemFontFamily'}>
-            <TestCase itShould="itemFontFamily是多选下拉菜单中每个未选定项目的字体系列" tags={['C_API']}>
-              <SelectExample12></SelectExample12>
             </TestCase>
           </TestSuite>
           <TestSuite name='itemFontSize' key={'itemFontSize'}>
@@ -676,30 +671,6 @@ class SelectExample11 extends Component {
           onSelectedItemsChange={this.onSelectedItemsChange}
           selectedItems={selectedItems}
           searchIcon={this.defaultSearchIcon}
-        />
-      </View>
-    );
-  }
-}
-class SelectExample12 extends Component {
-  state = {
-    selectedItems: []
-  };
-  onSelectedItemsChange = (selectedItems: any) => {
-    this.setState({ selectedItems });
-  };
-  multiSelect!: MultiSelect | any;
-  render() {
-    const { selectedItems } = this.state;
-    return (
-      <View style={{ flex: 1 }}>
-        <MultiSelect
-          items={items}
-          uniqueKey="id"
-          ref={(component) => { this.multiSelect = component }}
-          onSelectedItemsChange={this.onSelectedItemsChange}
-          selectedItems={selectedItems}
-          itemFontFamily=''
         />
       </View>
     );
