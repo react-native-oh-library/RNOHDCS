@@ -128,25 +128,6 @@ const lineChartDemo = () => {
           </TestCase>
         </TestSuite>
 
-        <TestSuite name="LineChart 基础折线图(position)">
-          <TestCase itShould="Props:position 描述文本在屏幕中的位置">
-            <View  style={{width: '100%', height: 300}}>
-            <LineChart
-              style={styles.chart}
-              data={{
-                dataSets: [
-                  {
-                    label: 'demo',
-                    values: data
-                  },
-                ],
-              }}
-              chartDescription={{text:'ChartDescription demo',positionX:80,positionY:45}}
-            />
-            </View>
-           
-          </TestCase>
-        </TestSuite>
 
         <TestSuite name="LineChart 基础折线图(noDataText:无数据显示的文本)">
           <TestCase itShould="Props:noDataText noDataTextColor 无数据显示的文本和文本 颜色">
@@ -427,7 +408,7 @@ const lineChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="LineChart 基础折线图(data:数据)">
-          <TestCase itShould="Props:config(drawVerticalHighlightIndicator) 启用/禁用垂直突出显示指示器。如果禁用，则不绘制指示器。!!!! ">
+          <TestCase itShould="Props:config(drawVerticalHighlightIndicator) 禁用垂直突出显示指示器。如果禁用，则不绘制指示器。">
             <View  style={{width: '100%', height: 300}}>
             <LineChart
               style={styles.chart}
@@ -436,11 +417,69 @@ const lineChartDemo = () => {
                   {
                     label: 'demo',
                     values: data,
-                    config:{drawVerticalHighlightIndicator:true,drawHighlightIndicators:true,highlightLineWidth:10}
+                    config:{drawVerticalHighlightIndicator:false,drawHighlightIndicators:false}
                   },
                 ],
               }}
-              touchEnabled
+              touchEnabled={true}
+              highlightPerTapEnabled={true}
+              maxVisibleValueCount={70}
+              scaleEnabled={true}
+              scaleXEnabled={true}
+              scaleYEnabled={true}
+              maxHighlightDistance={1000}
+              
+            />
+            </View>
+           
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="LineChart 基础折线图(data:数据)">
+          <TestCase itShould="Props:config(drawVerticalHighlightIndicator) 启用垂直突出显示指示器。如果禁用，则不绘制指示器。 ">
+            <View  style={{width: '100%', height: 300}}>
+            <LineChart
+              style={styles.chart}
+              data={{
+                dataSets: [
+                  {
+                    label: 'demo',
+                    values: data,
+                    config:{drawVerticalHighlightIndicator:true,drawHighlightIndicators:true}
+                  },
+                ],
+              }}
+              touchEnabled={true}
+              highlightPerTapEnabled={true}
+              maxVisibleValueCount={70}
+              scaleEnabled={true}
+              scaleXEnabled={true}
+              scaleYEnabled={true}
+              maxHighlightDistance={1000}
+              
+            />
+            </View>
+           
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="LineChart 基础折线图(X轴属性)">
+          <TestCase itShould="props:avoidFirstLastClipping 如果设置为true，图表将避免第一个和最后一个标签条目被裁剪  ">
+            <View  style={{width:'100%', height: 300}}>
+            <LineChart
+              style={styles.chart}
+              data={{
+                dataSets: [
+                  {
+                    label: 'demo',
+                    values: data,
+                    config:{dashedLine:{lineLength:10,spaceLength:2,phase:1}}
+                  },
+                ],
+              }}
+              xAxis={{avoidFirstLastClipping:true,}}
+              touchEnabled={true}
+              scaleXEnabled={true}
+              scaleYEnabled={true}
+              scaleEnabled={true}
             />
             </View>
            
