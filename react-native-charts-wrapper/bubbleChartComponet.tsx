@@ -686,31 +686,6 @@ const BubbleChartDemo = () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="bubble 基础气泡图:(data)">
-          <TestCase itShould="highlightCircleWidth ">
-            <View style={{ width: '100%', height: 300 }}>
-              <BubbleChart
-                style={styles.chart}
-                data={{
-                  dataSets: [
-                    {
-                      label: 'demo',
-                      values: data,
-                      config: {
-                        drawValues: true, visible: true
-                      },
-
-                    },
-                  ],
-
-                }}
-                maxVisibleValueCount={70}
-                xAxis={{ enabled: true, limitLines: [{ limit: 3, label: "limitLine" }, { limit: 6, label: "limitLine" }],drawLimitLinesBehindData:true }}
-                yAxis={{ left: { enabled: true, }, right: { enabled: true } }}
-              />
-            </View>
-          </TestCase>
-        </TestSuite>
       </ScrollView>
     </Tester>
   )

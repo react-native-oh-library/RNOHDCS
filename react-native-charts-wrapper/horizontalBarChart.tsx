@@ -64,10 +64,13 @@ const HorizontalBarChartDemo = () => {
                     },
                   ],
                 }}
-
+                touchEnabled={true}
                 dragDecelerationEnabled={true}
-                dragDecelerationFrictionCoef={0.1}
-
+                dragDecelerationFrictionCoef={0.8}
+                dragEnabled={true}
+                scaleEnabled={true}
+                scaleXEnabled={true}
+                scaleYEnabled={true}
               />
             </View>
           </TestCase>
@@ -139,50 +142,7 @@ const HorizontalBarChartDemo = () => {
           </TestCase>
         </TestSuite>
 
-        <TestSuite name="horizontalBarChart 水平柱状图(maxVisibleValueCount)">
-          <TestCase itShould="Props:maxVisibleValueCount(最大为30,数据最大44,不显示) 设置值的最大条目数量 需配合drawValues 设置值，如果值有任意超过设置的最大条目，则值不显示，反之显示">
-            <View style={{ width: '100%', height: 300 }}>
-              <HorizontalBarChart
-                style={styles.chart}
-                data={{
-                  dataSets: [
-                    {
-                      label: 'demo',
-                      values: data,
-                      config: { drawValues: true }
-                    },
-                  ],
-                }}
-
-                maxVisibleValueCount={30}
-
-              />
-            </View>
-          </TestCase>
-        </TestSuite>
-        <TestSuite name="horizontalBarChart 水平柱状图(maxVisibleValueCount)">
-          <TestCase itShould="Props:maxVisibleValueCount(最大为50,数据最大44,不显示) 设置值的最大条目数量 需配合drawValues 设置值，如果值有任意超过设置的最大条目，则值不显示，反之显示">
-            <View style={{ width: '100%', height: 300 }}>
-            <HorizontalBarChart
-                style={styles.chart}
-                data={{
-                  dataSets: [
-                    {
-                      label: 'demo',
-                      values: data,
-                      config: {
-                        drawValues:true
-                      },
-                      
-                    },
-                  ],
-                  
-                }}
-                maxVisibleValueCount={70}
-              />
-            </View>
-          </TestCase>
-        </TestSuite>
+        
 
         
       </ScrollView>

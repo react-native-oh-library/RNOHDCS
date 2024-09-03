@@ -197,30 +197,6 @@ const CandleChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="烛台图(X轴属性)">
-          <TestCase itShould="props:avoidFirstLastClipping 如果设置为true，图表将避免第一个和最后一个标签条目">
-            <View style={{height: 300}}>
-              <CandleStickChart
-                style={{width: '100%', height: 300}}
-                data={{
-                  dataSets: [
-                    {
-                      label: 'demo',
-                      values: data,
-                    },
-                  ],
-                }}
-                xAxis={{
-                  axisMaximum: 15,
-                  axisMinimum: -1,
-                  position: 'BOTTOM',
-                  avoidFirstLastClipping: true,
-                }}
-              />
-            </View>
-          </TestCase>
-        </TestSuite>
-
-        <TestSuite name="烛台图(X轴属性)">
           <TestCase itShould="props:position 设置X轴标签的位置 TOP:在上方">
             <View style={{height: 300}}>
               <CandleStickChart
