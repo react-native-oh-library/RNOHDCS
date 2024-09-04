@@ -878,36 +878,36 @@ const TestCrypto = () => {
     }
 
     return (
-        <Tester style={{ flex: 1 }}>
-            <ScrollView style={styles.container}>
+        <ScrollView style={styles.container}>
+            <Tester>
                 <TestSuite name="Crypto.createHash">
                     <TestCase itShould="Use update() to add data" >
                         <View style={styles.buttonContainer}>
-                            <Button title="sha" onPress={handleCreatHashSha} />
+                            <Button title="data:some data-sha" onPress={handleCreatHashSha} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="sha1" onPress={handleCreatHashSha1} />
+                            <Button title="data:some data-sha1" onPress={handleCreatHashSha1} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="sha224" onPress={handleCreatHashSha224} />
+                            <Button title="data:some data-sha224" onPress={handleCreatHashSha224} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="sha256" onPress={handleCreatHashSha256} />
+                            <Button title="data:some data-sha256" onPress={handleCreatHashSha256} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="sha384" onPress={handleCreatHashSha384} />
+                            <Button title="data:some data-sha384" onPress={handleCreatHashSha384} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="sha512" onPress={handleCreatHashSha512} />
+                            <Button title="data:some data-sha512" onPress={handleCreatHashSha512} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="rmd160" onPress={handleCreatHashRmd160} />
+                            <Button title="data:some data-rmd160" onPress={handleCreatHashRmd160} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="md5" onPress={handleCreatHashMd5} />
+                            <Button title="data:some data-md5" onPress={handleCreatHashMd5} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="ripemd160" onPress={handleCreatHashRipemd160} />
+                            <Button title="data:some data-ripemd160" onPress={handleCreatHashRipemd160} />
                         </View>
                         <View style={styles.line} />
                         <Text style={styles.result}>{hashResult}</Text>
@@ -915,31 +915,31 @@ const TestCrypto = () => {
 
                     <TestCase itShould="Use write() to add data" >
                         <View style={styles.buttonContainer}>
-                            <Button title="sha" onPress={writeCreatHashSha} />
+                            <Button title="data:some data-sha" onPress={writeCreatHashSha} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="sha1" onPress={writeCreatHashSha1} />
+                            <Button title="data:some data-sha1" onPress={writeCreatHashSha1} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="sha224" onPress={writeCreatHashSha224} />
+                            <Button title="data:some data-sha224" onPress={writeCreatHashSha224} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="sha256" onPress={writeCreatHashSha256} />
+                            <Button title="data:some data-sha256" onPress={writeCreatHashSha256} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="sha384" onPress={writeCreatHashSha384} />
+                            <Button title="data:some data-sha384" onPress={writeCreatHashSha384} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="sha512" onPress={writeCreatHashSha512} />
+                            <Button title="data:some data-sha512" onPress={writeCreatHashSha512} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="rmd160" onPress={writeCreatHashRmd160} />
+                            <Button title="data:some data-rmd160" onPress={writeCreatHashRmd160} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="md5" onPress={writeCreatHashMd5} />
+                            <Button title="data:some data-md5" onPress={writeCreatHashMd5} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="ripemd160" onPress={writeCreatHashRipemd160} />
+                            <Button title="data:some data-ripemd160" onPress={writeCreatHashRipemd160} />
                         </View>
                         <View style={styles.line} />
                         <Text style={styles.result}>{hashResult_2}</Text>
@@ -978,31 +978,31 @@ const TestCrypto = () => {
                 <TestSuite name="Crypto.createHmac">
                     <TestCase itShould="HMAC" >
                         <View style={styles.buttonContainer}>
-                            <Button title="sha" onPress={handleCreateHmacSha} />
+                            <Button title="data:Hello, world!-sha" onPress={handleCreateHmacSha} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="sha1" onPress={handleCreateHmacSha1} />
+                            <Button title="data:Hello, world!-sha1" onPress={handleCreateHmacSha1} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="sha224" onPress={handleCreateHmacSha224} />
+                            <Button title="data:Hello, world!-sha224" onPress={handleCreateHmacSha224} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="sha256" onPress={handleCreateHmacSha256} />
+                            <Button title="data:Hello, world!-sha256" onPress={handleCreateHmacSha256} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="sha384" onPress={handleCreateHmacSha384} />
+                            <Button title="data:Hello, world!-sha384" onPress={handleCreateHmacSha384} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="sha512" onPress={handleCreateHmacSha512} />
+                            <Button title="data:Hello, world!-sha512" onPress={handleCreateHmacSha512} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="rmd160" onPress={handleCreateHmacRmd160} />
+                            <Button title="data:Hello, world!-rmd160" onPress={handleCreateHmacRmd160} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="md5" onPress={handleCreateHmacMd5} />
+                            <Button title="data:Hello, world!-md5" onPress={handleCreateHmacMd5} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="ripemd160" onPress={handleCreateHmacRipemd160} />
+                            <Button title="data:Hello, world!-ripemd160" onPress={handleCreateHmacRipemd160} />
                         </View>
                         <View style={styles.line} />
                         <Text style={styles.result}>{hmacResult}</Text>
@@ -1203,19 +1203,19 @@ const TestCrypto = () => {
                             <Button title="Clear" onPress={clear} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="getDiffieHellman" onPress={handleGenerateKeys_1} />
+                            <Button title="getDiffieHellman('modp14')" onPress={handleGenerateKeys_1} />
                         </View>
                         <View style={styles.buttonContainer}>
                             <Button title="DiffieHellman" onPress={handleGenerateKeys_2} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="createDiffieHellman" onPress={handleGenerateKeys_3} />
+                            <Button title="createDiffieHellman(128)" onPress={handleGenerateKeys_3} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="DiffieHellmanGroup" onPress={handleGenerateKeys_4} />
+                            <Button title="DiffieHellmanGroup('modp14')" onPress={handleGenerateKeys_4} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title="createDiffieHellmanGroup" onPress={handleGenerateKeys_5} />
+                            <Button title="createDiffieHellmanGroup('modp14')" onPress={handleGenerateKeys_5} />
                         </View>
                     </TestCase>
                 </TestSuite>
@@ -1281,7 +1281,7 @@ const TestCrypto = () => {
                 </TestSuite>
 
                 <TestSuite name="Crypto.Sign and Crypto.Verify">
-                    <TestCase itShould="签名，认证">
+                    <TestCase itShould="签名，认证:message = Hello, this is a test message!">
                         <View style={styles.buttonContainer}>
                             <Button title="Sign and Verify" onPress={handleSign} />
                         </View>
@@ -1292,7 +1292,7 @@ const TestCrypto = () => {
                 </TestSuite>
 
                 <TestSuite name="Crypto.createSign Crypto.createVerify">
-                    <TestCase itShould="签名，认证:">
+                    <TestCase itShould="签名，认证:message = Hello, this is a test message!">
                         <View style={styles.buttonContainer}>
                             <Button title="Sign and Verify" onPress={handleCreateSign} />
                         </View>
@@ -1301,8 +1301,8 @@ const TestCrypto = () => {
                         <Text style={styles.result}>verified: {createVerify}</Text>
                     </TestCase>
                 </TestSuite>
-            </ScrollView>
-        </Tester>
+            </Tester>
+        </ScrollView>
     );
 }
 
