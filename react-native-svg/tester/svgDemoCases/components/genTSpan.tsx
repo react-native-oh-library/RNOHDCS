@@ -64,7 +64,7 @@ export default function () {
             cases={allCases}
             basicProps={basicProps}
             comName='TSpan'
-            renderComChildren="测试文本012345678"
+            renderComChildren="测试 文本012345678"
         >
         </GenMain>
     )

@@ -12,6 +12,7 @@ const basicProps = {
   width: 80,
   height: 80,
   fill: 'red',
+  strokeWidth: '1',
 };
 
 const basicCases: CaseParams[] = [

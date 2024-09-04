@@ -41,10 +41,6 @@ export function commonProps() {
             key: 'opacity',
             values: ['0.1', '0.5', '1']
         },
-        {
-            key: 'responsible',
-            values: ['true', 'false']
-        },
     ]
 }
 
@@ -274,18 +270,6 @@ export function genAccessibilityProps(): CaseParams[] {
         {
             key: 'testID',
             values: []
-        },
-        {
-            key: 'accessible',
-            values: ['true', 'false']
-        },
-        {
-            key: 'accessibilityLabel',
-            values: ['video', 'music', 'news'],
-            othersProps: {
-                accessible: 'true'
-            },
-            showOtherProps: true
         },
     ]
 }
