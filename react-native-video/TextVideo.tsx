@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Text, StyleSheet, Dimensions, Button, Alert } from "react-native";
-import { TestSuite, TestCase } from '@rnoh/testerino';
+import { View, Text, StyleSheet, Dimensions, Button, Alert, ScrollView } from "react-native";
+import { TestSuite, TestCase, Tester } from '@rnoh/testerino';
 import type {
     VideoComponentType,
 } from "react-native-video/src/fabric/VideoNativeComponent";
@@ -15,139 +15,144 @@ const width = Dimensions.get('window').width * 0.8
 
 export function TextVideo(): JSX.Element {
     return (
-        <TestSuite name="video">
-            <TestCase
-                itShould="poster"
-                initialState={false}
-                arrange={({ setState }) => <AddMenuPosterTest setState={setState} />}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                }}
-            />
-            <TestCase
-                itShould={`posterResizeMode = {"stretch"}`}
-                initialState={false}
-                arrange={({ setState }) => <AddposterResizeModeTest setState={setState} />}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                }}
-            />
-            <TestCase
-                itShould="OnBuffer"
-                initialState={false}
-                arrange={({ setState }) => <AddMenuOnBufferTest setState={setState} />}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                }}
-            />
-            <TestCase
-                itShould="source"
-                initialState={false}
-                arrange={({ setState }) => <AddMenuMeasureTest setState={setState} />}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                }}
-            />
-            <TestCase
-                itShould="repeat={true}"
-                initialState={false}
-                arrange={({ setState }) => <AddMenuRepeatFalseTest setState={setState} />}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                }}
-            />
-            <TestCase
-                itShould="resizeMode={'contain'}"
-                initialState={false}
-                arrange={({ setState }) => <AddMenuResizeModeTest setState={setState} />}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                }}
-            />
-            <TestCase
-                itShould="resizeMode={'cover'}"
-                initialState={false}
-                arrange={({ setState }) => <AddMenuResizeModecoverTest setState={setState} />}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                }}
-            />
-            <TestCase
-                itShould="resizeMode={'stretch'}"
-                initialState={false}
-                arrange={({ setState }) => <AddMenuResizeModeStretchTest setState={setState} />}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                }}
-            />
+        <Tester style={{ flex: 1 }}>
+            <ScrollView style={{ flex: 1 }}>
+                <TestSuite name="video">
+                    <TestCase
+                        itShould="poster"
+                        initialState={false}
+                        arrange={({ setState }) => <AddMenuPosterTest setState={setState} />}
+                        assert={({ state, expect }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
+                    <TestCase
+                        itShould={`posterResizeMode = {"stretch"}`}
+                        initialState={false}
+                        arrange={({ setState }) => <AddposterResizeModeTest setState={setState} />}
+                        assert={({ state, expect }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
+                    <TestCase
+                        itShould="OnBuffer"
+                        initialState={false}
+                        arrange={({ setState }) => <AddMenuOnBufferTest setState={setState} />}
+                        assert={({ state, expect }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
+                    <TestCase
+                        itShould="source"
+                        initialState={false}
+                        arrange={({ setState }) => <AddMenuMeasureTest setState={setState} />}
+                        assert={({ state, expect }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
+                    <TestCase
+                        itShould="repeat={true}"
+                        initialState={false}
+                        arrange={({ setState }) => <AddMenuRepeatFalseTest setState={setState} />}
+                        assert={({ state, expect }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
+                    <TestCase
+                        itShould="resizeMode={'contain'}"
+                        initialState={false}
+                        arrange={({ setState }) => <AddMenuResizeModeTest setState={setState} />}
+                        assert={({ state, expect }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
+                    <TestCase
+                        itShould="resizeMode={'cover'}"
+                        initialState={false}
+                        arrange={({ setState }) => <AddMenuResizeModecoverTest setState={setState} />}
+                        assert={({ state, expect }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
+                    <TestCase
+                        itShould="resizeMode={'stretch'}"
+                        initialState={false}
+                        arrange={({ setState }) => <AddMenuResizeModeStretchTest setState={setState} />}
+                        assert={({ state, expect }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
 
-            <TestCase
-                itShould="onLoadStart"
-                initialState={false}
-                arrange={({ setState }) => <AddMenuOnLoadStartTest setState={setState} />}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                }}
-            />
-            <TestCase
-                itShould="onProgress"
-                initialState={false}
-                arrange={({ setState }) => <AddMenuOnProgressTest setState={setState} />}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                }}
-            />
-            <TestCase
-                itShould="seek"
-                initialState={false}
-                arrange={({ setState }) => <AddMenuSeekTest setState={setState} />}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                }}
-            />
-            <TestCase
-                itShould="onEnd"
-                initialState={false}
-                arrange={({ setState }) => <AddMenuOnEndTest setState={setState} />}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                }}
-            />
+                    <TestCase
+                        itShould="onLoadStart"
+                        initialState={false}
+                        arrange={({ setState }) => <AddMenuOnLoadStartTest setState={setState} />}
+                        assert={({ state, expect }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
+                    <TestCase
+                        itShould="onProgress"
+                        initialState={false}
+                        arrange={({ setState }) => <AddMenuOnProgressTest setState={setState} />}
+                        assert={({ state, expect }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
+                    <TestCase
+                        itShould="seek"
+                        initialState={false}
+                        arrange={({ setState }) => <AddMenuSeekTest setState={setState} />}
+                        assert={({ state, expect }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
+                    <TestCase
+                        itShould="onEnd"
+                        initialState={false}
+                        arrange={({ setState }) => <AddMenuOnEndTest setState={setState} />}
+                        assert={({ state, expect }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
 
-            <TestCase
-                itShould="onLoad"
-                initialState={false}
-                arrange={({ setState }) => <AddMenuOnLoadTest setState={setState} />}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                }}
-            />
-            <TestCase
-                itShould="onReadyForDisplay"
-                initialState={false}
-                arrange={({ setState }) => <AddMenuonReadyForDisplayTest setState={setState} />}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                }}
-            />
-            <TestCase
-                itShould="muted={false}"
-                initialState={false}
-                arrange={({ setState }) => <AddMenuonMutedTest setState={setState} />}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                }}
-            />
-            <TestCase
-                itShould="volume={0.2}"
-                initialState={false}
-                arrange={({ setState }) => <AddVolumeTest setState={setState} />}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                }}
-            />
+                    <TestCase
+                        itShould="onLoad"
+                        initialState={false}
+                        arrange={({ setState }) => <AddMenuOnLoadTest setState={setState} />}
+                        assert={({ state, expect }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
+                    <TestCase
+                        itShould="onReadyForDisplay"
+                        initialState={false}
+                        arrange={({ setState }) => <AddMenuonReadyForDisplayTest setState={setState} />}
+                        assert={({ state, expect }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
+                    <TestCase
+                        itShould="muted={false}"
+                        initialState={false}
+                        arrange={({ setState }) => <AddMenuonMutedTest setState={setState} />}
+                        assert={({ state, expect }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
+                    <TestCase
+                        itShould="volume={0.2}"
+                        initialState={false}
+                        arrange={({ setState }) => <AddVolumeTest setState={setState} />}
+                        assert={({ state, expect }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
 
-        </TestSuite>
+                </TestSuite>
+            </ScrollView>
+        </Tester>
+
     );
 }
 
