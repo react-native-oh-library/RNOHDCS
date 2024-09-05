@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { View, Text, Button, ScrollView, TextInput, } from "react-native";
-import ViewShot, { captureRef, captureScreen } from "react-native-view-shot";
+import { View, Text,  ScrollView } from "react-native";
+import ViewShot from "react-native-view-shot";
 import { Tester, TestCase } from '@rnoh/testerino';
 
 export default function ViewShotContinuousTest() {
@@ -11,16 +11,20 @@ export default function ViewShotContinuousTest() {
     const [errMsg, setErrMsg] = useState('');
     const myText = React.useRef<ViewShot>(null);
     const getSuccess = (res) => {
+      console.log('captureSuccess', res);
       setMountUri(res);
     }
 
     const getError = (err) => {
-      setErrMsg(err)
+      console.log('captureFailed', err.message);
+      setErrMsg(err.message);
     }
     return (
       <View style={{ height: 80 }}>
         <View>
-          <ViewShot ref={myText} style={{ backgroundColor: '#bfa' }} captureMode="continuous" onCaptureFailure={getError} onCapture={getSuccess} children={<Text>测试截图</Text>}></ViewShot>
+          <ViewShot ref={myText} style={{ backgroundColor: '#bfa' }} captureMode="continuous" onCaptureFailure={getError} onCapture={getSuccess}>
+            <Text>测试截图</Text>
+          </ViewShot>
         </View>
         <View style={{ marginTop: 20 }}>
           <Text numberOfLines={1} ellipsizeMode="middle">截图成功路径：{mountUri}</Text>
