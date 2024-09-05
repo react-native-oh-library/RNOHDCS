@@ -14,7 +14,7 @@ export default function ViewShotMountTest() {
       props.setState(res);
     }
     const getError = (err) => {
-      console.log(err);
+      console.log(err.message);
     }
 
     return (
