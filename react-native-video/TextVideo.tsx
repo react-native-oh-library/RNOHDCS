@@ -148,6 +148,46 @@ export function TextVideo(): JSX.Element {
                             expect(state).to.be.true;
                         }}
                     />
+                    <TestCase
+                        itShould="disableFocus"
+                        initialState={false}
+                        arrange={({ setState }) => <AdddisableFocusTest setState={setState} />}
+                        assert={({ state, expect }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
+                    <TestCase
+                        itShould="paused"
+                        initialState={false}
+                        arrange={({ setState }) => <AddpausedTest setState={setState} />}
+                        assert={({ state, expect }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
+                    <TestCase
+                        itShould="onError"
+                        initialState={false}
+                        arrange={({ setState }) => <AddonErrorTest setState={setState} />}
+                        assert={({ state, expect }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
+                    <TestCase
+                        itShould="onPlaybackStalled"
+                        initialState={false}
+                        arrange={({ setState }) => <AddonPlaybackStalledTest setState={setState} />}
+                        assert={({ state, expect }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
+                    <TestCase
+                        itShould="onPlaybackResume"
+                        initialState={false}
+                        arrange={({ setState }) => <AddonPlaybackResumeTest setState={setState} />}
+                        assert={({ state, expect }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
 
                 </TestSuite>
             </ScrollView>
@@ -156,7 +196,251 @@ export function TextVideo(): JSX.Element {
     );
 }
 
-//https://vod.vmall.com/asset/073cc2bab11eb7417e13a722bd9559d7/fe675e3e740a04d3a5295441af743036.mp4
+const AddonPlaybackResumeTest = (props: {
+    setState: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+    const videoref = useRef<React.ElementRef<VideoComponentType>>(null);
+    const [show, setShow] = useState(false)
+    const [title, setTitle] = useState("")
+    const addRepeat = () => {
+        setShow(!show)
+    }
+    return (
+
+        <View style={{
+            height: 220,
+            width: "100%",
+            overflow: 'hidden',
+            alignItems: "center"
+
+        }}>
+             <Text>{title}</Text>
+            <View style={{
+                height: 150,
+                width: 150,
+                overflow: 'hidden',
+                justifyContent: 'center',
+
+            }}>
+                {show ?
+                    <RNCVideo
+                        ref={videoref}
+                        source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
+                        controls={true}
+                        repeat={false}
+                        paused={false}
+                        resizeMode={"contain"}
+                        style={{ flex: 1 }}
+                        onPlaybackResume={() => {
+                            setTitle("缓冲区结束缓存")
+                        }}
+                    /> : null}
+            </View>
+            <Button title={"展示video的onPlaybackResume"} onPress={addRepeat} />
+        </View>
+
+    );
+
+}
+
+const AddonPlaybackStalledTest = (props: {
+    setState: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+    const videoref = useRef<React.ElementRef<VideoComponentType>>(null);
+    const [show, setShow] = useState(false)
+    const [title, setTitle] = useState("")
+    const addRepeat = () => {
+        setShow(!show)
+    }
+    return (
+
+        <View style={{
+            height: 220,
+            width: "100%",
+            overflow: 'hidden',
+            alignItems: "center"
+
+        }}>
+             <Text>{title}</Text>
+            <View style={{
+                height: 150,
+                width: 150,
+                overflow: 'hidden',
+                justifyContent: 'center',
+
+            }}>
+                {show ?
+                    <RNCVideo
+                        ref={videoref}
+                        source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
+                        controls={true}
+                        repeat={false}
+                        paused={false}
+                        resizeMode={"contain"}
+                        style={{ flex: 1 }}
+                        onPlaybackStalled={() => {
+                            setTitle("缓冲区开始缓存")
+                        }}
+                    /> : null}
+            </View>
+            <Button title={"展示video的onPlaybackStalled"} onPress={addRepeat} />
+        </View>
+
+    );
+
+}
+
+const AddonErrorTest = (props: {
+    setState: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+    const videoref = useRef<React.ElementRef<VideoComponentType>>(null);
+    const [paused, setPaused] = useState(true)
+    const [error, setError] = useState("")
+    const addRepeat = () => {
+        setPaused(!paused)
+    }
+
+
+    return (
+
+        <View style={{
+            height: 220,
+            width: "100%",
+            overflow: 'hidden',
+            alignItems: "center"
+
+        }}>
+            <View style={{
+                height: 150,
+                width: 200,
+                overflow: 'hidden',
+                justifyContent: 'center',
+
+            }}>
+                <Text>断网测试error{error}</Text>
+
+                <RNCVideo
+                    ref={videoref}
+                    source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
+                    controls={true}
+                    repeat={false}
+                    paused={false}
+                    muted={false}
+                    resizeMode={"contain"}
+                    onError={(err: any) => {
+                        setError(JSON.stringify(err))
+                    }}
+                    style={{ flex: 1 }}
+                />
+            </View>
+
+        </View>
+
+    );
+
+}
+
+const AddpausedTest = (props: {
+    setState: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+    const videoref = useRef<React.ElementRef<VideoComponentType>>(null);
+    const [paused, setPaused] = useState(true)
+
+    const addRepeat = () => {
+        setPaused(!paused)
+    }
+
+
+    return (
+
+        <View style={{
+            height: 220,
+            width: "100%",
+            overflow: 'hidden',
+            alignItems: "center"
+
+        }}>
+            <View style={{
+                height: 150,
+                width: 200,
+                overflow: 'hidden',
+                justifyContent: 'center',
+
+            }}>
+
+                <RNCVideo
+                    ref={videoref}
+                    source={require("./asstes/34.mp4")}
+                    controls={true}
+                    repeat={false}
+                    paused={paused}
+                    muted={false}
+                    resizeMode={"contain"}
+                    style={{ flex: 1 }}
+                />
+            </View>
+            <View style={{ marginTop: 20, flexDirection: "row" }}>
+                <Button title={paused ? "播放" : "暂停"} onPress={addRepeat} />
+            </View>
+        </View>
+
+    );
+
+}
+
+const AdddisableFocusTest = (props: {
+    setState: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+    const videoref = useRef<React.ElementRef<VideoComponentType>>(null);
+    const [paused, setPaused] = useState(true)
+    const [disableFocus, setDisableFocus] = useState(false)
+    const addRepeat = () => {
+        setPaused(!paused)
+    }
+    const addDisableFocus = () => {
+        setDisableFocus(!disableFocus)
+    }
+
+    return (
+
+        <View style={{
+            height: 220,
+            width: "100%",
+            overflow: 'hidden',
+            alignItems: "center"
+
+        }}>
+            <View style={{
+                height: 150,
+                width: 200,
+                overflow: 'hidden',
+                justifyContent: 'center',
+
+            }}>
+
+                <RNCVideo
+                    ref={videoref}
+                    disableFocus={disableFocus}
+                    source={require("./asstes/34.mp4")}
+                    controls={true}
+                    repeat={false}
+                    paused={paused}
+                    muted={false}
+                    resizeMode={"contain"}
+                    style={{ flex: 1 }}
+                />
+            </View>
+            <View style={{ marginTop: 20, flexDirection: "row" }}>
+                <Button title={paused ? "播放" : "暂停"} onPress={addRepeat} />
+                <Button title={`disableFocus切换${!disableFocus}`} onPress={addDisableFocus} />
+            </View>
+        </View>
+
+    );
+
+}
+
+
 
 const AddVolumeTest = (props: {
     setState: React.Dispatch<React.SetStateAction<boolean>>;
@@ -190,8 +474,7 @@ const AddVolumeTest = (props: {
 
                 <RNCVideo
                     ref={videoref}
-                    source={{ uri: "https://res.vmallres.com//uomcdn/CN/cms/202210/C75C7E20060F3E909F2998E13C3ABC03.mp4" }}
-                    //source={{ uri: "https://vod.vmall.com/asset/073cc2bab11eb7417e13a722bd9559d7/fe675e3e740a04d3a5295441af743036.mp4" }}
+                    source={require("./asstes/34.mp4")}
                     controls={true}
                     repeat={false}
                     paused={paused}
@@ -241,8 +524,7 @@ const AddMenuonMutedTest = (props: {
 
                 <RNCVideo
                     ref={videoref}
-                    source={{ uri: "https://res.vmallres.com//uomcdn/CN/cms/202210/C75C7E20060F3E909F2998E13C3ABC03.mp4" }}
-                    //source={{ uri: "https://vod.vmall.com/asset/073cc2bab11eb7417e13a722bd9559d7/fe675e3e740a04d3a5295441af743036.mp4" }}
+                    source={require("./asstes/34.mp4")}
                     controls={true}
                     repeat={true}
                     paused={paused}
