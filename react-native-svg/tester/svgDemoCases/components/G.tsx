@@ -4,6 +4,8 @@ import { Svg, Circle, Rect } from 'react-native-svg'
 import { GenMain } from './gen'
 import { genTransformProps, genStrokeProps, genFillProps, commonProps } from '../genUtil'
 const basicProps = {
+    fill: 'grey',
+    strokeWidth: '2',
 }
 
 const allCases = [
