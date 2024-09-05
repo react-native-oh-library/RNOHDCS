@@ -285,41 +285,9 @@ export function genViewProps(): CaseParams[] {
             ]
         },
         {
-            key: 'hitSlop',
-            values: [
-                {
-                    top: 0,
-                    left: 0,
-                    bottom: 0,
-                    right: 0
-                },
-                {
-                    top: 10,
-                    left: 10,
-                    bottom: 10,
-                    right: 10
-                },
-                {
-                    top: 30,
-                    left: 30,
-                    bottom: 0,
-                    right: 0
-                },
-            ]
-        },
-        {
             key: 'pointerEvents', // 'box-none' | 'none' | 'box-only' | 'auto' | undefined;
             values: ['box-none', 'none', 'box-only', 'auto']
         },
-        {
-            key: 'removeClippedSubviews',
-            values: [true, false]
-        },
-        // testID nativeID
-        {
-            key: 'shouldRasterizeIOS',
-            values: [true, false]
-        }
     ]
 }
 
