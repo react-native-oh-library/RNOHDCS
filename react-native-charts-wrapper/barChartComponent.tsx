@@ -34,6 +34,7 @@ const BarChartDemo = ()=>{
   ]
   return (
     <Tester>
+      
       <ScrollView style={{marginBottom: 70}}>
         <TestSuite name="barChart 基础柱状图:图例(legend)">
           <TestCase itShould="Props:legend(enabled:true),是否设置图表图例部件">
@@ -99,7 +100,7 @@ const BarChartDemo = ()=>{
         </TestSuite>
 
         <TestSuite name="barChart 基础柱状图:图例(legend)">
-          <TestCase itShould="Props:legend(textColor),图例文本的颜色">
+          <TestCase itShould="Props:legend(textColor:#f45),图例文本的颜色">
             <View style={{width: '100%', height: 300}}>
               <BarChart
                 style={styles.chart}
@@ -121,7 +122,7 @@ const BarChartDemo = ()=>{
         </TestSuite>
 
         <TestSuite name="barChart 基础柱状图:图例(legend)">
-          <TestCase itShould="Props:legend(textSize) 图例文本的大小">
+          <TestCase itShould="Props:legend(textSize:30) 图例文本的大小">
             <View style={{width: '100%', height: 300}}>
               <BarChart
                 style={styles.chart}
@@ -242,7 +243,7 @@ const BarChartDemo = ()=>{
         </TestSuite>
 
         <TestSuite name="barChart 基础柱状图:图例(legend)">
-          <TestCase itShould="Props:fontFamily 字体">
+          <TestCase itShould="Props:fontFamily 字体 monospace">
             <View style={{width: '100%', height: 400}}>
               <BarChart
                 style={styles.chart}
@@ -395,7 +396,30 @@ const BarChartDemo = ()=>{
             </View>
           </TestCase>
         </TestSuite>
-
+        <TestSuite name="barChart 基础柱状图:图例(legend)">
+          <TestCase itShould="Props:legend(formSize 20) 设置图例格式的大小">
+            <View style={{width: '100%', height: 400}}>
+              <BarChart
+                style={styles.chart}
+                
+                data={{
+                  dataSets: [
+                    {
+                      label: 'demo',
+                      values:data,
+                    },
+                  ],
+                }}
+                
+                legend={{
+                  enabled: true,
+                  drawInside:false,
+                  formSize:20,
+                }}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
         <TestSuite name="barChart 基础柱状图:图例(legend)">
           <TestCase itShould="Props:legend(drawInside:true) 图例部件是否在图表内部显示">
             <View style={{width: '100%', height: 400}}>
@@ -494,6 +518,183 @@ const BarChartDemo = ()=>{
           </TestCase>
         </TestSuite>
 
+        <TestSuite name="barChart 基础柱状图:图例(legend)">
+          <TestCase itShould="Props:legend(form CIRCLE) 设置图例形式的形式/形状 圆">
+            <View style={{width: '100%', height: 400}}>
+              <BarChart
+                style={styles.chart}
+                
+                data={{
+                  dataSets: [
+                    {
+                      label: 'demo',
+                      values:data,
+                    },
+                  ],
+                }}
+                
+                legend={{
+                  enabled: true,
+                  drawInside:false,
+                  form:'CIRCLE'
+                }}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+
+        <TestSuite name="barChart 基础柱状图:图例(legend)">
+          <TestCase itShould="Props:legend(form DEFAULT) 设置图例形式的形式/形状 默认 默认就是圆">
+            <View style={{width: '100%', height: 400}}>
+              <BarChart
+                style={styles.chart}
+                
+                data={{
+                  dataSets: [
+                    {
+                      label: 'demo',
+                      values:data,
+                    },
+                  ],
+                }}
+                
+                legend={{
+                  enabled: true,
+                  drawInside:false,
+                  form:'DEFAULT'
+                }}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+
+        <TestSuite name="barChart 基础柱状图:图例(legend)">
+          <TestCase itShould="Props:legend(form EMPTY) 设置图例形式的形式/形状 empty空的，不显示">
+            <View style={{width: '100%', height: 400}}>
+              <BarChart
+                style={styles.chart}
+                
+                data={{
+                  dataSets: [
+                    {
+                      label: 'demo',
+                      values:data,
+                    },
+                  ],
+                }}
+                
+                legend={{
+                  enabled: true,
+                  drawInside:false,
+                  form:'EMPTY'
+                }}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+
+        <TestSuite name="barChart 基础柱状图:图例(legend)">
+          <TestCase itShould="Props:legend(form LINE) 设置图例形式的形式/形状 线条">
+            <View style={{width: '100%', height: 400}}>
+              <BarChart
+                style={styles.chart}
+                
+                data={{
+                  dataSets: [
+                    {
+                      label: 'demo',
+                      values:data,
+                    },
+                  ],
+                }}
+                
+                legend={{
+                  enabled: true,
+                  drawInside:false,
+                  form:'LINE'
+                }}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+
+        <TestSuite name="barChart 基础柱状图:图例(legend)">
+          <TestCase itShould="Props:legend(form NONE) 设置图例形式的形式/形状 无">
+            <View style={{width: '100%', height: 400}}>
+              <BarChart
+                style={styles.chart}
+                
+                data={{
+                  dataSets: [
+                    {
+                      label: 'demo',
+                      values:data,
+                    },
+                  ],
+                }}
+                
+                legend={{
+                  enabled: true,
+                  drawInside:false,
+                  form:'NONE'
+                }}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+
+        <TestSuite name="barChart 基础柱状图:图例(legend)">
+          <TestCase itShould="Props:legend(form SQUARE) 设置图例形式的形式/形状 正方形">
+            <View style={{width: '100%', height: 400}}>
+              <BarChart
+                style={styles.chart}
+                
+                data={{
+                  dataSets: [
+                    {
+                      label: 'demo',
+                      values:data,
+                    },
+                  ],
+                }}
+                
+                legend={{
+                  enabled: true,
+                  drawInside:false,
+                  form:'SQUARE'
+                }}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+
+     
+
+        <TestSuite name="barChart 基础柱状图:图例(legend)">
+          <TestCase itShould="Props:legend(formToTextSpace 15) 图例部件图标到文字的间距">
+            <View style={{width: '100%', height: 400}}>
+              <BarChart
+                style={styles.chart}
+                
+                data={{
+                  dataSets: [
+                    {
+                      label: 'demo',
+                      values:data,
+                    },
+                  ],
+                }}
+                
+                legend={{
+                  enabled: true,
+                  drawInside:false,
+                  formToTextSpace:15
+                }}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+
         <TestSuite name="barChart 基础柱状图:drawValueAboveBar">
           <TestCase itShould="Props:drawValueAboveBar(true) 所有值都绘制在其条形上方  需要设置maxVisibleValueCount">
             <View style={{width: '100%', height: 300}}>
@@ -511,6 +712,33 @@ const BarChartDemo = ()=>{
                 }}
                 drawValueAboveBar={true}
                 maxVisibleValueCount={70}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+
+        <TestSuite name="barChart 基础柱状图">
+          <TestCase itShould="Props:chartBackgroundColor 背景颜色 #4f4">
+            <View style={{width: '100%', height: 400}}>
+              <BarChart
+                style={styles.chart}
+                
+                data={{
+                  dataSets: [
+                    {
+                      label: 'demo',
+                      values:data,
+                    },
+                  ],
+                }}
+                
+                legend={{
+                  enabled: true,
+                  drawInside:false,
+                  form:'NONE'
+                }}
+                drawGridBackground={true}
+                chartBackgroundColor={processColor('#4f4')}
               />
             </View>
           </TestCase>
@@ -711,7 +939,7 @@ const BarChartDemo = ()=>{
         </TestSuite>
 
         <TestSuite name="barChart 基础柱状图:数据(data)">
-          <TestCase itShould="Props:axisDependency 设置绘制此数据集所依据的Y轴,demo数据依赖的左边Y轴，demo2依赖的是右边Y轴，可以看0刻度分辨">
+          <TestCase itShould="Props:axisDependency 有两个数据就分别设置了左边和右边 设置绘制此数据集所依据的Y轴,demo数据依赖的左边Y轴，demo2依赖的是右边Y轴，可以看0刻度分辨">
             <View style={{width: '100%', height: 300}}>
               <BarChart
                 style={styles.chart}
@@ -722,7 +950,8 @@ const BarChartDemo = ()=>{
                       values: data,
                       config: {
                         color:processColor('#d2d'),
-                        axisDependency:'LEFT'
+                        axisDependency:'LEFT',
+                        stackLabels:['123','456']
                       },
                       
                     },
@@ -742,10 +971,9 @@ const BarChartDemo = ()=>{
             </View>
           </TestCase>
         </TestSuite>
-
  
         <TestSuite name="barChart 基础柱状图:数据(data) ">
-          <TestCase itShould="Props:highlightColor 设置用于绘制突出显示指示器的颜色">
+          <TestCase itShould="Props:highlightColor 设置用于绘制突出显示指示器的颜色 高亮颜色 #4f4">
             <View style={{width: '100%', height: 300}}>
               <BarChart
                 style={styles.chart}
@@ -771,7 +999,7 @@ const BarChartDemo = ()=>{
           </TestCase>
         </TestSuite>
         <TestSuite name="barChart 基础柱状图:数据(data)">
-          <TestCase itShould="Props:barWidth 设置每个条形在x轴上应具有的宽度 默认0.85f">
+          <TestCase itShould="Props:barWidth 0.5 设置每个条形在x轴上应具有的宽度 默认0.85f">
             <View style={{width: '100%', height: 300}}>
               <BarChart
                 style={styles.chart}
@@ -794,7 +1022,7 @@ const BarChartDemo = ()=>{
         </TestSuite>
 
         <TestSuite name="barChart 基础柱状图:数据(data)">
-          <TestCase itShould="Props:topRadius 设置顶部圆角半径">
+          <TestCase itShould="Props:topRadius 5 设置顶部圆角半径">
             <View style={{width: '100%', height: 300}}>
               <BarChart
                 style={styles.chart}
@@ -814,7 +1042,7 @@ const BarChartDemo = ()=>{
 
 
         <TestSuite name="barChart 基础柱状图:数据(data)">
-          <TestCase itShould="Props:barShadowColor 设置用于绘制条形阴影的颜色 需配合drawBarShadow">
+          <TestCase itShould="Props:barShadowColor #4f4 设置用于绘制条形阴影的颜色 需配合drawBarShadow">
             <View style={{width: '100%', height: 300}}>
               <BarChart
                 style={styles.chart}
@@ -834,7 +1062,7 @@ const BarChartDemo = ()=>{
 
         </TestSuite>
         <TestSuite name="barChart 基础柱状图:数据(data)">
-          <TestCase itShould="Props:highlightAlpha 设置用于绘制高光的alpha值（透明度）">
+          <TestCase itShould="Props:highlightAlpha 设置用于绘制高光的alpha值（透明度）50">
             <View style={{width: '100%', height: 300}}>
               <BarChart
                 style={styles.chart}
@@ -856,8 +1084,9 @@ const BarChartDemo = ()=>{
             </View>
           </TestCase>
         </TestSuite>
+
         <TestSuite name="barChart 基础柱状图:数据(data)">
-          <TestCase itShould="Props:group 设置柱状图的组 fromX,groupSpace,barSpace需要一起设置">
+          <TestCase itShould="Props:group 设置柱状图的组 fromX,groupSpace,barSpace需要一起设置 fromX: 0, groupSpace: 0.06, barSpace: 0.02">
             <View style={{width: '100%', height: 300}}>
               <BarChart
                 style={styles.chart}
@@ -882,6 +1111,7 @@ const BarChartDemo = ()=>{
             </View>
           </TestCase>
         </TestSuite>
+        
       </ScrollView>
     </Tester>
   );

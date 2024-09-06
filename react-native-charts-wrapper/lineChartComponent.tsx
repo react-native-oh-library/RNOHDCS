@@ -69,7 +69,7 @@ const lineChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="LineChart 基础折线图(chartDescription：描述部件)">
-          <TestCase itShould="Props:textColor 描述文本的颜色">
+          <TestCase itShould="Props:textColor 描述文本的颜色 #4f4">
             <View  style={{width: '100%', height: 300}}>
             <LineChart
               style={styles.chart}
@@ -89,7 +89,7 @@ const lineChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="LineChart 基础折线图(chartDescription：描述部件)">
-          <TestCase itShould="Props:textSize 描述文本的颜色">
+          <TestCase itShould="Props:textSize 描述文本的大小 textSize:20">
             <View  style={{width: '100%', height: 300}}>
             <LineChart
               style={styles.chart}
@@ -109,7 +109,7 @@ const lineChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="LineChart 基础折线图(chartDescription：描述部件)">
-          <TestCase itShould="Props:position 描述文本在屏幕中的位置">
+          <TestCase itShould="Props:position 描述文本在屏幕中的位置 positionX:80,positionY:45">
             <View  style={{width: '100%', height: 300}}>
             <LineChart
               style={styles.chart}
@@ -168,6 +168,29 @@ const lineChartDemo = () => {
           </TestCase>
         </TestSuite>
 
+        <TestSuite name="LineChart 基础折线图(highlightLineWidth:高亮宽度)">
+          <TestCase itShould="Props:highlightLineWidth  高亮宽度 highlightLineWidth:6">
+            <View  style={{width: '100%', height: 300}}>
+            <LineChart
+              style={styles.chart}
+              data={{
+                dataSets: [
+                  {
+                    label: 'demo',
+                    values: data,
+                    config:{highlightEnabled:true,highlightColor:processColor('#000'),highlightLineWidth:6}
+                  },
+                ],
+              }}
+              touchEnabled={true}
+              highlightPerTapEnabled={true}
+              maxHighlightDistance={1000}
+            />
+            </View>
+           
+          </TestCase>
+        </TestSuite>
+
         <TestSuite name="LineChart 基础折线图(data:数据)">
           <TestCase itShould="Props:data  数据">
             <View  style={{width: '100%', height: 300}}>
@@ -188,7 +211,7 @@ const lineChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="LineChart 基础折线图(data:数据)">
-          <TestCase itShould="Props:config(circleRadius)  设置绘制的圆的半径。最小是1f">
+          <TestCase itShould="Props:config(circleRadius)  设置绘制的圆的半径。最小是1f circleRadius:20">
             <View  style={{width: '100%', height: 300}}>
             <LineChart
               style={styles.chart}
@@ -208,7 +231,7 @@ const lineChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="LineChart 基础折线图(data:数据)">
-          <TestCase itShould="Props:config(drawCircles) 将此值设置为false以关闭此的圆圈指示器的绘制数据集，默认为true,其他用例均覆盖true的情况">
+          <TestCase itShould="Props:config(drawCircles false) 将此值设置为false以关闭此的圆圈指示器的绘制数据集，默认为true,其他用例均覆盖true的情况">
             <View  style={{width: '100%', height: 300}}>
             <LineChart
               style={styles.chart}
@@ -228,7 +251,7 @@ const lineChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="LineChart 基础折线图(data:数据)">
-          <TestCase itShould="Props:config(mode) 设置lineDataSet的绘制模式 CUBIC_BEZIER 立方曲线 ">
+          <TestCase itShould="Props:config(mode ) 设置lineDataSet的绘制模式 CUBIC_BEZIER 立方曲线 ">
             <View  style={{width: '100%', height: 300}}>
             <LineChart
               style={styles.chart}
@@ -308,7 +331,7 @@ const lineChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="LineChart 基础折线图(data:数据)">
-          <TestCase itShould="Props:config(circleColor) 设置应该用于此数据集的唯一颜色  ">
+          <TestCase itShould="Props:config(circleColor #4f4) 设置应该用于此数据集的唯一颜色  ">
             <View  style={{width: '100%', height: 300}}>
             <LineChart
               style={styles.chart}
@@ -328,7 +351,7 @@ const lineChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="LineChart 基础折线图(data:数据)">
-          <TestCase itShould="Props:config(circleColors) 设置应该用于此数据集的颜色集,可设置多个颜色  ">
+          <TestCase itShould="Props:config(circleColors) 设置应该用于此数据集的颜色集,可设置多个颜色，可查看用例看见颜色  ">
             <View  style={{width: '100%', height: 300}}>
             <LineChart
               style={styles.chart}
@@ -348,7 +371,7 @@ const lineChartDemo = () => {
 
         </TestSuite>
         <TestSuite name="LineChart 基础折线图(data:数据)">
-          <TestCase itShould="Props:config(circleHoleColor) 设置线条圆的内圆的颜色。  ">
+          <TestCase itShould="Props:config(circleHoleColor) 设置线条圆的内圆的颜色。 #f54 ">
             <View  style={{width: '100%', height: 300}}>
             <LineChart
               style={styles.chart}
@@ -388,7 +411,7 @@ const lineChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="LineChart 基础折线图(data:数据)">
-          <TestCase itShould="Props:config(dashedLine) 折线设置为虚线  ">
+          <TestCase itShould="Props:config(dashedLine lineLength:10,spaceLength:2,phase:1) 折线设置为虚线  ">
             <View  style={{width: '100%', height: 300}}>
             <LineChart
               style={styles.chart}
@@ -408,7 +431,7 @@ const lineChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="LineChart 基础折线图(data:数据)">
-          <TestCase itShould="Props:config(drawVerticalHighlightIndicator) 禁用垂直突出显示指示器。如果禁用，则不绘制指示器。">
+          <TestCase itShould="Props:config(drawVerticalHighlightIndicator false) 禁用垂直突出显示指示器。如果禁用，则不绘制指示器。其他高亮用例已覆盖为true的情况">
             <View  style={{width: '100%', height: 300}}>
             <LineChart
               style={styles.chart}
@@ -435,7 +458,7 @@ const lineChartDemo = () => {
           </TestCase>
         </TestSuite>
         <TestSuite name="LineChart 基础折线图(data:数据)">
-          <TestCase itShould="Props:config(drawVerticalHighlightIndicator) 启用垂直突出显示指示器。如果禁用，则不绘制指示器。 ">
+          <TestCase itShould="Props:config(drawHorizontalHighlightIndicator) 启用水平突出显示指示器。如果禁用，则不绘制指示器。其他高亮用例已覆盖为true的情况 ">
             <View  style={{width: '100%', height: 300}}>
             <LineChart
               style={styles.chart}
@@ -444,7 +467,7 @@ const lineChartDemo = () => {
                   {
                     label: 'demo',
                     values: data,
-                    config:{drawVerticalHighlightIndicator:true,drawHighlightIndicators:true}
+                    config:{drawHorizontalHighlightIndicator:false,drawHighlightIndicators:false}
                   },
                 ],
               }}
@@ -461,8 +484,63 @@ const lineChartDemo = () => {
            
           </TestCase>
         </TestSuite>
+
+        <TestSuite name="LineChart 基础折线图(data:数据)">
+          <TestCase itShould="Props:config(lineWidth 0.5) 折线宽度 ">
+            <View  style={{width: '100%', height: 300}}>
+            <LineChart
+              style={styles.chart}
+              data={{
+                dataSets: [
+                  {
+                    label: 'demo',
+                    values: data,
+                    config:{lineWidth:0.5}
+                  },
+                ],
+              }}
+              touchEnabled={true}
+              highlightPerTapEnabled={true}
+              maxVisibleValueCount={70}
+              scaleEnabled={true}
+              scaleXEnabled={true}
+              scaleYEnabled={true}
+              maxHighlightDistance={1000}
+              
+            />
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="LineChart 基础折线图(data:数据)">
+          <TestCase itShould="Props:config(fillFormatter #4f4) 填充 ">
+            <View  style={{width: '100%', height: 300}}>
+            <LineChart
+              style={styles.chart}
+              data={{
+                dataSets: [
+                  {
+                    label: 'demo',
+                    values: data,
+                    config:{drawFilled:true,fillAlpha:0.2,fillColor:processColor('#4f4')}
+                  },
+                ],
+              }}
+              touchEnabled={true}
+              highlightPerTapEnabled={true}
+              maxVisibleValueCount={70}
+              scaleEnabled={true}
+              scaleXEnabled={true}
+              scaleYEnabled={true}
+              maxHighlightDistance={1000}
+              
+            />
+            </View>
+            
+           
+          </TestCase>
+        </TestSuite>
         <TestSuite name="LineChart 基础折线图(X轴属性)">
-          <TestCase itShould="props:avoidFirstLastClipping 如果设置为true，图表将避免第一个和最后一个标签条目被裁剪  ">
+          <TestCase itShould="props:avoidFirstLastClipping false,图表将避免第一个和最后一个标签条目被裁剪,会被直接裁剪掉 ">
             <View  style={{width:'100%', height: 300}}>
             <LineChart
               style={styles.chart}
@@ -475,22 +553,41 @@ const lineChartDemo = () => {
                   },
                 ],
               }}
-              xAxis={{avoidFirstLastClipping:true,}}
+              xAxis={{avoidFirstLastClipping:false}}
               touchEnabled={true}
               scaleXEnabled={true}
               scaleYEnabled={true}
               scaleEnabled={true}
+               viewPortOffsets={{top: -3, left: 20, right: 20, bottom: 20}}
             />
             </View>
-           
           </TestCase>
         </TestSuite>
-
-        
+         <TestSuite name="LineChart 基础折线图(X轴属性)">
+            <TestCase itShould="props:avoidFirstLastClipping true,图表将避免第一个和最后一个标签条目被裁剪,会保留标签一部分 ">
+              <View  style={{width:'100%', height: 300}}>
+              <LineChart
+                style={styles.chart}
+                data={{
+                  dataSets: [
+                    {
+                      label: 'demo',
+                      values: data,
+                      config:{dashedLine:{lineLength:10,spaceLength:2,phase:1}}
+                    },
+                  ],
+                }}
+                xAxis={{avoidFirstLastClipping:true}}
+                touchEnabled={true}
+                scaleXEnabled={true}
+                scaleYEnabled={true}
+                scaleEnabled={true}
+                viewPortOffsets={{top: -3, left: 20, right: 20, bottom: 20}}
+              />
+              </View>
+            </TestCase>
+         </TestSuite>
       </ScrollView>
-
-      
-
     </Tester>
 
   )
