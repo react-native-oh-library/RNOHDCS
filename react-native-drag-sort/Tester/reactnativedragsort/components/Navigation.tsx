@@ -1,14 +1,10 @@
 import React, {useEffect} from 'react';
-import {
-  FlatList,
-  Image,
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import {PALETTE} from './Palette';
+import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+
+export const PALETTE = {
+  REACT_CYAN_LIGHT: 'hsl(193, 95%, 68%)',
+  REACT_CYAN_DARK: 'hsl(193, 95%, 30%)',
+};
 
 const NavigationContext = React.createContext<
   | {
@@ -27,7 +23,7 @@ export function NavigationContainer({
 }: {
   initialPage?: string;
   children: any;
-  hasHeader?: boolean
+  hasHeader?: boolean;
 }) {
   const [currentPageName, setCurrentPageName] = React.useState(initialPage);
   const [registeredPageNames, setRegisteredPageNames] = React.useState<
@@ -51,7 +47,7 @@ export function NavigationContainer({
       }}>
       <View style={{width: '100%', height: '100%', flexDirection: 'column'}}>
         <Page name="INDEX">
-        <IndexPage hasHeader={hasHeader} />
+          <IndexPage hasHeader={hasHeader} />
         </Page>
         {children}
       </View>
@@ -92,34 +88,23 @@ export function Page({name, children}: {name: string; children: any}) {
   ) : null;
 }
 
-export function IndexPage({ hasHeader }: { hasHeader: boolean }) {
+export function IndexPage({hasHeader}: {hasHeader: boolean}) {
   const {navigateTo, registeredPageNames} = useNavigation();
 
   return (
     <FlatList
       data={registeredPageNames}
       ListHeaderComponent={
-        hasHeader ? <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            paddingHorizontal: 16,
-            paddingVertical: 16,
-          }}>
-          <Text
+        hasHeader ? (
+          <View
             style={{
-              color: '#EEE',
-              fontSize: 24,
-              fontWeight: 'bold',
-              padding: 16,
+              flexDirection: 'row',
+              alignItems: 'center',
+              paddingHorizontal: 5,
+              paddingVertical: 5,
             }}>
-            RN Svg Capi Tester
-            {'rnohArchitecture' in Platform.constants
-              ? (` (${Platform.constants.rnohArchitecture})` as string)
-              : ''}
-          </Text>
-        </View>
-        : null
+          </View>
+        ) : null
       }
       renderItem={({item}) => {
         return (
@@ -151,8 +136,8 @@ const styles = StyleSheet.create({
   buttonText: {
     width: '100%',
     fontWeight: 'bold',
-    paddingHorizontal: 16,
-    paddingVertical: 24,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
     color: 'white',
     backgroundColor: 'black',
   },
