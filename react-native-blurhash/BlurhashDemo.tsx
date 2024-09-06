@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Blurhash } from 'react-native-blurhash';
-import BlurhashDemo22 from './BlurhashDemo';
 import { ScrollView, Text, View, StyleSheet, TouchableOpacity, Alert, SafeAreaView, TextInput, Switch, ActivityIndicator, StatusBar } from 'react-native'
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino'
 
 const BlurhashDemo: React.FC = (): JSX.Element => {
+    const [validData,setValidData] = useState<boolean>('')
     const [blurhash, setBlurhash] = useState('LGF5]+Yk^6#M@-5c,1J5@[or[Q6.');
     const [blurhash2, setBlurhash2] = useState('LOGj+#n$02t7IVWWtQs,03R-~As9');
     const [blurhash3, setBlurhash3] = useState('LGF5]+Yk^6#M@-5c,1J5@[or[Q6.');
@@ -539,7 +539,7 @@ const BlurhashDemo: React.FC = (): JSX.Element => {
                         />
                         <TestCase
                             tags={['C_API']}
-                            itShould='验证isBlurhashValid方法'
+                            itShould='验证isBlurhashValid方法（返回ture或false则为成功）'
                             initialState={undefined as any}
                             arrange={({ setState }) => {
                                 return (
@@ -554,7 +554,15 @@ const BlurhashDemo: React.FC = (): JSX.Element => {
                                             <TouchableOpacity
                                                 style={clearCosineCacheButton}
                                                 disabled={blurhash5.length < 5}
-                                                onPress={isVaild}>
+                                                onPress={() => {
+                                                    const data = Blurhash.isBlurhashValid(blurhash5)
+                                                    setValidData(data.isValid)
+                                                    if (data.isValid == true || data.isValid == false) {
+                                                        setState(data.isValid)
+                                                    } else {
+                                                        setState(data)
+                                                    }
+                                                }}>
                                                 {isValiding ? (
                                                     <ActivityIndicator color="black" />
                                                 ) : (
@@ -569,6 +577,7 @@ const BlurhashDemo: React.FC = (): JSX.Element => {
                                 expect(state).to.be.true
                             }}
                         />
+                        <Text style={{color:'#fff'}}>{'isBlurhashValid:'+validData}</Text>
                     </View>
                 </TestSuite>
             </ScrollView>
