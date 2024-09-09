@@ -5,7 +5,6 @@
  * @format
  */
 
-
 import React, { useState } from "react";
 import {
   Text,
@@ -21,6 +20,7 @@ import {
 
 export default function App(): JSX.Element {
   const [info, setInfo] = useState(AdvertisingInfoResponse);
+  const [info_2, setInfo_2] = useState(AdvertisingInfoResponse);
 
   const testGetAdvertisingInfo = async () => {
     const result: AdvertisingInfoResponse = await ReactNativeIdfaAaid.getAdvertisingInfo();
@@ -28,7 +28,7 @@ export default function App(): JSX.Element {
   };
   const testgetAdvertisingInfoAndCheckAuthorization = async () => {
     const result = await ReactNativeIdfaAaid.getAdvertisingInfoAndCheckAuthorization(true);
-    setInfo(result as any);
+    setInfo_2(result as any);
   };
 
 
@@ -78,7 +78,7 @@ export default function App(): JSX.Element {
             onPress={testgetAdvertisingInfoAndCheckAuthorization}
           />
           {/* 展示从GetOaidModule中获取的广告信息 */}
-          <Text>{JSON.stringify(info)}</Text>
+          <Text>{JSON.stringify(info_2)}</Text>
         </TestCase>
       </TestSuite>
     </Tester>
