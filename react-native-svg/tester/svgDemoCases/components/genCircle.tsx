@@ -32,9 +32,6 @@ const basicCases: CaseParams[] = [
                 opacity: '0.3'
             },
         ],
-        othersProps: {
-            fill: 'green'
-        },
         showOtherProps: true
     }
 ]

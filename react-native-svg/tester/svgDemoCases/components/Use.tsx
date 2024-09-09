@@ -168,7 +168,7 @@ export default function () {
                     >
                         <Svg viewBox="0 0 400 400">
                             <Circle id="shape" cx="100" cy="100" r="50" stroke="black" />
-                            <Use href="#shape" x="200" />
+                            <Use xlinkHref="#shape" x="200" />
                         </Svg>
                     </View>
                 </TestCase>

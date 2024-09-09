@@ -35,38 +35,6 @@ const BubbleChartDemo = () => {
   return (
     <Tester>
       <ScrollView style={{ marginBottom: 70 }}>
-        <TestSuite name="bubble 基础气泡图:数据(data)">
-          <TestCase itShould="Props:visible:true 数据集的可见性 可见">
-            <View style={{ width: '100%', height: 300 }}>
-              <BubbleChart
-                style={styles.chart}
-                data={{
-                  dataSets: [
-                    {
-                      label: 'demo',
-                      values: data,
-                      config: {
-                        drawValues: true, visible: true
-                      },
-
-                    },
-                    {
-                      label: 'demo2',
-                      values: data1,
-                      config: {
-                        drawValues: true, visible: true
-                      },
-
-                    },
-                  ],
-
-                }}
-                maxVisibleValueCount={70}
-              />
-            </View>
-          </TestCase>
-        </TestSuite>
-
         <TestSuite name="bubble 基础气泡图:(X轴Y轴公共设置)">
           <TestCase itShould="enabled 是否设置X轴 Y轴 都为true">
             <View style={{ width: '100%', height: 300 }}>
@@ -222,7 +190,7 @@ const BubbleChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="bubble 基础气泡图:(X轴Y轴公共设置)">
-          <TestCase itShould="drawGridLines 是否启用此轴的网格线绘制 其他用例均已覆盖为true的情况">
+          <TestCase itShould="drawGridLines false 是否启用此轴的网格线绘制 其他用例均已覆盖为true的情况">
             <View style={{ width: '100%', height: 300 }}>
               <BubbleChart
                 style={styles.chart}
@@ -248,7 +216,7 @@ const BubbleChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="bubble 基础气泡图:(X轴Y轴公共设置)">
-          <TestCase itShould="textColor 设置用于标签的文本颜色 ">
+          <TestCase itShould="textColor 设置用于标签的文本颜色 颜色：#f4f">
             <View style={{ width: '100%', height: 300 }}>
               <BubbleChart
                 style={styles.chart}
@@ -274,7 +242,7 @@ const BubbleChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="bubble 基础气泡图:(X轴Y轴公共设置)">
-          <TestCase itShould="textSize 设置用于标签的文本大小 ">
+          <TestCase itShould="textSize 设置用于标签的文本大小 x:20,y:left:12,y:right:20">
             <View style={{ width: '100%', height: 300 }}>
               <BubbleChart
                 style={styles.chart}
@@ -294,6 +262,31 @@ const BubbleChartDemo = () => {
                 maxVisibleValueCount={70}
                 xAxis={{ enabled: true, textSize: 20 }}
                 yAxis={{ left: { enabled: true, textSize: 12 }, right: { enabled: true, textSize: 20 } }}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="bubble 基础气泡图:(X轴Y轴公共设置)">
+          <TestCase itShould="fontFamily 设置用于标签的文本字体 monospace">
+            <View style={{ width: '100%', height: 300 }}>
+              <BubbleChart
+                style={styles.chart}
+                data={{
+                  dataSets: [
+                    {
+                      label: 'demo',
+                      values: data,
+                      config: {
+                        drawValues: true, visible: true
+                      },
+
+                    },
+                  ],
+
+                }}
+                maxVisibleValueCount={70}
+                xAxis={{ enabled: true, textSize: 20 ,fontFamily:'monospace'}}
+                yAxis={{ left: { enabled: true, textSize: 12,fontFamily:'monospace' }, right: { enabled: true, textSize: 12,fontFamily:'monospace' } }}
               />
             </View>
           </TestCase>
@@ -325,7 +318,7 @@ const BubbleChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="bubble 基础气泡图:(X轴Y轴公共设置)">
-          <TestCase itShould="gridLineWidth 设置远离每个轴绘制的栅格线的宽度">
+          <TestCase itShould="gridLineWidth 设置每个轴绘制的栅格线的宽度 X:gridLineWidth: 5 left: gridLineWidth: 2 right:gridLineWidth: 10">
             <View style={{ width: '100%', height: 300 }}>
               <BubbleChart
                 style={styles.chart}
@@ -351,7 +344,7 @@ const BubbleChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="bubble 基础气泡图:(X轴Y轴公共设置)">
-          <TestCase itShould="axisLineColor 设置图表周围边框的颜色">
+          <TestCase itShould="axisLineColor 设置图表周围边框的颜色 颜色：#f4f,#4f4">
             <View style={{ width: '100%', height: 300 }}>
               <BubbleChart
                 style={styles.chart}
@@ -377,7 +370,7 @@ const BubbleChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="bubble 基础气泡图:(X轴Y轴公共设置)">
-          <TestCase itShould="axisLineWidth 设置图表周围边框的宽度">
+          <TestCase itShould="axisLineWidth 设置图表周围边框的宽度 axisLineWidth: 5">
             <View style={{ width: '100%', height: 300 }}>
               <BubbleChart
                 style={styles.chart}

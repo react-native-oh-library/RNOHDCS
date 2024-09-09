@@ -26,13 +26,6 @@ const HorizontalBarChartDemo = () => {
     <Tester>
       <ScrollView style={{ marginBottom: 70 }}>
 
-      <TestSuite name="horizontalBarChart 水平柱状图">
-          <TestCase itShould="">
-            <View style={{ width: '100%', height: 300 }}>
-              <Text>此图表为柱状图的水平状态，和柱状图的props相同，无需重复编写测试用例,以下用例为所有图表的公共props，以及horizontalBarChart的基础图表</Text>
-            </View>
-          </TestCase>
-        </TestSuite>
 
         <TestSuite name="horizontalBarChart 基础水平柱状图:数据(data)">
           <TestCase itShould="Props:data">
@@ -56,7 +49,7 @@ const HorizontalBarChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="horizontalBarChart 水平柱状图">
-          <TestCase itShould="Props:dragDecelerationEnabled设置拖拽减速 !!!!">
+          <TestCase itShould="Props:dragDecelerationEnabled设置拖拽减速 dragDecelerationFrictionCoef={0.8}">
             <View style={{ width: '100%', height: 300 }}>
               <HorizontalBarChart
                 style={styles.chart}
@@ -71,17 +64,20 @@ const HorizontalBarChartDemo = () => {
                     },
                   ],
                 }}
-
+                touchEnabled={true}
                 dragDecelerationEnabled={true}
-                dragDecelerationFrictionCoef={0.1}
-
+                dragDecelerationFrictionCoef={0.8}
+                dragEnabled={true}
+                scaleEnabled={true}
+                scaleXEnabled={true}
+                scaleYEnabled={true}
               />
             </View>
           </TestCase>
         </TestSuite>
 
         <TestSuite name="horizontalBarChart 水平柱状图(drawGridBackground)">
-          <TestCase itShould="Props:drawGridBackground 是否设置网格背景颜色,gridBackgroundColor 设置网格背景颜色,如为false则在其他用例中均覆盖">
+          <TestCase itShould="Props:drawGridBackground 是否设置网格背景颜色,gridBackgroundColor：#4f4 设置网格背景颜色,如为false则在其他用例中均覆盖">
             <View style={{ width: '100%', height: 300 }}>
               <HorizontalBarChart
                 style={styles.chart}
@@ -103,7 +99,7 @@ const HorizontalBarChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="horizontalBarChart 水平柱状图(drawBorders)">
-          <TestCase itShould="Props:drawBorders 是否设置边框,borderColor 设置边框颜色，borderWidth 设置边框宽度 同一种需要一起设置">
+          <TestCase itShould="Props:drawBorders 是否设置边框,borderColor 设置边框颜色，borderWidth 设置边框宽度 同一种需要一起设置  drawBorders={true} borderWidth={4}">
             <View style={{ width: '100%', height: 300 }}>
               <HorizontalBarChart
                 style={styles.chart}
@@ -126,7 +122,7 @@ const HorizontalBarChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="horizontalBarChart 水平柱状图(minOffset)">
-          <TestCase itShould="Props:minOffset 设置最小偏移 图表偏移多少">
+          <TestCase itShould="Props:minOffset 设置最小偏移 图表偏移多少 minOffset={30}">
             <View style={{ width: '100%', height: 300 }}>
               <HorizontalBarChart
                 style={styles.chart}
@@ -146,50 +142,7 @@ const HorizontalBarChartDemo = () => {
           </TestCase>
         </TestSuite>
 
-        <TestSuite name="horizontalBarChart 水平柱状图(maxVisibleValueCount)">
-          <TestCase itShould="Props:maxVisibleValueCount(最大为30,数据最大44,不显示) 设置值的最大条目数量 需配合drawValues 设置值，如果值有任意超过设置的最大条目，则值不显示，反之显示">
-            <View style={{ width: '100%', height: 300 }}>
-              <HorizontalBarChart
-                style={styles.chart}
-                data={{
-                  dataSets: [
-                    {
-                      label: 'demo',
-                      values: data,
-                      config: { drawValues: true }
-                    },
-                  ],
-                }}
-
-                maxVisibleValueCount={30}
-
-              />
-            </View>
-          </TestCase>
-        </TestSuite>
-        <TestSuite name="horizontalBarChart 水平柱状图(maxVisibleValueCount) !!!">
-          <TestCase itShould="Props:maxVisibleValueCount(最大为50,数据最大44,不显示) 设置值的最大条目数量 需配合drawValues 设置值，如果值有任意超过设置的最大条目，则值不显示，反之显示">
-            <View style={{ width: '100%', height: 300 }}>
-            <HorizontalBarChart
-                style={styles.chart}
-                data={{
-                  dataSets: [
-                    {
-                      label: 'demo',
-                      values: data,
-                      config: {
-                        drawValues:true
-                      },
-                      
-                    },
-                  ],
-                  
-                }}
-                maxVisibleValueCount={70}
-              />
-            </View>
-          </TestCase>
-        </TestSuite>
+        
 
         
       </ScrollView>

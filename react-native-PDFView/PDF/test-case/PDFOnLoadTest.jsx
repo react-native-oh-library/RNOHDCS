@@ -20,8 +20,8 @@ export function PDFOnLoadTest() {
     <Tester>
       <ScrollView>
         <TestSuite name="Test onLoad">
-          <TestCase itShould="onLoad 加载完成之后onload变为true">
-            <Text>onLoad:{onLoadValue}</Text>
+          <TestCase itShould="onLoad 加载完成">
+            <Text>这里显示加载完成信息:{onLoadValue}</Text>
             <View style={{height: 500}}>
               <PDFView
                 style={{flex: 1}}

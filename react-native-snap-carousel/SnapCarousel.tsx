@@ -37,27 +37,27 @@ export default function SnapCarousel(): JSX.Element {
     {
       title: 'Beautiful and dramatic Antelope Canyon',
       subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
-      illustration: 'https://i.imgur.com/UYiroysl.jpg',
+      illustration: 'https://res.vmallres.com/uomcdn/CN/cms/202408/74b9fdbc2f6940cca4494f064d4ab278.jpg',
     },
     {
       title: 'Earlier this morning, NYC',
       subtitle: 'Lorem ipsum dolor sit amet',
-      illustration: 'https://i.imgur.com/UPrs1EWl.jpg',
+      illustration: 'https://res.vmallres.com/uomcdn/CN/cms/202408/74b9fdbc2f6940cca4494f064d4ab278.jpg',
     },
     {
       title: 'White Pocket Sunset',
       subtitle: 'Lorem ipsum dolor sit amet et nuncat ',
-      illustration: 'https://i.imgur.com/MABUbpDl.jpg',
+      illustration: 'https://res.vmallres.com/uomcdn/CN/cms/202408/74b9fdbc2f6940cca4494f064d4ab278.jpg',
     },
     {
       title: 'Acrocorinth, Greece',
       subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
-      illustration: 'https://i.imgur.com/KZsmUi2l.jpg',
+      illustration: 'https://res.vmallres.com/uomcdn/CN/cms/202408/74b9fdbc2f6940cca4494f064d4ab278.jpg',
     },
     {
       title: 'The lone tree, majestic landscape of New Zealand',
       subtitle: 'Lorem ipsum dolor sit amet',
-      illustration: 'https://i.imgur.com/2nCt3Sbl.jpg',
+      illustration: 'https://res.vmallres.com/uomcdn/CN/cms/202408/74b9fdbc2f6940cca4494f064d4ab278.jpg',
     },
   ];
 
@@ -65,6 +65,13 @@ export default function SnapCarousel(): JSX.Element {
     return (
       <View>
         <Image source={item.url} style={styles.image} />
+      </View>
+    );
+  };
+  const _renderItemOther = ({ item, index }: any) => {
+    return (
+      <View>
+        <Image source={item.url} style={styles.imageOther} />
       </View>
     );
   };
@@ -135,14 +142,18 @@ export default function SnapCarousel(): JSX.Element {
   const [apparitionDelayTime, setApparitionDelayTime] = useState<boolean>(true);
   const [currentIndex, setCurrentIndex] = useState<number>(1);
   const [beforeIndex, setBeforeIndex] = useState<number>(0);
+  const [scrollValue, setScrollValue] = useState<number>(0);
 
+  const showScroll = (e) => {
+    setScrollValue(e.timeStamp);
 
+  }
   return (
     <View style={styles.bootstrop}>
 
       <Tester>
         <ScrollView>
-          <TestCase itShould="基础属性 data renderItem sliderWidth sliderHeight itemWidth itemHeight">
+          <TestCase itShould="基础属性 data renderItem sliderWidth：300 sliderHeight：200 itemWidth：100 itemHeight：100">
             <Carousel
               data={ENTRIES1}
               renderItem={_renderItem}
@@ -151,6 +162,35 @@ export default function SnapCarousel(): JSX.Element {
               sliderHeight={200}
               itemHeight={100}
             />
+          </TestCase>
+          <TestCase itShould="基础属性 data renderItem sliderWidth：400 sliderHeight：300 itemWidth：150 itemHeight：150">
+            <Carousel
+              data={ENTRIES1}
+              renderItem={_renderItemOther}
+              sliderWidth={400}
+              itemWidth={150}
+              sliderHeight={300}
+              itemHeight={150}
+            />
+          </TestCase>
+          <TestCase itShould="onLayout" arrange={({ setState, reset }) => (
+            <View>
+              <Carousel
+                data={ENTRIES1}
+                renderItem={_renderItem}
+                sliderWidth={300}
+                itemWidth={100}
+                sliderHeight={200}
+                itemHeight={100}
+                onLayout={() => { setTimeout(() => { setState(true) }, 3000) }}
+
+              />
+            </View>
+          )}
+            assert={({ state, expect }) => {
+              expect(state).to.be.true;
+            }}>
+
           </TestCase>
           <TestCase itShould="loop loopClonesPerSide 无限循环" arrange={
             ({ setState }) => {
@@ -178,7 +218,7 @@ export default function SnapCarousel(): JSX.Element {
             }
           }>
           </TestCase>
-          <TestCase itShould="autoplay autoplayDelay 自动播放">
+          <TestCase itShould="autoplay自动播放 autoplayDelay启动时启用自动播放之前和释放触摸之后的延迟 2s">
             <Carousel
               data={ENTRIES1}
               renderItem={_renderItem}
@@ -187,7 +227,19 @@ export default function SnapCarousel(): JSX.Element {
               sliderHeight={200}
               itemHeight={100}
               autoplay={true}
-              autoplayDelay={1000}
+              autoplayDelay={2000}
+            />
+          </TestCase>
+          <TestCase itShould="autoplayInterval 导航至下一个项目所需的延迟 4s">
+            <Carousel
+              data={ENTRIES1}
+              renderItem={_renderItem}
+              sliderWidth={300}
+              itemWidth={100}
+              sliderHeight={200}
+              itemHeight={100}
+              autoplay={true}
+              autoplayInterval={4000}
             />
           </TestCase>
           <TestCase itShould="layout --- stack tinder" arrange={
@@ -214,7 +266,7 @@ export default function SnapCarousel(): JSX.Element {
             }
           }>
           </TestCase>
-          <TestCase itShould="layout 偏移量" arrange={
+          <TestCase itShould="layoutCardOffset 用于增加或减少“stack”和“tinder”布局中的默认卡片偏移量" arrange={
             ({ setState }) => {
               return (
                 <View>
@@ -287,7 +339,7 @@ export default function SnapCarousel(): JSX.Element {
             }
           }>
           </TestCase>
-          <TestCase itShould="containerCustomStyle">
+          <TestCase itShould="containerCustomStyle 全局包装器的可选样式 背景色#d6c00">
             <Carousel
               data={ENTRIES1}
               renderItem={_renderItem}
@@ -298,7 +350,29 @@ export default function SnapCarousel(): JSX.Element {
               containerCustomStyle={styles.carouselContainer}
             />
           </TestCase>
-          <TestCase itShould="slideStyle">
+          <TestCase itShould="containerCustomStyle 全局包装器的可选样式 背景色#000">
+            <Carousel
+              data={ENTRIES1}
+              renderItem={_renderItem}
+              sliderWidth={300}
+              itemWidth={100}
+              sliderHeight={200}
+              itemHeight={100}
+              containerCustomStyle={styles.carouselContainers}
+            />
+          </TestCase>
+          <TestCase itShould="contentContainerCustomStyle 项目容器的可选样式">
+            <Carousel
+              data={ENTRIES1}
+              renderItem={_renderItem}
+              sliderWidth={300}
+              itemWidth={100}
+              sliderHeight={200}
+              itemHeight={100}
+              contentContainerCustomStyle={styles.sliderContentContainer}
+            />
+          </TestCase>
+          <TestCase itShould="slideStyle 每个项目容器的可选样式 背景色red">
             <Carousel
               data={ENTRIES1}
               renderItem={_renderItem}
@@ -309,7 +383,18 @@ export default function SnapCarousel(): JSX.Element {
               slideStyle={styles.carouselContainerSlide}
             />
           </TestCase>
-          <TestCase itShould="scrollInterpolator slideInterpolatedStyle">
+          <TestCase itShould="slideStyle 每个项目容器的可选样式 背景色blue">
+            <Carousel
+              data={ENTRIES1}
+              renderItem={_renderItem}
+              sliderWidth={300}
+              itemWidth={100}
+              sliderHeight={200}
+              itemHeight={100}
+              slideStyle={styles.carouselContainerSlides}
+            />
+          </TestCase>
+          <TestCase itShould="scrollInterpolator用于定义自定义插值 slideInterpolatedStyle用于定义自定义插值">
             <Carousel
               data={ENTRIES1}
               renderItem={_renderItem}
@@ -319,10 +404,9 @@ export default function SnapCarousel(): JSX.Element {
               itemHeight={100}
               scrollInterpolator={_scrollInterpolator}
               slideInterpolatedStyle={_animatedStyles}
-              useScrollView={true}
             />
           </TestCase>
-          <TestCase itShould="vertical useScrollView" arrange={
+          <TestCase itShould="vertical 轮播图滚动方向" arrange={
             ({ setState }) => {
               return (
                 <View>
@@ -333,8 +417,7 @@ export default function SnapCarousel(): JSX.Element {
                     itemWidth={100}
                     sliderHeight={200}
                     itemHeight={100}
-                    useScrollView={true}
-                    vertical={verticalType}  // vertical = true  要配合useScrollView一起使用
+                    vertical={verticalType}
                   />
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Switch
@@ -347,7 +430,25 @@ export default function SnapCarousel(): JSX.Element {
             }
           }>
           </TestCase>
-          <TestCase itShould="inactiveSlideOpacity 透明效果">
+          <TestCase itShould="useScrollView 是否使用ScrollView组件代替默认FlatList组件 无明显效果" arrange={
+            ({ setState }) => {
+              return (
+                <View>
+                  <Carousel
+                    data={ENTRIES1}
+                    renderItem={_renderItem}
+                    sliderWidth={300}
+                    itemWidth={100}
+                    sliderHeight={200}
+                    itemHeight={100}
+                    useScrollView={true}
+                  />
+                </View>
+              )
+            }
+          }>
+          </TestCase>
+          <TestCase itShould="inactiveSlideOpacity 透明效果0.2">
             <Carousel
               data={ENTRIES1}
               renderItem={_renderItem}
@@ -358,7 +459,18 @@ export default function SnapCarousel(): JSX.Element {
               inactiveSlideOpacity={0.2}
             />
           </TestCase>
-          <TestCase itShould="inactiveSlideScale 缩放效果">
+          <TestCase itShould="inactiveSlideOpacity 透明效果0.5">
+            <Carousel
+              data={ENTRIES1}
+              renderItem={_renderItem}
+              sliderWidth={300}
+              itemWidth={100}
+              sliderHeight={200}
+              itemHeight={100}
+              inactiveSlideOpacity={0.5}
+            />
+          </TestCase>
+          <TestCase itShould="inactiveSlideScale 缩放效果0.5">
             <Carousel
               data={ENTRIES1}
               renderItem={_renderItem}
@@ -369,7 +481,18 @@ export default function SnapCarousel(): JSX.Element {
               inactiveSlideScale={0.5}
             />
           </TestCase>
-          <TestCase itShould="layout 布局为default时候 轮播效果的偏移量">
+          <TestCase itShould="inactiveSlideScale 缩放效果0.7">
+            <Carousel
+              data={ENTRIES1}
+              renderItem={_renderItem}
+              sliderWidth={300}
+              itemWidth={100}
+              sliderHeight={200}
+              itemHeight={100}
+              inactiveSlideScale={0.7}
+            />
+          </TestCase>
+          <TestCase itShould="inactiveSlideShift轮播效果的偏移量 layout布局为default生效">
             <Carousel
               data={ENTRIES1}
               renderItem={_renderItem}
@@ -392,7 +515,7 @@ export default function SnapCarousel(): JSX.Element {
               activeSlideAlignment={'end'}
             />
           </TestCase>
-          <TestCase itShould="firstItem 默认要展示的轮播图的索引">
+          <TestCase itShould="firstItem 默认要展示的轮播图的索引 2">
             <Carousel
               data={ENTRIES1}
               renderItem={_renderItem}
@@ -403,7 +526,8 @@ export default function SnapCarousel(): JSX.Element {
               firstItem={2}
             />
           </TestCase>
-          <TestCase itShould="enableMomentum //手指滑动轮播的缓冲效果" arrange={
+          {/* ios效果不明显 */}
+          <TestCase itShould="enableMomentum 手指滑动轮播的缓冲效果" arrange={
             ({ setState }) => {
               return (
                 <View>
@@ -428,7 +552,7 @@ export default function SnapCarousel(): JSX.Element {
             }
           }>
           </TestCase>
-          <TestCase itShould="activeSlideOffset  从滑块中心滑动距离 才可以滚动">
+          <TestCase itShould="activeSlideOffset  从滑块中心滑动距离才可以滚动 ----  50">
             <Carousel
               data={ENTRIES1}
               renderItem={_renderItem}
@@ -437,6 +561,17 @@ export default function SnapCarousel(): JSX.Element {
               sliderHeight={200}
               itemHeight={100}
               activeSlideOffset={50}
+            />
+          </TestCase>
+          <TestCase itShould="activeSlideOffset  从滑块中心滑动距离才可以滚动 ----  100">
+            <Carousel
+              data={ENTRIES1}
+              renderItem={_renderItem}
+              sliderWidth={300}
+              itemWidth={100}
+              sliderHeight={200}
+              itemHeight={100}
+              activeSlideOffset={100}
             />
           </TestCase>
           {/* 固定值 只接受初始化值   不建议在Android上使用'apparitionDelay'，因为它可能导致渲染问题*/}
@@ -451,7 +586,40 @@ export default function SnapCarousel(): JSX.Element {
               apparitionDelay={5000}
             />
           </TestCase>
-          <TestCase itShould="swipeThreshold 滑动阈值 以自身为开始点">
+          <TestCase itShould="shouldOptimizeUpdates：false 是否实施shouldComponentUpdate最小化更新策略 无明显效果">
+            <Carousel
+              data={ENTRIES1}
+              renderItem={_renderItem}
+              sliderWidth={300}
+              itemWidth={100}
+              sliderHeight={300}
+              itemHeight={100}
+              shouldOptimizeUpdates={false}
+            />
+          </TestCase>
+          <TestCase itShould="shouldOptimizeUpdates：true 是否实施shouldComponentUpdate最小化更新策略 无明显效果">
+            <Carousel
+              data={ENTRIES1}
+              renderItem={_renderItem}
+              sliderWidth={300}
+              itemWidth={100}
+              sliderHeight={300}
+              itemHeight={100}
+              shouldOptimizeUpdates={true}
+            />
+          </TestCase>
+          <TestCase itShould="swipeThreshold 滑动阈值 以自身为开始点 50">
+            <Carousel
+              data={ENTRIES1}
+              renderItem={_renderItem}
+              sliderWidth={300}
+              itemWidth={100}
+              sliderHeight={300}
+              itemHeight={100}
+              swipeThreshold={50}
+            />
+          </TestCase>
+          <TestCase itShould="swipeThreshold 滑动阈值 以自身为开始点 100">
             <Carousel
               data={ENTRIES1}
               renderItem={_renderItem}
@@ -472,8 +640,7 @@ export default function SnapCarousel(): JSX.Element {
               hasParallaxImages={true}
             />
           </TestCase>
-          {/* 不支持 */}
-          <TestCase itShould="lockScrollWhileSnapping lockScrollTimeoutDuration  轮播滚动时 点击轮播图 动画效果停止">
+          <TestCase itShould="lockScrollWhileSnapping lockScrollTimeoutDuration  防止用户在轮播捕捉到某个位置时再次滑动">
             <Carousel
               data={ENTRIES1}
               renderItem={_renderItem}
@@ -482,11 +649,25 @@ export default function SnapCarousel(): JSX.Element {
               sliderHeight={200}
               itemHeight={100}
               lockScrollWhileSnapping={true}
-              lockScrollTimeoutDuration={1000}
+              lockScrollTimeoutDuration={5000}
             />
           </TestCase>
-          {/* 没效果 */}
-          <TestCase itShould="activeAnimationType 自定义动画">
+          <TestCase itShould="activeAnimationType自定义动画类型spring activeAnimationOptions自定义动画">
+            <Carousel
+              data={ENTRIES1}
+              renderItem={_renderItem}
+              sliderWidth={300}
+              itemWidth={100}
+              sliderHeight={200}
+              itemHeight={100}
+              activeAnimationType={'spring'}
+              activeAnimationOptions={{
+                friction: 4,
+                tension: 40
+              }}
+            />
+          </TestCase>
+          <TestCase itShould="activeAnimationType自定义动画类型decay activeAnimationOptions自定义动画">
             <Carousel
               data={ENTRIES1}
               renderItem={_renderItem}
@@ -495,11 +676,15 @@ export default function SnapCarousel(): JSX.Element {
               sliderHeight={200}
               itemHeight={100}
               activeAnimationType={'decay'}
-              activeAnimationOptions={null}
+              activeAnimationOptions={{
+                velocity: 0.2,
+                deceleration: 0.2,
+                isInteraction: false,
+                useNativeDriver: true
+              }}
             />
           </TestCase>
-          {/* 没效果 */}
-          <TestCase itShould="activeAnimationOptions 自定义动画">
+          <TestCase itShould="callbackOffsetMargin 增加的小边距 处理滚动不精确的问题 无明显效果">
             <Carousel
               data={ENTRIES1}
               renderItem={_renderItem}
@@ -507,10 +692,10 @@ export default function SnapCarousel(): JSX.Element {
               itemWidth={100}
               sliderHeight={200}
               itemHeight={100}
-              activeAnimationOptions={null}
+              callbackOffsetMargin={10}
             />
           </TestCase>
-          <TestCase itShould="callbackOffsetMargin  events  onScroll">
+          <TestCase itShould="onScroll">
             <Carousel
               data={ENTRIES1}
               renderItem={_renderItem}
@@ -518,10 +703,14 @@ export default function SnapCarousel(): JSX.Element {
               itemWidth={100}
               sliderHeight={200}
               itemHeight={100}
-              onScroll={() => { }}
+              onScroll={(e) => { showScroll(e) }}
             />
+            <View style={{ flexDirection: 'row', alignItems: 'center', paddingBottom: 20 }}>
+              <Text> {`正在滚动${scrollValue}`}</Text>
+            </View>
+1
           </TestCase>
-          <TestCase itShould="events onSnapToItem" arrange={
+          <TestCase itShould="onSnapToItem" arrange={
             ({ setState }) => {
               return (
                 <View>
@@ -543,7 +732,7 @@ export default function SnapCarousel(): JSX.Element {
           }>
 
           </TestCase>
-          <TestCase itShould="events onBeforeSnapToItem" arrange={
+          <TestCase itShould="onBeforeSnapToItem" arrange={
             ({ setState }) => {
               return (
                 <View>
@@ -564,17 +753,6 @@ export default function SnapCarousel(): JSX.Element {
             }
           }>
 
-          </TestCase>
-          <TestCase itShould="events onLayout">
-            <Carousel
-              data={ENTRIES1}
-              renderItem={_renderItem}
-              sliderWidth={300}
-              itemWidth={100}
-              sliderHeight={200}
-              itemHeight={100}
-              onLayout={() => { console.log('------onLayout-----') }}
-            />
           </TestCase>
         </ScrollView>
       </Tester >
@@ -629,10 +807,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   carouselContainer: {
-    // width: '100%',
-    // marginBottom: 20,
     backgroundColor: '#ed6c00',
     flex: 1,
+  },
+  carouselContainers: {
+    backgroundColor: '#000',
+    flex: 1,
+  },
+  sliderContentContainer: {
+    paddingVertical: 10 // for custom animation
   },
   image: {
     resizeMode: 'cover',
@@ -641,21 +824,34 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
   },
+  imageOther: {
+    resizeMode: 'cover',
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+    width: 150,
+    height: 150,
+  },
   carouselContainerSlide: {
     backgroundColor: 'red',
   },
+  carouselContainerSlides: {
+    backgroundColor: 'blue',
+  },
   item: {
-    width: screenWidth - 60,
-    height: screenWidth - 60,
+    width: screenWidth - 100,
+    height: screenWidth - 100,
   },
   imageContainer: {
     flex: 1,
     marginBottom: Platform.select({ ios: 0, android: 1 }), // Prevent a random Android rendering issue
     backgroundColor: 'white',
     borderRadius: 8,
+    height: screenWidth - 100,
   },
   parallaxImage: {
     ...StyleSheet.absoluteFillObject,
     resizeMode: 'cover',
+    width: 200,
+    height: 200,
   }
 });

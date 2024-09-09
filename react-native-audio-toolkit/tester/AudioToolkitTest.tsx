@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Button, PermissionsAndroid, Platform, SafeAreaView, StyleSheet, Switch, Systrace, Text, View, InteractionManager, ScrollView } from 'react-native';
-import { Player, Recorder, MediaStates } from '@react-native-community/audio-toolkit';
+import { Button, PermissionsAndroid, Platform, StyleSheet, Switch, Text, View, ScrollView } from 'react-native';
+import { Player, Recorder,MediaStates} from '@react-native-community/audio-toolkit';
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
-import noop from 'lodash/noop';
+import RTNPermissions, {RESULTS} from "@react-native-oh-tpl/react-native-permissions";
 
 const filename = 'test.mp4';
 
@@ -34,7 +34,7 @@ type State = {
   error: string | null
 };
 
-export default class App extends Component<Props, State> {
+export default class AudioToolkitTest extends Component<Props, State> {
   player: Player | null = null;
   netPlayer: Player | null = null;
   recorder: Recorder | null = null;
@@ -44,6 +44,7 @@ export default class App extends Component<Props, State> {
   recorderChannels: number = 2;
   audioBitrate: number = 48000;
   audioSampleRate: number = 48000;
+  format:string = '';
 
   constructor(props: Props) {
     super(props);
@@ -148,7 +149,6 @@ export default class App extends Component<Props, State> {
       autoDestroy: false
     }).prepare((err) => {
       if (err) {
-        console.log('error at _reloadPlayer():');
         console.log(err);
       } else {
         if (this.player) {
@@ -202,6 +202,7 @@ export default class App extends Component<Props, State> {
       bitrate: this.audioBitrate,
       channels: this.recorderChannels,
       sampleRate: this.audioSampleRate,
+      format: this.format,
       quality: 'max'
     });
 
@@ -209,6 +210,12 @@ export default class App extends Component<Props, State> {
   }
 
   _toggleRecord() {
+    if (this.recorder && this.recorder.state === MediaStates.PAUSED) {
+      this.recorder?.record((err) => {
+        this._updateState();
+      })
+      return
+    }
     if (this.player) {
       this.player.destroy();
     }
@@ -216,6 +223,8 @@ export default class App extends Component<Props, State> {
     let recordAudioRequest;
     if (Platform.OS == 'android') {
       recordAudioRequest = this._requestRecordAudioPermission();
+    } else if (Platform.OS === 'harmony') {
+      recordAudioRequest = this._requestRecordAudioPermissionHs();
     } else {
       recordAudioRequest = new Promise(function (resolve, reject) { resolve(true); });
     }
@@ -240,6 +249,20 @@ export default class App extends Component<Props, State> {
         this._updateState();
       });
     });
+  }
+    
+  async _requestRecordAudioPermissionHs() {
+    try {
+      let check = await RTNPermissions.request('ohos.permission.MICROPHONE');
+      if (check === RESULTS.GRANTED) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
   }
 
   async _requestRecordAudioPermission() {
@@ -394,10 +417,29 @@ export default class App extends Component<Props, State> {
                   onValueChange={(value) => this._recorderChannel(value)}
                   value={this.state.isRecorderChannelTwo}
                 />
-                <Text>Toggle play Background</Text>
+                <Text>Toggle recorder channels</Text>
               </TestCase>
             </TestSuite>
           </View>
+
+          <TestSuite name="audio recorder set fileFormat">
+              <TestCase itShould='test fileFormat'>
+                <View style={styles.settingsSpeed}>
+                  <View style={styles.buttonStyle}>
+                    <Button title={'mp4'} onPress={() => {
+                     this.format = 'mp4';
+                     this._reloadRecorder();
+                    }} />
+                  </View>
+                  <View style={styles.buttonStyle}>
+                    <Button title={'m4a'} onPress={() => {
+                      this.format = 'm4a';
+                      this._reloadRecorder();
+                    }} />
+                  </View>
+                </View>
+              </TestCase>
+            </TestSuite>
 
           <View>
             <TestSuite name="audio record or stop Test">
@@ -434,7 +476,6 @@ export default class App extends Component<Props, State> {
                 </TestCase>
               </TestSuite>
             </View>
-
 
             <TestSuite name="audio play autoDestroy">
               <TestCase itShould='test play autoDestroy'

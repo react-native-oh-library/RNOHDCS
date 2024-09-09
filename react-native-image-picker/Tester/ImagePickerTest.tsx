@@ -188,7 +188,6 @@ export const ImagePickerTest = () => {
                             expect(state).to.be.true;
                         }}
                     />
-
                     <TestCase
                         key={"getInitStatus_5"}
                         itShould={`launchImageLibrary:includeBase64: creates base64 string of the image`}
@@ -196,6 +195,8 @@ export const ImagePickerTest = () => {
                         initialState={false}
                         arrange={({ setState }) => {
                             const [urlInfo, setUrlInfo] = React.useState<string>();
+                            const [isBase64, setIsBase64] = React.useState<boolean>(true);
+
 
                             return (
                                 <View style={{ marginTop: 100, minHeight: 120 }} >
@@ -208,7 +209,7 @@ export const ImagePickerTest = () => {
                                             paddingVertical: 8,
                                             borderRadius: 8
                                         }} onTouchEnd={() => {
-                                            launchImageLibrary({ mediaType: 'photo', includeBase64: true }, (data) => {
+                                            launchImageLibrary({ mediaType: 'photo', includeBase64: isBase64 }, (data) => {
                                                 if (data.assets?.length) {
                                                     setUrlInfo(JSON.stringify(data.assets))
                                                 }
@@ -218,6 +219,9 @@ export const ImagePickerTest = () => {
                                                 setState(true)
                                             }}>选择</Text>
                                         </View>
+                                        <Text style={{ width: 160, height: 34, borderRadius: 8, backgroundColor: 'hsl(190,50%,70%)', lineHeight: 28, marginTop: 10, fontWeight: 'bold', textAlign: 'center' }} onPress={() => {
+                                            setIsBase64(!isBase64)
+                                        }}>{isBase64 + ''}</Text>
                                         <Text style={{ color: 'black', width: 260, minHeight: 200, overflow: 'hidden' }}>{urlInfo?.substring(0, 300) + '...'}</Text>
                                     </View>
                                 </View>
@@ -229,45 +233,6 @@ export const ImagePickerTest = () => {
                     />
                     <TestCase
                         key={"getInitStatus_6"}
-                        itShould={`launchCamera:saveToPhotos saves the image/video file captured to public photo`}
-                        tags={['C_API']}
-                        initialState={false}
-                        arrange={({ setState }) => {
-                            const [urlInfo, setUrlInfo] = React.useState<string>();
-
-                            return (
-                                <View style={{ marginTop: 100, minHeight: 120 }} >
-                                    <View >
-                                        <View style={{
-                                            width: 160,
-                                            height: 36,
-                                            backgroundColor: 'hsl(190,50%,70%)',
-                                            paddingHorizontal: 16,
-                                            paddingVertical: 8,
-                                            borderRadius: 8
-                                        }} onTouchEnd={() => {
-                                            launchCamera({ mediaType: 'photo', saveToPhotos: true }, (data) => {
-                                                if (data.assets?.length) {
-                                                    setUrlInfo(data.assets[0].uri)
-                                                }
-                                            })
-                                        }}>
-                                            <Text style={{ width: 160, height: '100%', fontWeight: 'bold', textAlign: 'center' }} onPress={() => {
-                                                setState(true)
-                                            }}>选择</Text>
-                                        </View>
-                                        <Text style={{ color: 'black', width: 560 }}>{urlInfo}</Text>
-
-                                    </View>
-                                </View>
-                            );
-                        }}
-                        assert={async ({ expect, state }) => {
-                            expect(state).to.be.true;
-                        }}
-                    />
-                    <TestCase
-                        key={"getInitStatus_7"}
                         itShould={`launchImageLibrary:selectionLimit Optional number of pictures`}
                         tags={['C_API']}
                         initialState={false}
@@ -311,9 +276,8 @@ export const ImagePickerTest = () => {
                             expect(state).to.be.true;
                         }}
                     />
-
                     <TestCase
-                        key={"getInitStatus_8"}
+                        key={"getInitStatus_7"}
                         itShould={`launchImageLibrary:Returned Asset Object`}
                         tags={['C_API']}
                         initialState={false}
