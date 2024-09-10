@@ -63,9 +63,35 @@ export function NewTabViewExample() {
     </View>
   );
 
+  const FourthRoute = () => (
+    <View style={{ flex: 1, backgroundColor: '#38e0f2' }}>
+      <Text
+        style={{
+          width: "100%",
+          height: "100%",
+          fontWeight: "bold",
+        }}
+      >
+        {swipeStr}
+      </Text>
+    </View>
+  );
+
   const renderLazyPlaceholder = () => (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Loading...</Text>
+    </View>
+  );
+  const renderLazyPlaceholderNone = () => (
+    <View style={{ flex: 1, backgroundColor: '#38e0f2' }}>
+      <Text
+        style={{
+          width: "100%",
+          height: "100%",
+          fontWeight: "bold",
+        }}
+      >
+      </Text>
     </View>
   );
 
@@ -73,8 +99,16 @@ export function NewTabViewExample() {
   const renderScene = SceneMap({
     first: FirstRoute,
     second: SecondRoute,
-    third:ThirdRoute,
+    third: ThirdRoute,
+    fourth:FourthRoute
   });
+
+  const getLabel = (route: {
+    key: string;
+    title: string;
+  }) => {
+    return route.title
+  }
 
   const renderTabBar = (
     props: SceneRendererProps & { navigationState: State }
@@ -86,21 +120,19 @@ export function NewTabViewExample() {
       style={styles.tabbar}
       labelStyle={styles.label}
       tabStyle={styles.tabStyle}
-      getLabelText={({ route }) =>  route.title}
-      getAccessible={({route}) =>  true}
-      getAccessibilityLabel={({route}) => route.title}
-      renderIcon={({ route }) =>  route.title}
+      getLabelText={({ route }) => getLabel(route)}
+      getAccessible={({ route }) => true}
+      getAccessibilityLabel={({ route }) => route.title}
+      renderIcon={({ route }) => route.title}
       // renderLabel={({ route }) =>  route.title}
       onTabPress={onTabPress}
       onTabLongPress={onTabLongPress}
       activeColor={activeColor}
       inactiveColor={inactiveColor}
       pressOpacity={pressOpacity}
-      indicatorContainerStyle={{backgroundColor:'white'}}
-      contentContainerStyle={{backgroundColor:'white'}}
+      indicatorContainerStyle={{ backgroundColor: 'white' }}
+      contentContainerStyle={{ backgroundColor: 'white' }}
       gap={gap}
-      pressColor={'#ff0000'}
-      bounces={true}
     >
     </TabBar>
   );
@@ -109,6 +141,7 @@ export function NewTabViewExample() {
     { key: "first", title: "First" },
     { key: "second", title: "Second" },
     { key: "third", title: "Third" },
+    { key: "fourth", title: "Fourth" },
   ]);
 
   const onSwipeStart = () => {
@@ -128,12 +161,12 @@ export function NewTabViewExample() {
   }
 
   // 初始布局
-  const initialLayout = { width: 200 }
+  const initialLayout = { width: 200,height:500  }
 
   const [index, setIndex] = React.useState(0);
   const [showRenderTabBar, setShowRenderTabBar] = React.useState(true);
   const [showTabBar, setShowTabBar] = React.useState('top');
-  const [showLazy, setshowLazy] = React.useState(false);
+  const [showLazy, setshowLazy] = React.useState(true);
   const [preload, setPreload] = React.useState(0);
   const [boardDismiss, setBoardDismiss] = React.useState('auto');
   const [showSwipeEnabled, setShowSwipeEnabled] = React.useState(true);
@@ -151,11 +184,11 @@ export function NewTabViewExample() {
     <View style={{ flex: 1 }}>
       <Tester>
         <TestSuite name={'TabViewTest'}>
-          <TestCase itShould={'TabView renderScene'}>
+          <TestCase itShould={'TabView show'}>
             <View style={{
               padding: 0,
               margin: 0,
-              width: '100%',
+              width: 350,
               height: 200,
             }}>
               <TabView
@@ -172,7 +205,7 @@ export function NewTabViewExample() {
                 tabBarPosition={showTabBar === 'top' ? 'top' : 'bottom'}
                 lazy={showLazy}
                 lazyPreloadDistance={preload}
-                renderLazyPlaceholder={showLazy == true ? renderLazyPlaceholder : undefined}
+                renderLazyPlaceholder={showLazy == true ? renderLazyPlaceholder : renderLazyPlaceholderNone}
                 keyboardDismissMode={boardDismiss == 'auto' ? 'auto' : (boardDismiss == 'none' ? 'none' : 'on-drag')}
                 swipeEnabled={showSwipeEnabled}
                 animationEnabled={animation}
@@ -187,112 +220,147 @@ export function NewTabViewExample() {
         </TestSuite>
       </Tester>
 
-      <ScrollView style={{ height: 2000 }} bounces={false}>
+      <ScrollView bounces={false}>
+        <Tester>
+          <TestSuite name={'TabViewTest'}>
+            <TestCase itShould={'TabView renderTabBar'}>
+              <View style={styles.flex_row} >
+                <Text style={{ flex: 0.25 }}>renderTabBar:{showRenderTabBar}</Text>
+                <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setShowRenderTabBar(true); }} >设置renderTabBar</Text>
+                <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setShowRenderTabBar(false); }} >关闭renderTabBar</Text>
+              </View>
+            </TestCase>
+          </TestSuite>
 
-        <View style={styles.flex_row} >
-          <Text style={{ flex: 0.25 }}>renderTabBar:{showRenderTabBar}</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setShowRenderTabBar(true); }} >设置renderTabBar</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setShowRenderTabBar(false); }} >关闭renderTabBar</Text>
-        </View>
+          <TestCase itShould={'TabView tabBarPosition'}>
+            <View style={styles.flex_row} >
+              <Text style={{ flex: 0.25 }}>tabBarPosition:{showTabBar}</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setShowTabBar('top'); }} >top</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setShowTabBar('bottom'); }} >bottom</Text>
+            </View>
+          </TestCase>
 
-        <View style={styles.flex_row} >
-          <Text style={{ flex: 0.25 }}>tabBarPosition:{showTabBar}</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setShowTabBar('top'); }} >top</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setShowTabBar('bottom'); }} >bottom</Text>
-        </View>
+          <TestCase itShould={'TabView lazy'}>
+            <View style={styles.flex_row} >
+              <Text style={{ flex: 0.25 }}>lazy:{showLazy.toString()}</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setshowLazy(true); }} >true</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setshowLazy(false); }} >false</Text>
+            </View>
+          </TestCase>
 
-        <View style={styles.flex_row} >
-          <Text style={{ flex: 0.25 }}>lazy:{showLazy.toString()}</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setshowLazy(true); }} >true</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setshowLazy(false); }} >false</Text>
-        </View>
+          <TestCase itShould={'TabView lazyPreloadDistance'}>
+            <View style={styles.flex_row} >
+              <Text style={{ flex: 0.25 }}>lazyPreloadDistance:{preload}</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setPreload(0); }} >0</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setPreload(1); }} >1</Text>
+            </View>
+          </TestCase>
 
-        <View style={styles.flex_row} >
-          <Text style={{ flex: 0.25 }}>lazyPreloadDistance:{preload}</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setPreload(0); }} >0</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setPreload(1); }} >1</Text>
-        </View>
+          <TestCase itShould={'TabView keyboardDismissMode'}>
+            <View style={styles.flex_row} >
+              <Text style={{ flex: 0.25 }}>keyboardDismissMode:{boardDismiss}</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setBoardDismiss('auto'); }} >auto</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setBoardDismiss('none'); }} >none</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setBoardDismiss('on-drag'); }} >on-drag</Text>
+              <TextInput style={styles.input}></TextInput>
+            </View>
+          </TestCase>
 
-        <View style={styles.flex_row} >
-          <Text style={{ flex: 0.25 }}>keyboardDismissMode:{boardDismiss}</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setBoardDismiss('auto'); }} >auto</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setBoardDismiss('none'); }} >none</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setBoardDismiss('on-drag'); }} >on-drag</Text>
-          <TextInput style={styles.input}></TextInput>
-        </View>
+          <TestCase itShould={'TabView swipeEnabled'}>
+            <View style={styles.flex_row} >
+              <Text style={{ flex: 0.25 }}>swipeEnabled:{showSwipeEnabled.toString()}</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setShowSwipeEnabled(true); }} >true</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setShowSwipeEnabled(false); }} >false</Text>
+            </View>
+          </TestCase>
 
-        <View style={styles.flex_row} >
-          <Text style={{ flex: 0.25 }}>swipeEnabled:{showSwipeEnabled.toString()}</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setShowSwipeEnabled(true); }} >true</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setShowSwipeEnabled(false); }} >false</Text>
-        </View>
+          <TestCase itShould={'TabView animationEnabled'}>
+            <View style={styles.flex_row} >
+              <Text style={{ flex: 0.25 }}>animationEnabled:{animation.toString()}</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setAnimation(true); }} >true</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setAnimation(false); }} >false</Text>
+            </View>
+          </TestCase>
 
-        <View style={styles.flex_row} >
-          <Text style={{ flex: 0.25 }}>animationEnabled:{animation.toString()}</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setAnimation(true); }} >true</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setAnimation(false); }} >false</Text>
-        </View>
+          <TestCase itShould={'TabView sceneContainerStyle'}>
+            <View style={styles.flex_row} >
+              <Text style={{ flex: 0.25 }}>sceneContainerStyle:{sceneContainer}</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setSceneContainer(100); }} >100</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setSceneContainer(200); }} >200</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setSceneContainer(350); }} >350</Text>
+            </View>
+          </TestCase>
 
-        <View style={styles.flex_row} >
-          <Text style={{ flex: 0.25 }}>initialLayout:{initial.toString()}</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setInitial(true); }} >true</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setInitial(false); }} >false</Text>
-        </View>
+          <TestCase itShould={'TabView activeColor'}>
+            <View style={styles.flex_row} >
+              <Text style={{ flex: 0.25 }}>activeColor:{activeColor}</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setActiveColor('red'); }} >red</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setActiveColor('purple'); }} >purple</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setActiveColor('orange'); }} >orange</Text>
+            </View>
+          </TestCase>
 
-        <View style={styles.flex_row} >
-          <Text style={{ flex: 0.25 }}>overScrollMode:{overScroll}</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setOverScroll('auto'); }} >auto</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setOverScroll('never'); }} >never</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setOverScroll('always'); }} >always</Text>
-        </View>
+          <TestCase itShould={'TabView inactiveColor'}>
+            <View style={styles.flex_row} >
+              <Text style={{ flex: 0.25 }}>inactiveColor:{inactiveColor}</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setInactiveColor('pink'); }} >pink</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setInactiveColor('white'); }} >white</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setInactiveColor('skyblue'); }} >skyblue</Text>
+            </View>
+          </TestCase>
 
-        <View style={styles.flex_row} >
-          <Text style={{ flex: 0.25 }}>sceneContainerStyle:{sceneContainer}</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setSceneContainer(100); }} >100</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setSceneContainer(200); }} >200</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setSceneContainer(350); }} >350</Text>
-        </View>
+          <TestCase itShould={'TabView pressOpacity'}>
+            <View style={styles.flex_row} >
+              <Text style={{ flex: 0.25 }}>pressOpacity:{pressOpacity}</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setPressOpacity(0); }} >0</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setPressOpacity(0.5); }} >0.5</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setPressOpacity(1); }} >1</Text>
+            </View>
+          </TestCase>
 
-        <View style={styles.flex_row} >
-          <Text style={{ flex: 0.25 }}>activeColor:{activeColor}</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setActiveColor('red'); }} >red</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setActiveColor('purple'); }} >purple</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setActiveColor('orange'); }} >orange</Text>
-        </View>
+          <TestCase itShould={'TabView scrollEnabled'}>
+            <View style={styles.flex_row} >
+              <Text style={{ flex: 0.25 }}>scrollEnabled:{scrollEnabled.toString()}</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setScrollEnabled(true); }} >true</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setScrollEnabled(false); }} >false</Text>
+            </View>
+          </TestCase>
 
-        <View style={styles.flex_row} >
-          <Text style={{ flex: 0.25 }}>inactiveColor:{inactiveColor}</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setInactiveColor('pink'); }} >pink</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setInactiveColor('white'); }} >white</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setInactiveColor('skyblue'); }} >skyblue</Text>
-        </View>
+          <TestCase itShould={'TabView gap'}>
+            <View style={styles.flex_row} >
+              <Text style={{ flex: 0.25 }}>gap:{gap}</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setGap(0); }} >0</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setGap(10); }} >10</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setGap(20); }} >20</Text>
+            </View>
+          </TestCase>
 
-        <View style={styles.flex_row} >
-          <Text style={{ flex: 0.25 }}>pressOpacity:{pressOpacity}</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setPressOpacity(0); }} >0</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setPressOpacity(0.5); }} >0.5</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setPressOpacity(1); }} >1</Text>
-        </View>
+          <TestCase itShould={'TabView onSwipeStart'}>
+            <View style={styles.flex_row} >
+              <Text style={{ backgroundColor: "orange", flex: 0.25 }}  >onSwipeStart</Text>
+            </View>
+          </TestCase>
 
-        <View style={styles.flex_row} >
-          <Text style={{ flex: 0.25 }}>scrollEnabled:{scrollEnabled.toString()}</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setScrollEnabled(true); }} >true</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setScrollEnabled(false); }} >false</Text>
-        </View>
+          <TestCase itShould={'TabView onSwipeEnd'}>
+            <View style={styles.flex_row} >
+              <Text style={{ backgroundColor: "orange", flex: 0.25 }}  >onSwipeEnd</Text>
+            </View>
+          </TestCase>
 
-        <View style={styles.flex_row} >
-          <Text style={{ flex: 0.25 }}>gap:{gap}</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setGap(0); }} >0</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setGap(10); }} >10</Text>
-          <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setGap(20); }} >20</Text>
-        </View>
+          <TestCase itShould={'TabView onTabPress'}>
+            <View style={styles.flex_row} >
+              <Text style={{ backgroundColor: "orange", flex: 0.25 }}  >onTabPress</Text>
+            </View>
+          </TestCase>
 
-
+          <TestCase itShould={'TabView onTabLongPress'}>
+            <View style={styles.flex_row} >
+              <Text style={{ backgroundColor: "orange", flex: 0.25 }}  >onTabLongPress</Text>
+            </View>
+          </TestCase>
+        </Tester>
       </ScrollView>
     </View>
-
-
-
   );
 }
 
@@ -318,6 +386,7 @@ const styles = StyleSheet.create({
   tabStyle: {
     height: 65,
     width: 175,
+    backgroundColor: "pink",
   },
   sceneContainer: {
     width: 150,
