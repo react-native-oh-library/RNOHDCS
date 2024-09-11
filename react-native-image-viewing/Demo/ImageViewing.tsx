@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import {
   Alert,
@@ -8,14 +7,13 @@ import {
   StyleSheet,
   Text,
   View,
-  Image, ScrollView, TouchableOpacity,Button
+  Image, ScrollView, TouchableOpacity
 } from "react-native";
 import memoize from "lodash/memoize";
-import get from "lodash/get";
 import ImageViewing from "react-native-image-viewing";
-import ImageHeader from './components/ImageHeader'
-import ImageFooter from './components/ImageFooter'
-import {ImageSource} from "react-native-image-viewing/dist/@types"
+import { ImageSource } from "react-native-image-viewing/dist/@types";
+import ImageHeader from '../tests/Image-viewing/components/ImageHeader'
+import ImageFooter from '../tests/Image-viewing/components/ImageFooter'
 
 type Props = {
   images: string[];
@@ -28,32 +26,39 @@ const IMAGE_HEIGH = 120;
 
 const architecture = [
   {
-    thumbnail: require('./architecture.jpg'),
-    original: require('./architecture.jpg'),
+    thumbnail: "https://img.zcool.cn/community/01d191576ccecb0000018c1b64e382.jpg@1280w_1l_2o_100sh.jpg",
+    original: "https://img.zcool.cn/community/01d191576ccecb0000018c1b64e382.jpg@1280w_1l_2o_100sh.jpg",
   },
   {
-    thumbnail: require('./222.jpg'),
-    original: require('./222.jpg'),
+    thumbnail: "https://p0.ssl.qhimgs1.com/sdr/400__/t0461b1cfd7e4ef2b66.jpg",
+    original: "https://p0.ssl.qhimgs1.com/sdr/400__/t0461b1cfd7e4ef2b66.jpg",
+  },
+  {
+    thumbnail: "https://p0.ssl.qhimgs1.com/sdr/400__/t017c44dc545b663cce.jpg",
+    original: "https://p0.ssl.qhimgs1.com/sdr/400__/t017c44dc545b663cce.jpg",
   }
 ];
 
-
-
 const ImageList = ({ images, shift = 0, onPress }: Props) => (
-  <View
+  <ScrollView
+    horizontal
     style={styles1.root}
+    contentOffset={{ x: shift * IMAGE_WIDTH, y: 0 }}
+    contentContainerStyle={styles1.container}
   >
     {images.map((imageUrl, index) => (
       <TouchableOpacity
         style={styles1.button}
         key={`${imageUrl}_${index}`}
         activeOpacity={0.8}
-        onPress={() => {onPress(index)}}
+        onPress={() => onPress(index)}
       >
-        <Image source={ imageUrl } key={`${index}`} doubleTapToZoomEnabled={true} style={styles1.image} />
+        {
+          typeof imageUrl === 'string' ? <Image source={{ uri: imageUrl }} key={`${index}`} style={styles1.image} /> : <Image source={imageUrl} key={`${index}`} doubleTapToZoomEnabled={true} style={styles1.image} />
+        }
       </TouchableOpacity>
     ))}
-  </View>
+  </ScrollView>
 );
 
 const styles1 = StyleSheet.create({
@@ -73,12 +78,11 @@ const styles1 = StyleSheet.create({
   }
 });
 
-
-export default function App() {
+export function ImageViewingExample() {
   const [currentImageIndex, setImageIndex] = useState(0);
   const [images, setImages] = useState(architecture);
   const [isVisible, setIsVisible] = useState(false);
-  const [animationType, setAnimationType] = useState('slide');
+  const [isVisible2, setIsVisible2] = useState(false);
 
   const onSelect = (images, index) => {
     setImageIndex(index);
@@ -86,17 +90,7 @@ export default function App() {
     setIsVisible(true);
   };
 
-  const OnImageIndexChange = () => {
-    if(currentImageIndex === 1) {
-      Alert.alert("OnImageIndexChange")
-    } 
-  }
-
-  const onLongPress = (image) => {
-    Alert.alert("Long Pressed",image.uri)
-  }
   const onRequestClose = () => setIsVisible(false);
-
 
   const getImageSource = memoize((images): ImageSource[] =>
     images.map((image) =>
@@ -106,10 +100,6 @@ export default function App() {
     )
   );
 
-  const setType = () => {
-    setAnimationType(animationType === 'slide' ? 'fade' : 'slide')
-  }
-
   return (
     <SafeAreaView style={styles.root}>
       <ImageList
@@ -117,38 +107,29 @@ export default function App() {
         onPress={(index) => onSelect(architecture, index)}
         shift={0.75}
       />
-      <View style={styles.about}>
-        <Text style={styles.name}>[ react-native-image-viewing ]</Text>
-        <Button title="切换动画效果" onPress={setType}></Button>
-      </View>
       <ImageViewing
         images={getImageSource(images)}
         imageIndex={currentImageIndex}
         visible={isVisible}
         onRequestClose={onRequestClose}
-        onImageIndexChange={OnImageIndexChange}
-        presentationStyle="fullScreen"
-        backgroundColor="#f00"
-        animationType={animationType}
-        onLongPress={onLongPress}
-        delayLongPress={2000}
-        keyExtreactor={(imageSrc,index) => {
-          console.log('keyExtreactor OK');
-          return index.toString()
-        }
-        }
-        HeaderComponent={
-          images === architecture
-            ? ({ imageIndex }) => {
-                const title = get(images, `${imageIndex}.title`);
-                return (
-                  <ImageHeader title={`title${imageIndex + 1}`} onRequestClose={onRequestClose} />
-                );
-              }
-            : undefined
-        }
+        HeaderComponent={({ imageIndex }) => (
+          <ImageHeader title={`title${imageIndex + 1}`} onRequestClose={() => setIsVisible(false)} />
+        )}
         FooterComponent={({ imageIndex }) => (
-          <ImageFooter imageIndex={imageIndex} imagesCount={images.length} />
+          <ImageFooter imageIndex={imageIndex} imagesCount={architecture.length} />
+        )}
+      />
+      <View>asdsdas</View>
+      <ImageViewing
+        images={getImageSource(images)}
+        imageIndex={currentImageIndex}
+        visible={isVisible2}
+        onRequestClose={onRequestClose}
+        HeaderComponent={({ imageIndex }) => (
+          <ImageHeader title={`title${imageIndex + 1}`} onRequestClose={() => setIsVisible2(false)} />
+        )}
+        FooterComponent={({ imageIndex }) => (
+          <ImageFooter imageIndex={imageIndex} imagesCount={architecture.length} />
         )}
       />
     </SafeAreaView>

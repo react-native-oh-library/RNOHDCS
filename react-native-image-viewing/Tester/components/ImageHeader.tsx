@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
-
 import React from "react";
 import {
   StyleSheet,
@@ -63,7 +62,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     paddingTop: 2,
     includeFontPadding: false,
-    color: "#FFF"
+    color: "yellow"
   },
   text: {
     maxWidth: 240,

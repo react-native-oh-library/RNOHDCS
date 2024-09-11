@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
-
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
@@ -29,7 +28,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 17,
-    color: "#FFF"
+    color: "yellow"
   }
 });
 
