@@ -1,63 +1,57 @@
-import ContentLoader, { Rect, Circle } from 'react-content-loader/native'
+import { Facebook ,Rect} from 'react-content-loader/native'
 import { View, ScrollView } from "react-native"
 import { Tester, TestCase } from '@rnoh/testerino'
 import React from 'react'
 
-export function ContentLoaderDemo() {
+export function FacebookDemo() {
     return <View style={{ flex: 1, backgroundColor: 'white' }}>
         <ScrollView >
             <Tester>
                 <TestCase itShould='animate:false'>
-                    <ContentLoader
+                    <Facebook
                         width={'100%'}
-                        animate={false}
-                    >
-                    </ContentLoader>
+                        animate={false}></Facebook>
                 </TestCase>
                 <TestCase itShould='animate:true'>
-                    <ContentLoader
+                    <Facebook
                         width={'100%'}
-                        animate={true}
-                    >
-                    </ContentLoader>
+                        animate={true}></Facebook>
                 </TestCase>
                 <TestCase itShould='viewBox:0 0 380 70'>
-                    <ContentLoader
+                    <Facebook
                         width={'100%'}
                         animate={true}
                         viewBox="0 0 380 70"
                     >
-                    </ContentLoader>
+                    </Facebook>
                 </TestCase>
                 <TestCase itShould='backgroundColor:#999'>
-                    <ContentLoader
+                    <Facebook
                         width={'100%'}
                         animate={true}
                         backgroundColor={'#999'}
-                    >
-                    </ContentLoader>
+                    ></Facebook>
                 </TestCase>
                 <TestCase itShould='foregroundColor:red'>
-                    <ContentLoader
+                    <Facebook
                         width={'100%'}
                         animate={true}
                         backgroundColor={'#999'}
                         foregroundColor={'red'}
-                    >
-                    </ContentLoader>
+                    ></Facebook>
                 </TestCase>
                 <TestCase itShould='speed:0.5'>
-                    <ContentLoader
+                    <Facebook
                         width={'100%'}
                         animate={true}
                         backgroundColor={'#999'}
                         foregroundColor={'red'}
                         speed={0.5}
                     >
-                    </ContentLoader>
+                    </Facebook>
                 </TestCase>
                 <TestCase itShould='interval:2'>
-                    <ContentLoader
+                    <Facebook
                         width={'100%'}
                         animate={true}
                         backgroundColor={'#999'}
@@ -65,10 +59,10 @@ export function ContentLoaderDemo() {
                         speed={0.5}
                         interval={2}
                     >
-                    </ContentLoader>
+                    </Facebook>
                 </TestCase>
                 <TestCase itShould='rtl:true'>
-                    <ContentLoader
+                    <Facebook
                         width={'100%'}
                         animate={true}
                         backgroundColor={'#999'}
@@ -77,26 +71,17 @@ export function ContentLoaderDemo() {
                         interval={2}
                         rtl={true}
                     >
-                    </ContentLoader>
+                    </Facebook>
                 </TestCase>
                 <TestCase itShould='beforeMask:Rect(组件)'>
-                    <ContentLoader
+                    <Facebook
                         width={'100%'}
-                        animate={false}
+                        animate={true}
                         backgroundColor={'#999'}
+                        foregroundColor={'red'}
                         beforeMask={<Rect x="80" y="40" rx="3" ry="3" width="250" height="10" fill='red' />}
                     >
-                    </ContentLoader>
-                </TestCase>
-                <TestCase itShould='作为容器组件包裹子组件'>
-                    <ContentLoader
-                        width={'100%'}
-                        height={100}
-                    >
-                        <Circle cx="30" cy="30" r="30" />
-                        <Rect x="80" y="17" rx="4" ry="4" width="300" height="13" />
-                        <Rect x="80" y="40" rx="3" ry="3" width="250" height="10" />
-                    </ContentLoader>
+                    </Facebook>
                 </TestCase>
             </Tester>
         </ScrollView>

@@ -1,59 +1,59 @@
-import { List, Rect } from 'react-content-loader/native'
+import { BulletList ,Rect} from 'react-content-loader/native'
 import { View, ScrollView } from "react-native"
 import { Tester, TestCase } from '@rnoh/testerino'
+import React from 'react'
 
-export function ListDemo() {
+export function BulletListDemo() {
     return <View style={{ flex: 1, backgroundColor: 'white' }}>
         <ScrollView >
             <Tester>
                 <TestCase itShould='animate:false'>
-                    <List animate={false}></List>
+                    <BulletList animate={false}></BulletList>
                 </TestCase>
                 <TestCase itShould='animate:true'>
-                    <List animate={true}></List>
+                    <BulletList animate={true}></BulletList>
                 </TestCase>
                 <TestCase itShould='viewBox:0 0 380 70'>
-                    <List
+                    <BulletList
                         animate={true}
                         viewBox="0 0 380 70"
                     >
-                    </List>
+                    </BulletList>
                 </TestCase>
                 <TestCase itShould='backgroundColor:#999'>
-                    <List
+                    <BulletList
                         animate={true}
-                        backgroundColor={'#999'}
-                    ></List>
+                        backgroundColor='#999'
+                    ></BulletList>
                 </TestCase>
                 <TestCase itShould='foregroundColor:red'>
-                    <List
+                    <BulletList
                         animate={true}
                         backgroundColor={'#999'}
-                        foregroundColor={'red'}
-                    ></List>
+                        foregroundColor='red'
+                    ></BulletList>
                 </TestCase>
                 <TestCase itShould='speed:0.5'>
-                    <List
+                    <BulletList
                         animate={true}
                         backgroundColor={'#999'}
                         foregroundColor={'red'}
                         speed={0.5}
                     >
-                    </List>
+                    </BulletList>
                 </TestCase>
                 <TestCase itShould='interval:2'>
-                    <List
+                    <BulletList
                         animate={true}
                         backgroundColor={'#999'}
                         foregroundColor={'red'}
                         speed={0.5}
                         interval={2}
                     >
-                    </List>
+                    </BulletList>
                 </TestCase>
                 <TestCase itShould='rtl:true'>
-                    <List height={140}
-                        width={'100%'}
+                    <BulletList height={140}
                         animate={true}
                         backgroundColor={'#999'}
                         foregroundColor={'red'}
@@ -61,16 +61,16 @@ export function ListDemo() {
                         interval={2}
                         rtl={true}
                     >
-                    </List>
+                    </BulletList>
                 </TestCase>
                 <TestCase itShould='beforeMask:Rect(组件)'>
-                    <List height={140}
-                        animate={false}
+                    <BulletList height={140}
+                        animate={true}
                         backgroundColor={'#999'}
                         foregroundColor={'red'}
                         beforeMask={<Rect x="80" y="40" rx="3" ry="3" width="250" height="10" fill='red' />}
                     >
-                    </List>
+                    </BulletList>
                 </TestCase>
             </Tester>
         </ScrollView>

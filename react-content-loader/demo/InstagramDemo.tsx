@@ -1,58 +1,65 @@
-import { BulletList ,Rect} from 'react-content-loader/native'
+import { Instagram, Rect } from 'react-content-loader/native'
 import { View, ScrollView } from "react-native"
 import { Tester, TestCase } from '@rnoh/testerino'
+import React from 'react'
 
-export function BulletListDemo() {
+export function InstagramDemo() {
     return <View style={{ flex: 1, backgroundColor: 'white' }}>
         <ScrollView >
             <Tester>
                 <TestCase itShould='animate:false'>
-                    <BulletList animate={false}></BulletList>
+                    <Instagram animate={false} width={'100%'}></Instagram>
                 </TestCase>
                 <TestCase itShould='animate:true'>
-                    <BulletList animate={true}></BulletList>
+                    <Instagram animate={true} width={'100%'}></Instagram>
                 </TestCase>
                 <TestCase itShould='viewBox:0 0 380 70'>
-                    <BulletList
+                    <Instagram
+                        width={'100%'}
                         animate={true}
                         viewBox="0 0 380 70"
                     >
-                    </BulletList>
+                    </Instagram>
                 </TestCase>
                 <TestCase itShould='backgroundColor:#999'>
-                    <BulletList
-                        animate={true}
-                        backgroundColor='#999'
-                    ></BulletList>
-                </TestCase>
-                <TestCase itShould='foregroundColor:red'>
-                    <BulletList
+                    <Instagram
+                        width={'100%'}
                         animate={true}
                         backgroundColor={'#999'}
-                        foregroundColor='red'
-                    ></BulletList>
+                    ></Instagram>
+                </TestCase>
+                <TestCase itShould='foregroundColor:red'>
+                    <Instagram
+                        width={'100%'}
+                        animate={true}
+                        backgroundColor={'#999'}
+                        foregroundColor={'red'}
+                    ></Instagram>
                 </TestCase>
                 <TestCase itShould='speed:0.5'>
-                    <BulletList
+                    <Instagram
+                        width={'100%'}
                         animate={true}
                         backgroundColor={'#999'}
                         foregroundColor={'red'}
                         speed={0.5}
                     >
-                    </BulletList>
+                    </Instagram>
                 </TestCase>
                 <TestCase itShould='interval:2'>
-                    <BulletList
+                    <Instagram
+                        width={'100%'}
                         animate={true}
                         backgroundColor={'#999'}
                         foregroundColor={'red'}
                         speed={0.5}
                         interval={2}
                     >
-                    </BulletList>
+                    </Instagram>
                 </TestCase>
                 <TestCase itShould='rtl:true'>
-                    <BulletList height={140}
+                    <Instagram
+                        width={'100%'}
                         animate={true}
                         backgroundColor={'#999'}
                         foregroundColor={'red'}
@@ -60,16 +67,17 @@ export function BulletListDemo() {
                         interval={2}
                         rtl={true}
                     >
-                    </BulletList>
+                    </Instagram>
                 </TestCase>
                 <TestCase itShould='beforeMask:Rect(组件)'>
-                    <BulletList height={140}
+                    <Instagram
+                        width={'100%'}
                         animate={true}
                         backgroundColor={'#999'}
                         foregroundColor={'red'}
                         beforeMask={<Rect x="80" y="40" rx="3" ry="3" width="250" height="10" fill='red' />}
                     >
-                    </BulletList>
+                    </Instagram>
                 </TestCase>
             </Tester>
         </ScrollView>
