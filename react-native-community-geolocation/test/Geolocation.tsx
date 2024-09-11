@@ -2,16 +2,17 @@ import React, {useEffect, useState} from 'react';
 
 import {View, ScrollView, Text} from 'react-native';
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
-import {Button} from '../components';
+import {Button} from 'react-native';
 import Geo from '@react-native-community/geolocation';
 const Meun = [
   {
     key: 'geo_1',
     itShould: '设置位置信息请求配置',
     label: 'setRNConfiguration',
-    onPress: (setState: (arg0: boolean) => void) => {
+    onPress: (setState: (arg0: boolean) => void, setValue: (arg0: string) => void) => {
         try {
             Geo.setRNConfiguration({skipPermissionRequests:true})
+            setValue('setRNConfiguration: success')
             setState(true)
         } catch (error) {
             setState(false)
@@ -29,7 +30,8 @@ const Meun = [
       setValue: (arg0: string) => void,
     ) => {
         Geo.requestAuthorization(()=>{
-                setState(true)
+          setValue('requestAuthorization: success')
+          setState(true)
         },error=>{
             setState(false)
             setValue(JSON.stringify(error))
@@ -44,7 +46,7 @@ const Meun = [
     onPress: (setState: (arg0: boolean) => void,setValue: (arg0: string) => void,) => {
             Geo.getCurrentPosition((success)=>{
                 setState(true)
-                setValue(JSON.stringify(success))
+                setValue(`getCurrentPosition: ${JSON.stringify(success)}`)
             },error=>{
                 setState(false)
                 setValue(JSON.stringify(error))
@@ -58,7 +60,7 @@ const Meun = [
     onPress: (setState: (arg0: boolean) => void,setValue: (arg0: string) => void) => {
      Geo.watchPosition((success)=>{
         setState(true)
-        setValue(JSON.stringify(success))
+        setValue(`watchPosition: ${JSON.stringify(success)}`)
     },error=>{
         setState(false)
         setValue(JSON.stringify(error))
@@ -69,8 +71,9 @@ const Meun = [
     key: 'geo_5',
     itShould: '通过watchId清除监听',
     label: 'clearWatch',
-    onPress: (setState: (arg0: boolean) => void) => {
+    onPress: (setState: (arg0: boolean) => void, setValue: (arg0: string) => void) => {
      Geo.clearWatch(0)
+     setValue('clearWatch: success')
      setState(true)
     },
   },
@@ -78,12 +81,12 @@ const Meun = [
 ];
 export const ProgressViewDemo = () => {
   const [value, setValue] = useState('');
-  const [current,setCurrent]=useState(0)
   return (
     <Tester>
       <ScrollView>
         <TestSuite name="@react-native-community/geolocation">
-          {Meun.map((item,index) => (
+          <Text style={{ backgroundColor: '#fff' }}>{value}</Text>
+          {Meun.map((item) => (
             <TestCase
               key={item.key}
               itShould={item.itShould}
@@ -92,16 +95,10 @@ export const ProgressViewDemo = () => {
               arrange={({setState}) => {
                 return (
                   <View style={{flex: 1}}>
-                    {current===index&&<Button
-                      label={value}
-                      onPress={() => {
-                       
-                      }}></Button>}
                     <Button
-                      label={item.label}
+                      title={item.label}
                       onPress={() => {
-                        setCurrent(index)
-                        item.onPress(setState,setValue);
+                        item.onPress(setState, setValue);
                       }}></Button>
                   </View>
                 );
