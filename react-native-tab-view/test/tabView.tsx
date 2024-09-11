@@ -63,6 +63,7 @@ export function NewTabViewExample() {
     </View>
   );
 
+  // 第四个选项卡的页面
   const FourthRoute = () => (
     <View style={{ flex: 1, backgroundColor: '#38e0f2' }}>
       <Text
@@ -100,19 +101,38 @@ export function NewTabViewExample() {
     first: FirstRoute,
     second: SecondRoute,
     third: ThirdRoute,
-    fourth:FourthRoute
+    fourth: FourthRoute
   });
 
-  const getLabel = (route: {
-    key: string;
-    title: string;
-  }) => {
+  const getLabel = (route: any) => {
     return route.title
   }
 
-  const renderTabBar = (
-    props: SceneRendererProps & { navigationState: State }
-  ) => (
+  const getAccessible = (route: any) => {
+    if (route.title == 'First') {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  const renderIcon = (route: any) => {
+    if (route.title == 'First') {
+      return <Text>First</Text>
+    }
+  }
+
+  const renderTabBarItem = (route: any) => {
+    return <Text>{route.title}</Text>
+  }
+
+  const renderIndicatorFn = (route: any) => {
+    styles.indicator.backgroundColor = 'blue'
+    return <Text>{route.title}</Text>
+  }
+
+
+  const renderTabBar = (props: any) => (
     <TabBar
       {...props}
       scrollEnabled={scrollEnabled}
@@ -121,10 +141,13 @@ export function NewTabViewExample() {
       labelStyle={styles.label}
       tabStyle={styles.tabStyle}
       getLabelText={({ route }) => getLabel(route)}
-      getAccessible={({ route }) => true}
-      getAccessibilityLabel={({ route }) => route.title}
-      renderIcon={({ route }) => route.title}
-      // renderLabel={({ route }) =>  route.title}
+      getAccessible={({ route }) => getAccessible(route)}
+      getAccessibilityLabel={({ route }) => getLabel(route)}
+      renderIcon={icon ? ({ route }) => renderIcon(route) : undefined}
+      renderLabel={label ? ({ route }) => renderIcon(route) : undefined}
+      renderTabBarItem={tabBarItem ? ({ route }) => renderTabBarItem(route) : undefined}
+      renderIndicator={indicator ? (route) => renderIndicatorFn(route) : undefined}
+      renderBadge={({ route }) => getLabel(route)}
       onTabPress={onTabPress}
       onTabLongPress={onTabLongPress}
       activeColor={activeColor}
@@ -161,7 +184,7 @@ export function NewTabViewExample() {
   }
 
   // 初始布局
-  const initialLayout = { width: 200,height:500  }
+  const initialLayout = { width: 200, height: 500 }
 
   const [index, setIndex] = React.useState(0);
   const [showRenderTabBar, setShowRenderTabBar] = React.useState(true);
@@ -180,6 +203,10 @@ export function NewTabViewExample() {
   const [pressOpacity, setPressOpacity] = React.useState(0.5);
   const [scrollEnabled, setScrollEnabled] = React.useState(true);
   const [gap, setGap] = React.useState(0);
+  const [icon, setIcon] = React.useState(false);
+  const [label, setLabel] = React.useState(false);
+  const [tabBarItem, setTabBarItem] = React.useState(false);
+  const [indicator, setIndicator] = React.useState(false);
   return (
     <View style={{ flex: 1 }}>
       <Tester>
@@ -358,6 +385,63 @@ export function NewTabViewExample() {
               <Text style={{ backgroundColor: "orange", flex: 0.25 }}  >onTabLongPress</Text>
             </View>
           </TestCase>
+
+          <TestCase itShould={'TabView getLabelText'}>
+            <View style={styles.flex_row} >
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} >{getLabel(routes[index])}</Text>
+            </View>
+          </TestCase>
+
+          <TestCase itShould={'TabView getAccessible'}>
+            <View style={styles.flex_row} >
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }}>{getAccessible(routes[index]).toString()}</Text>
+            </View>
+          </TestCase>
+
+          <TestCase itShould={'TabView getAccessibilityLabel'}>
+            <View style={styles.flex_row} >
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }}>{getLabel(routes[index])}</Text>
+            </View>
+          </TestCase>
+
+          <TestCase itShould={'TabView renderIcon'}>
+            <View style={styles.flex_row} >
+              <Text style={{ flex: 0.25 }}>renderIcon:{icon.toString()}</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setIcon(true); }} >true</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setIcon(false); }} >false</Text>
+            </View>
+          </TestCase>
+
+          <TestCase itShould={'TabView renderLabel'}>
+            <View style={styles.flex_row} >
+              <Text style={{ flex: 0.25 }}>renderLabel:{label.toString()}</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setLabel(true); }} >true</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setLabel(false); }} >false</Text>
+            </View>
+          </TestCase>
+
+          <TestCase itShould={'TabView renderTabBarItem'}>
+            <View style={styles.flex_row} >
+              <Text style={{ flex: 0.25 }}>renderTabBarItem:{tabBarItem.toString()}</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setTabBarItem(true); }} >true</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setTabBarItem(false); }} >false</Text>
+            </View>
+          </TestCase>
+
+          <TestCase itShould={'TabView renderIndicator'}>
+            <View style={styles.flex_row} >
+              <Text style={{ flex: 0.25 }}>renderIndicator:{indicator.toString()}</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25 }} onPress={() => { setIndicator(true); }} >true</Text>
+              <Text style={{ backgroundColor: "orange", flex: 0.25, marginLeft: 10 }} onPress={() => { setIndicator(false); }} >false</Text>
+            </View>
+          </TestCase>
+
+          <TestCase itShould={'TabView renderBadge'}>
+            <View style={styles.flex_row} >
+              <Text >{getLabel(routes[index])}</Text>
+            </View>
+          </TestCase>
+
         </Tester>
       </ScrollView>
     </View>
