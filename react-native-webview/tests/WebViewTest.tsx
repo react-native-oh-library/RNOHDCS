@@ -227,7 +227,10 @@ export default function WebViewTest() {
             arrange={({setState}) => {
               return (
                 <View style={{padding: 20, height: 600}}>
-                  <WebView source={{uri: 'www.baidu.com'}} userAgent="xxxxx" />
+                  <WebView
+                    source={{uri: 'www.baidu.com'}}
+                    userAgent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+                  />
                 </View>
               );
             }}
@@ -317,45 +320,6 @@ export default function WebViewTest() {
           />
 
           <TestCase
-            key={'webview api ref stopLoading'}
-            itShould={`webview api ref stopLoading`}
-            tags={['C_API']}
-            initialState={false}
-            arrange={({setState}) => {
-              return (
-                <View style={{padding: 20, height: 600}}>
-                  <WebView
-                    source={{uri: 'www.baidu.com'}}
-                    ref={stopLoadingRef}
-                  />
-                  <Button title={'stopLoading'} onPress={stopLoading}></Button>
-                </View>
-              );
-            }}
-            assert={async ({expect, state}) => {
-              expect(state).to.be.true;
-            }}
-          />
-
-          <TestCase
-            key={'webview api ref goForward'}
-            itShould={`webview api ref goForward`}
-            tags={['C_API']}
-            initialState={false}
-            arrange={({setState}) => {
-              return (
-                <View style={{padding: 20, height: 600}}>
-                  <WebView source={{uri: 'www.baidu.com'}} ref={goForwardRef} />
-                  <Button title={'goForward'} onPress={goForward}></Button>
-                </View>
-              );
-            }}
-            assert={async ({expect, state}) => {
-              expect(state).to.be.true;
-            }}
-          />
-
-          <TestCase
             key={'webview api ref goForward'}
             itShould={`webview api ref goForward`}
             tags={['C_API']}
@@ -390,30 +354,6 @@ export default function WebViewTest() {
               expect(state).to.be.true;
             }}
           />
-
-          <TestCase
-            key={'webview api ref requestFocus'}
-            itShould={`webview api ref requestFocus`}
-            tags={['C_API']}
-            initialState={false}
-            arrange={({setState}) => {
-              return (
-                <View style={{padding: 20, height: 600}}>
-                  <WebView
-                    source={{uri: 'www.baidu.com'}}
-                    ref={requestFocusRef}
-                  />
-                  <Button
-                    title={'requestFocus'}
-                    onPress={requestFocus}></Button>
-                </View>
-              );
-            }}
-            assert={async ({expect, state}) => {
-              expect(state).to.be.true;
-            }}
-          />
-
           <TestCase
             key={'webview api ref requestFocus'}
             itShould={`webview api ref requestFocus`}
@@ -669,49 +609,6 @@ export default function WebViewTest() {
               expect(state).to.be.true;
             }}
           />
-
-          <TestCase
-            key={'webview api ref mediaPlaybackRequiresUserAction'}
-            itShould={`webview api ref mediaPlaybackRequiresUserAction`}
-            tags={['C_API']}
-            initialState={false}
-            arrange={({setState}) => {
-              const [event, setEvent] = useState({});
-              return (
-                <View style={{padding: 20, height: 600}}>
-                  <WebView
-                    source={{uri: 'www.baidu.com'}}
-                    applicationNameForUserAgent={true}
-                  />
-                </View>
-              );
-            }}
-            assert={async ({expect, state}) => {
-              expect(state).to.be.true;
-            }}
-          />
-
-          <TestCase
-            key={'webview api ref geolocationEnabled'}
-            itShould={`webview api ref geolocationEnabled`}
-            tags={['C_API']}
-            initialState={false}
-            arrange={({setState}) => {
-              const [event, setEvent] = useState({});
-              return (
-                <View style={{padding: 20, height: 600}}>
-                  <WebView
-                    source={{uri: 'www.baidu.com'}}
-                    geolocationEnabled={true}
-                  />
-                </View>
-              );
-            }}
-            assert={async ({expect, state}) => {
-              expect(state).to.be.true;
-            }}
-          />
-
           <TestCase
             key={'webview api ref geolocationEnabled'}
             itShould={`webview api ref geolocationEnabled`}
