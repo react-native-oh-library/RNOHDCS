@@ -14,22 +14,22 @@ const defaultData = generateDataSource(20, '标题');
 
 export const API_keyExtractor = () => {
   return (
-    <Tester>
+    <Tester style={{flex: 1}}>
       <TestSuite name="keyExtractor">
         <TestCase
           itShould={`方法keyExtractor,该方法返回一个key值，用来支持库内部算法，只能纯展示`}>
-          <View style={{height: 494}}>
+          <View>
             <DragSortableView
               parentWidth={356}
               dataSource={defaultData}
-              childrenHeight={98}
+              childrenHeight={90}
               childrenWidth={88}
               keyExtractor={(item, index) => {
                 return item.key;
               }}
               renderItem={item => {
                 return (
-                  <View key={item.id} style={{...styles.childView, height: 94}}>
+                  <View key={item.id} style={{...styles.childView, height: 84}}>
                     <Text style={styles.childText}>{item.title}</Text>
                   </View>
                 );

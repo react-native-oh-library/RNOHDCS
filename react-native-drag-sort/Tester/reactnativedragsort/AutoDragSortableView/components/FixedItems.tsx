@@ -10,7 +10,7 @@ import {generateDataSource} from '../../libs';
  * fixedItems,【下标对应组件禁止拖拽】
  */
 
-const defaultData = generateDataSource(30, '标题');
+const defaultData = generateDataSource(60, '标题');
 
 export const API_fixedItems = () => {
   const [fixedItems, setFixedItems] = useState<number[]>([]);

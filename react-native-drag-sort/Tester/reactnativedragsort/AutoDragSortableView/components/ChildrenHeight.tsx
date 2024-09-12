@@ -10,7 +10,7 @@ import {generateDataSource} from '../../libs';
  * childrenHeight,【子组件高度】
  */
 
-const defaultData = generateDataSource(30, '标题');
+const defaultData = generateDataSource(60, '标题');
 
 export const API_childrenHeight = () => {
   const [childrenHeight, setChildrenHeight] = useState(92);

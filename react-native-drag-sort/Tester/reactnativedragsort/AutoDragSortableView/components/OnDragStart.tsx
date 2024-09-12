@@ -10,7 +10,7 @@ import {generateDataSource} from '../../libs';
  * onDragStart,【开始拖拽】
  */
 
-const defaultData = generateDataSource(30, '标题');
+const defaultData = generateDataSource(60, '标题');
 
 export const API_onDragStart = () => {
   return (

@@ -10,12 +10,12 @@ import {generateDataSource} from '../../libs';
  * marginChildrenLeft,【子组件左边距】
  */
 
-const defaultData = generateDataSource(14, '标题');
+const defaultData = generateDataSource(16, '标题');
 
 export const API_marginChildrenLeft = () => {
   const [marginChildrenLeft, setMarginChildrenLeft] = useState(0);
   return (
-    <Tester>
+    <Tester style={{flex: 1}}>
       <TestSuite name="marginChildrenLeft">
         <TestCase
           key={'marginChildrenLeft'}
@@ -24,16 +24,18 @@ export const API_marginChildrenLeft = () => {
           initialState={false}
           arrange={({setState}) => {
             return (
-              <View style={{height: 510}}>
+              <View>
                 <DragSortableView
                   parentWidth={356}
                   dataSource={defaultData}
-                  childrenHeight={92}
-                  childrenWidth={89}
+                  childrenHeight={80}
+                  childrenWidth={88}
                   marginChildrenLeft={marginChildrenLeft}
                   renderItem={item => {
                     return (
-                      <View key={item.id} style={styles.childView}>
+                      <View
+                        key={item.id}
+                        style={{...styles.childView, height: 74}}>
                         <Text style={styles.childText}>{item.title}</Text>
                       </View>
                     );
@@ -42,7 +44,7 @@ export const API_marginChildrenLeft = () => {
                 <Button
                   title="修改marginChildrenLeft"
                   onPress={() => {
-                    setMarginChildrenLeft(20);
+                    setMarginChildrenLeft(15);
                     setState(true);
                   }}
                 />
