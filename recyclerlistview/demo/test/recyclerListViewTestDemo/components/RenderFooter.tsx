@@ -14,3 +14,5 @@ export const RenderFooter = () => {
     </View>
   );
 };
+
+export default RenderFooter;

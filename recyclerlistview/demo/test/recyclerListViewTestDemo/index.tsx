@@ -8,55 +8,71 @@ import {
   Text,
 } from 'react-native';
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
-import {
-  LayoutProvider,
-  RecyclerListView,
-  WindowCorrection,
-} from 'recyclerlistview';
-import {dataProviderInit, width} from './data';
-import {ContextProviderInstance, LayoutUtil} from './class';
-import {generateArray} from './libs';
-import {RowRenderer, ExternalScrollVIew} from './components';
+import {RecyclerListView} from 'recyclerlistview';
+import {getDataProvider, width} from './data';
+import {ContextProviderInstance, getLayoutProvider} from './class';
+import rowRenderer from './components/rowRenderer';
+import RenderFooter from './components/renderFooter';
+import ExternalScrollView from './components/externalScrollView';
 import {ItemAnimatorInstance} from './class/itemAnimatorInstance';
 
-const baseProps = {
-  layoutProvider: LayoutUtil.getLayoutProvider(0) as LayoutProvider,
-  dataProvider: dataProviderInit.cloneWithRows(generateArray(30)),
-  rowRenderer: RowRenderer,
-  style: {width: width - 40, height: 250},
-};
+interface IExtendedState {
+  title: string;
+}
 
-const customProps = (num: number) => {
-  return {dataProvider: dataProviderInit.cloneWithRows(generateArray(num))};
-};
+let timer: any;
 
-let timer;
+interface ILayoutSize {
+  width: number;
+  height: number;
+}
+
+const defaultLayoutProvider = getLayoutProvider(0);
+const defaultDataProvider = getDataProvider(30);
 
 export const RecyclerListViewTestDemo = () => {
+  const [layoutProvider, setLayoutProvider] = useState(defaultLayoutProvider);
+  const [dataProvider, setDataProvider] = useState(defaultDataProvider);
+  const [rendererRow, setRendererRow] = useState(defaultLayoutProvider);
+  const [renderAheadOffset, setRenderAheadOffset] = useState(100);
   const [isHorizontal, setIsHorizontal] = useState(false);
+  const [onRecreate, setOnRecreate] = useState<string>();
+  const [externalScrollView, setExternalScrollView] = useState(false);
   const [onEndReachedThreshold, setOnEndReachedThreshold] = useState(0);
   const [onEndReachedThresholdRelative, setOnEndReachedThresholdRelative] =
     useState(0);
   const [onVisibleIndicesChanged, setOnVisibleIndicesChanged] = useState();
   const [showFooter, setShowFooter] = useState(false);
-
-  const [scrollThrottle, setScrollThrottle] = useState(0);
+  const [scrollThrottle, setScrollThrottle] = useState(16);
   const [canChangeSize, setCanChangeSize] = useState(false);
+  const [layoutCanChangeSize, setLayoutCanChangeSize] = useState<
+    ILayoutSize | undefined
+  >(undefined);
   const [applyWindowCorrection, setApplyWindowCorrection] = useState();
+  const [disableRecycling, setDisableRecycling] = useState(false);
+
   const [forceNonDeterministicRendering, setForceNonDeterministicRendering] =
     useState(false);
-  const [extendedState, setExtendedState] = useState({});
-  const [itemAnimator, setItemAnimator] = useState();
+  const [extendedState, setExtendedState] = useState<IExtendedState>();
+  const [itemAnimator, setItemAnimator] = useState<string>();
   const [loading, setLoading] = useState(false);
   const [windowCorrectionConfig, setWindowCorrectionConfig] = useState({
     applyToItemScroll: false,
     applyToInitialOffset: false,
     value: {startCorrection: 0, endCorrection: 0, windowShift: 0},
   });
-  //
   const [onItemLayout, setOnItemLayout] =
     useState<(index: number) => void | undefined>();
-  const contextProvider = new ContextProviderInstance({api: 'contextProvider'});
+
+  const [componentStyle, setComponentStyle] = useState(width);
+  const contextProvider = new ContextProviderInstance({
+    api: 'contextProvider',
+    key: 0,
+  });
+  const recreateContext = new ContextProviderInstance({
+    api: 'onRecreat',
+    key: 100,
+  });
 
   useEffect(() => {
     return () => {
@@ -64,26 +80,39 @@ export const RecyclerListViewTestDemo = () => {
     };
   });
 
+  const OnVisibleIndicesChangedFUnc = (
+    all: number[],
+    now: number[],
+    notNow: number[],
+  ) => {
+    Alert.alert('onVisibleIndicesChanged');
+  };
+
+  const applyWindowCorrectionFunc = () => {
+    Alert.alert('applyWindowCorrection');
+  };
+
   return (
-    <Tester style={{paddingBottom: 80}}>
+    <Tester style={{flex: 1}}>
       <ScrollView>
         <TestSuite name="recyclerlistview">
           <TestCase
-            key={'contextProvider'}
-            itShould={'contextProvider'}
+            key="layoutProvider"
+            itShould={`必填属性layoutProvider：用来定义布局`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({setState, state}) => {
               return (
-                <View>
+                <View style={{width: width - 40, height: 250}}>
                   <RecyclerListView
-                    {...baseProps}
-                    contextProvider={contextProvider}
+                    layoutProvider={layoutProvider as any}
+                    dataProvider={defaultDataProvider}
+                    rowRenderer={rowRenderer}
                   />
                   <Button
-                    title={'修改contextProvider'}
+                    title="修改layoutProvider"
                     onPress={() => {
-                      Alert.alert(contextProvider?.getUniqueKey());
+                      setLayoutProvider(getLayoutProvider(1));
                       setState(true);
                     }}
                   />
@@ -94,29 +123,155 @@ export const RecyclerListViewTestDemo = () => {
               expect(state).to.be.true;
             }}
           />
-          <TestCase itShould={`initialOffset 当前为：${100}`}>
-            <RecyclerListView {...baseProps} initialOffset={100} />
-          </TestCase>
-          <TestCase itShould={`renderAheadOffset 当前为：${2}`}>
-            <RecyclerListView {...baseProps} renderAheadOffset={2} />
-          </TestCase>
           <TestCase
-            key={'isHorizontal'}
-            itShould={`isHorizontal 当前为：${isHorizontal}`}
+            key="dataProvider"
+            itShould={`必填属性dataProvider：用来定义每个元素数据`}
+            tags={['C_API']}
+            initialState={false}
+            arrange={({setState, state}) => {
+              return (
+                <View style={{width: width - 40, height: 250}}>
+                  <RecyclerListView
+                    layoutProvider={defaultLayoutProvider as any}
+                    dataProvider={dataProvider as any}
+                    rowRenderer={rowRenderer}
+                  />
+                  <Button
+                    title="修改dataProvider"
+                    onPress={() => {
+                      setDataProvider(getDataProvider(10));
+                      setState(true);
+                    }}
+                  />
+                </View>
+              );
+            }}
+            assert={async ({expect, state}) => {
+              expect(state).to.be.true;
+            }}
+          />
+          <TestCase
+            key="rowRenderer"
+            itShould={`必填属性rowRenderer：用来渲染布局`}
+            tags={['C_API']}
+            initialState={false}
+            arrange={({setState, state}) => {
+              return (
+                <View style={{width: width - 40, height: 250}}>
+                  <RecyclerListView
+                    layoutProvider={rendererRow as any}
+                    dataProvider={defaultDataProvider}
+                    rowRenderer={rowRenderer}
+                  />
+                  <Button
+                    title="修改rowRenderer"
+                    onPress={() => {
+                      setRendererRow(getLayoutProvider(2));
+                      setState(true);
+                    }}
+                  />
+                </View>
+              );
+            }}
+            assert={async ({expect, state}) => {
+              expect(state).to.be.true;
+            }}
+          />
+          <TestCase
+            key={'contextProvider'}
+            itShould={'属性contextProvider：该属性用来保存上下文信息'}
             tags={['C_API']}
             initialState={false}
             arrange={({setState}) => {
               return (
-                <View>
+                <View style={{width: width - 40, height: 250}}>
                   <RecyclerListView
-                    {...baseProps}
+                    layoutProvider={defaultLayoutProvider}
+                    dataProvider={defaultDataProvider}
+                    rowRenderer={rowRenderer}
+                    contextProvider={contextProvider}
+                  />
+                  <Button
+                    title={'触发contextProvider'}
+                    onPress={() => {
+                      Alert.alert(
+                        `contextProvider保存的key值：${contextProvider?.getUniqueKey()}`,
+                        '',
+                        [
+                          {
+                            text: 'OK',
+                            onPress: () => setState(true),
+                          },
+                        ],
+                      );
+                    }}
+                  />
+                </View>
+              );
+            }}
+            assert={async ({expect, state}) => {
+              expect(state).to.be.true;
+            }}
+          />
+          <TestCase itShould={'属性initialOffset 当前为100'}>
+            <View style={{width: width - 40, height: 250}}>
+              <RecyclerListView
+                layoutProvider={defaultLayoutProvider as any}
+                dataProvider={defaultDataProvider}
+                rowRenderer={rowRenderer}
+                initialOffset={100}
+              />
+            </View>
+          </TestCase>
+          <TestCase
+            key={`renderAheadOffset`}
+            itShould={`属性renderAheadOffset 当前为：${renderAheadOffset}`}
+            tags={['C_API']}
+            initialState={false}
+            arrange={({setState}) => {
+              return (
+                <View style={{width: width - 40, height: 250}}>
+                  <RecyclerListView
+                    layoutProvider={defaultLayoutProvider}
+                    dataProvider={defaultDataProvider}
+                    rowRenderer={rowRenderer}
+                    renderAheadOffset={renderAheadOffset}
+                  />
+                  <Button
+                    title={'修改renderAheadOffset'}
+                    onPress={() => {
+                      setRenderAheadOffset(250);
+                      setState(true);
+                    }}
+                  />
+                </View>
+              );
+            }}
+            assert={async ({expect, state}) => {
+              expect(state).to.be.true;
+            }}
+          />
+          <TestCase
+            key={'isHorizontal'}
+            itShould={`属性isHorizontal 当前为：${isHorizontal}`}
+            tags={['C_API']}
+            initialState={false}
+            arrange={({setState, state}) => {
+              return (
+                <View style={{width: width - 40, height: 250}}>
+                  <RecyclerListView
+                    layoutProvider={defaultLayoutProvider}
+                    dataProvider={defaultDataProvider}
+                    rowRenderer={rowRenderer}
                     isHorizontal={isHorizontal}
                   />
                   <Button
                     title={'修改isHorizontal'}
                     onPress={() => {
-                      setIsHorizontal(true);
-                      setState(true);
+                      if (!state) {
+                        setIsHorizontal(true);
+                        setState(true);
+                      }
                     }}
                   />
                 </View>
@@ -128,38 +283,52 @@ export const RecyclerListViewTestDemo = () => {
           />
           <TestCase
             key={'onScroll'}
-            itShould={'onScroll'}
+            itShould={'方法onScroll:滚动监听事件'}
             tags={['C_API']}
             initialState={false}
             arrange={({setState, state}) => {
               return (
-                <RecyclerListView
-                  {...baseProps}
-                  onScroll={() => {
-                    !state && Alert.alert('onScroll');
-                    setState(true);
-                  }}
-                />
+                <View style={{width: width - 40, height: 250}}>
+                  <RecyclerListView
+                    layoutProvider={defaultLayoutProvider}
+                    dataProvider={defaultDataProvider}
+                    rowRenderer={rowRenderer}
+                    onScroll={() => {
+                      if (!state) {
+                        Alert.alert('onScroll');
+                        setState(true);
+                      }
+                    }}
+                  />
+                </View>
               );
             }}
             assert={async ({expect, state}) => {
               expect(state).to.be.true;
             }}
           />
-          {/* onRecreate效果未知 */}
-          <TestCase itShould={'onRecreate'}>
-            <RecyclerListView
-              {...baseProps}
-              contextProvider={new ContextProviderInstance({api: 'onRecreate'})}
-              onRecreate={() => Alert.alert('onRecreate')}
-            />
+          <TestCase
+            itShould={`方法onRecreate，该属性依赖于contextProvider属性，用来读取contextProvider属性保存的上下文信息，无法展示效果`}>
+            <View style={{width: width - 40, height: 250}}>
+              <RecyclerListView
+                layoutProvider={defaultLayoutProvider}
+                dataProvider={defaultDataProvider}
+                rowRenderer={rowRenderer}
+                contextProvider={recreateContext}
+                onRecreate={() => {}}
+              />
+            </View>
           </TestCase>
           <TestCase
-            itShould={`externalScrollView：JSON.stringify(ExternalScrollVIew)`}>
-            <RecyclerListView
-              {...baseProps}
-              externalScrollView={ExternalScrollVIew}
-            />
+            itShould={`属性externalScrollView：额外的ScrollView，会替换默认`}>
+            <View style={{width: width - 40, height: 250}}>
+              <RecyclerListView
+                layoutProvider={defaultLayoutProvider as any}
+                dataProvider={defaultDataProvider}
+                rowRenderer={rowRenderer}
+                externalScrollView={ExternalScrollView}
+              />
+            </View>
           </TestCase>
           <TestCase
             key={'onEndReached'}
@@ -168,13 +337,17 @@ export const RecyclerListViewTestDemo = () => {
             initialState={false}
             arrange={({setState, state}) => {
               return (
-                <RecyclerListView
-                  {...baseProps}
-                  onEndReached={() => {
-                    !state && Alert.alert('onEndReached触发');
-                    setState(true);
-                  }}
-                />
+                <View style={{width: width - 40, height: 250}}>
+                  <RecyclerListView
+                    layoutProvider={defaultLayoutProvider}
+                    dataProvider={defaultDataProvider}
+                    rowRenderer={rowRenderer}
+                    onEndReached={() => {
+                      !state && Alert.alert('onEndReached触发');
+                      setState(true);
+                    }}
+                  />
+                </View>
               );
             }}
             assert={async ({expect, state}) => {
@@ -188,9 +361,11 @@ export const RecyclerListViewTestDemo = () => {
             initialState={false}
             arrange={({setState, state}) => {
               return (
-                <View>
+                <View style={{width: width - 40, height: 250}}>
                   <RecyclerListView
-                    {...baseProps}
+                    layoutProvider={defaultLayoutProvider}
+                    dataProvider={defaultDataProvider}
+                    rowRenderer={rowRenderer}
                     onEndReached={() => Alert.alert('onEndReachedThreshold')}
                     onEndReachedThreshold={onEndReachedThreshold}
                   />
@@ -210,14 +385,16 @@ export const RecyclerListViewTestDemo = () => {
           />
           <TestCase
             key={'onEndReachedThresholdRelative'}
-            itShould={`onEndReachedThresholdRelative 当前为：${onEndReachedThresholdRelative}`}
+            itShould={`属性onEndReachedThresholdRelative 当前为：${onEndReachedThresholdRelative}`}
             tags={['C_API']}
             initialState={false}
             arrange={({setState}) => {
               return (
-                <View>
+                <View style={{width: width - 40, height: 250}}>
                   <RecyclerListView
-                    {...baseProps}
+                    layoutProvider={defaultLayoutProvider}
+                    dataProvider={defaultDataProvider}
+                    rowRenderer={rowRenderer}
                     onEndReached={() =>
                       Alert.alert(
                         `onEndReachedThresholdRelative：${onEndReachedThresholdRelative}`,
@@ -230,7 +407,7 @@ export const RecyclerListViewTestDemo = () => {
                   <Button
                     title={`修改onEndReachedThresholdRelative`}
                     onPress={() => {
-                      setOnEndReachedThresholdRelative(20);
+                      setOnEndReachedThresholdRelative(5);
                       setState(true);
                     }}
                   />
@@ -243,23 +420,25 @@ export const RecyclerListViewTestDemo = () => {
           />
           <TestCase
             key={'onVisibleIndicesChanged'}
-            itShould={`onVisibleIndicesChanged`}
+            itShould={`方法onVisibleIndicesChanged`}
             tags={['C_API']}
             initialState={false}
             arrange={({setState, state}) => {
               return (
-                <View>
+                <View style={{width: width - 40, height: 250}}>
                   <RecyclerListView
-                    {...baseProps}
-                    onVisibleIndicesChanged={onVisibleIndicesChanged}
+                    layoutProvider={defaultLayoutProvider}
+                    dataProvider={defaultDataProvider}
+                    rowRenderer={rowRenderer}
+                    onVisibleIndicesChanged={
+                      !state ? onVisibleIndicesChanged : undefined
+                    }
                   />
                   <Button
                     title="修改onVisibleIndicesChanged"
                     onPress={() => {
                       setOnVisibleIndicesChanged(
-                        (all: number[], now: number[], notNow: number[]) => {
-                          if (!state) Alert.alert('onVisibleIndicesChanged');
-                        },
+                        OnVisibleIndicesChangedFUnc as any,
                       );
                       setState(true);
                     }}
@@ -273,26 +452,17 @@ export const RecyclerListViewTestDemo = () => {
           />
           <TestCase
             key={'renderFooter'}
-            itShould={`renderFooter`}
+            itShould={`属性renderFooter`}
             tags={['C_API']}
             initialState={false}
             arrange={({setState, state}) => {
               return (
-                <View>
+                <View style={{width: width - 40, height: 250}}>
                   <RecyclerListView
-                    {...baseProps}
-                    {...customProps(3)}
-                    renderFooter={
-                      showFooter
-                        ? () => {
-                            return (
-                              <View>
-                                <Text>我是底部</Text>
-                              </View>
-                            );
-                          }
-                        : null
-                    }
+                    layoutProvider={defaultLayoutProvider}
+                    dataProvider={defaultDataProvider}
+                    rowRenderer={rowRenderer}
+                    renderFooter={showFooter ? RenderFooter : undefined}
                   />
                   <Button
                     title={`修改renderFooter`}
@@ -310,19 +480,28 @@ export const RecyclerListViewTestDemo = () => {
               expect(state).to.be.true;
             }}
           />
-          <TestCase itShould={`initialRenderIndex 当前为：${5}`}>
-            <RecyclerListView {...baseProps} initialRenderIndex={5} />
+          <TestCase itShould={`属性initialRenderIndex 当前为：${5}`}>
+            <View style={{width: width - 40, height: 250}}>
+              <RecyclerListView
+                layoutProvider={defaultLayoutProvider as any}
+                dataProvider={defaultDataProvider}
+                rowRenderer={rowRenderer}
+                initialRenderIndex={5}
+              />
+            </View>
           </TestCase>
-          <TestCase
+          {/* <TestCase
             key={'scrollThrottle'}
-            itShould={`scrollThrottle 当前为：${scrollThrottle}`}
+            itShould={`属性scrollThrottle 当前为：${scrollThrottle}`}
             tags={['C_API']}
             initialState={false}
             arrange={({setState}) => {
               return (
-                <View>
+                <View style={{width: width - 40, height: 250}}>
                   <RecyclerListView
-                    {...baseProps}
+                    layoutProvider={defaultLayoutProvider}
+                    dataProvider={defaultDataProvider}
+                    rowRenderer={rowRenderer}
                     scrollThrottle={scrollThrottle}
                   />
                   <Button
@@ -338,52 +517,51 @@ export const RecyclerListViewTestDemo = () => {
             assert={async ({expect, state}) => {
               expect(state).to.be.true;
             }}
-          />
-          {/* canChangeSize效果未知 */}
-          <TestCase
-            key={'canChangeSize'}
-            itShould={`canChangeSize 当前为：${canChangeSize}`}
-            tags={['C_API']}
-            initialState={false}
-            arrange={({setState}) => {
-              return (
-                <View>
-                  <RecyclerListView
-                    {...baseProps}
-                    canChangeSize={canChangeSize}
-                  />
-                  <Button
-                    title={`修改canChangeSize`}
-                    onPress={() => {
-                      setCanChangeSize(!canChangeSize);
-                      setState(true);
-                    }}
-                  />
-                </View>
-              );
-            }}
-            assert={async ({expect, state}) => {
-              expect(state).to.be.true;
-            }}
-          />
+          /> */}
+          <TestCase itShould={`属性canChangeSize`}>
+            <View style={{width: width - 40, height: 250}}>
+              <Text>属性canChangeSize为：true</Text>
+              <RecyclerListView
+                layoutProvider={getLayoutProvider(0)}
+                dataProvider={defaultDataProvider}
+                rowRenderer={rowRenderer}
+                layoutSize={{width: 250, height: 250}}
+                canChangeSize={true}
+              />
+            </View>
+            <View style={{width: width - 40, height: 250}}>
+              <Text>属性canChangeSize为：false</Text>
+              <RecyclerListView
+                layoutProvider={getLayoutProvider(0)}
+                dataProvider={defaultDataProvider}
+                rowRenderer={rowRenderer}
+                layoutSize={{width: 250, height: 250}}
+                canChangeSize={false}
+              />
+            </View>
+          </TestCase>
           <TestCase
             key={'applyWindowCorrection'}
-            itShould={'applyWindowCorrection'}
+            itShould={'方法applyWindowCorrection'}
             tags={['C_API']}
             initialState={false}
             arrange={({setState, state}) => {
               return (
-                <View>
+                <View style={{width: width - 40, height: 250}}>
                   <RecyclerListView
-                    {...baseProps}
-                    applyWindowCorrection={applyWindowCorrection}
+                    layoutProvider={defaultLayoutProvider}
+                    dataProvider={defaultDataProvider}
+                    rowRenderer={rowRenderer}
+                    applyWindowCorrection={
+                      state ? undefined : applyWindowCorrection
+                    }
                   />
                   <Button
                     title="修改applyWindowCorrection"
                     onPress={() => {
-                      setApplyWindowCorrection(() => {
-                        if (!state) Alert.alert('applyWindowCorrection');
-                      });
+                      setApplyWindowCorrection(
+                        applyWindowCorrectionFunc as any,
+                      );
                       setState(true);
                     }}
                   />
@@ -394,19 +572,46 @@ export const RecyclerListViewTestDemo = () => {
               expect(state).to.be.true;
             }}
           />
-          <TestCase itShould={`disableRecycling 当前为：true`}>
-            <RecyclerListView {...baseProps} disableRecycling={true} />
-          </TestCase>
           <TestCase
-            key={'forceNonDeterministicRendering'}
-            itShould={`forceNonDeterministicRendering 当前为：${forceNonDeterministicRendering}`}
+            key={'disableRecycling'}
+            itShould={`属性disableRecycling 当前为：${disableRecycling}`}
             tags={['C_API']}
             initialState={false}
             arrange={({setState, state}) => {
               return (
-                <View>
+                <View style={{width: width - 40, height: 250}}>
                   <RecyclerListView
-                    {...baseProps}
+                    layoutProvider={defaultLayoutProvider}
+                    dataProvider={getDataProvider(150)}
+                    rowRenderer={rowRenderer}
+                    disableRecycling={false}
+                  />
+                  <Button
+                    title="修改disableRecycling"
+                    onPress={() => {
+                      setDisableRecycling(true);
+                      setState(true);
+                    }}
+                  />
+                </View>
+              );
+            }}
+            assert={async ({expect, state}) => {
+              expect(state).to.be.true;
+            }}
+          />
+          <TestCase
+            key={'forceNonDeterministicRendering'}
+            itShould={`属性forceNonDeterministicRendering 当前为：${forceNonDeterministicRendering}`}
+            tags={['C_API']}
+            initialState={false}
+            arrange={({setState, state}) => {
+              return (
+                <View style={{width: width - 50, height: 250}}>
+                  <RecyclerListView
+                    layoutProvider={getLayoutProvider(0)}
+                    dataProvider={defaultDataProvider}
+                    rowRenderer={rowRenderer}
                     forceNonDeterministicRendering={
                       forceNonDeterministicRendering
                     }
@@ -427,28 +632,59 @@ export const RecyclerListViewTestDemo = () => {
               expect(state).to.be.true;
             }}
           />
-          <TestCase itShould={`extendedState 当前为：{title:"标题"}`}>
-            <RecyclerListView {...baseProps} extendedState={{title: '标题'}} />
-          </TestCase>
           <TestCase
-            key={'itemAnimator'}
-            itShould={`itemAnimator`}
+            key={'extendedState'}
+            itShould={`属性extendedState 当前为：${JSON.stringify(
+              extendedState,
+            )}`}
             tags={['C_API']}
             initialState={false}
             arrange={({setState, state}) => {
               return (
-                <View>
+                <View style={{width: width - 40, height: 250}}>
                   <RecyclerListView
-                    {...baseProps}
-                    itemAnimator={itemAnimator}
+                    layoutProvider={defaultLayoutProvider}
+                    dataProvider={defaultDataProvider}
+                    rowRenderer={rowRenderer}
+                    extendedState={extendedState}
+                  />
+                  <Button
+                    title="修改extendedState"
+                    onPress={() => {
+                      setExtendedState({title: '标题'});
+                      setState(true);
+                    }}
+                  />
+                </View>
+              );
+            }}
+            assert={async ({expect, state}) => {
+              expect(state).to.be.true;
+            }}
+          />
+          <TestCase
+            key={'itemAnimator'}
+            itShould={`属性itemAnimator`}
+            tags={['C_API']}
+            initialState={false}
+            arrange={({setState, state}) => {
+              return (
+                <View style={{width: width - 40, height: 250}}>
+                  <RecyclerListView
+                    layoutProvider={defaultLayoutProvider}
+                    dataProvider={defaultDataProvider}
+                    rowRenderer={rowRenderer}
+                    itemAnimator={
+                      itemAnimator === 'itemAnimator'
+                        ? new ItemAnimatorInstance({api: 'itemAnimator'})
+                        : undefined
+                    }
                   />
                   <Button
                     title="修改itemAnimator"
                     onPress={() => {
                       if (!state) {
-                        setItemAnimator(
-                          new ItemAnimatorInstance({api: 'itemAnimator'}),
-                        );
+                        setItemAnimator('itemAnimator');
                         setState(true);
                       }
                     }}
@@ -460,40 +696,54 @@ export const RecyclerListViewTestDemo = () => {
               expect(state).to.be.true;
             }}
           />
-          <TestCase itShould={`scrollViewProps`}>
-            <RecyclerListView
-              {...baseProps}
-              scrollViewProps={{
-                refreshControl: (
-                  <RefreshControl
-                    refreshing={loading}
-                    onRefresh={() => {
-                      setLoading(true);
-                      timer = setTimeout(() => {
-                        setLoading(false);
-                      }, 500);
-                    }}
-                  />
-                ),
-              }}
-            />
+          <TestCase itShould={`属性scrollViewProps`}>
+            <View style={{width: width - 40, height: 250}}>
+              <RecyclerListView
+                layoutProvider={defaultLayoutProvider}
+                dataProvider={defaultDataProvider}
+                rowRenderer={rowRenderer}
+                scrollViewProps={{
+                  refreshControl: (
+                    <RefreshControl
+                      refreshing={loading}
+                      onRefresh={() => {
+                        setLoading(true);
+                        timer = setTimeout(() => {
+                          setLoading(false);
+                        }, 1000);
+                      }}
+                    />
+                  ),
+                }}
+              />
+            </View>
           </TestCase>
-          <TestCase itShould={'当前layoutSize为：{width:250,height:250}'}>
-            <RecyclerListView
-              {...baseProps}
-              layoutSize={{width: 250, height: 250}}
-            />
+          <TestCase
+            itShould={`属性layoutSize 当前layoutSize为：${JSON.stringify({
+              width: 250,
+              height: 250,
+            })}`}>
+            <View style={{width: width - 40, height: 250}}>
+              <RecyclerListView
+                layoutProvider={getLayoutProvider(0)}
+                dataProvider={defaultDataProvider}
+                rowRenderer={rowRenderer}
+                layoutSize={{width: 250, height: 250}}
+              />
+            </View>
           </TestCase>
           <TestCase
             key={'onItemLayout'}
-            itShould={`onItemLayout`}
+            itShould={`属性onItemLayout`}
             tags={['C_API']}
             initialState={false}
             arrange={({setState, state}) => {
               return (
-                <View>
+                <View style={{width: width - 40, height: 250}}>
                   <RecyclerListView
-                    {...baseProps}
+                    layoutProvider={defaultLayoutProvider}
+                    dataProvider={defaultDataProvider}
+                    rowRenderer={rowRenderer}
                     forceNonDeterministicRendering={true}
                     onItemLayout={onItemLayout}
                   />
@@ -501,7 +751,50 @@ export const RecyclerListViewTestDemo = () => {
                     title="修改onItemLayout"
                     onPress={() => {
                       setOnItemLayout((index: number) => {
-                        !state && Alert.alert('onVisibleIndicesChanged');
+                        !state &&
+                          Alert.alert('onItemLayout', '', [
+                            {
+                              text: 'OK',
+                              onPress: () => setState(true),
+                            },
+                          ]);
+                      });
+                    }}
+                  />
+                </View>
+              );
+            }}
+            assert={async ({expect, state}) => {
+              expect(state).to.be.true;
+            }}
+          />
+          <TestCase
+            key={'windowCorrectionConfig'}
+            itShould={`属性windowCorrectionConfig 当前为${JSON.stringify(
+              windowCorrectionConfig,
+            )}`}
+            tags={['C_API']}
+            initialState={false}
+            arrange={({setState, state}) => {
+              return (
+                <View style={{width: width - 40, height: 250}}>
+                  <RecyclerListView
+                    layoutProvider={defaultLayoutProvider}
+                    dataProvider={defaultDataProvider}
+                    rowRenderer={rowRenderer}
+                    windowCorrectionConfig={windowCorrectionConfig}
+                  />
+                  <Button
+                    title="修改windowCorrectionConfig"
+                    onPress={() => {
+                      setWindowCorrectionConfig({
+                        applyToItemScroll: true,
+                        applyToInitialOffset: true,
+                        value: {
+                          startCorrection: 0,
+                          endCorrection: 0,
+                          windowShift: 100,
+                        },
                       });
                       setState(true);
                     }}
@@ -514,20 +807,33 @@ export const RecyclerListViewTestDemo = () => {
             }}
           />
           <TestCase
-            itShould={`windowCorrectionConfig：{applyToItemScroll: false,applyToInitialOffset: false,value: {startCorrection: 2,endCorrection: 2,windowShift: 1}}`}>
-            <RecyclerListView
-              {...baseProps}
-              windowCorrectionConfig={{
-                applyToItemScroll: false,
-                applyToInitialOffset: false,
-                value: {
-                  startCorrection: 2,
-                  endCorrection: 2,
-                  windowShift: 1,
-                },
-              }}
-            />
-          </TestCase>
+            key={'style'}
+            itShould={`属性style 当前为${JSON.stringify(componentStyle)}`}
+            tags={['C_API']}
+            initialState={false}
+            arrange={({setState, state}) => {
+              return (
+                <View style={{width: width - 40, height: 250}}>
+                  <RecyclerListView
+                    layoutProvider={defaultLayoutProvider}
+                    dataProvider={defaultDataProvider}
+                    rowRenderer={rowRenderer}
+                    style={componentStyle}
+                  />
+                  <Button
+                    title="修改componentStyle"
+                    onPress={() => {
+                      setComponentStyle({width: width - 100} as any);
+                      setState(true);
+                    }}
+                  />
+                </View>
+              );
+            }}
+            assert={async ({expect, state}) => {
+              expect(state).to.be.true;
+            }}
+          />
         </TestSuite>
       </ScrollView>
     </Tester>
