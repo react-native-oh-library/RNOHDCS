@@ -1,7 +1,7 @@
 import WebView from 'react-native-webview';
-import {ScrollView, StatusBar, View, Button, Text} from 'react-native';
-import {TestCase, Tester} from '@rnoh/testerino';
-import React, {useRef, useState} from 'react';
+import { ScrollView, StatusBar, View, Button, Text } from 'react-native';
+import { TestCase, Tester } from '@rnoh/testerino';
+import React, { useRef, useState } from 'react';
 
 export default function WebViewTest() {
   const reloadRef = useRef<any>();
@@ -21,6 +21,51 @@ export default function WebViewTest() {
   const clearCacheRef = useRef<any>();
 
   const clearHistoryRef = useRef<any>();
+
+  const webViewPostMessage = useRef<any>();
+  const introduceTemplate = `<html>
+
+  <head>
+      <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      <style>
+          html,
+          body {
+              height: 100%;
+              background-color: transparent
+          }
+  
+          * {
+              padding: 0;
+              margin: 0
+          }
+  
+          img {
+              width: 100%;
+              height: auto
+          }
+          #onPostMessage{
+            background: red;
+          }
+      </style>
+      
+  </head>
+  
+  <body>
+      <button style="padding-bottom: 90px" id="onPostMessage" style="backgroundColor:'red'">点击触发</button>
+      发送数据{a: '123', b: '456'}
+      <script>
+  
+          let onPostMessage = document.getElementById('onPostMessage');
+          onPostMessage.onclick = function(){
+              window.ReactNativeWebView.postMessage(JSON.stringify({a: '123', b: '456'}));
+          }
+          
+      </script>
+  </body>
+  
+  </html>
+  `;
 
   interface ControlProps {
     backward: () => void;
@@ -65,7 +110,7 @@ export default function WebViewTest() {
   };
 
   return (
-    <View style={{paddingBottom: 100, paddingTop: 0}}>
+    <View style={{ paddingBottom: 100, paddingTop: 0 }}>
       <StatusBar barStyle="dark-content"></StatusBar>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <Tester>
@@ -74,14 +119,14 @@ export default function WebViewTest() {
             itShould={`webview api uri`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               return (
-                <View style={{padding: 20, height: 600}}>
-                  <WebView source={{uri: 'www.baidu.com'}} />
+                <View style={{ padding: 20, height: 600 }}>
+                  <WebView source={{ uri: 'www.baidu.com' }} />
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -91,14 +136,14 @@ export default function WebViewTest() {
             itShould={`webview api incognito`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               return (
-                <View style={{padding: 20, height: 600}}>
-                  <WebView source={{uri: 'www.baidu.com'}} incognito={true} />
+                <View style={{ padding: 20, height: 600 }}>
+                  <WebView source={{ uri: 'www.baidu.com' }} incognito={true} />
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -107,17 +152,46 @@ export default function WebViewTest() {
             itShould={`webview api domStorageEnabled`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               return (
-                <View style={{padding: 20, height: 600}}>
+                <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{uri: 'www.baidu.com'}}
+                    source={{ uri: 'www.baidu.com' }}
                     domStorageEnabled={true}
                   />
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
+
+          <TestCase
+            key={'webview api postMessage'}
+            itShould={`webview api postMessage`}
+            tags={['C_API']}
+            initialState={false}
+            arrange={({ setState }) => {
+
+              const [event, setEvent] = useState({});
+              return (
+                <View style={{ padding: 20, height: 600 }}>
+                  <Text>{JSON.stringify(event)}</Text>
+                  <WebView
+                    ref={webViewPostMessage}
+                    domStorageEnabled={true}
+                    onMessage={event => {
+                      // const {data} = event.nativeEvent;
+                      setEvent(event.nativeEvent.data)
+                      console.log('String message from the WebView: ', event.nativeEvent.data);
+                    }}
+                    source={{ html: introduceTemplate }}
+                  />
+                </View>
+              );
+            }}
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -127,17 +201,17 @@ export default function WebViewTest() {
             itShould={`webview api javaScriptEnabled`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               return (
-                <View style={{padding: 20, height: 600}}>
+                <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{uri: 'www.baidu.com'}}
+                    source={{ uri: 'www.baidu.com' }}
                     javaScriptEnabled={true}
                   />
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -147,17 +221,17 @@ export default function WebViewTest() {
             itShould={`webview api cacheEnabled`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               return (
-                <View style={{padding: 20, height: 600}}>
+                <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{uri: 'www.baidu.com'}}
+                    source={{ uri: 'www.baidu.com' }}
                     cacheEnabled={true}
                   />
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -167,14 +241,16 @@ export default function WebViewTest() {
             itShould={`webview api textZoom`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               return (
-                <View style={{padding: 20, height: 600}}>
-                  <WebView source={{uri: 'www.baidu.com'}} textZoom={40} />
+
+                <View style={{ padding: 20, height: 600 }}>
+                  <Text>textZoom:10</Text>
+                  <WebView source={{ uri: 'www.baidu.com' }} textZoom={10} />
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -184,17 +260,17 @@ export default function WebViewTest() {
             itShould={`webview api scalesPageToFit`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               return (
-                <View style={{padding: 20, height: 600}}>
+                <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{uri: 'www.baidu.com'}}
+                    source={{ uri: 'www.baidu.com' }}
                     scalesPageToFit={true}
                   />
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -204,17 +280,17 @@ export default function WebViewTest() {
             itShould={`webview api injectJavaScript`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               return (
-                <View style={{padding: 20, height: 600}}>
+                <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{uri: 'www.baidu.com'}}
+                    source={{ uri: 'www.baidu.com' }}
                     injectedJavaScript={`alert('injectedJavaScript')`}
                   />
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -224,17 +300,17 @@ export default function WebViewTest() {
             itShould={`webview api userAgent`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               return (
-                <View style={{padding: 20, height: 600}}>
+                <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{uri: 'www.baidu.com'}}
+                    source={{ uri: 'www.baidu.com' }}
                     userAgent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
                   />
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -244,15 +320,15 @@ export default function WebViewTest() {
             itShould={`webview api ref`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               return (
-                <View style={{padding: 20, height: 600}}>
-                  <WebView source={{uri: 'www.baidu.com'}} ref={reloadRef} />
+                <View style={{ padding: 20, height: 600 }}>
+                  <WebView source={{ uri: 'www.baidu.com' }} ref={reloadRef} />
                   <Button title={'reload'} onPress={reload}></Button>
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -262,15 +338,15 @@ export default function WebViewTest() {
             itShould={`webview api ref goBack`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               return (
-                <View style={{padding: 20, height: 600}}>
-                  <WebView source={{uri: 'www.baidu.com'}} ref={goBackRef} />
+                <View style={{ padding: 20, height: 600 }}>
+                  <WebView source={{ uri: 'www.baidu.com' }} ref={goBackRef} />
                   <Button title={'goBack'} onPress={goBack}></Button>
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -280,11 +356,11 @@ export default function WebViewTest() {
             itShould={`webview api ref injectJavaScriptRef`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               return (
-                <View style={{padding: 20, height: 600}}>
+                <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{uri: 'www.baidu.com'}}
+                    source={{ uri: 'www.baidu.com' }}
                     ref={injectJavaScriptRef}
                   />
                   <Button
@@ -293,7 +369,7 @@ export default function WebViewTest() {
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -303,18 +379,18 @@ export default function WebViewTest() {
             itShould={`webview api ref stopLoading`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               return (
-                <View style={{padding: 20, height: 600}}>
+                <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{uri: 'www.baidu.com'}}
+                    source={{ uri: 'www.baidu.com' }}
                     ref={stopLoadingRef}
                   />
                   <Button title={'stopLoading'} onPress={stopLoading}></Button>
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -324,15 +400,15 @@ export default function WebViewTest() {
             itShould={`webview api ref goForward`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               return (
-                <View style={{padding: 20, height: 600}}>
-                  <WebView source={{uri: 'www.baidu.com'}} ref={goForwardRef} />
+                <View style={{ padding: 20, height: 600 }}>
+                  <WebView source={{ uri: 'www.baidu.com' }} ref={goForwardRef} />
                   <Button title={'goForward'} onPress={goForward}></Button>
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -342,15 +418,15 @@ export default function WebViewTest() {
             itShould={`webview api ref loadUrl`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               return (
-                <View style={{padding: 20, height: 600}}>
-                  <WebView source={{uri: 'www.baidu.com'}} ref={loadUrlRef} />
+                <View style={{ padding: 20, height: 600 }}>
+                  <WebView source={{ uri: 'www.baidu.com' }} ref={loadUrlRef} />
                   <Button title={'loadUrl'} onPress={loadUrl}></Button>
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -359,11 +435,11 @@ export default function WebViewTest() {
             itShould={`webview api ref requestFocus`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               return (
-                <View style={{padding: 20, height: 600}}>
+                <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{uri: 'www.baidu.com'}}
+                    source={{ uri: 'www.baidu.com' }}
                     ref={requestFocusRef}
                   />
                   <Button
@@ -372,7 +448,7 @@ export default function WebViewTest() {
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -382,18 +458,18 @@ export default function WebViewTest() {
             itShould={`webview api ref clearCache`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               return (
-                <View style={{padding: 20, height: 600}}>
+                <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{uri: 'www.baidu.com'}}
+                    source={{ uri: 'www.baidu.com' }}
                     ref={clearCacheRef}
                   />
                   <Button title={'clearCache'} onPress={clearCache}></Button>
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -403,11 +479,11 @@ export default function WebViewTest() {
             itShould={`webview api ref clearHistory`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               return (
-                <View style={{padding: 20, height: 600}}>
+                <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{uri: 'www.baidu.com'}}
+                    source={{ uri: 'www.baidu.com' }}
                     ref={clearHistoryRef}
                   />
                   <Button
@@ -416,7 +492,7 @@ export default function WebViewTest() {
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -426,21 +502,21 @@ export default function WebViewTest() {
             itShould={`webview api ref onLoadProgress`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               const [event, setEvent] = useState({});
               return (
-                <View style={{padding: 20, height: 600}}>
+                <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{uri: 'www.baidu.com'}}
+                    source={{ uri: 'www.baidu.com' }}
                     onLoadProgress={e => {
-                      setEvent(e);
+                      setEvent(e.nativeEvent);
                     }}
                   />
                   <Text>{JSON.stringify(event)}</Text>
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -450,21 +526,21 @@ export default function WebViewTest() {
             itShould={`webview api ref onScroll`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               const [event, setEvent] = useState({});
               return (
-                <View style={{padding: 20, height: 600}}>
+                <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{uri: 'www.baidu.com'}}
+                    source={{ uri: 'www.baidu.com' }}
                     onScroll={e => {
-                      setEvent(e);
+                      setEvent(e.nativeEvent);
                     }}
                   />
                   <Text>{JSON.stringify(event)}</Text>
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -474,21 +550,21 @@ export default function WebViewTest() {
             itShould={`webview api ref onLoad`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               const [event, setEvent] = useState({});
               return (
-                <View style={{padding: 20, height: 600}}>
+                <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{uri: 'www.baidu.com'}}
+                    source={{ uri: 'www.baidu.com' }}
                     onLoad={e => {
-                      setEvent(e);
+                      setEvent(e.nativeEvent);
                     }}
                   />
                   <Text>{JSON.stringify(event)}</Text>
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -498,21 +574,21 @@ export default function WebViewTest() {
             itShould={`webview api ref onLoadEnd`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               const [event, setEvent] = useState({});
               return (
-                <View style={{padding: 20, height: 600}}>
+                <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{uri: 'www.baidu.com'}}
+                    source={{ uri: 'www.baidu.com' }}
                     onLoadEnd={e => {
-                      setEvent(e);
+                      setEvent(e.nativeEvent);
                     }}
                   />
                   <Text>{JSON.stringify(event)}</Text>
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -522,21 +598,21 @@ export default function WebViewTest() {
             itShould={`webview api ref onLoadStart`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               const [event, setEvent] = useState({});
               return (
-                <View style={{padding: 20, height: 600}}>
+                <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{uri: 'www.baidu.com'}}
+                    source={{ uri: 'www.baidu.com' }}
                     onLoadStart={e => {
-                      setEvent(e);
+                      setEvent(e.nativeEvent);
                     }}
                   />
                   <Text>{JSON.stringify(event)}</Text>
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -546,12 +622,12 @@ export default function WebViewTest() {
             itShould={`webview api ref onError`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               const [event, setEvent] = useState({});
               return (
-                <View style={{padding: 20, height: 600}}>
+                <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{uri: 'www.baidu.com'}}
+                    source={{ uri: 'www.baidu.com' }}
                     onError={e => {
                       setEvent(e);
                     }}
@@ -560,7 +636,7 @@ export default function WebViewTest() {
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -570,12 +646,12 @@ export default function WebViewTest() {
             itShould={`webview api ref onHttpError`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               const [event, setEvent] = useState({});
               return (
-                <View style={{padding: 20, height: 600}}>
+                <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{uri: 'www.baidu.com'}}
+                    source={{ uri: 'www.baidu.com' }}
                     onHttpError={e => {
                       setEvent(e);
                     }}
@@ -584,7 +660,7 @@ export default function WebViewTest() {
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -594,18 +670,18 @@ export default function WebViewTest() {
             itShould={`webview api ref applicationNameForUserAgent`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               const [event, setEvent] = useState({});
               return (
-                <View style={{padding: 20, height: 600}}>
+                <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{uri: 'www.baidu.com'}}
+                    source={{ uri: 'www.baidu.com' }}
                     applicationNameForUserAgent={'xxxxx'}
                   />
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -614,18 +690,18 @@ export default function WebViewTest() {
             itShould={`webview api ref geolocationEnabled`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               const [event, setEvent] = useState({});
               return (
-                <View style={{padding: 20, height: 600}}>
+                <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{uri: 'www.baidu.com'}}
+                    source={{ uri: 'www.baidu.com' }}
                     geolocationEnabled={true}
                   />
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -635,18 +711,18 @@ export default function WebViewTest() {
             itShould={`webview api ref fraudulentWebsiteWarningEnabled`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               const [event, setEvent] = useState({});
               return (
-                <View style={{padding: 20, height: 600}}>
+                <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{uri: 'www.baidu.com'}}
+                    source={{ uri: 'www.baidu.com' }}
                     fraudulentWebsiteWarningEnabled={true}
                   />
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -656,18 +732,18 @@ export default function WebViewTest() {
             itShould={`webview api ref setThirdPartyCookiesEnabled`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               const [event, setEvent] = useState({});
               return (
-                <View style={{padding: 20, height: 600}}>
+                <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{uri: 'www.baidu.com'}}
+                    source={{ uri: 'www.baidu.com' }}
                     setThirdPartyCookiesEnabled={true}
                   />
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -677,15 +753,15 @@ export default function WebViewTest() {
             itShould={`webview api ref forceDarkOn`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               const [event, setEvent] = useState({});
               return (
-                <View style={{padding: 20, height: 600}}>
-                  <WebView source={{uri: 'www.baidu.com'}} forceDarkOn={true} />
+                <View style={{ padding: 20, height: 600 }}>
+                  <WebView source={{ uri: 'www.baidu.com' }} forceDarkOn={true} />
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
@@ -695,18 +771,18 @@ export default function WebViewTest() {
             itShould={`webview api ref minimumFontSize`}
             tags={['C_API']}
             initialState={false}
-            arrange={({setState}) => {
+            arrange={({ setState }) => {
               const [event, setEvent] = useState({});
               return (
-                <View style={{padding: 20, height: 600}}>
+                <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{uri: 'www.baidu.com'}}
+                    source={{ uri: 'www.baidu.com' }}
                     minimumFontSize={50}
                   />
                 </View>
               );
             }}
-            assert={async ({expect, state}) => {
+            assert={async ({ expect, state }) => {
               expect(state).to.be.true;
             }}
           />
