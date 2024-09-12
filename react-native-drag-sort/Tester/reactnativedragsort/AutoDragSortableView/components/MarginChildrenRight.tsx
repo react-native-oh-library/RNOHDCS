@@ -10,7 +10,7 @@ import {generateDataSource} from '../../libs';
  * marginChildrenRight,【子组件右边距】
  */
 
-const defaultData = generateDataSource(30, '标题');
+const defaultData = generateDataSource(60, '标题');
 
 export const API_marginChildrenRight = () => {
   const [marginChildrenRight, setMarginChildrenRight] = useState(0);

@@ -15,7 +15,7 @@ const defaultData = generateDataSource(20, '标题');
 export const API_maxScale = () => {
   const [maxScale, setMaxScale] = useState(1.2);
   return (
-    <Tester>
+    <Tester style={{flex: 1}}>
       <TestSuite name="maxScale">
         <TestCase
           key={'maxScale'}
@@ -24,7 +24,7 @@ export const API_maxScale = () => {
           initialState={false}
           arrange={({setState}) => {
             return (
-              <View style={{height: 510}}>
+              <View>
                 <DragSortableView
                   parentWidth={356}
                   dataSource={defaultData}

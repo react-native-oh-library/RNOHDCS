@@ -10,12 +10,12 @@ import {generateDataSource} from '../../libs';
  * dataSource,【数据源】
  */
 
-const defaultData = generateDataSource(16, '标题');
+const defaultData = generateDataSource(20, '标题');
 
 export const API_dataSource = () => {
   const [dataSource, setDataSource] = useState(defaultData);
   return (
-    <Tester style={{paddingBottom: 70}}>
+    <Tester style={{flex: 1}}>
       <TestSuite name="dataSource">
         <TestCase
           key={'dataSource'}
@@ -24,7 +24,7 @@ export const API_dataSource = () => {
           initialState={false}
           arrange={({setState}) => {
             return (
-              <View style={{height: 510}}>
+              <View>
                 <DragSortableView
                   parentWidth={356}
                   dataSource={dataSource}
@@ -41,7 +41,7 @@ export const API_dataSource = () => {
                 <Button
                   title="修改dataSource"
                   onPress={() => {
-                    setDataSource(generateDataSource(16, '活动'));
+                    setDataSource(generateDataSource(20, '活动'));
                     setState(true);
                   }}
                 />

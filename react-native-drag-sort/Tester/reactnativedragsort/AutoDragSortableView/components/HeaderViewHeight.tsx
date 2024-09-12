@@ -10,7 +10,7 @@ import {generateDataSource} from '../../libs';
  * headerViewHeight,【头部组件高度，支撑算法】
  */
 
-const defaultData = generateDataSource(30, '标题');
+const defaultData = generateDataSource(60, '标题');
 
 export const API_headerViewHeight = () => {
   return (

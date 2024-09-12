@@ -10,7 +10,7 @@ import {generateDataSource} from '../../libs';
  * scaleStatus,【缩放状态】
  */
 
-const defaultData = generateDataSource(30, '标题');
+const defaultData = generateDataSource(60, '标题');
 
 export const API_scaleStatus = () => {
   const [scaleStatusX, setScaleStatusX] = useState('scale');

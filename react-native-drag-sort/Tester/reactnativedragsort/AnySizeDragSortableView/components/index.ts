@@ -10,7 +10,7 @@ export * from './RenderBottomView';
 export * from './BottomViewHeight';
 export * from './AutoThrottle';
 export * from './AutoThrottleDuration';
-export * from './ScrollIndicatorInsets';
+// export * from './ScrollIndicatorInsets';
 export * from './OnScrollListener';
 export * from './OnScrollRef';
 export * from './AreaOverlapRatio';

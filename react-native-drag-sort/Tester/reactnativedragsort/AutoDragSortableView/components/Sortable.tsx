@@ -10,7 +10,7 @@ import {generateDataSource} from '../../libs';
  * sortable,【是否可拖拽】
  */
 
-const defaultData = generateDataSource(30, '标题');
+const defaultData = generateDataSource(60, '标题');
 
 export const API_sortable = () => {
   const [sortable, setSortable] = useState(true);

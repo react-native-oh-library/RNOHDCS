@@ -10,7 +10,7 @@ import {anySizeDragSortableVIewStyle as styles} from '../../styles';
  * onScrollListener,【滚动监听】
  */
 
-const defaultData = generateDataSource(30, '标题');
+const defaultData = generateDataSource(60, '标题');
 
 export const API_onScrollListener = () => {
   const ref = useRef();

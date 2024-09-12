@@ -5,7 +5,7 @@ import * as CompByNames from './components';
 
 export function DragSortableViewDemo() {
   return (
-    <View style={{backgroundColor: 'black', paddingBottom: 70}}>
+    <View style={{backgroundColor: 'black'}}>
       <NavigationContainer>
         {Object.entries(CompByNames).map(([Name, Comp]) => {
           return (

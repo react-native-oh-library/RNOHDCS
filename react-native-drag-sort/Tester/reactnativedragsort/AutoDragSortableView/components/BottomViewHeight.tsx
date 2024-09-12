@@ -10,7 +10,7 @@ import {generateDataSource} from '../../libs';
  * bottomViewHeight,【底部部组件高度，支撑算法】
  */
 
-const defaultData = generateDataSource(30, '标题');
+const defaultData = generateDataSource(60, '标题');
 
 export const API_bottomViewHeight = () => {
   return (
@@ -32,7 +32,7 @@ export const API_bottomViewHeight = () => {
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}>
-                  <Text>我是底部部组件</Text>
+                  <Text>我是底部组件</Text>
                 </View>
               }
               bottomViewHeight={40}

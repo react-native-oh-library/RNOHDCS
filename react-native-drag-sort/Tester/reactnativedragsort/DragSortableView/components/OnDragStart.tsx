@@ -14,7 +14,7 @@ const defaultData = generateDataSource(20, '标题');
 
 export const API_onDragStart = () => {
   return (
-    <Tester>
+    <Tester style={{flex: 1}}>
       <TestSuite name="onDragStart">
         <TestCase
           key={'onDragStart'}
@@ -23,11 +23,11 @@ export const API_onDragStart = () => {
           initialState={false}
           arrange={({setState}) => {
             return (
-              <View style={{height: 510}}>
+              <View>
                 <DragSortableView
                   parentWidth={356}
                   dataSource={defaultData}
-                  childrenHeight={100}
+                  childrenHeight={90}
                   childrenWidth={88}
                   onDragStart={() => {
                     Alert.alert('触发onDragStart', '', [
@@ -38,7 +38,7 @@ export const API_onDragStart = () => {
                     return (
                       <View
                         key={item.id}
-                        style={{...styles.childView, height: 94}}>
+                        style={{...styles.childView, height: 84}}>
                         <Text style={styles.childText}>{item.title}</Text>
                       </View>
                     );

@@ -10,7 +10,7 @@ import {generateDataSource} from '../../libs';
  * autoThrottleDuration,【子组件拖动到指定位置所用的时间】
  */
 
-const defaultData = generateDataSource(30, '标题');
+const defaultData = generateDataSource(60, '标题');
 
 export const API_autoThrottleDuration = () => {
   const [autoThrottleDuration, setAutoThrottleDuration] = useState(10);

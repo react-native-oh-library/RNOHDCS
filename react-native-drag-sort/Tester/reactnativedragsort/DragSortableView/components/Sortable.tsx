@@ -15,7 +15,7 @@ const defaultData = generateDataSource(20, '标题');
 export const API_sortable = () => {
   const [sortable, setSortable] = useState(true);
   return (
-    <Tester>
+    <Tester style={{flex: 1}}>
       <TestSuite name="sortable">
         <TestCase
           key={'sortable'}
@@ -24,7 +24,7 @@ export const API_sortable = () => {
           initialState={false}
           arrange={({setState}) => {
             return (
-              <View style={{height: 510}}>
+              <View>
                 <DragSortableView
                   parentWidth={356}
                   dataSource={defaultData}

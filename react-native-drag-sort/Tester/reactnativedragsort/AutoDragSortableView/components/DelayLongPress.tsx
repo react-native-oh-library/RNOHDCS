@@ -10,7 +10,7 @@ import {generateDataSource} from '../../libs';
  * delayLongPress,【触发拖拽开始所用的时间】
  */
 
-const defaultData = generateDataSource(30, '标题');
+const defaultData = generateDataSource(60, '标题');
 
 export const API_delayLongPress = () => {
   const [delayLongPress, setDelayLongPress] = useState(0);

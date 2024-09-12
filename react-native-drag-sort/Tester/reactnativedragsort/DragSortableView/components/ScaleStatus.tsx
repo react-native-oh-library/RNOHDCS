@@ -16,7 +16,7 @@ export const API_scaleStatus = () => {
   const [scaleStatusX, setScaleStatusX] = useState('scale');
   const [scaleStatusY, setScaleStatusY] = useState('scale');
   return (
-    <Tester>
+    <Tester style={{flex: 1}}>
       <TestSuite name="scaleStatus">
         <TestCase
           key={'scaleStatusX'}
@@ -25,7 +25,7 @@ export const API_scaleStatus = () => {
           initialState={false}
           arrange={({setState}) => {
             return (
-              <View style={{height: 200}}>
+              <View>
                 <DragSortableView
                   parentWidth={356}
                   dataSource={defaultData}

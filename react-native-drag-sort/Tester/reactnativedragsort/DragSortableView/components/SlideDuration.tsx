@@ -15,7 +15,7 @@ const defaultData = generateDataSource(20, '标题');
 export const API_slideDuration = () => {
   const [slideDuration, setSlideDuration] = useState(300);
   return (
-    <Tester>
+    <Tester style={{flex: 1}}>
       <TestSuite name="slideDuration">
         <TestCase
           key={'slideDuration'}
@@ -24,7 +24,7 @@ export const API_slideDuration = () => {
           initialState={false}
           arrange={({setState}) => {
             return (
-              <View style={{height: 510}}>
+              <View>
                 <DragSortableView
                   parentWidth={356}
                   dataSource={defaultData}
@@ -42,7 +42,7 @@ export const API_slideDuration = () => {
                 <Button
                   title="修改slideDuration"
                   onPress={() => {
-                    setSlideDuration(600);
+                    setSlideDuration(1000);
                     setState(true);
                   }}
                 />

@@ -16,7 +16,7 @@ export const API_childrenWidth = () => {
   const [childrenWidth, setChildrenWidth] = useState(88);
 
   return (
-    <Tester>
+    <Tester style={{flex: 1}}>
       <TestSuite name="childrenWidth">
         <TestCase
           key={'childrenWidth'}
@@ -25,7 +25,7 @@ export const API_childrenWidth = () => {
           initialState={false}
           arrange={({setState}) => {
             return (
-              <View style={{height: 510}}>
+              <View>
                 <DragSortableView
                   parentWidth={356}
                   dataSource={defaultData}
