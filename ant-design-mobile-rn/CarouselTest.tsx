@@ -4,7 +4,6 @@ import { Carousel, Button } from '@ant-design/react-native';
 import { TestSuite, TestCase } from '@rnoh/testerino';
 
 export default () => {
-  const [autoplay, setAutoplay] = useState(true);
   return (
     <TestSuite name="CarouselTest">
       <TestCase itShould="render a Carousel selectedIndex={2}" tags={['C_API']}>
@@ -16,13 +15,13 @@ export default () => {
       <TestCase itShould="render a Carousel vertical={true}" tags={['C_API']}>
         <CarouselVerticalTest />
       </TestCase>
-      <TestCase itShould="render a Carousel autoplay={true}" tags={['C_API']}>
+      <TestCase itShould="render a Carousel autoplay={true}, autoplay={false}" tags={['C_API']}>
         <CarouselAutoplayTest />
       </TestCase>
-      <TestCase itShould="render a Carousel autoplayInterval={1000}" tags={['C_API']}>
+      <TestCase itShould="render a Carousel autoplayInterval={1000}, autoplayInterval={3000}" tags={['C_API']}>
         <CarouselAutoplayIntervalTest />
       </TestCase>
-      <TestCase itShould="render a Carousel infinite={true}" tags={['C_API']}>
+      <TestCase itShould="render a Carousel infinite={true}, infinite={false}" tags={['C_API']}>
         <CarouselInfiniteTest />
       </TestCase>
       <TestCase itShould="render a Carousel afterChange()" tags={['C_API']} initialState={false}
@@ -31,7 +30,7 @@ export default () => {
             <Carousel
               style={styles.wrapper}
               selectedIndex={1}
-              autoplay={true}
+              autoplay={false}
               infinite
               afterChange={(index: number) => { setState(true); }}
             >
@@ -75,20 +74,23 @@ export default () => {
 
 function CarouselSelectedIndexTest() {
   return (
-    <Carousel
-      style={styles.wrapper}
-      selectedIndex={2}
-    >
-      <View style={[styles.containerHorizontal, { backgroundColor: 'red' }]}>
-        <Text>Carousel 1</Text>
-      </View>
-      <View style={[styles.containerHorizontal, { backgroundColor: 'blue' }]}>
-        <Text>Carousel 2</Text>
-      </View>
-      <View style={[styles.containerHorizontal, { backgroundColor: 'yellow' }]}>
-        <Text>Carousel 3</Text>
-      </View>
-    </Carousel>
+    <View>
+      <Carousel
+        style={styles.wrapper}
+        selectedIndex={2}
+        autoplay={true}
+      >
+        <View style={[styles.containerHorizontal, { backgroundColor: 'red' }]}>
+          <Text>Carousel 1</Text>
+        </View>
+        <View style={[styles.containerHorizontal, { backgroundColor: 'blue' }]}>
+          <Text>Carousel 2</Text>
+        </View>
+        <View style={[styles.containerHorizontal, { backgroundColor: 'yellow' }]}>
+          <Text>Carousel 3</Text>
+        </View>
+      </Carousel>
+    </View>
   )
 }
 
@@ -134,64 +136,120 @@ function CarouselVerticalTest() {
 
 function CarouselAutoplayTest() {
   return (
-    <Carousel
-      style={styles.wrapper}
-      selectedIndex={0}
-      autoplay={true}
-    >
-      <View style={[styles.containerHorizontal, { backgroundColor: 'red' }]}>
-        <Text>Carousel 1</Text>
-      </View>
-      <View style={[styles.containerHorizontal, { backgroundColor: 'blue' }]}>
-        <Text>Carousel 2</Text>
-      </View>
-      <View style={[styles.containerHorizontal, { backgroundColor: 'yellow' }]}>
-        <Text>Carousel 3</Text>
-      </View>
-    </Carousel>
+    <View>
+      <Carousel
+        style={styles.wrapper}
+        selectedIndex={0}
+        autoplay={true}
+      >
+        <View style={[styles.containerHorizontal, { backgroundColor: 'red' }]}>
+          <Text>Carousel 1</Text>
+        </View>
+        <View style={[styles.containerHorizontal, { backgroundColor: 'blue' }]}>
+          <Text>Carousel 2</Text>
+        </View>
+        <View style={[styles.containerHorizontal, { backgroundColor: 'yellow' }]}>
+          <Text>Carousel 3</Text>
+        </View>
+      </Carousel>
+      <Carousel
+        style={styles.wrapper}
+        selectedIndex={0}
+        autoplay={false}
+      >
+        <View style={[styles.containerHorizontal, { backgroundColor: 'red' }]}>
+          <Text>Carousel 1</Text>
+        </View>
+        <View style={[styles.containerHorizontal, { backgroundColor: 'blue' }]}>
+          <Text>Carousel 2</Text>
+        </View>
+        <View style={[styles.containerHorizontal, { backgroundColor: 'yellow' }]}>
+          <Text>Carousel 3</Text>
+        </View>
+      </Carousel>
+    </View>
   )
 }
 
 function CarouselAutoplayIntervalTest() {
   return (
-    <Carousel
-      style={styles.wrapper}
-      selectedIndex={0}
-      autoplay={true}
-      autoplayInterval={1000}
-    >
-      <View style={[styles.containerHorizontal, { backgroundColor: 'red' }]}>
-        <Text>Carousel 1</Text>
-      </View>
-      <View style={[styles.containerHorizontal, { backgroundColor: 'blue' }]}>
-        <Text>Carousel 2</Text>
-      </View>
-      <View style={[styles.containerHorizontal, { backgroundColor: 'yellow' }]}>
-        <Text>Carousel 3</Text>
-      </View>
-    </Carousel>
+    <View>
+      <Carousel
+        style={styles.wrapper}
+        selectedIndex={0}
+        autoplay={true}
+        autoplayInterval={1000}
+        infinite={true}
+      >
+        <View style={[styles.containerHorizontal, { backgroundColor: 'red' }]}>
+          <Text>Carousel 1</Text>
+        </View>
+        <View style={[styles.containerHorizontal, { backgroundColor: 'blue' }]}>
+          <Text>Carousel 2</Text>
+        </View>
+        <View style={[styles.containerHorizontal, { backgroundColor: 'yellow' }]}>
+          <Text>Carousel 3</Text>
+        </View>
+      </Carousel>
+      <Carousel
+        style={styles.wrapper}
+        selectedIndex={0}
+        autoplay={true}
+        infinite={true}
+        autoplayInterval={3000}
+      >
+        <View style={[styles.containerHorizontal, { backgroundColor: 'red' }]}>
+          <Text>Carousel 1</Text>
+        </View>
+        <View style={[styles.containerHorizontal, { backgroundColor: 'blue' }]}>
+          <Text>Carousel 2</Text>
+        </View>
+        <View style={[styles.containerHorizontal, { backgroundColor: 'yellow' }]}>
+          <Text>Carousel 3</Text>
+        </View>
+      </Carousel>
+    </View>
   )
 }
 
 function CarouselInfiniteTest() {
   return (
-    <Carousel
-      style={styles.wrapper}
-      selectedIndex={0}
-      autoplay={true}
-      autoplayInterval={1000}
-      infinite={true}
-    >
-      <View style={[styles.containerHorizontal, { backgroundColor: 'red' }]}>
-        <Text>Carousel 1</Text>
-      </View>
-      <View style={[styles.containerHorizontal, { backgroundColor: 'blue' }]}>
-        <Text>Carousel 2</Text>
-      </View>
-      <View style={[styles.containerHorizontal, { backgroundColor: 'yellow' }]}>
-        <Text>Carousel 3</Text>
-      </View>
-    </Carousel>
+    <View>
+      <Carousel
+        style={styles.wrapper}
+        selectedIndex={0}
+        autoplay={true}
+        autoplayInterval={1000}
+        infinite={true}
+      >
+        <View style={[styles.containerHorizontal, { backgroundColor: 'red' }]}>
+          <Text>Carousel 1</Text>
+        </View>
+        <View style={[styles.containerHorizontal, { backgroundColor: 'blue' }]}>
+          <Text>Carousel 2</Text>
+        </View>
+        <View style={[styles.containerHorizontal, { backgroundColor: 'yellow' }]}>
+          <Text>Carousel 3</Text>
+        </View>
+      </Carousel>
+      <Carousel
+        style={styles.wrapper}
+        selectedIndex={0}
+        autoplay={true}
+        autoplayInterval={1000}
+        infinite={false}
+      >
+        <View style={[styles.containerHorizontal, { backgroundColor: 'red' }]}>
+          <Text>Carousel 1</Text>
+        </View>
+        <View style={[styles.containerHorizontal, { backgroundColor: 'blue' }]}>
+          <Text>Carousel 2</Text>
+        </View>
+        <View style={[styles.containerHorizontal, { backgroundColor: 'yellow' }]}>
+          <Text>Carousel 3</Text>
+        </View>
+      </Carousel>
+    </View>
   )
 }
 
@@ -271,7 +329,7 @@ function CarouselPaginationTest() {
       autoplay={true}
       autoplayInterval={3000}
       infinite={true}
-      pagination={() => <View style={{ width: 20, height: 20, backgroundColor: 'pink'}}></View>}
+      pagination={() => <View style={{ width: 20, height: 20, backgroundColor: 'pink' }}></View>}
     >
       <View style={[styles.containerHorizontal, { backgroundColor: 'red' }]}>
         <Text>Carousel 1</Text>

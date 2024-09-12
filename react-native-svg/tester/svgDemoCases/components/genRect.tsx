@@ -11,7 +11,8 @@ import {
 const basicProps = {
   width: 80,
   height: 80,
-  fill: 'red',
+  fill: 'grey',
+  strokeWidth: '2',
 };
 
 const basicCases: CaseParams[] = [

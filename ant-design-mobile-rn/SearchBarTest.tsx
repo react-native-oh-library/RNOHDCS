@@ -27,7 +27,7 @@ export default () => {
       </TestCase>
       <TestCase itShould="SearchBar onCancel()" tags={['C_API']} initialState={false}
         arrange={({ setState }: any) =>
-          <SearchBar placeholder="请搜索..." onCancel={() => { setState(true); }} />
+          <SearchBar placeholder="请搜索..." onCancel={() => { setState(true) }} showCancelButton={true} />
         }
         assert={({ expect, state }) => {
           expect(state).to.be.eq(true);
@@ -57,14 +57,16 @@ export default () => {
           expect(state).to.be.eq(true);
         }}>
       </TestCase>
-      <TestCase itShould="SearchBar showCancelButton=true" tags={['C_API']}>
+      <TestCase itShould="SearchBar showCancelButton=true, showCancelButton={false}" tags={['C_API']}>
         <SearchBar showCancelButton={true} />
+        <SearchBar showCancelButton={false} />
       </TestCase>
       <TestCase itShould="SearchBar cancelText='清除'" tags={['C_API']}>
         <SearchBar showCancelButton={true} cancelText='清除' />
       </TestCase>
-      <TestCase itShould="SearchBar disabled" tags={['C_API']}>
+      <TestCase itShould="SearchBar disabled={true}, disabled={false}" tags={['C_API']}>
         <SearchBar disabled />
+        <SearchBar disabled={false} />
       </TestCase>
     </TestSuite>
   );

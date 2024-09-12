@@ -188,6 +188,18 @@ const Detail = () => {
     );
 };
 
+const RouteDetail = () => {
+    return (
+        <View><Text>RouteDetail路由内容</Text></View>
+    );
+};
+
+const RouteIndex = () => {
+    return (
+        <View><Text>RouteIndex路由内容</Text></View>
+    );
+};
+
 
 const GetRoutes = () => {
     return useRoutes([
@@ -275,7 +287,7 @@ const LocationTest = () => {
     );
 };
 
-export function ReactRouterDomTest() {
+export default function ReactRouterDomTest() {
 
 
     return (
@@ -283,7 +295,7 @@ export function ReactRouterDomTest() {
             <Tester>
                 <TestSuite name="ReactRouterDomTest">
                     <TestCase.Manual
-                        itShould="useRoutes"
+                        itShould="useRoutes and useNavigate "
                         initialState={{
                             changeStatus: false
                         }}
@@ -322,7 +334,7 @@ export function ReactRouterDomTest() {
                     </TestCase.Manual>
                     <View style={{ height: 30 }}></View>
                     <TestCase.Manual
-                        itShould="Router"
+                        itShould="MemoryRouter"
                         initialState={{
                             changeStatus: false
                         }}
@@ -518,6 +530,32 @@ export function ReactRouterDomTest() {
                                         }}
                                     />
                                 </>
+                            );
+                        }}
+                        assert={({ expect, state }) => {
+                            expect(state.changeStatus).to.be.true;
+                        }}>
+                    </TestCase.Manual>
+                    <TestCase.Manual
+                        itShould="Routes and Route"
+                        initialState={{
+                            changeStatus: false
+                        }}
+                        arrange={({ setState, state }) => {
+                            return (
+                                <Router>
+                                    <Routes>
+                                        <Route path="/" element={<RouteDetail />}>
+                                        </Route>
+                                        <Route path="/Index" element={<RouteIndex />}></Route>
+                                    </Routes>
+                                    <Button
+                                        label="点击"
+                                        onPress={() => {
+                                            setState(prev => ({ ...prev, changeStatus: true }));
+                                        }}
+                                    />
+                                </Router>
                             );
                         }}
                         assert={({ expect, state }) => {

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Button, PermissionsAndroid, Platform, SafeAreaView, StyleSheet, Switch, Systrace, Text, View, InteractionManager, ScrollView } from 'react-native';
+import { Button, PermissionsAndroid, Platform, StyleSheet, Switch, Text, View, ScrollView } from 'react-native';
 import Slider from '@react-native-oh-tpl/react-native-slider';
 import { Player, Recorder, MediaStates } from '@react-native-community/audio-toolkit';
-import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
+import RTNPermissions, {RESULTS} from "@react-native-oh-tpl/react-native-permissions";
 
 const filename = 'test.mp4';
 
@@ -173,7 +173,7 @@ export default class AudioToolkitDemo extends Component<Props, State> {
   }
 
   _toggleRecord() {
-    if(this.recorder && this.recorder.state === MediaStates.PAUSED){
+    if (this.recorder && this.recorder.state === MediaStates.PAUSED) {
       this.recorder?.record((err) => {
         this._updateState();
       })
@@ -186,6 +186,8 @@ export default class AudioToolkitDemo extends Component<Props, State> {
     let recordAudioRequest;
     if (Platform.OS == 'android') {
       recordAudioRequest = this._requestRecordAudioPermission();
+    } else if (Platform.OS === 'harmony') {
+      recordAudioRequest = this._requestRecordAudioPermissionHs();
     } else {
       recordAudioRequest = new Promise(function (resolve, reject) { resolve(true); });
     }
@@ -211,6 +213,22 @@ export default class AudioToolkitDemo extends Component<Props, State> {
         this._updateState();
       });
     });
+  }
+
+  
+  async _requestRecordAudioPermissionHs() {
+    try {
+      let check = await RTNPermissions.request('ohos.permission.MICROPHONE');
+      console.info("RTNPermissions===== request", check);
+      if (check === RESULTS.GRANTED) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
   }
 
   async _requestRecordAudioPermission() {

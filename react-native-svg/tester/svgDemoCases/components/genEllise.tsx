@@ -39,9 +39,6 @@ const basicCases: CaseParams[] = [
                 ry: 40,
             },
         ],
-        othersProps: {
-            fill: 'green'
-        },
     }
 ]
 

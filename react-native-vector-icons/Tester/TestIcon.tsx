@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import {
     StyleSheet,
     View,
@@ -8,14 +8,14 @@ import {
     Easing,
     TouchableHighlight
 } from 'react-native';
-import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 
 export const PALETTE = {
     REACT_CYAN_LIGHT: 'hsl(193, 95%, 68%)',
     REACT_CYAN_DARK: 'hsl(193, 95%, 30%)',
 };
 
-export function Button({label, onPress}: {onPress: () => void; label: string}) {
+export function Button({ label, onPress }: { onPress: () => void; label: string }) {
     return (
         <TouchableHighlight
             underlayColor={PALETTE.REACT_CYAN_DARK}
@@ -27,7 +27,7 @@ export function Button({label, onPress}: {onPress: () => void; label: string}) {
                 borderColor: PALETTE.REACT_CYAN_DARK,
             }}
             onPress={onPress}>
-            <Text style={{color: 'black', fontWeight: 'bold', fontSize: 12}}>
+            <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 12 }}>
                 {label}
             </Text>
         </TouchableHighlight>
@@ -51,20 +51,62 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-export const  TestIcon =()=> {
+import { createIconSetFromIcoMoon, createIconSet } from "react-native-vector-icons";
+import icoMoonConfig from "../assets/fonts/home.json"; // 引入本地assets下的字体资源
+
+import { createIconSetFromFontello } from "react-native-vector-icons";
+import fontelloConfig from "../assets/fonts/fontello.json";
+
+
+const CustomFontIcoMoon = createIconSetFromIcoMoon(
+    icoMoonConfig,
+    "home",
+    "../assets/fonts/home.ttf" // 引入本地assets下的字体资源
+);
+
+const CustomFontello = createIconSetFromFontello(
+    fontelloConfig,
+    "fontello",
+    "../assets/fonts/fontello.ttf" // 引入本地assets下的字体资源
+);
+
+const Pencil = createIconSetFromIcoMoon(
+    require("../assets/fonts/pencil.json"), // 引入本地assets下的字体资源
+    "pencil",
+    "../assets/fonts/pencil.ttf" // 引入本地assets下的字体资源
+);
+
+export const TestIcon = () => {
     return (
-        <Tester>
+        <Tester style={{paddingBottom: 100}}>
             <ScrollView>
-                <TestSuite name="react-native-community/progress-view">
+                <TestSuite name="react-native-vector-icons">
                     <TestCase
                         key={"getInitStatus_1"}
                         itShould={`show or hide`}
                         tags={['C_API']}
                         initialState={false}
-                        arrange={({setState}) => {
+                        arrange={({ setState }) => {
                             return (
-                                <View style={{flex:1}}>
+                                <View style={{ flex: 1 }}>
 
+                                    <CustomFontello.Button
+                                        name="child"
+                                        backgroundColor="#3b5998"
+                                        size={20}
+                                    >child</CustomFontello.Button>;
+
+                                    <Pencil.Button
+                                        name="pencil"
+                                        backgroundColor="#3b5998"
+                                        size={20}
+                                    >pencil</Pencil.Button>
+
+                                    <CustomFontIcoMoon.Button
+                                        name="home"
+                                        backgroundColor="#3b5998"
+                                        size={20}
+                                    >home</CustomFontIcoMoon.Button>
                                     <AntDesign.Button
                                         name="forward"
                                         backgroundColor="#3b5998"
@@ -209,7 +251,7 @@ export const  TestIcon =()=> {
                                 </View>
                             );
                         }}
-                        assert={async ({expect, state}) => {
+                        assert={async ({ expect, state }) => {
                             expect(state).to.be.true;
                         }}
                     />

@@ -33,14 +33,18 @@ export default () => {
           expect(state).to.be.eq(true);
         }}>
       </TestCase>
-      <TestCase itShould="render a Stepper disabled" tags={['C_API']}>
-        <Stepper min={0} defaultValue={3} max={20} disabled />
+      <TestCase itShould="render a Stepper disabled={true}, disabled={false}" tags={['C_API']}>
+        <Stepper min={0} defaultValue={3} max={20} disabled={true} />
+        <Stepper min={0} defaultValue={3} max={20} disabled={false} />
       </TestCase>
-      <TestCase itShould="render a Stepper readOnly={true}" tags={['C_API']}>
-        <Stepper min={0} defaultValue={3} max={20} readOnly />
+      <TestCase itShould="render a Stepper readOnly={true}, readOnly={false}" tags={['C_API']}>
+        <Stepper min={0} defaultValue={3} max={20} readOnly={true} />
+        <Stepper min={0} defaultValue={3} max={20} readOnly={false} />
       </TestCase>
-      <TestCase itShould="render a Stepper styles={borderColor: 'red'}" tags={['C_API']}>
-        <Stepper min={0} defaultValue={3} max={20} styles={{ container: styles.stepper }} />
+      <TestCase itShould="render a Stepper styles={backgroundColor: 'red'}" tags={['C_API']}>
+        <View style={{ height: 100, width: '100%', backgroundColor: 'red' }}>
+          <Stepper min={0} defaultValue={3} max={20} />
+        </View>
       </TestCase>
       <TestCase itShould="render a Stepper inputStyle={{backgroundColor: 'green'}}" tags={['C_API']}>
         <Stepper min={0} defaultValue={3} max={20} inputStyle={{ backgroundColor: 'green' }} />
@@ -49,13 +53,15 @@ export default () => {
   );
 };
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 10,
-  },
   stepper: {
-    borderColor: 'red',
+    backgroundColor: '#f0f0f0',
+  },
+  stepperContainer: {
+    borderColor: '#d9d9d9',
+  },
+  stepperInput: {
+    borderColor: '#d9d9d9',
+    borderWidth: 1,
+    borderRadius: 4,
   },
 });
