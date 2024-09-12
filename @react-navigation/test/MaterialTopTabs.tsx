@@ -903,6 +903,7 @@ export const MaterialTopTabsExample = () => {
         value: 0,
         description: '懒加载页面距离',
         valueList: [
+          -1,
           0,
           1,
           2
@@ -1277,6 +1278,7 @@ export const MaterialTopTabsExample = () => {
 
                       setScreens([])
                     }}></ToggleButton>
+                    <Text style={{color:'yellow',fontSize:12,}}>注：lazyPreloadDistance为-1时会显示,lazyPlaceholder加载的内容：背景颜色为粉色，文字为加载中。。。</Text>
                     <ToggleButton title={'切换lazyPreloadDistance'} list={state.lazyPreloadDistance.valueList || []} initValue={state.lazyPreloadDistance.value} onChange={(val: any) => {
                       setState({
                         ...state,

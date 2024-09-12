@@ -18,6 +18,11 @@ export const HttpBridgeDemo = () => {
   const [postRequestResult, setPostRequestResult] = useState('');
   const [putRequestResult, setPutRequestResult] = useState('');
   const [deleteRequestResult, setDeleteRequestResult] = useState('');
+  const [getRequestResultId, setRequestResultId] = useState(0);
+
+  const StopExample = () => {
+    httpBridge.stop();
+  }
 
   const GetMothedExample = () => {
     fetch('http://127.0.0.1:8888/student/getStuInfo?value=GET', {
@@ -82,8 +87,10 @@ export const HttpBridgeDemo = () => {
       }
       console.log('HttpServer request: ' + JSON.stringify(request))
       if (request.type === "GET" && request.url.split("/")[1] === "user") {
+        setRequestResultId(request.requestId);
         httpBridge.respond(request.requestId, 200, "application/json", "{\"message\": \"OK\"}");
       } else {
+        setRequestResultId(request.requestId);
         httpBridge.respond(request.requestId, 400, "application/json", "{\"message\": \"Bad Request\"}");
       }
     });
@@ -95,7 +102,9 @@ export const HttpBridgeDemo = () => {
   return (
     <ScrollView>
       <Tester>
-        <TestSuite name='httpBridgeExample Port : 8888'>
+        <TestSuite name='httpBridgeExample Port : 8888  serviceName ： http_service'>
+          <Text allowFontScaling style={{ color: "green" }}>{'OK respond  parameter ' + ' requestId: ' + getRequestResultId + '\ncode: 200' + '\ntype: application/json' + '\nbody: {\"message\": \"OK\"}'}</Text>
+          <Text allowFontScaling style={{ color: "green" }}>{'Bad respond parameter ' + ' requestId: ' + getRequestResultId + '\ncode: 400' + '\ntype: application/json' + '\nbody: {\"message\": \"Bad Request\"}'}</Text>
           <TestCase itShould='Method：GET'>
             <Button
               title="GET"
@@ -130,6 +139,14 @@ export const HttpBridgeDemo = () => {
               onPress={DeleteMothedExample}
             />
             <Text allowFontScaling>{deleteRequestResult}</Text>
+          </TestCase>
+
+          <TestCase itShould='stop'>
+            <Button
+              title="STOP"
+              color="#9a73ef"
+              onPress={StopExample}
+            />
           </TestCase>
         </TestSuite>
       </Tester>

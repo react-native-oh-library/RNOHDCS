@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Alert, StyleSheet, View} from 'react-native';
 import MapViewDirections from 'react-native-maps-directions';
 import MapView, { Marker } from "@react-native-oh-tpl/react-native-maps";
 import {TestSuite} from '@rnoh/testerino';
@@ -88,6 +88,7 @@ export function MapsDirectionsTest() {
             apikey: apikey,
             onStart:(params) => {
               console.log(`Started routing between ${JSON.stringify(params.origin)} and ${JSON.stringify(params.destination)}`);
+			  Alert.alert(`Started routing between ${JSON.stringify(params.origin)} and ${JSON.stringify(params.destination)}`)
             },
         }}
         />
@@ -102,6 +103,7 @@ export function MapsDirectionsTest() {
             onReady:(result) => {
               console.log(`result Distance: ${result.distance} km`)
               console.log(`result Duration: ${result.duration} min.`)
+			  Alert.alert(`result Distance: ${result.distance} km`)
             }
         }}
         />
@@ -115,6 +117,7 @@ export function MapsDirectionsTest() {
             apikey: "cc",
             onError:(errorMessage) => {
               console.log(`GOT AN ERROR ${JSON.stringify(errorMessage)} `);
+			  Alert.alert(`GOT AN ERROR ${JSON.stringify(errorMessage)} `)
             }
         }}
         />

@@ -1,0 +1,66 @@
+{
+    "IcoMoonType": "selection",
+    "icons": [
+        {
+            "icon": {
+                "paths": [
+                    "M864 0c88.364 0 160 71.634 160 160 0 36.020-11.91 69.258-32 96l-64 64-224-224 64-64c26.742-20.090 59.978-32 96-32zM64 736l-64 288 288-64 592-592-224-224-592 592zM715.578 363.578l-448 448-55.156-55.156 448-448 55.156 55.156z"
+                ],
+                "tags": [
+                    "pencil",
+                    "write",
+                    "edit"
+                ],
+                "defaultCode": 59653,
+                "grid": 16,
+                "attrs": []
+            },
+            "attrs": [],
+            "properties": {
+                "ligatures": "pencil, write",
+                "name": "pencil",
+                "order": 5,
+                "id": 6,
+                "prevSize": 32,
+                "code": 59653
+            },
+            "setIdx": 0,
+            "setId": 1,
+            "iconIdx": 5
+        }
+    ],
+    "height": 1024,
+    "metadata": {
+        "name": "icomoon"
+    },
+    "preferences": {
+        "showGlyphs": true,
+        "showQuickUse": true,
+        "showQuickUse2": true,
+        "showSVGs": true,
+        "fontPref": {
+            "prefix": "icon-",
+            "metadata": {
+                "fontFamily": "icomoon"
+            },
+            "metrics": {
+                "emSize": 1024,
+                "baseline": 6.25,
+                "whitespace": 50
+            },
+            "embed": false
+        },
+        "imagePref": {
+            "prefix": "icon-",
+            "png": true,
+            "useClassSelector": true,
+            "color": 0,
+            "bgColor": 16777215,
+            "classSelector": ".icon",
+            "name": "icomoon"
+        },
+        "historySize": 50,
+        "showCodes": true,
+        "gridSize": 16
+    }
+}

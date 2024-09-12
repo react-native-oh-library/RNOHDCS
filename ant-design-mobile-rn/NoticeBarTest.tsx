@@ -33,8 +33,11 @@ export default () => {
       <TestCase itShould="NoticeBar with closable and action='不再提示'" tags={['C_API']}>
         <NoticeBarActionTest />
       </TestCase>
-      <TestCase itShould="NoticeBar marqueeProps={loop: true, style: { fontSize: 12, color: 'blue' }}" tags={['C_API']}>
+      <TestCase itShould="NoticeBar marqueeProps={loop: true, style: { fontSize: 12, color: 'blue' }}, marqueeProps={{ loop: false, style: { fontSize: 16, color: 'yellow' } }}" tags={['C_API']}>
         <NoticeBar marqueeProps={{ loop: true, style: { fontSize: 12, color: 'blue' } }} mode='closable'>
+          {'Notice: The arrival time of incomes and transfers of Yu E Bao will bedelayed during National Day.'}
+        </NoticeBar>
+        <NoticeBar marqueeProps={{ loop: false, style: { fontSize: 16, color: 'yellow' } }} mode='closable'>
           {'Notice: The arrival time of incomes and transfers of Yu E Bao will bedelayed during National Day.'}
         </NoticeBar>
       </TestCase>

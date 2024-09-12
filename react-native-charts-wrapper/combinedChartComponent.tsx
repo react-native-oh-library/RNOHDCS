@@ -87,7 +87,7 @@ const CombinedChartDemo = () => {
   return (
     <Tester>
       <TestSuite name="组合图（基础图表）">
-        <TestCase itShould="props">
+        <TestCase itShould="props:drawValueAboveBar 所有值都绘制在其条形的上方，而不是下方 *他们的顶部">
           <View style={{ width: '100%', height: 500 }}>
             <CombinedChart
               style={styles.chart}
@@ -116,7 +116,7 @@ const CombinedChartDemo = () => {
                       values: barDataSet,
                       config: {
                         color: processColor('#c66'),
-                        valueTextColor: processColor('#fff'),
+                        valueTextColor: processColor('#c66'),
                         valueTextSize: 10,
                         axisDependency: 'LEFT'
                       },
@@ -126,7 +126,7 @@ const CombinedChartDemo = () => {
                       values: barDataSet2,
                       config: {
                         color: processColor('#142'),
-                        valueTextColor: processColor('#fff'),
+                        valueTextColor: processColor('#c66'),
                         valueTextSize: 10,
                         axisDependency: 'LEFT'
                       },
@@ -157,7 +157,7 @@ const CombinedChartDemo = () => {
                     {
                       label: 'scatterData',
                       values: scatterDataSet,
-                      config:{colors:[processColor('#4f4'),processColor('#d54')],scatterShapeSize:7.5,drawValues:false,valueTextSize:10}
+                      config:{colors:[processColor('#4f4'),processColor('#d54')],scatterShapeSize:7.5,drawValues:true,valueTextSize:10}
                     },
                   ],
                 },
@@ -183,9 +183,16 @@ const CombinedChartDemo = () => {
               scaleYEnabled={true}
               highlightPerTapEnabled={true}
               touchEnabled={true}
-
+              drawValueAboveBar={true}
+              highlightPerDragEnabled={true}
+              highlightFullBarEnabled={true}
             />
           </View>
+        </TestCase>
+      </TestSuite>
+      <TestSuite name='组合图'>
+        <TestCase itShould=''>
+           <Text>组合图的所有数据props都为其他图表的props,其他图表用例均已覆盖</Text>
         </TestCase>
       </TestSuite>
     </Tester>

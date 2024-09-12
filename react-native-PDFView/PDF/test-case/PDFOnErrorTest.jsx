@@ -19,8 +19,8 @@ export function PDFOnErrorTest() {
     <Tester>
       <ScrollView>
         <TestSuite name="Test onError">
-          <TestCase itShould="onError 加载失败之后onError变为true">
-            <Text>onLoad:{onErrorValue}</Text>
+          <TestCase itShould="onError 加载失败">
+            <Text>这里显示error信息:{onErrorValue}</Text>
             <View style={{height: 500}}>
               <PDFView
                 style={{flex: 1}}

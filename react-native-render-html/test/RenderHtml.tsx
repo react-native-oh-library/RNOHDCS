@@ -12,7 +12,7 @@ import {
   Alert
 } from 'react-native';
 import { findOne, isTag } from 'domutils';
-import RenderHtml, { Node, defaultSystemFonts, NodeWithChildren, CustomBlockRenderer } from 'react-native-render-html';
+import RenderHtml, { Node, defaultSystemFonts, NodeWithChildren, CustomBlockRenderer, HTMLElementModel, HTMLContentModel } from 'react-native-render-html';
 import { TestCase, Tester, TestSuite } from '@rnoh/testerino';
 
 const TestRenderHtml = () => {
@@ -124,29 +124,20 @@ const TestRenderHtml = () => {
 
           <TestCase
             key={'bypassAnonymousTPhrasingNodes'}
-            itShould={'The most simple one is that itsimplifies the render tree.' }
+            itShould={'The most simple one is that itsimplifies the render tree.'}
             tags={['C_API']}
             initialState={false}
             arrange={({ setState }) => {
               const { width } = useWindowDimensions();
-              const [btnState, setBtnState] = useState(false)
               return (
                 <View style={{ flex: 1 }}>
-                  <Button title='bypassAnonymousTPhrasingNodes' onPress={() => {
-                    setBtnState(true)
-                    setState(true)
-                  }} />
-                  {
-                    btnState === true ? <RenderHtml
+                 <RenderHtml
                       contentWidth={width}
                       bypassAnonymousTPhrasingNodes={true}
                       source={{
                         html: '<h1><h3>hi</h3></h1>',
                       }}
-                    /> : null
-                  }
-
-                  ;
+                    />
                 </View>
               );
             }}
@@ -521,7 +512,6 @@ This is
             tags={['C_API']}
             initialState={false}
             arrange={({ setState }) => {
-              const [btnState, setBtnState] = useState(false)
               const htmlContent =
                 '<a href="https://www.example.com">Example</a>';
 
@@ -533,22 +523,13 @@ This is
                   };
                 },
               };
-
               return (
                 <View style={{ flex: 1 }}>
-                  <Button title='domVisitors' onPress={() => {
-                    setBtnState(true)
-                    setState(true)
-                  }} />
-                  {
-                    btnState === true ? <RenderHtml
+                 
+                  <RenderHtml
                       domVisitors={domVisitors}
                       source={{ html: htmlContent }}
-                    /> : <RenderHtml
-                      source={{ html: htmlContent }}
                     />
-                  }
-
                 </View>
               );
             }}
@@ -933,15 +914,13 @@ This is
             initialState={false}
             arrange={({ setState }) => {
               const { width } = useWindowDimensions();
-              const [btnState, setBtnState] = useState(false)
-
+              // const [btnState, setBtnState] = useState(false)
               return (
                 <View style={{ flex: 1 }}>
-                  <Button title='setMarkersForTNode' onPress={() => {
+                  {/* <Button title='setMarkersForTNode' onPress={() => {
                     setBtnState(true)
                     setState(true)
-                  }} />
-                  {
+                  }} /> */}
                     btnState === true ? <RenderHtml
                       contentWidth={width}
                       source={{
@@ -953,15 +932,7 @@ This is
                           targetMarkers.em = true;
                         }
                       }}
-                    /> : <RenderHtml
-                      contentWidth={width}
-                      source={{
-                        html: '<em>Two</em>'
-                      }}
-                    />
-                  }
-
-                  ;
+                    /> 
                 </View>
               );
             }}
@@ -1078,23 +1049,58 @@ This is
             tags={['C_API']}
             initialState={false}
             arrange={({ setState }) => {
-              const { width } = useWindowDimensions();
-              const [btnState, setBtnState] = useState(false)
+              const { width } = useWindowDimensions()
               const systemFonts = [...defaultSystemFonts, 'Mysuperfont']
               return (
                 <View style={{ flex: 1 }}>
-                  <Button title='systemFonts' onPress={() => {
-                    setBtnState(true)
-                    setState(true)
-                  }} />
-                  {
-                    btnState === true ? <RenderHtml
+                     <RenderHtml
                       contentWidth={width}
                       systemFonts={systemFonts}
                       source={{
                         html: '<div>Hello-----</div>',
                       }}
-                    /> :null
+                    /> 
+                </View>
+              );
+            }}
+            assert={async ({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
+
+          <TestCase
+            key={'customHTMLElementModels'}
+            itShould={'Customize element models for target tags'}
+            tags={['C_API']}
+            initialState={false}
+            arrange={({ setState }) => {
+              const [btnState, setBtnState] = useState(false)
+              const htmlContent = '<blue-circle>hi</blue-circle>';
+              const customHTMLElementModels = {
+                'blue-circle': HTMLElementModel.fromCustomModel({
+                  tagName: 'blue-circle',
+                  mixedUAStyles: {
+                    width: 50,
+                    height: 50,
+                    borderRadius: 25,
+                    alignSelf: 'center',
+                    backgroundColor: 'blue'
+                  },
+                  contentModel: HTMLContentModel.block
+                })
+              };
+            
+              return (
+                <View style={{ flex: 1 }}>
+                  <Button title='customHTMLElementModels' onPress={() => {
+                    setBtnState(true)
+                    setState(true)
+                  }} />
+                  {
+                    btnState === true ? <RenderHtml
+                      source={{ html: htmlContent }}
+                      customHTMLElementModels={customHTMLElementModels}
+                    /> : null
                   }
                 </View>
               );

@@ -39,7 +39,7 @@ export const URLPolyfillDemo = () => {
     '\nurl.toString: ' + url.toString()
 
   // 创建一个 URLSearchParams 对象
-  const searchParams = new URLSearchParams('abc=456&rn=ReactNative&abc=javascript');
+  const searchParams = new URLSearchParams('abc=456&rn=ReactNative&def=javascript');
 
   // searchParams.forEach()
   let forEachResult = '';

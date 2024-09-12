@@ -44,9 +44,24 @@ export default function ReactNativeMultipleSelect() {
       <ScrollView horizontal={true} style={{ width: "100%" }}>
       <Tester style={{ flex: 1 }}>
         <View style={styles.container}>
-          <TestSuite name='["altFontFamily", "fontFamily","itemFontFamily","selectedItemFontFamily"]' key={'altFontFamily'}>
-            <TestCase itShould="这些为设置自定义字体" tags={['C_API']}>
-              <SelectExample1></SelectExample1>
+          <TestSuite name="altFontFamily" key={'altFontFamily'}>
+            <TestCase itShould="设置下拉框里面标题的字体" tags={['C_API']}>
+              <SelectExampleT1></SelectExampleT1>
+            </TestCase>
+          </TestSuite>
+          <TestSuite name= "fontFamily" key={'fontFamily'}>
+            <TestCase itShould="设置除下拉框里之外的所有字体" tags={['C_API']}>
+              <SelectExampleT2></SelectExampleT2>
+            </TestCase>
+          </TestSuite>
+          <TestSuite name="itemFontFamily" key={'itemFontFamily'}>
+            <TestCase itShould="设置下拉选项的字体" tags={['C_API']}>
+              <SelectExampleT3></SelectExampleT3>
+            </TestCase>
+          </TestSuite>
+          <TestSuite name="selectedItemFontFamily" key={'selectedItemFontFamily'}>
+            <TestCase itShould="设置选中项目的字体" tags={['C_API']}>
+              <SelectExampleT4></SelectExampleT4>
             </TestCase>
           </TestSuite>
           <TestSuite name='canAddItems' key={'canAddItems'}>
@@ -92,11 +107,6 @@ export default function ReactNativeMultipleSelect() {
           <TestSuite name='searchIcon' key={'searchIcon'}>
             <TestCase itShould="searchIcon左边搜索图标，比如说设置成紫色" tags={['C_API']}>
               <SelectExample11></SelectExample11>
-            </TestCase>
-          </TestSuite>
-          <TestSuite name='itemFontFamily' key={'itemFontFamily'}>
-            <TestCase itShould="itemFontFamily是多选下拉菜单中每个未选定项目的字体系列" tags={['C_API']}>
-              <SelectExample12></SelectExample12>
             </TestCase>
           </TestSuite>
           <TestSuite name='itemFontSize' key={'itemFontSize'}>
@@ -282,7 +292,7 @@ export default function ReactNativeMultipleSelect() {
     </SafeAreaView >
   );
 }
-class SelectExample1 extends Component {
+class SelectExampleT1 extends Component {
   state = {
     selectedItems: []
   };
@@ -300,10 +310,79 @@ class SelectExample1 extends Component {
           ref={(component) => { this.multiSelect = component }}
           onSelectedItemsChange={this.onSelectedItemsChange}
           selectedItems={selectedItems}
-          altFontFamily="ProximaNova-Light"
-          fontFamily="ProximaNova-Light"
-          itemFontFamily="ProximaNova-Light"
-          selectedItemFontFamily="ProximaNova-Light"
+          altFontFamily="Pacifico-Regular"
+        />
+      </View>
+    );
+  }
+}
+class SelectExampleT2 extends Component {
+  state = {
+    selectedItems: []
+  };
+  onSelectedItemsChange = (selectedItems: any) => {
+    this.setState({ selectedItems });
+  };
+  multiSelect!: MultiSelect | any;
+  render() {
+    const { selectedItems } = this.state;
+    return (
+      <View style={{ flex: 1 }}>
+        <MultiSelect
+          items={items}
+          uniqueKey="id"
+          ref={(component) => { this.multiSelect = component }}
+          onSelectedItemsChange={this.onSelectedItemsChange}
+          selectedItems={selectedItems}
+          fontFamily="Pacifico-Regular"
+        />
+      </View>
+    );
+  }
+}
+class SelectExampleT3 extends Component {
+  state = {
+    selectedItems: []
+  };
+  onSelectedItemsChange = (selectedItems: any) => {
+    this.setState({ selectedItems });
+  };
+  multiSelect!: MultiSelect | any;
+  render() {
+    const { selectedItems } = this.state;
+    return (
+      <View style={{ flex: 1 }}>
+        <MultiSelect
+          items={items}
+          uniqueKey="id"
+          ref={(component) => { this.multiSelect = component }}
+          onSelectedItemsChange={this.onSelectedItemsChange}
+          selectedItems={selectedItems}
+          itemFontFamily="Pacifico-Regular"
+        />
+      </View>
+    );
+  }
+}
+class SelectExampleT4 extends Component {
+  state = {
+    selectedItems: []
+  };
+  onSelectedItemsChange = (selectedItems: any) => {
+    this.setState({ selectedItems });
+  };
+  multiSelect!: MultiSelect | any;
+  render() {
+    const { selectedItems } = this.state;
+    return (
+      <View style={{ flex: 1 }}>
+        <MultiSelect
+          items={items}
+          uniqueKey="id"
+          ref={(component) => { this.multiSelect = component }}
+          onSelectedItemsChange={this.onSelectedItemsChange}
+          selectedItems={selectedItems}
+          selectedItemFontFamily="Pacifico-Regular"
         />
       </View>
     );
@@ -423,6 +502,7 @@ class SelectExample5 extends Component {
           onSelectedItemsChange={this.onSelectedItemsChange}
           selectedItems={selectedItems}
           filterMethod="partial"
+          selectText="filterMethod=partial"
         />
         <MultiSelect
           items={items}
@@ -431,6 +511,7 @@ class SelectExample5 extends Component {
           onSelectedItemsChange={this.onSelectedItemsChange}
           selectedItems={selectedItems}
           filterMethod="full"
+          selectText="filterMethod=full"
         />
       </View>
     );
@@ -590,30 +671,6 @@ class SelectExample11 extends Component {
           onSelectedItemsChange={this.onSelectedItemsChange}
           selectedItems={selectedItems}
           searchIcon={this.defaultSearchIcon}
-        />
-      </View>
-    );
-  }
-}
-class SelectExample12 extends Component {
-  state = {
-    selectedItems: []
-  };
-  onSelectedItemsChange = (selectedItems: any) => {
-    this.setState({ selectedItems });
-  };
-  multiSelect!: MultiSelect | any;
-  render() {
-    const { selectedItems } = this.state;
-    return (
-      <View style={{ flex: 1 }}>
-        <MultiSelect
-          items={items}
-          uniqueKey="id"
-          ref={(component) => { this.multiSelect = component }}
-          onSelectedItemsChange={this.onSelectedItemsChange}
-          selectedItems={selectedItems}
-          itemFontFamily=''
         />
       </View>
     );
