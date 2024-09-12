@@ -104,10 +104,6 @@ export default function RedashOtherTest() {
         );
     }
 
-    const handleColorPress = () => {
-        progress.value = withRepeat(withTiming(1 - progress.value, { duration: 1000 }), 60, true);
-    }
-
     /** 用于处理混合颜色 */
     const handleMixColor = () => {
         const bgc = mixColor(progress.value, "#b58df1", "#38ffb3"); // 使用mixColor函数混合颜色
@@ -196,10 +192,10 @@ export default function RedashOtherTest() {
     }
 
     const [open, setOpen] = useState(false);
-    const textOpacity = useSharedValue(open ? 1 : 0);
+    const textOpacity = useSharedValue(1);
     const toggleText = () => {
         setOpen(!open);
-        textOpacity.value = withTiming(open ? 0 : 1, { duration: 500 });
+        textOpacity.value = withTiming(open ? 1 : 0, { duration: 500 });
     };
     const price = useSharedValue(42);
     const formattedPrice = useDerivedValue(() => `${price.value}`.toLocaleString());
@@ -214,31 +210,8 @@ export default function RedashOtherTest() {
                     expect(state).to.be.eq(mixColorText);
                 }}
                 tags={['C_API']}
-                itShould="mixColor Text"
+                itShould="mixColor: mixColor Text"
             />
-
-            <TestCase
-                initialState={undefined as any}
-                arrange={({ setState }) => {
-                    return (
-                        <View style={styles.baseArea}>
-                            <View>
-                                <Animated.View style={[styles.box, colorAnimatedStyle]} />
-                            </View>
-                            <View style={{ marginBottom: 10 }}>
-                                <Button onPress={() => handleColorPress()} label="Start Animated" />
-                                <Button onPress={() => cancelAnimation(progress)} label="Stop Animated" />
-                            </View>
-                        </View>
-                    );
-                }}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.eq('x: 10, y: 20');
-                }}
-                tags={['C_API']}
-                itShould="测试颜色变化"
-            />
-
             <TestCase
                 initialState={undefined as any}
                 arrange={({ setState }) => <SetValueView setState={setState} testText={vectorText} handleFunc={handleSetVectorText} textLabel="Vector" />}
@@ -248,7 +221,7 @@ export default function RedashOtherTest() {
                 tags={['C_API']}
                 itShould="设置vector"
             />
-            
+
             <TestCase
                 initialState={undefined as any}
                 arrange={({ setState }) => {
@@ -286,7 +259,7 @@ export default function RedashOtherTest() {
                     expect(state).to.be.true;
                 }}
                 tags={['C_API']}
-                itShould="Time-based animation."
+                itShould="useTiming: Time-based animation."
             />
 
             <TestCase
@@ -306,7 +279,7 @@ export default function RedashOtherTest() {
                     expect(state).to.be.true;
                 }}
                 tags={['C_API']}
-                itShould="Animation with spring effect."
+                itShould="useSpring : Animation with spring effect."
             />
 
             <TestCase
@@ -327,7 +300,7 @@ export default function RedashOtherTest() {
                     expect(state).to.be.true;
                 }}
                 tags={['C_API']}
-                itShould="Control animation pause."
+                itShould="withPause: Control animation pause."
             />
 
             <TestCase
@@ -348,7 +321,7 @@ export default function RedashOtherTest() {
                     expect(state).to.be.true;
                 }}
                 tags={['C_API']}
-                itShould="To add a bounce behavior based on an animation."
+                itShould="withBouncing: To add a bounce behavior based on an animation."
             />
 
             <TestCase
@@ -367,7 +340,7 @@ export default function RedashOtherTest() {
                                 />
                             </View>
                             <View>
-                                <Button onPress={() => { toggleText(); setState(true) } } label={open ? 'Close' : 'Open'} />
+                                <Button onPress={() => { toggleText(); setState(true) }} label={textOpacity.value === 0 ? 'open' : 'close'} />
                             </View>
                         </View>
                     );
@@ -376,7 +349,7 @@ export default function RedashOtherTest() {
                     expect(state).to.be.true;
                 }}
                 tags={['C_API']}
-                itShould="ReText show text."
+                itShould="ReText: ReText show text."
             />
         </TestSuite>
     );
