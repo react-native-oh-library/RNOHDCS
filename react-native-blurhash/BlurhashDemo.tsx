@@ -4,7 +4,7 @@ import { ScrollView, Text, View, StyleSheet, TouchableOpacity, Alert, SafeAreaVi
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino'
 
 const BlurhashDemo: React.FC = (): JSX.Element => {
-    const [validData,setValidData] = useState<boolean>('')
+    const [validData, setValidData] = useState<boolean>(undefined)
     const [blurhash, setBlurhash] = useState('LGF5]+Yk^6#M@-5c,1J5@[or[Q6.');
     const [blurhash2, setBlurhash2] = useState('LOGj+#n$02t7IVWWtQs,03R-~As9');
     const [blurhash3, setBlurhash3] = useState('LGF5]+Yk^6#M@-5c,1J5@[or[Q6.');
@@ -92,451 +92,366 @@ const BlurhashDemo: React.FC = (): JSX.Element => {
                             style={styles.moduleName}>
                             Blurhash属性
                         </Text>
-                        <TestCase
-                            tags={['C_API']}
-                            itShould='设置Blurhash参数'
-                            initialState={undefined as any}
-                            arrange={({ setState }) => {
-                                return (
-                                    <>
-                                        <SafeAreaView style={styles.container}>
-                                            <View style={styles.blurhashContainer}>
-                                                <View style={styles.blurhashRadiusMask}>
-                                                    <Blurhash
-                                                        blurhash={blurhash}
-                                                        decodeWidth={32}
-                                                        decodeHeight={32}
-                                                        decodePunch={1}
-                                                        decodeAsync={decodeAsync}
-                                                        onLoadStart={onLoadStart}
-                                                        onLoadEnd={onLoadEnd}
-                                                        onLoadError={onLoadError}
-                                                        style={styles.blurhashImage}
-                                                        resizeMode="cover"
-                                                    />
-                                                </View>
-                                            </View>
-                                            <TextInput
-                                                value={String(blurhash)}
-                                                placeholder="Blurhash"
-                                                onChangeText={setBlurhash}
-                                                style={styles.textInput}
-                                            />
-                                        </SafeAreaView>
-                                        <SafeAreaView style={styles.container}>
-                                            <View style={styles.blurhashContainer}>
-                                                <View style={styles.blurhashRadiusMask}>
-                                                    <Blurhash
-                                                        blurhash={blurhash2}
-                                                        decodeWidth={32}
-                                                        decodeHeight={32}
-                                                        decodePunch={1}
-                                                        decodeAsync={decodeAsync}
-                                                        onLoadStart={onLoadStart}
-                                                        onLoadEnd={onLoadEnd}
-                                                        onLoadError={onLoadError}
-                                                        style={styles.blurhashImage}
-                                                        resizeMode="cover"
-                                                    />
-                                                </View>
-                                            </View>
-                                            <TextInput
-                                                value={String(blurhash2)}
-                                                placeholder="Blurhash"
-                                                onChangeText={setBlurhash2}
-                                                style={styles.textInput}
-                                            />
-                                        </SafeAreaView>
-                                    </>
-                                )
-                            }}
-                            assert={async ({ expect, state }) => {
-                                expect(state).to.be.true
-                            }}
-                        />
-                        <TestCase
-                            tags={['C_API']}
-                            itShould='设置decodeWidth参数'
-                            initialState={undefined as any}
-                            arrange={({ setState }) => {
-                                return (
-                                    <>
-                                        <SafeAreaView style={styles.container}>
-                                            <View style={styles.blurhashContainer}>
-                                                <View style={styles.blurhashRadiusMask}>
-                                                    <Blurhash
-                                                        blurhash="LL9@GER-n1o#9tj[xbWpR1WAS$W9"
-                                                        decodeWidth={16}
-                                                        decodeHeight={32}
-                                                        decodePunch={1}
-                                                        decodeAsync={decodeAsync}
-                                                        onLoadStart={onLoadStart}
-                                                        onLoadEnd={onLoadEnd}
-                                                        onLoadError={onLoadError}
-                                                        style={styles.blurhashImage}
-                                                        resizeMode="cover"
-                                                    />
-                                                </View>
-                                            </View>
-                                            <Text>decodeWidth 16</Text>
-                                        </SafeAreaView>
-                                        <SafeAreaView style={styles.container}>
-                                            <View style={styles.blurhashContainer}>
-                                                <View style={styles.blurhashRadiusMask}>
-                                                    <Blurhash
-                                                        blurhash="LLAALbR+n1kX9tj[xbWpR1WAS$W9"
-                                                        decodeWidth={32}
-                                                        decodeHeight={32}
-                                                        decodePunch={1}
-                                                        decodeAsync={decodeAsync}
-                                                        onLoadStart={onLoadStart}
-                                                        onLoadEnd={onLoadEnd}
-                                                        onLoadError={onLoadError}
-                                                        style={styles.blurhashImage}
-                                                        resizeMode="cover"
-                                                    />
-                                                </View>
-                                            </View>
-                                            <Text>decodeWidth 24</Text>
-                                        </SafeAreaView>
-                                    </>
-                                )
-                            }}
-                            assert={async ({ expect, state }) => {
-                                expect(state).to.be.true
-                            }}
-                        />
-                        <TestCase
-                            tags={['C_API']}
-                            itShould='设置decodeHeight参数'
-                            initialState={undefined as any}
-                            arrange={({ setState }) => {
-                                return (
-                                    <>
-                                        <SafeAreaView style={styles.container}>
-                                            <View style={styles.blurhashContainer}>
-                                                <View style={styles.blurhashRadiusMask}>
-                                                    <Blurhash
-                                                        blurhash="LLA0z;R,n1kX9tj[xbWpR1WAS$W9"
-                                                        decodeWidth={32}
-                                                        decodeHeight={16}
-                                                        decodePunch={1}
-                                                        decodeAsync={decodeAsync}
-                                                        onLoadStart={onLoadStart}
-                                                        onLoadEnd={onLoadEnd}
-                                                        onLoadError={onLoadError}
-                                                        style={styles.blurhashImage}
-                                                        resizeMode="cover"
-                                                    />
-                                                </View>
-                                            </View>
-                                            <Text>decodeHeight 16</Text>
-                                        </SafeAreaView>
-                                        <SafeAreaView style={styles.container}>
-                                            <View style={styles.blurhashContainer}>
-                                                <View style={styles.blurhashRadiusMask}>
-                                                    <Blurhash
-                                                        blurhash="LL9%rfR.ito#9tfkxbWXR1WAX9W9"
-                                                        decodeWidth={32}
-                                                        decodeHeight={32}
-                                                        decodePunch={1}
-                                                        decodeAsync={decodeAsync}
-                                                        onLoadStart={onLoadStart}
-                                                        onLoadEnd={onLoadEnd}
-                                                        onLoadError={onLoadError}
-                                                        style={styles.blurhashImage}
-                                                        resizeMode="cover"
-                                                    />
-                                                </View>
-                                            </View>
-                                            <Text>decodeHeight 32</Text>
-                                        </SafeAreaView>
-                                    </>
-                                )
-                            }}
-                            assert={async ({ expect, state }) => {
-                                expect(state).to.be.true
-                            }}
-                        />
-                        <TestCase
-                            tags={['C_API']}
-                            itShould='设置decodePunch参数'
-                            initialState={undefined as any}
-                            arrange={({ setState }) => {
-                                return (
-                                    <>
-                                        <SafeAreaView style={styles.container}>
-                                            <View style={styles.blurhashContainer}>
-                                                <View style={styles.blurhashRadiusMask}>
-                                                    <Blurhash
-                                                        blurhash="LEG[._~p-SsSlC=]NGWW~V%2E1NG"
-                                                        decodeWidth={32}
-                                                        decodeHeight={32}
-                                                        decodePunch={0.5}
-                                                        decodeAsync={decodeAsync}
-                                                        onLoadStart={onLoadStart}
-                                                        onLoadEnd={onLoadEnd}
-                                                        onLoadError={onLoadError}
-                                                        style={styles.blurhashImage}
-                                                        resizeMode="cover"
-                                                    />
-                                                </View>
-                                            </View>
-                                            <Text>decodePunch 0.5</Text>
-                                        </SafeAreaView>
-                                        <SafeAreaView style={styles.container}>
-                                            <View style={styles.blurhashContainer}>
-                                                <View style={styles.blurhashRadiusMask}>
-                                                    <Blurhash
-                                                        blurhash="LEG[._~p-SsmlC=]NGWV~V%2E1NG"
-                                                        decodeWidth={32}
-                                                        decodeHeight={32}
-                                                        decodePunch={1}
-                                                        decodeAsync={decodeAsync}
-                                                        onLoadStart={onLoadStart}
-                                                        onLoadEnd={onLoadEnd}
-                                                        onLoadError={onLoadError}
-                                                        style={styles.blurhashImage}
-                                                        resizeMode="cover"
-                                                    />
-                                                </View>
-                                            </View>
-                                            <Text>decodePunch 1</Text>
-                                        </SafeAreaView>
-                                        <SafeAreaView style={styles.container}>
-                                            <View style={styles.blurhashContainer}>
-                                                <View style={styles.blurhashRadiusMask}>
-                                                    <Blurhash
-                                                        blurhash="LEG+OL~p-Ssopf=@NGWV~V%2IVNG"
-                                                        decodeWidth={32}
-                                                        decodeHeight={32}
-                                                        decodePunch={2}
-                                                        decodeAsync={decodeAsync}
-                                                        onLoadStart={onLoadStart}
-                                                        onLoadEnd={onLoadEnd}
-                                                        onLoadError={onLoadError}
-                                                        style={styles.blurhashImage}
-                                                        resizeMode="cover"
-                                                    />
-                                                </View>
-                                            </View>
-                                            <Text>decodePunch 2</Text>
-                                        </SafeAreaView>
-                                    </>
-                                )
-                            }}
-                            assert={async ({ expect, state }) => {
-                                expect(state).to.be.true
-                            }}
-                        />
-                        <TestCase
-                            tags={['C_API']}
-                            itShould='设置resizeMode参数'
-                            initialState={undefined as any}
-                            arrange={({ setState }) => {
-                                return (
-                                    <>
-                                        <SafeAreaView style={styles.container}>
-                                            <View style={styles.blurhashContainer}>
-                                                <View style={styles.blurhashRadiusMask}>
-                                                    <Blurhash
-                                                        blurhash="LEG[._~p-SsmlC=]NGWV~V%2E1NG"
-                                                        decodeWidth={32}
-                                                        decodeHeight={32}
-                                                        decodePunch={1}
-                                                        decodeAsync={decodeAsync}
-                                                        onLoadStart={onLoadStart}
-                                                        onLoadEnd={onLoadEnd}
-                                                        onLoadError={onLoadError}
-                                                        style={styles.blurhashImage}
-                                                        resizeMode="cover"
-                                                    />
-                                                </View>
-                                            </View>
-                                            <Text>resizeMode:cover</Text>
-                                        </SafeAreaView>
-                                        <SafeAreaView style={styles.container}>
-                                            <View style={styles.blurhashContainer}>
-                                                <View style={styles.blurhashRadiusMask}>
-                                                    <Blurhash
-                                                        blurhash="LEG[._~p-SsmlC=]NGWV~V%2E1NG"
-                                                        decodeWidth={32}
-                                                        decodeHeight={32}
-                                                        decodePunch={1}
-                                                        decodeAsync={decodeAsync}
-                                                        onLoadStart={onLoadStart}
-                                                        onLoadEnd={onLoadEnd}
-                                                        onLoadError={onLoadError}
-                                                        style={styles.blurhashImage}
-                                                        resizeMode="contain"
-                                                    />
-                                                </View>
-                                            </View>
-                                            <Text>resizeMode:contain</Text>
-                                        </SafeAreaView>
-                                        <SafeAreaView style={styles.container}>
-                                            <View style={styles.blurhashContainer}>
-                                                <View style={styles.blurhashRadiusMask}>
-                                                    <Blurhash
-                                                        blurhash="LEG[._~p-SsmlC=]NGWV~V%2E1NG"
-                                                        decodeWidth={32}
-                                                        decodeHeight={32}
-                                                        decodePunch={1}
-                                                        decodeAsync={decodeAsync}
-                                                        onLoadStart={onLoadStart}
-                                                        onLoadEnd={onLoadEnd}
-                                                        onLoadError={onLoadError}
-                                                        style={styles.blurhashImage}
-                                                        resizeMode="stretch"
-                                                    />
-                                                </View>
-                                            </View>
-                                            <Text>resizeMode:stretch</Text>
-                                        </SafeAreaView>
-                                        <SafeAreaView style={styles.container}>
-                                            <View style={styles.blurhashContainer}>
-                                                <View style={styles.blurhashRadiusMask}>
-                                                    <Blurhash
-                                                        blurhash="LEG[._~p-SsmlC=]NGWV~V%2E1NG"
-                                                        decodeWidth={32}
-                                                        decodeHeight={32}
-                                                        decodePunch={1}
-                                                        decodeAsync={decodeAsync}
-                                                        onLoadStart={onLoadStart}
-                                                        onLoadEnd={onLoadEnd}
-                                                        onLoadError={onLoadError}
-                                                        style={styles.blurhashImage}
-                                                        resizeMode="center"
-                                                    />
-                                                </View>
-                                            </View>
-                                            <Text>resizeMode:center</Text>
-                                        </SafeAreaView>
-                                        <SafeAreaView style={styles.container}>
-                                            <View style={styles.blurhashContainer}>
-                                                <View style={styles.blurhashRadiusMask}>
-                                                    <Blurhash
-                                                        blurhash="LEG[._~p-SsmlC=]NGWV~V%2E1NG"
-                                                        decodeWidth={32}
-                                                        decodeHeight={32}
-                                                        decodePunch={1}
-                                                        decodeAsync={decodeAsync}
-                                                        onLoadStart={onLoadStart}
-                                                        onLoadEnd={onLoadEnd}
-                                                        onLoadError={onLoadError}
-                                                        style={{ ...styles.blurhashImage, borderRadius: 5 }}
-                                                        resizeMode="stretch"
-                                                    />
-                                                </View>
-                                            </View>
-                                            <Text>resizeMode:center</Text>
-                                        </SafeAreaView>
-                                    </>
-                                )
-                            }}
-                            assert={async ({ expect, state }) => {
-                                expect(state).to.be.true
-                            }}
-                        />
-                        <TestCase
-                            tags={['C_API']}
-                            itShould='设置decodeAsync参数'
-                            initialState={undefined as any}
-                            arrange={({ setState }) => {
-                                return (
-                                    <>
-                                        <SafeAreaView style={styles.container}>
-                                            <View style={styles.blurhashContainer}>
-                                                <View style={styles.blurhashRadiusMask}>
-                                                    <Blurhash
-                                                        blurhash={blurhash3}
-                                                        decodeWidth={32}
-                                                        decodeHeight={32}
-                                                        decodePunch={1}
-                                                        decodeAsync={true}
-                                                        onLoadStart={onLoadStart}
-                                                        onLoadEnd={onLoadEnd}
-                                                        onLoadError={onLoadError}
-                                                        style={styles.blurhashImage}
-                                                        resizeMode="cover"
-                                                    />
-                                                </View>
-                                            </View>
-                                            <Text>decodeAsync:true</Text>
-                                            <TouchableOpacity
-                                                style={encodeButtonStyle}
-                                                disabled={encodingImageUri.length < 5}
-                                                onPress={startEncoding}>
-                                                {isEncoding ? (
-                                                    <ActivityIndicator color="black" />
-                                                ) : (
-                                                    <Text>Encode</Text>
-                                                )}
-                                            </TouchableOpacity>
-                                        </SafeAreaView>
-                                        <SafeAreaView style={styles.container}>
-                                            <View style={styles.blurhashContainer}>
-                                                <View style={styles.blurhashRadiusMask}>
-                                                    <Blurhash
-                                                        blurhash={blurhash4}
-                                                        decodeWidth={32}
-                                                        decodeHeight={32}
-                                                        decodePunch={1}
-                                                        decodeAsync={false}
-                                                        onLoadStart={onLoadStart}
-                                                        onLoadEnd={onLoadEnd}
-                                                        onLoadError={onLoadError}
-                                                        style={styles.blurhashImage}
-                                                        resizeMode="cover"
-                                                    />
-                                                </View>
-                                            </View>
-                                            <Text>decodeAsync:false</Text>
-                                            <TouchableOpacity
-                                                style={encodeButtonStyle}
-                                                disabled={encodingImageUri.length < 5}
-                                                onPress={startEncoding2}>
-                                                {isEncoding ? (
-                                                    <ActivityIndicator color="black" />
-                                                ) : (
-                                                    <Text>Encode</Text>
-                                                )}
-                                            </TouchableOpacity>
-                                        </SafeAreaView>
-
-                                    </>
-                                )
-                            }}
-                            assert={async ({ expect, state }) => {
-                                expect(state).to.be.true
-                            }}
-                        />
-                        <TestCase
-                            tags={['C_API']}
-                            itShould='验证clearCosineCache方法'
-                            initialState={undefined as any}
-                            arrange={({ setState }) => {
-                                return (
-                                    <>
-                                        <SafeAreaView style={styles.container}>
-                                            <TouchableOpacity
-                                                style={clearCosineCacheButton}
-                                                disabled={blurhash.length < 5}
-                                                onPress={CCache}>
-                                                {isValiding ? (
-                                                    <ActivityIndicator color="black" />
-                                                ) : (
-                                                    <Text>clearCosineCache</Text>
-                                                )}
-                                            </TouchableOpacity>
-                                        </SafeAreaView>
-                                    </>
-                                )
-                            }}
-                            assert={async ({ expect, state }) => {
-                                expect(state).to.be.true
-                            }}
-                        />
+                        <TestCase tags={['C_API']} itShould='设置Blurhash参数'>
+                            <SafeAreaView style={styles.container}>
+                                <View style={styles.blurhashContainer}>
+                                    <View style={styles.blurhashRadiusMask}>
+                                        <Blurhash
+                                            blurhash={blurhash}
+                                            decodeWidth={32}
+                                            decodeHeight={32}
+                                            decodePunch={1}
+                                            decodeAsync={decodeAsync}
+                                            onLoadStart={onLoadStart}
+                                            onLoadEnd={onLoadEnd}
+                                            onLoadError={onLoadError}
+                                            style={styles.blurhashImage}
+                                            resizeMode="cover"
+                                        />
+                                    </View>
+                                </View>
+                                <TextInput
+                                    value={String(blurhash)}
+                                    placeholder="Blurhash"
+                                    onChangeText={setBlurhash}
+                                    style={styles.textInput}
+                                />
+                            </SafeAreaView>
+                            <SafeAreaView style={styles.container}>
+                                <View style={styles.blurhashContainer}>
+                                    <View style={styles.blurhashRadiusMask}>
+                                        <Blurhash
+                                            blurhash={blurhash2}
+                                            decodeWidth={32}
+                                            decodeHeight={32}
+                                            decodePunch={1}
+                                            decodeAsync={decodeAsync}
+                                            onLoadStart={onLoadStart}
+                                            onLoadEnd={onLoadEnd}
+                                            onLoadError={onLoadError}
+                                            style={styles.blurhashImage}
+                                            resizeMode="cover"
+                                        />
+                                    </View>
+                                </View>
+                                <TextInput
+                                    value={String(blurhash2)}
+                                    placeholder="Blurhash"
+                                    onChangeText={setBlurhash2}
+                                    style={styles.textInput}
+                                />
+                            </SafeAreaView>
+                        </TestCase>
+                        <TestCase tags={['C_API']} itShould='设置decodeWidth参数'>
+                            <SafeAreaView style={styles.container}>
+                                <View style={styles.blurhashContainer}>
+                                    <View style={styles.blurhashRadiusMask}>
+                                        <Blurhash
+                                            blurhash="LL9@GER-n1o#9tj[xbWpR1WAS$W9"
+                                            decodeWidth={16}
+                                            decodeHeight={32}
+                                            decodePunch={1}
+                                            decodeAsync={decodeAsync}
+                                            onLoadStart={onLoadStart}
+                                            onLoadEnd={onLoadEnd}
+                                            onLoadError={onLoadError}
+                                            style={styles.blurhashImage}
+                                            resizeMode="cover"
+                                        />
+                                    </View>
+                                </View>
+                                <Text>decodeWidth 16</Text>
+                            </SafeAreaView>
+                            <SafeAreaView style={styles.container}>
+                                <View style={styles.blurhashContainer}>
+                                    <View style={styles.blurhashRadiusMask}>
+                                        <Blurhash
+                                            blurhash="LLAALbR+n1kX9tj[xbWpR1WAS$W9"
+                                            decodeWidth={32}
+                                            decodeHeight={32}
+                                            decodePunch={1}
+                                            decodeAsync={decodeAsync}
+                                            onLoadStart={onLoadStart}
+                                            onLoadEnd={onLoadEnd}
+                                            onLoadError={onLoadError}
+                                            style={styles.blurhashImage}
+                                            resizeMode="cover"
+                                        />
+                                    </View>
+                                </View>
+                                <Text>decodeWidth 24</Text>
+                            </SafeAreaView>
+                        </TestCase>
+                        <TestCase tags={['C_API']} itShould='设置decodeHeight参数'>
+                            <SafeAreaView style={styles.container}>
+                                <View style={styles.blurhashContainer}>
+                                    <View style={styles.blurhashRadiusMask}>
+                                        <Blurhash
+                                            blurhash="LLA0z;R,n1kX9tj[xbWpR1WAS$W9"
+                                            decodeWidth={32}
+                                            decodeHeight={16}
+                                            decodePunch={1}
+                                            decodeAsync={decodeAsync}
+                                            onLoadStart={onLoadStart}
+                                            onLoadEnd={onLoadEnd}
+                                            onLoadError={onLoadError}
+                                            style={styles.blurhashImage}
+                                            resizeMode="cover"
+                                        />
+                                    </View>
+                                </View>
+                                <Text>decodeHeight 16</Text>
+                            </SafeAreaView>
+                            <SafeAreaView style={styles.container}>
+                                <View style={styles.blurhashContainer}>
+                                    <View style={styles.blurhashRadiusMask}>
+                                        <Blurhash
+                                            blurhash="LL9%rfR.ito#9tfkxbWXR1WAX9W9"
+                                            decodeWidth={32}
+                                            decodeHeight={32}
+                                            decodePunch={1}
+                                            decodeAsync={decodeAsync}
+                                            onLoadStart={onLoadStart}
+                                            onLoadEnd={onLoadEnd}
+                                            onLoadError={onLoadError}
+                                            style={styles.blurhashImage}
+                                            resizeMode="cover"
+                                        />
+                                    </View>
+                                </View>
+                                <Text>decodeHeight 32</Text>
+                            </SafeAreaView>
+                        </TestCase>
+                        <TestCase tags={['C_API']} itShould='设置decodePunch参数'>
+                            <SafeAreaView style={styles.container}>
+                                <View style={styles.blurhashContainer}>
+                                    <View style={styles.blurhashRadiusMask}>
+                                        <Blurhash
+                                            blurhash="LEG[._~p-SsSlC=]NGWW~V%2E1NG"
+                                            decodeWidth={32}
+                                            decodeHeight={32}
+                                            decodePunch={0.5}
+                                            decodeAsync={decodeAsync}
+                                            onLoadStart={onLoadStart}
+                                            onLoadEnd={onLoadEnd}
+                                            onLoadError={onLoadError}
+                                            style={styles.blurhashImage}
+                                            resizeMode="cover"
+                                        />
+                                    </View>
+                                </View>
+                                <Text>decodePunch 0.5</Text>
+                            </SafeAreaView>
+                            <SafeAreaView style={styles.container}>
+                                <View style={styles.blurhashContainer}>
+                                    <View style={styles.blurhashRadiusMask}>
+                                        <Blurhash
+                                            blurhash="LEG[._~p-SsmlC=]NGWV~V%2E1NG"
+                                            decodeWidth={32}
+                                            decodeHeight={32}
+                                            decodePunch={1}
+                                            decodeAsync={decodeAsync}
+                                            onLoadStart={onLoadStart}
+                                            onLoadEnd={onLoadEnd}
+                                            onLoadError={onLoadError}
+                                            style={styles.blurhashImage}
+                                            resizeMode="cover"
+                                        />
+                                    </View>
+                                </View>
+                                <Text>decodePunch 1</Text>
+                            </SafeAreaView>
+                            <SafeAreaView style={styles.container}>
+                                <View style={styles.blurhashContainer}>
+                                    <View style={styles.blurhashRadiusMask}>
+                                        <Blurhash
+                                            blurhash="LEG+OL~p-Ssopf=@NGWV~V%2IVNG"
+                                            decodeWidth={32}
+                                            decodeHeight={32}
+                                            decodePunch={2}
+                                            decodeAsync={decodeAsync}
+                                            onLoadStart={onLoadStart}
+                                            onLoadEnd={onLoadEnd}
+                                            onLoadError={onLoadError}
+                                            style={styles.blurhashImage}
+                                            resizeMode="cover"
+                                        />
+                                    </View>
+                                </View>
+                                <Text>decodePunch 2</Text>
+                            </SafeAreaView>
+                        </TestCase>
+                        <TestCase tags={['C_API']} itShould='设置resizeMode参数'>
+                            <SafeAreaView style={styles.container}>
+                                <View style={styles.blurhashContainer}>
+                                    <View style={styles.blurhashRadiusMask}>
+                                        <Blurhash
+                                            blurhash="LEG[._~p-SsmlC=]NGWV~V%2E1NG"
+                                            decodeWidth={32}
+                                            decodeHeight={32}
+                                            decodePunch={1}
+                                            decodeAsync={decodeAsync}
+                                            onLoadStart={onLoadStart}
+                                            onLoadEnd={onLoadEnd}
+                                            onLoadError={onLoadError}
+                                            style={styles.blurhashImage}
+                                            resizeMode="cover"
+                                        />
+                                    </View>
+                                </View>
+                                <Text>resizeMode:cover</Text>
+                            </SafeAreaView>
+                            <SafeAreaView style={styles.container}>
+                                <View style={styles.blurhashContainer}>
+                                    <View style={styles.blurhashRadiusMask}>
+                                        <Blurhash
+                                            blurhash="LEG[._~p-SsmlC=]NGWV~V%2E1NG"
+                                            decodeWidth={32}
+                                            decodeHeight={32}
+                                            decodePunch={1}
+                                            decodeAsync={decodeAsync}
+                                            onLoadStart={onLoadStart}
+                                            onLoadEnd={onLoadEnd}
+                                            onLoadError={onLoadError}
+                                            style={styles.blurhashImage}
+                                            resizeMode="contain"
+                                        />
+                                    </View>
+                                </View>
+                                <Text>resizeMode:contain</Text>
+                            </SafeAreaView>
+                            <SafeAreaView style={styles.container}>
+                                <View style={styles.blurhashContainer}>
+                                    <View style={styles.blurhashRadiusMask}>
+                                        <Blurhash
+                                            blurhash="LEG[._~p-SsmlC=]NGWV~V%2E1NG"
+                                            decodeWidth={32}
+                                            decodeHeight={32}
+                                            decodePunch={1}
+                                            decodeAsync={decodeAsync}
+                                            onLoadStart={onLoadStart}
+                                            onLoadEnd={onLoadEnd}
+                                            onLoadError={onLoadError}
+                                            style={styles.blurhashImage}
+                                            resizeMode="stretch"
+                                        />
+                                    </View>
+                                </View>
+                                <Text>resizeMode:stretch</Text>
+                            </SafeAreaView>
+                            <SafeAreaView style={styles.container}>
+                                <View style={styles.blurhashContainer}>
+                                    <View style={styles.blurhashRadiusMask}>
+                                        <Blurhash
+                                            blurhash="LEG[._~p-SsmlC=]NGWV~V%2E1NG"
+                                            decodeWidth={32}
+                                            decodeHeight={32}
+                                            decodePunch={1}
+                                            decodeAsync={decodeAsync}
+                                            onLoadStart={onLoadStart}
+                                            onLoadEnd={onLoadEnd}
+                                            onLoadError={onLoadError}
+                                            style={styles.blurhashImage}
+                                            resizeMode="center"
+                                        />
+                                    </View>
+                                </View>
+                                <Text>resizeMode:center</Text>
+                            </SafeAreaView>
+                            <SafeAreaView style={styles.container}>
+                                <View style={styles.blurhashContainer}>
+                                    <View style={styles.blurhashRadiusMask}>
+                                        <Blurhash
+                                            blurhash="LEG[._~p-SsmlC=]NGWV~V%2E1NG"
+                                            decodeWidth={32}
+                                            decodeHeight={32}
+                                            decodePunch={1}
+                                            decodeAsync={decodeAsync}
+                                            onLoadStart={onLoadStart}
+                                            onLoadEnd={onLoadEnd}
+                                            onLoadError={onLoadError}
+                                            style={{ ...styles.blurhashImage, borderRadius: 5 }}
+                                            resizeMode="stretch"
+                                        />
+                                    </View>
+                                </View>
+                                <Text>resizeMode:center</Text>
+                            </SafeAreaView>
+                        </TestCase>
+                        <TestCase tags={['C_API']} itShould='设置decodeAsync参数'>
+                            <SafeAreaView style={styles.container}>
+                                <View style={styles.blurhashContainer}>
+                                    <View style={styles.blurhashRadiusMask}>
+                                        <Blurhash
+                                            blurhash={blurhash3}
+                                            decodeWidth={32}
+                                            decodeHeight={32}
+                                            decodePunch={1}
+                                            decodeAsync={true}
+                                            onLoadStart={onLoadStart}
+                                            onLoadEnd={onLoadEnd}
+                                            onLoadError={onLoadError}
+                                            style={styles.blurhashImage}
+                                            resizeMode="cover"
+                                        />
+                                    </View>
+                                </View>
+                                <Text>decodeAsync:true</Text>
+                                <TouchableOpacity
+                                    style={encodeButtonStyle}
+                                    disabled={encodingImageUri.length < 5}
+                                    onPress={startEncoding}>
+                                    {isEncoding ? (
+                                        <ActivityIndicator color="black" />
+                                    ) : (
+                                        <Text>Encode</Text>
+                                    )}
+                                </TouchableOpacity>
+                            </SafeAreaView>
+                            <SafeAreaView style={styles.container}>
+                                <View style={styles.blurhashContainer}>
+                                    <View style={styles.blurhashRadiusMask}>
+                                        <Blurhash
+                                            blurhash={blurhash4}
+                                            decodeWidth={32}
+                                            decodeHeight={32}
+                                            decodePunch={1}
+                                            decodeAsync={false}
+                                            onLoadStart={onLoadStart}
+                                            onLoadEnd={onLoadEnd}
+                                            onLoadError={onLoadError}
+                                            style={styles.blurhashImage}
+                                            resizeMode="cover"
+                                        />
+                                    </View>
+                                </View>
+                                <Text>decodeAsync:false</Text>
+                                <TouchableOpacity
+                                    style={encodeButtonStyle}
+                                    disabled={encodingImageUri.length < 5}
+                                    onPress={startEncoding2}>
+                                    {isEncoding ? (
+                                        <ActivityIndicator color="black" />
+                                    ) : (
+                                        <Text>Encode</Text>
+                                    )}
+                                </TouchableOpacity>
+                            </SafeAreaView>
+                        </TestCase>
+                        <TestCase tags={['C_API']} itShould='验证clearCosineCache方法'>
+                            <SafeAreaView style={styles.container}>
+                                <TouchableOpacity
+                                    style={clearCosineCacheButton}
+                                    disabled={blurhash.length < 5}
+                                    onPress={CCache}>
+                                    {isValiding ? (
+                                        <ActivityIndicator color="black" />
+                                    ) : (
+                                        <Text>clearCosineCache</Text>
+                                    )}
+                                </TouchableOpacity>
+                            </SafeAreaView>
+                        </TestCase>
                         <TestCase
                             tags={['C_API']}
                             itShould='验证isBlurhashValid方法（返回ture或false则为成功）'
@@ -577,11 +492,11 @@ const BlurhashDemo: React.FC = (): JSX.Element => {
                                 expect(state).to.be.true
                             }}
                         />
-                        <Text style={{color:'#fff'}}>{'isBlurhashValid:'+validData}</Text>
+                        <Text style={{ color: '#fff' }}>{'isBlurhashValid:' + validData}</Text>
                     </View>
                 </TestSuite>
             </ScrollView>
-        </Tester>
+        </Tester >
     )
 }
 
