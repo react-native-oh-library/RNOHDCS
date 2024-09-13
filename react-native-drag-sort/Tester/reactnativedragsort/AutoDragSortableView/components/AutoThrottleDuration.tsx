@@ -42,7 +42,7 @@ export const API_autoThrottleDuration = () => {
                 <Button
                   title="修改autoThrottleDuration"
                   onPress={() => {
-                    setAutoThrottleDuration(50);
+                    setAutoThrottleDuration(500);
                     setState(true);
                   }}
                 />
