@@ -14,7 +14,7 @@ import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
 const BubbleChartDemo = () => {
   const data = [
     { x: 1, y: 20, size: 3 },
-    { x: 2, y: 43, size: 1 },
+    { x: 2, y: 13, size: 1 },
     { x: 3, y: 21, size: 4 },
     { x: 4, y: 33, size: 1 },
     { x: 5, y: 23, size: 2 },
@@ -285,8 +285,8 @@ const BubbleChartDemo = () => {
 
                 }}
                 maxVisibleValueCount={70}
-                xAxis={{ enabled: true, textSize: 20 ,fontFamily:'monospace'}}
-                yAxis={{ left: { enabled: true, textSize: 12,fontFamily:'monospace' }, right: { enabled: true, textSize: 12,fontFamily:'monospace' } }}
+                xAxis={{ enabled: true, textSize: 20, fontFamily: 'monospace' }}
+                yAxis={{ left: { enabled: true, textSize: 12, fontFamily: 'monospace' }, right: { enabled: true, textSize: 12, fontFamily: 'monospace' } }}
               />
             </View>
           </TestCase>
@@ -420,7 +420,7 @@ const BubbleChartDemo = () => {
           </TestCase>
         </TestSuite>
         <TestSuite name="bubble 基础气泡图:(X轴Y轴公共设置)">
-          <TestCase itShould="limitLines 设置限制线 X轴限制线，单个,覆盖props：limit(从那个点开始),label(标签),lineColor(限制线颜色),lineWidth(限制线宽度)">
+          <TestCase itShould="limitLines 设置限制线 X轴限制线，单个,覆盖props：limit(从那个点开始),label(标签),lineColor(限制线颜色),lineWidth(限制线宽度) lineWidth:5">
             <View style={{ width: '100%', height: 300 }}>
               <BubbleChart
                 style={styles.chart}
@@ -446,7 +446,7 @@ const BubbleChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="bubble 基础气泡图:(X轴Y轴公共设置)">
-          <TestCase itShould="limitLines 设置限制线 X轴限制线，单个,覆盖props：labelPosition(标签坐标),LEFT_TOP(左上)">
+          <TestCase itShould="limitLines 设置限制线 X轴限制线，单个,覆盖props：lineDashPhase(使用虚线作为限制线),lineDashLengths（虚线长度）lineDashLengths: [20, 50]">
             <View style={{ width: '100%', height: 300 }}>
               <BubbleChart
                 style={styles.chart}
@@ -464,93 +464,14 @@ const BubbleChartDemo = () => {
 
                 }}
                 maxVisibleValueCount={70}
-                xAxis={{ enabled: true, limitLines: [{ limit: 3, label: "limitLine", labelPosition: 'LEFT_TOP' }] }}
+                xAxis={{ enabled: true, limitLines: [{ limit: 3, label: "limitLine", lineDashPhase: 10, lineDashLengths: [20, 50] }] }}
                 yAxis={{ left: { enabled: true, }, right: { enabled: true } }}
               />
             </View>
           </TestCase>
         </TestSuite>
-
         <TestSuite name="bubble 基础气泡图:(X轴Y轴公共设置)">
-          <TestCase itShould="limitLines 设置限制线 X轴限制线，单个,覆盖props：labelPosition(标签坐标),LEFT_BOTTOM(左下)">
-            <View style={{ width: '100%', height: 300 }}>
-              <BubbleChart
-                style={styles.chart}
-                data={{
-                  dataSets: [
-                    {
-                      label: 'demo',
-                      values: data,
-                      config: {
-                        drawValues: true, visible: true
-                      },
-
-                    },
-                  ],
-
-                }}
-                maxVisibleValueCount={70}
-                xAxis={{ enabled: true, limitLines: [{ limit: 3, label: "limitLine", labelPosition: 'LEFT_BOTTOM' }] }}
-                yAxis={{ left: { enabled: true, }, right: { enabled: true } }}
-              />
-            </View>
-          </TestCase>
-        </TestSuite>
-
-        <TestSuite name="bubble 基础气泡图:(X轴Y轴公共设置)">
-          <TestCase itShould="limitLines 设置限制线 X轴限制线，单个,覆盖props：labelPosition(标签坐标),RIGHT_TOP(右上)">
-            <View style={{ width: '100%', height: 300 }}>
-              <BubbleChart
-                style={styles.chart}
-                data={{
-                  dataSets: [
-                    {
-                      label: 'demo',
-                      values: data,
-                      config: {
-                        drawValues: true, visible: true
-                      },
-
-                    },
-                  ],
-
-                }}
-                maxVisibleValueCount={70}
-                xAxis={{ enabled: true, limitLines: [{ limit: 3, label: "limitLine", labelPosition: 'RIGHT_TOP' }] }}
-                yAxis={{ left: { enabled: true, }, right: { enabled: true } }}
-              />
-            </View>
-          </TestCase>
-        </TestSuite>
-
-        <TestSuite name="bubble 基础气泡图:(X轴Y轴公共设置)">
-          <TestCase itShould="limitLines 设置限制线 X轴限制线，单个,覆盖props：labelPosition(标签坐标),RIGHT_BOTTOM(右下)">
-            <View style={{ width: '100%', height: 300 }}>
-              <BubbleChart
-                style={styles.chart}
-                data={{
-                  dataSets: [
-                    {
-                      label: 'demo',
-                      values: data,
-                      config: {
-                        drawValues: true, visible: true
-                      },
-
-                    },
-                  ],
-
-                }}
-                maxVisibleValueCount={70}
-                xAxis={{ enabled: true, limitLines: [{ limit: 3, label: "limitLine", labelPosition: 'RIGHT_BOTTOM' }] }}
-                yAxis={{ left: { enabled: true, }, right: { enabled: true } }}
-              />
-            </View>
-          </TestCase>
-        </TestSuite>
-
-        <TestSuite name="bubble 基础气泡图:(X轴Y轴公共设置)">
-          <TestCase itShould="limitLines 设置限制线 X轴限制线，单个,覆盖props：lineDashPhase(使用虚线作为限制线),lineDashLengths（虚线长度）">
+          <TestCase itShould="limitLines 设置限制线 X轴限制线，单个,覆盖props：lineDashPhase(使用虚线作为限制线),lineDashLengths（虚线长度）lineDashLengths: [10, 20]">
             <View style={{ width: '100%', height: 300 }}>
               <BubbleChart
                 style={styles.chart}
@@ -601,7 +522,7 @@ const BubbleChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="bubble 基础气泡图:(X轴Y轴公共设置)">
-          <TestCase itShould="limitLines 设置限制线 y轴限制线，单个,左边y轴一个，右边y轴一个,覆盖props：limit(从那个点开始),label(标签),lineColor(限制线颜色),lineWidth(限制线宽度)">
+          <TestCase itShould="limitLines 设置限制线 y轴限制线，单个,左边y轴一个，右边y轴一个,覆盖props：limit(从那个点开始),label(标签),lineColor(限制线颜色),lineWidth(限制线宽度) lineColor: processColor('#4f4'), lineWidth: 5">
             <View style={{ width: '100%', height: 300 }}>
               <BubbleChart
                 style={styles.chart}
@@ -629,11 +550,6 @@ const BubbleChartDemo = () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="bubble 基础气泡图:(X轴Y轴公共设置)">
-          <TestCase itShould="limitLines 设置限制线 labelPosition">
-            <Text>Y轴设置位置与X轴设置限制线位置用例一致，则不重复编写</Text>
-          </TestCase>
-        </TestSuite>
 
         <TestSuite name="bubble 基础气泡图:(X轴Y轴公共设置)">
           <TestCase itShould="limitLines 设置限制线 X轴限制线，多个。y轴限制线，,左边y轴一个，右边y轴一个,覆盖props:lineDashPhase(使用虚线作为限制线),lineDashLengths（虚线长度）">
@@ -655,7 +571,7 @@ const BubbleChartDemo = () => {
                 }}
                 maxVisibleValueCount={70}
                 xAxis={{ enabled: true, limitLines: [{ limit: 3, label: "limitLine" }, { limit: 6, label: "limitLine" }] }}
-                yAxis={{ left: { enabled: true,limitLines: [{ limit: 10, label: "limitLine",lineDashPhase:10,lineDashLengths:[5,10] }] }, right: { enabled: true,limitLines: [{ limit: 20, label: "limitLine",lineDashPhase:10,lineDashLengths:[5,10] }] } }}
+                yAxis={{ left: { enabled: true, limitLines: [{ limit: 10, label: "limitLine", lineDashPhase: 10, lineDashLengths: [5, 10] }] }, right: { enabled: true, limitLines: [{ limit: 20, label: "limitLine", lineDashPhase: 10, lineDashLengths: [5, 10] }] } }}
               />
             </View>
           </TestCase>
@@ -680,7 +596,7 @@ const BubbleChartDemo = () => {
 
                 }}
                 maxVisibleValueCount={70}
-                xAxis={{ enabled: true, limitLines: [{ limit: 3, label: "limitLine" }, { limit: 6, label: "limitLine" }],drawLimitLinesBehindData:true }}
+                xAxis={{ enabled: true, limitLines: [{ limit: 3, label: "limitLine" }, { limit: 6, label: "limitLine" }], drawLimitLinesBehindData: true }}
                 yAxis={{ left: { enabled: true, }, right: { enabled: true } }}
               />
             </View>

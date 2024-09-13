@@ -76,6 +76,34 @@ const HorizontalBarChartDemo = () => {
           </TestCase>
         </TestSuite>
 
+        <TestSuite name="horizontalBarChart 水平柱状图">
+          <TestCase itShould="Props:dragDecelerationEnabled设置拖拽减速 dragDecelerationFrictionCoef={0.1}">
+            <View style={{ width: '100%', height: 300 }}>
+              <HorizontalBarChart
+                style={styles.chart}
+                data={{
+                  dataSets: [
+                    {
+                      label: 'demo',
+                      values: data,
+                      config: {
+
+                      },
+                    },
+                  ],
+                }}
+                touchEnabled={true}
+                dragDecelerationEnabled={true}
+                dragDecelerationFrictionCoef={0.1}
+                dragEnabled={true}
+                scaleEnabled={true}
+                scaleXEnabled={true}
+                scaleYEnabled={true}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+
         <TestSuite name="horizontalBarChart 水平柱状图(drawGridBackground)">
           <TestCase itShould="Props:drawGridBackground 是否设置网格背景颜色,gridBackgroundColor：#4f4 设置网格背景颜色,如为false则在其他用例中均覆盖">
             <View style={{ width: '100%', height: 300 }}>
@@ -99,7 +127,7 @@ const HorizontalBarChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="horizontalBarChart 水平柱状图(drawBorders)">
-          <TestCase itShould="Props:drawBorders 是否设置边框,borderColor 设置边框颜色，borderWidth 设置边框宽度 同一种需要一起设置  drawBorders={true} borderWidth={4}">
+          <TestCase itShould="Props:drawBorders 是否设置边框,borderColor 设置边框颜色，borderWidth 设置边框宽度 同一种需要一起设置  drawBorders={true} borderWidth={4} borderColor={processColor('#4f4')}">
             <View style={{ width: '100%', height: 300 }}>
               <HorizontalBarChart
                 style={styles.chart}
@@ -115,6 +143,29 @@ const HorizontalBarChartDemo = () => {
                 drawBorders={true}
                 borderColor={processColor('#4f4')}
                 borderWidth={4}
+
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+
+        <TestSuite name="horizontalBarChart 水平柱状图(drawBorders)">
+          <TestCase itShould="Props:drawBorders 是否设置边框,borderColor 设置边框颜色，borderWidth 设置边框宽度 同一种需要一起设置  drawBorders={true} borderWidth={6} borderColor={processColor('#328')}">
+            <View style={{ width: '100%', height: 300 }}>
+              <HorizontalBarChart
+                style={styles.chart}
+                data={{
+                  dataSets: [
+                    {
+                      label: 'demo',
+                      values: data,
+                    },
+                  ],
+                }}
+
+                drawBorders={true}
+                borderColor={processColor('#328')}
+                borderWidth={6}
 
               />
             </View>
@@ -142,9 +193,9 @@ const HorizontalBarChartDemo = () => {
           </TestCase>
         </TestSuite>
 
-        
 
-        
+
+
       </ScrollView>
     </Tester>
   )
