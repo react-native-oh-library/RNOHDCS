@@ -69,6 +69,18 @@ export function InstagramDemo() {
                     >
                     </Instagram>
                 </TestCase>
+                <TestCase itShould='rtl:false'>
+                    <Instagram
+                        width={'100%'}
+                        animate={true}
+                        backgroundColor={'#999'}
+                        foregroundColor={'red'}
+                        speed={0.5}
+                        interval={2}
+                        rtl={false}
+                    >
+                    </Instagram>
+                </TestCase>
                 <TestCase itShould='beforeMask:Rect(组件)'>
                     <Instagram
                         width={'100%'}

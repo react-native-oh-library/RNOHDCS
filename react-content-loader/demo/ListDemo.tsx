@@ -64,9 +64,21 @@ export function ListDemo() {
                     >
                     </List>
                 </TestCase>
+                <TestCase itShould='rtl:false'>
+                    <List height={140}
+                        width={'100%'}
+                        animate={true}
+                        backgroundColor={'#999'}
+                        foregroundColor={'red'}
+                        speed={0.5}
+                        interval={2}
+                        rtl={false}
+                    >
+                    </List>
+                </TestCase>
                 <TestCase itShould='beforeMask:Rect(组件)'>
                     <List height={140}
-                        animate={false}
+                        animate={true}
                         backgroundColor={'#999'}
                         foregroundColor={'red'}
                         beforeMask={<Rect x="80" y="40" rx="3" ry="3" width="250" height="10" fill='red' />}

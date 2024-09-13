@@ -25,7 +25,7 @@ export function ContentLoaderDemo() {
                     <ContentLoader
                         width={'100%'}
                         animate={true}
-                        viewBox="10 10 380 60"
+                        viewBox="0 0 380 70"
                     >
                     </ContentLoader>
                 </TestCase>
