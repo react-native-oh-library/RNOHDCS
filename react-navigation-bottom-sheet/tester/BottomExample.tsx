@@ -115,76 +115,6 @@ export function BottomExample() {
       props: {
         noSnapTo: false,
         snapPoints: ['60%', '80%'],
-        overDragResistanceFactor: 20
-      }
-    },
-    {
-      props: {
-        noSnapTo: false,
-        snapPoints: ['60%', '80%'],
-        overDragResistanceFactor: 500
-      }
-    },
-    {
-      props: {
-        noSnapTo: false,
-        snapPoints: ['60%', '80%'],
-        enableOverDrag: false
-      }
-    },
-    {
-      props: {
-        noSnapTo: false,
-        snapPoints: ['60%', '80%'],
-        enableOverDrag: true
-      }
-    },
-    {
-      props: {
-        noSnapTo: false,
-        snapPoints: ['60%', '80%'],
-        enableContentPanningGesture: false
-      }
-    },
-    {
-      props: {
-        noSnapTo: false,
-        snapPoints: ['60%', '80%'],
-        enableContentPanningGesture: true
-      }
-    },
-    {
-      props: {
-        noSnapTo: false,
-        snapPoints: ['60%', '80%'],
-        enableHandlePanningGesture: false
-      }
-    },
-    {
-      props: {
-        noSnapTo: false,
-        snapPoints: ['60%', '80%'],
-        enableHandlePanningGesture: true
-      }
-    },
-    {
-      props: {
-        noSnapTo: false,
-        snapPoints: ['60%', '80%'],
-        enablePanDownToClose: false
-      }
-    },
-    {
-      props: {
-        noSnapTo: false,
-        snapPoints: ['60%', '80%'],
-        enablePanDownToClose: true
-      }
-    },
-    {
-      props: {
-        noSnapTo: false,
-        snapPoints: ['60%', '80%'],
         enableDynamicSizing: false
       }
     },
@@ -335,41 +265,6 @@ export function BottomExample() {
       props: {
         noSnapTo: false,
         snapPoints: ['60%', '80%'],
-        keyboardBehavior: 'extend'
-      }
-    },
-    {
-      props: {
-        noSnapTo: false,
-        snapPoints: ['60%', '80%'],
-        keyboardBehavior: 'fillParent'
-      }
-    },
-    {
-      props: {
-        noSnapTo: false,
-        snapPoints: ['60%', '80%'],
-        keyboardBehavior: 'interactive'
-      }
-    },
-    {
-      props: {
-        noSnapTo: false,
-        snapPoints: ['60%', '80%'],
-        keyboardBlurBehavior: 'restore'
-      }
-    },
-    {
-      props: {
-        noSnapTo: false,
-        snapPoints: ['60%', '80%'],
-        keyboardBlurBehavior: 'none'
-      }
-    },
-    {
-      props: {
-        noSnapTo: false,
-        snapPoints: ['60%', '80%'],
         animationConfigs: animationConfigs1
       }
     },
@@ -456,12 +351,228 @@ export function BottomExample() {
     }
 
   ]
+  const props1 = {
+    props: {
+      noSnapTo: false,
+      snapPoints: ['60%', '80%'],
+      enableContentPanningGesture: false
+    }
+  }
+  const props2 = {
+    props: {
+      noSnapTo: false,
+      snapPoints: ['60%', '80%'],
+      enableContentPanningGesture: true
+    }
+  }
+  const props3 = {
+    props: {
+      noSnapTo: false,
+      snapPoints: ['60%', '80%'],
+      enableHandlePanningGesture: false
+    }
+  }
+  const props4 = {
+    props: {
+      noSnapTo: false,
+      snapPoints: ['60%', '80%'],
+      enableHandlePanningGesture: true
+    }
+  }
+  const props5 = {
+    props: {
+      noSnapTo: false,
+      snapPoints: ['60%', '80%'],
+      enableOverDrag: false
+    }
+  }
+  const props6 = {
+    props: {
+      noSnapTo: false,
+      snapPoints: ['60%', '80%'],
+      enableOverDrag: true
+    }
+  }
+  const props7 = {
+    props: {
+      noSnapTo: false,
+      snapPoints: ['60%', '80%'],
+      overDragResistanceFactor: 2
+    }
+  }
+  const props8 = {
+    props: {
+      noSnapTo: false,
+      snapPoints: ['60%', '80%'],
+      overDragResistanceFactor: 20
+    }
+  }
+  const props9 = {
+    props: {
+      noSnapTo: false,
+      snapPoints: ['60%', '80%'],
+      enablePanDownToClose: false
+    }
+  }
+  const props10 = {
+    props: {
+      noSnapTo: false,
+      snapPoints: ['60%', '80%'],
+      enablePanDownToClose: true
+    }
+  }
+  const [show, setShow] = React.useState<any>({});
+  const { show0, show1, show2, show3, show4, show5, show6, show7, show8, show9, show10 } = show;
+  const flag1 = (show1 || show2 || show3 || show4 || show5 || show6 || show7 || show8 || show9 || show10)
+  const dealShow = (index: number) => {
+    const result: any = {};
+    Array.from({ length: 11 }).map((item, idx) => {
+      result[`show${idx}`] = index == idx;
+    })
+    setShow(result);
+  }
+
   return (
-    <ScrollView>
-      <Tester>
-        <TestSuite name='BottomSheetTesteDemo'>
-          {
-            propsArr.map((item, index) => (
+    <>
+
+      <>
+        {!(show0 || flag1) && <ScrollView>
+          <View style={styles.spacer0} />
+          {!show0 && <Button title='all other props' onPress={() => {
+            dealShow(0)
+          }} />}
+          <View style={styles.spacer} />
+          {!show1 && <Button title='enableContentPanningGesture1' onPress={() => {
+            dealShow(1)
+          }} />}
+          <View style={styles.spacer} />
+          {!show2 && <Button title='enableContentPanningGesture2' onPress={() => {
+            dealShow(2)
+          }} />}
+          <View style={styles.spacer} />
+          {!show3 && <Button title='enableHandlePanningGesture1' onPress={() => {
+            dealShow(3)
+          }} />}
+          <View style={styles.spacer} />
+          {!show4 && <Button title='enableHandlePanningGesture2' onPress={() => {
+            dealShow(4)
+          }} />}
+          <View style={styles.spacer} />
+          {!show5 && <Button title='enableOverDrag1' onPress={() => {
+            dealShow(5)
+          }} />}
+          <View style={styles.spacer} />
+          {!show6 && <Button title='enableOverDrag2' onPress={() => {
+            dealShow(6)
+          }} />}
+          <View style={styles.spacer} />
+          {!show7 && <Button title='overDragResistanceFactor1' onPress={() => {
+            dealShow(7)
+          }} />}
+          <View style={styles.spacer} />
+          {!show8 && <Button title='overDragResistanceFactor2' onPress={() => {
+            dealShow(8)
+          }} />}
+          <View style={styles.spacer} />
+          {!show9 && <Button title='enablePanDownToClose1' onPress={() => {
+            dealShow(9)
+          }} />}
+          <View style={styles.spacer} />
+          {!show10 && <Button title='enablePanDownToClose2' onPress={() => {
+            dealShow(10)
+          }} />}
+        </ScrollView>}
+        {flag1 && <Tester>
+          <TestSuite name='BottomSheetTesteDemo1'>
+            {show1 && <TestCase itShould={JSON.stringify(props1.props)} tags={['C_API']} key={-1}>
+              {<View style={styles.app}>
+                <GestureHandlerRootView style={styles.container}>
+                  <SimpleExample {...props1.props} />
+                </GestureHandlerRootView>
+                <Button title='返回' onPress={() => setShow({ ...show, show1: false })} />
+              </View>}
+            </TestCase>}
+            {show2 && <TestCase itShould={JSON.stringify(props2.props)} tags={['C_API']} key={-2}>
+              {<View style={styles.app}>
+                <GestureHandlerRootView style={styles.container}>
+                  <SimpleExample {...props2.props} />
+                </GestureHandlerRootView>
+                <Button title='返回' onPress={() => setShow({ ...show, show2: false })} />
+              </View>}
+            </TestCase>}
+            {show3 && <TestCase itShould={JSON.stringify(props3.props)} tags={['C_API']} key={-3}>
+              {<View style={styles.app}>
+                <GestureHandlerRootView style={styles.container}>
+                  <SimpleExample {...props3.props} />
+                </GestureHandlerRootView>
+                <Button title='返回' onPress={() => setShow({ ...show, show3: false })} />
+              </View>}
+            </TestCase>}
+            {show4 && <TestCase itShould={JSON.stringify(props4.props)} tags={['C_API']} key={-4}>
+              {<View style={styles.app}>
+                <GestureHandlerRootView style={styles.container}>
+                  <SimpleExample {...props4.props} />
+                </GestureHandlerRootView>
+                <Button title='返回' onPress={() => setShow({ ...show, show4: false })} />
+              </View>}
+            </TestCase>}
+            {show5 && <TestCase itShould={JSON.stringify(props5.props)} tags={['C_API']} key={-5}>
+              {<View style={styles.app}>
+                <GestureHandlerRootView style={styles.container}>
+                  <SimpleExample {...props5.props} />
+                </GestureHandlerRootView>
+                <Button title='返回' onPress={() => setShow({ ...show, show5: false })} />
+              </View>}
+            </TestCase>}
+            {show6 && <TestCase itShould={JSON.stringify(props6.props)} tags={['C_API']} key={-6}>
+              {<View style={styles.app}>
+                <GestureHandlerRootView style={styles.container}>
+                  <SimpleExample {...props6.props} />
+                </GestureHandlerRootView>
+                <Button title='返回' onPress={() => setShow({ ...show, show6: false })} />
+              </View>}
+            </TestCase>}
+            {show7 && <TestCase itShould={JSON.stringify(props7.props)} tags={['C_API']} key={-7}>
+              {<View style={styles.app}>
+                <GestureHandlerRootView style={styles.container}>
+                  <SimpleExample {...props7.props} />
+                </GestureHandlerRootView>
+                <Button title='返回' onPress={() => setShow({ ...show, show7: false })} />
+              </View>}
+            </TestCase>}
+            {show8 && <TestCase itShould={JSON.stringify(props8.props)} tags={['C_API']} key={-8}>
+              {<View style={styles.app}>
+                <GestureHandlerRootView style={styles.container}>
+                  <SimpleExample {...props9.props} />
+                </GestureHandlerRootView>
+                <Button title='返回' onPress={() => setShow({ ...show, show8: false })} />
+              </View>}
+            </TestCase>}
+            {show9 && <TestCase itShould={JSON.stringify(props9.props)} tags={['C_API']} key={-9}>
+              {<View style={styles.app}>
+                <GestureHandlerRootView style={styles.container}>
+                  <SimpleExample {...props9.props} />
+                </GestureHandlerRootView>
+                <Button title='返回' onPress={() => setShow({ ...show, show9: false })} />
+              </View>}
+            </TestCase>}
+            {show10 && <TestCase itShould={JSON.stringify(props10.props)} tags={['C_API']} key={-10}>
+              {<View style={styles.app}>
+                <GestureHandlerRootView style={styles.container}>
+                  <SimpleExample {...props10.props} />
+                </GestureHandlerRootView>
+                <Button title='返回' onPress={() => setShow({ ...show, show10: false })} />
+              </View>}
+            </TestCase>}
+          </TestSuite>
+        </Tester>}
+      </>
+      {show0 && <ScrollView>
+        <View style={styles.spacer0} />
+        <Button title='返回' onPress={() => setShow({ ...show, show0: false })} />
+        <Tester>
+          <TestSuite name='BottomSheetTesteDemo2'>
+            {!show1 && propsArr.map((item, index) => (
               <TestCase itShould={JSON.stringify(item.props)} tags={['C_API']} key={index}>
                 <View style={styles.app}>
                   <GestureHandlerRootView style={styles.container}>
@@ -469,18 +580,24 @@ export function BottomExample() {
                   </GestureHandlerRootView>
                 </View>
               </TestCase>
-            ))
-          }
-        </TestSuite>
-      </Tester>
-    </ScrollView>
+            ))}
+          </TestSuite>
+        </Tester>
+      </ScrollView>}
+    </>
   );
 }
 
 
 const styles = StyleSheet.create({
+  spacer0: {
+    margin: 20
+  },
+  spacer: {
+    margin: 10
+  },
   app: {
-    height: height - 200
+    height: height - 100
   },
   container: {
     flex: 1,
