@@ -72,31 +72,6 @@ const ScatterChartDemo = () => {
             </View>
           </TestCase>
         </TestSuite>
-
-        <TestSuite name="散点图(barChart和lineChart类型图表的公共属性)">
-          <TestCase itShould="props:highlightPerDragEnabled  设置false,可防止值通过点击手势突出显示">
-            <View style={{height: 300}}>
-              <ScatterChart
-                style={styles.chart}
-                data={{
-                  dataSets: [
-                    {
-                      label: 'demo',
-                      values: data,
-                      config: {color: processColor('#4f4'), visible: true},
-                    },
-                    {
-                      label: 'demo2',
-                      values: data2,
-                      config: {color: processColor('#f4f')},
-                    },
-                  ],
-                }}
-                highlightPerDragEnabled={false}
-              />
-            </View>
-          </TestCase>
-        </TestSuite>
         <TestSuite name="散点图(barChart和lineChart类型图表的公共属性)">
           <TestCase itShould="props:scaleEnabled true 是否启用缩放 scaleXEnabled true是否启用x轴缩放,其他用例均覆盖false的情况">
             <View style={{height: 300}}>
@@ -449,6 +424,29 @@ const ScatterChartDemo = () => {
                       label: 'demo',
                       values: data,
                       config: {scatterShape: 'X'},
+                    },
+                  ],
+                }}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+
+        <TestSuite name="散点图(数据Data)">
+          <TestCase itShould="props:scatterShape 设置绘制此DataSet时应使用的散点形状 CIRCLE(圆形),scatterShapeHoleColor #4f4 设置形状中孔的颜色,scatterShapeHoleRadius 0 设置形状中孔的半径（适用于正方形、圆形和三角形）将其设置为<=0以删除孔">
+            <View style={{height: 300}}>
+              <ScatterChart
+                style={styles.chart}
+                data={{
+                  dataSets: [
+                    {
+                      label: 'demo',
+                      values: data,
+                      config: {
+                        scatterShape: 'CIRCLE',
+                        scatterShapeHoleColor: processColor('#4f4'),
+                        scatterShapeHoleRadius: 0,
+                      },
                     },
                   ],
                 }}
