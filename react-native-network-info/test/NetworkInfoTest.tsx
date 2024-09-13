@@ -1,3 +1,4 @@
+import React from "react";
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {NetworkInfo} from 'react-native-network-info';
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
@@ -32,7 +33,7 @@ export function NetworkInfoTest() {
       name: 'getBSSID',
       fn: NetworkInfo.getBSSID,
       type: 'string',
-      des: '获取连接的 WiFi 网络的 SSID',
+      des: '获取连接的 WiFi 网络的 BSSID',
     },
     {
       name: 'getSubnet',
@@ -68,7 +69,11 @@ export function NetworkInfoTest() {
                   <TouchableOpacity
                     onPress={async () => {
                       const value = await item.fn();
-                      setState(value as any);
+                      if(!value){
+                        setState('null');
+                      }else{
+                        setState(value as any);
+                      }
                     }}>
                     <Text style={styles.button}>{item.name}</Text>
                   </TouchableOpacity>
@@ -77,7 +82,7 @@ export function NetworkInfoTest() {
               );
             }}
             assert={async ({expect, state}) => {
-              expect(state).to.be.a(item.type);
+              expect(state).to.be.a(item.type)
             }}
           />
         ))}
