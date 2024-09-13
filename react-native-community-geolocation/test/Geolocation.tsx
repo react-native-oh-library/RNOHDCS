@@ -10,15 +10,8 @@ const Meun = [
     itShould: '设置位置信息请求配置',
     label: 'setRNConfiguration',
     onPress: (setState: (arg0: boolean) => void, setValue: (arg0: string) => void) => {
-        try {
-            Geo.setRNConfiguration({skipPermissionRequests:true})
-            setValue('setRNConfiguration: success')
-            setState(true)
-        } catch (error) {
-            setState(false)
-        }
-        
-        
+      Geo.setRNConfiguration({skipPermissionRequests:true})
+      setValue('setRNConfiguration')
     },
   },
   {
@@ -73,8 +66,7 @@ const Meun = [
     label: 'clearWatch',
     onPress: (setState: (arg0: boolean) => void, setValue: (arg0: string) => void) => {
      Geo.clearWatch(0)
-     setValue('clearWatch: success')
-     setState(true)
+     setValue('clearWatch')
     },
   },
  
