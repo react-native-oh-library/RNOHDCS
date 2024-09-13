@@ -63,6 +63,17 @@ export function BulletListDemo() {
                     >
                     </BulletList>
                 </TestCase>
+                <TestCase itShould='rtl:false'>
+                    <BulletList height={140}
+                        animate={true}
+                        backgroundColor={'#999'}
+                        foregroundColor={'red'}
+                        speed={0.5}
+                        interval={2}
+                        rtl={false}
+                    >
+                    </BulletList>
+                </TestCase>
                 <TestCase itShould='beforeMask:Rect(组件)'>
                     <BulletList height={140}
                         animate={true}

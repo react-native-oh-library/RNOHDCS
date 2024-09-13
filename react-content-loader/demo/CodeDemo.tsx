@@ -63,6 +63,17 @@ export function CodeDemo() {
                     >
                     </Code>
                 </TestCase>
+                <TestCase itShould='rtl:false'>
+                    <Code height={140}
+                        animate={true}
+                        backgroundColor={'#999'}
+                        foregroundColor={'red'}
+                        speed={0.5}
+                        interval={2}
+                        rtl={false}
+                    >
+                    </Code>
+                </TestCase>
                 <TestCase itShould='beforeMask:Rect(组件)'>
                     <Code height={140}
                         animate={true}

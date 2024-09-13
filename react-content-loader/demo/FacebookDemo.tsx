@@ -73,6 +73,18 @@ export function FacebookDemo() {
                     >
                     </Facebook>
                 </TestCase>
+                <TestCase itShould='rtl:false'>
+                    <Facebook
+                        width={'100%'}
+                        animate={true}
+                        backgroundColor={'#999'}
+                        foregroundColor={'red'}
+                        speed={0.5}
+                        interval={2}
+                        rtl={false}
+                    >
+                    </Facebook>
+                </TestCase>
                 <TestCase itShould='beforeMask:Rect(组件)'>
                     <Facebook
                         width={'100%'}
