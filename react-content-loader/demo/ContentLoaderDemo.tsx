@@ -25,7 +25,7 @@ export function ContentLoaderDemo() {
                     <ContentLoader
                         width={'100%'}
                         animate={true}
-                        viewBox="0 0 380 70"
+                        viewBox="10 10 380 60"
                     >
                     </ContentLoader>
                 </TestCase>
@@ -79,6 +79,18 @@ export function ContentLoaderDemo() {
                     >
                     </ContentLoader>
                 </TestCase>
+                <TestCase itShould='rtl:false'>
+                    <ContentLoader
+                        width={'100%'}
+                        animate={true}
+                        backgroundColor={'#999'}
+                        foregroundColor={'red'}
+                        speed={0.5}
+                        interval={2}
+                        rtl={false}
+                    >
+                    </ContentLoader>
+                </TestCase>
                 <TestCase itShould='beforeMask:Rect(组件)'>
                     <ContentLoader
                         width={'100%'}
@@ -86,16 +98,6 @@ export function ContentLoaderDemo() {
                         backgroundColor={'#999'}
                         beforeMask={<Rect x="80" y="40" rx="3" ry="3" width="250" height="10" fill='red' />}
                     >
-                    </ContentLoader>
-                </TestCase>
-                <TestCase itShould='作为容器组件包裹子组件'>
-                    <ContentLoader
-                        width={'100%'}
-                        height={100}
-                    >
-                        <Circle cx="30" cy="30" r="30" />
-                        <Rect x="80" y="17" rx="4" ry="4" width="300" height="13" />
-                        <Rect x="80" y="40" rx="3" ry="3" width="250" height="10" />
                     </ContentLoader>
                 </TestCase>
             </Tester>
