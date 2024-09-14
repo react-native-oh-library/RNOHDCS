@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, Button, ScrollView } from 'react-native';
-import Clipboard from "@react-native-clipboard/clipboard";
+import Clipboard from '@react-native-clipboard/clipboard';
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
 
 // Small icon of a plus for demo purposes
@@ -95,48 +95,30 @@ export function ClipboardTest() {
               key={"clipboard_hasString"}
               itShould={`hasString`}
               tags={['C_API']}
-              initialState={false}
-              arrange={({ setState }) => {
-                return (
-                  <View style={{ flex: 1 }}>
-                    <Button
-                      title="Click get hasString"
-                      onPress={async () => {
-                        const flag = await Clipboard.hasString();
-                        setHasString(flag);
-                        setState(true);
-                      }} />
-                    <Text>{`hasString: ${hasString}`}</Text>
-                  </View>
-                );
-              }}
-              assert={async ({ expect, state }) => {
-                expect(state).to.be.true;
-              }}
-            />
+            >
+              <Button
+                title="Click get hasString"
+                onPress={async () => {
+                  const flag = await Clipboard.hasString();
+                  setHasString(flag);
+                }}
+              />
+              <Text>{`hasString: ${hasString}`}</Text>
+            </TestCase>
             <TestCase
               key={"clipboard_hasNumber"}
               itShould={`hasNumber`}
               tags={['C_API']}
-              initialState={false}
-              arrange={({ setState }) => {
-                return (
-                  <View style={{ flex: 1 }}>
-                    <Button
-                      title="Click get hasNumber"
-                      onPress={async () => {
-                        const flag = await Clipboard.hasNumber();
-                        setHasNumber(flag);
-                        setState(true);
-                      }} />
-                    <Text>{`hasNumber: ${hasNumber}`}</Text>
-                  </View>
-                );
-              }}
-              assert={async ({ expect, state }) => {
-                expect(state).to.be.true;
-              }}
-            />
+            >
+              <Button
+                title="Click get hasNumber"
+                onPress={async () => {
+                  const flag = await Clipboard.hasNumber();
+                  setHasNumber(flag);
+                }}
+              />
+              <Text>{`hasNumber: ${hasNumber}`}</Text>
+            </TestCase>
             <TestCase
               key={"clipboard_setStrings"}
               itShould={'setStrings'}
@@ -169,25 +151,16 @@ export function ClipboardTest() {
               key={"clipboard_hasURL"}
               itShould={`hasURL`}
               tags={['C_API']}
-              initialState={false}
-              arrange={({ setState }) => {
-                return (
-                  <View style={{ flex: 1 }}>
-                    <Button
-                      title="Click get hasURL"
-                      onPress={async () => {
-                        const flag = await Clipboard.hasURL();
-                        setWebURL(flag);
-                        setState(true);
-                      }} />
-                    <Text>{`hasURL: ${hasURL}`}</Text>
-                  </View>
-                );
-              }}
-              assert={async ({ expect, state }) => {
-                expect(state).to.be.true;
-              }}
-            />
+            >
+              <Button
+                title="Click get hasURL"
+                onPress={async () => {
+                  const flag = await Clipboard.hasURL();
+                  setWebURL(flag);
+                }}
+              />
+              <Text>{`hasURL: ${hasURL}`}</Text>
+            </TestCase>
             <TestCase
               key={"clipboard_setWebUrl"}
               itShould={'setWebUrl'}
@@ -202,25 +175,16 @@ export function ClipboardTest() {
               key={"clipboard_hasWebURL"}
               itShould={`hasWebURL`}
               tags={['C_API']}
-              initialState={false}
-              arrange={({ setState }) => {
-                return (
-                  <View style={{ flex: 1 }}>
-                    <Button
-                      title="Click get hasWebURL"
-                      onPress={async () => {
-                        const flag = await Clipboard.hasWebURL();
-                        setHasWebURL(flag);
-                        setState(true);
-                      }} />
-                    <Text>{`hasWebURL: ${hasWebURL}`}</Text>
-                  </View>
-                );
-              }}
-              assert={async ({ expect, state }) => {
-                expect(state).to.be.true;
-              }}
-            />
+            >
+              <Button
+                title="Click get hasWebURL"
+                onPress={async () => {
+                  const flag = await Clipboard.hasWebURL();
+                  setHasWebURL(flag);
+                }}
+              />
+              <Text>{`hasWebURL: ${hasWebURL}`}</Text>
+            </TestCase>
             <TestCase
               key={"clipboard_setJpgImage"}
               itShould={'setJpgImage'}
@@ -261,25 +225,16 @@ export function ClipboardTest() {
               key={"clipboard_hasImage"}
               itShould={`hasImage`}
               tags={['C_API']}
-              initialState={false}
-              arrange={({ setState }) => {
-                return (
-                  <View style={{ flex: 1 }}>
-                    <Button
-                      title="Click get hasImage"
-                      onPress={async () => {
-                        const hasImage = await Clipboard.hasImage();
-                        setHasImageVal(hasImage);
-                        setState(true);
-                      }} />
-                    <Text>{`hasImage: ${hasImageVal}`}</Text>
-                  </View>
-                );
-              }}
-              assert={async ({ expect, state }) => {
-                expect(state).to.be.true;
-              }}
-            />
+            >
+              <Button
+                title="Click get hasImage"
+                onPress={async () => {
+                  const hasImage = await Clipboard.hasImage();
+                  setHasImageVal(hasImage);
+                }}
+              />
+              <Text>{`hasImage: ${hasImageVal}`}</Text>
+            </TestCase>
           </TestSuite>
         </Tester>
       </View>
