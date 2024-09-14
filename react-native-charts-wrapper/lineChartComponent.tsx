@@ -513,7 +513,7 @@ const lineChartDemo = () => {
           </TestCase>
         </TestSuite>
         <TestSuite name="LineChart 基础折线图(data:数据)">
-          <TestCase itShould="Props:config(fillFormatter #4f4) 填充 drawFilled:true,fillAlpha:0.2,fillColor:processColor('#4f4') ">
+          <TestCase itShould="Props:config(fillFormatter #4f4) 填充 drawFilled:true,fillColor:processColor('#4f4') ">
             <View style={{ width: '100%', height: 300 }}>
               <LineChart
                 style={styles.chart}
@@ -542,7 +542,7 @@ const lineChartDemo = () => {
           </TestCase>
         </TestSuite>
         <TestSuite name="LineChart 基础折线图(data:数据)">
-          <TestCase itShould="Props:config(fillFormatter #4f4) 填充 drawFilled:true,fillColor: processColor(' #4f4') ">
+          <TestCase itShould="Props:config(fillFormatter #4f4) 填充 drawFilled:true,fillColor: processColor(' #d41') ">
             <View style={{ width: '100%', height: 300 }}>
               <LineChart
                 style={styles.chart}
@@ -551,7 +551,7 @@ const lineChartDemo = () => {
                     {
                       label: 'demo',
                       values: data,
-                      config: { drawFilled: true, fillAlpha:  0.8, fillColor: processColor('#4f4') }
+                      config: { drawFilled: true, fillAlpha:  0.2, fillColor: processColor('#d41') }
                     },
                   ],
                 }}

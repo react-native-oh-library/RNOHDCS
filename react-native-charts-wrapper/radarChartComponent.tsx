@@ -666,7 +666,7 @@ const RadarChartDemo = () => {
           </TestCase>
         </TestSuite>
         <TestSuite name="雷达图">
-          <TestCase itShould="props:skipWebLineCount 设置在执行以下操作之前应在图表 Web 上跳过的 Web 行数">
+          <TestCase itShould="props:skipWebLineCount 设置在执行以下操作之前应在图表 Web 上跳过的 Web 行数 中心往外绿色线 跳过4行">
             <View style={{ height: 300 }}>
               <RadarChart
                 style={styles.chart}
@@ -719,7 +719,7 @@ const RadarChartDemo = () => {
                   axisMinimum: 0,
                 }}
                 animation={{ durationX: 1000, durationY: 1000 }}
-                skipWebLineCount={12}
+                skipWebLineCount={4}
               />
             </View>
           </TestCase>
