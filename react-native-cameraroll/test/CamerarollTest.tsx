@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, ScrollView, Button} from "react-native";
+import { View, Text, ScrollView, Button, StyleSheet} from "react-native";
 import {
   CameraRoll,
 } from "@react-native-camera-roll/camera-roll";
@@ -7,13 +7,12 @@ import RNFS from 'react-native-fs';
 import { Tester, TestCase } from '@rnoh/testerino';
 
 export default function CameraRollTest() {
+const [saveUri, setSaveUri] = useState('');
   const SaveAssetInternetImage = (props: {
     setState: React.Dispatch<React.SetStateAction<string>>;
   }) => {
-    const [saveUri, setSaveUri] = useState('');
-
     return (
-      <View style={{ height: 180 }}>
+      <View style={{ height: 50 }}>
         <Button
           title="SaveAsset"
           onPress={() => {
@@ -23,9 +22,6 @@ export default function CameraRollTest() {
             });
           }}
         />
-        <View style={{ marginTop: 10 }}>
-          <Text>图片保存信息：{saveUri}</Text>
-        </View>
       </View>
     );
   };
@@ -33,10 +29,8 @@ export default function CameraRollTest() {
   const SaveAssetLocalImage = (props: {
     setState: React.Dispatch<React.SetStateAction<string>>;
   }) => {
-    const [saveUri, setSaveUri] = useState('');
-
     return (
-      <View style={{ height: 180 }}>
+      <View style={{ height: 50 }}>
         <Button
           title="SaveAsset"
           onPress={() => {
@@ -54,9 +48,6 @@ export default function CameraRollTest() {
             })
           }}
         />
-        <View style={{ marginTop: 10 }}>
-          <Text>图片保存信息：{saveUri}</Text>
-        </View>
       </View>
     );
   };
@@ -64,10 +55,8 @@ export default function CameraRollTest() {
   const SaveAssetInternetVideo = (props: {
     setState: React.Dispatch<React.SetStateAction<string>>;
   }) => {
-    const [saveUri, setSaveUri] = useState('');
-
     return (
-      <View style={{ height: 180 }}>
+      <View style={{ height: 50 }}>
         <Button
           title="SaveAsset"
           onPress={() => {
@@ -77,9 +66,6 @@ export default function CameraRollTest() {
             });
           }}
         />
-        <View style={{ marginTop: 10 }}>
-          <Text>视频保存信息：{saveUri}</Text>
-        </View>
       </View>
     );
   };
@@ -87,10 +73,8 @@ export default function CameraRollTest() {
   const SaveAssetLocalVideo = (props: {
     setState: React.Dispatch<React.SetStateAction<string>>;
   }) => {
-    const [saveUri, setSaveUri] = useState('');
-
     return (
-      <View style={{ height: 180 }}>
+      <View style={{ height: 50 }}>
         <Button
           title="SaveAsset"
           onPress={() => {
@@ -108,9 +92,6 @@ export default function CameraRollTest() {
             })
           }}
         />
-        <View style={{ marginTop: 10 }}>
-          <Text>视频保存信息：{saveUri}</Text>
-        </View>
       </View>
     );
   };
@@ -118,10 +99,8 @@ export default function CameraRollTest() {
   const SaveToCamerarollInternetImage = (props: {
     setState: React.Dispatch<React.SetStateAction<string>>;
   }) => {
-    const [saveUri, setSaveUri] = useState('');
-
     return (
-      <View style={{ height: 180 }}>
+      <View style={{ height: 50 }}>
         <Button
           title="SaveToCameraroll"
           onPress={() => {
@@ -131,9 +110,6 @@ export default function CameraRollTest() {
             });
           }}
         />
-        <View style={{ marginTop: 10 }}>
-          <Text>图片保存信息：{saveUri}</Text>
-        </View>
       </View>
     );
   };
@@ -141,10 +117,8 @@ export default function CameraRollTest() {
   const SaveToCamerarollLocalImage = (props: {
     setState: React.Dispatch<React.SetStateAction<string>>;
   }) => {
-    const [saveUri, setSaveUri] = useState('');
-
     return (
-      <View style={{ height: 180 }}>
+      <View style={{ height: 50 }}>
         <Button
           title="SaveToCameraroll"
           onPress={() => {
@@ -162,9 +136,6 @@ export default function CameraRollTest() {
             })
           }}
         />
-        <View style={{ marginTop: 10 }}>
-          <Text>图片保存信息：{saveUri}</Text>
-        </View>
       </View>
     );
   };
@@ -172,10 +143,8 @@ export default function CameraRollTest() {
   const SaveToCamerarollInternetVideo = (props: {
     setState: React.Dispatch<React.SetStateAction<string>>;
   }) => {
-    const [saveUri, setSaveUri] = useState('');
-
     return (
-      <View style={{ height: 180 }}>
+      <View style={{ height: 50 }}>
         <Button
           title="SaveToCameraroll"
           onPress={() => {
@@ -185,9 +154,6 @@ export default function CameraRollTest() {
             });
           }}
         />
-        <View style={{ marginTop: 10 }}>
-          <Text>视频保存信息：{saveUri}</Text>
-        </View>
       </View>
     );
   };
@@ -195,10 +161,8 @@ export default function CameraRollTest() {
   const SaveToCamerarollLocalVideo = (props: {
     setState: React.Dispatch<React.SetStateAction<string>>;
   }) => {
-    const [saveUri, setSaveUri] = useState('');
-
     return (
-      <View style={{ height: 180 }}>
+      <View style={{ height: 50 }}>
         <Button
           title="SaveToCameraroll"
           onPress={() => {
@@ -216,15 +180,15 @@ export default function CameraRollTest() {
             })
           }}
         />
-        <View style={{ marginTop: 10 }}>
-          <Text>视频保存信息：{saveUri}</Text>
-        </View>
       </View>
     );
   };
 
   return (
-    <View>
+    <View style={styles.container}>
+      <View style={styles.inputArea}>
+          <Text style={styles.baseText}>{saveUri}</Text>
+      </View>
       <ScrollView>
         <Tester>
           <TestCase
@@ -296,3 +260,30 @@ export default function CameraRollTest() {
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    width: "100%",
+    height: "100%",
+    flexDirection: "column",
+    alignItems: "center",
+    backgroundColor: "#F1F3F5",
+  },
+  baseText: {
+    width: "100%",
+    height: "100%",
+    fontWeight: "bold",
+    textAlign: "center",
+    fontSize: 16,
+  },
+  inputArea: {
+    width: "100%",
+    height: 260,
+    borderWidth: 2,
+    borderColor: "#000000",
+    marginTop: 8,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
+  },
+});
