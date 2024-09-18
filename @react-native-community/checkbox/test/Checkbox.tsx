@@ -42,7 +42,7 @@ export function CheckboxTest() {
               <CheckBox value={true} markSize={50} />;
             </TestCase>
             <TestCase itShould={'checkbox strokeWidth=5'}>
-              <CheckBox value={true} strokeWidth={50} />;
+              <CheckBox value={true} strokeWidth={5} />;
             </TestCase>
             <TestCase itShould={'checkbox strokeWidth=10'}>
               <CheckBox value={true} strokeWidth={10} />;
