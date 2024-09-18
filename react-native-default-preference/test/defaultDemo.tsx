@@ -1,13 +1,22 @@
 import React, { useCallback, useState } from 'react';
 import { TestSuite, Tester, TestCase } from '@rnoh/testerino';
-import { View, Alert, Button, ScrollView, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Button, ScrollView, Text, StyleSheet, TextInput } from 'react-native';
 import RNDefaultPreference from 'react-native-default-preference'
 
-export function Preference() {
+export function PreferenceDemo() {
     const [resTest, setResTest] = useState('');
     const [preName, setPreName] = useState('');
     const handleSetItem = useCallback((key: string, value: string) => {
-        RNDefaultPreference.set(key, value)
+        try {
+            RNDefaultPreference.set(key, value)
+            if (key == 'key1') {
+                setResTest('成功存入key1')
+            } else {
+                setResTest('成功存入key2')
+            }
+        } catch (error) {
+            setResTest('存入失败')
+        }
 
     }, []);
 
@@ -18,7 +27,12 @@ export function Preference() {
     }, []);
 
     const clear = useCallback(() => {
-        RNDefaultPreference.clear('key1');
+        try {
+            RNDefaultPreference.clear('key1');
+            setResTest('删除成功')
+        } catch (error) {
+            setResTest('删除失败')
+        }
     }, [])
 
     const getAll = useCallback(() => {
@@ -30,11 +44,27 @@ export function Preference() {
     }, [])
 
     const setMultiple = useCallback(() => {
-        RNDefaultPreference.setMultiple({ key3: 'value3', key4: 'value4' })
+        try {
+            RNDefaultPreference.setMultiple({ key3: 'value3', key4: 'value4' })
+            setResTest('成功存入')
+        } catch (error) {
+            setResTest('失败')
+        }
+
     }, [])
 
     const getMultiple = useCallback(() => {
         RNDefaultPreference.getMultiple(['key3', 'key4']).then(res => { setResTest(JSON.stringify(res)) });
+    }, [])
+
+    const clearMultiple = useCallback(() => {
+        try {
+            RNDefaultPreference.clearMultiple(['key1', 'key2', 'key3', 'key4']).then(res => { setResTest(JSON.stringify(res)) });
+            setResTest('全部删除成功')
+        } catch (error) {
+            setResTest('全部删除失败')
+        }
+
     }, [])
 
     const setName = useCallback((pname: string) => {
@@ -172,6 +202,27 @@ export function Preference() {
 
 
                             }} title={'Add item using deleteItem'}></Button>
+                        }
+                        assert={({ expect, state }) => {
+                            expect(state).to.be.eq(true);
+                        }}
+                    />
+
+                    <TestCase
+                        itShould="删除全部键值对"
+                        tags={["dev"]}
+                        initialState={false}
+                        arrange={({ setState }) =>
+                            <Button onPress={async () => {
+                                try {
+                                    await clearMultiple()
+                                    setState(true)
+                                } catch {
+                                    setState(false)
+                                }
+
+
+                            }} title={'Add item using clearMultiple'}></Button>
                         }
                         assert={({ expect, state }) => {
                             expect(state).to.be.eq(true);
