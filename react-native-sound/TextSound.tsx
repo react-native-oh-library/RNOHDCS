@@ -424,7 +424,7 @@ const AddMenuPlayTest = (props: {
         sound.release();
       });
     } else {
-      sound = new Sound("https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3", "", (error) => {
+      sound = new Sound("https://sis-sample-audio.obs.cn-north-1.myhuaweicloud.com/16k16bit.mp3", "", (error) => {
 
         if (error) {
           return;

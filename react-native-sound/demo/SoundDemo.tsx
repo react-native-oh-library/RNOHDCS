@@ -58,7 +58,7 @@ export function SoundDemo(): JSX.Element {
     title: props.navigation.state.params.title,
   });
 
-  let sound = new Sound("https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3");
+  let sound = new Sound("https://sis-sample-audio.obs.cn-north-1.myhuaweicloud.com/16k16bit.mp3");
   
   const onPlay = () => {
     sound.play();
