@@ -14,6 +14,8 @@ const fontSpecs: TSFontSpecs = {
 const width = Dimensions.get('window').width * 0.8
 
 export function TextVideo(): JSX.Element {
+    const [disableFocus, setDisableFocus] = useState(false)
+
     return (
         <Tester style={{ flex: 1 }}>
             <ScrollView style={{ flex: 1 }}>
@@ -21,7 +23,7 @@ export function TextVideo(): JSX.Element {
                     <TestCase
                         itShould="poster"
                         initialState={false}
-                        arrange={({ setState }) => <AddMenuPosterTest setState={setState} />}
+                        arrange={({ setState }) => <AddMenuPosterTest setState={setState} disableFocus={disableFocus} setDisableFocus={setDisableFocus} />}
                         assert={({ state, expect }) => {
                             expect(state).to.be.true;
                         }}
@@ -29,7 +31,7 @@ export function TextVideo(): JSX.Element {
                     <TestCase
                         itShould={`posterResizeMode = {"stretch"}`}
                         initialState={false}
-                        arrange={({ setState }) => <AddposterResizeModeTest setState={setState} />}
+                        arrange={({ setState }) => <AddposterResizeModeTest setState={setState} disableFocus={disableFocus} setDisableFocus={setDisableFocus} />}
                         assert={({ state, expect }) => {
                             expect(state).to.be.true;
                         }}
@@ -37,7 +39,7 @@ export function TextVideo(): JSX.Element {
                     <TestCase
                         itShould="OnBuffer"
                         initialState={false}
-                        arrange={({ setState }) => <AddMenuOnBufferTest setState={setState} />}
+                        arrange={({ setState }) => <AddMenuOnBufferTest setState={setState} disableFocus={disableFocus} setDisableFocus={setDisableFocus} />}
                         assert={({ state, expect }) => {
                             expect(state).to.be.true;
                         }}
@@ -45,7 +47,7 @@ export function TextVideo(): JSX.Element {
                     <TestCase
                         itShould="source"
                         initialState={false}
-                        arrange={({ setState }) => <AddMenuMeasureTest setState={setState} />}
+                        arrange={({ setState }) => <AddMenuMeasureTest setState={setState} disableFocus={disableFocus} setDisableFocus={setDisableFocus} />}
                         assert={({ state, expect }) => {
                             expect(state).to.be.true;
                         }}
@@ -53,7 +55,7 @@ export function TextVideo(): JSX.Element {
                     <TestCase
                         itShould="repeat={true}"
                         initialState={false}
-                        arrange={({ setState }) => <AddMenuRepeatFalseTest setState={setState} />}
+                        arrange={({ setState }) => <AddMenuRepeatFalseTest setState={setState} disableFocus={disableFocus} setDisableFocus={setDisableFocus} />}
                         assert={({ state, expect }) => {
                             expect(state).to.be.true;
                         }}
@@ -61,7 +63,7 @@ export function TextVideo(): JSX.Element {
                     <TestCase
                         itShould="resizeMode={'contain'}"
                         initialState={false}
-                        arrange={({ setState }) => <AddMenuResizeModeTest setState={setState} />}
+                        arrange={({ setState }) => <AddMenuResizeModeTest setState={setState} disableFocus={disableFocus} setDisableFocus={setDisableFocus} />}
                         assert={({ state, expect }) => {
                             expect(state).to.be.true;
                         }}
@@ -69,7 +71,7 @@ export function TextVideo(): JSX.Element {
                     <TestCase
                         itShould="resizeMode={'cover'}"
                         initialState={false}
-                        arrange={({ setState }) => <AddMenuResizeModecoverTest setState={setState} />}
+                        arrange={({ setState }) => <AddMenuResizeModecoverTest setState={setState} disableFocus={disableFocus} setDisableFocus={setDisableFocus} />}
                         assert={({ state, expect }) => {
                             expect(state).to.be.true;
                         }}
@@ -77,7 +79,7 @@ export function TextVideo(): JSX.Element {
                     <TestCase
                         itShould="resizeMode={'stretch'}"
                         initialState={false}
-                        arrange={({ setState }) => <AddMenuResizeModeStretchTest setState={setState} />}
+                        arrange={({ setState }) => <AddMenuResizeModeStretchTest setState={setState} disableFocus={disableFocus} setDisableFocus={setDisableFocus} />}
                         assert={({ state, expect }) => {
                             expect(state).to.be.true;
                         }}
@@ -86,7 +88,7 @@ export function TextVideo(): JSX.Element {
                     <TestCase
                         itShould="onLoadStart"
                         initialState={false}
-                        arrange={({ setState }) => <AddMenuOnLoadStartTest setState={setState} />}
+                        arrange={({ setState }) => <AddMenuOnLoadStartTest setState={setState} disableFocus={disableFocus} setDisableFocus={setDisableFocus} />}
                         assert={({ state, expect }) => {
                             expect(state).to.be.true;
                         }}
@@ -94,7 +96,7 @@ export function TextVideo(): JSX.Element {
                     <TestCase
                         itShould="onProgress"
                         initialState={false}
-                        arrange={({ setState }) => <AddMenuOnProgressTest setState={setState} />}
+                        arrange={({ setState }) => <AddMenuOnProgressTest setState={setState} disableFocus={disableFocus} setDisableFocus={setDisableFocus} />}
                         assert={({ state, expect }) => {
                             expect(state).to.be.true;
                         }}
@@ -102,7 +104,7 @@ export function TextVideo(): JSX.Element {
                     <TestCase
                         itShould="seek"
                         initialState={false}
-                        arrange={({ setState }) => <AddMenuSeekTest setState={setState} />}
+                        arrange={({ setState }) => <AddMenuSeekTest setState={setState} disableFocus={disableFocus} setDisableFocus={setDisableFocus} />}
                         assert={({ state, expect }) => {
                             expect(state).to.be.true;
                         }}
@@ -110,7 +112,7 @@ export function TextVideo(): JSX.Element {
                     <TestCase
                         itShould="onEnd"
                         initialState={false}
-                        arrange={({ setState }) => <AddMenuOnEndTest setState={setState} />}
+                        arrange={({ setState }) => <AddMenuOnEndTest setState={setState} disableFocus={disableFocus} setDisableFocus={setDisableFocus} />}
                         assert={({ state, expect }) => {
                             expect(state).to.be.true;
                         }}
@@ -119,7 +121,7 @@ export function TextVideo(): JSX.Element {
                     <TestCase
                         itShould="onLoad"
                         initialState={false}
-                        arrange={({ setState }) => <AddMenuOnLoadTest setState={setState} />}
+                        arrange={({ setState }) => <AddMenuOnLoadTest setState={setState} disableFocus={disableFocus} setDisableFocus={setDisableFocus} />}
                         assert={({ state, expect }) => {
                             expect(state).to.be.true;
                         }}
@@ -127,7 +129,7 @@ export function TextVideo(): JSX.Element {
                     <TestCase
                         itShould="onReadyForDisplay"
                         initialState={false}
-                        arrange={({ setState }) => <AddMenuonReadyForDisplayTest setState={setState} />}
+                        arrange={({ setState }) => <AddMenuonReadyForDisplayTest setState={setState} disableFocus={disableFocus} setDisableFocus={setDisableFocus} />}
                         assert={({ state, expect }) => {
                             expect(state).to.be.true;
                         }}
@@ -135,7 +137,7 @@ export function TextVideo(): JSX.Element {
                     <TestCase
                         itShould="muted={false}"
                         initialState={false}
-                        arrange={({ setState }) => <AddMenuonMutedTest setState={setState} />}
+                        arrange={({ setState }) => <AddMenuonMutedTest setState={setState} disableFocus={disableFocus} setDisableFocus={setDisableFocus} />}
                         assert={({ state, expect }) => {
                             expect(state).to.be.true;
                         }}
@@ -143,15 +145,23 @@ export function TextVideo(): JSX.Element {
                     <TestCase
                         itShould="volume={0.2}"
                         initialState={false}
-                        arrange={({ setState }) => <AddVolumeTest setState={setState} />}
+                        arrange={({ setState }) => <AddVolumeTest setState={setState} disableFocus={disableFocus} setDisableFocus={setDisableFocus} />}
                         assert={({ state, expect }) => {
                             expect(state).to.be.true;
                         }}
                     />
                     <TestCase
-                        itShould="disableFocus"
+                        itShould="disableFocus = false"
                         initialState={false}
-                        arrange={({ setState }) => <AdddisableFocusTest setState={setState} />}
+                        arrange={({ setState }) => <AdddisableFocusTest setState={setState} disableFocus={disableFocus} setDisableFocus={setDisableFocus} />}
+                        assert={({ state, expect }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
+                    <TestCase
+                        itShould="disableFocus =true"
+                        initialState={false}
+                        arrange={({ setState }) => <AdddisableFocusTrueTest setState={setState} disableFocus={disableFocus} setDisableFocus={setDisableFocus} />}
                         assert={({ state, expect }) => {
                             expect(state).to.be.true;
                         }}
@@ -159,7 +169,7 @@ export function TextVideo(): JSX.Element {
                     <TestCase
                         itShould="paused"
                         initialState={false}
-                        arrange={({ setState }) => <AddpausedTest setState={setState} />}
+                        arrange={({ setState }) => <AddpausedTest setState={setState} disableFocus={disableFocus} setDisableFocus={setDisableFocus} />}
                         assert={({ state, expect }) => {
                             expect(state).to.be.true;
                         }}
@@ -167,7 +177,7 @@ export function TextVideo(): JSX.Element {
                     <TestCase
                         itShould="onError"
                         initialState={false}
-                        arrange={({ setState }) => <AddonErrorTest setState={setState} />}
+                        arrange={({ setState }) => <AddonErrorTest setState={setState} disableFocus={disableFocus} setDisableFocus={setDisableFocus} />}
                         assert={({ state, expect }) => {
                             expect(state).to.be.true;
                         }}
@@ -175,7 +185,7 @@ export function TextVideo(): JSX.Element {
                     <TestCase
                         itShould="onPlaybackStalled"
                         initialState={false}
-                        arrange={({ setState }) => <AddonPlaybackStalledTest setState={setState} />}
+                        arrange={({ setState }) => <AddonPlaybackStalledTest setState={setState} disableFocus={disableFocus} setDisableFocus={setDisableFocus} />}
                         assert={({ state, expect }) => {
                             expect(state).to.be.true;
                         }}
@@ -183,7 +193,7 @@ export function TextVideo(): JSX.Element {
                     <TestCase
                         itShould="onPlaybackResume"
                         initialState={false}
-                        arrange={({ setState }) => <AddonPlaybackResumeTest setState={setState} />}
+                        arrange={({ setState }) => <AddonPlaybackResumeTest setState={setState} disableFocus={disableFocus} setDisableFocus={setDisableFocus} />}
                         assert={({ state, expect }) => {
                             expect(state).to.be.true;
                         }}
@@ -198,7 +208,11 @@ export function TextVideo(): JSX.Element {
 
 const AddonPlaybackResumeTest = (props: {
     setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>;
+    disableFocus: boolean;
 }) => {
+    const { disableFocus, setDisableFocus } = props
+
     const videoref = useRef<React.ElementRef<VideoComponentType>>(null);
     const [show, setShow] = useState(false)
     const [title, setTitle] = useState("")
@@ -214,7 +228,7 @@ const AddonPlaybackResumeTest = (props: {
             alignItems: "center"
 
         }}>
-             <Text>{title}</Text>
+            <Text>{title}</Text>
             <View style={{
                 height: 150,
                 width: 150,
@@ -229,6 +243,7 @@ const AddonPlaybackResumeTest = (props: {
                         controls={true}
                         repeat={false}
                         paused={false}
+                        disableFocus={disableFocus}
                         resizeMode={"contain"}
                         style={{ flex: 1 }}
                         onPlaybackResume={() => {
@@ -245,7 +260,10 @@ const AddonPlaybackResumeTest = (props: {
 
 const AddonPlaybackStalledTest = (props: {
     setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>;
+    disableFocus: boolean;
 }) => {
+    const { disableFocus, setDisableFocus } = props
     const videoref = useRef<React.ElementRef<VideoComponentType>>(null);
     const [show, setShow] = useState(false)
     const [title, setTitle] = useState("")
@@ -261,7 +279,7 @@ const AddonPlaybackStalledTest = (props: {
             alignItems: "center"
 
         }}>
-             <Text>{title}</Text>
+            <Text>{title}</Text>
             <View style={{
                 height: 150,
                 width: 150,
@@ -276,6 +294,7 @@ const AddonPlaybackStalledTest = (props: {
                         controls={true}
                         repeat={false}
                         paused={false}
+                        disableFocus={disableFocus}
                         resizeMode={"contain"}
                         style={{ flex: 1 }}
                         onPlaybackStalled={() => {
@@ -292,12 +311,20 @@ const AddonPlaybackStalledTest = (props: {
 
 const AddonErrorTest = (props: {
     setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>;
+    disableFocus: boolean;
 }) => {
+    const { disableFocus, setDisableFocus } = props
+
     const videoref = useRef<React.ElementRef<VideoComponentType>>(null);
     const [paused, setPaused] = useState(true)
     const [error, setError] = useState("")
     const addRepeat = () => {
         setPaused(!paused)
+    }
+    const [show, setShow] = useState(false)
+    const addshow = () => {
+        setShow(!show)
     }
 
 
@@ -318,20 +345,27 @@ const AddonErrorTest = (props: {
 
             }}>
                 <Text>断网测试error{error}</Text>
+                {
+                    show ? <RNCVideo
+                        ref={videoref}
+                        source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
+                        controls={true}
+                        repeat={false}
+                        paused={false}
+                        muted={false}
+                        disableFocus={disableFocus}
+                        resizeMode={"contain"}
+                        onError={(err: any) => {
+                            Alert.alert("12333")
+                            setError(JSON.stringify(err))
+                        }}
+                        style={{ flex: 1 }}
+                    /> : null
+                }
 
-                <RNCVideo
-                    ref={videoref}
-                    source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
-                    controls={true}
-                    repeat={false}
-                    paused={false}
-                    muted={false}
-                    resizeMode={"contain"}
-                    onError={(err: any) => {
-                        setError(JSON.stringify(err))
-                    }}
-                    style={{ flex: 1 }}
-                />
+            </View>
+            <View style={{ marginTop: 20, flexDirection: "row" }}>
+                <Button title={"展示video"} onPress={addshow} />
             </View>
 
         </View>
@@ -342,12 +376,20 @@ const AddonErrorTest = (props: {
 
 const AddpausedTest = (props: {
     setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>;
+    disableFocus: boolean;
 }) => {
+    const { disableFocus, setDisableFocus } = props
+
     const videoref = useRef<React.ElementRef<VideoComponentType>>(null);
     const [paused, setPaused] = useState(true)
 
     const addRepeat = () => {
         setPaused(!paused)
+    }
+    const [show, setShow] = useState(false)
+    const addshow = () => {
+        setShow(!show)
     }
 
 
@@ -367,19 +409,24 @@ const AddpausedTest = (props: {
                 justifyContent: 'center',
 
             }}>
+                {show ?
+                    <RNCVideo
+                        ref={videoref}
+                        source={require("./asstes/34.mp4")}
+                        controls={true}
+                        repeat={false}
+                        paused={paused}
+                        muted={false}
+                        disableFocus={disableFocus}
+                        resizeMode={"contain"}
+                        style={{ flex: 1 }}
+                    />
+                    : null}
 
-                <RNCVideo
-                    ref={videoref}
-                    source={require("./asstes/34.mp4")}
-                    controls={true}
-                    repeat={false}
-                    paused={paused}
-                    muted={false}
-                    resizeMode={"contain"}
-                    style={{ flex: 1 }}
-                />
+
             </View>
             <View style={{ marginTop: 20, flexDirection: "row" }}>
+                <Button title={"展示video"} onPress={addshow} />
                 <Button title={paused ? "播放" : "暂停"} onPress={addRepeat} />
             </View>
         </View>
@@ -388,17 +435,23 @@ const AddpausedTest = (props: {
 
 }
 
-const AdddisableFocusTest = (props: {
+const AdddisableFocusTrueTest = (props: {
     setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>;
+    disableFocus: boolean;
 }) => {
+
     const videoref = useRef<React.ElementRef<VideoComponentType>>(null);
     const [paused, setPaused] = useState(true)
-    const [disableFocus, setDisableFocus] = useState(false)
+
     const addRepeat = () => {
         setPaused(!paused)
     }
-    const addDisableFocus = () => {
-        setDisableFocus(!disableFocus)
+   
+
+    const [show, setShow] = useState(false)
+    const addshow = () => {
+        setShow(!show)
     }
 
     return (
@@ -417,22 +470,82 @@ const AdddisableFocusTest = (props: {
                 justifyContent: 'center',
 
             }}>
+                {show ?
+                    <RNCVideo
+                        ref={videoref}
+                        disableFocus={true}
+                        source={require("./asstes/34.mp4")}
+                        controls={true}
+                        repeat={false}
+                        paused={paused}
+                        muted={false}
+                        resizeMode={"contain"}
+                        style={{ flex: 1 }}
+                    />
+                    : null}
 
-                <RNCVideo
-                    ref={videoref}
-                    disableFocus={disableFocus}
-                    source={require("./asstes/34.mp4")}
-                    controls={true}
-                    repeat={false}
-                    paused={paused}
-                    muted={false}
-                    resizeMode={"contain"}
-                    style={{ flex: 1 }}
-                />
             </View>
             <View style={{ marginTop: 20, flexDirection: "row" }}>
+                <Button title={"展示video"} onPress={addshow} />
                 <Button title={paused ? "播放" : "暂停"} onPress={addRepeat} />
-                <Button title={`disableFocus切换${!disableFocus}`} onPress={addDisableFocus} />
+            </View>
+        </View>
+
+    );
+
+}
+
+
+const AdddisableFocusTest = (props: {
+    setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>;
+    disableFocus: boolean;
+}) => {
+    const videoref = useRef<React.ElementRef<VideoComponentType>>(null);
+    const [paused, setPaused] = useState(true)
+
+    const addRepeat = () => {
+        setPaused(!paused)
+    }
+    const [show, setShow] = useState(false)
+    const addshow = () => {
+        setShow(!show)
+    }
+
+    return (
+
+        <View style={{
+            height: 220,
+            width: "100%",
+            overflow: 'hidden',
+            alignItems: "center"
+
+        }}>
+            <View style={{
+                height: 150,
+                width: 200,
+                overflow: 'hidden',
+                justifyContent: 'center',
+
+            }}>
+                {show ?
+                    <RNCVideo
+                        ref={videoref}
+                        disableFocus={false}
+                        source={require("./asstes/34.mp4")}
+                        controls={true}
+                        repeat={false}
+                        paused={paused}
+                        muted={false}
+                        resizeMode={"contain"}
+                        style={{ flex: 1 }}
+                    />
+                    : null}
+
+            </View>
+            <View style={{ marginTop: 20, flexDirection: "row" }}>
+                <Button title={"展示video"} onPress={addshow} />
+                <Button title={paused ? "播放" : "暂停"} onPress={addRepeat} />
             </View>
         </View>
 
@@ -444,7 +557,11 @@ const AdddisableFocusTest = (props: {
 
 const AddVolumeTest = (props: {
     setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>;
+    disableFocus: boolean;
 }) => {
+
+    const { disableFocus, setDisableFocus } = props
     const videoref = useRef<React.ElementRef<VideoComponentType>>(null);
     const [paused, setPaused] = useState(true)
     const [volume, setVolume] = useState(1)
@@ -453,6 +570,11 @@ const AddVolumeTest = (props: {
     }
     const addVolume = () => {
         setVolume(0.2)
+    }
+
+    const [show, setShow] = useState(false)
+    const addshow = () => {
+        setShow(!show)
     }
 
     return (
@@ -471,20 +593,23 @@ const AddVolumeTest = (props: {
                 justifyContent: 'center',
 
             }}>
-
-                <RNCVideo
+                {show ? <RNCVideo
                     ref={videoref}
                     source={require("./asstes/34.mp4")}
                     controls={true}
                     repeat={false}
+                    disableFocus={disableFocus}
                     paused={paused}
                     muted={false}
                     resizeMode={"contain"}
                     style={{ flex: 1 }}
                     volume={volume}
-                />
+                /> : null}
+
+
             </View>
             <View style={{ marginTop: 20, flexDirection: "row" }}>
+                <Button title={"展示video"} onPress={addshow} />
                 <Button title={paused ? "播放" : "暂停"} onPress={addRepeat} />
 
                 <Button title={"音量调整为0.2"} onPress={addVolume} />
@@ -496,13 +621,21 @@ const AddVolumeTest = (props: {
 }
 const AddMenuonMutedTest = (props: {
     setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>;
+    disableFocus: boolean;
 }) => {
+    const { disableFocus, setDisableFocus } = props
+
     const videoref = useRef<React.ElementRef<VideoComponentType>>(null);
     const [paused, setPaused] = useState(false)
 
     const [muted, setMuted] = useState(false)
     const addRepeat = () => {
         setMuted(!muted)
+    }
+    const [show, setShow] = useState(false)
+    const addshow = () => {
+        setShow(!show)
     }
 
     return (
@@ -521,19 +654,25 @@ const AddMenuonMutedTest = (props: {
                 justifyContent: 'center',
 
             }}>
-
-                <RNCVideo
+                {show ? <RNCVideo
                     ref={videoref}
                     source={require("./asstes/34.mp4")}
                     controls={true}
                     repeat={true}
                     paused={paused}
+                    disableFocus={disableFocus}
                     muted={muted}
                     resizeMode={"contain"}
                     style={{ flex: 1 }}
-                />
+                /> : null}
+
             </View>
-            <Button title={muted ? "不静音" : "静音"} onPress={addRepeat} />
+            <View style={{ marginTop: 20, flexDirection: "row" }}>
+                <Button title={"展示video"} onPress={addshow} />
+                <Button title={muted ? "不静音" : "静音"} onPress={addRepeat} />
+
+            </View>
+
         </View>
 
     );
@@ -541,7 +680,11 @@ const AddMenuonMutedTest = (props: {
 }
 const AddMenuonReadyForDisplayTest = (props: {
     setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>;
+    disableFocus: boolean;
 }) => {
+    const { disableFocus, setDisableFocus } = props
+
     const videoref = useRef<React.ElementRef<VideoComponentType>>(null);
     const [paused, setPaused] = useState(false)
 
@@ -573,6 +716,7 @@ const AddMenuonReadyForDisplayTest = (props: {
                         controls={true}
                         repeat={false}
                         paused={paused}
+                        disableFocus={disableFocus}
                         resizeMode={"contain"}
                         style={{ flex: 1 }}
                         onReadyForDisplay={() => {
@@ -580,7 +724,9 @@ const AddMenuonReadyForDisplayTest = (props: {
                         }}
                     /> : null}
             </View>
-            <Button title={"展示video的onReadyForDisplay"} onPress={addRepeat} />
+            <View style={{ marginTop: 20, flexDirection: "row" }}>
+                <Button title={"展示video的onReadyForDisplay"} onPress={addRepeat} />
+            </View>
         </View>
 
     );
@@ -590,10 +736,15 @@ const AddMenuonReadyForDisplayTest = (props: {
 
 const AddMenuOnLoadTest = (props: {
     setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>;
+    disableFocus: boolean;
 }) => {
+    const { disableFocus, setDisableFocus } = props
+
     const videoref = useRef<React.ElementRef<VideoComponentType>>(null);
     const [paused, setPaused] = useState(false)
     const [show, setShow] = useState(false)
+
     const addRepeat = () => {
         setShow(!show)
     }
@@ -618,6 +769,7 @@ const AddMenuOnLoadTest = (props: {
                         controls={true}
                         repeat={false}
                         paused={paused}
+                        disableFocus={disableFocus}
                         resizeMode={"contain"}
                         style={{ flex: 1 }}
                         onLoad={(param) => {
@@ -626,7 +778,10 @@ const AddMenuOnLoadTest = (props: {
                         }}
                     /> : null}
             </View>
-            <Button title={"展示video的onLoad"} onPress={addRepeat} />
+            <View style={{ marginTop: 20, flexDirection: "row" }}>
+
+                <Button title={"展示video的onLoad"} onPress={addRepeat} />
+            </View>
         </View>
 
     );
@@ -638,17 +793,22 @@ const AddMenuOnLoadTest = (props: {
 
 const AddMenuOnBufferTest = (props: {
     setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>;
+    disableFocus: boolean;
 }) => {
+    const { disableFocus, setDisableFocus } = props
+
     const videoref = useRef<React.ElementRef<VideoComponentType>>(null);
     const [paused, setPaused] = useState(false)
     const [load, setLoad] = useState({ load: false })
-    const addRepeat = () => {
-        setPaused(!paused)
+    const [show, setShow] = useState(false)
+    const addshow = () => {
+        setShow(!show)
     }
     return (
 
         <View style={{
-            height: 150,
+            height: 220,
             width: "100%",
             overflow: 'hidden',
             alignItems: "center"
@@ -661,19 +821,23 @@ const AddMenuOnBufferTest = (props: {
                 justifyContent: 'center',
 
             }}>
-                <RNCVideo
-                    ref={videoref}
-                    source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
-                    controls={true}
-                    repeat={false}
-                    paused={paused}
-                    resizeMode={"contain"}
-                    style={{ flex: 1 }}
-                    onBuffer={(onBufferData) => {
-                        console.log(JSON.stringify(onBufferData))
-                        setLoad({ load: onBufferData.isBuffering ?? false });
-                    }}
-                />
+                {show ?
+                    <RNCVideo
+                        ref={videoref}
+                        source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
+                        controls={true}
+                        repeat={false}
+                        paused={paused}
+                        disableFocus={disableFocus}
+                        resizeMode={"contain"}
+                        style={{ flex: 1 }}
+                        onBuffer={(onBufferData) => {
+                            console.log(JSON.stringify(onBufferData))
+                            setLoad({ load: onBufferData.isBuffering ?? false });
+                        }}
+                    />
+
+                    : null}
 
                 {load.load &&
                     <View
@@ -681,7 +845,10 @@ const AddMenuOnBufferTest = (props: {
                         <Text>加载中动画</Text>
                     </View>}
             </View>
-            {/* <Button title={paused ? "播放" : "暂停"} onPress={addRepeat} /> */}
+            <View style={{ marginTop: 20, flexDirection: "row" }}>
+
+                <Button title={"展示video"} onPress={addshow} />
+            </View>
         </View>
 
     );
@@ -690,10 +857,17 @@ const AddMenuOnBufferTest = (props: {
 
 const AddMenuOnEndTest = (props: {
     setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>;
+    disableFocus: boolean;
 }) => {
+    const { disableFocus, setDisableFocus } = props
+
     const videoref = useRef<React.ElementRef<VideoComponentType>>(null);
     const [paused, setPaused] = useState(true)
     const [show, setShow] = useState(false)
+    const addshow = () => {
+        setShow(!show)
+    }
     const addRepeat = () => {
         setPaused(!paused)
     }
@@ -713,22 +887,30 @@ const AddMenuOnEndTest = (props: {
                 justifyContent: 'center',
 
             }}>
-                <RNCVideo
-                    ref={videoref}
-                    source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
-                    controls={true}
-                    repeat={false}
-                    paused={paused}
-                    resizeMode={"contain"}
-                    style={{ flex: 1 }}
-                    onEnd={() => {
-                        console.log("onEnd已触发")
-                        Alert.alert("onEnd已触发")
-                    }}
-                />
+                {show ?
+                    <RNCVideo
+                        ref={videoref}
+                        source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
+                        controls={true}
+                        repeat={false}
+                        paused={paused}
+                        disableFocus={disableFocus}
+                        resizeMode={"contain"}
+                        style={{ flex: 1 }}
+                        onEnd={() => {
+                            console.log("onEnd已触发")
+                            Alert.alert("onEnd已触发")
+                        }}
+                    />
+                    : null}
+
 
             </View>
-            <Button title={paused ? "播放" : "暂停"} onPress={addRepeat} />
+            <View style={{ marginTop: 20, flexDirection: "row" }}>
+                <Button title={"展示video"} onPress={addshow} />
+                <Button title={paused ? "播放" : "暂停"} onPress={addRepeat} />
+            </View>
+
         </View>
 
     );
@@ -738,7 +920,11 @@ const AddMenuOnEndTest = (props: {
 
 const AddMenuSeekTest = (props: {
     setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>;
+    disableFocus: boolean;
 }) => {
+    const { disableFocus, setDisableFocus } = props
+
     const videoref = useRef<React.ElementRef<VideoComponentType>>(null);
     const [timeDuration, setTimeDuration] = useState({
         currentTime: 0,
@@ -750,6 +936,11 @@ const AddMenuSeekTest = (props: {
         videoref?.current?.seek(1)
     }
 
+    const [show, setShow] = useState(false)
+    const addshow = () => {
+        setShow(!show)
+    }
+
     return (
 
         <View style={{
@@ -767,20 +958,26 @@ const AddMenuSeekTest = (props: {
                 justifyContent: 'center',
 
             }}>
-                <RNCVideo
-                    ref={videoref}
-                    source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
-                    controls={true}
-                    repeat={true}
-                    resizeMode={"contain"}
-                    style={{ flex: 1 }}
-                    onProgress={(currentTime) => {
-                        setTimeDuration(currentTime)
-                    }}
-                />
-
+                {show ?
+                    <RNCVideo
+                        ref={videoref}
+                        source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
+                        controls={true}
+                        repeat={true}
+                        disableFocus={disableFocus}
+                        resizeMode={"contain"}
+                        style={{ flex: 1 }}
+                        onProgress={(currentTime) => {
+                            setTimeDuration(currentTime)
+                        }}
+                    />
+                    : null}
             </View>
-            <Button title={"设置seek"} onPress={addRepeat} />
+            <View style={{ marginTop: 20, flexDirection: "row" }}>
+                <Button title={"展示video"} onPress={addshow} />
+                <Button title={"设置seek"} onPress={addRepeat} />
+            </View>
+
         </View>
 
     );
@@ -789,7 +986,14 @@ const AddMenuSeekTest = (props: {
 
 const AddMenuOnProgressTest = (props: {
     setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>;
+    disableFocus: boolean;
 }) => {
+    const [show, setShow] = useState(false)
+    const addshow = () => {
+        setShow(!show)
+    }
+    const { disableFocus, setDisableFocus } = props
     const [timeDuration, setTimeDuration] = useState({
         currentTime: 0,
         playableDuration: 0,
@@ -799,7 +1003,7 @@ const AddMenuOnProgressTest = (props: {
     return (
 
         <View style={{
-            height: 190,
+            height: 220,
             width: "100%",
             overflow: 'hidden',
             alignItems: "center"
@@ -813,19 +1017,26 @@ const AddMenuOnProgressTest = (props: {
                 justifyContent: 'center',
 
             }}>
-                <RNCVideo
-                    source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
-                    controls={true}
-                    repeat={true}
-                    resizeMode={"contain"}
-                    style={{ flex: 1 }}
-                    onProgress={(currentTime) => {
-                        setTimeDuration(currentTime)
-                    }}
-                />
+                {show ?
+                    <RNCVideo
+                        source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
+                        controls={true}
+                        repeat={true}
+                        resizeMode={"contain"}
+                        disableFocus={disableFocus}
+                        style={{ flex: 1 }}
+                        onProgress={(currentTime) => {
+                            setTimeDuration(currentTime)
+                        }}
+                    />
+                    : null}
+
 
             </View>
+            <View style={{ marginTop: 20, flexDirection: "row" }}>
+                <Button title={"展示video"} onPress={addshow} />
 
+            </View>
 
 
         </View>
@@ -836,7 +1047,11 @@ const AddMenuOnProgressTest = (props: {
 
 const AddMenuOnLoadStartTest = (props: {
     setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>;
+    disableFocus: boolean;
 }) => {
+    const { disableFocus, setDisableFocus } = props
+
     const [show, setShow] = useState(false)
     const addRepeat = () => {
         setShow(!show)
@@ -844,7 +1059,7 @@ const AddMenuOnLoadStartTest = (props: {
     return (
         <View style={{
             width: "100%",
-            height: 190,
+            height: 220,
             justifyContent: "center",
             alignItems: "center"
         }}>
@@ -860,6 +1075,7 @@ const AddMenuOnLoadStartTest = (props: {
                     source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
                     controls={true}
                     repeat={true}
+                    disableFocus={disableFocus}
                     resizeMode={"contain"}
                     style={{ flex: 1 }}
                     onLoadStart={() => {
@@ -869,7 +1085,10 @@ const AddMenuOnLoadStartTest = (props: {
                 /> : null}
 
             </View>
-            <Button title={"展示video"} onPress={addRepeat} />
+            <View style={{ marginTop: 20, flexDirection: "row" }}>
+
+                <Button title={"展示video"} onPress={addRepeat} />
+            </View>
         </View>
 
 
@@ -880,52 +1099,93 @@ const AddMenuOnLoadStartTest = (props: {
 
 const AddposterResizeModeTest = (props: {
     setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>;
+    disableFocus: boolean;
 }) => {
-
+    const { disableFocus, setDisableFocus } = props
+    const [show, setShow] = useState(false)
+    const addRepeat = () => {
+        setShow(!show)
+    }
     return (
-
         <View style={{
-            height: 150,
             width: "100%",
-            overflow: 'hidden',
-            justifyContent: 'center',
-
+            height: 220,
+            justifyContent: "center",
+            alignItems: "center"
         }}>
-            <RNCVideo
-                source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
-                controls={true}
-                repeat={true}
-                resizeMode={"contain"}
-                style={{ flex: 1 }}
-                poster={"https://res.vmallres.com/pimages/uomcdn/CN/pms/202304/sbom/4002010007801/group/800_800_9B1356F1330EADDCB20D35D2AE1F46E0.jpg"}
-                posterResizeMode="stretch"
-            />
+            <View style={{
+                height: 150,
+                width: "100%",
+                overflow: 'hidden',
+                justifyContent: 'center',
+
+            }}>
+                {
+                    show ? <RNCVideo
+                        source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
+                        controls={true}
+                        repeat={true}
+                        resizeMode={"contain"}
+                        style={{ flex: 1 }}
+                        disableFocus={disableFocus}
+                        poster={"https://res.vmallres.com/pimages/uomcdn/CN/pms/202304/sbom/4002010007801/group/800_800_9B1356F1330EADDCB20D35D2AE1F46E0.jpg"}
+                        posterResizeMode="stretch"
+                    /> : null
+                }
+
+            </View>
+            <View style={{ marginTop: 20, flexDirection: "row" }}>
+
+                <Button title={"展示video"} onPress={addRepeat} />
+            </View>
         </View>
 
     );
 
 }
 const AddMenuPosterTest = (props: {
-    setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setState: React.Dispatch<React.SetStateAction<boolean>>,
+    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>,
+    disableFocus: boolean,
 }) => {
-
+    const { disableFocus, setDisableFocus } = props
+    const [show, setShow] = useState(false)
+    const addRepeat = () => {
+        setShow(!show)
+    }
     return (
-
         <View style={{
-            height: 150,
             width: "100%",
-            overflow: 'hidden',
-            justifyContent: 'center',
-
+            height: 220,
+            justifyContent: "center",
+            alignItems: "center"
         }}>
-            <RNCVideo
-                source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
-                controls={true}
-                repeat={true}
-                resizeMode={"contain"}
-                style={{ flex: 1 }}
-                poster={"https://res.vmallres.com/pimages/uomcdn/CN/pms/202304/sbom/4002010007801/group/800_800_9B1356F1330EADDCB20D35D2AE1F46E0.jpg"}
-            />
+            <View style={{
+                height: 150,
+                width: "100%",
+                overflow: 'hidden',
+                justifyContent: 'center',
+
+            }}>
+                {
+                    show ?
+                        <RNCVideo
+                            source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
+                            controls={true}
+                            repeat={true}
+                            disableFocus={disableFocus}
+                            resizeMode={"contain"}
+                            style={{ flex: 1 }}
+                            poster={"https://res.vmallres.com/pimages/uomcdn/CN/pms/202304/sbom/4002010007801/group/800_800_9B1356F1330EADDCB20D35D2AE1F46E0.jpg"}
+                        />
+                        : null}
+
+            </View>
+            <View style={{ marginTop: 20, flexDirection: "row" }}>
+
+                <Button title={"展示video"} onPress={addRepeat} />
+            </View>
         </View>
 
     );
@@ -934,26 +1194,47 @@ const AddMenuPosterTest = (props: {
 
 
 const AddMenuResizeModeStretchTest = (props: {
-    setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setState: React.Dispatch<React.SetStateAction<boolean>>,
+    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>,
+    disableFocus: boolean,
 }) => {
+    const { disableFocus, setDisableFocus } = props
 
-
+    const [show, setShow] = useState(false)
+    const addRepeat = () => {
+        setShow(!show)
+    }
     return (
-
         <View style={{
-            height: 150,
             width: "100%",
-            overflow: 'hidden',
-            justifyContent: 'center',
-
+            height: 220,
+            justifyContent: "center",
+            alignItems: "center"
         }}>
-            <RNCVideo
-                source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
-                controls={true}
-                repeat={true}
-                resizeMode={"stretch"}
-                style={{ flex: 1 }}
-            />
+            <View style={{
+                height: 150,
+                width: "100%",
+                overflow: 'hidden',
+                justifyContent: 'center',
+
+            }}>
+                {
+                    show ?
+                        <RNCVideo
+                            source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
+                            controls={true}
+                            repeat={true}
+                            disableFocus={disableFocus}
+                            resizeMode={"stretch"}
+                            style={{ flex: 1 }}
+                        />
+                        : null}
+
+            </View>
+            <View style={{ marginTop: 20, flexDirection: "row" }}>
+
+                <Button title={"展示video"} onPress={addRepeat} />
+            </View>
         </View>
 
     );
@@ -961,26 +1242,47 @@ const AddMenuResizeModeStretchTest = (props: {
 }
 
 const AddMenuResizeModecoverTest = (props: {
-    setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setState: React.Dispatch<React.SetStateAction<boolean>>,
+    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>,
+    disableFocus: boolean,
 }) => {
-
+    const { disableFocus, setDisableFocus } = props
+    const [show, setShow] = useState(false)
+    const addRepeat = () => {
+        setShow(!show)
+    }
 
     return (
-
         <View style={{
-            height: 150,
             width: "100%",
-            overflow: 'hidden',
-            justifyContent: 'center',
-
+            height: 220,
+            justifyContent: "center",
+            alignItems: "center"
         }}>
-            <RNCVideo
-                source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
-                controls={true}
-                repeat={true}
-                resizeMode={"cover"}
-                style={{ flex: 1 }}
-            />
+            <View style={{
+                height: 150,
+                width: "100%",
+                overflow: 'hidden',
+                justifyContent: 'center',
+
+            }}>
+                {
+                    show ?
+                        <RNCVideo
+                            source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
+                            controls={true}
+                            repeat={true}
+                            disableFocus={disableFocus}
+                            resizeMode={"cover"}
+                            style={{ flex: 1 }}
+                        />
+                        : null}
+
+            </View>
+            <View style={{ marginTop: 20, flexDirection: "row" }}>
+
+                <Button title={"展示video"} onPress={addRepeat} />
+            </View>
         </View>
 
     );
@@ -988,37 +1290,67 @@ const AddMenuResizeModecoverTest = (props: {
 }
 
 const AddMenuResizeModeTest = (props: {
-    setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setState: React.Dispatch<React.SetStateAction<boolean>>,
+    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>,
+    disableFocus: boolean,
 }) => {
-
+    const { disableFocus, setDisableFocus } = props
+    const [show, setShow] = useState(false)
+    const addRepeat = () => {
+        setShow(!show)
+    }
 
     return (
-
         <View style={{
-            height: 150,
             width: "100%",
-            overflow: 'hidden',
-            justifyContent: 'center',
-
+            height: 220,
+            justifyContent: "center",
+            alignItems: "center"
         }}>
-            <RNCVideo
-                source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
-                controls={true}
-                repeat={true}
-                resizeMode={"contain"}
-                style={{ flex: 1 }}
-            />
+
+            <View style={{
+                height: 150,
+                width: "100%",
+                overflow: 'hidden',
+                justifyContent: 'center',
+
+            }}>
+                {
+                    show ?
+                        <RNCVideo
+                            disableFocus={disableFocus}
+                            source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
+                            controls={true}
+                            repeat={true}
+                            resizeMode={"contain"}
+                            style={{ flex: 1 }}
+                        />
+                        : null}
+
+            </View>
+            <View style={{ marginTop: 20, flexDirection: "row" }}>
+
+                <Button title={"展示video"} onPress={addRepeat} />
+            </View>
         </View>
+
 
     );
 
 }
 
 const AddMenuRepeatFalseTest = (props: {
-    setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setState: React.Dispatch<React.SetStateAction<boolean>>,
+    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>,
+    disableFocus: boolean,
 }) => {
-    const [repeat, setRepeat] = useState<boolean>(true)
+    const { disableFocus, setDisableFocus } = props
 
+    const [repeat, setRepeat] = useState<boolean>(true)
+    const [show, setShow] = useState(false)
+    const addshow = () => {
+        setShow(!show)
+    }
     const addRepeat = () => {
         setRepeat(!repeat)
     }
@@ -1026,7 +1358,7 @@ const AddMenuRepeatFalseTest = (props: {
     return (
         <View style={{
             width: "100%",
-            height: 190,
+            height: 220,
             justifyContent: "center",
             alignItems: "center"
         }}>
@@ -1036,15 +1368,22 @@ const AddMenuRepeatFalseTest = (props: {
                 overflow: 'hidden',
 
             }}>
-                <RNCVideo
+                {show ? <RNCVideo
+                    disableFocus={disableFocus}
                     source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
                     controls={true}
                     repeat={repeat}
                     resizeMode={'contain'}
                     style={{ flex: 1 }}
-                />
+                /> : null}
+
             </View>
-            <Button title={"重复播放切换"} onPress={addRepeat} />
+            <View style={{ marginTop: 20, flexDirection: "row" }}>
+
+                <Button title={"展示video"} onPress={addshow} />
+                <Button title={"重复播放切换"} onPress={addRepeat} />
+            </View>
+
         </View>
 
     );
@@ -1057,8 +1396,15 @@ const AddMenuRepeatFalseTest = (props: {
 
 
 const AddMenuMeasureTest = (props: {
-    setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setState: React.Dispatch<React.SetStateAction<boolean>>,
+    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>,
+    disableFocus: boolean,
 }) => {
+    const [show, setShow] = useState(false)
+    const addshow = () => {
+        setShow(!show)
+    }
+    const { disableFocus, setDisableFocus } = props
     const [measureText, setMeasureText] = useState<{
         width: number,
         height: number,
@@ -1069,19 +1415,35 @@ const AddMenuMeasureTest = (props: {
 
     return (
         <View style={{
-            height: 150,
             width: "100%",
-            overflow: 'hidden',
-            justifyContent: 'center',
+            height: 220,
+            justifyContent: "center",
+            alignItems: "center"
         }}>
-            <RNCVideo
-                source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
-                controls={true}
-                repeat={false}
-                resizeMode={'contain'}
-                style={{ flex: 1 }}
-            />
+
+            <View style={{
+                height: 150,
+                width: "100%",
+                overflow: 'hidden',
+                justifyContent: 'center',
+            }}>
+
+                {show ? <RNCVideo
+                    source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
+                    controls={true}
+                    disableFocus={disableFocus}
+                    repeat={false}
+                    resizeMode={'contain'}
+                    style={{ flex: 1 }}
+                /> : null}
+
+            </View>
+            <View style={{ marginTop: 20, flexDirection: "row" }}>
+
+                <Button title={"展示video"} onPress={addshow} />
+            </View>
         </View>
+
     );
 
 }
@@ -1094,4 +1456,3 @@ const styles = StyleSheet.create({
     },
 
 });
-
