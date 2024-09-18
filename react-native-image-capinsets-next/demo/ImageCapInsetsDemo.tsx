@@ -1,6 +1,7 @@
 import ImageCapInset from '@react-native-oh-tpl/react-native-image-capinsets-next';
 import React, {useState} from 'react';
 import {View, StyleSheet, Text, Switch} from 'react-native';
+import { Tester, TestCase, TestSuite } from "@rnoh/testerino";
 
 const YourImage = () => {
   const img1 = require('./img/capinset_bg.png');
@@ -37,62 +38,72 @@ const YourImage = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <ImageCapInset
-        style={styles.imgStyle}
-        source={currentImg1}
-        capInsets={currentCapInset1}>
-      </ImageCapInset>
-      <View style={styles.switchItem}>
-        <Text>切换本地图片: </Text>
-        <Switch
-          trackColor={{false: '#767577', true: '#81b0ff'}}
-          thumbColor={currentImg1 === img1 ? '#f5dd4b' : '#f4f3f4'}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={onChangeUrl1}
-          value={currentImg1 === img1 ? true : false}
-        />
-      </View>
-      <View style={styles.switchItem}>
-        <Text>切换本地图片Inset: </Text>
-        <Switch
-          thumbColor={currentCapInset1 === initInset ? '#f5dd4b' : '#f4f3f4'}
-          onValueChange={onChangeInset1}
-          value={JSON.stringify(currentCapInset1) === initInset ? true : false}
-        />
-      </View>
-      <View style={styles.instruction}>
-          <Text>开关关闭: top: 15, right: 20, bottom: 15, left: 20</Text>
-          <Text>开关打开: top: 2, right: 5, bottom: 2, left: 5</Text>
-        </View>
-      <ImageCapInset
-        style={styles.imgStyle}
-        source={{uri: currentImg2}}
-        capInsets={currentCapInset2}>
-      </ImageCapInset>
-      <View style={styles.switchItem}>
-        <Text>切换网络图片: </Text>
-        <Switch
-          trackColor={{false: '#767577', true: '#81b0ff'}}
-          thumbColor={currentImg2 === img3 ? '#f5dd4b' : '#f4f3f4'}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={onChangeUrl2}
-          value={currentImg2 === img3 ? true : false}
-        />
-      </View>
-      <View style={styles.switchItem}>
-        <Text>切换网络图片Inset: </Text>
-        <Switch
-          thumbColor={currentCapInset2 === initInset ? '#f5dd4b' : '#f4f3f4'}
-          onValueChange={onChangeInset2}
-          value={JSON.stringify(currentCapInset2) === initInset ? true : false}
-        />
-      </View>
-      <View style={styles.instruction}>
-        <Text>开关关闭: top: 15, right: 20, bottom: 15, left: 20</Text>
-        <Text>开关打开: top: 2, right: 5, bottom: 2, left: 5</Text>
-      </View>
-    </View>
+    <Tester>
+      <TestSuite name="react native image capinsets next">
+        <TestCase itShould="react native image capinsets next load locale picture">
+            <View style={styles.container}>
+              <ImageCapInset
+                style={styles.imgStyle}
+                source={currentImg1}
+                capInsets={currentCapInset1}>
+              </ImageCapInset>
+              <View style={styles.switchItem}>
+                <Text>切换本地图片: </Text>
+                <Switch
+                  trackColor={{false: '#767577', true: '#81b0ff'}}
+                  thumbColor={currentImg1 === img1 ? '#f5dd4b' : '#f4f3f4'}
+                  ios_backgroundColor="#3e3e3e"
+                  onValueChange={onChangeUrl1}
+                  value={currentImg1 === img1 ? true : false}
+                />
+              </View>
+              <View style={styles.switchItem}>
+                <Text>切换本地图片Inset: </Text>
+                <Switch
+                  thumbColor={currentCapInset1 === initInset ? '#f5dd4b' : '#f4f3f4'}
+                  onValueChange={onChangeInset1}
+                  value={JSON.stringify(currentCapInset1) === initInset ? true : false}
+                />
+              </View>
+              <View style={styles.instruction}>
+                  <Text>开关关闭: top: 15, right: 20, bottom: 15, left: 20</Text>
+                  <Text>开关打开: top: 2, right: 5, bottom: 2, left: 5</Text>
+              </View>
+            </View>
+          </TestCase>
+          <TestCase itShould="react native image capinsets next load network picture">
+            <View style={styles.container}>
+              <ImageCapInset
+                style={styles.imgStyle}
+                source={{uri: currentImg2}}
+                capInsets={currentCapInset2}>
+              </ImageCapInset>
+              <View style={styles.switchItem}>
+                <Text>切换网络图片: </Text>
+                <Switch
+                  trackColor={{false: '#767577', true: '#81b0ff'}}
+                  thumbColor={currentImg2 === img3 ? '#f5dd4b' : '#f4f3f4'}
+                  ios_backgroundColor="#3e3e3e"
+                  onValueChange={onChangeUrl2}
+                  value={currentImg2 === img3 ? true : false}
+                />
+              </View>
+              <View style={styles.switchItem}>
+                <Text>切换网络图片Inset: </Text>
+                <Switch
+                  thumbColor={currentCapInset2 === initInset ? '#f5dd4b' : '#f4f3f4'}
+                  onValueChange={onChangeInset2}
+                  value={JSON.stringify(currentCapInset2) === initInset ? true : false}
+                />
+              </View>
+              <View style={styles.instruction}>
+                <Text>开关关闭: top: 15, right: 20, bottom: 15, left: 20</Text>
+                <Text>开关打开: top: 2, right: 5, bottom: 2, left: 5</Text>
+              </View>
+          </View>
+        </TestCase>
+      </TestSuite>
+  </Tester>
   );
 };
 
