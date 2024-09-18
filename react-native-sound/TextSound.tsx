@@ -418,24 +418,28 @@ const AddMenuPauseTest = (props: {
 const AddMenuPlayTest = (props: {
   setState: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+
   const addCustomMenuItem = () => {
     if (state === "pause") {
       sound.play(() => {
         sound.release();
       });
     } else {
-      sound = new Sound("https://sis-sample-audio.obs.cn-north-1.myhuaweicloud.com/16k16bit.mp3", "", (error) => {
+      if (state !== "play") {
+        sound = new Sound("https://sis-sample-audio.obs.cn-north-1.myhuaweicloud.com/16k16bit.mp3", "", (error) => {
 
-        if (error) {
-          return;
-        }
-        sound.play((a) => {
-          console.log(a)
-          state = ""
-          sound.release();
+          if (error) {
+            return;
+          }
+          state = "play"
+          sound.play((a) => {
+            state = ""
+            sound.release();
+          });
+
         });
+      }
 
-      });
     }
     props.setState(true);
   };
