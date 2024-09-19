@@ -9,7 +9,7 @@ import {
   Alert,
 } from 'react-native';
 import SwipeableFlatList from 'react-native-swipeable-list';
-import { Tester, Filter, TestSuite } from '@rnoh/testerino';
+import {Tester, Filter, TestSuite} from '@rnoh/testerino';
 import {dummyData} from './data/dummyData';
 
 const darkColors = {
@@ -57,7 +57,7 @@ function renderItemSeparator() {
   return <View style={styles.itemSeparator} />;
 }
 
-export function TestNativeSwiperListDemo(){
+export default function ReactNativeSwipeableListDemoDefault1() {
   const [data, setData] = useState(dummyData);
 
   const deleteItem = itemId => {
@@ -129,37 +129,35 @@ export function TestNativeSwiperListDemo(){
 
   return (
     <>
-    <SafeAreaView style={styles.container}>
-    <StatusBar barStyle="dark-content" />
-      <Tester style={styles.container}>
-            <SwipeableFlatList
-              keyExtractor={extractItemKey}
-              data={data}
-              renderItem={({item}) => (
-                <Item item={item} deleteItem={() => deleteItem} />
-              )}
-              maxSwipeDistance={240}
-              renderQuickActions={({index, item}) => QuickActions(index, item)}
-              contentContainerStyle={styles.contentContainerStyle}
-              shouldBounceOnMount={true}
-              ItemSeparatorComponent={renderItemSeparator}
-            />
-      </Tester>
-    </SafeAreaView>
-      
+      <SafeAreaView style={styles.container}>
+        <StatusBar barStyle="dark-content" />
+        <Tester style={styles.container}>
+          <SwipeableFlatList
+            keyExtractor={extractItemKey}
+            data={data}
+            renderItem={({item}) => (
+              <Item item={item} deleteItem={() => deleteItem} />
+            )}
+            maxSwipeDistance={240}
+            renderQuickActions={({index, item}) => QuickActions(index, item)}
+            contentContainerStyle={styles.contentContainerStyle}
+            ItemSeparatorComponent={renderItemSeparator}
+          />
+        </Tester>
+      </SafeAreaView>
     </>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
     backgroundColor: '#121212',
   },
-  bottomPlace:{
-    width:'100%',
-    height:60,
-    marginTop:20
+  bottomPlace: {
+    width: '100%',
+    height: 60,
+    marginTop: 20,
   },
   headerContainer: {
     height: 80,

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -7,17 +7,18 @@ import {
   StatusBar,
   Pressable,
   Alert,
-} from "react-native";
-import SwipeableFlatList from "react-native-swipeable-list";
-import { dummyData } from "./data/dummyData";
+} from 'react-native';
+import SwipeableFlatList from 'react-native-swipeable-list';
+import {Tester, Filter, TestSuite} from '@rnoh/testerino';
+import {dummyData} from './data/dummyData';
 
 const darkColors = {
-  background: "#121212",
-  primary: "#BB86FC",
-  primary2: "#3700b3",
-  secondary: "#03DAC6",
-  onBackground: "#FFFFFF",
-  error: "#CF6679",
+  background: '#121212',
+  primary: '#BB86FC',
+  primary2: '#3700b3',
+  secondary: '#03DAC6',
+  onBackground: '#FFFFFF',
+  error: '#CF6679',
 };
 
 const colorEmphasis = {
@@ -26,11 +27,11 @@ const colorEmphasis = {
   disabled: 0.38,
 };
 
-const extractItemKey = (item) => {
+const extractItemKey = item => {
   return item.id.toString();
 };
 
-const Item = ({ item, backgroundColor, textColor, deleteItem }) => {
+const Item = ({item, backgroundColor, textColor, deleteItem}) => {
   return (
     <>
       <View style={styles.item}>
@@ -56,51 +57,51 @@ function renderItemSeparator() {
   return <View style={styles.itemSeparator} />;
 }
 
-export function TestNativeSwipeableList() {
+export default function ReactNativeSwipeableListDemoDefault5() {
   const [data, setData] = useState(dummyData);
 
-  const deleteItem = (itemId) => {
+  const deleteItem = itemId => {
     // ! Please don't do something like this in production. Use proper state management.
     const newState = [...data];
-    const filteredState = newState.filter((item) => item.id !== itemId);
+    const filteredState = newState.filter(item => item.id !== itemId);
     return setData(filteredState);
   };
 
-  const archiveItem = (itemId) => {
+  const archiveItem = itemId => {
     Alert.alert(
-      "DISHONESTY ALERT",
+      'DISHONESTY ALERT',
       "Not gonna Archive it. We're actually are gonna just delete it.",
       [
         {
-          text: "Just delete it?",
+          text: 'Just delete it?',
           onPress: () => deleteItem(itemId),
-          style: "destructive",
+          style: 'destructive',
         },
         {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel",
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
         },
-      ]
+      ],
     );
   };
 
-  const snoozeItem = (itemId) => {
+  const snoozeItem = itemId => {
     Alert.alert(
-      "DISHONESTY ALERT",
+      'DISHONESTY ALERT',
       "Not gonna Snooze it. We're actually are gonna just delete it.",
       [
         {
-          text: "Just delete it?",
+          text: 'Just delete it?',
           onPress: () => deleteItem(itemId),
-          style: "destructive",
+          style: 'destructive',
         },
         {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel",
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
         },
-      ]
+      ],
     );
   };
 
@@ -130,21 +131,19 @@ export function TestNativeSwipeableList() {
     <>
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="dark-content" />
-        <View style={styles.headerContainer}>
-          <Text style={styles.headerText}>Inbox</Text>
-        </View>
-        <SwipeableFlatList
-          keyExtractor={extractItemKey}
-          data={data}
-          renderItem={({ item }) => (
-            <Item item={item} deleteItem={() => deleteItem} />
-          )}
-          maxSwipeDistance={240}
-          renderQuickActions={({ index, item }) => QuickActions(index, item)}
-          contentContainerStyle={styles.contentContainerStyle}
-          shouldBounceOnMount={true}
-          ItemSeparatorComponent={renderItemSeparator}
-        />
+        <Tester style={styles.container}>
+          <SwipeableFlatList
+            keyExtractor={extractItemKey}
+            data={data}
+            renderItem={({item}) => (
+              <Item item={item} deleteItem={() => deleteItem} />
+            )}
+            maxSwipeDistance={240}
+            renderQuickActions={({index, item}) => QuickActions(index, item)}
+            contentContainerStyle={styles.contentContainerStyle}
+            ItemSeparatorComponent={renderItemSeparator}
+          />
+        </Tester>
       </SafeAreaView>
     </>
   );
@@ -153,29 +152,29 @@ export function TestNativeSwipeableList() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#121212",
+    backgroundColor: '#121212',
   },
   bottomPlace: {
-    width: "100%",
+    width: '100%',
     height: 60,
     marginTop: 20,
   },
   headerContainer: {
     height: 80,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingTop: 10,
   },
   headerText: {
     fontSize: 30,
-    fontWeight: "800",
+    fontWeight: '800',
     color: darkColors.onBackground,
     opacity: colorEmphasis.high,
   },
   item: {
-    backgroundColor: "#121212",
+    backgroundColor: '#121212',
     height: 80,
-    flexDirection: "row",
+    flexDirection: 'row',
     padding: 10,
   },
   messageContainer: {
@@ -186,15 +185,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: darkColors.primary,
     opacity: colorEmphasis.high,
-    fontWeight: "800",
+    fontWeight: '800',
   },
   subject: {
     fontSize: 14,
     color: darkColors.onBackground,
     opacity: colorEmphasis.high,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     textShadowColor: darkColors.secondary,
-    textShadowOffset: { width: 1, height: 1 },
+    textShadowOffset: {width: 1, height: 1},
     textShadowRadius: 4,
   },
   text: {
@@ -211,9 +210,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 20,
     marginRight: 7,
-    alignSelf: "center",
+    alignSelf: 'center',
     shadowColor: darkColors.secondary,
-    shadowOffset: { width: 1, height: 1 },
+    shadowOffset: {width: 1, height: 1},
     shadowRadius: 2,
     shadowOpacity: colorEmphasis.high,
   },
@@ -224,23 +223,35 @@ const styles = StyleSheet.create({
   },
   qaContainer: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "flex-end",
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
   button: {
     width: 80,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   buttonText: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     opacity: colorEmphasis.high,
+  },
+  button1: {
+    borderColor: darkColors.primary,
+    borderWidth: 1,
   },
   button1Text: {
     color: darkColors.primary,
   },
+  button2: {
+    borderColor: darkColors.secondary,
+    borderWidth: 1,
+  },
   button2Text: {
     color: darkColors.secondary,
+  },
+  button3: {
+    borderColor: darkColors.error,
+    borderWidth: 1,
   },
   button3Text: {
     color: darkColors.error,
