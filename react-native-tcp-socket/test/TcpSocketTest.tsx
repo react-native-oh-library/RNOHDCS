@@ -5,10 +5,19 @@ import {
   Text,
   ScrollView,
   View,
+  FlatList,
   TextInput,
+  StatusBar,
+  SafeAreaView,
 } from 'react-native';
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
 import TcpSocket from 'react-native-tcp-socket';
+
+interface Message {
+  id: number;
+  time: string;
+  text: string;
+}
 
 const ca = `-----BEGIN CERTIFICATE-----
 MIIFOTCCAyGgAwIBAgIUZiAx4QlvsVTwoSPJCW7oHBut1aEwDQYJKoZIhvcNAQEL
@@ -96,6 +105,12 @@ KLH49mC1YcDcvaJt6C/wSB3oAcJXQkzBwN5nSxxn89zi3m875zG1Kvpj3KaBOzBN
 
 const keystore = require('./ca/server-keystore.p12');
 
+let instanceNumber = 0;
+
+function getNextId() {
+  return instanceNumber++;
+}
+
 const getNowTime = () => {
   let date = new Date();
   let hours = date.getHours();
@@ -110,9 +125,21 @@ let client: any = null;
 let testCase = 1;
 
 export const TcpSocketTest = () => {
-  const [ip, setIP] = useState('');
-  const [ip2, setIP2] = useState('');
-  const [ip3, setIP3] = useState('');
+  const [ip, setIP] = useState('127.0.0.1');
+  const [ip2, setIP2] = useState('192.168.1.1');
+  const [ip3, setIP3] = useState('2001:0db8:85a3:0000:0000:8a2e:0370:7334');
+
+  const [messages, setMessages] = useState<Message[]>([]);
+
+  const sendMessage = (msg: string) => {
+    let time = getNowTime();
+    let newMessage = {
+      id: getNextId(),
+      time: time,
+      text: msg,
+    };
+    setMessages([...messages, newMessage]);
+  };
 
   const createTcpServer = () => {
     server = new TcpSocket.Server();
@@ -121,6 +148,7 @@ export const TcpSocketTest = () => {
       const port = server.address()?.port;
       if (!port) throw new Error('Server port not found');
       console.log('TcpSocketDemo:tcpServer start listen success on:' + port);
+      sendMessage('TcpSocketDemo:tcpServer start listen success on:' + port);
     });
 
     server.on('connection', (socket: any) => {
@@ -131,6 +159,9 @@ export const TcpSocketTest = () => {
             console.log(
               'TcpSocketDemo:tcpServer received data:' + JSON.stringify(data),
             );
+            sendMessage(
+              'TcpSocketDemo:tcpServer received data:' + JSON.stringify(data),
+            );
             let time = getNowTime();
             socket.write(`${time} Hello, tcpClient!`);
             break;
@@ -138,12 +169,21 @@ export const TcpSocketTest = () => {
             console.log(
               `TcpSocketDemo:tcpServer Received ${data.length} bytes of data.`,
             );
+            sendMessage(
+              `TcpSocketDemo:tcpServer Received ${data.length} bytes of data.`,
+            );
             socket.pause();
             console.log(
               'TcpSocketDemo:tcpServer There will be no additional data for 1 second.',
             );
+            sendMessage(
+              'TcpSocketDemo:tcpServer There will be no additional data for 1 second.',
+            );
             setTimeout(() => {
               console.log(
+                'TcpSocketDemo:tcpServer Now data will start flowing again.',
+              );
+              sendMessage(
                 'TcpSocketDemo:tcpServer Now data will start flowing again.',
               );
               socket.resume();
@@ -156,9 +196,18 @@ export const TcpSocketTest = () => {
                 dataLen +
                 ' bytes',
             );
+            sendMessage(
+              'TcpSocketDemo:tcpServer client received data: ' +
+                dataLen +
+                ' bytes',
+            );
             break;
           default:
             console.log(
+              'TcpSocketDemo:tcpServer socket received data:' +
+                JSON.stringify(data),
+            );
+            sendMessage(
               'TcpSocketDemo:tcpServer socket received data:' +
                 JSON.stringify(data),
             );
@@ -170,6 +219,7 @@ export const TcpSocketTest = () => {
           errorMsg = JSON.stringify(error);
         }
         console.log('TcpSocketDemo:tcpServer socket on error ' + errorMsg);
+        sendMessage('TcpSocketDemo:tcpServer socket on error ' + errorMsg);
       });
 
       socket.on('close', (error: any) => {
@@ -178,15 +228,18 @@ export const TcpSocketTest = () => {
           errorMsg = JSON.stringify(error);
         }
         console.log('TcpSocketDemo:tcpServer socket on close ' + errorMsg);
+        sendMessage('TcpSocketDemo:tcpServer socket on close ' + errorMsg);
       });
     });
 
     server.on('error', (error: any) => {
       console.log('TcpSocketDemo:tcpServer on error ' + JSON.stringify(error));
+      sendMessage('TcpSocketDemo:tcpServer on error ' + JSON.stringify(error));
     });
 
     server.on('close', () => {
       console.log('TcpSocketDemo:tcpServer closed');
+      sendMessage('TcpSocketDemo:tcpServer closed');
     });
   };
 
@@ -206,9 +259,14 @@ export const TcpSocketTest = () => {
     };
     client.connect(options, () => {
       console.log('TcpSocketDemo:tcpClient connect success');
+      sendMessage('TcpSocketDemo:tcpClient connect success');
     });
     client.on('data', (data: any) => {
       console.log(
+        'TcpSocketDemo:tcpClient received data: ' +
+          (data.length < 500 ? data : data.length + ' bytes'),
+      );
+      sendMessage(
         'TcpSocketDemo:tcpClient received data: ' +
           (data.length < 500 ? data : data.length + ' bytes'),
       );
@@ -219,20 +277,26 @@ export const TcpSocketTest = () => {
         'TcpSocketDemo:tcpClient on connect:' +
           JSON.stringify(client.address()),
       );
+      sendMessage(
+        'TcpSocketDemo:tcpClient on connect:' +
+          JSON.stringify(client.address()),
+      );
     });
 
     client.on('drain', () => {
-      console.log('TcpSocketDemo:tcpClient drained');
+      sendMessage('TcpSocketDemo:tcpClient drained');
     });
 
     client.on('error', (error: any) => {
       if (error) {
         console.log('TcpSocketDemo:tcpClient error ' + JSON.stringify(error));
+        sendMessage('TcpSocketDemo:tcpClient error ' + JSON.stringify(error));
       }
     });
 
     client.on('timeout', () => {
       console.log('TcpSocketDemo:tcpClient Socket timed out!');
+      sendMessage('TcpSocketDemo:tcpClient Socket timed out!');
       client.end();
     });
 
@@ -242,6 +306,7 @@ export const TcpSocketTest = () => {
         errorMsg = JSON.stringify(error);
       }
       console.log('TcpSocketDemo:tcpClient closed ' + errorMsg);
+      sendMessage('TcpSocketDemo:tcpClient closed ' + errorMsg);
     });
   };
 
@@ -256,6 +321,7 @@ export const TcpSocketTest = () => {
     server.close();
     client = null;
     server = null;
+    setMessages([])
   };
 
   const tcpPauseResume = () => {
@@ -281,22 +347,11 @@ export const TcpSocketTest = () => {
     const hugeData = 'x'.repeat(5 * 1024);
     client.end(hugeData, 'utf8');
     console.log('TcpSocketDemo:tcpClient end hugeData...');
+    sendMessage('TcpSocketDemo:tcpClient end hugeData...');
   };
 
   const setSokcetTimeout = () => {
     client.setTimeout(3000);
-  };
-
-  const setSocketEncoding = () => {
-    client.setEncoding('utf8');
-  };
-
-  const setSokcetNoDelay = () => {
-    client.setNoDelay(true);
-  };
-
-  const setSocketKeepAlive = () => {
-    client.setKeepAlive(true);
   };
 
   const createTlsServer = () => {
@@ -311,10 +366,17 @@ export const TcpSocketTest = () => {
         'TcpSocketDemo:TlsServer on secureConnection:' +
           JSON.stringify(socket.address()),
       );
+      sendMessage(
+        'TcpSocketDemo:TlsServer on secureConnection:' +
+          JSON.stringify(socket.address()),
+      );
       socket.on('data', (data: any) => {
         switch (testCase) {
           case 1:
             console.log(
+              'TcpSocketDemo:tlsServer received data:' + JSON.stringify(data),
+            );
+            sendMessage(
               'TcpSocketDemo:tlsServer received data:' + JSON.stringify(data),
             );
             let time = getNowTime();
@@ -324,12 +386,21 @@ export const TcpSocketTest = () => {
             console.log(
               `TcpSocketDemo:tlsServer Received ${data.length} bytes of data.`,
             );
+            sendMessage(
+              `TcpSocketDemo:tlsServer Received ${data.length} bytes of data.`,
+            );
             socket.pause();
             console.log(
               'TcpSocketDemo:tlsServer There will be no additional data for 1 second.',
             );
+            sendMessage(
+              'TcpSocketDemo:tlsServer There will be no additional data for 1 second.',
+            );
             setTimeout(() => {
               console.log(
+                'TcpSocketDemo:tlsServer Now data will start flowing again.',
+              );
+              sendMessage(
                 'TcpSocketDemo:tlsServer Now data will start flowing again.',
               );
               socket.resume();
@@ -342,9 +413,18 @@ export const TcpSocketTest = () => {
                 dataLen +
                 ' bytes',
             );
+            sendMessage(
+              'TcpSocketDemo:tlsServer client received data: ' +
+                dataLen +
+                ' bytes',
+            );
             break;
           default:
             console.log(
+              'TcpSocketDemo:tlsServer socket received data:' +
+                JSON.stringify(data),
+            );
+            sendMessage(
               'TcpSocketDemo:tlsServer socket received data:' +
                 JSON.stringify(data),
             );
@@ -355,10 +435,18 @@ export const TcpSocketTest = () => {
           'TcpSocketDemo:TlsServer secureConnection socket error ' +
             JSON.stringify(error),
         );
+        sendMessage(
+          'TcpSocketDemo:TlsServer secureConnection socket error ' +
+            JSON.stringify(error),
+        );
       });
 
       socket.on('close', (error: any) => {
         console.log(
+          'TcpSocketDemo:TlsServer secureConnection socket closed ' +
+            (error ? JSON.stringify(error) : ''),
+        );
+        sendMessage(
           'TcpSocketDemo:TlsServer secureConnection socket closed ' +
             (error ? JSON.stringify(error) : ''),
         );
@@ -367,14 +455,17 @@ export const TcpSocketTest = () => {
 
     server.on('error', (error: any) => {
       console.log('TcpSocketDemo:TlsServer on error ' + JSON.stringify(error));
+      sendMessage('TcpSocketDemo:TlsServer on error ' + JSON.stringify(error));
     });
 
     server.on('close', () => {
       console.log('TcpSocketDemo:TlsServer closed');
+      sendMessage('TcpSocketDemo:TlsServer closed');
     });
 
     server.listen({port: 9999, host: '127.0.0.1', reuseAddress: true}, () => {
       console.log('TcpSocketDemo:tlsServer start listen success!');
+      sendMessage('TcpSocketDemo:tlsServer start listen success!');
     });
   };
 
@@ -387,10 +478,19 @@ export const TcpSocketTest = () => {
         'TcpSocketDemo:TlsClient clientSocket error',
         error ? JSON.stringify(error) : '',
       );
+      sendMessage(
+        'TcpSocketDemo:TlsClient clientSocket error' + error
+          ? JSON.stringify(error)
+          : '',
+      );
     });
 
     clientSocket.on('close', hadError => {
       console.log(
+        'TcpSocketDemo:TlsClient clientSocket close ' +
+          (hadError ? JSON.stringify(hadError) : ''),
+      );
+      sendMessage(
         'TcpSocketDemo:TlsClient clientSocket close ' +
           (hadError ? JSON.stringify(hadError) : ''),
       );
@@ -406,10 +506,15 @@ export const TcpSocketTest = () => {
       },
       () => {
         console.log('TcpSocketDemo:TlsClient clientSocket connect success.');
+        sendMessage('TcpSocketDemo:TlsClient clientSocket connect success.');
       },
     );
     client.on('secureConnect', () => {
       console.log(
+        'TcpSocketDemo:TlsClient on secureConnect:' +
+          JSON.stringify(client.address()),
+      );
+      sendMessage(
         'TcpSocketDemo:TlsClient on secureConnect:' +
           JSON.stringify(client.address()),
       );
@@ -420,10 +525,15 @@ export const TcpSocketTest = () => {
         'TcpSocketDemo:TlsClient on connect:' +
           JSON.stringify(client.address()),
       );
+      sendMessage(
+        'TcpSocketDemo:TlsClient on connect:' +
+          JSON.stringify(client.address()),
+      );
     });
 
     client.on('drain', () => {
       console.log('TcpSocketDemo:TlsClient Client drained');
+      sendMessage('TcpSocketDemo:TlsClient Client drained');
     });
 
     client.on('data', (data: any) => {
@@ -431,14 +541,23 @@ export const TcpSocketTest = () => {
         'TcpSocketDemo:TlsClient received data: ' +
           (data.length < 500 ? data : data.length + ' bytes'),
       );
+      sendMessage(
+        'TcpSocketDemo:TlsClient received data: ' +
+          (data.length < 500 ? data : data.length + ' bytes'),
+      );
     });
 
     client.on('error', (error: any) => {
       console.log('TcpSocketDemo:TlsClient error ' + JSON.stringify(error));
+      sendMessage('TcpSocketDemo:TlsClient error ' + JSON.stringify(error));
     });
 
     client.on('close', (error: any) => {
       console.log(
+        'tcpSocketDemo:TlsClient closed ' +
+          (error ? JSON.stringify(error) : ''),
+      );
+      sendMessage(
         'tcpSocketDemo:TlsClient closed ' +
           (error ? JSON.stringify(error) : ''),
       );
@@ -466,10 +585,14 @@ export const TcpSocketTest = () => {
   const createServer = () => {
     server = TcpSocket.createServer((socket: any) => {
       console.log('TcpSocketDemo:tcpServer on connection!');
+      sendMessage('TcpSocketDemo:tcpServer on connection!');
       socket.on('data', (data: any) => {
         switch (testCase) {
           case 1:
             console.log(
+              'TcpSocketDemo:tcpServer received data:' + JSON.stringify(data),
+            );
+            sendMessage(
               'TcpSocketDemo:tcpServer received data:' + JSON.stringify(data),
             );
             let time = getNowTime();
@@ -479,12 +602,21 @@ export const TcpSocketTest = () => {
             console.log(
               `TcpSocketDemo:tcpServer Received ${data.length} bytes of data.`,
             );
+            sendMessage(
+              `TcpSocketDemo:tcpServer Received ${data.length} bytes of data.`,
+            );
             socket.pause();
             console.log(
               'TcpSocketDemo:tcpServer There will be no additional data for 1 second.',
             );
+            sendMessage(
+              'TcpSocketDemo:tcpServer There will be no additional data for 1 second.',
+            );
             setTimeout(() => {
               console.log(
+                'TcpSocketDemo:tcpServer Now data will start flowing again.',
+              );
+              sendMessage(
                 'TcpSocketDemo:tcpServer Now data will start flowing again.',
               );
               socket.resume();
@@ -497,9 +629,18 @@ export const TcpSocketTest = () => {
                 dataLen +
                 ' bytes',
             );
+            sendMessage(
+              'TcpSocketDemo:tcpServer client received data: ' +
+                dataLen +
+                ' bytes',
+            );
             break;
           default:
             console.log(
+              'TcpSocketDemo:tcpServer socket received data:' +
+                JSON.stringify(data),
+            );
+            sendMessage(
               'TcpSocketDemo:tcpServer socket received data:' +
                 JSON.stringify(data),
             );
@@ -511,6 +652,7 @@ export const TcpSocketTest = () => {
           errorMsg = JSON.stringify(error);
         }
         console.log('TcpSocketDemo:tcpServer socket on error ' + errorMsg);
+        sendMessage('TcpSocketDemo:tcpServer socket on error ' + errorMsg);
       });
 
       socket.on('close', (error: any) => {
@@ -519,6 +661,7 @@ export const TcpSocketTest = () => {
           errorMsg = JSON.stringify(error);
         }
         console.log('TcpSocketDemo:tcpServer socket on close ' + errorMsg);
+        sendMessage('TcpSocketDemo:tcpServer socket on close ' + errorMsg);
       });
     });
 
@@ -526,14 +669,17 @@ export const TcpSocketTest = () => {
       const port = server.address()?.port;
       if (!port) throw new Error('Server port not found');
       console.log('TcpSocketDemo:tcpServer start listen success on:' + port);
+      sendMessage('TcpSocketDemo:tcpServer start listen success on:' + port);
     });
 
     server.on('error', (error: any) => {
       console.log('TcpSocketDemo:tcpServer on error ' + JSON.stringify(error));
+      sendMessage('TcpSocketDemo:tcpServer on error ' + JSON.stringify(error));
     });
 
     server.on('close', () => {
       console.log('TcpSocketDemo:tcpServer closed');
+      sendMessage('TcpSocketDemo:tcpServer closed');
     });
   };
 
@@ -550,10 +696,15 @@ export const TcpSocketTest = () => {
       },
       () => {
         console.log('TcpSocketDemo:tcpClient connect success');
+        sendMessage('TcpSocketDemo:tcpClient connect success');
       },
     );
     client.on('data', (data: any) => {
       console.log(
+        'TcpSocketDemo:tcpClient received data: ' +
+          (data.length < 500 ? data : data.length + ' bytes'),
+      );
+      sendMessage(
         'TcpSocketDemo:tcpClient received data: ' +
           (data.length < 500 ? data : data.length + ' bytes'),
       );
@@ -564,15 +715,21 @@ export const TcpSocketTest = () => {
         'TcpSocketDemo:tcpClient on connect:' +
           JSON.stringify(client.address()),
       );
+      sendMessage(
+        'TcpSocketDemo:tcpClient on connect:' +
+          JSON.stringify(client.address()),
+      );
     });
 
     client.on('drain', () => {
       console.log('TcpSocketDemo:tcpClient drained');
+      sendMessage('TcpSocketDemo:tcpClient drained');
     });
 
     client.on('error', (error: any) => {
       if (error) {
         console.log('TcpSocketDemo:tcpClient error ' + JSON.stringify(error));
+        sendMessage('TcpSocketDemo:tcpClient error ' + JSON.stringify(error));
       }
     });
 
@@ -582,6 +739,7 @@ export const TcpSocketTest = () => {
         errorMsg = JSON.stringify(error);
       }
       console.log('TcpSocketDemo:tcpClient closed ' + errorMsg);
+      sendMessage('TcpSocketDemo:tcpClient closed ' + errorMsg);
     });
   };
 
@@ -598,10 +756,17 @@ export const TcpSocketTest = () => {
           'TcpSocketDemo:TlsServer on secureConnection:' +
             JSON.stringify(socket.address()),
         );
+        sendMessage(
+          'TcpSocketDemo:TlsServer on secureConnection:' +
+            JSON.stringify(socket.address()),
+        );
         socket.on('data', (data: any) => {
           switch (testCase) {
             case 1:
               console.log(
+                'TcpSocketDemo:tlsServer received data:' + JSON.stringify(data),
+              );
+              sendMessage(
                 'TcpSocketDemo:tlsServer received data:' + JSON.stringify(data),
               );
               let time = getNowTime();
@@ -611,12 +776,21 @@ export const TcpSocketTest = () => {
               console.log(
                 `TcpSocketDemo:tlsServer Received ${data.length} bytes of data.`,
               );
+              sendMessage(
+                `TcpSocketDemo:tlsServer Received ${data.length} bytes of data.`,
+              );
               socket.pause();
               console.log(
                 'TcpSocketDemo:tlsServer There will be no additional data for 1 second.',
               );
+              sendMessage(
+                'TcpSocketDemo:tlsServer There will be no additional data for 1 second.',
+              );
               setTimeout(() => {
                 console.log(
+                  'TcpSocketDemo:tlsServer Now data will start flowing again.',
+                );
+                sendMessage(
                   'TcpSocketDemo:tlsServer Now data will start flowing again.',
                 );
                 socket.resume();
@@ -629,9 +803,18 @@ export const TcpSocketTest = () => {
                   dataLen +
                   ' bytes',
               );
+              sendMessage(
+                'TcpSocketDemo:tlsServer client received data: ' +
+                  dataLen +
+                  ' bytes',
+              );
               break;
             default:
               console.log(
+                'TcpSocketDemo:tlsServer socket received data:' +
+                  JSON.stringify(data),
+              );
+              sendMessage(
                 'TcpSocketDemo:tlsServer socket received data:' +
                   JSON.stringify(data),
               );
@@ -642,10 +825,18 @@ export const TcpSocketTest = () => {
             'TcpSocketDemo:TlsServer secureConnection socket error ' +
               JSON.stringify(error),
           );
+          sendMessage(
+            'TcpSocketDemo:TlsServer secureConnection socket error ' +
+              JSON.stringify(error),
+          );
         });
 
         socket.on('close', (error: any) => {
           console.log(
+            'TcpSocketDemo:TlsServer secureConnection socket closed ' +
+              (error ? JSON.stringify(error) : ''),
+          );
+          sendMessage(
             'TcpSocketDemo:TlsServer secureConnection socket closed ' +
               (error ? JSON.stringify(error) : ''),
           );
@@ -655,14 +846,17 @@ export const TcpSocketTest = () => {
 
     server.on('error', (error: any) => {
       console.log('TcpSocketDemo:TlsServer on error ' + JSON.stringify(error));
+      sendMessage('TcpSocketDemo:TlsServer on error ' + JSON.stringify(error));
     });
 
     server.on('close', () => {
       console.log('TcpSocketDemo:TlsServer closed');
+      sendMessage('TcpSocketDemo:TlsServer closed');
     });
 
     server.listen({port: 9999, host: '127.0.0.1', reuseAddress: true}, () => {
       console.log('TcpSocketDemo:tlsServer start listen success!');
+      sendMessage('TcpSocketDemo:tlsServer start listen success!');
     });
   };
 
@@ -680,11 +874,16 @@ export const TcpSocketTest = () => {
       },
       () => {
         console.log('TcpSocketDemo:TlsClient clientSocket connect success.');
+        sendMessage('TcpSocketDemo:TlsClient clientSocket connect success.');
       },
     );
 
     client.on('secureConnect', () => {
       console.log(
+        'TcpSocketDemo:TlsClient on secureConnect:' +
+          JSON.stringify(client.address()),
+      );
+      sendMessage(
         'TcpSocketDemo:TlsClient on secureConnect:' +
           JSON.stringify(client.address()),
       );
@@ -695,10 +894,15 @@ export const TcpSocketTest = () => {
         'TcpSocketDemo:TlsClient on connect:' +
           JSON.stringify(client.address()),
       );
+      sendMessage(
+        'TcpSocketDemo:TlsClient on connect:' +
+          JSON.stringify(client.address()),
+      );
     });
 
     client.on('drain', () => {
       console.log('TcpSocketDemo:TlsClient Client drained');
+      sendMessage('TcpSocketDemo:TlsClient Client drained');
     });
 
     client.on('data', (data: any) => {
@@ -706,214 +910,235 @@ export const TcpSocketTest = () => {
         'TcpSocketDemo:TlsClient received data: ' +
           (data.length < 500 ? data : data.length + ' bytes'),
       );
+      sendMessage(
+        'TcpSocketDemo:TlsClient received data: ' +
+          (data.length < 500 ? data : data.length + ' bytes'),
+      );
     });
 
     client.on('error', (error: any) => {
       console.log('TcpSocketDemo:TlsClient error ' + JSON.stringify(error));
+      sendMessage('TcpSocketDemo:TlsClient error ' + JSON.stringify(error));
     });
 
     client.on('close', (error: any) => {
       console.log(
-        'cpSocketDemo:TlsClient closed ' + (error ? JSON.stringify(error) : ''),
+        'TcpSocketDemo:TlsClient closed ' +
+          (error ? JSON.stringify(error) : ''),
+      );
+      sendMessage(
+        'TcpSocketDemo:TlsClient closed ' +
+          (error ? JSON.stringify(error) : ''),
       );
     });
   };
 
   return (
-    <ScrollView>
-      <Tester>
-        <TestSuite name="测试TCP连接">
-          <TestCase itShould="Create TCPServer">
-            <TouchableOpacity
-              onPress={createTcpServer}
-              style={styles.moduleButton}>
-              <Text style={styles.buttonText}>创建TCP服务器</Text>
-            </TouchableOpacity>
-          </TestCase>
-          <TestCase itShould="Create TCPClient">
-            <TouchableOpacity
-              onPress={createTcpClient}
-              style={styles.moduleButton}>
-              <Text style={styles.buttonText}>创建TCP客户端</Text>
-            </TouchableOpacity>
-          </TestCase>
-          <TestCase itShould="TCP send message">
-            <TouchableOpacity onPress={tcpSendData} style={styles.moduleButton}>
-              <Text style={styles.buttonText}>TCP客户端和服务器通信</Text>
-            </TouchableOpacity>
-          </TestCase>
-          <TestCase itShould="TCP Pause and Resume">
-            <TouchableOpacity
-              onPress={tcpPauseResume}
-              style={styles.moduleButton}>
-              <Text style={styles.buttonText}>TCP数据的暂停与恢复</Text>
-            </TouchableOpacity>
-          </TestCase>
-          <TestCase itShould="TCP send long data">
-            <TouchableOpacity onPress={tcpLongData} style={styles.moduleButton}>
-              <Text style={styles.buttonText}>TCP长数据传输</Text>
-            </TouchableOpacity>
-          </TestCase>
-          <TestCase itShould="TCP close connection">
-            <TouchableOpacity onPress={tcpClose} style={styles.moduleButton}>
-              <Text style={styles.buttonText}>TCP关闭连接</Text>
-            </TouchableOpacity>
-          </TestCase>
-          <TestCase itShould="set Timeout 3s">
-            <TouchableOpacity
-              onPress={setSokcetTimeout}
-              style={styles.moduleButton}>
-              <Text style={styles.buttonText}>setTimeout</Text>
-            </TouchableOpacity>
-          </TestCase>
-          <TestCase itShould="set Encoding 'UTF-8'">
-            <TouchableOpacity
-              onPress={setSocketEncoding}
-              style={styles.moduleButton}>
-              <Text style={styles.buttonText}>setEncoding</Text>
-            </TouchableOpacity>
-          </TestCase>
-          <TestCase itShould="set no delay">
-            <TouchableOpacity
-              onPress={setSokcetNoDelay}
-              style={styles.moduleButton}>
-              <Text style={styles.buttonText}>setNoDelay</Text>
-            </TouchableOpacity>
-          </TestCase>
-          <TestCase itShould="set keep alive">
-            <TouchableOpacity
-              onPress={setSocketKeepAlive}
-              style={styles.moduleButton}>
-              <Text style={styles.buttonText}>setKeepAlive</Text>
-            </TouchableOpacity>
-          </TestCase>
-        </TestSuite>
-        <TestSuite name="测试TLS连接">
-          <TestCase itShould="Create TLSServer">
-            <TouchableOpacity
-              onPress={createTlsServer}
-              style={styles.moduleButton}>
-              <Text style={styles.buttonText}>创建TLS服务器</Text>
-            </TouchableOpacity>
-          </TestCase>
-          <TestCase itShould="Create TLSClient">
-            <TouchableOpacity
-              onPress={createTlsClient}
-              style={styles.moduleButton}>
-              <Text style={styles.buttonText}>创建TLS客户端</Text>
-            </TouchableOpacity>
-          </TestCase>
-          <TestCase itShould="TLS send message">
-            <TouchableOpacity onPress={tcpSendData} style={styles.moduleButton}>
-              <Text style={styles.buttonText}>TLS客户端和服务器通信</Text>
-            </TouchableOpacity>
-          </TestCase>
-          <TestCase itShould="TCP Pause and Resume">
-            <TouchableOpacity
-              onPress={tcpPauseResume}
-              style={styles.moduleButton}>
-              <Text style={styles.buttonText}>TLS数据的暂停与恢复</Text>
-            </TouchableOpacity>
-          </TestCase>
-          <TestCase itShould="TCP send long data">
-            <TouchableOpacity onPress={tcpLongData} style={styles.moduleButton}>
-              <Text style={styles.buttonText}>TLS长数据传输</Text>
-            </TouchableOpacity>
-          </TestCase>
-          <TestCase itShould="TCP close connection">
-            <TouchableOpacity onPress={tcpClose} style={styles.moduleButton}>
-              <Text style={styles.buttonText}>TLS关闭连接</Text>
-            </TouchableOpacity>
-          </TestCase>
-        </TestSuite>
-        <TestSuite name="测试API方法">
-          <TestCase itShould="创建TCP服务器">
-            <TouchableOpacity
-              onPress={createServer}
-              style={styles.moduleButton}>
-              <Text style={styles.buttonText}>createServer</Text>
-            </TouchableOpacity>
-          </TestCase>
-          <TestCase itShould="建立TCP连接">
-            <TouchableOpacity onPress={connect} style={styles.moduleButton}>
-              <Text style={styles.buttonText}>connect</Text>
-            </TouchableOpacity>
-          </TestCase>
-          <TestCase itShould="创建TLS服务器">
-            <TouchableOpacity
-              onPress={createTLSServer}
-              style={styles.moduleButton}>
-              <Text style={styles.buttonText}>createTLSServer</Text>
-            </TouchableOpacity>
-          </TestCase>
-          <TestCase itShould="建立TLS连接">
-            <TouchableOpacity onPress={connectTLS} style={styles.moduleButton}>
-              <Text style={styles.buttonText}>connectTLS</Text>
-            </TouchableOpacity>
-          </TestCase>
-          <TestCase itShould="get local Certificate">
-            <TouchableOpacity
-              onPress={getLocalCertificate}
-              style={styles.moduleButton}>
-              <Text style={styles.buttonText}>TLS客户端获取本地证书</Text>
-            </TouchableOpacity>
-          </TestCase>
-          <TestCase itShould="get peer Certificate">
-            <TouchableOpacity
-              onPress={getPeerCertificate}
-              style={styles.moduleButton}>
-              <Text style={styles.buttonText}>TLS客户端获取服务端证书</Text>
-            </TouchableOpacity>
-          </TestCase>
-          <TestCase itShould="判断是否是IP">
-            <View>
-              <TextInput
-                placeholder="请输入地址"
-                style={styles.TextInput}
-                onChangeText={newValue => {
-                  setIP(newValue);
-                }}
-                value={ip}></TextInput>
+    <>
+      <StatusBar barStyle="dark-content" />
+      <SafeAreaView>
+        <View style={styles.flatContainer}>
+          <FlatList
+            data={messages}
+            renderItem={({item}) => (
+              <View style={styles.message}>
+                <Text style={styles.messageText}>
+                  {item?.time}: {item?.text}
+                </Text>
+              </View>
+            )}
+            keyExtractor={item => item.id.toString()}
+          />
+        </View>
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
+          <Tester>
+            <TestSuite name="测试TCP连接">
+              <TestCase itShould="Create TCPServer">
+                <TouchableOpacity
+                  onPress={createTcpServer}
+                  style={styles.moduleButton}>
+                  <Text style={styles.buttonText}>创建TCP服务器</Text>
+                </TouchableOpacity>
+              </TestCase>
+              <TestCase itShould="Create TCPClient">
+                <TouchableOpacity
+                  onPress={createTcpClient}
+                  style={styles.moduleButton}>
+                  <Text style={styles.buttonText}>创建TCP客户端</Text>
+                </TouchableOpacity>
+              </TestCase>
+              <TestCase itShould="TCP send message">
+                <TouchableOpacity
+                  onPress={tcpSendData}
+                  style={styles.moduleButton}>
+                  <Text style={styles.buttonText}>TCP客户端和服务器通信</Text>
+                </TouchableOpacity>
+              </TestCase>
+              <TestCase itShould="TCP Pause and Resume">
+                <TouchableOpacity
+                  onPress={tcpPauseResume}
+                  style={styles.moduleButton}>
+                  <Text style={styles.buttonText}>TCP数据的暂停与恢复</Text>
+                </TouchableOpacity>
+              </TestCase>
+              <TestCase itShould="TCP send long data">
+                <TouchableOpacity
+                  onPress={tcpLongData}
+                  style={styles.moduleButton}>
+                  <Text style={styles.buttonText}>TCP长数据传输</Text>
+                </TouchableOpacity>
+              </TestCase>
+              <TestCase itShould="set Timeout 3s">
+                <TouchableOpacity
+                  onPress={setSokcetTimeout}
+                  style={styles.moduleButton}>
+                  <Text style={styles.buttonText}>setTimeout</Text>
+                </TouchableOpacity>
+              </TestCase>
+              <TestCase itShould="TCP close connection">
+                <TouchableOpacity
+                  onPress={tcpClose}
+                  style={styles.moduleButton}>
+                  <Text style={styles.buttonText}>TCP关闭连接</Text>
+                </TouchableOpacity>
+              </TestCase>
+            </TestSuite>
+            <TestSuite name="测试TLS连接">
+              <TestCase itShould="Create TLSServer">
+                <TouchableOpacity
+                  onPress={createTlsServer}
+                  style={styles.moduleButton}>
+                  <Text style={styles.buttonText}>创建TLS服务器</Text>
+                </TouchableOpacity>
+              </TestCase>
+              <TestCase itShould="Create TLSClient">
+                <TouchableOpacity
+                  onPress={createTlsClient}
+                  style={styles.moduleButton}>
+                  <Text style={styles.buttonText}>创建TLS客户端</Text>
+                </TouchableOpacity>
+              </TestCase>
+              <TestCase itShould="TLS send message">
+                <TouchableOpacity
+                  onPress={tcpSendData}
+                  style={styles.moduleButton}>
+                  <Text style={styles.buttonText}>TLS客户端和服务器通信</Text>
+                </TouchableOpacity>
+              </TestCase>
+              <TestCase itShould="TCP Pause and Resume">
+                <TouchableOpacity
+                  onPress={tcpPauseResume}
+                  style={styles.moduleButton}>
+                  <Text style={styles.buttonText}>TLS数据的暂停与恢复</Text>
+                </TouchableOpacity>
+              </TestCase>
+              <TestCase itShould="TCP send long data">
+                <TouchableOpacity
+                  onPress={tcpLongData}
+                  style={styles.moduleButton}>
+                  <Text style={styles.buttonText}>TLS长数据传输</Text>
+                </TouchableOpacity>
+              </TestCase>
+              <TestCase itShould="TCP close connection">
+                <TouchableOpacity
+                  onPress={tcpClose}
+                  style={styles.moduleButton}>
+                  <Text style={styles.buttonText}>TLS关闭连接</Text>
+                </TouchableOpacity>
+              </TestCase>
+            </TestSuite>
+            <TestSuite name="测试API方法">
+              <TestCase itShould="创建TCP服务器">
+                <TouchableOpacity
+                  onPress={createServer}
+                  style={styles.moduleButton}>
+                  <Text style={styles.buttonText}>createServer</Text>
+                </TouchableOpacity>
+              </TestCase>
+              <TestCase itShould="建立TCP连接">
+                <TouchableOpacity onPress={connect} style={styles.moduleButton}>
+                  <Text style={styles.buttonText}>connect</Text>
+                </TouchableOpacity>
+              </TestCase>
+              <TestCase itShould="创建TLS服务器">
+                <TouchableOpacity
+                  onPress={createTLSServer}
+                  style={styles.moduleButton}>
+                  <Text style={styles.buttonText}>createTLSServer</Text>
+                </TouchableOpacity>
+              </TestCase>
+              <TestCase itShould="建立TLS连接">
+                <TouchableOpacity
+                  onPress={connectTLS}
+                  style={styles.moduleButton}>
+                  <Text style={styles.buttonText}>connectTLS</Text>
+                </TouchableOpacity>
+              </TestCase>
+              <TestCase itShould="get local Certificate">
+                <TouchableOpacity
+                  onPress={getLocalCertificate}
+                  style={styles.moduleButton}>
+                  <Text style={styles.buttonText}>TLS客户端获取本地证书</Text>
+                </TouchableOpacity>
+              </TestCase>
+              <TestCase itShould="get peer Certificate">
+                <TouchableOpacity
+                  onPress={getPeerCertificate}
+                  style={styles.moduleButton}>
+                  <Text style={styles.buttonText}>TLS客户端获取服务端证书</Text>
+                </TouchableOpacity>
+              </TestCase>
+              <TestCase itShould="判断是否是IP">
+                <View>
+                  <TextInput
+                    placeholder="请输入地址"
+                    style={styles.TextInput}
+                    onChangeText={newValue => {
+                      setIP(newValue);
+                    }}
+                    value={ip}></TextInput>
 
-              <Text>返回值：{TcpSocket.isIP(ip)}</Text>
-              <Text>
-                注：测试输入是否为IP地址。无效字符串返回`0`，IPV4地址返回`4`，IPV6地址返回`6`
-              </Text>
-            </View>
-          </TestCase>
-          <TestCase itShould="判断是否是IPv4">
-            <View>
-              <TextInput
-                placeholder="请输入地址"
-                style={styles.TextInput}
-                onChangeText={newValue => {
-                  setIP2(newValue);
-                }}
-                value={ip2}></TextInput>
-              <Text>返回值：{TcpSocket.isIPv4(ip2) + ''}</Text>
-              <Text>
-                注：测试输入是否为IPV4地址。是返回`true`,否返回`false`
-              </Text>
-            </View>
-          </TestCase>
-          <TestCase itShould="判断是否是IPv6">
-            <View>
-              <TextInput
-                placeholder="请输入地址"
-                style={styles.TextInput}
-                onChangeText={newValue => {
-                  setIP3(newValue);
-                }}
-                value={ip3}></TextInput>
-              <Text>返回值：{TcpSocket.isIPv6(ip3) + ''}</Text>
-              <Text>
-                注：测试输入是否为IPV6地址。是返回`true`,否返回`false`
-              </Text>
-            </View>
-          </TestCase>
-        </TestSuite>
-      </Tester>
-    </ScrollView>
+                  <Text>返回值：{TcpSocket.isIP(ip)}</Text>
+                  <Text>
+                    注：测试输入是否为IP地址。无效字符串返回`0`，IPV4地址返回`4`，IPV6地址返回`6`
+                  </Text>
+                </View>
+              </TestCase>
+              <TestCase itShould="判断是否是IPv4">
+                <View>
+                  <TextInput
+                    placeholder="请输入地址"
+                    style={styles.TextInput}
+                    onChangeText={newValue => {
+                      setIP2(newValue);
+                    }}
+                    value={ip2}></TextInput>
+                  <Text>返回值：{TcpSocket.isIPv4(ip2) + ''}</Text>
+                  <Text>
+                    注：测试输入是否为IPV4地址。是返回`true`,否返回`false`
+                  </Text>
+                </View>
+              </TestCase>
+              <TestCase itShould="判断是否是IPv6">
+                <View>
+                  <TextInput
+                    placeholder="请输入地址"
+                    style={styles.TextInput}
+                    onChangeText={newValue => {
+                      setIP3(newValue);
+                    }}
+                    value={ip3}></TextInput>
+                  <Text>返回值：{TcpSocket.isIPv6(ip3) + ''}</Text>
+                  <Text>
+                    注：测试输入是否为IPV6地址。是返回`true`,否返回`false`
+                  </Text>
+                </View>
+              </TestCase>
+            </TestSuite>
+          </Tester>
+        </ScrollView>
+      </SafeAreaView>
+    </>
   );
 };
 
@@ -922,6 +1147,10 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#fff',
+  },
+  flatContainer: {
+    marginBottom: 32,
+    paddingHorizontal: 24,
   },
   message: {
     marginVertical: 10,
