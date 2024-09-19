@@ -190,9 +190,17 @@ export function TextSound(): JSX.Element {
           />
 
           <TestCase
-            itShould="setActive"
+            itShould="isPlaying"
             initialState={false}
-            arrange={({ setState }) => <AddMenuSetActiveTest setState={setState} />}
+            arrange={({ setState }) => <AddMenuisPlayingTest setState={setState} />}
+            assert={({ state, expect }) => {
+              expect(state).to.be.true;
+            }}
+          />
+          <TestCase
+            itShould="isLoaded"
+            initialState={false}
+            arrange={({ setState }) => <AddMenuisLoadedTest setState={setState} />}
             assert={({ state, expect }) => {
               expect(state).to.be.true;
             }}
@@ -204,18 +212,36 @@ export function TextSound(): JSX.Element {
   );
 }
 
-const AddMenuSetActiveTest = (props: {
+const AddMenuisLoadedTest = (props: {
   setState: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-
+  const [isLoaded,setIsLoaded] = useState("")
   const addCustomMenuItem = () => {
-    Sound.setActive(true);
+    setIsLoaded(`${sound.isLoaded()}`)
     props.setState(true);
   };
 
   return (
     <View style={styles.container}>
-      <Button title={"获取为活跃状态"} onPress={addCustomMenuItem} />
+      <Text style={{ fontSize: 20 }}>load状态{isLoaded}</Text>
+      <Button title={"获取load状态"} onPress={addCustomMenuItem} />
+    </View>
+  );
+};
+
+const AddMenuisPlayingTest = (props: {
+  setState: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const [isPlaying,setIsPlaying] = useState("")
+  const addCustomMenuItem = () => {
+    setIsPlaying(`${sound.isPlaying()}`)
+    props.setState(true);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={{ fontSize: 20 }}>播放状态{isPlaying}</Text>
+      <Button title={"获取播放状态"} onPress={addCustomMenuItem} />
     </View>
   );
 };
