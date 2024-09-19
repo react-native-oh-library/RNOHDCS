@@ -101,6 +101,22 @@ export function TextSound(): JSX.Element {
               expect(state).to.be.true;
             }}
           />
+          <TestCase
+            itShould="setVolume"
+            initialState={false}
+            arrange={({ setState }) => <AddMenuSetVolume05Test setState={setState} />}
+            assert={({ state, expect }) => {
+              expect(state).to.be.true;
+            }}
+          />
+          <TestCase
+            itShould="setVolume"
+            initialState={false}
+            arrange={({ setState }) => <AddMenuSetVolume10Test setState={setState} />}
+            assert={({ state, expect }) => {
+              expect(state).to.be.true;
+            }}
+          />
 
           <TestCase
             itShould="getSpeed"
@@ -112,9 +128,26 @@ export function TextSound(): JSX.Element {
           />
 
           <TestCase
-            itShould="setSpeed"
+            itShould="setSpeed0.5"
             initialState={false}
             arrange={({ setState }) => <AddMenuSetSpeedTest setState={setState} />}
+            assert={({ state, expect }) => {
+              expect(state).to.be.true;
+            }}
+          />
+
+          <TestCase
+            itShould="setSpeed1"
+            initialState={false}
+            arrange={({ setState }) => <AddMenuSetSpeed1Test setState={setState} />}
+            assert={({ state, expect }) => {
+              expect(state).to.be.true;
+            }}
+          />
+          <TestCase
+            itShould="setSpeed2"
+            initialState={false}
+            arrange={({ setState }) => <AddMenuSetSpeed2Test setState={setState} />}
             assert={({ state, expect }) => {
               expect(state).to.be.true;
             }}
@@ -261,7 +294,7 @@ const AddMenuLoopTest = (props: {
   );
 };
 
-const AddMenuSetSpeedTest = (props: {
+const AddMenuSetSpeed2Test = (props: {
   setState: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const addCustomMenuItem = () => {
@@ -271,7 +304,37 @@ const AddMenuSetSpeedTest = (props: {
 
   return (
     <View style={styles.container}>
-      <Button title={"设置播放速度"} onPress={addCustomMenuItem} />
+      <Button title={"设置播放速度为2"} onPress={addCustomMenuItem} />
+    </View>
+  );
+};
+
+const AddMenuSetSpeed1Test = (props: {
+  setState: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const addCustomMenuItem = () => {
+    sound?.setSpeed(1)
+    props.setState(true);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Button title={"设置播放速度为1"} onPress={addCustomMenuItem} />
+    </View>
+  );
+};
+
+const AddMenuSetSpeedTest = (props: {
+  setState: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const addCustomMenuItem = () => {
+    sound?.setSpeed(5)
+    props.setState(true);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Button title={"设置播放速度为0.5"} onPress={addCustomMenuItem} />
     </View>
   );
 };
@@ -294,6 +357,37 @@ const AddMenuSpeedTest = (props: {
     </View>
   );
 };
+
+const AddMenuSetVolume10Test= (props: {
+  setState: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const addCustomMenuItem = () => {
+    sound?.setVolume(1)
+    props.setState(true);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Button title={"设置音量为1"} onPress={addCustomMenuItem} />
+    </View>
+  );
+};
+
+const AddMenuSetVolume05Test= (props: {
+  setState: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const addCustomMenuItem = () => {
+    sound?.setVolume(0.5)
+    props.setState(true);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Button title={"设置音量为0.5"} onPress={addCustomMenuItem} />
+    </View>
+  );
+};
+
 const AddMenuSetVolumeTest = (props: {
   setState: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
@@ -422,12 +516,12 @@ const AddMenuPlayTest = (props: {
   const addCustomMenuItem = () => {
     if (state === "pause") {
       sound.play(() => {
+        state = ""
         sound.release();
       });
     } else {
       if (state !== "play") {
         sound = new Sound("https://sis-sample-audio.obs.cn-north-1.myhuaweicloud.com/16k16bit.mp3", "", (error) => {
-
           if (error) {
             return;
           }
