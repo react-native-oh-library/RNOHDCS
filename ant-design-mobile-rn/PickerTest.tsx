@@ -146,6 +146,20 @@ export default () => {
           expect(state).to.be.eq(true);
         }}>
       </TestCase>
+      <TestCase itShould="render a Picker okButtonProps={{ activeOpacity: 1, underlayColor: 'red' }}" tags={['C_API']}>
+        <List>
+          <Picker data={datas} okButtonProps={{ activeOpacity: 1, underlayColor: 'red' }}>
+            <List.Item arrow="horizontal">{'省市选择'}</List.Item>
+          </Picker>
+        </List>
+      </TestCase>
+      <TestCase itShould="render a Picker okButtonProps={{ activeOpacity: 1, underlayColor: 'yellow' }}" tags={['C_API']}>
+        <List>
+          <Picker data={datas} dismissButtonProps={{ activeOpacity: 1, underlayColor: 'yellow' }}>
+            <List.Item arrow="horizontal">{'省市选择'}</List.Item>
+          </Picker>
+        </List>
+      </TestCase>
       <TestCase itShould="render a Picker visible control" tags={['C_API']}>
         <BasicDemo />
       </TestCase>
@@ -231,6 +245,13 @@ export default () => {
       <TestCase itShould="render a Picker style={{padding: 20, backgroundColor:'pink'}}" tags={['C_API']}>
         <List>
           <Picker data={datas} style={{ padding: 10, backgroundColor: 'pink' }}>
+            <List.Item arrow="horizontal">选址</List.Item>
+          </Picker>
+        </List>
+      </TestCase>
+      <TestCase itShould="render a Picker locale={{okText:'确认'}}" tags={['C_API']}>
+        <List>
+          <Picker data={datas} locale={{ okText: '确认' }}>
             <List.Item arrow="horizontal">选址</List.Item>
           </Picker>
         </List>

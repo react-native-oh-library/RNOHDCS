@@ -10,15 +10,15 @@ export default () => {
   const [value2, setvalue2] = useState<any>('');
   const basicColumns = [
     [
-      { label: '周一', value: 'Mon' },
-      { label: '周二', value: 'Tues' },
-      { label: '周三', value: 'Wed' },
-      { label: '周四', value: 'Thur' },
-      { label: '周五', value: 'Fri' },
+      { label: '周一', value: 'Mon', key: '1' },
+      { label: '周二', value: 'Tues', key: '2' },
+      { label: '周三', value: 'Wed', key: '3' },
+      { label: '周四', value: 'Thur', key: '4' },
+      { label: '周五', value: 'Fri', key: '5' },
     ],
     [
-      { label: '上午', value: 'am' },
-      { label: '下午', value: 'pm' },
+      { label: '上午', value: 'am', key: '6' },
+      { label: '下午', value: 'pm', key: '7' },
     ],
   ];
 
@@ -32,6 +32,7 @@ export default () => {
       <Text style={{ textAlign: 'center', lineHeight: 30 }}>{option.label}</Text>
     </View>
   );
+
   return (
     <TestSuite name="PickerViewTest">
       <TestCase itShould="render a PickerView data" tags={['C_API']}>
@@ -40,7 +41,7 @@ export default () => {
       <TestCase itShould="render a PickerView value" tags={['C_API']}>
         <View style={{ padding: 10 }}>
           <Text>value:{value1}</Text>
-          <PickerView data={datas} value={value1} onChange={(value: any) => { setvalue1(value) }} />
+          <PickerView data={basicColumns} cascade={false} value={value1} onChange={(value: any) => { setvalue1(value) }} />
         </View>
       </TestCase>
       <TestCase itShould="render a PickerView cascade={false}, cascade={true}" tags={['C_API']}>

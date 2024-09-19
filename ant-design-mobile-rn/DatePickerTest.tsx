@@ -102,7 +102,7 @@ export default () => {
       <TestCase itShould="render a DatePicker onValueChange()" tags={['C_API']} initialState={false}
         arrange={({ setState }: any) =>
           <List>
-            <DatePicker value={value1} onValueChange={(value: any) => { setValue1(value); setState(true); }}>
+            <DatePicker value={value1} onValueChange={(value: any) => { console.log(value); setValue1(value); setState(true); }}>
               <List.Item arrow="horizontal">Select Date</List.Item>
             </DatePicker>
           </List>
