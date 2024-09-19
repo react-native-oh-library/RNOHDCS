@@ -12,54 +12,60 @@ export function UnistylesExample() {
     return(
         <ScrollView>
             <Tester>
-                <TestSuite name='unistyles' >
-                    <TestCase itShould = '主题名称'>
+                <TestSuite name='unistyles' > 
+                    <TestCase itShould = '状态栏 themeColor #00ff00'>
+                        <Button title='状态栏颜色 #00ff00' onPress={() => UnistylesRuntime.statusBar.setColor('#00ff00')}></Button>
+                    </TestCase>
+                    <TestCase itShould = '状态栏 themeColor #0000ff'>
+                        <Button title='状态栏颜色 #0000ff' onPress={() => UnistylesRuntime.statusBar.setColor('#0000ff')}></Button>
+                    </TestCase>
+                    <TestCase itShould = '主题名称 themeName'>
                         <Text style={styles.text}> 当前主题:{UnistylesRuntime.themeName} 重新渲染的次数:{renderCount.current++}</Text><Text style={styles.theme}> Colors: {JSON.stringify(theme.colors, null, 2)} </Text>
                     </TestCase>
-                    <TestCase itShould='变更主题对象 UnistylesRuntime.updateTheme("light", theme => ({ ...theme, colors: { ...theme.colors, typography: "#ff6b6b" } }))'>
-                        <Button title="变更light主题 #ff6b6b" onPress={() => { 
+                    <TestCase itShould='更新主题内容 UnistylesRuntime.updateTheme("light", theme => ({ ...theme, colors: { ...theme.colors, typography: "#ff6b6b" } }))'>
+                        <Button title="更新主题内容 #ff6b6b" onPress={() => { 
                           UnistylesRuntime.setAdaptiveThemes(false);
                           UnistylesRuntime.setTheme('light');
                           UnistylesRuntime.updateTheme('light', theme => ({ ...theme, colors: { ...theme.colors, typography: theme.colors.blood } }))
                         }}
                         />
                     </TestCase>
-                    <TestCase itShould='变更主题对象 UnistylesRuntime.updateTheme("light", theme => ({ ...theme, colors: { ...theme.colors, typography: "#000000" } }))'>
-                        <Button title="变更light主题 #000000" onPress={() => { 
+                    <TestCase itShould='更新主题内容 UnistylesRuntime.updateTheme("light", theme => ({ ...theme, colors: { ...theme.colors, typography: "#000000" } }))'>
+                        <Button title="更新主题内容 #000000" onPress={() => { 
                                 UnistylesRuntime.setAdaptiveThemes(false);
                                 UnistylesRuntime.setTheme('light');
                                 UnistylesRuntime.updateTheme('light', theme => ({ ...theme, colors: { ...theme.colors, typography: '#000000' } }))
                             }}
                         />
                     </TestCase>
-                    <TestCase itShould='更改页面主题'>
+                    <TestCase itShould='更改页面主题 setTheme light '>
                         <Button title="更改页面主题 UnistylesRuntime.setTheme('light')" color={theme.colors.accent} onPress={() => {
                             UnistylesRuntime.setAdaptiveThemes(false);
                             UnistylesRuntime.setTheme('light')
                         }} />
                     </TestCase>
-                    <TestCase itShould='更改页面主题'>
+                    <TestCase itShould='更改页面主题 setTheme premium'>
                         <Button title="更改页面主题 UnistylesRuntime.setTheme('premium')" color={theme.colors.accent} onPress={() => {
                             UnistylesRuntime.setAdaptiveThemes(false);
                             UnistylesRuntime.setTheme('premium');
                         }} />
                     </TestCase>
-                    <TestCase itShould='启用自适应主题'>
+                    <TestCase itShould='启用自适应主题 setAdaptiveThemes true'>
                         <Text style={styles.container}>{" 系统主题:"+UnistylesRuntime.colorScheme}</Text>
                         <Button title="启用自适应主题 UnistylesRuntime.setAdaptiveThemes(true)" onPress={() => { UnistylesRuntime.setAdaptiveThemes(true) } } />
                     </TestCase>
-                    <TestCase itShould='关闭自适应主题'>
+                    <TestCase itShould='关闭自适应主题 setAdaptiveThemes false'>
                         <Text style={styles.container}>{" 系统主题:"+UnistylesRuntime.colorScheme}</Text>
                         <Button title="关闭自适应主题 UnistylesRuntime.setAdaptiveThemes(false)" onPress={() => {  UnistylesRuntime.setAdaptiveThemes(false)  }} />
                     </TestCase>
-                    <TestCase itShould='启用插件'>
+                    <TestCase itShould='启用插件 addPlugin autoGuidelinePlugin'>
                         <View style={styles.unscaledBox}></View><Text>前缀为unscaled的样式会被插件跳过,已启用的插件{UnistylesRuntime.enabledPlugins}</Text>
                         <Button
                             title={'启用插件'}
                             onPress={() => { UnistylesRuntime.addPlugin(autoGuidelinePlugin) } }
                         />
                     </TestCase>
-                    <TestCase itShould='关闭插件'>
+                    <TestCase itShould='关闭插件 removePlugin '>
                         <View style={styles.unscaledBox}></View><Text>前缀为unscaled的样式会被插件跳过,已启用的插件{UnistylesRuntime.enabledPlugins}</Text>
                         <Button
                             title={'关闭插件'}
@@ -80,14 +86,29 @@ export function UnistylesExample() {
                     <TestCase itShould='媒体查询'>
                         <Text>你的屏幕大小是:{UnistylesRuntime.screen.width}x{UnistylesRuntime.screen.height};当宽大于500时背景是{theme.colors.backgroundColor}，宽大于900时背景为{theme.colors.aloes} </Text>
                     </TestCase>
-                    <TestCase itShould='字体大小偏好'>
-                        <Text>{"现在的字体大小偏好设置为:"+UnistylesRuntime.contentSizeCategory}</Text>
-                    </TestCase>
                     <TestCase itShould='在StyleSheets中使用variants style={styles.box_variants}'>
                         <View style={styles.box_variants}></View>
                     </TestCase>
                     <TestCase itShould='在StyleSheets中使用variants style={styles.box_variants1}'>
                         <View style={styles.box_variants1}></View>
+                    </TestCase>
+                    
+                    <TestCase itShould='UnistylesRuntime.enabledPlugins'>
+                        <Text> {JSON.stringify(UnistylesRuntime.enabledPlugins)} </Text>
+                    </TestCase>
+                    <TestCase itShould='UnistylesRuntime.hasAdaptiveThemes'>
+                        <Text> {JSON.stringify(UnistylesRuntime.hasAdaptiveThemes)} </Text>
+                    </TestCase>
+                    
+                    <TestCase itShould='UnistylesRuntime.breakpoints'>
+                        <Text>{JSON.stringify(UnistylesRuntime.breakpoints)}</Text>
+                    </TestCase>
+                    <TestCase itShould='UnistylesRuntime.colorScheme'>
+                        <Text>{UnistylesRuntime.colorScheme}</Text>
+                    </TestCase>
+                    
+                    <TestCase itShould='字体大小偏好'>
+                        <Text>{"现在的字体大小偏好设置为:"+UnistylesRuntime.contentSizeCategory}</Text>
                     </TestCase>
                     <TestCase itShould='UnistylesRuntime.insets'>
                         <Text>top {UnistylesRuntime.insets.top} bottom {UnistylesRuntime.insets.bottom} left {UnistylesRuntime.insets.left} right {UnistylesRuntime.insets.right}</Text>
@@ -100,9 +121,6 @@ export function UnistylesExample() {
                     </TestCase>
                     <TestCase itShould='UnistylesRuntime.orientation'>
                         <Text>{UnistylesRuntime.orientation}</Text>
-                    </TestCase>
-                    <TestCase itShould='UnistylesRuntime.breakpoints'>
-                        <Text>{JSON.stringify(UnistylesRuntime.breakpoints)}</Text>
                     </TestCase>
                 </TestSuite>
             </Tester>
