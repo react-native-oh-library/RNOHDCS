@@ -43,9 +43,10 @@ class App extends React.Component {
   componentDidMount() {
     // Initialize BackgroundFetch ONLY ONCE when component mounts.
     this.initBackgroundFetch();
+    this.scheduleTask('test');
   }
 
-  async initBackgroundFetch(options?: BackgroundFetchConfig) {
+  async initBackgroundFetch() {
     // BackgroundFetch event handler.
     const onEvent = async (taskId: string) => {
       console.log('[BackgroundFetch] task: ', taskId);
@@ -64,17 +65,16 @@ class App extends React.Component {
 
     // Initialize BackgroundFetch only once when component mounts.
     let status = await BackgroundFetch.configure(
-      {minimumFetchInterval: 20, ...options},
+      {minimumFetchInterval: 20},
       onEvent,
       onTimeout,
     );
   }
 
-  scheduleTask(taskId: string, options?: TaskConfig) {
+  scheduleTask(taskId: string) {
     BackgroundFetch.scheduleTask({
       taskId,
       delay: 20 * 60 * 1000, // <-- milliseconds
-      ...options,
     });
   }
 
