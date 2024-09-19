@@ -44,7 +44,7 @@ function App() {
   async function initBackgroundFetch(options: BackgroundFetchConfig) {
     // BackgroundFetch event handler.
     const onEvent = async (taskId: string) => {
-      // console.log('=== [BackgroundFetch] task: ', taskId);
+      // console.log('[BackgroundFetch] task: ', taskId);
       // Do your background work...
       await addEvent(taskId)
       // IMPORTANT:  You must signal to the OS that your task is complete.
@@ -54,7 +54,34 @@ function App() {
     // Timeout callback is executed when your Task has exceeded its allowed running-time.
     // You must stop what you're doing immediately BackgroundFetch.finish(taskId)
     const onTimeout = async (taskId: string) => {
-      // console.warn('=== [BackgroundFetch] TIMEOUT task: ', taskId);
+      // console.warn('[BackgroundFetch] TIMEOUT task: ', taskId);
+      await addTimeoutEvent(taskId)
+      BackgroundFetch.finish(taskId);
+    };
+
+    // Initialize BackgroundFetch only once when component mounts.
+    let status = await BackgroundFetch.configure(
+      options,
+      onEvent,
+      onTimeout,
+    );
+  }
+
+  async function initBackgroundFetchFinishTest(options: BackgroundFetchConfig) {
+    // BackgroundFetch event handler.
+    const onEvent = async (taskId: string) => {
+      // console.log('[BackgroundFetch] task: ', taskId);
+      // Do your background work...
+      await addEvent(taskId)
+      // IMPORTANT:  You must signal to the OS that your task is complete.
+      // BackgroundFetch.finish(taskId);
+    };
+
+    // Timeout callback is executed when your Task has exceeded its allowed running-time.
+    // You must stop what you're doing immediately BackgroundFetch.finish(taskId)
+    const onTimeout = async (taskId: string) => {
+      // console.warn('[BackgroundFetch] TIMEOUT task: ', taskId);
+      await addTimeoutEvent(taskId)
       BackgroundFetch.finish(taskId);
     };
 
@@ -69,12 +96,27 @@ function App() {
   function addEvent(taskId: string) {
     // Simulate a possibly long-running asynchronous task with a Promise.
     return new Promise((resolve, reject) => {
-      const newEvents = [...events]
-      newEvents.push({
-        taskId,
-        timestamp: new Date().toString()
-      })
-      setEvents([...newEvents])
+      setEvents([
+        ...events,
+        {
+          taskId,
+          timestamp: new Date().toString()
+        }
+      ])
+      resolve(true);
+    });
+  }
+
+  function addTimeoutEvent(taskId: string) {
+    // Simulate a possibly long-running asynchronous task with a Promise.
+    return new Promise((resolve, reject) => {
+      setEvents([
+        ...events,
+        {
+          taskId: taskId + '超时回调',
+          timestamp: new Date().toString()
+        }
+      ])
       resolve(true);
     });
   }
@@ -132,6 +174,8 @@ function App() {
               {renderElement('测试 configure 接口 属性 requiresStorageNotLow 存储状态 表示这个触发条件是存储空间不足或者从存储空间不足恢复到正常。', () => initBackgroundFetch({requiresStorageNotLow: false}))}
               {renderElement('测试 configure 接口 属性 requiresDeviceIdle 空闲状态 需要要求设备进入空闲状态。', () => initBackgroundFetch({requiresDeviceIdle: true}))}
               {renderElement('测试 configure 接口 属性 requiresDeviceIdle 空闲状态 不需要要求设备进入空闲状态。', () => initBackgroundFetch({requiresDeviceIdle: false}))}
+
+              {renderElement('测试 configure 接口 超时回调被触发 触发条件充电', () => initBackgroundFetchFinishTest({requiresCharging: true}))}
 
               {renderElement('测试 scheduleTask 接口 taskId为 com.transistorsoft.customtask delay为 20*60*1000毫秒', () => scheduleTask({taskId: 'com.transistorsoft.customtask', delay: 20*60*1000}))}
               {renderElement('测试 scheduleTask 接口 periodic: false 不重复执行', () => scheduleTask({taskId: 'com.transistorsoft.customtask', delay: 20*60*1000, periodic: false}))}
