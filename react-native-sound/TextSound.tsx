@@ -94,7 +94,7 @@ export function TextSound(): JSX.Element {
           />
 
           <TestCase
-            itShould="setVolume"
+            itShould="setVolume0.2"
             initialState={false}
             arrange={({ setState }) => <AddMenuSetVolumeTest setState={setState} />}
             assert={({ state, expect }) => {
@@ -102,7 +102,7 @@ export function TextSound(): JSX.Element {
             }}
           />
           <TestCase
-            itShould="setVolume"
+            itShould="setVolume0.5"
             initialState={false}
             arrange={({ setState }) => <AddMenuSetVolume05Test setState={setState} />}
             assert={({ state, expect }) => {
@@ -110,7 +110,7 @@ export function TextSound(): JSX.Element {
             }}
           />
           <TestCase
-            itShould="setVolume"
+            itShould="setVolume1"
             initialState={false}
             arrange={({ setState }) => <AddMenuSetVolume10Test setState={setState} />}
             assert={({ state, expect }) => {
@@ -453,8 +453,8 @@ const AddMenuFileNameTest = (props: {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={{ fontSize: 20 }}>{fileName}</Text>
+    <View style={{height:150}}>
+      <Text style={{ fontSize: 20,height:110 }}>{fileName}</Text>
       <Button title={"获取文件名称"} onPress={addCustomMenuItem} />
     </View>
   );
