@@ -340,7 +340,7 @@ export default function RedashOtherTest() {
                                 />
                             </View>
                             <View>
-                                <Button onPress={() => { toggleText(); setState(true) }} label={textOpacity.value === 0 ? 'open' : 'close'} />
+                                <Button onPress={() => { toggleText(); setState(true) }} label={open === false ? 'close' : 'open'} />
                             </View>
                         </View>
                     );
