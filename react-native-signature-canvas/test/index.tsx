@@ -15,9 +15,6 @@ import {
   ImageType,
   MinWidth,
   MaxWidth,
-  MinDistance,
-  NestedScrollEnabled,
-  ShowsVerticalScrollIndicator,
   OnOK,
   OnEmpty,
   OnClear,
@@ -44,21 +41,13 @@ import {
   GetData,
   ReadSignature,
   Undo,
-  Redo,
-  AndroidHardwareAccelerationDisabled,
-  AndroidLayerType
-} from './tester';
+  Redo
+} from './signatureCanvasDemo';
 const Stack = createStackNavigator();
 function HomePage({navigation}) {
   return (
     <ScrollView style={{backgroundColor: '#fff'}}>
       <Text>属性</Text>
-      <Button
-        title="android硬件加速已禁用"
-        onPress={() => {
-          navigation.navigate('AndroidHardwareAccelerationDisabled');
-        }}
-      />
       <Button
         title="自动清除"
         onPress={() => {
@@ -129,24 +118,6 @@ function HomePage({navigation}) {
         title="最大宽度"
         onPress={() => {
           navigation.navigate('MaxWidth');
-        }}
-      />
-      <Button
-        title="最小距离"
-        onPress={() => {
-          navigation.navigate('MinDistance');
-        }}
-      />
-      <Button
-        title="启用嵌套滚动"
-        onPress={() => {
-          navigation.navigate('NestedScrollEnabled');
-        }}
-      />
-      <Button
-        title="显示垂直滚动指示器"
-        onPress={() => {
-          navigation.navigate('ShowsVerticalScrollIndicator');
         }}
       />
       <Button
@@ -263,12 +234,6 @@ function HomePage({navigation}) {
           navigation.navigate('WebStyle');
         }}
       />
-      <Button
-        title="androidLayer类型"
-        onPress={() => {
-          navigation.navigate('AndroidLayerType');
-        }}
-      />
       <Text>方法</Text>
       <Button
         title="清除当前签名"
@@ -345,15 +310,6 @@ export default function SignatureCanvasExample() {
         <Stack.Screen name="ImageType" component={ImageType} />
         <Stack.Screen name="MinWidth" component={MinWidth} />
         <Stack.Screen name="MaxWidth" component={MaxWidth} />
-        <Stack.Screen name="MinDistance" component={MinDistance} />
-        <Stack.Screen
-          name="NestedScrollEnabled"
-          component={NestedScrollEnabled}
-        />
-        <Stack.Screen
-          name="ShowsVerticalScrollIndicator"
-          component={ShowsVerticalScrollIndicator}
-        />
         <Stack.Screen name="OnOK" component={OnOK} />
         <Stack.Screen name="OnEmpty" component={OnEmpty} />
         <Stack.Screen name="OnClear" component={OnClear} />
@@ -381,12 +337,6 @@ export default function SignatureCanvasExample() {
         <Stack.Screen name="ReadSignature" component={ReadSignature} />
         <Stack.Screen name="Undo" component={Undo} />
         <Stack.Screen name="Redo" component={Redo} />
-        <Stack.Screen
-          name="AndroidHardwareAccelerationDisabled"
-          component={AndroidHardwareAccelerationDisabled}
-        />
-        <Stack.Screen name="AndroidLayerType" component={AndroidLayerType} />
-
       </Stack.Navigator>
     </NavigationContainer>
   );
