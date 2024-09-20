@@ -1,5 +1,5 @@
 import { Text,View,Button, ScrollView,PixelRatio} from 'react-native';
-import { UnistylesRuntime, createStyleSheet, useStyles,UnistylesRegistry,mq,UnistylesPlugin } from 'react-native-unistyles'
+import { UnistylesRuntime, createStyleSheet, useStyles,UnistylesRegistry,mq,UnistylesPlugin,useInitialTheme } from 'react-native-unistyles'
 import React,{useEffect} from 'react'; 
 import {TestSuite,Tester,TestCase} from '@rnoh/testerino';
 
@@ -7,12 +7,51 @@ export function UnistylesExample() {
     const hasSomeCoolFeatures = true;
     const { styles, theme } = useStyles(stylesheet,{ colors: hasSomeCoolFeatures,sizes: !hasSomeCoolFeatures});
     const renderCount = React.useRef(0)
-    useEffect(() => () => { UnistylesRuntime.removePlugin(autoGuidelinePlugin) }, [])
-
+    useInitialTheme(theme)
     return(
         <ScrollView>
             <Tester>
                 <TestSuite name='unistyles' > 
+                  <TestCase
+                    itShould="useStyles"
+                    fn={({expect}) => {
+                        expect(theme).to.be.not.undefined;
+                    }}
+                  /> 
+                  <TestCase
+                    itShould="useInitialTheme"
+                    fn={({expect}) => {
+                        //可以渲染出来即为注册成功
+                        expect(UnistylesRuntime.themeName).to.be.eq('light');
+                    }}
+                  /> 
+                  <TestCase
+                    itShould="addConfig ({ initialTheme: 'light' })"
+                    fn={({expect}) => {
+                        //使用light主题作为默认主题
+                        expect(UnistylesRuntime.themeName).to.be.eq('light');
+                    }}
+                  />
+                  <TestCase
+                    itShould="addThemes (light: lightTheme, dark: darkTheme, premium: premiumTheme)"
+                    fn={({expect}) => {
+                      //注册了light主题了后才能使用
+                      expect(UnistylesRuntime.themeName).to.be.eq('light');
+                    }}
+                  />
+                  <TestCase
+                    itShould="addBreakpoints { xs: 0, sm: 300, md: 500, lg: 800, xl: 1200}"
+                    fn={({expect}) => {
+                      expect(UnistylesRuntime.breakpoints).and.to.be.not.undefined;
+                    }}
+                  />
+                  <TestCase
+                    itShould="const stylesheet = createStyleSheet((theme, runtime)"
+                    fn={({expect}) => {
+                      expect(stylesheet).and.to.be.not.undefined;
+                    }}
+                  />
+
                     <TestCase itShould = '状态栏 themeColor #00ff00'>
                         <Button title='状态栏颜色 #00ff00' onPress={() => UnistylesRuntime.statusBar.setColor('#00ff00')}></Button>
                     </TestCase>
@@ -77,20 +116,17 @@ export function UnistylesExample() {
                             <Text>占据了屏幕一半大小的方块width:{styles.box.width} height:{styles.box.height}</Text>
                         </View>
                     </TestCase>
-                    <TestCase itShould='动态函数式样式表 styles.dynamicFunction(1)'>
-                        <View style={styles.dynamicFunction(1)}><Text>barbie</Text></View>
+                    <TestCase itShould='mq : width'>
+                        <Text style={styles.mq1}> styles.mq1 </Text>
                     </TestCase>
-                    <TestCase itShould='动态函数式样式表 styles.dynamicFunction(2)'>
-                        <View style={styles.dynamicFunction(2)}><Text>accent</Text></View>
+                    <TestCase itShould='mq : height'>
+                        <Text style={styles.mq2}> styles.mq2 </Text>
                     </TestCase>
-                    <TestCase itShould='媒体查询'>
-                        <Text>你的屏幕大小是:{UnistylesRuntime.screen.width}x{UnistylesRuntime.screen.height};当宽大于500时背景是{theme.colors.backgroundColor}，宽大于900时背景为{theme.colors.aloes} </Text>
+                    <TestCase itShould='mq : and'>
+                        <Text style={styles.mq3}> styles.mq3 </Text>
                     </TestCase>
-                    <TestCase itShould='在StyleSheets中使用variants style={styles.box_variants}'>
-                        <View style={styles.box_variants}></View>
-                    </TestCase>
-                    <TestCase itShould='在StyleSheets中使用variants style={styles.box_variants1}'>
-                        <View style={styles.box_variants1}></View>
+                    <TestCase itShould='mq : only'>
+                        <Text style={styles.mq4}> styles.mq4 </Text>
                     </TestCase>
                     
                     <TestCase itShould='UnistylesRuntime.enabledPlugins'>
@@ -115,9 +151,6 @@ export function UnistylesExample() {
                     </TestCase>
                     <TestCase itShould='UnistylesRuntime.statusBar'>
                         <Text>width {UnistylesRuntime.statusBar.width} height {UnistylesRuntime.statusBar.height}</Text>
-                    </TestCase>
-                    <TestCase itShould='UnistylesRuntime.navigationBar'>
-                        <Text>width {UnistylesRuntime.navigationBar.width} height {UnistylesRuntime.navigationBar.height}</Text>
                     </TestCase>
                     <TestCase itShould='UnistylesRuntime.orientation'>
                         <Text>{UnistylesRuntime.orientation}</Text>
@@ -145,16 +178,29 @@ const stylesheet = createStyleSheet((theme, runtime) => ({
     bold: {
         fontWeight: 'bold'
     },
-    container1: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingHorizontal: 20,
+    mq1: {
         backgroundColor: {
-            [mq.width(undefined, 500).and.height(undefined, 1000)]: theme.colors.backgroundColor,
-            [mq.only.width(932)]: theme.colors.aloes
+            [mq.only.width(100, 200)]: theme.colors.blood,
+            [mq.only.width(201, 10000)]: theme.colors.aloes
         },
-        rowGap: 20
+    },
+    mq2: {
+        backgroundColor: {
+          [mq.only.height(100, 200)]: theme.colors.aloes,
+          [mq.only.height(201, 10000)]: theme.colors.blood
+        },
+    },
+    mq3: {
+        backgroundColor: {
+          [mq.width(100, 200).and.height(undefined, 10000)]: theme.colors.barbie,
+          [mq.width(201, 10000).and.height(undefined, 10000)]: theme.colors.sky
+        },
+    },
+    mq4: {
+        backgroundColor: {
+          [mq.only.width(0, 400)]: theme.colors.sky,
+          [mq.only.width(400,10000)]: theme.colors.barbie
+        },
     },
     theme: {
         color: theme.colors.typography
@@ -220,7 +266,7 @@ const breakpoints = { xs: 0, sm: 300, md: 500, lg: 800, xl: 1200}
 UnistylesRegistry
     .addThemes({ light: lightTheme, dark: darkTheme, premium: premiumTheme })
     .addBreakpoints(breakpoints)
-    .addConfig({ adaptiveThemes: true, initialTheme: 'light' });
+    .addConfig({ initialTheme: 'light' });
 
 const REFERENCE_WIDTH = 300
 const REFERENCE_HEIGHT = 800
