@@ -28,6 +28,7 @@ import ScrollBottomSheetDemoDefault16 from './examples/ReactNativeScrollBottomDe
 import ScrollBottomSheetDemoDefault17 from './examples/ReactNativeScrollBottomDemoDefault17';
 import ScrollBottomSheetDemoDefault18 from './examples/ReactNativeScrollBottomDemoDefault18';
 import ScrollBottomSheetDemoDefault19 from './examples/ReactNativeScrollBottomDemoDefault19';
+import ScrollBottomSheetDemoDefault20 from './examples/ReactNativeScrollBottomDemoDefault20';
 const App = () => {
   // renders
   return (
@@ -115,6 +116,9 @@ const App = () => {
           <Page
             name={`EXAMPLE: ScrollBottomSheetDemoDefault19 enableOverScroll={true} 滑到底部节点后手指继续下滑 有下滑趋势`}>
             <ScrollBottomSheetDemoDefault19 />
+          </Page>
+          <Page name={`EXAMPLE: ScrollBottomSheetDemoDefault20 测试snapTo方法`}>
+            <ScrollBottomSheetDemoDefault20 />
           </Page>
         </NavigationContainer>
       </SafeAreaView>
