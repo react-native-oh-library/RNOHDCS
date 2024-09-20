@@ -94,9 +94,25 @@ export function TextSound(): JSX.Element {
           />
 
           <TestCase
-            itShould="setVolume"
+            itShould="setVolume0.2"
             initialState={false}
             arrange={({ setState }) => <AddMenuSetVolumeTest setState={setState} />}
+            assert={({ state, expect }) => {
+              expect(state).to.be.true;
+            }}
+          />
+          <TestCase
+            itShould="setVolume0.5"
+            initialState={false}
+            arrange={({ setState }) => <AddMenuSetVolume05Test setState={setState} />}
+            assert={({ state, expect }) => {
+              expect(state).to.be.true;
+            }}
+          />
+          <TestCase
+            itShould="setVolume1"
+            initialState={false}
+            arrange={({ setState }) => <AddMenuSetVolume10Test setState={setState} />}
             assert={({ state, expect }) => {
               expect(state).to.be.true;
             }}
@@ -112,9 +128,26 @@ export function TextSound(): JSX.Element {
           />
 
           <TestCase
-            itShould="setSpeed"
+            itShould="setSpeed0.5"
             initialState={false}
             arrange={({ setState }) => <AddMenuSetSpeedTest setState={setState} />}
+            assert={({ state, expect }) => {
+              expect(state).to.be.true;
+            }}
+          />
+
+          <TestCase
+            itShould="setSpeed1"
+            initialState={false}
+            arrange={({ setState }) => <AddMenuSetSpeed1Test setState={setState} />}
+            assert={({ state, expect }) => {
+              expect(state).to.be.true;
+            }}
+          />
+          <TestCase
+            itShould="setSpeed2"
+            initialState={false}
+            arrange={({ setState }) => <AddMenuSetSpeed2Test setState={setState} />}
             assert={({ state, expect }) => {
               expect(state).to.be.true;
             }}
@@ -157,9 +190,17 @@ export function TextSound(): JSX.Element {
           />
 
           <TestCase
-            itShould="setActive"
+            itShould="isPlaying"
             initialState={false}
-            arrange={({ setState }) => <AddMenuSetActiveTest setState={setState} />}
+            arrange={({ setState }) => <AddMenuisPlayingTest setState={setState} />}
+            assert={({ state, expect }) => {
+              expect(state).to.be.true;
+            }}
+          />
+          <TestCase
+            itShould="isLoaded"
+            initialState={false}
+            arrange={({ setState }) => <AddMenuisLoadedTest setState={setState} />}
             assert={({ state, expect }) => {
               expect(state).to.be.true;
             }}
@@ -171,18 +212,36 @@ export function TextSound(): JSX.Element {
   );
 }
 
-const AddMenuSetActiveTest = (props: {
+const AddMenuisLoadedTest = (props: {
   setState: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-
+  const [isLoaded,setIsLoaded] = useState("")
   const addCustomMenuItem = () => {
-    Sound.setActive(true);
+    setIsLoaded(`${sound.isLoaded()}`)
     props.setState(true);
   };
 
   return (
     <View style={styles.container}>
-      <Button title={"获取为活跃状态"} onPress={addCustomMenuItem} />
+      <Text style={{ fontSize: 20 }}>load状态{isLoaded}</Text>
+      <Button title={"获取load状态"} onPress={addCustomMenuItem} />
+    </View>
+  );
+};
+
+const AddMenuisPlayingTest = (props: {
+  setState: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const [isPlaying,setIsPlaying] = useState("")
+  const addCustomMenuItem = () => {
+    setIsPlaying(`${sound.isPlaying()}`)
+    props.setState(true);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={{ fontSize: 20 }}>播放状态{isPlaying}</Text>
+      <Button title={"获取播放状态"} onPress={addCustomMenuItem} />
     </View>
   );
 };
@@ -261,7 +320,7 @@ const AddMenuLoopTest = (props: {
   );
 };
 
-const AddMenuSetSpeedTest = (props: {
+const AddMenuSetSpeed2Test = (props: {
   setState: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const addCustomMenuItem = () => {
@@ -271,7 +330,37 @@ const AddMenuSetSpeedTest = (props: {
 
   return (
     <View style={styles.container}>
-      <Button title={"设置播放速度"} onPress={addCustomMenuItem} />
+      <Button title={"设置播放速度为2"} onPress={addCustomMenuItem} />
+    </View>
+  );
+};
+
+const AddMenuSetSpeed1Test = (props: {
+  setState: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const addCustomMenuItem = () => {
+    sound?.setSpeed(1)
+    props.setState(true);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Button title={"设置播放速度为1"} onPress={addCustomMenuItem} />
+    </View>
+  );
+};
+
+const AddMenuSetSpeedTest = (props: {
+  setState: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const addCustomMenuItem = () => {
+    sound?.setSpeed(5)
+    props.setState(true);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Button title={"设置播放速度为0.5"} onPress={addCustomMenuItem} />
     </View>
   );
 };
@@ -294,6 +383,37 @@ const AddMenuSpeedTest = (props: {
     </View>
   );
 };
+
+const AddMenuSetVolume10Test= (props: {
+  setState: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const addCustomMenuItem = () => {
+    sound?.setVolume(1)
+    props.setState(true);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Button title={"设置音量为1"} onPress={addCustomMenuItem} />
+    </View>
+  );
+};
+
+const AddMenuSetVolume05Test= (props: {
+  setState: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const addCustomMenuItem = () => {
+    sound?.setVolume(0.5)
+    props.setState(true);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Button title={"设置音量为0.5"} onPress={addCustomMenuItem} />
+    </View>
+  );
+};
+
 const AddMenuSetVolumeTest = (props: {
   setState: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
@@ -359,8 +479,8 @@ const AddMenuFileNameTest = (props: {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={{ fontSize: 20 }}>{fileName}</Text>
+    <View style={{height:150}}>
+      <Text style={{ fontSize: 20,height:110 }}>{fileName}</Text>
       <Button title={"获取文件名称"} onPress={addCustomMenuItem} />
     </View>
   );
@@ -418,24 +538,28 @@ const AddMenuPauseTest = (props: {
 const AddMenuPlayTest = (props: {
   setState: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+
   const addCustomMenuItem = () => {
     if (state === "pause") {
       sound.play(() => {
+        state = ""
         sound.release();
       });
     } else {
-      sound = new Sound("https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3", "", (error) => {
+      if (state !== "play") {
+        sound = new Sound("https://sis-sample-audio.obs.cn-north-1.myhuaweicloud.com/16k16bit.mp3", "", (error) => {
+          if (error) {
+            return;
+          }
+          state = "play"
+          sound.play((a) => {
+            state = ""
+            sound.release();
+          });
 
-        if (error) {
-          return;
-        }
-        sound.play((a) => {
-          console.log(a)
-          state = ""
-          sound.release();
         });
+      }
 
-      });
     }
     props.setState(true);
   };

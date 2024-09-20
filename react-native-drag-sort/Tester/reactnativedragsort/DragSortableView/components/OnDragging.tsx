@@ -16,7 +16,7 @@ export const API_onDragging = () => {
   let count = 0;
 
   return (
-    <Tester>
+    <Tester style={{flex: 1}}>
       <TestSuite name="onDragging">
         <TestCase
           key={'onDragging'}
@@ -25,7 +25,7 @@ export const API_onDragging = () => {
           initialState={false}
           arrange={({setState, state}) => {
             return (
-              <View style={{height: 510}}>
+              <View>
                 <DragSortableView
                   parentWidth={356}
                   dataSource={defaultData}

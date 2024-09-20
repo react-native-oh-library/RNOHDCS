@@ -15,7 +15,7 @@ const defaultData = generateDataSource(20, '标题');
 export const API_scaleDuration = () => {
   const [scaleDuration, setScaleDuration] = useState(100);
   return (
-    <Tester>
+    <Tester style={{flex: 1}}>
       <TestSuite name="scaleDuration">
         <TestCase
           key={'scaleDuration'}
@@ -24,7 +24,7 @@ export const API_scaleDuration = () => {
           initialState={false}
           arrange={({setState}) => {
             return (
-              <View style={{height: 510}}>
+              <View>
                 <DragSortableView
                   parentWidth={356}
                   dataSource={defaultData}

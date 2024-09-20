@@ -15,7 +15,7 @@ const defaultData = generateDataSource(16, '标题');
 export const API_marginChildrenBottom = () => {
   const [marginChildrenBottom, setMarginChildrenBottom] = useState(0);
   return (
-    <Tester>
+    <Tester style={{flex: 1}}>
       <TestSuite name="marginChildrenBottom">
         <TestCase
           key={'marginChildrenBottom'}
@@ -24,7 +24,7 @@ export const API_marginChildrenBottom = () => {
           initialState={false}
           arrange={({setState}) => {
             return (
-              <View style={{height: 510}}>
+              <View>
                 <DragSortableView
                   parentWidth={356}
                   dataSource={defaultData}

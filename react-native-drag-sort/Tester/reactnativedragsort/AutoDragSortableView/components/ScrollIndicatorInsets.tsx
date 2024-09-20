@@ -10,7 +10,7 @@ import {generateDataSource} from '../../libs';
  * scrollIndicatorInsets,【滚轮偏移量】
  */
 
-const defaultData = generateDataSource(30, '标题');
+const defaultData = generateDataSource(60, '标题');
 
 export const API_scrollIndicatorInsets = () => {
   const [scrollIndicatorInsets, setScrollIndicatorInsets] = useState({

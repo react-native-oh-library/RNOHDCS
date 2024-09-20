@@ -10,7 +10,7 @@ import {anySizeDragSortableVIewStyle as styles} from '../../styles';
  * onDataChange,【拖拽结束后进行刷新数据】
  */
 
-const defaultData = generateDataSource(30, '标题');
+const defaultData = generateDataSource(60, '标题');
 
 export const API_onDataChange = () => {
   const ref = useRef();

@@ -1,9 +1,47 @@
-import {Text, View} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 import React from 'react';
 import {ViewTypes} from '../data';
-import {layoutProvider, LayoutManager} from 'recyclerlistview';
+// import {layoutProvider, LayoutManager} from 'recyclerlistview';
 
-export const RowRenderer = (type, data, index, extendedState) => {
+const styles = StyleSheet.create({
+  containerFirst: {
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flex: 1,
+    backgroundColor: '#00a1f1',
+  },
+  containerSecond: {
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flex: 1,
+    backgroundColor: '#ffbb00',
+  },
+  containerThree: {
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flex: 1,
+    backgroundColor: '#7cbb00',
+  },
+  containerFour: {
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flex: 1,
+    backgroundColor: '#00ffff',
+    margin: 5,
+  },
+  centerText: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#000000',
+  },
+});
+
+export const rowRendererComponent = (
+  type: any,
+  data: any,
+  index: any,
+  extendedState: any,
+) => {
   switch (type) {
     case ViewTypes.FIRST:
       return (
@@ -42,35 +80,4 @@ export const RowRenderer = (type, data, index, extendedState) => {
   }
 };
 
-const styles = {
-  containerFirst: {
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    flex: 1,
-    backgroundColor: '#00a1f1',
-  },
-  containerSecond: {
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    flex: 1,
-    backgroundColor: '#ffbb00',
-  },
-  containerThree: {
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    flex: 1,
-    backgroundColor: '#7cbb00',
-  },
-  containerFour: {
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    flex: 1,
-    backgroundColor: '#00ffff',
-    margin: 5,
-  },
-  centerText: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: '#000000',
-  },
-};
+export default rowRendererComponent;

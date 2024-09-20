@@ -428,18 +428,17 @@ function TabBarIconStyleTest() {
         barTintColor="#f5f5f5">
         <TabBar.Item
           icon={<Icon name="ordered-list" color='pink' />}
+          iconStyle={{ width: 50, height: 50 }}
           title="Koubei"
-          badge={2}
           selected={selectedTab === 'redTab'}
           onPress={() => onChangeTab('redTab')}>
           {renderContent('Koubei Tab')}
         </TabBar.Item>
         <TabBar.Item
           icon={<Icon name="user" color='blue' />}
-          iconStyle={{ backgroundColor: 'blue' }}
+          iconStyle={{ width: 50, height: 50 }}
           title="My"
           selected={selectedTab === 'yellowTab'}
-          selectedIcon={<Image source={require('./assets/alipay.png')} style={{ width: 20, height: 20 }} />}
           onPress={() => onChangeTab('yellowTab')}>
           {renderContent('My Tab')}
         </TabBar.Item>
@@ -450,18 +449,17 @@ function TabBarIconStyleTest() {
         barTintColor="#f5f5f5">
         <TabBar.Item
           icon={<Icon name="ordered-list" color='pink' />}
+          iconStyle={{ width: 20, height: 20 }}
           title="Koubei"
-          badge={2}
           selected={selectedTab === 'redTab'}
           onPress={() => onChangeTab('redTab')}>
           {renderContent('Koubei Tab')}
         </TabBar.Item>
         <TabBar.Item
           icon={<Icon name="user" color='green' />}
-          iconStyle={{ backgroundColor: 'green' }}
+          iconStyle={{ width: 20, height: 20 }}
           title="My"
           selected={selectedTab === 'yellowTab'}
-          selectedIcon={<Image source={require('./assets/alipay.png')} style={{ width: 20, height: 20 }} />}
           onPress={() => onChangeTab('yellowTab')}>
           {renderContent('My Tab')}
         </TabBar.Item>

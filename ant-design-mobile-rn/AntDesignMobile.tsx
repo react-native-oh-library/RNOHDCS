@@ -27,7 +27,6 @@ import TagsTest from './TagsTest';
 import TabsTest from './TabsTest';
 import { SwipeActionTest } from './SwipeActionTest';
 import SwitchTest from './SwitchTest';
-import SegmentedControlTest from './SegmentedControlTest';
 import StepsTest from './StepsTest';
 import StepperTest from './StepperTest';
 import SliderAntTest from './SliderAntTest';
@@ -42,16 +41,20 @@ import DatePickerTest from './DatePickerTest';
 import CheckboxTest from './CheckboxTest';
 import ToastTest from './ToastTest';
 import LocaleProviderTest from './LocaleProviderTest';
+import CollapseTest from './CollapseTest';
+import InputTest from './InputTest';
+import FormTest from './FormTest';
+import TooltipTest from './TooltipTest';
 import { NavigationContainer, Page } from '../../components';
 import { Tester } from '@rnoh/testerino';
-import { Provider } from '@ant-design/react-native';
+import { Provider, Tooltip } from '@ant-design/react-native';
 
 export function AntDesignMobile() {
   return (
     <Provider>
       <NavigationContainer>
-        <ScrollView nestedScrollEnabled={true}>
-          <Tester style={{ flex: 1 }}>
+        <ScrollView {...Tooltip.scrollProps} keyboardShouldPersistTaps="always">
+          <Tester>
             <Page name='1.Button'><ButtonAntTest /></Page>
             <Page name='2.Accordion'><AccordionTest /></Page>
             <Page name='3.ActionSheet'><ActionSheetTest /></Page>
@@ -84,16 +87,19 @@ export function AntDesignMobile() {
             <Page name='30.LocaleProvider'><LocaleProviderTest /></Page>
             <Page name='31.DatePickerView'><DatePickerViewTest /></Page>
             <Page name='32.Icon'><IconAntTest /></Page>
-            <Page name='33.SegmentedControl'><SegmentedControlTest /></Page>
-            <Page name='34.DatePicker'><DatePickerTest /></Page>
-            <Page name='35.Picker'><PickerTest /></Page>
-            <Page name='36.PickerView'><PickerViewTest /></Page>
-            <Page name='37.Tabs'><TabsTest /></Page>
-            <Page name='38.Modal'><ModalTest /></Page>
-            <Page name='39.Slider'><SliderAntTest /></Page>
-            <Page name='40.ListView'><ListViewTest /></Page>
-            <Page name='41.Popover'><PopoverTest /></Page>
-            <Page name='42.SwipeAction'><SwipeActionTest /></Page>
+            <Page name='33.DatePicker'><DatePickerTest /></Page>
+            <Page name='34.Picker'><PickerTest /></Page>
+            <Page name='35.PickerView'><PickerViewTest /></Page>
+            <Page name='36.Tabs'><TabsTest /></Page>
+            <Page name='37.Modal'><ModalTest /></Page>
+            <Page name='38.Slider'><SliderAntTest /></Page>
+            <Page name='39.ListView'><ListViewTest /></Page>
+            <Page name='40.Popover'><PopoverTest /></Page>
+            <Page name='41.SwipeAction'><SwipeActionTest /></Page>
+            <Page name='42.Collapse'><CollapseTest /></Page>
+            <Page name='43.Input'><InputTest /></Page>
+            <Page name='44.Form'><FormTest /></Page>
+            <Page name='45.Tooltip'><TooltipTest /></Page>
           </Tester>
         </ScrollView>
       </NavigationContainer>

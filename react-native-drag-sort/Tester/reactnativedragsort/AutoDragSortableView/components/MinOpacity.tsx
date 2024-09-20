@@ -10,7 +10,7 @@ import {generateDataSource} from '../../libs';
  * minOpacity,【开启拖拽后的子项引用的透明度】
  */
 
-const defaultData = generateDataSource(30, '标题');
+const defaultData = generateDataSource(60, '标题');
 
 export const API_minOpacity = () => {
   const [minOpacity, setMinOpacity] = useState(1);

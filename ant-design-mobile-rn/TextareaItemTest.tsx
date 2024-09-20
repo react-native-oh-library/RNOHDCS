@@ -5,7 +5,7 @@ import { TextareaItem } from '@ant-design/react-native';
 import { TestSuite, TestCase } from '@rnoh/testerino';
 
 export default () => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState('value');
   const [value1, setValue1] = useState('');
   const [value2, setValue2] = useState('');
   const [value3, setValue3] = useState('');
@@ -15,8 +15,8 @@ export default () => {
 
   return (
     <TestSuite name="TextareaItemTest">
-      <TestCase itShould="TextareaItem value" tags={['C_API']}>
-        <TextareaItem value={value} onChange={(value: any) => { setValue(value) }} placeholder="请输入..." />
+      <TestCase itShould="TextareaItem value={value}" tags={['C_API']}>
+        <TextareaItem value={value} onChange={(value: any) => { setValue(value) }} />
         <Text>value:{value}</Text>
       </TestCase>
       <TestCase itShould="TextareaItem defaultValue='wwww'" tags={['C_API']}>
@@ -29,8 +29,8 @@ export default () => {
         <TextareaItem value="不可编辑 editable = {false}" editable={false} />
         <TextareaItem value="可编辑 editable = {true}" editable={true} />
       </TestCase>
-      <TestCase itShould="TextareaItem disabled=true, disabled={false}" tags={['C_API']}>
-        <TextareaItem value={value3} placeholder='禁用' onChange={(value: any) => { setValue3(value) }} disabled={true} />
+      <TestCase itShould="TextareaItem disabled={true}, disabled={false}" tags={['C_API']}>
+        <TextareaItem placeholder='禁用' disabled={true} />
         <TextareaItem value={value3} placeholder='可用' onChange={(value: any) => { setValue3(value) }} disabled={false} />
       </TestCase>
       <TestCase itShould="TextareaItem clear=false, clear={true}" tags={['C_API']}>

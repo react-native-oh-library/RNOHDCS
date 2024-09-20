@@ -17,7 +17,7 @@ export const API_parentWidth = () => {
   const [childrenWidth, setChildrenWidth] = useState(88);
 
   return (
-    <Tester>
+    <Tester style={{flex: 1}}>
       <TestSuite name="parentWidth">
         <TestCase
           key={'parentWidth'}
@@ -26,7 +26,7 @@ export const API_parentWidth = () => {
           initialState={false}
           arrange={({setState}) => {
             return (
-              <View style={{height: 510}}>
+              <View>
                 <DragSortableView
                   parentWidth={parentWidth}
                   dataSource={defaultData}
@@ -49,8 +49,8 @@ export const API_parentWidth = () => {
                 <Button
                   title="修改parentWidth"
                   onPress={() => {
-                    setParentWidth(320);
-                    setChildrenWidth(90);
+                    setParentWidth(300);
+                    setChildrenWidth(80);
                     setState(true);
                   }}
                 />

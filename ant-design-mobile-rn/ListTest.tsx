@@ -39,6 +39,9 @@ export default () => {
       <TestCase itShould="list renderHeader={<Text>底部渲染</Text>}" tags={['C_API']}>
         <List renderFooter={<Text>底部渲染</Text>}><Item><Text>底部渲染</Text></Item></List>
       </TestCase>
+      <TestCase itShould="list styles={{ List: { backgroundColor: 'pink' } }}" tags={['C_API']}>
+        <List renderHeader={<Text>头部样式</Text>} styles={{ List: { backgroundColor: 'pink' } }}><Item><Text>头部样式</Text></Item></List>
+      </TestCase>
       <TestCase itShould="list wrap=false" tags={['C_API']}>
         <List>
           <Item>
@@ -68,6 +71,13 @@ export default () => {
         <List>
           <Item wrap arrow='empty' extra='没有箭头'>
             没有箭头
+          </Item>
+        </List>
+      </TestCase>
+      <TestCase itShould="List.Item styles={{Content:{backgroundColor:'pink'}}}" tags={['C_API']}>
+        <List>
+          <Item styles={{ Content: { backgroundColor: 'pink' } }}>
+            List.Item样式
           </Item>
         </List>
       </TestCase>
@@ -101,11 +111,15 @@ export default () => {
         <List>
           <Item
             wrap
-            extra="文字超长折行文字超长折行文字超长"
             align="top"
-            arrow="horizontal">
+            extra={
+              <View>
+                内容内容
+                <Brief>辅助文字内容</Brief>
+              </View>
+            }
+          >
             顶部对齐
-            <Brief>辅助文字内容</Brief>
           </Item>
         </List>
       </TestCase>

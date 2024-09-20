@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Button,
     View,
@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { TestSuite, TestCase, Tester } from '@rnoh/testerino';
 
-import RTNTextSize, { TSFontSpecs, TSFontInfo, TSFontForStyle  } from 'react-native-text-size'
+import RTNTextSize, { TSFontSpecs, TSFontInfo, TSFontForStyle } from 'react-native-text-size'
 const fontSpecs: TSFontSpecs = {
     fontFamily: undefined,
     fontSize: 20,
@@ -20,60 +20,64 @@ const fontSpecs: TSFontSpecs = {
 }
 const width = Dimensions.get('window').width * 0.8
 
-export function TextSizeTest(): JSX.Element {
+let specsForTextList = [];
+
+export default function TextSize() {
     return (
-        <TestSuite name="TextSize">
-            <TestCase
-                itShould="measure"
-                initialState={false}
-                arrange={({ setState }) => <AddMenuMeasureTest setState={setState} />}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                }}
-            />
-            <TestCase
-                itShould="flatHeights"
-                initialState={false}
-                arrange={({ setState }) => <AddMenuFlatHeightsTest setState={setState} />}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                }}
-            />
-            <TestCase
-                itShould="specsForTextStyles"
-                initialState={false}
-                arrange={({ setState }) => <AddMenuspecsForTextStylesTest setState={setState} />}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                }}
-            />
+        <ScrollView>
+            <Tester>
+                <TestCase
+                    itShould="measure 文本测量  I rnTextSize"
+                    initialState={false}
+                    arrange={({ setState }) => <AddMenuMeasureTest setState={setState} />}
+                    assert={({ state, expect }) => {
+                        expect(state).to.be.true;
+                    }}
+                />
+                <TestCase
+                    itShould="flatHeights 字符串高度计算"
+                    initialState={false}
+                    arrange={({ setState }) => <AddMenuFlatHeightsTest setState={setState} />}
+                    assert={({ state, expect }) => {
+                        expect(state).to.be.true;
+                    }}
+                />
+                <TestCase
+                    itShould="specsForTextStyles 获取正在运行的操作系统的系统字体信息"
+                    initialState={false}
+                    arrange={({ setState }) => <AddMenuspecsForTextStylesTest setState={setState} />}
+                    assert={({ state, expect }) => {
+                        expect(state).to.be.true;
+                    }}
+                />
 
-            <TestCase
-                itShould="fontFromSpecs"
-                initialState={false}
-                arrange={({ setState }) => <AddMenuFontFromSpecsTest setState={setState} />}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                }}
-            />
-            <TestCase
-                itShould="fontFamilyNames"
-                initialState={false}
-                arrange={({ setState }) => <AddMenuFontFamilyNamesTest setState={setState} />}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                }}
-            />
+                <TestCase
+                    itShould="fontFromSpecs 返回根据给定的规范获得的字体的特征 San Francisco"
+                    initialState={false}
+                    arrange={({ setState }) => <AddMenuFontFromSpecsTest setState={setState} />}
+                    assert={({ state, expect }) => {
+                        expect(state).to.be.true;
+                    }}
+                />
+                <TestCase
+                    itShould="fontFamilyNames 返回系统上可用的字体系列名称列表"
+                    initialState={false}
+                    arrange={({ setState }) => <AddMenuFontFamilyNamesTest setState={setState} />}
+                    assert={({ state, expect }) => {
+                        expect(state).to.be.true;
+                    }}
+                />
 
-            <TestCase
-                itShould="fontNamesForFamilyName"
-                initialState={false}
-                arrange={({ setState }) => <AddMenuFontNamesForFamilyNameTest setState={setState} />}
-                assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                }}
-            />
-        </TestSuite>
+                <TestCase
+                    itShould="fontNamesForFamilyName 返回特定字体具体信息"
+                    initialState={false}
+                    arrange={({ setState }) => <AddMenuFontNamesForFamilyNameTest setState={setState} />}
+                    assert={({ state, expect }) => {
+                        expect(state).to.be.true;
+                    }}
+                />
+            </Tester>
+        </ScrollView>
     );
 }
 
@@ -82,22 +86,17 @@ const AddMenuFontNamesForFamilyNameTest = (props: {
 }) => {
     const [fontFamilyNamesText, setFontFamilyNamesText] = useState<{ [key: string]: TSFontForStyle }>()
 
-    const getFontFromSpecs = async ()=>{
-        console.log(86)
-        const specsForText = await RTNTextSize.fontNamesForFamilyName('HarmonyOS Sans TC');
-        console.log(87)
+    const getFontFromSpecs = async () => {
+        const specsForText = await RTNTextSize.fontNamesForFamilyName(specsForTextList[0]);
         setFontFamilyNamesText(specsForText);
     }
-
-    useEffect(()=>{
-        getFontFromSpecs()
-    },[])
 
     return (
         <View style={styles.containerFamilyName} >
             <Text >
-            {JSON.stringify(fontFamilyNamesText)}
+                {JSON.stringify(fontFamilyNamesText)}
             </Text>
+            <Button onPress={getFontFromSpecs} title="返回特定字体具体信息"></Button>
         </View>
     );
 }
@@ -107,21 +106,17 @@ const AddMenuFontFamilyNamesTest = (props: {
 }) => {
     const [fontFamilyNamesText, setFontFamilyNamesText] = useState<{ [key: string]: TSFontForStyle }>()
 
-    const getFontFromSpecs = async ()=>{
-        const specsForText = await RTNTextSize.fontFamilyNames();
-        console.log(specsForText)
-        setFontFamilyNamesText(specsForText);
+    const getFontFromSpecs = async () => {
+        specsForTextList = await RTNTextSize.fontFamilyNames();
+        setFontFamilyNamesText(specsForTextList);
     }
-
-    useEffect(()=>{
-        getFontFromSpecs()
-    },[])
 
     return (
         <View style={styles.containerFontFamily} >
             <Text >
-            {JSON.stringify(fontFamilyNamesText)}
+                {JSON.stringify(fontFamilyNamesText)}
             </Text>
+            <Button onPress={getFontFromSpecs} title="返回系统字体列表"></Button>
         </View>
     );
 }
@@ -131,21 +126,17 @@ const AddMenuFontFromSpecsTest = (props: {
 }) => {
     const [specsForText, setSpecsForText] = useState<{ [key: string]: TSFontForStyle }>()
 
-    const getFontFromSpecs = async ()=>{
-        const specsForText = await RTNTextSize.fontFromSpecs(fontSpecs);
-    
+    const getFontFromSpecs = async () => {
+        const specsForText = await RTNTextSize.fontFromSpecs({ ...fontSpecs, ...{ fontFamily: 'San Francisco' } });
         setSpecsForText(specsForText);
     }
-
-    useEffect(()=>{
-        getFontFromSpecs()
-    },[])
 
     return (
         <View style={styles.containerSpecs} >
             <Text >
-            {JSON.stringify(specsForText)}
+                {JSON.stringify(specsForText)}
             </Text>
+            <Button onPress={getFontFromSpecs} title="返回字体特征"></Button>
         </View>
     );
 }
@@ -155,21 +146,17 @@ const AddMenuspecsForTextStylesTest = (props: {
 }) => {
     const [specsForText, setSpecsForText] = useState<{ [key: string]: TSFontForStyle }>()
 
-    const getSpecsForTextStyles = async ()=>{
+    const getSpecsForTextStyles = async () => {
         const specsForText = await RTNTextSize.specsForTextStyles()
         setSpecsForText(specsForText);
-        
     }
-
-    useEffect(()=>{
-        getSpecsForTextStyles()
-    },[])
 
     return (
         <View style={styles.containerSpecsFor} >
             <Text >
-            {JSON.stringify(specsForText)}
+                {JSON.stringify(specsForText)}
             </Text>
+            <Button onPress={getSpecsForTextStyles} title="获取系统字体信息"></Button>
         </View>
     );
 }
@@ -186,26 +173,26 @@ const AddMenuFlatHeightsTest = (props: {
         height: 0,
     }])
 
-    const getFlatHeightsText = async()=>{
+    const getFlatHeightsText = async () => {
         const newHeights = await RTNTextSize.flatHeights({
             text: texts,      // array of texts to measure, can include symbols
-             width: width,            // max-width of the "virtual" container
-             ...fontSpecs,     // RN font specification
+            width: width,            // max-width of the "virtual" container
+            ...fontSpecs,     // RN font specification
         })
         setFlatHeightsText(newHeights);
     }
 
-    useEffect(()=>{
-        getFlatHeightsText()
-    },[])
-
     return (
         <View style={styles.containerFlat} >
-            {texts.map((text, index)=>{
+            {texts.map((text, index) => {
                 return <Text key={index} style={{ height: flatHeightsText[index], ...fontSpecs }}>
-                {text}
-              </Text>
+                    {text}
+                </Text>
             })}
+            <Button onPress={getFlatHeightsText} title="字符串计算高度"></Button>
+            <Text>
+                {JSON.stringify(flatHeightsText)}
+            </Text>
         </View>
     );
 }
@@ -214,7 +201,11 @@ const AddMenuFlatHeightsTest = (props: {
 const AddMenuMeasureTest = (props: {
     setState: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-    const texts = 'I rnTextSize'
+    const texts = '無論文字是什麽';
+    const measureFontSpecs: TSFontSpecs = {
+        fontSize: 20,
+        fontStyle: 'normal',
+    };
     const [measureText, setMeasureText] = useState<{
         width: number,
         height: number,
@@ -223,20 +214,15 @@ const AddMenuMeasureTest = (props: {
         height: 0,
     })
 
-    const setMeasure = ()=>{
-        const newHeights = RTNTextSize.measure({
+    const setMeasure = async () => {
+        const newHeights = await RTNTextSize.measure({
             text: texts,      // array of texts to measure, can include symbols
-             width: width,            // max-width of the "virtual" container
-             ...fontSpecs,     // RN font specification
+            width: width,            // max-width of the "virtual" container
+            lineInfoForLine: 1,
+            ...measureFontSpecs,     // RN font specification
         })
         setMeasureText(newHeights);
     }
-
-    useEffect(()=>{
-        
-        setMeasure()
-    },[])
-
     return (
         <View style={styles.container} >
             <Text
@@ -245,8 +231,12 @@ const AddMenuMeasureTest = (props: {
                     height: measureText.height,
                     ...fontSpecs
                 }}
-                >
+            >
                 {texts}
+            </Text>
+            <Button onPress={setMeasure} title="文本测量"></Button>
+            <Text>
+                {JSON.stringify(measureText)}
             </Text>
         </View>
     );
@@ -254,28 +244,21 @@ const AddMenuMeasureTest = (props: {
 
 const styles = StyleSheet.create({
     container: {
-        height: 50,
         justifyContent: 'center',
     },
     containerFlat: {
-        height: 180,
         justifyContent: 'center',
     },
-    containerSpecsFor:{
-        height: 400,
+    containerSpecsFor: {
         justifyContent: 'center',
     },
     containerSpecs: {
-        height: 100,
         justifyContent: 'center',
     },
-    containerFontFamily:{
-        height: 1000,
+    containerFontFamily: {
         justifyContent: 'center',
     },
-    containerFamilyName:{
-        height: 50,
+    containerFamilyName: {
         justifyContent: 'center',
     }
 });
-

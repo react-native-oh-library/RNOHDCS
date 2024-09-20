@@ -16,7 +16,7 @@ export const API_renderItem = () => {
   const [renderItem, setRenderItem] = useState('');
 
   return (
-    <Tester>
+    <Tester style={{flex: 1}}>
       <TestSuite name="renderItem">
         <TestCase
           key={'renderItem'}
@@ -25,7 +25,7 @@ export const API_renderItem = () => {
           initialState={false}
           arrange={({setState}) => {
             return (
-              <View style={{height: 510}}>
+              <View>
                 <DragSortableView
                   parentWidth={356}
                   dataSource={defaultData}

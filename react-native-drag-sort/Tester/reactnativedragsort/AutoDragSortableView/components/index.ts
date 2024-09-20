@@ -26,7 +26,7 @@ export * from './AutoThrottle';
 export * from './AutoThrottleDuration';
 export * from './RenderHeaderView';
 export * from './HeaderViewHeight';
-export * from './ScrollIndicatorInsets';
+// export * from './ScrollIndicatorInsets';
 export * from './RenderBottomView';
 export * from './BottomViewHeight';
 export * from './OnScrollListener';

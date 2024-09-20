@@ -352,14 +352,6 @@ export function genTextSpecificProps(): CaseParams[] {
             values: ['5', '10', '150%']
         },
         {
-            key: 'fontData',
-            values: [
-                {
-                    fontSize: '100',
-                }
-            ]
-        },
-        {
             key: 'fontFeatureSettings',
             values: ['normal', '"liga" 0', 'tnum', 'smcp']
         },

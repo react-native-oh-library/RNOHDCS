@@ -10,7 +10,7 @@ import {anySizeDragSortableVIewStyle as styles} from '../../styles';
  * renderBottomView,【底部组件】
  */
 
-const defaultData = generateDataSource(30, '标题');
+const defaultData = generateDataSource(60, '标题');
 
 export const API_renderBottomView = () => {
   const ref = useRef();

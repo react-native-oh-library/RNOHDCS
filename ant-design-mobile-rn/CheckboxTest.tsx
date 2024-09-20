@@ -109,8 +109,8 @@ export default () => {
               Option 1
             </CheckboxItem>
             <CheckboxItem>Option 2</CheckboxItem>
-            <CheckboxItem disabled>Option 3</CheckboxItem>
-            <CheckboxItem disabled checked right>
+            <CheckboxItem>Option 3</CheckboxItem>
+            <CheckboxItem checked right>
               More...
             </CheckboxItem>
           </List>

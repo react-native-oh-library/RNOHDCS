@@ -10,7 +10,7 @@ import {generateDataSource} from '../../libs';
  * parentWidth,【父组件的宽度】
  */
 
-const defaultData = generateDataSource(30, '标题');
+const defaultData = generateDataSource(60, '标题');
 
 export const API_parentWidth = () => {
   const [parentWidth, setParentWidth] = useState(356);
@@ -49,8 +49,8 @@ export const API_parentWidth = () => {
                 <Button
                   title="修改parentWidth"
                   onPress={() => {
-                    setParentWidth(320);
-                    setChildrenWidth(90);
+                    setParentWidth(300);
+                    setChildrenWidth(80);
                     setState(true);
                   }}
                 />

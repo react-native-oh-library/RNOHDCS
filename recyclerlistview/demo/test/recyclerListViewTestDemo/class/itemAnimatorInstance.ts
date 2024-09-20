@@ -4,7 +4,7 @@ import {Alert} from 'react-native';
 export class ItemAnimatorInstance extends BaseItemAnimator {
   api: string;
 
-  constructor(props) {
+  constructor(props: any) {
     super();
     this.api = props.api;
   }

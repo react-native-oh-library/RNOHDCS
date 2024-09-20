@@ -10,7 +10,7 @@ import {anySizeDragSortableVIewStyle as styles} from '../../styles';
  * areaOverlapRatio ,【覆盖比率】
  */
 
-const defaultData = generateDataSource(30, '标题');
+const defaultData = generateDataSource(60, '标题');
 
 export const API_areaOverlapRatio = () => {
   const ref = useRef();

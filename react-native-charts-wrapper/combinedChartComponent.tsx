@@ -87,7 +87,7 @@ const CombinedChartDemo = () => {
   return (
     <Tester>
       <TestSuite name="组合图（基础图表）">
-        <TestCase itShould="props:drawValueAboveBar 所有值都绘制在其条形的上方，而不是下方 *他们的顶部">
+        <TestCase itShould="props:drawValueAboveBar 所有值都绘制在其条形的上方，而不是下方 *他们的顶部 valueTextColor 值的文本颜色 #c66 valueTextSize: 10 值的大小">
           <View style={{ width: '100%', height: 500 }}>
             <CombinedChart
               style={styles.chart}
@@ -163,7 +163,7 @@ const CombinedChartDemo = () => {
                 },
               }}
               chartDescription={{ enabled: false }}
-              legend={{ enabled: true }}
+              legend={{ enabled: true,wordWrapEnabled:true }}
               maxVisibleValueCount={60}
               pinchZoom={false}
               drawGridBackground={false}

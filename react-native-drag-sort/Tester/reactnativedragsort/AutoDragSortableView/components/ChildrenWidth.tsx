@@ -10,7 +10,7 @@ import {generateDataSource} from '../../libs';
  * childrenWidth,【子组件宽度】
  */
 
-const defaultData = generateDataSource(30, '标题');
+const defaultData = generateDataSource(60, '标题');
 
 export const API_childrenWidth = () => {
   const [childrenWidth, setChildrenWidth] = useState(89);

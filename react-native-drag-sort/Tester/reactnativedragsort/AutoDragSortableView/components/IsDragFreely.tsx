@@ -10,7 +10,7 @@ import {generateDataSource} from '../../libs';
  * isDragFreely,【是否可以自由拖拽】
  */
 
-const defaultData = generateDataSource(16, '标题');
+const defaultData = generateDataSource(60, '标题');
 
 export const API_isDragFreely = () => {
   const [isDragFreely, setIsDragFreely] = useState(false);

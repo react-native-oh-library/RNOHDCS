@@ -1,5 +1,6 @@
 import {BaseScrollView} from 'recyclerlistview';
 import {ScrollView, Image} from 'react-native';
+import {width} from '../data';
 
 const generateArray = (num: number = 10) => {
   const list = [];
@@ -9,10 +10,12 @@ const generateArray = (num: number = 10) => {
   return list;
 };
 
-export class ExternalScrollVIew extends BaseScrollView {
+export class ExternalScrollView extends BaseScrollView {
+  scrollTo = () => {};
+
   render() {
     return (
-      <ScrollView style={{height: 250}}>
+      <ScrollView style={{width: width - 50, height: 150}}>
         {generateArray().map(item => {
           return (
             <Image
@@ -26,3 +29,5 @@ export class ExternalScrollVIew extends BaseScrollView {
     );
   }
 }
+
+export default ExternalScrollView;

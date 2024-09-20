@@ -10,7 +10,7 @@ import {generateDataSource} from '../../libs';
  * renderBottomView,【渲染底部组件】
  */
 
-const defaultData = generateDataSource(30, '标题');
+const defaultData = generateDataSource(60, '标题');
 
 export const API_renderBottomView = () => {
   const [renderBottomView, setRenderBottomView] = useState<any>();
@@ -47,11 +47,11 @@ export const API_renderBottomView = () => {
                       <View
                         style={{
                           height: 40,
-                          backgroundColor: '#ffff00',
+                          backgroundColor: '#00ff00',
                           justifyContent: 'center',
                           alignItems: 'center',
                         }}>
-                        <Text>我是头部组件</Text>
+                        <Text>我是底部组件</Text>
                       </View>,
                     );
                     setState(true);

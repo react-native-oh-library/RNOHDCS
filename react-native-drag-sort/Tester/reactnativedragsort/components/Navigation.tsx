@@ -99,11 +99,8 @@ export function IndexPage({hasHeader}: {hasHeader: boolean}) {
           <View
             style={{
               flexDirection: 'row',
-              alignItems: 'center',
-              paddingHorizontal: 5,
-              paddingVertical: 5,
-            }}>
-          </View>
+              alignItems: 'center'
+            }}></View>
         ) : null
       }
       renderItem={({item}) => {
@@ -136,8 +133,8 @@ const styles = StyleSheet.create({
   buttonText: {
     width: '100%',
     fontWeight: 'bold',
-    paddingHorizontal: 10,
-    paddingVertical: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
     color: 'white',
     backgroundColor: 'black',
   },

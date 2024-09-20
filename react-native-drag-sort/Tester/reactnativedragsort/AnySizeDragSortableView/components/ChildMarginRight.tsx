@@ -10,7 +10,7 @@ import {anySizeDragSortableVIewStyle as styles} from '../../styles';
  * childMarginRight ,【子组件有边距】
  */
 
-const defaultData = generateDataSource(30, '标题');
+const defaultData = generateDataSource(60, '标题');
 
 export const API_childMarginRight = () => {
   const ref = useRef();
