@@ -389,7 +389,7 @@ const BubbleChartDemo = () => {
                 }}
                 maxVisibleValueCount={70}
                 xAxis={{ enabled: true, axisLineWidth: 5 }}
-                yAxis={{ left: { enabled: true, axisLineWidth: 6 }, right: { enabled: true, axisLineWidth: 2 } }}
+                yAxis={{ left: { enabled: true, axisLineWidth: 5 }, right: { enabled: true, axisLineWidth:5 } }}
               />
             </View>
           </TestCase>

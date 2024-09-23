@@ -14,7 +14,7 @@ import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
 const HorizontalBarChartDemo = () => {
   const data = [
     { x: 1, y: 20 },
-    { x: 2, y: 43 },
+    { x: 2, y: 77 },
     { x: 3, y: 21 },
     { x: 4, y: 33 },
     { x: 5, y: 23 },
@@ -104,6 +104,63 @@ const HorizontalBarChartDemo = () => {
           </TestCase>
         </TestSuite>
 
+        <TestSuite name="horizontalBarChart 水平柱状图">
+          <TestCase itShould="Props:AutoScaleMinMaxEnabled true Y轴自动缩放标记 启用之后缩放会自动去调整Y轴的数据">
+            <View style={{ width: '100%', height: 300 }}>
+              <HorizontalBarChart
+                style={styles.chart}
+                data={{
+                  dataSets: [
+                    {
+                      label: 'demo',
+                      values: data,
+                      config: {
+
+                      },
+                    },
+                  ],
+                }}
+                xAxis={{ enabled: true, drawLabels: true,position:"BOTTOM",centerAxisLabels:true }}
+                touchEnabled={true}
+                dragDecelerationEnabled={true}
+                dragEnabled={true}
+                scaleEnabled={true}
+                scaleXEnabled={true}
+                scaleYEnabled={true}
+                autoScaleMinMaxEnabled={true}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="horizontalBarChart 水平柱状图 "> 
+          <TestCase itShould="Props:AutoScaleMinMaxEnabled false Y轴自动缩放标记 禁用之后缩放不会自动去调整Y轴的数据">
+            <View style={{ width: '100%', height: 300 }}>
+              <HorizontalBarChart
+                style={styles.chart}
+                data={{
+                  dataSets: [
+                    {
+                      label: 'demo',
+                      values: data,
+                      config: {
+
+                      },
+                    },
+                  ],
+                }}
+                xAxis={{ enabled: true, drawLabels: true,position:"BOTTOM",centerAxisLabels:true }}
+                touchEnabled={true}
+                dragDecelerationEnabled={true}
+                dragEnabled={true}
+                scaleEnabled={true}
+                scaleXEnabled={true}
+                scaleYEnabled={true}
+                autoScaleMinMaxEnabled={false}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+
         <TestSuite name="horizontalBarChart 水平柱状图(drawGridBackground)">
           <TestCase itShould="Props:drawGridBackground 是否设置网格背景颜色,gridBackgroundColor：#4f4 设置网格背景颜色,如为false则在其他用例中均覆盖">
             <View style={{ width: '100%', height: 300 }}>
@@ -127,7 +184,7 @@ const HorizontalBarChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="horizontalBarChart 水平柱状图(drawBorders)">
-          <TestCase itShould="Props:drawBorders 是否设置边框,borderColor 设置边框颜色，borderWidth 设置边框宽度 同一种需要一起设置  drawBorders={true} borderWidth={4} borderColor={processColor('#4f4')}">
+          <TestCase itShould="Props:drawBorders true 是否设置边框,borderColor 设置边框颜色，borderWidth 设置边框宽度 同一种需要一起设置,  drawBorders={true} borderWidth={4} borderColor={processColor('#4f4')}">
             <View style={{ width: '100%', height: 300 }}>
               <HorizontalBarChart
                 style={styles.chart}
@@ -148,9 +205,8 @@ const HorizontalBarChartDemo = () => {
             </View>
           </TestCase>
         </TestSuite>
-
         <TestSuite name="horizontalBarChart 水平柱状图(drawBorders)">
-          <TestCase itShould="Props:drawBorders 是否设置边框,borderColor 设置边框颜色，borderWidth 设置边框宽度 同一种需要一起设置  drawBorders={true} borderWidth={6} borderColor={processColor('#328')}">
+          <TestCase itShould="Props:drawBorders false 是否设置边框,borderColor 设置边框颜色，borderWidth 设置边框宽度 同一种需要一起设置,  drawBorders={true} borderWidth={4} borderColor={processColor('#4f4')}">
             <View style={{ width: '100%', height: 300 }}>
               <HorizontalBarChart
                 style={styles.chart}
@@ -163,6 +219,50 @@ const HorizontalBarChartDemo = () => {
                   ],
                 }}
 
+                drawBorders={false}
+                borderColor={processColor('#4f4')}
+                borderWidth={4}
+
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="horizontalBarChart 水平柱状图(drawBorders)">
+          <TestCase itShould="Props:drawBorders 是否设置边框,borderColor 设置边框颜色，borderWidth 设置边框宽度 同一种需要一起设置, drawBorders={false} borderWidth={4} borderColor={processColor('#4f4')}">
+            <View style={{ width: '100%', height: 300 }}>
+              <HorizontalBarChart
+                style={styles.chart}
+                data={{
+                  dataSets: [
+                    {
+                      label: 'demo',
+                      values: data,
+                    },
+                  ],
+                }}
+                drawBorders={true}
+                borderColor={processColor('#4f4')}
+                borderWidth={2}
+   
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+
+        <TestSuite name="horizontalBarChart 水平柱状图(drawBorders)">
+          <TestCase itShould="Props:drawBorders 是否设置边框,borderColor 设置边框颜色，borderWidth 设置边框宽度 同一种需要一起 设置图表以及图表所在区域  drawBorders={true} borderWidth={6} borderColor={processColor('#328')}">
+            <View style={{ width: '100%', height: 300 }}>
+              <HorizontalBarChart
+                style={styles.chart}
+                data={{
+                  dataSets: [
+                    {
+                      label: 'demo',
+                      values: data,
+                    },
+                  ],
+                }}
+                
                 drawBorders={true}
                 borderColor={processColor('#328')}
                 borderWidth={6}
@@ -173,10 +273,10 @@ const HorizontalBarChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="horizontalBarChart 水平柱状图(minOffset)">
-          <TestCase itShould="Props:minOffset 设置最小偏移 图表偏移多少 minOffset={30}">
+          <TestCase itShould="Props:minOffset 设置最小偏移 图表偏移多少 minOffset={100}">
             <View style={{ width: '100%', height: 300 }}>
               <HorizontalBarChart
-                style={styles.chart}
+                style={{width:"100%",height:300}}
                 data={{
                   dataSets: [
                     {
@@ -185,17 +285,12 @@ const HorizontalBarChartDemo = () => {
                     },
                   ],
                 }}
-
-                minOffset={30}
-
+                minOffset={100}
               />
+              
             </View>
           </TestCase>
         </TestSuite>
-
-
-
-
       </ScrollView>
     </Tester>
   )

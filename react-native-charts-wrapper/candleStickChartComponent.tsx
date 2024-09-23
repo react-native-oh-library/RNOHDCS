@@ -127,7 +127,7 @@ const CandleChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="烛台图(XY轴公共属性)">
-          <TestCase itShould="props:labelCount 标签条目数  labelCount: 20">
+          <TestCase itShould="props:labelCount 标签条目数  labelCount: X轴为10，Y轴为15">
             <View style={{ height: 300 }}>
               <CandleStickChart
                 style={styles.chart}
@@ -143,18 +143,20 @@ const CandleChartDemo = () => {
                   axisMaximum: 15,
                   axisMinimum: -1,
                   position: 'BOTTOM',
-                  labelCount: 20,
+                  labelCount: 10,
+                  labelCountForce: true
                 }}
                 yAxis={{
                   left: {
                     granularityEnabled: true,
-                    granularity: 5,
-                    labelCount: 20,
+             
+                    labelCount: 15,
+                    labelCountForce: true
                   },
                   right: {
                     granularityEnabled: true,
-                    granularity: 5,
-                    labelCount: 20,
+                    labelCount: 15,
+                    labelCountForce: true
                   },
                 }}
               />
@@ -224,14 +226,10 @@ const CandleChartDemo = () => {
                 yAxis={{
                   left: {
                     granularityEnabled: true,
-                    granularity: 5,
-                    labelCount: 20,
                     centerAxisLabels: true,
                   },
                   right: {
                     granularityEnabled: true,
-                    granularity: 5,
-                    labelCount: 20,
                     centerAxisLabels: true,
                   },
                 }}
