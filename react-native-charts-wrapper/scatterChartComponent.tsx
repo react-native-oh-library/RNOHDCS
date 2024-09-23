@@ -44,35 +44,6 @@ const ScatterChartDemo = () => {
     <Tester>
       <ScrollView style={{marginBottom: 70}}>
         <TestSuite name="散点图(barChart和lineChart类型图表的公共属性)">
-          <TestCase itShould="props:AutoScaleMinMaxEnabled  是否设置Y轴的自动缩放标记">
-            <View style={{height: 300}}>
-              <ScatterChart
-                style={styles.chart}
-                data={{
-                  dataSets: [
-                    {
-                      label: 'demo',
-                      values: data,
-                      config: {color: processColor('#4f4'), visible: true},
-                    },
-                    {
-                      label: 'demo2',
-                      values: data2,
-                      config: {color: processColor('#f4f')},
-                    },
-                  ],
-                }}
-                yAxis={{left:{axisMaximum:200,axisMinimum:0}}}
-                touchEnabled={true}
-                scaleEnabled={true}
-                scaleXEnabled={true}
-                scaleYEnabled={true}
-                autoScaleMinMaxEnabled={true}
-              />
-            </View>
-          </TestCase>
-        </TestSuite>
-        <TestSuite name="散点图(barChart和lineChart类型图表的公共属性)">
           <TestCase itShould="props:scaleEnabled true 是否启用缩放 scaleXEnabled true是否启用x轴缩放,其他用例均覆盖false的情况">
             <View style={{height: 300}}>
               <ScatterChart

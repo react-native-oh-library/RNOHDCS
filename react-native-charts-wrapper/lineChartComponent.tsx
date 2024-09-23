@@ -432,7 +432,7 @@ const lineChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="LineChart 基础折线图(data:数据)">
-          <TestCase itShould="Props:config(drawVerticalHighlightIndicator false) 禁用垂直突出显示指示器。如果禁用，则不绘制指示器。其他高亮用例已覆盖为true的情况">
+          <TestCase itShould="Props:config(drawVerticalHighlightIndicator false) 禁用垂直突出显示指示器。水平突出显示器会生效drawHorizontalHighlightIndicator，高亮线为横向">
             <View style={{ width: '100%', height: 300 }}>
               <LineChart
                 style={styles.chart}
@@ -441,7 +441,7 @@ const lineChartDemo = () => {
                     {
                       label: 'demo',
                       values: data,
-                      config: { drawVerticalHighlightIndicator: false, drawHighlightIndicators: false }
+                      config: { drawVerticalHighlightIndicator: false, drawHorizontalHighlightIndicator:true}
                     },
                   ],
                 }}
@@ -459,7 +459,7 @@ const lineChartDemo = () => {
           </TestCase>
         </TestSuite>
         <TestSuite name="LineChart 基础折线图(data:数据)">
-          <TestCase itShould="Props:config(drawHorizontalHighlightIndicator) 启用水平突出显示指示器。如果禁用，则不绘制指示器。其他高亮用例已覆盖为true的情况 ">
+          <TestCase itShould="Props:config(drawHorizontalHighlightIndicator false) 启用水平突出显示指示器。垂直突出显示器会生效drawVerticalHighlightIndicator，高亮线为纵向 ">
             <View style={{ width: '100%', height: 300 }}>
               <LineChart
                 style={styles.chart}
@@ -468,7 +468,7 @@ const lineChartDemo = () => {
                     {
                       label: 'demo',
                       values: data,
-                      config: { drawHorizontalHighlightIndicator: false, drawHighlightIndicators: false }
+                      config: { drawVerticalHighlightIndicator: true, drawHorizontalHighlightIndicator:false}
                     },
                   ],
                 }}
@@ -522,7 +522,7 @@ const lineChartDemo = () => {
                     {
                       label: 'demo',
                       values: data,
-                      config: { drawFilled: true, fillAlpha: 0.2, fillColor: processColor('#4f4') }
+                      config: { drawFilled: true, fillAlpha: 0.8, fillColor: processColor('#4f4') }
                     },
                   ],
                 }}
@@ -542,7 +542,7 @@ const lineChartDemo = () => {
           </TestCase>
         </TestSuite>
         <TestSuite name="LineChart 基础折线图(data:数据)">
-          <TestCase itShould="Props:config(fillFormatter #4f4) 填充 drawFilled:true,fillColor: processColor(' #d41') ">
+          <TestCase itShould="Props:config(fillFormatter  #d41) 填充 drawFilled:true,fillColor: processColor(' #d41') ">
             <View style={{ width: '100%', height: 300 }}>
               <LineChart
                 style={styles.chart}
@@ -551,7 +551,7 @@ const lineChartDemo = () => {
                     {
                       label: 'demo',
                       values: data,
-                      config: { drawFilled: true, fillAlpha:  0.2, fillColor: processColor('#d41') }
+                      config: { drawFilled: true, fillAlpha:  0.8, fillColor: processColor('#d41') }
                     },
                   ],
                 }}
