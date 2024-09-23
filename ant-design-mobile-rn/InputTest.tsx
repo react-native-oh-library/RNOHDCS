@@ -86,13 +86,13 @@ export default () => {
           <View>
             <TextArea
               rows={6}
-              autoSize={false}
+              // autoSize={false}
               placeholder="固定行数 row={6}"
             />
           </View>
           <Input.TextArea
             rows={2}
-            autoSize={false}
+            // autoSize={false}
             placeholder="固定行数 row={2}"
           />
         </TestCase>

@@ -123,6 +123,22 @@ export default () => {
           </Item>
         </List>
       </TestCase>
+      <TestCase itShould="list align 居中对齐" tags={['C_API']}>
+        <List>
+          <Item
+            wrap
+            align="top"
+            extra={
+              <View>
+                内容内容
+                <Brief>辅助文字内容</Brief>
+              </View>
+            }
+          >
+            居中对齐
+          </Item>
+        </List>
+      </TestCase>
       <TestCase itShould="list align 底部对齐" tags={['C_API']}>
         <List>
           <Item

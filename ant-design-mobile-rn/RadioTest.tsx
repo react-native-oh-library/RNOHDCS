@@ -36,8 +36,8 @@ export default () => {
     <TestSuite name="RadioTest">
       <TestCase itShould="Radio defaultChecked={true}, defaultChecked={false}" tags={['C_API']}>
         <List renderHeader="基本用法">
-          <List.Item thumb={<Radio defaultChecked={true}>Radio</Radio>} />
-          <List.Item thumb={<Radio defaultChecked={false}>Radio</Radio>} />
+          <List.Item thumb={<Radio defaultChecked={true}>defaultChecked=true</Radio>} />
+          <List.Item thumb={<Radio defaultChecked={false}>defaultChecked=false</Radio>} />
         </List>
       </TestCase>
       <TestCase itShould="Radio checked={true}, checked={false}" tags={['C_API']}>
