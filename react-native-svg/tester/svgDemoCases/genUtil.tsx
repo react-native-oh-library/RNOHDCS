@@ -176,12 +176,20 @@ export function genTransformProps(): CaseParams[] {
             showOtherProps: true
         },
         {
-            key: 'originx',
-            values:['10', '20', '30']
+            key: 'originX',
+            values:['10', '20', '30'],
+            othersProps: {
+                rotation: '45'
+            },
+            showOtherProps: true
         },
         {
-            key: 'originy',
-            values:['10', '20', '30']
+            key: 'originY',
+            values:['10', '20', '30'],
+            othersProps: {
+                rotation: '45'
+            },
+            showOtherProps: true
         },
         {
             key: 'scale',
