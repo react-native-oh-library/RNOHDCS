@@ -42,7 +42,7 @@ import {
   ReadSignature,
   Undo,
   Redo
-} from './signatureCanvasDemo';
+} from './tester';
 const Stack = createStackNavigator();
 function HomePage({navigation}) {
   return (
