@@ -1,10 +1,10 @@
 import { Text, View, TouchableHighlight, Platform, TextInput, ScrollView } from 'react-native';
-import { LogicalTestCase, TestSuite, TestCase as _TestCase, Tester } from '@rnoh/testerino';
+import { LogicalTestCase, TestSuite, TestCase, Tester } from '@rnoh/testerino';
 import { SmartManualTestCaseProps } from '@rnoh/testerino/src/react-native/ManualTestCase';
 import {
-    MemoryRouter as Router, Outlet, useRoutes, useNavigate, useOutlet, Route, Routes, Navigate, useParams, useLocation
+    MemoryRouter as Router, Outlet, useMatch, useInRouterContext, NavigationType, useOutletContext, useHref, useAsyncValue, useAsyncError, parsePath, useNavigationType, useRoutes, useNavigate, useOutlet, Route, Routes, Navigate, useParams, useLocation
 } from "react-router-dom";
-import React from 'react';
+import React, { useState } from 'react';
 
 type TesterTag = 'dev';
 
@@ -48,105 +48,6 @@ const Button = ({ label, onPress }: { onPress: () => void; label: string }) => {
     );
 }
 
-const prepareHarmonySkipProp = (
-    skipProp: TesterHarmonySkipProp,
-): string | boolean => {
-    if (typeof skipProp === 'string' || typeof skipProp === 'boolean') {
-        return skipProp;
-    } else {
-        return 'rnohArchitecture' in Platform.constants &&
-            Platform.constants.rnohArchitecture === 'C_API'
-            ? skipProp?.cAPI
-            : skipProp?.arkTS;
-    }
-}
-
-const prepareSkipProp = (skipProp: TesterSkipProp | undefined) => {
-    return skipProp
-        ? typeof skipProp === 'string'
-            ? skipProp
-            : Platform.select({
-                android: skipProp?.android,
-                harmony: prepareHarmonySkipProp(skipProp?.harmony),
-            })
-        : undefined;
-}
-
-const TestCase = {
-    Example: ({
-        itShould,
-        children,
-        skip,
-        tags,
-        modal,
-    }: {
-        itShould: string;
-        children: any;
-        modal?: boolean;
-        skip?: TesterSkipProp;
-        tags?: TesterTag[];
-    }) => {
-        return (
-            <_TestCase
-                itShould={itShould}
-                modal={modal}
-                tags={tags}
-                skip={prepareSkipProp(skip)}>
-                {children}
-            </_TestCase>
-        );
-    },
-    Manual: <TState = undefined>({
-        itShould,
-        skip,
-        tags,
-        modal,
-        initialState,
-        arrange,
-        assert,
-    }: {
-        itShould: string;
-        skip?: TesterSkipProp;
-        tags?: TesterTag[];
-        modal?: boolean;
-        initialState: TState;
-        arrange: SmartManualTestCaseProps<TState>['arrange'];
-        assert: SmartManualTestCaseProps<TState>['assert'];
-    }) => {
-        return (
-            <_TestCase
-                itShould={itShould}
-                modal={modal}
-                tags={tags}
-                skip={prepareSkipProp(skip)}
-                initialState={initialState}
-                arrange={arrange}
-                assert={assert}
-            />
-        );
-    },
-    Logical: ({
-        itShould,
-        skip,
-        tags,
-        fn,
-    }: {
-        itShould: string;
-        skip?: TesterSkipProp;
-        tags?: TesterTag[];
-        fn: React.ComponentProps<typeof LogicalTestCase>['fn'];
-    }) => {
-        return (
-            <_TestCase
-                itShould={itShould}
-                skip={prepareSkipProp(skip)}
-                tags={tags}
-                fn={fn}
-            />
-        );
-    },
-};
-
 const Home = () => {
     const navigate = useNavigate();
     return (
@@ -155,8 +56,8 @@ const Home = () => {
             <Button label="To Login by navigate(/Login)" onPress={() => {
                 navigate("/Login");
             }} />
-            <Button label="To Login by navigate(/Index)" onPress={() => {
-                navigate("/Index");
+            <Button label="To Login by navigate(/Index1)" onPress={() => {
+                navigate("/Index1");
             }} />
             <Button label="Show Tasks by navigate(/Detail)" onPress={() => {
                 navigate("/Detail", {
@@ -176,15 +77,32 @@ const Login = () => {
     );
 };
 
-const Index = () => {
+const Index1 = () => {
     return (
-        <View><Text>Index路由内容</Text></View>
+        <View>
+            <Text>Index路由内容</Text>
+        </View>
+    );
+};
+
+const Index = () => {
+    const [count, setCount] = useOutletContext();
+    const increment = () => setCount(2);
+    return (
+        <View>
+            <Text>Index路由内容</Text>
+            <Button label="useOutletContext" onPress={increment} />
+            <Text>{count}</Text>
+        </View>
     );
 };
 
 const Detail = () => {
     return (
-        <View><Text>Detail路由内容</Text></View>
+        <View style={{ display: 'flex' }}>
+            <Text>Detail路由内容</Text>
+            <Text>{`-----${useInRouterContext()}`}</Text>
+        </View>
     );
 };
 
@@ -212,8 +130,8 @@ const GetRoutes = () => {
                     element: <Login />
                 },
                 {
-                    path: '/Index',
-                    element: <Index />
+                    path: '/Index1',
+                    element: <Index1 />
                 },
                 {
                     path: '/Detail',
@@ -228,6 +146,7 @@ const GetRoutes = () => {
 const UseOutletHome = (props: any) => {
     const navigate = useNavigate();
     const outlet = useOutlet();
+    const [count, setCount] = React.useState(0);
     return (
         <View>
             <Text>Home</Text>
@@ -244,7 +163,7 @@ const UseOutletHome = (props: any) => {
                     preventScrollReset: true,
                 });
             }} />
-            <Outlet />
+            <Outlet context={[count, setCount]} />
             <Text>当前激活子路由内容为：</Text>
             {props.parentState && (outlet)}
         </View>
@@ -287,14 +206,186 @@ const LocationTest = () => {
     );
 };
 
+
+const Users = () => {
+    const { id } = useParams();
+    return (
+        <View>
+            <Text>User路由内容</Text><Text>{`----------ID=${id}-------------`}</Text>
+        </View>
+
+    );
+};
+
+const Users2 = () => {
+    const { id } = useParams();
+    return (
+        <View><Text>User2路由内容</Text><Text>{`----------ID=${id}-------------`}</Text></View>
+
+    );
+};
+const LayoutPage = () => {
+    return useRoutes([
+        {
+            path: "/",
+            element: <Navigation />,
+            children: [
+
+                {
+                    path: '/Users',
+                    element: <Users />
+                },
+                {
+                    path: '/Users2',
+                    element: <Users2 />
+                },
+            ]
+        }
+    ]);
+}
+
+const Navigation = () => {
+    const navigate = useNavigate();
+    return (
+        <View style={{ display: 'flex', justifyContent: 'flex-start' }}>
+            <Text>Navigation</Text>
+            <Button label="Users组件跳转" onPress={() => {
+                navigate("/Users");
+            }} />
+            <Button label="Users2组件跳转" onPress={() => {
+                navigate("/Users2");
+            }} />
+            <Outlet />
+        </View>
+    );
+};
+
+function MatchPath({ path, Comp }) {
+    let match = useMatch(path);
+    return match ? <Comp {...match} /> : null;
+}
+
+const Users1 = () => {
+    return (
+        <View>
+            <Text>路由内容</Text>
+            <Text>{`type=${useNavigationType()}`}</Text>
+            <Text>{`Pop=${NavigationType.Pop}`}</Text>
+            <Text>{`Pop=${NavigationType.Push}`}</Text>
+            <Text>{`Pop=${NavigationType.Replace}`}</Text>
+        </View>
+
+    );
+};
+
+const Users4 = ({ to }: { to: string }) => {
+    return <View>
+        <Text>{useHref(to)}</Text>
+    </View>
+}
+
+const TypePage = () => {
+    return useRoutes([
+        {
+            path: "/",
+            element: <NavigationTypePage />,
+            children: [
+
+                {
+                    path: '/Users1',
+                    element: <Users1 />
+                },
+
+                {
+                    path: '/Users4',
+                    element: <Users4 to='Users1' />
+                },
+            ]
+        },
+        {
+
+        }
+    ]);
+}
+
+const NavigationTypePage = () => {
+    const navigate = useNavigate();
+    return (
+        <View style={{ display: 'flex', justifyContent: 'flex-start' }}>
+            <Text>Navigation</Text>
+            <Button label="Navigation组件跳转" onPress={() => {
+                navigate("/Users1");
+            }} />
+            <Outlet />
+        </View>
+    );
+};
+
+const Users6 = () => {
+    const pares = parsePath('/Users6')
+    const variants = useAsyncValue() as string;
+    const error = useAsyncError();
+    return (
+        <View>
+            <Text>路由名称</Text>
+            <Text>{`----------parsePath=${pares.pathname}-------------`}</Text>
+            <Text>{`----------variants=${variants}-------------`}</Text>
+            <Text>{`----------error=${error}-------------`}</Text>
+        </View>
+
+    );
+};
+
+const HrefView = () => {
+    return useRoutes([
+        {
+            path: "/",
+            element: <HrefPage />,
+            children: [
+
+                {
+                    path: '/Users1',
+                    element: <Users1 />
+                },
+                {
+                    path: '/Users4',
+                    element: <Users4 to='Users1' />
+                },
+                {
+                    path: '/Users6',
+                    element: <Users6 />
+                },
+            ]
+        },
+        {
+
+        }
+    ]);
+}
+
+const HrefPage = () => {
+    const navigate = useNavigate();
+    return (
+        <View style={{ display: 'flex', justifyContent: 'flex-start' }}>
+            <Text>Navigation</Text>
+            <Button label="模拟路径" onPress={() => {
+                navigate("/Users4");
+            }} />
+            <Button label="捕获路径" onPress={() => {
+                navigate("/Users6");
+            }} />
+            <Outlet />
+        </View>
+    );
+};
+
+
 export default function ReactRouterDomTest() {
-
-
     return (
         <ScrollView>
             <Tester>
                 <TestSuite name="ReactRouterDomTest">
-                    <TestCase.Manual
+                    <TestCase
                         itShould="useRoutes and useNavigate "
                         initialState={{
                             changeStatus: false
@@ -331,9 +422,9 @@ export default function ReactRouterDomTest() {
                         assert={({ expect, state }) => {
                             expect(state.changeStatus).to.be.true;
                         }}>
-                    </TestCase.Manual>
+                    </TestCase>
                     <View style={{ height: 30 }}></View>
-                    <TestCase.Manual
+                    <TestCase
                         itShould="MemoryRouter"
                         initialState={{
                             changeStatus: false
@@ -358,10 +449,10 @@ export default function ReactRouterDomTest() {
                         assert={({ expect, state }) => {
                             expect(state.changeStatus).to.be.true;
                         }}>
-                    </TestCase.Manual>
+                    </TestCase>
                     <View style={{ height: 30 }}></View>
-                    <TestCase.Manual
-                        itShould="UseOutlet"
+                    <TestCase
+                        itShould="UseOutlet and  useOutletContext and useInRouterContext"
                         initialState={{
                             changeStatus: false
                         }}
@@ -387,10 +478,10 @@ export default function ReactRouterDomTest() {
                         assert={({ expect, state }) => {
                             expect(state.changeStatus).to.be.true;
                         }}>
-                    </TestCase.Manual>
+                    </TestCase>
 
                     <View style={{ height: 30 }}></View>
-                    <TestCase.Manual
+                    <TestCase
                         itShould="Outlet"
                         initialState={{
                             changeStatus: false
@@ -432,10 +523,10 @@ export default function ReactRouterDomTest() {
                         assert={({ expect, state }) => {
                             expect(state.changeStatus).to.be.true;
                         }}>
-                    </TestCase.Manual>
+                    </TestCase>
 
                     <View style={{ height: 30 }}></View>
-                    <TestCase.Manual
+                    <TestCase
                         itShould="Navigate"
                         initialState={{
                             changeStatus: false
@@ -491,9 +582,9 @@ export default function ReactRouterDomTest() {
                         assert={({ expect, state }) => {
                             expect(state.changeStatus).to.be.true;
                         }}>
-                    </TestCase.Manual>
+                    </TestCase>
                     <View style={{ height: 30 }}></View>
-                    <TestCase.Manual
+                    <TestCase
                         itShould="useLocation"
                         initialState={{
                             changeStatus: false
@@ -535,8 +626,8 @@ export default function ReactRouterDomTest() {
                         assert={({ expect, state }) => {
                             expect(state.changeStatus).to.be.true;
                         }}>
-                    </TestCase.Manual>
-                    <TestCase.Manual
+                    </TestCase>
+                    <TestCase
                         itShould="Routes and Route"
                         initialState={{
                             changeStatus: false
@@ -545,7 +636,7 @@ export default function ReactRouterDomTest() {
                             return (
                                 <Router>
                                     <Routes>
-                                        <Route path="/" element={<RouteDetail />}>
+                                        <Route element={<RouteDetail />}>
                                         </Route>
                                         <Route path="/Index" element={<RouteIndex />}></Route>
                                     </Routes>
@@ -561,7 +652,61 @@ export default function ReactRouterDomTest() {
                         assert={({ expect, state }) => {
                             expect(state.changeStatus).to.be.true;
                         }}>
-                    </TestCase.Manual>
+                    </TestCase>
+                    <TestCase
+                        itShould="useNavigate and useParams "
+                        initialState={{
+                            changeStatus: false
+                        }}
+                        arrange={({ setState, state }) => {
+                            return (
+                                <Router>
+                                    <LayoutPage></LayoutPage>
+                                    <Routes>
+                                        <Route
+                                            path=":teamId"
+                                            element={<Team />}
+                                        />
+                                    </Routes>
+                                </Router>
+                            );
+                        }}
+                        assert={({ expect, state }) => {
+                            expect(state.changeStatus).to.be.true;
+                        }}>
+                    </TestCase>
+                    <TestCase
+                        itShould="navigationType and useNavigationType"
+                        initialState={{
+                            changeStatus: false
+                        }}
+                        arrange={({ setState, state }) => {
+                            return (
+                                <Router>
+                                    <TypePage></TypePage>
+                                </Router>
+                            );
+                        }}
+                        assert={({ expect, state }) => {
+                            expect(state.changeStatus).to.be.true;
+                        }}>
+                    </TestCase>
+                    <TestCase
+                        itShould="useHref"
+                        initialState={{
+                            changeStatus: false
+                        }}
+                        arrange={({ setState, state }) => {
+                            return (
+                                <Router>
+                                    <HrefView></HrefView>
+                                </Router>
+                            );
+                        }}
+                        assert={({ expect, state }) => {
+                            expect(state.changeStatus).to.be.true;
+                        }}>
+                    </TestCase>
                 </TestSuite>
             </Tester>
         </ScrollView>
