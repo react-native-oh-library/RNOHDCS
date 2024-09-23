@@ -103,27 +103,6 @@ const BarChartDemo = () => {
         </TestSuite>
 
         <TestSuite name="barChart 基础柱状图:图例(legend)">
-          <TestCase itShould="Props:legend(text：图例文本为dataSets中的label),图例文本">
-            <View style={{ width: '100%', height: 300 }}>
-              <BarChart
-                style={styles.chart}
-                data={{
-                  dataSets: [
-                    {
-                      label: 'legend',
-                      values: data
-                    },
-                  ],
-                }}
-                legend={{
-                  enabled: true,
-                }}
-              />
-            </View>
-          </TestCase>
-        </TestSuite>
-
-        <TestSuite name="barChart 基础柱状图:图例(legend)">
           <TestCase itShould="Props:legend(enabled:false),是否设置图表图例部件">
             <View style={{ width: '100%', height: 300 }}>
               <BarChart
