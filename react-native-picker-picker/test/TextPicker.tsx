@@ -1,8 +1,7 @@
 import * as React from "react";
 import { Picker } from "@react-native-picker/picker";
 import { TestCase, TestSuite, Tester } from '@rnoh/testerino';
-import { ScrollView, Switch, Text, View } from "react-native"
-import { Button } from "../components";
+import { ScrollView, Switch, Text, View, Button } from "react-native"
 
 export const PickerExample = () => {
 
@@ -49,7 +48,7 @@ const SelectedValueTest = () => {
   return (
     <View>
       <Button
-        label="click to change selectedValue of this Picker"
+        title="click to change selectedValue of this Picker"
         onPress={() => {
           setSelected(selected === 'js' ? 'jave' : 'js')
         }}
