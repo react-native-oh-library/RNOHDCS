@@ -356,7 +356,6 @@ const AddonErrorTest = (props: {
                         disableFocus={disableFocus}
                         resizeMode={"contain"}
                         onError={(err: any) => {
-                            Alert.alert("12333")
                             setError(JSON.stringify(err))
                         }}
                         style={{ flex: 1 }}
@@ -366,6 +365,67 @@ const AddonErrorTest = (props: {
             </View>
             <View style={{ marginTop: 20, flexDirection: "row" }}>
                 <Button title={"展示video"} onPress={addshow} />
+            </View>
+
+        </View>
+
+    );
+
+}
+const AddMenuOnEndTest = (props: {
+    setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>;
+    disableFocus: boolean;
+}) => {
+    const { disableFocus, setDisableFocus } = props
+
+    const videoref = useRef<React.ElementRef<VideoComponentType>>(null);
+    const [paused, setPaused] = useState(true)
+    const [show, setShow] = useState(false)
+    const addshow = () => {
+        setShow(!show)
+    }
+    const addRepeat = () => {
+        setPaused(!paused)
+    }
+    return (
+
+        <View style={{
+            height: 220,
+            width: "100%",
+            overflow: 'hidden',
+            alignItems: "center"
+
+        }}>
+            <View style={{
+                height: 150,
+                width: 150,
+                overflow: 'hidden',
+                justifyContent: 'center',
+
+            }}>
+                {show ?
+                    <RNCVideo
+                        ref={videoref}
+                        source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
+                        controls={true}
+                        repeat={false}
+                        paused={paused}
+                        disableFocus={disableFocus}
+                        resizeMode={"contain"}
+                        style={{ flex: 1 }}
+                        onEnd={() => {
+                            console.log("onEnd已触发")
+                            Alert.alert("onEnd已触发")
+                        }}
+                    />
+                    : null}
+
+
+            </View>
+            <View style={{ marginTop: 20, flexDirection: "row" }}>
+                <Button title={"展示video"} onPress={addshow} />
+                <Button title={paused ? "播放" : "暂停"} onPress={addRepeat} />
             </View>
 
         </View>
@@ -855,67 +915,7 @@ const AddMenuOnBufferTest = (props: {
 
 }
 
-const AddMenuOnEndTest = (props: {
-    setState: React.Dispatch<React.SetStateAction<boolean>>;
-    setDisableFocus: React.Dispatch<React.SetStateAction<boolean>>;
-    disableFocus: boolean;
-}) => {
-    const { disableFocus, setDisableFocus } = props
 
-    const videoref = useRef<React.ElementRef<VideoComponentType>>(null);
-    const [paused, setPaused] = useState(true)
-    const [show, setShow] = useState(false)
-    const addshow = () => {
-        setShow(!show)
-    }
-    const addRepeat = () => {
-        setPaused(!paused)
-    }
-    return (
-
-        <View style={{
-            height: 220,
-            width: "100%",
-            overflow: 'hidden',
-            alignItems: "center"
-
-        }}>
-            <View style={{
-                height: 150,
-                width: 150,
-                overflow: 'hidden',
-                justifyContent: 'center',
-
-            }}>
-                {show ?
-                    <RNCVideo
-                        ref={videoref}
-                        source={{ uri: "https://971-cn-north-4.cdn-vod.huaweicloud.com/asset/c726f001f9b6c33483dc694002fd5759/09dff810b88651acd29c49cbcec21079.mp4" }}
-                        controls={true}
-                        repeat={false}
-                        paused={paused}
-                        disableFocus={disableFocus}
-                        resizeMode={"contain"}
-                        style={{ flex: 1 }}
-                        onEnd={() => {
-                            console.log("onEnd已触发")
-                            Alert.alert("onEnd已触发")
-                        }}
-                    />
-                    : null}
-
-
-            </View>
-            <View style={{ marginTop: 20, flexDirection: "row" }}>
-                <Button title={"展示video"} onPress={addshow} />
-                <Button title={paused ? "播放" : "暂停"} onPress={addRepeat} />
-            </View>
-
-        </View>
-
-    );
-
-}
 
 
 const AddMenuSeekTest = (props: {
@@ -944,7 +944,7 @@ const AddMenuSeekTest = (props: {
     return (
 
         <View style={{
-            height: 220,
+            height: 250,
             width: "100%",
             overflow: 'hidden',
             alignItems: "center"
@@ -1003,7 +1003,7 @@ const AddMenuOnProgressTest = (props: {
     return (
 
         <View style={{
-            height: 220,
+            height: 250,
             width: "100%",
             overflow: 'hidden',
             alignItems: "center"
