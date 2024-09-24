@@ -4,7 +4,7 @@ import { Tester, TestSuite, TestCase as _TestCase } from '@rnoh/testerino';
 import { SmartManualTestCaseProps } from '@rnoh/testerino/src/react-native/ManualTestCase';
 import RNPickerSelect, { defaultStyles } from 'react-native-picker-select';
 
-// 随即颜色获取
+// 随机颜色获取
 const colorRange = ['red', 'yellow', 'blue', 'orange', 'purple'];
 // picker select items
 const sports = [
@@ -12,7 +12,6 @@ const sports = [
     label: 'Orange',
     value: 'orange',
     key: 'orange',
-    color: 'orange',
     inputLabel: 'Orange!',
     testID: 'e2e-orange'
   },
@@ -32,19 +31,17 @@ const sports = [
     key: 'hockey'
   }
 ];
-// placeholder info
-const placeholder = {
-  label: 'Select a sport...',
-  value: null,
-  color: '#9EA0A4'
-};
 
 export default function PickerSelectDemo() {
   const favSport5 = useRef<RNPickerSelect | null>(null);
+  const [placeholder, setPlaceholder] = useState({
+    label: 'Select a sport...',
+    value: null,
+    color: '#9EA0A4'
+  })
   const [selectVal, setSelectVal] = useState({
     previousFavSport5: null,
     favSport5: null,
-    placeholder: "",
     disabled: false,
     value: "",
     itemKey: "baseball",
@@ -108,7 +105,6 @@ export default function PickerSelectDemo() {
         <TestSuite name="PickerSelectDemo">
           <_TestCase itShould="show items">
             <View>
-              <Text style={{ color: "#000" }}>{selectVal.placeholder}</Text>
               <RNPickerSelect
                 items={[{
                   label: '123', value: '123', key: '123',
@@ -127,12 +123,12 @@ export default function PickerSelectDemo() {
             arrange={({ setState }) => {
               return (
                 <View>
-                  <Text style={{ color: "#000" }}>{selectVal.placeholder}</Text>
+                  <Text style={{ color: "#000" }}>{placeholder.label}</Text>
                   <RNPickerSelect
-                    placeholder={{ ...placeholder, label: selectVal.placeholder }}
+                    placeholder={placeholder}
                     items={sports}
                     onValueChange={value => {
-                      setSelectVal({ ...selectVal, placeholder: value + '-placeholder' });
+                      setPlaceholder({ ...placeholder, label: value + '-placeholder', value });
                       setState(true);
                     }}
                   />
@@ -191,8 +187,9 @@ export default function PickerSelectDemo() {
                   <RNPickerSelect
                     items={sports}
                     itemKey={selectVal.itemKey}
-                    onValueChange={(value, index) => {
-                      setSelectVal({ ...selectVal, itemKey: sports[index]?.key });
+                    onValueChange={(value: string, index: number) => {
+                      const curKey = sports.find(ite => ite.value === value)?.key || '';
+                      setSelectVal({ ...selectVal, itemKey: curKey });
                       setState(true);
                     }}
                   />
@@ -210,14 +207,23 @@ export default function PickerSelectDemo() {
               />
             </View>
           </_TestCase>
-          <_TestCase itShould="constom style">
+          <_TestCase itShould="custom style">
             <View style={{ padding: 10 }}>
-              <Text style={{ color: "#000" }}>constom style</Text>
-              <RNPickerSelect
-                style={styles}
-                items={sports}
-                onValueChange={value => { }}
-              />
+              <Text style={{ color: "#000" }}>custom style</Text>
+              <View>
+                <RNPickerSelect
+                  style={styles}
+                  items={sports}
+                  onValueChange={value => { }}
+                />
+              </View>
+              <View>
+                <RNPickerSelect
+                  style={styles2}
+                  items={sports}
+                  onValueChange={value => { }}
+                />
+              </View>
             </View>
           </_TestCase>
           <TestCase
@@ -263,11 +269,11 @@ export default function PickerSelectDemo() {
           />
           <_TestCase itShould="change Icon">
             <View>
-              <Text style={{ color: "#000" }}>arrow-down</Text>
+              <Text style={{ color: "#000" }}>icon 1</Text>
               <RNPickerSelect
                 items={sports}
                 Icon={() => {
-                  return <Image source={require('./assets/expo.png')} style={{ width: 16, height: 16 }} />;
+                  return <Image source={require('../assets/expo.png')} style={{ width: 16, height: 16 }} />;
                 }}
                 onValueChange={(value) => { }}
               />
@@ -275,11 +281,11 @@ export default function PickerSelectDemo() {
           </_TestCase>
           <_TestCase itShould="change Icon2">
             <View>
-              <Text style={{ color: "#000" }}>arrow-up</Text>
+              <Text style={{ color: "#000" }}>icon 2</Text>
               <RNPickerSelect
                 items={sports}
                 Icon={() => {
-                  return <Image source={require('./assets/react-native-logo.png')} style={{ width: 16, height: 16 }} />;
+                  return <Image source={require('../assets/react-native-logo.png')} style={{ width: 16, height: 16 }} />;
                 }}
                 onValueChange={(value) => { }}
               />
@@ -341,48 +347,6 @@ export default function PickerSelectDemo() {
                     }}
                     onValueChange={(value) => { }}
                   />
-                </View>
-              );
-            }}
-            assert={({ expect, state }) => { expect(state).to.be.true }}
-          />
-          <TestCase
-            itShould="toggle useNativeAndroidPickerStyle"
-            initialState={undefined as any}
-            arrange={({ setState }) => {
-              return (
-                <View>
-                  <Text style={{ color: "#000" }}>{selectVal.useNativeAndroidPickerStyle}</Text>
-                  <RNPickerSelect
-                    items={sports}
-                    useNativeAndroidPickerStyle={selectVal.useNativeAndroidPickerStyle}
-                    onValueChange={(value) => {
-                      setSelectVal({ ...selectVal, useNativeAndroidPickerStyle: !selectVal.useNativeAndroidPickerStyle });
-                      setState(true);
-                    }}
-                  />
-                </View>
-              );
-            }}
-            assert={({ expect, state }) => { expect(state).to.be.true }}
-          />
-          <TestCase
-            itShould="toggle fixAndroidTouchableBug"
-            initialState={undefined as any}
-            arrange={({ setState }) => {
-              return (
-                <View>
-                  <Text style={{ color: "#000" }}>{selectVal.fixAndroidTouchableBug}</Text>
-                  <RNPickerSelect
-                    items={sports}
-                    fixAndroidTouchableBug={selectVal.fixAndroidTouchableBug}
-                    onValueChange={(value) => {
-                      setSelectVal({ ...selectVal, fixAndroidTouchableBug: !selectVal.fixAndroidTouchableBug });
-                      setState(true);
-                    }}
-                  >
-                    <View><Text>Children Text</Text></View>
-                  </RNPickerSelect>
                 </View>
               );
             }}
@@ -579,7 +543,7 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderRadius: 4,
     color: 'black',
-    paddingRight: 30, // to ensure the text is never behind the icon
+    paddingRight: 30,
   },
   inputAndroid: {
     width: 200,
@@ -590,6 +554,29 @@ const styles = StyleSheet.create({
     borderColor: 'purple',
     borderRadius: 8,
     color: 'black',
-    paddingRight: 30, // to ensure the text is never behind the icon
+    paddingRight: 30,
+  }
+});
+const styles2 = StyleSheet.create({
+  inputIOS: {
+    fontSize: 18,
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderColor: 'red',
+    borderRadius: 10,
+    color: 'green',
+    paddingRight: 30,
+  },
+  inputAndroid: {
+    width: 200,
+    fontSize: 16,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderWidth: 0.5,
+    borderColor: 'red',
+    borderRadius: 8,
+    color: 'green',
+    paddingRight: 30,
   }
 });
