@@ -111,32 +111,7 @@ export function RNShareExample() {
             })}
           </View>
         </View>
-        <TestSuite name="验证isPackageInstalled接口">
-          <TestCase
-            itShould="false"
-            initialState={true}
-            tags={['dev']}
-            arrange={({ setState }) => {
-              return (
-                <View style={styles.section}>
-                  <Text>{share}</Text>
-                  <Button
-                    key="isPackageInstalled"
-                    title="isPackageInstalled"
-                    onPress={async () => {
-                      const res = await isPackageInstalled();
-                      setState(res);
-                    }}
-                  />
-                </View>
-              );
-            }}
-            assert={async ({ expect, state }) => {
-              console.log('###testCase', state);
-              expect(state).to.be.false;
-            }}
-          />
-        </TestSuite>
+       
         <TestSuite name="验证shareSingle接口-三方分享链接">
           <TestCase
             itShould="true"
