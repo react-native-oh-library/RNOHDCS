@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, Button, ScrollView, TextInput, Image } from "react-native";
-import ViewShot from "react-native-view-shot";
+import ViewShot, { releaseCapture } from "react-native-view-shot";
 import { Tester, TestCase } from '@rnoh/testerino';
 
 export default function ViewShotUpdateTest() {
@@ -13,6 +13,7 @@ export default function ViewShotUpdateTest() {
     const getSuccess = (res) => {
       console.log(res);
       setTxt(res);
+      releaseCapture(res);
       setFlag(false);
     }
     const getError = (err) => {
