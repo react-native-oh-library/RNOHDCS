@@ -1,6 +1,6 @@
 import ImageCapInset from '@react-native-oh-tpl/react-native-image-capinsets-next';
 import React, {useState} from 'react';
-import {View, StyleSheet, Text, Switch} from 'react-native';
+import {View, StyleSheet, Text, Switch, ScrollView } from 'react-native';
 import { Tester, TestCase, TestSuite } from "@rnoh/testerino";
 
 const YourImage = () => {
@@ -38,6 +38,7 @@ const YourImage = () => {
   };
 
   return (
+    <ScrollView>
     <Tester>
       <TestSuite name="react native image capinsets next">
         <TestCase itShould="react native image capinsets next load locale picture">
@@ -104,6 +105,7 @@ const YourImage = () => {
         </TestCase>
       </TestSuite>
   </Tester>
+  </ScrollView>
   );
 };
 
