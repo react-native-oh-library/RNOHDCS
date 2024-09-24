@@ -6,7 +6,7 @@ import React from 'react';
 
 export const CheckInternetConnectionScreen = () => {
     const DEFAULT_TIMEOUT = 3000;
-    const DEFAULT_PING_SERVER_URL = 'https://www.huawei.com/';
+    const DEFAULT_PING_SERVER_URL = 'https://www.baidu.com';
     const DEFAULT_HTTP_METHOD = 'HEAD';
     const DEFAULT_CUSTOM_HEADERS = {};
     const [connectStatus, setConnectStatus] = React.useState('');

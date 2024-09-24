@@ -6,7 +6,7 @@ interface Context {
 }
 
 const DummyNetworkContext = React.createContext<Context>({
-  pingUrl: 'https://www.huawei.com',
+  pingUrl: 'https://www.baidu.com',
   toggleConnection: () => {},
 });
 export default DummyNetworkContext;
