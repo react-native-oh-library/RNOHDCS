@@ -1,6 +1,6 @@
 import {useRef, useState} from 'react';
 import React, {Button, StyleSheet, View, Text} from 'react-native';
-import Camera, {CameraApi} from 'react-native-camera-kit';
+import {CameraApi, CameraType, Camera} from 'react-native-camera-kit';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
 export const zoomModeTest = () => {
@@ -19,7 +19,7 @@ export const zoomModeTest = () => {
             zoomMode === 'on' ? '开启对焦' : '关闭对焦'
           }`}>
           <Text style={styles.text}>当前zoom:{zoom}x</Text>
-          <View style={styles.view}>
+          <View>
             <Camera
               ref={cameraRef}
               style={styles.cameraPreview}
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    padding:10,
+    padding: 10,
   },
   text: {
     fontSize: 20,

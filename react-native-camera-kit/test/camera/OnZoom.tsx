@@ -1,6 +1,6 @@
 import {useRef, useState} from 'react';
 import React, {StyleSheet, View, Text} from 'react-native';
-import Camera, {CameraApi} from 'react-native-camera-kit';
+import {CameraApi, CameraType, Camera} from 'react-native-camera-kit';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
 export const onZoomTest = () => {
@@ -8,6 +8,9 @@ export const onZoomTest = () => {
   const cameraRef = useRef<CameraApi>(null);
   const onZoom = (e: any) => {
     setZoom(e.nativeEvent.zoom);
+    console.log('====================================');
+    console.log(e);
+    console.log('====================================');
   };
 
   return (
@@ -15,11 +18,12 @@ export const onZoomTest = () => {
       <TestSuite name="onZoom">
         <TestCase itShould="onZoom回调">
           <Text style={styles.text}>当前zoom:{zoom}x</Text>
-          <View style={styles.view}>
+          <View>
             <Camera
               ref={cameraRef}
               style={styles.cameraPreview}
               onZoom={onZoom}
+              zoomMode="on"
             />
           </View>
         </TestCase>

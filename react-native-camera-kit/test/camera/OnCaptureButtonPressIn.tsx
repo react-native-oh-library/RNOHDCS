@@ -1,7 +1,6 @@
 import React, {useRef, useState} from 'react';
 import {StyleSheet, Image, View} from 'react-native';
-import Camera from 'react-native-camera-kit';
-import {CameraApi, CameraType} from 'react-native-camera-kit';
+import {CameraApi, CameraType, Camera} from 'react-native-camera-kit';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
 export const OnCaptureButtonPressInTest: React.FC = (): JSX.Element => {

@@ -1,6 +1,6 @@
 import {useRef, useState} from 'react';
 import React, {Button, StyleSheet, View} from 'react-native';
-import Camera, {CameraApi} from 'react-native-camera-kit';
+import {CameraApi, CameraType, Camera} from 'react-native-camera-kit';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
 export const ScanShowFrameTest = () => {
@@ -11,7 +11,7 @@ export const ScanShowFrameTest = () => {
     <Tester>
       <TestSuite name="showFrame">
         <TestCase itShould={`${showFrame ? '显示' : '不显示'}扫描帧率`}>
-          <View style={styles.view}>
+          <View >
             <Camera
               ref={cameraRef}
               style={styles.cameraPreview}

@@ -1,7 +1,6 @@
 import React, {useRef, useState} from 'react';
 import {Text, StyleSheet, View} from 'react-native';
-import Camera from 'react-native-camera-kit';
-import {CameraApi, CameraType} from 'react-native-camera-kit';
+import {CameraApi, CameraType, Camera} from 'react-native-camera-kit';
 
 export const ScanCodeDemo: React.FC = (): JSX.Element => {
   const nativeRef = useRef<CameraApi>(null);

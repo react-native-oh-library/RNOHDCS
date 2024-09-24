@@ -1,6 +1,6 @@
 import {useRef, useState} from 'react';
 import React, {Button, StyleSheet, View, Text} from 'react-native';
-import Camera, {CameraApi, CameraType} from 'react-native-camera-kit';
+import {CameraApi, CameraType, Camera} from 'react-native-camera-kit';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
 export const CameraTypeTest = () => {
@@ -18,14 +18,12 @@ export const CameraTypeTest = () => {
           <View>
             <Text style={styles.text}>error:{errorStr}</Text>
           </View>
-          <View style={styles.view}>
-            <Camera
-              ref={cameraRef}
-              style={styles.cameraPreview}
-              cameraType={cameraType}
-              onError={onError}
-            />
-          </View>
+          <Camera
+            ref={cameraRef}
+            style={styles.cameraPreview}
+            cameraType={cameraType}
+            onError={onError}
+          />
           <View style={styles.actionBtn}>
             <Button
               title="前置相机"
@@ -46,7 +44,6 @@ export const CameraTypeTest = () => {
   );
 };
 const styles = StyleSheet.create({
-  view: {flex: 1},
   cameraPreview: {
     width: '100%',
     aspectRatio: 3 / 4,

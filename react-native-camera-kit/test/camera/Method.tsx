@@ -1,6 +1,6 @@
 import {useRef, useState} from 'react';
 import React, {StyleSheet, View, Text, Button} from 'react-native';
-import Camera, {CameraApi} from 'react-native-camera-kit';
+import {CameraApi, CameraType, Camera} from 'react-native-camera-kit';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
 export const MethodTest = () => {
@@ -12,20 +12,19 @@ export const MethodTest = () => {
     <Tester>
       <TestSuite name="Method:静态方法">
         <TestCase itShould="">
-          <View style={styles.view}>
-            <View>
-              <Text>当前相机权限状态{checkRes}</Text>
-              <Text>请求相机权限状态{reqRes}</Text>
-            </View>
-            <Camera ref={cameraRef} style={styles.cameraPreview} />
+          <View>
+            <Text>当前相机权限状态{checkRes}</Text>
+            <Text>请求相机权限状态{reqRes}</Text>
           </View>
+          <Camera ref={cameraRef} style={styles.cameraPreview} />
+
           <View style={styles.actionBtn}>
             <Button
               title="请求相机权限"
               onPress={async () => {
                 const res =
                   await cameraRef.current?.requestDeviceCameraAuthorization();
-                setReqRes( res ? '请求成功': '请求失败');
+                setReqRes(res ? '请求成功' : '请求失败');
               }}
             />
             <Button
@@ -33,7 +32,7 @@ export const MethodTest = () => {
               onPress={async () => {
                 const res =
                   await cameraRef.current?.checkDeviceCameraAuthorizationStatus();
-                setCheckRes( res ? '成功': '失败');
+                setCheckRes(res ? '成功' : '失败');
               }}
             />
           </View>
@@ -43,7 +42,6 @@ export const MethodTest = () => {
   );
 };
 const styles = StyleSheet.create({
-  view: {flex: 1},
   cameraPreview: {
     width: '100%',
     aspectRatio: 3 / 4,
