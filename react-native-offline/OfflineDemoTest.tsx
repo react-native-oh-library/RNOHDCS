@@ -15,7 +15,7 @@ export const OfflineDemoTest = () => {
                 <ReduxScreen></ReduxScreen>
                 <SagasScreen></SagasScreen>
                 <CheckInternetConnectionScreen></CheckInternetConnectionScreen>
-                <NetworkProvider pingServerUrl='https://www.huawei.com'>
+                <NetworkProvider pingServerUrl='https://www.baidu.com'>
                     <UseIsConnectedScreen></UseIsConnectedScreen>
                 </NetworkProvider>
             </View>
