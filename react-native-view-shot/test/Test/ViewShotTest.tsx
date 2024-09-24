@@ -50,8 +50,9 @@ export default function ViewShotTest() {
     const capture = () => {
       captureScreen({ width: 500, height: 200 }).then((res) => {
         FS.readFile(res, 'base64').then((data) => {
-          setScreenData(data);
+          releaseCapture(res);
           setWindowUri(res);
+          setScreenData(data);
           props.setState(res);
         })
       })
@@ -75,6 +76,7 @@ export default function ViewShotTest() {
       captureRef(myText11).then((res) => {
         setRefUri(res);
         props.setState(res);
+        releaseCapture(res);
       })
     };
 
@@ -189,6 +191,7 @@ export default function ViewShotTest() {
           setTextData(data);
           setTextUri(res);
           props.setState(res);
+          releaseCapture(res);
         })
       })
     };
@@ -216,6 +219,7 @@ export default function ViewShotTest() {
           setButtonData(data);
           setButtonUri(res);
           props.setState(res);
+          releaseCapture(res);
         })
       })
     };
@@ -241,6 +245,7 @@ export default function ViewShotTest() {
       captureRef(myText, { fileName: 'FirstCapture' }).then((res) => {
         setFirstUri(res);
         props.setState(res);
+        releaseCapture(res);
       })
     };
 
@@ -264,6 +269,7 @@ export default function ViewShotTest() {
       captureRef(myText, { fileName: 'SecondCapture' }).then((res) => {
         setSecondUri(res);
         props.setState(res);
+        releaseCapture(res);
       })
     };
 
@@ -287,6 +293,7 @@ export default function ViewShotTest() {
       captureRef(myText, { format: 'png' }).then((res) => {
         setPngUri(res);
         props.setState(res);
+        releaseCapture(res);
       })
     };
 
@@ -310,6 +317,7 @@ export default function ViewShotTest() {
       captureRef(myText, { format: 'jpg' }).then((res) => {
         setJpgUri(res);
         props.setState(res);
+        releaseCapture(res);
       })
     };
 
@@ -335,6 +343,7 @@ export default function ViewShotTest() {
           setQuality1nData(data);
           setQuality1Uri(res);
           props.setState(res);
+          releaseCapture(res);
         })
       })
     };
@@ -362,6 +371,7 @@ export default function ViewShotTest() {
           setQuality3Data(data);
           setQuality3Uri(res);
           props.setState(res);
+          releaseCapture(res);
         })
       })
     };
@@ -389,6 +399,7 @@ export default function ViewShotTest() {
           setQuality2Data(data);
           setQuality2Uri(res);
           props.setState(res);
+          releaseCapture(res);
         })
       })
     };
@@ -414,6 +425,7 @@ export default function ViewShotTest() {
       captureRef(myText4, { result: 'tmpfile' }).then((res) => {
         setResult1Uri(res);
         props.setState(res);
+        releaseCapture(res);
       })
     };
 

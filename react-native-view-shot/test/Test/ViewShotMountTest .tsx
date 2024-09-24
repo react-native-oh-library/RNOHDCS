@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, ScrollView } from "react-native";
-import ViewShot from "react-native-view-shot";
+import ViewShot, { releaseCapture } from "react-native-view-shot";
 import { Tester, TestCase } from '@rnoh/testerino';
 
 export default function ViewShotMountTest() {
@@ -12,9 +12,11 @@ export default function ViewShotMountTest() {
     const getSuccess = (res) => {
       setMountUri(res);
       props.setState(res);
+      releaseCapture(res);
+      console.log(res);
     }
     const getError = (err) => {
-      console.log(err.message);
+      console.log(err);
     }
 
     return (
