@@ -1,6 +1,6 @@
 import {useRef, useState} from 'react';
 import React, {Button, StyleSheet, View, Image} from 'react-native';
-import Camera, {CameraApi} from 'react-native-camera-kit';
+import {CameraApi, CameraType, Camera} from 'react-native-camera-kit';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
 export const ShutterPhotoSoundTest = () => {
@@ -17,7 +17,7 @@ export const ShutterPhotoSoundTest = () => {
     <Tester>
       <TestSuite name="ShutterPhotoSound">
         <TestCase itShould="是否相机快门声音">
-          <View style={styles.view}>
+          <View>
             <Camera
               ref={cameraRef}
               style={styles.cameraPreview}

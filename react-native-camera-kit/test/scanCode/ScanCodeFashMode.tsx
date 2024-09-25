@@ -1,12 +1,11 @@
 import {useRef, useState} from 'react';
 import React, {Button, StyleSheet, View} from 'react-native';
-import Camera, {CameraApi} from 'react-native-camera-kit';
-import {FlashMode} from './type';
+import {CameraApi, CameraType, Camera} from 'react-native-camera-kit';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
 export const ScanCodeFashMode = () => {
-  const [flashMode, setFlashMode] = useState<FlashMode>(
-    FlashMode.FLASH_MODE_CLOSE,
+  const [flashMode, setFlashMode] = useState<string>(
+  
   );
   const cameraRef = useRef<CameraApi>(null);
 
@@ -14,7 +13,7 @@ export const ScanCodeFashMode = () => {
     <Tester>
       <TestSuite name={`flashMode:${flashMode}`}>
         <TestCase itShould="设置闪光灯模式">
-          <View style={styles.view}>
+          <View >
             <Camera
               ref={cameraRef}
               style={styles.cameraPreview}
@@ -24,15 +23,15 @@ export const ScanCodeFashMode = () => {
           </View>
           <View style={styles.actionBtn}>
             <Button
-              title="close:关闭"
+              title="off:关闭"
               onPress={() => {
-                setFlashMode(FlashMode.FLASH_MODE_CLOSE);
+                setFlashMode('off');
               }}
             />
             <Button
-              title="always_open:常亮"
+              title="on:开启"
               onPress={() => {
-                setFlashMode(FlashMode.FLASH_MODE_ALWAYS_OPEN);
+                setFlashMode('on');
               }}
             />
           </View>

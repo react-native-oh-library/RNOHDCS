@@ -1,6 +1,6 @@
 import {useRef, useState} from 'react';
 import React, {Button, StyleSheet, View} from 'react-native';
-import Camera, {CameraApi} from 'react-native-camera-kit';
+import {CameraApi, CameraType, Camera} from 'react-native-camera-kit';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
 export const ScanScanThrottleDelayTest = () => {
@@ -11,7 +11,7 @@ export const ScanScanThrottleDelayTest = () => {
     <Tester>
       <TestSuite name="scanThrottleDelay">
         <TestCase itShould={`扫描限制延时:${scanThrottleDelay}ms`}>
-          <View style={styles.view}>
+          <View>
             <Camera
               ref={cameraRef}
               style={styles.cameraPreview}

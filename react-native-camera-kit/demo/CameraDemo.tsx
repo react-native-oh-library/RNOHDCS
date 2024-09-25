@@ -1,7 +1,6 @@
 import React, {useRef, useState} from 'react';
 import {Text, StyleSheet, View, Button} from 'react-native';
-import Camera from 'react-native-camera-kit';
-import {CameraApi, CameraType} from 'react-native-camera-kit';
+import {CameraApi, CameraType, Camera} from 'react-native-camera-kit';
 
 export const CameraDemo: React.FC = (): JSX.Element => {
   const nativeRef = useRef<CameraApi>(null);
@@ -30,7 +29,6 @@ export const CameraDemo: React.FC = (): JSX.Element => {
           ref={nativeRef}
           maxZoom={10}
           cameraType={CameraType.Back}
-          flashMode={0}
           onError={onError}
           onZoom={onZoom}
         />

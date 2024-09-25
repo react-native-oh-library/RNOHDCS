@@ -1,17 +1,17 @@
 import {useRef, useState} from 'react';
 import React, {Button, StyleSheet, View} from 'react-native';
-import Camera, {CameraApi} from 'react-native-camera-kit';
+import {CameraApi, CameraType, Camera} from 'react-native-camera-kit';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
 export const RatioOverlayTest = () => {
-  const [ratioOverlay, setRatioOverlay] = useState<string>('4:3');
+  const [ratioOverlay, setRatioOverlay] = useState<string>('16:9');
   const cameraRef = useRef<CameraApi>(null);
 
   return (
     <Tester>
       <TestSuite name={`RatioOverlay:${ratioOverlay}`}>
         <TestCase itShould="相机预览比例">
-          <View style={styles.view}>
+          <View>
             <Camera
               ref={cameraRef}
               style={styles.cameraPreview}
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   view: {flex: 1},
   cameraPreview: {
     width: '100%',
-    aspectRatio: 9 / 16,
+    height: 600,
   },
   actionBtn: {
     flexDirection: 'row',
@@ -49,9 +49,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 10,
     backgroundColor: '#000',
-    position:'absolute',
-    bottom:0,
-    zIndex:999,
-    width:'100%'
+    position: 'absolute',
+    bottom: 0,
+    zIndex: 999,
+    width: '100%',
   },
 });

@@ -1,6 +1,6 @@
 import {useRef, useState} from 'react';
 import React, {Button, StyleSheet, View} from 'react-native';
-import Camera, {CameraApi} from 'react-native-camera-kit';
+import {CameraApi, CameraType, Camera} from 'react-native-camera-kit';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
 export const ResizeModeTest = () => {
@@ -11,11 +11,8 @@ export const ResizeModeTest = () => {
     <Tester>
       <TestSuite name={`resizeMode`}>
         <TestCase itShould="相机预览模式">
-          <View style={styles.view}>
-            <Camera
-              ref={cameraRef}
-              resizeMode={resizeMode}
-            />
+          <View>
+            <Camera ref={cameraRef} resizeMode={resizeMode} />
             <View style={styles.actionBtn}>
               <Button
                 title="设置cover"
@@ -38,10 +35,6 @@ export const ResizeModeTest = () => {
 };
 const styles = StyleSheet.create({
   view: {flex: 1},
-  cameraPreview: {
-    width: '100%',
-    aspectRatio: 3 / 4,
-  },
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',

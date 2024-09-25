@@ -1,6 +1,6 @@
 import {useRef, useState} from 'react';
 import React, {Button, StyleSheet, View} from 'react-native';
-import Camera, {CameraApi} from 'react-native-camera-kit';
+import {CameraApi, CameraType, Camera} from 'react-native-camera-kit';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
 export const ScanZoomModeTest = () => {
@@ -14,7 +14,7 @@ export const ScanZoomModeTest = () => {
           itShould={`设置对焦模式:${
             zoomMode === 'on' ? '开启对焦' : '关闭对焦'
           }`}>
-          <View style={styles.view}>
+          <View>
             <Camera
               ref={cameraRef}
               style={styles.cameraPreview}

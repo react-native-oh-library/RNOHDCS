@@ -1,6 +1,6 @@
 import {useRef, useState} from 'react';
 import React, {StyleSheet, View, Text} from 'react-native';
-import Camera, {CameraApi} from 'react-native-camera-kit';
+import {CameraApi, CameraType, Camera} from 'react-native-camera-kit';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
 export const ScanOnErrorTest = () => {
@@ -14,7 +14,7 @@ export const ScanOnErrorTest = () => {
     <Tester>
       <TestSuite name="onError">
         <TestCase itShould="处理报错信息">
-          <View style={styles.view}>
+          <View>
             <Camera
               ref={cameraRef}
               style={styles.cameraPreview}
