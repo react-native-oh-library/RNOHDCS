@@ -1,6 +1,7 @@
 import { View, Text, ScrollView, TextInput, TextInputProps } from 'react-native';
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 import React, { useRef } from 'react';
+import { NavigationContainer, Page } from './Navigation';
 
 import { CustomRightIconExample } from './CustomRightIconExample';
 import { LocalDataSetExample } from './LocalDataSetExample';
@@ -29,17 +30,20 @@ import * as Icon from 'react-native-feather';
 export const DrpDemo = () => {
     return (
         <ScrollView style={{ flex: 1 }}>
-            <Tester style={{ flex: 1, marginBottom: 260 }}>
+            <Tester style={{ flex: 1 }}>
                 <TestSuite name="autoComplete dropdown">
                     {/* 本地数据 */}
-                    <TestCase itShould="LocalData">
+                    <TestCase itShould="dateSet">
+                        <LocalDataSetExample />
+                    </TestCase>
+                    <TestCase itShould="initialValue: 2">
                         <LocalDataSetExample />
                     </TestCase>
                     <TestCase itShould="renderItem">
                         <LocalDataSetExample2 />
                     </TestCase>
                     {/* Custom Icon */}
-                    <TestCase itShould="CustomRightIcon">
+                    <TestCase itShould="RightIconComponent">
                         <CustomRightIconExample />
                     </TestCase>
                     <TestCase itShould="RemoteDataSet">
@@ -67,8 +71,11 @@ export const DrpDemo = () => {
                     <TestCase itShould="ShowChevronExample">
                         <ShowChevronExample />
                     </TestCase>
-                    <TestCase itShould="CloseOnBlur">
-                        <CloseOnBlurExample />
+                    <TestCase itShould="clearOnFocus: true">
+                        <BasicDrpExample clearOnFocus={true}/>
+                    </TestCase>
+                    <TestCase itShould="clearOnFocus: false">
+                        <BasicDrpExample clearOnFocus={false}/>
                     </TestCase>
                     <TestCase itShould="CloseOnSubmit">
                         <CloseOnSubmitExample />
@@ -121,7 +128,7 @@ const InputComp = React.forwardRef((props: {}, ref) => {
 export const DrpDemo2 = () => {
     return (
         <ScrollView style={{ flex: 1 }}>
-            <Tester style={{ flex: 1, marginBottom: 300 }}>
+            <Tester style={{ flex: 1 }}>
                 <TestSuite name="autoComplete dropdown">
                     <TestCase itShould={'suggestionsListMaxHeight: 100'}>
                         <SuggestionsListExample suggestionsListMaxHeight={100}/>
@@ -145,9 +152,6 @@ export const DrpDemo2 = () => {
                     <TestCase itShould={'matchForm: start'}>
                         <MatchFormExample matchFrom='start'/>
                     </TestCase>
-                    <TestCase itShould={'Event Example'}>
-                        <EventExample/>
-                    </TestCase>
                     <TestCase itShould={'Control example'}>
                         <ControlerExample/>
                     </TestCase>
@@ -156,6 +160,15 @@ export const DrpDemo2 = () => {
                             containerStyle={{backgroundColor: 'red'}}
                             inputContainerStyle={{width: '60%'}}
                         />
+                    </TestCase>
+                    <TestCase itShould={'rightButtonsContainerStyle'}>
+                        <BasicDrpExample rightButtonsContainerStyle={{
+                                        right: 8,
+                                        height: 36,
+                                        alignSelf: 'center',
+                                        backgroundColor: 'red',
+                                        borderRadius: 10
+                        }}></BasicDrpExample>
                     </TestCase>
                     <TestCase itShould={'emptyResult'}>
                         <EmptyResultExample 
@@ -211,8 +224,33 @@ export const DrpDemo2 = () => {
                             }}
                         />
                     </TestCase>
+                    {/* <TestCase itShould={'remote data'}>
+                    <RemoteDataSetExample></RemoteDataSetExample>
+                    </TestCase> */}
                 </TestSuite>
             </Tester>
         </ScrollView>
+    )
+}
+
+export default DropDownDemo = () => {
+    return (
+        <NavigationContainer>
+            <Page name="autocomplete DropDown demo 01">
+              <DrpDemo />
+            </Page>
+            <Page name="autocomplete DropDown demo 02">
+              <DrpDemo2 />
+            </Page>
+            <Page name="autocomplete DropDown demo 03">
+              <ScrollView>
+                <Tester>
+                    <TestSuite name="Event test">
+                        <EventExample/>
+                    </TestSuite>
+                </Tester>
+              </ScrollView>
+            </Page>
+        </NavigationContainer>
     )
 }

@@ -3,7 +3,7 @@ import { Text } from 'react-native'
 import type { IAutocompleteDropdownRef, AutocompleteDropdownItem } from 'react-native-autocomplete-dropdown'
 import { AutocompleteDropdown } from 'react-native-autocomplete-dropdown'
 import { Smile } from 'react-native-feather'
-import { generateDataSet } from '../helpers'
+import { generateDataSet } from './helpers'
 
 export const CustomRightIconExample = memo(() => {
   const [selectedItem, setSelectedItem] = useState<AutocompleteDropdownItem | null>(null)
