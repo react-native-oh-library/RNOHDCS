@@ -286,7 +286,7 @@ class VoiceTest extends Component<Props, State> {
             }}></TestCase>
 
           <TestCase
-            itShould="销毁实例 Voice.destroy()"
+            itShould="销毁实例 Voice.destroy()后调用Voice.removeAllListeners"
             tags={['C_API']}
             initialState={undefined}
             arrange={({setState}: any) => (
