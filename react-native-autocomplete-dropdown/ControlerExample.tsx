@@ -3,7 +3,7 @@ import { Text, View, Button } from 'react-native'
 import type { IAutocompleteDropdownRef, AutocompleteDropdownItem } from 'react-native-autocomplete-dropdown'
 import { AutocompleteDropdown } from 'react-native-autocomplete-dropdown'
 import { Smile } from 'react-native-feather'
-import { generateDataSet } from '../helpers'
+import { generateDataSet } from './helpers'
 
 export const ControlerExample = memo(() => {
   const dropdownController = useRef<IAutocompleteDropdownRef | null>(null)
@@ -17,15 +17,13 @@ export const ControlerExample = memo(() => {
           dropdownController.current = controller
         }}
         clearOnFocus={false}
+        closeOnBlur={true}
         dataSet={dataSet}
-        suggestionsListMaxHeight={200}
-        RightIconComponent={<Smile color="#f55" />}
-        onRightIconComponentPress={() => {
-          dropdownController.current?.toggle()
-        }}
-        showChevron={false}
+        suggestionsListMaxHeight={80}
+        direction='up'
+        showChevron={true}
       />
-      <View style={{margin: 8}}>
+      <View style={{margin: 8, gap: 10}}>
         <Button title='open' onPress={() => {
           dropdownController.current?.open();
         }}></Button>
