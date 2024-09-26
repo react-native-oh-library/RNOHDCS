@@ -261,7 +261,7 @@ export const  ReactNativeCreditCardInputTest = () => {
         <TestCase
           tags={['C_API']}
           itShould="CardView中  scale 属性设置图片大小为原大小0.5">
-          <View>
+          <View style = {{height: 150}}>
               <CardView scale={0.5}/>
           </View>
         </TestCase>
