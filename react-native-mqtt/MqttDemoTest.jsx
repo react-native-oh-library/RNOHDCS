@@ -1,5 +1,5 @@
 import React from 'react';
-import { AsyncStorage, View, Button, StyleSheet, Text, TextInput } from 'react-native';
+import { AsyncStorage, View, Button, StyleSheet, Text, TextInput, ScrollView } from 'react-native';
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 import init from 'react_native_mqtt';
 
@@ -15,6 +15,7 @@ export const MqttDemoTest = () => {
     const [onChangeMessage, setOnChangeMessage] = React.useState('');
     return (
         <Tester>
+            <ScrollView>
             <TestSuite name="连接MQTT服务器">
                 <TestCase tags={['C_API']} itShould="连接MQTT服务器"
                     initialState={''}
@@ -240,6 +241,7 @@ export const MqttDemoTest = () => {
                     }}>
                 </TestCase>
             </TestSuite>
+            </ScrollView>
         </Tester>
     );
 
