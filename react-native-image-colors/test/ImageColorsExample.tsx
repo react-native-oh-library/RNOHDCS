@@ -22,6 +22,10 @@ export interface Config {
 }
 
 const imgCat = require('../assets/cat.jpg');
+const expo = require('../assets/expo.png');
+const transparentImage = require('../assets/transparent.png');
+const headersUrl =
+  'http://10.6.20.40:3000/server/weChat/getimg/jjjj?q-sign-algorithm=sha1&q-ak=AKID2vITIvKWUEj15xb2GF2d1A5mSuAC16ze&q-sign-time=1723030397%3B1723116797&q-key-time=1723030397%3B1723116797&q-header-list=host&q-url-param-list=&q-signature=197c4873221dd479a97afd0ce3201e04a34d1db3';
 const yunaUrl =
   'http://gips0.baidu.com/it/u=1690853528,2506870245&fm=3028&app=3028&f=JPEG&fmt=auto?w=1024&h=1024';
 const base =
@@ -46,7 +50,7 @@ export default function demo() {
   const [colorsKeyW, setColorsKeyW] = useState({});
 
   const [colorsHeaders, setColorsHeaders] = useState({});
-
+  const [colorsHeadersW, setColorsHeadersW] = useState({});
 
   const element = (colors: any) => {
     switch (colors.platform) {
@@ -212,11 +216,19 @@ export default function demo() {
     const result = await getColors(uri, config);
     setColorsHeaders(result);
   };
-
+  const fetchColorsHeadersW = async (uri: string, config?: Config) => {
+    const result = await getColors(uri, config);
+    setColorsHeadersW(result);
+  };
 
   const [storage, setStorage] = useState('');
   const getCache = (key: string) => {
     setStorage(JSON.stringify(cache.getItem(key) || {}));
+  };
+
+  const [storageBase, setStorageBase] = useState('');
+  const getCacheBase = (key: string) => {
+    setStorageBase(JSON.stringify(cache.getItem(key) || {}));
   };
 
   const [storageHttp, setStorageHttp] = useState('');
@@ -233,392 +245,277 @@ export default function demo() {
     <ScrollView>
       <Tester>
         <TestSuite name="react-native-image-colors">
-          <TestCase
-            itShould={title}
-            initialState={false}
-            assert={({expect, state}) => {
-              expect(state).to.be.true;
-            }}
-            arrange={({setState}) => (
-              <View>
-                <SafeAreaView style={styles.resultContainer}>
-                  <Text style={styles.loading}>Result:</Text>
-                  <Text style={styles.result}>{JSON.stringify(colors)}</Text>
-                  {element(colors)}
-                </SafeAreaView>
-                <Image
-                  resizeMode="contain"
-                  style={styles.image}
-                  source={imgCat}
-                />
-                <Button
-                  title={'uri为本地assets目录下的图片 拾取颜色'}
-                  onPress={() => {
-                    fetchColors(imgCat);
-                    setState(true);
-                  }}></Button>
-              </View>
-            )}></TestCase>
+          <TestCase itShould={title}>
+            <View>
+              <SafeAreaView style={styles.resultContainer}>
+                <Text style={styles.loading}>Result:</Text>
+                <Text style={styles.result}>{JSON.stringify(colors)}</Text>
+                {element(colors)}
+              </SafeAreaView>
+              <Image
+                resizeMode="contain"
+                style={styles.image}
+                source={imgCat}
+              />
+              <Button
+                title={'uri为本地assets目录下的图片 拾取颜色'}
+                onPress={() => {
+                  fetchColors(imgCat);
+                }}></Button>
+            </View>
+          </TestCase>
+
+          <TestCase itShould={httpTitle}>
+            <View>
+              <SafeAreaView style={styles.resultContainer}>
+                <Text style={styles.loading}>Result:</Text>
+                <Text style={styles.result}>{JSON.stringify(colorsHttp)}</Text>
+                {element(colorsHttp)}
+              </SafeAreaView>
+              <Image
+                resizeMode="contain"
+                style={styles.httpImage}
+                source={{uri: yunaUrl}}
+              />
+              <Button
+                title={'uri为网络图片 拾取颜色'}
+                onPress={() => {
+                  fetchColorsHttp(yunaUrl);
+                }}></Button>
+            </View>
+          </TestCase>
+
+          <TestCase itShould={base64Title}>
+            <View>
+              <SafeAreaView style={styles.resultContainer}>
+                <Text style={styles.loading}>Result:</Text>
+                <Text style={styles.result}>{JSON.stringify(colorsBase)}</Text>
+                {element(colorsBase)}
+              </SafeAreaView>
+              <Image style={styles.httpImage} source={{uri: base}} />
+              <Button
+                title={'uri为base64格式的图片 拾取颜色'}
+                onPress={() => {
+                  fetchColorsBase(base);
+                }}></Button>
+            </View>
+          </TestCase>
 
           <TestCase
-            itShould={httpTitle}
-            initialState={false}
-            assert={({expect, state}) => {
-              expect(state).to.be.true;
-            }}
-            arrange={({setState}) => (
-              <View>
-                <SafeAreaView style={styles.resultContainer}>
-                  <Text style={styles.loading}>Result:</Text>
-                  <Text style={styles.result}>
-                    {JSON.stringify(colorsHttp)}
-                  </Text>
-                  {element(colorsHttp)}
-                </SafeAreaView>
-                <Image
-                  resizeMode="contain"
-                  style={styles.httpImage}
-                  source={{uri: yunaUrl}}
-                />
-                <Button
-                  title={'uri为网络图片 拾取颜色'}
-                  onPress={() => {
-                    fetchColorsHttp(yunaUrl);
-                    setState(true);
-                  }}></Button>
-              </View>
-            )}></TestCase>
+            itShould={
+              '测试config参数 fallback为 #000000，该值只有当harmonyOS的api取到的颜色是空值时，返回值默认为fallback的值 #000000'
+            }>
+            <View>
+              <SafeAreaView style={styles.resultContainer}>
+                <Text style={styles.loading}>Result:</Text>
+                <Text style={styles.result}>
+                  {JSON.stringify(colorsFallback)}
+                </Text>
+                {element(colorsFallback)}
+              </SafeAreaView>
+              <Image style={styles.httpImage} source={transparentImage} />
+              <Button
+                title={'测试config参数 fallback 拾取颜色'}
+                onPress={() => {
+                  fetchColorsFallback(transparentImage, {fallback: '#000000'});
+                }}></Button>
+            </View>
+          </TestCase>
 
           <TestCase
-            itShould={base64Title}
-            initialState={false}
-            assert={({expect, state}) => {
-              expect(state).to.be.true;
-            }}
-            arrange={({setState}) => (
-              <View>
-                <SafeAreaView style={styles.resultContainer}>
-                  <Text style={styles.loading}>Result:</Text>
-                  <Text style={styles.result}>
-                    {JSON.stringify(colorsBase)}
-                  </Text>
-                  {element(colorsBase)}
-                </SafeAreaView>
-                <Image style={styles.httpImage} source={{uri: base}} />
-                <Button
-                  title={'uri为base64格式的图片 拾取颜色'}
-                  onPress={() => {
-                    fetchColorsBase(base);
-                    setState(true);
-                  }}></Button>
-              </View>
-            )}></TestCase>
-
-          <TestCase
-            itShould={'测试config参数 fallback为 #000000，该值只有当harmonyOS的api取到的颜色是空值时，返回值默认为fallback的值 #000000'}
-            initialState={false}
-            assert={({expect, state}) => {
-              expect(state).to.be.true;
-            }}
-            arrange={({setState}) => (
-              <View>
-                <SafeAreaView style={styles.resultContainer}>
-                  <Text style={styles.loading}>Result:</Text>
-                  <Text style={styles.result}>
-                    {JSON.stringify(colorsFallback)}
-                  </Text>
-                  {element(colorsFallback)}
-                </SafeAreaView>
-                <Image style={styles.httpImage} source={imgCat} />
-                <Button
-                  title={'测试config参数 fallback 拾取颜色'}
-                  onPress={() => {
-                    fetchColorsFallback(imgCat, {fallback: '#000000'});
-                    setState(true);
-                  }}></Button>
-              </View>
-            )}></TestCase>
+            itShould={
+              '测试config参数 fallback为 #ffffff，该值只有当harmonyOS的api取到的颜色是空值时，返回值默认为fallback的值 #ffffff'
+            }>
+            <View>
+              <SafeAreaView style={styles.resultContainer}>
+                <Text style={styles.loading}>Result:</Text>
+                <Text style={styles.result}>
+                  {JSON.stringify(colorsFallbackW)}
+                </Text>
+                {element(colorsFallbackW)}
+              </SafeAreaView>
+              <Image style={styles.httpImage} source={transparentImage} />
+              <Button
+                title={'测试config参数 fallback 拾取颜色'}
+                onPress={() => {
+                  fetchColorsFallbackW(transparentImage, {fallback: '#ffffff'});
+                }}></Button>
+            </View>
+          </TestCase>
           
-          <TestCase
-            itShould={'测试config参数 fallback为 #ffffff，该值只有当harmonyOS的api取到的颜色是空值时，返回值默认为fallback的值 #ffffff'}
-            initialState={false}
-            assert={({expect, state}) => {
-              expect(state).to.be.true;
-            }}
-            arrange={({setState}) => (
-              <View>
-                <SafeAreaView style={styles.resultContainer}>
-                  <Text style={styles.loading}>Result:</Text>
-                  <Text style={styles.result}>
-                    {JSON.stringify(colorsFallbackW)}
-                  </Text>
-                  {element(colorsFallbackW)}
-                </SafeAreaView>
-                <Image style={styles.httpImage} source={imgCat} />
-                <Button
-                  title={'测试config参数 fallback 拾取颜色'}
-                  onPress={() => {
-                    fetchColorsFallbackW(imgCat, {fallback: '#ffffff'});
-                    setState(true);
-                  }}></Button>
-              </View>
-            )}></TestCase>
+          <TestCase itShould={`测试config参数 headers为  "'a': 'a'"`}>
+            <View>
+              <SafeAreaView style={styles.resultContainer}>
+                <Text style={styles.loading}>Result:</Text>
+                <Text style={styles.result}>
+                  {JSON.stringify(colorsHeaders)}
+                </Text>
+                {element(colorsHeaders)}
+              </SafeAreaView>
+              <Image
+                resizeMode="contain"
+                style={styles.httpImage}
+                source={imgCat}
+              />
+              <Button
+                title={`测试config参数 headers为 "'a': 'a'" 拾取颜色`}
+                onPress={() => {
+                  fetchColorsHeaders('http://10.51.126.22:5005/image', {
+                    headers: {
+                      a: 'a',
+                    },
+                  });
+                }}></Button>
+            </View>
+          </TestCase>
+
+          <TestCase itShould={`测试config参数headers为 "'a': 'A'"`}>
+            <View>
+              <SafeAreaView style={styles.resultContainer}>
+                <Text style={styles.loading}>Result:</Text>
+                <Text style={styles.result}>
+                  {JSON.stringify(colorsHeadersW)}
+                </Text>
+                {element(colorsHeadersW)}
+              </SafeAreaView>
+              <Image
+                resizeMode="contain"
+                style={styles.httpImage}
+                source={expo}
+              />
+              <Button
+                title={'测试config参数 headers 拾取颜色'}
+                onPress={() => {
+                  fetchColorsHeadersW('http://10.51.126.22:5005/image', {
+                    headers: {
+                      a: 'A',
+                    },
+                  });
+                }}></Button>
+            </View>
+          </TestCase>
 
           <TestCase
-            itShould={`测试config参数 headers为 "'Content-Type': 'application/octet-stream'"`}
-            initialState={false}
-            assert={({expect, state}) => {
-              expect(state).to.be.true;
-            }}
-            arrange={({setState}) => (
-              <View>
-                <SafeAreaView style={styles.resultContainer}>
-                  <Text style={styles.loading}>Result:</Text>
-                  <Text style={styles.result}>
-                    {JSON.stringify(colorsHeaders)}
-                  </Text>
-                  {element(colorsHeaders)}
-                </SafeAreaView>
-                <Image
-                  resizeMode="contain"
-                  style={styles.httpImage}
-                  source={{uri: yunaUrl}}
-                />
-                <Button
-                  title={'测试config参数 headers 拾取颜色'}
-                  onPress={() => {
-                    fetchColorsHeaders(yunaUrl, {
-                      headers: {
-                        'Content-Type': 'application/octet-stream',
-                      }
-                    });
-                    setState(true);
-                  }}></Button>
-              </View>
-            )}></TestCase>
+            itShould={
+              '测试config参数 cache为 true、 key为 localImage ，开启缓存时，key为localImage，缓存的值为该次调用getColors的返回值'
+            }>
+            <View>
+              <SafeAreaView style={styles.resultContainer}>
+                <Text style={styles.loading}>Result:</Text>
+                <Text style={styles.result}>{JSON.stringify(colorsKey)}</Text>
+                {element(colorsKey)}
+                <Text style={styles.loading}>
+                  cache.getItem('localImage')的值
+                </Text>
+                <Text style={styles.result}>{storage}</Text>
+              </SafeAreaView>
+              <Image style={styles.image} source={imgCat} />
+              <Button
+                title={'测试config参数 cache key 拾取颜色'}
+                onPress={async () => {
+                  await fetchColorsKey(imgCat, {cache: true, key: 'localImage'});
+                  getCache('localImage');
+                }}></Button>
+            </View>
+          </TestCase>
 
           <TestCase
-            itShould={'测试config参数 cache为 true，开启缓存，开启缓存后，可将这次的返回值缓存起来，下次再调用该api时，直接返回缓存值'}
-            initialState={false}
-            assert={({expect, state}) => {
-              expect(state).to.be.true;
-            }}
-            arrange={({setState}) => (
-              <View>
-                <SafeAreaView style={styles.resultContainer}>
-                  <Text style={styles.loading}>Result:</Text>
-                  <Text style={styles.result}>
-                    {JSON.stringify(colorsCache)}
-                  </Text>
-                  {element(colorsCache)}
-                </SafeAreaView>
-                <Image style={styles.image} source={imgCat} />
-                <Button
-                  title={'测试config参数 cache 拾取颜色'}
-                  onPress={() => {
-                    fetchColorsCache(imgCat, {cache: true});
-                    setState(true);
-                  }}></Button>
-              </View>
-            )}></TestCase>
+            itShould={
+              '测试config参数 cache为 false、 key为 baseImage ，不开启缓存时'
+            }>
+            <View>
+              <SafeAreaView style={styles.resultContainer}>
+                <Text style={styles.loading}>Result:</Text>
+                <Text style={styles.result}>{JSON.stringify(colorsKeyW)}</Text>
+                {element(colorsKeyW)}
+                <Text style={styles.loading}>
+                  cache.getItem('baseImage')的值
+                </Text>
+                <Text style={styles.result}>{storageBase}</Text>
+              </SafeAreaView>
+              <Image style={styles.httpImage} source={{uri: base}} />
+              <Button
+                title={'测试config参数 cache key 拾取颜色'}
+                onPress={async () => {
+                  await fetchColorsKeyW(base, {cache: false, key: 'baseImage'});
+                  getCacheBase('baseImage');
+                }}></Button>
+            </View>
+          </TestCase>
 
           <TestCase
-            itShould={'测试config参数 cache为 false，不开启缓存'}
-            initialState={false}
-            assert={({expect, state}) => {
-              expect(state).to.be.true;
-            }}
-            arrange={({setState}) => (
-              <View>
-                <SafeAreaView style={styles.resultContainer}>
-                  <Text style={styles.loading}>Result:</Text>
-                  <Text style={styles.result}>
-                    {JSON.stringify(colorsCacheW)}
-                  </Text>
-                  {element(colorsCacheW)}
-                </SafeAreaView>
-                <Image style={styles.httpImage} source={imgCat} />
-                <Button
-                  title={'测试config参数 cache 拾取颜色'}
-                  onPress={() => {
-                    fetchColorsCacheW(imgCat, {cache: true});
-                    setState(true);
-                  }}></Button>
-              </View>
-            )}></TestCase>
-
-          
-          <TestCase
-            itShould={'测试config参数 cache为 true、 key为 localImage ，开启缓存时，key为localImage，缓存的值为该次调用getColors的返回值'}
-            initialState={false}
-            assert={({expect, state}) => {
-              expect(state).to.be.true;
-            }}
-            arrange={({setState}) => (
-              <View>
-                <SafeAreaView style={styles.resultContainer}>
-                  <Text style={styles.loading}>Result:</Text>
-                  <Text style={styles.result}>
-                    {JSON.stringify(colorsKey)}
-                  </Text>
-                  {element(colorsKey)}
-                </SafeAreaView>
-                <Image style={styles.image} source={imgCat} />
-                <Button
-                  title={'测试config参数 cache key 拾取颜色'}
-                  onPress={() => {
-                    fetchColorsKey(imgCat, {cache: true, key: 'localImage'});
-                    setState(true);
-                  }}></Button>
-              </View>
-            )}></TestCase>
+            itShould={`测试cache.getItem()方法，读取缓存 调用方式cache.getItem('localImage');`}>
+            <View>
+              <SafeAreaView style={styles.resultContainer}>
+                <Text style={styles.loading}>
+                  cache.getItem('localImage')的值
+                </Text>
+                <Text style={styles.result}>{storage}</Text>
+              </SafeAreaView>
+              <Button
+                title={`读取缓存 localImage`}
+                onPress={() => {
+                  getCache('localImage');
+                }}></Button>
+            </View>
+          </TestCase>
 
           <TestCase
-            itShould={'测试config参数 cache为 true、 key为 baseImage ，开启缓存时，key为baseImage，缓存的值为该次调用getColors的返回值'}
-            initialState={false}
-            assert={({expect, state}) => {
-              expect(state).to.be.true;
-            }}
-            arrange={({setState}) => (
-              <View>
-                <SafeAreaView style={styles.resultContainer}>
-                  <Text style={styles.loading}>Result:</Text>
-                  <Text style={styles.result}>
-                    {JSON.stringify(colorsKeyW)}
-                  </Text>
-                  {element(colorsKeyW)}
-                </SafeAreaView>
-                <Image style={styles.httpImage} source={{uri: base}} />
-                <Button
-                  title={'测试config参数 cache key 拾取颜色'}
-                  onPress={() => {
-                    fetchColorsKeyW(base, {cache: true, key: 'baseImage'});
-                    setState(true);
-                  }}></Button>
-              </View>
-            )}></TestCase>
+            itShould={`测试cache.setItem()方法，设置缓存 调用方式cache.setItem('key', {a: 1, b: 2});`}>
+            <View>
+              <SafeAreaView style={styles.resultContainer}>
+                <Text style={styles.loading}>cache.getItem('key')的值</Text>
+                <Text style={styles.result}>{widgetsStorage}</Text>
+              </SafeAreaView>
+              <Button
+                title={`设置缓存 key`}
+                onPress={() => {
+                  cache.setItem('key', {a: 1, b: 2});
+                  getWidgetsCache('key');
+                }}></Button>
+            </View>
+          </TestCase>
 
           <TestCase
-            itShould={`测试cache.getItem()方法，读取缓存 调用方式cache.getItem('localImage');`}
-            initialState={false}
-            assert={({expect, state}) => {
-              expect(state).to.be.true;
-            }}
-            arrange={({setState}) => (
-              <View>
-                <SafeAreaView style={styles.resultContainer}>
-                  <Text style={styles.loading}>
-                    cache.getItem('localImage')的值
-                  </Text>
-                  <Text style={styles.result}>{storage}</Text>
-                </SafeAreaView>
-                <Button
-                  title={`读取缓存 localImage`}
-                  onPress={() => {
-                    getCache('localImage');
-                    setState(true);
-                  }}></Button>
-              </View>
-            )}></TestCase>
+            itShould={`测试cache.removeItem()方法，删除缓存 调用方式cache.removeItem('localImage');`}>
+            <View>
+              <SafeAreaView style={styles.resultContainer}>
+                <Text style={styles.loading}>
+                  cache.getItem('localImage')的值
+                </Text>
+                <Text style={styles.result}>{storage}</Text>
+              </SafeAreaView>
+              <Button
+                title={`删除缓存 localImage`}
+                onPress={() => {
+                  cache.removeItem('localImage');
+                  getCache('localImage');
+                }}></Button>
+            </View>
+          </TestCase>
 
           <TestCase
-            itShould={`测试cache.getItem()方法，读取缓存 调用方式cache.getItem('baseImage');`}
-            initialState={false}
-            assert={({expect, state}) => {
-              expect(state).to.be.true;
-            }}
-            arrange={({setState}) => (
-              <View>
-                <SafeAreaView style={styles.resultContainer}>
-                  <Text style={styles.loading}>
-                    cache.getItem('baseImage')的值
-                  </Text>
-                  <Text style={styles.result}>{storageHttp}</Text>
-                </SafeAreaView>
-                <Button
-                  title={`读取缓存 baseImage`}
-                  onPress={() => {
-                    getCacheHttp('baseImage');
-                    setState(true);
-                  }}></Button>
-              </View>
-            )}></TestCase>
-
-          <TestCase
-            itShould={`测试cache.setItem()方法，设置缓存 调用方式cache.setItem('key', {a: 1, b: 2});`}
-            initialState={false}
-            assert={({expect, state}) => {
-              expect(state).to.be.true;
-            }}
-            arrange={({setState}) => (
-              <View>
-                <SafeAreaView style={styles.resultContainer}>
-                  <Text style={styles.loading}>cache.getItem('key')的值</Text>
-                  <Text style={styles.result}>{widgetsStorage}</Text>
-                </SafeAreaView>
-                <Button
-                  title={`设置缓存 key`}
-                  onPress={() => {
-                    cache.setItem('key', {a: 1, b: 2});
-                    getWidgetsCache('key');
-                    setState(true);
-                  }}></Button>
-              </View>
-            )}></TestCase>
-
-          <TestCase
-            itShould={`测试cache.removeItem()方法，删除缓存 调用方式cache.removeItem('baseImage');`}
-            initialState={false}
-            assert={({expect, state}) => {
-              expect(state).to.be.true;
-            }}
-            arrange={({setState}) => (
-              <View>
-                <SafeAreaView style={styles.resultContainer}>
-                  <Text style={styles.loading}>
-                    cache.getItem('baseImage')的值
-                  </Text>
-                  <Text style={styles.result}>{storage}</Text>
-                </SafeAreaView>
-                <Button
-                  title={`删除缓存 baseImage`}
-                  onPress={() => {
-                    cache.removeItem('baseImage');
-                    getCache('baseImage');
-                    setState(true);
-                  }}></Button>
-              </View>
-            )}></TestCase>
-
-          <TestCase
-            itShould={`测试cache.clear()方法，清空缓存 调用方式cache.clear();`}
-            initialState={false}
-            assert={({expect, state}) => {
-              expect(state).to.be.true;
-            }}
-            arrange={({setState}) => (
-              <View style={{marginBottom: 50}}>
-                <SafeAreaView style={styles.resultContainer}>
-                  <Text style={styles.loading}>
-                    cache.getItem: baseImage && key && localImage 的值
-                  </Text>
-                  <Text style={styles.result}>
-                    {storage}
-                    {storageHttp}
-                    {widgetsStorage}
-                  </Text>
-                </SafeAreaView>
-                <Button
-                  title={`清空缓存`}
-                  onPress={() => {
-                    cache.clear();
-                    getCacheHttp('baseImage');
-                    getWidgetsCache('key');
-                    getCache('localImage');
-                    setState(true);
-                  }}></Button>
-              </View>
-            )}></TestCase>
+            itShould={`测试cache.clear()方法，清空缓存 调用方式cache.clear();`}>
+            <View style={{marginBottom: 50}}>
+              <SafeAreaView style={styles.resultContainer}>
+                <Text style={styles.loading}>
+                  cache.getItem: key && localImage 的值
+                </Text>
+                <Text style={styles.result}>
+                  {storage}
+                  {storageHttp}
+                  {widgetsStorage}
+                </Text>
+              </SafeAreaView>
+              <Button
+                title={`清空缓存`}
+                onPress={() => {
+                  cache.clear();
+                  getWidgetsCache('key');
+                  getCache('localImage');
+                }}></Button>
+            </View>
+          </TestCase>
         </TestSuite>
       </Tester>
     </ScrollView>
