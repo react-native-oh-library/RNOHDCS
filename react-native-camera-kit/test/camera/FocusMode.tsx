@@ -1,10 +1,13 @@
 import {useRef, useState} from 'react';
 import React, {Button, StyleSheet, View} from 'react-native';
 import {CameraApi, CameraType, Camera} from 'react-native-camera-kit';
+import {FocusMode} from './type';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
 export const FocusModeTest = () => {
-  const [focusMode, setFocusMode] = useState<string>();
+  const [focusMode, setFocusMode] = useState<FocusMode>(
+    FocusMode.FOCUS_MODE_AUTO,
+  );
   const cameraRef = useRef<CameraApi>(null);
 
   return (
@@ -16,18 +19,29 @@ export const FocusModeTest = () => {
             style={styles.cameraPreview}
             focusMode={focusMode}
           />
-
           <View style={styles.actionBtn}>
             <Button
-              title="开启"
+              title="手动"
               onPress={() => {
-                setFocusMode('on');
+                setFocusMode(FocusMode.FOCUS_MODE_MANUAL);
               }}
             />
             <Button
-              title="关闭"
+              title="连续"
               onPress={() => {
-                setFocusMode('off');
+                setFocusMode(FocusMode.FOCUS_MODE_CONTINUOUS_AUTO);
+              }}
+            />
+            <Button
+              title="自动"
+              onPress={() => {
+                setFocusMode(FocusMode.FOCUS_MODE_AUTO);
+              }}
+            />
+            <Button
+              title="锁定"
+              onPress={() => {
+                setFocusMode(FocusMode.FOCUS_MODE_LOCKED);
               }}
             />
           </View>
@@ -42,7 +56,6 @@ const styles = StyleSheet.create({
     aspectRatio: 3 / 4,
   },
   actionBtn: {
-    marginTop:10,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',

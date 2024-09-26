@@ -1,10 +1,13 @@
 import {useRef, useState} from 'react';
 import React, {Button, StyleSheet, View} from 'react-native';
 import {CameraApi, Camera} from 'react-native-camera-kit';
+import {FlashMode} from './type';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
 export const FashModeTest = () => {
-  const [flashMode, setFlashMode] = useState<string>();
+  const [flashMode, setFlashMode] = useState<FlashMode>(
+    FlashMode.FLASH_MODE_CLOSE,
+  );
   const cameraRef = useRef<CameraApi>(null);
 
   return (
@@ -20,19 +23,25 @@ export const FashModeTest = () => {
             <Button
               title="close:关闭"
               onPress={() => {
-                setFlashMode('off');
+                setFlashMode(FlashMode.FLASH_MODE_CLOSE);
               }}
             />
             <Button
               title="open:开启"
               onPress={() => {
-                setFlashMode('on');
+                setFlashMode(FlashMode.FLASH_MODE_OPEN);
               }}
             />
             <Button
               title="auto:自动"
               onPress={() => {
-                setFlashMode('auto');
+                setFlashMode(FlashMode.FLASH_MODE_AUTO);
+              }}
+            />
+            <Button
+              title="always_open:常亮"
+              onPress={() => {
+                setFlashMode(FlashMode.FLASH_MODE_ALWAYS_OPEN);
               }}
             />
           </View>
@@ -42,6 +51,7 @@ export const FashModeTest = () => {
   );
 };
 const styles = StyleSheet.create({
+  view: {flex: 1},
   cameraPreview: {
     width: '100%',
     aspectRatio: 3 / 4,

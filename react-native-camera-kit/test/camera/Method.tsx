@@ -17,7 +17,6 @@ export const MethodTest = () => {
             <Text>请求相机权限状态{reqRes}</Text>
           </View>
           <Camera ref={cameraRef} style={styles.cameraPreview} />
-
           <View style={styles.actionBtn}>
             <Button
               title="请求相机权限"

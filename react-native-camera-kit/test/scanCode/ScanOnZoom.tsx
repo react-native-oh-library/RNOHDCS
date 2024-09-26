@@ -14,14 +14,12 @@ export const ScanOnZoomTest = () => {
     <Tester>
       <TestSuite name="onZoom">
         <TestCase itShould="onZoom回调">
-          <View>
-            <Camera
-              ref={cameraRef}
-              style={styles.cameraPreview}
-              onZoom={onZoom}
-              scanBarcode
-            />
-          </View>
+          <Camera
+            ref={cameraRef}
+            style={styles.cameraPreview}
+            onZoom={onZoom}
+            scanBarcode
+          />
           <View style={styles.actionBtn}>
             <Text style={styles.text}>当前zoom:{zoom}</Text>
           </View>

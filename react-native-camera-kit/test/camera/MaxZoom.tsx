@@ -18,14 +18,12 @@ export const MaxZoomTest = () => {
           <View>
             <Text>当前zoom：{zoom}x</Text>
           </View>
-          <View>
-            <Camera
-              ref={cameraRef}
-              style={styles.cameraPreview}
-              maxZoom={maxZoom}
-              onZoom={onZoom}
-            />
-          </View>
+          <Camera
+            ref={cameraRef}
+            style={styles.cameraPreview}
+            maxZoom={maxZoom}
+            onZoom={onZoom}
+          />
           <View style={styles.actionBtn}>
             <Button
               title="setZoom=5"
@@ -46,7 +44,6 @@ export const MaxZoomTest = () => {
   );
 };
 const styles = StyleSheet.create({
-  view: {flex: 1},
   cameraPreview: {
     width: '100%',
     aspectRatio: 3 / 4,

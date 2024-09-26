@@ -14,14 +14,13 @@ export const ScanZoomModeTest = () => {
           itShould={`设置对焦模式:${
             zoomMode === 'on' ? '开启对焦' : '关闭对焦'
           }`}>
-          <View>
-            <Camera
-              ref={cameraRef}
-              style={styles.cameraPreview}
-              zoomMode={zoomMode}
-              scanBarcode
-            />
-          </View>
+          <Camera
+            ref={cameraRef}
+            style={styles.cameraPreview}
+            zoomMode={zoomMode}
+            scanBarcode
+          />
+
           <View style={styles.actionBtn}>
             <Button
               title="开启"

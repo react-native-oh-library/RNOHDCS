@@ -15,20 +15,17 @@ export const OnErrorTest = () => {
       <TestSuite name="onError">
         <TestCase itShould="处理报错信息">
           <Text style={styles.text}>error:{errorStr}</Text>
-          <View>
-            <Camera
-              ref={cameraRef}
-              style={styles.cameraPreview}
-              onError={onError}
-            />
-          </View>
+          <Camera
+            ref={cameraRef}
+            style={styles.cameraPreview}
+            onError={onError}
+          />
         </TestCase>
       </TestSuite>
     </Tester>
   );
 };
 const styles = StyleSheet.create({
-  view: {flex: 1},
   cameraPreview: {
     width: '100%',
     aspectRatio: 3 / 4,

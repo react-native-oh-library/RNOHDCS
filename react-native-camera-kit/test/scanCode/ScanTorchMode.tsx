@@ -11,14 +11,12 @@ export const ScanTorchModeTest = () => {
     <Tester>
       <TestSuite name={`TorchMode:${torchMode}`}>
         <TestCase itShould="设置手电筒模式">
-          <View>
-            <Camera
-              ref={cameraRef}
-              style={styles.cameraPreview}
-              torchMode={torchMode}
-              scanBarcode
-            />
-          </View>
+          <Camera
+            ref={cameraRef}
+            style={styles.cameraPreview}
+            torchMode={torchMode}
+            scanBarcode
+          />
           <View style={styles.actionBtn}>
             <Button
               title="off:关闭"

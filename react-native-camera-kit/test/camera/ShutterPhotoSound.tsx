@@ -17,13 +17,11 @@ export const ShutterPhotoSoundTest = () => {
     <Tester>
       <TestSuite name="ShutterPhotoSound">
         <TestCase itShould="是否相机快门声音">
-          <View>
-            <Camera
-              ref={cameraRef}
-              style={styles.cameraPreview}
-              shutterPhotoSound={shutterPhotoSound}
-            />
-          </View>
+          <Camera
+            ref={cameraRef}
+            style={styles.cameraPreview}
+            shutterPhotoSound={shutterPhotoSound}
+          />
           <View style={styles.actionBtn}>
             <Button
               title="开启"

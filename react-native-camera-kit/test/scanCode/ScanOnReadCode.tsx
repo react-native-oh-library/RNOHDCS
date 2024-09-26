@@ -14,14 +14,12 @@ export const ScanOnReadCodeTest = () => {
     <Tester>
       <TestSuite name="OnReadCode">
         <TestCase itShould="获取扫描的结果">
-          <View>
-            <Camera
-              ref={cameraRef}
-              style={styles.cameraPreview}
-              onReadCode={onReadCode}
-              scanBarcode
-            />
-          </View>
+          <Camera
+            ref={cameraRef}
+            style={styles.cameraPreview}
+            onReadCode={onReadCode}
+            scanBarcode
+          />
           <View style={styles.actionBtn}>
             <Text numberOfLines={1} style={styles.textStyle}>
               code: {barcode}

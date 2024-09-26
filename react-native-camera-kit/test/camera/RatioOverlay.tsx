@@ -11,13 +11,11 @@ export const RatioOverlayTest = () => {
     <Tester>
       <TestSuite name={`RatioOverlay:${ratioOverlay}`}>
         <TestCase itShould="相机预览比例">
-          <View>
-            <Camera
-              ref={cameraRef}
-              style={styles.cameraPreview}
-              ratioOverlay={ratioOverlay}
-            />
-          </View>
+          <Camera
+            ref={cameraRef}
+            style={styles.cameraPreview}
+            ratioOverlay={ratioOverlay}
+          />
           <View style={styles.actionBtn}>
             <Button
               title="4:3"

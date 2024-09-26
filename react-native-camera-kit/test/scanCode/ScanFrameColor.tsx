@@ -1,22 +1,37 @@
-import {useRef} from 'react';
-import React, {StyleSheet, View} from 'react-native';
-import {CameraApi, CameraType, Camera} from 'react-native-camera-kit';
+import {useRef, useState} from 'react';
+import React, {Button, StyleSheet, View} from 'react-native';
+import {CameraApi, Camera} from 'react-native-camera-kit';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
 export const ScanFrameColorTest = () => {
   const cameraRef = useRef<CameraApi>(null);
+  const [frameColor, setFrameColor] = useState<string>('#FF0034');
 
   return (
     <Tester>
-      <TestSuite name="FrameColor:对焦框的颜色">
-        <TestCase itShould="设置为红色">
+      <TestSuite name="FrameColor:扫码框的颜色">
+        <TestCase itShould={frameColor === '#FF0034' ? '红色' : '白色'}>
           <Camera
             ref={cameraRef}
             style={styles.cameraPreview}
-            frameColor="#FF0034"
+            frameColor={frameColor}
             scanBarcode
             showFrame
           />
+          <View style={styles.actionBtn}>
+            <Button
+              title="设置红色"
+              onPress={() => {
+                setFrameColor('#FF0034');
+              }}
+            />
+            <Button
+              title="设置白色"
+              onPress={() => {
+                setFrameColor('#fff');
+              }}
+            />
+          </View>
         </TestCase>
       </TestSuite>
     </Tester>
@@ -32,10 +47,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    position: 'absolute',
-    bottom: 10,
-    left: 0,
-    zIndex: 999,
-    gap: 10,
+    padding: 10,
+    backgroundColor: '#000',
   },
 });

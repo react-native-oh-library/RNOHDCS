@@ -8,9 +8,6 @@ export const onZoomTest = () => {
   const cameraRef = useRef<CameraApi>(null);
   const onZoom = (e: any) => {
     setZoom(e.nativeEvent.zoom);
-    console.log('====================================');
-    console.log(e);
-    console.log('====================================');
   };
 
   return (
@@ -18,14 +15,11 @@ export const onZoomTest = () => {
       <TestSuite name="onZoom">
         <TestCase itShould="onZoom回调">
           <Text style={styles.text}>当前zoom:{zoom}x</Text>
-          <View>
-            <Camera
-              ref={cameraRef}
-              style={styles.cameraPreview}
-              onZoom={onZoom}
-              zoomMode="on"
-            />
-          </View>
+          <Camera
+            ref={cameraRef}
+            style={styles.cameraPreview}
+            onZoom={onZoom}
+          />
         </TestCase>
       </TestSuite>
     </Tester>

@@ -11,28 +11,26 @@ export const ZoomTest = () => {
     <Tester>
       <TestSuite name="zoom">
         <TestCase itShould={`设置变焦倍数:${zoom}`}>
-          <View >
-            <Camera ref={cameraRef} style={styles.cameraPreview} zoom={zoom} />
-            <View style={styles.actionBtn}>
-              <Button
-                title="setZoom=5"
-                onPress={() => {
-                  setZoom(5);
-                }}
-              />
-              <Button
-                title="setZoom=10"
-                onPress={() => {
-                  setZoom(10);
-                }}
-              />
-              <Button
-                title="rest"
-                onPress={() => {
-                  setZoom(0.5);
-                }}
-              />
-            </View>
+          <Camera ref={cameraRef} style={styles.cameraPreview} zoom={zoom} />
+          <View style={styles.actionBtn}>
+            <Button
+              title="setZoom=5"
+              onPress={() => {
+                setZoom(5);
+              }}
+            />
+            <Button
+              title="setZoom=10"
+              onPress={() => {
+                setZoom(10);
+              }}
+            />
+            <Button
+              title="rest"
+              onPress={() => {
+                setZoom(0.5);
+              }}
+            />
           </View>
         </TestCase>
       </TestSuite>
