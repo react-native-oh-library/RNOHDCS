@@ -40,16 +40,16 @@ const YourImage = () => {
   return (
     <ScrollView>
     <Tester>
-      <TestSuite name="react native image capinsets next">
-        <TestCase itShould="react native image capinsets next load locale picture">
+      <TestSuite name="react native image capinsets next property Source">
+        <TestCase itShould="react native image capinsets next load locale picture and toggle the property Source">
             <View style={styles.container}>
               <ImageCapInset
                 style={styles.imgStyle}
                 source={currentImg1}
-                capInsets={currentCapInset1}>
+                capInsets={JSON.parse(initInset)}>
               </ImageCapInset>
               <View style={styles.switchItem}>
-                <Text>切换本地图片: </Text>
+                <Text>切换本地图片source: </Text>
                 <Switch
                   trackColor={{false: '#767577', true: '#81b0ff'}}
                   thumbColor={currentImg1 === img1 ? '#f5dd4b' : '#f4f3f4'}
@@ -58,8 +58,40 @@ const YourImage = () => {
                   value={currentImg1 === img1 ? true : false}
                 />
               </View>
+            </View>
+          </TestCase>
+          </TestSuite>
+          <TestSuite name="react native image capinsets next property Source">
+          <TestCase itShould="react native image capinsets next load locale picture and toggle the property Source">
+            <View style={styles.container}>
+              <ImageCapInset
+                style={styles.imgStyle}
+                source={currentImg1}
+                capInsets={JSON.parse(initInset2)}>
+              </ImageCapInset>
               <View style={styles.switchItem}>
-                <Text>切换本地图片Inset: </Text>
+                <Text>切换本地图片source: </Text>
+                <Switch
+                  trackColor={{false: '#767577', true: '#81b0ff'}}
+                  thumbColor={currentImg1 === img1 ? '#f5dd4b' : '#f4f3f4'}
+                  ios_backgroundColor="#3e3e3e"
+                  onValueChange={onChangeUrl1}
+                  value={currentImg1 === img1 ? true : false}
+                />
+              </View>
+            </View>
+          </TestCase>
+          </TestSuite>
+          <TestSuite name="react native image capinsets next property CapInset">
+          <TestCase itShould="react native image capinsets next load locale picture and toggle the property CapInset">
+            <View style={styles.container}>
+              <ImageCapInset
+                style={styles.imgStyle}
+                source={img1}
+                capInsets={currentCapInset1}>
+              </ImageCapInset>
+              <View style={styles.switchItem}>
+                <Text>切换本地图片capinset: </Text>
                 <Switch
                   thumbColor={currentCapInset1 === initInset ? '#f5dd4b' : '#f4f3f4'}
                   onValueChange={onChangeInset1}
@@ -67,20 +99,45 @@ const YourImage = () => {
                 />
               </View>
               <View style={styles.instruction}>
-                  <Text>开关关闭: top: 15, right: 20, bottom: 15, left: 20</Text>
-                  <Text>开关打开: top: 2, right: 5, bottom: 2, left: 5</Text>
+                  <Text>开关关闭capinset值: top: 15, right: 20, bottom: 15, left: 20</Text>
+                  <Text>开关打开capinset值: top: 2, right: 5, bottom: 2, left: 5</Text>
               </View>
             </View>
           </TestCase>
-          <TestCase itShould="react native image capinsets next load network picture">
+          </TestSuite>
+          <TestSuite name="react native image capinsets next property CapInset">
+          <TestCase itShould="react native image capinsets next load locale picture and toggle the property CapInset">
+            <View style={styles.container}>
+              <ImageCapInset
+                style={styles.imgStyle}
+                source={img2}
+                capInsets={currentCapInset1}>
+              </ImageCapInset>
+              <View style={styles.switchItem}>
+                <Text>切换本地图片capinset: </Text>
+                <Switch
+                  thumbColor={currentCapInset1 === initInset ? '#f5dd4b' : '#f4f3f4'}
+                  onValueChange={onChangeInset1}
+                  value={JSON.stringify(currentCapInset1) === initInset ? true : false}
+                />
+              </View>
+              <View style={styles.instruction}>
+                  <Text>开关关闭capinset值: top: 15, right: 20, bottom: 15, left: 20</Text>
+                  <Text>开关打开capinset值: top: 2, right: 5, bottom: 2, left: 5</Text>
+              </View>
+            </View>
+          </TestCase>
+          </TestSuite>
+          <TestSuite name="react native image capinsets next property Source">
+          <TestCase itShould="react native image capinsets next load network picture and toggle property Source">
             <View style={styles.container}>
               <ImageCapInset
                 style={styles.imgStyle}
                 source={{uri: currentImg2}}
-                capInsets={currentCapInset2}>
+                capInsets={JSON.parse(initInset)}>
               </ImageCapInset>
               <View style={styles.switchItem}>
-                <Text>切换网络图片: </Text>
+                <Text>切换网络图片source: </Text>
                 <Switch
                   trackColor={{false: '#767577', true: '#81b0ff'}}
                   thumbColor={currentImg2 === img3 ? '#f5dd4b' : '#f4f3f4'}
@@ -89,8 +146,40 @@ const YourImage = () => {
                   value={currentImg2 === img3 ? true : false}
                 />
               </View>
+          </View>
+        </TestCase>
+        </TestSuite>
+        <TestSuite name="react native image capinsets next property Source">
+        <TestCase itShould="react native image capinsets next load network picture and toggle property Source">
+            <View style={styles.container}>
+              <ImageCapInset
+                style={styles.imgStyle}
+                source={{uri: currentImg2}}
+                capInsets={JSON.parse(initInset2)}>
+              </ImageCapInset>
               <View style={styles.switchItem}>
-                <Text>切换网络图片Inset: </Text>
+                <Text>切换网络图片source: </Text>
+                <Switch
+                  trackColor={{false: '#767577', true: '#81b0ff'}}
+                  thumbColor={currentImg2 === img3 ? '#f5dd4b' : '#f4f3f4'}
+                  ios_backgroundColor="#3e3e3e"
+                  onValueChange={onChangeUrl2}
+                  value={currentImg2 === img3 ? true : false}
+                />
+              </View>
+          </View>
+        </TestCase>
+        </TestSuite>
+        <TestSuite name="react native image capinsets next property Capinset">
+        <TestCase itShould="react native image capinsets next load network picture and toggle property Capinset">
+            <View style={styles.container}>
+              <ImageCapInset
+                style={styles.imgStyle}
+                source={{uri: img3}}
+                capInsets={currentCapInset2}>
+              </ImageCapInset>
+              <View style={styles.switchItem}>
+                <Text>切换网络图片capinset: </Text>
                 <Switch
                   thumbColor={currentCapInset2 === initInset ? '#f5dd4b' : '#f4f3f4'}
                   onValueChange={onChangeInset2}
@@ -98,12 +187,35 @@ const YourImage = () => {
                 />
               </View>
               <View style={styles.instruction}>
-                <Text>开关关闭: top: 15, right: 20, bottom: 15, left: 20</Text>
-                <Text>开关打开: top: 2, right: 5, bottom: 2, left: 5</Text>
+                <Text>开关关闭capinset值: top: 15, right: 20, bottom: 15, left: 20</Text>
+                <Text>开关打开capinset值: top: 2, right: 5, bottom: 2, left: 5</Text>
               </View>
           </View>
         </TestCase>
-      </TestSuite>
+        </TestSuite>
+        <TestSuite name="react native image capinsets next property Capinset">
+        <TestCase itShould="react native image capinsets next load network picture and toggle property Capinset">
+            <View style={styles.container}>
+              <ImageCapInset
+                style={styles.imgStyle}
+                source={{uri: img4}}
+                capInsets={currentCapInset2}>
+              </ImageCapInset>
+              <View style={styles.switchItem}>
+                <Text>切换网络图片capinset: </Text>
+                <Switch
+                  thumbColor={currentCapInset2 === initInset ? '#f5dd4b' : '#f4f3f4'}
+                  onValueChange={onChangeInset2}
+                  value={JSON.stringify(currentCapInset2) === initInset ? true : false}
+                />
+              </View>
+              <View style={styles.instruction}>
+                <Text>开关关闭capinset值: top: 15, right: 20, bottom: 15, left: 20</Text>
+                <Text>开关打开capinset值: top: 2, right: 5, bottom: 2, left: 5</Text>
+              </View>
+          </View>
+        </TestCase>
+        </TestSuite>
   </Tester>
   </ScrollView>
   );
