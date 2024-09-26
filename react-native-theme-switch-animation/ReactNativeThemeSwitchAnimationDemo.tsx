@@ -38,11 +38,11 @@ export function ReactNativeThemeSwitchAnimationDemo() {
                   setTheme(theme === 'light' ? 'dark' : 'light');
                 },
                 animationConfig: {
-                  type: 'inverted-circular',
+                  type: 'circular',
                   duration: 2000,
                   startingPoint: {
-                    cxRatio: 0.5,
-                    cyRatio: 0.5,
+                    cxRatio: 0.1,
+                    cyRatio: 0.1,
                   },
                 },
               });
