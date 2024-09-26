@@ -504,7 +504,29 @@ export default function SnapCarousel(): JSX.Element {
               inactiveSlideShift={40}
             />
           </TestCase>
-          <TestCase itShould="activeSlideAlignment 轮播图对齐方式">
+          <TestCase itShould="activeSlideAlignment 轮播图对齐方式 start">
+            <Carousel
+              data={ENTRIES1}
+              renderItem={_renderItem}
+              sliderWidth={300}
+              itemWidth={100}
+              sliderHeight={200}
+              itemHeight={100}
+              activeSlideAlignment={'start'}
+            />
+          </TestCase>
+          <TestCase itShould="activeSlideAlignment 轮播图对齐方式 center">
+            <Carousel
+              data={ENTRIES1}
+              renderItem={_renderItem}
+              sliderWidth={300}
+              itemWidth={100}
+              sliderHeight={200}
+              itemHeight={100}
+              activeSlideAlignment={'center'}
+            />
+          </TestCase>
+          <TestCase itShould="activeSlideAlignment 轮播图对齐方式 end">
             <Carousel
               data={ENTRIES1}
               renderItem={_renderItem}
@@ -679,6 +701,23 @@ export default function SnapCarousel(): JSX.Element {
               activeAnimationOptions={{
                 velocity: 0.2,
                 deceleration: 0.2,
+                isInteraction: false,
+                useNativeDriver: true
+              }}
+            />
+          </TestCase>
+          <TestCase itShould="activeAnimationType自定义动画类型timing activeAnimationOptions自定义动画">
+            <Carousel
+              data={ENTRIES1}
+              renderItem={_renderItem}
+              sliderWidth={300}
+              itemWidth={100}
+              sliderHeight={200}
+              itemHeight={100}
+              activeAnimationType={'timing'}
+              activeAnimationOptions={{
+                duration: 2000,
+                delay: 1,
                 isInteraction: false,
                 useNativeDriver: true
               }}
