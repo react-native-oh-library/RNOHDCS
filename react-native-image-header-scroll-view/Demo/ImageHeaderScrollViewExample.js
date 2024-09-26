@@ -7,9 +7,8 @@
  * 
  */
 
-import React, { useRef } from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, StatusBar } from 'react-native';
-import * as Animatable from 'react-native-animatable';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, Image,Animated, Dimensions ,Easing} from 'react-native';
 import ImageHeaderScrollView ,{TriggeringView}  from 'react-native-image-header-scroll-view';
 const MIN_HEIGHT = 80;
 const MAX_HEIGHT = 250;
@@ -103,12 +102,31 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   sectionLarge: {
-    height: 600,
-  },
+    height: 800,
+},
 });
 
 function ImageHeaderScrollViewExample () {
-  const HeaderRef = useRef(null)
+  const [visible, setVisible] = useState(false);
+    const fadeAnim = new Animated.Value(0);
+    useEffect(() => {
+        if (visible) {
+          Animated.timing(fadeAnim, {
+            toValue: 1,
+            duration: 100,
+            easing: Easing.bounce,
+            useNativeDriver: true,
+          }).start();
+        } else {
+          // 如果当前是不可见的，则执行淡出动画
+          Animated.timing(fadeAnim, {
+            toValue: 0,
+            duration: 100,
+            easing: Easing.bounce,
+            useNativeDriver: true,
+          }).start();
+        }
+      }, [visible, fadeAnim]);  
  
     return (
       <View style={{ flex: 1 }}>
@@ -123,14 +141,13 @@ function ImageHeaderScrollViewExample () {
           overlayColor={'blue'} 
           renderHeader={() => <Image source={require('../Tester/Pages/doctorwho.jpg')} style={styles.image} />} 
           renderFixedForeground={() => (
-            <Animatable.View
-              style={styles.navTitleView}
-              ref={HeaderRef}
-            >
-              <Text style={styles.navTitle}>
+            <Animated.View
+            style={[styles.navTitleView,{ opacity: fadeAnim}]}  
+        >
+            <Text style={styles.navTitle}>
                 {tvShowContent.title}, ({tvShowContent.year})
-              </Text>
-            </Animatable.View> 
+            </Text>
+        </Animated.View>
           )} 
           renderForeground={() => (
             <View style={styles.titleContainer}>
@@ -141,8 +158,8 @@ function ImageHeaderScrollViewExample () {
           disableHeaderGrow={false}>
          <>
           <TriggeringView
-            onHide={() =>  HeaderRef?.current?.fadeInUp(100)}
-            onDisplay={() => HeaderRef?.current?.fadeOut(100)}
+              onHide={() => setVisible(true)}
+              onDisplay={() => setVisible(false)}
           >
             <Text style={styles.title}>
               <Text style={styles.name}>{tvShowContent.title}</Text>, ({tvShowContent.year})

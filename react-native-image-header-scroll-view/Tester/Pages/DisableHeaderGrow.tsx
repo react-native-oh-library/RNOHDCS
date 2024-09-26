@@ -9,7 +9,6 @@
 
 import React, { useRef } from 'react';
 import { StyleSheet, Text, View, ScrollView, Image, Dimensions, StatusBar } from 'react-native';
-import * as Animatable from 'react-native-animatable';
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino'
 import ImageHeaderScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 const MIN_HEIGHT = 80;
@@ -104,7 +103,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
     },
     sectionLarge: {
-        height: 500,
+        height: 800,
     },
 });
 
@@ -114,8 +113,7 @@ function DisableHeaderGrow() {
     return (
         <Tester>
             <TestSuite name='disableHeaderGrow'>
-                <TestCase itShould='disableHeaderGrow'>
-                   
+                <TestCase itShould='disableHeaderGrow'> 
                         <View style={{ height:1000}}>
                             <ImageHeaderScrollView
                                 maxHeight={MAX_HEIGHT}
@@ -125,14 +123,6 @@ function DisableHeaderGrow() {
                                 disableHeaderGrow={false}
                             >
                                   <>
-                                    <TriggeringView
-                                        onHide={() => HeaderRef?.current?.fadeInUp(100)}
-                                        onDisplay={() => HeaderRef?.current?.fadeOut(100)}
-                                    >
-                                        <Text style={styles.title}>
-                                            <Text style={styles.name}>{tvShowContent.title}</Text>, ({tvShowContent.year})
-                                        </Text>
-                                    </TriggeringView>
                                     <View style={styles.section}>
                                         <Text style={styles.sectionTitle}>Overview</Text>
                                         <Text style={styles.sectionContent}>{tvShowContent.overview}</Text>
