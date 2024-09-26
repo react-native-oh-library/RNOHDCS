@@ -14,7 +14,7 @@ export const ScanOnErrorTest = () => {
     <Tester>
       <TestSuite name="onError">
         <TestCase itShould="处理报错信息">
-          <View>
+          <View style={styles.view}>
             <Camera
               ref={cameraRef}
               style={styles.cameraPreview}

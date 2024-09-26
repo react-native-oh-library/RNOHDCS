@@ -11,14 +11,12 @@ export const ScanZoomTest = () => {
     <Tester>
       <TestSuite name="zoom">
         <TestCase itShould={`设置变焦倍数:${zoom}x`}>
-          <View>
-            <Camera
-              ref={cameraRef}
-              style={styles.cameraPreview}
-              zoom={zoom}
-              scanBarcode
-            />
-          </View>
+          <Camera
+            ref={cameraRef}
+            style={styles.cameraPreview}
+            zoom={zoom}
+            scanBarcode
+          />
           <View style={styles.actionBtn}>
             <Button
               title="setZoom=5"

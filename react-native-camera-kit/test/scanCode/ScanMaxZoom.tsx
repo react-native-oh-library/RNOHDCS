@@ -18,15 +18,13 @@ export const ScanMaxZoomTest = () => {
           <View>
             <Text>当前zoom：{zoom}</Text>
           </View>
-          <View>
-            <Camera
-              ref={cameraRef}
-              style={styles.cameraPreview}
-              maxZoom={maxZoom}
-              onZoom={onZoom}
-              scanBarcode
-            />
-          </View>
+          <Camera
+            ref={cameraRef}
+            style={styles.cameraPreview}
+            maxZoom={maxZoom}
+            onZoom={onZoom}
+            scanBarcode
+          />
           <View style={styles.actionBtn}>
             <Button
               title="setZoom=5"

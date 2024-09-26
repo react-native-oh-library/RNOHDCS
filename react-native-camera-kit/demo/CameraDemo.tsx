@@ -29,6 +29,7 @@ export const CameraDemo: React.FC = (): JSX.Element => {
           ref={nativeRef}
           maxZoom={10}
           cameraType={CameraType.Back}
+          flashMode={0}
           onError={onError}
           onZoom={onZoom}
         />

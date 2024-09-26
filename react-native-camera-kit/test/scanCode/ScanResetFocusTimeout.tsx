@@ -11,14 +11,12 @@ export const ScanResetFocusTimeoutTest = () => {
     <Tester>
       <TestSuite name="resetFocusTimeout">
         <TestCase itShould={`自动取消对焦时间:${resetFocusTimeout}ms`}>
-          <View >
-            <Camera
-              ref={cameraRef}
-              style={styles.cameraPreview}
-              resetFocusTimeout={resetFocusTimeout}
-              scanBarcode
-            />
-          </View>
+          <Camera
+            ref={cameraRef}
+            style={styles.cameraPreview}
+            resetFocusTimeout={resetFocusTimeout}
+            scanBarcode
+          />
           <View style={styles.actionBtn}>
             <Button
               title="设置2S"

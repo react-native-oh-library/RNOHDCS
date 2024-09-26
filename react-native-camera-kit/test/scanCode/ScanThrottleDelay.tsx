@@ -11,14 +11,12 @@ export const ScanScanThrottleDelayTest = () => {
     <Tester>
       <TestSuite name="scanThrottleDelay">
         <TestCase itShould={`扫描限制延时:${scanThrottleDelay}ms`}>
-          <View>
-            <Camera
-              ref={cameraRef}
-              style={styles.cameraPreview}
-              scanBarcode
-              scanThrottleDelay={scanThrottleDelay}
-            />
-          </View>
+          <Camera
+            ref={cameraRef}
+            style={styles.cameraPreview}
+            scanBarcode
+            scanThrottleDelay={scanThrottleDelay}
+          />
           <View style={styles.actionBtn}>
             <Button
               title="设置2s"

@@ -1,22 +1,35 @@
-import {useRef} from 'react';
-import React, {StyleSheet, View} from 'react-native';
-import {CameraApi, CameraType, Camera} from 'react-native-camera-kit';
+import {useRef, useState} from 'react';
+import React, {Button, StyleSheet, View} from 'react-native';
+import {CameraApi, Camera} from 'react-native-camera-kit';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
 export const ScanLaserColorTest = () => {
   const cameraRef = useRef<CameraApi>(null);
+  const [laserColor, setLaserColor] = useState<string>('#fff');
 
   return (
     <Tester>
       <TestSuite name="LaserColor:条形码扫描仪激光可视化的颜色">
-        <TestCase itShould="设置为红色">
-          <View>
-            <Camera
-              ref={cameraRef}
-              style={styles.cameraPreview}
-              laserColor={'FFE20C56'}
-              scanBarcode
-              showFrame
+        <TestCase itShould={laserColor === '#FF0034' ? '红色' : '白色'}>
+          <Camera
+            ref={cameraRef}
+            style={styles.cameraPreview}
+            laserColor={laserColor}
+            scanBarcode
+            showFrame
+          />
+          <View style={styles.actionBtn}>
+            <Button
+              title="设置红色"
+              onPress={() => {
+                setLaserColor('#FF0034');
+              }}
+            />
+            <Button
+              title="设置白色"
+              onPress={() => {
+                setLaserColor('#fff');
+              }}
             />
           </View>
         </TestCase>
@@ -25,7 +38,6 @@ export const ScanLaserColorTest = () => {
   );
 };
 const styles = StyleSheet.create({
-  view: {flex: 1},
   cameraPreview: {
     width: '100%',
     aspectRatio: 3 / 4,
@@ -34,10 +46,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    position: 'absolute',
-    bottom: 10,
-    left: 0,
-    zIndex: 999,
-    gap: 10,
+    padding: 10,
+    backgroundColor: '#000',
   },
 });

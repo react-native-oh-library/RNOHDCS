@@ -11,7 +11,7 @@ export const ScanShowFrameTest = () => {
     <Tester>
       <TestSuite name="showFrame">
         <TestCase itShould={`${showFrame ? '显示' : '不显示'}扫描帧率`}>
-          <View >
+          <View style={styles.view}>
             <Camera
               ref={cameraRef}
               style={styles.cameraPreview}

@@ -19,14 +19,12 @@ export const zoomModeTest = () => {
             zoomMode === 'on' ? '开启对焦' : '关闭对焦'
           }`}>
           <Text style={styles.text}>当前zoom:{zoom}x</Text>
-          <View>
-            <Camera
-              ref={cameraRef}
-              style={styles.cameraPreview}
-              zoomMode={zoomMode}
-              onZoom={onZoom}
-            />
-          </View>
+          <Camera
+            ref={cameraRef}
+            style={styles.cameraPreview}
+            zoomMode={zoomMode}
+            onZoom={onZoom}
+          />
           <View style={styles.actionBtn}>
             <Button
               title="开启对焦"
