@@ -1,0 +1,10 @@
+export { MapViewTest } from "./MapViewTest";
+export { MarkerTest } from "./MarkerTest";
+export { PolygonTest } from "./PolygonTest";
+export { PolylineTest } from "./PolylineTest";
+export { CircleTest } from "./CircleTest";
+export { GeojsonTest } from "./GeojsonTest";
+export { OverlayTest } from "./OverlayTest";
+export { UrlWMSTileTest } from "./UrlTile&WMSTile_Test";
+export { CalloutTest } from "./CalloutTest";
+export { HeatmapTest } from "./HeatmapTest";
