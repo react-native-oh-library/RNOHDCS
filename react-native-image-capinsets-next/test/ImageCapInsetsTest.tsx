@@ -102,10 +102,10 @@ const YourImage = () => {
                 <Text>切换本地图片source: </Text>
                 <Switch
                   trackColor={{false: '#767577', true: '#81b0ff'}}
-                  thumbColor={currentImg1 === img1 ? '#f5dd4b' : '#f4f3f4'}
+                  thumbColor={currentImg11 === img1 ? '#f5dd4b' : '#f4f3f4'}
                   ios_backgroundColor="#3e3e3e"
                   onValueChange={onChangeUrl11}
-                  value={currentImg1 === img1 ? true : false}
+                  value={currentImg11 === img1 ? true : false}
                 />
               </View>
             </View>
