@@ -49,7 +49,7 @@ const YourImage = () => {
                 capInsets={currentCapInset1}>
               </ImageCapInset>
               <View style={styles.switchItem}>
-                <Text>切换本地图片: </Text>
+                <Text>切换本地图片source: </Text>
                 <Switch
                   trackColor={{false: '#767577', true: '#81b0ff'}}
                   thumbColor={currentImg1 === img1 ? '#f5dd4b' : '#f4f3f4'}
@@ -59,7 +59,7 @@ const YourImage = () => {
                 />
               </View>
               <View style={styles.switchItem}>
-                <Text>切换本地图片Inset: </Text>
+                <Text>切换本地图片capinset: </Text>
                 <Switch
                   thumbColor={currentCapInset1 === initInset ? '#f5dd4b' : '#f4f3f4'}
                   onValueChange={onChangeInset1}
@@ -67,8 +67,8 @@ const YourImage = () => {
                 />
               </View>
               <View style={styles.instruction}>
-                  <Text>开关关闭: top: 15, right: 20, bottom: 15, left: 20</Text>
-                  <Text>开关打开: top: 2, right: 5, bottom: 2, left: 5</Text>
+                  <Text>开关关闭capinset值: top: 15, right: 20, bottom: 15, left: 20</Text>
+                  <Text>开关打开capinset值: top: 2, right: 5, bottom: 2, left: 5</Text>
               </View>
             </View>
           </TestCase>
@@ -80,7 +80,7 @@ const YourImage = () => {
                 capInsets={currentCapInset2}>
               </ImageCapInset>
               <View style={styles.switchItem}>
-                <Text>切换网络图片: </Text>
+                <Text>切换网络图片source: </Text>
                 <Switch
                   trackColor={{false: '#767577', true: '#81b0ff'}}
                   thumbColor={currentImg2 === img3 ? '#f5dd4b' : '#f4f3f4'}
@@ -90,7 +90,7 @@ const YourImage = () => {
                 />
               </View>
               <View style={styles.switchItem}>
-                <Text>切换网络图片Inset: </Text>
+                <Text>切换网络图片capinset: </Text>
                 <Switch
                   thumbColor={currentCapInset2 === initInset ? '#f5dd4b' : '#f4f3f4'}
                   onValueChange={onChangeInset2}
@@ -98,8 +98,8 @@ const YourImage = () => {
                 />
               </View>
               <View style={styles.instruction}>
-                <Text>开关关闭: top: 15, right: 20, bottom: 15, left: 20</Text>
-                <Text>开关打开: top: 2, right: 5, bottom: 2, left: 5</Text>
+                <Text>开关关闭capinset值: top: 15, right: 20, bottom: 15, left: 20</Text>
+                <Text>开关打开capinset值: top: 2, right: 5, bottom: 2, left: 5</Text>
               </View>
           </View>
         </TestCase>
