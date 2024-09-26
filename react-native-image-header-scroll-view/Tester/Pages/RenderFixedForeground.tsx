@@ -7,9 +7,8 @@
  * 
  */
 
-import React, { useRef } from 'react';
-import { StyleSheet, Text, View, ScrollView, Image, Dimensions, StatusBar } from 'react-native';
-import * as Animatable from 'react-native-animatable';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, Image,Animated, Dimensions ,Easing} from 'react-native';
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino'
 import ImageHeaderScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 const MIN_HEIGHT = 80;
@@ -104,12 +103,32 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
     },
     sectionLarge: {
-        height: 500,
+        height: 800,
     },
 });
 
 function RenderFixedForeground() {
-    const HeaderRef = useRef(null)
+    const [visible, setVisible] = useState(false);
+    const fadeAnim = new Animated.Value(0);
+    useEffect(() => {
+        if (visible) {
+          Animated.timing(fadeAnim, {
+            toValue: 1,
+            duration: 100,
+            easing: Easing.bounce,
+            useNativeDriver: true,
+          }).start();
+        } else {
+          // 如果当前是不可见的，则执行淡出动画
+          Animated.timing(fadeAnim, {
+            toValue: 0,
+            duration: 100,
+            easing: Easing.bounce,
+            useNativeDriver: true,
+          }).start();
+        }
+      }, [visible, fadeAnim]);   
+     
 
     return (
         <Tester>
@@ -123,20 +142,19 @@ function RenderFixedForeground() {
                                 renderHeader={() => <Image source={require('./doctorwho.jpg')} style={styles.image} />}
                                 maxOverlayOpacity={0.8}
                                 renderFixedForeground={() => (
-                                    <Animatable.View
-                                        style={styles.navTitleView}
-                                        ref={HeaderRef}
+                                    <Animated.View
+                                        style={[styles.navTitleView,{ opacity: fadeAnim}]}  
                                     >
                                         <Text style={styles.navTitle}>
                                             {tvShowContent.title}, ({tvShowContent.year})
                                         </Text>
-                                    </Animatable.View>
+                                    </Animated.View>
                                 )}
                             >
                                   <>
                                     <TriggeringView
-                                        onHide={() => HeaderRef?.current?.fadeInUp(100)}
-                                        onDisplay={() => HeaderRef?.current?.fadeOut(100)}
+                                      onHide={() => setVisible(true)}
+                                      onDisplay={() => setVisible(false)}
                                     >
                                         <Text style={styles.title}>
                                             <Text style={styles.name}>{tvShowContent.title}</Text>, ({tvShowContent.year})
