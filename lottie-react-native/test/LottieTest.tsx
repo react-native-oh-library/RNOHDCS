@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, ScrollView, Button, Text, TextInput, StyleSheet } from 'react-native';
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
-import LottieView from "@react-native-oh-tpl/lottie-react-native";
+import LottieView from '@react-native-oh-tpl/lottie-react-native';
 
 export default function LottieTest() {
     const animateString = {
@@ -317,12 +317,13 @@ export default function LottieTest() {
                             </View>
                         </TestCase>
 
-                        <TestCase itShould={'LottieView duration prop is 2000ms.'}>
+                        <TestCase itShould={'LottieView duration prop is 6000ms.'}>
                             <View style={{ flex: 1, width: 300, height: 300 }}>
                                 <LottieView style={{ width: 300, height: 280 }}
                                     source={require("../assets/data_base64s.json")}
-                                    duration={2000}
-                                    autoPlay loop />
+                                    duration={6000}
+                                    autoPlay
+                                    loop={false} />
                             </View>
                         </TestCase>
                         <TestCase itShould={'LottieView loop prop is true.'}>
@@ -348,7 +349,7 @@ export default function LottieTest() {
                                 <LottieView style={{ width: 300, height: 300, backgroundColor: 'red' }}
                                     source={require("../assets/data_base64s.json")}
                                     duration={1000}
-                                    imageAssetsFolder={"../assets"}
+                                    imageAssetsFolder={"images/"}
                                     autoPlay 
                                     loop />
                             </View>
