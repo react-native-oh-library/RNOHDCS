@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Button, RefreshControl, Alert } from 'react-nat
 import WaterfallFlow from 'react-native-waterfall-flow';
 
 const WaterfallFlowExample = () => {
-  const item = ['Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item'].map((l, i) => ({ id: l, text: i + ` ${l}` }))
+  const item = ['Item', 'ItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItem', 'ItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItem', 'Item', 'ItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItem', 'Item', 'ItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItem', 'Item', 'Item', 'ItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItem', 'Item', 'Item', 'ItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItem', 'Item', 'Item', 'ItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItem', 'Item', 'Item', 'Item', 'Item', 'ItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItem', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item', 'Item'].map((l, i) => ({ id: l, text: i + ` ${l}` }))
   const [data, setData] = useState(item);
   const [refreshing, setRefreshing] = useState(false);
   const waterfallRef = useRef(null);
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
-    padding: 10,
+    backgroundColor: '#FFF'
   },
   item: {
     backgroundColor: '#ccc',
