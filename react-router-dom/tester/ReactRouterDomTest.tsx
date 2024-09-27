@@ -1,26 +1,26 @@
 import { Text, View, TouchableHighlight, Platform, TextInput, ScrollView } from 'react-native';
 import { LogicalTestCase, TestSuite, TestCase, Tester } from '@rnoh/testerino';
 import {
-    MemoryRouter as Router,
-    Outlet,
-    useMatch,
-    useInRouterContext,
-    NavigationType,
-    useOutletContext,
+    MemoryRouter as Router, 
+    Outlet, 
+    useMatch, 
+    useInRouterContext, 
+    NavigationType, 
+    useOutletContext, 
     useHref,
     useAsyncValue,
-    useAsyncError,
-    parsePath,
-    useNavigationType,
-    useRoutes,
-    useNavigate,
-    useOutlet,
-    Route,
-    Routes,
-    Navigate,
+    useAsyncError, 
+    parsePath, 
+    useNavigationType, 
+    useRoutes, 
+    useNavigate, 
+    useOutlet, 
+    Route, 
+    Routes, 
+    Navigate, 
     useParams,
     useLocation
-} from "react-router-dom";
+} from 'react-router-dom';
 import React, { useState } from 'react';
 
 type TesterTag = 'dev';
@@ -67,23 +67,24 @@ const Button = ({ label, onPress }: { onPress: () => void; label: string }) => {
 
 const Home = () => {
     const navigate = useNavigate();
+    const [count, setCount] = React.useState(0);
     return (
         <View>
             <Text>Home</Text>
-            <Button label="To Login by navigate(/Login)" onPress={() => {
-                navigate("/Login");
+            <Button label='To Login by navigate(/Login)' onPress={() => {
+                navigate('/Login');
             }} />
-            <Button label="To Login by navigate(/Index1)" onPress={() => {
-                navigate("/Index1");
+            <Button label='To Login by navigate(/Index1)' onPress={() => {
+                navigate('/Index1');
             }} />
-            <Button label="Show Tasks by navigate(/Detail)" onPress={() => {
-                navigate("/Detail", {
+            <Button label='Show Tasks by navigate(/Detail)' onPress={() => {
+                navigate('/Detail', {
                     replace: false,
                     relative: 'route',
                     preventScrollReset: true,
                 });
             }} />
-            <Outlet />
+            <Outlet context={[count, setCount]}/>
         </View>
     );
 };
@@ -95,21 +96,21 @@ const Login = () => {
 };
 
 const Index1 = () => {
+      const [count, setCount] = useOutletContext();
+    const increment = () => setCount(2);
     return (
         <View>
             <Text>Index路由内容</Text>
+            <Button label='useOutletContext' onPress={increment} />
+            <Text>{count}</Text>
         </View>
     );
 };
 
 const Index = () => {
-    const [count, setCount] = useOutletContext();
-    const increment = () => setCount(2);
     return (
         <View>
             <Text>Index路由内容</Text>
-            <Button label="useOutletContext" onPress={increment} />
-            <Text>{count}</Text>
         </View>
     );
 };
@@ -139,7 +140,7 @@ const RouteIndex = () => {
 const GetRoutes = () => {
     return useRoutes([
         {
-            path: "/",
+            path: '/',
             element: <Home />,
             children: [
                 {
@@ -167,14 +168,14 @@ const UseOutletHome = (props: any) => {
     return (
         <View>
             <Text>Home</Text>
-            <Button label="To Login by navigate(/Login)" onPress={() => {
-                navigate("/Login");
+            <Button label='To Login by navigate(/Login)' onPress={() => {
+                navigate('/Login');
             }} />
-            <Button label="To Login by navigate(/Index)" onPress={() => {
-                navigate("/Index");
+            <Button label='To Login by navigate(/Index)' onPress={() => {
+                navigate('/Index');
             }} />
-            <Button label="Show Tasks by navigate(/Detail)" onPress={() => {
-                navigate("/Detail", {
+            <Button label='Show Tasks by navigate(/Detail)' onPress={() => {
+                navigate('/Detail', {
                     replace: false,
                     relative: 'route',
                     preventScrollReset: true,
@@ -216,8 +217,8 @@ const Team = () => {
 const LocationTest = () => {
     const location = useLocation();
     return (
-        <View style={{ backgroundColor: "blue" }}>
-            <Text>---- {location.key.length == 0 ? "LocationTest page!" : location.key} ----</Text>
+        <View style={{ backgroundColor: 'blue' }}>
+            <Text>---- {location.key.length == 0 ? 'LocationTest page!' : location.key} ----</Text>
             <Text>pathname:{location.pathname} search:{location.search} hash:{location.hash} </Text>
         </View>
     );
@@ -244,7 +245,7 @@ const Users2 = () => {
 const LayoutPage = () => {
     return useRoutes([
         {
-            path: "/",
+            path: '/',
             element: <Navigation />,
             children: [
 
@@ -266,11 +267,11 @@ const Navigation = () => {
     return (
         <View style={{ display: 'flex', justifyContent: 'flex-start' }}>
             <Text>Navigation</Text>
-            <Button label="Users组件跳转" onPress={() => {
-                navigate("/Users");
+            <Button label='Users组件跳转' onPress={() => {
+                navigate('/Users');
             }} />
-            <Button label="Users2组件跳转" onPress={() => {
-                navigate("/Users2");
+            <Button label='Users2组件跳转' onPress={() => {
+                navigate('/Users2');
             }} />
             <Outlet />
         </View>
@@ -304,7 +305,7 @@ const Users4 = ({ to }: { to: string }) => {
 const TypePage = () => {
     return useRoutes([
         {
-            path: "/",
+            path: '/',
             element: <NavigationTypePage />,
             children: [
 
@@ -330,8 +331,8 @@ const NavigationTypePage = () => {
     return (
         <View style={{ display: 'flex', justifyContent: 'flex-start' }}>
             <Text>Navigation</Text>
-            <Button label="Navigation组件跳转" onPress={() => {
-                navigate("/Users1");
+            <Button label='Navigation组件跳转' onPress={() => {
+                navigate('/Users1');
             }} />
             <Outlet />
         </View>
@@ -356,7 +357,7 @@ const Users6 = () => {
 const HrefView = () => {
     return useRoutes([
         {
-            path: "/",
+            path: '/',
             element: <HrefPage />,
             children: [
 
@@ -385,11 +386,11 @@ const HrefPage = () => {
     return (
         <View style={{ display: 'flex', justifyContent: 'flex-start' }}>
             <Text>Navigation</Text>
-            <Button label="模拟路径" onPress={() => {
-                navigate("/Users4");
+            <Button label='模拟路径' onPress={() => {
+                navigate('/Users4');
             }} />
-            <Button label="捕获路径" onPress={() => {
-                navigate("/Users6");
+            <Button label='捕获路径' onPress={() => {
+                navigate('/Users6');
             }} />
             <Outlet />
         </View>
@@ -401,9 +402,9 @@ export default function ReactRouterDomTest() {
     return (
         <ScrollView>
             <Tester>
-                <TestSuite name="ReactRouterDomTest">
+                <TestSuite name='ReactRouterDomTest'>
                     <TestCase
-                        itShould="useRoutes and useNavigate "
+                        itShould='useRoutes and useNavigate and  useOutletContext '
                         initialState={{
                             changeStatus: false
                         }}
@@ -413,7 +414,7 @@ export default function ReactRouterDomTest() {
                                     <Router>
                                         <GetRoutes></GetRoutes>
                                         <Button
-                                            label="点击"
+                                            label='点击'
                                             onPress={() => {
                                                 setState(prev => ({ ...prev, changeStatus: false }));
                                             }}
@@ -424,11 +425,11 @@ export default function ReactRouterDomTest() {
                             return (
                                 <Router>
                                     <Routes>
-                                        <Route path="/" element={<Detail />}>
+                                        <Route path='/' element={<Detail />}>
                                         </Route>
                                     </Routes>
                                     <Button
-                                        label="点击"
+                                        label='点击'
                                         onPress={() => {
                                             setState(prev => ({ ...prev, changeStatus: true }));
                                         }}
@@ -442,7 +443,7 @@ export default function ReactRouterDomTest() {
                     </TestCase>
                     <View style={{ height: 30 }}></View>
                     <TestCase
-                        itShould="MemoryRouter"
+                        itShould='MemoryRouter'
                         initialState={{
                             changeStatus: false
                         }}
@@ -450,12 +451,12 @@ export default function ReactRouterDomTest() {
                             return (
                                 <Router>
                                     <Routes>
-                                        <Route path="/" element={<Detail />}>
+                                        <Route path='/' element={<Detail />}>
                                         </Route>
-                                        <Route path="/Index" element={<Index />}></Route>
+                                        <Route path='/Index' element={<Index />}></Route>
                                     </Routes>
                                     <Button
-                                        label="点击"
+                                        label='点击'
                                         onPress={() => {
                                             setState(prev => ({ ...prev, changeStatus: true }));
                                         }}
@@ -469,7 +470,7 @@ export default function ReactRouterDomTest() {
                     </TestCase>
                     <View style={{ height: 30 }}></View>
                     <TestCase
-                        itShould="UseOutlet and  useOutletContext and useInRouterContext"
+                        itShould='UseOutlet and useInRouterContext'
                         initialState={{
                             changeStatus: false
                         }}
@@ -477,14 +478,14 @@ export default function ReactRouterDomTest() {
                             return (
                                 <Router>
                                     <Routes>
-                                        <Route path="/" element={<UseOutletHome parentState={state.changeStatus}></UseOutletHome>}>
-                                            <Route path="/Login" element={<Login />}></Route>
-                                            <Route path="/Index" element={<Index />}></Route>
-                                            <Route path="/Detail" element={<Detail />}></Route>
+                                        <Route path='/' element={<UseOutletHome parentState={state.changeStatus}></UseOutletHome>}>
+                                            <Route path='/Login' element={<Login />}></Route>
+                                            <Route path='/Index' element={<Index />}></Route>
+                                            <Route path='/Detail' element={<Detail />}></Route>
                                         </Route>
                                     </Routes>
                                     <Button
-                                        label="点击"
+                                        label='点击'
                                         onPress={() => {
                                             setState(prev => ({ ...prev, changeStatus: true }));
                                         }}
@@ -499,7 +500,7 @@ export default function ReactRouterDomTest() {
 
                     <View style={{ height: 30 }}></View>
                     <TestCase
-                        itShould="Outlet"
+                        itShould='Outlet'
                         initialState={{
                             changeStatus: false
                         }}
@@ -509,25 +510,25 @@ export default function ReactRouterDomTest() {
                                 <>
                                     <Router>
                                         <Routes>
-                                            <Route path='/' element={<View style={{ backgroundColor: "green", }}>
+                                            <Route path='/' element={<View style={{ backgroundColor: 'green', }}>
 
                                                 <Text>Welcome to the home page!</Text>
-                                                <Text>-------{messages ? "messages" : "tasks"}-------</Text>
-                                                {messages && (<Navigate to="/messages" replace={false} />)}
-                                                {!messages && (<Navigate to="/tasks" replace={false} />)}
+                                                <Text>-------{messages ? 'messages' : 'tasks'}-------</Text>
+                                                {messages && (<Navigate to='/messages' replace={false} />)}
+                                                {!messages && (<Navigate to='/tasks' replace={false} />)}
                                                 <Outlet />
 
                                             </View>} >
                                                 <Route
-                                                    path="messages"
+                                                    path='messages'
                                                     element={<HomeMessages />}
                                                 />
-                                                <Route path="tasks" element={<HomeTasks />} />
+                                                <Route path='tasks' element={<HomeTasks />} />
                                             </Route>
                                         </Routes>
                                     </Router>
                                     <Button
-                                        label={`切换按钮:${!messages ? "messages" : "tasks"}`}
+                                        label={`切换按钮:${!messages ? 'messages' : 'tasks'}`}
                                         onPress={() => {
                                             setMessages(!messages)
                                             setState(prev => ({ ...prev, changeStatus: true }));
@@ -544,7 +545,7 @@ export default function ReactRouterDomTest() {
 
                     <View style={{ height: 30 }}></View>
                     <TestCase
-                        itShould="Navigate"
+                        itShould='Navigate'
                         initialState={{
                             changeStatus: false
                         }}
@@ -556,17 +557,17 @@ export default function ReactRouterDomTest() {
                                 pathname: '/locationTest',
                                 search: '?id=1&name=test',
                                 hash: '#section1',
-                                key: "locationTest page",
+                                key: 'locationTest page',
                             };
                             return (
                                 <>
                                     <Router>
                                         <Routes location={location}>
-                                            <Route path='/' element={<View style={{ backgroundColor: "green", }}>
+                                            <Route path='/' element={<View style={{ backgroundColor: 'green', }}>
 
                                                 <Text>Navigate text</Text>
-                                                <TextInput placeholder="Input your username" style={{
-                                                    color: 'black', height: 40, fontSize: 16, backgroundColor: 'white', borderColor: "blue", borderWidth: 1, borderRadius: 20, paddingLeft: 20
+                                                <TextInput placeholder='Input your username' style={{
+                                                    color: 'black', height: 40, fontSize: 16, backgroundColor: 'white', borderColor: 'blue', borderWidth: 1, borderRadius: 20, paddingLeft: 20
                                                 }} onChangeText={(value) => {
                                                     setUsername(value);
                                                 }}
@@ -578,7 +579,7 @@ export default function ReactRouterDomTest() {
 
                                             </View>} >
                                                 <Route
-                                                    path=":teamId"
+                                                    path=':teamId'
                                                     element={<Team />}
                                                 />
 
@@ -602,7 +603,7 @@ export default function ReactRouterDomTest() {
                     </TestCase>
                     <View style={{ height: 30 }}></View>
                     <TestCase
-                        itShould="useLocation"
+                        itShould='useLocation'
                         initialState={{
                             changeStatus: false
                         }}
@@ -612,25 +613,25 @@ export default function ReactRouterDomTest() {
                                 <>
                                     <Router>
                                         <Routes>
-                                            <Route path='/' element={<View style={{ backgroundColor: "green", }}>
+                                            <Route path='/' element={<View style={{ backgroundColor: 'green', }}>
 
                                                 <Text>Welcome to the home page!</Text>
-                                                <Text>-------{messages ? "messages" : "locationTest"}-------</Text>
-                                                {messages && (<Navigate to="/messages" replace={true} />)}
-                                                {!messages && (<Navigate to="/locationTest" replace={true} />)}
+                                                <Text>-------{messages ? 'messages' : 'locationTest'}-------</Text>
+                                                {messages && (<Navigate to='/messages' replace={true} />)}
+                                                {!messages && (<Navigate to='/locationTest' replace={true} />)}
                                                 <Outlet />
 
                                             </View>} >
                                                 <Route
-                                                    path="messages"
+                                                    path='messages'
                                                     element={<HomeMessages />}
                                                 />
-                                                <Route path="locationTest" element={<LocationTest />} />
+                                                <Route path='locationTest' element={<LocationTest />} />
                                             </Route>
                                         </Routes>
                                     </Router>
                                     <Button
-                                        label={`点击切换按钮:${!messages ? "messages" : "locationTest"}`}
+                                        label={`点击切换按钮:${!messages ? 'messages' : 'locationTest'}`}
                                         onPress={() => {
                                             setMessages(!messages)
                                             setState(prev => ({ ...prev, changeStatus: true }));
@@ -645,7 +646,7 @@ export default function ReactRouterDomTest() {
                         }}>
                     </TestCase>
                     <TestCase
-                        itShould="Routes and Route"
+                        itShould='Routes and Route'
                         initialState={{
                             changeStatus: false
                         }}
@@ -655,10 +656,10 @@ export default function ReactRouterDomTest() {
                                     <Routes>
                                         <Route element={<RouteDetail />}>
                                         </Route>
-                                        <Route path="/Index" element={<RouteIndex />}></Route>
+                                        <Route path='/Index' element={<RouteIndex />}></Route>
                                     </Routes>
                                     <Button
-                                        label="点击"
+                                        label='点击'
                                         onPress={() => {
                                             setState(prev => ({ ...prev, changeStatus: true }));
                                         }}
@@ -671,7 +672,7 @@ export default function ReactRouterDomTest() {
                         }}>
                     </TestCase>
                     <TestCase
-                        itShould="useNavigate and useParams "
+                        itShould='useNavigate and useParams '
                         initialState={{
                             changeStatus: false
                         }}
@@ -681,7 +682,7 @@ export default function ReactRouterDomTest() {
                                     <LayoutPage></LayoutPage>
                                     <Routes>
                                         <Route
-                                            path=":teamId"
+                                            path=':teamId'
                                             element={<Team />}
                                         />
                                     </Routes>
@@ -693,7 +694,7 @@ export default function ReactRouterDomTest() {
                         }}>
                     </TestCase>
                     <TestCase
-                        itShould="navigationType and useNavigationType"
+                        itShould='navigationType and useNavigationType'
                         initialState={{
                             changeStatus: false
                         }}
@@ -709,7 +710,7 @@ export default function ReactRouterDomTest() {
                         }}>
                     </TestCase>
                     <TestCase
-                        itShould="useHref"
+                        itShould='useHref'
                         initialState={{
                             changeStatus: false
                         }}
