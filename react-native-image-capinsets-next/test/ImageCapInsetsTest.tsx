@@ -69,8 +69,8 @@ const YourImage = () => {
   return (
     <ScrollView>
     <Tester>
-      <TestSuite name="react native image capinsets next load locale picture property Source">
-        <TestCase itShould="toggle the property Source with capinset {top: 2, right: 5, bottom: 2, left: 5}">
+      <TestSuite name="react native image capinsets next">
+        <TestCase itShould="load locale picture 01: toggle the property Source with capinset {top: 2, right: 5, bottom: 2, left: 5}">
             <View style={styles.container}>
               <ImageCapInset
                 style={styles.imgStyle}
@@ -89,9 +89,8 @@ const YourImage = () => {
               </View>
             </View>
           </TestCase>
-          </TestSuite>
-          <TestSuite name="react native image capinsets next load locale picture property Source">
-          <TestCase itShould="toggle the property Source with capinset {top: 15, right: 20, bottom: 15, left: 20}">
+          
+          <TestCase itShould="load locale picture 02: toggle the property Source with capinset {top: 15, right: 20, bottom: 15, left: 20}">
             <View style={styles.container}>
               <ImageCapInset
                 style={styles.imgStyle}
@@ -110,9 +109,8 @@ const YourImage = () => {
               </View>
             </View>
           </TestCase>
-          </TestSuite>
-          <TestSuite name="react native image capinsets next load locale picture property CapInset">
-          <TestCase itShould="toggle the property CapInset">
+          
+          <TestCase itShould="load locale picture 03: toggle the property CapInset">
             <View style={styles.container}>
               <ImageCapInset
                 style={styles.imgStyle}
@@ -133,9 +131,8 @@ const YourImage = () => {
               </View>
             </View>
           </TestCase>
-          </TestSuite>
-          <TestSuite name="react native image capinsets next load locale picture property CapInset">
-          <TestCase itShould="toggle the property CapInset">
+          
+          <TestCase itShould="load locale picture 04: toggle the property CapInset">
             <View style={styles.container}>
               <ImageCapInset
                 style={styles.imgStyle}
@@ -156,9 +153,8 @@ const YourImage = () => {
               </View>
             </View>
           </TestCase>
-          </TestSuite>
-          <TestSuite name="react native image capinsets next load network picture property Source">
-          <TestCase itShould="toggle property Source with capinset {top: 2, right: 5, bottom: 2, left: 5}">
+          
+          <TestCase itShould="load network picture 05: toggle property Source with capinset {top: 2, right: 5, bottom: 2, left: 5}">
             <View style={styles.container}>
               <ImageCapInset
                 style={styles.imgStyle}
@@ -177,9 +173,8 @@ const YourImage = () => {
               </View>
           </View>
         </TestCase>
-        </TestSuite>
-        <TestSuite name="react native image capinsets next load network picture property Source">
-        <TestCase itShould="toggle property Source with capinset {top: 15, right: 20, bottom: 15, left: 20}">
+        
+        <TestCase itShould="load network picture 06: toggle property Source with capinset {top: 15, right: 20, bottom: 15, left: 20}">
             <View style={styles.container}>
               <ImageCapInset
                 style={styles.imgStyle}
@@ -198,9 +193,8 @@ const YourImage = () => {
               </View>
           </View>
         </TestCase>
-        </TestSuite>
-        <TestSuite name="react native image capinsets next load network picture property Capinset">
-        <TestCase itShould="toggle property Capinset">
+        
+        <TestCase itShould="load network picture 07: toggle property Capinset">
             <View style={styles.container}>
               <ImageCapInset
                 style={styles.imgStyle}
@@ -221,9 +215,8 @@ const YourImage = () => {
               </View>
           </View>
         </TestCase>
-        </TestSuite>
-        <TestSuite name="react native image capinsets next load network picture property Capinset">
-        <TestCase itShould="toggle property Capinset">
+        
+        <TestCase itShould="load network picture 08: toggle property Capinset">
             <View style={styles.container}>
               <ImageCapInset
                 style={styles.imgStyle}
@@ -244,7 +237,7 @@ const YourImage = () => {
               </View>
           </View>
         </TestCase>
-        </TestSuite>
+      </TestSuite>
   </Tester>
   </ScrollView>
   );
