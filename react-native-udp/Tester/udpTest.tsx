@@ -1,4 +1,3 @@
-
 import React, { useState,} from 'react';
 import { StyleSheet,Button,TextInput,Alert} from 'react-native';
 import {TestSuite, Tester,TestCase} from '@rnoh/testerino';
@@ -78,13 +77,13 @@ export function UDPTest() {
     return (
         <Tester>
          <TestSuite name="UDPTest">
-            <TestCase.Example  itShould="createUDP" >
+            <TestCase  itShould="createUDP" >
                  <Button title="createAndBind" onPress={createAndBindUDP}/>
-             </TestCase.Example>
-             <TestCase.Example  itShould="address" >
+             </TestCase>
+             <TestCase  itShould="address" >
                  <Button title="getAddress" onPress={getAddress}/>
-             </TestCase.Example>
-             <TestCase.Example  style={styles.test} itShould="AsendMessage" >
+             </TestCase>
+             <TestCase  style={styles.test} itShould="AsendMessage" >
                 <TextInput
                         style={styles.input}
                         value={bAddress}
@@ -105,21 +104,21 @@ export function UDPTest() {
                     value={aReciveTex}  // 将 TextInput 的 value 绑定到 state 变量
                     onChangeText={(newText) => setARText(newText)}  // 处理用户输入
                 />
-            </TestCase.Example>
-             <TestCase.Example  itShould="setBroadcast" >
+            </TestCase>
+             <TestCase  itShould="setBroadcast" >
                  <Button title="UDPAsetBroadcast" onPress={()=>udpA.setBroadcast(true)}/>
                  <Button title="sendBroadcastMessage" onPress={sendBroadcastMessage}/>
-             </TestCase.Example>
-             <TestCase.Example  itShould="addMembership" >
+             </TestCase>
+             <TestCase  itShould="addMembership" >
                  <Button title="UDPAAddMembership" onPress={addAMembership}/>
                  <Button title="BSendGroupMessage" onPress={sendGroupMessage}/>
-             </TestCase.Example>
-             <TestCase.Example  itShould="dropMembership" >
+             </TestCase>
+             <TestCase  itShould="dropMembership" >
                  <Button title="UDPADropMembership" onPress={dropMembership}/>
-             </TestCase.Example>
-             <TestCase.Example  itShould="CloseUDP" >
+             </TestCase>
+             <TestCase  itShould="CloseUDP" >
                  <Button title="closeUDPA" onPress={()=>udpA.close()}/>
-             </TestCase.Example>
+             </TestCase>
          </TestSuite>
         </Tester>
     );
