@@ -86,7 +86,64 @@ export default function App() {
 
   const renderStepIndicator = (params: any) => {
     const {position, stepStatus} = params;
+    
+    switch (position) {
+      case 0: {
+        return <Text>你</Text>;
+      }
+      case 1: {
+        return <Text>是</Text>;
+      }
+      case 2: {
+        return <Text>真</Text>;
+      }
+      case 3: {
+        return <Text>的</Text>;
+      }
+      case 4: {
+        return <Text>强</Text>;
+      }
+      default: {
+        return <Text>啊</Text>;
+      }
+    }
+  };
+  
+  const renderStepIndicatorWith = (params: any) => {
+    const {position, stepStatus} = params;
+    
+    switch (stepStatus) {
+      case 'unfinished': {
+        return <Text>a</Text>;
+      }
+      case 'current': {
+        return <Text>b</Text>;
+      }
+      case 'finished': {
+        return <Text>c</Text>;
+      }
+      default: {
+        return <Text>A</Text>;
+      }
+    }
+  };
 
+  const onStepPress = (position: number) => {
+    setCurrentPage(position);
+    test.current = 'pass';
+  };
+
+  const renderLabel = ({
+    position,
+    stepStatus,
+    label,
+    currentPosition,
+  }: {
+    position: number;
+    stepStatus: string;
+    label: string;
+    currentPosition: number;
+  }) => {
     switch (position) {
       case 0: {
         return <Text>你</Text>;
@@ -109,12 +166,7 @@ export default function App() {
     }
   };
 
-  const onStepPress = (position: number) => {
-    setCurrentPage(position);
-    test.current = 'pass';
-  };
-
-  const renderLabel = ({
+  const renderLabelTwo = ({
     position,
     stepStatus,
     label,
@@ -125,9 +177,62 @@ export default function App() {
     label: string;
     currentPosition: number;
   }) => {
-    return (      
-      <Text>6</Text>
-    );
+    switch (stepStatus) {
+      case 'unfinished': {
+        return <Text>a</Text>;
+      }
+      case 'current': {
+        return <Text>b</Text>;
+      }
+      case 'finished': {
+        return <Text>c</Text>;
+      }
+      default: {
+        return <Text>A</Text>;
+      }
+    }
+  };
+
+  const renderLabelThree = ({
+    position,
+    stepStatus,
+    label,
+    currentPosition,
+  }: {
+    position: number;
+    stepStatus: string;
+    label: string;
+    currentPosition: number;
+  }) => {
+    switch (label) {
+      case 'Shipping': {
+        return <Text>a</Text>;
+      }
+      default: {
+        return <Text>A</Text>;
+      }
+    }
+  };
+
+  const renderLabelFour = ({
+    position,
+    stepStatus,
+    label,
+    currentPosition,
+  }: {
+    position: number;
+    stepStatus: string;
+    label: string;
+    currentPosition: number;
+  }) => {
+    switch (currentPosition) {
+      case 2: {
+        return <Text>a</Text>;
+      }
+      default: {
+        return <Text>A</Text>;
+      }
+    }
   };
 
   const renderElement = (title: string, fn: Function) => (
@@ -142,7 +247,6 @@ export default function App() {
           title={title}
           onPress={() => {
             fn();
-            setState(true);
           }}></Button>
       )}></TestCase>
   );
@@ -193,21 +297,26 @@ export default function App() {
               },
             )}
 
-            {renderElement('分隔线宽度 separatorStrokeWidth 0 -> 10', () => {
+            {renderElement('分隔线宽度 separatorStrokeWidth 0 -> 3, separatorStrokeUnfinishedWidth:10 -> 0 , separatorStrokeFinishedWidth:3 ->  0 ', () => {
+              setIndicatorStyles({
+                ...indicatorStyles,
+                separatorStrokeWidth: 3,
+                separatorStrokeUnfinishedWidth: 0,
+                separatorStrokeFinishedWidth: 0
+              });
+            })}
+            {renderElement('分隔线宽度 separatorStrokeWidth 0 -> 10, separatorStrokeUnfinishedWidth: 0 , separatorStrokeFinishedWidth: 0 ', () => {
               setIndicatorStyles({
                 ...indicatorStyles,
                 separatorStrokeWidth: 10,
+                separatorStrokeUnfinishedWidth: 0,
+                separatorStrokeFinishedWidth: 0
               });
             })}
-            {renderElement('分隔线宽度 separatorStrokeWidth 10 -> 0', () => {
-              setIndicatorStyles({
-                ...indicatorStyles,
-                separatorStrokeWidth: 0,
-              });
-            })}
+          
 
             {renderElement(
-              '未完成的步骤分隔线宽度 separatorStrokeUnfinishedWidth 10 -> 20',
+              '未完成的步骤分隔线宽度 separatorStrokeUnfinishedWidth 0 -> 20',
               () => {
                 setIndicatorStyles({
                   ...indicatorStyles,
@@ -226,7 +335,7 @@ export default function App() {
             )}
 
             {renderElement(
-              '已完成步骤分隔线宽度 separatorStrokeFinishedWidth 3 -> 8',
+              '已完成步骤分隔线宽度 separatorStrokeFinishedWidth 0 -> 8，0 默认为未完成的步骤分隔线宽度',
               () => {
                 setIndicatorStyles({
                   ...indicatorStyles,
@@ -562,6 +671,31 @@ export default function App() {
                 setIndicatorStyles({...indicatorStyles, labelAlign: 'flex-start'});
               },
             )}
+            {/* 'flex-end' | 'stretch' | 'baseline' */}
+            {renderElement(
+              'label 对其方式 labelAlign flex-start -> flex-end',
+              () => {
+                setIndicatorStyles({...indicatorStyles, labelAlign: 'flex-end'});
+              },
+            )}
+            {renderElement(
+              'label 对其方式 labelAlign flex-end -> stretch',
+              () => {
+                setIndicatorStyles({...indicatorStyles, labelAlign: 'stretch'});
+              },
+            )}
+            {renderElement(
+              'label 对其方式 labelAlign stretch -> baseline',
+              () => {
+                setIndicatorStyles({...indicatorStyles, labelAlign: 'baseline'});
+              },
+            )}
+            {renderElement(
+              'label 对其方式 labelAlign stretch -> undefined',
+              () => {
+                setIndicatorStyles({...indicatorStyles, labelAlign: undefined});
+              },
+            )}
 
             {renderElement(
               'label 字体样式 labelFontFamily Pacifico-Regular -> ""',
@@ -596,9 +730,47 @@ export default function App() {
               />
             </TestCase>
 
+            <TestCase itShould="自定义内容 renderStepIndicator={renderStepIndicatorWith}">
+              <StepIndicator
+                stepCount={5}
+                customStyles={firstIndicatorStyles}
+                renderStepIndicator={renderStepIndicatorWith}
+                currentPosition={currentPage}
+                onPress={onStepPress}
+                labels={arr}
+              />
+            </TestCase>
+
             <TestCase itShould="自定义labels renderLabel={renderLabel}">
               <StepIndicator
                 renderLabel={renderLabel}
+                currentPosition={currentPage}
+                onPress={onStepPress}
+                labels={arr}
+              />
+            </TestCase>
+
+            <TestCase itShould="自定义labels renderLabel={renderLabelTwo}">
+              <StepIndicator
+                renderLabel={renderLabelTwo}
+                currentPosition={currentPage}
+                onPress={onStepPress}
+                labels={arr}
+              />
+            </TestCase>
+
+            <TestCase itShould="自定义labels renderLabel={renderLabelThree}">
+              <StepIndicator
+                renderLabel={renderLabelThree}
+                currentPosition={currentPage}
+                onPress={onStepPress}
+                labels={arr}
+              />
+            </TestCase>
+
+            <TestCase itShould="自定义labels renderLabel={renderLabelFour}">
+              <StepIndicator
+                renderLabel={renderLabelFour}
                 currentPosition={currentPage}
                 onPress={onStepPress}
                 labels={arr}
