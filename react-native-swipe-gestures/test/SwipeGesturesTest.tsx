@@ -6,7 +6,7 @@
  */
 
 import React, { Component, useEffect } from 'react';
-import { View, Text, StatusBar, SafeAreaView, Button, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StatusBar, SafeAreaView, Button, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
 
@@ -21,14 +21,16 @@ const NavigationContext = React.createContext<
 >(undefined);
 
 export function NavigationContainer({
-    initialPage = 'test function',
+    initialPage = 'INDEX',
     children,
 }: {
     initialPage?: string;
     children: any;
 }) {
     const [currentPageName, setCurrentPageName] = React.useState(initialPage);
-    const [registeredPageNames, setRegisteredPageNames] = React.useState<string[]>([]);
+    const [registeredPageNames, setRegisteredPageNames] = React.useState<
+        string[]
+    >([]);
 
     return (
         <NavigationContext.Provider
@@ -45,10 +47,12 @@ export function NavigationContainer({
                 },
                 registeredPageNames,
             }}>
-            <Page name='test function' toName='test attribute'>
-                <SwipeGesturesFunction></SwipeGesturesFunction>
-            </Page>
-            {children}
+            <View style={{ width: '100%', height: '100%', flexDirection: 'column' }}>
+                <Page name="INDEX">
+                    <IndexPage />
+                </Page>
+                {children}
+            </View>
         </NavigationContext.Provider>
     );
 }
@@ -57,35 +61,77 @@ export function useNavigation() {
     return React.useContext(NavigationContext)!;
 }
 
-export function Page({ name, toName, children }: { name: string; toName: string; children: any }) {
+export function Page({ name, children }: { name: string; children: any }) {
     const { currentPageName, navigateTo, registerPageName } = useNavigation();
 
     useEffect(() => {
-        if (name !== 'test function') {
+        if (name !== 'INDEX') {
             registerPageName(name);
         }
     }, [name]);
 
     return name === currentPageName ? (
-        <View style={{ width: '100%', height: '100%' }}>
-            {(
-                <TouchableOpacity
-                    onPress={() => {
-                        navigateTo(toName);
-                    }}>
-                    <Text style={styles.buttonText}>{toName}</Text>
-                </TouchableOpacity>
+        <View style={{ width: '100%', height: '50%' }}>
+            {name !== 'INDEX' && (
+                <View>
+                    <TouchableOpacity
+                        onPress={() => {
+                            navigateTo('INDEX');
+                        }}>
+                        <Text
+                            style={[styles.buttonText]}>
+                            {'‹ Back'}
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             )}
-            {children}
+            <View style={{ width: '100%', flex: 1 }}>{children}</View>
         </View>
     ) : null;
+}
+
+export function IndexPage() {
+    const { navigateTo, registeredPageNames } = useNavigation();
+
+    return (
+        <FlatList
+            data={registeredPageNames}
+            ListHeaderComponent={
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        paddingHorizontal: 16,
+                        paddingVertical: 16,
+                    }}>
+                </View>
+            }
+            renderItem={({ item }) => {
+                return (
+                    <View>
+                        <TouchableOpacity
+                            onPress={() => {
+                                navigateTo(item);
+                            }}>
+                            <Text style={styles.buttonText}>{item}</Text>
+                        </TouchableOpacity>
+                    </View>
+                );
+            }}
+            ItemSeparatorComponent={() => (
+                <View
+                    style={{ height: StyleSheet.hairlineWidth, backgroundColor: '#666' }}
+                />
+            )}
+        />
+    );
 }
 
 const styles = StyleSheet.create({
     container: {
         width: '100%',
         height: '100%',
-        backgroundColor: '#333',
+        backgroundColor: '#888',
     },
     buttonText: {
         width: '100%',
@@ -95,6 +141,7 @@ const styles = StyleSheet.create({
         color: 'blue',
     },
 });
+
 
 class SwipeGesturesFunction extends Component {
     constructor(props) {
@@ -162,8 +209,10 @@ class SwipeGesturesFunction extends Component {
             directionalOffsetThreshold: 80,
             gestureIsClickThreshold: 5
         };
+
         return (
             <Tester>
+
                 <TestSuite name='slip up/down/left/right'>
                     <TestCase itShould='test onSwipe function'>
                         <GestureRecognizer
@@ -329,7 +378,6 @@ class SwipeGesturesAttribute extends Component {
         }
     }
     render() {
-
         return (
             <Tester>
                 <SwipeComponent config={this.state.config} />
@@ -412,9 +460,14 @@ function SwipeGesturesTest() {
             <StatusBar barStyle="light-content" />
             <SafeAreaView>
                 <NavigationContainer>
-                    <Page name='test attribute' toName='test function'>
+                    <Page name='test function'>
+                        <SwipeGesturesFunction></SwipeGesturesFunction>
+                    </Page>
+
+                    <Page name='tets attribute'>
                         <SwipeGesturesAttribute></SwipeGesturesAttribute>
                     </Page>
+
                 </NavigationContainer>
             </SafeAreaView>
         </View>
