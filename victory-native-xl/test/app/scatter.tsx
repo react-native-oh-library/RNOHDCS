@@ -7,7 +7,6 @@ import {
   useChartPressState,
   type ScatterShape,
 } from "victory-native";
-import { useDarkMode } from "react-native-dark";
 import inter from "../../assets/inter-medium.ttf";
 import { appColors } from "./consts/colors";
 import { Button } from "../components/Button";

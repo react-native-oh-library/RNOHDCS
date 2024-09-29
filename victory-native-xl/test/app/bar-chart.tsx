@@ -2,7 +2,6 @@ import { LinearGradient, useFont, vec } from "@shopify/react-native-skia";
 import React, { useState } from "react";
 import { SafeAreaView, ScrollView, StyleSheet, View, Text } from "react-native";
 import { Bar, CartesianChart } from "victory-native";
-import { useDarkMode } from "react-native-dark";
 import inter from "../../assets/inter-medium.ttf";
 import { appColors } from "./consts/colors";
 import { Button } from "../components/Button";
@@ -16,7 +15,6 @@ const DATA = (length: number = 10) =>
 
 export default function BarChartPage() {
   const font = useFont(inter, 12);
-  const isDark = useDarkMode();
   const [data, setData] = useState(DATA(5));
   const [data1, setData1] = useState(DATA(5));
   const [data2, setData2] = useState(DATA(5));

@@ -2,7 +2,6 @@ import * as React from "react";
 import { SafeAreaView, ScrollView, StyleSheet, View, Text } from "react-native";
 import { BarGroup, CartesianChart } from "victory-native";
 import { LinearGradient, useFont, vec } from "@shopify/react-native-skia";
-import { useDarkMode } from "react-native-dark";
 import { appColors } from "./consts/colors";
 import inter from "../../assets/inter-medium.ttf";
 import { Button } from "../components/Button";
@@ -27,7 +26,6 @@ export default function BarGroupPage() {
   const [color2, setColor2] = React.useState("#c084fc");
   const [color3, setColor3] = React.useState("#a5f3fc");
   const font = useFont(inter, 12);
-  const isDark = useDarkMode();
 
   return (
     <Tester style={{ flex: 1 }}>
