@@ -22,7 +22,7 @@ function VideoPlayerTest(){
             <TestCase itShould="test VideoPlayer official web video">
               <VideoPlayer
                 controlTimeout = {160000}
-                source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
+                source = {{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
                 style = {styles.video}
                 paused = {true}
                 title = "oceans"
@@ -35,6 +35,7 @@ function VideoPlayerTest(){
              <VideoPlayer 
                 controlTimeout = {160000}
                 toggleResizeModeOnFullscreen={false}
+                style = {styles.video}
                 source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
                 paused = {true}
               /> 
@@ -43,42 +44,48 @@ function VideoPlayerTest(){
               <VideoPlayer
                 controlTimeout = {160000}
                 toggleResizeModeOnFullscreen={true}
+                style = {styles.video}
                 source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
                 paused = {true}
               /> 
             </TestCase>
             <TestCase itShould="test VideoPlayer showOnStart properties and set value false">
               <VideoPlayer
+                style = {styles.video}
                 controlTimeout = {160000}
                 showOnStart={false}
-                source={{uri: ''}}
+                source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
                 paused = {true}
               /> 
             </TestCase>
             <TestCase itShould="test VideoPlayer showOnStart properties and set value true">
               <VideoPlayer
+                style = {styles.video}
                 controlTimeout = {160000}
                 showOnStart={true}
-                source={{uri: ''}}
+                source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
                 paused = {true}
               /> 
             </TestCase>
             <TestCase itShould="test VideoPlayer navigator properties and set value navigation">
               <VideoPlayer
+                style = {styles.video}
                 navigator={navigation}
-                source={{uri: ''}}
+                source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
                 paused = {true}
               />
             </TestCase>
             <TestCase itShould="test VideoPlayer controlAnimationTiming properties and set value 5000">
               <VideoPlayer
+                style = {styles.video}
                 controlAnimationTiming={5000}
-                source={{uri: ''}}
+                source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
                 paused = {true}
               />
             </TestCase>
             <TestCase itShould="test VideoPlayer doubleTapTime properties and set value 2000">
               <VideoPlayer
+                style = {styles.video}
                 doubleTapTime={2000}
                 source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
                 paused = {true}    
@@ -86,6 +93,7 @@ function VideoPlayerTest(){
             </TestCase>
             <TestCase itShould="test VideoPlayer scrubbing properties and set value 1000">
               <VideoPlayer
+                style = {styles.video}
                 scrubbing={1000}
                 source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
                 paused = {true}    
@@ -93,13 +101,15 @@ function VideoPlayerTest(){
             </TestCase>
             <TestCase itShould="test VideoPlayer controlTimeout properties and set value 1000">
               <VideoPlayer
+                style = {styles.video}
                 controlTimeout ={1000}
-                source={{uri: ''}} 
+                source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}} 
                 paused = {true}   
               /> 
             </TestCase>
             <TestCase itShould="test VideoPlayer videoStyle properties and set value {width,heigth}">
               <VideoPlayer
+                style = {styles.video}
                 controlTimeout = {160000}
                 videoStyle={styles.videostyleone}
                 source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}} 
@@ -116,6 +126,7 @@ function VideoPlayerTest(){
             </TestCase>
             <TestCase itShould="test VideoPlayer seekColor properties and set value #00F5FF">
               <VideoPlayer
+                style = {styles.video}
                 controlTimeout = {160000}
                 seekColor={'#00F5FF'}
                 source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}} 
@@ -124,6 +135,7 @@ function VideoPlayerTest(){
             </TestCase>
             <TestCase itShould="test VideoPlayer tapAnywhereToPause properties and set value true">
               <VideoPlayer
+                style = {styles.video}
                 controlTimeout = {160000}
                 tapAnywhereToPause={true}
                 source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}  
@@ -132,6 +144,7 @@ function VideoPlayerTest(){
             </TestCase>
             <TestCase itShould="test VideoPlayer tapAnywhereToPause properties and set value false">
               <VideoPlayer
+                style = {styles.video}
                 controlTimeout = {160000}
                 tapAnywhereToPause={false}
                 source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}    
@@ -140,98 +153,110 @@ function VideoPlayerTest(){
             </TestCase>
             <TestCase itShould="test VideoPlayer disableFullscreen properties and set value true">
               <VideoPlayer
+                style = {styles.video}
                 controlTimeout = {160000}
                 disableFullscreen={true}
                 paused = {true}
-                source = {{uri:''}}
+                source = {{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
               /> 
             </TestCase>
             <TestCase itShould="test VideoPlayer disableFullscreen properties and set value false">
               <VideoPlayer
+                style = {styles.video}
                 controlTimeout = {160000}
                 disableFullscreen={false}
                 paused = {true}
-                source = {{uri:''}}
+                source = {{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
               /> 
             </TestCase>
             <TestCase itShould="test VideoPlayer disablePlayPause properties and set value true">
               <VideoPlayer
+                style = {styles.video}
                 controlTimeout = {160000}
                 disablePlayPause={true}
                 paused = {true} 
-                source = {{uri:''}}
+                source = {{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
               /> 
             </TestCase>
             <TestCase itShould="test VideoPlayer disablePlayPause properties and set value false">
               <VideoPlayer
+                style = {styles.video}
                 controlTimeout = {160000}
                 disablePlayPause={false}
                 paused = {true} 
-                source = {{uri:''}}
+                source = {{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
               /> 
             </TestCase>
             <TestCase itShould="test VideoPlayer disableSeekbar properties and set value true">
               <VideoPlayer
+                style = {styles.video}
                 controlTimeout = {160000}
                 disableSeekbar={true}
                 paused = {true}   
-                source = {{uri:''}}
+                source = {{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
               /> 
             </TestCase>
             <TestCase itShould="test VideoPlayer disableSeekbar properties and set value false">
               <VideoPlayer
+                style = {styles.video}
                 controlTimeout = {160000}
                 disableSeekbar={false}
                 paused = {true}   
-                source = {{uri:''}}
+                source = {{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
               /> 
             </TestCase>
             <TestCase itShould="test VideoPlayer disableVolume properties and set value true">
               <VideoPlayer
+                style = {styles.video}
                 controlTimeout = {160000}
                 disableVolume={true}
                 paused = {true}
-                source = {{uri:''}}
+                source = {{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
               /> 
             </TestCase>
             <TestCase itShould="test VideoPlayer disableVolume properties and set value false">
               <VideoPlayer
+                style = {styles.video}
                 controlTimeout = {160000}
                 disableVolume={false}
                 paused = {true}
-                source = {{uri:''}}
+                source = {{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
               /> 
             </TestCase>
             <TestCase itShould="test VideoPlayer disableTimer properties and set value true">
               <VideoPlayer
+                style = {styles.video}
                 controlTimeout = {160000}
                 disableTimer={true}
                 paused = {true}
-                source = {{uri:''}}
+                source = {{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
               /> 
             </TestCase>
             <TestCase itShould="test VideoPlayer disableTimer properties and set value false">
               <VideoPlayer
+                style = {styles.video}
                 controlTimeout = {160000}
                 disableTimer={false}
                 paused = {true}
-                source = {{uri:''}}
+                source = {{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
               />
             </TestCase>
             <TestCase itShould="test VideoPlayer disableBack properties and set value true">
               <VideoPlayer
+                style = {styles.video}
                 controlTimeout = {160000}
                 disableBack={true}
                 paused = {true}
-                source = {{uri:''}}
+                source = {{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
               /> 
             </TestCase>
             <TestCase itShould="test VideoPlayer disableBack properties and set value false">
               <VideoPlayer
+                style = {styles.video}
                 controlTimeout = {160000}
                 disableBack={false}
                 paused = {true}
-                source = {{uri:''}}
+                source = {{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
               /> 
             </TestCase>
           </TestSuite>
@@ -246,6 +271,7 @@ function VideoPlayerTest(){
               arrange={({ setState }) => {
                 return (
                   <VideoPlayer
+                    style = {styles.video}
                     controlTimeout = {160000}
                     onEnterFullscreen = {()=>{
                       setState(true);
@@ -267,6 +293,7 @@ function VideoPlayerTest(){
               arrange={({ setState }) => {
                 return (
                   <VideoPlayer
+                    style = {styles.video}
                     controlTimeout = {160000}
                     onExitFullscreen = {()=>{
                       setState(true);
@@ -288,6 +315,7 @@ function VideoPlayerTest(){
               arrange={({ setState }) => {
                 return (
                   <VideoPlayer
+                    style = {styles.video}
                     controlTimeout = {160000}
                     onHideControls = {()=>{
                       setState(true);
@@ -309,6 +337,7 @@ function VideoPlayerTest(){
               arrange={({ setState }) => {
                 return (
                   <VideoPlayer
+                    style = {styles.video}
                     controlTimeout = {160000}
                     onShowControls = {()=>{
                       setState(true);
@@ -330,6 +359,7 @@ function VideoPlayerTest(){
               arrange={({ setState }) => {
                 return (
                   <VideoPlayer
+                    style = {styles.video}
                     controlTimeout = {160000}
                     onError = {()=>{
                       setState(true);
@@ -351,6 +381,7 @@ function VideoPlayerTest(){
               arrange={({ setState }) => {
                 return (
                   <VideoPlayer
+                    style = {styles.video}
                     controlTimeout = {160000}
                     onPause = {()=>{
                       setState(true);
@@ -372,6 +403,7 @@ function VideoPlayerTest(){
               arrange={({ setState }) => {
                 return (
                   <VideoPlayer
+                    style = {styles.video}
                     controlTimeout = {160000}
                     onPlay = {()=>{
                       setState(true);
@@ -393,12 +425,13 @@ function VideoPlayerTest(){
               arrange={({ setState }) => {
                 return (
                   <VideoPlayer
+                    style = {styles.video}
                     controlTimeout = {160000}
                     onBack = {()=>{
                       setState(true);
                       alert('onBack event run success!');
                     }}
-                    source={{uri: ''}}    
+                    source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}    
                     paused = {true}
                 />
               )
@@ -414,12 +447,13 @@ function VideoPlayerTest(){
               arrange={({ setState }) => {
                 return (
                   <VideoPlayer
+                    style = {styles.video}
                     controlTimeout = {160000}
                     onEnd = {()=>{
                       setState(true);
                       alert('onEnd event run success!');
                     }}
-                    source={{uri: ''}}    
+                    source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}    
                     paused = {true}
                   />
                 )
@@ -455,8 +489,8 @@ function VideoPlayerTest(){
       height: '100%', 
     },
     video: {  
-      width: '100%',  
-      height: '100%',  
+      width: 300,  
+      height: 200,  
     }, 
     videostyleone: {
       width: '50%',
