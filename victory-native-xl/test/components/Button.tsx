@@ -5,7 +5,6 @@ import {
   TouchableHighlight,
   type TouchableHighlightProps,
 } from "react-native";
-import { useDarkMode } from "react-native-dark";
 import { appColors } from "../app/consts/colors";
 
 type ButtonProps = Omit<TouchableHighlightProps, "children"> & {
@@ -13,7 +12,7 @@ type ButtonProps = Omit<TouchableHighlightProps, "children"> & {
 };
 
 export const Button = ({ style, title, ...rest }: ButtonProps) => {
-  const isDark = useDarkMode();
+  const isDark = true;
   return (
     <TouchableHighlight
       underlayColor={
