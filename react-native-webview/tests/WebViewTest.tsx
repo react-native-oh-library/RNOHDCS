@@ -1,5 +1,5 @@
 import WebView from 'react-native-webview';
-import { ScrollView, StatusBar, View, Button, Text } from 'react-native';
+import { ScrollView, StatusBar, View, Button, Text, TextInput } from 'react-native';
 import { TestCase, Tester } from '@rnoh/testerino';
 import React, { useRef, useState } from 'react';
 
@@ -71,7 +71,6 @@ export default function WebViewTest() {
     backward: () => void;
   }
 
-  const webView = useRef<any>();
 
   const goBack = () => {
     goBackRef?.current.goBack();
@@ -102,7 +101,7 @@ export default function WebViewTest() {
   };
 
   const clearCache = () => {
-    clearCacheRef?.current.clearCache();
+    clearCacheRef?.current.clearCache(true);
   };
 
   const clearHistory = () => {
@@ -139,7 +138,7 @@ export default function WebViewTest() {
             arrange={({ setState }) => {
               return (
                 <View style={{ padding: 20, height: 600 }}>
-                  <WebView source={{ uri: 'www.baidu.com' }} incognito={true} />
+                  <WebView source={{ uri: 'https://www.chsi.com.cn/' }} incognito={true} />
                 </View>
               );
             }}
@@ -153,12 +152,17 @@ export default function WebViewTest() {
             tags={['C_API']}
             initialState={false}
             arrange={({ setState }) => {
+              const webView1 = useRef<any>();
               return (
                 <View style={{ padding: 20, height: 600 }}>
                   <WebView
                     source={{ uri: 'www.baidu.com' }}
+                    ref={webView1}
                     domStorageEnabled={true}
                   />
+                  <Button title='弹窗' onPress={() => {
+                    webView1?.current.injectJavaScript("localStorage.setItem('name', 'John');alert('name:=='+localStorage.getItem('name'));");
+                  }}></Button>
                 </View>
               );
             }}
@@ -168,8 +172,8 @@ export default function WebViewTest() {
           />
 
           <TestCase
-            key={'webview api postMessage'}
-            itShould={`webview api postMessage`}
+            key={'webview api postMessage and onMessage'}
+            itShould={`webview api postMessage and onMessage`}
             tags={['C_API']}
             initialState={false}
             arrange={({ setState }) => {
@@ -202,12 +206,28 @@ export default function WebViewTest() {
             tags={['C_API']}
             initialState={false}
             arrange={({ setState }) => {
+              const webView1 = useRef<any>();
+              const webView2 = useRef<any>();
               return (
                 <View style={{ padding: 20, height: 600 }}>
                   <WebView
+                    ref={webView1}
+                    source={{ uri: 'www.baidu.com' }}
+                    javaScriptEnabled={false}
+                  />
+                  <WebView
+                    ref={webView2}
                     source={{ uri: 'www.baidu.com' }}
                     javaScriptEnabled={true}
                   />
+                  <Button title='弹窗' onPress={() => {
+                    webView1.current.injectJavaScript(`
+                      alert('JavaScript11111111 is enabled!');
+                    `);
+                    webView2.current.injectJavaScript(`
+                    alert('JavaScript22222222 is enabled!');
+                  `);
+                  }}></Button>
                 </View>
               );
             }}
@@ -215,27 +235,6 @@ export default function WebViewTest() {
               expect(state).to.be.true;
             }}
           />
-
-          <TestCase
-            key={'webview api cacheMode'}
-            itShould={`webview api cacheEnabled`}
-            tags={['C_API']}
-            initialState={false}
-            arrange={({ setState }) => {
-              return (
-                <View style={{ padding: 20, height: 600 }}>
-                  <WebView
-                    source={{ uri: 'www.baidu.com' }}
-                    cacheEnabled={true}
-                  />
-                </View>
-              );
-            }}
-            assert={async ({ expect, state }) => {
-              expect(state).to.be.true;
-            }}
-          />
-
           <TestCase
             key={'webview api textZoom'}
             itShould={`webview api textZoom`}
@@ -246,7 +245,9 @@ export default function WebViewTest() {
 
                 <View style={{ padding: 20, height: 600 }}>
                   <Text>textZoom:10</Text>
-                  <WebView source={{ uri: 'www.baidu.com' }} textZoom={10} />
+                  <WebView source={{ uri: 'https://developer.huawei.com/consumer/cn/devservice/use' }} textZoom={10} />
+                  <Text>textZoom:150</Text>
+                  <WebView source={{ uri: 'https://developer.huawei.com/consumer/cn/devservice/use' }} textZoom={150} />
                 </View>
               );
             }}
@@ -261,11 +262,36 @@ export default function WebViewTest() {
             tags={['C_API']}
             initialState={false}
             arrange={({ setState }) => {
+              const webViewRef = useRef<any>(null);
+
+              const onZoomOutPress = () => {
+                webViewRef.current.injectJavaScript(`
+                  var meta = document.createElement('meta');
+                  meta.setAttribute('name', 'viewport');
+                  meta.setAttribute('content', 'width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=0');
+                  document.getElementsByTagName('head')[0].appendChild(meta);
+                `);
+              };
+
+              const onZoomInPress = () => {
+                webViewRef.current.injectJavaScript(`
+                  var meta = document.createElement('meta');
+                  meta.setAttribute('name', 'viewport');
+                  meta.setAttribute('content', 'width=device-width, initial-scale=2, maximum-scale=2, user-scalable=0');
+                  document.getElementsByTagName('head')[0].appendChild(meta);
+                `);
+              };
               return (
                 <View style={{ padding: 20, height: 600 }}>
+                  <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginVertical: 20 }}>
+                    <Button title="Zoom Out" onPress={onZoomOutPress} />
+                    <Button title="Zoom In" onPress={onZoomInPress} />
+                  </View>
                   <WebView
-                    source={{ uri: 'www.baidu.com' }}
+                    ref={webViewRef}
+                    source={{ uri: 'https://www.baidu.com' }}
                     scalesPageToFit={true}
+                    style={{ flex: 1 }}
                   />
                 </View>
               );
@@ -285,7 +311,7 @@ export default function WebViewTest() {
                 <View style={{ padding: 20, height: 600 }}>
                   <WebView
                     source={{ uri: 'www.baidu.com' }}
-                    injectedJavaScript={`alert('injectedJavaScript')`}
+                    injectedJavaScript={`alert('this alert for webview api injectJavaScript test')`}
                   />
                 </View>
               );
@@ -301,12 +327,70 @@ export default function WebViewTest() {
             tags={['C_API']}
             initialState={false}
             arrange={({ setState }) => {
+              const webView = useRef<any>();
               return (
                 <View style={{ padding: 20, height: 600 }}>
                   <WebView
                     source={{ uri: 'www.baidu.com' }}
+                    ref={webView}
                     userAgent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
                   />
+                  <Button title='获取userAgent' onPress={() => {
+                    webView?.current.injectJavaScript(`var userAgent = navigator.userAgent;
+                     console.log("获取userAgent",userAgent);`);
+                  }}></Button>
+                  <Text>'在控制台搜索:获取userAgent'</Text>
+
+                </View>
+              );
+            }}
+            assert={async ({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
+          <TestCase
+            key={'webview api ref applicationNameForUserAgent'}
+            itShould={`webview api ref applicationNameForUserAgent`}
+            tags={['C_API']}
+            initialState={false}
+            arrange={({ setState }) => {
+              const [event, setEvent] = useState({});
+              const webView = useRef<any>();
+              return (
+                <View style={{ padding: 20, height: 600 }}>
+                  <WebView
+                    source={{ uri: 'www.baidu.com' }}
+                    ref={webView}
+                    applicationNameForUserAgent={'xxxxx'}
+                  />
+                  <Button title='获取userAgent' onPress={() => {
+                    webView?.current.injectJavaScript(`var userAgent = navigator.userAgent;
+                     console.log("获取applicationNameForUserAgent",userAgent);`);
+                  }}></Button>
+                  <Text>'在控制台搜索:获取applicationNameForUserAgent'</Text>
+                </View>
+              );
+            }}
+            assert={async ({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
+          <TestCase
+            key={'webview api ignoreSilentHardwareSwitch'}
+            itShould={`webview api ignoreSilentHardwareSwitch`}
+            tags={['C_API']}
+            initialState={false}
+            arrange={({ setState }) => {
+              return (
+                <View style={{ padding: 20, height: 600 }}>
+                  <Text> ignoreSilentHardwareSwitch=true</Text>
+                  <WebView
+                    source={{ uri: 'https://res.vmallres.com//uomcdn/CN/cms/202210/C75C7E20060F3E909F2998E13C3ABC03.mp4' }}
+                    ignoreSilentHardwareSwitch={true} />
+                  <Text> ignoreSilentHardwareSwitch=false</Text>
+                  <WebView
+                    source={{ uri: 'https://res.vmallres.com//uomcdn/CN/cms/202210/C75C7E20060F3E909F2998E13C3ABC03.mp4' }}
+                    ignoreSilentHardwareSwitch={false} />
                 </View>
               );
             }}
@@ -317,7 +401,7 @@ export default function WebViewTest() {
 
           <TestCase
             key={'webview api ref reload'}
-            itShould={`webview api ref`}
+            itShould={`webview api ref reload`}
             tags={['C_API']}
             initialState={false}
             arrange={({ setState }) => {
@@ -380,13 +464,23 @@ export default function WebViewTest() {
             tags={['C_API']}
             initialState={false}
             arrange={({ setState }) => {
+              const [flg, setFlg] = useState(false)
               return (
                 <View style={{ padding: 20, height: 600 }}>
                   <WebView
                     source={{ uri: 'www.baidu.com' }}
                     ref={stopLoadingRef}
+                    onLoadProgress={() => {
+                      if (flg) {
+                        stopLoading()
+                      }
+                    }}
                   />
-                  <Button title={'stopLoading'} onPress={stopLoading}></Button>
+                  <Button title='切换' onPress={() => {
+                    setFlg(!flg)
+                    stopLoadingRef?.current.reload()
+                  }}></Button>
+                  <Text>{flg ? '停止' : '放行'}</Text>
                 </View>
               );
             }}
@@ -405,6 +499,9 @@ export default function WebViewTest() {
                 <View style={{ padding: 20, height: 600 }}>
                   <WebView source={{ uri: 'www.baidu.com' }} ref={goForwardRef} />
                   <Button title={'goForward'} onPress={goForward}></Button>
+                  <Button title={'goBack'} onPress={()=>{
+                    goForwardRef?.current.goBack()
+                  }}></Button>
                 </View>
               );
             }}
@@ -445,6 +542,7 @@ export default function WebViewTest() {
                   <Button
                     title={'requestFocus'}
                     onPress={requestFocus}></Button>
+                  <TextInput style={{ backgroundColor: 'green' }} placeholder='点我聚焦，输入框聚焦' />
                 </View>
               );
             }}
@@ -454,18 +552,35 @@ export default function WebViewTest() {
           />
 
           <TestCase
-            key={'webview api ref clearCache'}
-            itShould={`webview api ref clearCache`}
+            key={'webview api ref clearCache cacheEnabled'}
+            itShould={`webview api ref clearCache value LOAD_CACHE_ELSE_NETWORK  cacheEnabled value true`}
             tags={['C_API']}
             initialState={false}
             arrange={({ setState }) => {
+              let [start, setstart] = useState<number>(0)
+              let [end, setend] = useState<number>(0)
+              let [cacheEnabled, setcacheEnabled] = useState<boolean>(true)
               return (
                 <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{ uri: 'www.baidu.com' }}
+                    source={{ uri: 'https://wallpapersite.com/' }}
                     ref={clearCacheRef}
+                    cacheMode="LOAD_CACHE_ELSE_NETWORK"
+                    cacheEnabled={true}
+                    onLoadStart={() => {
+                      setstart(new Date().getTime())
+                    }}
+                    onLoadEnd={(e) => {
+                      console.log('总耗时', new Date().getTime() - start);
+                      setend(new Date().getTime() - start)
+                    }}
                   />
+                  <Text>总耗时：{end}</Text>
                   <Button title={'clearCache'} onPress={clearCache}></Button>
+                  <Button title={'reload'} onPress={() => {
+                    setcacheEnabled(cacheEnabled)
+                    clearCacheRef?.current.reload();
+                  }}></Button>
                 </View>
               );
             }}
@@ -489,6 +604,11 @@ export default function WebViewTest() {
                   <Button
                     title={'clearHistory'}
                     onPress={clearHistory}></Button>
+                  <Button
+                    title={'goBack'}
+                    onPress={() => {
+                      clearHistoryRef?.current.goBack();
+                    }}></Button>
                 </View>
               );
             }}
@@ -570,6 +690,30 @@ export default function WebViewTest() {
           />
 
           <TestCase
+            key={'webview api ref onLoadStart'}
+            itShould={`webview api ref onLoadStart`}
+            tags={['C_API']}
+            initialState={false}
+            arrange={({ setState }) => {
+              const [event, setEvent] = useState({});
+              return (
+                <View style={{ padding: 20, height: 600 }}>
+                  <WebView
+                    source={{ uri: 'www.baidu.com' }}
+                    onLoadStart={e => {
+                      setEvent(e.nativeEvent);
+                    }}
+                  />
+                  <Text>{JSON.stringify(event)}</Text>
+                </View>
+              );
+            }}
+            assert={async ({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
+
+          <TestCase
             key={'webview api ref onLoadEnd'}
             itShould={`webview api ref onLoadEnd`}
             tags={['C_API']}
@@ -627,9 +771,11 @@ export default function WebViewTest() {
               return (
                 <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{ uri: 'www.baidu.com' }}
+                    source={{ uri: 'xxxx.baidu.com' }}
                     onError={e => {
-                      setEvent(e);
+                      setEvent(e.nativeEvent);
+                      console.log('errorrr,e', e.nativeEvent);
+
                     }}
                   />
                   <Text>{JSON.stringify(event)}</Text>
@@ -651,33 +797,14 @@ export default function WebViewTest() {
               return (
                 <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{ uri: 'www.baidu.com' }}
+                    source={{ uri: 'https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V5/js-apis-webview-V6' }}
                     onHttpError={e => {
+                      console.log('httperror', e);
+
                       setEvent(e);
                     }}
                   />
                   <Text>{JSON.stringify(event)}</Text>
-                </View>
-              );
-            }}
-            assert={async ({ expect, state }) => {
-              expect(state).to.be.true;
-            }}
-          />
-
-          <TestCase
-            key={'webview api ref applicationNameForUserAgent'}
-            itShould={`webview api ref applicationNameForUserAgent`}
-            tags={['C_API']}
-            initialState={false}
-            arrange={({ setState }) => {
-              const [event, setEvent] = useState({});
-              return (
-                <View style={{ padding: 20, height: 600 }}>
-                  <WebView
-                    source={{ uri: 'www.baidu.com' }}
-                    applicationNameForUserAgent={'xxxxx'}
-                  />
                 </View>
               );
             }}
@@ -692,10 +819,14 @@ export default function WebViewTest() {
             initialState={false}
             arrange={({ setState }) => {
               const [event, setEvent] = useState({});
+              const webView = useRef<any>();
+           
+             
+           
               return (
                 <View style={{ padding: 20, height: 600 }}>
                   <WebView
-                    source={{ uri: 'www.baidu.com' }}
+                    source={{ uri: 'm.amap.com' }}
                     geolocationEnabled={true}
                   />
                 </View>
