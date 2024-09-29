@@ -464,7 +464,7 @@ function SwipeGesturesTest() {
                         <SwipeGesturesFunction></SwipeGesturesFunction>
                     </Page>
 
-                    <Page name='tets attribute'>
+                    <Page name='test attribute'>
                         <SwipeGesturesAttribute></SwipeGesturesAttribute>
                     </Page>
 
