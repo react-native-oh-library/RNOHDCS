@@ -4,7 +4,7 @@ import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
 import Pdf from "react-native-pdf";
 
 export default function PdfErrorApitest() {
-  const localSource = require("../assets/pdfPassword.pdf");
+  const localSource = require("../../assets/pdfPassword.pdf");
   const password = '6666666';
   const [onErrorResult, setOnErrorResult] = useState(new Error());
   return (

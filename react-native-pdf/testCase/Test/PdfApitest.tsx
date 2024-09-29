@@ -4,7 +4,8 @@ import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
 import Pdf from "react-native-pdf";
 
 export default function PdfApitest() {
-  const localSource = require("../assets/pdfApi.pdf");
+  const localSource = require("../../assets/pdfApi.pdf");
+  const [style, setStyle] = React.useState(styles.pdfCaseBlock);
   const [onLoadCompleteResult1, setOnLoadComplete1] = React.useState(0.0);
   const [onLoadCompleteResult2, setOnLoadComplete2] = React.useState('');
   const [onLoadProgressResult, setOnLoadProgress] = React.useState(0);
@@ -20,6 +21,7 @@ export default function PdfApitest() {
             <View style={{ width: 350, height: 350 }}>
               <Pdf
                 source={localSource}
+                style={style}
                 onLoadProgress={(percent) => {
                   setOnLoadProgress(percent);
                 }}
