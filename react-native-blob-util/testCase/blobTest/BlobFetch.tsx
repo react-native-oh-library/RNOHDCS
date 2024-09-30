@@ -43,7 +43,7 @@ export default function BlobUtilFetch() {
     })
       .fetch(
         "POST",
-        "http://172.30.112.1:3006/fileUpload",
+        "http://127.0.0.1:3006/fileUpload",
         {
           'Content-Type': 'multipart/form-data',
         },
@@ -72,7 +72,7 @@ export default function BlobUtilFetch() {
     })
       .fetch(
         "GET",
-        "http://172.30.112.1:3006/download",
+        "http://127.0.0.1:3006/download",
       ).then((res) => {
         console.log(res.data, "aaa");
         if (res.data) {
@@ -95,7 +95,7 @@ export default function BlobUtilFetch() {
     })
       .fetch(
         "GET",
-        "http://172.30.112.1:3006/download",
+        "http://127.0.0.1:3006/download",
       ).then((res) => {
         console.log(res.data, "aaa");
         if (res.data) {
@@ -113,7 +113,7 @@ export default function BlobUtilFetch() {
       session: 'foo',
       fileCache: true
     })
-      .fetch('GET', "http://172.30.112.1:3006/download")
+      .fetch('GET', "http://127.0.0.1:3006/download")
       .then((res) => {
         console.log(res, "aaa");
 
@@ -128,7 +128,7 @@ export default function BlobUtilFetch() {
     let task = ReactNativeBlobUtil.config({
       fileCache: true
     })
-      .fetch('GET', "http://172.30.112.1:3006/download") .progress({count:-1,interval:1000},(received, total) => {
+      .fetch('GET', "http://127.0.0.1:3006/download") .progress({count:-1,interval:1000},(received, total) => {
         console.log('progress ' + Math.floor(received/total*100) + '%')
         setProgress( Math.floor(received/total*100)+"")
         setState(true)
@@ -143,7 +143,7 @@ export default function BlobUtilFetch() {
     })
       .fetch(
         "POST",
-        "http://172.30.112.1:3006/fileUpload",
+        "http://127.0.0.1:3006/fileUpload",
         {
           'Content-Type': 'multipart/form-data',
         },
@@ -165,7 +165,7 @@ export default function BlobUtilFetch() {
     let task = ReactNativeBlobUtil.config({
       fileCache: true
     })
-      .fetch('GET', "http://172.30.112.1:3006/download").cancel(res=>setState(true))
+      .fetch('GET', "http://127.0.0.1:3006/download").cancel(res=>setState(true))
      
   }
 
