@@ -1,136 +1,79 @@
-/* eslint-disable react-native/no-inline-styles */
-import React, {useCallback, useRef, useState} from 'react';
+import React from 'react';
+import { View, Text, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import GestureDetector from './GestureDetector';
+import DrawerLayout from './DrawerLayout';
+import Swipeable from './Swipeable';
+import GestureHandlers from './GestureHandlers';
+import Buttons from './Buttons';
+import Touchables from './Touchables';
 
-import {
-  Button,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  Text,
-  View,
-} from 'react-native';
+const Stack = createStackNavigator();
 
-import {Tester} from '@rnoh/testerino';
-import {
-  Gesture,
-  GestureDetector,
-  GestureHandlerRootView,
-  gestureHandlerRootHOC,
-} from 'react-native-gesture-handler';
-import DrawerLayout from 'react-native-gesture-handler/DrawerLayout';
-import {NewApiTest, OldApiTest, SharedAPITest} from './src';
+class Home extends React.Component {
+    onPress1 = () => {
+        this.props.navigation.navigate('Gesture detector');
+    }
+    onPress2 = () => {
+        this.props.navigation.navigate('Touchables');
+    }
+    onPress3 = () => {
+        this.props.navigation.navigate('Buttons');
+    }
+    onPress4 = () => {
+        this.props.navigation.navigate('DrawerLayout');
+    }
+    onPress5 = () => {
+        this.props.navigation.navigate('Swipeable');
+    }
+    onPress6 = () => {
+        this.props.navigation.navigate('GestureHandlers');
+    }
 
-type RootViewMode = 'Component' | 'HOC';
 
-const DEV_MODE = false;
+    render() {
+        return (
+            <View style={{padding:14}}>
+                <View style={{height:50}}>
+                    <Button title="Gesture detector"  onPress={this.onPress1}></Button>
+                </View>
+                <View style={{height:50,marginTop:12}}>
+                    <Button title="Touchables"  onPress={this.onPress2}></Button>
+                </View>
+                <View style={{height:50,marginTop:12}}>
+                    <Button title="Buttons"  onPress={this.onPress3}></Button>
+                </View>
+                <View style={{height:50,marginTop:12}}>
+                    <Button title="DrawerLayout"  onPress={this.onPress4}></Button>
+                </View>
+                <View style={{height:50,marginTop:12}}>
+                    <Button title="Swipeable"  onPress={this.onPress5}></Button>
+                </View>
+                <View style={{height:50,marginTop:12}}>
+                    <Button title="GestureHandlers"  onPress={this.onPress6}></Button>
+                </View>
+            </View>
+        );
+    }
+};
 
-function App({}): JSX.Element | null {
-  const [rootViewMode, setRootViewMode] = useState<RootViewMode>('Component');
-
-  return (
-    <View style={{flex: 1}}>
-      <StatusBar />
-      <SafeAreaView style={{backgroundColor: '#222', flex: 1}}>
-        {DEV_MODE ? (
-          <GestureHandlerRootView style={{flex: 1}}>
-            <Tester style={{flex: 1}} filter={{tags: ['dev']}}>
-              <NewApiTest />
-              <OldApiTest />
-              <SharedAPITest />
-            </Tester>
-          </GestureHandlerRootView>
-        ) : (
-          <>
-            <Button
-              title={`toggle rootViewMode (current: ${rootViewMode})`}
-              onPress={() => {
-                setRootViewMode(prev =>
-                  prev === 'Component' ? 'HOC' : 'Component',
-                );
-              }}
-            />
-            {rootViewMode === 'Component' && (
-              <GestureHandlerRootView style={{flex: 1}}>
-                <Tests />
-              </GestureHandlerRootView>
-            )}
-            {rootViewMode === 'HOC' && <WrappedTests />}
-          </>
-        )}
-      </SafeAreaView>
-    </View>
-  );
+class App extends React.Component {
+    render() {
+        return (
+            <NavigationContainer>
+                <Stack.Navigator initialRouteName="react-native-gesture-handler 组件测试">
+                    <Stack.Screen name="Gesture-handler 组件测试" component={Home} />
+                    <Stack.Screen name="Gesture detector" component={GestureDetector} />
+                    <Stack.Screen name="DrawerLayout" component={DrawerLayout} />
+                    <Stack.Screen name="Swipeable" component={Swipeable} />
+                    <Stack.Screen name="GestureHandlers" component={GestureHandlers} />
+                    <Stack.Screen name="Buttons" component={Buttons} />
+                    <Stack.Screen name="Touchables" component={Touchables} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        );
+    }
 }
-
-function Tests() {
-  const drawerLayoutRef = useRef<DrawerLayout>(null);
-  const [drawerState, setDrawerState] = useState<
-    'OPEN' | 'CLOSED' | 'CHANGING' | 'UNINITIALIZED'
-  >('UNINITIALIZED');
-
-  const onRenderNavigationView = useCallback(() => {
-    return (
-      <View>
-        <Text>DrawerLayout isn't super responsive on Android</Text>
-      </View>
-    );
-  }, []);
-
-  return (
-    <>
-      <Button
-        title={`Toggle Drawer (${drawerState})`}
-        onPress={() => {
-          if (drawerState === 'UNINITIALIZED') {
-            setDrawerState('CLOSED');
-          } else {
-            const drawer = drawerLayoutRef.current;
-            if (drawer) {
-              drawer.state.drawerOpened
-                ? drawer.closeDrawer()
-                : drawer.openDrawer();
-            }
-          }
-        }}
-      />
-      <Tester style={{flex: 1}}>
-        {drawerState !== 'UNINITIALIZED' && (
-          <DrawerLayout
-            ref={drawerLayoutRef}
-            useNativeAnimations
-            drawerWidth={200}
-            drawerPosition={'left'}
-            drawerType="slide"
-            drawerBackgroundColor="#ddd"
-            renderNavigationView={onRenderNavigationView}
-            onDrawerOpen={() => {
-              setDrawerState('OPEN');
-            }}
-            onDrawerSlide={() => {
-              setDrawerState('CHANGING');
-            }}
-            onDrawerClose={() => {
-              setDrawerState('CLOSED');
-            }}>
-            <ScrollView style={{width: '100%', flex: 1}}>
-              <NewApiTest />
-              <OldApiTest />
-              <SharedAPITest />
-            </ScrollView>
-          </DrawerLayout>
-        )}
-        {drawerState === 'UNINITIALIZED' && (
-          <ScrollView style={{width: '100%', flex: 1}}>
-            <NewApiTest />
-            <OldApiTest />
-            <SharedAPITest />
-          </ScrollView>
-        )}
-      </Tester>
-    </>
-  );
-}
-
-const WrappedTests = gestureHandlerRootHOC(Tests);
 
 export default App;

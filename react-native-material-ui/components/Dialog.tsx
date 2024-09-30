@@ -13,7 +13,7 @@ const DialogDemo = () => {
       <ScrollView style={{marginBottom:100}}>
 
       
-      <TestSuite name='Dialog'>
+      <TestSuite name='Dialog(对话框：是一个整体，props需要同时设置才生效)'>
         <TestCase itShould='props:actions,onActionPress,options,style'>
           <View style={styles.container}>
           <Text>{dialog}</Text>

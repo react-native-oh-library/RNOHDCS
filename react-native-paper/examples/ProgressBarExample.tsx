@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StyleSheet,Animated } from 'react-native';
+import {StyleSheet,Animated, ScrollView } from 'react-native';
 import {Button,  ProgressBarProps,ProgressBar,MD2Theme,
   MD3Theme,
   MD3Colors,
@@ -10,10 +10,8 @@ import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
 function ProgressBarDemo() { 
 
   const [visible, setVisible] = React.useState<boolean>(true);
-  const [progress, setProgress] = React.useState<number>(0.3);
   const useExampleTheme = () => useTheme<MD2Theme | MD3Theme>();
   const theme = useExampleTheme();
-  const { isV3 } = useExampleTheme();
   const { current: progressBarValue } = React.useRef(new Animated.Value(0));
 
   const runCustomAnimation = () => {
@@ -25,44 +23,110 @@ function ProgressBarDemo() {
     }).start();
   };
 
+  
+  const ProgressBarProps = [
+    {
+      key: ' ProgressBar style:progress={0.5}',
+      value: {
+        progress:0.5,
+        color:MD3Colors.error50
+      },
+
+    },
+    {
+      key: ' ProgressBar style:progress={0.75}',
+      value: {
+        progress:0.75,
+        color:MD3Colors.error50
+      },
+    },
+    {
+      key: ' ProgressBar style:color={MD2Colors.blue100}',
+      value: {
+        progress:0.75,
+        color:MD2Colors.blue100
+      },
+    },
+    {
+      key: ' ProgressBar style:indeterminate={true}',
+      value: {
+        progress:0.75,
+        color:MD3Colors.error50,
+        indeterminate:true
+      },
+    },
+    {
+      key: ' ProgressBar style:indeterminate={false}',
+      value: {
+        progress:0.75,
+        color:MD3Colors.error50,
+        indeterminate:false
+      },
+    },
+    {
+      key: ' ProgressBar style:visible={true}',
+      value: {
+        progress:0.75,
+        color:MD3Colors.error50,
+        visible:true
+      },
+    },
+    {
+      key: ' ProgressBar style:visible={false}',
+      value: {
+        progress:0.75,
+        color:MD3Colors.error50,
+        visible:false
+      },
+    },
+    {
+      key: ' ProgressBar style:fillStyle={backgroundColor:MD2Colors.blue100}',
+      value: {
+        progress:0.75,
+        color:MD3Colors.error50,
+        fillStyle:{backgroundColor:MD2Colors.blue100},
+      },
+    },
+    {
+      key: ' ProgressBar style:style={backgroundColor:MD2Colors.blue100}',
+      value: {
+        progress:0.75,
+        color:MD3Colors.error50,
+        style:{backgroundColor:MD2Colors.blue100},
+      },
+    },
+    {
+      key: ' ProgressBar style:theme={theme}',
+      value: {
+        progress:0.75,
+        color:MD3Colors.error50,
+        theme:theme,
+      },
+    },
+    {
+      key: ' ProgressBar style:testID={"ProgressBar"}',
+      value: {
+        progress:0.75,
+        color:MD3Colors.error50,
+        testID:'ProgressBar',
+      },
+    },
+    {
+      key: ' ProgressBar style:testID={"ProgressBar1"}',
+      value: {
+        progress:0.75,
+        color:MD3Colors.error50,
+        testID:'ProgressBar1',
+      },
+    },
+  ]
+
+
   return (
-    <Tester>
+    <ScrollView>
+       <Tester>
       <TestSuite name='ProgressBar' >
-        <TestCase itShould='Default ProgressBar'>
-           <ProgressBar progress={progress} visible={visible} />
-        </TestCase>
-                <TestCase itShould='Indeterminate ProgressBar'>
-           <ProgressBar indeterminate visible={visible} />
-        </TestCase>
-
-        <TestCase itShould='ProgressBar with custom color'>
-          <ProgressBar
-            progress={progress}
-            visible={visible}
-            color={isV3 ? MD3Colors.error50 : MD2Colors.red800}
-          />
-        </TestCase>
-
-        <TestCase itShould='ProgressBar with custom background color'>
-          <ProgressBar
-            progress={progress}
-            visible={visible}
-            color={MD2Colors.red800}
-            style={{
-              backgroundColor: isV3 ? MD3Colors.secondary50 : MD2Colors.teal500,
-            }}
-          />
-        </TestCase>
-
-        <TestCase itShould='ProgressBar with custom height'>
-          <ProgressBar
-            progress={progress}
-            visible={visible}
-            style={styles.customHeight}
-          />
-        </TestCase>
-
-        <TestCase itShould='ProgressBar with animated value'>
+       <TestCase itShould='ProgressBar style:animatedValue ={progressBarValue}'>
           <Button onPress={runCustomAnimation}>Toggle animation</Button>
           <AnimatedProgressBar
             visible={visible}
@@ -71,8 +135,16 @@ function ProgressBarDemo() {
             theme={theme}
           />
         </TestCase>
+        {ProgressBarProps.map((item) => {
+          return (
+            <TestCase itShould={item.key}  key={item.key}>
+                  <ProgressBar {...item.value}/>
+            </TestCase>
+          );
+        })},
      </TestSuite>
     </Tester>
+    </ScrollView>
   )
 }
 

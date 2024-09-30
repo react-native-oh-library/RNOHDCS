@@ -4,7 +4,6 @@ import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 export function LoadingSpinnerOverlayDemo() {
-
     const [isSpinnerVisible, setSpinnerVisible] = useState({
         default: false,
         cancelable: false,
@@ -30,7 +29,6 @@ export function LoadingSpinnerOverlayDemo() {
         children2: false,
     });
 
-
     // 切换显示状态
     const toggleSpinner = (type: keyof typeof isSpinnerVisible) => {
         return new Promise((resolve) => {
@@ -42,16 +40,12 @@ export function LoadingSpinnerOverlayDemo() {
         })
     };
 
-    const closeSpinner = (type: keyof typeof isSpinnerVisible) => {
-        setSpinnerVisible({ ...isSpinnerVisible, [type]: false });
-    }
-
     return (
         <ScrollView style={{ flex: 1, height: '100%' }}>
             <Tester>
                 <TestSuite name='LoadingSpinnerOverlay'>
                     <TestCase
-                        itShould="default"
+                        itShould="default-option"
                         initialState={undefined as any}
                         arrange={({ setState }) => {
                             return (
@@ -68,7 +62,7 @@ export function LoadingSpinnerOverlayDemo() {
                     />
 
                     <TestCase
-                        itShould="cancelable=false"
+                        itShould="default-option change cancelable=false"
                         initialState={undefined as any}
                         arrange={({ setState }) => {
                             return (
@@ -83,7 +77,7 @@ export function LoadingSpinnerOverlayDemo() {
                         assert={({ expect, state }) => { expect(state).to.be.true }}
                     />
                     <TestCase
-                        itShould="cancelable=true"
+                        itShould="default-option change cancelable=true"
                         initialState={undefined as any}
                         arrange={({ setState }) => {
                             return (
@@ -99,7 +93,7 @@ export function LoadingSpinnerOverlayDemo() {
                     />
 
                     <TestCase
-                        itShould="color='#ff0000'"
+                        itShould="default-option change color='#ff0000'"
                         initialState={undefined as any}
                         arrange={({ setState }) => {
                             return (
@@ -114,7 +108,7 @@ export function LoadingSpinnerOverlayDemo() {
                         assert={({ expect, state }) => { expect(state).to.be.true }}
                     />
                     <TestCase
-                        itShould="color='#00ff00'"
+                        itShould="default-option change color='#00ff00'"
                         initialState={undefined as any}
                         arrange={({ setState }) => {
                             return (
@@ -130,7 +124,7 @@ export function LoadingSpinnerOverlayDemo() {
                     />
 
                     <TestCase
-                        itShould="animation='fade'"
+                        itShould="default-option change animation='fade'"
                         initialState={undefined as any}
                         arrange={({ setState }) => {
                             return (
@@ -145,7 +139,7 @@ export function LoadingSpinnerOverlayDemo() {
                         assert={({ expect, state }) => { expect(state).to.be.true }}
                     />
                     <TestCase
-                        itShould="animation='slide'"
+                        itShould="default-option change animation='slide'"
                         initialState={undefined as any}
                         arrange={({ setState }) => {
                             return (
@@ -161,7 +155,7 @@ export function LoadingSpinnerOverlayDemo() {
                     />
 
                     <TestCase
-                        itShould="overlayColor='#0000ff4f'"
+                        itShould="default-option change overlayColor='#0000ff4f'"
                         initialState={undefined as any}
                         arrange={({ setState }) => {
                             return (
@@ -177,7 +171,7 @@ export function LoadingSpinnerOverlayDemo() {
                     />
 
                     <TestCase
-                        itShould="overlayColor='#0080008f'"
+                        itShould="default-option change overlayColor='#0080008f'"
                         initialState={undefined as any}
                         arrange={({ setState }) => {
                             return (
@@ -193,7 +187,7 @@ export function LoadingSpinnerOverlayDemo() {
                     />
 
                     <TestCase
-                        itShould="size=20"
+                        itShould="default-option change size=20"
                         initialState={undefined as any}
                         arrange={({ setState }) => {
                             return (
@@ -208,7 +202,7 @@ export function LoadingSpinnerOverlayDemo() {
                         assert={({ expect, state }) => { expect(state).to.be.true }}
                     />
                     <TestCase
-                        itShould="size=40"
+                        itShould="default-option change size=40"
                         initialState={undefined as any}
                         arrange={({ setState }) => {
                             return (
@@ -223,7 +217,7 @@ export function LoadingSpinnerOverlayDemo() {
                         assert={({ expect, state }) => { expect(state).to.be.true }}
                     />
                     <TestCase
-                        itShould="size='small'"
+                        itShould="default-option change size='small'"
                         initialState={undefined as any}
                         arrange={({ setState }) => {
                             return (
@@ -239,7 +233,7 @@ export function LoadingSpinnerOverlayDemo() {
                     />
 
                     <TestCase
-                        itShould="textContent"
+                        itShould="default-option textContent-textStyle"
                         initialState={undefined as any}
                         arrange={({ setState }) => {
                             return (
@@ -255,7 +249,7 @@ export function LoadingSpinnerOverlayDemo() {
                         assert={({ expect, state }) => { expect(state).to.be.true }}
                     />
                     <TestCase
-                        itShould="textContent2"
+                        itShould="default-option textContent2-textStyle"
                         initialState={undefined as any}
                         arrange={({ setState }) => {
                             return (
@@ -272,7 +266,7 @@ export function LoadingSpinnerOverlayDemo() {
                     />
 
                     <TestCase
-                        itShould="textStyle color='#fff'"
+                        itShould="default-option change textStyle-color='#fff'"
                         initialState={undefined as any}
                         arrange={({ setState }) => {
                             return (
@@ -288,7 +282,7 @@ export function LoadingSpinnerOverlayDemo() {
                         assert={({ expect, state }) => { expect(state).to.be.true }}
                     />
                     <TestCase
-                        itShould="textStyle color='#ffff00'"
+                        itShould="default-option change textStyle-color='#ffff00'"
                         initialState={undefined as any}
                         arrange={({ setState }) => {
                             return (
@@ -305,7 +299,7 @@ export function LoadingSpinnerOverlayDemo() {
                     />
 
                     <TestCase
-                        itShould="indicatorStyle color='#00ff00' border='dotted'"
+                        itShould="default-option indicatorStyle color='#00ff00' border='dotted'"
                         initialState={undefined as any}
                         arrange={({ setState }) => {
                             return (
@@ -320,7 +314,7 @@ export function LoadingSpinnerOverlayDemo() {
                         assert={({ expect, state }) => { expect(state).to.be.true }}
                     />
                     <TestCase
-                        itShould="indicatorStyle2 color='#8b4513' border='dashed'"
+                        itShould="default-option indicatorStyle2 color='#8b4513' border='dashed'"
                         initialState={undefined as any}
                         arrange={({ setState }) => {
                             return (
@@ -336,7 +330,7 @@ export function LoadingSpinnerOverlayDemo() {
                     />
 
                     <TestCase
-                        itShould="customIndicator"
+                        itShould="default-option change customIndicator"
                         initialState={undefined as any}
                         arrange={({ setState }) => {
                             return (
@@ -355,7 +349,7 @@ export function LoadingSpinnerOverlayDemo() {
                         assert={({ expect, state }) => { expect(state).to.be.true }}
                     />
                     <TestCase
-                        itShould="customIndicator2"
+                        itShould="default-option change customIndicator2"
                         initialState={undefined as any}
                         arrange={({ setState }) => {
                             return (

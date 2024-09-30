@@ -34,17 +34,17 @@ export default () => {
   const labelRenderer = (type: string, data: number) => {
     switch (type) {
       case 'year':
-        return data + '年'
+        return data + 'Y'
       case 'month':
-        return data + '月'
+        return data + 'M'
       case 'day':
-        return data + '日'
+        return data + 'D'
       case 'hour':
-        return data + '时'
+        return data + 'H'
       case 'minute':
-        return data + '分'
+        return data + 'Min'
       case 'second':
-        return data + '秒'
+        return data + 'S'
       default:
         return data
     }
@@ -102,7 +102,7 @@ export default () => {
       <TestCase itShould="render a DatePicker onValueChange()" tags={['C_API']} initialState={false}
         arrange={({ setState }: any) =>
           <List>
-            <DatePicker value={value1} onValueChange={(value: any) => { setValue1(value); setState(true); }}>
+            <DatePicker value={value1} onValueChange={(value: any) => { console.log(value); setValue1(value); setState(true); }}>
               <List.Item arrow="horizontal">Select Date</List.Item>
             </DatePicker>
           </List>
@@ -115,6 +115,20 @@ export default () => {
         <List>
           <DatePicker
             value={value}
+            defaultValue={new Date()}
+            minDate={new Date(2015, 7, 6)}
+            maxDate={new Date(2026, 11, 3)}
+            renderLabel={labelRenderer}
+            format="YYYY-MM-DD">
+            <List.Item arrow="horizontal">Select Date</List.Item>
+          </DatePicker>
+        </List>
+      </TestCase>
+      <TestCase itShould="render a DatePicker locale={{ okText: 'Yes', dismissText: 'No' }}" tags={['C_API']}>
+        <List>
+          <DatePicker
+            value={value}
+            locale={{ okText: 'Yes', dismissText: 'No' }}
             defaultValue={new Date()}
             minDate={new Date(2015, 7, 6)}
             maxDate={new Date(2026, 11, 3)}

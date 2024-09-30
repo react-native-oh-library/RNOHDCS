@@ -9,11 +9,11 @@ import { Tester, TestSuite, TestCase } from "@rnoh/testerino"
 const DividerDemo = () => {
   return (
     <Tester>
-      <TestSuite name='Divider'>
-        <TestCase itShould='props:inset,style'>
+      <TestSuite name='Divider(分割线)'>
+        <TestCase itShould='props:inset(true从文本开始，false反之),style(样式)'>
           <View style= {styles.container}>
           <Text>Hello world!</Text>
-          <Divider inset style={{container:styles.divider}}/>
+          <Divider inset style={{container:{backgroundColor:'red'}}}/>
           <Text>Hello Divider!</Text>
           <Divider inset={false}/>
           </View>
@@ -30,9 +30,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 200,
     marginTop: 20,
-  },
-  divider:{
-    marginBottom:20,
   }
 });
 export default DividerDemo;

@@ -1,14 +1,16 @@
 import { View, StyleSheet, Text } from 'react-native';
-import React  from 'react';
+import React, { useState }  from 'react';
 import { Card, ListItem, Avatar } from 'react-native-material-ui';
 import { Tester, TestSuite, TestCase } from "@rnoh/testerino"
 
 const CardDemo = () => {
+  const [cardText,setCardText] = useState('')
   return (
     <Tester>
-      <TestSuite name='Card'>
+      <TestSuite name='Card(卡片 只有两个props,主要是用于展示)'>
         <TestCase itShould='props:onPress,style'>
-          <Card onPress={()=>{console.log("Card")}} style={{container:{height:'auto'}}}>
+          <Text>{cardText}</Text>
+          <Card onPress={()=>{setCardText('card')}} style={{container:{height:'auto'}}}>
             <ListItem
               leftElement={<Avatar text="JM" />}
               centerElement={{

@@ -712,6 +712,8 @@ export function MultiSliderDemo() {
         values: [0, 10],
         step: 2,
         showSteps: true,
+        showStepLabels: true,
+        stepLabelStyle: {color: 'red'},
         stepsAs: [
           {index: 1, stepLabel: 'step', prefix: '@', suffix: '%'},
           {index: 2, stepLabel: 'step', prefix: '@', suffix: '%'},

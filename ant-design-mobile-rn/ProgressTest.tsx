@@ -12,11 +12,14 @@ export default () => {
         <Progress percent={90} />
       </TestCase>
       <TestCase itShould="render a Progress position='normal'" tags={['C_API']}>
-        <Progress percent={90} position='normal' />
+        <View style={{ height: 100 }}>
+          <Progress percent={90} position='normal' />
+        </View>
       </TestCase>
-      <TestCase itShould="render a Progress unfilled=false" tags={['C_API']}>
-        <View>
-          <Progress percent={50} unfilled={false} />
+      <TestCase itShould="render a Progress unfilled=false, unfilled={true}" tags={['C_API']}>
+        <View style={{ height: 100 }}>
+          <Progress percent={50} unfilled={false} style={{ height: 20, borderRadius: 5, }} />
+          <Progress percent={50} unfilled={true} style={{ height: 20, borderRadius: 5, }} />
         </View>
       </TestCase>
       <TestCase itShould="render a Progress barStyle={{ borderColor: 'pink' }}" tags={['C_API']}>

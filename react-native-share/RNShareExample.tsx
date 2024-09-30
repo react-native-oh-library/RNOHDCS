@@ -9,7 +9,8 @@ import {
   Text,
 } from 'react-native';
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
-import RNShare from 'react-native-share';
+import RNShare from 'react-native-share'; 
+// import RNShare from '@react-native-oh-tpl/react-native-share';
 
 export function RNShareExample() {
   let [shareOptions, setShareOptions] = useState<string[]>([]);
@@ -27,7 +28,7 @@ export function RNShareExample() {
     'https://developer.huawei.com/images/new-content/develop/img_DLP_develop_gailan_ArkUI.png',
   );
   let [base64Url] = useState<string>(
-    'data:image/jpeg;base64,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',
+    'data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=',
   );
   let [videoUrl] = useState<string>('https://vjs.zencdn.net/v/oceans.mp4');
   // let [docUrl] = useState<string>('file://com.rnoh.tester/data/storage/el1/base/cache/video_file/d2.doc');
@@ -111,32 +112,6 @@ export function RNShareExample() {
             })}
           </View>
         </View>
-        <TestSuite name="验证isPackageInstalled接口">
-          <TestCase
-            itShould="false"
-            initialState={true}
-            tags={['dev']}
-            arrange={({ setState }) => {
-              return (
-                <View style={styles.section}>
-                  <Text>{share}</Text>
-                  <Button
-                    key="isPackageInstalled"
-                    title="isPackageInstalled"
-                    onPress={async () => {
-                      const res = await isPackageInstalled();
-                      setState(res);
-                    }}
-                  />
-                </View>
-              );
-            }}
-            assert={async ({ expect, state }) => {
-              console.log('###testCase', state);
-              expect(state).to.be.false;
-            }}
-          />
-        </TestSuite>
         <TestSuite name="验证shareSingle接口-三方分享链接">
           <TestCase
             itShould="true"
@@ -152,9 +127,7 @@ export function RNShareExample() {
                       title,
                       subject,
                       appId,
-                      message: '短信消息',
-                      recipient: '123456789',
-                      email: 'lihonggang11@h-partners.com',
+
                     })}
                   </Text>
                   <Button

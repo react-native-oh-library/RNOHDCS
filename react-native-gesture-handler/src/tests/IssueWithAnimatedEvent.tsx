@@ -102,5 +102,5 @@ export class IssueWithAnimatedEvent extends Component {
         </GestureHandlerRootView>
       );
     </Tester>
-  }
+  )}
 }

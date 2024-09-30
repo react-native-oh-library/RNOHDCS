@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import { List, Radio } from '@ant-design/react-native';
 import { TestSuite, TestCase } from '@rnoh/testerino';
 
@@ -17,6 +17,7 @@ interface EventRadioItem {
 
 export default () => {
   const [checked, setChecked] = useState(false);
+  const [value, setValue] = useState<any>();
   const [part1Value, setPart1Value] = useState(1);
   const [part2Value, setPart2Value] = useState<any>(1);
   const [part3Value, setpart3Value] = useState<any>(1);
@@ -33,20 +34,39 @@ export default () => {
 
   return (
     <TestSuite name="RadioTest">
-      <TestCase itShould="Radio defaultChecked" tags={['C_API']}>
+      <TestCase itShould="Radio defaultChecked={true}, defaultChecked={false}" tags={['C_API']}>
         <List renderHeader="基本用法">
-          <List.Item thumb={<Radio defaultChecked={true}>Radio</Radio>} />
+          <List.Item thumb={<Radio defaultChecked={true}>defaultChecked=true</Radio>} />
+          <List.Item thumb={<Radio defaultChecked={false}>defaultChecked=false</Radio>} />
         </List>
       </TestCase>
-      <TestCase itShould="Radio checked" tags={['C_API']}>
+      <TestCase itShould="Radio checked={true}, checked={false}" tags={['C_API']}>
         <List>
           <List.Item thumb={<Radio checked={true}>Radio</Radio>} />
+          <List.Item thumb={<Radio checked={false}>Radio</Radio>} />
         </List>
       </TestCase>
-      <TestCase itShould="Radio disabled" tags={['C_API']}>
+      <TestCase itShould="Radio disabled={true}, disabled={false}" tags={['C_API']}>
         <List>
           <List.Item thumb={<Radio disabled={true}>Radio</Radio>} />
+          <List.Item thumb={<Radio disabled={false}>Radio</Radio>} />
         </List>
+      </TestCase>
+      <TestCase itShould="Radio value" tags={['C_API']}>
+        <List>
+          <Radio.Group
+            defaultValue={2}
+            onChange={(e: any) => { setValue(e.target.value) }}
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              paddingVertical: 6,
+            }}>
+            <Radio value={1}>A</Radio>
+            <Radio value={2}>B</Radio>
+          </Radio.Group>
+        </List>
+        <Text>value:{value}</Text>
       </TestCase>
       <TestCase itShould="Radio onChange()" tags={['C_API']} initialState={false}
         arrange={({ setState }: any) =>
@@ -88,10 +108,22 @@ export default () => {
           </Radio.Group>
         </List>
       </TestCase>
-      <TestCase itShould="Radio.Group disabled" tags={['C_API']}>
+      <TestCase itShould="Radio.Group disabled={true}, disabled={false}" tags={['C_API']}>
         <List>
           <Radio.Group
             disabled
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              paddingVertical: 6,
+            }}>
+            <Radio value={1}>A</Radio>
+            <Radio value={2}>B</Radio>
+          </Radio.Group>
+        </List>
+        <List>
+          <Radio.Group
+            disabled={false}
             style={{
               flexDirection: 'row',
               justifyContent: 'space-around',
@@ -116,42 +148,24 @@ export default () => {
           </Radio.Group>
         </List>
       </TestCase>
-      <TestCase itShould="Radio.Group onChange()" tags={['C_API']}>
-        <List>
-          <Radio.Group
-            value={part2Value}
-            onChange={(e: any) => { setPart2Value(e.target.value) }}
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              paddingVertical: 6,
-            }}>
-            <Radio value={1}>A</Radio>
-            <Radio value={2}>B</Radio>
-          </Radio.Group>
-        </List>
-      </TestCase>
-      <TestCase itShould="Radio.Group 垂直" tags={['C_API']} initialState={undefined}
+      <TestCase itShould="Radio.Group onChange()" tags={['C_API']} initialState={false}
         arrange={({ setState }: any) =>
-          <List
-            renderHeader={'Radio.Group 垂直\n垂直的 Radio.Group，配合更多输入框选项'}>
+          <List>
             <Radio.Group
-              onChange={(e: any) => {
-                onGroupChange3(e);
-                setState(100);
-              }}
-              value={part3Value}>
-              <RadioItem value={1}>Option A</RadioItem>
-              <RadioItem value={2}>Option B</RadioItem>
-              <RadioItem value={3}>Option C</RadioItem>
-              <RadioItem value={4} left>
-                More...
-              </RadioItem>
+              value={part2Value}
+              onChange={(e: any) => { setPart2Value(e.target.value); setState(true); }}
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                paddingVertical: 6,
+              }}>
+              <Radio value={1}>A</Radio>
+              <Radio value={2}>B</Radio>
             </Radio.Group>
           </List>
         }
         assert={({ expect, state }) => {
-          expect(state).to.be.eq(100);
+          expect(state).to.be.eq(true);
         }}>
       </TestCase>
       <TestCase itShould="Radio.Group 组合 - 配置方式\n可通过配置 options 参数来渲染单选框" tags={['C_API']}>

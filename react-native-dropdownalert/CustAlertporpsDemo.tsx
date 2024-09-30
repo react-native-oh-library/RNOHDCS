@@ -18,7 +18,7 @@ import DropdownAlert, {
   DropDownAlertTestID,
   DropdownAlertPosition,
   DropdownAlertToValue,
-  DropdownAlertDismissAction,
+  DropdownAlertDismissAction
 } from 'react-native-dropdownalert';
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
 
@@ -28,6 +28,7 @@ type ListItem = {
   alertData?: DropdownAlertData;
   alertProps?: DropdownAlertProps;
   color: ColorValue;
+  needMessage?:boolean;
 };
 
 type ListItemIndex = {
@@ -51,8 +52,8 @@ const custAlertporps: DropdownAlertProps = {
   cancelImageSrc: CustDropDownAlertImage.Cancel,
   infoColor: '#FF00FF',
   warnColor: '#C0C0C0',
-  errorColor: '#00FFFF',
-  successColor: '#FFFF00',
+  errorColor: '#483D8B',
+  successColor: '#FF7F50',
 };
 
 function CustAlertporpsDemo(): React.JSX.Element {
@@ -63,6 +64,8 @@ function CustAlertporpsDemo(): React.JSX.Element {
   };
   const [selected, setSelected] = useState(defaultSelected);
   const [processing, setProcessing] = useState(false);
+  const [dismissType, setDismissType] = useState("");
+
   let alert = useRef(
     (_data?: DropdownAlertData) => new Promise<DropdownAlertData>(res => res),
   );
@@ -97,8 +100,8 @@ function CustAlertporpsDemo(): React.JSX.Element {
       color: '#FF00FF',
     },
     {
-      name: 'Customer Success #FFFF00',
-      itshould: 'Customer Success 测试 #FFFF00',
+      name: 'Customer Success #FF7F50',
+      itshould: 'Customer Success 测试 #FF7F50',
       alertData: {
         type: DropdownAlertType.Success,
         title: 'I am title',
@@ -106,11 +109,11 @@ function CustAlertporpsDemo(): React.JSX.Element {
           '（I am message）The device battery is low. It will go into low power mode in 5 minutes.',
       },
       alertProps: custAlertporps,
-      color: '#FFFF00',
+      color: '#FF7F50',
     },
     {
-      name: 'Customer Error #00FFFF',
-      itshould: 'Customer Error 测试 #00FFFF',
+      name: 'Customer Error #483D8B',
+      itshould: 'Customer Error 测试 #483D8B',
       alertData: {
         type: DropdownAlertType.Error,
         title: 'I am title',
@@ -118,7 +121,7 @@ function CustAlertporpsDemo(): React.JSX.Element {
           '（I am message）The device battery is low. It will go into low power mode in 5 minutes.',
       },
       alertProps: custAlertporps,
-      color: '#00FFFF',
+      color: '#483D8B',
     },
     {
       name: 'Customer Cancel',
@@ -133,8 +136,8 @@ function CustAlertporpsDemo(): React.JSX.Element {
       color: DropdownAlertColor.Success,
     },
     {
-      name: ' activeStatusBarBackgroundColor #00FFFF',
-      itshould: ' activeStatusBarBackgroundColor #00FFFF',
+      name: ' activeStatusBarBackgroundColor #483D8B',
+      itshould: ' activeStatusBarBackgroundColor #483D8B',
       alertData: {
         type: DropdownAlertType.Warn,
         title: 'I am title',
@@ -144,7 +147,7 @@ function CustAlertporpsDemo(): React.JSX.Element {
       alertProps: {
         ...custAlertporps,
         updateStatusBar: true,
-        activeStatusBarBackgroundColor: '#00FFFF',
+        activeStatusBarBackgroundColor: '#483D8B',
       },
       color: DropdownAlertColor.Success,
     },
@@ -413,6 +416,12 @@ function CustAlertporpsDemo(): React.JSX.Element {
         animatedViewProps: {
           style: {opacity: 0.8, borderColor: '#CCAABB'},
         },
+        springAnimationConfig: {
+          toValue: 40,
+          friction: 1,
+          useNativeDriver: false,
+          isInteraction: false,
+        },
       },
       color: DropdownAlertColor.Warn,
     },
@@ -438,10 +447,10 @@ function CustAlertporpsDemo(): React.JSX.Element {
       itshould:
         'messageTextProps : {fontSize: 10}、titleTextPropsstyle: style: {fontSize: 12}',
       alertData: {
-        type: DropdownAlertType.Success,
-        title: 'I am title',
+        type: DropdownAlertType.Info,
+        title: 'messageTextProps 10、titleTextProps 12',
         message:
-          '（I am message）The device battery is low. It will go into low power mode in 5 minutes.',
+          'messageTextProps : {fontSize: 10}、titleTextPropsstyle: style: {fontSize: 12}',
       },
       alertProps: {
         messageTextProps: {
@@ -458,10 +467,10 @@ function CustAlertporpsDemo(): React.JSX.Element {
       itshould:
         'messageTextProps : {fontSize: 18}、titleTextPropsstyle: style: {fontSize: 24}',
       alertData: {
-        type: DropdownAlertType.Success,
-        title: 'I am title',
+        type: DropdownAlertType.Error,
+        title: 'messageTextProps 18、titleTextProps 24',
         message:
-          '（I am message）The device battery is low. It will go into low power mode in 5 minutes.',
+          'messageTextProps : {fontSize: 18}、titleTextPropsstyle: style: {fontSize: 24}',
       },
       alertProps: {
         messageTextProps: {
@@ -586,23 +595,25 @@ function CustAlertporpsDemo(): React.JSX.Element {
       },
       alertProps: {
         showCancel: true,
+        onDismissPressDisabled:false,
         onDismissAutomatic: () => {
-          _onDismissConsole('onDismissAutomatic');
+          _onDismissTypeChange('onDismissAutomatic');
         },
         onDismissPress: () => {
-          _onDismissConsole('onDismissPress');
+          _onDismissTypeChange('onDismissPress');
         },
         onDismissPanResponder: () => {
-          _onDismissConsole('onDismissPanResponder');
+          _onDismissTypeChange('onDismissPanResponder');
         },
         onDismissProgrammatic: () => {
-          _onDismissConsole('onDismissProgrammatic');
+          _onDismissTypeChange('onDismissProgrammatic');
         },
         onDismissCancel: () => {
-          _onDismissConsole('onDismissCancel');
+          _onDismissTypeChange('onDismissCancel');
         },
       },
       color: DropdownAlertColor.Error,
+      needMessage:true
     },
     {
       name: 'onDismiss test 2',
@@ -614,24 +625,26 @@ function CustAlertporpsDemo(): React.JSX.Element {
       },
       alertProps: {
         showCancel: true,
+        onDismissPressDisabled:false,
         onDismissAutomatic: () => {
-          _onDismissConsole('onDismissAutomatic');
+          _onDismissTypeChange('onDismissAutomatic');
         },
         onDismissPress: () => {
-          _onDismissConsole('onDismissPress');
+          _onDismissTypeChange('onDismissPress');
         },
         onDismissPanResponder: () => {
-          _onDismissConsole('onDismissPanResponder');
+          _onDismissTypeChange('onDismissPanResponder');
         },
         onDismissProgrammatic: () => {
-          _onDismissConsole('onDismissProgrammatic');
+          _onDismissTypeChange('onDismissProgrammatic');
         },
         onDismissCancel: () => {
-          _onDismissConsole('onDismissCancel');
+          _onDismissTypeChange('onDismissCancel');
         },
         alertPosition: 'bottom',
       },
       color: DropdownAlertColor.Success,
+      needMessage:true
     },
     {
       name: 'onDismissPressDisabled:true',
@@ -690,7 +703,7 @@ function CustAlertporpsDemo(): React.JSX.Element {
       alertProps: {
         updateStatusBar: true,
         translucent: true,
-        activeStatusBarBackgroundColor: '#00FFFF',
+        activeStatusBarBackgroundColor: '#483D8B',
       },
       color: DropdownAlertColor.Warn,
     },
@@ -705,7 +718,7 @@ function CustAlertporpsDemo(): React.JSX.Element {
       alertProps: {
         updateStatusBar: true,
         translucent: false,
-        activeStatusBarBackgroundColor: '#00FFFF',
+        activeStatusBarBackgroundColor: '#483D8B',
       },
       color: DropdownAlertColor.Warn,
     },
@@ -882,8 +895,8 @@ function CustAlertporpsDemo(): React.JSX.Element {
       </View>
     );
   }
-  function _onDismissConsole(onDismissType: string) {
-    console.log('onDismiss:' + onDismissType);
+  function _onDismissTypeChange(onDismissType: string) {
+    setDismissType(onDismissType);
   }
   function _onSelect(item: ListItem): void {
     setSelected(item);
@@ -905,7 +918,15 @@ function CustAlertporpsDemo(): React.JSX.Element {
         <Tester>
           <TestSuite name="本页演示alertProps 自定义颜色、图片和其他支持自定义的属性">
             {items.map((item: ListItem, index: number) => {
-              return (
+              return item.needMessage?(<TestCase itShould={item.itshould} key={index}>
+                <Text>dismiss type:{dismissType}</Text>
+                <TouchableOpacity
+                  style={[styles.item, {backgroundColor: item.color}]}
+                  onPress={() => _onSelect(item)}
+                  disabled={processing}>
+                  <Text style={styles.name}>{item.name}</Text>
+                </TouchableOpacity>
+              </TestCase>):(
                 <TestCase itShould={item.itshould} key={index}>
                   <TouchableOpacity
                     style={[styles.item, {backgroundColor: item.color}]}

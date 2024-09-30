@@ -1,5 +1,11 @@
 # react-native-spring-scrollview组件Demo测试用例使用说明
 
+
+### Demo运行入口
+
+import APP from 'react-native-spring-scrollview/APP'
+
+
 ### 依赖库以下 
 
 

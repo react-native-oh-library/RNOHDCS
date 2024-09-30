@@ -1,43 +1,50 @@
-import {StyleSheet, Text} from 'react-native';
-import RNRestart from 'react-native-restart';
-import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
+import { useState } from "react";
+import { StyleSheet, Text } from "react-native";
+import RNRestart from "react-native-restart";
+import { Tester, TestSuite, TestCase } from "@rnoh/testerino";
 
-export function RestartDemoTester() {
+export default function RestartDemo() {
+  const [restartReason, setRestartReason] = useState("");
+
   return (
     <Tester>
       <TestSuite name="restart">
-        <TestCase tags={['C_API']} itShould="restart">
+        <TestCase tags={["C_API"]} itShould="restart">
           <Text
             style={styles.button}
-            onPress={() => RNRestart.restart('restart_a')}>
+            onPress={() => RNRestart.restart("restart_a")}
+          >
             restart
           </Text>
         </TestCase>
-        <TestCase tags={['C_API']} itShould="Restart">
+        <TestCase tags={["C_API"]} itShould="Restart">
           <Text
             style={styles.button}
-            onPress={() => RNRestart.Restart('restart_b')}>
+            onPress={() => RNRestart.Restart("restart_b")}
+          >
             Restart
           </Text>
         </TestCase>
         <TestCase
-          tags={['C_API']}
+          tags={["C_API"]}
           itShould="getReason"
-          initialState={'reason'}
-          arrange={({setState}) => {
+          initialState={"reason"}
+          arrange={({ setState }) => {
             return (
               <Text
                 style={styles.button}
                 onPress={async () => {
                   const reason = await RNRestart.getReason();
+                  setRestartReason(reason);
                   setState(reason);
-                }}>
-                getReason
+                }}
+              >
+                getReason{restartReason ? `（原因：${restartReason}）` : ""}
               </Text>
             );
           }}
-          assert={async ({expect, state}) => {
-            expect(state).include('restart_');
+          assert={async ({ expect, state }) => {
+            expect(state).include("restart_");
           }}
         />
       </TestSuite>
@@ -49,8 +56,8 @@ const styles = StyleSheet.create({
   button: {
     paddingVertical: 6,
     paddingHorizontal: 12,
-    backgroundColor: 'hsl(193, 95%, 68%)',
+    backgroundColor: "hsl(193, 95%, 68%)",
     borderWidth: 2,
-    borderColor: 'hsl(193, 95%, 30%)',
+    borderColor: "hsl(193, 95%, 30%)",
   },
 });

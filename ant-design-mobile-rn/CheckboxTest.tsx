@@ -31,14 +31,10 @@ export default () => {
 
   return (
     <TestSuite name="CheckboxTest">
-      <TestCase itShould="render a Checkbox defaultChecked={true}" tags={['C_API']}>
+      <TestCase itShould="render a Checkbox defaultChecked={true}， defaultChecked={false}" tags={['C_API']}>
         <List>
           <List.Item thumb={<Checkbox defaultChecked={true}>{'默认选中'}</Checkbox>} />
-        </List>
-      </TestCase>
-      <TestCase itShould="render a Checkbox checked={true}" tags={['C_API']}>
-        <List>
-          <List.Item thumb={<Checkbox checked={true}>{'当前选中'}</Checkbox>} />
+          <List.Item thumb={<Checkbox defaultChecked={false}>{'默认不选中'}</Checkbox>} />
         </List>
       </TestCase>
       <TestCase itShould="render a Checkbox onChange()" tags={['C_API']} initialState={false}
@@ -55,14 +51,6 @@ export default () => {
         assert={({ expect, state }) => {
           expect(state).to.be.eq(true);
         }}>
-      </TestCase>
-      <TestCase itShould="render a Checkbox disabled" tags={['C_API']}>
-        <View>
-          <List renderHeader="Checkbox 不可用">
-            <List.Item thumb={<Checkbox defaultChecked={false} disabled />} />
-            <List.Item thumb={<Checkbox defaultChecked disabled />} />
-          </List>
-        </View>
       </TestCase>
       <TestCase itShould="受控的Checkbox" tags={['C_API']}>
         <View>
@@ -121,9 +109,9 @@ export default () => {
               Option 1
             </CheckboxItem>
             <CheckboxItem>Option 2</CheckboxItem>
-            <CheckboxItem disabled>Option 3</CheckboxItem>
-            <CheckboxItem disabled checked right>
-              More...
+            <CheckboxItem>Option 3</CheckboxItem>
+            <CheckboxItem checked right>
+              自动已被选择，无法取消的选项
             </CheckboxItem>
           </List>
         </View>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import {StyleSheet, Image, Alert, ScrollView } from 'react-native';
+import {StyleSheet, Image, Alert, ScrollView, View, AccessibilityRole } from 'react-native';
 import {
   Chip,
   MD2Theme,
@@ -8,157 +8,463 @@ import {
   useTheme,
   MD2Colors,
   MD3Colors,
-  Icon
+  Icon,
+  TouchableRipple,
+  Text
 } from 'react-native-paper';
 
 import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
+import { EllipsizeProp } from 'react-native-paper/lib/typescript/types';
 
 export function ChipText() {
+
   const [snackbarProperties, setSnackbarProperties] = React.useState({
     visible: false,
     text: '',
   });
-  const [selected, setSelected] = useState(false);
-  const [isSelected, setIsSelected] = useState(false);
-  const useExampleTheme = () => useTheme<MD2Theme | MD3Theme>();
-  const { isV3 } = useExampleTheme();
-  const customColor = isV3 ? MD3Colors.error50 : MD2Colors.purple900;
-  const handlePress = () => {
-    setSelected(!selected);
-  };
+  const _onClose =() => {
+    console.info('chip onClose')
+    setSnackbarProperties({
+      visible: true,
+      text: 'Custom icon close button pressed',
+    })
+  }
 
-  const handlePress1 = () => {
-    setIsSelected(!isSelected);
-  };
+  const _onPress =() => {
+    console.info('chip onPress')
+  }
 
-  const selectedStyle = {
-    // 这里可以添加你想要的选中状态样式，比如背景色、边框等  
-    backgroundColor: 'rgba(0, 0, 255, 0.2)', // 示例：半透明蓝色背景  
-  };
+  const _onLongPress =()=> {
+    console.info('chip onLongPress');
+  }
 
-  const longText = '这是一段非常长的文本内容，用于演示ellipsizeMode属性';
+  const _onPressIn =()=> {
+    console.info('chip onPressIn')
+  }
 
-  const text = '123456'; 
+  
+  const _onPressOut =()=> {
+    console.info('chip onPressIn')
+  }
+
+  const CheckboxProps = [
+    {
+        key: 'Checkbox style: mode  is flat',
+        value: {
+          icon:'information',
+          Type:'flat'
+        } ,
+        text:'Example Chip'
+    },
+    {
+      key: 'Checkbox style: mode  is outlined',
+      value: {
+        icon:'information',
+        Type:'outlined',
+        style:[styles.chip]
+      },
+      text:'Chip Content' 
+     },
+     {
+      key: 'Checkbox style: children  is children  Content',
+      value: {
+        icon:'information',
+        Type:'outlined',
+        style:[styles.chip]
+      },
+      text:'children  Content' 
+     },
+     {
+      key: 'Checkbox style: icon  is heart',
+      value: {
+        icon:'heart',
+        Type:'outlined',
+        style:[styles.chip]
+      },
+      text:'Chip Content' 
+     },
+     {
+      key: 'Checkbox style: icon  is <Image source={require("../assets/images/avatar.png")} accessibilityIgnoresInvertColors/>',
+      value: {
+        style:[styles.chip],
+        avatar:<Image
+        source={require('../assets/images/avatar.png')}
+        accessibilityIgnoresInvertColors
+      />
+      },
+      text:'Avatar(selected)' 
+     },
+     {
+      key: 'Checkbox style: closeIcon is arrow-down',
+      value: {
+        closeIcon:'arrow-down',
+        style:[styles.chip],
+        closeIconAccessibilityLabel:"Custom Close icon accessibility label",
+        onClose:_onClose
+      },
+      text:'With custom close icon' 
+     },
+     {
+      key: 'Checkbox style: selected is true',
+      value: {
+        mode:'outlined' as 'flat' | 'outlined',
+        style:[styles.chip],
+        selected:true
+
+      },
+      text:'With selected overlay' 
+     },
+     {
+      key: 'Checkbox style: selected is false',
+      value: {
+        mode:'outlined' as 'flat' | 'outlined',
+        style:[styles.chip],
+        selected:false
+
+      },
+      text:'With selected overlay' 
+     },
+     {
+      key: 'Checkbox style: selectedColor is MD2Colors.purple900',
+      value: {
+        mode:'outlined' as 'flat' | 'outlined',
+        style:[styles.chip],
+        selected:true,
+        selectedColor:MD2Colors.purple900
+      },
+      text:'With selected overlay' 
+     },
+     {
+      key: 'Checkbox style: showSelectedOverlay  is true',
+      value: {
+        mode:'outlined' as 'flat' | 'outlined',
+        style:[styles.chip],
+        selected:true,
+        showSelectedOverlay:true
+      },
+      text:'With selected overlay' 
+     },
+     {
+      key: 'Checkbox style: showSelectedOverlay  is false',
+      value: {
+        mode:'outlined' as 'flat' | 'outlined',
+        style:[styles.chip],
+        selected:true,
+        showSelectedOverlay:false
+      },
+      text:'With selected overlay' 
+     },
+     {
+      key: 'Checkbox style: showSelectedCheck  is true',
+      value: {
+        mode:'outlined' as 'flat' | 'outlined',
+        style:[styles.chip],
+        selected:true,
+        showSelectedCheck:true
+      },
+      text:'With selected overlay' 
+     },
+     {
+      key: 'Checkbox style: showSelectedCheck  is false',
+      value: {
+        mode:'outlined' as 'flat' | 'outlined',
+        style:[styles.chip],
+        selected:true,
+        showSelectedCheck:false
+      },
+      text:'With selected overlay' 
+     },
+     {
+      key: 'Checkbox style: rippleColor  is false',
+      value: {
+        style:[styles.chip],
+        selected:true,
+        showSelectedOverlay:true,
+        onPress:_onPress,
+        rippleColor:MD2Colors.red100
+      },
+      text:'With selected overlay' 
+     },
+     {
+      key: 'Checkbox style: disabled  is true',
+      value: {
+        style:[styles.chip],
+        selected:true,
+        showSelectedOverlay:true,
+        onPress:_onPress,
+        rippleColor:MD2Colors.red100,
+        disabled:true
+      },
+      text:'With selected overlay' 
+     },
+     {
+      key: 'Checkbox style: disabled  is false',
+      value: {
+        style:[styles.chip],
+        selected:true,
+        showSelectedOverlay:true,
+        onPress:_onPress,
+        rippleColor:MD2Colors.red100,
+        disabled:false,
+        //background:{color:'red',borderless:false,radius:10,foreground:true}
+      },
+      text:'With selected overlay' 
+     },
+     {
+      key: 'Checkbox style: background  is {color:MD2Colors.red100}',
+      value: {
+        style:[styles.chip,{backgroundColor:MD2Colors.red100}],
+        selected:true,
+        showSelectedOverlay:true,
+        onPress:_onPress,
+        background:{color:MD2Colors.red100}
+      },
+      text:'With selected overlay' 
+     },
+     {
+      key: 'Checkbox style: accessibilityLabel  is accessibilityLabel',
+      value: {
+        mode:"outlined" as 'flat' | 'outlined',
+        style:[styles.chip],
+        accessibilityLabel:'accessibilityLabel'
+      },
+      text:'With selected overlay' 
+     },
+     {
+      key: 'Checkbox style: accessibilityLabel  is Close icon accessibility label',
+      value: {
+        mode:"outlined" as 'flat' | 'outlined',
+        style:[styles.chip],
+        onClose:_onClose,
+        closeIconAccessibilityLabel:'Close icon accessibility label'
+      },
+      text:'With selected overlay' 
+     },
+     {
+      key: 'Checkbox fuction: onPress',
+      value: {
+        mode:"outlined" as 'flat' | 'outlined',
+        style:[styles.chip],
+        onPress:_onPress,
+      },
+      text:'With selected overlay' 
+     },
+     {
+      key: 'Checkbox fuction: onLongPress',
+      value: {
+        mode:"outlined" as 'flat' | 'outlined',
+        style:[styles.chip],
+        onLongPress:_onLongPress,
+      },
+      text:'With selected overlay' 
+     },
+     {
+      key: 'Checkbox fuction: onPressIn',
+      value: {
+        mode:"outlined" as 'flat' | 'outlined',
+        style:[styles.chip],
+        onPressIn:_onPressIn,
+      },
+      text:'With selected overlay' 
+     },
+     {
+      key: 'Checkbox fuction: onPressOut',
+      value: {
+        mode:"outlined" as 'flat' | 'outlined',
+        style:[styles.chip],
+        onPressOut:_onPressOut,
+      },
+      text:'With selected overlay' 
+     },
+     {
+      key: 'Checkbox fuction: onClose',
+      value: {
+        mode:"outlined" as 'flat' | 'outlined',
+        style:[styles.chip],
+        onClose:_onClose,
+      },
+      text:'With selected overlay' 
+     },
+     {
+      key: 'Checkbox style: delayLongPress is 10000(延时10秒)',
+      value: {
+        mode:"outlined" as 'flat' | 'outlined',
+        style:[styles.chip],
+        onLongPress:_onLongPress,
+        delayLongPress:10000
+      },
+      text:'With selected overlay' 
+     },
+     {
+      key: 'Checkbox style: delayLongPress is 1000(延时1秒)',
+      value: {
+        mode:"outlined" as 'flat' | 'outlined',
+        style:[styles.chip],
+        onLongPress:_onLongPress,
+        delayLongPress:1000
+      },
+      text:'With selected overlay' 
+     },
+     {
+      key: 'Checkbox style: compact is true',
+      value: {
+        mode:"outlined" as 'flat' | 'outlined',
+        style:[styles.chip],
+        compact:true,
+      },
+      text:'Compact chip' 
+     },
+     {
+      key: 'Checkbox style: compact is false',
+      value: {
+        mode:"outlined" as 'flat' | 'outlined',
+        style:[styles.chip],
+        compact:false,
+        onPress:_onPress
+      },
+      text:'Compact chip' 
+     },
+     {
+      key: 'Checkbox style: textStyle is {styles.tiny}',
+      value: {
+        style:[styles.chip],
+        onPress:_onPress,
+        textStyle:styles.tiny
+      },
+      text:'With custom text' 
+     },
+     {
+      key: 'Checkbox style: style is [styles.chip]',
+      value: {
+        style:[styles.chip],
+        onPress:_onPress,
+      },
+      text:'With custom text' 
+     },
+     {
+      key: 'Checkbox style: theme is { colors: { primary: "green" } }',
+      value: {
+        style:[styles.chip],
+        onPress:_onPress,
+        theme:{ colors: { primary: 'green' } }
+      },
+      text:'With custom text' 
+     },
+     {
+      key: 'Checkbox style: testID is chip ',
+      value: {
+        style:[styles.chip],
+        onPress:_onPress,
+        testID:'chip'
+      },
+      text:'With custom text' 
+     },
+     {
+      key: 'Checkbox style: testID is chip1',
+      value: {
+        style:[styles.chip],
+        onPress:_onPress,
+        testID:'chip1'
+      },
+      text:'With custom text' 
+     },
+     {
+      key: 'Checkbox style: ellipsizeMode is head',
+      value: {
+        mode:"outlined" as 'flat' | 'outlined',
+        style:[styles.bigTextFlex],
+        textStyle:styles.bigTextStyle,
+        onPress:_onPress,
+        onClose:_onClose,
+        ellipsizeMode:'head' as 'head' | 'middle' | 'tail' | 'clip'
+      },
+      text:' With a very big text: React Native Paper is a high-quality,standard-compliant Material Design library that has you covered inall major use-cases.' 
+     },
+     {
+      key: 'Checkbox style: ellipsizeMode is middle',
+      value: {
+        mode:"outlined" as 'flat' | 'outlined',
+        style:[styles.bigTextFlex],
+        textStyle:styles.bigTextStyle,
+        onPress:_onPress,
+        onClose:_onClose,
+        ellipsizeMode:'middle' as 'head' | 'middle' | 'tail' | 'clip'
+      },
+      text:' With a very big text: React Native Paper is a high-quality,standard-compliant Material Design library that has you covered inall major use-cases.' 
+     },
+     {
+      key: 'Checkbox style: ellipsizeMode is tail',
+      value: {
+        mode:"outlined" as 'flat' | 'outlined',
+        style:[styles.bigTextFlex],
+        textStyle:styles.bigTextStyle,
+        onPress:_onPress,
+        onClose:_onClose,
+        ellipsizeMode:'tail' as 'head' | 'middle' | 'tail' | 'clip'
+      },
+      text:' With a very big text: React Native Paper is a high-quality,standard-compliant Material Design library that has you covered inall major use-cases.' 
+     },
+     {
+      key: 'Checkbox style: ellipsizeMode is clip',
+      value: {
+        mode:"outlined" as 'flat' | 'outlined',
+        style:[styles.bigTextFlex],
+        textStyle:styles.bigTextStyle,
+        onPress:_onPress,
+        onClose:_onClose,
+        ellipsizeMode:'clip' as 'head' | 'middle' | 'tail' | 'clip'
+      },
+      text:' With a very big text: React Native Paper is a high-quality,standard-compliant Material Design library that has you covered inall major use-cases.' 
+     },
+     {
+      key: 'Checkbox style: maxFontSizeMultiplier is 1',
+      value: {
+        style:[styles.chip],
+        onPress:_onPress,
+        maxFontSizeMultiplier:1
+      },
+      text:'With custom text' 
+     },
+     {
+      key: 'Checkbox style: maxFontSizeMultiplier is 2',
+      value: {
+        style:[styles.chip],
+        onPress:_onPress,
+        maxFontSizeMultiplier:2
+      },
+      text:'With custom text' 
+     },
+     {
+      key: 'Checkbox style: accessibilityRole is button',
+      value: {
+        style:[styles.chip],
+        onPress:_onPress,
+        accessibilityRole:'button' as AccessibilityRole
+      },
+      text:'With custom text' 
+     },
+     {
+      key: 'Checkbox style: theme = {{ colors: { primary:"green"}}}',
+      value: {
+        style:[styles.chip],
+        onPress:_onPress,
+        theme:{ colors: { primary:"green"}}
+      },
+      text:'With custom text' 
+     }
+  ]
 
   return (
     <Tester>
       <ScrollView>
         <TestSuite name='Chip' >
-          <TestCase itShould='Default'>
-            <Chip icon="information" onPress={() => console.log('Pressed')} selected={true}>Example Chip</Chip>
-          </TestCase>
-          <TestCase itShould='outlined'>
-            <Chip mode='outlined' icon="heart" selected={true}>ChipExample</Chip>
-          </TestCase>
-
-          <TestCase itShould='avatar'>
-              <Chip
-              avatar={
-                <Image
-                  source={require('../assets/images/avatar.png')}
-                  accessibilityIgnoresInvertColors
-                />
-              }
-              selected={selected}
-              onPress={handlePress}
-              onClose={() =>
-                setSnackbarProperties({
-                  visible: true,
-                  text: 'Avatar close button pressed',
-                })
-              }
-              style={styles.chip}
-              selectedColor={customColor}
-            >
-              Avatar(selected)
-            </Chip>
-          </TestCase>
-
-          <TestCase itShould='Use "elevated" mode to display stereoscopic effects'>
-            <Chip
-                mode="outlined" // 使用 'elevated' 模式来显示立体效果  
-                style={isSelected ? [styles.chip, selectedStyle] : styles.chip} // 根据 isSelected 应用样式  
-                onPress={handlePress1}
-              >
-                Chip Content
-              </Chip>
-              <Chip
-              mode="flat" // 或者 'elevated', 'outlined'  
-              onPress={handlePress1}
-              style={{ margin: 8 }}
-              background={{ color: "#f0f0f0" }}
-              accessibilityLabel="My Chip"
-              closeIconAccessibilityLabel="Close icon accessibility label">
-              {/* 当 Chip 被选中时显示勾选图标 */}
-              {isSelected && <Icon size={16} color="green" source={undefined} />}
-              showSelectedCheck
-            </Chip>
-            </TestCase>
-
-            <TestCase itShould='rippleColor'>
-             <Chip
-              mode="outlined" // 或者 'outlined'  
-              rippleColor="red" // 设置涟漪颜色为红色  
-              onPress={() => console.log('Chip pressed!')}
-              style={{ margin: 8 }}
-            >
-              Chip Content
-            </Chip>
-            </TestCase>
-
-
-            <TestCase itShould='Chip closed '>
-            <Chip
-              icon="close"
-              onClose={() => {Alert.alert('closed Chip')}}
-              closeIconAccessibilityLabel="Close chip"
-              >
-              Example Chip
-            </Chip>
-            </TestCase>
-
-            <TestCase itShould='Compact chip '>
-            <Chip compact={true} style={styles.chip} onPress={() => { Alert.alert('compact') }}>
-              Compact chip
-             </Chip>
-            </TestCase>
-
-            <TestCase itShould='Elevated chip '>
-              <Chip elevated={true} onPress={() => { }} style={styles.chip} onLongPress={() => { Alert.alert('Elevated') }}>
-                Elevated
-              </Chip>
-            </TestCase>
-
-            <TestCase itShould='custom chip '>
-              <Chip
-                onPress={() => { }}
-                style={styles.chip}
-                textStyle={styles.tiny}>
-                With custom size
-              </Chip>
-            </TestCase>
-
-            <TestCase itShould='ellipsizeMode chip '>
-              <Chip
-                onPress={() => { }}
-                ellipsizeMode="head"
-              >
-              Chips
-              </Chip>
-            </TestCase>
-
-            <TestCase itShould='longText chip '>
-            <Chip ellipsizeMode="tail" style={{ margin: 8 }}>  
-              {longText}  
-              </Chip> 
-            </TestCase>
-
-            <TestCase itShould='maxFontSizeMultiplier chip '>
-            <Chip maxFontSizeMultiplier={0.1} style={{ width: 80, margin: 8 }}>  
-               {text}  
-             </Chip> 
-            </TestCase>
-
+         {CheckboxProps.map((item) => {
+            return (
+              <TestCase itShould={item.key}  key={item.key}>
+                 <Chip {...item.value}>{item.text}</Chip>
+              </TestCase>
+            );
+        })} 
         </TestSuite>
       </ScrollView> 
     </Tester>
@@ -173,6 +479,11 @@ const styles = StyleSheet.create({
   },
   chip: {
     margin: 4,
+  },
+  ripple: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   tiny: {
     marginVertical: 2,

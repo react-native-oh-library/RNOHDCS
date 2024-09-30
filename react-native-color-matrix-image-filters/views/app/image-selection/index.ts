@@ -1,6 +1,6 @@
 import { Command, UpdateMap } from 'react-use-backlash'
 import { ResizeMode } from '../../../domain'
-import { Alert, ImagePicker } from '../../../services'
+// import { Alert, ImagePicker } from '../../../services'
 import { errorMessage } from '../../../utils'
 
 type State = {
@@ -19,9 +19,9 @@ type Actions = {
   leaveFullScreen: []
 }
 
-type Injects = ImagePicker & Alert
+// type Injects = ImagePicker & Alert
 
-const init = (image: State['image']): Command<State, Actions, Injects> => [
+const init = (image: State['image']): Command<State, Actions> => [
   {
     selectedResizeMode: 'center',
     image,
@@ -32,7 +32,7 @@ const init = (image: State['image']): Command<State, Actions, Injects> => [
 
 const takePhoto =
   (source: 'camera' | 'library') =>
-  (state: State): Command<State, Actions, Injects> =>
+  (state: State): Command<State, Actions> =>
     [
       state,
       async ({ updatePhoto }, { pickPhotoFromLibrary, takePhotoFromCamera, showAlert }) => {
@@ -47,7 +47,7 @@ const takePhoto =
       }
     ]
 
-const updates: UpdateMap<State, Actions, Injects> = {
+const updates: UpdateMap<State, Actions> = {
   selectResizeMode: (state, selectedResizeMode) =>
     selectedResizeMode === state.selectedResizeMode ? [state] : [{ ...state, selectedResizeMode }],
 

@@ -9,112 +9,82 @@ import {
   Tooltip,
   Card,
 } from 'react-native-paper';
-
-const DURATION_MEDIUM = 1500;
-const DURATION_LONG = 3000;
-
-const formOfTransport = [
-  { title: 'Car - default delays' },
-  { title: 'Airplane - default delays' },
-  { title: 'Taxi - long enter delay', enterTouchDelay: DURATION_MEDIUM },
-  { title: 'Train - long enter delay', enterTouchDelay: DURATION_MEDIUM },
-  { title: 'Ferry - long leave delay', leaveTouchDelay: DURATION_MEDIUM },
-  { title: 'Bus - long leave delay', leaveTouchDelay: DURATION_MEDIUM },
-  {
-    title: 'Walk - long both delays',
-    enterTouchDelay: DURATION_MEDIUM,
-    leaveTouchDelay: DURATION_LONG,
-  },
-];
-
 import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
 
 function TooltipDemo() { 
-  const [textAlign, setTextAlign] = React.useState('bold');
+
+  const TooltippProps = [
+    {
+      key: 'Tooltipp style:title={Selected Camera}',
+      value: {
+        title:"Selected Camera"
+      }
+    },
+    {
+      key: 'Tooltipp style:enterTouchDelay={1000}',
+      value: {
+        title:"Selected Camera",
+        enterTouchDelay:1000,
+      }
+    },
+    {
+      key: 'Tooltipp style:enterTouchDelay={2000}',
+      value: {
+        title:"Selected Camera",
+        enterTouchDelay:2000,
+      }
+    },
+    {
+      key: 'Tooltipp style:enterTouchDelay={1500}',
+      value: {
+        title:"Selected Camera",
+        leaveTouchDelay:1500,
+      }
+    },
+    {
+      key: 'Tooltipp style:enterTouchDelay={3000}',
+      value: {
+        title:"Selected Camera",
+        leaveTouchDelay:3000,
+      }
+    },
+    {
+      key: 'Tooltipp style:enterTouchDelay={1}',
+      value: {
+        title:"Selected Camera",
+        titleMaxFontSizeMultiplier:1,
+      }
+    },
+    {
+      key: 'Tooltipp style:enterTouchDelay={2}',
+      value: {
+        title:"Selected Camera",
+        titleMaxFontSizeMultiplier:2,
+      }
+    },
+    {
+      key: 'Tooltipp style:theme={ colors: { primary:"green"} }',
+      value: {
+        title:"Selected Camera",
+        theme:{ colors: { primary: 'green' } },
+      }
+    },
+  ]
+
   return (
     <Tester>
       <ScrollView>
       <TestSuite name='Tooltip' >
-        <TestCase itShould='Icon Buttons'>
-          <View style={styles.iconButtonContainer}>
-              {formOfTransport.map((transport, index) => (
-                <Tooltip
-                  key={index}
-                  title={transport.title}
-                  enterTouchDelay={transport.enterTouchDelay}
-                  leaveTouchDelay={transport.leaveTouchDelay}
-                >
-                  <IconButton
-                    icon={transport.title.split(' ')[0].toLowerCase()}
-                    size={24}
-                    onPress={() => {}}
-                  />
-                </Tooltip>
-              ))}
-            </View>
-        </TestCase>
-
-        <TestCase itShould='Icon Buttons'>
-          <ToggleButton.Row
-              value={textAlign}
-              style={styles.toggleButtonRow}
-              onValueChange={setTextAlign}
-            >
-              <Tooltip title="Align left">
-                <ToggleButton icon="format-align-left" value="left" />
+      {TooltippProps.map((item) => {
+          return (
+            <TestCase itShould={item.key}  key={item.key}>
+              <Tooltip title="Selected Camera">
+                <IconButton icon="camera" selected size={24} onPress={() => {}} />
               </Tooltip>
-              <Tooltip title="Align center">
-                <ToggleButton icon="format-align-center" value="center" />
-              </Tooltip>
-              <Tooltip title="Align right">
-                <ToggleButton icon="format-align-right" value="right" disabled />
-              </Tooltip>
-            </ToggleButton.Row>
-          </TestCase>
-
-          <TestCase itShould='Avatar'>
-            <View style={styles.avatarContainer}>
-              <Tooltip title="Username">
-                <Avatar.Text label="U" />
-              </Tooltip>
-            </View>
-          </TestCase>
-
-          <TestCase itShould='Chip'>
-            <View style={styles.chipContainer}>
-              <Tooltip title="Copied">
-                <Chip
-                  mode="outlined"
-                  avatar={
-                    <Image
-                      source={require('../assets/images/avatar.png')}
-                      accessibilityIgnoresInvertColors
-                    />
-                  }
-                >
-                  John Doe
-                </Chip>
-              </Tooltip>
-            </View>
-          </TestCase>
-
-
-          <TestCase itShould='Card'>
-            <View style={styles.chipContainer}>
-            <Tooltip title="Cafeteria, 1st floor">
-            <Card style={styles.cardContainer}>
-              <Card.Title
-                title="Lunch break"
-                subtitle="1:00-2:00 PM"
-                left={(props) => (
-                  <Avatar.Icon {...props} icon="food-fork-drink" />
-                )}
-              />
-            </Card>
-            </Tooltip>
-            </View>
-          </TestCase>
-     </TestSuite>
+            </TestCase>
+            );
+          })},
+       </TestSuite>
       </ScrollView>
     </Tester>
   )
@@ -122,31 +92,3 @@ function TooltipDemo() {
 
 
 export default TooltipDemo;
-
-const styles = StyleSheet.create({
-  avatarContainer: {
-    marginHorizontal: 16,
-    width: 64,
-  },
-  chipContainer: {
-    marginHorizontal: 16,
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  fabContainer: {
-    margin: 16,
-    right: 0,
-    position: 'absolute',
-    bottom: 0,
-  },
-  cardContainer: {
-    margin: 16,
-  },
-  toggleButtonRow: {
-    paddingHorizontal: 16,
-  },
-  iconButtonContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-});

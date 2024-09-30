@@ -1,246 +1,108 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { AppRegistry, Text, View } from 'react-native';
+import { TextField } from 'react-native-material-textfield';
 import { Dropdown } from 'react-native-material-dropdown';
-import {
-  Tester,
-  TestSuite,
-  TestCase
-} from '@rnoh/testerino';
 
-export class Example extends Component {
-  constructor(props) {
-    super(props);
 
-    this.onChangeText = this.onChangeText.bind(this);
+export class DropDownDemo extends Component {
+    constructor(props) {
+      super(props);
 
-    this.codeRef = this.updateRef.bind(this, 'code');
-    this.nameRef = this.updateRef.bind(this, 'name');
-    this.sampleRef = this.updateRef.bind(this, 'sample');
-    this.typographyRef = this.updateRef.bind(this, 'typography');
+      this.onChangeText = this.onChangeText.bind(this);
 
-    this.state = {
-      sample: 'The quick brown fox jumps over the lazy dog',
-      typography: 'value',
-      name: 'Cyan',
-      code: 'A700',
-    };
-  }
+      this.codeRef = this.updateRef.bind(this, 'code');
+      this.nameRef = this.updateRef.bind(this, 'name');
+      this.sampleRef = this.updateRef.bind(this, 'sample');
+      this.typographyRef = this.updateRef.bind(this, 'typography');
 
-  onChangeText(text) {
-    ['name', 'code', 'sample', 'typography']
-      .map((name) => ({ name, ref: this[name] }))
-      .filter(({ ref }) => ref && ref.isFocused())
-      .forEach(({ name, ref }) => {
-        this.setState({ [name]: text });
-      });
+      this.state = {
+        sample: 'The quick brown fox jumps over the lazy dog',
+        typography: 'Headline',
+        name: 'Cyan',
+        code: 'A700',
+      };
+    }
 
-  }
+    onChangeText(text) {
+      ['name', 'code', 'sample', 'typography']
+        .map((name) => ({ name, ref: this[name] }))
+        .filter(({ ref }) => ref && ref.isFocused())
+        .forEach(({ name, ref }) => {
+          this.setState({ [name]: text });
+        });
+    }
 
-  updateRef(name, ref) {
-    this[name] = ref;
-  }
+    updateRef(name, ref) {
+      this[name] = ref;
+    }
 
-  render() {
-    let { typography, name, code, sample } = this.state;
-    let textStyle = [
-      styles.text,
-      styles[typography],
-      styles[name + code],
-    ];
+    render() {
+      let { typography, name, code, sample } = this.state;
 
-    return (
-      <View style={styles.screen}>
-        <Tester style={{ flex: 1, backgroundColor: 'black' }}>
-          <ScrollView >
-            <TestSuite name="DropDown test">
-              <View style={styles.container}>
-                <TestCase
-                  itShould="TestCase01 DropDown data and value "
-                  tags={['C_API']}
-                  initialState={undefined as any}
-                  arrange={({ setState }) => {
-                    return (
-                      <Dropdown
-                        ref={this.typographyRef}
-                        value={typography} //选中值
-                        data={typographyData} //item 条目值
-                        onChangeText={(e) => {
-                          this.onChangeText(e);
-                          setState(true);
-                        }}
-                      />
-                    );
-                  }}
-                  assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                  }}
-                />
-                <TestCase
-                  itShould="TestCase02 DropDown textColor "
-                  tags={['C_API']}
-                  initialState={undefined as any}
-                  arrange={({ setState }) => {
-                    return (
-                      <Dropdown
-                        ref={this.typographyRef}
-                        value={typography}
-                        data={typographyData}
-                        textColor='rgba(255, 5, 0, .87)' // 被选中的vlue颜色值
-                        onChangeText={(e) => {
-                          this.onChangeText(e);
-                          setState(true);
-                        }}
-                      />
-                    );
-                  }}
-                  assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                  }}
-                />
-                <TestCase
-                  itShould="TestCase03 DropDown itemColor "
-                  tags={['C_API']}
-                  initialState={undefined as any}
-                  arrange={({ setState }) => {
-                    return (
-                      <Dropdown
-                        ref={this.typographyRef}
-                        value={typography}
-                        data={typographyData}
-                        textColor='rgba(0, 5, 0, .87)' // 被选中的vlue颜色值
-                        itemColor='rgba(0, 100, 0, .87)' //下拉列表里面的item颜色
-                        onChangeText={(e) => {
-                          this.onChangeText(e);
-                          setState(true);
-                        }}
-                      />
-                    );
-                  }}
-                  assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                  }}
-                />
-                <TestCase
-                  itShould="TestCase04 DropDown selectedItemColor "
-                  tags={['C_API']}
-                  initialState={undefined as any}
-                  arrange={({ setState }) => {
-                    return (
-                      <Dropdown
-                        ref={this.typographyRef}
-                        value={typography}
-                        data={typographyData}
-                        textColor='rgba(255, 100, 0, .87)' // 被选中的vlue颜色值
-                        itemColor='rgba(0, 100, 0, .87)' //下拉列表里面的item颜色
-                        selectedItemColor='rgba(255, 100, 0, .87)'//下拉列表里面的item被选中的颜色
-                        onChangeText={(e) => {
-                          this.onChangeText(e);
-                          setState(true);
-                        }}
-                      />
-                    );
-                  }}
-                  assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                  }}
-                />
-                <TestCase
-                  itShould="TestCase05 DropDown dropdownPosition "
-                  tags={['C_API']}
-                  initialState={undefined as any}
-                  arrange={({ setState }) => {
-                    return (
-                      <Dropdown
-                        ref={this.typographyRef}
-                        value={typography}
-                        data={typographyData}
-                        dropdownPosition='10' //点击弹出下拉列表的位置
-                        onChangeText={(e) => {
-                          this.onChangeText(e);
-                          setState(true);
-                        }}
-                      />
-                    );
-                  }}
-                  assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                  }}
-                />
-                <TestCase
-                  itShould="TestCase06 DropDown label "
-                  tags={['C_API']}
-                  initialState={undefined as any}
-                  arrange={({ setState }) => {
-                    return (
-                      <Dropdown
-                        ref={this.typographyRef}
-                        value={typography}
-                        data={typographyData}
-                        label='...我是标签....' //下拉列表默认标签
-                        onChangeText={(e) => {
-                          this.onChangeText(e);
-                          setState(true);
-                        }}
-                      />
-                    );
-                  }}
-                  assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                  }}
-                />
-                <TestCase
-                  itShould="TestCase07 DropDown itemCount "
-                  tags={['C_API']}
-                  initialState={undefined as any}
-                  arrange={({ setState }) => {
-                    return (
-                      <Dropdown
-                        ref={this.typographyRef}
-                        value={typography}
-                        data={typographyData}
-                        itemCount='2' //点击弹出下拉列表显示的item的数量，默认4个
-                        dropdownPosition='4'
-                      />
-                    );
-                  }}
-                  assert={({ state, expect }) => {
-                    expect(state).to.be.true;
-                  }}
+      let textStyle = [
+        styles.text,
+        styles[typography],
+        styles[name + code],
+      ];
+
+      return (
+        <View style={styles.screen}>
+          <View style={styles.container}>
+            <TextField
+              ref={this.sampleRef}
+              value={sample}
+              onChangeText={this.onChangeText}
+              label='Sample text'
+              multiline={true}
+            />
+
+            <Dropdown
+              ref={this.typographyRef}
+              value={typography}
+              onChangeText={this.onChangeText}
+              label='Typography'
+              data={typographyData}
+            />
+
+            <View style={{ flexDirection: 'row' }}>
+              <View style={{ flex: 1 }}>
+                <Dropdown
+                  ref={this.nameRef}
+                  value={name}
+                  onChangeText={this.onChangeText}
+                  label='Color name'
+                  data={colorNameData}
                 />
               </View>
-            </TestSuite>
-          </ScrollView>
-        </Tester>
-      </View>
-    );
+
+              <View style={{ width: 96, marginLeft: 8 }}>
+                <Dropdown
+                  ref={this.codeRef}
+                  value={code}
+                  onChangeText={this.onChangeText}
+                  label='Color code'
+                  data={colorCodeData}
+                  propsExtractor={({ props }, index) => props}
+                />
+              </View>
+            </View>
+          </View>
+
+          <View style={[styles.container, styles.textContainer]}>
+            <Text style={textStyle}>{sample}</Text>
+          </View>
+        </View>
+      );
+    }
   }
-}
 
 
 const styles = {
-  TextInput: {
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 4,
-    width: '90%',
-  },
-  btn: {
-    borderRadius: 10,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10,
-    margin: 10,
-    backgroundColor: 'blue',
-  },
-  btnText: { fontWeight: 'bold', color: '#fff', fontSize: 20 },
-
   screen: {
     flex: 1,
     padding: 4,
     paddingTop: 56,
-    backgroundColor: 'black',
+    backgroundColor: '#E8EAF6',
   },
 
   container: {
@@ -292,11 +154,24 @@ const styles = {
 };
 
 const typographyData = [
-  { value: 'value' },
-  { value: 'textColor'},
-  { value: 'itemColor' },
-  { value: 'selectedItemColor' },
-  { value: 'DropDown Postion' },
-  { value: 'DropDown label' },
-  { value: 'itemCount' },
+  { value: 'Display2', label: 'Display 2' },
+  { value: 'Display1', label: 'Display 1' },
+  { value: 'Headline' },
+  { value: 'Title' },
+  { value: 'Subheading' },
+  { value: 'Body' },
+  { value: 'Caption' },
+];
+
+const colorNameData = [
+  { value: 'Blue' },
+  { value: 'Teal' },
+  { value: 'Cyan' },
+];
+
+const colorCodeData = [
+  { value: '900', props: { disabled: true } },
+  { value: '700' },
+  { value: 'A700' },
+  { value: 'A400' },
 ];

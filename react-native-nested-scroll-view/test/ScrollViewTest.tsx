@@ -1,6 +1,6 @@
-import { View, ScrollView, Text, StyleSheet } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, RefreshControl } from 'react-native';
 import { TestSuite, TestCase, Tester } from '@rnoh/testerino';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from './button';
 import { StylesTest } from './StylesTest';
 import { ContentContainerStyleTest } from './ContentContainerStyleTest';
@@ -14,11 +14,17 @@ import { MiscPropsTest } from './MiscPropsTest';
 import { ScrollToTest } from './ScrollToTest';
 import { CenterContentTest } from './CenterContentTest';
 
-export function ScrollViewTest() {
+export default function ScrollViewTest() {
   return (
-    <ScrollView>
-      <Tester>
+    <Tester>
+      <ScrollView>
         <TestSuite name="ScrollView">
+          <TestCase modal skip itShould="removeClippedSubviewsBasicTest">
+            <RemoveClippedSubviewsBasicTest />
+          </TestCase>
+          <TestCase modal skip itShould="ScrollViewWithRefreshControlTest">
+            <ScrollViewWithRefreshControlTest />
+          </TestCase>
           <StylesTest />
           <ContentContainerStyleTest />
           <ScrollBarsTest />
@@ -42,8 +48,8 @@ export function ScrollViewTest() {
             <ScrollViewEndFillColorTest />
           </TestCase>
         </TestSuite>
-      </Tester>
-    </ScrollView>
+      </ScrollView>
+    </Tester>
   );
 }
 
@@ -183,3 +189,111 @@ function ScrollViewEndFillColorTest() {
     </View>
   );
 }
+
+function RemoveClippedSubviewsBasicTest() {
+  return (
+    <View style={{ height: 300, width: '60%' }}>
+      <ScrollView removeClippedSubviews={true}>
+        <View style={stylesBox.box}>
+          <Text>Box 1</Text>
+        </View>
+        <View style={stylesBox.box}>
+          <Text>Box 2</Text>
+        </View>
+        <View style={stylesBox.box}>
+          <Text>Box 3</Text>
+        </View>
+        <View style={stylesBox.box4}>
+          <Text style={{ fontSize: 18 }}>
+            Component that wraps platform ScrollView while providing integration
+            with touch locking "responder" system. Keep in mind that ScrollViews
+            must have a bounded height in order to work, since they contain
+            unbounded-height children into a bounded container (via a scroll
+            interaction). In order to bound the height of a ScrollView, either
+            set the height of the view directly (discouraged) or make sure all
+            parent views have bounded height. Forgetting to transfer "flex: 1"
+            down the view stack can lead to errors here, which the element
+            inspector makes quick to debug. Doesn't yet support other contained
+            responders from blocking this scroll view from becoming the
+            responder.
+          </Text>
+        </View>
+      </ScrollView>
+    </View>
+  );
+}
+
+const stylesBox = StyleSheet.create({
+  box: {
+    width: 200,
+    height: 200,
+    backgroundColor: 'lightblue',
+    margin: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  box4: {
+    width: 500,
+    height: 200,
+    backgroundColor: '#528af58a',
+    margin: 10,
+  },
+});
+
+function ScrollViewWithRefreshControlTest() {
+  const [refreshing, setRefreshing] = useState(false);
+  const [data, setData] = useState([]);
+
+  const fetchData = () => {
+    setTimeout(() => {
+      const newData: any = ['Item 1', 'Item 2', 'Item 3'];
+      setData(newData);
+      setRefreshing(false);
+    }, 2000);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    fetchData();
+  };
+
+  return (
+    <View style={{ height: 300, width: '60%' }}>
+      <ScrollView
+        style={styles.scrollView}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            colors={['#9Bd35A', '#689F38']}
+            tintColor="#689F38"
+            title="Loading..."
+            titleColor="#689F38"
+            progressBackgroundColor="#F1F1F1"
+          />
+        }>
+        {data.map((item, index) => (
+          <View key={index} style={styles.item}>
+            <Text>{item}</Text>
+          </View>
+        ))}
+      </ScrollView>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+  },
+  item: {
+    backgroundColor: '#f9c2ff',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+});

@@ -15,9 +15,9 @@ const ListItemDemo = () => {
   return (
     <Tester>
       <ScrollView style = {{marginBottom:100}}>
-        <TestSuite name='ListItem'>
-          <TestCase itShould='props'>
-            <View style={{ height: 250 }}>
+        <TestSuite name='ListItem(列表项)'>
+          <TestCase itShould='props:divider(分隔线),centerElement(中间文本元素),dense(紧密)'>
+            <View style={{ height: 300 }}>
               <View style={styles.container}>
                 <Subheader text="One line" />
                 <ListItem
@@ -41,12 +41,16 @@ const ListItemDemo = () => {
                   dense
                   centerElement="Center element as a text (dense)"
                 />
+                 <ListItem
+                  divider
+                  centerElement="Center element as a text (dense)"
+                />
               </View>
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name='Two lines'>
-          <TestCase itShould='props:divide,dense,centerElement(object)'>
+        <TestSuite name='ListItem(列表项)'>
+          <TestCase itShould='props:centerElement(object)'>
             <View style={{ height: 250 }}>
               <View style={styles.container}>
               <Subheader text="Two lines" />
@@ -70,8 +74,8 @@ const ListItemDemo = () => {
           </TestCase>
         </TestSuite>
 
-        <TestSuite name='TTwo lines with icon'>
-          <TestCase itShould='props:divide,dense,centerElement(object),onPress,OnRightElementPress'>
+        <TestSuite name='ListItem(列表项)'>
+          <TestCase itShould='props:onPress(按下之后触发的回调),OnRightElementPress(按下右边元素触发的回调)，leftElement(左边元素),rightElement(右边元素)'>
             <View style={{ height: 250 }}>
               <View style={styles.container}>
               <Subheader text="Two lines with icon" />
@@ -103,8 +107,8 @@ const ListItemDemo = () => {
           </TestCase>
         </TestSuite>
 
-        <TestSuite name='Three lines'>
-          <TestCase itShould='props:divide,centerElement(object),numberOfLines,leftElement,style'>
+        <TestSuite name='ListItem(列表项)'>
+          <TestCase itShould='numberOfLines(行数),style(样式)'>
             <View style={{ height: 300 }}>
               <View style={styles.container}>
               <ListItem
@@ -142,8 +146,8 @@ const ListItemDemo = () => {
           </TestCase>
         </TestSuite>
 
-        <TestSuite name='Dynamic'>
-          <TestCase itShould='props:divide,centerElement(object),numberOfLines(dynamic),onPress'>
+        <TestSuite name='ListItem(列表项)'>
+          <TestCase itShould='props:numberOfLines(dynamic)'>
             <View style={{ height: 250 }}>
               <View style={styles.container}>
               <Subheader text="Dynamic" />
@@ -163,7 +167,7 @@ const ListItemDemo = () => {
         </TestSuite>
 
         <TestSuite name='Custom'>
-          <TestCase itShould='props:divide,leftElement,centerElement(element)'>
+          <TestCase itShould='centerElement(element)'>
             <View style={{ height: 250 }}>
               <View style={styles.container}>
               <Subheader text="Custom" />
@@ -177,12 +181,12 @@ const ListItemDemo = () => {
           </TestCase>
         </TestSuite>
 
-        <TestSuite name='style'>
+        <TestSuite name='ListItem(列表项)'>
           <TestCase itShould='props:style'>
             <View style={{ height: 250 }}>
               <View style={styles.container}>
               <Subheader text="Custom" />
-              <ScrollView style={{marginBottom:100,height:"100%"}}>
+              <ScrollView style={{marginBottom:100,height:300}}>
 
              
                     <ListItem

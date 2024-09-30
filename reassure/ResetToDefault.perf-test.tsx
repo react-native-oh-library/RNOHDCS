@@ -1,3 +1,4 @@
+import {test} from '@jest/globals';
 import {measureFunction, resetToDefaults} from 'reassure';
 
 function fib(n: number): number {
@@ -8,11 +9,11 @@ function fib(n: number): number {
   return fib(n - 1) + fib(n - 2);
 }
 
-test('ResetToDefault runs 20', async () => {
-  await measureFunction(() => fib(30), {runs: 20});
+test('ResetToDefault runs 10', async () => {
+  await measureFunction(() => fib(30), {runs: 10});
 });
 
-// resetToDefaults();
+resetToDefaults();
 
 test('ResetToDefault runs 20', async () => {
   await measureFunction(() => fib(30), {runs: 20});

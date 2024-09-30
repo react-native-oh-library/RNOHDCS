@@ -15,16 +15,15 @@ const ToolbarDemo = () => {
   return (
     <Tester>
       <ScrollView style={{marginBottom:50}}>
-      <TestSuite name='Toolbar With menu'>
-        <TestCase itShould='props:centerElement,rightElement,onRightElementPress'>
+      <TestSuite name='Toolbar(工具栏)'>
+        <TestCase itShould='props:centerElement(中间元素),rightElement(右侧元素),onRightElementPress(按下右侧元素触发的回调)'>
           <View style={{ height: 100 }}>
             <View style={styles.container}>
               <Text>{textRightElement}</Text>
               <Toolbar
                 centerElement="With menu"
                 rightElement={{
-                  actions: ['edit'],
-                  menu: { icon: 'star', labels: ['Item 1', 'Item 2'] },
+                  actions: ['edit']
                 }}
                 onRightElementPress={()=>{setTextRightElement('textRightElement')}}
               />
@@ -34,16 +33,15 @@ const ToolbarDemo = () => {
       </TestSuite>
 
       
-      <TestSuite name='Toolbar With menu'>
-        <TestCase itShould='props:centerElement,rightElement,onRightElementPress'>
+      <TestSuite name='Toolbar(工具栏)'>
+        <TestCase itShould='props:onPress(按下触发的回调)'>
           <View style={{ height: 100 }}>
             <View style={styles.container}>
               <Text>{textOnPress}</Text>
               <Toolbar
                 centerElement="With menu"
                 rightElement={{
-                  actions: ['edit'],
-                  menu: { icon: 'star', labels: ['Item 1', 'Item 2'] },
+                  actions: ['edit']
                 }}
                onPress={()=>setTextOnPress('TextonPress')}
               />
@@ -52,8 +50,8 @@ const ToolbarDemo = () => {
         </TestCase>
       </TestSuite>
 
-      <TestSuite name='Searchable'>
-        <TestCase itShould='props:isSearchActive,searchable,leftElement,centerElement,onLeftElementPress'>
+      <TestSuite name='Toolbar(工具栏)'>
+        <TestCase itShould='props:isSearchActive(搜索是否在活动状态，默认为false,其他用例已展示),searchable(搜索),leftElement(左边元素),onLeftElementPress(按下左边元素触发的回调)'>
           <View style={{ height: 100 }}>
             <View style={styles.container}>
               <Text>{textLeftElement}</Text>
@@ -72,8 +70,8 @@ const ToolbarDemo = () => {
         </TestCase>
       </TestSuite>
 
-      <TestSuite name='Searchable'>
-        <TestCase itShould='props:searchable(onChangeText)'>
+      <TestSuite name='Toolbar(工具栏)'>
+        <TestCase itShould='props:searchable(onChangeText):文字改变触发的回调'>
           <View style={{ height: 100 }}>
             <View style={styles.container}>
               <Text>{onChangeText}</Text>
@@ -92,8 +90,8 @@ const ToolbarDemo = () => {
         </TestCase>
       </TestSuite>
 
-      <TestSuite name='Searchable'>
-        <TestCase itShould='props:searchable(onSearchClosed)'>
+      <TestSuite name='Toolbar(工具栏)'>
+        <TestCase itShould='props:searchable(onSearchClosed):搜索关闭触发的回调'>
           <View style={{ height: 100 }}>
             <View style={styles.container}>
               <Text>{onSearchClosed}</Text>
@@ -113,8 +111,8 @@ const ToolbarDemo = () => {
       </TestSuite>
 
 
-      <TestSuite name='Searchable'>
-        <TestCase itShould='props:searchable(onSearchCloseRequested)'>
+      <TestSuite name='Toolbar(工具栏)'>
+        <TestCase itShould='props:searchable(onSearchCloseRequested)：搜索请求关闭触发的回调'>
           <View style={{ height: 100 }}>
             <View style={styles.container}>
               <Text>{onSearchCloseRequested}</Text>
@@ -133,8 +131,8 @@ const ToolbarDemo = () => {
         </TestCase>
       </TestSuite>
 
-      <TestSuite name='Searchable'>
-        <TestCase itShould='props:searchable(onSearchPressed)'>
+      <TestSuite name='Toolbar(工具栏)'>
+        <TestCase itShould='props:searchable(onSearchPressed):按下搜索触发的回调'>
           <View style={{ height: 100 }}>
             <View style={styles.container}>
               <Text>{onSearchPressed}</Text>
@@ -153,8 +151,8 @@ const ToolbarDemo = () => {
         </TestCase>
       </TestSuite>
 
-      <TestSuite name='Searchable'>
-        <TestCase itShould='props:searchable(onSearchCloseRequested)'>
+      <TestSuite name='Toolbar(工具栏)'>
+        <TestCase itShould='props:searchable(onSubmitEditing):搜索关键字输入完成，按下确定时的回调'>
           <View style={{ height: 100 }}>
             <View style={styles.container}>
               <Text>{onSubmitEditing}</Text>
@@ -174,8 +172,8 @@ const ToolbarDemo = () => {
       </TestSuite>
 
 
-      <TestSuite name='With button'>
-        <TestCase itShould='props:leftEment,centerElement,rightElement'>
+      <TestSuite name='Toolbar(工具栏)'>
+        <TestCase itShould='props:leftEment,centerElement,rightElement(右边元素为组件元素)'>
           <View style={{ height: 100 }}>
             <View style={styles.container}>
               <Toolbar
@@ -194,8 +192,8 @@ const ToolbarDemo = () => {
       </TestSuite>
 
 
-      <TestSuite name='Custom icon size'>
-        <TestCase itShould='props,size,leftElement,centerEment,rightElement'>
+      <TestSuite name='Toolbar(工具栏)'>
+        <TestCase itShould='props,size(大小)'>
           <View style={{ height: 100 }}>
           <View style={styles.container}>
                     <Toolbar
@@ -214,8 +212,8 @@ const ToolbarDemo = () => {
         </TestCase>
       </TestSuite>
 
-      <TestSuite name='Custom styles'>
-        <TestCase itShould='props:leftEmenet,centerElment,rightElement,style'>
+      <TestSuite name='Toolbar(工具栏)'>
+        <TestCase itShould='props:style(样式,元素样式)'>
           <View style={{ height: 100 }}>
           <View style={styles.container}>
                     <Toolbar
@@ -239,8 +237,8 @@ const ToolbarDemo = () => {
         </TestCase>
       </TestSuite>
 
-      <TestSuite name='Custom styles'>
-        <TestCase itShould='props:leftEmenet,centerElment,rightElement,style'>
+      <TestSuite name='Toolbar(工具栏)'>
+        <TestCase itShould='props:style(样式：元素盒子样式)'>
           <View style={{ height: 100 }}>
           <View style={styles.container}>
                     <Toolbar

@@ -93,6 +93,12 @@ export default function PhotoDemo() {
   const changeZoom = () => {
     setZoom(getRandomNumber(0.48, 15));
   };
+  const changeZoom1X = () => {
+    setZoom(1);
+  };
+  const changeZoom14X = () => {
+    setZoom(1.4);
+  };
   const changeExposure = () => {
     setExposure(exposure === 4 ? -4 : 4);
   };
@@ -214,6 +220,8 @@ export default function PhotoDemo() {
               title="androidPreviewViewType"
               onPress={changeAndroidPreviewViewType}></Button>
             <Button title="zoom" onPress={changeZoom}></Button>
+            <Button title="zoom1x" onPress={changeZoom1X}></Button>
+            <Button title="zoom1.4x" onPress={changeZoom14X}></Button>
             <Button
               title="photoQualityBalance"
               onPress={changePhotoQualityBalance}></Button>

@@ -17,6 +17,7 @@ const CustomCellRendererComponent = React.forwardRef((props: any, _) => {
       Animated.delay(props.index * 50),
       Animated.spring(offset, {
         toValue: 0,
+        useNativeDriver: true,
       }),
     ]).start();
   }, [props.index]);

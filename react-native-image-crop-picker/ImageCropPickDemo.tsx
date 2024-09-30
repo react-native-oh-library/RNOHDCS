@@ -1,7 +1,8 @@
 import ImagePicker from 'react-native-image-corp-picker';
 import {openPicker} from 'react-native-image-corp-picker';
-import React {useState} from 'react'
+import React, {useState} from 'react';
 import {Text,StyleSheet,TextInput, View, Button, ScrollView,Switch} from 'react-native'
+
 const ImageCropPickDemo =()=>{
    const TAG:string='ImageCropPickTurboModule';
    const [vulue1,onChangeText1]=useState('');
@@ -586,10 +587,10 @@ const ImageCropPickDemo =()=>{
                                 freeStyleCropEnable:freeStyleCropEnableCropper,
                                 forceJpg:forceJpgCropper,
                                 cropperToolbarTitle:cropperTitle,
-                                cropperChoseText:chooseText,
-                                cropperChoseColor:chooseColor,
-                                croppercCancelText:cancelText,
-                                roppercCancelColor:cancelColor,
+                                cropperChooseText:chooseText,
+                                cropperChooseColor:chooseColor,
+                                cropperCancelText:cancelText,
+                                cropperCancelColor:cancelColor,
                                 cropperRotateButtonsHidden:cropperRotate,
                                 showCropGuidelines:showCropGuidelines,
                                 showCropFrame:showCropFrame
@@ -670,15 +671,13 @@ const styles = StyleSheet.create({
       width:50,
       height:30,
       color:'black',
-      borderColor:'gray',
-      borderWidth:1
+      backgroundColor: 'lightblue',
      },
      textInput:{
         width:'50%',
         height:36,
         color:'black',
-        borderColor:'gray',
-        bordeWidth:1
+        backgroundColor: 'lightblue',
      },
      switchType:{
         width:60,
@@ -700,3 +699,5 @@ const styles = StyleSheet.create({
         marginTop:10,
      }
 })
+
+export default ImageCropPickDemo;

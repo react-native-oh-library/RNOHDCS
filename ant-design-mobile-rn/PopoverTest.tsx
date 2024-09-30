@@ -14,7 +14,7 @@ export default () => {
   ))
   overlay = overlay.concat([
     <Item key="4" value="disabled" disabled>
-      <Text style={{ color: '#ddd' }}>{'disabled opt'}</Text>
+      <Text style={{ color: '#ddd' }}>{'disabled'}</Text>
     </Item>,
     <Item key="6" value="button ct" style={{ backgroundColor: '#efeff4' }}>
       <Text>{'关闭'}</Text>
@@ -47,48 +47,31 @@ export default () => {
           expect(state).to.be.eq(true);
         }}>
       </TestCase>
-      <TestCase itShould="render a Popover triggerStyle={{backgroundColor:'pink'}}" tags={['C_API']}>
+      <TestCase itShould="render a Popover triggerStyle={{backgroundColor:'pink'}}, triggerStyle={{backgroundColor:'blue'}}" tags={['C_API']}>
         <PopoverTriggerStyleTest />
       </TestCase>
       <TestCase itShould="render a Popover renderOverlayComponent={我是自定义组件title}" tags={['C_API']}>
         <PopoverCustomizingTest />
       </TestCase>
-      <TestCase itShould="render a Popover duration={2000}" tags={['C_API']}>
+      <TestCase itShould="render a Popover duration={2000}, duration={1000}" tags={['C_API']}>
         <PopoverDurationTest />
       </TestCase>
       <TestCase itShould="render a Popover easing={(show) => (show ? Easing.in(Easing.ease) : Easing.step0)}" tags={['C_API']}>
         <PopoverEasingTest />
       </TestCase>
+      <TestCase itShould="render a Popover easing={(show) => (show ? Easing.in(Easing.bounce) : Easing.step0)}" tags={['C_API']}>
+        <PopoverEasingStep0Test />
+      </TestCase>
       <TestCase itShould="render a Popover useNativeDriver={true}" tags={['C_API']}>
         <PopoverUseNativeDriverTest />
       </TestCase>
-      <TestCase itShould="render a Popover onDismiss()" initialState={false}
-        arrange={({ setState }: any) =>
-          <React.Fragment>
-            <View style={{ alignItems: 'center' }}>
-              <Popover
-                overlay={overlay}
-                duration={1000}
-                onDismiss={() => { setState(true); }}
-              >
-                <Text
-                  style={{
-                    margin: 16,
-                  }}>
-                  {'onDismiss()'}
-                </Text>
-              </Popover>
-            </View>
-          </React.Fragment>
-        }
-        assert={({ expect, state }) => {
-          expect(state).to.be.eq(true);
-        }}>
+      <TestCase itShould="render a Popover useNativeDriver={false}" tags={['C_API']}>
+        <PopoverUseNativeDriverFalseTest />
       </TestCase>
       <TestCase itShould="render a Popover.Item disabled" tags={['C_API']}>
         <PopoverDisabledTest />
       </TestCase>
-      <TestCase itShould="render a Popover.Item itemStyle={{ backgroundColor: '#efeff4' }}" tags={['C_API']}>
+      <TestCase itShould="render a Popover.Item style={{ backgroundColor: '#efeff4' }},style={{ backgroundColor: 'red' }}" tags={['C_API']}>
         <PopoverItemStyleTest />
       </TestCase>
       <TestCase itShould="render a Popover.Item value" tags={['C_API']}>
@@ -109,7 +92,7 @@ function PopoverOverlayTest() {
   ))
   overlay = overlay.concat([
     <Item key="4" value="disabled" disabled>
-      <Text style={{ color: '#ddd' }}>{'disabled opt'}</Text>
+      <Text style={{ color: '#ddd' }}>{'disabled'}</Text>
     </Item>,
     <Item key="6" value="button ct" style={{ backgroundColor: '#efeff4' }}>
       <Text>{'关闭'}</Text>
@@ -148,6 +131,12 @@ function PopoverTriggerStyleTest() {
         <Popover
           overlay={overlay}
           triggerStyle={styles.triggerStyle}
+        >
+          <Text style={{ margin: 10 }}>{'triggerStyle'}</Text>
+        </Popover>
+        <Popover
+          overlay={overlay}
+          triggerStyle={styles.triggerStyleBlue}
         >
           <Text style={{ margin: 10 }}>{'triggerStyle'}</Text>
         </Popover>
@@ -198,7 +187,7 @@ function PopoverDurationTest() {
   ))
   overlay = overlay.concat([
     <Item key="4" value="disabled" disabled>
-      <Text style={{ color: '#ddd' }}>{'disabled opt'}</Text>
+      <Text style={{ color: '#ddd' }}>{'disabled'}</Text>
     </Item>,
     <Item key="6" value="button ct" style={{ backgroundColor: '#efeff4' }}>
       <Text>{'关闭'}</Text>
@@ -209,13 +198,24 @@ function PopoverDurationTest() {
       <View style={{ alignItems: 'center' }}>
         <Popover
           overlay={overlay}
+          duration={2000}
+        >
+          <Text
+            style={{
+              margin: 16,
+            }}>
+            2s慢慢出现
+          </Text>
+        </Popover>
+        <Popover
+          overlay={overlay}
           duration={1000}
         >
           <Text
             style={{
               margin: 16,
             }}>
-            2s慢慢出现慢慢消失
+            1s慢慢出现
           </Text>
         </Popover>
       </View>
@@ -231,7 +231,7 @@ function PopoverEasingTest() {
   ))
   overlay = overlay.concat([
     <Item key="4" value="disabled" disabled>
-      <Text style={{ color: '#ddd' }}>{'disabled opt'}</Text>
+      <Text style={{ color: '#ddd' }}>{'disabled'}</Text>
     </Item>,
     <Item key="6" value="button ct" style={{ backgroundColor: '#efeff4' }}>
       <Text>{'关闭'}</Text>
@@ -249,7 +249,40 @@ function PopoverEasingTest() {
             style={{
               margin: 16,
             }}>
-            2s慢慢出现快速消失
+            缓入效果
+          </Text>
+        </Popover>
+      </View>
+    </React.Fragment>
+  )
+}
+function PopoverEasingStep0Test() {
+  let overlay = [1, 2, 3].map((i, index) => (
+    <Item key={index} value={`option ${i}`}>
+      <Text>option {i}</Text>
+    </Item>
+  ))
+  overlay = overlay.concat([
+    <Item key="4" value="disabled" disabled>
+      <Text style={{ color: '#ddd' }}>{'disabled'}</Text>
+    </Item>,
+    <Item key="6" value="button ct" style={{ backgroundColor: '#efeff4' }}>
+      <Text>{'关闭'}</Text>
+    </Item>,
+  ]);
+  return (
+    <React.Fragment>
+      <View style={{ alignItems: 'center' }}>
+        <Popover
+          overlay={overlay}
+          duration={500}
+          easing={(show) => (show ? Easing.in(Easing.bounce) : Easing.step0)}
+        >
+          <Text
+            style={{
+              margin: 16,
+            }}>
+            弹跳效果
           </Text>
         </Popover>
       </View>
@@ -265,7 +298,7 @@ function PopoverUseNativeDriverTest() {
   ))
   overlay = overlay.concat([
     <Item key="4" value="disabled" disabled>
-      <Text style={{ color: '#ddd' }}>{'disabled opt'}</Text>
+      <Text style={{ color: '#ddd' }}>{'disabled'}</Text>
     </Item>,
     <Item key="6" value="button ct" style={{ backgroundColor: '#efeff4' }}>
       <Text>{'关闭'}</Text>
@@ -291,6 +324,39 @@ function PopoverUseNativeDriverTest() {
   )
 }
 
+function PopoverUseNativeDriverFalseTest() {
+  let overlay = [1, 2, 3].map((i, index) => (
+    <Item key={index} value={`option ${i}`}>
+      <Text>option {i}</Text>
+    </Item>
+  ))
+  overlay = overlay.concat([
+    <Item key="4" value="disabled" disabled>
+      <Text style={{ color: '#ddd' }}>{'disabled'}</Text>
+    </Item>,
+    <Item key="6" value="button ct" style={{ backgroundColor: '#efeff4' }}>
+      <Text>{'关闭'}</Text>
+    </Item>,
+  ]);
+  return (
+    <React.Fragment>
+      <View style={{ alignItems: 'center' }}>
+        <Popover
+          overlay={overlay}
+          duration={1000}
+        >
+          <Text
+            style={{
+              margin: 16,
+            }}>
+            {'useNativeDriver={false}'}
+          </Text>
+        </Popover>
+      </View>
+    </React.Fragment>
+  )
+}
+
 function PopoverDisabledTest() {
   let overlay = [1, 2, 3].map((i, index) => (
     <Item key={index} value={`option ${i}`}>
@@ -299,7 +365,7 @@ function PopoverDisabledTest() {
   ))
   overlay = overlay.concat([
     <Item key="4" value="disabled" disabled>
-      <Text style={{ color: '#ddd' }}>{'disabled opt'}</Text>
+      <Text style={{ color: '#ddd' }}>{'disabled'}</Text>
     </Item>,
     <Item key="6" value="button ct" style={{ backgroundColor: '#efeff4' }}>
       <Text>{'关闭'}</Text>
@@ -333,7 +399,12 @@ function PopoverItemStyleTest() {
   ))
   overlay = overlay.concat([
     <Item key="6" value="button ct" style={{ backgroundColor: '#efeff4' }}>
-      <Text>{'关闭'}</Text>
+      <Text>{'关闭灰色'}</Text>
+    </Item>,
+  ]);
+  overlay = overlay.concat([
+    <Item key="7" value="button ct" style={{ backgroundColor: 'red' }}>
+      <Text>{'关闭红色'}</Text>
     </Item>,
   ]);
   return (
@@ -348,7 +419,7 @@ function PopoverItemStyleTest() {
             style={{
               margin: 16,
             }}>
-            {'关闭的ItemStyle样式为灰色'}
+            {'关闭的ItemStyle样式'}
           </Text>
         </Popover>
       </View>
@@ -430,5 +501,9 @@ const styles = StyleSheet.create({
   triggerStyle: {
     paddingHorizontal: 6,
     backgroundColor: 'pink'
+  },
+  triggerStyleBlue: {
+    paddingHorizontal: 6,
+    backgroundColor: 'blue'
   },
 })

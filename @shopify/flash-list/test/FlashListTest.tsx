@@ -482,7 +482,7 @@ export const FlashListTest = () => {
     });
 
     const onViewableItemsChanged = () => {
-        console.info('flashlist onViewableItemsChanged');
+        console.log('flashlist onViewableItemsChanged');
     };
     const viewabilityConfigCallbackPairs = [
         {
@@ -501,6 +501,7 @@ export const FlashListTest = () => {
                 Animated.delay(props.index * 50),
                 Animated.spring(offset, {
                     toValue: 0,
+                    useNativeDriver: true,
                 }),
             ]).start();
         }, [props.index]);
@@ -750,7 +751,7 @@ export const FlashListTest = () => {
                             data={MessageDATA}
                             renderItem={renderMessage}
                             getItemType={item => {
-                                console.info('flashlist getItemType type:' + item.type + ',id:' + item.id)
+                                console.log('flashlist getItemType type:' + item.type + ',id:' + item.id)
                                 return item.type;
                             }}
                         />
@@ -871,7 +872,7 @@ export const FlashListTest = () => {
                                 estimatedItemSize={40}
                                 nestedScrollEnabled={true}
                                 renderScrollComponent={props => {
-                                    console.info('flashlist renderScrollComponent do')
+                                    console.log('flashlist renderScrollComponent do')
                                     return (<ScrollView nestedScrollEnabled {...props} />)
                                 }}
                             />

@@ -36,14 +36,14 @@ export const axesProps = [
   {
     showReferenceLine1: true,
     referenceLine1Config: {
-      thickness: 2, width: 200, color: 'red', type: 'solid', dashWidth: 10, dashGap: 2, labelText: '$100', labelTextStyle: { clolr: 'blue' }, zIndex: 100, stripBehindBars: false
+      thickness: 2, width: 200, color: 'red', type: 'solid', dashWidth: 10, dashGap: 2, labelText: '$100', labelTextStyle: { color: 'blue' }, zIndex: 100, stripBehindBars: false
     },
     referenceLine1Position: 100,
   },
   {
     showReferenceLine1: true,
     referenceLine1Config: {
-      thickness: 2, width: 200, color: 'red', type: 'solid', dashWidth: 10, dashGap: 2, labelText: '$100', labelTextStyle: { clolr: 'blue' }, zIndex: 100, stripBehindBars: true
+      thickness: 2, width: 200, color: 'red', type: 'solid', dashWidth: 10, dashGap: 2, labelText: '$100', labelTextStyle: { color: 'blue' }, zIndex: 100, stripBehindBars: true
     },
     referenceLine1Position: 50,
   },
@@ -51,29 +51,29 @@ export const axesProps = [
     showReferenceLine2: true,
     referenceLine2Position: 120,
     referenceLine2Config: {
-      thickness: 2, width: 200, color: 'blue', type: 'solid', dashWidth: 10, dashGap: 2, labelText: '第二条线', labelTextStyle: { clolr: 'blue' }, zIndex: 100, stripBehindBars: true
+      thickness: 2, width: 200, color: 'blue', type: 'solid', dashWidth: 10, dashGap: 2, labelText: '第二条线', labelTextStyle: { color: 'blue' }, zIndex: 100, stripBehindBars: true
     },
     showReferenceLine1: true,
     referenceLine1Position: 100,
     referenceLine1Config: {
-      thickness: 2, width: 200, color: 'red', type: 'solid', dashWidth: 10, dashGap: 2, labelText: '第一条线', labelTextStyle: { clolr: 'blue' }, zIndex: 100, stripBehindBars: true
+      thickness: 2, width: 200, color: 'red', type: 'solid', dashWidth: 10, dashGap: 2, labelText: '第一条线', labelTextStyle: { color: 'blue' }, zIndex: 100, stripBehindBars: true
     },
   },
   {
     showReferenceLine3: true,
     referenceLine3Position: 120,
     referenceLine3Config: {
-      thickness: 2, width: 200, color: 'green', type: 'solid', dashWidth: 10, dashGap: 2, labelText: '第三条线', labelTextStyle: { clolr: 'blue' }, zIndex: 100, stripBehindBars: true
+      thickness: 2, width: 200, color: 'green', type: 'solid', dashWidth: 10, dashGap: 2, labelText: '第三条线', labelTextStyle: { color: 'blue' }, zIndex: 100, stripBehindBars: true
     },
     showReferenceLine2: true,
     referenceLine2Position: 100,
     referenceLine2Config: {
-      thickness: 2, width: 200, color: 'blue', type: 'solid', dashWidth: 10, dashGap: 2, labelText: '第二条线', labelTextStyle: { clolr: 'blue' }, zIndex: 100, stripBehindBars: true
+      thickness: 2, width: 200, color: 'blue', type: 'solid', dashWidth: 10, dashGap: 2, labelText: '第二条线', labelTextStyle: { color: 'blue' }, zIndex: 100, stripBehindBars: true
     },
     showReferenceLine1: true,
     referenceLine1Position: 80,
     referenceLine1Config: {
-      thickness: 2, width: 200, color: 'red', type: 'solid', dashWidth: 10, dashGap: 2, labelText: '第一条线', labelTextStyle: { clolr: 'blue' }, zIndex: 100, stripBehindBars: true
+      thickness: 2, width: 200, color: 'red', type: 'solid', dashWidth: 10, dashGap: 2, labelText: '第一条线', labelTextStyle: { color: 'blue' }, zIndex: 100, stripBehindBars: true
     },
   },
   { showVerticalLines: true }, { showVerticalLines: false },
@@ -107,7 +107,6 @@ export const commonPointerProps = [
   { pointerConfig: { width: 10, height: 10 } }, { pointerConfig: { width: 30, height: 30 } },
   { pointerConfig: { radius: 8 } }, { pointerConfig: { radius: 15 } },
   { pointerConfig: { pointerColor: 'yellow' } }, { pointerConfig: { pointerColor: 'blue' } },
-  { pointerConfig: { secondaryPointerColor: 'green' }, }, { pointerConfig: { secondaryPointerColor: 'gray' }, },
   { pointerConfig: { showPointerStrip: true }, }, { pointerConfig: { showPointerStrip: false }, },
   { pointerConfig: { pointerStripWidth: 10 }, }, { pointerConfig: { pointerStripWidth: 20 }, },
   { pointerConfig: { pointerStripHeight: 10 }, }, { pointerConfig: { pointerStripHeight: 20 }, },
@@ -116,8 +115,7 @@ export const commonPointerProps = [
   { pointerConfig: { stripOverPointer: true }, }, { pointerConfig: { stripOverPointer: false }, },
   { pointerConfig: { pointerVanishDelay: 500 }, }, { pointerConfig: { pointerVanishDelay: 1000 }, },
   { pointerConfig: { activatePointersOnLongPress: true }, }, { pointerConfig: { activatePointersOnLongPress: false }, },
-  { pointerConfig: { activatePointersDelay: 500 }, }, { pointerConfig: { activatePointersDelay: 2000 }, },
-  { pointerConfig: { initialPointerIndex: 1, persistPointer: true, }, }, { pointerConfig: { initialPointerIndex: 2, persistPointer: true, }, },
-  { pointerConfig: { initialPointerAppearDelay: 10 }, isAnimated: true, }, { pointerConfig: { initialPointerAppearDelay: 100 }, isAnimated: true, },
+  { pointerConfig: { activatePointersDelay: 1000, persistPointer: true, }, },
+  { pointerConfig: { activatePointersDelay: 2500, persistPointer: true, }, },
   { pointerConfig: { strokeDashArray: [10, 20] } }, { pointerConfig: { strokeDashArray: [10, 40] } },
 ]
