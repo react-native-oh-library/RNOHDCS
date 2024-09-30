@@ -56,7 +56,6 @@ export function FacebookDemo() {
                         animate={true}
                         backgroundColor={'#999'}
                         foregroundColor={'red'}
-                        speed={0.5}
                         interval={2}
                     >
                     </Facebook>
