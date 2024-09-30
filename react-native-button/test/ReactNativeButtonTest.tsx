@@ -1,10 +1,11 @@
 import React from 'react';
 import {View, StyleSheet, Text, ScrollView} from 'react-native';
 import Button from 'react-native-button';
-import {TestCase, TestSuite} from '@rnoh/testerino';
+import {Tester, TestCase, TestSuite} from '@rnoh/testerino';
 
 export const ReactNativeButtonTest = () => {
   return (
+    <Tester>
     <ScrollView>
       <TestSuite name="Button">
         <TestCase itShould="render a button that should be disabled">
@@ -49,6 +50,7 @@ export const ReactNativeButtonTest = () => {
 
       </TestSuite>
     </ScrollView>
+    </Tester>
   );
 };
 function ButtonwithStyleView() {
