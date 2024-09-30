@@ -17,6 +17,8 @@ import inter from "../../assets/inter-medium.ttf";
 import { appColors } from "./consts/colors";
 import { Button } from "../components/Button";
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
+import { LinearGradient, vec } from "@shopify/react-native-skia";
+
 const randomNumber = () => Math.floor(Math.random() * (50 - 25 + 1)) + 25;
 
 const SKIP = [7, 8, 15];
@@ -75,7 +77,7 @@ export default function LineChartPage() {
   return (
     <ScrollView>
       <Tester style={{ flex: 1 }}>
-        <TestCase itShould="case1: 更新数据，有动画效果">
+        <TestCase itShould="case1: animate属性 更新数据，有动画效果">
           <View style={{ height: 180}}>
             <CartesianChart
               xKey="day"
@@ -120,7 +122,7 @@ export default function LineChartPage() {
         </TestCase>
 
 
-        <TestCase itShould="case2: 增加一个点位">
+        <TestCase itShould="case2: points属性 增加一个点位">
           <View style={{ height: 180 }}>
             <CartesianChart
               xKey="day"
@@ -372,6 +374,35 @@ export default function LineChartPage() {
           </View>
         </TestCase>
 
+        <TestCase itShould="case7: children 属性 测试渐变">
+          <View style={{ height: 180 }}>
+            <CartesianChart
+              xKey="day"
+              padding={{ left: 10, right: 10, bottom: 10, top: 15 }}
+              yKeys={["sales"]}
+              axisOptions={{ font }}
+              data={data2}
+              domainPadding={{ left: 50, right: 50, top: 30 }}
+            >
+              {({ points }) => (
+                <>
+                  <Line
+                    points={points.sales}
+                    curveType="catmullRom"
+                    color={colors.stroke!}
+                    strokeWidth={2}
+                    connectMissingData={true} >
+                    <LinearGradient
+                        start={vec(0, 0)}
+                        end={vec(0, 400)}
+                        colors={["#FF0000", "#0000FF"]}
+                      />
+                    </Line>
+                </>
+              )}
+            </CartesianChart>
+          </View>
+        </TestCase>
       </Tester>
     </ScrollView>
   );

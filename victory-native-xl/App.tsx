@@ -12,7 +12,8 @@ import BarChartPage from './test/app/bar-chart'
 import BarGroupPage from './test/app/bar-group'
 import ScatterPage from './test/app/scatter'
 import PieChart from './test/app/pie-chart'
-import AxisConfiguration from './test/app/axis-configuration'
+import PolarChartPage from './test/app/polar-chart'
+import CartesianChartPage from './test/app/cartesian-chart'
 
 import { LineChartExample } from './demo/LineChartExample';
 import { BarChartExample } from './demo/BarChartExample';
@@ -45,8 +46,11 @@ const Testers = () => {
         <Page name={'测试 Pie Chart 组件'}>
           <PieChart />
         </Page>
-        <Page name={'测试 Axis 组件'}>
-          <AxisConfiguration />
+        <Page name={'测试 Polar Chart 组件'}>
+          <PolarChartPage />
+        </Page>
+        <Page name={'测试 Cartesian Chart 组件'}>
+          <CartesianChartPage />
         </Page>
       </NavigationContainer>
     </View>

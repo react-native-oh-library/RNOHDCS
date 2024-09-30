@@ -23,6 +23,10 @@ export default function BarChartPage() {
   const [barCount, setBarCount] = useState(5);
   const [color, setColor] = useState("green");
   const [roundedCorner, setRoundedCorner] = useState(5);
+  const [Boundsleft, setBoundsleft] = useState(36);
+  const [Boundsright, setBoundsright] = useState(353);
+  const [Boundstop, setBoundstop] = useState(15);
+  const [Boundsbottom, setBoundsbottom] = useState(150);
 
   return (
     <>
@@ -378,6 +382,116 @@ export default function BarChartPage() {
                 onPress={() => { setColor("yellow") }}
                 title="yellow"
               />
+            </View>
+          </TestCase>
+
+          <TestCase itShould="case8: chartBounds 属性 设置图表边界">
+          <View style={{ height: 180 }}>
+              <CartesianChart
+                xKey="month"
+                padding={{ left: 10, right: 10, bottom: 10, top: 15 }}
+                yKeys={["listenCount"]}
+                domainPadding={{ left: 50, right: 80, top: 30 }}
+                domain={{ y: [0, 100] }}
+                axisOptions={{ font }}
+                data={data1}
+              >
+                {({ points, chartBounds }) => {
+                  return (
+                    <>
+                      <Bar
+                        points={points.listenCount}
+                        chartBounds={{
+                          left: Boundsleft,
+                          right: Boundsright,
+                          top: Boundstop,
+                          bottom: Boundsbottom,
+                        }}
+                        animate={{ type: "spring" }}
+                        innerPadding={0.5}
+                        color="#a78bfa"
+                      />
+                    </>
+                  );
+                }}
+              </CartesianChart>
+            </View>
+            <Text>设置左边界</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              gap: 12,
+              marginVertical: 10,
+            }}
+          >
+            <Button
+              style={{ flex: 1 }}
+              onPress={() => {
+                setBoundsleft(Boundsleft + 20);
+              }}
+              title="左边界up"
+            />
+            <Button
+              style={{ flex: 1 }}
+              onPress={() => {
+                setBoundsleft(Boundsleft - 20);
+              }}
+              title="左边界down"
+            />
+            </View>
+
+            <Text>设置右边界</Text>
+            <View
+            style={{
+              flexDirection: "row",
+              gap: 12,
+              marginVertical: 10,
+            }}
+          >
+            <Button
+              style={{ flex: 1 }}
+              onPress={() => {
+                setBoundsright(Boundsright + 20);
+              }}
+              title="右边界up"
+            />
+            <Button
+              style={{ flex: 1 }}
+              onPress={() => {
+                setBoundsright(Boundsright - 20);
+              }}
+              title="右边界down"
+            />
+          </View>
+          </TestCase>
+
+          <TestCase itShould="case12: children 属性 测试渐变">
+            <View style={{ height: 180 }}>
+              <CartesianChart
+                xKey="month"
+                padding={{ left: 10, right: 10, bottom: 10, top: 15 }}
+                yKeys={["listenCount"]}
+                domainPadding={{ left: 50, right: 80, top: 30 }}
+                domain={{ y: [0, 100] }}
+                axisOptions={{ font }}
+                data={data1}
+              >
+                {({ points, chartBounds }) => {
+                  return (
+                    <>
+                      <Bar
+                        points={points.listenCount}
+                        chartBounds={chartBounds}
+                        animate={{ type: "spring" }}
+                        innerPadding={0.5}
+                        color="#a78bfa"
+                      >
+                      <LinearGradient start={vec(0, 0)} end={vec(0, 400)} colors={["#a78bfa", "#a7bfa50"]}/>
+                      </Bar>
+                    </>
+                  );
+                }}
+              </CartesianChart>
             </View>
           </TestCase>
 

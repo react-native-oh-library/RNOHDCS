@@ -14,7 +14,7 @@ export const InputText = ({ label, ...props }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 5,
+    paddingVertical: 10,
     width: "48%",
   },
   inputStyles: {
@@ -22,12 +22,12 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "lightgray",
     fontSize: 16,
-    paddingVertical: 5,
+    paddingVertical: 10,
     paddingHorizontal: 15,
     width: "100%",
   },
   labelStyles: {
     fontWeight: "bold",
-    paddingBottom: 3,
+    paddingBottom: 10,
   },
 });
