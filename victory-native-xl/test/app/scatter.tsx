@@ -1,4 +1,4 @@
-import { PaintProps, useFont } from "@shopify/react-native-skia";
+import { LinearGradient, PaintProps, useFont, vec } from "@shopify/react-native-skia";
 import React, { useState } from "react";
 import { ScrollView, StyleSheet, View, Text } from "react-native";
 import {
@@ -23,14 +23,14 @@ export default function ScatterPage() {
   const [dataTest, setDataTest] = useState(DATA(5));
   const [radius, setRadius] = useState(10);
   const [shape, setShape] = useState("circle" as ScatterShape);
-  const [color, setColor] = useState("green");
+  const [color, setColor] = useState("#0000FF");
   const [style, setStyle] = useState("fill" as PaintProps["style"]);
   const [strokeWidth, setStrokeWidth] = useState(3);
   const { state, isActive } = useChartPressState({
     x: 0,
     y: { listenCount: 0 },
   });
-
+  const [linearGradient, setLinearGradient] = useState(false);
   return (
     <Tester style={{ flex: 1 }}>
       <TestCase itShould="case1: 散点图 图表">
@@ -55,10 +55,16 @@ export default function ScatterPage() {
                     animate={{ type: "spring" }}
                     radius={radius}
                     shape={shape}
-                    color={color}
                     style={style}
-                    strokeWidth={strokeWidth}
-                  />
+                    color={color}
+                    strokeWidth={strokeWidth} >
+                    {linearGradient?<LinearGradient
+                          start={vec(0, 0)}
+                          end={vec(0, 400)}
+                          colors={["#FF0000", "#0000FF"]}
+                    />:null}
+                           
+                  </Scatter>
                 </>
               );
             }}
@@ -70,7 +76,7 @@ export default function ScatterPage() {
         style={styles.optionsScrollView}
         contentContainerStyle={styles.options}
       >
-        <TestCase itShould="case2: 更新点位数据，会有动画效果">
+        <TestCase itShould="case2: points 属性 更新点位数据，会有动画效果">
           <View
             style={{
               flexDirection: "row",
@@ -87,7 +93,7 @@ export default function ScatterPage() {
           </View>
         </TestCase>
 
-        <TestCase itShould="case3: 设置点的半径">
+        <TestCase itShould="case3: radius 属性 设置点的半径">
           <View
             style={{
               flexDirection: "row",
@@ -110,7 +116,7 @@ export default function ScatterPage() {
           </View>
         </TestCase>
 
-        <TestCase itShould="case4: 设置点的形状 circle圆形 square正方形 star星形">
+        <TestCase itShould="case4: shape 属性 设置点的形状 circle圆形 square正方形 star星形">
           <View
             style={{
               flexDirection: "row",
@@ -138,7 +144,7 @@ export default function ScatterPage() {
           </View>
         </TestCase>
 
-        <TestCase itShould="case5: 设置点的颜色">
+        <TestCase itShould="case5: color 属性 设置颜色">
           <View
             style={{
               flexDirection: "row",
@@ -161,7 +167,7 @@ export default function ScatterPage() {
           </View>
         </TestCase>
 
-        <TestCase itShould="case6: 设置每个点是填充还是中空">
+        <TestCase itShould="case6: style 属性 设置每个点是填充还是中空">
           <View
             style={{
               flexDirection: "row",
@@ -186,7 +192,7 @@ export default function ScatterPage() {
           </View>
         </TestCase>
 
-        <TestCase itShould="case7: 设置线条宽度，只有在中空时生效">
+        <TestCase itShould="case7: strokeWidth 属性 设置线条宽度，只有在中空时生效">
           <View
             style={{
               flexDirection: "row",
@@ -215,6 +221,32 @@ export default function ScatterPage() {
           </View>
         </TestCase>
 
+        <TestCase itShould="case8: children 颜色渐变效果">
+          <View
+            style={{
+              flexDirection: "row",
+              gap: 12,
+              marginVertical: 16,
+              marginTop: 3,
+              marginBottom: 3,
+            }}
+          >
+            <Button
+              style={{ flex: 1 }}
+              onPress={() => {
+                setLinearGradient(true);
+              }}
+              title="enable"
+            />
+            <Button
+              style={{ flex: 1}}
+              onPress={() => {
+                setLinearGradient(false);
+              }}
+              title="disable"
+            />
+          </View>
+        </TestCase>
       </ScrollView>
     </Tester>
   );

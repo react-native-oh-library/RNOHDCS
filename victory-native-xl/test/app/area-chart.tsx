@@ -18,6 +18,7 @@ import inter from "../../assets/inter-medium.ttf";
 import { appColors } from "./consts/colors";
 import { Button } from "../components/Button";
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
+import { LinearGradient, vec } from "@shopify/react-native-skia";
 
 const randomNumber = () => Math.floor(Math.random() * (50 - 25 + 1)) + 25;
 
@@ -125,7 +126,7 @@ export default function AreaChartPage() {
           </TestCase>
 
 
-          <TestCase itShould="case2: 增加point点位">
+        <TestCase itShould="case2: points属性 增加point点位">
             <View style={{ height: 180 }}>
               <CartesianChart
                 xKey="day"
@@ -341,7 +342,31 @@ export default function AreaChartPage() {
               </CartesianChart>
             </View>
           </TestCase>
-
+        <TestCase itShould="case7: children 属性 测试渐变">
+          <View style={{ height: 180 }}>
+            <CartesianChart
+              xKey="day"
+              padding={{ left: 10, right: 10, bottom: 10, top: 15 }}
+              yKeys={["sales"]}
+              axisOptions={{ font }}
+              data={data2}
+              domainPadding={{ left: 0, right: 50, top: 30 }}
+            >
+              {({ points, chartBounds }) => (
+                <>
+                  <Area
+                    points={points.sales}
+                    y0={chartBounds.bottom}
+                    color={colors.stroke!}
+                    curveType="catmullRom"
+                    animate={{ type: "timing", duration: 300 }}
+                    children={<LinearGradient start={vec(0, 0)} end={vec(0, 400)} colors={["#FF0000", "#0000FF"]} />}
+                  />
+                </>
+              )}
+            </CartesianChart>
+          </View>
+        </TestCase>
         </Tester>
       </ScrollView>
   );

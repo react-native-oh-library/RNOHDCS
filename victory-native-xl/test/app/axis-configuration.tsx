@@ -37,7 +37,7 @@ const DATA = (ticksX: number[], ticksY: number[]) => {
   }));
 };
 
-export default function AxisConfiguration() {
+export default function CartesianChartPage() {
   const isDark = true;
   const [
     {

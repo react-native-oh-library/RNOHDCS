@@ -1,9 +1,35 @@
 import React, { useState } from "react";
 import { SafeAreaView, ScrollView, StyleSheet, View, Text } from "react-native";
+import { LinearGradient, vec } from "@shopify/react-native-skia";
 import { Pie, PolarChart } from "victory-native";
 import { Button } from "../components/Button";
 import { appColors } from "./consts/colors";
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
+
+function calculateGradientPoints(
+  radius: number,
+  startAngle: number,
+  endAngle: number,
+  centerX: number,
+  centerY: number,
+) {
+  // Calculate the midpoint angle of the slice for a central gradient effect
+  const midAngle = (startAngle + endAngle) / 2;
+
+  // Convert angles from degrees to radians
+  const startRad = (Math.PI / 180) * startAngle;
+  const midRad = (Math.PI / 180) * midAngle;
+
+  // Calculate start point (inner edge near the pie's center)
+  const startX = centerX + radius * 0.5 * Math.cos(startRad);
+  const startY = centerY + radius * 0.5 * Math.sin(startRad);
+
+  // Calculate end point (outer edge of the slice)
+  const endX = centerX + radius * Math.cos(midRad);
+  const endY = centerY + radius * Math.sin(midRad);
+
+  return { startX, startY, endX, endY };
+}
 
 const randomNumber = () => Math.floor(Math.random() * (50 - 25 + 1)) + 125;
 function generateRandomColor(): string {
@@ -24,7 +50,10 @@ export default function PieChart() {
   const [dataTest, setDataTest] = useState(DATA(5));
   const [insetWidth, setInsetWidth] = useState(4);
   const [innerRadius, setInnerRadius] = useState("100%");
+  const [circleSweepDegrees, setCircleSweepDegrees] = useState(360);
+  const [startAngle, setStartAngle] = useState(30);
   const [insetColor, setInsetColor] = useState<string>("#fafafa");
+  const [linearGradient, setLinearGradient] = useState(false);
 
   return (
     <Tester style={{ flex: 1 }}>
@@ -38,11 +67,28 @@ export default function PieChart() {
           >
             <Pie.Chart
               innerRadius={innerRadius}
+              circleSweepDegrees={circleSweepDegrees}
+              startAngle={startAngle}
             >
-              {() => {
+              {({ slice }) => {
+                const { startX, startY, endX, endY } = calculateGradientPoints(
+                  slice.radius,
+                  slice.startAngle,
+                  slice.endAngle,
+                  slice.center.x,
+                  slice.center.y,
+                );
+
                 return (
                   <>
-                    <Pie.Slice />
+                    <Pie.Slice>
+                    {linearGradient?<LinearGradient
+                        start={vec(startX, startY)}
+                        end={vec(endX, endY)}
+                        colors={[slice.color, `${slice.color}50`]}
+                        positions={[0, 1]}
+                      />:null}
+                    </Pie.Slice>
                     <Pie.SliceAngularInset
                       angularInset={{
                         angularStrokeWidth: insetWidth,
@@ -61,24 +107,8 @@ export default function PieChart() {
         style={styles.optionsScrollView}
         contentContainerStyle={styles.options}
       >
-        <TestCase itShould="case2: 更新数据">
-          <View
-            style={{
-              flexDirection: "row",
-              gap: 12,
-              marginTop: 3,
-              marginBottom: 3,
-            }}
-          >
-            <Button
-              style={{ flex: 1 }}
-              onPress={() => setDataTest((data) => DATA(data.length))}
-              title="Shuffle Data"
-            />
-          </View>
-        </TestCase>
 
-        <TestCase itShould="case3: 设置切块中间的间隔">
+        <TestCase itShould="case2: angularStrokeWidth 属性 设置切块中间的间隔">
           <View
             style={{
               flexDirection: "row",
@@ -111,7 +141,7 @@ export default function PieChart() {
         </TestCase>
 
 
-        <TestCase itShould="case4: 设置间隔的颜色">
+        <TestCase itShould="case3: angularStrokeColor 属性 设置间隔的颜色">
           <View
             style={{
               flexDirection: "row",
@@ -139,7 +169,7 @@ export default function PieChart() {
           </View>
         </TestCase>
 
-        <TestCase itShould="case5: 设置内环的半径，100% 为饼图，小于100 为环形图">
+        <TestCase itShould="case4: innerRadius 属性 设置内环的半径，100% 为饼图，小于100 为环形图">
           <View
             style={{
               flexDirection: "row",
@@ -164,7 +194,80 @@ export default function PieChart() {
               onPress={() => setInnerRadius('100%')}
               title="innerRadius 100%"
             />
+          </View>
+        </TestCase>
 
+        <TestCase itShould="case5: circleSweepDegrees 属性 设置环形角度，0-360">
+          <View
+            style={{
+              flexDirection: "row",
+              gap: 12,
+              marginVertical: 16,
+              marginTop: 3,
+              marginBottom: 3,
+            }}
+          >
+            <Button
+              style={{ flex: 1 }}
+              onPress={() => setCircleSweepDegrees(90)}
+              title="CircleSweepDegrees 90"
+            />
+            <Button
+              style={{ flex: 1 }}
+              onPress={() => setCircleSweepDegrees(180)}
+              title="CircleSweepDegrees 180"
+            />
+            <Button
+              style={{ flex: 1 }}
+              onPress={() => setCircleSweepDegrees(360)}
+              title="CircleSweepDegrees 360"
+            />
+          </View>
+        </TestCase>
+
+        <TestCase itShould="case6: startAngle 属性 设置起始角度，0-360">
+          <View
+            style={{
+              flexDirection: "row",
+              gap: 12,
+              marginVertical: 16,
+              marginTop: 3,
+              marginBottom: 3,
+            }}
+          >
+            <Button
+              style={{ flex: 1 }}
+              onPress={() => setStartAngle(45)}
+              title="setStartAngle 45"
+            />
+            <Button
+              style={{ flex: 1 }}
+              onPress={() => setStartAngle(90)}
+              title="setStartAngle 90"
+            />
+          </View>
+        </TestCase>
+
+        <TestCase itShould="case7: children 属性 设置饼状图每个切片属性 以下是渐变效果">
+          <View
+            style={{
+              flexDirection: "row",
+              gap: 12,
+              marginVertical: 16,
+              marginTop: 3,
+              marginBottom: 3,
+            }}
+          >
+            <Button
+              style={{ flex: 1 }}
+              onPress={() => setLinearGradient(true)}
+              title="enbale"
+            />
+            <Button
+              style={{ flex: 1 }}
+              onPress={() => setLinearGradient(false)}
+              title="disable"
+            />
           </View>
         </TestCase>
 
