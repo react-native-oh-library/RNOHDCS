@@ -52,7 +52,6 @@ export function InstagramDemo() {
                         animate={true}
                         backgroundColor={'#999'}
                         foregroundColor={'red'}
-                        speed={0.5}
                         interval={2}
                     >
                     </Instagram>
