@@ -303,7 +303,7 @@ export default function BouncyCheckboxExample() {
             <TestSuite name='bounceEffectOut'>
             <TestCase itShould="test BouncyCheckbox bounceEffectOut property with value '2'">
             <BouncyCheckbox
-                    bounceEffectIn={2}
+                    bounceEffectOut={2}
             />
             </TestCase>
             </TestSuite>
@@ -311,9 +311,14 @@ export default function BouncyCheckboxExample() {
 
         
             <TestSuite name='bounceVelocityIn'>
-                <TestCase itShould="test BouncyCheckbox bounceVelocityIn property with value '0.5'">
+                <TestCase itShould="test BouncyCheckbox bounceVelocityIn property with value '200'">
                     <BouncyCheckbox
-                    bounceEffectIn={0.5}
+                    bounceEffectIn={0.3}
+                    bounceEffectOut={2}
+                    bounceVelocityIn={200}
+                    bounceVelocityOut={0.1}
+                    bouncinessOut={20}
+                    bouncinessIn={20}
                     />
             </TestCase>
             </TestSuite>
@@ -321,9 +326,14 @@ export default function BouncyCheckboxExample() {
 
       
             <TestSuite name='bounceVelocityOut'>
-                <TestCase itShould="test BouncyCheckbox bounceVelocityOut property with value '0.2'">
+                <TestCase itShould="test BouncyCheckbox bounceVelocityOut property with value '200'">
                     <BouncyCheckbox
-                    bounceEffectIn={0.2}
+                    bounceEffectIn={0.3}
+                    bounceEffectOut={2}
+                    bounceVelocityOut={200}
+                    bounceVelocityIn={0.1}
+                    bouncinessOut={20}
+                    bouncinessIn={20}
                     />
             </TestCase>
             </TestSuite>
@@ -333,7 +343,12 @@ export default function BouncyCheckboxExample() {
             <TestSuite name='bouncinessIn'>
             <TestCase itShould="test BouncyCheckbox bouncinessIn property with value '40'">
                 <BouncyCheckbox
-                    bounceEffectIn={40}
+                bounceEffectIn={0.1}
+                bounceEffectOut={5}               
+                bouncinessIn={40}
+                bouncinessOut={20}
+                bounceVelocityIn={0.1}
+                bounceVelocityOut={0.4}
                 />
             </TestCase>
             </TestSuite>
@@ -343,7 +358,13 @@ export default function BouncyCheckboxExample() {
             <TestSuite name='bouncinessOut'>
                 <TestCase itShould="test BouncyCheckbox bouncinessOut property with value '40'">
                     <BouncyCheckbox
-                    bounceEffectIn={40}
+                                    bounceEffectIn={0.1}
+                                    bounceEffectOut={5}  
+                                    bouncinessOut={40}
+                                    bouncinessIn={20}
+                                    bounceVelocityIn={0.1}
+                                    bounceVelocityOut={0.4}
+                    
                     />
                     </TestCase>
                     </TestSuite>
