@@ -16,18 +16,6 @@ export const NetInfoTest = () => {
   }
 
   const [netInfoState, setNetInfoState] = React.useState({});
-  const configNetInfo = () => {
-    NetInfo.configure({
-      reachabilityUrl: 'https://developer.huawei.com/',
-      reachabilityTest: async (response) => response.status === 204,
-      reachabilityLongTimeout: 60 * 1000, // 60s
-      reachabilityShortTimeout: 5 * 1000, // 5s
-      reachabilityRequestTimeout: 15 * 1000, // 15s
-      reachabilityShouldRun: () => true,
-      shouldFetchWiFiSSID: true, // met iOS requirements to get SSID. Will leak memory if set to true without meeting requirements.
-      useNativeReachability: false
-    })
-  }
   const fetch = async () => {
     console.log('拿到数据啦！！！！！');
     const fetchState = await NetInfo.fetch()
@@ -57,7 +45,6 @@ export const NetInfoTest = () => {
         <Tester>
           <TestSuite name={'NetInfo'}>
             <View>
-              <Button title="configNetInfo" onPress={() => configNetInfo()} />
               <Button title="addEventListener" onPress={() => toListen()} />
               <Button title="fetch" onPress={() => fetch()} />
               <Button title="refresh" onPress={() => refresh()} />
