@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { View, Button, StyleSheet, TextInput, Alert, Text, ActivityIndicator } from 'react-native';
 import { pathParameters, zip, unzip, zipWithPassword, unzipWithPassword, subscribe, creteFile, isPasswordProtected, unzipAssets, getUncompressedSize } from 'react-native-zip-archive';
 import { ProgressBar } from 'react-native-paper';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 
-export const ZipArchiveDemo = () => {
+export const ZipArchiveDemoTest = () => {
     const [fileName, setFileName] = useState('');
     const [fileContent, setFileContent] = useState('');
     const [createdFilePath, setCreatedFilePath] = useState('');
@@ -194,7 +195,7 @@ export const ZipArchiveDemo = () => {
         })
     }
 
-    // unzipAssets
+    // unzipAssets解压到指定目录
     const handleUnzipAssets = async () => {
         setLoading(true);
         let filesDir = pathParameters();
@@ -217,7 +218,7 @@ export const ZipArchiveDemo = () => {
         }
     }
 
-    // getUncompressedSize
+    // getUncompressedSize解压文件大小
     const handleGetUncompressedSize = () => {
         getUncompressedSize(newZipPath)
             .then((uncompressSize: any) => {
@@ -228,102 +229,147 @@ export const ZipArchiveDemo = () => {
                 console.log(`getUncompressedSize err:${err}`)
             })
     }
-    
+
     return (
-        <View style={styles.content}>
-            <View style={styles.buttonSix}>
-                <View>
-                    <Text>解压缩后的大小:{uncompressSize ? uncompressSize : '0'}字节</Text>
-                    <View style={styles.progressBar}>
-                        <View style={{ width: `${progress}%`, backgroundColor: '#00AEEF', height: '100%' }}></View>
-                    </View>
-                    <Text style={styles.percentageText}>{progress}%</Text>
-                </View>
-            </View>
-
-            <View >
-                <View >
-                    <TextInput
-                        placeholder="请输入文件名"
-                        value={fileName}
-                        onChangeText={setFileName}
-                        style={{ borderWidth: 1, padding: 10, width: '70%' }}
-                    />
-                    <TextInput
-                        style={{
-                            height: 100,
-                            borderColor: 'gray',
-                            borderWidth: 1,
-                            width: 200,
-                            padding: 10,
-                            marginBottom: 10,
-                            marginTop: 10
-                        }}
-                        onChangeText={text => setFileContent(text)}
-                        value={fileContent}
-                        placeholder="文件内容"
-                        multiline={true}
-                    />
-                    <Button title="创建文件" onPress={createFile} />
-                </View>
-            </View>
-
-            <View style={styles.buttonSix}>
-                <Button title='压缩' onPress={() => {
-                    if (createdFilePath) {
-                        handleProgress();//进度条
-                        zip(newSourcePath, newZipPath)
-                            .then(() => {
-                                setCompressedFilePath(newZipPath)
-                                Alert.alert('成功', '已压缩');
-                            })
-                            .catch(error => {
-                                Alert.alert('错误', `压缩失败: ${error}`);
-                            })
-                    } else {
-                        Alert.alert('无文件可供压缩');
+        <Tester>
+            <TestSuite name="创建文件">
+                <TestCase tags={['C_API']} itShould="创建文件"
+                    initialState={''}
+                    arrange={({ setState }) =>
+                        <View >
+                            <View >
+                                <TextInput
+                                    placeholder="请输入文件名"
+                                    value={fileName}
+                                    onChangeText={setFileName}
+                                    style={{ borderWidth: 1, padding: 10, width: '70%' }}
+                                />
+                                <TextInput
+                                    style={{
+                                        height: 100,
+                                        borderColor: 'gray',
+                                        borderWidth: 1,
+                                        width: 200,
+                                        padding: 10,
+                                        marginBottom: 10,
+                                        marginTop: 10
+                                    }}
+                                    onChangeText={text => setFileContent(text)}
+                                    value={fileContent}
+                                    placeholder="文件内容"
+                                    multiline={true}
+                                />
+                                <Button title="创建文件" onPress={() => { createFile(); setState('success'); }} />
+                            </View>
+                        </View>
                     }
-                }} />
-            </View>
-
-            <View>
-                <TextInput
-                    style={styles.input}
-                    placeholder="设置压缩密码"
-                    onChangeText={text => setPassword(text)}
-                    value={password}
-                />
-            </View>
-            <View style={styles.buttonSix}>
-                <Button title='密码压缩' onPress={handleZipPress} />
-            </View>
-
-            {showInput && (
-                <View>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="输入解压密码"
-                        onChangeText={text => setUnzipPassword(text)}
-                    />
-                </View>
-            )}
-
-            <View style={styles.buttonSix}>
-                <Button title="解压" onPress={handleUnzipPress} />
-            </View>
-
-            <View>
-                <Button title='unzipAssets解压' onPress={handleUnzipAssets} />
-                {loading ? (
-                    <View>
-                        <ActivityIndicator size="large" color='#0000ff' />
-                        <Text>正在解压文件...</Text>
-                    </View>
-                ) : (
-                    <Text>{unzipStatus}</Text>
-                )}
-            </View>
-        </View>
+                    assert={({ expect, state }) => {
+                        expect(state).to.be.eq('success');
+                    }}>
+                </TestCase>
+            </TestSuite>
+            <TestSuite name="压缩文件">
+                <TestCase tags={['C_API']} itShould="压缩文件"
+                    initialState={''}
+                    arrange={({ setState }) =>
+                        <View style={styles.buttonSix}>
+                            <Text >压缩进度</Text>
+                            <View style={styles.progressBar}>
+                                <View style={{ width: `${progress}%`, backgroundColor: '#00AEEF', height: '100%' }}></View>
+                            </View>
+                            <Text style={styles.percentageText}>{progress}%</Text>
+                            <Button title='压缩' onPress={() => {
+                                if (createdFilePath) {
+                                    handleProgress();//进度条
+                                    zip(newSourcePath, newZipPath)
+                                        .then(() => {
+                                            setCompressedFilePath(newZipPath)
+                                            Alert.alert('成功', '已压缩');
+                                            setState('success');
+                                        })
+                                        .catch(error => {
+                                            Alert.alert('错误', `压缩失败: ${error}`);
+                                        })
+                                } else {
+                                    Alert.alert('无文件可供压缩');
+                                }
+                            }} />
+                        </View>
+                    }
+                    assert={({ expect, state }) => {
+                        expect(state).to.be.eq('success');
+                    }}>
+                </TestCase>
+            </TestSuite>
+            <TestSuite name="设置密码压缩文件">
+                <TestCase tags={['C_API']} itShould="设置密码压缩文件"
+                    initialState={''}
+                    arrange={({ setState }) =>
+                        <View>
+                            <Text >压缩进度</Text>
+                            <View style={styles.progressBar}>
+                                <View style={{ width: `${progress}%`, backgroundColor: '#00AEEF', height: '100%' }}></View>
+                            </View>
+                            <Text style={styles.percentageText}>{progress}%</Text>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="设置压缩密码"
+                                onChangeText={text => setPassword(text)}
+                                value={password}
+                            />
+                            <View style={styles.buttonSix}>
+                                <Button title='密码压缩' onPress={() => { handleZipPress(); setState('success'); }} />
+                            </View>
+                        </View>
+                    }
+                    assert={({ expect, state }) => {
+                        expect(state).to.be.eq('success');
+                    }}>
+                </TestCase>
+            </TestSuite>
+            <TestSuite name="解压文件">
+                <TestCase tags={['C_API']} itShould="解压文件"
+                    initialState={''}
+                    arrange={({ setState }) =>
+                        <View>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="输入解压密码"
+                                onChangeText={text => setUnzipPassword(text)}
+                            />
+                            <View style={styles.buttonSix}>
+                                <Button title="解压" onPress={() => { handleUnzipPress(); setState('success'); }} />
+                            </View>
+                            <Text>解压缩后的大小:{uncompressSize ? uncompressSize : '0'}字节</Text>
+                        </View>
+                    }
+                    assert={({ expect, state }) => {
+                        expect(state).to.be.eq('success');
+                    }}>
+                </TestCase>
+            </TestSuite>
+            <TestSuite name="unzipAssets解压">
+                <TestCase tags={['C_API']} itShould="解压到指定目录"
+                    initialState={''}
+                    arrange={({ setState }) =>
+                        <View>
+                            <Button title='unzipAssets解压' onPress={() => { handleUnzipAssets(); setState('success'); }} />
+                            {loading ? (
+                                <View>
+                                    <ActivityIndicator size="large" color='#0000ff' />
+                                    <Text>正在解压文件...</Text>
+                                </View>
+                            ) : (
+                                <Text>{unzipStatus}</Text>
+                            )}
+                        </View>
+                    }
+                    assert={({ expect, state }) => {
+                        expect(state).to.be.eq('success');
+                    }}>
+                </TestCase>
+            </TestSuite>
+        </Tester>
     )
 }
 
@@ -333,7 +379,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 56,
-        backgroundColor: 'white' 
+        backgroundColor: 'white'
     },
     buttonSix: {
         width: '65%',
