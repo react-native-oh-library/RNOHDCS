@@ -480,7 +480,7 @@ const SocialIcons: React.FunctionComponent<SocialIconsComponentProps> = () => {
                 opacity: 0.7,
               }}
               fontStyle={{fontSize: 30, fontWeight: '400', color: 'black'}}
-              onPress={() => {
+              onPressIn={() => {
                 setOnPressIn(!onPressIn);
               }}
             />
@@ -504,7 +504,7 @@ const SocialIcons: React.FunctionComponent<SocialIconsComponentProps> = () => {
                 opacity: 0.7,
               }}
               fontStyle={{fontSize: 30, fontWeight: '400', color: 'black'}}
-              onPress={() => {
+              onPressOut={() => {
                 setonPressOut(!onPressOut);
               }}
             />
