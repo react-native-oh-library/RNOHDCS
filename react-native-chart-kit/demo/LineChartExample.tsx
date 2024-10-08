@@ -107,8 +107,8 @@ export function LineChartExample() {
         }}
         onDataPointClick={handlePointClick}
         decorator={doDecorator(tooltipPos)}
-        horizontalLabelRotation={15}
-        verticalLabelRotation={15}
+        // horizontalLabelRotation={15}
+        // verticalLabelRotation={15}
         formatXLabel={label => label.toUpperCase()}
         formatYLabel={label => label.toUpperCase()}
         getDotColor={dataPoint => {

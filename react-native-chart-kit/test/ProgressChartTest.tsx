@@ -4,7 +4,7 @@ import {ProgressChart} from 'react-native-chart-kit';
 import {Tester, TestCase, TestSuite} from '@rnoh/testerino';
 
 export function ProgressChartTest() {
-  const screenWidth = Dimensions.get('window').width;
+  const screenWidth = Dimensions.get('window').width - 40;
 
   const chartConfig = {
     backgroundColor: '#e26a00',

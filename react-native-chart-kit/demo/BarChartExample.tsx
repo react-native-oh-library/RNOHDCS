@@ -25,7 +25,7 @@ export function BarChartExample() {
       <Text>Bar Chart</Text>
       <BarChart
         data={{
-          labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
           datasets: [
             {
               data: [20, 45, 28, 80, 99, 43],
