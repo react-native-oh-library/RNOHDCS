@@ -15,46 +15,14 @@ export  function AwareScrollView() {
   const [disableScrollOnKeyboardHide, setDisableScrollOnKeyboardHide] =
     useState(false);
   const [enabled, setEnabled] = useState(true);
+  const [bottom, setBottom] = useState(50);
   const [snapToOffsetsEnabled, setSnapToOffsetsEnabled] = useState(false);
 
   return (
     <>
-     <View style={styles.switchContainerView}>
-        <View style={styles.switchContainer}>
-          <Text>Toggle back scroll</Text>
-          <Switch
-            testID="bottom_sheet_toggle_back_scroll"
-            value={disableScrollOnKeyboardHide}
-            onChange={() => {
-              setDisableScrollOnKeyboardHide(!disableScrollOnKeyboardHide);
-            }}
-          />
-        </View>
-        <View style={styles.switchContainer}>
-          <Text>Toggle enabled</Text>
-          <Switch
-            testID="bottom_sheet_toggle_enabled_state"
-            value={enabled}
-            onChange={() => {
-              setEnabled(!enabled);
-            }}
-          />
-        </View>
-
-        <View style={styles.switchContainer}>
-          <Text>Toggle snapToOffsets</Text>
-          <Switch
-            testID="bottom_sheet_toggle_snap_to_offsets"
-            value={snapToOffsetsEnabled}
-            onChange={() => {
-              setSnapToOffsetsEnabled(!snapToOffsetsEnabled);
-            }}
-          />
-        </View>
-      </View>
       <KeyboardAwareScrollView
         testID="aware_scroll_view_container"
-        bottomOffset={50}
+        bottomOffset={bottom}
         enabled={enabled}
         snapToOffsets={snapToOffsetsEnabled ? snapToOffsets : undefined}
         disableScrollOnKeyboardHide={disableScrollOnKeyboardHide}

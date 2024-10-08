@@ -5,7 +5,7 @@ export default StyleSheet.create({
     justifyContent: "flex-end",
     flex: 1,
     height:'100%',
-    backgroundColor:'red'
+    backgroundColor:'white'
   },
   header: {
     color: "black",
