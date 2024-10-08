@@ -217,7 +217,7 @@ const AddMenuisLoadedTest = (props: {
 }) => {
   const [isLoaded,setIsLoaded] = useState("")
   const addCustomMenuItem = () => {
-    setIsLoaded(`${sound.isLoaded()}`)
+    setIsLoaded(`${sound?.isLoaded()}`)
     props.setState(true);
   };
 
@@ -234,7 +234,7 @@ const AddMenuisPlayingTest = (props: {
 }) => {
   const [isPlaying,setIsPlaying] = useState("")
   const addCustomMenuItem = () => {
-    setIsPlaying(`${sound.isPlaying()}`)
+    setIsPlaying(`${sound?.isPlaying()}`)
     props.setState(true);
   };
 
@@ -553,6 +553,7 @@ const AddMenuPlayTest = (props: {
           }
           state = "play"
           sound.play((a) => {
+            console.log(556)
             state = ""
             sound.release();
           });
