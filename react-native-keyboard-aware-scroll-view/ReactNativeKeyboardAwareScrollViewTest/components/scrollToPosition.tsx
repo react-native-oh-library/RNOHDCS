@@ -24,6 +24,7 @@ export const scrollToPosition: React.FC = (): JSX.Element => {
 
                 arrange={({ setState }) => {
                     const [isShow, setIsshow] = useState(true)
+                    const [value, setValue] = useState('')
                     return (
                         <KeyboardAwareScrollView
                             style={styles.scroll}
@@ -36,11 +37,14 @@ export const scrollToPosition: React.FC = (): JSX.Element => {
                                 scroll = ref
                             }}
                             viewIsInsideTabBar={true}
+                            onKeyboardDidHide={() => { setValue('键盘隐藏') }}
+                            onKeyboardDidShow={() => { setValue('键盘出现') }}
                         >
                             <Button title={'start'} onPress={() => {
                                 scroll?.currentProps?.scrollToPosition(0, 100, true);
                                 setState(true);
                             }}></Button>
+                            <Text>onKeyboardDidHide/onKeyboardDidShow:{value}</Text>
                             {
                                 Labels.map(item => {
                                     return <View key={item}>
