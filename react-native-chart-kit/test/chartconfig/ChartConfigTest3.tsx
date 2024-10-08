@@ -4,7 +4,7 @@ import {BarChart, LineChart} from 'react-native-chart-kit';
 import {Tester, TestCase, TestSuite} from '@rnoh/testerino';
 
 export function ChartConfigTest3() {
-  const screenWidth = Dimensions.get('window').width;
+  const screenWidth = Dimensions.get('window').width - 40;
 
   const useShadowColorConfig = {
     backgroundGradientFrom: '#ffffff',

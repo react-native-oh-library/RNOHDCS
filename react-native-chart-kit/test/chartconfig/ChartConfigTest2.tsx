@@ -4,7 +4,7 @@ import {LineChart, ProgressChart} from 'react-native-chart-kit';
 import {Tester, TestCase, TestSuite} from '@rnoh/testerino';
 
 export function ChartConfigTest2() {
-  const screenWidth = Dimensions.get('window').width;
+  const screenWidth = Dimensions.get('window').width - 40;
 
   const bgFromConfig = {
     backgroundColor: '#e26a00',

@@ -5,7 +5,7 @@ import {Rect, G, Text as SvgText} from 'react-native-svg';
 import {Tester, TestCase, TestSuite} from '@rnoh/testerino';
 
 export function LineChartTest1() {
-  const screenWidth = Dimensions.get('window').width;
+  const screenWidth = Dimensions.get('window').width - 40;
 
   const chartConfig = {
     backgroundColor: '#e26a00',

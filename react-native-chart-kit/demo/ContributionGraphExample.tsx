@@ -49,7 +49,7 @@ export function ContributionGraphExample() {
         chartConfig={chartConfig}
         tooltipDataAttrs={() => handleToolTip}
         gutterSize={2}
-        squareSize={22}
+        squareSize={20}
         horizontal={!chartState}
         showMonthLabels={true}
         showOutOfRangeDays={true}
