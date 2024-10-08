@@ -43,9 +43,9 @@ export default function KeyboardAnimation({
   provider = useKeyboardAnimation,
 }: Props) {
   const { height, progress } = provider();
-  
+  const p = provider();
  useEffect(()=>{
-  console.log('###KeyboardAnimation',height,progress)
+  console.log('###KeyboardAnimation',p,height,progress)
  },[])
   const keyboard = useGradualKeyboardAnimation();
 

@@ -5,8 +5,11 @@ import { Platform, StyleSheet, View } from "react-native";
 import {
   KeyboardAwareScrollView,
   KeyboardToolbar,
+  KeyboardStickyView,
+  
 } from "react-native-keyboard-controller";
 
+import type { LayoutChangeEvent } from "react-native";
 import TextInput from "../components/TextInput";
 
 import {AutoFillContacts} from "./Contacts";
@@ -26,6 +29,10 @@ const haptic = () =>{
 export  function ToolbarExample() {
   const [showAutoFill, setShowAutoFill] = useState(false);
   const [name, setName] = useState("");
+  const [footerHeight, setFooterHeight] = useState(0);
+  const handleLayout = useCallback((evt: LayoutChangeEvent) => {
+    setFooterHeight(evt.nativeEvent.layout.height);
+  }, []);
   const onContactSelected = useCallback((contact: Contact) => {
     setName(contact.name);
   }, []);
@@ -39,9 +46,10 @@ export  function ToolbarExample() {
   return (
     <>
       <KeyboardAwareScrollView
-        bottomOffset={62}
-        style={[styles.withPadding, styles.container]}
-        testID="toolbar.scrollView"
+        style={styles.container}
+        contentContainerStyle={styles.content}
+        bottomOffset={ 0}
+        keyboardShouldPersistTaps="handled"
       >
         <TextInput
           keyboardType="default"
@@ -153,24 +161,42 @@ export  function ToolbarExample() {
           testID="TextInput#13"
         />
       </KeyboardAwareScrollView>
+      <KeyboardStickyView offset={{ closed: 0, opened:  0  }}>
+      <View onLayout={handleLayout} style={styles.footer}>
       <KeyboardToolbar
-        content={
-          showAutoFill ? (
-            <AutoFillContacts onContactSelected={onContactSelected} />
-          ) : null
-        }
-        opacity={Platform.OS === "ios" ? "4F" : "DD"}
-        onDoneCallback={haptic}
-        onPrevCallback={haptic}
-        onNextCallback={haptic}
-      />
+      
+     content={
+       showAutoFill ? (
+         <AutoFillContacts onContactSelected={onContactSelected} />
+       ) : null
+     }
+     opacity={'ff'}
+     onDoneCallback={haptic}
+     onPrevCallback={haptic}
+     onNextCallback={haptic}
+   /> 
+          </View>
+   
+        </KeyboardStickyView>
     </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    flexGrow: 1,
+    paddingHorizontal: 16,
+  },
+  content: {
+    paddingTop: 50,
+  },
+  footer: {
+    backgroundColor: "green",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 0,
+    width: "100%",
+    
   },
   row: {
     flexDirection: "row",

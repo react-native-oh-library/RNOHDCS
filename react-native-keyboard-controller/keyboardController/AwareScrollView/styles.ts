@@ -8,9 +8,6 @@ export const styles = StyleSheet.create({
     paddingTop: 50,
   },
   switchContainerView:{
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
     margin: 16,
     top:80
   },
@@ -20,7 +17,6 @@ export const styles = StyleSheet.create({
   },
   switchContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
     margin: 16,
   },
