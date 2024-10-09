@@ -184,7 +184,7 @@ const BottomSheetComponent: React.FunctionComponent<
           </TestCase>
         </TestSuite>
         <TestSuite name="BottomSheet属性scrollViewProps的验证 设置滚动属性 包含背景色 透明度 是否可滚动">
-          <TestCase itShould="scrollViewProps" tags={['C_API']}>
+          <TestCase itShould="scrollViewProps设置不可滚动" tags={['C_API']}>
             <Button
               title="Open Bottom Sheet with handler"
               onPress={() => setIsVisible5(true)}
@@ -194,7 +194,7 @@ const BottomSheetComponent: React.FunctionComponent<
               scrollViewProps={{
                 style: {backgroundColor: 'yellow', opacity: 0.8},
                 showsHorizontalScrollIndicator: true,
-                scrollEnabled: true,
+                scrollEnabled: false,
                 decelerationRate: 'fast',
               }}
               onBackdropPress={() => setIsVisible5(false)}

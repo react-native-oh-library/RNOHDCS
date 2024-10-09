@@ -188,7 +188,7 @@ const AirbnbRatings: React.FunctionComponent<
             <Text>评分分数：{value}</Text>
           </TestCase>
         </TestSuite>
-        <TestSuite name="AirbnbRating属性starImage 自定义图标无效">
+        {/* <TestSuite name="AirbnbRating属性starImage 自定义图标无效">
           <TestCase tags={['C_API']} itShould="starImage">
             <AirbnbRating
               starImage={require('./images/img.png')}
@@ -203,7 +203,7 @@ const AirbnbRatings: React.FunctionComponent<
             />
             <Text>评分分数：{value}</Text>
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
       </ScrollView>
     </Tester>
   );

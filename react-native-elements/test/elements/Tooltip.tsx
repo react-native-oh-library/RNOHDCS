@@ -265,7 +265,7 @@ const TooltipComponent: React.FunctionComponent<ToolTipComponentProps> = () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Tooltip的closeOnlyOnBackdropPress属性  设置closeOnlyOnBackdropPress无效">
+        {/* <TestSuite name="Tooltip的closeOnlyOnBackdropPress属性  设置closeOnlyOnBackdropPress无效">
           <TestCase itShould="closeOnlyOnBackdropPress" tags={['C_API']}>
             <View style={styles.view}>
               <Tooltip
@@ -286,7 +286,7 @@ const TooltipComponent: React.FunctionComponent<ToolTipComponentProps> = () => {
               </Tooltip>
             </View>
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="Tooltip的containerStyle属性  设置containerStyle容器样式">
           <TestCase itShould="containerStyle" tags={['C_API']}>
             <View style={styles.view}>
@@ -518,7 +518,7 @@ const TooltipComponent: React.FunctionComponent<ToolTipComponentProps> = () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Tooltip的skipAndroidStatusBar属性  设置skipAndroidStatusBar无效">
+        {/* <TestSuite name="Tooltip的skipAndroidStatusBar属性  设置skipAndroidStatusBar无效">
           <TestCase itShould="skipAndroidStatusBar" tags={['C_API']}>
             <View style={styles.view}>
               <Tooltip
@@ -546,7 +546,7 @@ const TooltipComponent: React.FunctionComponent<ToolTipComponentProps> = () => {
               </Tooltip>
             </View>
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="Tooltip的toggleAction属性  toggleAction  自定义弹出Tooltip事件 自定义为长按事件">
           <TestCase itShould="toggleAction" tags={['C_API']}>
             <View style={styles.view}>

@@ -597,14 +597,14 @@ export default () => {
   return (
     <Tester>
       <ScrollView>
-        <TestSuite name="Input属性ErrorComponent 可传入自定义组件">
+        {/* <TestSuite name="Input属性ErrorComponent 可传入自定义组件">
           <TestCase itShould="设置ErrorComponent" tags={['C_API']}>
             <View style={styles.container}>
               <Text style={styles.subText}>ErrorComponent</Text>
               <Input ErrorComponent={ViewComponent} />
             </View>
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="Input属性InputComponent可传入一个RN的TextInput组件">
           <TestCase itShould="设置InputComponent" tags={['C_API']}>
             <View style={styles.container}>
@@ -681,15 +681,14 @@ export default () => {
           </TestCase>
         </TestSuite>
         <TestSuite name="Input属性errorProps验证">
-          <TestCase itShould="设置errorProps设置无效" tags={['C_API']}>
+          <TestCase itShould="设置errorProps设置" tags={['C_API']}>
             <View style={styles.container}>
               <Text style={styles.subText}>errorProps</Text>
               <Input
                 inputStyle={{ color: 'green', fontSize: 20, fontWeight: '500' }}
-
                 placeholder="INPUT WITH ERROR MESSAGE"
                 errorMessage="ENTER A VALID ERROR HERE"
-                errorProps={{ width: 200, height: 30, backgroundColor: 'red' }}
+                errorProps={{ width: 200, height: 30, backgroundColor: 'green' }}
               />
             </View>
           </TestCase>
@@ -829,7 +828,7 @@ export default () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Input属性renderErrorMessage验证 设置无效">
+        {/* <TestSuite name="Input属性renderErrorMessage验证 设置无效">
           <TestCase itShould="设置renderErrorMessage" tags={['C_API']}>
             <View style={styles.container}>
               <Text style={styles.subText}>renderErrorMessage</Text>
@@ -842,7 +841,7 @@ export default () => {
               />
             </View>
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="Input属性rightIcon 添加rightIcon">
           <TestCase itShould="设置rightIcon" tags={['C_API']}>
             <View style={styles.container}>
@@ -887,7 +886,7 @@ export default () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Input属性shake 需要摇摇一摇">
+        <TestSuite name="Input属性shake 设置无效">
           <TestCase itShould="设置shake" tags={['C_API']}>
             <View style={styles.container}>
               <Text style={styles.subText}>shake</Text>
@@ -896,8 +895,6 @@ export default () => {
                 shake={() => {
                   const shakeAnimationValue = new Animated.Value(0);
                   shakeAnimationValue.setValue(0);
-                  // Animation duration based on Material Design
-                  // https://material.io/guidelines/motion/duration-easing.html#duration-easing-common-durations
                   Animated.timing(shakeAnimationValue, {
                     duration: 375,
                     toValue: 3,

@@ -171,9 +171,9 @@ const Pricing: React.FunctionComponent<PricingCardComponentProps> = () => {
               info={['red', 'green', 'blue']}
               infoStyle={{fontSize: 20, fontWeight: '400', color: 'black'}}
               title="我是title"
-              titleStyle={{fontSize: 20, fontWeight: '500', color: 'yellow'}}
+              titleStyle={{fontSize: 30, fontWeight: '700', color: 'yellow'}}
               price="$19000"
-              color="green"
+              color="yellow"
               containerStyle={{backgroundColor: 'pink', borderRadius: 20}}
               button={{
                 title: ' GET STARTED',

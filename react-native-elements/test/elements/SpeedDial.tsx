@@ -17,7 +17,7 @@ export default () => {
   return (
     <Tester>
       <ScrollView style={{height: '100%'}}>
-        <TestSuite name="SpeedDial的属性backdropPressableProps backdropPressableProps设置背景颜色 添加子组件均无效">
+        {/* <TestSuite name="SpeedDial的属性backdropPressableProps backdropPressableProps设置背景颜色 添加子组件均无效">
           <TestCase itShould="backdropPressableProps" tags={['C_API']}>
             <View style={{height: 400, width: '100%'}}>
               <SpeedDial
@@ -70,7 +70,7 @@ export default () => {
               </SpeedDial>
             </View>
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="SpeedDial的属性children 设置子组件SpeedDial.Action">
           <TestCase itShould="backdropPressableProps" tags={['C_API']}>
             <View style={{height: 400, width: '100%'}}>

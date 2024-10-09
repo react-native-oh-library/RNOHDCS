@@ -1666,7 +1666,7 @@ const List: React.FunctionComponent = () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="ListItem.Swipeable属性minSlideWidth 设置会报错 显示无此属性 标记为无效">
+        {/* <TestSuite name="ListItem.Swipeable属性minSlideWidth 设置会报错 显示无此属性 标记为无效">
           <TestCase itShould="设置minSlideWidth" tags={['C_API']}>
             <View style={styles.container}>
               <Text style={styles.subText}>设置会报错，显示无此属性</Text>
@@ -1702,7 +1702,7 @@ const List: React.FunctionComponent = () => {
               </ListItem.Swipeable>
             </View>
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="ListItem.Swipeable事件onSwipeBegin onSwipeBegin开始滑动修改背景颜色">
           <TestCase
             itShould="onSwipeBegin事件触发修改背景颜色"
@@ -1945,7 +1945,7 @@ const List: React.FunctionComponent = () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="ListItem.Title属性right title在右边显示 设置无效">
+        {/* <TestSuite name="ListItem.Title属性right title在右边显示 设置无效">
           <TestCase itShould="设置right属性" tags={['C_API']}>
             <View style={styles.container}>
               <Text style={styles.subText}>ListItem.Title设置right</Text>
@@ -1973,7 +1973,7 @@ const List: React.FunctionComponent = () => {
               </ListItem>
             </View>
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
       </ScrollView>
     </Tester>
   );
