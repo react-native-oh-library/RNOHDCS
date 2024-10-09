@@ -52,11 +52,11 @@ export default function ScatterPage() {
                 <>
                   <Scatter
                     points={points.listenCount}
-                    animate={{ type: "spring" }}
                     radius={radius}
                     shape={shape}
                     style={style}
                     color={color}
+                    animate={{ type: "spring" }}
                     strokeWidth={strokeWidth} >
                     {linearGradient?<LinearGradient
                           start={vec(0, 0)}
@@ -76,21 +76,30 @@ export default function ScatterPage() {
         style={styles.optionsScrollView}
         contentContainerStyle={styles.options}
       >
-        <TestCase itShould="case2: points 属性 更新点位数据，会有动画效果">
-          <View
-            style={{
-              flexDirection: "row",
-              gap: 12,
-              marginTop: 3,
-              marginBottom: 3,
-            }}
-          >
-            <Button
-              style={{ flex: 1 }}
-              onPress={() => setDataTest((data) => DATA(data.length))}
-              title="Shuffle Data"
-            />
-          </View>
+        <TestCase itShould="case2: points 属性 更新点位数据">
+
+        <View
+              style={{
+                flexDirection: "row",
+                gap: 12,
+                marginVertical: 16,
+                marginTop: 3,
+                marginBottom: 3,
+              }}
+            >
+              <Button
+                style={{ flex: 1 }}
+                onPress={() => {
+                  setDataTest((data) => DATA(6))
+                }}
+                title="points num 6"
+              />
+              <Button
+                style={{ flex: 1 }}
+                onPress={() => setDataTest((data) => DATA(4))}
+                title="points num 4"
+              />
+            </View>
         </TestCase>
 
         <TestCase itShould="case3: radius 属性 设置点的半径">
@@ -247,6 +256,24 @@ export default function ScatterPage() {
             />
           </View>
         </TestCase>
+
+        <TestCase itShould="case9: animate 属性 动画效果">
+        <View
+            style={{
+              flexDirection: "row",
+              gap: 12,
+              marginTop: 3,
+              marginBottom: 3,
+            }}
+          >
+            <Button
+              style={{ flex: 1 }}
+              onPress={() => setDataTest((data) => DATA(data.length))}
+              title="animate"
+            />
+          </View>
+        </TestCase>
+
       </ScrollView>
     </Tester>
   );
