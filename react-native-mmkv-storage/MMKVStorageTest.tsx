@@ -42,6 +42,8 @@ const MMKVStorageTest = () => {
     const name = useMMKVRef("name", storageRef, "")
     const [user, setUser] = useMMKVStorage("user", MMKV, "robert"); // robert is the default value
 
+
+
     //#region State & Props & Callbacks
     //String
     const [stringTest, setStringTest] = useStorageString('stringTest', 'andrew');
@@ -73,12 +75,12 @@ const MMKVStorageTest = () => {
     const [mapTest, setMapTest] = useStorageMap('mapTest', { user: 'andrew' });
 
     //Array
-    const [arrayTest, setArrayTest] = useStorageArray('arrayTest',["andrew", "dosen"]);
+    const [arrayTest, setArrayTest] = useStorageArray('arrayTest', ["andrew", "dosen"]);
 
     //MultipleItems
     const [multipleItemsTest, setMultipleItemsTest] = useStorageMultipleItems('multipleItemsTest', [['user', 'shaoen']]);
 
-    const [multipleItemsTest2, setMultipleItemsTest2] = useStorageMultipleItems2('multipleItemsTest', [['user', 'andrew']]);
+    const [multipleItemsTest2, setMultipleItemsTest2] = useStorageMultipleItems2('multipleItemsTest2', "shaoen");
 
     //#endregion
     return (
@@ -180,7 +182,7 @@ const MMKVStorageTest = () => {
                                         <TouchableOpacity
                                             style={styles.moduleButton}
                                             onPress={() => {
-                                                const MMKV = new MMKVLoader().encryptWithCustomKey('key').initialize();
+                                                const MMKV = new MMKVLoader().withEncryption().encryptWithCustomKey('key').initialize();
                                                 if (MMKV.options.initWithEncryption) {
                                                     setState(true)
                                                 } else {
@@ -216,7 +218,7 @@ const MMKVStorageTest = () => {
                                             }}
                                         >
                                             <Text style={styles.buttonText}>
-                                                从内存中清除 
+                                                从内存中清除
                                             </Text>
                                         </TouchableOpacity>
                                     </View>
@@ -256,7 +258,7 @@ const MMKVStorageTest = () => {
 
                             <TestCase
                                 tags={['C_API']}
-                                itShould="MMKV.getAllMMKVInstanceIDs();"
+                                itShould="MMKV.getCurrentMMKVInstanceIDs();"
                                 initialState={false}
                                 arrange={({ setState }) => (
                                     <View>
@@ -264,7 +266,6 @@ const MMKVStorageTest = () => {
                                             style={styles.moduleButton}
                                             onPress={() => {
                                                 let res = storageInt.getCurrentMMKVInstanceIDs()
-                                                console.log(res);
                                                 if (res) {
                                                     setState(true)
                                                 } else {
@@ -273,7 +274,7 @@ const MMKVStorageTest = () => {
                                             }}
                                         >
                                             <Text style={styles.buttonText}>
-                                                返回创建的所有MMKV实例ID的列表
+                                                获取当前初始化的实例ID
                                             </Text>
                                         </TouchableOpacity>
                                     </View>
@@ -794,15 +795,15 @@ const MMKVStorageTest = () => {
                         <View>
                             <View style={styles.unitView}>
                                 <Text style={styles.unitViewText}>
-                                    {JSON.stringify(multipleItemsTest2)};
+                                    {JSON.stringify(multipleItemsTest2)}
                                 </Text>
                             </View>
                             <TestCase tags={['C_API']} itShould='setMultipleItemsAsync: 调用实例的setMultipleItemsAsync方法给定的键设置存储一个数组'>
                                 <View>
                                     <TouchableOpacity
                                         style={styles.moduleButton}
-                                        onPress={async () => {
-                                            await storageMultipleItems2.setMultipleItemsAsync([['user', 'koen']], 'string')
+                                        onPress={() => {
+                                            storageMultipleItems2.setMultipleItemsAsync([['multipleItemsTest2', '123']], 'string')
                                         }}
                                     >
                                         <Text style={styles.buttonText}>setMultipleItemsAsync</Text>
@@ -819,11 +820,8 @@ const MMKVStorageTest = () => {
                                             style={styles.moduleButton}
                                             onPress={async () => {
 
-                                                let res = await storageMultipleItems2.getMultipleItemsAsync(['user'], 'string');
-                                                console.log(multipleItemsTest2);
-                                                console.log(res);
-
-                                                if (JSON.stringify(res) === JSON.stringify(multipleItemsTest2)) {
+                                                let res = await storageMultipleItems2.getMultipleItemsAsync(['multipleItemsTest2'], 'string');
+                                                if (JSON.stringify(res) === JSON.stringify([["multipleItemsTest2", `${multipleItemsTest2}`]])) {
                                                     setState(true)
                                                 } else {
                                                     setState(false)
@@ -852,8 +850,6 @@ const MMKVStorageTest = () => {
                                             onPress={() => {
 
                                                 let res = storageString.indexer.hasKey("stringTest");
-                                                console.log(res);
-
                                                 if (res) {
                                                     setState(true)
                                                 } else {
@@ -921,7 +917,7 @@ const MMKVStorageTest = () => {
                             </TestCase>
                         </View>
 
-                        
+
                     </TestSuite>
                 </ScrollView>
             </Tester>
