@@ -24,7 +24,7 @@ export default function ProgressCircleSnailTest() {
   const [size, setSize] = React.useState(20);
   const [animating, setAnimating] = React.useState(true);
   const [animating_, setAnimating_] = React.useState(false);
-  const [hidesWhenStopped, setHidesWhenStopped] = React.useState(false);
+  const [hidesWhenStopped, setHidesWhenStopped] = React.useState(true);
   const [hidesWhenStopped_, setHidesWhenStopped_] = React.useState(false);
   const [color_, setColor_] = React.useState(["#F44336", "#2196F3", "#009688"]);
   const [thickness, setThickness] = React.useState(10);
