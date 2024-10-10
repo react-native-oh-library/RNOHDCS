@@ -119,17 +119,17 @@ const CheckboxComponent: React.FunctionComponent<
             />
           </TestCase>
         </TestSuite>
-        {/* <TestSuite name="CheckBox属fontFamily验证 设置checkbox的字体">
+        <TestSuite name="CheckBox属fontFamily验证 设置checkbox的字体">
           <TestCase itShould='fontFamily' tags={['C_API']}>
             <CheckBox
-              fontFamily='PingFangSC-Regular'
+              fontFamily='font-awesome'
               checked={check4}
               onPress={() => setCheck4(!check4)}
               checkedTitle="checkbox选中时的title"
               title="checkbox未选中的title"
             />
           </TestCase>
-        </TestSuite> */}
+        </TestSuite>
         <TestSuite name="CheckBox属性iconRight验证 ckeckbox会显示在文字的右侧">
           <TestCase itShould="iconRight" tags={['C_API']}>
             <CheckBox

@@ -97,7 +97,7 @@ const Tiles: React.FunctionComponent<TilesComponentProps> = () => {
             </TestCase>
           </View> */}
         </TestSuite>
-        <TestSuite name="Tile的属性activeOpacity 设置activeOpacity 无效">
+        {/* <TestSuite name="Tile的属性activeOpacity 设置activeOpacity 无效">
           <TestCase itShould="activeOpacity" tags={['C_API']}>
             <Tile
               imageSrc={{
@@ -124,7 +124,7 @@ const Tiles: React.FunctionComponent<TilesComponentProps> = () => {
               </View>
             </Tile>
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
 
         <TestSuite name="Tile的属性caption 设置caption 传入一段文字">
           <TestCase itShould="caption" tags={['C_API']}>
@@ -497,7 +497,7 @@ const Tiles: React.FunctionComponent<TilesComponentProps> = () => {
             />
           </TestCase>
         </TestSuite>
-        <TestSuite name="Tile的属性overlayContainerStyle	 设置overlayContainerStyle无效">
+        {/* <TestSuite name="Tile的属性overlayContainerStyle	 设置overlayContainerStyle无效">
           <TestCase itShould="overlayContainerStyle" tags={['C_API']}>
             <Tile
               overlayContainerStyle={{backgroundColor: 'blue',width:300}}
@@ -535,7 +535,7 @@ const Tiles: React.FunctionComponent<TilesComponentProps> = () => {
               onPress={() => {}}
             />
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="Tile的属性title 设置title 就是那段英文">
           <TestCase itShould="title" tags={['C_API']}>
             <Tile

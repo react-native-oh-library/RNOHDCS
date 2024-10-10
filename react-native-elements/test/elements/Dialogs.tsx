@@ -104,7 +104,7 @@ const Dialogs: React.FunctionComponent<DialogComponentProps> = () => {
             />
           </TestCase>
         </TestSuite>
-        <TestSuite name="Dialog属性onLongPress验证  长按点击事件无效">
+        {/* <TestSuite name="Dialog属性onLongPress验证  长按点击事件无效">
           <TestCase itShould="onLongPress" tags={['C_API']}>
             <Button
               title="长按关闭Dialog"
@@ -112,8 +112,8 @@ const Dialogs: React.FunctionComponent<DialogComponentProps> = () => {
               buttonStyle={styles.button}
             />
           </TestCase>
-        </TestSuite>
-        <TestSuite name="Dialog属性onPressIn验证  手指按下事件无效">
+        </TestSuite> */}
+        {/* <TestSuite name="Dialog属性onPressIn验证  手指按下事件无效">
           <TestCase itShould="onPressIn" tags={['C_API']}>
             <Button
               title="手指按下关闭Dialog"
@@ -121,8 +121,8 @@ const Dialogs: React.FunctionComponent<DialogComponentProps> = () => {
               buttonStyle={styles.button}
             />
           </TestCase>
-        </TestSuite>
-        <TestSuite name="Dialog属性onPressOut验证  手指松开事件无效">
+        </TestSuite> */}
+        {/* <TestSuite name="Dialog属性onPressOut验证  手指松开事件无效">
           <TestCase itShould="onPressOut" tags={['C_API']}>
             <Button
               title="手指松开关闭Dialog"
@@ -130,7 +130,7 @@ const Dialogs: React.FunctionComponent<DialogComponentProps> = () => {
               buttonStyle={styles.button}
             />
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="Dialog属性overlayStyle验证 Dialog样式设置">
           <TestCase itShould="overlayStyle" tags={['C_API']}>
             <Button

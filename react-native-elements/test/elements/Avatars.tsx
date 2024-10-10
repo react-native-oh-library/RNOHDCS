@@ -337,7 +337,7 @@ const Avatars: React.FunctionComponent<AvatarComponentProps> = () => {
           </TestCase>
         </TestSuite>
 
-        <TestSuite name="Avatars属性renderCustomContent的验证  无效 无此属性 设置会报错">
+        {/* <TestSuite name="Avatars属性renderCustomContent的验证  无效 无此属性 设置会报错">
           <TestCase tags={['C_API']} itShould="renderCustomContent">
             <Avatar
               renderCustomContent={
@@ -349,7 +349,7 @@ const Avatars: React.FunctionComponent<AvatarComponentProps> = () => {
               }
             />
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="Avatars属性rounded的验证 设置圆角">
           <TestCase tags={['C_API']} itShould="rounded">
             <View

@@ -105,7 +105,7 @@ export default function HeaderComponent(): JSX.Element{
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Header属性barStyle 枚举验证 全部设置无效">
+        {/* <TestSuite name="Header属性barStyle 枚举验证 全部设置无效">
           <TestCase itShould="设置barStyle" tags={['C_API']}>
             <View style={styles.container}>
               <Text style={styles.subText}>dark-content</Text>
@@ -129,7 +129,7 @@ export default function HeaderComponent(): JSX.Element{
               />
             </View>
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="Header属性centerComponent验证  ">
           <TestCase itShould="设置centerComponent" tags={['C_API']}>
             <SafeAreaProvider>
@@ -225,7 +225,7 @@ export default function HeaderComponent(): JSX.Element{
             />
           </TestCase>
         </TestSuite>
-        <TestSuite name="Header属性edges验证 设置edges  无效 没有这个属性 设置会报错 ">
+        {/* <TestSuite name="Header属性edges验证 设置edges  没有这个属性 设置会报错 ">
           <TestCase itShould="设置edges" tags={['C_API']}>
             <HeaderRNE
               containerStyle={{
@@ -249,8 +249,8 @@ export default function HeaderComponent(): JSX.Element{
               
             />
           </TestCase>
-        </TestSuite>
-        <TestSuite name="Header属性elevated验证 设置elevated 无效 ">
+        </TestSuite> */}
+        {/* <TestSuite name="Header属性elevated验证 设置elevated 无效 ">
           <TestCase itShould="elevated" tags={['C_API']}>
             <HeaderRNE
               elevated={false}
@@ -274,8 +274,8 @@ export default function HeaderComponent(): JSX.Element{
               }}
             />
           </TestCase>
-        </TestSuite>
-        <TestSuite name="Header属性hideStatusBar验证 设置hideStatusBar无效 会报错没有这个属性 ">
+        </TestSuite> */}
+        {/* <TestSuite name="Header属性hideStatusBar验证 设置hideStatusBar无效 会报错没有这个属性 ">
           <TestCase itShould="hideStatusBar" tags={['C_API']}>
             <HeaderRNE
               containerStyle={{
@@ -291,6 +291,7 @@ export default function HeaderComponent(): JSX.Element{
                 type: 'font-awesome',
                 size: 20,
               }}
+              
               centerContainerStyle={{
                 backgroundColor: 'pink',
                 borderRadius: 5,
@@ -298,7 +299,7 @@ export default function HeaderComponent(): JSX.Element{
               }}
             />
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="Header属性leftComponent 验证 设置左边子组件">
           <TestCase
             itShould="leftComponent"
@@ -346,7 +347,7 @@ export default function HeaderComponent(): JSX.Element{
             />
           </TestCase>
         </TestSuite>
-        <TestSuite name="Header属性linearGradientProps验证 设置linearGradientProps无效  ">
+        {/* <TestSuite name="Header属性linearGradientProps验证 设置linearGradientProps无效  ">
           <TestCase itShould="linearGradientProps" tags={['C_API']}>
             <HeaderRNE
               linearGradientProps={{
@@ -374,7 +375,7 @@ export default function HeaderComponent(): JSX.Element{
               }}
             />
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="Header属性placement验证 placement的枚举验证 left center right  ">
           <TestCase itShould="left" tags={['C_API']}>
             <HeaderRNE

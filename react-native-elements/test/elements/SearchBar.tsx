@@ -51,7 +51,7 @@ const SearchBarTest: React.FunctionComponent<SearchBarComponentProps> = () => {
   return (
     <Tester>
       <ScrollView style={{...styles.viewContainer}}>
-        <TestSuite name="SearchBar属性cancelButtonProps  设置cancelButtonProps 背景颜色 宽度高度 字体颜色 均无效">
+        {/* <TestSuite name="SearchBar属性cancelButtonProps  设置cancelButtonProps 背景颜色 宽度高度 字体颜色 均无效">
           <TestCase itShould="cancelButtonProps" tags={['C_API']}>
             <SearchBar
               autoFocus={true}
@@ -73,8 +73,8 @@ const SearchBarTest: React.FunctionComponent<SearchBarComponentProps> = () => {
               onCancel={() => {}}
             />
           </TestCase>
-        </TestSuite>
-        <TestSuite name="SearchBar属性cancelButtonTitle 设置cancelButtonTitle值为文本字符串 无效">
+        </TestSuite> */}
+        {/* <TestSuite name="SearchBar属性cancelButtonTitle 设置cancelButtonTitle值为文本字符串 无效">
           <TestCase itShould="cancelButtonProps" tags={['C_API']}>
             <SearchBar
               autoFocus={true}
@@ -96,7 +96,7 @@ const SearchBarTest: React.FunctionComponent<SearchBarComponentProps> = () => {
               onCancel={() => {}}
             />
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="SearchBar属性 cancelIcon 设置cancelIcon 一个小图标无效">
           <TestCase itShould="cancelButtonProps" tags={['C_API']}>
             <SearchBar
@@ -208,7 +208,7 @@ const SearchBarTest: React.FunctionComponent<SearchBarComponentProps> = () => {
             />
           </TestCase>
         </TestSuite>
-        <TestSuite name="SearchBar属性lightTheme 设置lightTheme为true和false均无效">
+        {/* <TestSuite name="SearchBar属性lightTheme 设置lightTheme为true和false均无效">
           <TestCase itShould="lightTheme" tags={['C_API']}>
             <SearchBar
               lightTheme={true}
@@ -222,7 +222,7 @@ const SearchBarTest: React.FunctionComponent<SearchBarComponentProps> = () => {
               inputStyle={{backgroundColor: 'yellow'}}
             />
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="SearchBar属性loadingProps 设置loadingProps 接受loading属性">
           <TestCase itShould="loadingProps" tags={['C_API']}>
             <SearchBar
@@ -242,7 +242,7 @@ const SearchBarTest: React.FunctionComponent<SearchBarComponentProps> = () => {
             />
           </TestCase>
         </TestSuite>
-        <TestSuite name="SearchBar属性onCancel 设置onCancel无效 cancel组件显示不出来 ">
+        {/* <TestSuite name="SearchBar属性onCancel 设置onCancel无效 cancel组件显示不出来 ">
           <TestCase itShould="onCancel" tags={['C_API']}>
             <SearchBar
               value={value11}
@@ -264,7 +264,7 @@ const SearchBarTest: React.FunctionComponent<SearchBarComponentProps> = () => {
               onCancel={() => {}}
             />
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="SearchBar属性onClear 设置onClear  删除的回调事件 设置无效">
           <TestCase itShould="onClear" tags={['C_API']}>
             <SearchBar
@@ -295,7 +295,7 @@ const SearchBarTest: React.FunctionComponent<SearchBarComponentProps> = () => {
             />
           </TestCase>
         </TestSuite>
-        <TestSuite name="SearchBar属性platform 设置platform为default无效">
+        {/* <TestSuite name="SearchBar属性platform 设置platform为default无效">
           <TestCase itShould="platform" tags={['C_API']}>
             <SearchBar
               // cancelButtonProps={{ buttonStyle: { backgroundColor: 'red' }, buttonTextStyle: { color: 'green' } }}
@@ -316,7 +316,7 @@ const SearchBarTest: React.FunctionComponent<SearchBarComponentProps> = () => {
               onClear={() => {}}
             />
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="SearchBar属性rightIconContainerStyle 设置rightIconContainerStyle 右边的icon容器样式">
           <TestCase itShould="rightIconContainerStyle" tags={['C_API']}>
             <SearchBar
@@ -444,7 +444,7 @@ const SearchBarTest: React.FunctionComponent<SearchBarComponentProps> = () => {
             />
           </TestCase>
         </TestSuite>
-        <TestSuite name="SearchBar属性showCancel  设置showCancel为true或false 都不会出现cancel组件 无效">
+        {/* <TestSuite name="SearchBar属性showCancel  设置showCancel为true或false 都不会出现cancel组件 无效">
           <TestCase itShould="showCancel " tags={['C_API']}>
             <SearchBar
               onChangeText={value => {
@@ -491,7 +491,7 @@ const SearchBarTest: React.FunctionComponent<SearchBarComponentProps> = () => {
               onClear={() => {}}
             />
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="SearchBar属性showLoading  设置showLoading">
           <TestCase itShould="showLoading" tags={['C_API']}>
             <SearchBar

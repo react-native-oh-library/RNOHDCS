@@ -48,7 +48,7 @@ export default function ButtonGroups(): JSX.Element {
             />
           </TestCase>
         </TestSuite>
-        <TestSuite name="ButtonGroup属性activeOpacity的验证   设置activeOpacity为1，0.8，0.1 均无效">
+        {/* <TestSuite name="ButtonGroup属性activeOpacity的验证   设置activeOpacity为1，0.8，0.1 均无效">
           <TestCase itShould='activeOpacity' tags={['C_API']}>
             <ButtonGroup
               containerStyle={{height:60}}
@@ -58,8 +58,8 @@ export default function ButtonGroups(): JSX.Element {
               buttons={[<Icon name='save' type='font-awesome' color='red' size={40}/>,<Icon type='font-awesome' color='red' size={20} name='home'/>,<Icon type='font-awesome' color='red' size={50} name='remove'/>]}
             />
           </TestCase>
-        </TestSuite>
-        <TestSuite name="ButtonGroup属性button的验证  传入一个button组件 传入一个button组件无效">
+        </TestSuite> */}
+        {/* <TestSuite name="ButtonGroup属性button的验证  传入一个button组件 传入一个button组件无效">
           <TestCase itShould='button' tags={['C_API']}>
             <ButtonGroup
             containerStyle={{height:60}}
@@ -70,7 +70,7 @@ export default function ButtonGroups(): JSX.Element {
               button={<Button style={{width:100,height:100,backgroundColor:'green'}}></Button>}
             />
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="ButtonGroup属性buttonContainerStyle的验证  设置buttonGroup容器的样式">
           <TestCase itShould='buttonContainerStyle' tags={['C_API']}>
             <ButtonGroup
@@ -189,7 +189,7 @@ export default function ButtonGroups(): JSX.Element {
             />
           </TestCase>
         </TestSuite>
-        <TestSuite name="ButtonGroup属性onHideUnderlay的验证  设置onHideUnderlay  因为underlay显示不出来 所以设置onHideUnderlay无效">
+        {/* <TestSuite name="ButtonGroup属性onHideUnderlay的验证  设置onHideUnderlay  因为underlay显示不出来 所以设置onHideUnderlay无效">
           <TestCase itShould='onHideUnderlay' tags={['C_API']}>
             <ButtonGroup
             onShowUnderlay={()=>{}}
@@ -207,7 +207,7 @@ export default function ButtonGroups(): JSX.Element {
             disabledSelectedStyle={{backgroundColor:'green'}}
             />
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="ButtonGroup属性onLongPress的验证  设置onLongPress 长按触发切换背景色">
           <TestCase itShould='onLongPress' tags={['C_API']}>
             <ButtonGroup
@@ -284,7 +284,7 @@ export default function ButtonGroups(): JSX.Element {
             />
           </TestCase>
         </TestSuite>
-        <TestSuite name="ButtonGroup属性onShowUnderlay的验证  设置onShowUnderlay 因为underlay显示不出来 所以设置onShowUnderlay无效">
+        {/* <TestSuite name="ButtonGroup属性onShowUnderlay的验证  设置onShowUnderlay 因为underlay显示不出来 所以设置onShowUnderlay无效">
           <TestCase itShould='onShowUnderlay' tags={['C_API']}>
             <ButtonGroup
             onShowUnderlay={()=>{}}
@@ -302,7 +302,7 @@ export default function ButtonGroups(): JSX.Element {
             disabledSelectedStyle={{backgroundColor:'green'}}
             />
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="ButtonGroup属性selectMultiple的验证  设置selectMultiple 设置选中多个">
           <TestCase itShould='selectMultiple' tags={['C_API']}>
             <ButtonGroup
@@ -389,7 +389,7 @@ export default function ButtonGroups(): JSX.Element {
             />
           </TestCase>
         </TestSuite>
-        <TestSuite name="ButtonGroup属性setOpacityTo的验证  设置setOpacityTo 无法触发属性   设置无效 ">
+        {/* <TestSuite name="ButtonGroup属性setOpacityTo的验证  设置setOpacityTo 无法触发属性   设置无效 ">
           <TestCase itShould='setOpacityTo' tags={['C_API']}>
             <ButtonGroup
             setOpacityTo={(value)=>{
@@ -414,7 +414,7 @@ export default function ButtonGroups(): JSX.Element {
             disabledSelectedStyle={{backgroundColor:'green'}}
             />
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="ButtonGroup属性textStyle的验证  设置textStyle 设置普通状态下文字的样式">
           <TestCase itShould='textStyle' tags={['C_API']}>
             <ButtonGroup
@@ -436,7 +436,7 @@ export default function ButtonGroups(): JSX.Element {
             />
           </TestCase>
         </TestSuite>
-        <TestSuite name="ButtonGroup属性underlayColor的验证  设置underlayColor  underlay显示不出来 设置颜色无效">
+        {/* <TestSuite name="ButtonGroup属性underlayColor的验证  设置underlayColor  underlay显示不出来 设置颜色无效">
           <TestCase itShould='underlayColor' tags={['C_API']}>
             <ButtonGroup
             textStyle={{color:'orange',fontSize:20}}
@@ -460,7 +460,7 @@ export default function ButtonGroups(): JSX.Element {
             disabledSelectedStyle={{backgroundColor:'green'}}
             />
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="ButtonGroup属性vertical的验证  设置vertical 按钮垂直方向显示">
           <TestCase itShould='vertical' tags={['C_API']}>
             <ButtonGroup

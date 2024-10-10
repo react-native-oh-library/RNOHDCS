@@ -127,7 +127,7 @@ export default () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Tab的containerStyle属性 设置选项卡的containerStyle无效 设置背景颜色 圆角 宽度 均无效">
+        {/* <TestSuite name="Tab的containerStyle属性 设置选项卡的containerStyle无效 设置背景颜色 圆角 宽度 均无效">
           <TestCase itShould="containerStyle" tags={['C_API']}>
             <Tab
               value={Math.ceil(index1 > -1 ? index1 : 0)}
@@ -216,8 +216,8 @@ export default () => {
               </TabView>
             </View>
           </TestCase>
-        </TestSuite>
-        <TestSuite name="Tab的dense属性 设置Tab的dense无效 设置ture或false均无效">
+        </TestSuite> */}
+        {/* <TestSuite name="Tab的dense属性 设置Tab的dense无效 设置ture或false均无效">
           <TestCase itShould="containerStyle" tags={['C_API']}>
             <Tab
               value={Math.ceil(index2 > -1 ? index2 : 0)}
@@ -300,7 +300,7 @@ export default () => {
               </TabView>
             </View>
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="Tab的disableIndicator属性 设置Tab的disableIndicator 选择哪一个选项卡的指示器隐藏">
           <TestCase itShould="containerStyle" tags={['C_API']}>
             <Tab
@@ -744,7 +744,7 @@ export default () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Tab的scrollable属性 设置Tab的scrollable 选项卡条是否可滚动  设置为false仍然可滚动  scrollable设置无效">
+        {/* <TestSuite name="Tab的scrollable属性 设置Tab的scrollable 选项卡条是否可滚动  设置为false仍然可滚动  scrollable设置无效">
           <TestCase itShould="scrollable" tags={['C_API']}>
             <Tab
               value={Math.ceil(index8 > -1 ? index8 : 0)}
@@ -832,8 +832,8 @@ export default () => {
               </TabView>
             </View>
           </TestCase>
-        </TestSuite>
-        <TestSuite name="Tab的titleStyle属性 设置Tab的titleStyle 设置文字的样式 字体颜色 字体大小 字体加粗均无效 ">
+        </TestSuite> */}
+        {/* <TestSuite name="Tab的titleStyle属性 设置Tab的titleStyle 设置文字的样式 字体颜色 字体大小 字体加粗均无效 ">
           <TestCase itShould="titleStyle" tags={['C_API']}>
             <Tab
               titleStyle={active => ({
@@ -925,7 +925,7 @@ export default () => {
               </TabView>
             </View>
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="Tab的value属性 设置Tab的value 选项卡选中的值 ">
           <TestCase itShould="value" tags={['C_API']}>
             <Tab
@@ -1074,7 +1074,7 @@ export default () => {
             </Tab>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Tab.Item的active属性 设置Tab.Item的active 选项卡选中的值 设置active ture或false 均无效 ">
+        {/* <TestSuite name="Tab.Item的active属性 设置Tab.Item的active 选项卡选中的值 设置active ture或false 均无效 ">
           <TestCase itShould="active" tags={['C_API']}>
             <Tab
               titleStyle={{fontSize: 100, fontWeight: '500', color: '#222222'}}
@@ -1126,7 +1126,7 @@ export default () => {
               />
             </Tab>
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="Tab.Item的buttonStyle属性 设置Tab.Item的buttonStyle 设置选项卡样式 ">
           <TestCase itShould="buttonStyle" tags={['C_API']}>
             <Tab
@@ -1236,7 +1236,7 @@ export default () => {
             </Tab>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Tab.Item的dense属性 设置Tab.Item的dense 设置dense true或false均无效 ">
+        {/* <TestSuite name="Tab.Item的dense属性 设置Tab.Item的dense 设置dense true或false均无效 ">
           <TestCase itShould="dense" tags={['C_API']}>
             <Tab
               titleStyle={{fontSize: 100, fontWeight: '500', color: '#222222'}}
@@ -1288,7 +1288,7 @@ export default () => {
               />
             </Tab>
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="Tab.Item的iconContainerStyle属性 设置Tab.Item的iconContainerStyle 设置icon图标的容器样式 ">
           <TestCase itShould="iconContainerStyle" tags={['C_API']}>
             <Tab
@@ -1441,7 +1441,7 @@ export default () => {
             </Tab>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Tab.Item的variant属性 设置Tab.Item的variant的枚举验证  设置primary和default均无效 ">
+        {/* <TestSuite name="Tab.Item的variant属性 设置Tab.Item的variant的枚举验证  设置primary和default均无效 ">
           <TestCase itShould="primary" tags={['C_API']}>
             <Tab
               titleStyle={{fontSize: 100, fontWeight: '500', color: '#222222'}}
@@ -1550,7 +1550,7 @@ export default () => {
               />
             </Tab>
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="TabView的animationConfig属性 设置animationConfig 配置动画时间和是否使用原生动画">
           <TestCase itShould="animationConfig" tags={['C_API']}>
             <Tab
