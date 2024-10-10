@@ -43,8 +43,8 @@ const TextComponent: React.FunctionComponent<TextComponentProps> = () => {
             <TestCase itShould="H3 Primary" tags={['C_API']}>
               <Text
                 style={styles.text}
-                h4
-                h4Style={{color: theme?.colors?.primary}}>
+                h3
+                h3Style={{color: theme?.colors?.primary}}>
                 Heading 3
               </Text>
             </TestCase>
@@ -54,11 +54,11 @@ const TextComponent: React.FunctionComponent<TextComponentProps> = () => {
       <TestSuite name="h4 h4style">
         <ThemeProvider>
           <View style={styles.view}>
-            <TestCase itShould="H4 Primary" tags={['C_API']}>
+            <TestCase itShould="H4 Error" tags={['C_API']}>
               <Text
                 style={styles.text}
                 h4
-                h4Style={{color: theme?.colors?.primary}}>
+                h4Style={{color: theme?.colors?.error}}>
                 Heading 4
               </Text>
             </TestCase>
