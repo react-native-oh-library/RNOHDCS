@@ -508,4 +508,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default progressExamplefive;
+export default progressVerifying;
