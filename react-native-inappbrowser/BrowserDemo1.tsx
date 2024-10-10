@@ -187,7 +187,7 @@ export default function BrowserDemo() {
               />
             );
         })}
-        <TestCase itShould="function:onTryDeepLinking('https://proyecto26.github.io/react-native-inappbrowser/?redirect_url='my-demo','my-demo')" initialState={null as any} arrange={({ setState }) => (
+        <TestCase itShould="function:openAuth('https://proyecto26.github.io/react-native-inappbrowser/?redirect_url='my-demo','my-demo')" initialState={null as any} arrange={({ setState }) => (
             <Button title='运行' color='#841584' onPress={async () => {
               let resultType =  await onTryDeepLinking();
               setState(resultType)
@@ -212,7 +212,7 @@ export default function BrowserDemo() {
         }}
         />
 
-        <TestCase itShould="function:close()(该接口调式会先启动浏览器，然后5秒后关闭)" initialState={null as any} arrange={({ setState }) => (
+        <TestCase itShould="function:close()(该接口调式会先启动浏览器，然后关闭)" initialState={null as any} arrange={({ setState }) => (
               <Button title='运行' color='#841584' onPress={async() => {
                 let resultType = await close({
                   url: 'https://reactnative.dev',
@@ -228,7 +228,7 @@ export default function BrowserDemo() {
         }}
         />
 
-        <TestCase itShould="function:closeAuth()(该接口调式会先启动浏览器，然后5秒后关闭)" initialState={null as any} arrange={({ setState }) => (
+        <TestCase itShould="function:closeAuth()(该接口调式会先启动浏览器，然后关闭)" initialState={null as any} arrange={({ setState }) => (
           <Button title='运行' color='#841584' onPress={async() => {
             let resultType = await closeAuth();
             setText(JSON.stringify(resultType))
