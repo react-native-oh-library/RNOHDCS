@@ -52,6 +52,9 @@ export default function PushNotificationIos() {
             subtitle: 'subtitle userInfo',
             body: 'body userInfo',
             repeats: true,
+            userInfo: {
+                type: '1',
+            },
         });
     };
 
