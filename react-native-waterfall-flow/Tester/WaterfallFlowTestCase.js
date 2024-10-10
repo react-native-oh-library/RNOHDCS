@@ -37,48 +37,6 @@ const WaterfallFlowTestCase = () => {
     <ScrollView>
       <Tester style={{ flex: 1 }}>
         <TestSuite name='WaterfallFlow'>
-          <TestCase itShould='WaterfallFlow'>
-            <View style={styles.container}>
-              <View style={{ height: 300 }}>
-                <WaterfallFlow
-                  ref={waterfallRef}
-                  renderItem={renderItem}
-                  data={data}
-                  numColumns={2}
-                  ListHeaderComponent={<Text style={styles.header}>Header Component</Text>}
-                  ListFooterComponent={<Text style={styles.footer}>Footer Component</Text>}
-                  ListEmptyComponent={<Text style={styles.empty}>No Data Available</Text>}
-                  onEndReached={onEndReached}
-                  onRefresh={onRefresh}
-                  refreshing={refreshing}
-                  style={styles.waterfall}
-                  contentContainerStyle={styles.contentContainer}
-                  refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-                />
-              </View>
-              <View style={styles.buttonsContainer}>
-                <Button
-                  title="ScrollEnd"
-                  onPress={() => waterfallRef.current.scrollToEnd({ animated: true })}
-                />
-                <Button
-                  title="ScrollIndex"
-                  onPress={() => { data.length >= 20 ? waterfallRef.current.scrollToIndex({ animated: true, index: 20, viewPosition: 0 }) : false }}
-                />
-                <Button
-                  title="Offset"
-                  onPress={() => waterfallRef.current.scrollToOffset({ offset: 0 })}
-                />
-              </View>
-              <View style={styles.buttonDelete}>
-                <Button
-                  title="Delete Data"
-                  onPress={() => { setData([]) }}
-                />
-              </View>
-            </View>
-          </TestCase>
-
           <TestCase itShould='renderItem & data'>
             <View style={{ height: 200 }}>
               <WaterfallFlow
@@ -138,7 +96,7 @@ const WaterfallFlowTestCase = () => {
             </View>
           </TestCase>
 
-          <TestCase itShould='refreshing & refreshing'>
+          <TestCase itShould='refreshing & onRefresh'>
             <View style={{ height: 200 }}>
               <WaterfallFlow
                 renderItem={renderItem}
