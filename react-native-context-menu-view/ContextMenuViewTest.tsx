@@ -3,7 +3,7 @@ import { SafeAreaView, View, StyleSheet, Text, Platform, TouchableOpacity, Alert
 import ContextMenu from 'react-native-context-menu-view';
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 
-//DevEco Studio\sdk\HarmonyOS-NEXT-DB5\openharmony\ets\build-tools\ets-loader\sysResource.js这里面有系统图标
+//E:\DEV\5.0.3.655\DevEco Studio\sdk\HarmonyOS-NEXT-DB5\openharmony\ets\build-tools\ets-loader\sysResource.js这里面有系统图标
 const Icons = {
   //sys.symbol.paintbrush_fill为填充画笔
   changeColor: 'sys.symbol.paintbrush',
@@ -16,26 +16,27 @@ export const ContextMenuViewTest = () => {
   const [color, setColor] = useState('red');
   const [previousColor, setPreviousColor] = useState('blue');
   const [circle, setCircle] = useState(false)
+  const [cancelled, setcancelled] = useState(false)
 
   return (
     <Tester>
-      <TestSuite name="ContextMenuViewTest">
+       <TestSuite name="ContextMenuViewTest">
         <TestCase
           tags={['C_API']}
           itShould="整体效果">
           <SafeAreaView >
             <ContextMenu
-              //ContextMenu的范围由view撑开
               title={'Customize'}
-              //设置为true表示只会单击生效，没有动效等
-              // dropdownMenuMode={true}
+              //设置为true表示只会单击生效等，默认为false
+              dropdownMenuMode={false}
               actions={[
                 {
                   title: 'Change Color',
                   systemIcon: Icons.changeColor,
                   subtitle: '改变颜色',
                   iconColor: 'green',
-                  // inlineChildren: true,
+                  //当该属性未true时候,点击该menu，无法拉起二级目录,默认为false
+                  inlineChildren: false,
                   actions: [
                     {
                       title: 'Blue',
@@ -58,9 +59,10 @@ export const ContextMenuViewTest = () => {
                 {
                   title: 'Toggle Circle',
                   systemIcon: Icons.toggleCircle,
+                  icon: 'app.media.airplane_fill',
                   subtitle: '点击变圈圈',
                   iconColor: 'blue',
-                  disabled:false
+                  disabled: false
                 },
                 {
                   title: 'Disabled Item',
@@ -84,22 +86,11 @@ export const ContextMenuViewTest = () => {
                       subtitle: '点我变绿色',
                       systemIcon: color === 'green' ? 'sys.symbol.paintbrush_fill' : 'sys.symbol.paintbrush',
                     },
-                    {
-                      title: '让我康康你还有没有下一级目录',
-                      actions: [
-                        {
-                          title: '你猜',
-                          actions: [
-                            { title: '你再猜猜？' }
-                          ]
-                        },
-                        {
-                          title: '我要是不呢',
-                        },
-                      ]
-                    },
-
                   ]
+                },
+                {
+                  title: 'CANCELLED触发',
+
                 },
               ]}
               // dropdownMenuMode={true}
@@ -123,11 +114,17 @@ export const ContextMenuViewTest = () => {
                 } else if (index == 2) {
                   console.log("2222222")
                   setCircle(!circle)
+                } else if (index == 5) {
+                  setcancelled(true);
                 }
               }}
               onCancel={() => {
-                console.log('CANCELLED')
-                setColor('white');
+                console.log("onCancel")
+                if (cancelled) {
+                  console.log("onCancel2222222")
+                  setColor('white');
+                  setcancelled(false);
+                }
               }}
             >
               <View style={[styles.rectangle, { backgroundColor: color, borderRadius: circle ? 999 : 0 }]} />
@@ -138,15 +135,16 @@ export const ContextMenuViewTest = () => {
 
       <TestSuite name="ContextMenuViewTest2">
         <TestCase
-          tags={['C_API']}
+          tags={['C_API2']}
           itShould="整体效果2">
           <SafeAreaView >
             <ContextMenu
-              title={'Dropdown Menu'}
+              title={'Dropdown Menu2'}
               actions={[
                 {
                   title: 'Test Item',
                   subtitle: '副标题',
+                  icon: 'app.media.airplane_fill',
                   actions: [
                     {
                       title: '二级目录',
@@ -156,7 +154,8 @@ export const ContextMenuViewTest = () => {
                 {
                   title: '凑热闹',
                   subtitle: '凑热闹',
-                  selected:false,
+                  selected: false,
+                  inlineChildren: true,
                   actions: [
                     {
                       title: '凑热闹',
@@ -166,11 +165,11 @@ export const ContextMenuViewTest = () => {
                 {
                   title: 'Test Item',
                   subtitle: '副标题',
-                  selected:true,
+                  selected: true,
                   actions: [
                     {
                       title: '二级目录',
-                      selected:true,
+                      selected: true,
                     }
                   ]
                 }
@@ -182,6 +181,35 @@ export const ContextMenuViewTest = () => {
           </SafeAreaView >
         </TestCase>
       </TestSuite>
+
+      <TestSuite name="ContextMenuViewTest3">
+        <TestCase
+          tags={['C_API3']}
+          itShould="整体效果3">
+          <SafeAreaView >
+            <ContextMenu
+              title={'Custom Preview'}
+              dropdownMenuMode={true}
+              actions={[
+                {
+                  title: 'Test Item',
+                  selected: true,
+                },
+              ]}
+              previewBackgroundColor="transparent"
+              preview={
+                <TouchableOpacity onPress={() => console.log('TAPPP')}>
+                  <View style={[styles.rectangle, { backgroundColor: 'green' }]} />
+                </TouchableOpacity>
+              }
+              //该回调接口需要搭配previewBackgroundColor使用,目前只是预留了该onPreviewPress方法,无法触发
+              //在其他平台经过验证同理,在指导文档中有记载
+              onPreviewPress={() => Alert.alert('Preview Tapped')}>
+              <View style={[styles.rectangle, { backgroundColor: 'red' }]} />
+            </ContextMenu>
+          </SafeAreaView>
+        </TestCase>
+      </TestSuite> 
     </Tester>
   )
 }
