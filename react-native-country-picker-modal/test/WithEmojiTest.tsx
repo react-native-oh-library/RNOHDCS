@@ -35,7 +35,7 @@ export const WithEmojiTest = () => {
                 </Text>
               )}
             </View>
-            <View>
+            <View style={styles.actionBtn}>
               <Button
                 title="set:true"
                 onPress={() => {
@@ -85,5 +85,12 @@ const styles = StyleSheet.create({
     borderColor: '#888',
     borderWidth: 1 / PixelRatio.get(),
     color: '#777',
+  },
+  actionBtn: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    width: '100%',
+    padding: 10,
   },
 });

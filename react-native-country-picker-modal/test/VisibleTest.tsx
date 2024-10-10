@@ -6,47 +6,40 @@ import CountryPicker, {
   CountryCode,
 } from 'react-native-country-picker-modal';
 
-export const WithCurrencyTest = () => {
+export const VisibleTest = () => {
   const [countryCode, setCountryCode] = useState<CountryCode>('US');
   const [country, setCountry] = useState<Country>();
   const onSelect = (country: Country) => {
     setCountryCode(country.cca2);
     setCountry(country);
   };
-  const [withCurrency, setWithCurrency] = useState<boolean>(true);
-
+  const [visible, setVisible] = useState<boolean>(false);
+  const switchVisible = () => setVisible(!visible);
   return (
     <>
       <Tester>
-        <TestSuite name="withCurrency：是否带currency">
-          <TestCase itShould={withCurrency ? '是' : '否'}>
+        <TestSuite name="visible">
+          <TestCase itShould={`visible: ${visible + ''}`}>
             <View style={styles.box}>
               <CountryPicker
                 countryCode={countryCode}
                 onSelect={onSelect}
                 containerButtonStyle={styles.containerButtonStyle}
                 withFilter
-                withCurrency={withCurrency}
+                modalProps={{visible}}
+                onOpen={() => {
+                  setVisible(true);
+                }}
+                onClose={() => {
+                  setVisible(false);
+                }}
               />
+              <Button title={'changeVisible'} onPress={switchVisible} />
               {country !== null && (
                 <Text style={styles.data}>
                   {JSON.stringify(country, null, 0)}
                 </Text>
               )}
-            </View>
-            <View style={styles.actionBtn}>
-              <Button
-                title="set:true"
-                onPress={() => {
-                  setWithCurrency(true);
-                }}
-              />
-              <Button
-                title="set:false"
-                onPress={() => {
-                  setWithCurrency(false);
-                }}
-              />
             </View>
           </TestCase>
         </TestSuite>
@@ -56,13 +49,6 @@ export const WithCurrencyTest = () => {
 };
 
 const styles = StyleSheet.create({
-  actionBtn: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    width: '100%',
-    padding: 10,
-  },
   box: {
     minWidth: 200,
     backgroundColor: '#fff',

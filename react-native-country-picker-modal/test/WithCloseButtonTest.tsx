@@ -26,7 +26,7 @@ export const WithCloseButtonTest = () => {
     <>
       <Tester>
         <TestSuite name="withCloseButton:是否使用关闭按钮">
-          <TestCase itShould="withCloseButton =true">
+          <TestCase itShould={`withCloseButton = ${withCloseButton + ''}`}>
             <View style={styles.box}>
               <CountryPicker
                 countryCode={countryCode}
