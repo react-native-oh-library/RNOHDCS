@@ -4,7 +4,7 @@ import { Button } from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import { Tester, TestCase } from '@rnoh/testerino';
 
-export function PushNotificationIos() {
+export default function PushNotificationIos() {
 
     const [data, setData] = useState({});
 
@@ -16,7 +16,42 @@ export function PushNotificationIos() {
             body: 'body',
             category: 'test',
             threadId: 'thread-id',
-            repeats: true
+            repeats: true,
+            sound: 'customSound.wav',
+        });
+    };
+
+    const addNotificationBadgeRequest = () => {
+
+        PushNotificationIOS.addNotificationRequest({
+            id: 'test',
+            title: 'badge1',
+            subtitle: 'badge',
+            body: 'badge',
+            category: 'badge',
+            threadId: 'badge-id',
+            repeats: true,
+            badge: 1,
+        });
+    }
+
+    const addNotificationIdRequest = () => {
+        PushNotificationIOS.addNotificationRequest({
+            id: 'id',
+            title: 'id',
+            subtitle: 'subtitle id',
+            body: 'body id',
+            repeats: true,
+        });
+    };
+
+    const addNotificationUserInfoRequest = () => {
+        PushNotificationIOS.addNotificationRequest({
+            id: 'userInfo',
+            title: 'userInfo',
+            subtitle: 'subtitle userInfo',
+            body: 'body userInfo',
+            repeats: true,
         });
     };
 
@@ -90,7 +125,7 @@ export function PushNotificationIos() {
             }
         });
     };
-    
+
 
     const setNotificationCategories = () => {
         PushNotificationIOS.setNotificationCategories([
@@ -218,6 +253,21 @@ export function PushNotificationIos() {
                     <TestCase itShould="addNotificationRequest">
                         <Button title="添加通知请求title1"
                             onPress={addNotificationRequest}
+                        />
+                    </TestCase>
+                    <TestCase itShould="addNotificationRequest badge">
+                        <Button title="添加通知请求 badge=1"
+                            onPress={addNotificationBadgeRequest}
+                        />
+                    </TestCase>
+                    <TestCase itShould="addNotificationRequest id">
+                        <Button title="添加通知请求 id"
+                            onPress={addNotificationIdRequest}
+                        />
+                    </TestCase>
+                    <TestCase itShould="addNotificationRequest userInfo">
+                        <Button title="添加通知请求 userInfo"
+                            onPress={addNotificationUserInfoRequest}
                         />
                     </TestCase>
                     <TestCase itShould="addNotificationRequest isSilent=true">
