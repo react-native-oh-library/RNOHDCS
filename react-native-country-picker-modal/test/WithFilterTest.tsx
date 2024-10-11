@@ -42,7 +42,7 @@ export const WithFilterTest = () => {
                 </Text>
               )}
             </View>
-            <View>
+            <View style={styles.actionBtn}>
               <Button
                 title="set:true"
                 onPress={() => {
@@ -64,6 +64,13 @@ export const WithFilterTest = () => {
 };
 
 const styles = StyleSheet.create({
+  actionBtn: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    width: '100%',
+    padding: 10,
+  },
   box: {
     minWidth: 200,
     backgroundColor: '#fff',

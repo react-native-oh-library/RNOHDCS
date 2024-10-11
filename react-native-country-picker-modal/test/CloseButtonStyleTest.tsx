@@ -6,27 +6,44 @@ import CountryPicker, {
   CountryCode,
 } from 'react-native-country-picker-modal';
 
-export const WithCurrencyTest = () => {
+function getRandomColor() {
+  // 生成一个0到255之间的随机整数
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  // 将RGB值格式化为两位十六进制数，并拼接成#RRGGBB格式的颜色代码
+  const color = `#${r.toString(16).padStart(2, '0')}${g
+    .toString(16)
+    .padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+
+  return color;
+}
+
+export const closeButtonStyleTest = () => {
   const [countryCode, setCountryCode] = useState<CountryCode>('US');
   const [country, setCountry] = useState<Country>();
   const onSelect = (country: Country) => {
     setCountryCode(country.cca2);
     setCountry(country);
   };
-  const [withCurrency, setWithCurrency] = useState<boolean>(true);
+  const [color, setColor] = useState(getRandomColor());
+
+  const changeCloseButtonImageStyle = () => {
+    setColor(getRandomColor());
+  };
 
   return (
     <>
       <Tester>
-        <TestSuite name="withCurrency：是否带currency">
-          <TestCase itShould={withCurrency ? '是' : '否'}>
+        <TestSuite name="closeButtonStyle">
+          <TestCase itShould="设置关闭按钮样式">
             <View style={styles.box}>
               <CountryPicker
                 countryCode={countryCode}
                 onSelect={onSelect}
                 containerButtonStyle={styles.containerButtonStyle}
                 withFilter
-                withCurrency={withCurrency}
+                closeButtonStyle={{backgroundColor: color}}
               />
               {country !== null && (
                 <Text style={styles.data}>
@@ -34,20 +51,10 @@ export const WithCurrencyTest = () => {
                 </Text>
               )}
             </View>
-            <View style={styles.actionBtn}>
-              <Button
-                title="set:true"
-                onPress={() => {
-                  setWithCurrency(true);
-                }}
-              />
-              <Button
-                title="set:false"
-                onPress={() => {
-                  setWithCurrency(false);
-                }}
-              />
-            </View>
+            <Button
+              title="设置随机样式"
+              onPress={changeCloseButtonImageStyle}
+            />
           </TestCase>
         </TestSuite>
       </Tester>
@@ -56,13 +63,6 @@ export const WithCurrencyTest = () => {
 };
 
 const styles = StyleSheet.create({
-  actionBtn: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    width: '100%',
-    padding: 10,
-  },
   box: {
     minWidth: 200,
     backgroundColor: '#fff',
