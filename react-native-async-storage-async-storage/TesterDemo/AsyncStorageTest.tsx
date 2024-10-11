@@ -235,6 +235,13 @@ export const AsyncStorageTest = () => {
       </>
     );
   };
+  const display2 = () => {
+    return (
+      <>
+        <Button title={`当前key: ${key}`} onPress={() => {}}></Button>
+      </>
+    );
+  };
   useEffect(() => {
     !key && handDisplay();
     AsyncStorage.getAllKeys(async (e, r) => {
@@ -261,7 +268,7 @@ export const AsyncStorageTest = () => {
               arrange={({setState}) => {
                 return (
                   <View style={{flex: 1}}>
-                     {current===index&&display()}
+                     {current===index&& (index === 4 ? display2() : display())}
                     <Button
                       title={item.label}
                       onPress={() => {
@@ -289,7 +296,7 @@ export const AsyncStorageTest = () => {
               arrange={({setState}) => {
                 return (
                   <View style={{flex: 1}}>
-                    {current===index&&display()}
+                    {current===index&& (index === 4 ? display2() : display())}
                     <Button
                       title={item.label}
                       onPress={() => {
@@ -312,4 +319,3 @@ export const AsyncStorageTest = () => {
     </Tester>
   );
 };
-
