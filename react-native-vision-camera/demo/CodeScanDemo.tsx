@@ -8,7 +8,7 @@ import {
   useCodeScanner,
 } from 'react-native-vision-camera';
 
-export default function CodeScanDemo() {
+export function CodeScanDemo() {
   const device = useCameraDevice('back');
   const format = useCameraFormat(device, [
     {videoResolution: {width: 3048, height: 2160}},
@@ -43,87 +43,62 @@ export default function CodeScanDemo() {
       'data-matrix',
     ],
     onCodeScanned: (codes: string | any[], frame: any) => {
-      console.log('frame', frame);
       if (codes.length) {
         setIsActive(false);
       }
-
-      let codeStr = JSON.stringify(codes);
+      let codeStr = JSON.stringify(codes[0].value);
       setCodes(codeStr);
     },
   });
 
   const [isActive, setIsActive] = useState(true);
-  const [torch, setTorch] = useState<'off' | 'on'>('off');
-  const [torchTxt, setTorchTxt] = useState(torch);
 
-  useEffect(() => {
-    setCodes(`torch change ${torch}`);
-    setTorchTxt(torch);
-  }, [torch]);
+  const [errorStr, setErrorStr] = useState<string>('');
 
   const changeIsActive = () => {
     setIsActive(!isActive);
   };
 
-  const changeSetTorch = () => {
-    setTorch(torch === 'off' ? 'on' : 'off');
-  };
-
   return (
-    <View style={{flex: 1, backgroundColor: 'red'}}>
+    <>
       <Camera
-        style={{flex: 1}}
+        style={styles.cameraPreview}
         ref={camera}
         codeScanner={codeScanner}
         device={device}
         isActive={isActive}
-        preview={true}
+        preview
         resizeMode={'cover'}
-        torch={torch}
         format={format}
         onError={(e: any) => {
-          console.log('err', e);
+          setErrorStr(JSON.stringify(e));
         }}
       />
-      <View style={styles.position}>
-        <Button
-          title={`changeSetTorch:${torchTxt}`}
-          onPress={changeSetTorch}></Button>
-        <View style={styles.button}>
-          <Button
-            title={`changeIsActive:${isActive}`}
-            onPress={changeIsActive}></Button>
-        </View>
-        <Text style={styles.text}>{codes}</Text>
+      <View style={styles.actionBtn}>
+        <Button title={`changeIsActive:${isActive}`} onPress={changeIsActive} />
       </View>
-    </View>
+      <View>
+        <Text style={styles.text}>codes:{codes}</Text>
+        <Text style={styles.text}>err:{errorStr}</Text>
+      </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  flex: {
-    flex: 1,
-    gap: 10,
+  cameraPreview: {
+    width: '100%',
+    aspectRatio: 3 / 4,
   },
-  position: {
-    position: 'absolute',
-    bottom: 20,
-    width: '96%',
-    margin: '2%',
-  },
-  button: {
-    marginTop: '2%',
-    marginBottom: '2%',
+  actionBtn: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    padding: 10,
   },
   text: {
-    backgroundColor: '#fff',
-    padding: 10,
-    paddingTop: 2,
-    paddingBottom: 2,
-    opacity: 0.6,
-    borderRadius: 10,
-    marginTop: '2%',
-    zIndex: -1,
+    fontSize: 20,
+    textAlign: 'center',
+    color: '#fff',
   },
 });
