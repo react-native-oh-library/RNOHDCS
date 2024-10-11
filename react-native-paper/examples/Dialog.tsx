@@ -213,7 +213,7 @@ const DialogIconProps = [
 
   const DialogTitleAreaProps = [
     {
-      key: 'DialogScrollArea theme={{ colors: { primary: "green" } }} style={{backgroundColor:MD2Colors.red100}}  children:This is a title',
+      key: 'DialogTitleArea theme={{ colors: { primary: "green" } }} style={{backgroundColor:MD2Colors.red100}}  children:This is a title',
       buttonKey:'Dialog.Actions button',
       buttonValue:{
         onPress:_showVisibility("DialogScro11"),

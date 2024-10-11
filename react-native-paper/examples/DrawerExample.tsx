@@ -3,6 +3,7 @@ import { View,StyleSheet, ScrollView } from 'react-native';
 import {
   Drawer,
   MD2Colors,
+  Text,
 } from 'react-native-paper';
 
 
@@ -18,7 +19,7 @@ export function DrawerText() {
 
   const DrawerCollapsedItemProps = [
     {
-      key: 'Drawer style:label={Inbox}',
+      key: 'DrawerCollapsed style:label={Inbox}',
       value: {
         focusedIcon :'inbox',
         unfocusedIcon:'inbox-outline',
@@ -26,7 +27,7 @@ export function DrawerText() {
       },
     },
     {
-      key: 'Drawer style:label={Inbox1}',
+      key: 'DrawerCollapsed style:label={Inbox1}',
       value: {
         focusedIcon :'inbox',
         unfocusedIcon:'inbox-outline',
@@ -34,7 +35,7 @@ export function DrawerText() {
       },
     },
     {
-      key: 'Drawer style:badge={44}',
+      key: 'DrawerCollapsed style:badge={44}',
       value: {
         focusedIcon :'inbox',
         unfocusedIcon:'inbox-outline',
@@ -43,7 +44,7 @@ export function DrawerText() {
       },
     },
     {
-      key: 'Drawer style:badge={true}',
+      key: 'DrawerCollapsed style:badge={true}',
       value: {
         focusedIcon :'inbox',
         unfocusedIcon:'inbox-outline',
@@ -52,7 +53,7 @@ export function DrawerText() {
       },
     },
     {
-      key: 'Drawer style:badge={...}',
+      key: 'DrawerCollapsed style:badge={...}',
       value: {
         focusedIcon :'inbox',
         unfocusedIcon:'inbox-outline',
@@ -61,25 +62,27 @@ export function DrawerText() {
       },
     },
     {
-      key: 'Drawer style:disabled={true}',
+      key: 'DrawerCollapsed style:disabled={true}',
       value: {
         focusedIcon :'inbox',
         unfocusedIcon:'inbox-outline',
         label:'Inbox',
-        disabled:true
+        disabled:true,
+        onPress:_onPress
       },
     },
     {
-      key: 'Drawer style:disabled={false}',
+      key: 'DrawerCollapsed style:disabled={false}',
       value: {
         focusedIcon :'inbox',
         unfocusedIcon:'inbox-outline',
         label:'Inbox',
-        disabled:false
+        disabled:false,
+        onPress:_onPress
       },
     },
     {
-      key: 'Drawer style:focusedIcon={star}',
+      key: 'DrawerCollapsed style:focusedIcon={star}',
       value: {
         label: 'Starred',
         focusedIcon: 'star',
@@ -87,7 +90,7 @@ export function DrawerText() {
       },
     },
     {
-      key: 'Drawer style:unfocusedIcon={star-outline}',
+      key: 'DrawerCollapsed style:unfocusedIcon={star-outline}',
       value: {
         label: 'Starred',
         focusedIcon: 'star',
@@ -96,7 +99,25 @@ export function DrawerText() {
       },
     },
     {
-      key: 'Drawer fuction:onPress',
+      key: 'DrawerCollapsed style:active={true}',
+      value: {
+        label: 'Starred',
+        focusedIcon: 'star',
+        unfocusedIcon: 'star-outline',
+        active:true
+      },
+    },
+    {
+      key: 'DrawerCollapsed style:active={false}',
+      value: {
+        label: 'Starred',
+        focusedIcon: 'star',
+        unfocusedIcon: 'star-outline',
+        active:true
+      },
+    },
+    {
+      key: 'DrawerCollapsed fuction:onPress',
       value: {
         label: 'Starred',
         focusedIcon: 'star',
@@ -105,7 +126,7 @@ export function DrawerText() {
       },
     },
     {
-      key: 'Drawer style:labelMaxFontSizeMultiplier ={1}',
+      key: 'DrawerCollapsed style:labelMaxFontSizeMultiplier ={1}',
       value: {
         label: 'Starred',
         focusedIcon: 'star',
@@ -114,7 +135,7 @@ export function DrawerText() {
       },
     },
     {
-      key: 'Drawer style:labelMaxFontSizeMultiplier ={2}',
+      key: 'DrawerCollapsed style:labelMaxFontSizeMultiplier ={2}',
       value: {
         label: 'Starred',
         focusedIcon: 'star',
@@ -123,16 +144,17 @@ export function DrawerText() {
       },
     },
     {
-      key: 'Drawer style:accessibilityLabel ={accessibility Label}',
+      key: 'DrawerCollapsed style:accessibilityLabel ={accessibility Label}',
       value: {
         label: 'Starred',
         focusedIcon: 'star',
         unfocusedIcon: 'star-outline',
+        accessibilityLabel:'accessibility Label',
         style :{backgroundColor:MD2Colors.red100}
       },
     },
     {
-      key: 'Drawer style:theme ={ colors: { primary: "green" } }',
+      key: 'DrawerCollapsed style:theme ={ colors: { primary: "green" } }',
       value: {
         label: 'Starred',
         focusedIcon: 'star',
@@ -141,7 +163,7 @@ export function DrawerText() {
       },
     },
     {
-      key: 'Drawer style:testID= {Drawer}',
+      key: 'DrawerCollapsed style:testID= {Drawer}',
       value: {
         label: 'Starred',
         focusedIcon: 'star',
@@ -150,7 +172,7 @@ export function DrawerText() {
       },
     },
     {
-      key: 'Drawer style:testID= {Drawer1}',
+      key: 'DrawerCollapsed style:testID= {Drawer1}',
       value: {
         label: 'Starred',
         focusedIcon: 'star',
@@ -175,6 +197,15 @@ export function DrawerText() {
         style :{ backgroundColor: '#64ffda' },
         icon:'star',
         label:'First Item1'
+      },
+    },
+    {
+      key: 'DrawerItem style:right={<Text variant="labelLarge">44</Text>,}',
+      value: {
+        style :{ backgroundColor: '#64ffda' },
+        icon:'star',
+        label:'First Item1',
+        right: () => <Text variant="labelLarge">44</Text>,
       },
     },
     {
