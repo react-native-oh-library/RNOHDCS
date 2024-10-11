@@ -2,10 +2,12 @@ import React, { useRef }  from 'react';
 import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
 import { Appbar ,Button,MD2Colors} from 'react-native-paper';
 import { ScrollView,View,StyleSheet} from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type mode = 'small' | 'medium' | 'large' | 'center-aligned';
 
 export function AppbarDemo() {
+  const { bottom } = useSafeAreaInsets();
   const _goBack = () => console.log('Went back');
   const _handleSearch = () => console.log('Searching');
   const _handleContent = () => console.log('Content');
@@ -111,8 +113,8 @@ export function AppbarDemo() {
       // 这里只是为了演示如何访问ref  
       console.log('View is referenced');
     }  
+    console.log('View is viewRef');
   };  
-
 
   const AppbarBackActionProps = [
     {
@@ -128,13 +130,13 @@ export function AppbarDemo() {
       }
     },
     {
-      key: 'Appbar.BackAction style:color is 20',
+      key: 'Appbar.BackAction style:size is 20',
       value: {
         size:20,
       }
     },
     {
-      key: 'Appbar.BackAction style:color is 40',
+      key: 'Appbar.BackAction style:size is 40',
       value: {
         size:40,
       }
@@ -184,6 +186,7 @@ export function AppbarDemo() {
       value: {
         title:'Title',
         disabled:true,
+        onPress:_handleSearch
       }
     },
     {
@@ -191,6 +194,7 @@ export function AppbarDemo() {
       value: {
         title:'Title',
         disabled:false,
+        onPress:_handleSearch
       }
     },
     {
@@ -305,6 +309,14 @@ export function AppbarDemo() {
     <Tester> 
     <ScrollView>
      <TestSuite name='Appbar'>
+       <TestCase  itShould='Appbar style rippleColor is MD2Colors.red500'> 
+       <Appbar safeAreaInsets={{ bottom }}>
+        <Appbar.Action icon="archive" onPress={() => {}} />
+        <Appbar.Action icon="email" onPress={() => {}} />
+        <Appbar.Action icon="label" onPress={() => {}} />
+        <Appbar.Action icon="delete" onPress={() => {}} />
+      </Appbar>
+        </TestCase>
         <TestCase  itShould='Appbar.Action style rippleColor is MD2Colors.red500'> 
           <Appbar.Header>
             <Appbar.BackAction onPress={() => {}} />
@@ -333,6 +345,8 @@ export function AppbarDemo() {
             <Appbar.Action icon="magnify" />
           </Appbar.Header>
         </TestCase>
+
+
          {AppbarActionProps.map((item) => {
             return (
               <TestCase  itShould={item.key}  key={item.key} > 
@@ -344,11 +358,23 @@ export function AppbarDemo() {
               </TestCase>
             );
           })}
-       <TestCase itShould={'Appbar.Header style:ref={viewRef}'}  >
+       <TestCase itShould={'Appbar.BackAction style:ref={viewRef}'}  >
         <Appbar.Header>
           <Appbar.BackAction onPress={() => {}} ref={viewRef}/>
         </Appbar.Header>
           <Button onPress={measureView} >Press me</Button>  
+         </TestCase>
+        <TestCase itShould={'Appbar.Action style:ref={viewRef}'}  >
+          <Appbar.Header ref={viewRef}>
+            <Appbar.BackAction onPress={() => {}}/>
+          </Appbar.Header>
+            <Button onPress={measureView} >Press me</Button>  
+         </TestCase>
+         <TestCase itShould={'Appbar.Action style:ref={viewRef}'}  >
+          <Appbar.Header>
+            <Appbar.Content title="Title" titleRef={viewRef}/>
+          </Appbar.Header>
+            <Button onPress={measureView} >Press me</Button>  
          </TestCase>
         {AppbarBackActionProps.map((item) => {
               return (

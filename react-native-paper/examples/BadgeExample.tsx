@@ -4,6 +4,7 @@ import { Animated, ScrollView, StyleSheet, View } from 'react-native';
 import {
     Badge,
     IconButton,
+    MD2Colors,
 } from 'react-native-paper';
 import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
 import { useEffect, useRef } from 'react';
@@ -37,35 +38,35 @@ export function BadgeTest() {
 
     const BadgeProps = [
         {
-          key: 'Avatar.Text: children is 3',
+          key: 'Badge: children is 3',
           value: {
             style:styles.badge,
             visible:true
           }
         },
         {
-            key: 'Avatar.Text: style is styles.badge',
+            key: 'Badge: style is { backgroundColor:MD2Colors.blue100}',
+            value: {
+            style:{ backgroundColor:MD2Colors.blue100},
+            visible:true
+            }
+        },
+        {
+            key: 'Badge: visible is true',
             value: {
             style:styles.badge,
             visible:true
             }
         },
         {
-            key: 'Avatar.Text: visible is true',
-            value: {
-            style:styles.badge,
-            visible:true
-            }
-        },
-        {
-            key: 'Avatar.Text: visible is false',
+            key: 'Badge: visible is false',
             value: {
             style:styles.badge,
             visible:false
             }
         },
         {
-            key: 'Avatar.Text: size is 22',
+            key: 'Badge: size is 22',
             value: {
             style:styles.badge,
             visible:true,
@@ -73,15 +74,16 @@ export function BadgeTest() {
             }
         },
         {
-            key: 'Avatar.Text: size is 24',
+            key: 'Badge: size is 24',
             value: {
             style:styles.badge,
             visible:true,
             size:24
             }
         },
+        
         {
-            key: 'Avatar.Text: theme is colors:{ primary: "green" }',
+            key: 'Badge: theme is colors:{ primary: "green" }',
             value: {
             style:styles.badge,
             theme:{ colors: { primary: 'green' }}

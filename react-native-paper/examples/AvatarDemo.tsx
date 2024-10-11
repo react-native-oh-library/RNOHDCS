@@ -49,7 +49,7 @@ export function AvatarTest() {
             }
           },
           {
-            key: 'Avatar.Icon style: color is 80',
+            key: 'Avatar.Icon style: color is MD2Colors.blue100',
             value: {
               style:styles.avatar,
               icon:"folder",
@@ -72,6 +72,11 @@ export function AvatarTest() {
             }
           },
     ]
+
+    const onLoad = () => {
+      console.info('fuction onLoad')
+    }
+
 
     const _onError = () => {
       console.info('fuction onError')
@@ -122,7 +127,7 @@ export function AvatarTest() {
             value: {
               style:styles.avatar,
               size:60,
-              source:require('../assets/images/avatar.png'),
+              source:require('../assets/images/avataraaaa.png'),
               onError:_onError
             }
           },
@@ -136,12 +141,12 @@ export function AvatarTest() {
             }
           },
           {
-            key: 'Avatar.Image fuction: onLoadEnd = {_onLoadEnd}',
+            key: 'Avatar.Image fuction: onLoad = {onLoad}',
             value: {
               style:styles.avatar,
               size:60,
               source:require('../assets/images/avatar.png'),
-              onLoadEnd:_onLoadEnd
+              onLoad:onLoad
             }
           },
           {
