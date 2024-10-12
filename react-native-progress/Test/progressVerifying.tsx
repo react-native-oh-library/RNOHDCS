@@ -3,7 +3,7 @@ import {StyleSheet, View, ScrollView, Text, Button} from 'react-native';
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
 import * as Progress from 'react-native-progress';
 
-const progressVerifying = () => {
+const ProgressVerifying = () => {
   const [progress, setProgress] = React.useState(0);
   const [indeterminate, setIndeterminate] = React.useState(true);
   const [circleInfo, setCircleInfo] = React.useState(
@@ -508,4 +508,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default progressVerifying;
+export default ProgressVerifying;
