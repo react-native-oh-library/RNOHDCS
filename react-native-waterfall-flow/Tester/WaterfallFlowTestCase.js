@@ -96,13 +96,23 @@ const WaterfallFlowTestCase = () => {
             </View>
           </TestCase>
 
-          <TestCase itShould='refreshing & onRefresh'>
+          <TestCase itShould='refreshing：true & onRefresh'>
             <View style={{ height: 200 }}>
               <WaterfallFlow
                 renderItem={renderItem}
                 data={data}
                 onRefresh={onRefresh}
                 refreshing={refreshing}
+              />
+            </View>
+          </TestCase>
+
+          <TestCase itShould='refreshing：false'>
+            <View style={{ height: 200 }}>
+              <WaterfallFlow
+                renderItem={renderItem}
+                data={data}
+                refreshing={false}
               />
             </View>
           </TestCase>
