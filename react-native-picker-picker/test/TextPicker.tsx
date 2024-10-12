@@ -21,6 +21,10 @@ export const PickerExample = () => {
             <StyleTest />
           </TestCase>
 
+          <TestCase itShould="render a Picker to test testID -- 端到端测试中定位此视图,无实际ui效果">
+            <TestIDTest />
+          </TestCase>
+
           <TestCase itShould="render a Picker to test itemStyle">
             <ItemStyleTest />
           </TestCase>
@@ -210,6 +214,25 @@ const OnChangeTest = () => {
         <Picker.Item label="pink" value="pink" />
         <Picker.Item label="purple" value="purple" />
         <Picker.Item label="orange" value="orange" />
+      </Picker>
+    </View>
+  )
+}
+
+const TestIDTest = () => {
+  const [selected, setSelected] = React.useState('blue');
+
+  return (
+    <View>
+      <Picker
+        selectedValue={selected}
+        onValueChange={(itemValue) => {
+          setSelected(itemValue)
+        }}
+        testID={'123456789'}
+      >
+        <Picker.Item label="blue" value="blue" />
+        <Picker.Item label="pink" value="pink" />
       </Picker>
     </View>
   )
