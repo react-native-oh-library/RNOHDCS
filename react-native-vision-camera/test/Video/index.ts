@@ -1,0 +1,5 @@
+export * from './VideoAudioTest'
+export * from './VideoFpsTest'
+export * from './VideoHdrTest'
+export * from './VideoPreviewTest'
+export * from './VideoStabilizationModeTest'
