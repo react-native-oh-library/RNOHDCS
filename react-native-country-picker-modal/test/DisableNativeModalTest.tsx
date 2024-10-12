@@ -11,9 +11,11 @@ import {
 import CountryPicker, {
   Country,
   CountryCode,
+  CountryModalProvider,
 } from 'react-native-country-picker-modal';
 
-export const WithFlagButtonTest = () => {
+const Demo = (props: any) => {
+  const {children, ...rest} = props;
   const [countryCode, setCountryCode] = useState<CountryCode>('US');
   const [country, setCountry] = useState<Country>();
   const onSelect = (country: Country) => {
@@ -21,45 +23,40 @@ export const WithFlagButtonTest = () => {
     setCountry(country);
   };
 
-  const [withFlagButton, setWithFlagButton] = useState<boolean>(true);
-
   return (
-    <>
-      <Tester>
-        <TestSuite name="withFlagButton:是否使用带flag按钮">
-          <TestCase itShould={`withFlagButton =${withFlagButton + ''}`}>
-            <View style={styles.box}>
-              <CountryPicker
-                countryCode={countryCode}
-                onSelect={onSelect}
-                containerButtonStyle={styles.containerButtonStyle}
-                withFilter
-                withFlagButton={withFlagButton}
-              />
-              {country !== null && (
-                <Text style={styles.data}>
-                  {JSON.stringify(country, null, 0)}
-                </Text>
-              )}
-            </View>
-            <View style={styles.actionBtn}>
-              <Button
-                title="set:true"
-                onPress={() => {
-                  setWithFlagButton(true);
-                }}
-              />
-              <Button
-                title="set:false"
-                onPress={() => {
-                  setWithFlagButton(false);
-                }}
-              />
-            </View>
-          </TestCase>
-        </TestSuite>
-      </Tester>
-    </>
+    <CountryModalProvider>
+      <View style={styles.box}>
+        <CountryPicker
+          countryCode={countryCode}
+          onSelect={onSelect}
+          containerButtonStyle={styles.containerButtonStyle}
+          withFilter
+          filterProps={{placeholder: '请选择国家/地区'}}
+          {...rest}
+        />
+        {children}
+        {country !== null && (
+          <Text style={styles.data}>{JSON.stringify(country, null, 0)}</Text>
+        )}
+      </View>
+    </CountryModalProvider>
+  );
+};
+
+export const disableNativeModalTest = () => {
+  return (
+    <Tester>
+      <TestSuite name="disableNativeModalTest">
+        <TestCase itShould={`disableNativeModalTest =true`}>
+          <Demo disableNativeModalTest />
+        </TestCase>
+      </TestSuite>
+      <TestSuite name="disableNativeModalTest">
+        <TestCase itShould={`disableNativeModalTest =false`}>
+          <Demo disableNativeModalTest={false} />
+        </TestCase>
+      </TestSuite>
+    </Tester>
   );
 };
 
