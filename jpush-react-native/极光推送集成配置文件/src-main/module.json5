@@ -1,0 +1,93 @@
+{
+  "module": {
+    "metadata": [
+      {
+        "name": "client_id",
+        "value": "112133485"
+      }
+    ],
+    "proxyData":[{
+      "uri": "datashareproxy://com.lihonggang.test/PushMessage",
+      "requiredWritePermission": "ohos.permission.WRITE_PRIVACY_PUSH_DATA",
+      "metadata":{
+        "name": "dataProperties",
+        "resource": "$profile:PushMessage"
+      }
+    }],
+    "name": "entry",
+    "type": "entry",
+    "srcEntry": "./ets/entryability/MyAbilityStage.ets",
+    "description": "$string:module_desc",
+    "mainElement": "EntryAbility",
+    "deviceTypes": [
+      "default"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "requestPermissions": [
+      {"name":  "ohos.permission.INTERNET"},
+      { "name": "ohos.permission.ACCESS_BIOMETRIC" },
+      {
+        "name": "ohos.permission.APP_TRACKING_CONSENT",
+        "reason": "$string:reason",
+        "usedScene": {
+          "abilities": [
+            "EntryAbility" //一般要用首页
+          ],
+          "when": "always"
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "name": "EntryAbility",
+        "description": "$string:EntryAbility_desc",
+        "icon": "$media:icon",
+        "label": "$string:EntryAbility_label",
+        "startWindowIcon": "$media:icon",
+        "startWindowBackground": "$color:start_window_background",
+        "visible": true,
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home"
+            ],
+            "actions": [
+              "action.system.home"
+            ]
+          }
+        ],
+        "srcEntry": "./ets/entryability/EntryAbility.ets"
+      },
+      {
+        "name": "PushMessageAbility",
+        "srcEntry": "./ets/entryability/PushMessageAbility.ets",
+        "launchType": "singleton",
+        "startWindowIcon": "$media:icon",
+        "startWindowBackground": "$color:start_window_background",
+        "skills": [
+          {
+            "actions": [
+              "action.ohos.push.listener"
+            ]
+          }
+        ]
+      }
+    ],
+    "extensionAbilities": [
+      {
+        "name": "RemoteNotificationExtAbility",
+        "type": "remoteNotification",
+        "srcEntry": "./ets/entryability/RemoteNotificationExtAbility.ets",
+        "description": "RemoteNotificationExtAbility test",
+        "exported": false,
+        "skills": [
+          {
+            "actions": ["action.hms.push.extension.remotenotification"]
+          }
+        ]
+      }
+    ]
+  }
+}
