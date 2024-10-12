@@ -24,6 +24,7 @@ export default function ProgressBarTest() {
   const [width, setWidth] = React.useState(100);
   const [width_, setWidth_] = React.useState(null);
   const [height, setHeight] = React.useState(20);
+  const [height_, setHeight_] = React.useState(null);
   const [borderRadius, setBorderRadius] = React.useState(0);
   const [borderRadius_, setBorderRadius_] = React.useState(20);
   const [useNativeDriver, setUseNativeDriver] = React.useState(true);
@@ -67,7 +68,7 @@ export default function ProgressBarTest() {
                   <Progress.Bar
                     style={styles.progress}
                     progress={progress}
-                    animationConfig={ () => animationConfig }
+                    animationConfig={() => animationConfig}
                   />
                 </View>
               );
@@ -212,6 +213,24 @@ export default function ProgressBarTest() {
                     style={styles.progress}
                     progress={progress}
                     height={height}
+                  />
+                </View>
+              );
+            }}
+            assert={() => {
+            }}
+          />
+
+          <TestCase
+            itShould="height = null"
+            initialState={undefined as any}
+            arrange={({ setState }) => {
+              return (
+                <View>
+                  <Progress.Bar
+                    style={styles.progress}
+                    progress={progress}
+                    height={height_}
                   />
                 </View>
               );
@@ -542,12 +561,12 @@ const styles = StyleSheet.create({
 });
 
 function TestCase<TState = undefined>({
-                                        itShould,
-                                        modal,
-                                        initialState,
-                                        arrange,
-                                        assert
-                                      }: {
+  itShould,
+  modal,
+  initialState,
+  arrange,
+  assert
+}: {
   itShould: string;
   modal?: boolean;
   initialState: TState;
