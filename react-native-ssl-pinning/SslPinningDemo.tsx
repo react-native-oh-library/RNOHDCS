@@ -103,7 +103,7 @@ function SslPingDemo() : React.JSX.Element{
                       type: "multipart/form-data",
                       uri: filePath[0]
                     })
-                    fetch("http://localhost:8888/handerOkhttpRequest/parse", {
+                    fetch("http://123.249.28.4:8888/handerOkhttpRequest/parse", {
                       method: "POST" ,
                       timeoutInterval: 10000, // milliseconds
                       body: {
