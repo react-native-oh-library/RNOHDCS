@@ -1029,6 +1029,48 @@ export const PickerTester = () => {
                             expect(state).to.be.true;
                         }}
                     />
+                    <TestCase
+                        key={"getInitStatus_23"}
+                        itShould={`select`}
+                        tags={['C_API']}
+                        initialState={false}
+
+                        arrange={({ setState }) => {
+                            let data = {
+                                pickerData:
+                                    [1, 2, 3],
+                                    selectedValue: ['2'],
+                                onPickerConfirm: data => {
+                                    console.log('onPickerConfirm:', data)
+                                },
+                                onPickerCancel: data => {
+                                    console.log('onPickerCancel:', data);
+                                },
+                                onPickerSelect: data => {
+                                    console.log('onPickerSelect:', data);
+                                }
+                            }
+                            return (
+                                <View style={{ minHeight: 220 }} >
+                                    <View style={{ marginBottom: 20 }}>
+                                        <Text style={{ width: 160, height: 34, borderRadius: 8, backgroundColor: 'hsl(190,50%,70%)', lineHeight: 28, marginTop: 10, fontWeight: 'bold', textAlign: 'center' }} onPress={() => {
+                                            Picker.init(data)
+                                        }}>init picker</Text>
+                                        <Text style={{ width: 160, height: 34, borderRadius: 8, backgroundColor: 'hsl(190,50%,70%)', lineHeight: 28, marginTop: 10, fontWeight: 'bold', textAlign: 'center' }} onPress={() => {
+                                            Picker.show()
+                                            setTimeout(() => {
+                                                Picker.select(['3'])                                                
+                                              }, 2000);
+                                            setState(true)
+                                        }}>show and select</Text>
+                                    </View>
+                                </View>
+                            );
+                        }}
+                        assert={async ({ expect, state }) => {
+                            expect(state).to.be.true;
+                        }}
+                    />
                 </TestSuite>
 
             </ScrollView>
