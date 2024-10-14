@@ -5,7 +5,7 @@ import RNBounceable from "@freakycoder/react-native-bounceable";
 import { TestSuite, Tester, TestCase} from '@rnoh/testerino';
 
 let flag:boolean = true;
-export function BounceableTest () {
+export default function BounceableTest () {
     const customStyle = {
         backgroundColor: 'red',
         padding: 10,
