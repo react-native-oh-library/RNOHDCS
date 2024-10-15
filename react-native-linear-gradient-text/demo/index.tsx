@@ -1,43 +1,26 @@
-import React, {ReactNode} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { LinearGradientText } from 'react-native-linear-gradient-text';
 
-// Within your render function
-export function LinearGradientDemo() {
+export const App = () => {
   return (
     <View style={styles.container}>
-      <LinearGradient
-        colors={['#4c669f', '#3b5998', '#192f6a']}
-        style={styles.linearGradient}>
-        <Text style={styles.buttonText}>Sign in with Facebook</Text>
-      </LinearGradient>
-      ;
+      <LinearGradientText
+        colors={['#E76F00', '#EA374E']}
+        text="Hello World"
+        start={{ x: 0.5, y: 0 }}  // Optional
+        end={{ x: 1, y: 1 }}  // Optional
+        textStyle={{ fontSize: 40 }}  // Optional
+        textProps={{ allowFontScaling: true }}  // Optional
+      />
     </View>
   );
-}
+};
 
-// Later on in your styles..
-var styles = StyleSheet.create({
-  container: {},
-  linearGradient: {
+const styles = StyleSheet.create({
+  container: {
     flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderRadius: 5,
-  },
-  buttonText: {
-    fontSize: 18,
-    fontFamily: 'Gill Sans',
-    textAlign: 'center',
-    margin: 10,
-    color: '#ffffff',
-    backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
