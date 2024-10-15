@@ -1,4 +1,4 @@
-import {StyleSheet,View,Text,Button} from 'react-native';
+import {StyleSheet,View,Text,Button, ScrollView} from 'react-native';
 import React ,{useState}from 'react';
 const RNMd5 =  require('react-native-md5')
 import {TestSuite,Tester,TestCase} from '@rnoh/testerino';
@@ -40,30 +40,23 @@ export function Md5TestExample() {
     
     return(
       <Tester>
+        <ScrollView>
         <TestSuite name = "md5">
         <TestCase
             itShould="hex_md5计算"
-            fn={({expect}) => {
-              expect(RNMd5.hex_md5('asd44287/**-+asd2+26..3d65qase')).to.be.eq('a8c1c3e4a5ecda5bb739c1edc73e4cfa');
-            }}
+            fn={({expect}) => { expect(RNMd5.hex_md5('asd44287/**-+asd2+26..3d65qase')).to.be.eq('a8c1c3e4a5ecda5bb739c1edc73e4cfa'); }}
           />
           <TestCase
             itShould="b64_md5计算"
-            fn={({expect}) => {
-              expect(RNMd5.b64_md5('sadad22gg54235r__024ed23')).to.be.eq('DwhUxmnowtBWe05pOdmUwA');
-            }}
+            fn={({expect}) => { expect(RNMd5.b64_md5('sadad22gg54235r__024ed23')).to.be.eq('DwhUxmnowtBWe05pOdmUwA'); }}
           />
           <TestCase
             itShould="str_md5计算"
-            fn={({expect}) => {
-              expect(RNMd5.str_md5('154ssdas2d')).to.be.not.NaN;
-            }}
+            fn={({expect}) => { expect(RNMd5.str_md5('154ssdas2d')).to.be.not.NaN; }}
           />
           <TestCase
             itShould="hex_hmac_md5计算"
-            fn={({expect}) => {
-              expect(RNMd5.hex_hmac_md5('154sasdsadawdawd2gf23e1q2d','dw2d2-d*8295qdsd')).to.be.eq('b5fba631287e9604e8cf399191a68086');
-            }}
+            fn={({expect}) => { expect(RNMd5.hex_hmac_md5('154sasdsadawdawd2gf23e1q2d','dw2d2-d*8295qdsd')).to.be.eq('b5fba631287e9604e8cf399191a68086'); }}
           />
           <TestCase
             itShould="b64_hmac_md5计算"
@@ -104,6 +97,7 @@ export function Md5TestExample() {
           </TestCase>
 
         </TestSuite>
+        </ScrollView>
    
       </Tester>
     );
