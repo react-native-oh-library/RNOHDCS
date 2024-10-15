@@ -3,7 +3,7 @@ import { View, Platform } from 'react-native'
 import { AreaChart, XAxis, Grid } from 'react-native-svg-charts'
 import * as scale from 'd3-scale'
 import * as shape from 'd3-shape'
-import dateFns from 'date-fns'
+import { setHours, format } from 'date-fns'
 import { yScaleProp, xScaleProp } from '../../genUtil'
 
 class XAxisScaleTimeExample extends React.PureComponent {
@@ -13,27 +13,27 @@ class XAxisScaleTimeExample extends React.PureComponent {
     const data = [
       {
         value: 50,
-        date: dateFns.setHours(new Date(2018, 0, 0), 6),
+        date: setHours(new Date(2018, 0, 0), 6),
       },
       {
         value: 10,
-        date: dateFns.setHours(new Date(2018, 0, 0), 9),
+        date: setHours(new Date(2018, 0, 0), 9),
       },
       {
         value: 150,
-        date: dateFns.setHours(new Date(2018, 0, 0), 15),
+        date: setHours(new Date(2018, 0, 0), 15),
       },
       {
         value: 10,
-        date: dateFns.setHours(new Date(2018, 0, 0), 18),
+        date: setHours(new Date(2018, 0, 0), 18),
       },
       {
         value: 100,
-        date: dateFns.setHours(new Date(2018, 0, 0), 21),
+        date: setHours(new Date(2018, 0, 0), 21),
       },
       {
         value: 20,
-        date: dateFns.setHours(new Date(2018, 0, 0), 24),
+        date: setHours(new Date(2018, 0, 0), 24),
       },
     ]
 
@@ -67,9 +67,8 @@ class XAxisScaleTimeExample extends React.PureComponent {
           scale={scale.scaleTime}
           numberOfTicks={10}
           contentInset={{ left: 10, right: 20 }}
-          formatLabel={(value) => dateFns.format(value, 'HH:mm')}
+          formatLabel={(value) => format(value, 'HH:mm')}
         />
-
         <XAxis
           style={{ height: 100, marginHorizontal: -15, height: 20 }}
           data={data}
@@ -85,7 +84,7 @@ class XAxisScaleTimeExample extends React.PureComponent {
           scale={scale.scaleTime}
           numberOfTicks={20}
           contentInset={{ left: 10, right: 20 }}
-          formatLabel={(value) => dateFns.format(value, 'HH:mm')}
+          formatLabel={(value) => format(value, 'HH:mm')}
         />
       </View>
     )
