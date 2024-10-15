@@ -1,25 +1,26 @@
 import { Text, View, TouchableHighlight, Platform, TextInput, ScrollView } from 'react-native';
 import { LogicalTestCase, TestSuite, TestCase, Tester } from '@rnoh/testerino';
 import {
-    MemoryRouter as Router, 
-    Outlet, 
-    useMatch, 
-    useInRouterContext, 
-    NavigationType, 
-    useOutletContext, 
+    MemoryRouter as Router,
+    Outlet,
+    useMatch,
+    useInRouterContext,
+    NavigationType,
+    useOutletContext,
     useHref,
     useAsyncValue,
-    useAsyncError, 
-    parsePath, 
-    useNavigationType, 
-    useRoutes, 
-    useNavigate, 
-    useOutlet, 
-    Route, 
-    Routes, 
-    Navigate, 
+    useAsyncError,
+    parsePath,
+    useNavigationType,
+    useRoutes,
+    useNavigate,
+    useOutlet,
+    Route,
+    Routes,
+    Navigate,
     useParams,
-    useLocation
+    useLocation,
+    Await
 } from 'react-router-dom';
 import React, { useState } from 'react';
 
@@ -84,7 +85,7 @@ const Home = () => {
                     preventScrollReset: true,
                 });
             }} />
-            <Outlet context={[count, setCount]}/>
+            <Outlet context={[count, setCount]} />
         </View>
     );
 };
@@ -96,7 +97,7 @@ const Login = () => {
 };
 
 const Index1 = () => {
-      const [count, setCount] = useOutletContext();
+    const [count, setCount] = useOutletContext();
     const increment = () => setCount(2);
     return (
         <View>
@@ -193,6 +194,14 @@ const HomeMessages = () => {
     return (
         <View style={{ height: 200, backgroundColor: 'yellow' }}>
             <Text>Outlet Demo: HomeMessages page!</Text>
+        </View>
+    );
+};
+
+const NavigateView = () => {
+    return (
+        <View style={{ height: 200, backgroundColor: 'blue' }}>
+            <Text>NavigateView page!</Text>
         </View>
     );
 };
@@ -338,17 +347,54 @@ const NavigationTypePage = () => {
         </View>
     );
 };
+function ErrorElement() {
+    const error = useAsyncError();
+    return (
+        <Text>error: {error}</Text>
+    );
+}
+
+function ProductVariants() {
+    const variants = useAsyncValue();
+    return <Text>AsyncValue: {variants}</Text>
+}
 
 const Users6 = () => {
     const pares = parsePath('/Users6')
-    const variants = useAsyncValue() as string;
-    const error = useAsyncError();
     return (
         <View>
             <Text>路由名称</Text>
             <Text>{`----------parsePath=${pares.pathname}-------------`}</Text>
-            <Text>{`----------variants=${variants}-------------`}</Text>
-            <Text>{`----------error=${error}-------------`}</Text>
+        </View>
+
+    );
+};
+
+const AsyncValue = () => {
+    const rand = () => Math.round(Math.random() * 100);
+    const resolve = (d: string, ms: number) =>
+        new Promise((r, rej) => setTimeout(() => r(`${d} - ${rand()}`), ms));
+    return (
+        <View>
+            <React.Suspense fallback={<Text>AsyncValue</Text>}>
+                <Await resolve={resolve("Lazy 1", 1000)} errorElement={<ErrorElement />}>
+                    <ProductVariants />
+                </Await>
+            </React.Suspense>
+        </View>
+    );
+};
+
+const AsyncError = () => {
+        const resolve = (d: string, ms: number) =>
+        new Promise((r, rej) => setTimeout(() => rej('错误信息')))
+    return (
+        <View>
+            <React.Suspense fallback={<Text>AsyncError</Text>}>
+                <Await resolve={resolve("Lazy 1", 1000)} errorElement={<ErrorElement />}>
+                    <ProductVariants />
+                </Await>
+            </React.Suspense>
         </View>
 
     );
@@ -381,6 +427,30 @@ const HrefView = () => {
     ]);
 }
 
+const AsyncView = () => {
+    return useRoutes([
+        {
+            path: '/',
+            element: <AsyncPage />,
+            children: [
+
+                {
+                    path: '/AsyncValue',
+                    element: <AsyncValue />
+                },
+                {
+                    path: '/AsyncError',
+                    element: <AsyncError/>
+                },
+            ]
+        },
+        {
+
+        }
+    ]);
+}
+
+
 const HrefPage = () => {
     const navigate = useNavigate();
     return (
@@ -391,6 +461,22 @@ const HrefPage = () => {
             }} />
             <Button label='捕获路径' onPress={() => {
                 navigate('/Users6');
+            }} />
+            <Outlet />
+        </View>
+    );
+};
+
+const AsyncPage = () => {
+    const navigate = useNavigate();
+    return (
+        <View style={{ display: 'flex', justifyContent: 'flex-start' }}>
+            <Text>useAsyncValue and useAsyncError</Text>
+            <Button label='useAsyncValue' onPress={() => {
+                navigate('/AsyncValue');
+            }} />
+            <Button label='useAsyncError' onPress={() => {
+                navigate('/AsyncError');
             }} />
             <Outlet />
         </View>
@@ -448,17 +534,20 @@ export default function ReactRouterDomTest() {
                             changeStatus: false
                         }}
                         arrange={({ setState, state }) => {
+                            const [messages, setMessages] = React.useState(false);
                             return (
                                 <Router>
                                     <Routes>
-                                        <Route path='/' element={<Detail />}>
-                                        </Route>
-                                        <Route path='/Index' element={<Index />}></Route>
+                                        {messages && <Route path='/' element={<Detail />}>
+                                        </Route>}
+                                        {/* <Route path='/Index' element={<Index />}></Route> */}
                                     </Routes>
                                     <Button
-                                        label='点击'
+                                        label='点击显示MemoryRouter路由'
                                         onPress={() => {
+                                            setMessages(!messages)
                                             setState(prev => ({ ...prev, changeStatus: true }));
+
                                         }}
                                     />
                                 </Router>
@@ -562,32 +651,22 @@ export default function ReactRouterDomTest() {
                             return (
                                 <>
                                     <Router>
-                                        <Routes location={location}>
+                                        <Routes>
                                             <Route path='/' element={<View style={{ backgroundColor: 'green', }}>
 
-                                                <Text>Navigate text</Text>
-                                                <TextInput placeholder='Input your username' style={{
-                                                    color: 'black', height: 40, fontSize: 16, backgroundColor: 'white', borderColor: 'blue', borderWidth: 1, borderRadius: 20, paddingLeft: 20
-                                                }} onChangeText={(value) => {
-                                                    setUsername(value);
-                                                }}
-                                                />
-
-                                                {username.length < 5 && (<Text>用户名最少5位   </Text>)}
-                                                {messages && (<Navigate to={`${username}`} replace={true} />)}
+                                                <Text>Welcome to the Navigate page!</Text>
+                                                {messages && (<Navigate to='/messages' replace={true} />)}
                                                 <Outlet />
-
                                             </View>} >
                                                 <Route
-                                                    path=':teamId'
-                                                    element={<Team />}
+                                                    path='messages'
+                                                    element={<NavigateView />}
                                                 />
-
                                             </Route>
                                         </Routes>
                                     </Router>
                                     <Button
-                                        label={`点击显示 Navigate 子路由`}
+                                        label='点击显示Navigate路由'
                                         onPress={() => {
                                             setMessages(!messages)
                                             setState(prev => ({ ...prev, changeStatus: true }));
@@ -651,17 +730,19 @@ export default function ReactRouterDomTest() {
                             changeStatus: false
                         }}
                         arrange={({ setState, state }) => {
+                            const [messages, setMessages] = React.useState(false);
                             return (
                                 <Router>
                                     <Routes>
-                                        <Route element={<RouteDetail />}>
-                                        </Route>
-                                        <Route path='/Index' element={<RouteIndex />}></Route>
+                                        {messages && <Route path='/' element={<RouteDetail />}></Route>}
+                                        {/* <Route path='/Index' element={<RouteIndex />}></Route> */}
                                     </Routes>
                                     <Button
-                                        label='点击'
+                                        label='点击显示Route路由'
                                         onPress={() => {
+                                            setMessages(!messages)
                                             setState(prev => ({ ...prev, changeStatus: true }));
+
                                         }}
                                     />
                                 </Router>
@@ -718,6 +799,22 @@ export default function ReactRouterDomTest() {
                             return (
                                 <Router>
                                     <HrefView></HrefView>
+                                </Router>
+                            );
+                        }}
+                        assert={({ expect, state }) => {
+                            expect(state.changeStatus).to.be.true;
+                        }}>
+                    </TestCase>
+                    <TestCase
+                        itShould='useAsyncValue and useAsyncError'
+                        initialState={{
+                            changeStatus: false
+                        }}
+                        arrange={({ setState, state }) => {
+                            return (
+                                <Router>
+                                    <AsyncView></AsyncView>
                                 </Router>
                             );
                         }}
