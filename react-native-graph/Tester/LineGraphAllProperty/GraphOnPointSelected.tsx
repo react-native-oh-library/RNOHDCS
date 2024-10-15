@@ -30,7 +30,7 @@ export default function() {
       
     return (
         <View style={{ flex: 1 }}>
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    {/* <GestureHandlerRootView style={{ flex: 1 }}> */}
         <Text>{`selectPoint value is ${JSON.stringify(selectPoint)}`}</Text>
         <LineGraph 
         style={styles.graph}
@@ -40,7 +40,7 @@ export default function() {
         enablePanGesture={enablePanGesture}
         onPointSelected={(value) =>setSelectPoint(value) }
         />
-     </GestureHandlerRootView>
+     {/* </GestureHandlerRootView> */}
     </View>
     )
 

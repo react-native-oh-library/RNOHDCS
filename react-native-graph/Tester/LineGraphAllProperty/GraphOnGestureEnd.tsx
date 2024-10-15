@@ -33,7 +33,7 @@ export default function() {
 
     return (
         <View style={{ flex: 1 }}>
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    {/* <GestureHandlerRootView style={{ flex: 1 }}> */}
         <Text>{`onGestureEnd={() =>setSelectPoint(undefined)`}</Text>
         <Text>{`selectPoint value is ${JSON.stringify(selectPoint)}`}</Text>
         <LineGraph 
@@ -45,7 +45,7 @@ export default function() {
         onPointSelected={(value) =>setSelectPoint(value) }
         onGestureEnd={onGestureEnd}
         />
-     </GestureHandlerRootView>
+     {/* </GestureHandlerRootView> */}
     </View>
     )
 

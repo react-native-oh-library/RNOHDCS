@@ -43,7 +43,7 @@ export default function() {
       
     return (
         <View style={{ flex: 1 }}>
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    {/* <GestureHandlerRootView style={{ flex: 1 }}> */}
         <Text>{`enableRange value is ${enableRange}`}</Text>
         <LineGraph 
         style={styles.graph}
@@ -53,7 +53,7 @@ export default function() {
         range={enableRange?range:undefined}
         />
         <Button title='change enableRange' onPress={()=>setEnableRange(!enableRange)} />
-     </GestureHandlerRootView>
+     {/* </GestureHandlerRootView> */}
     </View>
     )
 

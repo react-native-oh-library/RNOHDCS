@@ -28,7 +28,7 @@ export default function() {
       const [indicatorPulsating, setIndicatorPulsating] = useState(false)
     return (
         <View style={{ flex: 1 }}>
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    {/* <GestureHandlerRootView style={{ flex: 1 }}> */}
         <Text>{`indicatorPulsating value is ${indicatorPulsating}`}</Text>
         <LineGraph 
         style={styles.graph}
@@ -40,7 +40,7 @@ export default function() {
         indicatorPulsating={indicatorPulsating}
         />
         <Button title='change indicatorPulsating' onPress={()=>setIndicatorPulsating(!indicatorPulsating)} />
-     </GestureHandlerRootView>
+     {/* </GestureHandlerRootView> */}
     </View>
     )
 

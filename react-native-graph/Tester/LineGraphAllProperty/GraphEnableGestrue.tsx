@@ -30,7 +30,7 @@ export default function() {
       
     return (
         <View style={{ flex: 1 }}>
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    {/* <GestureHandlerRootView style={{ flex: 1 }}> */}
         <Text>{`enablePanGesture value is ${enablePanGesture}`}</Text>
         <LineGraph 
         style={styles.graph}
@@ -40,7 +40,7 @@ export default function() {
         enablePanGesture={enablePanGesture}
         />
         <Button title='change enablePanGesture' onPress={()=>setEnablePanGesture(!enablePanGesture)} />
-     </GestureHandlerRootView>
+     {/* </GestureHandlerRootView> */}
     </View>
     )
 

@@ -28,7 +28,7 @@ export default function() {
       
     return (
         <View style={{ flex: 1 }}>
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    {/* <GestureHandlerRootView style={{ flex: 1 }}> */}
         <Text>{`horizontalPadding value is ${horizontalPadding}`}</Text>
         <LineGraph 
         style={styles.graph}
@@ -38,7 +38,7 @@ export default function() {
         horizontalPadding={horizontalPadding}
         />
         <Button title='change horizontalPadding' onPress={()=>setHorizontalPadding(horizontalPadding?0:15)} />
-     </GestureHandlerRootView>
+     {/* </GestureHandlerRootView> */}
     </View>
     )
 

@@ -31,7 +31,7 @@ export default function() {
       
     return (
         <View style={{ flex: 1 }}>
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    {/* <GestureHandlerRootView style={{ flex: 1 }}> */}
         <Text>{`animated value is ${isAnimated}`}</Text>
         <LineGraph 
         style={styles.graph}
@@ -41,7 +41,7 @@ export default function() {
         />
         <Button title='refreshData' onPress={refreshData} />
         <Button title='change animated' onPress={()=>setIsAnimated(!isAnimated)} />
-     </GestureHandlerRootView>
+     {/* </GestureHandlerRootView> */}
     </View>
     )
 

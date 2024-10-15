@@ -40,7 +40,7 @@ export default function() {
       
     return (
         <View style={{ flex: 1 }}>
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    {/* <GestureHandlerRootView style={{ flex: 1 }}> */}
         <Text>{`max value data is ${maxValue}`}</Text>
         <LineGraph 
         style={styles.graph}
@@ -51,7 +51,7 @@ export default function() {
         />
         <Button title='refreshData' onPress={refreshData} />
        
-     </GestureHandlerRootView>
+     {/* </GestureHandlerRootView> */}
     </View>
     )
 

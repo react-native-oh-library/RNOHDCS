@@ -30,7 +30,7 @@ export default function() {
       
     return (
         <View style={{ flex: 1 }}>
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    {/* <GestureHandlerRootView style={{ flex: 1 }}> */}
         <Text>{`panGestureDelay value is ${panGestureDelay===300?`default 300`:panGestureDelay}`}</Text>
         <LineGraph 
         style={styles.graph}
@@ -41,7 +41,7 @@ export default function() {
         panGestureDelay={panGestureDelay}
         />
         <Button title='change panGestureDelay' onPress={()=>setPanGestureDelay(panGestureDelay===300?600:300)} />
-     </GestureHandlerRootView>
+     {/* </GestureHandlerRootView> */}
     </View>
     )
 

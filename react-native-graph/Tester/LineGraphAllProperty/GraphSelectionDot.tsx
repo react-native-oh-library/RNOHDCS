@@ -99,7 +99,7 @@ export default function() {
       
     return (
         <View style={{ flex: 1 }}>
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    {/* <GestureHandlerRootView style={{ flex: 1 }}> */}
     <Text>{`CustomSelectionDot color is ${enableCustomSelectionDot?'yellow':'#dd4400'}`}</Text>
         <Text>{`enableCustomSelectionDot value is ${enableCustomSelectionDot}`}</Text>
         <LineGraph 
@@ -111,7 +111,7 @@ export default function() {
         SelectionDot={enableCustomSelectionDot ? SelectionDot : undefined}
         />
         <Button title='change enableCustomSelectionDot' onPress={()=>setEnableCustomSelectionDot(!enableCustomSelectionDot)} />
-     </GestureHandlerRootView>
+     {/* </GestureHandlerRootView> */}
     </View>
     )
 

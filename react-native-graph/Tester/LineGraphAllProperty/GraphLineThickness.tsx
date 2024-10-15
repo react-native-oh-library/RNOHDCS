@@ -31,7 +31,7 @@ export default function() {
       
     return (
         <View style={{ flex: 1 }}>
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    {/* <GestureHandlerRootView style={{ flex: 1 }}> */}
         <Text>{`lineThickness value is ${lineThickness?6:'default 3'}`}</Text>
         <LineGraph 
         style={styles.graph}
@@ -41,7 +41,7 @@ export default function() {
         lineThickness={lineThickness?6:3}
         />
         <Button title='change lineThickness' onPress={()=>setLineThickness(!lineThickness)} />
-     </GestureHandlerRootView>
+     {/* </GestureHandlerRootView> */}
     </View>
     )
 
