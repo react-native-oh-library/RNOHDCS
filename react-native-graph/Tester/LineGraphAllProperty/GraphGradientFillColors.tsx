@@ -31,7 +31,7 @@ export default function() {
       
     return (
         <View style={{ flex: 1 }}>
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    {/* <GestureHandlerRootView style={{ flex: 1 }}> */}
         <Text>{`gradientFillColors value is ${enableGradient?JSON.stringify(GRADIENT_FILL_COLORS):'undefined'}`}</Text>
         <LineGraph 
         style={styles.graph}
@@ -42,7 +42,7 @@ export default function() {
         />
   
         <Button title='change gradientFillColors' onPress={()=>setEnableGradient(!enableGradient)} />
-     </GestureHandlerRootView>
+     {/* </GestureHandlerRootView> */}
     </View>
     )
 

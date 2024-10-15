@@ -27,7 +27,7 @@ export default function() {
       const [enableIndicator, setEnableIndicator] = useState(false)
     return (
         <View style={{ flex: 1 }}>
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    {/* <GestureHandlerRootView style={{ flex: 1 }}> */}
         <Text>{`enableIndicator value is ${enableIndicator}`}</Text>
         <LineGraph 
         style={styles.graph}
@@ -38,7 +38,7 @@ export default function() {
         horizontalPadding={enableIndicator ? 15 : 0}
         />
         <Button title='change enableIndicator' onPress={()=>setEnableIndicator(!enableIndicator)} />
-     </GestureHandlerRootView>
+     {/* </GestureHandlerRootView> */}
     </View>
     )
 

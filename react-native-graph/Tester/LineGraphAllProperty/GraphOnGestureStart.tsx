@@ -28,13 +28,13 @@ export default function() {
       const color='#dd4400'
       
       const onGestureStart = useCallback(() => {
-        console.log('触发onGestureStart')
+        // console.log('触发onGestureStart')
         setOnGestureStartValue('触发onGestureStart回调')
       }, []);
       
     return (
         <View style={{ flex: 1 }}>
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    {/* <GestureHandlerRootView style={{ flex: 1 }}> */}
     <Text>{`onGestureStart={()=>setOnGestureStartValue('触发onGestureStart回调')}`}</Text>
         <Text>{`onGestureStart value is ${onGestureStartValue}`}</Text>
         <LineGraph 
@@ -45,7 +45,7 @@ export default function() {
         enablePanGesture={enablePanGesture}
         onGestureStart={onGestureStart}
         />
-     </GestureHandlerRootView>
+     {/* </GestureHandlerRootView> */}
     </View>
     )
 

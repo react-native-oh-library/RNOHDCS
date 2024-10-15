@@ -32,7 +32,7 @@ export default function() {
       
     return (
         <View style={{ flex: 1 }}>
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    {/* <GestureHandlerRootView style={{ flex: 1 }}> */}
         <Text>{`color value is ${isColor?SET_COLOR:DEFAULT_COLOR}`}</Text>
         <LineGraph 
         style={styles.graph}
@@ -42,7 +42,7 @@ export default function() {
         />
         <Button title='refreshData' onPress={refreshData} />
         <Button title='change color' onPress={()=>setIsColor(!isColor)} />
-     </GestureHandlerRootView>
+     {/* </GestureHandlerRootView> */}
     </View>
     )
 

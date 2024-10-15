@@ -31,7 +31,7 @@ export default function() {
       
     return (
         <View style={{ flex: 1 }}>
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    {/* <GestureHandlerRootView style={{ flex: 1 }}> */}
         <Text>{`enableFadeInMask value is ${enableFadeInEffect}`}</Text>
         <LineGraph 
         style={styles.graph}
@@ -42,7 +42,7 @@ export default function() {
        
         />
         <Button title='change enableFadeInMask' onPress={()=>setEnableFadeInEffect(!enableFadeInEffect)} />
-     </GestureHandlerRootView>
+     {/* </GestureHandlerRootView> */}
     </View>
     )
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import {ScrollView} from 'react-native'
 import {TestSuite, Tester, TestCase} from '@rnoh/testerino'
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import GraphAnimated from './LineGraphAllProperty/GraphAnimated'
 import GraphEnableGestrue from './LineGraphAllProperty/GraphEnableGestrue'
@@ -23,6 +24,7 @@ import GraphColor from './LineGraphAllProperty/GraphColor'
 
 export const LineGraphExample = () => {
     return (
+      <GestureHandlerRootView style={{ flex: 1 }}>
       <ScrollView>
         <Tester>
           <TestSuite name="LineGraphExample">
@@ -100,5 +102,6 @@ export const LineGraphExample = () => {
           </TestSuite>
         </Tester>
       </ScrollView>
+      </GestureHandlerRootView>
     )
   }
