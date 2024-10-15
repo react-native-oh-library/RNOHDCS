@@ -2,7 +2,7 @@ import {Tester, TestSuite} from '@rnoh/testerino';
 import React, {useState} from 'react';
 import {TestCase} from './testCase';
 import BetterBanner from 'react-native-better-banner';
-import {Text, View, StyleSheet} from 'react-native';
+import { Text, View, StyleSheet, ScrollView } from 'react-native';
 
 const bannerComponents = [
   <View style={{
@@ -54,35 +54,37 @@ const bannerImages = [
 
 const BetterBannerTest = () => {
   return (
-    <Tester>
-      <TestSuite name="BetterBanner" style={styles.container}>
-      <TestCase.Example
-          skip={{android: true, harmony: {arkTS: true, cAPI: true}}}
-          itShould="display red background if Screen Reader is enabled">
-          <BetterBannerTestCase1 />
-        </TestCase.Example>
-        <TestCase.Example
-          skip={{android: true, harmony: {arkTS: true, cAPI: true}}}
-          itShould="display red background if Screen Reader is enabled">
-          <BetterBannerTestCase2 />
-        </TestCase.Example>
-        <TestCase.Example
-          skip={{android: true, harmony: {arkTS: true, cAPI: true}}}
-          itShould="display red background if Screen Reader is enabled">
-          <BetterBannerTestCase3 />
-        </TestCase.Example>
-        <TestCase.Example
-          skip={{android: true, harmony: {arkTS: true, cAPI: true}}}
-          itShould="display red background if Screen Reader is enabled">
-          <BetterBannerTestCase4 />
-        </TestCase.Example>
-        <TestCase.Example
-          skip={{android: true, harmony: {arkTS: true, cAPI: true}}}
-          itShould="display red background if Screen Reader is enabled">
-          <BetterBannerTestCase5 />
-        </TestCase.Example>
-      </TestSuite>
-    </Tester>
+    <ScrollView>
+      <Tester>
+        <TestSuite name="BetterBanner" style={styles.container}>
+          <TestCase.Example
+            skip={{ android: true, harmony: { arkTS: true, cAPI: true } }}
+            itShould="display red background if Screen Reader is enabled">
+            <BetterBannerTestCase1 />
+          </TestCase.Example>
+          <TestCase.Example
+            skip={{ android: true, harmony: { arkTS: true, cAPI: true } }}
+            itShould="display red background if Screen Reader is enabled">
+            <BetterBannerTestCase2 />
+          </TestCase.Example>
+          <TestCase.Example
+            skip={{ android: true, harmony: { arkTS: true, cAPI: true } }}
+            itShould="display red background if Screen Reader is enabled">
+            <BetterBannerTestCase3 />
+          </TestCase.Example>
+          <TestCase.Example
+            skip={{ android: true, harmony: { arkTS: true, cAPI: true } }}
+            itShould="display red background if Screen Reader is enabled">
+            <BetterBannerTestCase4 />
+          </TestCase.Example>
+          <TestCase.Example
+            skip={{ android: true, harmony: { arkTS: true, cAPI: true } }}
+            itShould="display red background if Screen Reader is enabled">
+            <BetterBannerTestCase5 />
+          </TestCase.Example>
+        </TestSuite>
+      </Tester>
+    </ScrollView>
   );
 };
 const BetterBannerTestCase1 = () => {
