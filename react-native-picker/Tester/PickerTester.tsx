@@ -1005,7 +1005,7 @@ export const PickerTester = () => {
                             return (
                                 <View style={{ minHeight: 220 }} >
                                     <View style={{ marginBottom: 20 }}>
-                                        <Text style={{ color: 'black', marginTop: 20 }}>pickerRowHeight: {isShow + ''}</Text>
+                                        <Text style={{ color: 'black', marginTop: 20 }}>isPickerShow: {isShow + ''}</Text>
                                         <Text style={{ width: 180, height: 34, borderRadius: 8, backgroundColor: 'hsl(190,50%,70%)', lineHeight: 28, marginTop: 10, fontWeight: 'bold', textAlign: 'center' }} onPress={() => {
                                             Picker.isPickerShow(show => {
                                                 setIsshow(show)
