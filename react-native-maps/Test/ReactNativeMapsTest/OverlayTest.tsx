@@ -52,6 +52,12 @@ export class OverlayTest extends React.Component<any, any> {
   render() {
     const propList = (
       <TestSuite name="属性">
+        <TestCase itShould="image: 图片--必需属性，以下可选属性都需要该属性配合使用，图中显示已设置该属性值">
+          <View></View>
+        </TestCase>
+        <TestCase itShould="bounds: 图片显示范围--必需属性，以下可选属性都需要该属性配合使用，图中显示已设置该属性值">
+          <View></View>
+        </TestCase>
         <TestCase itShould="bearing: 旋转角度">
           <Switch 
             value={this.state.bearing} 

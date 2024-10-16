@@ -47,7 +47,7 @@ function App() {
             <Page name="EXAMPLE: OverlayTest">
               <OverlayTest />
             </Page>
-            <Page name="EXAMPLE: UrlTile & WMSTile Test 不支持">
+            {/* <Page name="EXAMPLE: UrlTile & WMSTile Test 不支持">
               <UrlWMSTileTest />
             </Page>
             <Page name="EXAMPLE: CalloutTest 不支持">
@@ -55,7 +55,7 @@ function App() {
             </Page>
             <Page name="EXAMPLE: HeatmapTest 不支持">
               <HeatmapTest />
-            </Page>
+            </Page> */}
           </PortalProvider>
         </NavigationContainer>
       </SafeAreaView>

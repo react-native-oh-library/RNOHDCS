@@ -87,7 +87,7 @@ export class PolygonTest extends React.Component<any, any> {
         polygonProps[key] = this.state[key] ? [HOLES] : undefined;
         break;
       case 'strokeWidth':
-        polygonProps[key] = this.state[key] ? 8 : 1;
+        polygonProps[key] = this.state[key] ? 30 : 1;
         break;
       case 'strokeColor':
         polygonProps[key] = this.state[key] ? 'rgba(255,0,0, 1)' : '#000';
@@ -127,6 +127,9 @@ export class PolygonTest extends React.Component<any, any> {
   render() {
     const propList = (
       <TestSuite name="属性">
+        <TestCase itShould="coordinates: 多边形的点集合--必需属性，以下可选属性都需要该属性配合使用，图中显示已设置该属性值">
+          <View></View>
+        </TestCase>
         <TestCase itShould="holes: 打孔">
           <Switch 
             value={this.state.holes} 

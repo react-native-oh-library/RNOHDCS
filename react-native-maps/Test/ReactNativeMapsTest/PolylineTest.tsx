@@ -32,8 +32,8 @@ const POLYLINE = [
     longitude: LONGITUDE + 2 * SPACE,
   },
   {
-    latitude: LATITUDE + 4 * SPACE,
-    longitude: LONGITUDE + 2 * SPACE,
+    latitude: LATITUDE - 2 * SPACE,
+    longitude: LONGITUDE - 2 * SPACE,
   }
 ];
 const POLYLINE2 = [
@@ -72,7 +72,7 @@ export class PolylineTest extends React.Component<any, any> {
   setPolylineProps(polylineProps: { [key: string]: any}, key: string) {
     switch (key) {
       case 'strokeWidth':
-        polylineProps[key] = this.state[key] ? 20 : undefined;
+        polylineProps[key] = this.state[key] ? 30 : 1;
         break;
       case 'strokeColor':
         polylineProps[key] = this.state[key] ? 'rgba(255,0,0, 1)' : '#000';
@@ -86,7 +86,7 @@ export class PolylineTest extends React.Component<any, any> {
         polylineProps[key] = this.state[key] ? 'square' : 'round';
         break;
       case 'lineJoin':
-        polylineProps[key] = this.state[key] ? 'miter' : 'round';
+        polylineProps[key] = this.state[key] ? 'bevel' : 'round';
         break;
       case 'miterLimit':
         polylineProps[key] = this.state[key] ? 30 : 0;
@@ -111,6 +111,9 @@ export class PolylineTest extends React.Component<any, any> {
   render() {
     const propList = (
       <TestSuite name="属性">
+        <TestCase itShould="coordinates: 多段线的点集合--必需属性，以下可选属性都需要该属性配合使用，图中显示已设置该属性值">
+          <View></View>
+        </TestCase>
         <TestCase itShould="strokeWidth: 线宽度">
           <Switch 
             value={this.state.strokeWidth} 
