@@ -7,6 +7,7 @@ import {
 
 } from 'react-native-paper';
 import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
+import { useRef } from 'react';
 
 export function ButtonTest() {
 
@@ -259,12 +260,35 @@ export function ButtonTest() {
             },
             test:'children text'
           },
+          {
+            key: 'Button style: contentStyle is { backgroundColor:MD2Colors.blue100}',
+            value: {
+              mode:'contained' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
+              style:[styles.button],
+              contentStyle:{ backgroundColor:MD2Colors.blue100},
+              testID:'button1'
+            },
+            test:'children text'
+          },
     ]
+
+    const touchableRef = useRef(null);  
+    const handlePress = () => {  
+      console.info('touchableRef touchableRef touchableRef')
+    }; 
 
     return (
         <Tester>
         <ScrollView>
         <TestSuite name='Button'>
+        <TestCase itShould={"Button style: touchableRef = {useRef(null)}"}>
+            <View style={styles.row}>
+                    <Button onPress={handlePress} style={styles.button} touchableRef={touchableRef}>
+                        Default
+                    </Button>
+                </View>
+            </TestCase>  
+          
           <TestCase itShould={"Button style: rippleColor  is MD2Colors.red100"}>
             <View style={styles.row}>
                     <Button onPress={() => { }} style={styles.button} rippleColor={MD2Colors.red100}>

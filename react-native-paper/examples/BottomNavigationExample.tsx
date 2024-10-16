@@ -353,6 +353,26 @@ function BottomNavigationDemo() {
         onIndexChange:_changeIndex('BottomNavigation29'),
         testID:'BottomNavigation'
       }
+    },
+    {
+      key: 'BottomNavigation style: compact ={true}',
+      value: {
+        renderScene:renderScene,
+        compact:true,
+        navigationState:{ index:_getIndex('BottomNavigation30'),routes:routes},
+        onIndexChange:_changeIndex('BottomNavigation30'),
+        testID:'BottomNavigation'
+      }
+    },
+    {
+      key: 'BottomNavigation style: compact ={false}',
+      value: {
+        renderScene:renderScene,
+        compact:false,
+        navigationState:{ index:_getIndex('BottomNavigation30'),routes:routes},
+        onIndexChange:_changeIndex('BottomNavigation30'),
+        testID:'BottomNavigation'
+      }
     }
   ]
 

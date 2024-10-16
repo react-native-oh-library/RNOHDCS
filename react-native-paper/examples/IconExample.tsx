@@ -17,6 +17,24 @@ function IconDemo() {
       }
     },
     {
+      key: ' Icon style:allowFontScaling={true}',
+      value: {
+        source :"camera",
+        color:'red',
+        size:40,
+        allowFontScaling:true
+      }
+    },
+    {
+      key: ' Icon style:allowFontScaling={false}',
+      value: {
+        source :"camera",
+        color:'red',
+        size:40,
+        allowFontScaling:false
+      }
+    },
+    {
       key: ' Icon style:size={"50"}',
       value: {
         source :"camera",
@@ -88,22 +106,5 @@ function IconDemo() {
   )
 }
 
-const AssetIcon = ({ size, testID }: { size: number; testID: string }) => (
-  <Image
-    accessibilityIgnoresInvertColors
-    source={require('../assets/images/paper-icon.png')}
-    style={{ width: size, height: size }}
-    testID={testID}
-  />
-);
-
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    marginLeft: 16,
-  },
-});
 
 export default IconDemo;

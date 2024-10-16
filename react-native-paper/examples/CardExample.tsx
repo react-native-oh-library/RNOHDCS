@@ -79,7 +79,7 @@ export function CardTest() {
             }
         },
         {
-            key: 'Card stylet: delayLongPress is 10000(延时长按1秒)',
+            key: 'Card stylet: delayLongPress is 10000(延时长按10秒)',
             value: {
               mode:'contained' as 'elevated' | 'outlined' | 'contained',
               onLongPress:_onLongPress,
@@ -87,11 +87,11 @@ export function CardTest() {
             }
         },
         {
-            key: 'Card stylet: delayLongPress is 100000(延时长按10秒)',
+            key: 'Card stylet: delayLongPress is 20000(延时长按10秒)',
             value: {
               mode:'contained' as 'elevated' | 'outlined' | 'contained',
               onLongPress:_onLongPress,
-              delayLongPress:100000
+              delayLongPress:20000
             }
         },
         {

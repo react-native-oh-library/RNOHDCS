@@ -127,7 +127,7 @@ export function AvatarTest() {
             value: {
               style:styles.avatar,
               size:60,
-              source:require('../assets/images/avatar.png'),
+              source:require('../assets/images/avataraaaa.png'),
               onError:_onError
             }
           },
@@ -168,7 +168,7 @@ export function AvatarTest() {
             }
           },
           {
-            key: 'Avatar.Image fuction: onLoadStart = {_onLoadStart}',
+            key: 'Avatar.Image fuction: onProgress = {_onProgress}',
             value: {
               style:styles.avatar,
               size:60,

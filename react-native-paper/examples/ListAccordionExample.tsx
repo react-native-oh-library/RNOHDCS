@@ -6,9 +6,10 @@ import ScreenWrapper from '../ScreenWrapper';
 import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
 import { ScrollView } from 'react-native-harmony';
 import { Item } from 'react-native-paper/lib/typescript/components/Drawer/Drawer';
+import { EllipsizeProp } from 'react-native-paper/lib/typescript/types';
 
 type State = string | number | undefined;
-
+type EllipsizeMode = 'head' | 'middle' | 'tail' | 'clip'
 function ListAccordionDemo() { 
   
 
@@ -18,7 +19,7 @@ function ListAccordionDemo() {
   };
 
   const _handlePress1 = () => {
-
+    console.info('fuction handlePress')
   };
   const _handLongPress = () => {
     console.info('fuction handLongPress')
@@ -126,6 +127,14 @@ function ListAccordionDemo() {
         title:'Accordions',
         left:(props: { color: string }) => <List.Icon {...props} icon="folder" />,
         style:{backgroundColor:MD2Colors.red100}
+      }
+    },
+    {
+      key: ' ListAccordion titleStyle:{backgroundColor:MD2Colors.red100}',
+      value: {
+        title:'Accordions',
+        left:(props: { color: string }) => <List.Icon {...props} icon="folder" />,
+        titleStyle:{backgroundColor:MD2Colors.red100}
       }
     },
     {
@@ -253,6 +262,14 @@ function ListAccordionDemo() {
         pointerEvents:'none' as  "box-none" | "none" | "box-only" | "auto"
       }
     },
+    {
+      key: ' ListAccordion children :<List.Item title="First item" />',
+      value: {
+        title:'Accordions',
+        description:'Describes the expandable list item ',
+        pointerEvents:'none' as  "box-none" | "none" | "box-only" | "auto"
+      }
+    },
   ]
 
   const [expandedId, setExpandedId] = React.useState<State>(undefined);
@@ -339,7 +356,7 @@ function ListAccordionDemo() {
       }
     },
     {
-      key: ' ListSection style:{ colors: { primary:"green"} }',
+      key: ' ListSection theme:{ colors: { primary:"green"} }',
       value: {
         theme :{ colors: { primary: 'green' } }
       }
@@ -354,7 +371,7 @@ function ListAccordionDemo() {
       }
     },
     {
-      key: ' Listsubheader style:{ colors: { primary: "green" } }',
+      key: ' Listsubheader theme:{ colors: { primary: "green" } }',
       value: {
         theme :{ colors: { primary: 'green' } }
       }
@@ -369,6 +386,257 @@ function ListAccordionDemo() {
       key: ' Listsubheader style:maxFontSizeMultiplier ={2}(该属性用于多设备适配)',
       value: {
         maxFontSizeMultiplier :2
+      }
+    },
+  ]
+
+  const ListItemProps = [
+    {
+      key: ' ListItemProps style : title= First Item',
+      value: {
+        title :'First Item',
+        description:'Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />
+      }
+    },
+    {
+      key: ' ListItemProps style :description = Item description',
+      value: {
+        title :'First Item',
+        description:'Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />
+      }
+    },
+    {
+      key: ' ListItemProps style : left=(props: { color: string}) =><List.Icon {...props} icon="folder" />',
+      value: {
+        title :'First Item',
+        description:'Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />
+      }
+    },
+    {
+      key: ' ListItemProps style : right=(props: { color: string}) =><List.Icon {...props} icon="folder" />',
+      value: {
+        title :'First Item',
+        description:'Item description',
+        right: (props: { color: string}) =><List.Icon {...props} icon="folder" />
+      }
+    },
+    {
+      key: ' ListItemProps fuction:onPress = _handlePress1',
+      value: {
+        title :'First Item',
+        description:'Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />,
+        onPress:_handlePress1
+      }
+    },
+    {
+      key: ' ListItemProps style:theme={ colors: { primary:"green"} }',
+      value: {
+        title :'First Item',
+        description:'Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />,
+        theme :{ colors: { primary: 'green' } }
+      }
+    },
+    {
+      key: ' ListItemProps style={backgroundColor:MD2Colors.red100}',
+      value: {
+        title :'First Item',
+        description:'Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />,
+        style :{backgroundColor:MD2Colors.red100}
+      }
+    },
+    {
+      key: ' ListItemProps contentStyle={backgroundColor:MD2Colors.red100}',
+      value: {
+        title :'First Item',
+        description:'Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />,
+        contentStyle :{backgroundColor:MD2Colors.red100}
+      }
+    },
+    {
+      key: ' ListItemProps titleStyle={backgroundColor:MD2Colors.red100}',
+      value: {
+        title :'First Item',
+        description:'Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />,
+        titleStyle :{backgroundColor:MD2Colors.red100}
+      }
+    },
+    {
+      key: ' ListItemProps descriptionStyle={backgroundColor:MD2Colors.red100}',
+      value: {
+        title :'First Item',
+        description:'Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />,
+        descriptionStyle :{backgroundColor:MD2Colors.red100}
+      }
+    },
+    {
+      key: ' ListItemProps titleNumberOfLines=1',
+      value: {
+        title :'First Item First Item First Item First Item First Item First Item First Item First Item',
+        description:'Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />,
+        titleNumberOfLines :1
+      }
+    },
+    {
+      key: ' ListItemProps titleNumberOfLines=2',
+      value: {
+        title :'First Item First Item First Item First Item First Item First Item First Item First Item',
+        description:'Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />,
+        titleNumberOfLines :2
+      }
+    },
+    {
+      key: ' ListItemProps descriptionNumberOfLines=1',
+      value: {
+        title :'First Item ',
+        description:'Item description Item description Item description Item description Item description Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />,
+        descriptionNumberOfLines :1
+      }
+    },
+    {
+      key: ' ListItemProps descriptionNumberOfLines=2',
+      value: {
+        title :'First Item ',
+        description:'Item description Item description Item description Item description Item description Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />,
+        descriptionNumberOfLines :2
+      }
+    },
+    {
+      key: ' ListItemProps titleEllipsizeMode=head',
+      value: {
+        title :'First Item First Item First Item First Item First Item First Item First Item First Item',
+        description:'Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />,
+        titleEllipsizeMode :'head' as EllipsizeProp,
+        titleNumberOfLines :1
+      }
+    },
+    {
+      key: ' ListItemProps titleEllipsizeMode=middle',
+      value: {
+        title :'First Item First Item First Item First Item First Item First Item First Item First Item',
+        description:'Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />,
+        titleEllipsizeMode :'middle' as EllipsizeProp,
+        titleNumberOfLines :1
+      }
+    },
+    {
+      key: ' ListItemProps titleEllipsizeMode=tail',
+      value: {
+        title :'First Item First Item First Item First Item First Item First Item First Item First Item',
+        description:'Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />,
+        titleEllipsizeMode :'tail' as EllipsizeProp,
+        titleNumberOfLines :1
+      }
+    },
+    {
+      key: ' ListItemProps titleEllipsizeMode=clip',
+      value: {
+        title :'First Item First Item First Item First Item First Item First Item First Item First Item',
+        description:'Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />,
+        titleEllipsizeMode :'clip' as EllipsizeProp,
+        titleNumberOfLines :1
+      }
+    },
+    {
+      key: ' ListItemProps descriptionEllipsizeMode=head',
+      value: {
+        title :'First Item ',
+        description:'Item description Item description Item description Item description Item description Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />,
+        descriptionNumberOfLines :1,
+        descriptionEllipsizeMode:'head' as EllipsizeProp
+      }
+    },
+    {
+      key: ' ListItemProps descriptionEllipsizeMode=middle',
+      value: {
+        title :'First Item ',
+        description:'Item description Item description Item description Item description Item description Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />,
+        descriptionNumberOfLines :1,
+        descriptionEllipsizeMode:'middle' as EllipsizeProp
+      }
+    },
+    {
+      key: ' ListItemProps descriptionEllipsizeMode=tail',
+      value: {
+        title :'First Item ',
+        description:'Item description Item description Item description Item description Item description Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />,
+        descriptionNumberOfLines :1,
+        descriptionEllipsizeMode:'tail' as EllipsizeProp
+      }
+    },
+    {
+      key: ' ListItemProps descriptionEllipsizeMode=clip',
+      value: {
+        title :'First Item ',
+        description:'Item description Item description Item description Item description Item description Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />,
+        descriptionNumberOfLines :1,
+        descriptionEllipsizeMode:'clip' as EllipsizeProp
+      }
+    },
+
+    {
+      key: ' ListItemProps titleMaxFontSizeMultiplier=1',
+      value: {
+        title :'First Item ',
+        description:'Item description Item description Item description Item description Item description Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />,
+        titleMaxFontSizeMultiplier:1
+      }
+    },
+    {
+      key: ' ListItemProps titleMaxFontSizeMultiplier=2',
+      value: {
+        title :'First Item ',
+        description:'Item description Item description Item description Item description Item description Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />,
+        titleMaxFontSizeMultiplier:2
+      }
+    },
+    {
+      key: ' ListItemProps descriptionMaxFontSizeMultiplier=1',
+      value: {
+        title :'First Item ',
+        description:'Item description Item description Item description Item description Item description Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />,
+        descriptionMaxFontSizeMultiplier:1
+      }
+    },
+    {
+      key: ' ListItemProps testID=testID1',
+      value: {
+        title :'First Item ',
+        description:'Item description Item description Item description Item description Item description Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />,
+        testID:'testID1'
+      }
+    },
+    {
+      key: ' ListItemProps testID=testID2',
+      value: {
+        title :'First Item ',
+        description:'Item description Item description Item description Item description Item description Item description',
+        left: (props: { color: string}) =><List.Icon {...props} icon="folder" />,
+        testID:'testID2'
       }
     },
   ]
@@ -418,6 +686,13 @@ function ListAccordionDemo() {
           </TestCase>
           );
       })},
+        {ListItemProps.map((item) => {
+          return (
+            <TestCase itShould={item.key}  key={item.key}>
+                <List.Item {...item.value}/>
+            </TestCase>
+          );
+      })},
       {ListIconProps.map((item) => {
           return (
             <TestCase itShould={item.key}  key={item.key}>
@@ -454,61 +729,5 @@ function ListAccordionDemo() {
   )
 }
 
-const ListAccordionExample  = () => {
-
-  const [expanded, setExpanded] = React.useState<boolean>(true);
-  const _handlePress = () => {
-    setExpanded(!expanded);
-  };
-
-  return (
-    <ScreenWrapper>
-       <List.Section>
-        <List.Accordion
-          left={(props) => <List.Icon {...props} icon="folder" />}
-          title="Expandable list item"
-        >
-          <List.Item title="List item 1" />
-          <List.Item title="List item 2" />
-        </List.Accordion>
-        <List.Accordion
-          left={(props) => <List.Icon {...props} icon="folder" />}
-          title="Start expanded"
-          expanded={expanded}
-          onPress={_handlePress}
-        >
-          <List.Item title="List item 1" />
-        </List.Accordion>
-      </List.Section>
-      <Divider />
-      <List.Section title="Expandable & multiline list item">
-        <List.Accordion
-          title="Expandable list item"
-          description="Describes the expandable list item"
-        >
-          <List.Item title="List item 1" />
-          <List.Item title="List item 2" />
-        </List.Accordion>
-      </List.Section>
-      <Divider />
-      <List.Section title="Expandable list with icons">
-        <List.Accordion
-          left={(props) => <List.Icon {...props} icon="star" />}
-          title="Accordion item 1"
-        >
-          <List.Item
-            left={(props) => <List.Icon {...props} icon="thumb-up" />}
-            title="List item 1"
-          />
-          <List.Item
-            left={(props) => <List.Icon {...props} icon="thumb-down" />}
-            title="List item 2"
-          />
-        </List.Accordion>
-      </List.Section>
-    </ScreenWrapper>
-  )
-
-};
 
 export default ListAccordionDemo ;

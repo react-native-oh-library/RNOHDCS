@@ -91,6 +91,14 @@ function SurfaceTextDemo() {
         testID:'SurfaceText1'
       }
     },
+    {
+      key: 'SurfaceTextProps style:children =<Text>Surface</Text>',
+      value: {
+        style:styles.surface,
+        elevation:5 as 0 | 1 | 2 | 3 | 4 | 5 ,
+        testID:'SurfaceText1'
+      }
+    },
   ]
 
     // 创建一个ref，它将被用来引用View组件  

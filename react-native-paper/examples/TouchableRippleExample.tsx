@@ -104,6 +104,15 @@ function TouchableRippleDemo() {
       }
     },
     {
+      key: 'TouchableRipple fuction:onLongPress={_onLongPress}',
+      value: {
+        disabled:false,
+        style:styles.ripple,
+        rippleColor:MD2Colors.red100,
+        onLongPress:_onLongPress
+      }
+    },
+    {
       key: 'TouchableRipple style:rippleColor={MD2Colors.red100}',
       value: {
         disabled:false,
@@ -139,6 +148,15 @@ function TouchableRippleDemo() {
         rippleColor:MD2Colors.red100,
         underlayColor:MD2Colors.blue100,
         theme:{ colors: { primary: 'green' } },
+      }
+    },
+    {
+      key: 'TouchableRipple style:children =<Text variant="bodyMedium">Press anywhere</Text>',
+      value: {
+        disabled:false,
+        style:styles.ripple,
+        rippleColor:MD2Colors.red100,
+        underlayColor:MD2Colors.blue100,
       }
     },
   ]

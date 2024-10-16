@@ -34,6 +34,12 @@ export function CheckboxText() {
             } 
         },
         {
+            key: 'Checkbox style: status  is indeterminate',
+            value: {
+                status:'indeterminate' as status,
+            } 
+        },
+        {
             key: 'Checkbox function: _onPress',
             value: {
                 status:_getVisible('checkedDefault1') ? 'checked' : 'unchecked' as status,
@@ -90,7 +96,160 @@ export function CheckboxText() {
         },
     ]
 
-    const CheckboxAndroidProps = [
+    const ChecAndroidkboxProps = [
+        {
+            key: 'ChecAndroidkboxProps style: status  is checked/unchecked',
+            value: {
+                status:_getVisible('ChecAndroid1') ? 'checked' : 'unchecked' as status,
+                onPress:_showCheckbox('ChecAndroid1'),
+            } 
+        },
+        {
+            key: 'ChecAndroidkboxProps style: status = {indeterminate}',
+            value: {
+                status:'indeterminate' as status
+            } 
+        },
+        {
+            key: 'ChecAndroidkboxProps fuction: onPress = {_showCheckbox("ChecAndroids")}',
+            value: {
+                status:_getVisible('ChecAndroids') ? 'checked' : 'unchecked' as status,
+                onPress:_showCheckbox('ChecAndroid1'),
+            } 
+        },
+        {
+            key: 'ChecAndroidkboxProps style: disabled  is true',
+            value: {
+                status:_getVisible('ChecAndroid2') ? 'checked' : 'unchecked' as status,
+                onPress:_showCheckbox('ChecAndroid2'),
+                disabled:true
+            } 
+        },
+        {
+            key: 'ChecAndroidkboxProps style: disabled  is false',
+            value: {
+                status:_getVisible('ChecAndroid3') ? 'checked' : 'unchecked' as status,
+                onPress:_showCheckbox('ChecAndroid3'),
+                disabled:false
+            } 
+        },
+        {
+            key: 'ChecAndroidkboxProps style: uncheckedColor is MD2Colors.red100',
+            value: {
+                status:_getVisible('ChecAndroid4') ? 'checked' : 'unchecked' as status,
+                onPress:_showCheckbox('ChecAndroid4'),
+                uncheckedColor:MD2Colors.red100
+            } 
+        },
+        {
+            key: 'ChecAndroidkboxProps style: color is MD2Colors.red100',
+            value: {
+                status:_getVisible('ChecAndroid5') ? 'checked' : 'unchecked' as status,
+                onPress:_showCheckbox('ChecAndroid5'),
+                color:MD2Colors.red100
+            } 
+        },
+        {
+            key: 'ChecAndroidkboxProps style: theme  is { colors: { primary: "green" } }',
+            value: {
+                status:_getVisible('ChecAndroid6') ? 'checked' : 'unchecked' as status,
+                onPress:_showCheckbox('ChecAndroid6'),
+                theme :{ colors: { primary: 'green' } }
+            } 
+        },
+        {
+            key: 'ChecAndroidkboxProps style: testID  is testID1',
+            value: {
+                status:_getVisible('ChecAndroid6') ? 'checked' : 'unchecked' as status,
+                onPress:_showCheckbox('ChecAndroid6'),
+                testID:'testID1'
+            } 
+        },
+        {
+            key: 'ChecAndroidkboxProps style: testID  is testID2',
+            value: {
+                status:_getVisible('ChecAndroid6') ? 'checked' : 'unchecked' as status,
+                onPress:_showCheckbox('ChecAndroid6'),
+                testID:'testID2'
+            } 
+        },
+
+    ]
+
+
+    const ChecIOSkboxProps = [
+        {
+            key: 'ChecIOSkboxProps style: status  is checked/unchecked',
+            value: {
+                status:_getVisible('ChecIOS1') ? 'checked' : 'unchecked' as status,
+                onPress:_showCheckbox('ChecIOS1'),
+            } 
+        },
+        {
+            key: 'ChecIOSkboxProps style: status = {indeterminate}',
+            value: {
+                status:'indeterminate' as status
+            } 
+        },
+        {
+            key: 'ChecIOSkboxProps fuction: onPress = {_showCheckbox("ChecIOSs")}',
+            value: {
+                status:_getVisible('ChecIOSs') ? 'checked' : 'unchecked' as status,
+                onPress:_showCheckbox('ChecIOSs'),
+            } 
+        },
+        {
+            key: 'ChecIOSkboxProps style: disabled  is true',
+            value: {
+                status:_getVisible('ChecIOSs2') ? 'checked' : 'unchecked' as status,
+                onPress:_showCheckbox('ChecIOSs2'),
+                disabled:true
+            } 
+        },
+        {
+            key: 'ChecIOSkboxProps style: disabled  is false',
+            value: {
+                status:_getVisible('ChecIOSs3') ? 'checked' : 'unchecked' as status,
+                onPress:_showCheckbox('ChecIOSs3'),
+                disabled:false
+            } 
+        },
+        {
+            key: 'ChecIOSkboxProps style: color is MD2Colors.red100',
+            value: {
+                status:_getVisible('ChecIOSs5') ? 'checked' : 'unchecked' as status,
+                onPress:_showCheckbox('ChecIOSs5'),
+                color:MD2Colors.red100
+            } 
+        },
+        {
+            key: 'ChecIOSkboxProps style: theme  is { colors: { primary: "green" } }',
+            value: {
+                status:_getVisible('ChecIOSs6') ? 'checked' : 'unchecked' as status,
+                onPress:_showCheckbox('ChecIOSs6'),
+                theme :{ colors: { primary: 'green' } }
+            } 
+        },
+        {
+            key: 'ChecIOSkboxProps style: testID  is testID1',
+            value: {
+                status:_getVisible('ChecIOSs6') ? 'checked' : 'unchecked' as status,
+                onPress:_showCheckbox('ChecIOSs6'),
+                testID:'testID1'
+            } 
+        },
+        {
+            key: 'ChecIOSkboxProps style: testID  is testID2',
+            value: {
+                status:_getVisible('ChecIOSs6') ? 'checked' : 'unchecked' as status,
+                onPress:_showCheckbox('ChecIOSs6'),
+                testID:'testID2'
+            } 
+        },
+
+    ]
+
+    const CheckboxItemProps = [
         {
             key: 'Checkbox.Item style: status  is checked/unchecked',
             value: {
@@ -332,13 +491,25 @@ export function CheckboxText() {
                 {CheckboxProps.map((item) => {
                     return (
                     <TestCase itShould={item.key}  key={item.key}>
-                        <Checkbox {...item.value}
-                        />
+                        <Checkbox {...item.value}/>
                     </TestCase>
                     );
                 })} 
-
-                {CheckboxAndroidProps.map((item) => {
+                {ChecAndroidkboxProps.map((item) => {
+                    return (
+                    <TestCase itShould={item.key}  key={item.key}>
+                        <Checkbox.Android {...item.value}/>
+                    </TestCase>
+                    );
+                })} 
+                {ChecIOSkboxProps.map((item) => {
+                    return (
+                    <TestCase itShould={item.key}  key={item.key}>
+                        <Checkbox.Android {...item.value}/>
+                    </TestCase>
+                    );
+                })} 
+                {CheckboxItemProps.map((item) => {
                     return (
                     <TestCase itShould={item.key}  key={item.key}>
                         <Checkbox.Item {...item.value}

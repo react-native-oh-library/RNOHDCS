@@ -309,7 +309,7 @@ export function AppbarDemo() {
     <Tester> 
     <ScrollView>
      <TestSuite name='Appbar'>
-       <TestCase  itShould='Appbar style rippleColor is MD2Colors.red500'> 
+       <TestCase  itShould='Appbar style safeAreaInsets = {bottom}'> 
        <Appbar safeAreaInsets={{ bottom }}>
         <Appbar.Action icon="archive" onPress={() => {}} />
         <Appbar.Action icon="email" onPress={() => {}} />
@@ -370,7 +370,7 @@ export function AppbarDemo() {
           </Appbar.Header>
             <Button onPress={measureView} >Press me</Button>  
          </TestCase>
-         <TestCase itShould={'Appbar.Action style:ref={viewRef}'}  >
+         <TestCase itShould={'Appbar.Action style:titleRef={viewRef}'}  >
           <Appbar.Header>
             <Appbar.Content title="Title" titleRef={viewRef}/>
           </Appbar.Header>
