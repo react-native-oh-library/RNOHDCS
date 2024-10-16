@@ -103,7 +103,7 @@ KLH49mC1YcDcvaJt6C/wSB3oAcJXQkzBwN5nSxxn89zi3m875zG1Kvpj3KaBOzBN
 06v4n5pCSJDPebsNaecm5HETSwAfsg==
 -----END PRIVATE KEY-----`;
 
-const keystore = require('./ca/server-keystore.p12');
+const keystore = require('../ca/server-keystore.p12');
 
 let instanceNumber = 0;
 
