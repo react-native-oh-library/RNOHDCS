@@ -96,7 +96,7 @@ export class GeojsonTest extends React.Component<any, any> {
         polylineProps[key] = this.state[key] ? "rgba(0,255,0, 1)" : '#000';
         break;
       case 'strokeWidth':
-        polylineProps[key] = this.state[key] ? 10 : 1;
+        polylineProps[key] = this.state[key] ? 30 : 1;
         break;
       case 'color':
         polylineProps[key] = this.state[key] ? '#0000ff' : undefined;
@@ -111,7 +111,7 @@ export class GeojsonTest extends React.Component<any, any> {
         polylineProps[key] = this.state[key] ? 'square' : undefined;
         break;
       case 'lineJoin':
-        polylineProps[key] = this.state[key] ? 'miter' : undefined;
+        polylineProps[key] = this.state[key] ? 'miter' : 'round';
         break;
       case 'miterLimit':
         polylineProps[key] = this.state[key] ? 30 : 0;
@@ -145,6 +145,9 @@ export class GeojsonTest extends React.Component<any, any> {
   render() {
     const propList = (
       <TestSuite name="属性">
+        <TestCase itShould="geojson: geojson数据--必需属性，以下可选属性都需要该属性配合使用，图中显示已设置该属性值">
+          <View></View>
+        </TestCase>
         <TestCase itShould="strokeColor: 线颜色">
           <Switch 
             value={this.state.strokeColor} 
@@ -258,6 +261,16 @@ export class GeojsonTest extends React.Component<any, any> {
               geojson={GEOJSON_DATA} // yes geojson数据，必填属性
               {...geojsonProps}
             />
+            <Polygon
+              coordinates={[
+                { latitude: 34.896956, longitude: 108.433821 }, 
+                { latitude: 34.896956, longitude: 108.433821 - 0.1 }, 
+                { latitude: 34.896956 - 0.05 , longitude: 108.433821 - 0.1 }, 
+                { latitude: 34.896956 - 0.05, longitude: 108.433821 },
+              ]}
+              fillColor="rgba(0,255,0, 0.2)"
+              zIndex={3}
+            ></Polygon>
           </MapView>
         </View>
         {/* @ts-ignore */}

@@ -129,7 +129,7 @@ export class MapViewTest extends React.Component<any, any> {
         break;
       case 'mapType':
         if (this.state[key]) {
-          mapViewProps[key] = 'none';
+          mapViewProps[key] = 'terrain';
         }
         break;
       case 'customMapStyle':
@@ -659,7 +659,7 @@ export class MapViewTest extends React.Component<any, any> {
         <View style={styles.container}>
           {mapView}
         </View>
-        <View style={{ height: 50 }}>
+        <View style={{ minHeight: 50 }}>
           <Text>{this.state.apiCallbackText}</Text>
         </View>
         {/* @ts-ignore */}

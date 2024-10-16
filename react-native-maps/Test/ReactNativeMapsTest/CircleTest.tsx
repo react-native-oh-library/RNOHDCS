@@ -77,6 +77,12 @@ export class CircleTest extends React.Component<any, any> {
   render() {
     const propList = (
       <TestSuite name="属性">
+        <TestCase itShould="center: 中心点--必需属性，以下可选属性都需要该属性配合使用，图中显示已设置该属性值">
+          <View></View>
+        </TestCase>
+        <TestCase itShould="radius: 半径--必需属性，以下可选属性都需要该属性配合使用，图中显示已设置该属性值">
+          <View></View>
+        </TestCase>
         <TestCase itShould="strokeWidth: 线宽度">
           <Switch 
             value={this.state.strokeWidth} 

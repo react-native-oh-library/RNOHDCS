@@ -124,6 +124,9 @@ export class MarkerTest extends React.Component<any, any> {
   render() {
     const propList = (
       <TestSuite name="属性">
+        <TestCase itShould="coordinate: 经纬度坐标--必需属性，以下可选属性都需要该属性配合使用，图中显示已设置该属性值">
+          <View></View>
+        </TestCase>
         <TestCase itShould="title: 标题, 需要开启tappable,点击呈现">
           <Switch 
             value={this.state.title} 
