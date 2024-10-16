@@ -69,6 +69,13 @@ function TooltipDemo() {
         theme:{ colors: { primary: 'green' } },
       }
     },
+    {
+      key: 'Tooltipp style:children=<IconButton icon="camera" selected size={24} onPress={() => {}} />',
+      value: {
+        title:"Selected Camera",
+        theme:{ colors: { primary: 'green' } },
+      }
+    },
   ]
 
   return (

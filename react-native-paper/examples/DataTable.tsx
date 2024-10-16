@@ -395,32 +395,32 @@ export function DataTableText() {
 
   const DataTableRowProps = [
     {
-      key: 'DataTableHeader style: children  is <DataTable.Cell numeric>1</DataTable.Cell>',
+      key: 'DataTableRowProps style: children  is <DataTable.Cell numeric>1</DataTable.Cell>',
       value: {
         styles:styles.first
       }
     },
     {
-      key: 'DataTableHeader fuction: onPress',
+      key: 'DataTableRowProps fuction: onPress',
       value: {
         styles:styles.first,
         onPress:_onPress
       }
     },
     {
-      key: 'DataTableHeader styles: {backgroundColor:MD2Colors.red100}',
+      key: 'DataTableRowProps styles: {backgroundColor:MD2Colors.red100}',
       value: {
         style:{backgroundColor:MD2Colors.red100},
       }
     },
     {
-      key: 'DataTableHeader styles: { colors: { primary: "green" } }',
+      key: 'DataTableRowProps theme: { colors: { primary: "green" } }',
       value: {
         theme:{ colors: { primary: 'green' } }
       }
     },
     {
-      key: 'DataTableHeader styles: pointerEvents is auto',
+      key: 'DataTableRowProps styles: pointerEvents is auto',
       value: {
         pointerEvents:'auto' as "box-none" | "none" | "box-only" | "auto"
       }

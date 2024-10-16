@@ -47,26 +47,26 @@ export function ChipText() {
     console.info('chip onPressIn')
   }
 
-  const CheckboxProps = [
+  const ChipProps = [
     {
-        key: 'Checkbox style: mode  is flat',
+        key: 'Chip style: mode  is flat',
         value: {
           icon:'information',
           Type:'flat'
         } ,
-        text:'Example Chip'
+        text:'mode  is flat'
     },
     {
-      key: 'Checkbox style: mode  is outlined',
+      key: 'Chip style: mode  is outlined',
       value: {
         icon:'information',
         Type:'outlined',
         style:[styles.chip]
       },
-      text:'Chip Content' 
+      text:'mode  is outlined' 
      },
      {
-      key: 'Checkbox style: children  is children  Content',
+      key: 'Chip style: children  is children  Content',
       value: {
         icon:'information',
         Type:'outlined',
@@ -75,7 +75,7 @@ export function ChipText() {
       text:'children  Content' 
      },
      {
-      key: 'Checkbox style: icon  is heart',
+      key: 'Chip style: icon  is heart',
       value: {
         icon:'heart',
         Type:'outlined',
@@ -84,7 +84,7 @@ export function ChipText() {
       text:'Chip Content' 
      },
      {
-      key: 'Checkbox style: icon  is <Image source={require("../assets/images/avatar.png")} accessibilityIgnoresInvertColors/>',
+      key: 'Chip style: icon  is <Image source={require("../assets/images/avatar.png")} accessibilityIgnoresInvertColors/>',
       value: {
         style:[styles.chip],
         avatar:<Image
@@ -95,7 +95,7 @@ export function ChipText() {
       text:'Avatar(selected)' 
      },
      {
-      key: 'Checkbox style: closeIcon is arrow-down',
+      key: 'Chip style: closeIcon is arrow-down',
       value: {
         closeIcon:'arrow-down',
         style:[styles.chip],
@@ -105,7 +105,7 @@ export function ChipText() {
       text:'With custom close icon' 
      },
      {
-      key: 'Checkbox style: selected is true',
+      key: 'Chip style: selected is true',
       value: {
         mode:'outlined' as 'flat' | 'outlined',
         style:[styles.chip],
@@ -115,7 +115,7 @@ export function ChipText() {
       text:'With selected overlay' 
      },
      {
-      key: 'Checkbox style: selected is false',
+      key: 'Chip style: selected is false',
       value: {
         mode:'outlined' as 'flat' | 'outlined',
         style:[styles.chip],
@@ -125,7 +125,7 @@ export function ChipText() {
       text:'With selected overlay' 
      },
      {
-      key: 'Checkbox style: selectedColor is MD2Colors.purple900',
+      key: 'Chip style: selectedColor is MD2Colors.purple900',
       value: {
         mode:'outlined' as 'flat' | 'outlined',
         style:[styles.chip],
@@ -135,7 +135,7 @@ export function ChipText() {
       text:'With selected overlay' 
      },
      {
-      key: 'Checkbox style: showSelectedOverlay  is true',
+      key: 'Chip style: showSelectedOverlay  is true',
       value: {
         mode:'outlined' as 'flat' | 'outlined',
         style:[styles.chip],
@@ -145,7 +145,7 @@ export function ChipText() {
       text:'With selected overlay' 
      },
      {
-      key: 'Checkbox style: showSelectedOverlay  is false',
+      key: 'Chip style: showSelectedOverlay  is false',
       value: {
         mode:'outlined' as 'flat' | 'outlined',
         style:[styles.chip],
@@ -155,7 +155,7 @@ export function ChipText() {
       text:'With selected overlay' 
      },
      {
-      key: 'Checkbox style: showSelectedCheck  is true',
+      key: 'Chip style: showSelectedCheck  is true',
       value: {
         mode:'outlined' as 'flat' | 'outlined',
         style:[styles.chip],
@@ -165,7 +165,7 @@ export function ChipText() {
       text:'With selected overlay' 
      },
      {
-      key: 'Checkbox style: showSelectedCheck  is false',
+      key: 'Chip style: showSelectedCheck  is false',
       value: {
         mode:'outlined' as 'flat' | 'outlined',
         style:[styles.chip],
@@ -175,7 +175,7 @@ export function ChipText() {
       text:'With selected overlay' 
      },
      {
-      key: 'Checkbox style: rippleColor  is false',
+      key: 'Chip style: rippleColor  is MD2Colors.red100',
       value: {
         style:[styles.chip],
         selected:true,
@@ -186,7 +186,7 @@ export function ChipText() {
       text:'With selected overlay' 
      },
      {
-      key: 'Checkbox style: disabled  is true',
+      key: 'Chip style: disabled  is true',
       value: {
         style:[styles.chip],
         selected:true,
@@ -198,7 +198,7 @@ export function ChipText() {
       text:'With selected overlay' 
      },
      {
-      key: 'Checkbox style: disabled  is false',
+      key: 'Chip style: disabled  is false',
       value: {
         style:[styles.chip],
         selected:true,
@@ -211,7 +211,7 @@ export function ChipText() {
       text:'With selected overlay' 
      },
      {
-      key: 'Checkbox style: background  is {color:MD2Colors.red100}',
+      key: 'Chip style: background  is {color:MD2Colors.red100}',
       value: {
         style:[styles.chip,{backgroundColor:MD2Colors.red100}],
         selected:true,
@@ -222,7 +222,7 @@ export function ChipText() {
       text:'With selected overlay' 
      },
      {
-      key: 'Checkbox style: accessibilityLabel  is accessibilityLabel',
+      key: 'Chip style: accessibilityLabel  is accessibilityLabel',
       value: {
         mode:"outlined" as 'flat' | 'outlined',
         style:[styles.chip],
@@ -231,7 +231,7 @@ export function ChipText() {
       text:'With selected overlay' 
      },
      {
-      key: 'Checkbox style: accessibilityLabel  is Close icon accessibility label',
+      key: 'Chip style: accessibilityLabel  is Close icon accessibility label',
       value: {
         mode:"outlined" as 'flat' | 'outlined',
         style:[styles.chip],
@@ -241,7 +241,7 @@ export function ChipText() {
       text:'With selected overlay' 
      },
      {
-      key: 'Checkbox fuction: onPress',
+      key: 'Chip fuction: onPress',
       value: {
         mode:"outlined" as 'flat' | 'outlined',
         style:[styles.chip],
@@ -250,7 +250,7 @@ export function ChipText() {
       text:'With selected overlay' 
      },
      {
-      key: 'Checkbox fuction: onLongPress',
+      key: 'Chip fuction: onLongPress',
       value: {
         mode:"outlined" as 'flat' | 'outlined',
         style:[styles.chip],
@@ -259,7 +259,7 @@ export function ChipText() {
       text:'With selected overlay' 
      },
      {
-      key: 'Checkbox fuction: onPressIn',
+      key: 'Chip fuction: onPressIn',
       value: {
         mode:"outlined" as 'flat' | 'outlined',
         style:[styles.chip],
@@ -268,7 +268,7 @@ export function ChipText() {
       text:'With selected overlay' 
      },
      {
-      key: 'Checkbox fuction: onPressOut',
+      key: 'Chip fuction: onPressOut',
       value: {
         mode:"outlined" as 'flat' | 'outlined',
         style:[styles.chip],
@@ -277,7 +277,7 @@ export function ChipText() {
       text:'With selected overlay' 
      },
      {
-      key: 'Checkbox fuction: onClose',
+      key: 'Chip fuction: onClose',
       value: {
         mode:"outlined" as 'flat' | 'outlined',
         style:[styles.chip],
@@ -286,7 +286,7 @@ export function ChipText() {
       text:'With selected overlay' 
      },
      {
-      key: 'Checkbox style: delayLongPress is 10000(延时10秒)',
+      key: 'Chip style: delayLongPress is 10000(延时10秒)',
       value: {
         mode:"outlined" as 'flat' | 'outlined',
         style:[styles.chip],
@@ -296,7 +296,7 @@ export function ChipText() {
       text:'With selected overlay' 
      },
      {
-      key: 'Checkbox style: delayLongPress is 1000(延时1秒)',
+      key: 'Chip style: delayLongPress is 1000(延时1秒)',
       value: {
         mode:"outlined" as 'flat' | 'outlined',
         style:[styles.chip],
@@ -306,7 +306,7 @@ export function ChipText() {
       text:'With selected overlay' 
      },
      {
-      key: 'Checkbox style: compact is true',
+      key: 'Chip style: compact is true',
       value: {
         mode:"outlined" as 'flat' | 'outlined',
         style:[styles.chip],
@@ -315,7 +315,7 @@ export function ChipText() {
       text:'Compact chip' 
      },
      {
-      key: 'Checkbox style: compact is false',
+      key: 'Chip style: compact is false',
       value: {
         mode:"outlined" as 'flat' | 'outlined',
         style:[styles.chip],
@@ -325,7 +325,7 @@ export function ChipText() {
       text:'Compact chip' 
      },
      {
-      key: 'Checkbox style: textStyle is {styles.tiny}',
+      key: 'Chip style: textStyle is {styles.tiny}',
       value: {
         style:[styles.chip],
         onPress:_onPress,
@@ -334,7 +334,7 @@ export function ChipText() {
       text:'With custom text' 
      },
      {
-      key: 'Checkbox style: style is [styles.chip]',
+      key: 'Chip style: style is [styles.chip]',
       value: {
         style:[styles.chip],
         onPress:_onPress,
@@ -342,7 +342,7 @@ export function ChipText() {
       text:'With custom text' 
      },
      {
-      key: 'Checkbox style: theme is { colors: { primary: "green" } }',
+      key: 'Chip style: theme is { colors: { primary: "green" } }',
       value: {
         style:[styles.chip],
         onPress:_onPress,
@@ -351,7 +351,7 @@ export function ChipText() {
       text:'With custom text' 
      },
      {
-      key: 'Checkbox style: testID is chip ',
+      key: 'Chip style: testID is chip ',
       value: {
         style:[styles.chip],
         onPress:_onPress,
@@ -360,7 +360,7 @@ export function ChipText() {
       text:'With custom text' 
      },
      {
-      key: 'Checkbox style: testID is chip1',
+      key: 'Chip style: testID is chip1',
       value: {
         style:[styles.chip],
         onPress:_onPress,
@@ -369,7 +369,7 @@ export function ChipText() {
       text:'With custom text' 
      },
      {
-      key: 'Checkbox style: ellipsizeMode is head',
+      key: 'Chip style: ellipsizeMode is head',
       value: {
         mode:"outlined" as 'flat' | 'outlined',
         style:[styles.bigTextFlex],
@@ -381,7 +381,7 @@ export function ChipText() {
       text:' With a very big text: React Native Paper is a high-quality,standard-compliant Material Design library that has you covered inall major use-cases.' 
      },
      {
-      key: 'Checkbox style: ellipsizeMode is middle',
+      key: 'Chip style: ellipsizeMode is middle',
       value: {
         mode:"outlined" as 'flat' | 'outlined',
         style:[styles.bigTextFlex],
@@ -393,7 +393,7 @@ export function ChipText() {
       text:' With a very big text: React Native Paper is a high-quality,standard-compliant Material Design library that has you covered inall major use-cases.' 
      },
      {
-      key: 'Checkbox style: ellipsizeMode is tail',
+      key: 'Chip style: ellipsizeMode is tail',
       value: {
         mode:"outlined" as 'flat' | 'outlined',
         style:[styles.bigTextFlex],
@@ -405,7 +405,7 @@ export function ChipText() {
       text:' With a very big text: React Native Paper is a high-quality,standard-compliant Material Design library that has you covered inall major use-cases.' 
      },
      {
-      key: 'Checkbox style: ellipsizeMode is clip',
+      key: 'Chip style: ellipsizeMode is clip',
       value: {
         mode:"outlined" as 'flat' | 'outlined',
         style:[styles.bigTextFlex],
@@ -417,7 +417,7 @@ export function ChipText() {
       text:' With a very big text: React Native Paper is a high-quality,standard-compliant Material Design library that has you covered inall major use-cases.' 
      },
      {
-      key: 'Checkbox style: maxFontSizeMultiplier is 1',
+      key: 'Chip style: maxFontSizeMultiplier is 1',
       value: {
         style:[styles.chip],
         onPress:_onPress,
@@ -426,7 +426,7 @@ export function ChipText() {
       text:'With custom text' 
      },
      {
-      key: 'Checkbox style: maxFontSizeMultiplier is 2',
+      key: 'Chip style: maxFontSizeMultiplier is 2',
       value: {
         style:[styles.chip],
         onPress:_onPress,
@@ -435,7 +435,7 @@ export function ChipText() {
       text:'With custom text' 
      },
      {
-      key: 'Checkbox style: accessibilityRole is button',
+      key: 'Chip style: accessibilityRole is button',
       value: {
         style:[styles.chip],
         onPress:_onPress,
@@ -444,11 +444,27 @@ export function ChipText() {
       text:'With custom text' 
      },
      {
-      key: 'Checkbox style: theme = {{ colors: { primary:"green"}}}',
+      key: 'Chip style: theme = {{ colors: { primary:"green"}}}',
       value: {
         style:[styles.chip],
         onPress:_onPress,
         theme:{ colors: { primary:"green"}}
+      },
+      text:'With custom text' 
+     },
+     {
+      key: 'Chip style: elevated = {true}',
+      value: {
+        style:[styles.chip],
+        elevated:true
+      },
+      text:'With custom text' 
+     },
+     {
+      key: 'Chip style: elevated = {false}',
+      value: {
+        style:[styles.chip],
+        elevated:false
       },
       text:'With custom text' 
      }
@@ -458,7 +474,7 @@ export function ChipText() {
     <Tester>
       <ScrollView>
         <TestSuite name='Chip' >
-         {CheckboxProps.map((item) => {
+         {ChipProps.map((item) => {
             return (
               <TestCase itShould={item.key}  key={item.key}>
                  <Chip {...item.value}>{item.text}</Chip>

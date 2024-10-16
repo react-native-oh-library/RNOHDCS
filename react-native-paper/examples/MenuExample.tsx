@@ -76,7 +76,7 @@ function MenuDemo() {
       }
     },
     {
-      key: ' Menu fuction:_toggleMenu("menu5")',
+      key: ' Menu fuction:onDismiss("menu5")',
       value: {
         visible :_getVisible('menu5'),
         onDismiss:_toggleMenu('menu5'),
@@ -162,6 +162,14 @@ function MenuDemo() {
         onDismiss:_toggleMenu('menu13'),
         anchor:<Button mode="outlined" onPress={_toggleMenu('menu13')}>default Menu</Button>,
         testID:'Menu2'
+      }
+    },
+    {
+      key: ' Menu style:children =  <Menu.Item onPress={() => {}} title="Undo" />',
+      value: {
+        visible :_getVisible('menu14'),
+        onDismiss:_toggleMenu('menu14'),
+        anchor:<Button mode="outlined" onPress={_toggleMenu('menu13')}>default Menu</Button>,
       }
     },
   ]
@@ -267,6 +275,14 @@ function MenuDemo() {
         title:'Redo',
         leadingIcon:'redo',
         style:{backgroundColor:MD2Colors.red100},
+      }
+    },
+    {
+      key: ' MenuItem titleStyle:{backgroundColor:MD2Colors.red100}',
+      value: {
+        title:'Redo',
+        leadingIcon:'redo',
+        titleStyle:{backgroundColor:MD2Colors.red100},
       }
     },
     {

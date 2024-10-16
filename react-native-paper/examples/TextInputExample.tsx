@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
-import {HelperText, MD2Colors, MD3Colors, TextInput} from 'react-native-paper';
+import {HelperText, MD2Colors, MD3Colors, Text, TextInput} from 'react-native-paper';
 import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
 import { RenderProps } from 'react-native-paper/lib/typescript/components/TextInput/types';
 
@@ -26,25 +26,49 @@ function TextInputDemo() {
 
     const TextInputProps = [
       {
-        key: ' TextProps style:variant ={"displayLarge"}',
-        value: {
-          mode:'flat' as 'flat' | 'outlined',
-          label:'Email',
-          value:_getTextInputValue('TextInput'),
-          onChangeText:_onValueChange('TextInput')
-        }
-      },
-      {
-        key: ' TextProps style:variant ={"displayLarge"}',
+        key: ' TextInputProps style:mode =outlined',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
-          value:_getTextInputValue('TextInput1'),
-          onChangeText:_onValueChange('TextInput1')
+          left:<TextInput.Icon icon="magnify"/>,
+          value:_getTextInputValue('TextInputs1'),
+          onChangeText:_onValueChange('TextInputs1')
         }
       },
       {
-        key: ' TextProps style:left ={<TextInput.Icon icon="magnify"/>}',
+        key: ' TextInputProps style:mode =flat',
+        value: {
+          mode:'flat' as 'flat' | 'outlined',
+          label:'Email',
+          left:<TextInput.Icon icon="magnify"/>,
+          value:_getTextInputValue('TextInputs2'),
+          onChangeText:_onValueChange('TextInputs2')
+        }
+      },
+      {
+        key: ' TextInputProps style:selectionColor =MD2Colors.red100',
+        value: {
+          mode:'flat' as 'flat' | 'outlined',
+          label:'Email',
+          left:<TextInput.Icon icon="magnify"/>,
+          value:_getTextInputValue('TextInputs3'),
+          onChangeText:_onValueChange('TextInputs3'),
+          selectionColor:MD2Colors.red100
+        }
+      },
+      {
+        key: ' TextInputProps style:left =<TextInput.Icon icon="magnify"/>',
+        value: {
+          mode:'flat' as 'flat' | 'outlined',
+          label:'Email',
+          left:<TextInput.Icon icon="magnify"/>,
+          value:_getTextInputValue('TextInput2'),
+          onChangeText:_onValueChange('TextInput2')
+        }
+      },
+
+      {
+        key: ' TextInputProps style:left ={<TextInput.Icon icon="magnify"/>}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -54,7 +78,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:left ={<TextInput.Affix text={"/100" } />}',
+        key: ' TextInputProps style:left ={<TextInput.Affix text={"/100" } />}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -64,7 +88,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:disabled ={true}',
+        key: ' TextInputProps style:disabled ={true}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -74,7 +98,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:disabled ={false}',
+        key: ' TextInputProps style:disabled ={false}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -84,7 +108,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:label ={"Email"}',
+        key: ' TextTextInputPropsProps style:label ={"Email"}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -93,7 +117,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:placeholder ={"Type something"}',
+        key: ' TextInputProps style:placeholder ={"Type something"}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -103,7 +127,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:placeholder ={"Type something1"}',
+        key: ' TextInputProps style:placeholder ={"Type something1"}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -113,7 +137,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps fuction:onChangeText ={_onValueChange}',
+        key: ' TextInputProps fuction:onChangeText ={_onValueChange}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -123,7 +147,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:underlineColor ={MD2Colors.pink400}',
+        key: ' TextInputProps style:underlineColor ={MD2Colors.pink400}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -134,7 +158,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:underlineColor ={MD3Colors.primary70}',
+        key: ' TextInputProps style:underlineColor ={MD3Colors.primary70}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -145,7 +169,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:activeUnderlineColor ={MD3Colors.tertiary50}',
+        key: ' TextInputProps style:activeUnderlineColor ={MD3Colors.tertiary50}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -156,7 +180,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:activeUnderlineColor ={MD2Colors.amber900}',
+        key: ' TextInputProps style:activeUnderlineColor ={MD2Colors.amber900}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -167,7 +191,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:outlineColor ={MD2Colors.pink400}',
+        key: ' TextInputProps style:outlineColor ={MD2Colors.pink400}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -178,7 +202,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:activeOutlineColor ={MD2Colors.amber900}',
+        key: ' TextInputProps style:activeOutlineColor ={MD2Colors.amber900}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -189,7 +213,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:activeOutlineColor ={MD3Colors.tertiary50}',
+        key: ' TextInputProps style:activeOutlineColor ={MD3Colors.tertiary50}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -200,7 +224,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:textColor ={MD2Colors.red100}',
+        key: ' TextInputProps style:textColor ={MD2Colors.red100}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -211,7 +235,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:textColor ={MD2Colors.blue100}',
+        key: ' TextInputProps style:textColor ={MD2Colors.blue100}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -222,7 +246,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:dense ={true}',
+        key: ' TextInputProps style:dense ={true}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -234,7 +258,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:dense ={false}',
+        key: ' TextInputProps style:dense ={false}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -246,7 +270,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:multiline ={false}',
+        key: ' TextInputProps style:multiline ={false}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -258,7 +282,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:multiline ={true}',
+        key: ' TextInputProps style:multiline ={true}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -270,7 +294,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps fuction:onFocus ={_onFocus}',
+        key: ' TextInputProps fuction:onFocus ={_onFocus}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -282,7 +306,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps fuction:onBlur ={_onBlur}',
+        key: ' TextInputProps fuction:onBlur ={_onBlur}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -294,7 +318,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:value ={_getTextInputValue("TextInput20")}',
+        key: ' TextInputProps style:value ={_getTextInputValue("TextInput20")}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -306,7 +330,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:value ={backgroundColor:MD2Colors.blue100}',
+        key: ' TextInputProps style:value ={backgroundColor:MD2Colors.blue100}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -318,7 +342,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:value ={ colors: { primary:"green"} }',
+        key: ' TextInputProps style:value ={ colors: { primary:"green"} }',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -330,7 +354,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:underlineStyle ={backgroundColor:MD2Colors.blue100}',
+        key: ' TextInputProps style:underlineStyle ={backgroundColor:MD2Colors.blue100}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -342,7 +366,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:underlineStyle ={true}',
+        key: ' TextInputProps style:underlineStyle ={true}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -354,7 +378,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextProps style:underlineStyle ={false}',
+        key: ' TextInputProps style:underlineStyle ={false}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -363,6 +387,54 @@ function TextInputDemo() {
           value:_getTextInputValue('TextInput21'),
           onChangeText:_onValueChange('TextInput21'),
           editable:false
+        }
+      },
+      {
+        key: ' TextInputProps style:contentStyle ={backgroundColor:MD2Colors.red100}',
+        value: {
+          mode:'outlined' as 'flat' | 'outlined',
+          label:'Email',
+          placeholder:"Type something1",
+          textColor:MD2Colors.blue100 ,
+          value:_getTextInputValue('TextInput22'),
+          onChangeText:_onValueChange('TextInput22'),
+          contentStyle:{backgroundColor:MD2Colors.red100}
+        }
+      },
+      {
+        key: ' TextInputProps style:outlineStyle ={backgroundColor:MD2Colors.red100}',
+        value: {
+          mode:'outlined' as 'flat' | 'outlined',
+          label:'Email',
+          placeholder:"Type something1",
+          textColor:MD2Colors.blue100 ,
+          value:_getTextInputValue('TextInput23'),
+          onChangeText:_onValueChange('TextInput23'),
+          outlineStyle:{backgroundColor:MD2Colors.red100}
+        }
+      },
+      {
+        key: ' TextInputProps style:editable ={true}',
+        value: {
+          mode:'outlined' as 'flat' | 'outlined',
+          label:'Email',
+          placeholder:"Type something1",
+          textColor:MD2Colors.blue100 ,
+          value:_getTextInputValue('TextInput24'),
+          onChangeText:_onValueChange('TextInput24'),
+          editable:true
+        }
+      },
+      {
+        key: ' TextInputProps style:editable ={false}',
+        value: {
+          mode:'outlined' as 'flat' | 'outlined',
+          label:'Email',
+          placeholder:"Type something1",
+          textColor:MD2Colors.blue100 ,
+          value:_getTextInputValue('TextInput24'),
+          onChangeText:_onValueChange('TextInput24'),
+          editable:true
         }
       },
     ]
@@ -380,48 +452,48 @@ function TextInputDemo() {
 
     const TextInputAffixProps = [
       {
-        key: ' TextProps style:text ={"/100"}',
+        key: ' TextInputAffix style:text ={"/100"}',
         value: {
           text:"/100"
         }
       },
       {
-        key: ' TextProps fucyion:onLayout ={_onLayout}',
+        key: ' TextInputAffix fucyion:onLayout ={_onLayout}',
         value: {
           text:"/100",
           onLayout:_onLayout,
         }
       },
       {
-        key: ' TextProps fucyion:onLayout ={_onPress}',
+        key: ' TextInputAffix fucyion:onLayout ={_onPress}',
         value: {
           text:"/100",
           onPress:_onPress,
         }
       },
       {
-        key: ' TextProps style:accessibilityLabel ={"accessibility Label"}',
+        key: ' TextInputAffix style:accessibilityLabel ={"accessibility Label"}',
         value: {
           text:"/100",
           accessibilityLabel:'accessibility Label',
         }
       },
       {
-        key: ' TextProps style:accessibilityLabel ={"accessibility Label"}',
+        key: ' TextInputAffix style:accessibilityLabel ={"accessibility Label1"}',
         value: {
           text:"/100",
-          accessibilityLabel:'accessibility Label',
+          accessibilityLabel:'accessibility Label1',
         }
       },
       {
-        key: ' TextProps style:textStyle ={backgroundColor:MD2Colors.blue100}',
+        key: ' TextInputAffix style:textStyle ={backgroundColor:MD2Colors.blue100}',
         value: {
           text:"/100",
           textStyle:{backgroundColor:MD2Colors.blue100},
         }
       },
       {
-        key: ' TextProps style:textStyle ={backgroundColor:MD2Colors.blue100}',
+        key: ' TextInputAffix style:textStyle ={backgroundColor:MD2Colors.blue100}',
         value: {
           text:"/100",
           theme:{ colors: { primary: 'green' } }
@@ -435,55 +507,55 @@ function TextInputDemo() {
 
     const TextInputIconProps = [
       {
-        key: ' TextProps style:icon ={"eye"}',
+        key: ' TextInputIconProps style:icon ={"eye"}',
         value: {
           icon:"eye",
         }
       },
       {
-        key: ' TextProps fuction:onPress ={_iconPress}',
+        key: ' TextInputIconProps fuction:onPress ={_iconPress}',
         value: {
           icon:"eye",
           onPress:_iconPress
         }
       },
       {
-        key: ' TextProps style:forceTextInputFocus ={true}',
+        key: ' TextInputIconProps style:forceTextInputFocus ={true}',
         value: {
           icon:"eye",
           forceTextInputFocus:true
         }
       },
       {
-        key: ' TextProps style:forceTextInputFocus ={false}',
+        key: ' TextInputIconProps style:forceTextInputFocus ={false}',
         value: {
           icon:"eye",
           forceTextInputFocus:false
         }
       },
       {
-        key: ' TextProps style:color ={MD2Colors.red100}',
+        key: ' TextInputIconProps style:color ={MD2Colors.red100}',
         value: {
           icon:"eye",
           color:MD2Colors.red100
         }
       },
       {
-        key: ' TextProps style:rippleColor ={MD2Colors.red100}',
+        key: ' TextInputIconProps style:rippleColor ={MD2Colors.red100}',
         value: {
           icon:"eye",
           rippleColor:MD2Colors.red100
         }
       },
       {
-        key: ' TextProps style:{backgroundColor:MD2Colors.blue100},',
+        key: ' TextInputIconProps style:{backgroundColor:MD2Colors.blue100},',
         value: {
           icon:"eye",
           style:{backgroundColor:MD2Colors.blue100},
         }
       },
       {
-        key: ' TextProps style:theme ={ colors: { primary: "green"} }',
+        key: ' TextInputIconProps style:theme ={ colors: { primary: "green"} }',
         value: {
           icon:"eye",
           theme:{ colors: { primary: 'green' } }
@@ -494,6 +566,14 @@ function TextInputDemo() {
   return (
     <ScrollView>
     <Tester>
+    <TestCase itShould={"TextProps style:render =<Text variant='labelLarge'>Label Large</Text>"}>
+    <TextInput
+        label="Phone number"
+        render={props =>
+          <Text variant="labelLarge">Label Large</Text>
+        }
+      />
+    </TestCase> 
     <TestCase itShould={"TextProps style:error ={true}"}>
       <TextInput
           label="Input with helper text"

@@ -17,7 +17,11 @@ export function BannerTest() {
 
     const viewRef = useRef<View>(null);  
     const measureView = () => {  
+      if (viewRef.current) {  
+        // 这里只是为了演示如何访问ref  
         console.log('View is referenced');
+      }  
+      console.log('View is viewRef');
     }; 
 
 
@@ -168,7 +172,7 @@ export function BannerTest() {
             }
           },
           {
-            key: 'Banner style: maxFontSizeMultiplier ={1}(accessibilityLabel 属性，这是为了增强应用的无障碍性,该属性为屏幕阅读器提供了一个标签，这样视力障碍的用户就能通过语音助手了解界面上各个元素的功能)',
+            key: 'Banner style: maxFontSizeMultiplier ={1}',
             value: {
               visible:true,
               actions:[
@@ -232,12 +236,36 @@ export function BannerTest() {
               onHideAnimationFinished:_onHideAnimationFinished
             }
         },
+        {
+          key: 'Banner style: style= { backgroundColor:MD2Colors.blue100}',
+          value: {
+            visible:true,
+            actions:[
+                {label: 'Fix it'},
+                {label: 'Learn more'}
+            ],
+            style:{ backgroundColor:MD2Colors.blue100},
+            icon:'folder',
+            value:"There was a problem processing a transaction on your credit card.",
+            onHideAnimationFinished:_onHideAnimationFinished
+          }
+      },
     ]
 
     return (
         <ScrollView>
          <Tester>
             <TestSuite name='Banner' >
+            <TestCase itShould={'Appbar.Action style:ref={viewRef}'}  >
+            <Banner
+              ref={viewRef}
+              visible={true}
+              actions={[{ label: 'Fix it'},{label: 'Learn more' },
+              ]}>
+             There was a problem processing a transaction on your credit card.
+          </Banner>
+            <Button onPress={measureView} >Press me</Button>  
+         </TestCase>
             {BannerProps.map((item) => {
              return (
                 <TestCase  itShould={item.key}  key={item.key} > 
