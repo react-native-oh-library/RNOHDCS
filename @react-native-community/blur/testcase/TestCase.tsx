@@ -29,7 +29,7 @@ export const CommunitrBlurDemo = () => {
     'materialDark', 'thinMaterialDark', 'ultraThinMaterialDark']
 
   return (
-    <Tester>
+    <Tester style={{paddingBottom:60}}>
       <ScrollView>
         <TestSuite name="@react-native-community/blur">
           <TestCase
@@ -90,7 +90,7 @@ export const CommunitrBlurDemo = () => {
               initialState={false}
 
               arrange={({ setState }) => {
-                const [blurTypeL, setBlurTypeL] = useState<BlurViewProps['blurType']>("thickMaterial")
+                const [blurTypeL, setBlurTypeL] = useState<BlurViewProps['blurType']>("dark")
                 return (
                   <View style={{ flex: 1, height: 500 }}>
                     <BlurDemo blurBlurType={blurTypeL} blurAmount={100} ></BlurDemo>
@@ -172,7 +172,7 @@ const BlurDemo: React.FC<IBlursProps> = ({ blurBlurType, blurAmount }) => {
   return (
     <View style={styles.container}>
       <Image
-        source={{ uri: "https://avatars0.githubusercontent.com/u/15728691?s=460&v=4" }}
+         source={require('../assests/blur.jpg')}
         resizeMode="cover"
         style={styles.img}
       />
@@ -248,5 +248,4 @@ const styles = StyleSheet.create({
   },
 });
 
-
-
+export default CommunitrBlurDemo
