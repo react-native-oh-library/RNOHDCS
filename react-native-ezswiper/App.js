@@ -22,7 +22,7 @@ import { TestCase } from './TestCase';
 
 const images = [require(`./resource/0.jpg`), require(`./resource/1.jpg`), require(`./resource/2.jpg`), require(`./resource/3.jpg`), require(`./resource/4.jpg`), require(`./resource/5.jpg`), require(`./resource/6.jpg`), require(`./resource/7.jpg`), require(`./resource/8.jpg`)]
 
-export default class App extends Component<{}> {
+export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -263,6 +263,21 @@ function ScrollToDom(props) {
     </View>)
 }
 
+// export const displayName = 'EzswiperExample';
+// export const framework = 'React';
+// export const category = 'UI';
+// export const title = 'react-native-ezswiper';
+// export const documentationURL = 'https://github.com/easyui/react-native-ezswiper';
+// export const description = 'React Native ezswiper';
+
+// export const examples = [
+//   {
+//     title: 'react-native-ezswiper',
+//     render: function () {
+//       return <App />;
+//     },
+//   },
+// ];
 
 const styles = StyleSheet.create({
   container: {
