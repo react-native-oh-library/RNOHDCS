@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
 });
 
 
-function ImageHeaderScrollViewExample() {
+function ForegroundParallaxRatio() {
     const [visible, setVisible] = useState(false);
     const fadeAnim = new Animated.Value(0);
     useEffect(() => {
@@ -134,14 +134,16 @@ function ImageHeaderScrollViewExample() {
      
     return (
             <Tester>
-                <TestSuite name='HeaderImage 设置header图片'>
-                    <TestCase  itShould='HeaderImage'>
+                <TestSuite name='ForegroundParallaxRatio 设置foregroundParallaxRatio 提高滚动速度'>
+                    <TestCase  itShould='ForegroundParallaxRatio'>
                         <View style={{ height:1000}}>
                             <ImageHeaderScrollView
                                 maxHeight={MAX_HEIGHT}
                                 minHeight={MIN_HEIGHT}
                                 maxOverlayOpacity={0.8}
                                 minOverlayOpacity={0.2}
+                                fadeOutForeground={true}
+                                foregroundParallaxRatio={2}
                                 overlayColor={'blue'}
                                 headerImage={{uri:'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg'}}
                                 renderHeader={() => <Image source={require('./doctorwho.jpg')} style={styles.image} />}
@@ -201,4 +203,4 @@ function ImageHeaderScrollViewExample() {
 
 }
 
-export default ImageHeaderScrollViewExample;
+export default ForegroundParallaxRatio;

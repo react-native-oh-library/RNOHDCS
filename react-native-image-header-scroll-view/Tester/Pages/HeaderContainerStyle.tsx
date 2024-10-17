@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
 });
 
 
-function ImageHeaderScrollViewExample() {
+function HeaderContainerStyle() {
     const [visible, setVisible] = useState(false);
     const fadeAnim = new Animated.Value(0);
     useEffect(() => {
@@ -134,15 +134,17 @@ function ImageHeaderScrollViewExample() {
      
     return (
             <Tester>
-                <TestSuite name='HeaderImage 设置header图片'>
-                    <TestCase  itShould='HeaderImage'>
+                <TestSuite name='HeaderContainerStyle 设置header容器背景色为粉色'>
+                    <TestCase  itShould='HeaderContainerStyle'>
                         <View style={{ height:1000}}>
                             <ImageHeaderScrollView
                                 maxHeight={MAX_HEIGHT}
                                 minHeight={MIN_HEIGHT}
                                 maxOverlayOpacity={0.8}
                                 minOverlayOpacity={0.2}
-                                overlayColor={'blue'}
+                                fadeOutForeground={true}
+                                foregroundParallaxRatio={1}
+                                headerContainerStyle={{backgroundColor:'pink',width:'100%',height:1000,padding:20}}
                                 headerImage={{uri:'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg'}}
                                 renderHeader={() => <Image source={require('./doctorwho.jpg')} style={styles.image} />}
                                 renderFixedForeground={() => (
@@ -159,13 +161,6 @@ function ImageHeaderScrollViewExample() {
                                         <Text style={styles.imageTitle}>{tvShowContent.title}</Text>
                                     </View>
                                 )}
-                                // fixedForegroundContainerStyles={{backgroundColor: '#999999',
-                                // borderRadius: 10,
-                                // margin: 10,
-                                // padding: 10,}}
-                                // useNativeDriver={true}
-                                // disableHeaderGrow={false}
-                         
                             >
                                 <>
                                     <TriggeringView
@@ -201,4 +196,4 @@ function ImageHeaderScrollViewExample() {
 
 }
 
-export default ImageHeaderScrollViewExample;
+export default HeaderContainerStyle;

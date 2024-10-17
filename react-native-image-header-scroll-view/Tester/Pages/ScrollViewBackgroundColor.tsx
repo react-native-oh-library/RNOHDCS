@@ -8,7 +8,7 @@
 //  */
 
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image,Animated, Dimensions ,Easing} from 'react-native';
+import { StyleSheet, Text, View, Image,Animated, Dimensions ,Easing,TouchableOpacity} from 'react-native';
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino'
 import ImageHeaderScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 
@@ -109,8 +109,7 @@ const styles = StyleSheet.create({
     },
 });
 
-
-function ImageHeaderScrollViewExample() {
+function ScrollViewBackgroundColor() {
     const [visible, setVisible] = useState(false);
     const fadeAnim = new Animated.Value(0);
     useEffect(() => {
@@ -134,8 +133,8 @@ function ImageHeaderScrollViewExample() {
      
     return (
             <Tester>
-                <TestSuite name='HeaderImage 设置header图片'>
-                    <TestCase  itShould='HeaderImage'>
+                <TestSuite name='ScrollViewBackgroundColor 传入背后滚动组件的颜色为绿色'>
+                    <TestCase  itShould='ScrollViewBackgroundColor'>
                         <View style={{ height:1000}}>
                             <ImageHeaderScrollView
                                 maxHeight={MAX_HEIGHT}
@@ -159,13 +158,7 @@ function ImageHeaderScrollViewExample() {
                                         <Text style={styles.imageTitle}>{tvShowContent.title}</Text>
                                     </View>
                                 )}
-                                // fixedForegroundContainerStyles={{backgroundColor: '#999999',
-                                // borderRadius: 10,
-                                // margin: 10,
-                                // padding: 10,}}
-                                // useNativeDriver={true}
-                                // disableHeaderGrow={false}
-                         
+                                scrollViewBackgroundColor={'green'}
                             >
                                 <>
                                     <TriggeringView
@@ -201,4 +194,4 @@ function ImageHeaderScrollViewExample() {
 
 }
 
-export default ImageHeaderScrollViewExample;
+export default ScrollViewBackgroundColor;

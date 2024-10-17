@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, ScrollView, Text } from 'react-native';
 import JSONTree from 'react-native-json-tree';
-import { Map } from 'immutable';
 
 export default () => {
 
@@ -13,7 +12,6 @@ export default () => {
       country: 'USA',
     },
     hobbies: ['reading', 'gaming', 'hiking'],
-    immutable: Map({ key: 'value' })
   };
 
   const data1 = {

@@ -8,7 +8,7 @@
 //  */
 
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image,Animated, Dimensions ,Easing} from 'react-native';
+import { StyleSheet, Text, View, Image,Animated, Dimensions ,Easing,TouchableOpacity} from 'react-native';
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino'
 import ImageHeaderScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 
@@ -108,9 +108,28 @@ const styles = StyleSheet.create({
         height: 800,
     },
 });
+class TouchableComponent extends React.Component<{}, {}> {
+    render() {
+      return (
+        <TouchableOpacity>
+          <View
+            style={{
+              paddingTop: 20,
+              paddingBottom: 20,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Text
+              style={{fontSize: 28, backgroundColor: 'yellow', color: 'pink'}}>
+              TouchableComponent
+            </Text>
+          </View>
+        </TouchableOpacity>
+      );
+    }
+  }
 
-
-function ImageHeaderScrollViewExample() {
+function RenderTouchableFixedForeground() {
     const [visible, setVisible] = useState(false);
     const fadeAnim = new Animated.Value(0);
     useEffect(() => {
@@ -134,8 +153,8 @@ function ImageHeaderScrollViewExample() {
      
     return (
             <Tester>
-                <TestSuite name='HeaderImage 设置header图片'>
-                    <TestCase  itShould='HeaderImage'>
+                <TestSuite name='RenderTouchableFixedForeground 传入一个可点击的组件'>
+                    <TestCase  itShould='RenderTouchableFixedForeground'>
                         <View style={{ height:1000}}>
                             <ImageHeaderScrollView
                                 maxHeight={MAX_HEIGHT}
@@ -159,13 +178,7 @@ function ImageHeaderScrollViewExample() {
                                         <Text style={styles.imageTitle}>{tvShowContent.title}</Text>
                                     </View>
                                 )}
-                                // fixedForegroundContainerStyles={{backgroundColor: '#999999',
-                                // borderRadius: 10,
-                                // margin: 10,
-                                // padding: 10,}}
-                                // useNativeDriver={true}
-                                // disableHeaderGrow={false}
-                         
+                                renderTouchableFixedForeground={() => <TouchableComponent /> as any}
                             >
                                 <>
                                     <TriggeringView
@@ -201,4 +214,4 @@ function ImageHeaderScrollViewExample() {
 
 }
 
-export default ImageHeaderScrollViewExample;
+export default RenderTouchableFixedForeground;
