@@ -53,9 +53,9 @@ const gradientColors = [
   ['#FF5733', '#33FF57'], // 从橙色到绿色
   ['#3357FF', '#FF3357'], // 从蓝色到红色
   ['#33FFC1', '#C133FF'], // 从青色到紫色
-  ['#F333FF', '#FF33F3'], // 从品红色到紫色（类似）
-  ['#33FFF3', '#F333FF'], // 从青色到品红色
-  ['#FF33C1', '#C1FF33'], // 从橙红色到黄绿色
+  // ['#F333FF', '#FF33F3'], // 从品红色到紫色（类似）
+  // ['#33FFF3', '#F333FF'], // 从青色到品红色
+  // ['#FF33C1', '#C1FF33'], // 从橙红色到黄绿色
 ];
 
 const genText = cyclicReturn([
@@ -99,10 +99,9 @@ function ShowText() {
 
 function ChangeColorPosition() {
   const [startX, setStartX] = React.useState(0.5);
-  const [startY, setStartY] = React.useState(0);
-  const [endX, setEndX] = React.useState(1);
-  const [endY, setEndY] = React.useState(1);
-
+  const [startY, setStartY] = React.useState(0.7);
+  const [endX, setEndX] = React.useState(0.2);
+  const [endY, setEndY] = React.useState(0.7);
   return (
     <View style={styles.container}>
       <LinearGradientText
@@ -116,10 +115,18 @@ function ChangeColorPosition() {
       <Button
         title="change position"
         onPress={() => {
-          setStartX(parseFloat(Math.random().toFixed(1)));
-          setStartY(parseFloat(Math.random().toFixed(1)));
-          setEndX(parseFloat(Math.random().toFixed(1)));
-          setEndY(parseFloat(Math.random().toFixed(1)));
+          setStartX(v => {
+            return v === 0.5 ? 0.2 : 0.2;
+          });
+          setStartY(v => {
+            return v === 0.7 ? 0.2 : 0.7;
+          });
+          setEndX(v => {
+            return v === 0.2 ? 0.3 : 0.2;
+          });
+          setEndY(v => {
+            return v === 0.7 ? 0.3 : 0.7;
+          });
         }}
       />
     </View>
