@@ -64,13 +64,14 @@ export function LocalizationTestCase() {
         setSystemLanguageTitle(strings.getInterfaceLanguage());
     };
 
+
     const [buttonFormatString, formatString] = useState('');
     const handleFormatString = () => {
         let name = strings.formatString(strings.question, strings.bread, strings.butter);
         formatString(name);
     };
 
-    const [buttonGetAvailableLanguages, getAvailableLanguages] = useState('');
+    let [buttonGetAvailableLanguages, getAvailableLanguages] = useState('');
     const handleGetAvailableLanguage = () => {
         getAvailableLanguages(strings.getAvailableLanguages().join('、 '));
     };
@@ -78,6 +79,23 @@ export function LocalizationTestCase() {
     const [buttonGetString, getString] = useState('');
     const handleGetString = () => {
         getString(strings.getString("greeting"));
+    };
+
+    const [buttonsetContent, setContent] = useState('');
+    const handleSetContent = () => {
+        strings.setContent({
+            ko: { // 韩语
+                welcome: '환영합니다',
+                question: '저는 {0}와 {1}이 조금 필요합니다, 아니면 그냥 {0}만요',
+                bread: '빵',
+                butter: '버터',
+                greeting: '안녕하세요~~~',
+                currentlanguage: '현재 언어',
+                availableLanguages: '사용 가능한 언어',
+                interfaceLanguage: '시스템 언어'
+            }
+        })
+        setContent(strings.welcome + strings.question + strings.bread + strings.greeting)
     };
 
     return (
@@ -190,7 +208,7 @@ export function LocalizationTestCase() {
                                     <Button
                                         title={"当前显示语言：" + buttonCurrentLanguageTitle}
                                         onPress={() => {
-                                            if (['zh', 'en', 'fr'].includes(strings.getLanguage())) {
+                                            if (['zh', 'en', 'fr', 'ko'].includes(strings.getLanguage())) {
                                                 { handleGetLanguage() }
                                                 setState(true);
                                             }
@@ -211,7 +229,7 @@ export function LocalizationTestCase() {
                             arrange={({ setState, reset }) => (
                                 <View>
                                     <Button
-                                        title={"当前可用语言数组：" + buttonGetAvailableLanguages}
+                                        title={"当前可用语言数组 : " + buttonGetAvailableLanguages}
                                         onPress={() => {
                                             { handleGetAvailableLanguage() }
                                             if (strings.getAvailableLanguages().length > 0) {
@@ -271,6 +289,35 @@ export function LocalizationTestCase() {
                                 expect(state).to.be.true;
                             }}
                         />
+
+                        {/* testcase_07  setContent API  使用 setContent 方法会覆盖整个对象。请注意：使用此方法将移除所有其他本地化内容，只保留当前的内容*/}
+                        <View style={{ justifyContent: 'space-between', marginBottom: 30 }}>
+                            <Text style={styles.text}>
+                                {buttonsetContent}
+                            </Text>
+                            <TestCase
+                                tags={['C_API']}
+                                itShould="setContent()"
+                                initialState={false}
+                                arrange={({ setState, reset }) => (
+                                    <View>
+                                        <Button
+                                            title={"调用setContent API接口"}
+                                            onPress={() => {
+                                                { handleSetContent() }
+                                                if (buttonsetContent != null) {
+                                                    setState(true);
+                                                }
+                                            }}
+                                        />
+                                    </View>
+                                )}
+                                assert={({ state, expect }) => {
+                                    expect(state).to.be.true;
+                                }}
+                            />
+                        </View>
+
                     </TestSuite>
                 </ScrollView>
             </Tester>
