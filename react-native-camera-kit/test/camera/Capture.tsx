@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import {StyleSheet, View, Button, Image} from 'react-native';
+import {StyleSheet, View, Button, Image, Text} from 'react-native';
 import {CameraApi, CameraType, Camera} from 'react-native-camera-kit';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
@@ -17,6 +17,9 @@ export const CaptureTest: React.FC = (): JSX.Element => {
       <TestSuite name="capture">
         <TestCase itShould="拍照功能">
           <>
+            <View>
+              <Text>photo:{photo}</Text>
+            </View>
             <Camera
               style={styles.cameraPreview}
               ref={nativeRef}
