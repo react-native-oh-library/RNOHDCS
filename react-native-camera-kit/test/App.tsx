@@ -1,11 +1,9 @@
 import React from 'react';
 import {SafeAreaView, ScrollView, View} from 'react-native';
-
 import * as testSuiteByName from './index';
+import {Page, NavigationContainer} from './components/Navigation';
 
-import {NavigationContainer, Page} from '../components/Navigation';
-
-export function CameraKitTestApp() {
+export function CameraKitTestExampleApp() {
   return (
     <View style={{backgroundColor: 'black'}}>
       <SafeAreaView>
@@ -30,3 +28,20 @@ export function CameraKitTestApp() {
     </View>
   );
 }
+
+export default {
+  displayName: 'react-native-camera-kit_test_app',
+  framework: 'React',
+  category: 'UI',
+  title: 'react-native-camera-kit',
+  documentationURL: 'https://github.com/react-native-oh-library/react-native-camera-kit',
+  description: 'React Native Camera Kit',
+  examples: [
+    {
+      title: 'react-native-camera-kit',
+      render: function (): any {
+        return <CameraKitTestExampleApp />;
+      },
+    },
+  ],
+};
