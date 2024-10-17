@@ -11,6 +11,7 @@ import React, { useRef } from 'react';
 import { StyleSheet, Text, View, ScrollView, Image, Dimensions, StatusBar } from 'react-native';
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino'
 import ImageHeaderScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
+import {MyImageScrollView} from './MyImageScrollView'
 const MIN_HEIGHT = 80;
 const MAX_HEIGHT = 250;
 const tvShowContent = {
@@ -107,37 +108,24 @@ const styles = StyleSheet.create({
     },
 });
 
-function FadeOutForeground() {
+function DisableHeaderGrow1111() {
     const HeaderRef = useRef(null)
 
     return (
         <Tester>
-            <TestSuite name='fadeOutForeground 设置Foreground隐藏带淡出动画'>
-                <TestCase itShould='fadeOutForeground'>          
+            <TestSuite name='disableHeaderGrow'>
+                <TestCase itShould='disableHeaderGrow'> 
                         <View style={{ height:1000}}>
-                            <ImageHeaderScrollView
-                                  maxHeight={MAX_HEIGHT}
-                                  minHeight={MIN_HEIGHT}
-                                  renderHeader={() => <Image source={require('./doctorwho.jpg')} style={styles.image} />}
-                                  fadeOutForeground={true}
+                            <MyImageScrollView
+                                maxHeight={MAX_HEIGHT}
+                                minHeight={MIN_HEIGHT}
+                                renderHeader={() => <Image source={require('./doctorwho.jpg')} style={styles.image} />  as any}
+                                maxOverlayOpacity={0.8}
+                                disableHeaderGrow={false}
+                                useNativeDriver={true}
                             >
-                                  <>
-                                    <View style={styles.section}>
-                                        <Text style={styles.sectionTitle}>Overview</Text>
-                                        <Text style={styles.sectionContent}>{tvShowContent.overview}</Text>
-                                    </View>
-                                    <View style={[styles.section, styles.sectionLarge]}>
-                                        <Text style={styles.sectionTitle}>Keywords</Text>
-                                        <View style={styles.keywords}>
-                                            {tvShowContent.keywords.map(keyword => (
-                                                <View style={styles.keywordContainer} key={keyword}>
-                                                    <Text style={styles.keyword}>{keyword}</Text>
-                                                </View>
-                                            ))}
-                                        </View>
-                                    </View>
-                                </>
-                            </ImageHeaderScrollView>
+                       
+                            </MyImageScrollView>
                         </View>
                   
                 </TestCase>
@@ -147,6 +135,6 @@ function FadeOutForeground() {
 
 }
 
-export default FadeOutForeground;
+export default DisableHeaderGrow1111;
 
 

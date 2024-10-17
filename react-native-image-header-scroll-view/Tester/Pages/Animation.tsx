@@ -1,13 +1,13 @@
 
-// /************
-//  * 
-//  * 
-//  * 此demo是基于0.10.3版本的 因最新版本 TriggeringView组件的回调bug 详情请查看 https://gitee.com/react-native-oh-library/usage-docs/blob/master/zh-cn/react-native-image-header-scroll-view.md
-//  * 
-//  * 
-//  */
+// // /************
+// //  * 
+// //  * 
+// //  * 此demo是基于0.10.3版本的 因最新版本 TriggeringView组件的回调bug 详情请查看 https://gitee.com/react-native-oh-library/usage-docs/blob/master/zh-cn/react-native-image-header-scroll-view.md
+// //  * 
+// //  * 
+// //  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState ,useRef} from 'react';
 import { StyleSheet, Text, View, Image,Animated, Dimensions ,Easing} from 'react-native';
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino'
 import ImageHeaderScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
 });
 
 
-function ImageHeaderScrollViewExample() {
+function AnimationTest() {
     const [visible, setVisible] = useState(false);
     const fadeAnim = new Animated.Value(0);
     useEffect(() => {
@@ -132,10 +132,36 @@ function ImageHeaderScrollViewExample() {
         }
       }, [visible, fadeAnim]);   
      
+     const scaleValue = useRef(new Animated.Value(1)).current; // 初始值为1
+   scaleValue.interpolate 
+  // 动画开始的方法
+  const startAnimation = () => {
+    // 设置动画配置（目标值、持续时间、缓动函数等）
+    Animated.timing(scaleValue, {
+      toValue: 1.3, // 目标值
+      duration: 500, // 持续时间
+      useNativeDriver: true, // 使用原生驱动提高性能
+      easing: Easing.linear, // 缓动函数
+    }).start();
+  };
+
+  // 动画重置的方法
+  const resetAnimation = () => {
+    Animated.timing(scaleValue, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true,
+      easing: Easing.linear,
+    }).start();
+  };
+
+  // 动画样式
+  const animatedStyle = {
+    transform: [{ scale: scaleValue }],
+  };
+
     return (
-            <Tester>
-                <TestSuite name='HeaderImage 设置header图片'>
-                    <TestCase  itShould='HeaderImage'>
+      
                         <View style={{ height:1000}}>
                             <ImageHeaderScrollView
                                 maxHeight={MAX_HEIGHT}
@@ -143,8 +169,14 @@ function ImageHeaderScrollViewExample() {
                                 maxOverlayOpacity={0.8}
                                 minOverlayOpacity={0.2}
                                 overlayColor={'blue'}
-                                headerImage={{uri:'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg'}}
-                                renderHeader={() => <Image source={require('./doctorwho.jpg')} style={styles.image} />}
+                                onScrollBeginDrag={()=>{
+                                    startAnimation()
+                                }}
+                               onScrollEndDrag={()=>{
+                                 resetAnimation()
+                               }}
+                               
+                                renderHeader={() => <Animated.View  style={animatedStyle}> <Image source={require('./doctorwho.jpg')} style={styles.image} /> </Animated.View>}
                                 renderFixedForeground={() => (
                                     <Animated.View
                                         style={[styles.navTitleView,{ opacity: fadeAnim}]}  
@@ -165,7 +197,7 @@ function ImageHeaderScrollViewExample() {
                                 // padding: 10,}}
                                 // useNativeDriver={true}
                                 // disableHeaderGrow={false}
-                         
+                                
                             >
                                 <>
                                     <TriggeringView
@@ -194,11 +226,71 @@ function ImageHeaderScrollViewExample() {
                                 </>
                             </ImageHeaderScrollView>
                         </View>
-                    </TestCase>
-                </TestSuite> 
-            </Tester>
+
     );
 
 }
 
-export default ImageHeaderScrollViewExample;
+export default AnimationTest;
+// import React, { useRef } from 'react';
+// import { View, TouchableOpacity, StyleSheet, Text, Animated, Easing } from 'react-native';
+
+// const ScaleAnimation = () => {
+//   // 创建一个Animated.Value来表示缩放比例
+//   const scaleValue = useRef(new Animated.Value(1)).current; // 初始值为1
+
+//   // 动画开始的方法
+//   const startAnimation = () => {
+//     // 设置动画配置（目标值、持续时间、缓动函数等）
+//     Animated.timing(scaleValue, {
+//       toValue: 0.5, // 目标值
+//       duration: 500, // 持续时间
+//       useNativeDriver: true, // 使用原生驱动提高性能
+//       easing: Easing.linear, // 缓动函数
+//     }).start();
+//   };
+
+//   // 动画重置的方法
+//   const resetAnimation = () => {
+//     Animated.timing(scaleValue, {
+//       toValue: 1,
+//       duration: 500,
+//       useNativeDriver: true,
+//       easing: Easing.linear,
+//     }).start();
+//   };
+
+//   // 动画样式
+//   const animatedStyle = {
+//     transform: [{ scale: scaleValue }],
+//   };
+
+//   return (
+//     <View style={styles.container}>
+//       <TouchableOpacity onPress={startAnimation}>
+//         <Animated.View style={[styles.box, animatedStyle]} />
+//       </TouchableOpacity>
+//       <TouchableOpacity onPress={resetAnimation} style={styles.resetButton}>
+//         <Text>Reset</Text>
+//       </TouchableOpacity>
+//     </View>
+//   );
+// };
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   box: {
+//     width: 100,
+//     height: 100,
+//     backgroundColor: 'blue',
+//   },
+//   resetButton: {
+//     marginTop: 20,
+//   },
+// });
+
+// export default ScaleAnimation;

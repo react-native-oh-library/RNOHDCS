@@ -162,9 +162,15 @@ function TriggeringViewOnTouchTopAndOnTouchBottom() {
                                 disableHeaderGrow={false}
                             >
                                 <>
-                                    <TriggeringView
-                                        onTouchBottom={() => setVisible(true)}
-                                        onTouchTop={() => setVisible(false)}
+                                    <TriggeringView 
+                                        onTouchBottom={() => {
+                                            console.log('111111111111')
+                                            setVisible(true)
+                                        } }
+                                        onTouchTop={() => {
+                                            console.log('22222222222222222222')
+                                            setVisible(false)
+                                        } }
                                     >
                                         <Text style={styles.title}>
                                             <Text style={styles.name}>{tvShowContent.title}</Text>, ({tvShowContent.year})

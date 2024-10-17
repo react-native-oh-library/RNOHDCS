@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import { View, ScrollView, Text } from 'react-native';
+import React, {useState} from 'react';
+import {View, ScrollView, Text} from 'react-native';
 import JSONTree from 'react-native-json-tree';
-import { TestSuite, TestCase } from '@rnoh/testerino';
-import { Map } from 'immutable';
+import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
 
-export default () => {
+export const App = () => {
   const data = {
     name: 'John Doe',
     age: 30,
@@ -13,24 +12,23 @@ export default () => {
       country: 'USA',
     },
     hobbies: ['reading', 'gaming', 'hiking'],
-    immutable: Map({ key: 'value' })
   };
 
   const data1 = {
-    name: "Charlie",
+    name: 'Charlie',
     age: 22,
   };
 
   const data2 = {
-    name: "Bob",
+    name: 'Bob',
     age: 35,
     info: {
       height: 180,
-      weight: 120
+      weight: 120,
     },
     address: {
-      street: "123 Elm St",
-      city: "Springfield",
+      street: '123 Elm St',
+      city: 'Springfield',
     },
   };
 
@@ -52,26 +50,26 @@ export default () => {
     base0C: '#a1efe4',
     base0D: '#66d9ef',
     base0E: '#ae81ff',
-    base0F: '#cc6633'
+    base0F: '#cc6633',
   };
 
   const shouldExpandNode = (key: any) => {
     const shouldExpandNodeKey = key.some((item: any) => {
       return item === 'address';
-    })
+    });
     return shouldExpandNodeKey;
   };
 
   const data3 = {
-    name: "Fiona",
+    name: 'Fiona',
     age: 29,
   };
 
   const data4 = {
-    name: "Wx",
+    name: 'Wx',
     task: {
       weekday: 'ro to work',
-      weekend: 'play'
+      weekend: 'play',
     },
     beliked: 'xiao mei',
     age: 18,
@@ -84,19 +82,19 @@ export default () => {
       address: {
         street: '123 Main St',
         city: 'Somewhere',
-        country: 'Wonderland'
-      }
-    }
+        country: 'Wonderland',
+      },
+    },
   };
 
   const data6 = {
-    users: Array.from({ length: 100 }, (_, i) => ({ id: i, name: `User ${i}` })),
+    users: Array.from({length: 100}, (_, i) => ({id: i, name: `User ${i}`})),
   };
 
   const data7 = {
     date: new Date(),
     number: 123456.789,
-    name: 'moon'
+    name: 'moon',
   };
 
   // 格式化日期
@@ -120,10 +118,10 @@ export default () => {
   };
 
   const data8 = {
-    name: "John Doe",
+    name: 'John Doe',
     age: 30,
-    job: "Developer",
-    salary: 100000
+    job: 'Developer',
+    salary: 100000,
   };
 
   const isCustomNode = (value: any) => {
@@ -132,71 +130,175 @@ export default () => {
   };
 
   return (
-    <ScrollView style={{ height: '100%', marginBottom: 20 }}>
-      <TestSuite name="JsonTreeTest">
-        <TestCase itShould="JsonTree data" tags={['C_API']}>
-          <View>
-            <JSONTree data={data} />
-          </View>
-        </TestCase>
-        <TestCase itShould="JsonTree theme" tags={['C_API']}>
-          <View>
-            <JSONTree data={data1} theme={theme} />
-          </View>
-        </TestCase>
-        <TestCase itShould="JsonTree shouldExpandNode='address', 默认展开address" tags={['C_API']}>
-          <View>
-            <JSONTree data={data2} shouldExpandNode={shouldExpandNode} />
-          </View>
-        </TestCase>
-        <TestCase itShould="JsonTree hideRoot={true}, hideRoot={false}" tags={['C_API']}>
-          <View>
-            <JSONTree data={data2} hideRoot={true} />
-            <JSONTree data={data2} hideRoot={false} />
-          </View>
-        </TestCase>
-        <TestCase itShould="JsonTree invertTheme={true}, invertTheme={false}" tags={['C_API']}>
-          <View>
-            <JSONTree data={data2} theme={theme} invertTheme={true} />
-            <JSONTree data={data2} theme={theme} invertTheme={false} />
-          </View>
-        </TestCase>
-        <TestCase itShould="JsonTree getItemString={ {}&&2 keys}" tags={['C_API']}>
-          <View>
-            <JSONTree data={data3} getItemString={(type, data, itemType, itemString) => {
-              return <Text>{itemType}&&{itemString}</Text>
-            }
-            }
-            />
-          </View>
-        </TestCase>
-        <TestCase itShould="JsonTree labelRenderer 标签字体样式为加粗" tags={['C_API']}>
-          <View><JSONTree data={data3} labelRenderer={(raw: any) => <Text style={{ fontWeight: 'bold' }}>{raw}</Text>} /></View>
-        </TestCase>
-        <TestCase itShould="JsonTree valueRenderer 标签值字体样式为斜体" tags={['C_API']}>
-          <View><JSONTree data={data3} valueRenderer={(raw: any) => <Text style={{ fontStyle: 'italic' }}>{raw}</Text>} /></View>
-        </TestCase>
-        <TestCase itShould="JsonTree sortObjectKeys 定义键的排序方式(按照英文字母顺序排序)" tags={['C_API']}>
-          <View><JSONTree data={data4} sortObjectKeys={(a: any, b: any) => {
-            return a.localeCompare(b);
-          }} /></View>
-        </TestCase>
-        <TestCase itShould="JsonTree keyPath=['information']" tags={['C_API']}>
-          <View><JSONTree data={data5} keyPath={['information']} /></View>
-        </TestCase>
-        <TestCase itShould="JsonTree collectionLimit={5}" tags={['C_API']}>
-          <View><JSONTree data={data6} collectionLimit={5} /></View>
-        </TestCase>
-        <TestCase itShould="JsonTree postprocessValue 根据数据类型格式化, 展示经过处理的数据" tags={['C_API']}>
-          <View><JSONTree data={data7} postprocessValue={postprocessValue} /></View>
-        </TestCase>
-        <TestCase itShould="JsonTree isCustomNode 如果节点值是数字，则使用自定义渲染" tags={['C_API']}>
-          <View><JSONTree data={data8} theme={theme} isCustomNode={isCustomNode} /></View>
-          <View><JSONTree data={data8} theme={theme} /></View>
-        </TestCase>
-      </TestSuite>
+    <ScrollView style={{height: '100%', marginBottom: 20}}>
+      <Tester>
+        <TestSuite name="JsonTreeTest">
+          <TestCase itShould="JsonTree data" tags={['C_API']}>
+            <View>
+              <JSONTree data={data} />
+            </View>
+          </TestCase>
+          <TestCase itShould="JsonTree theme" tags={['C_API']}>
+            <View>
+              <JSONTree data={data1} theme={theme} />
+            </View>
+          </TestCase>
+          <TestCase
+            itShould="JsonTree shouldExpandNode='address', 默认展开address"
+            tags={['C_API']}>
+            <View>
+              <JSONTree data={data2} shouldExpandNode={shouldExpandNode} />
+            </View>
+          </TestCase>
+          <TestCase
+            itShould="JsonTree no shouldExpandNode"
+            tags={['C_API']}>
+            <View>
+              <JSONTree data={data2} />
+            </View>
+          </TestCase>
+          <TestCase
+            itShould="JsonTree hideRoot={true}, hideRoot={false}"
+            tags={['C_API']}>
+            <View>
+              <JSONTree data={data2} hideRoot={true} />
+              <JSONTree data={data2} hideRoot={false} />
+            </View>
+          </TestCase>
+          <TestCase
+            itShould="JsonTree invertTheme={true}, invertTheme={false}"
+            tags={['C_API']}>
+            <View>
+              <JSONTree data={data2} theme={theme} invertTheme={true} />
+              <JSONTree data={data2} theme={theme} invertTheme={false} />
+            </View>
+          </TestCase>
+          <TestCase
+            itShould="JsonTree getItemString={ {}&&2 keys}"
+            tags={['C_API']}>
+            <View>
+              <JSONTree
+                data={data3}
+                getItemString={(type, data, itemType, itemString) => {
+                  return (
+                    <Text>
+                      {itemType}&&{itemString}
+                    </Text>
+                  );
+                }}
+              />
+            </View>
+          </TestCase>
+          <TestCase
+            itShould="JsonTree labelRenderer 标签字体样式为加粗"
+            tags={['C_API']}>
+            <View>
+              <JSONTree
+                data={data3}
+                labelRenderer={(raw: any) => (
+                  <Text style={{fontWeight: 'bold'}}>{raw}</Text>
+                )}
+              />
+            </View>
+          </TestCase>
+          <TestCase
+            itShould="JsonTree valueRenderer 标签值字体样式为斜体"
+            tags={['C_API']}>
+            <View>
+              <JSONTree
+                data={data3}
+                valueRenderer={(raw: any) => (
+                  <Text style={{fontStyle: 'italic'}}>{raw}</Text>
+                )}
+              />
+            </View>
+          </TestCase>
+          <TestCase
+            itShould="JsonTree sortObjectKeys 定义键的排序方式(按照英文字母顺序排序)"
+            tags={['C_API']}>
+            <View>
+              <JSONTree
+                data={data4}
+                sortObjectKeys={(a: any, b: any) => {
+                  return a.localeCompare(b);
+                }}
+              />
+            </View>
+          </TestCase>
+          <TestCase
+            itShould="JsonTree keyPath=['information']"
+            tags={['C_API']}>
+            <View>
+              <JSONTree data={data5} keyPath={['information']} />
+            </View>
+          </TestCase>
+          <TestCase itShould="JsonTree collectionLimit={5}" tags={['C_API']}>
+            <View>
+              <JSONTree data={data6} collectionLimit={5} />
+            </View>
+          </TestCase>
+          <TestCase
+            itShould="JsonTree No postprocessValue"
+            tags={['C_API']}>
+            <View>
+              <JSONTree data={data7} />
+            </View>
+          </TestCase>
+          <TestCase
+            itShould="
+            JsonTree postprocessValue=(value: any) => {
+    if (value instanceof Date) {
+      return formatDate(value)
+    }
+    if (typeof value === 'number') {
+      return value.toFixed(2);
+    }
+    return value
+  } 根据数据类型格式化, 展示经过处理的数据"
+            tags={['C_API']}>
+            <View>
+              <JSONTree data={data7} postprocessValue={postprocessValue} />
+            </View>
+          </TestCase>
+          <TestCase
+            itShould="JsonTree No postprocessValue 不设置postprocessValue默认效果"
+            tags={['C_API']}>
+            <View>
+              <JSONTree data={data7} />
+            </View>
+          </TestCase>
+          <TestCase
+            itShould="JsonTree isCustomNode 如果节点值是数字，则使用自定义渲染"
+            tags={['C_API']}>
+            <View>
+              <JSONTree
+                data={data8}
+                theme={theme}
+                isCustomNode={isCustomNode}
+              />
+            </View>
+            <View>
+              <JSONTree data={data8} theme={theme} />
+            </View>
+          </TestCase>
+        </TestSuite>
+      </Tester>
     </ScrollView>
   );
 };
+export const displayName = 'RNJsonTree';
+export const framework = 'React';
+export const category = 'UI';
+export const title = 'JsonTree';
+export const documentationURL =
+  'https://github.com/Dean177/react-native-json-tree';
+export const description = 'React Native json tree';
 
-
+export const examples = [
+  {
+    title: 'React Native json tree',
+    render: function () {
+      return <App />;
+    },
+  },
+];

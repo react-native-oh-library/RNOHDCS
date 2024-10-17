@@ -5,7 +5,7 @@ import JSONTree from 'react-native-json-tree';
 import {Tester, TestSuite} from '@rnoh/testerino';
 import {TestCase} from './TestCase';
 
-const App = () => {
+export  const RNJsonTree = () => {
   return (
     <ScrollView>
       <Tester>
@@ -136,5 +136,3 @@ const TestTree4 = () => {
     </ScrollView>
   );
 };
-
-export default App;

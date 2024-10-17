@@ -120,6 +120,7 @@ function DisableHeaderGrow() {
                                 minHeight={MIN_HEIGHT}
                                 renderHeader={() => <Image source={require('./doctorwho.jpg')} style={styles.image} />}
                                 maxOverlayOpacity={0.8}
+                                useNativeDriver={true}
                                 disableHeaderGrow={false}
                             >
                                   <>

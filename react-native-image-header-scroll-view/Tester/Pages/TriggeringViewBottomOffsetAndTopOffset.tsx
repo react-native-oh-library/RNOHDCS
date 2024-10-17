@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
     },
     title: {
+        // backgroundColor:'green',
         fontSize: 20,
     },
     name: {
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
 
 function TriggeringViewBottomOffsetAndTopOffset() {
     const [visible, setVisible] = useState(false);
-    const fadeAnim = new Animated.Value(0);
+    const fadeAnim = new Animated.Value(1);
     useEffect(() => {
         if (visible) {
           Animated.timing(fadeAnim, {
@@ -163,12 +164,13 @@ function TriggeringViewBottomOffsetAndTopOffset() {
                             >
                                 <>
                                     <TriggeringView
-                                      onHide={() => setVisible(true)}
+                                      onHide={() =>  setVisible(true)}
                                       onDisplay={() => setVisible(false)}
-                                        bottomOffset={10}
-                                        topOffset={10}
+                                      bottomOffset={10}
+                                      topOffset={10}
+                                      
                                     >
-                                        <Text style={styles.title}>
+                                        <Text  style={styles.title}>
                                             <Text style={styles.name}>{tvShowContent.title}</Text>, ({tvShowContent.year})
                                         </Text>
                                     </TriggeringView>

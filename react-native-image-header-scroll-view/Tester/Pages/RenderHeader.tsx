@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
 });
 
 
-function ImageHeaderScrollViewExample() {
+function RenderHeader() {
     const [visible, setVisible] = useState(false);
     const fadeAnim = new Animated.Value(0);
     useEffect(() => {
@@ -134,8 +134,8 @@ function ImageHeaderScrollViewExample() {
      
     return (
             <Tester>
-                <TestSuite name='HeaderImage 设置header图片'>
-                    <TestCase  itShould='HeaderImage'>
+                <TestSuite name='renderHeader 设置头部组件返回一张图片'>
+                    <TestCase  itShould='renderHeader'>
                         <View style={{ height:1000}}>
                             <ImageHeaderScrollView
                                 maxHeight={MAX_HEIGHT}
@@ -143,7 +143,6 @@ function ImageHeaderScrollViewExample() {
                                 maxOverlayOpacity={0.8}
                                 minOverlayOpacity={0.2}
                                 overlayColor={'blue'}
-                                headerImage={{uri:'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg'}}
                                 renderHeader={() => <Image source={require('./doctorwho.jpg')} style={styles.image} />}
                                 renderFixedForeground={() => (
                                     <Animated.View
@@ -201,4 +200,4 @@ function ImageHeaderScrollViewExample() {
 
 }
 
-export default ImageHeaderScrollViewExample;
+export default RenderHeader;

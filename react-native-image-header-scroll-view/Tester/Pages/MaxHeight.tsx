@@ -13,7 +13,7 @@ import { Tester, TestCase, TestSuite } from '@rnoh/testerino'
 import ImageHeaderScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 
 const MIN_HEIGHT = 80;
-const MAX_HEIGHT = 250;
+const MAX_HEIGHT = 380;
 const tvShowContent = {
     title: 'Doctor Who',
     overview: `
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
 });
 
 
-function ImageHeaderScrollViewExample() {
+function MaxHeight() {
     const [visible, setVisible] = useState(false);
     const fadeAnim = new Animated.Value(0);
     useEffect(() => {
@@ -134,8 +134,8 @@ function ImageHeaderScrollViewExample() {
      
     return (
             <Tester>
-                <TestSuite name='HeaderImage 设置header图片'>
-                    <TestCase  itShould='HeaderImage'>
+                <TestSuite name='MaxHeight 设置MaxHeight为380'>
+                    <TestCase  itShould='MaxHeight'>
                         <View style={{ height:1000}}>
                             <ImageHeaderScrollView
                                 maxHeight={MAX_HEIGHT}
@@ -201,4 +201,4 @@ function ImageHeaderScrollViewExample() {
 
 }
 
-export default ImageHeaderScrollViewExample;
+export default MaxHeight;
