@@ -95,6 +95,7 @@ export function Md5TestExample() {
           <TestCase itShould='str_hmac_md5方法'>
             <Text>明文:{smd5_h} key:{smd5_h_key} 密文:{RNMd5.str_hmac_md5(smd5_h,smd5_h_key)} <Button title = "随机明文" onPress={() => { set_smd5_h(generateRandomString(10));set_smd5_h_key(generateRandomString(10)) }}></Button></Text>  
           </TestCase>
+            <View style={{height:200}}></View>
 
         </TestSuite>
         </ScrollView>
