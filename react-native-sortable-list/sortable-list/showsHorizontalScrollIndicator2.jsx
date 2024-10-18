@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
 
   list: {
     height: 210,
-    width: window.width,
+    width: window.width-50,
   },
 
   contentContainer: {
