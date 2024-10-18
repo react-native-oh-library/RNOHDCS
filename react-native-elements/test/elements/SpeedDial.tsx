@@ -14,6 +14,12 @@ export default () => {
   const [open7, setOpen7] = React.useState(false);
   const [open8, setOpen8] = React.useState(false);
   const [open9, setOpen9] = React.useState(false);
+  const [open10, setOpen10] = React.useState(false);
+  const [open11, setOpen11] = React.useState(false);
+  const [open12, setOpen12] = React.useState(false);
+  const [open13, setOpen13] = React.useState(false);
+  const [open14, setOpen14] = React.useState(false);
+  const [open15, setOpen15] = React.useState(false);
   return (
     <Tester>
       <ScrollView style={{height: '100%'}}>
@@ -492,6 +498,287 @@ export default () => {
                   }}
                   title="child3"
                   onPress={() => console.log('Delete Event')}
+                />
+              </SpeedDial>
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="SpeedDial的属性disable 接收Button组件的disable属性">
+          <TestCase itShould="设置Button组件的disable属性" tags={['C_API']}>
+            <View style={{height: 400, width: '100%'}}>
+              <SpeedDial
+                color="black"
+                backdropPressableProps={{
+                  children: <Text>123</Text>,
+                  style: {backgroundColor: 'yellow'},
+                }}
+                disabled={true}
+                isOpen={open10}
+                labelPressable
+                placement="right"
+                overlayColor="pink"
+                icon={{name: 'pencil', type: 'font-awesome', color: '#fff'}}
+                openIcon={{name: 'save', type: 'font-awesome', color: '#fff'}}
+                onOpen={() => setOpen10(!open10)}
+                onClose={() => setOpen10(!open10)}
+                transitionDuration={2000}>
+                <SpeedDial.Action
+                  color="black"
+                  icon={{name: 'plus', type: 'font-awesome', color: 'yellow'}}
+                  title="child1"
+                  onPress={() => console.log('Added Event')}
+                />
+                <SpeedDial.Action
+                  color="black"
+                  icon={{name: 'minus', type: 'font-awesome', color: 'yellow'}}
+                  title="child2"
+                  onPress={() => console.log('Delete Event')}
+                />
+                <SpeedDial.Action
+                  color="black"
+                  icon={{
+                    name: 'minus',
+                    type: 'font-awesome',
+                    color: 'yellow',
+                    style: {marginLeft: 5, marginBottom: 7},
+                  }}
+                  title="child3"
+                  onPress={() => console.log('Delete Event')}
+                />
+              </SpeedDial>
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="SpeedDial的属性size 接收Button组件的size属性">
+          <TestCase itShould="设置Button组件的size属性" tags={['C_API']}>
+            <View style={{height: 400, width: '100%'}}>
+              <SpeedDial
+                color="black"
+                backdropPressableProps={{
+                  children: <Text>123</Text>,
+                  style: {backgroundColor: 'yellow'},
+                }}
+                size='small'
+                isOpen={open11}
+                labelPressable
+                placement="right"
+                overlayColor="pink"
+                icon={{name: 'pencil', type: 'font-awesome', color: '#fff'}}
+                openIcon={{name: 'save', type: 'font-awesome', color: '#fff'}}
+                onOpen={() => setOpen11(!open11)}
+                onClose={() => setOpen11(!open11)}
+                transitionDuration={2000}>
+                <SpeedDial.Action
+                  color="black"
+                  icon={{name: 'plus', type: 'font-awesome', color: 'yellow'}}
+                  title="child1"
+                  onPress={() => console.log('Added Event')}
+                />
+                <SpeedDial.Action
+                  color="black"
+                  icon={{name: 'minus', type: 'font-awesome', color: 'yellow'}}
+                  title="child2"
+                  onPress={() => console.log('Delete Event')}
+                />
+                <SpeedDial.Action
+                  color="black"
+                  icon={{
+                    name: 'minus',
+                    type: 'font-awesome',
+                    color: 'yellow',
+                    style: {marginLeft: 5, marginBottom: 7},
+                  }}
+                  title="child3"
+                  onPress={() => console.log('Delete Event')}
+                />
+              </SpeedDial>
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="SpeedDial的属性placement 接收FAB组件的placement属性">
+          <TestCase itShould="设置FAB组件的placement属性为left" tags={['C_API']}>
+            <View style={{height: 400, width: '100%'}}>
+              <SpeedDial
+                color="black"
+                backdropPressableProps={{
+                  children: <Text>123</Text>,
+                  style: {backgroundColor: 'yellow'},
+                }}
+                isOpen={open12}
+                labelPressable
+                placement="left"
+                overlayColor="pink"
+                icon={{name: 'pencil', type: 'font-awesome', color: '#fff'}}
+                openIcon={{name: 'save', type: 'font-awesome', color: '#fff'}}
+                onOpen={() => setOpen12(!open12)}
+                onClose={() => setOpen12(!open12)}
+                transitionDuration={2000}>
+                <SpeedDial.Action
+                  color="black"
+                  icon={{name: 'plus', type: 'font-awesome', color: 'yellow'}}
+                  title="child1"
+                  onPress={() => console.log('Added Event')}
+                />
+                <SpeedDial.Action
+                  color="black"
+                  icon={{name: 'minus', type: 'font-awesome', color: 'yellow'}}
+                  title="child2"
+                  onPress={() => console.log('Delete Event')}
+                />
+                <SpeedDial.Action
+                  color="black"
+                  icon={{
+                    name: 'minus',
+                    type: 'font-awesome',
+                    color: 'yellow',
+                    style: {marginLeft: 5, marginBottom: 7},
+                  }}
+                  title="child3"
+                  onPress={() => console.log('Delete Event')}
+                />
+              </SpeedDial>
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="SpeedDial的属性color 接收FAB组件的color属性">
+          <TestCase itShould="设置FAB组件的color为蓝色" tags={['C_API']}>
+            <View style={{height: 400, width: '100%'}}>
+              <SpeedDial
+                color="blue"
+                backdropPressableProps={{
+                  children: <Text>123</Text>,
+                  style: {backgroundColor: 'yellow'},
+                }}
+                isOpen={open13}
+                labelPressable
+                placement="right"
+                overlayColor="pink"
+                icon={{name: 'pencil', type: 'font-awesome', color: '#fff'}}
+                openIcon={{name: 'save', type: 'font-awesome', color: '#fff'}}
+                onOpen={() => setOpen13(!open13)}
+                onClose={() => setOpen13(!open13)}
+                transitionDuration={2000}>
+                <SpeedDial.Action
+                  color="black"
+                  icon={{name: 'plus', type: 'font-awesome', color: 'yellow'}}
+                  title="child1"
+                  onPress={() => console.log('Added Event')}
+                />
+                <SpeedDial.Action
+                  color="black"
+                  icon={{name: 'minus', type: 'font-awesome', color: 'yellow'}}
+                  title="child2"
+                  onPress={() => console.log('Delete Event')}
+                />
+                <SpeedDial.Action
+                  color="black"
+                  icon={{
+                    name: 'minus',
+                    type: 'font-awesome',
+                    color: 'yellow',
+                    style: {marginLeft: 5, marginBottom: 7},
+                  }}
+                  title="child3"
+                  onPress={() => console.log('Delete Event')}
+                />
+              </SpeedDial>
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="SpeedDial.Action的属性visible 接收FAB组件的visible属性">
+          <TestCase itShould="设置FAB组件的visible属性" tags={['C_API']}>
+            <View style={{height: 400, width: '100%'}}>
+              <SpeedDial
+                color="black"
+                backdropPressableProps={{
+                  children: <Text>123</Text>,
+                  style: {backgroundColor: 'yellow'},
+                }}
+                isOpen={open14}
+                labelPressable
+                placement="right"
+                overlayColor="pink"
+                icon={{name: 'pencil', type: 'font-awesome', color: '#fff'}}
+                openIcon={{name: 'save', type: 'font-awesome', color: '#fff'}}
+                onOpen={() => setOpen14(!open14)}
+                onClose={() => setOpen14(!open14)}>
+                <SpeedDial.Action
+                  visible={!open14}
+                  disabledStyle={{width:100,height:100,backgroundColor:'green'}}
+                  labelPressable={true}
+                  color="black"
+                  icon={{name: 'plus', type: 'font-awesome', color: 'yellow'}}
+                  title="child1"
+                  onPress={() => setOpen14(!open14)}
+                />
+                <SpeedDial.Action
+                 visible={!open14}
+                  disabledStyle={{width:100,height:100,backgroundColor:'green'}}
+                  labelPressable={true}
+                  color="black"
+                  icon={{name: 'minus', type: 'font-awesome', color: 'yellow'}}
+                  title="child2"
+                  onPress={() => setOpen14(!open14)}
+                />
+                <SpeedDial.Action
+                  visible={!open14}
+                  labelPressable={true}
+                  color="black"
+                  icon={{
+                    name: 'minus',
+                    type: 'font-awesome',
+                    color: 'yellow',
+                    style: {marginLeft: 5, marginBottom: 7},
+                  }}
+                  title="child3"
+                  onPress={() => setOpen14(!open14)}
+                />
+              </SpeedDial>
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="SpeedDial.Action的属性color 接收FAB组件的color属性">
+          <TestCase itShould="设置FAB组件的color属性" tags={['C_API']}>
+            <View style={{height: 400, width: '100%'}}>
+              <SpeedDial
+                
+                backdropPressableProps={{
+                  children: <Text>123</Text>,
+                  style: {backgroundColor: 'yellow'},
+                }}
+                isOpen={open15}
+                labelPressable
+                placement="right"
+                overlayColor="pink"
+                icon={{name: 'pencil', type: 'font-awesome', color: '#fff'}}
+                openIcon={{name: 'save', type: 'font-awesome', color: '#fff'}}
+                onOpen={() => setOpen15(!open15)}
+                onClose={() => setOpen15(!open15)}>
+                <SpeedDial.Action
+                  labelPressable={true}
+                  color="green"
+                  icon={{name: 'plus', type: 'font-awesome', color: 'yellow'}}
+                  title="child1"
+                  onPress={() => setOpen15(!open15)}
+                />
+                <SpeedDial.Action
+                  labelPressable={true}
+                  color="green"
+                  icon={{name: 'minus', type: 'font-awesome', color: 'yellow'}}
+                  title="child2"
+                  onPress={() => setOpen15(!open15)}
+                />
+                <SpeedDial.Action
+                  labelPressable={true}
+                  color="green"
+                  icon={{
+                    name: 'minus',
+                    type: 'font-awesome',
+                    color: 'yellow',
+                    style: {marginLeft: 5, marginBottom: 7},
+                  }}
+                  title="child3"
+                  onPress={() => setOpen15(!open15)}
                 />
               </SpeedDial>
             </View>

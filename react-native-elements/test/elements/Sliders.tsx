@@ -21,33 +21,6 @@ const Sliders: React.FunctionComponent<SlidersComponentProps> = () => {
     let b = interpolate(0, 0);
     return `rgb(${r},${g},${b})`;
   };
-  //   <TestCase itShould='Slider Vertical' tags={['C_API']}>
-  //   <View style={{ ...styles.verticalContent, height: 400 }}>
-  //     <Slider
-  //       value={vertValue}
-  //       onValueChange={setVertValue}
-  //       maximumValue={50}
-  //       minimumValue={20}
-  //       step={1}
-  //       orientation="vertical"
-  //       allowTouchTrack
-  //       thumbStyle={{ height: 20, width: 16, backgroundColor: 'transparent' }}
-  //       thumbProps={{
-  //         children: (
-  //           <Icon
-  //             name="heartbeat"
-  //             type="font-awesome"
-  //             size={20}
-  //             reverse
-  //             containerStyle={{ bottom: 20, right: 20 }}
-  //             color="#f50"
-  //           />
-  //         ),
-  //       }}
-  //     />
-  //   </View>
-  //   <Text style={{ paddingLeft: 25, color: '#000' }}>Value: {vertValue}</Text>
-  // </TestCase>
   return (
     <Tester>
       <ScrollView>

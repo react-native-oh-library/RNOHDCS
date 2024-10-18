@@ -523,35 +523,82 @@ export default function HeaderComponent(): JSX.Element{
             />
           </TestCase>
         </TestSuite>
+
+        <TestSuite name="Header属性style 接收View的style属性 ">
+        <TestCase itShould="View的style属性" tags={['C_API']}>
+            <HeaderRNE
+              style={{width:100,backgroundColor:'yellow',height:50}}
+              statusBarProps={{
+                animated: true,
+                barStyle: 'dark-content',
+                backgroundColor: 'green',
+              }}
+              linearGradientProps={{
+                colors: '#F44336',
+                start: {x: 0, y: 0.5},
+                end: {x: 1, y: 0.5},
+              }}
+              containerStyle={{ 
+                width: '100%',
+                height: 100,
+                borderRadius: 20,
+                backgroundColor: 'yellow',
+              }}
+              centerComponent={{
+                icon: 'menu',
+                color: 'yellow',
+                text: '接收View的style属性',
+                type: 'font-awesome',
+                style: {color: 'yellow', alignSelf: 'center'},
+              }}
+              centerContainerStyle={{
+                backgroundColor: 'pink',
+                borderRadius: 5,
+                height: 40,
+              }}
+            />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Header属性testId 接收View的testId属性 ">
+        <TestCase itShould="View的testId属性" tags={['C_API']}>
+            <HeaderRNE
+              testID='headerTest'
+              style={{width:100,backgroundColor:'yellow',height:50}}
+              statusBarProps={{
+                animated: true,
+                barStyle: 'dark-content',
+                backgroundColor: 'green',
+              }}
+              linearGradientProps={{
+                colors: '#F44336',
+                start: {x: 0, y: 0.5},
+                end: {x: 1, y: 0.5},
+              }}
+              containerStyle={{ 
+                width: '100%',
+                height: 100,
+                borderRadius: 20,
+                backgroundColor: 'yellow',
+              }}
+              centerComponent={{
+                icon: 'menu',
+                color: 'yellow',
+                text: '接收View的testId属性',
+                type: 'font-awesome',
+                style: {color: 'yellow', alignSelf: 'center'},
+              }}
+              centerContainerStyle={{
+                backgroundColor: 'pink',
+                borderRadius: 5,
+                height: 40,
+              }}
+            />
+          </TestCase>
+        </TestSuite>
       </ScrollView>
     </Tester>
   );
 };
-// import * as React from "react";
-// import { Header, Icon } from "@rneui/base";
-// import { SafeAreaProvider } from "react-native-safe-area-context";
-
-// export default () => {
-//   return (
-//     <Header
-//       backgroundImageStyle={{}}
-//       barStyle="default"
-//       centerComponent={{
-//         text: "MY TITLE",
-//         style: { color: "#fff" }
-//       }}
-//       centerContainerStyle={{}}
-//       containerStyle={{ width: 350 }}
-//       leftComponent={{ icon: "menu", color: "#fff" }}
-//       leftContainerStyle={{}}
-//       linearGradientProps={{}}
-//       placement="center"
-//       rightComponent={{ icon: "home", color: "#fff" }}
-//       rightContainerStyle={{}}
-//       statusBarProps={{}}
-//     />
-//   );
-// }
 const styles = StyleSheet.create({
   container: {
     marginTop: 10,

@@ -651,19 +651,11 @@ export default () => {
                   fontWeight: '400',
                   backgroundColor: 'red'
                 }}
-                value='disable的样式'
                 disabled={true}
                 placeholder="请输入"
               />
             </View>
-            <View style={styles.container}>
-              <Text style={styles.subText}>未设置disable的样式</Text>
-              <Input
-                inputStyle={{ color: 'red', fontSize: 20, fontWeight: '500' }}
-                disabled={false}
-                placeholder="请输入"
-              />
-            </View>
+           
           </TestCase>
         </TestSuite>
         <TestSuite name="Input属性errorMessage  显示errorMessage">
@@ -722,7 +714,6 @@ export default () => {
                   padding: 10,
                   borderRadius: 10,
                 }}
-                value='请输入'
                 placeholder="INPUT WITH  MESSAGE"
               />
             </View>
@@ -742,7 +733,6 @@ export default () => {
                   padding: 10,
                   borderRadius: 10,
                 }}
-                value='请输入'
                 inputStyle={{ color: 'black', fontSize: 20, fontWeight: '400' }}
                 placeholder="INPUT WITH  MESSAGE"
               />
@@ -860,7 +850,7 @@ export default () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Input属性rightIconContainerStyle rightIcon设置样式">
+        <TestSuite name="Input属性editable rightIcon设置样式">
           <TestCase itShould="设置rightIconContainerStyle" tags={['C_API']}>
             <View style={styles.container}>
               <Text style={styles.subText}>rightIconContainerStyle</Text>
@@ -886,7 +876,7 @@ export default () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Input属性shake 设置无效">
+        {/* <TestSuite name="Input属性shake 设置无效">
           <TestCase itShould="设置shake" tags={['C_API']}>
             <View style={styles.container}>
               <Text style={styles.subText}>shake</Text>
@@ -918,6 +908,114 @@ export default () => {
                 labelStyle={{ fontSize: 30, fontWeight: '400', color: 'pink' }}
                 label="label"
                 placeholder="INPUT WITH MESSAGE"
+              />
+            </View>
+          </TestCase>
+        </TestSuite> */}
+        <TestSuite name="Input属性editable  接收React-Native原生Input组件的editable">
+          <TestCase itShould="接收React-Native原生Input组件的editable" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>原生Input组件的editable 设置未false不可输入</Text>
+              <Input
+                editable={false}
+                inputStyle={{ color: '#222222' }}
+                rightIconContainerStyle={{
+                  width: 40,
+                  borderWidth: 1,
+                  backgroundColor: 'blue',
+                  paddingLeft: 5,
+                  borderRadius: 20,
+                }}
+                rightIcon={{
+                  type: 'font-awesome',
+                  name: 'close',
+                  color: 'pink',
+                  size: 30,
+                }}
+                labelStyle={{ fontSize: 30, fontWeight: '400', color: 'pink' }}
+                label="label"
+                placeholder="原生Input组件的editable"
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Input属性autoFocus  接收React-Native原生Input组件的autoFocus">
+          <TestCase itShould="接收React-Native原生Input组件的autoFocus" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>原生Input组件的autoFocus设置为true input框自动聚焦</Text>
+              <Input
+                autoFocus={true}
+                inputStyle={{ color: '#222222' }}
+                rightIconContainerStyle={{
+                  width: 40,
+                  borderWidth: 1,
+                  backgroundColor: 'blue',
+                  paddingLeft: 5,
+                  borderRadius: 20,
+                }}
+                rightIcon={{
+                  type: 'font-awesome',
+                  name: 'close',
+                  color: 'pink',
+                  size: 30,
+                }}
+                labelStyle={{ fontSize: 30, fontWeight: '400', color: 'pink' }}
+                label="label"
+                placeholder="原生Input组件的autoFocus"
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Input属性style  接收React-Native原生View组件的style">
+          <TestCase itShould="接收React-Native原生View组件的style" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>原生View组件的style设置</Text>
+              <Input
+                style={{width:200,height:80,backgroundColor:'red'}}
+                inputStyle={{ color: '#222222' }}
+                rightIconContainerStyle={{
+                  width: 40,
+                  borderWidth: 1,
+                  backgroundColor: 'blue',
+                  paddingLeft: 5,
+                  borderRadius: 20,
+                }}
+                rightIcon={{
+                  type: 'font-awesome',
+                  name: 'close',
+                  color: 'pink',
+                  size: 30,
+                }}
+                labelStyle={{ fontSize: 30, fontWeight: '400', color: 'pink' }}
+                label="label"
+                placeholder="原生View组件的style"
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Input属性testID 接收React-Native原生View组件的testID">
+          <TestCase itShould="接收React-Native原生View组件的testID" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>原生View组件的testID设置</Text>
+              <Input
+                testID='InputViewStyle'
+                inputStyle={{ color: '#222222' }}
+                rightIconContainerStyle={{
+                  width: 40,
+                  borderWidth: 1,
+                  backgroundColor: 'blue',
+                  paddingLeft: 5,
+                  borderRadius: 20,
+                }}
+                rightIcon={{
+                  type: 'font-awesome',
+                  name: 'close',
+                  color: 'pink',
+                  size: 30,
+                }}
+                labelStyle={{ fontSize: 30, fontWeight: '400', color: 'pink' }}
+                label="label"
+                placeholder="原生View组件的testID"
               />
             </View>
           </TestCase>

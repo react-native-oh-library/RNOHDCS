@@ -568,6 +568,133 @@ const Avatars: React.FunctionComponent<AvatarComponentProps> = () => {
               }}></View>
           </TestCase>
         </TestSuite>
+        <TestSuite name="Avatar.Accessory属性type  接收Icon组件的type属性">
+          <TestCase tags={['C_API']} itShould="icon的type">
+          <View
+              style={{
+                paddingTop: 20,
+                paddingBottom: 20,
+                width:'100%',
+                height:100,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+            <Avatar.Accessory
+              name="home"
+              type="font-awesome"
+              color="red"
+              size={100}
+               
+            />
+           </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Avatar.Accessory属性size 接收Icon组件的size属性">
+          <TestCase tags={['C_API']} itShould="icon的size">
+          <View
+              style={{
+                paddingTop: 20,
+                paddingBottom: 20,
+                width:'100%',
+                height:100,
+  
+              }}>
+            <Avatar.Accessory
+              name="remove"
+              type="font-awesome"
+              color="green"
+              size={50}
+               
+            />
+           </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Avatar.Accessory属性source 接收Image组件的source属性">
+          <TestCase tags={['C_API']} itShould="Image的source">
+          <View
+              style={{
+                paddingTop: 20,
+                paddingBottom: 20,
+                width:'100%',
+                height:100,
+  
+              }}>
+            <Avatar.Accessory
+               size={100}
+               source={{
+                 uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
+               }}
+               
+            />
+           </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Avatar.Accessory属性transitionDuration 接收Image组件的transitionDuration属性">
+          <TestCase tags={['C_API']} itShould="设置Image的transitionDuration动画显示时间">
+          <View
+              style={{
+                paddingTop: 20,
+                paddingBottom: 20,
+                width:'100%',
+                height:100,
+  
+              }}>
+            <Avatar.Accessory
+               transitionDuration={20000}
+               transition={true}
+               size={100}
+               source={{
+                 uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
+               }}
+               
+            />
+           </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Avatar.Accessory属性h1和h1Style 接收Text组件的h1和h1Style属性">
+          <TestCase tags={['C_API']} itShould="设置Text组件的h1和h1Style属性">
+          <View
+              style={{
+                paddingTop: 20,
+                paddingBottom: 20,
+                width:'100%',
+                height:100,
+  
+              }}>
+            <Avatar.Accessory
+               h1={true}
+               h1Style={{backgroundColor:'pink'}}
+               size={100}
+               source={{
+                 uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
+               }}
+               
+            />
+           </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Avatar.Accessory属性h2和h2Style 接收Text组件的h2和h2Style属性">
+          <TestCase tags={['C_API']} itShould="设置Text组件的h2和h2Style属性">
+          <View
+              style={{
+                paddingTop: 20,
+                paddingBottom: 20,
+                width:'100%',
+                height:100,
+  
+              }}>
+            <Avatar.Accessory
+               h2={true}
+               h2Style={{backgroundColor:'green'}}
+               size={100}
+               source={{
+                 uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
+               }}
+               
+            />
+           </View>
+          </TestCase>
+        </TestSuite>
       </ScrollView>
     </Tester>
   );

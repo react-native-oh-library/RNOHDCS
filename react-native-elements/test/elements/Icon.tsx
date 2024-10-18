@@ -267,19 +267,27 @@ const Icons: React.FunctionComponent<IconProps> = () => {
               size={100}></Icon>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Icon属性type 设置不同的type">
-
-          <TestCase itShould="font-awesome" tags={['C_API']}>
+        <TestSuite name="Icon属性numberOfLines 接收React-Native原生Text组件的numberOfLines">
+          <TestCase itShould="Text组件的numberOfLines" tags={['C_API']}>
             <Icon
               name={'save'}
-              testID="testID"
-             
+              numberOfLines={1}
               containerStyle={{alignSelf: 'center'}}
               type="font-awesome"
               color="red"
               size={100}></Icon>
           </TestCase>
-
+        </TestSuite>
+        <TestSuite name="Icon属性ellipsizeMode 接收React-Native原生Text组件的ellipsizeMode">
+          <TestCase itShould="Text组件的ellipsizeMode" tags={['C_API']}>
+            <Icon
+              name={'save'}
+              ellipsizeMode={'middle'}
+              containerStyle={{alignSelf: 'center'}}
+              type="font-awesome"
+              color="red"
+              size={100}></Icon>
+          </TestCase>
         </TestSuite>
       </ScrollView>
     </Tester>

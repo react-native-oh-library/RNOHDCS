@@ -626,6 +626,49 @@ export default function SnapCarouselExample(): JSX.Element {
             </View>
           </TestCase>
         </TestSuite>
+        <TestSuite name="Button属性style的验证  接收TouchableOpacityProps的style">
+          <TestCase itShould="TouchableOpacityProps的style" tags={['C_API']}>
+            <View
+              style={{
+                paddingTop: 20,
+                paddingBottom: 20,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Button
+               style={{width:200,height:80,backgroundColor:'yellow'}}
+                title={'TouchableOpacityProps的style'}
+        
+                containerStyle={{
+                  width: 200,
+                  marginHorizontal: 50,
+                  marginVertical: 10,
+                }}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Button属性activeOpacity的验证  接收TouchableOpacityProps的activeOpacity">
+          <TestCase itShould="TouchableOpacityProps的activeOpacity" tags={['C_API']}>
+            <View
+              style={{
+                paddingTop: 20,
+                paddingBottom: 20,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Button
+                activeOpacity={0.2}
+                title={'TouchableOpacityProps的style'}
+                containerStyle={{
+                  width: 200,
+                  marginHorizontal: 50,
+                  marginVertical: 10,
+                }}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
       </ScrollView>
     </Tester>
   );

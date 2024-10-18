@@ -30,6 +30,43 @@ const Chips: React.FunctionComponent<ChipsComponentProps> = () => {
               </TestCase>
             </View>
           </TestSuite>
+          <TestSuite name="Chips 属性disable验证  接收Button的disable属性">
+            <View style={{alignItems: 'center'}}>
+              <TestCase itShould="Button的disable属性为true" tags={['C_API']}>
+                <Chip
+                disabled={true}
+                  title="Button的disable属性为true"
+                  type="outline"
+                  containerStyle={{marginVertical: 15}}
+                  activeOpacity={0.1}
+                  onPress={()=>{}}
+                />
+              </TestCase>
+              <TestCase itShould="Button的disable属性为false" tags={['C_API']}>
+                <Chip
+                  title="Button的disable属性为false"
+                  type="outline"
+                  containerStyle={{marginVertical: 15}}
+                  activeOpacity={0.1}
+                  onPress={()=>{}}
+                />
+              </TestCase>
+            </View>
+          </TestSuite>
+          <TestSuite name="Chips 属性loading验证  接收Button的loading属性">
+            <View style={{alignItems: 'center'}}>
+              <TestCase itShould="Button的loading属性" tags={['C_API']}>
+                <Chip
+                  loading={true}
+                  title="Button的disable属性为true"
+                  type="outline"
+                  containerStyle={{marginVertical: 15}}
+                  activeOpacity={0.1}
+                  onPress={()=>{}}
+                />
+              </TestCase>
+            </View>
+          </TestSuite>
         </View>
       </ScrollView>
     </Tester>

@@ -87,7 +87,8 @@ export default () => {
   const [onPress, setOnPress] = useState(false);
   const [onPressIn, setOnPressIn] = useState(false);
   const [onPressOut, setonPressOut] = useState(false);
-
+  const [changeImg, setChangeImg] = useState(false);
+  const [changeImg1, setChangeImg1] = useState(false);
   return (
     <Tester>
       <ScrollView>
@@ -283,6 +284,43 @@ export default () => {
                 transitionDuration={10000}
                 transition={true}
                 source={{uri: 'https://randomuser.me/api/portraits/men/13.jpg'}}
+                style={{width: 100, height: 100, alignSelf: 'center'}}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Image属性onLoadStart方法 接收React-Native原生Image组件的onLoadStart">
+          <TestCase
+            itShould="接收React-Native原生Image组件的onLoadStart"
+            tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>onLoadStart方法切换图片源</Text>
+              <Image
+                onLoadStart={()=>{
+                  setTimeout(() => {
+                    setChangeImg(!changeImg)
+                  }, 2000);
+                 
+                }}
+                source={{uri: changeImg ?  'https://randomuser.me/api/portraits/men/13.jpg' : 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg'}}
+                style={{width: 100, height: 100, alignSelf: 'center'}}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Image属性onLoadEnd方法 接收React-Native原生Image组件的onLoadEnd">
+          <TestCase
+            itShould="接收React-Native原生Image组件的onLoadEnd"
+            tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>onLoadEnd方法切换图片源</Text>
+              <Image
+                onLoadEnd={()=>{
+                  setTimeout(() => {
+                    setChangeImg1(!changeImg1)
+                  }, 2000);
+                }}
+                source={{uri: changeImg1 ?  'https://randomuser.me/api/portraits/men/13.jpg' : 'https://randomuser.me/api/portraits/men/10.jpg'}}
                 style={{width: 100, height: 100, alignSelf: 'center'}}
               />
             </View>

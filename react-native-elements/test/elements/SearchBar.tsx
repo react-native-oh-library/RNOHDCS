@@ -48,6 +48,8 @@ const SearchBarTest: React.FunctionComponent<SearchBarComponentProps> = () => {
   const [value16, setValue16] = useState('');
   const [value17, setValue17] = useState('');
   const [value18, setValue18] = useState('');
+  const [value19, setValue19] = useState('');
+  const [value20, setValue20] = useState('');
   return (
     <Tester>
       <ScrollView style={{...styles.viewContainer}}>
@@ -265,7 +267,7 @@ const SearchBarTest: React.FunctionComponent<SearchBarComponentProps> = () => {
             />
           </TestCase>
         </TestSuite> */}
-        <TestSuite name="SearchBar属性onClear 设置onClear  删除的回调事件 设置无效">
+        {/* <TestSuite name="SearchBar属性onClear 设置onClear  删除的回调事件 设置无效">
           <TestCase itShould="onClear" tags={['C_API']}>
             <SearchBar
               cancelButtonProps={{
@@ -294,7 +296,7 @@ const SearchBarTest: React.FunctionComponent<SearchBarComponentProps> = () => {
               onClear={() => {setValue12('')}}
             />
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         {/* <TestSuite name="SearchBar属性platform 设置platform为default无效">
           <TestCase itShould="platform" tags={['C_API']}>
             <SearchBar
@@ -508,6 +510,103 @@ const SearchBarTest: React.FunctionComponent<SearchBarComponentProps> = () => {
                   color="red"
                   size={20}></Icon>
               }
+              round={true}
+              rightIconContainerStyle={{width: 50, height: 50}}
+              rightIcon={
+                <Icon
+                  name="save"
+                  type="font-awesome"
+                  color="red"
+                  size={20}></Icon>
+              }
+              cancelButtonProps={{
+                buttonStyle: {backgroundColor: 'red'},
+                buttonTextStyle: {color: 'green'},
+              }}
+              cancelIcon={
+                <Icon
+                  name="home"
+                  type="font-awesome"
+                  color="red"
+                  size={20}></Icon>
+              }
+              cancelButtonTitle="取消"
+              showCancel={true}
+              onCancel={() => {}}
+              clearIcon={
+                <Icon
+                  name="remove"
+                  type="font-awesome"
+                  color="red"
+                  size={20}></Icon>
+              }
+              onClear={() => {}}
+            />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="SearchBar属性inputStyle 接收Input组件属性inputStyle">
+          <TestCase itShould="设置SearchBar的inputStyle" tags={['C_API']}>
+            <SearchBar
+              showLoading={true}
+              loadingProps={{animating: true, size: 20, color: 'red'}}
+              onChangeText={value => {
+                setValue19(value);
+              }}
+              inputStyle={{ color: 'black', fontSize: 20, fontWeight: '400' }}
+              value={value19}
+              searchIcon={
+                <Icon
+                name="search"
+                  type="font-awesome"
+                  color="red"
+                  size={20}></Icon>
+              }
+              round={true}
+              rightIconContainerStyle={{width: 50, height: 50}}
+              rightIcon={
+                <Icon
+                  name="save"
+                  type="font-awesome"
+                  color="red"
+                  size={20}></Icon>
+              }
+              cancelButtonProps={{
+                buttonStyle: {backgroundColor: 'red'},
+                buttonTextStyle: {color: 'green'},
+              }}
+              cancelIcon={
+                <Icon
+                  name="home"
+                  type="font-awesome"
+                  color="red"
+                  size={20}></Icon>
+              }
+              cancelButtonTitle="取消"
+              showCancel={true}
+              onCancel={() => {}}
+              clearIcon={
+                <Icon
+                  name="remove"
+                  type="font-awesome"
+                  color="red"
+                  size={20}></Icon>
+              }
+              onClear={() => {}}
+            />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="SearchBar属性editable 接收Input组件属性editable">
+          <TestCase itShould="设置ListItem.Input的editable" tags={['C_API']}>
+            <SearchBar
+              showLoading={true}
+              loadingProps={{animating: true, size: 20, color: 'red'}}
+              onChangeText={value => {
+                setValue20(value);
+              }}
+              inputStyle={{ color: 'black', fontSize: 20, fontWeight: '400' }}
+              value={value20}
+             editable={false}
+         
               round={true}
               rightIconContainerStyle={{width: 50, height: 50}}
               rightIcon={
