@@ -1,53 +1,55 @@
-import React from 'react';
-import { Tester, TestSuite } from '@rnoh/testerino';
-import { TestCase } from './TestCase';
-import { View, Dimensions, Text, Image, StyleSheet, Button, ScrollView } from 'react-native';
+import React, { Component } from 'react';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
+import { View, Dimensions, Text, Image, StyleSheet, Button, ScrollView, Alert } from 'react-native';
 import { MarqueeHorizontal, MarqueeVertical } from 'react-native-marquee-ab';
 //整个屏幕的宽度(由于宽度只能使用数值所以如果想要宽度满屏的话需要获取到宽度再赋值给width)
-const mWidth = Dimensions.get('window').width;
-const TestPage = () => {
-    return (
-        <ScrollView>
-            <Tester>
-                <TestSuite name="Marquee">
-                    <TestCase.Example itShould="horizontal duration customization">
-                        <HorizontalDurationRolling />
-                    </TestCase.Example>
-                    <TestCase.Example itShould="horizontal speed customization">
-                        <HorizontalSpeedRolling />
-                    </TestCase.Example>
-                    <TestCase.Example itShould="horizontal textList customization">
-                        <HorizontalTextList />
-                    </TestCase.Example>
-                    <TestCase.Example itShould="horizontal width customization">
-                        <HorizontalWidthRolling />
-                    </TestCase.Example>
-                    <TestCase.Example itShould="horizontal height customization">
-                        <HorizontalHeightRolling />
-                    </TestCase.Example>
-                    <TestCase.Example itShould="horizontal direction customization">
-                        <HorizontalDirectionRolling />
-                    </TestCase.Example>
-                    <TestCase.Example itShould="horizontal reverse customization">
-                        <HorizontalReverseRolling />
-                    </TestCase.Example>
-                    <TestCase.Example itShould="horizontal separator customization">
-                        <HorizontalSeparatorRolling />
-                    </TestCase.Example>
-                    <TestCase.Example itShould="horizontal bgStyle customization">
-                        <HorizontalBgStyleRolling />
-                    </TestCase.Example>
-                    <TestCase.Example itShould="horizontal textStyle customization">
-                        <HorizontalTextStyleRolling />
-                    </TestCase.Example>
-                    <TestCase.Example itShould="Vertical scrolling all effects">
-                        <VerticalRolling />
-                    </TestCase.Example>
-                </TestSuite>
-            </Tester>
-        </ScrollView>
-    );
-};
+const mWidth = Dimensions.get('window').width - 40;
+export default class TestPage extends Component {
+    render() {
+        return (
+            <ScrollView>
+                <Tester>
+                    <TestSuite name="Marquee">
+                        <TestCase itShould="horizontal duration customization">
+                            <HorizontalDurationRolling />
+                        </TestCase>
+                        <TestCase itShould="horizontal speed customization">
+                            <HorizontalSpeedRolling />
+                        </TestCase>
+                        <TestCase itShould="horizontal textList customization">
+                            <HorizontalTextList />
+                        </TestCase>
+                        <TestCase itShould="horizontal width customization">
+                            <HorizontalWidthRolling />
+                        </TestCase>
+                        <TestCase itShould="horizontal height customization">
+                            <HorizontalHeightRolling />
+                        </TestCase>
+                        <TestCase itShould="horizontal direction customization">
+                            <HorizontalDirectionRolling />
+                        </TestCase>
+                        <TestCase itShould="horizontal reverse customization">
+                            <HorizontalReverseRolling />
+                        </TestCase>
+                        <TestCase itShould="horizontal separator customization">
+                            <HorizontalSeparatorRolling />
+                        </TestCase>
+                        <TestCase itShould="horizontal bgStyle customization">
+                            <HorizontalBgStyleRolling />
+                        </TestCase>
+                        <TestCase itShould="horizontal textStyle customization">
+                            <HorizontalTextStyleRolling />
+                        </TestCase>
+                        <TestCase itShould="Vertical scrolling all effects">
+                            <VerticalRolling />
+                        </TestCase>
+                    </TestSuite>
+                </Tester>
+            </ScrollView>
+        );
+    }
+}
+
 const HorizontalDurationRolling = () => {
     const [pressCounter, setPressCounter] = React.useState(10000);
     const handlePress = () => {
@@ -75,7 +77,7 @@ const HorizontalDurationRolling = () => {
                 bgContainerStyle={{ backgroundColor: 'pink' }}
                 textStyle={{ fontSize: 16 }}
                 onTextClick={item => {
-                    alert('' + JSON.stringify(item));
+                    Alert.alert('' + JSON.stringify(item));
                 }}
             />
         </View>
@@ -108,7 +110,7 @@ const HorizontalSpeedRolling = () => {
                 bgContainerStyle={{ backgroundColor: 'pink' }}
                 textStyle={{ fontSize: 16 }}
                 onTextClick={item => {
-                    alert('' + JSON.stringify(item));
+                    Alert.alert('' + JSON.stringify(item));
                 }}
             />
         </View>
@@ -147,7 +149,7 @@ const HorizontalTextList = () => {
                 bgContainerStyle={{ backgroundColor: 'pink' }}
                 textStyle={{ fontSize: 16 }}
                 onTextClick={item => {
-                    alert('' + JSON.stringify(item));
+                    Alert.alert('' + JSON.stringify(item));
                 }}
             />
         </View>
@@ -180,7 +182,7 @@ const HorizontalWidthRolling = () => {
                 bgContainerStyle={{ backgroundColor: 'pink' }}
                 textStyle={{ fontSize: 16 }}
                 onTextClick={item => {
-                    alert('' + JSON.stringify(item));
+                    Alert.alert('' + JSON.stringify(item));
                 }}
             />
         </View>
@@ -213,7 +215,7 @@ const HorizontalHeightRolling = () => {
                 bgContainerStyle={{ backgroundColor: 'pink' }}
                 textStyle={{ fontSize: 16 }}
                 onTextClick={item => {
-                    alert('' + JSON.stringify(item));
+                    Alert.alert('' + JSON.stringify(item));
                 }}
             />
         </View>
@@ -246,7 +248,7 @@ const HorizontalDirectionRolling = () => {
                 bgContainerStyle={{ backgroundColor: 'pink' }}
                 textStyle={{ fontSize: 16 }}
                 onTextClick={item => {
-                    alert('' + JSON.stringify(item));
+                    Alert.alert('' + JSON.stringify(item));
                 }}
             />
         </View>
@@ -279,7 +281,7 @@ const HorizontalReverseRolling = () => {
                 bgContainerStyle={{ backgroundColor: 'pink' }}
                 textStyle={{ fontSize: 16 }}
                 onTextClick={item => {
-                    alert('' + JSON.stringify(item));
+                    Alert.alert('' + JSON.stringify(item));
                 }}
             />
         </View>
@@ -312,7 +314,7 @@ const HorizontalSeparatorRolling = () => {
                 bgContainerStyle={{ backgroundColor: 'pink' }}
                 textStyle={{ fontSize: 16 }}
                 onTextClick={item => {
-                    alert('' + JSON.stringify(item));
+                    Alert.alert('' + JSON.stringify(item));
                 }}
             />
         </View>
@@ -349,7 +351,7 @@ const HorizontalBgStyleRolling = () => {
                 bgContainerStyle={bgroundColor}
                 textStyle={{ fontSize: 16 }}
                 onTextClick={item => {
-                    alert('' + JSON.stringify(item));
+                    Alert.alert('' + JSON.stringify(item));
                 }}
             />
         </View>
@@ -386,7 +388,7 @@ const HorizontalTextStyleRolling = () => {
                 bgContainerStyle={{ backgroundColor: '#008ad3' }}
                 textStyle={textStyles}
                 onTextClick={item => {
-                    alert('' + JSON.stringify(item));
+                    Alert.alert('' + JSON.stringify(item));
                 }}
             />
         </View>
@@ -423,7 +425,7 @@ const VerticalRolling = () => {
                 </View>,
                 <Image
                     key="initial-image"
-                    source={require('../../assets/pravatar-131.jpg')}
+                    source={require('./assets/pravatar-131.jpg')}
                     style={{ width: 46, height: 28 }}
                 />,
             ];
@@ -441,7 +443,7 @@ const VerticalRolling = () => {
                 </View>,
                 <Image
                     key="toggled-image"
-                    source={require('../../assets/pravatar-131.jpg')}
+                    source={require('./assets/pravatar-131.jpg')}
                     style={{ width: 30, height: 30 }}
                 />,
             ];
@@ -516,10 +518,9 @@ const VerticalRolling = () => {
                 bgContainerStyle={bgColorChange}
                 textStyle={textStyleChange}
                 onTextClick={item => {
-                    alert('' + JSON.stringify(item));
+                    Alert.alert('' + JSON.stringify(item));
                 }}
             />
         </View>
     );
 };
-export default TestPage;
