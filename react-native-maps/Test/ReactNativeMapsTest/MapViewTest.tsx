@@ -659,8 +659,8 @@ export class MapViewTest extends React.Component<any, any> {
         <View style={styles.container}>
           {mapView}
         </View>
-        <View style={{ minHeight: 50 }}>
-          <Text>{this.state.apiCallbackText}</Text>
+        <View style={{ minHeight: 50, backgroundColor: 'white' }}>
+          <Text style={{ color: 'blank' }}>{this.state.apiCallbackText}</Text>
         </View>
         {/* @ts-ignore */}
         <ScrollView style={{ flex: 1, height: "calc(100% - 250px)" }}>
