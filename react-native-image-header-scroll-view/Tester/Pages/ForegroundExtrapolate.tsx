@@ -134,7 +134,7 @@ function ForegroundExtrapolate() {
      
     return (
             <Tester>
-                <TestSuite name='ForegroundExtrapolate 设置header容器背景色为粉色'>
+                <TestSuite name='ForegroundExtrapolate 设置一段文字'>
                     <TestCase  itShould='ForegroundExtrapolate'>
                         <View style={{ height:1000}}>
                             <ImageHeaderScrollView
