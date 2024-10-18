@@ -64,6 +64,18 @@ const OverlayComponent: React.FunctionComponent<OverlayComponentProps> = () => {
   const toggleOverlay7 = () => {
     setVisible7(!visible7);
   };
+
+  const [visible8, setVisible8] = useState(false);
+
+  const toggleOverlay8 = () => {
+    setVisible8(!visible8);
+  };
+
+  const [visible9, setVisible9] = useState(false);
+
+  const toggleOverlay9 = () => {
+    setVisible8(!visible9);
+  };
   return (
     <Tester>
       <ScrollView>
@@ -335,6 +347,70 @@ const OverlayComponent: React.FunctionComponent<OverlayComponentProps> = () => {
                 }
                 title="Start "
                 onPress={toggleOverlay7}
+              />
+            </Overlay>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Overlay属性h3和h3Style	 接收Text组件的h3和h3Style属性">
+          <TestCase itShould="设置Text组件的h3和h3Style属性" tags={['C_API']}>
+            <Button
+              title="接收Text组件的h3和h3Style属性"
+              onPress={toggleOverlay8}
+              buttonStyle={styles.button}
+            />
+            <Overlay
+              h3={true} h3Style={{backgroundColor:'pink'}}
+              isVisible={visible8}
+              overlayStyle={{backgroundColor: 'green', borderRadius: 20}}
+              onBackdropPress={toggleOverlay8}>
+              <Text style={styles.textPrimary}>Hello!</Text>
+              <Text style={styles.textSecondary}>
+                Welcome to React Native Elements
+              </Text>
+              <Button
+                icon={
+                  <Icon
+                    name="wrench"
+                    type="font-awesome"
+                    color="white"
+                    size={25}
+                    iconStyle={{marginRight: 10}}
+                  />
+                }
+                title="Start "
+                onPress={toggleOverlay8}
+              />
+            </Overlay>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Overlay属性h4和h4Style	 接收Text组件的h4和h4Style属性">
+          <TestCase itShould="设置Text组件的h4和h4Style属性" tags={['C_API']}>
+            <Button
+              title="接收Text组件的h4和h4Style属性"
+              onPress={toggleOverlay9}
+              buttonStyle={styles.button}
+            />
+            <Overlay
+              h4={true} h4Style={{backgroundColor:'pink'}}
+              isVisible={visible9}
+              overlayStyle={{backgroundColor: 'green', borderRadius: 20}}
+              onBackdropPress={toggleOverlay9}>
+              <Text style={styles.textPrimary}>Hello!</Text>
+              <Text style={styles.textSecondary}>
+                Welcome to React Native Elements
+              </Text>
+              <Button
+                icon={
+                  <Icon
+                    name="wrench"
+                    type="font-awesome"
+                    color="white"
+                    size={25}
+                    iconStyle={{marginRight: 10}}
+                  />
+                }
+                title="Start"
+                onPress={toggleOverlay9}
               />
             </Overlay>
           </TestCase>

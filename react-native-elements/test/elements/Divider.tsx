@@ -149,6 +149,26 @@ const DividerView: React.FunctionComponent<DividerViewTypes> = () => {
             </View>
           </TestCase>
         </TestSuite>
+        <TestSuite name="Divider属性style 接收View的style属性 ">
+          <TestCase
+            itShould="View的style属性"
+            tags={['C_API']}>
+            <View style={{alignItems:'center',justifyContent:'center'}}>
+              <Text style={styles.horizontalText}>View的style属性</Text>
+              <Divider width={10} color="yellow"  style={{ width:300,height:50,backgroundColor:'green',alignItems:'center',justifyContent:'center'}} />
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Divider属性testID 接收View的testID属性 ">
+          <TestCase
+            itShould="View的testID属性"
+            tags={['C_API']}>
+            <View style={{alignItems:'center',justifyContent:'center'}}>
+              <Text style={styles.horizontalText}>View的testID属性</Text>
+              <Divider testID='divider' width={10} color="black"  style={{ width:300,height:50,backgroundColor:'blue',alignItems:'center',justifyContent:'center'}} />
+            </View>
+          </TestCase>
+        </TestSuite>
       </ScrollView>
     </Tester>
   );

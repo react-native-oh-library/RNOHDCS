@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
-import {FAB, Button} from '@rneui/themed';
-import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { FAB, Button } from '@rneui/themed';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 
 export default () => {
   const [visible, setVisible] = React.useState(true);
@@ -16,7 +16,7 @@ export default () => {
               <FAB
                 visible={visible}
                 color="black"
-                icon={{name: 'plus', type: 'font-awesome', color: 'white'}}
+                icon={{ name: 'plus', type: 'font-awesome', color: 'white' }}
               />
             </View>
             <View style={styles.container}>
@@ -24,7 +24,7 @@ export default () => {
               <FAB
                 visible={visible}
                 color="blue"
-                icon={{name: 'heartbeat', type: 'font-awesome', color: 'white'}}
+                icon={{ name: 'heartbeat', type: 'font-awesome', color: 'white' }}
               />
             </View>
             <View style={styles.container}>
@@ -46,11 +46,11 @@ export default () => {
             <View
               style={[
                 styles.container,
-                {height: 80, justifyContent: 'flex-start'},
+                { height: 80, justifyContent: 'flex-start' },
               ]}>
               <Text style={styles.subText}>left靠左显示</Text>
               <FAB
-                style={{top: 40}}
+                style={{ top: 40 }}
                 placement="left"
                 visible={visible}
                 title="Navigate"
@@ -65,16 +65,16 @@ export default () => {
             <View
               style={[
                 styles.container,
-                {height: 80, justifyContent: 'flex-start'},
+                { height: 80, justifyContent: 'flex-start' },
               ]}>
               <Text style={styles.subText}>right靠右显示</Text>
               <FAB
-                style={{top: 40}}
+                style={{ top: 40 }}
                 visible={visible}
                 onPress={() => setVisible(!visible)}
                 placement="right"
                 title="Hide"
-                icon={{name: 'heartbeat', type: 'font-awesome', color: 'white'}}
+                icon={{ name: 'heartbeat', type: 'font-awesome', color: 'white' }}
                 color="red"
               />
             </View>
@@ -88,7 +88,7 @@ export default () => {
                 size="small"
                 visible={visible}
                 color="black"
-                icon={{name: 'plus', type: 'font-awesome', color: 'white'}}
+                icon={{ name: 'plus', type: 'font-awesome', color: 'white' }}
               />
             </View>
             <View style={styles.container}>
@@ -97,7 +97,7 @@ export default () => {
                 size="large"
                 visible={visible}
                 color="black"
-                icon={{name: 'plus', type: 'font-awesome', color: 'white'}}
+                icon={{ name: 'plus', type: 'font-awesome', color: 'white' }}
               />
             </View>
           </TestCase>
@@ -117,7 +117,7 @@ export default () => {
                 size="small"
                 visible={visible}
                 color="red"
-                icon={{name: 'plus', type: 'font-awesome', color: 'white'}}
+                icon={{ name: 'plus', type: 'font-awesome', color: 'white' }}
               />
             </View>
           </TestCase>
@@ -132,7 +132,7 @@ export default () => {
                 visible={visible}
                 color="red"
                 upperCase
-                icon={{name: 'plus', type: 'font-awesome', color: 'white'}}
+                icon={{ name: 'plus', type: 'font-awesome', color: 'white' }}
               />
             </View>
           </TestCase>
@@ -150,7 +150,48 @@ export default () => {
                 visible={visible}
                 color="red"
                 upperCase
-                icon={{name: 'plus', type: 'font-awesome', color: 'white'}}
+                icon={{ name: 'plus', type: 'font-awesome', color: 'white' }}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="FAB属性disable 接收Button的disable属性">
+          <TestCase itShould="设置disable属性为ture" tags={['C_API']}>
+            <View style={styles.container}>
+              <FAB
+                disabled={true}
+                size="small"
+                visible={visible}
+                color="red"
+                upperCase
+                icon={{ name: 'plus', type: 'font-awesome', color: 'white' }}
+              />
+            </View>
+          </TestCase>
+          <TestCase itShould="设置disable属性为false" tags={['C_API']}>
+            <View style={styles.container}>
+              <FAB
+                disabled={false}
+                size="small"
+                visible={visible}
+                color="red"
+                upperCase
+                icon={{ name: 'plus', type: 'font-awesome', color: 'white' }}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="FAB属性disableStyle 接收Button的disableStyle属性">
+          <TestCase itShould="Button的disableStyle" tags={['C_API']}>
+            <View style={styles.container}>
+              <FAB
+                disabledStyle={{width:100,height:100,backgroundColor:'green'}}
+                disabled={true}
+                size="small"
+                visible={visible}
+                color="red"
+                upperCase
+                icon={{ name: 'plus', type: 'font-awesome', color: 'white' }}
               />
             </View>
           </TestCase>

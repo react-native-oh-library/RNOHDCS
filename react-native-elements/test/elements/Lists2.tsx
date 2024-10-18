@@ -385,13 +385,14 @@ const List: React.FunctionComponent = () => {
   const [expanded5, setExpanded5] = React.useState(false);
   const [expanded6, setExpanded6] = React.useState(false);
   const [expanded7, setExpanded7] = React.useState(false);
-
+  const [expanded8, setExpanded8] = React.useState(false);
+  const [expanded9, setExpanded9] = React.useState(false);
   const [selectedButtonIndex, setSelectedButtonIndex] = React.useState(0);
   const [selectedButtonIndex1, setSelectedButtonIndex1] = React.useState(0);
   const [selectedButtonIndex2, setSelectedButtonIndex2] = React.useState(0);
   const [selectedButtonIndex3, setSelectedButtonIndex3] = React.useState(0);
   const [checkbox1, setCheckbox1] = React.useState(true);
-
+  const [checkbox2, setCheckbox2] = React.useState(true);
   const [onlongPress, setOnlongPress] = React.useState(false);
   const [onPress, setOnPress] = React.useState(false);
   const [onPressIn, setOnPressIn] = React.useState(false);
@@ -713,6 +714,90 @@ const List: React.FunctionComponent = () => {
             </View>
           </TestCase>
         </TestSuite>
+
+        <TestSuite name="ListItem属性style 接收React-Native原生View组件的style">
+          <TestCase itShould="React-Native原生View组件的style" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>
+                 设置原生的style样式
+              </Text>
+              <ListItem
+              style={{
+                marginVertical: 10,
+                width: '80%',
+                alignSelf: 'center',
+                height: 100,
+                borderRadius: 5,
+                backgroundColor:'black',
+              }}
+                pad={20}
+                containerStyle={{
+                  backgroundColor: 'white',
+                  width: '80%',
+                  alignSelf: 'center',
+                  opacity: 0.7,
+                }}
+                topDivider>
+                <Avatar
+                  rounded
+                  source={{
+                    uri: 'https://randomuser.me/api/portraits/men/36.jpg',
+                  }}
+                />
+                <ListItem.Content>
+                  <ListItem.Title style={{color: 'black'}}>
+                    John Doe
+                  </ListItem.Title>
+                  <ListItem.Subtitle style={{color: 'black'}}>
+                    President
+                  </ListItem.Subtitle>
+                </ListItem.Content>
+              </ListItem>
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="ListItem属性testID 接收React-Native原生View组件的testID">
+          <TestCase itShould="React-Native原生View组件的testID" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>
+                 设置原生的style样式
+              </Text>
+              <ListItem
+              style={{
+                marginVertical: 10,
+                width: '80%',
+                alignSelf: 'center',
+                height: 100,
+                borderRadius: 5,
+                backgroundColor:'black',
+              }}
+              testID={'ListItem'}
+                pad={20}
+                containerStyle={{
+                  backgroundColor: 'white',
+                  width: '80%',
+                  alignSelf: 'center',
+                  opacity: 0.7,
+                }}
+                topDivider>
+                <Avatar
+                  rounded
+                  source={{
+                    uri: 'https://randomuser.me/api/portraits/men/36.jpg',
+                  }}
+                />
+                <ListItem.Content>
+                  <ListItem.Title style={{color: 'black'}}>
+                    John Doe
+                  </ListItem.Title>
+                  <ListItem.Subtitle style={{color: 'black'}}>
+                    President
+                  </ListItem.Subtitle>
+                </ListItem.Content>
+              </ListItem>
+            </View>
+          </TestCase>
+        </TestSuite>
         <TestSuite name="ListItem.Accordion属性animation 设置Accordion显示动画为2s">
           <TestCase itShould="设置animation" tags={['C_API']}>
             <View style={styles.container}>
@@ -752,7 +837,6 @@ const List: React.FunctionComponent = () => {
             </View>
           </TestCase>
         </TestSuite>
-  
         <TestSuite name="ListItem.Accordion属性content 设置左边显示的内容">
           <TestCase itShould="设置content" tags={['C_API']}>
             <View style={styles.container}>
@@ -1138,6 +1222,129 @@ const List: React.FunctionComponent = () => {
             </View>
           </TestCase>
         </TestSuite>
+        <TestSuite name="ListItem.Accordion属性disableStyle 接收ListItem的disableStyle属性">
+          <TestCase itShould="disableStyle" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>接收ListItem的disableStyle属性</Text>
+              <ListItem.Accordion
+                   disabledStyle={{
+                    backgroundColor: 'gray',
+                    width: '80%',
+                    alignSelf: 'center',
+                    borderRadius: 20,
+                    opacity: 0.7,
+                  }}
+                disabled={true}
+                leftRotate={false}
+                onPress={() => {
+                  setExpanded8(!expanded8);
+                }}
+                noRotation={true}
+                icon={
+                  <Icon
+                    type="font-awesome"
+                    name="remove"
+                    color="black"
+                    size={30}
+                  />
+                }
+                containerStyle={{backgroundColor: 'white'}}
+                animation={{duration: 1000}}
+                isExpanded={expanded8}
+                content={
+                  <>
+                    <ListItem.Content>
+                      <ListItem.Title style={{color: '#222222'}}>
+                        List Accordion
+                      </ListItem.Title>
+                    </ListItem.Content>
+                  </>
+                }>
+                <ListItem
+                  pad={20}
+                  containerStyle={{
+                    backgroundColor: 'white',
+                    width: '80%',
+                    alignSelf: 'center',
+                  }}
+                  topDivider>
+                  <Avatar
+                    rounded
+                    source={{
+                      uri: 'https://randomuser.me/api/portraits/men/36.jpg',
+                    }}
+                  />
+                  <ListItem.Content>
+                    <ListItem.Title style={{color: 'black'}}>
+                      John Doe
+                    </ListItem.Title>
+                    <ListItem.Subtitle style={{color: 'black'}}>
+                      President
+                    </ListItem.Subtitle>
+                  </ListItem.Content>
+                </ListItem>
+              </ListItem.Accordion>
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="ListItem.Accordion属性topDivider 接收ListItem的topDivider属性">
+          <TestCase itShould="topDivider" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>接收ListItem的topDivider属性</Text>
+              <ListItem.Accordion
+                topDivider={true}
+                leftRotate={false}
+                onPress={() => {
+                  setExpanded9(!expanded9);
+                }}
+                noRotation={true}
+                icon={
+                  <Icon
+                    type="font-awesome"
+                    name="remove"
+                    color="black"
+                    size={30}
+                  />
+                }
+                containerStyle={{backgroundColor: 'white'}}
+                animation={{duration: 1000}}
+                isExpanded={expanded9}
+                content={
+                  <>
+                    <ListItem.Content>
+                      <ListItem.Title style={{color: '#222222'}}>
+                        List Accordion
+                      </ListItem.Title>
+                    </ListItem.Content>
+                  </>
+                }>
+                <ListItem
+                  pad={20}
+                  containerStyle={{
+                    backgroundColor: 'white',
+                    width: '80%',
+                    alignSelf: 'center',
+                  }}
+                  topDivider>
+                  <Avatar
+                    rounded
+                    source={{
+                      uri: 'https://randomuser.me/api/portraits/men/36.jpg',
+                    }}
+                  />
+                  <ListItem.Content>
+                    <ListItem.Title style={{color: 'black'}}>
+                      John Doe
+                    </ListItem.Title>
+                    <ListItem.Subtitle style={{color: 'black'}}>
+                      President
+                    </ListItem.Subtitle>
+                  </ListItem.Content>
+                </ListItem>
+              </ListItem.Accordion>
+            </View>
+          </TestCase>
+        </TestSuite>
         <TestSuite name="ListItem.ButtonGroup属性onLongPress  长按点击事件">
           <TestCase itShould="设置onLongPress" tags={['C_API']}>
             <View style={styles.container}>
@@ -1187,7 +1394,43 @@ const List: React.FunctionComponent = () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="ListItem.CheckBox属性接收所以checkbox属性">
+        <TestSuite name="ListItem.ButtonGroup属性disabled  接收ButtonGroup的disabled">
+          <TestCase itShould="设置disabled" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>接收ButtonGroup的disabled</Text>
+              <ListItem bottomDivider>
+                <ListItem.Content>
+                  <ListItem.Title>Choose 🤯</ListItem.Title>
+                </ListItem.Content>
+                <ListItem.ButtonGroup selectedButtonStyle={{backgroundColor:'black',width:100,borderRadius:20}}
+                disabled={true}
+                  buttons={['Flower', 'Coco']}
+                  selectedIndex={selectedButtonIndex3}
+                  onPressOut={()=>{setSelectedButtonIndex3(selectedButtonIndex3 == 0 ? 1 : 0)}} />
+              </ListItem>
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="ListItem.ButtonGroup属性disabledStyle  接收ButtonGroup的disabledStyle">
+          <TestCase itShould="设置disabledStyle" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>接收ButtonGroup的disabledStyle</Text>
+              <ListItem bottomDivider>
+                <ListItem.Content>
+                  <ListItem.Title>Choose 🤯</ListItem.Title>
+                </ListItem.Content>
+                <ListItem.ButtonGroup selectedButtonStyle={{backgroundColor:'black',width:100,borderRadius:20}}
+                disabledStyle={{backgroundColor:'yellow'}}
+                disabledSelectedStyle={{backgroundColor:'yellow'}}
+                disabled={true}
+                  buttons={['Flower', 'Coco']}
+                  selectedIndex={selectedButtonIndex3}
+                  onPressOut={()=>{setSelectedButtonIndex3(selectedButtonIndex3 == 0 ? 1 : 0)}} />
+              </ListItem>
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="ListItem.CheckBox属性接收所有checkbox属性">
           <TestCase itShould="设置checkbox1" tags={['C_API']}>
             <View style={styles.container}>
               <Text style={styles.subText}>checkbox1</Text>
@@ -1195,6 +1438,42 @@ const List: React.FunctionComponent = () => {
                 <ListItem.CheckBox
                   checked={checkbox1}
                   onPress={() => setCheckbox1(!checkbox1)}
+                />
+                <ListItem.Content>
+                  <ListItem.Title>Check that please 😢</ListItem.Title>
+                </ListItem.Content>
+              </ListItem>
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="ListItem.CheckBox属性disable 接收checkbox的disable">
+          <TestCase itShould="设置disable" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>接收checkbox的disable</Text>
+              <ListItem bottomDivider>
+                <ListItem.CheckBox
+                  checked={checkbox2}
+                  disabled={true}
+                  onPress={() => setCheckbox1(!checkbox2)}
+                />
+                <ListItem.Content>
+                  <ListItem.Title>Check that please 😢</ListItem.Title>
+                </ListItem.Content>
+              </ListItem>
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="ListItem.CheckBox属性disableStyle 接收checkbox的disableStyle">
+          <TestCase itShould="设置disableStyle" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>接收checkbox的disableStyle</Text>
+              <ListItem bottomDivider>
+                <ListItem.CheckBox
+                  
+                  checked={checkbox2}
+                  disabled={true}
+                  disabledStyle={{width:30,height:30,backgroundColor:'green',justifyContent:'center',alignItems:'center'}}
+                  onPress={() => setCheckbox2(!checkbox2)}
                 />
                 <ListItem.Content>
                   <ListItem.Title>Check that please 😢</ListItem.Title>
@@ -1303,6 +1582,56 @@ const List: React.FunctionComponent = () => {
             </View>
           </TestCase>
         </TestSuite>
+        <TestSuite name="ListItem.Chevron属性name	接收Icon组件的name属性">
+          <TestCase itShould="接收Icon组件的name属性" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>Icon组件的name属性</Text>
+              <ListItem
+                containerStyle={{backgroundColor: 'white'}}
+                bottomDivider>
+                <ListItem.Content>
+                  <ListItem.Title style={{color: 'black'}}>
+                    修改chevron颜色
+                  </ListItem.Title>
+                </ListItem.Content>
+                <ListItem.Chevron
+                  onPressOut={() => {
+                    setonPressOut(!onPressOut);
+                  }}
+                  color={'red'}
+                  size={30}
+                  type="font-awesome"
+                  name='remove'
+                />
+              </ListItem>
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="ListItem.Chevron属性size	接收Icon组件的size属性">
+          <TestCase itShould="接收Icon组件的size属性" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>Icon组件的size属性</Text>
+              <ListItem
+                containerStyle={{backgroundColor: 'white'}}
+                bottomDivider>
+                <ListItem.Content>
+                  <ListItem.Title style={{color: 'black'}}>
+                    修改chevron颜色
+                  </ListItem.Title>
+                </ListItem.Content>
+                <ListItem.Chevron
+                  onPressOut={() => {
+                    setonPressOut(!onPressOut);
+                  }}
+                  color={'red'}
+                  size={50}
+                  type="font-awesome"
+                  name='remove'
+                />
+              </ListItem>
+            </View>
+          </TestCase>
+        </TestSuite>
         <TestSuite name="ListItem.Content属性right  content内容从右边开始 ">
           <TestCase itShould="设置right " tags={['C_API']}>
             <View style={styles.container}>
@@ -1357,7 +1686,67 @@ const List: React.FunctionComponent = () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="ListItem.Input 接收所以input组件的属性">
+        <TestSuite name="ListItem.Content属性h1和h1style  接收Text组件的h1和h1style">
+          <TestCase itShould="设置Text组件的h1和h1style " tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>Text组件的h1和h1style </Text>
+              <ListItem
+                containerStyle={{
+                  backgroundColor: 'white',
+                  width: '100%',
+                  alignSelf: 'center',
+                }}
+                bottomDivider>
+                <Avatar
+                  rounded
+                  source={{
+                    uri: 'https://randomuser.me/api/portraits/men/36.jpg',
+                  }}
+                />
+                <ListItem.Content  h1={true} h1Style={{backgroundColor:'green'}}>
+                  <ListItem.Title style={{color: 'black'}}>
+                    John Doe
+                  </ListItem.Title>
+                  <ListItem.Subtitle style={{color: 'black'}}>
+                    President
+                  </ListItem.Subtitle>
+                </ListItem.Content>
+              </ListItem>
+            </View>
+    
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="ListItem.Content属性h2和h2style  接收Text组件的h2和h2style">
+          <TestCase itShould="设置Text组件的h2和h2style " tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>Text组件的h2和h2style </Text>
+              <ListItem
+                containerStyle={{
+                  backgroundColor: 'white',
+                  width: '100%',
+                  alignSelf: 'center',
+                }}
+                bottomDivider>
+                <Avatar
+                  rounded
+                  source={{
+                    uri: 'https://randomuser.me/api/portraits/men/36.jpg',
+                  }}
+                />
+                <ListItem.Content  h2={true} h2Style={{backgroundColor:'green'}}>
+                  <ListItem.Title style={{color: 'black'}}>
+                    John Doe
+                  </ListItem.Title>
+                  <ListItem.Subtitle style={{color: 'black'}}>
+                    President
+                  </ListItem.Subtitle>
+                </ListItem.Content>
+              </ListItem>
+            </View>
+    
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="ListItem.Input 接收所有input组件的属性">
           <TestCase itShould="设置ListItem.Input" tags={['C_API']}>
             <View style={styles.container}>
               <Text style={styles.subText}>ListItem.Input</Text>
@@ -1374,6 +1763,60 @@ const List: React.FunctionComponent = () => {
                       alignSelf: 'center',
                       borderRadius: 10,
                     }}
+                    placeholder="请输入"></ListItem.Input>
+                </ListItem.Content>
+              </ListItem>
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="ListItem.Input属性inputStyle 接收Input组件属性inputStyle">
+          <TestCase itShould="设置ListItem.Input的inputStyle " tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>接收Input组件属性inputStyle</Text>
+              <ListItem
+                containerStyle={{backgroundColor: 'white'}}
+                bottomDivider>
+                <ListItem.Content>
+                  <ListItem.Input
+                    containerStyle={{
+                      width: 280,
+                      height: 40,
+                      borderColor: 'pink',
+                      borderWidth: 1,
+                      alignSelf: 'center',
+                      borderRadius: 10,
+                    }}
+                    inputStyle={{ color: 'black', fontSize: 20, fontWeight: '400' }}
+                    placeholder="请输入"></ListItem.Input>
+                </ListItem.Content>
+              </ListItem>
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="ListItem.Input属性leftIcon 接收Input组件属性leftIcon">
+          <TestCase itShould="设置ListItem.Input的leftIcon " tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>接收Input组件属性leftIcon</Text>
+              <ListItem
+                containerStyle={{backgroundColor: 'white'}}
+                bottomDivider>
+                <ListItem.Content>
+                  <ListItem.Input
+                    containerStyle={{
+                      width: 280,
+                      height: 40,
+                      borderColor: 'pink',
+                      borderWidth: 1,
+                      alignSelf: 'center',
+                      borderRadius: 10,
+                    }}
+                    leftIcon={{
+                      type: 'font-awesome',
+                      name: 'comment',
+                      color: 'pink',
+                      size: 30,
+                    }}
+                    inputStyle={{ color: 'black', fontSize: 20, fontWeight: '400' }}
                     placeholder="请输入"></ListItem.Input>
                 </ListItem.Content>
               </ListItem>
@@ -1458,6 +1901,60 @@ const List: React.FunctionComponent = () => {
                   President
                 </ListItem.Subtitle>
                 {/* </ListItem.Content> */}
+              </ListItem>
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="ListItem.Subtitle属性h1和h1Style 接收Text组件属性h1和h1Style">
+          <TestCase itShould="设置Text组件属性h1和h1Style" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>接收Text组件属性h1和h1Style</Text>
+              <ListItem
+                pad={20}
+                containerStyle={{
+                  backgroundColor: 'pink',
+                  width: '80%',
+                  alignSelf: 'center',
+                  borderRadius: 20,
+                  opacity: 0.7,
+                }}
+                bottomDivider>
+                <Avatar
+                  rounded
+                  source={{
+                    uri: 'https://randomuser.me/api/portraits/men/36.jpg',
+                  }}
+                />
+                <ListItem.Subtitle h1={true} h1Style={{backgroundColor:'green',color:'red'}} right={false} style={{color: 'black'}}>
+                  President
+                </ListItem.Subtitle>
+              </ListItem>
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="ListItem.Subtitle属性h2和h2Style 接收Text组件属性h2和h2Style">
+          <TestCase itShould="设置Text组件属性h2和h2Style" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>接收Text组件属性h2和h2Style</Text>
+              <ListItem
+                pad={20}
+                containerStyle={{
+                  backgroundColor: 'pink',
+                  width: '80%',
+                  alignSelf: 'center',
+                  borderRadius: 20,
+                  opacity: 0.7,
+                }}
+                bottomDivider>
+                <Avatar
+                  rounded
+                  source={{
+                    uri: 'https://randomuser.me/api/portraits/men/36.jpg',
+                  }}
+                />
+                <ListItem.Subtitle h2={true} h2Style={{backgroundColor:'blue',color:'red'}} right={false} style={{color: 'black'}}>
+                  President
+                </ListItem.Subtitle>
               </ListItem>
             </View>
           </TestCase>
@@ -1945,6 +2442,93 @@ const List: React.FunctionComponent = () => {
             </View>
           </TestCase>
         </TestSuite>
+        <TestSuite name="ListItem.Swipeable属性disabledStyle 接收ListItem的disabledStyle属性">
+          <TestCase itShould="设置ListItem的disabledStyle属性" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>接收ListItem的disabledStyle属性</Text>
+              <ListItem.Swipeable
+                disabled={true}
+                disabledStyle={{  
+                backgroundColor: 'gray',
+                width: '100%',
+                alignSelf: 'center',
+                
+               }}
+                animation={{type: 'timing', duration: 100}}
+                bottomDivider
+                onSwipeBegin={swipeDirection =>
+                  console.log('onSwipeBegin ', swipeDirection)
+                }
+                onSwipeEnd={() => console.log('onSwipeEnd')}
+                // use as callback
+                rightContent={
+                  <Button
+                    title="Delete"
+                    icon={{
+                      name: 'remove',
+                      type: 'font-awesome',
+                      color: 'white',
+                    }}
+                    buttonStyle={{minHeight: '100%', backgroundColor: 'red'}}
+                  />
+                }
+                rightStyle={{
+                  width: 200,
+                  opacity: 0.6,
+                  borderColor: 'black',
+                  borderWidth: 1,
+                }}
+                containerStyle={{backgroundColor: 'pink'}}
+                leftWidth={100}>
+                <Icon type="font-awesome" name="save" color="green" size={30} />
+                <ListItem.Content>
+                  <ListItem.Title>{'ListItem.Swipeable'}</ListItem.Title>
+                </ListItem.Content>
+                <ListItem.Chevron />
+              </ListItem.Swipeable>
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="ListItem.Swipeable属性bottomDivider 接收ListItem的bottomDivider属性">
+          <TestCase itShould="设置ListItem的bottomDivider属性" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>接收ListItem的bottomDivider属性</Text>
+              <ListItem.Swipeable 
+                animation={{type: 'timing', duration: 100}}
+                bottomDivider={true}
+                onSwipeBegin={swipeDirection =>
+                  console.log('onSwipeBegin ', swipeDirection)
+                }
+                onSwipeEnd={() => console.log('onSwipeEnd')}
+                // use as callback
+                rightContent={
+                  <Button
+                    title="Delete"
+                    icon={{
+                      name: 'remove',
+                      type: 'font-awesome',
+                      color: 'white',
+                    }}
+                    buttonStyle={{minHeight: '100%', backgroundColor: 'red'}}
+                  />
+                }
+                rightStyle={{
+                  width: 200,
+                  opacity: 0.6,
+                  borderColor: 'black',
+                  borderWidth: 1,
+                }}
+                containerStyle={{backgroundColor: 'white'}}
+                leftWidth={100}>
+                <Icon type="font-awesome" name="save" color="green" size={30} />
+                <ListItem.Content>
+                  <ListItem.Title style={{color:'black'}}>{'ListItem.Swipeable'}</ListItem.Title>
+                </ListItem.Content>
+                <ListItem.Chevron />
+              </ListItem.Swipeable>
+            </View>
+          </TestCase>
+        </TestSuite>
         {/* <TestSuite name="ListItem.Title属性right title在右边显示 设置无效">
           <TestCase itShould="设置right属性" tags={['C_API']}>
             <View style={styles.container}>
@@ -1974,6 +2558,64 @@ const List: React.FunctionComponent = () => {
             </View>
           </TestCase>
         </TestSuite> */}
+        <TestSuite name="ListItem.Title属性h1和h1Style  接收Text组件的h1和h1Style属性">
+          <TestCase itShould="设置Text组件的h1和h1Style属性" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>接收Text组件的h1和h1Style属性</Text>
+              <ListItem
+                containerStyle={{
+                  backgroundColor: 'white',
+                  width: '100%',
+                  alignSelf: 'center',
+                }}
+                bottomDivider>
+                <Avatar
+                  rounded
+                  source={{
+                    uri: 'https://randomuser.me/api/portraits/men/36.jpg',
+                  }}
+                />
+                <ListItem.Content style={{backgroundColor: 'yellow'}}>
+                  <ListItem.Title h1={true} h1Style={{backgroundColor:'green'}}  style={{color: 'black'}}>
+                    John Doe
+                  </ListItem.Title>
+                  <ListItem.Subtitle style={{color: 'black'}}>
+                    President
+                  </ListItem.Subtitle>
+                </ListItem.Content>
+              </ListItem>
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="ListItem.Title属性h2和h2Style  接收Text组件的h2和h2Style属性">
+          <TestCase itShould="设置Text组件的h2和h2Style属性" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>接收Text组件的h2和h2Style属性</Text>
+              <ListItem
+                containerStyle={{
+                  backgroundColor: 'white',
+                  width: '100%',
+                  alignSelf: 'center',
+                }}
+                bottomDivider>
+                <Avatar
+                  rounded
+                  source={{
+                    uri: 'https://randomuser.me/api/portraits/men/36.jpg',
+                  }}
+                />
+                <ListItem.Content style={{backgroundColor: 'yellow'}}>
+                  <ListItem.Title h2={true} h2Style={{backgroundColor:'pink'}}  style={{color: 'black'}}>
+                    John Doe
+                  </ListItem.Title>
+                  <ListItem.Subtitle style={{color: 'black'}}>
+                    President
+                  </ListItem.Subtitle>
+                </ListItem.Content>
+              </ListItem>
+            </View>
+          </TestCase>
+        </TestSuite>
       </ScrollView>
     </Tester>
   );

@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
-import {View, ScrollView, StyleSheet, Image} from 'react-native';
-import {Text, Card, Button, Icon} from '@rneui/themed';
-import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
+import React, { useState } from 'react';
+import { View, ScrollView, StyleSheet, Image } from 'react-native';
+import { Text, Card, Button, Icon } from '@rneui/themed';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 
 const users = [
   {
     name: 'thot leader',
-    avatar:'https://randomuser.me/api/portraits/men/4.jpg',
+    avatar: 'https://randomuser.me/api/portraits/men/4.jpg',
   },
   {
     name: 'talhaconcepts',
@@ -46,7 +46,7 @@ const Cards: React.FunctionComponent<CardsComponentsProps> = () => {
                     <Image
                       style={styles.image}
                       resizeMode="cover"
-                      source={{uri: u.avatar}}
+                      source={{ uri: u.avatar }}
                     />
                     <Text style={styles.name}>{u.name}</Text>
                   </View>
@@ -58,7 +58,7 @@ const Cards: React.FunctionComponent<CardsComponentsProps> = () => {
         <TestSuite name="Card属性wrapperStyle 设置子组件样式">
           <TestCase itShould="wrapperStyle" tags={['C_API']}>
             <Card
-            containerStyle={{backgroundColor:'white',borderWidth:0}}
+              containerStyle={{ backgroundColor: 'white', borderWidth: 0 }}
               wrapperStyle={{
                 backgroundColor: 'green',
                 borderRadius: 20,
@@ -73,7 +73,7 @@ const Cards: React.FunctionComponent<CardsComponentsProps> = () => {
                     <Image
                       style={styles.image}
                       resizeMode="cover"
-                      source={{uri: u.avatar}}
+                      source={{ uri: u.avatar }}
                     />
                     <Text style={styles.name}>{u.name}</Text>
                   </View>
@@ -119,7 +119,7 @@ const Cards: React.FunctionComponent<CardsComponentsProps> = () => {
             <Card>
               <Card.Title>Divider的样式设置</Card.Title>
               <Card.Divider
-                style={{height: 5, backgroundColor: 'yellow', borderRadius: 3}}
+                style={{ height: 5, backgroundColor: 'yellow', borderRadius: 3 }}
               />
             </Card>
           </TestCase>
@@ -129,7 +129,7 @@ const Cards: React.FunctionComponent<CardsComponentsProps> = () => {
             <Card>
               <Card.Title>Divider的subHeader</Card.Title>
               <Card.Divider
-                style={{height: 5, backgroundColor: 'yellow', borderRadius: 3}}
+                style={{ height: 5, backgroundColor: 'yellow', borderRadius: 3 }}
                 subHeader="subHeader"
                 subHeaderStyle={{
                   fontSize: 28,
@@ -145,7 +145,7 @@ const Cards: React.FunctionComponent<CardsComponentsProps> = () => {
             <Card>
               <Card.Title>Divider的subHeader</Card.Title>
               <Card.Divider
-                style={{height: 5, backgroundColor: 'yellow', borderRadius: 3}}
+                style={{ height: 5, backgroundColor: 'yellow', borderRadius: 3 }}
                 subHeader="subHeader"
                 subHeaderStyle={{
                   fontSize: 28,
@@ -172,124 +172,71 @@ const Cards: React.FunctionComponent<CardsComponentsProps> = () => {
             </Card>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Card.FeaturedSubtitle  设置style属性 ">
+        <TestSuite name="Card.FeaturedSubtitle的h1和h1Style  接收Text组件的h1和h1Style属性 ">
           <TestCase
-            itShould="Card.FeaturedSubtitle"
+            itShould="设置Text组件的h1和h1Style属性"
             tags={['C_API']}>
             <Card>
-              <Card.Title>FeaturedSubtitle属性style</Card.Title>
+              <Card.Title>接收Text组件的h1和h1Style属性</Card.Title>
               <Card.FeaturedSubtitle
-                style={{
-                  backgroundColor: 'pink',
-                  width: 200,
-                  height: 40,
-                  borderRadius: 20,
-                  padding: 5,
-                }}>
+                h1={true}
+                h1Style={{ color: '#D8D8D8', fontWeight: '400' }}>
                 FeaturedSubtitle
               </Card.FeaturedSubtitle>
             </Card>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Card.FeaturedTitle  设置style属性 ">
+        <TestSuite name="Card.FeaturedSubtitle的h2和h2Style 接收Text组件的h2和h2Style属性  ">
           <TestCase
-            itShould="Card.FeaturedTitle"
+            itShould="设置Text组件的h2和h2Style属性"
             tags={['C_API']}>
             <Card>
-              <Card.Title>Card.FeaturedTitle属性style</Card.Title>
-              <Card.FeaturedTitle
-                style={{
-                  backgroundColor: 'yellow',
-                  width: 200,
-                  height: 40,
-                  borderRadius: 20,
-                  padding: 5,
-                }}>
-                Card.FeaturedTitle
-              </Card.FeaturedTitle>
-            </Card>
-          </TestCase>
-        </TestSuite>
-        <TestSuite name="必须设置h1为true  h1style设置的样式才会生效">
-          <TestCase itShould="h1和h1style" tags={['C_API']}>
-            <Card>
-              <Card.Title>h1和h1style</Card.Title>
-              <Card.FeaturedTitle
-                h1={true}
-                h1Style={{fontSize: 28, color: '#D8D8D8', fontWeight: '400'}}>
-                FeaturedTitle属性 h1和h1style{' '}
-              </Card.FeaturedTitle>
-              <Card.FeaturedSubtitle
-                h1={true}
-                h1Style={{fontSize: 15, color: '#D8D8D8', fontWeight: '400'}}>
-                FeaturedSubtitle属性 h1和h1style{' '}
-              </Card.FeaturedSubtitle>
-            </Card>
-          </TestCase>
-        </TestSuite>
-        <TestSuite name="必须设置h2为true  h2style设置的样式才会生效">
-          <TestCase itShould="h2和h2style" tags={['C_API']}>
-            <Card>
-              <Card.Title>h2和h2style</Card.Title>
-              <Card.FeaturedTitle
-                h2={true}
-                h2Style={{fontSize: 28, color: 'blue', fontWeight: '400'}}>
-                FeaturedTitle属性 h2和h2style{' '}
-              </Card.FeaturedTitle>
+              <Card.Title>接收Text组件的h2和h2Style属性</Card.Title>
               <Card.FeaturedSubtitle
                 h2={true}
-                h2Style={{fontSize: 13, color: 'blue', fontWeight: '400'}}>
-                FeaturedSubtitle属性 h2和h2style{' '}
+                h2Style={{ color: 'blue', fontWeight: '400' }}>
+                FeaturedSubtitle
               </Card.FeaturedSubtitle>
             </Card>
           </TestCase>
         </TestSuite>
-        <TestSuite name="必须设置h3为true  h3style设置的样式才会生效">
-          <TestCase itShould="h3和h3style" tags={['C_API']}>
+        <TestSuite name="Card.FeaturedTitle的h1和h1Style  接收Text组件的h1和h1Style属性">
+          <TestCase itShould="接收Text组件的h1和h1Style属性" tags={['C_API']}>
             <Card>
-              <Card.Title>h3和h3style</Card.Title>
+              <Card.Title>接收Text组件的h1和h1Style属性</Card.Title>
               <Card.FeaturedTitle
-                h3={true}
-                h3Style={{fontSize: 28, color: 'yellow', fontWeight: '400'}}>
-                FeaturedTitle属性 h3和h3style{' '}
+                h1={true}
+                h1Style={{ color: '#D8D8D8', fontWeight: '400' }}>
+                FeaturedTitle属性 h1和h1style
               </Card.FeaturedTitle>
-              <Card.FeaturedSubtitle
-                h3={true}
-                h3Style={{fontSize: 10, color: 'yellow', fontWeight: '400'}}>
-                FeaturedSubtitle属性 h3和h3style{' '}
-              </Card.FeaturedSubtitle>
             </Card>
           </TestCase>
         </TestSuite>
-        <TestSuite name="必须设置h4为true  h4style设置的样式才会生效">
-          <TestCase itShould="h4和h4style" tags={['C_API']}>
+        <TestSuite name="Card.FeaturedTitle的h2和h2Style  接收Text组件的h2和h2Style属性">
+          <TestCase itShould="设置Text组件的h2和h2Style属性" tags={['C_API']}>
             <Card>
-              <Card.Title>h4和h4style</Card.Title>
+              <Card.Title>设置Text组件的h2和h2Style属性</Card.Title>
               <Card.FeaturedTitle
-                h4={true}
-                h4Style={{fontSize: 28, color: 'pink', fontWeight: '400'}}>
-                FeaturedTitle属性 h4和h4style{' '}
+                h2={true}
+                h2Style={{ color: 'blue', fontWeight: '400' }}>
+                FeaturedTitle属性 h2和h2style
               </Card.FeaturedTitle>
-              <Card.FeaturedSubtitle
-                h4={true}
-                h4Style={{fontSize: 10, color: 'pink', fontWeight: '400'}}>
-                FeaturedSubtitle属性 h4和h4style{' '}
-              </Card.FeaturedSubtitle>
             </Card>
           </TestCase>
         </TestSuite>
+
         <TestSuite name="Card.Image 设置Image属性covery和contain对比 可接受所以Image属性">
           <TestCase itShould="Image属性" tags={['C_API']}>
             <Card>
               <Card.Title>Image</Card.Title>
               <Card.Image
-                containerStyle={{width: 100, height: 100}}
+                containerStyle={{ width: 100, height: 100 }}
                 resizeMode="cover"
                 source={{
                   uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
                 }}></Card.Image>
               <Card.Image
-                style={{marginTop: 20}}
+                style={{ marginTop: 20 }}
                 resizeMode="contain"
                 source={{
                   uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
@@ -302,7 +249,7 @@ const Cards: React.FunctionComponent<CardsComponentsProps> = () => {
             <Card>
               <Card.Title>Image</Card.Title>
               <Card.Image
-                containerStyle={{width: 100, height: 100}}
+                containerStyle={{ width: 100, height: 100 }}
                 onLongPress={() => setOnlongPress(!onlongPress)}
                 resizeMode="cover"
                 source={{
@@ -318,7 +265,7 @@ const Cards: React.FunctionComponent<CardsComponentsProps> = () => {
             <Card>
               <Card.Title>Image</Card.Title>
               <Card.Image
-                containerStyle={{width: 100, height: 100}}
+                containerStyle={{ width: 100, height: 100 }}
                 onPress={() => setOnPress(!onPress)}
                 resizeMode="cover"
                 source={{
@@ -334,7 +281,7 @@ const Cards: React.FunctionComponent<CardsComponentsProps> = () => {
             <Card>
               <Card.Title>Image</Card.Title>
               <Card.Image
-                containerStyle={{width: 100, height: 100}}
+                containerStyle={{ width: 100, height: 100 }}
                 onPressIn={() => setOnPressIn(!onPressIn)}
                 resizeMode="cover"
                 source={{
@@ -350,7 +297,7 @@ const Cards: React.FunctionComponent<CardsComponentsProps> = () => {
             <Card>
               <Card.Title>Image</Card.Title>
               <Card.Image
-                containerStyle={{width: 100, height: 100}}
+                containerStyle={{ width: 100, height: 100 }}
                 onPressOut={() => setonPressOut(!onPressOut)}
                 resizeMode="cover"
                 source={{
@@ -361,12 +308,88 @@ const Cards: React.FunctionComponent<CardsComponentsProps> = () => {
             </Card>
           </TestCase>
         </TestSuite>
+        <TestSuite name="Card.Image属性source 接收Image组件的source属性">
+          <TestCase itShould="设置Image组件的source属性" tags={['C_API']}>
+            <Card>
+              <Card.Title>接收Image组件的source属性</Card.Title>
+              <Card.Image
+                containerStyle={{ width: 100, height: 100 }}
+                resizeMode="cover"
+                source={{
+                  uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg'
+                }}></Card.Image>
+            </Card>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Card.Image属性transitionDuration 接收Image组件的transitionDuration属性">
+          <TestCase itShould="设置Image组件的transitionDuration属性" tags={['C_API']}>
+            <Card>
+              <Card.Title>接收Image组件的transitionDuration属性</Card.Title>
+              <Card.Image
+                transition={true}
+                transitionDuration={20000}
+                containerStyle={{ width: 100, height: 100 }}
+                resizeMode="cover"
+                source={{
+                  uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg'
+                }}></Card.Image>
+            </Card>
+          </TestCase>
+        </TestSuite>
         <TestSuite name="Card.Title 属性样式设置可接受所有文本属性">
           <TestCase itShould="文本样式设置" tags={['C_API']}>
             <Card>
               <Card.Title
-                style={{fontSize: 28, fontWeight: '100', color: 'yellow'}}>
+                style={{ fontSize: 28, fontWeight: '100', color: 'yellow' }}>
                 Card.Title
+              </Card.Title>
+              <Card.Divider width={10} color="pink" />
+            </Card>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Card.Title的h1和h1style属性 接收Text的h1和h1style">
+          <TestCase itShould="Text的h1和h1style" tags={['C_API']}>
+            <Card>
+              <Card.Title
+                h1={true}
+                h1Style={{ color: '#D8D8D8' }}>
+                Card.Title 的h1和h1style
+              </Card.Title>
+              <Card.Divider width={10} color="pink" />
+            </Card>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Card.Title的h2和h2style属性 接收Text的h2和h2style">
+          <TestCase itShould="Text的h2和h2style" tags={['C_API']}>
+            <Card>
+              <Card.Title
+                h2={true}
+                h2Style={{ color: 'blue' }}>
+                Card.Title 的h2和h2style
+              </Card.Title>
+              <Card.Divider width={10} color="pink" />
+            </Card>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Card.Title的h3和h3style属性 接收Text的h3和h3style">
+          <TestCase itShould="Text的h3和h3style" tags={['C_API']}>
+            <Card>
+              <Card.Title
+                h3={true}
+                h3Style={{ color: 'yellow' }}>
+                Card.Title 的h3和h3style
+              </Card.Title>
+              <Card.Divider width={10} color="pink" />
+            </Card>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Card.Title的h4和h4style属性 接收Text的h4和h4style">
+          <TestCase itShould="Text的h4和h4style" tags={['C_API']}>
+            <Card>
+              <Card.Title
+                h4={true}
+                h4Style={{ color: 'pink' }}>
+                Card.Title 的h4和h4style
               </Card.Title>
               <Card.Divider width={10} color="pink" />
             </Card>
@@ -376,81 +399,7 @@ const Cards: React.FunctionComponent<CardsComponentsProps> = () => {
     </Tester>
   );
 };
-{
-  /* <TestSuite name='Cards'>
-<View style={styles.container}>
-  <TestCase itShould='CARD WITH DIVIDER' tags={['C_API']}>
-    <Card>
-      <Card.Title>CARD WITH DIVIDER</Card.Title>
-      <Card.Divider />
-      {users.map((u, i) => {
-        return (
-          <View key={i} style={styles.user}>
-            <Image
-              style={styles.image}
-              resizeMode="cover"
-              source={{ uri: u.avatar }}
-            />
-            <Text style={styles.name}>{u.name}</Text>
-          </View>
-        );
-      })}
-    </Card>
-  </TestCase>
-  <TestCase itShould='FONTS' tags={['C_API']}>
-    <Card containerStyle={{ marginTop: 15 }}>
-      <Card.Title>FONTS</Card.Title>
-      <Card.Divider />
-      <Text style={styles.fonts} h1>
-        h1 Heading
-      </Text>
-      <Text style={styles.fonts} h2>
-        h2 Heading
-      </Text>
-      <Text style={styles.fonts} h3>
-        h3 Heading
-      </Text>
-      <Text style={styles.fonts} h4>
-        h4 Heading
-      </Text>
-      <Text style={styles.fonts}>Normal Text</Text>
-    </Card>
-  </TestCase>
-  <TestCase itShould='HELLO WORLD' tags={['C_API']}>
-    <Card>
-      <Card.Title>HELLO WORLD</Card.Title>
-      <Card.Divider />
-      <Card.Image
-        style={{ padding: 0 }}
-        source={{
-          uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
-        }}
-      />
-      <Text style={{ marginBottom: 10 }}>
-        The idea with React Native Elements is more about component
-        structure than actual design.
-      </Text>
-      <Button
-        icon={
-          <Icon
-            name="code"
-            color="#ffffff"
-            iconStyle={{ marginRight: 10 }}
-          />
-        }
-        buttonStyle={{
-          borderRadius: 0,
-          marginLeft: 0,
-          marginRight: 0,
-          marginBottom: 0,
-        }}
-        title="VIEW NOW"
-      />
-    </Card>
-  </TestCase>
-</View>
-</TestSuite> */
-}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

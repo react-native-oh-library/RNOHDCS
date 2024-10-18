@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import {Button, Dialog, CheckBox, ListItem, Avatar, Text} from '@rneui/themed';
-import {View, StyleSheet, ScrollView} from 'react-native';
-import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
-import {Image} from 'react-native';
+import React, { useState } from 'react';
+import { Button, Dialog, CheckBox, ListItem, Avatar, Text } from '@rneui/themed';
+import { View, StyleSheet, ScrollView } from 'react-native';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
+import { Image } from 'react-native';
 
 type DialogComponentProps = {};
 
@@ -17,8 +17,8 @@ function ChildComponent(props: any) {
       <Text>{props.text}</Text>
       <Image
         resizeMode="contain"
-        style={{width: 200, height: 100, marginTop: 20}}
-        source={{uri: props.img}}></Image>
+        style={{ width: 200, height: 100, marginTop: 20 }}
+        source={{ uri: props.img }}></Image>
     </View>
   );
 }
@@ -39,6 +39,10 @@ const Dialogs: React.FunctionComponent<DialogComponentProps> = () => {
   const [visible9, setVisible9] = useState(false);
   const [visible10, setVisible10] = useState(false);
   const [visible11, setVisible11] = useState(false);
+  const [visible12, setVisible12] = useState(false);
+  const [visible13, setVisible13] = useState(false);
+  const [visible14, setVisible14] = useState(false);
+  const [visible15, setVisible15] = useState(false);
   const [checked, setChecked] = useState(1);
   const toggleDialog1 = () => {
     setVisible1(!visible1);
@@ -73,6 +77,18 @@ const Dialogs: React.FunctionComponent<DialogComponentProps> = () => {
   const toggleDialog11 = () => {
     setVisible11(!visible11);
   };
+  const toggleDialog12 = () => {
+    setVisible12(!visible12);
+  };
+  const toggleDialog13 = () => {
+    setVisible13(!visible13);
+  };
+  const toggleDialog14 = () => {
+    setVisible14(!visible14);
+  };
+  const toggleDialog15 = () => {
+    setVisible15(!visible15);
+  };
   const userlist = [
     {
       name: 'Amy Farha',
@@ -94,7 +110,7 @@ const Dialogs: React.FunctionComponent<DialogComponentProps> = () => {
 
   return (
     <Tester>
-      <ScrollView style={{height: '90%'}}>
+      <ScrollView style={{ height: '90%' }}>
         <TestSuite name="Dialog属性children验证  传入一个子组件">
           <TestCase itShould="children" tags={['C_API']}>
             <Button
@@ -131,11 +147,20 @@ const Dialogs: React.FunctionComponent<DialogComponentProps> = () => {
             />
           </TestCase>
         </TestSuite> */}
-        <TestSuite name="Dialog属性overlayStyle验证 Dialog样式设置">
-          <TestCase itShould="overlayStyle" tags={['C_API']}>
+        <TestSuite name="Dialog属性fullScreen 接收Overlay的fullScreen属性 ">
+          <TestCase itShould="Overlay的fullScreen属性" tags={['C_API']}>
             <Button
-              title="overlayStyle样式设置"
-              onPress={toggleDialog5}
+              title="Overlay的fullScreen属性"
+              onPress={toggleDialog12}
+              buttonStyle={styles.button}
+            />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Dialog属性overlayStyle 接收Overlay的overlayStyle属性 ">
+          <TestCase itShould="Overlay的overlayStyle属性" tags={['C_API']}>
+            <Button
+              title="Overlay的overlayStyle属性"
+              onPress={toggleDialog13}
               buttonStyle={styles.button}
             />
           </TestCase>
@@ -145,6 +170,24 @@ const Dialogs: React.FunctionComponent<DialogComponentProps> = () => {
             <Button
               title="Dialog.Actions的子组件 设置两个Dialog.Button"
               onPress={toggleDialog6}
+              buttonStyle={styles.button}
+            />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Dialog.Button属性disable验证 接收Button组件的disable属性">
+          <TestCase itShould="设置Button组件的disable属性" tags={['C_API']}>
+            <Button
+              title="接收Button组件的disable属性"
+              onPress={toggleDialog14}
+              buttonStyle={styles.button}
+            />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Dialog.Button属性size验证 接收Button组件的size属性">
+          <TestCase itShould="设置Button组件的size属性" tags={['C_API']}>
+            <Button
+              title="接收Button组件的size属性"
+              onPress={toggleDialog15}
               buttonStyle={styles.button}
             />
           </TestCase>
@@ -200,21 +243,20 @@ const Dialogs: React.FunctionComponent<DialogComponentProps> = () => {
       </Dialog>
       <Dialog
         onLongPress={toggleDialog2}
-        overlayStyle={{backgroundColor: 'yellow'}}
+        overlayStyle={{ backgroundColor: 'yellow' }}
         isVisible={visible2}
         onBackdropPress={toggleDialog2}>
         <ChildComponent img={imgSrc} text={'Dialog长按切换图片'} />
       </Dialog>
-
       <Dialog
-        overlayStyle={{backgroundColor: 'pink', borderRadius: 20}}
+        overlayStyle={{ backgroundColor: 'pink', borderRadius: 20 }}
         onPressIn={toggleDialog3}
         isVisible={visible3}
         onBackdropPress={toggleDialog3}>
         <Dialog.Loading />
       </Dialog>
       <Dialog
-        overlayStyle={{backgroundColor: 'pink', borderRadius: 20}}
+        overlayStyle={{ backgroundColor: 'pink', borderRadius: 20 }}
         onPressOut={toggleDialog4}
         isVisible={visible4}
         onBackdropPress={toggleDialog4}>
@@ -222,7 +264,7 @@ const Dialogs: React.FunctionComponent<DialogComponentProps> = () => {
         <Text>Dialog body text. Add relevant information here.</Text>
       </Dialog>
       <Dialog
-        overlayStyle={{backgroundColor: 'pink', borderRadius: 20,width:300}}
+        overlayStyle={{ backgroundColor: 'pink', borderRadius: 20, width: 300 }}
         isVisible={visible5}
         onBackdropPress={toggleDialog5}>
         <Dialog.Title title="Select Preference" />
@@ -230,7 +272,7 @@ const Dialogs: React.FunctionComponent<DialogComponentProps> = () => {
           <CheckBox
             key={i}
             title={l}
-            containerStyle={{borderWidth: 0}}
+            containerStyle={{ borderWidth: 0 }}
             checkedIcon="dot-circle-o"
             uncheckedIcon="circle-o"
             checked={checked === i + 1}
@@ -255,11 +297,45 @@ const Dialogs: React.FunctionComponent<DialogComponentProps> = () => {
         <Dialog.Actions>
           <Dialog.Button
             title="ACTION 1"
-            style={{backgroundColor: 'black', width: 100}}
+            style={{ backgroundColor: 'black', width: 100 }}
             onPress={() => console.log('Primary Action Clicked!')}
           />
           <Dialog.Button
-            style={{backgroundColor: 'yellow', marginLeft: 20, width: 100}}
+            style={{ backgroundColor: 'yellow', marginLeft: 20, width: 100 }}
+            title="ACTION 2"
+            onPress={() => console.log('Secondary Action Clicked!')}
+          />
+        </Dialog.Actions>
+      </Dialog>
+      <Dialog isVisible={visible14} onBackdropPress={toggleDialog14}>
+        <Dialog.Title title="Dialog Title" />
+        <Text>Dialog body text. Add relevant information here.</Text>
+        <Dialog.Actions>
+          <Dialog.Button
+            disabled={true}
+            title="ACTION 1"
+            onPress={() => console.log('Primary Action Clicked!')}
+          />
+          <Dialog.Button
+            disabled={true}
+            title="ACTION 2"
+            onPress={() => console.log('Secondary Action Clicked!')}
+          />
+        </Dialog.Actions>
+      </Dialog>
+      <Dialog isVisible={visible15} onBackdropPress={toggleDialog15}>
+        <Dialog.Title title="Dialog Title" />
+        <Text>Dialog body text. Add relevant information here.</Text>
+        <Dialog.Actions>
+          <Dialog.Button
+            style={{ backgroundColor: 'yellow' }}
+            size='lg'
+            title="ACTION 1"
+            onPress={() => console.log('Primary Action Clicked!')}
+          />
+          <Dialog.Button
+            style={{ backgroundColor: 'green' }}
+            size='lg'
             title="ACTION 2"
             onPress={() => console.log('Secondary Action Clicked!')}
           />
@@ -281,9 +357,9 @@ const Dialogs: React.FunctionComponent<DialogComponentProps> = () => {
                 color: 'yellow',
                 size: 40,
               }}></Dialog.Loading>
-            <Avatar rounded source={{uri: l.avatar_url}} />
+            <Avatar rounded source={{ uri: l.avatar_url }} />
             <ListItem.Content>
-              <ListItem.Title style={{fontWeight: '700'}}>
+              <ListItem.Title style={{ fontWeight: '700' }}>
                 {l.name}
               </ListItem.Title>
               <ListItem.Subtitle>{l.subtitle}</ListItem.Subtitle>
@@ -307,9 +383,9 @@ const Dialogs: React.FunctionComponent<DialogComponentProps> = () => {
                 height: 30,
                 backgroundColor: 'pink',
               }}></Dialog.Loading>
-            <Avatar rounded source={{uri: l.avatar_url}} />
+            <Avatar rounded source={{ uri: l.avatar_url }} />
             <ListItem.Content>
-              <ListItem.Title style={{fontWeight: '700'}}>
+              <ListItem.Title style={{ fontWeight: '700' }}>
                 {l.name}
               </ListItem.Title>
               <ListItem.Subtitle>{l.subtitle}</ListItem.Subtitle>
@@ -323,12 +399,34 @@ const Dialogs: React.FunctionComponent<DialogComponentProps> = () => {
       </Dialog>
       <Dialog isVisible={visible10} onBackdropPress={toggleDialog10}>
         <Dialog.Title
-          titleProps={{style: {color: 'red', fontSize: 30}}}
+          titleProps={{ style: { color: 'red', fontSize: 30 } }}
           title="Dialog Title Title Title Title"
         />
         <Text>Dialog body text. Add relevant information here.</Text>
       </Dialog>
       <Dialog isVisible={visible11} onBackdropPress={toggleDialog11}>
+        <Dialog.Title
+          titleStyle={{
+            backgroundColor: 'yellow',
+            borderRadius: 20,
+            padding: 10,
+          }}
+          title="Dialog Title Title Title Title"
+        />
+        <Text>Dialog body text. Add relevant information here.</Text>
+      </Dialog>
+      <Dialog fullScreen={true} isVisible={visible12} onBackdropPress={toggleDialog12}>
+        <Dialog.Title
+          titleStyle={{
+            backgroundColor: 'yellow',
+            borderRadius: 20,
+            padding: 10,
+          }}
+          title="Dialog Title Title Title Title"
+        />
+        <Text>Dialog body text. Add relevant information here.</Text>
+      </Dialog>
+      <Dialog overlayStyle={{ backgroundColor: 'green', height: '50%' }} isVisible={visible13} onBackdropPress={toggleDialog13}>
         <Dialog.Title
           titleStyle={{
             backgroundColor: 'yellow',

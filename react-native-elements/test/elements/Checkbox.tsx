@@ -231,34 +231,42 @@ const CheckboxComponent: React.FunctionComponent<
             />
           </TestCase>
         </TestSuite>
+        <TestSuite name="CheckBox属性style验证 接收React-Native原生View组件的style属性">
+          <TestCase itShould="设置React-Native原生View组件的style属性" tags={['C_API']}>
+            <CheckBox
+              checked={true}
+              style={{
+                backgroundColor: 'yellow',
+                alignSelf: 'center',
+                width: 300,
+                height:60,
+                justifyContent: 'center',
+              }}
+              title={'接收React-Native原生View组件的style属性'}
+              checkedColor="#5C5C5C"
+            />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="CheckBox属性testID验证 接收React-Native原生View组件的testID属性">
+          <TestCase itShould="设置React-Native原生View组件的testID属性" tags={['C_API']}>
+            <CheckBox
+              checked={true}
+              testID='CheckBox'
+              style={{
+                backgroundColor: 'yellow',
+                alignSelf: 'center',
+                width: 300,
+                height:60,
+                justifyContent: 'center',
+              }}
+              title={'接收React-Native原生View组件的testID属性'}
+              checkedColor="#5C5C5C"
+            />
+          </TestCase>
+        </TestSuite>
       </ScrollView>
     </Tester>
   );
 };
-// import * as React from "react";
-// import { CheckBox } from "@rneui/base";
-
-// export default () => {
-//   const [checked, setChecked] = React.useState(false);
-//   return (
-//     <CheckBox
-//       checked={checked}
-//       checkedColor="#0F0"
-//       checkedTitle="Great!"
-//       containerStyle={{ width: "75%" }}
-//       onIconPress={() => setChecked(!checked)}
-//       onLongIconPress={() =>
-//         console.log("onLongIconPress()")
-//       }
-//       onLongPress={() => console.log("onLongPress()")}
-//       onPress={() => console.log("onPress()")}
-//       size={30}
-//       textStyle={{}}
-//       title="Check for Awesomeness"
-//       titleProps={{}}
-//       uncheckedColor="#F00"
-//     />
-//   );
-// }
 
 export default CheckboxComponent;

@@ -38,6 +38,10 @@ export default () => {
   const [index30, setIndex30] = React.useState(0);
   const [index31, setIndex31] = React.useState(0);
   const [index32, setIndex32] = React.useState(0);
+  const [index33, setIndex33] = React.useState(0);
+  const [index34, setIndex34] = React.useState(0);
+  const [index35, setIndex35] = React.useState(0);
+  const [index36, setIndex36] = React.useState(0);
   console.log('tabs re render');
   return (
     <Tester>
@@ -127,7 +131,7 @@ export default () => {
             </View>
           </TestCase>
         </TestSuite>
-        {/* <TestSuite name="Tab的containerStyle属性 设置选项卡的containerStyle无效 设置背景颜色 圆角 宽度 均无效">
+        <TestSuite name="Tab的containerStyle属性 设置选项卡的containerStyle无效 设置背景颜色 圆角 宽度 均无效">
           <TestCase itShould="containerStyle" tags={['C_API']}>
             <Tab
               value={Math.ceil(index1 > -1 ? index1 : 0)}
@@ -216,7 +220,7 @@ export default () => {
               </TabView>
             </View>
           </TestCase>
-        </TestSuite> */}
+        </TestSuite>
         {/* <TestSuite name="Tab的dense属性 设置Tab的dense无效 设置ture或false均无效">
           <TestCase itShould="containerStyle" tags={['C_API']}>
             <Tab
@@ -991,7 +995,6 @@ export default () => {
               }}
               scrollable
               variant="primary"
-              // style={{ backgroundColor: index == 0 ? 'yellow' : index == 1 ? 'red' : 'blue' }}
               dense={false}>
               <Tab.Item
                 containerStyle={active => ({
@@ -1039,6 +1042,105 @@ export default () => {
               scrollable
               variant="default"
               // style={{ backgroundColor: index == 0 ? 'yellow' : index == 1 ? 'red' : 'blue' }}
+              dense={false}>
+              <Tab.Item
+                containerStyle={active => ({
+                  width: 113,
+                  backgroundColor: active ? '#208990' : 'transparent',
+                })}
+                title="Recent"
+                titleStyle={{fontSize: 12}}
+                icon={{name: 'calendar', type: 'font-awesome', color: 'black'}}
+              />
+              <Tab.Item
+                title="Custom"
+                containerStyle={active => ({
+                  backgroundColor: active ? '#208990' : 'transparent',
+                  width: 115,
+                })}
+                titleStyle={{fontSize: 12}}
+                icon={{name: 'heart', type: 'font-awesome', color: 'black'}}
+              />
+              <Tab.Item
+                containerStyle={active => ({
+                  width: 118,
+                  backgroundColor: active ? '#208990' : 'transparent',
+                })}
+                title="Cart"
+                titleStyle={{fontSize: 12}}
+                icon={{
+                  name: 'shopping-cart',
+                  type: 'font-awesome',
+                  color: 'black',
+                }}
+              />
+            </Tab>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Tab的style属性 接收React-native 的原生View组件的style ">
+          <TestCase itShould="设置React-native 的原生View组件的style 设置背景色为黄色" tags={['C_API']}>
+            <Tab
+              style={{backgroundColor:'yellow'}}
+              titleStyle={{fontSize: 100, fontWeight: '500', color: '#222222'}}
+              value={Math.ceil(index11 > -1 ? index11 : 0)}
+              onChange={e => setIndex11(e)}
+              indicatorStyle={{
+                backgroundColor: 'pink',
+                height: 5,
+                borderRadius: 2.5,
+              }}
+              scrollable
+              variant="primary"
+              dense={false}>
+              <Tab.Item
+                containerStyle={active => ({
+                  width: 113,
+                  backgroundColor: active ? '#208990' : 'transparent',
+                })}
+                title="Recent"
+                titleStyle={{fontSize: 12}}
+                icon={{name: 'calendar', type: 'font-awesome', color: 'black'}}
+              />
+              <Tab.Item
+                title="Custom"
+                containerStyle={active => ({
+                  backgroundColor: active ? '#208990' : 'transparent',
+                  width: 115,
+                })}
+                titleStyle={{fontSize: 12}}
+                icon={{name: 'heart', type: 'font-awesome', color: 'black'}}
+              />
+              <Tab.Item
+                containerStyle={active => ({
+                  width: 118,
+                  backgroundColor: active ? '#208990' : 'transparent',
+                })}
+                title="Cart"
+                titleStyle={{fontSize: 12}}
+                icon={{
+                  name: 'shopping-cart',
+                  type: 'font-awesome',
+                  color: 'black',
+                }}
+              />
+            </Tab>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Tab的testID属性 接收React-native 的原生View组件的testID ">
+          <TestCase itShould="设置React-native 的原生View组件的testID " tags={['C_API']}>
+            <Tab
+              testID='Tab'
+              style={{backgroundColor:'yellow'}}
+              titleStyle={{fontSize: 100, fontWeight: '500', color: '#222222'}}
+              value={Math.ceil(index11 > -1 ? index11 : 0)}
+              onChange={e => setIndex11(e)}
+              indicatorStyle={{
+                backgroundColor: 'pink',
+                height: 5,
+                borderRadius: 2.5,
+              }}
+              scrollable
+              variant="primary"
               dense={false}>
               <Tab.Item
                 containerStyle={active => ({
@@ -1415,6 +1517,181 @@ export default () => {
                 icon={{name: 'heart', type: 'font-awesome', color: 'black'}}
               />
               <Tab.Item
+                active={false}
+                iconContainerStyle={active => ({
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: active ? 'blue' : 'gray',
+                  width: 100,
+                  height: 100,
+                })}
+                containerStyle={active => ({
+                  width: 118,
+                  backgroundColor: 'orange',
+                })}
+                title="Cart"
+                titleStyle={active => ({
+                  fontSize: 28,
+                  color: 'green',
+                })}
+                icon={{
+                  name: 'shopping-cart',
+                  type: 'font-awesome',
+                  color: 'black',
+                }}
+              />
+            </Tab>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Tab.Item的disable属性  接收Button组件的disable属性 ">
+          <TestCase itShould="设置Button组件的disable属性" tags={['C_API']}>
+            <Tab
+              titleStyle={{fontSize: 100, fontWeight: '500', color: '#222222'}}
+              value={Math.ceil(index33 > -1 ? index33 : 0)}
+              onChange={e => setIndex33(e)}
+              indicatorStyle={{
+                backgroundColor: 'pink',
+                height: 5,
+                borderRadius: 2.5,
+              }}
+              scrollable
+              variant="default"
+              style={{
+                backgroundColor:
+                  index33 == 0 ? 'yellow' : index33 == 1 ? 'red' : 'blue',
+              }}
+              dense={true}>
+              <Tab.Item
+              disabled={true}
+                titleStyle={active => ({
+                  fontSize: 28,
+                  color: 'green',
+                })}
+                containerStyle={active => ({
+                  width: 113,
+                  backgroundColor: 'yellow',
+                })}
+                iconContainerStyle={active => ({
+                  backgroundColor: active ? 'blue' : 'gray',
+                  width: 100,
+                  height: 100,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                })}
+                title="Recent"
+                icon={{name: 'calendar', type: 'font-awesome', color: 'black'}}
+              />
+              <Tab.Item
+                title="Custom"
+                disabled={true}
+                iconContainerStyle={active => ({
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: active ? 'blue' : 'gray',
+                  width: 100,
+                  height: 100,
+                })}
+                containerStyle={active => ({
+                  backgroundColor: 'white',
+                  width: 115,
+                })}
+                titleStyle={active => ({
+                  fontSize: 28,
+                  color: 'green',
+                })}
+                icon={{name: 'heart', type: 'font-awesome', color: 'black'}}
+              />
+              <Tab.Item
+                disabled={true}
+                active={false}
+                iconContainerStyle={active => ({
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: active ? 'blue' : 'gray',
+                  width: 100,
+                  height: 100,
+                })}
+                containerStyle={active => ({
+                  width: 118,
+                  backgroundColor: 'orange',
+                })}
+                title="Cart"
+                titleStyle={active => ({
+                  fontSize: 28,
+                  color: 'green',
+                })}
+                icon={{
+                  name: 'shopping-cart',
+                  type: 'font-awesome',
+                  color: 'black',
+                }}
+              />
+            </Tab>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Tab.Item的uppercase属性  接收Button组件的uppercase属性 ">
+          <TestCase itShould="设置Button组件的uppercase属性" tags={['C_API']}>
+            <Tab
+              titleStyle={{fontSize: 100, fontWeight: '500', color: '#222222'}}
+              value={Math.ceil(index34 > -1 ? index34 : 0)}
+              onChange={e => setIndex34(e)}
+              indicatorStyle={{
+                backgroundColor: 'pink',
+                height: 5,
+                borderRadius: 2.5,
+              }}
+              scrollable
+              variant="default"
+              style={{
+                backgroundColor:
+                  index34 == 0 ? 'yellow' : index34 == 1 ? 'red' : 'blue',
+              }}
+              dense={true}>
+              <Tab.Item
+              uppercase
+             
+                titleStyle={active => ({
+                  fontSize: 28,
+                  color: 'green',
+                })}
+                containerStyle={active => ({
+                  width: 113,
+                  backgroundColor: 'yellow',
+                })}
+                iconContainerStyle={active => ({
+                  backgroundColor: active ? 'blue' : 'gray',
+                  width: 100,
+                  height: 100,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                })}
+                title="Recent"
+                icon={{name: 'calendar', type: 'font-awesome', color: 'black'}}
+              />
+              <Tab.Item
+                title="Custom"
+                uppercase
+                iconContainerStyle={active => ({
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: active ? 'blue' : 'gray',
+                  width: 100,
+                  height: 100,
+                })}
+                containerStyle={active => ({
+                  backgroundColor: 'white',
+                  width: 115,
+                })}
+                titleStyle={active => ({
+                  fontSize: 28,
+                  color: 'green',
+                })}
+                icon={{name: 'heart', type: 'font-awesome', color: 'black'}}
+              />
+              <Tab.Item
+                  uppercase
                 active={false}
                 iconContainerStyle={active => ({
                   justifyContent: 'center',
@@ -2587,6 +2864,104 @@ export default () => {
                   <Text h1>Favorite 1</Text>
                 </TabView.Item>
                 <TabView.Item>
+                  <Text h1>Cart 2${Math.random()}</Text>
+                </TabView.Item>
+              </TabView>
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="TabView.Item的style属性  接收React-native 的原生View组件的style ">
+          <TestCase itShould="设置原生View组件的style" tags={['C_API']}>
+            <View style={{width: '100%', height: 200, overflow: 'hidden'}}>
+              <TabView
+                tabItemContainerStyle={{backgroundColor: 'yellow'}}
+                minSwipeSpeed={10}
+                containerStyle={{
+                  backgroundColor:
+                    index35 == 0 ? 'black' : index35 == 1 ? 'green' : 'red',
+                }}
+                animationConfig={{
+                  duration: 10,
+                  useNativeDriver: true,
+                }}
+                onSwipeStart={e => console.log(e)}
+                value={index35}
+                onChange={index => setIndex35(index)}
+                animationType="spring">
+                <TabView.Item  style={{width: '100%',backgroundColor:'red'}}>
+                  <ScrollView>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                  </ScrollView>
+                </TabView.Item>
+                <TabView.Item style={{width: '100%',backgroundColor:'green'}}>
+                  <Text h1>Favorite 1</Text>
+                </TabView.Item>
+                <TabView.Item style={{width: '100%',backgroundColor:'black'}}>
+                  <Text h1>Cart 2${Math.random()}</Text>
+                </TabView.Item>
+              </TabView>
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="TabView.Item的testID属性  接收React-native 的原生View组件的testID ">
+          <TestCase itShould="设置原生View组件的testID" tags={['C_API']}>
+            <View style={{width: '100%', height: 200, overflow: 'hidden'}}>
+              <TabView
+                tabItemContainerStyle={{backgroundColor: 'yellow'}}
+                minSwipeSpeed={10}
+                containerStyle={{
+                  backgroundColor:
+                    index36 == 0 ? 'black' : index36 == 1 ? 'green' : 'red',
+                }}
+                animationConfig={{
+                  duration: 10,
+                  useNativeDriver: true,
+                }}
+                onSwipeStart={e => console.log(e)}
+                value={index36}
+                onChange={index => setIndex36(index)}
+                animationType="spring">
+                <TabView.Item  testID='TabView.Item1' style={{width: '100%',backgroundColor:'red'}}>
+                  <ScrollView>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                    <Text h1>Recent 0</Text>
+                  </ScrollView>
+                </TabView.Item>
+                <TabView.Item testID='TabView.Item2' style={{width: '100%',backgroundColor:'green'}}>
+                  <Text h1>Favorite 1</Text>
+                </TabView.Item>
+                <TabView.Item testID='TabView.Item3' style={{width: '100%',backgroundColor:'black'}}>
                   <Text h1>Cart 2${Math.random()}</Text>
                 </TabView.Item>
               </TabView>

@@ -178,6 +178,53 @@ const LinearProgressAPI: React.FunctionComponent = () => {
             </View>
           </TestCase>
         </TestSuite>
+        <TestSuite name="LinearProgress属性style  接收React-Native原生View组件的style">
+          <TestCase itShould="React-Native原生View组件的style" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>接收React-Native原生View组件的style</Text>
+              <LinearProgress
+              
+                variant="determinate"
+                trackColor="pink"
+                color="blue"
+                style={{
+                  marginVertical: 10,
+                  width: '80%',
+                  alignSelf: 'center',
+                  height: 30,
+                  borderRadius: 5,
+                  backgroundColor:'black',
+                  
+                }}
+                animation={{duration: 1000}}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="LinearProgress属性testID  接收React-Native原生View组件的testID">
+          <TestCase itShould="React-Native原生View组件的testID" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>接收React-Native原生View组件的testID</Text>
+              <LinearProgress
+              
+                variant="determinate"
+                trackColor="pink"
+                color="blue"
+                style={{
+                  marginVertical: 10,
+                  width: '80%',
+                  alignSelf: 'center',
+                  height: 30,
+                  borderRadius: 5,
+                  backgroundColor:'black',
+                  
+                }}
+                testID='LinearProgress'
+                animation={{duration: 1000}}
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
       </ScrollView>
     </Tester>
   );

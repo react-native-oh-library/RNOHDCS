@@ -192,6 +192,39 @@ const Avatars = () => {
             </View>
           </TestCase>
         </TestSuite>
+        <TestSuite name="Skeleton的属性style 接收React-Native原生组件View的style属性">
+          <TestCase itShould="设置原生View的style属性">
+            <View style={styles.rowCenter}>
+              <Skeleton
+                style={{backgroundColor:'green',padding:5}}
+                skeletonStyle={{
+                  backgroundColor: 'pink',
+                  borderRadius: 10,
+                  opacity: 0.7,
+                }}
+                height={100}
+                animation="wave"
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Skeleton的属性Width 接收React-Native原生组件View的Width属性">
+          <TestCase itShould="设置原生View的Width属性">
+            <View style={styles.rowCenter}>
+              <Skeleton
+                width={180}
+                style={{backgroundColor:'green',padding:5}}
+                skeletonStyle={{
+                  backgroundColor: 'pink',
+                  borderRadius: 10,
+                  opacity: 0.7,
+                }}
+                height={100}
+                animation="wave"
+              />
+            </View>
+          </TestCase>
+        </TestSuite>
       </ScrollView>
     </Tester>
   );
