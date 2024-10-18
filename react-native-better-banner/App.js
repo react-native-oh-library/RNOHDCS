@@ -60,6 +60,12 @@ const BetterBannerTest = () => {
 
           <TestCase.Example
             skip={{ android: true, harmony: { arkTS: true, cAPI: true } }}
+            itShould="onScrollEnd">
+            <BetterBannerTestCase9 />
+          </TestCase.Example>
+
+          <TestCase.Example
+            skip={{ android: true, harmony: { arkTS: true, cAPI: true } }}
             itShould="adaptSeamlessScrollValue">
             <BetterBannerTestCase8 />
           </TestCase.Example>
@@ -109,6 +115,29 @@ const BetterBannerTest = () => {
       </Tester>
     </ScrollView>
   );
+};
+
+const BetterBannerTestCase9 = () => {
+  return <View>
+    <BetterBanner
+      bannerComponents={bannerComponents}
+      bannerHeight={250}
+      bannerTitles={["Page 01 1111", "Page 02 2222", "Page 03 3333", "Page 04 4444"]}
+      bannerTitleTextColor='red'
+      bannerTitleTextSize={14}
+      scrollInterval={2000}
+      indicatorWidth={20}
+      indicatorHeight={12}
+      indicatorColor={'rgba(255,255,255,0.6)'}
+      activeIndicatorColor={'#fff'}
+      onScrollEnd={() => alert("onScrollEnd")}
+      indicatorContainerBackgroundColor={'rgba(0,0,0,0.3)'}
+      onPress={(index) => alert('you pressed index is : ' + index)}
+      indicatorGroupPosition={'left'}
+      isSeamlessScroll={true}
+      adaptSeamlessScrollValue={true}
+    />
+  </View>;
 };
 
 const BetterBannerTestCase8 = () => {
