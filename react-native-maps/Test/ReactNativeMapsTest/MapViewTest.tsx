@@ -20,7 +20,7 @@ const DEFAULT_REGION = {
 };
 const DEFAULT_CAMERA = {
   center: { latitude: LATITUDE, longitude: LONGITUDE },
-  heading: 0,
+  heading: 1,
   pitch: 0
 };
 const MARKER_KEY = 'mk-key';
@@ -233,22 +233,22 @@ export class MapViewTest extends React.Component<any, any> {
 
   animateCamera() {
     const newCamera = {
-      center: { latitude: LATITUDE + SPACE, longitude: LONGITUDE - SPACE },
+      center: { latitude: LATITUDE + 4 * SPACE, longitude: LONGITUDE - 3 * SPACE },
       heading: 0,
       pitch: 0,
     };
     this.map?.animateCamera(newCamera, { duration: 500 }); // yes
-    this.setState({ apiCallbackText: JSON.stringify(newCamera) });
+    this.setState({ apiCallbackText: 'animateCamera 执行成功' });
   }
 
   setCamera() {
     const newCamera = {
-      center: { latitude: LATITUDE - SPACE, longitude: LONGITUDE + SPACE },
+      center: { latitude: LATITUDE - 2 * SPACE, longitude: LONGITUDE +  2 * SPACE },
       heading: 0,
       pitch: 0,
     };
     this.map?.setCamera(newCamera); // yes
-    this.setState({ apiCallbackText: JSON.stringify(newCamera) });
+    this.setState({ apiCallbackText: 'setCamera 执行成功' });
   }
 
   animateToRegion() {
@@ -259,7 +259,7 @@ export class MapViewTest extends React.Component<any, any> {
       longitudeDelta: 0,
     };
     this.map?.animateToRegion(newRegion, 500); // yes
-    this.setState({ apiCallbackText: JSON.stringify(newRegion) });
+    this.setState({ apiCallbackText: 'animateToRegion 执行成功' });
   }
 
   async getMapBoundaries() {
@@ -271,7 +271,7 @@ export class MapViewTest extends React.Component<any, any> {
     const northEast = { latitude: LATITUDE + 0.3, longitude: LONGITUDE + 0.3 };
     const southWest = { latitude: LATITUDE - 0.3, longitude: LONGITUDE - 0.3 };
     this.map?.setMapBoundaries(northEast, southWest); // yes
-    this.setState({ apiCallbackText: JSON.stringify(northEast) + ',' + JSON.stringify(southWest) });
+    this.setState({ apiCallbackText: 'setMapBoundaries 执行成功' });
   }
 
   setIndoorActiveLevelIndex() {
@@ -287,8 +287,11 @@ export class MapViewTest extends React.Component<any, any> {
   }
 
   async fitToCoordinates() {
-    await this.map?.fitToCoordinates(); // yes
-    this.setState({ apiCallbackText: '执行成功' });
+    await this.map?.fitToCoordinates(
+      [{ latitude: LATITUDE, longitude: LONGITUDE }, { latitude: LATITUDE - 0.3, longitude: LONGITUDE - 0.5 }],
+      { animated: true }
+    ); // yes
+    this.setState({ apiCallbackText: 'fitToCoordinates 执行成功' });
   }
 
   async addressForCoordinate() {
@@ -311,16 +314,16 @@ export class MapViewTest extends React.Component<any, any> {
     this.setState({ apiCallbackText: JSON.stringify(frame) });
   }
 
-  async takeSnapshot() {
+  async takeSnapshot(type: 'file' | 'base64' = 'file') {
     const sp = await this.map?.takeSnapshot({ // yes
       // width: 300,
       // height: 200,
       // region: DEFAULT_REGION,
       // format: 'png',
       // quality: 1,
-      // result: 'base64',
+      result: type,
     });
-    this.setState({ apiCallbackText: JSON.stringify(sp) });
+    this.setState({ apiCallbackText: sp?.slice(0, 100) });
   }
 
   reloadMap() {
@@ -650,7 +653,8 @@ export class MapViewTest extends React.Component<any, any> {
         <TouchButton name="pointForCoordinate" callback={() => this.pointForCoordinate()}></TouchButton>
         <TouchButton name="coordinateForPoint" callback={() => this.coordinateForPoint()}></TouchButton>
         {/* <TouchButton name="getMarkersFrames 不支持" callback={() => this.getMarkersFrames()}></TouchButton> */}
-        <TouchButton name="takeSnapshot" callback={() => this.takeSnapshot()}></TouchButton>
+        <TouchButton name="takeSnapshot(file)" callback={() => this.takeSnapshot()}></TouchButton>
+        <TouchButton name="takeSnapshot(base64)" callback={() => this.takeSnapshot('base64')}></TouchButton>
       </TestSuite>
     );
 
@@ -659,8 +663,8 @@ export class MapViewTest extends React.Component<any, any> {
         <View style={styles.container}>
           {mapView}
         </View>
-        <View style={{ minHeight: 50 }}>
-          <Text>{this.state.apiCallbackText}</Text>
+        <View style={{ minHeight: 50, backgroundColor: 'white' }}>
+          <Text style={{ color: 'black' }}>{this.state.apiCallbackText}</Text>
         </View>
         {/* @ts-ignore */}
         <ScrollView style={{ flex: 1, height: "calc(100% - 250px)" }}>
