@@ -31,6 +31,17 @@ export function FlashMessageTest() {
                 }}>
                 <Text>点击不能关闭消息</Text>
               </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => {
+                  showMessage({
+                    message: '点击能关闭消息',
+                    type: 'info',
+                    hideOnPress: true,
+                  });
+                }}>
+                <Text>点击能关闭消息</Text>
+              </TouchableOpacity>
             </TestCase>
 
             <TestCase itShould="测试onPress">
@@ -58,6 +69,7 @@ export function FlashMessageTest() {
                   showMessage({
                     message: '长按事件',
                     type: 'info',
+                    hideOnPress: false,
                     onLongPress: () => {
                       hideMessage();
                     },
@@ -161,6 +173,17 @@ export function FlashMessageTest() {
                 style={styles.button}
                 onPress={() => {
                   showMessage({
+                    message: '位置居上',
+                    type: 'info',
+                    position: 'top',
+                  });
+                }}>
+                <Text>位置居上</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => {
+                  showMessage({
                     message: '位置居中',
                     type: 'info',
                     position: 'center',
@@ -168,19 +191,16 @@ export function FlashMessageTest() {
                 }}>
                 <Text>位置居中</Text>
               </TouchableOpacity>
-            </TestCase>
-
-            <TestCase itShould="测试icon">
               <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
                   showMessage({
-                    message: '添加图标',
+                    message: '位置居下',
                     type: 'info',
-                    icon: 'success',
+                    position: 'bottom',
                   });
                 }}>
-                <Text>添加成功图标</Text>
+                <Text>位置居下</Text>
               </TouchableOpacity>
             </TestCase>
 
