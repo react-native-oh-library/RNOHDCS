@@ -27,6 +27,7 @@ export default class App extends Component {
     super(props)
     this.state = {
       currentPage: 0,
+      swiperWidth: 0
     };
   }
 
@@ -70,17 +71,16 @@ export default class App extends Component {
     setDidChangeObj(obj);
     setIndex(index)
   }
-
   render() {
-
+    // 38  大概是testerinfo的内外边距
     return (
       <ScrollView>
         <Tester>
           <TestSuite name="EZSwiper" style={[styles.container]}>
-            <TestCase.Example itShould="render a ez-swiper autoplayDirection = false">
-              <EZSwiper style={[styles.swiper, { width: width, height: 150 }]}
+            <TestCase.Example itShould="height:150 autoplayDirection:false">
+              <EZSwiper style={[styles.swiper, { width: '100%', height: 150 }]}
                 dataSource={['0', '1', '2', '3']}
-                width={width}
+                width={width - 39}
                 height={150}
                 autoplayDirection={false}
                 renderRow={this.renderRow}
@@ -93,10 +93,42 @@ export default class App extends Component {
                 autoplayTimeout={2}
               />
             </TestCase.Example>
-            <TestCase.Example itShould="render a ez-swiper with left">
-              <EZSwiper style={[styles.swiper, { width: width, height: 150 }]}
+            <TestCase.Example itShould="width:上方*0.8,height:100 autoplayDirection:false">
+              <EZSwiper style={[styles.swiper, { width: '80%', height: 150 }]}
                 dataSource={['0', '1', '2', '3']}
-                width={width}
+                width={(width - 39)*0.8}
+                height={100}
+                autoplayDirection={false}
+                renderRow={this.renderRow}
+                onPress={this.onPressRow}
+                onWillChange={this.onWillChange}
+                ratio={0.6}
+                index={2}
+                horizontal={true}
+                loop={true}
+                autoplayTimeout={2}
+              />
+            </TestCase.Example>
+            <TestCase.Example itShould="render a ez-swiper autoplayDirection = true">
+              <EZSwiper style={[styles.swiper, { width: '100%', height: 150 }]}
+                dataSource={['0', '1', '2', '3']}
+                width={width - 39}
+                height={150}
+                autoplayDirection={true}
+                renderRow={this.renderRow}
+                onPress={this.onPressRow}
+                onWillChange={this.onWillChange}
+                ratio={0.6}
+                index={2}
+                horizontal={true}
+                loop={true}
+                autoplayTimeout={2}
+              />
+            </TestCase.Example>
+            <TestCase.Example itShould="offset给一定的值偏移到left">
+              <EZSwiper style={[styles.swiper, { width: '100%', height: 150 }]}
+                dataSource={['0', '1', '2', '3']}
+                width={width - 39}
                 height={150}
                 renderRow={this.renderRow}
                 onPress={this.onPressRow}
@@ -109,10 +141,10 @@ export default class App extends Component {
                 offset={-width * 0.2 + 20}
               />
             </TestCase.Example>
-            <TestCase.Example itShould="render a ez-swiper with right">
-              <EZSwiper style={[styles.swiper, { width: width, height: 150 }]}
+            <TestCase.Example itShould="offset给一定的值偏移到right">
+              <EZSwiper style={[styles.swiper, { width: '100%', height: 150 }]}
                 dataSource={['0', '1', '2', '3']}
-                width={width}
+                width={width - 39}
                 height={150}
                 renderRow={this.renderRow}
                 onPress={this.onPressRow}
@@ -124,18 +156,18 @@ export default class App extends Component {
                 autoplayTimeout={2}
                 offset={60}
               /></TestCase.Example>
-            <TestCase.Example itShould="render a ez-swiper with normal">
-              <EZSwiper style={[styles.swiper, { width: width, height: 150 }]}
+            <TestCase.Example itShould="normal">
+              <EZSwiper style={[styles.swiper, { width: '100%', height: 150 }]}
                 dataSource={['0', '1', '2', '3']}
-                width={width}
+                width={width - 40}
                 height={150}
                 renderRow={this.renderRow}
                 onPress={this.onPressRow} />
             </TestCase.Example>
             <TestCase.Example itShould="render a ratio with 0.867">
-              <EZSwiper style={[styles.swiper, { width: width, height: 150 }]}
+              <EZSwiper style={[styles.swiper, { width: '100%', height: 150 }]}
                 dataSource={images}
-                width={width}
+                width={width - 39}
                 height={150}
                 renderRow={this.renderImageRow}
                 onPress={this.onPressRow}
@@ -152,17 +184,8 @@ export default class App extends Component {
                 loop={false}
                 index={2}
               /></TestCase.Example>
-            <TestCase.Example itShould="cardParams={ cardSide: width * 0.867, cardSmallSide: 150 * 0.867, cardSpace: width * (1 - 0.867) / 2 * 0.2 }">
-              <EZSwiper style={[styles.swiper, { width: width, height: 150 }]}
-                dataSource={['0', '1', '2', '3']}
-                width={width}
-                height={150}
-                renderRow={this.renderRow}
-                onPress={this.onPressRow}
-                cardParams={{ cardSide: width * 0.867, cardSmallSide: 150 * 0.867, cardSpace: width * (1 - 0.867) / 2 * 0.2 }}
-              /></TestCase.Example>
             <TestCase.Example itShould="ratio={0.867},horizontal={false}">
-              <EZSwiper style={[styles.swiper, { width: width, height: 200 }]}
+              <EZSwiper style={[styles.swiper, { width: '100%', height: 200 }]}
                 dataSource={['0', '1', '2', '3']}
                 width={width}
                 height={200}
@@ -171,11 +194,27 @@ export default class App extends Component {
                 ratio={0.867}
                 horizontal={false}
               /></TestCase.Example>
-
+            <TestCase.Example itShould="cardParams={ cardSide: width * 0.867, cardSmallSide: 150 * 0.867, cardSpace: width * (1 - 0.867) / 2 * 0.2 }">
+              <EZSwiper style={[styles.swiper, { width: '100%', height: 150 }]}
+                dataSource={['0', '1', '2', '3']}
+                width={width - 40}
+                height={150}
+                renderRow={this.renderRow}
+                onPress={this.onPressRow}
+                cardParams={{ cardSide: (width - 40) * 0.867, cardSmallSide: 150 * 0.867, cardSpace: width * (1 - 0.867) / 2 * 0.2 }}
+              /></TestCase.Example>
+            <TestCase.Example itShould="cardParams={ cardSide: width * 0.6, cardSmallSide: 150 * 0.6, cardSpace: width * (1 - 0.6) / 2 * 0.2 }">
+              <EZSwiper style={[styles.swiper, { width: '100%', height: 150 }]}
+                dataSource={['0', '1', '2', '3']}
+                width={width - 40}
+                height={150}
+                renderRow={this.renderRow}
+                onPress={this.onPressRow}
+                cardParams={{ cardSide: (width - 40) * 0.6, cardSmallSide: 150 * 0.6, cardSpace: width * (1 - 0.6) / 2 * 0.2 }}
+              /></TestCase.Example>
             <TestCase.Example itShould="render a ez-swiper with onDidChange">
               <DidChangeDom renderRow={this.renderRow} />
             </TestCase.Example>
-
             <TestCase.Example itShould="render a ez-swiper with onWillChange">
               <WillChangeDom renderRow={this.renderRow} />
             </TestCase.Example>
@@ -196,18 +235,20 @@ const DidChangeDom = (props) => {
 
   return (
     <View>
-      <View>
+      {/* <View>
         <Text>obj:{didChangeObj}</Text>
         <Text>index:{index}</Text>
+      </View> */}
+      <View>
+        <Text>见log</Text>
       </View>
-      <EZSwiper style={[styles.swiper, { width: width, height: 150 }]}
+      <EZSwiper style={[styles.swiper, { width: '100%', height: 150 }]}
         dataSource={['0', '1', '2', '3']}
-        width={width}
+        width={width - 40}
         height={150}
         renderRow={props.renderRow}
         onDidChange={(obj, index) => {
-          setDidChangeObj(obj)
-          setIndex(index)
+          console.log('onDidChange触发')
         }} />
     </View>)
 }
@@ -218,18 +259,20 @@ const WillChangeDom = (props) => {
 
   return (
     <View>
-      <View>
+      {/* <View>
         <Text>obj:{didChangeObj}</Text>
         <Text>index:{index}</Text>
+      </View> */}
+      <View>
+        <Text>见log</Text>
       </View>
-      <EZSwiper style={[styles.swiper, { width: width, height: 150 }]}
+      <EZSwiper style={[styles.swiper, { width: '100%', height: 150 }]}
         dataSource={['0', '1', '2', '3']}
-        width={width}
+        width={width - 39}
         height={150}
         renderRow={props.renderRow}
         onWillChange={(obj, index) => {
-          setDidChangeObj(obj)
-          setIndex(index)
+          console.log('onWillChange触发');
         }} />
     </View>)
 }
@@ -246,16 +289,16 @@ function ScrollToDom(props) {
   }
   return (
     <View>
-      <View style={{display: 'flex'}}>
+      <View style={{ display: 'flex' }}>
         <Button onPress={() => scrollTo(0)} style={styles.button} title="Press 0" />
         <Button onPress={() => scrollTo(1)} style={styles.button} title="Press 1" />
         <Button onPress={() => scrollTo(2)} style={styles.button} title="Press 2" />
         <Button onPress={() => scrollTo(3)} style={styles.button} title="Press 3" />
         <Button onPress={() => scrollTo(4)} style={styles.button} title="Press 4" />
       </View>
-      <EZSwiper style={[styles.swiper, { width: width, height: 150 }]}
+      <EZSwiper style={[styles.swiper, { width: '100%', height: 150 }]}
         dataSource={['0', '1', '2', '3', '4']}
-        width={width}
+        width={width - 40}
         ref={refDomFn}
         height={150}
         renderRow={props.renderRow}
@@ -263,26 +306,11 @@ function ScrollToDom(props) {
     </View>)
 }
 
-// export const displayName = 'EzswiperExample';
-// export const framework = 'React';
-// export const category = 'UI';
-// export const title = 'react-native-ezswiper';
-// export const documentationURL = 'https://github.com/easyui/react-native-ezswiper';
-// export const description = 'React Native ezswiper';
-
-// export const examples = [
-//   {
-//     title: 'react-native-ezswiper',
-//     render: function () {
-//       return <App />;
-//     },
-//   },
-// ];
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+    width: width
   },
   swiper: {
     backgroundColor: 'white',
