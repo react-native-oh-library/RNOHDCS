@@ -34,7 +34,8 @@ const DraxScrollViewDemo2 = () => {
           tags={['C_API']}>
           <View style={{height: 800}}>
             <DraxScrollViewBaseComponent
-              onScroll={onScrollHandler}></DraxScrollViewBaseComponent>
+              onScroll={onScrollHandler}>
+            </DraxScrollViewBaseComponent>
           </View>
         </TestCase>
       </Tester>

@@ -89,12 +89,6 @@ const DraxListBaseComponent = props => {
             keyExtractor={item => item}
             ListHeaderComponent={() => (
               <View style={styles.header}>
-                <Text style={styles.headerText}>
-                  Long-press any list item to drag it to a new position.
-                  Dragging an item over the top or bottom edge of the container
-                  will automatically scroll the list. Swiping up or down without
-                  the initial long-press will scroll the list normally.
-                </Text>
               </View>
             )}
           />
@@ -109,7 +103,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    padding: 12,
     justifyContent: 'center',
     alignItems: 'center',
   },
