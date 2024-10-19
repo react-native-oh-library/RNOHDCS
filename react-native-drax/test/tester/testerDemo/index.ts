@@ -42,7 +42,6 @@ import DraxListDemo13 from "./TestDraxList13"
 import DraxListDemo14 from "./TestDraxList14"
 import DraxScrollViewDemo1 from "./TestDraxScrollView1"
 import DraxScrollViewDemo2 from "./TestDraxScrollView2"
-import DraxScrollViewDemo3 from "./TestDraxScrollView3"
 export default {
     DraxViewDemo1,
     DraxViewDemo2,
@@ -88,5 +87,4 @@ export default {
     DraxListDemo14,
     DraxScrollViewDemo1,
     DraxScrollViewDemo2,
-    DraxScrollViewDemo3,
 }

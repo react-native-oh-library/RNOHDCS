@@ -24,7 +24,7 @@ const DraxScrollViewBaseComponent = props => {
           <Button title="Scroll to Start" onPress={scrollToStart} />
           <Button title="Scroll to End" onPress={scrollToEnd} />
         </View>
-        <GestureHandlerRootView style={{flex: 1}}>
+        <GestureHandlerRootView style={{flex: 1,height:200}}>
           <DraxScrollView
             horizontal
             onScroll={props.onScroll}
@@ -45,24 +45,6 @@ const DraxScrollViewBaseComponent = props => {
               <Text style={styles.itemText}>4</Text>
             </DraxView>
           </DraxScrollView>
-          <View style={styles.footer}>
-            <Text style={styles.description}>
-              The area above is a horizontal DraxScrollView containing 4
-              draggable number items. The buttons at the top of the screen
-              demonstrate the use of imperative scroll functions accessed via
-              ref to the underlying ScrollView. The number items can be dragged
-              into the sum bucket below.
-            </Text>
-            <DraxView
-              style={styles.bucket}
-              receivingStyle={styles.bucketReceiving}
-              onReceiveDragDrop={event => {
-                setSum(s => s + event.dragged.payload);
-                return DraxSnapbackTargetPreset.None;
-              }}>
-              <Text style={styles.itemText}>{`Sum: ${sum}`}</Text>
-            </DraxView>
-          </View>
         </GestureHandlerRootView>
       </SafeAreaView>
     </DraxProvider>

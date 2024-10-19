@@ -1,9 +1,7 @@
 import React from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   StatusBar,
-  StyleSheet,
   View,
 } from 'react-native';
 import {NavigationContainer, Page} from './Navigation';
