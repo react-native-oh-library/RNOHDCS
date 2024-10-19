@@ -1,5 +1,5 @@
 
-import { StyleSheet, ScrollView, View, } from 'react-native';
+import { StyleSheet, ScrollView, View,SafeAreaView} from 'react-native';
 
 import {
     TooltipAccessible,
@@ -23,13 +23,13 @@ import { TestCase, TestSuite,Tester } from '@rnoh/testerino';
 
 export default function Walkthrough() {
     return (
+    <ScrollView style={{flex:1}}>
         <Tester>
         <TestSuite name="Walkthrough">
-            <ScrollView style={{flex:1}}>
             <TestCase itShould='accessible属性测试,设置为true,屏幕朗读不可触碰提示气泡'>
                 <TooltipAccessible  accessible={true}/>
             </TestCase>
-            <TestCase itShould='accessible属性测试,设置为true,屏幕朗读可触碰提示气泡'>
+            <TestCase itShould='accessible属性测试,设置为false,屏幕朗读可触碰提示气泡'>
                 <TooltipAccessible  accessible={false}/>
             </TestCase>
             <TestCase itShould='测试arrowSize属性,改变气泡箭头大小'>
@@ -124,9 +124,10 @@ export default function Walkthrough() {
             <TestCase itShould="测试useInteractionManager属性,设置为false">
                 <TooltipUseInteractionManager useInteractionManager={false} />
             </TestCase>
-            </ScrollView>
         </TestSuite>
         </Tester>
+        </ScrollView>
+
     )
 
 }
