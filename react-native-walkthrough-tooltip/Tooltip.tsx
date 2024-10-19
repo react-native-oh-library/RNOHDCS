@@ -2,6 +2,7 @@ import   Tooltip  from 'react-native-walkthrough-tooltip';
 import {Text,StyleSheet,TouchableHighlight, Alert, View} from 'react-native';
 import { useState } from 'react';
 
+
 export function  TooltipCompent (){
 const [toolTipVisible,setToolTipVisible] = useState(false);
 return(
@@ -120,7 +121,7 @@ export function  TooltipBackgroundColor (props:any){
       </Tooltip>
       )
   }
-  
+
   export function  TooltipCloseOnChildInteraction (props:any){
     const {closeOnChildInteraction} =props
     const [toolTipCloseOnChildInteractionVisible,setToolTipCloseOnChildInteractionVisible] = useState(false);
