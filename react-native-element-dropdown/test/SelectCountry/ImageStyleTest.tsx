@@ -1,6 +1,6 @@
-import {TestCase, TestSuite,Tester} from '@rnoh/testerino';
+import {TestCase, TestSuite, Tester} from '@rnoh/testerino';
 import React, {useState} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 import {SelectCountry} from 'react-native-element-dropdown';
 
 const imageSource = require('../assets/react-native-logo.png');
@@ -12,10 +12,16 @@ const data = [
   {label: 'Item 5', value: '5', image: imageSource},
 ];
 
-const Demo = (props: any) => {
+const Demo = () => {
   const [country, setCountry] = useState<string>('');
+  const [width, setWidth] = useState<number>(15);
+  const [color, setColor] = useState<string>('blue');
   return (
     <>
+      <View>
+        <Text>color:{color}</Text>
+        <Text>width:{width}</Text>
+      </View>
       <SelectCountry
         style={styles.dropdown}
         selectedTextStyle={styles.selectedTextStyle}
@@ -34,39 +40,52 @@ const Demo = (props: any) => {
           setCountry(e.value);
         }}
         labelField={'label'}
-        {...props}
+        imageStyle={{
+          marginRight: 10,
+          width: width,
+          height: width,
+          backgroundColor: color,
+        }}
       />
+      <View style={styles.actionBtn}>
+        <Button
+          title="changeColor"
+          onPress={() => {
+            setColor(v => (v === 'red' ? 'blue' : 'red'));
+          }}
+        />
+        <Button
+          title="changeWidth"
+          onPress={() => {
+            setWidth(v => (v === 15 ? 20 : 15));
+          }}
+        />
+      </View>
     </>
   );
 };
 
-const Demo1 = () => {
-  return <Demo imageStyle={{marginRight: 5}} />;
-};
-
-export const SelectCountryTest = () => {
+export const ImageStyleTest = () => {
   return (
-    <ScrollView>
-      <Tester>
-      <View>
-        <Text style={{color: '#fff', fontSize: 20}}>SelectCountryDemo</Text>
-      </View>
-      <TestSuite name="imageField">
-        <TestCase itShould="imageField">
+    <Tester>
+      <TestSuite name="ImageStyle">
+        <TestCase itShould="">
           <Demo />
         </TestCase>
       </TestSuite>
-      <TestSuite name="imageStyle">
-        <TestCase itShould="imageStyle">
-          <Demo1 />
-        </TestCase>
-      </TestSuite>
-      </Tester>
-    </ScrollView>
+    </Tester>
   );
 };
 
 const styles = StyleSheet.create({
+  actionBtn: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    backgroundColor: '#000',
+    padding: 10,
+    gap: 10,
+  },
   dropdown: {
     height: 50,
     borderColor: 'gray',
