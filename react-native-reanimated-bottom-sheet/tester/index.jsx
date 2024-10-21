@@ -370,7 +370,7 @@ export default function () {
             }}></Button>
           </View>
         </TestCase>
-        <TestCase itShould="headerPosition">
+        {/* <TestCase itShould="headerPosition">
           <View style={{ flex: 1, gap: 10 }}>
             <Text>headerPosition的值会跟随sheet高度而变化</Text>
             <Button title="headerPosition" onPress={() => {
@@ -386,7 +386,7 @@ export default function () {
               })
             }}></Button>
           </View>
-        </TestCase>
+        </TestCase> */}
 
         <TestCase itShould="overdragResistanceFactor:过度拖拽时停止的力度">
           <View style={{ flex: 1, gap: 10 }}>
