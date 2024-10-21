@@ -10,7 +10,7 @@ const BottomSheetViewMaxDynamicContentSizeLayoutDemo = () => {
   // variables
   const snapPoints = useMemo(() => ["25%", "50%", "90%"], []);
 
-  const [maxDynamicContentSize, setMaxDynamicContentSize] = useState(100);
+  const [maxDynamicContentSize, setMaxDynamicContentSize] = useState(0);
 
   // callbacksh
 
@@ -37,7 +37,7 @@ const BottomSheetViewMaxDynamicContentSizeLayoutDemo = () => {
     <Tester>
     <TestSuite name='BottomSheetViewDemo'>
       <TestCase itShould="BottomSheetViewDemo Layout: maxDynamicContentSize ={maxDynamicContentSize}">
-     <GestureHandlerRootView>
+     <GestureHandlerRootView >
       <View style={styles.container}>
        <Button title="maxDynamicContentSize is 10" onPress={() => handleMaxDynamicContentSize(100)} />
         <View style={{height:10}}></View>
@@ -51,9 +51,10 @@ const BottomSheetViewMaxDynamicContentSizeLayoutDemo = () => {
           snapPoints={snapPoints}
           maxDynamicContentSize ={maxDynamicContentSize}
           onChange={handleSheetChange}
+          backgroundStyle={{backgroundColor:'red'}}
         >
           <BottomSheetView>
-            <Text>Enable dynamic sizing for content view and scrollable content size. 🔥</Text>
+            <Text>Enable dynamic sizing for content view and scrollable content size. 🔥Enable dynamic sizing for content view and scrollable content size. 🔥Enable dynamic sizing for content view and scrollable content size. 🔥Enable dynamic sizing for content view and scrollable content size. 🔥Enable dynamic sizing for content view and scrollable content size. 🔥</Text>
           </BottomSheetView>
         </BottomSheet>
       </View>
