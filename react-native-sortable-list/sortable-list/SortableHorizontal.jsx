@@ -44,9 +44,9 @@ export default function SortableHorizontal() {
 
   return (
     <Tester>
-      <ScrollView>
         <TestSuite name="Test horizontal">
           <TestCase itShould={'Test horizontal'}>
+            <View style={{width:500}}>
             <SortableList
               horizontal
               style={styles.list}
@@ -54,9 +54,9 @@ export default function SortableHorizontal() {
               data={data}
               renderRow={renderRow}
             />
+            </View>
           </TestCase>
         </TestSuite>
-      </ScrollView>
     </Tester>
   );
 }
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
 
   list: {
     height: 210,
-    width: window.width,
+    width: window.width-50,
   },
 
   contentContainer: {
