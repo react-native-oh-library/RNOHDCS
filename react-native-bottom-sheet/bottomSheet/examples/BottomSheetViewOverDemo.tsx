@@ -39,10 +39,10 @@ const BottomSheetViewOverDemo = () => {
       <View style={styles.container}>
         <Button title="overDragResistanceFactor is 10" onPress={() => handleOverDragResistanceFactor(10)} />
         <View style={{height:10}}></View>
-        <Button title="overDragResistanceFactor is 7.5" onPress={() => handleOverDragResistanceFactor(7.5)} />
+        {/* <Button title="overDragResistanceFactor is 7.5" onPress={() => handleOverDragResistanceFactor(7.5)} />
         <View style={{height:10}}></View>
         <Button title="overDragResistanceFactor is 5" onPress={() => handleOverDragResistanceFactor(5)} />
-        <View style={{height:10}}></View>
+        <View style={{height:10}}></View> */}
         <Button title="overDragResistanceFactor is 2.5" onPress={() => handleOverDragResistanceFactor(2.5)} />
         <View style={{height:10}}></View>
         <Button title="Close" onPress={() => handleClosePress()} />

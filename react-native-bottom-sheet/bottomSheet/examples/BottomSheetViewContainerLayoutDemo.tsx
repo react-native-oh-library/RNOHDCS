@@ -40,7 +40,7 @@ const BottomSheetViewContainerLayoutDemo = () => {
       <View style={styles.container}>
        <Button title="containerHeight is 0" onPress={() => handleHeightpres(0)} />
         <View style={{height:10}}></View>
-        <Button title="containerHeight is 10" onPress={() => handleHeightpres(10)} />
+        {/* <Button title="containerHeight is 10" onPress={() => handleHeightpres(10)} /> */}
         <View style={{height:10}}></View>
         <Button title="containerHeight is 20" onPress={() => handleHeightpres(20)} />
         <View style={{height:10}}></View>
