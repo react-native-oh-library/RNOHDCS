@@ -7,3 +7,4 @@ export * from './GiftedChatExample4';
 export * from './GiftedChatExample5';
 export * from './GiftedChatExample6';
 export * from './GiftedChatExample7';
+export * from './GiftedChatExample8';
