@@ -20,7 +20,7 @@ function getRandomColor() {
 }
 
 export const CloseButtonImageStyleTest = () => {
-  const [countryCode, setCountryCode] = useState<CountryCode>('US');
+  const [countryCode, setCountryCode] = useState<CountryCode>();
   const [country, setCountry] = useState<Country>();
   const onSelect = (country: Country) => {
     setCountryCode(country.cca2);

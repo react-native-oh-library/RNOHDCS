@@ -9,7 +9,7 @@ import CountryPicker, {
 
 const Demo = (props: any) => {
   const {children, ...rest} = props;
-  const [countryCode, setCountryCode] = useState<CountryCode>('US');
+  const [countryCode, setCountryCode] = useState<CountryCode>();
   const [country, setCountry] = useState<Country>();
   const onSelect = (country: Country) => {
     setCountryCode(country.cca2);

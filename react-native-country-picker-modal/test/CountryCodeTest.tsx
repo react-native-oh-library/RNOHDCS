@@ -6,44 +6,32 @@ import CountryPicker, {
   CountryCode,
 } from 'react-native-country-picker-modal';
 
-const Demo = (props: any) => {
-  const {children, ...rest} = props;
-  const [countryCode, setCountryCode] = useState<CountryCode>('US');
+
+export const CountryCodeTest = () => {
+  const [countryCode, setCountryCode] = useState<CountryCode>(['AF']);
   const [country, setCountry] = useState<Country>();
   const onSelect = (country: Country) => {
     setCountryCode(country.cca2);
     setCountry(country);
   };
-
-  return (
-    <View style={styles.box}>
-      <CountryPicker
-        countryCode={countryCode}
-        onSelect={onSelect}
-        containerButtonStyle={styles.containerButtonStyle}
-        withFilter
-        {...rest}
-      />
-      {children}
-      {country !== null && (
-        <Text style={styles.data}>{JSON.stringify(country, null, 0)}</Text>
-      )}
-    </View>
-  );
-};
-
-export const CountryCodeTest = () => {
   return (
     <>
       <Tester>
         <TestSuite name="countryCode">
-          <TestCase itShould="countryCode = AF">
-            <Demo countryCode={['AF']} />
-          </TestCase>
-        </TestSuite>
-        <TestSuite name="countryCode">
-          <TestCase itShould="countryCode = BZ">
-            <Demo countryCode={['BZ']} />
+          <TestCase itShould={`countryCode = ${countryCode}`}>
+            <View style={styles.box}>
+              <CountryPicker
+                countryCode={countryCode}
+                onSelect={onSelect}
+                containerButtonStyle={styles.containerButtonStyle}
+                withFilter
+              />
+              {country !== null && (
+                <Text style={styles.data}>
+                  {JSON.stringify(country, null, 0)}
+                </Text>
+              )}
+            </View>
           </TestCase>
         </TestSuite>
       </Tester>

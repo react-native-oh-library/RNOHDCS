@@ -1,28 +1,33 @@
 import {TestCase, TestSuite, Tester} from '@rnoh/testerino';
 import React, {useState} from 'react';
-import {PixelRatio, StyleSheet, Text, View} from 'react-native';
+import {Button, PixelRatio, StyleSheet, Text, View} from 'react-native';
 import CountryPicker, {
   Country,
   CountryCode,
 } from 'react-native-country-picker-modal';
 
 export const ContainerButtonStyleTest = () => {
-  const [countryCode, setCountryCode] = useState<CountryCode>('US');
+  const [countryCode, setCountryCode] = useState<CountryCode>();
   const [country, setCountry] = useState<Country>();
   const onSelect = (country: Country) => {
     setCountryCode(country.cca2);
     setCountry(country);
   };
+
+  const [color, setColor] = useState<string>('red');
   return (
     <>
       <Tester>
         <TestSuite name="containerButtonStyle">
-          <TestCase itShould="设置containerButton样式：背景颜色红色">
+          <TestCase itShould={`设置containerButton样式：背景颜色:${color}`}>
             <View style={styles.box}>
               <CountryPicker
                 countryCode={countryCode}
                 onSelect={onSelect}
-                containerButtonStyle={styles.containerButtonStyle}
+                containerButtonStyle={[
+                  styles.containerButtonStyle,
+                  {backgroundColor: color},
+                ]}
               />
               {country !== null && (
                 <Text style={styles.data}>
@@ -30,6 +35,12 @@ export const ContainerButtonStyleTest = () => {
                 </Text>
               )}
             </View>
+            <Button
+              title="changeBackgroundColor"
+              onPress={() => {
+                setColor(v => (v === 'red' ? 'blue' : 'red'));
+              }}
+            />
           </TestCase>
         </TestSuite>
       </Tester>
@@ -45,8 +56,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   containerButtonStyle: {
-    width: '100%',
-    backgroundColor:'pink',
+    width: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   container: {
     justifyContent: 'center',
