@@ -3,8 +3,8 @@ import {
   Filter,
   TestSuite,
   TestCase as _TestCase,
-} from "@rnoh/testerino";
-import React, { useState, useEffect } from "react";
+} from '@rnoh/testerino';
+import React, {useState, useEffect} from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -16,8 +16,8 @@ import {
   StatusBar,
   Linking,
   TouchableOpacity,
-} from "react-native";
-import Markdown, { getUniqueID } from "react-native-markdown-renderer";
+} from 'react-native';
+import Markdown, {getUniqueID} from 'react-native-markdown-renderer';
 
 type TesterSkipProp =
   | {
@@ -28,7 +28,7 @@ type TesterSkipProp =
 
 function prepareSkipProp(skipProp: TesterSkipProp | undefined) {
   return skipProp
-    ? typeof skipProp === "string"
+    ? typeof skipProp === 'string'
       ? skipProp
       : Platform.select({
           android: skipProp?.android,
@@ -54,8 +54,7 @@ function Example({
       itShould={itShould}
       modal={modal}
       tags={tags}
-      skip={prepareSkipProp(skip)}
-    >
+      skip={prepareSkipProp(skip)}>
       {children}
     </_TestCase>
   );
@@ -82,10 +81,10 @@ Unordered
 
 - Create a list by starting a line with 
 - Sub-lists are made by indenting 2 spaces:
-  - Marker character change forces new list start:
-    - Ac tristique libero volutpat at
-    * Facilisis in pretium nisl aliquet
-    - Nulla volutpat aliquam velit
+- Marker character change forces new list start:
+  - Ac tristique libero volutpat at
+  - Facilisis in pretium nisl aliquet
+  - Nulla volutpat aliquam velit
 - Very easy!
 
 Ordered
@@ -158,16 +157,16 @@ export function TestReactNativeMarkdownRendererDemo({
 }: {
   filter: Filter;
 }) {
-  const [param1, setParam1] = React.useState("");
+  const [param1, setParam1] = React.useState('');
   const handleUrlPress1 = (url, matchIndex /*: number*/) => {
-    let p = { url, matchIndex };
+    let p = {url, matchIndex};
     setParam1(JSON.stringify(p));
     Linking.openURL(url);
   };
 
   return (
     <Tester style={styles.container}>
-      <ScrollView style={{ flex: 1 }}>
+      <ScrollView style={{flex: 1}}>
         <TestSuite name="React Native Markdown Renderer">
           <TestCase.Example itShould="测试Markdown语法：标题">
             <View style={styles.inputpart}>
@@ -286,9 +285,9 @@ export function TestReactNativeMarkdownRendererDemo({
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    height: "100%",
-    backgroundColor: "#333",
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#333',
   },
   inputpart: {
     marginBottom: 10,
@@ -298,12 +297,12 @@ const styles = StyleSheet.create({
   },
   heading: {
     borderBottomWidth: 1,
-    borderColor: "#000000",
+    borderColor: '#000000',
   },
   heading1: {
     fontSize: 32,
-    backgroundColor: "#000000",
-    color: "#FFFFFF",
+    backgroundColor: '#000000',
+    color: '#FFFFFF',
   },
   heading2: {
     fontSize: 24,
@@ -321,7 +320,7 @@ const styles = StyleSheet.create({
     fontSize: 11,
   },
   buttomMargin: {
-    width: "100%",
+    width: '100%',
     height: 60,
   },
 });
