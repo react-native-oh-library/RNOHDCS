@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { ScrollView, TouchableOpacity, Text, StyleSheet, View, TextInput, FlatList, Button } from 'react-native';
+import { ScrollView, TouchableOpacity, Text, StyleSheet, View, TextInput, FlatList, Button, FlatListComponent, VirtualizedList } from 'react-native';
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino'
-import { MMKVLoader, ProcessingModes, create, useMMKVRef, useMMKVStorage, useIndex } from 'react-native-mmkv-storage';
+import { MMKVLoader, ProcessingModes, create, useMMKVRef, useMMKVStorage, useIndex, getAllMMKVInstanceIDs } from 'react-native-mmkv-storage';
 
 const storageString = new MMKVLoader().withInstanceID('storageString').initialize();
 const useStorageString = create(storageString);
@@ -29,16 +29,13 @@ const MMKV = new MMKVLoader().initialize();
 
 const indexMMKV = new MMKVLoader().withInstanceID('indexMMKV').initialize();
 const MMKVStorageTest = () => {
-    indexMMKV.transactions.register('object', 'beforewrite', ({ key, value }) => {
-        if (key.startsWith('post.')) {
-            // Call this only when the key has the post prefix.
-            let indexForTag = indexMMKV.getArray(`mmkv-index`) || [];
-            indexMMKV.setArray(indexForTag.push(key));
-        }
+    indexMMKV.transactions.register('array', 'beforewrite', ({ key, value }) => {
+       
     });
 
-    const [tagIndex, setTagIndex] = useMMKVStorage(`mmkv-index`, MMKV, []);
+    const [tagIndex, setTagIndex] = useMMKVStorage('index', MMKV, ['abc', '123']);
     const [posts, update, remove] = useIndex(tagIndex, "object", MMKV);
+
     const name = useMMKVRef("name", storageRef, "")
     const [user, setUser] = useMMKVStorage("user", MMKV, "robert"); // robert is the default value
 
@@ -86,7 +83,7 @@ const MMKVStorageTest = () => {
     return (
         <>
             <Tester style={{ height: '100%' }}>
-                <ScrollView style={{ flex: 1 }}>
+                <ScrollView style={{ marginBottom:70 }}>
                     <TestSuite name='API'>
                         <View>
                             <TestCase
@@ -258,7 +255,36 @@ const MMKVStorageTest = () => {
 
                             <TestCase
                                 tags={['C_API']}
-                                itShould="MMKV.getCurrentMMKVInstanceIDs();"
+                                itShould="MMKV.getAllMMKVInstanceIDs();"
+                                initialState={false}
+                                arrange={({ setState }) => (
+                                    <View>
+                                        <TouchableOpacity
+                                            style={styles.moduleButton}
+                                            onPress={() => {
+                                                let res = getAllMMKVInstanceIDs()
+                                                console.log(res);
+                                                if (res) {
+                                                    setState(true)
+                                                } else {
+                                                    setState(false)
+                                                }
+                                            }}
+                                        >
+                                            <Text style={styles.buttonText}>
+                                                返回创建的所有MMKV实例ID的列表
+                                            </Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                )}
+                                assert={({ state, expect }) => {
+                                    expect(state).to.be.true;
+                                }}
+                            />
+
+                            <TestCase
+                                tags={['C_API']}
+                                itShould="MMKV.getCurrentMMKVInstances();"
                                 initialState={false}
                                 arrange={({ setState }) => (
                                     <View>
@@ -266,6 +292,7 @@ const MMKVStorageTest = () => {
                                             style={styles.moduleButton}
                                             onPress={() => {
                                                 let res = storageInt.getCurrentMMKVInstanceIDs()
+                                                console.log(res);
                                                 if (res) {
                                                     setState(true)
                                                 } else {
@@ -776,6 +803,8 @@ const MMKVStorageTest = () => {
                                             style={styles.moduleButton}
                                             onPress={async () => {
                                                 let res = await storageArray.getArrayAsync('arrayTest');
+                                                console.log(JSON.stringify(arrayTest))
+                                                console.log(JSON.stringify(res))
                                                 if (JSON.stringify(res) === JSON.stringify(arrayTest)) {
                                                     setState(true)
                                                 } else {
@@ -821,6 +850,9 @@ const MMKVStorageTest = () => {
                                             onPress={async () => {
 
                                                 let res = await storageMultipleItems2.getMultipleItemsAsync(['multipleItemsTest2'], 'string');
+                                                console.log(multipleItemsTest2);
+                                                console.log(res);
+
                                                 if (JSON.stringify(res) === JSON.stringify([["multipleItemsTest2", `${multipleItemsTest2}`]])) {
                                                     setState(true)
                                                 } else {
@@ -850,6 +882,8 @@ const MMKVStorageTest = () => {
                                             onPress={() => {
 
                                                 let res = storageString.indexer.hasKey("stringTest");
+                                                console.log(res);
+
                                                 if (res) {
                                                     setState(true)
                                                 } else {
@@ -911,15 +945,18 @@ const MMKVStorageTest = () => {
                                             setUser("Naruto")
                                         }}
                                     >
-                                        <Text style={styles.buttonText}>setUser("Uzumaki Naruto")</Text>
+                                        <Text style={styles.buttonText}>setUser("Naruto")</Text>
                                     </TouchableOpacity>
                                 </View>
                             </TestCase>
                         </View>
-
-
                     </TestSuite>
                 </ScrollView>
+               
+
+                
+               
+        
             </Tester>
         </>
     )
