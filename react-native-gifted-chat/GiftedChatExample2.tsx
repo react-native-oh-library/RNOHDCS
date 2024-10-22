@@ -5,23 +5,40 @@ import {
   IMessage,
 } from 'react-native-gifted-chat'
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
+import Lightbox from 'react-native-lightbox-v2';
+
 
 
 export function GiftedChatExample2() {
+
+  const data = [
+    'locale',
+    'timeFormat',
+    'dateFormat',
+    'loadEarlier',
+    'renderDay',
+    'renderTime',
+    'renderLoadEarlier',
+    'onLoadEarlier',
+    'infiniteScroll',
+    'isLoadingEarlier'
+  ]
 
   const [messages, setMessages] = useState<IMessage[]>([
     {
       _id: 1,
       text: 'My message111',
       createdAt: new Date(Date.UTC(2016, 5, 11, 17, 20, 0)),
-      image: '',
+      image: '',  // 图片的 URL,
+      // video: require('./C-API.mp4'),
       user: {
         _id: 2,
         name: 'React Native',
         avatar: 'https://facebook.github.io/react/img/logo_og.png',
       },
+      // system: true,
       quickReplies: {
-        type: 'radio',
+        type: 'radio', // or 'checkbox',
         keepIt: true,
         values: [
           {
@@ -41,15 +58,15 @@ export function GiftedChatExample2() {
     },
     {
       _id: 2,
-      text: '15727293407',
+      text: 'Hello World',
       createdAt: new Date(),
       user: {
         _id: 3,
         name: 'renderUsernameOnMessage 显示的用户名',
       },
-      image: 'https://pics1.baidu.com/feed/c2cec3fdfc0392456576003568f8f3cc7c1e2540.jpeg@f_auto?token=b8c70f853c3c1bd7984b47a2e382552a',  // 图片的 URL,
+      image: 'https://pic.rmb.bdstatic.com/bjh/events/d882fc1d6d1ff5e4cb4cdfce2f1ac62c1450.jpeg@h_1280',  // 图片的 URL,
       quickReplies: {
-        type: 'checkbox',
+        type: 'checkbox', // or 'radio',
         values: [
           {
             title: 'Yes',
@@ -75,6 +92,7 @@ export function GiftedChatExample2() {
         name: 'Me',
         avatar: '190976198@qq.com',
       },
+      // system: true,
     },
 
   ])

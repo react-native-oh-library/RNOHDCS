@@ -8,19 +8,28 @@ import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 
 export function GiftedChatExample6() {
 
+  const data = [
+    'listViewProps',
+    'textInputProps',
+    'textInputStyle',
+    'multiline',
+    'onInputTextChanged',
+    'maxInputLength',
+    'parsePatterns'
+  ]
+
   const [messages, setMessages] = useState<IMessage[]>([
     {
       _id: 1,
       text: 'My message111',
       createdAt: new Date(Date.UTC(2016, 5, 11, 17, 20, 0)),
-      image: '',
+      image: '',  // 图片的 URL,
       user: {
         _id: 2,
         name: 'React Native',
-        avatar: 'https://facebook.github.io/react/img/logo_og.png',
       },
       quickReplies: {
-        type: 'radio',
+        type: 'radio', // or 'checkbox',
         keepIt: true,
         values: [
           {
@@ -40,15 +49,15 @@ export function GiftedChatExample6() {
     },
     {
       _id: 2,
-      text: '15727293407',
+      text: 'Hello World',
       createdAt: new Date(),
       user: {
         _id: 3,
         name: 'renderUsernameOnMessage 显示的用户名',
       },
-      image: 'https://pics1.baidu.com/feed/c2cec3fdfc0392456576003568f8f3cc7c1e2540.jpeg@f_auto?token=b8c70f853c3c1bd7984b47a2e382552a',  // 图片的 URL,
+      image: 'https://pic.rmb.bdstatic.com/bjh/events/d882fc1d6d1ff5e4cb4cdfce2f1ac62c1450.jpeg@h_1280',  // 图片的 URL,
       quickReplies: {
-        type: 'checkbox',
+        type: 'checkbox', // or 'radio',
         values: [
           {
             title: 'Yes',
@@ -94,82 +103,85 @@ export function GiftedChatExample6() {
     showUserAvatar: true,
     onSend,
   }
+  const [changeV, setChangeV] = useState('');
   return (
-    <Tester style={{ height: '100%' }}>
-      <ScrollView>
-        <TestSuite name='giftedChat'>
-          <TestCase itShould='listViewProps={{ initialNumToRender: 5 }} 每次渲染五条'>
-            <View style={{ height: 500, flex: 1 }}>
-              <GiftedChat {...prop}
-                messages={messagesList}
-                listViewProps={{ initialNumToRender: 5 }}
-              />
-            </View>
-          </TestCase>
+    <>
+      <Tester style={{ height: '100%' }}>
+        <ScrollView>
+          <TestSuite name='giftedChat'>
+            <TestCase itShould='listViewProps={{ initialNumToRender: 5 }} 每次渲染五条'>
+              <View style={{ height: 500, flex: 1 }}>
+                <GiftedChat {...prop}
+                  messages={messagesList}
+                  listViewProps={{ initialNumToRender: 5 }}
+                />
+              </View>
+            </TestCase>
 
-          <TestCase itShould='textInputProps 传递给textInput的额外属性'>
-            <View style={{ height: 500, flex: 1 }}>
-              <GiftedChat {...prop}
-                textInputProps={{ placeholder: '额外属性placeholder...', autoFocus: true }}
-              />
-            </View>
-          </TestCase>
+            <TestCase itShould='textInputProps 传递给textInput的额外属性'>
+              <View style={{ height: 500, flex: 1 }}>
+                <GiftedChat {...prop}
+                  textInputProps={{ placeholder: '额外属性placeholder...', autoFocus: true }}
+                />
+              </View>
+            </TestCase>
 
-          <TestCase itShould='textInputStyle 传递给textInput自定义样式'>
-            <View style={{ height: 500, flex: 1 }}>
-              <GiftedChat {...prop}
-                textInputStyle={{ backgroundColor: 'red' }}
-              />
-            </View>
-          </TestCase>
+            <TestCase itShould='textInputStyle 传递给textInput自定义样式'>
+              <View style={{ height: 500, flex: 1 }}>
+                <GiftedChat {...prop}
+                  textInputStyle={{ backgroundColor: 'red' }}
+                />
+              </View>
+            </TestCase>
 
-          <TestCase itShould='multiline <TextInput>多行；默认true'>
-            <View style={{ height: 500, flex: 1 }}>
-              <GiftedChat {...prop}
-                multiline={false}
-              />
-            </View>
-          </TestCase>
+            <TestCase itShould='multiline false <TextInput>多行；默认true'>
+              <View style={{ height: 500, flex: 1 }}>
+                <GiftedChat {...prop}
+                  multiline={false}
+                />
+              </View>
+            </TestCase>
+            <TestCase itShould='multiline true <TextInput>多行；默认true'>
+              <View style={{ height: 500, flex: 1 }}>
+                <GiftedChat {...prop}
+                  multiline={true}
+                />
+              </View>
+            </TestCase>
 
-          <TestCase itShould="keyboardShouldPersistTaps  'always'：键盘不会因为点击屏幕其他区域而收起。'never'：键盘会在点击屏幕其他任何区域时收起。'handled'（默认值）：只有当组件自身处理了点击事件时，键盘才不会收起。">
-            <View style={{ height: 500, flex: 1 }}>
-              <GiftedChat {...prop}
-                keyboardShouldPersistTaps="never"
-              />
-            </View>
-          </TestCase>
+            <TestCase itShould='onInputTextChanged 输入的onChange回调事件”'>
+              <View style={{ height: 500, flex: 1 }}>
+                <GiftedChat {...prop}
+                  onInputTextChanged={(value) => { setChangeV(value) }}
+                />
+                <Button title={'输入值为:' + changeV}></Button>
+              </View>
+            </TestCase>
 
-          <TestCase itShould='onInputTextChanged 输入的onChange回调事件”'>
-            <View style={{ height: 500, flex: 1 }}>
-              <GiftedChat {...prop}
-                onInputTextChanged={(value) => { Alert.alert(value) }}
-              />
-            </View>
-          </TestCase>
+            <TestCase itShould='maxInputLength 消息编写器 TextInput 的最大长度'>
+              <View style={{ height: 500, flex: 1 }}>
+                <GiftedChat {...prop}
+                  maxInputLength={5}
+                />
+              </View>
+            </TestCase>
 
-          <TestCase itShould='maxInputLength 消息编写器 TextInput 的最大长度'>
-            <View style={{ height: 500, flex: 1 }}>
-              <GiftedChat {...prop}
-                maxInputLength={5}
-              />
-            </View>
-          </TestCase>
+            <TestCase itShould='parsePatterns 高亮显示特定消息(聊天记录中邮箱)'>
+              <View style={{ height: 500, flex: 1 }}>
+                <GiftedChat {...prop}
+                  parsePatterns={() => [ // 高亮显示
+                    {
+                      pattern: /\b\w+@\w+\.\w+\b/gi, // 匹配电子邮件地址
+                      style: { fontWeight: 'bold', color: 'pink' }, // 样式：粗体和紫色
+                    },
+                  ]}
+                />
+              </View>
+            </TestCase>
 
-          <TestCase itShould='parsePatterns 高亮显示特定消息(聊天记录中邮箱)'>
-            <View style={{ height: 500, flex: 1 }}>
-              <GiftedChat {...prop}
-                parsePatterns={() => [
-                  {
-                    pattern: /\b\w+@\w+\.\w+\b/gi,
-                    style: { fontWeight: 'bold', color: 'pink' },
-                  },
-                ]}
-              />
-            </View>
-          </TestCase>
-
-        </TestSuite>
-      </ScrollView>
-    </Tester>
+          </TestSuite>
+        </ScrollView>
+      </Tester>
+    </>
   )
 }

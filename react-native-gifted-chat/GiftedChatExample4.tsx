@@ -5,8 +5,23 @@ import {
   IMessage,
 } from 'react-native-gifted-chat'
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
+import Lightbox from 'react-native-lightbox-v2';
+
+
 
 export function GiftedChatExample4() {
+
+  const data = [
+    'imageProps',
+    'renderMessageImage',
+    'renderMessageVideo',
+    'videoProps',
+    'lightboxProps',
+    'renderCustomView',
+    'isCustomViewBottom',
+    'renderChatEmpty',
+    'renderChatFooter',
+  ]
 
   const [messages, setMessages] = useState<IMessage[]>([
     {
@@ -19,8 +34,9 @@ export function GiftedChatExample4() {
         name: 'React Native',
         avatar: 'https://facebook.github.io/react/img/logo_og.png',
       },
+      // system: true,
       quickReplies: {
-        type: 'radio',
+        type: 'radio', // or 'checkbox',
         keepIt: true,
         values: [
           {
@@ -40,15 +56,15 @@ export function GiftedChatExample4() {
     },
     {
       _id: 2,
-      text: '15727293407',
+      text: 'Hello World',
       createdAt: new Date(),
       user: {
         _id: 3,
         name: 'renderUsernameOnMessage 显示的用户名',
       },
-      image: 'https://pics1.baidu.com/feed/c2cec3fdfc0392456576003568f8f3cc7c1e2540.jpeg@f_auto?token=b8c70f853c3c1bd7984b47a2e382552a',  // 图片的 URL,
+      image: 'https://pic.rmb.bdstatic.com/bjh/events/d882fc1d6d1ff5e4cb4cdfce2f1ac62c1450.jpeg@h_1280',  // 图片的 URL,
       quickReplies: {
-        type: 'checkbox',
+        type: 'checkbox', // or 'radio',
         values: [
           {
             title: 'Yes',
@@ -74,6 +90,7 @@ export function GiftedChatExample4() {
         name: 'Me',
         avatar: '190976198@qq.com',
       },
+      // system: true,
     },
 
   ])
@@ -160,6 +177,7 @@ export function GiftedChatExample4() {
           <TestCase itShould='videoProps 传递给所需创建的视频组件的额外属性(视频显示在聊天记录为源码显示)需要导入视频库,原库未提供显示显示视频能力,通过自定义实现'>
             <View style={{ height: 500, flex: 1 }}>
               <GiftedChat {...prop}
+                // videoProps={}
               />
             </View>
           </TestCase>

@@ -5,8 +5,24 @@ import {
   IMessage,
 } from 'react-native-gifted-chat'
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
+import Lightbox from 'react-native-lightbox-v2';
+
+
 
 export function GiftedChatExample7() {
+
+  const data = [
+    'scrollToBottom',
+    'scrollToBottomComponent',
+    'scrollToBottomStyle',
+    'scrollToBottomOffset',
+    'alignTop',
+    'onQuickReply',
+    'renderQuickReplies',
+    'quickReplyStyle',
+    'renderQuickReplySend',
+    'shouldUpdateMessage',
+  ]
 
   const [messages, setMessages] = useState<IMessage[]>([
     {
@@ -14,7 +30,7 @@ export function GiftedChatExample7() {
       text: 'This is a quick reply. Do you love Gifted Chat? (checkbox)',
       createdAt: new Date(),
       quickReplies: {
-        type: 'checkbox',
+        type: 'checkbox', // or 'radio',
         values: [
           {
             title: 'Yes',
@@ -43,9 +59,9 @@ export function GiftedChatExample7() {
         _id: 3,
         name: 'renderUsernameOnMessage 显示的用户名',
       },
-      image: 'https://pics1.baidu.com/feed/c2cec3fdfc0392456576003568f8f3cc7c1e2540.jpeg@f_auto?token=b8c70f853c3c1bd7984b47a2e382552a',  // 图片的 URL,
+      image: 'https://pic.rmb.bdstatic.com/bjh/events/d882fc1d6d1ff5e4cb4cdfce2f1ac62c1450.jpeg@h_1280',  // 图片的 URL,
       quickReplies: {
-        type: 'checkbox',
+        type: 'checkbox', // or 'radio',
         values: [
           {
             title: 'Yes',
@@ -71,6 +87,7 @@ export function GiftedChatExample7() {
         name: 'Me',
         avatar: '190976198@qq.com',
       },
+      // system: true,
     },
 
   ])
@@ -106,12 +123,21 @@ export function GiftedChatExample7() {
     );
   };
 
-  const shouldUpdateMessage: any = (prevMessage: { text: any; }, nextMessage: { text: any; }) => {
-    if (prevMessage.text === nextMessage.text) {
-      return Alert.alert('YES shouldUpdateMessage');
-    }
-    return Alert.alert('NO');
-  }
+  const [messages1, setMessages1] = React.useState([]);
+  const shouldUpdateMessage = (newMessage, oldMessage) => {
+    return newMessage.text!== oldMessage.text || newMessage.specialFlag;
+  };
+  const handleSend = (newMessages = []) => {
+    const updatedMessages = GiftedChat.append(messages1, newMessages);
+    setMessages1(updatedMessages);
+  };
+  const sendSpecialMessage = () => {
+    const newMessage = {
+      text: 'shouldUpdateMessage',
+      specialFlag: true,
+    };
+    handleSend([newMessage]);
+  };
 
   const onSend = (newMsg: IMessage[]) => setMessages([...messages, ...newMsg])
   const prop = {
@@ -126,19 +152,29 @@ export function GiftedChatExample7() {
     <Tester style={{ height: '100%' }}>
       <ScrollView>
         <TestSuite name='giftedChat'>
-          <TestCase itShould='shouldUpdateMessage 用于决定是否更新特定的消息(初始化可触发)'>
+          <TestCase itShould='shouldUpdateMessage 用于决定是否更新特定的消息)'>
             <View style={{ height: 500, flex: 1 }}>
+            <Button title="Send shouldUpdateMessage" onPress={sendSpecialMessage} />
               <GiftedChat {...prop}
+                messages={messages1}
                 shouldUpdateMessage={shouldUpdateMessage}
               />
             </View>
           </TestCase>
 
-          <TestCase itShould='scrollToBottom 启用显示滚动底部的组件（默认为 false）'>
+          <TestCase itShould='scrollToBottom true 启用显示滚动底部的组件（默认为 false）'>
             <View style={{ height: 500, flex: 1 }}>
               <GiftedChat {...prop}
                 messages={messagesList}
                 scrollToBottom
+              />
+            </View>
+          </TestCase>
+          <TestCase itShould='scrollToBottom false 启用显示滚动底部的组件（默认为 false）'>
+            <View style={{ height: 500, flex: 1 }}>
+              <GiftedChat {...prop}
+                messages={messagesList}
+                scrollToBottom={false}
               />
             </View>
           </TestCase>
@@ -173,10 +209,17 @@ export function GiftedChatExample7() {
             </View>
           </TestCase>
 
-          <TestCase itShould='alignTop 控制消息气泡是否出现在聊天顶部（默认为 false - 气泡对齐到底部）'>
+          <TestCase itShould='alignTop true 控制消息气泡是否出现在聊天顶部（默认为 false - 气泡对齐到底部）'>
             <View style={{ height: 500, flex: 1 }}>
               <GiftedChat {...prop}
                 alignTop={true}
+              />
+            </View>
+          </TestCase>
+          <TestCase itShould='alignTop false 控制消息气泡是否出现在聊天顶部（默认为 false - 气泡对齐到底部）'>
+            <View style={{ height: 500, flex: 1 }}>
+              <GiftedChat {...prop}
+                alignTop={false}
               />
             </View>
           </TestCase>

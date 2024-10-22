@@ -5,23 +5,38 @@ import {
   IMessage,
 } from 'react-native-gifted-chat'
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
+import Lightbox from 'react-native-lightbox-v2';
+
+
 
 export function GiftedChatExample3() {
+
+  const data = [
+    'renderBubble',
+    'renderSystemMessage',
+    'renderTicks',
+    'onPress',
+    'onLongPress',
+    'renderUsernameOnMessage',
+    'renderUsername',
+    'renderMessage',
+    'renderMessageText'
+  ]
 
   const [messages, setMessages] = useState<IMessage[]>([
     {
       _id: 1,
       text: 'My message111',
       createdAt: new Date(Date.UTC(2016, 5, 11, 17, 20, 0)),
-      image: '',
+      image: '',  // 图片的 URL,
+      // video: require('./C-API.mp4'),
       user: {
         _id: 2,
         name: 'React Native',
-        avatar: 'https://facebook.github.io/react/img/logo_og.png',
       },
       system: true,
       quickReplies: {
-        type: 'radio',
+        type: 'radio', // or 'checkbox',
         keepIt: true,
         values: [
           {
@@ -41,15 +56,15 @@ export function GiftedChatExample3() {
     },
     {
       _id: 2,
-      text: '15727293407',
+      text: 'Hello World',
       createdAt: new Date(),
       user: {
         _id: 3,
         name: '用户名: zhouchong',
       },
-      image: 'https://pics1.baidu.com/feed/c2cec3fdfc0392456576003568f8f3cc7c1e2540.jpeg@f_auto?token=b8c70f853c3c1bd7984b47a2e382552a',  // 图片的 URL,
+      image: 'https://pic.rmb.bdstatic.com/bjh/events/d882fc1d6d1ff5e4cb4cdfce2f1ac62c1450.jpeg@h_1280',  // 图片的 URL,
       quickReplies: {
-        type: 'checkbox',
+        type: 'checkbox', // or 'radio',
         values: [
           {
             title: 'Yes',
@@ -73,13 +88,18 @@ export function GiftedChatExample3() {
       user: {
         _id: 5,
         name: 'Me',
-        avatar: '190976198@qq.com',
+        // avatar: '190976198@qq.com',
       },
-      system: true,
+      // system: true,
     },
 
   ])
 
+  const renderLoadEarlier = () => (
+    <View style={{ alignItems: 'center', justifyContent: 'center', width: 100, height: 60, }}>
+      <Button title='加载早期消息' onPress={() => { Alert.alert('加载早期消息') }} />
+    </View>
+  );
   const renderBubble = () => (
     <View style={{ alignItems: 'center', justifyContent: 'center', width: 100, height: 60, backgroundColor: 'pink' }}>
       <Text style={{ color: '#ffffff' }}>自定义消息气泡</Text>
@@ -169,10 +189,17 @@ export function GiftedChatExample3() {
             </View>
           </TestCase>
 
-          <TestCase itShould='renderUsernameOnMessage 指示是否在消息气泡内显示用户的用户名；默认为false'>
+          <TestCase itShould='renderUsernameOnMessage true 指示是否在消息气泡内显示用户的用户名；默认为false'>
             <View style={{ height: 500, flex: 1 }}>
               <GiftedChat {...prop}
                 renderUsernameOnMessage
+              />
+            </View>
+          </TestCase>
+          <TestCase itShould='renderUsernameOnMessage false 指示是否在消息气泡内显示用户的用户名；默认为false'>
+            <View style={{ height: 500, flex: 1 }}>
+              <GiftedChat {...prop}
+                renderUsernameOnMessage={false}
               />
             </View>
           </TestCase>
@@ -189,7 +216,7 @@ export function GiftedChatExample3() {
           <TestCase itShould='renderMessage 自定义消息容器'>
             <View style={{ height: 500, flex: 1 }}>
               <GiftedChat {...prop}
-                renderMessage={renderMessage}
+                renderMessage={renderMessage} // 自定义消息容器
               />
             </View>
           </TestCase>
