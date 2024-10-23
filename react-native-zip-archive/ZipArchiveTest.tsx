@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { View, Button, StyleSheet, TextInput, Alert, Text, ActivityIndicator } from 'react-native';
+import { View, ScrollView, Button, StyleSheet, TextInput, Alert, Text, ActivityIndicator } from 'react-native';
 import { pathParameters, zip, unzip, zipWithPassword, unzipWithPassword, subscribe, creteFile, isPasswordProtected, unzipAssets, getUncompressedSize } from 'react-native-zip-archive';
 import { ProgressBar } from 'react-native-paper';
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 
+//demo入口
 export const ZipArchiveDemoTest = () => {
+    return (
+        <ScrollView>
+            <View>
+                <ZipArchiveDemoTest_></ZipArchiveDemoTest_>
+            </View>
+        </ScrollView>
+    );
+};
+
+const ZipArchiveDemoTest_ = () => {
     const [fileName, setFileName] = useState('');
     const [fileContent, setFileContent] = useState('');
     const [createdFilePath, setCreatedFilePath] = useState('');
@@ -332,6 +343,11 @@ export const ZipArchiveDemoTest = () => {
                     initialState={''}
                     arrange={({ setState }) =>
                         <View>
+                            <Text >压缩进度</Text>
+                            <View style={styles.progressBar}>
+                                <View style={{ width: `${progress}%`, backgroundColor: '#00AEEF', height: '100%' }}></View>
+                            </View>
+                            <Text style={styles.percentageText}>{progress}%</Text>
                             <TextInput
                                 style={styles.input}
                                 placeholder="输入解压密码"
