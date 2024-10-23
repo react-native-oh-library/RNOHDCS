@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text } from 'react-native'
+import { Text, Button } from 'react-native'
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino'
 import RNShake from 'react-native-shake';
 
@@ -22,6 +22,23 @@ export function ShakeExampleDemo() {
                         expect(state).to.be.eq(true);
                     }}
                 />
+                <TestCase
+                    itShould="remove(移除监听)"
+                    tags={["C_API"]}
+                    initialState={false}
+                    arrange={({ setState }) => (
+                        <Button
+                            onPress={() => {
+                                RNShake.removeAllListeners()
+                                setState(true)
+                            }}
+                            title={"removeAllListeners"}
+                        ></Button>
+                    )}
+                    assert={({ expect, state }) => {
+                        expect(state).to.be.eq(true);
+                    }}
+                />
             </TestSuite>
         </Tester>
     )
@@ -38,5 +55,4 @@ export const myComponent = (setState: React.Dispatch<React.SetStateAction<boolea
         }
     }, [])
 }
-
 
