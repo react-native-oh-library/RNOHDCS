@@ -16,13 +16,7 @@ export function SlidingUpPanelDemo() {
             ([exampleName, Example]) => {
               return (
                 <Page key={exampleName} name={exampleName}>
-                  <Tester style={{ flex: 1 }}>
-                    <ScrollView style={{ flex: 1 }}>
-                      <TestCase itShould={exampleName}>
-                        <Example />
-                      </TestCase>
-                    </ScrollView>
-                  </Tester>
+                  <Example />
                 </Page>
               );
             }
