@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { Dialog, DialogDefaultActions } from 'react-native-material-ui';
 import Container from './Container';
 import { Tester, TestSuite, TestCase } from "@rnoh/testerino"
+import { backgroundColor } from '@shopify/restyle';
 
 const DialogDemo = () => {
   const [dialog,setDialog] = useState('')
@@ -14,10 +15,10 @@ const DialogDemo = () => {
 
       
       <TestSuite name='Dialog(对话框：是一个整体，props需要同时设置才生效)'>
-        <TestCase itShould='props:actions,onActionPress,options,style'>
+        <TestCase itShould='props:涉及到的属性为：actions 显示到dialog按钮的文字 options:给该按钮设置disabled为true使其禁用，onActionPress：点击卡片触发的回调显示文本为dialog'>
           <View style={styles.container}>
           <Text>{dialog}</Text>
-            <Dialog style={{container:{marginLeft:15,marginTop:50}}}>
+            <Dialog >
               <Dialog.Title><Text>Hello world</Text></Dialog.Title>
               <Dialog.Content>
                 <Text>
@@ -31,7 +32,7 @@ const DialogDemo = () => {
                 <DialogDefaultActions
                   actions={['Dismiss', 'Keep']}
                   options={{ Keep: { disabled: true } }}
-                  onActionPress={() => {setDialog('diglog') }}
+                  onActionPress={() => {setDialog('dialog') }}
                 />
               </Dialog.Actions>
             </Dialog>
@@ -39,11 +40,11 @@ const DialogDemo = () => {
         </TestCase>
       </TestSuite>
 
-      <TestSuite name='Dialog'>
-        <TestCase itShould='props:actions,onActionPress,options,style'>
+      <TestSuite name='Dialog style(样式)'>
+        <TestCase itShould='props:style marginLeft:15,marginTop:50,backgroundColor:"red"'>
           <View style={styles.container}>
           <Text>{dialog}</Text>
-            <Dialog style={{container:{marginLeft:15,marginTop:50}}}>
+            <Dialog style={{container:{marginLeft:15,marginTop:50,backgroundColor:"red"}}}>
               <Dialog.Title><Text>Hello world</Text></Dialog.Title>
               <Dialog.Content>
                 <Text>

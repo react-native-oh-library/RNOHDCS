@@ -5,8 +5,8 @@ const BadgeDemo = () => {
   return (
     <Tester >
       <ScrollView style={styles.scrollView}>
-        <TestSuite name='Badge with icons (带图标的徽章)'>
-          <TestCase itShould='Props:text,children,,style'>
+        <TestSuite name='children(图标) (带图标的徽章)'>
+          <TestCase itShould='Props:children,  包含在组件中的子元素就叫做children 子元素为图标组件'>
             <View style={styles.rowContainer}>
               <View style={styles.badgeContainer}>
                 <Badge text="3" >
@@ -16,7 +16,6 @@ const BadgeDemo = () => {
               <View style={styles.badgeContainer}>
                 <Badge
                   text="13"
-                  
                 >
                   <Icon name="person" />
                 </Badge>
@@ -26,21 +25,12 @@ const BadgeDemo = () => {
                   <Icon name="folder-video" />
                 </Badge>
               </View>
-              <View style={styles.badgeContainer}>
-                <Badge
-                  text="13"
-                  
-                  style={{ container: { bottom: -8, right: -12 } }}
-                >
-                  <Icon name="star" />
-                </Badge>
-              </View>
             </View>
           </TestCase>
         </TestSuite>
 
-        <TestSuite name='Badge with button (带按钮的徽章)'>
-          <TestCase itShould='Props:text,children,,style'>
+        <TestSuite name='children(按钮) (带按钮的徽章)'>
+          <TestCase itShould='Props:children, 包含在组件中的子元素就叫做children 子元素为按钮组件' >
             <View style={styles.rowContainer}>
               <View style={styles.badgeContainer}>
                 <Badge  text="8" >
@@ -64,8 +54,8 @@ const BadgeDemo = () => {
           </TestCase>
         </TestSuite>
 
-        <TestSuite name='Badge with text(带文字的徽章) '>
-          <TestCase itShould='Props:text,children'>
+        <TestSuite name='children(文本) (带文本的徽章) '>
+          <TestCase itShould='Props:children 包含在组件中的子元素就叫做children 子元素为文本组件'>
             <View style={styles.rowContainer}>
               <View style={styles.badgeContainer}>
                 <Badge text="2" >
@@ -76,8 +66,8 @@ const BadgeDemo = () => {
           </TestCase>
         </TestSuite>
 
-        <TestSuite name='Badge with Avatar(带图标头像的徽章) '>
-          <TestCase itShould='Props:size,children,icon,style,'>
+        <TestSuite name='children(头像) (带头像的徽章) '>
+          <TestCase itShould='Props:children 包含在组件中的子元素就叫做children 子元素为头像组件'>
             <View style={styles.rowContainer}>
               <View style={styles.badgeContainer}>
                 <Badge
@@ -106,8 +96,8 @@ const BadgeDemo = () => {
           </TestCase>
         </TestSuite>
 
-        <TestSuite name='Badge with strokes(带有比划的徽章) '>
-          <TestCase itShould='Props:size,children,icon,style,,stroke'>
+        <TestSuite name='stroke(描边) (带边框的徽章) '>
+          <TestCase itShould='Props: stroke={4} 为徽章添加白色描边 第一个设置粗细为4 第二个为10 ,第三个未设置描边'>
             <View style={styles.rowContainer}>
               <View style={styles.badgeContainer}>
                 <Badge
@@ -122,31 +112,125 @@ const BadgeDemo = () => {
               <View style={styles.badgeContainer}>
                 <Badge
                   size={24}
-                  
-                  icon={{
-                    name: 'speaker-notes',
-                    color: 'white',
-                    size:10
-                  }}
-                  style={{ container: { top: -8, right: -12 } }}
+                  stroke={10}
+                  icon="speaker-notes"
+                  style={{ strokeContainer: { top: -8, right: -12 } }}
                 >
                   <Avatar text="TR" />
                 </Badge>
               </View>
               <View style={styles.badgeContainer}>
-                <Badge
-                  
-                  size={12}
-                  stroke={4}
-                  style={{ strokeContainer: { top: 0, right: 0 } }}
+              <Badge
+                  size={24}
+                  icon="star"
+                  style={{ container: { bottom: -8, right: -12 } }}
                 >
-                  <Icon name="notifications" />
+                  <Avatar text="BR" />
+                </Badge>
+              </View>
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name='text(文字) (徽章内呈现的内容 文字) '>
+          <TestCase itShould='Props:text= "BR  第一个为BR 第二个为123'>
+            <View style={styles.rowContainer}>
+              <View style={styles.badgeContainer}>
+              <Badge
+                  size={24}
+                  text="BR"
+                  style={{ container: { bottom: -8, right: -12 } }}
+                >
+                  <Avatar text="BR" />
+                </Badge>
+              </View>
+              <View style={styles.badgeContainer}>
+              <Badge
+                  text="123"
+                  size={24}
+                  style={{ container: { bottom: -8, right: -12 } }}
+                >
+                  <Avatar text="123" />
                 </Badge>
               </View>
             </View>
           </TestCase>
         </TestSuite>
 
+
+        <TestSuite name='icon(图标) (徽章内呈现的内容 图标) '>
+          <TestCase itShould='Props:icon= "star  第一个为star 第二个为home'>
+            <View style={styles.rowContainer}>
+              <View style={styles.badgeContainer}>
+              <Badge
+                  size={24}
+                  icon="star"
+                  style={{ container: { bottom: -8, right: -12 } }}
+                >
+                  <Avatar text="BR" />
+                </Badge>
+              </View>
+              <View style={styles.badgeContainer}>
+              <Badge
+                  size={24}
+                  icon="home"
+                  style={{ container: { bottom: -8, right: -12 } }}
+                >
+                  <Avatar text="123" />
+                </Badge>
+              </View>
+            </View>
+          </TestCase>
+        </TestSuite>
+
+        <TestSuite name='size(大小) (徽章大小) '>
+          <TestCase itShould='Props:size= 24 第一个为24 第二个为40'>
+            <View style={styles.rowContainer}>
+              <View style={styles.badgeContainer}>
+              <Badge
+                  size={24}
+                  icon="star"
+                  style={{ container: { bottom: -8, right: -12 } }}
+                >
+                  <Avatar text="BR" />
+                </Badge>
+              </View>
+              <View style={styles.badgeContainer}>
+              <Badge
+                  size={40}
+                  icon="home"
+                  style={{ container: { bottom: -8, right: -12 } }}
+                >
+                  <Avatar text="123" />
+                </Badge>
+              </View>
+            </View>
+          </TestCase>
+        </TestSuite>
+
+        <TestSuite name='style(样式) (徽章的样式) '>
+          <TestCase itShould='Props:style 背景颜色 第一个为backgroundColor:red 第二个为backgroundColor:"blue"'>
+            <View style={styles.rowContainer}>
+              <View style={styles.badgeContainer}>
+              <Badge
+                  size={24}
+                  icon="star"
+                  style={{ container: { backgroundColor:"red"} }}
+                >
+                  <Avatar text="BR" />
+                </Badge>
+              </View>
+              <View style={styles.badgeContainer}>
+              <Badge
+                  size={40}
+                  icon="home"
+                  style={{ container: { backgroundColor:"blue"} }}
+                >
+                  <Avatar text="123" />
+                </Badge>
+              </View>
+            </View>
+          </TestCase>
+        </TestSuite>
 
       </ScrollView>
     </Tester>
