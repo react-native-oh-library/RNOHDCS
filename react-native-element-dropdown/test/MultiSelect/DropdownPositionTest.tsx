@@ -38,12 +38,12 @@ export const MultiSelectPositionTest = () => {
     <Tester>
       <TestSuite name="MultiSelectPosition">
         <TestCase itShould={`bottom`}>
-          <Demo MultiSelectPosition="bottom" />
+          <Demo dropdownPosition="bottom" />
         </TestCase>
       </TestSuite>
       <TestSuite name="MultiSelectPosition">
         <TestCase itShould={`top`}>
-          <Demo MultiSelectPosition="top" />
+          <Demo dropdownPosition="top" />
         </TestCase>
       </TestSuite>
     </Tester>

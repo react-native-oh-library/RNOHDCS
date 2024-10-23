@@ -53,7 +53,7 @@ const Demo = (props: any) => {
 export const FlatListPropsText = () => {
   return (
     <Tester>
-      <TestSuite name="renderItem">
+      <TestSuite name="flatListProps">
         <TestCase itShould={`自定义`}>
           <Demo />
         </TestCase>
