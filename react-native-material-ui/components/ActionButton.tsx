@@ -5,11 +5,12 @@ import { useState } from 'react';
 
 const ActionButtonDemo = () => {
   const [actionText,setActionText] = useState('')
+  const [actionTextToolBar,setActionTextToolBar] = useState('')
   return (
         <Tester >
         <ScrollView style={styles.scrollView}>
-          <TestSuite name='ActionButton speedDial'>
-            <TestCase itShould='props:actions(点击按钮之后显示的图标，标题，以及该图标的名称),icon(按钮的图标),transition（过度效果 speedDial） '>
+          <TestSuite name='ActionButton actions  '>
+            <TestCase itShould='props:actions 按下主按钮后将显示的图标（或元素）名称的数组 speedDial 拨号过渡展示效果'>
               <View style={styles.view}>
                 <ActionButton
                   actions={[
@@ -26,8 +27,23 @@ const ActionButtonDemo = () => {
             </TestCase>
           </TestSuite>
           
-          <TestSuite name='ActionButton onPress'>
-            <TestCase itShould='props:onPress(按下之后触发的回调)'>
+          <TestSuite name='ActionButton actions  '>
+            <TestCase itShould='props:actions 按下主按钮后将显示的图标（或元素）名称的数组 toolbar 工具栏过渡展示效果'>
+              <View style={styles.view}>
+                <ActionButton
+                  actions={[{ icon: 'email', label: 'email', name: 'email' },
+                  { icon: 'phone', label: 'Phone', name: 'phone' },
+                  { icon: 'home', label: 'home', name: 'home' },
+                  { icon: 'chat', label: 'chat', name: 'chat' }]}
+                  icon='email'
+                  transition="toolbar"
+                />
+                
+              </View>
+            </TestCase>
+          </TestSuite>
+          <TestSuite name='ActionButton onPress '>
+            <TestCase itShould='props:onPress(按下之后触发的回调:显示文字 onPress actionText) speedDial 拨号过渡展示效果'>
               <View style={styles.view}>
                 <ActionButton
                   onPress={()=>setActionText("onPress actionText")}
@@ -45,17 +61,34 @@ const ActionButtonDemo = () => {
             </TestCase>
           </TestSuite>
 
+          <TestSuite name='ActionButton onPress  '>
+            <TestCase itShould='props:onPress(按下之后触发的回调 显示文字 onPress actionText) toolbar 工具栏过渡展示效果'>
+              <View style={styles.view}>
+                <ActionButton
+                  onPress={()=>setActionTextToolBar("onPress actionText")}
+                  actions={[{ icon: 'email', label: 'email', name: 'email' },
+                  { icon: 'phone', label: 'Phone', name: 'phone' },
+                  { icon: 'home', label: 'home', name: 'home' },
+                  { icon: 'chat', label: 'chat', name: 'chat' }]}
+                  icon='email'
+                  transition="toolbar"
+                />
+                <Text>{actionTextToolBar}</Text>
+              </View>
+            </TestCase>
+          </TestSuite>
+
          
 
 
-          <TestSuite name='ActionButton transition(toolbar)'>
-            <TestCase itShould='props:transition(过渡效果 toolbar)'>
+          <TestSuite name='ActionButton transition(toolbar) '>
+            <TestCase itShould='props:transition(过渡效果 toolbar) 工具栏过渡展示效果'>
               <View style={styles.view}>
                 <ActionButton
-                  actions={[{ icon: 'email', label: 'email', name: 'email' },
-                  { icon: 'phone', label: 'Phone', name: 'phone' },
-                  { icon: 'sms', label: 'text', name: 'text' },
-                  { icon: 'chat', label: 'chat', name: 'chat' }]}
+                   actions={[{ icon: 'email', label: 'email', name: 'email' },
+                   { icon: 'phone', label: 'Phone', name: 'phone' },
+                   { icon: 'home', label: 'home', name: 'home' },
+                   { icon: 'chat', label: 'chat', name: 'chat' }]}
                   icon="share"
                   transition="toolbar"
                 />
@@ -63,11 +96,10 @@ const ActionButtonDemo = () => {
             </TestCase>
           </TestSuite>
 
-           <TestSuite name='ActionButton style'>
-            <TestCase itShould='props:style(快速拨号过渡效果，组件的样式)'>
+           <TestSuite name='ActionButton transition(speedDial)'>
+            <TestCase itShould='props:transition(过渡效果 speedDial) 快速拨号过渡效果'>
               <View style={styles.view}>
                 <ActionButton
-                  style={{container:{backgroundColor:'blue'},icon:{color:'red'},positionContainer:{top:2,bottom:2}}}
                   actions={[
                     { icon: 'email', label: 'Email',name:'email'},
                     { icon: 'phone', label: 'Phone',name:'Phone' },
@@ -77,19 +109,114 @@ const ActionButtonDemo = () => {
                   icon='email'
                   transition="speedDial"
                 />
-                <Text>{actionText}</Text>
               </View>
             </TestCase>
           </TestSuite> 
-          
-          <TestSuite name='ActionButton style'>
-            <TestCase itShould='props:style(工具栏过渡效果，组件的样式)'>
+
+          <TestSuite name='ActionButton style container 容器风格'>
+            <TestCase itShould="props:style(快速拨号过渡效果，容器组件的样式 backgroundColor:'blue') ">
               <View style={styles.view}>
                 <ActionButton
-                style={{toolbarContainer:{backgroundColor:'blue'}}}
+                style={{container:{backgroundColor:'blue'}}}
                   actions={[{ icon: 'email', label: 'email', name: 'email' },
                   { icon: 'phone', label: 'Phone', name: 'phone' },
                   { icon: 'sms', label: 'text', name: 'text' },
+                  { icon: 'chat', label: 'chat', name: 'chat' }]}
+                  icon="share"
+                  transition="speedDial"
+                />
+              </View>
+            </TestCase>
+          </TestSuite>
+          
+          <TestSuite name='ActionButton style container 容器风格'>
+            <TestCase itShould="props:style(工具栏过渡效果，容器组件的样式  backgroundColor:'blue') ">
+              <View style={styles.view}>
+                <ActionButton
+                style={{container:{backgroundColor:'blue'}}}
+                actions={[{ icon: 'email', label: 'email', name: 'email' },
+                { icon: 'phone', label: 'Phone', name: 'phone' },
+                { icon: 'home', label: 'home', name: 'home' },
+                { icon: 'chat', label: 'chat', name: 'chat' }]}
+                  icon="share"
+                  transition="toolbar"
+                />
+              </View>
+            </TestCase>
+          </TestSuite>
+
+          <TestSuite name='ActionButton style icon 图标风格'>
+            <TestCase itShould="props:style(快速拨号过渡效果，组件的样式 color:'blue') ">
+              <View style={styles.view}>
+                <ActionButton
+                style={{icon:{color:'blue'}}}
+                  actions={[{ icon: 'email', label: 'email', name: 'email' },
+                  { icon: 'phone', label: 'Phone', name: 'phone' },
+                  { icon: 'sms', label: 'text', name: 'text' },
+                  { icon: 'chat', label: 'chat', name: 'chat' }]}
+                  icon="share"
+                  transition="speedDial"
+                />
+              </View>
+            </TestCase>
+          </TestSuite>
+          
+          <TestSuite name='ActionButton style icon 图标风格'>
+            <TestCase itShould="props:style(工具栏过渡效果，组件的样式 color:'blue') ">
+              <View style={styles.view}>
+                <ActionButton
+                style={{icon:{color:'blue'}}}
+                actions={[{ icon: 'email', label: 'email', name: 'email' },
+                { icon: 'phone', label: 'Phone', name: 'phone' },
+                { icon: 'home', label: 'home', name: 'home' },
+                { icon: 'chat', label: 'chat', name: 'chat' }]}
+                  icon="share"
+                  transition="toolbar"
+                />
+              </View>
+            </TestCase>
+          </TestSuite>
+
+          <TestSuite name='ActionButton style positionContainer 位置容器风格 更改组件在视图中的位置'>
+            <TestCase itShould="props:style(快速拨号过渡效果，组件的样式 positionContainer:{top:2} ">
+              <View style={styles.view}>
+                <ActionButton
+                style={{positionContainer:{top:2}}}
+                  actions={[{ icon: 'email', label: 'email', name: 'email' },
+                  { icon: 'phone', label: 'Phone', name: 'phone' },
+                  { icon: 'sms', label: 'text', name: 'text' },
+                  { icon: 'chat', label: 'chat', name: 'chat' }]}
+                  icon="share"
+                  transition="speedDial"
+                />
+              </View>
+            </TestCase>
+          </TestSuite>
+          
+          <TestSuite name='ActionButton style positionContainer 位置容器风格 更改组件在视图中的位置'>
+            <TestCase itShould="props:style(工具栏过渡效果，组件的样式 positionContainer:{top:2}">
+              <View style={styles.view}>
+                <ActionButton
+                style={{positionContainer:{top:2}}}
+                actions={[{ icon: 'email', label: 'email', name: 'email' },
+                { icon: 'phone', label: 'Phone', name: 'phone' },
+                { icon: 'home', label: 'home', name: 'home' },
+                { icon: 'chat', label: 'chat', name: 'chat' }]}
+                  icon="share"
+                  transition="toolbar"
+                />
+              </View>
+            </TestCase>
+          </TestSuite>
+
+          <TestSuite name='ActionButton style toolbarContainer 工具栏样式 工具栏过渡效果之后工具栏的样式'>
+            <TestCase itShould="props:style(工具栏过渡效果，组件的样式 toolbarContainer:{background:'orange'} ">
+              <View style={styles.view}>
+                <ActionButton
+                style={{toolbarContainer:{backgroundColor:'orange'}}}
+                  actions={[{ icon: 'email', label: 'email', name: 'email' },
+                  { icon: 'phone', label: 'Phone', name: 'phone' },
+                  { icon: 'home', label: 'home', name: 'home' },
                   { icon: 'chat', label: 'chat', name: 'chat' }]}
                   icon="share"
                   transition="toolbar"
@@ -97,6 +224,7 @@ const ActionButtonDemo = () => {
               </View>
             </TestCase>
           </TestSuite>
+          
           </ScrollView>        
         </Tester>
   )
