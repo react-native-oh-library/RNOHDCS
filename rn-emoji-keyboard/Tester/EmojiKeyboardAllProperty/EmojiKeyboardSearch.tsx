@@ -15,7 +15,7 @@ export default function() {
         <>
             <Text style={styles.textIcon}>{result || ' '}</Text>
             <Button onPress={() => setIsOpen(true)} title='open:search' />
-            <EmojiPicker  enableSearchBar onEmojiSelected={handlePick} open={isOpen} onClose={() => setIsOpen(false)} />
+            <EmojiPicker onRequestClose={()=>console.log('关闭')}  enableSearchBar onEmojiSelected={handlePick} open={isOpen} onClose={() => setIsOpen(false)} />
         </>
     )
 
