@@ -28,7 +28,6 @@ const Demo = (props: any) => {
       onChange={(item: any) => {
         setValue(item);
       }}
-      fontFamily
       {...props}
     />
   );
@@ -43,8 +42,8 @@ export const FontFamilyTest = () => {
         </TestCase>
       </TestSuite>
       <TestSuite name="FontFamily">
-        <TestCase itShould={`fontFamily:Helvetica Neue`}>
-          <Demo fontFamily="Helvetica Neue" />
+        <TestCase itShould={`fontFamily:FontAwesome`}>
+          <Demo fontFamily="FontAwesome" />
         </TestCase>
       </TestSuite>
     </Tester>

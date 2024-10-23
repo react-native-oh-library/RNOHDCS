@@ -33,6 +33,7 @@ const Demo = (props: any) => {
           setValue(item);
         }}
         activeColor="#FF8A2D2D"
+        dropdownPosition='top'
         {...props}
       />
     </>

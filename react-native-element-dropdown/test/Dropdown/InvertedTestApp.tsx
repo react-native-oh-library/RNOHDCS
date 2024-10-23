@@ -32,6 +32,7 @@ const Demo = (props: any) => {
         onChange={(item: any) => {
           setValue(item.value);
         }}
+        dropdownPosition='top'
         {...props}
       />
     </>
