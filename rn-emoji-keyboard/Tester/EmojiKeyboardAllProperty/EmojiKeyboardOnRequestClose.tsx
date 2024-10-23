@@ -5,6 +5,7 @@ import EmojiPicker,  {type EmojiType} from 'rn-emoji-keyboard'
 
 
 export default function() {
+    const [count,setCount]=React.useState<number>(0)
     const [result, setResult] = React.useState<string>()
     const [isOpen, setIsOpen] = React.useState<boolean>(false)
   
@@ -12,12 +13,16 @@ export default function() {
         setResult(e.emoji)
     }
 
-
+    const onRequestCloseFun=()=>{
+        setCount(count+1)
+        setIsOpen(false)
+    }
     return (
-        <>
+        <>  
+            <Text>count value:{count}</Text>
             <Text style={styles.textIcon}>{result || ' '}</Text>
-            <Button onPress={() => setIsOpen(true)} title='open:basic' />
-            <EmojiPicker  onEmojiSelected={handlePick} open={isOpen} onClose={() => setIsOpen(false)} />
+            <Button onPress={() => setIsOpen(true)} title='open' />
+            <EmojiPicker  onRequestClose={onRequestCloseFun} onEmojiSelected={handlePick} open={isOpen} onClose={() => setIsOpen(false)} />
         </>
     )
 

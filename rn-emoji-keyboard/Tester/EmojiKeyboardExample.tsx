@@ -22,8 +22,10 @@ import EmojiKeyboardExpandable from './EmojiKeyboardAllProperty/EmojiKeyboardExp
 import EmojiKeyboardExpandedHeight from './EmojiKeyboardAllProperty/EmojiKeyboardExpandedHeight'
 import EmojiKeyboardEmojiHideHeader from './EmojiKeyboardAllProperty/EmojiKeyboardEmojiHideHeader'
 import EmojiKeyboardStyles from './EmojiKeyboardAllProperty/EmojiKeyboardStyles'
+import EmojiKeyboardOnRequestClose from './EmojiKeyboardAllProperty/EmojiKeyboardOnRequestClose'
 import EmojiKeyboardTheme from './EmojiKeyboardAllProperty/EmojiKeyboardTheme'
 import EmojiKeyboardTranslated from './EmojiKeyboardAllProperty/EmojiKeyboardTranslated'
+
 
 export const EmojiKeyboardExample = () => {
   return (
@@ -89,6 +91,9 @@ export const EmojiKeyboardExample = () => {
           </TestCase>
           <TestCase itShould={`render EmojiKeyboardStyles EmojiKeyboard`} tags={['C_API']}>
           <EmojiKeyboardStyles/>
+          </TestCase>
+          <TestCase itShould={`Slip left Callback fired emoji keyboard is closing and count+1.`} tags={['C_API']}>
+          <EmojiKeyboardOnRequestClose/>
           </TestCase>
           <TestCase itShould={`render EmojiKeyboardTheme EmojiKeyboard`} tags={['C_API']}>
             <EmojiKeyboardTheme />
