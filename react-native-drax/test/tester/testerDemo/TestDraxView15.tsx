@@ -1,11 +1,7 @@
 import React, {useState} from 'react';
 import {
   StyleSheet,
-  Text,
   View,
-  ScrollView,
-  FlatList,
-  Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
 import DraxViewBaseComponent from './components/DraxViewBaseComponent';
@@ -18,11 +14,6 @@ const DraxViewDemo15 = () => {
         JSON.stringify(receiver.payload),
     );
   };
-
-  const resetBtn = () => {
-    setResult('');
-  };
-
   return (
     <>
       <Tester children={undefined}>

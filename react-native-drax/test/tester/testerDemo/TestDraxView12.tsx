@@ -3,8 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
-  FlatList,
   Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';

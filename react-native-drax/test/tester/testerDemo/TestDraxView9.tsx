@@ -19,7 +19,7 @@ const DraxViewDemo9 = () => {
     );
   };
   const onReceiveDragDropHandler = ({dragged: {payload}}) => {
-    // setResult('onReceiveDragDrop回调已执行,接收到payload参数:' + payload);
+    setResult('onReceiveDragDrop回调已执行,接收到payload参数:' + payload);
   };
 
   const onMonitorDragDropHandler = eventData => {
@@ -44,7 +44,7 @@ const DraxViewDemo9 = () => {
         <TestCase
           itShould="DraxView组件:onMonitorDragStart(拖动蓝色正方形此时检测到拖拽开始)"
           tags={['C_API']}>
-          <View style={{height: 260}}>
+          <View style={{height: 230}}>
             <DraxViewBaseTestMonitor
               payload={'hello'}
               onMonitorDragStart={
@@ -55,7 +55,7 @@ const DraxViewDemo9 = () => {
         <TestCase
           itShould="DraxView组件:onMonitorDragDrop(拖动蓝色正方形进入绿色正方形然后丢掉此时检测到释放)"
           tags={['C_API']}>
-          <View style={{height: 260}}>
+          <View style={{height: 230}}>
             <DraxViewBaseTestMonitor
               payload={'hello'}
               onReceiveDragDrop={onReceiveDragDropHandler}
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   inputArea: {
     width: '100%',
-    height: 80,
+    height: 120,
     marginTop: 8,
     justifyContent: 'center',
     alignItems: 'center',
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   },
   baseText: {
     width: '100%',
-    height: 48,
+    height: 60,
     fontWeight: 'bold',
     textAlign: 'center',
     fontSize: 14,
