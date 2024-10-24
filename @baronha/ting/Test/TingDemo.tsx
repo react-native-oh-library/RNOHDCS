@@ -8,7 +8,7 @@ import {
 } from '@baronha/ting';
 import { View, StyleSheet, Button, ScrollView } from 'react-native';
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
-import balloon from './image/balloon.svg';
+import balloon from './image/balloon.png';
 
 function handleToast(options: ToastOptions) {
     toast(options);
