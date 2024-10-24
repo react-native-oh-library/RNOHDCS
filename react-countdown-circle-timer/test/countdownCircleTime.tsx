@@ -512,7 +512,7 @@ export default function CountdownCircleTime() {
                   {({ remainingTime }) => {
                     return (
                       <View>
-                        <Text>Time Remaining: {remainingTime} seconds</Text>
+                        <Text>Time: {remainingTime} seconds</Text>
                       </View>)
                   }}
                 </CountdownCircleTimer>
