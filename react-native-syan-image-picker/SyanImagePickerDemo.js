@@ -59,6 +59,147 @@ export default class App extends Component<{}> {
         );
     };
 
+    handleOpenImagePickerCropRect = () => {
+        SYImagePicker.showImagePicker(
+            {
+                isCamera: true,
+                imageCount: 1,
+                isCrop: true,
+                quality: 10,
+                compress: true,
+                enableBase64: true,
+                CropW:200,
+                CropH:300
+            }, (err, photos) => {
+                if (!err) {
+                	  this.setState({video: []});
+                    this.setState({
+                        photos: photos,
+                    });
+                    {photos.map((item, index) => {
+                            console.log("rn_syan_image_picker showImagePicker result: ",
+                                "uri:" + item.uri + "-- " +
+                                "width:" + item.width + "-- " +
+                                "height:" + item.height + "-- " +
+                                "type:" + item.type + "-- " +
+                                "size:" + item.size + "-- " +
+                                "original_uri:" + item.original_uri + "-- " +
+                                "base64:" + item.base64 + "-- ");
+                        })
+                    }
+                } else {
+                    console.log(err);
+                }
+            },
+        );
+    };
+
+    handleOpenImagePickerCropCircle = () => {
+        SYImagePicker.showImagePicker(
+            {
+                isCamera: true,
+                imageCount: 1,
+                isCrop: true,
+                quality: 10,
+                compress: true,
+                showCropCircle:true,
+                circleCropRadius:250
+            }, (err, photos) => {
+                if (!err) {
+                	  this.setState({video: []});
+                    this.setState({
+                        photos: photos,
+                    });
+                    {photos.map((item, index) => {
+                            console.log("rn_syan_image_picker showImagePicker result: ",
+                                "uri:" + item.uri + "-- " +
+                                "width:" + item.width + "-- " +
+                                "height:" + item.height + "-- " +
+                                "type:" + item.type + "-- " +
+                                "size:" + item.size + "-- " +
+                                "original_uri:" + item.original_uri + "-- " +
+                                "base64:" + item.base64 + "-- ");
+                        })
+                    }
+                } else {
+                    console.log(err);
+                }
+            },
+        );
+    };
+    
+    handleOpenImagePickerCropCircle1 = () => {
+        SYImagePicker.showImagePicker(
+            {
+                isCamera: true,
+                imageCount: 1,
+                isCrop: true,
+                quality: 10,
+                compress: true,
+                showCropCircle:true,
+                circleCropRadius:350
+            }, (err, photos) => {
+                if (!err) {
+                	  this.setState({video: []});
+                    this.setState({
+                        photos: photos,
+                    });
+                    {photos.map((item, index) => {
+                            console.log("rn_syan_image_picker showImagePicker result: ",
+                                "uri:" + item.uri + "-- " +
+                                "width:" + item.width + "-- " +
+                                "height:" + item.height + "-- " +
+                                "type:" + item.type + "-- " +
+                                "size:" + item.size + "-- " +
+                                "original_uri:" + item.original_uri + "-- " +
+                                "base64:" + item.base64 + "-- ");
+                        })
+                    }
+                } else {
+                    console.log(err);
+                }
+            },
+        );
+    };
+    
+    
+    handleOpenImagePickerOriginalPhoto = () => {
+        SYImagePicker.showImagePicker(
+            {
+                isCamera: true,
+                imageCount: 1,
+                isCrop: true,
+                quality: 10,
+                allowPickingOriginalPhoto:true,
+                compress: true,
+                showCropCircle:true,
+                circleCropRadius:350
+            }, (err, photos) => {
+                if (!err) {
+                	  this.setState({video: []});
+                    this.setState({
+                        photos: photos,
+                    });
+                    {photos.map((item, index) => {
+                            console.log("rn_syan_image_picker showImagePicker result: ",
+                                "uri:" + item.uri + "-- " +
+                                "width:" + item.width + "-- " +
+                                "height:" + item.height + "-- " +
+                                "type:" + item.type + "-- " +
+                                "size:" + item.size + "-- " +
+                                "original_uri:" + item.original_uri + "-- " +
+                                "base64:" + item.base64 + "-- ");
+                        })
+                    }
+                } else {
+                    console.log(err);
+                }
+            },
+        );
+    };
+    
+    
+
     handleOpenImagePicker1 = () => {
         SYImagePicker.showImagePicker(
             {
@@ -155,7 +296,7 @@ export default class App extends Component<{}> {
 
     handleLaunchCamera = async () => {
         SYImagePicker.openCamera(
-            {isCrop: true, showCropCircle: true, showCropFrame: false},
+            {isCrop: true, showCropCircle: true, showCropFrame: false, videoMaximumDuration: 5},
             (err, photos) => {
                 if (!err) {
                 	  this.setState({video: []});
@@ -286,9 +427,13 @@ export default class App extends Component<{}> {
                             onPress={this.handleOpenVideoPickerNotAllowPickingMultipleVideo}/>
                     <Button title={'刪除全部图片'} onPress={this.handleRemoveAll}/>
                     <Button title={'通过索引删除图片(第一张)'} onPress={this.handleRemoveAtIndex}/>
+                    <Button title={'矩形裁剪'} onPress={this.handleOpenImagePickerCropRect}/>
+                    <Button title={'圆形裁剪small'} onPress={this.handleOpenImagePickerCropCircle}/>
+                    <Button title={'圆形裁剪large'} onPress={this.handleOpenImagePickerCropCircle1}/>
+                    <Button title={'显示原图'} onPress={this.handleOpenImagePickerOriginalPhoto}/>
+                
                 </View>
                 <ScrollView style={{flex: 1}} contentContainerStyle={styles.scroll}>
-                
                     {video.map((item, index) => {
                         const videoSource = {
                             uri: item.uri, isNetwork: false
@@ -302,7 +447,7 @@ export default class App extends Component<{}> {
                     })}
                 
                     {photos.map((item, index) => {
-                        let source = {uri: item.uri};
+                        let source = {uri: item.original_uri};
                         return (
                             <Image
                                 key={`image-${index}`}
