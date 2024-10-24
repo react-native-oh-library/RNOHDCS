@@ -110,26 +110,6 @@ const ListItemDemo = () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name='ListItem(列表项) onLeftElementPress 按下左边元素时触发回调事件 !!! '>
-          <TestCase itShould='props:onLeftElementPress 按下时显示"leftOnPress"文本'>
-            <View style={{ height: 300 }}>
-              <View style={styles.container}>
-                <Text>{press2}</Text>
-                <ListItem
-                  divider={true}
-                  centerElement="Center element as a text (dense)"
-                  leftElement="person"
-                />
-                <ListItem
-                  divider={true}
-                  centerElement="Center element as a text (dense)"
-                  leftElement="home"
-                />
-
-              </View>
-            </View>
-          </TestCase>
-        </TestSuite>
         <TestSuite name='ListItem(列表项) centerElement 中心侧元素'>
           <TestCase itShould='props:centerElement 中心侧元素 三种传参，第一条对应文本，第二条对应对象，第三条组件子元素<Text></Text>'>
             <View style={{ height: 300 }}>
