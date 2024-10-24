@@ -3,8 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
-  FlatList,
   Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
@@ -17,10 +15,6 @@ const DraxViewDemo13 = () => {
       'onDragEnter回调接收到绿色正方形传递的receiverPayload:' +
         JSON.stringify(receiver.payload),
     );
-  };
-
-  const onReceiveDragOverHandler = ({dragged: {payload}}) => {
-    setResult('onReceiveDragOver回调已执行,接收到payload参数:' + payload);
   };
   const resetBtn = () => {
     setResult('');

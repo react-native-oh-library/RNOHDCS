@@ -1,11 +1,7 @@
 import React, {useState} from 'react';
 import {
   StyleSheet,
-  Text,
   View,
-  ScrollView,
-  FlatList,
-  Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
 import DraxViewBaseComponent from './components/DraxViewBaseComponent';
@@ -17,10 +13,6 @@ const DraxViewDemo19 = () => {
       'onDragEnter回调接收到绿色正方形传递的receiverPayload:' +
         JSON.stringify(receiver.payload),
     );
-  };
-
-  const resetBtn = () => {
-    setResult('');
   };
 
   return (

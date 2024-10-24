@@ -11,28 +11,9 @@ import {Tester, TestCase} from '@rnoh/testerino';
 import DraxViewBaseComponent from './components/DraxViewBaseComponent';
 
 const DraxViewDemo10 = () => {
-  const [result, setResult] = useState('');
-
-  const onMonitorDragStartHandler = eventData => {
-    setResult('onMonitorDragStart回调已执行,参数eventData:' + eventData);
-  };
-
-  const onMonitorDragDropHandler = eventData => {
-    setResult('onMonitorDragDrop回调已执行,参数eventData:' + eventData);
-  };
-  const resetBtn = () => {
-    setResult('');
-  };
 
   return (
     <>
-      <View style={styles.inputArea}>
-        <Text style={styles.baseText}>{result}</Text>
-        <Button
-          style={styles.resetBtn}
-          title="重置"
-          onPress={resetBtn}></Button>
-      </View>
       <Tester children={undefined}>
         <TestCase
           itShould="DraxView组件:animateSnapback(是否在拖动释放后为悬停视图快照设置动画(默认true开启))"

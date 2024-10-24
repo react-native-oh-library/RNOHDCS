@@ -3,8 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
-  FlatList,
   Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
@@ -16,10 +14,10 @@ const DraxViewDemo7 = () => {
   const [result, setResult] = useState('');
 
   const onMonitorDragEndHandler = eventData => {
-    setResult('onMonitorDragEnd回调已执行,参数eventData:' + eventData);
+    setResult('onMonitorDragEnd回调已执行,参数eventData:' + JSON.stringify(eventData));
   };
   const onMonitorDragEnterHandler = eventData => {
-    setResult('onMonitorDragEnter回调已执行,参数eventData:' + eventData);
+    setResult('onMonitorDragEnter回调已执行,参数eventData:' + JSON.stringify(eventData));
   };
   const resetBtn = () => {
     setResult('');
@@ -38,7 +36,7 @@ const DraxViewDemo7 = () => {
         <TestCase
           itShould="DraxView组件:onMonitorDragEnd(手指拖动蓝色正方形进入绿色正方形然后停止，检测到停止时，执行回调)"
           tags={['C_API']}>
-          <View style={{height: 260}}>
+          <View style={{height: 230}}>
             <DraxViewBaseComponent
               payload={'hello'}
               onMonitorDragEnd={
@@ -49,7 +47,7 @@ const DraxViewDemo7 = () => {
         <TestCase
           itShould="DraxView组件:onMonitorDragEnter(手指拖动蓝色正方形进入绿色正方形，检测到进入，执行回调)"
           tags={['C_API']}>
-          <View style={{height: 260}}>
+          <View style={{height: 230}}>
             <DraxViewBaseComponent
               payload={'hello'}
               onMonitorDragEnter={
@@ -97,7 +95,7 @@ const styles = StyleSheet.create({
   },
   inputArea: {
     width: '100%',
-    height: 80,
+    height: 120,
     marginTop: 8,
     justifyContent: 'center',
     alignItems: 'center',

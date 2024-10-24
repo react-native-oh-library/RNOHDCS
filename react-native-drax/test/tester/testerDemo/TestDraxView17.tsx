@@ -19,10 +19,6 @@ const DraxViewDemo17 = () => {
     );
   };
 
-  const resetBtn = () => {
-    setResult('');
-  };
-
   return (
     <>
       <Tester children={undefined}>

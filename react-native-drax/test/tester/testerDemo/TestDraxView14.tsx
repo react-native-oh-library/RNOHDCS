@@ -1,11 +1,7 @@
 import React, {useState} from 'react';
 import {
   StyleSheet,
-  Text,
   View,
-  ScrollView,
-  FlatList,
-  Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
 import DraxViewBaseComponent from './components/DraxViewBaseComponent';
@@ -19,9 +15,6 @@ const DraxViewDemo14 = () => {
     );
   };
 
-  const resetBtn = () => {
-    setResult('');
-  };
 
   return (
     <>

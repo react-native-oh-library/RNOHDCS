@@ -9,7 +9,6 @@ import { DraxProvider, DraxView, DraxList } from 'react-native-drax';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const DraxListDemo4 = () => {
-  const [result, setResult] = useState('');
   const [data, setData] = useState([
     { id: '1', text: 'Task 1' },
     { id: '2', text: 'Task 2' },

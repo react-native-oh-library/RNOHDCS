@@ -9,14 +9,6 @@ import { DraxProvider, DraxView, DraxList } from 'react-native-drax';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const DraxListDemo2 = () => {
-  const [result, setResult] = useState('');
-  const onDragEnterHandler = ({ receiver }) => {
-    setResult(
-      'onDragEnter回调接收到绿色正方形传递的receiverPayload:' +
-      JSON.stringify(receiver.payload),
-    );
-  };
-
   const [data, setData] = useState([
     { id: '1', text: 'Task 1' },
     { id: '2', text: 'Task 2' },
