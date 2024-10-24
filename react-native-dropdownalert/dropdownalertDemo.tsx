@@ -230,29 +230,17 @@ function DropdownalertDemo(): React.JSX.Element {
       color: styles.alertView.backgroundColor,
     },
     {
-      name: 'iOS notification',
-      itshould: '自定义的提示样式-iOS 验证children、updateStatusBar：false',
+      name: '模拟iOS样式',
+      itshould: '验证自定义的children 模拟iOS样式 children: <NotificationIOS />',
       alertProps: {
-        updateStatusBar: false,
         children: <NotificationIOS />,
       },
       color: 'gray',
     },
     {
-      name: 'iOS notification',
-      itshould: 'updateStatusBar：true 更新状态栏样式，半透明或backgroundColor',
+      name: '模拟Android样式',
+      itshould: '验证自定义的children 模拟Android样式 children: <NotificationAndroid />',
       alertProps: {
-        updateStatusBar: true,
-        children: <NotificationIOS />,
-      },
-      color: 'gray',
-    },
-    {
-      name: 'Android notification dismissInterval 1000',
-      itshould: '自定义的提示样式-安卓',
-      alertProps: {
-        dismissInterval: 1000,
-        updateStatusBar: false,
         children: <NotificationAndroid />,
       },
       color: '#1F89C7',
