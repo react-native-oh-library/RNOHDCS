@@ -107,7 +107,7 @@ class VoiceTest extends Component<Props, State> {
     });
 
     try {
-      await Voice.start('zh-CN');
+      await Voice.start('zh-CN').then((res)=>console.log(res));
     } catch (e) {
       console.error(e);
     }
@@ -115,7 +115,7 @@ class VoiceTest extends Component<Props, State> {
 
   _stopRecognizing = async () => {
     try {
-      await Voice.stop();
+      await Voice.stop().then((res)=>console.log(res));
     } catch (e) {
       console.error(e);
     }
@@ -124,7 +124,7 @@ class VoiceTest extends Component<Props, State> {
   _cancelRecognizing = async (setCancelState: any) => {
     try {
       setCancelState(true);
-      await Voice.cancel();
+      await Voice.cancel().then((res)=>console.log(res));
     } catch (e) {
       console.error(e);
     }
@@ -133,7 +133,8 @@ class VoiceTest extends Component<Props, State> {
   _destroyRecognizer = async (setDestroyState: any) => {
     try {
       setDestroyState(true);
-      await Voice.destroy();
+      await Voice.destroy().then((res)=>(console.log(res)));
+      Voice.removeAllListeners()
     } catch (e) {
       console.error(e);
     }
@@ -157,7 +158,7 @@ class VoiceTest extends Component<Props, State> {
     } catch (e) {
       console.error(e);
       this.setState({
-        isAvailable: 0,
+        isAvailable: 2,
       });
     }
   };
@@ -174,7 +175,7 @@ class VoiceTest extends Component<Props, State> {
     } catch (e) {
       console.error(e);
       this.setState({
-        isRecognizing: 0,
+        isRecognizing: 2,
       });
     }
   };
