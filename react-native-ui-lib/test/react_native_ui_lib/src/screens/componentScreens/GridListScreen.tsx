@@ -61,7 +61,7 @@ class GridListScreen extends Component {
       return (
         <GridListItem
           // containerStyle={{width: '100%', borderWidth: 1}}
-          itemSize={{width: '100%', height: 200}}
+          itemSize={{width: '90%', height: 180}}
           imageProps={{source: {uri: item.mediaUrl}}}
           title="Title"
           subtitle="Subtile"
@@ -95,15 +95,16 @@ class GridListScreen extends Component {
     return (
       <TestSuite name="GridList">
         <TestCase itShould="numColumns={2}, itemSpacing={12}, listPadding={20}, ListHeaderComponent, data, renderItem">
-          <View padding-20>
+          <View padding-2>
             <GridList<(typeof products)[0]>
               ListHeaderComponent={() => this.renderHeader()}
               data={products}
               renderItem={this.renderItem}
               numColumns={2}
               // maxItemWidth={140}
-              itemSpacing={Spacings.s3}
+              itemSpacing={Spacings.s1}
               listPadding={Spacings.s5}
+              containerWidth={350}
               // keepItemSize
               contentContainerStyle={styles.list}
             />
@@ -116,6 +117,7 @@ class GridListScreen extends Component {
 
 const styles = StyleSheet.create({
   list: {
+    width: '90%',
     paddingTop: Spacings.s5,
   },
   itemImage: {

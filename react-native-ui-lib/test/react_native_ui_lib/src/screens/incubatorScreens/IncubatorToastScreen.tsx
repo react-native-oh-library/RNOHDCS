@@ -169,7 +169,7 @@ class ToastsScreen extends Component {
     return (
       <TestSuite name="IncubatorToasts">
         <TestCase itShould="">
-          <View flex padding-page>
+          <View flex padding-5>
             <Text $textDefault h1 marginB-s4>
               Toast
             </Text>
@@ -197,7 +197,7 @@ class ToastsScreen extends Component {
                   'With an attachment',
                   'hasAttachment',
                 )}
-                {renderBooleanOption.call(this, 'Swipeable', 'isSwipeable')}
+                {/* {renderBooleanOption.call(this, 'Swipeable', 'isSwipeable')} */}
 
                 {renderRadioGroup.call(
                   this,

@@ -164,7 +164,10 @@ class TabControllerScreen extends Component<{}, State> {
     const Container = asCarousel ? TabController.PageCarousel : View;
     const containerProps = asCarousel ? {} : {flex: true};
     return (
-      <Container {...containerProps}>
+      <Container {...containerProps} onMomentumScrollEnd={(event) => {
+        let page = Math.floor((event.nativeEvent.contentOffset.x + 1)/374);
+        this.tabController.current?.setTab(page);
+      }}>
         <TabController.TabPage index={0}>
           <Tab1 />
         </TabController.TabPage>
@@ -198,8 +201,8 @@ class TabControllerScreen extends Component<{}, State> {
       this.state;
     return (
       <TestSuite name="TabController">
-        <TestCase itShould="设置 activeBackgroundColor: red 属性 按下为红色反馈">
-          <View>
+        <TestCase itShould="例子">
+          <View flex style={{height: 600, width: 348, overflow: 'hidden'}}>
             <View flex bg-$backgroundDefault>
               <TabController
                 key={key}
@@ -211,6 +214,7 @@ class TabControllerScreen extends Component<{}, State> {
                 <TabController.TabBar
                   // items={items}
                   key={key}
+                  containerStyle={{width: 348, overflow: 'hidden'}}
                   // uppercase
                   // indicatorStyle={{backgroundColor: 'green', height: 3}}
                   // indicatorInsets={0}
@@ -236,22 +240,6 @@ class TabControllerScreen extends Component<{}, State> {
                   marginB-12
                   size={Button.sizes.small}
                   onPress={this.toggleItemsCount}
-                />
-                <Button
-                  bg-grey20={!asCarousel}
-                  bg-green30={asCarousel}
-                  label={`Carousel : ${asCarousel ? 'ON' : 'OFF'}`}
-                  marginB-12
-                  size={Button.sizes.small}
-                  onPress={this.toggleCarouselMode}
-                />
-                <Button
-                  bg-grey20={!centerSelected}
-                  bg-green30={centerSelected}
-                  label={`centerSelected : ${centerSelected ? 'ON' : 'OFF'}`}
-                  size={Button.sizes.small}
-                  marginB-12
-                  onPress={this.toggleCenterSelected}
                 />
                 <Button
                   label="setTab (Imperative)"

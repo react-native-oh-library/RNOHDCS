@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {ScrollView} from 'react-native';
-// import moment from 'moment';
+import moment from 'moment';
 // import * as LightDate from 'light-date';
 import {
   DateTimePicker,
@@ -61,8 +61,7 @@ class DateTimePickerScreen extends Component<{}, State> {
   getFormatter = (): DateTimePickerProps['dateTimeFormatter'] => {
     const {dateTimeFormatter} = this.state;
     if (dateTimeFormatter === 'moment') {
-      return (value: Date, mode: DateTimePickerMode) => value.toString();
-      // moment(value).format(mode === 'date' ? 'MMM D, YYYY' : 'h:mm A');
+      return (value: Date, mode: DateTimePickerMode) => moment(value).format(mode === 'date' ? 'MMM D, YYYY' : 'h:mm A');
     } else {
       return (value: Date, mode: DateTimePickerMode) => value.toString();
       // LightDate.format(value, mode === 'date' ? '{mm}-{dd}-{yyyy}' : '{HH}:{mm}');
@@ -82,7 +81,7 @@ class DateTimePickerScreen extends Component<{}, State> {
                 containerStyle={{marginVertical: 20}}
                 label={'Date'}
                 placeholder={'Select a date'}
-                value={new Date('October 13, 2014')}
+                value={new Date('2015-03-25T12:00:00-06:30')}
               />
               <DateTimePicker
                 // migrateDialog

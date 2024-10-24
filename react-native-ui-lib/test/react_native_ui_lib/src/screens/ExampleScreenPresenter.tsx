@@ -139,7 +139,7 @@ export function renderRadioGroup(title: string,
 
 export function renderColorOption(title: string,
   key: string,
-  colors = ['transparent', Colors.blue30, Colors.grey10, Colors.yellow30, Colors.green30, Colors.purple30]) {
+  colors = ['transparent', Colors.blue30, Colors.grey10, Colors.yellow30, Colors.green30]) {
   // @ts-ignore
   const value = this.state[key];
   return (

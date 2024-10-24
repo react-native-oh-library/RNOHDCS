@@ -72,10 +72,10 @@ const TimelineScreen = () => {
   return (
     <TestSuite name="Timeline">
       <TestCase itShould="例子">
-        <View padding-20>
+        <View padding-2>
           <>
             <View row margin-20 spread>
-              <Text h1 $textDefault margin-20>
+              <Text h1 $textDefault margin-10>
                 Timeline
               </Text>
               <Button

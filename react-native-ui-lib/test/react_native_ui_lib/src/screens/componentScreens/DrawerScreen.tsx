@@ -98,6 +98,7 @@ class DrawerScreen extends Component {
     }
   };
   openLeftDrawerFull = () => {
+    if(!this.state.fullSwipeLeft) return;
     if (this.ref) {
       // @ts-expect-error
       this.ref.openLeftFull();
@@ -116,6 +117,7 @@ class DrawerScreen extends Component {
     }
   };
   openRightDrawerFull = () => {
+    if(!this.state.fullSwipeRight) return;
     if (this.ref) {
       // @ts-expect-error
       this.ref.openRightFull();

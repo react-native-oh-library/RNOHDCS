@@ -38,7 +38,7 @@ export default class TextFieldScreen extends Component {
   };
 
   componentDidMount() {
-    this.input.current?.focus();
+    // this.input.current?.focus();
   }
 
   resetFieldValue = () => {
@@ -104,12 +104,12 @@ export default class TextFieldScreen extends Component {
             // floatingPlaceholderStyle={Typography.text60}
             // style={Typography.text60}
             containerStyle={{flex: 1}}
-            preset={this.state.preset}
+            // preset={this.state.preset}
           />
           <TextField
             placeholder="Placeholder"
             containerStyle={{flex: 1, marginLeft: Spacings.s6}}
-            preset={this.state.preset}
+            // preset={this.state.preset}
           />
         </View>
       </>
@@ -153,7 +153,7 @@ export default class TextFieldScreen extends Component {
           ref={this.input2}
           placeholder="Enter search term"
           trailingAccessory={this.renderTrailingAccessory()}
-          preset={this.state.preset}
+          // preset={this.state.preset}
         />
         <TextField
           ref={this.input2}
@@ -164,7 +164,7 @@ export default class TextFieldScreen extends Component {
               Kg.
             </Text>
           }
-          preset={this.state.preset}
+          // preset={this.state.preset}
         />
 
         <Text marginB-s2 $textPrimary>
@@ -178,7 +178,7 @@ export default class TextFieldScreen extends Component {
               Https://
             </Text>
           }
-          preset={this.state.preset}
+          // preset={this.state.preset}
         />
       </>
     );
@@ -223,13 +223,13 @@ export default class TextFieldScreen extends Component {
           // validationMessageStyle={Typography.text90R}
           validationMessagePosition={errorPosition}
           validate={['required', 'email']}
-          onChangeValidity={(isValid: boolean) =>
-            console.warn('validity changed:', isValid, Date.now())
-          }
+          // onChangeValidity={(isValid: boolean) =>
+          //   console.warn('validity changed:', isValid, Date.now())
+          // }
           validateOnChange
           // validateOnStart
           // validateOnBlur
-          preset={preset}
+          // preset={preset}
         />
         <View row spread center marginT-20>
           <TextField
@@ -248,7 +248,7 @@ export default class TextFieldScreen extends Component {
             topTrailingAccessory={
               <Icon source={Assets.icons.demo.info} size={16} />
             }
-            preset={preset}
+            // preset={preset}
           />
           <Button
             outline
@@ -270,7 +270,7 @@ export default class TextFieldScreen extends Component {
 
     switch (index) {
       case 0:
-        // this.input3.current?.clear();
+        this.input3.current?.clear();
         break;
       case 1:
         this.input3.current?.focus();
@@ -330,7 +330,7 @@ export default class TextFieldScreen extends Component {
           validateOnChange
           readonly={isReadonly}
           editable={!isDisabled}
-          preset={preset}
+          // preset={preset}
         />
       </>
     );
@@ -379,7 +379,7 @@ export default class TextFieldScreen extends Component {
           validate={'email'}
           validateOnChange
           validationMessage="Email is invalid"
-          preset={preset}
+          // preset={preset}
           editable={!isDisabled}
           readonly={isReadonly}
           dynamicFieldStyle={this.getDynamicFieldStyle}
@@ -408,7 +408,7 @@ export default class TextFieldScreen extends Component {
           }
           charCounterStyle={{color: Colors.$textGeneral}}
           maxLength={20}
-          preset={this.state.preset}
+          // preset={this.state.preset}
         />
       </>
     );
@@ -429,7 +429,7 @@ export default class TextFieldScreen extends Component {
           onChangeText={value => this.setState({value})}
           trailingAccessory={<Icon source={Assets.icons.demo.search} />}
           // multiline
-          preset={this.state.preset}
+          // preset={this.state.preset}
         />
       </>
     );
@@ -447,7 +447,7 @@ export default class TextFieldScreen extends Component {
           floatingPlaceholder
           floatOnFocus
           hint="1-6 chars including numeric chars"
-          preset={this.state.preset}
+          // preset={this.state.preset}
         />
       </>
     );
@@ -476,7 +476,7 @@ export default class TextFieldScreen extends Component {
               $
             </Text>
           }
-          preset={preset}
+          // preset={preset}
         />
       </>
     );
@@ -505,21 +505,21 @@ export default class TextFieldScreen extends Component {
           validationMessage={'This field is required'}
           validateOnBlur
           validationMessagePosition={errorPosition}
-          preset={preset}
+          // preset={preset}
         />
 
         <Text marginB-s1 $textPrimary>
           Inline:
         </Text>
         <View row>
-          <TextField placeholder="hours" preset={preset} />
+          <TextField placeholder="hours" />
           <Text
             marginT-s1={preset === TextField.presets.UNDERLINE}
             marginT-s2={preset === TextField.presets.OUTLINE}
             marginH-s1>
             :
           </Text>
-          <TextField placeholder="minutes" preset={preset} />
+          <TextField placeholder="minutes" />
         </View>
       </>
     );
@@ -537,9 +537,10 @@ export default class TextFieldScreen extends Component {
         <TestCase itShould="Placeholders">
           <View padding-20>{this.renderPlaceholdersExample()}</View>
         </TestCase>
-        <TestCase itShould="Validation">
+        {/*  */}
+        {/* <TestCase itShould="Validation">
           <View padding-20>{this.renderValidationExample()}</View>
-        </TestCase>
+        </TestCase> */}
         <TestCase itShould="Hint">
           <View padding-20>{this.renderHintExample()}</View>
         </TestCase>
@@ -552,6 +553,7 @@ export default class TextFieldScreen extends Component {
         <TestCase itShould="Accessories">
           <View padding-20>{this.renderAccessoriesExample()}</View>
         </TestCase>
+        {/*  */}
         <TestCase itShould="StateColors">
           <View padding-20>{this.renderStateColorsExample()}</View>
         </TestCase>
