@@ -621,19 +621,19 @@ const RequestTechnologyProps = [
 ]
 
  return (
+   <View>
+      <View>
+        <Text>Scan a Tag result:</Text>
+        <Text style={styles.baseText}>
+              返回结果(进行卡片操作时，请先通过ScanTag()扫描设备，获取当前卡片支持的标签):
+        </Text>
+        <Text style={styles.inputArea}>
+              {text}
+        </Text>
+      </View>
    <ScrollView>
      <Tester>
       <TestSuite name='NfcManagerDemo'>
-         <TestCase itShould="Scan a Tag result:">
-          <View>
-            <Text style={styles.baseText}>
-              返回结果(进行卡片操作时，请先通过ScanTag()扫描设备，获取当前卡片支持的标签):
-            </Text>
-            <Text style={styles.inputArea}>
-              {text}
-            </Text>
-          </View>
-        </TestCase>
        <TestCase itShould="function:isSupported()(该接口判断设备是否支持nfc)"  initialState={false} arrange={({ setState }) => (
           <Button title='运行' color='#841584' onPress={async () => {
               let isSupported = await onSupported();
@@ -1136,6 +1136,7 @@ const RequestTechnologyProps = [
       </TestSuite>
      </Tester>
     </ScrollView>
+    </View>
   );
 }
 
