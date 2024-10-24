@@ -108,7 +108,7 @@ class CarouselScreen extends Component<Props, State> {
           <Carousel
             key={numberOfPagesShown}
             ref={this.carousel}
-            //loop
+            // loop
             autoplay={autoplay}
             onChangePage={this.onChangePage}
             pageWidth={width}
@@ -121,7 +121,7 @@ class CarouselScreen extends Component<Props, State> {
             allowAccessibleLayout>
             {_.map([...Array(numberOfPagesShown)], (_item, index) => (
               <Page
-                style={{backgroundColor: BACKGROUND_COLORS[index]}}
+                style={{backgroundColor: BACKGROUND_COLORS[index], width: 280, marginLeft: index == 0 ? -10 : 20 }}
                 key={index}>
                 <Text margin-15>CARD {index}</Text>
               </Page>

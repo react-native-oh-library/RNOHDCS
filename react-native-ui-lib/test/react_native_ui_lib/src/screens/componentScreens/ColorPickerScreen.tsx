@@ -35,7 +35,7 @@ const colors = [
   '#E2902B', '#FAA030', '#FAAD4D', '#FBBD71', '#FCCE94', '#FDDEB8', '#FEEFDB', '#FEF7ED',
   '#D9644A', '#E66A4E', '#F27052', '#F37E63', '#F7A997', '#FAC6BA', '#FCE2DC', '#FEF0ED',
   '#CF262F', '#EE2C38', '#F2564D', '#F57871', '#F79A94', '#FABBB8', '#FCDDDB', '#FEEEED',
-  '#8B1079', '#A0138E', '#B13DAC', '#C164BD', '#D08BCD', '#E0B1DE', '#EFD8EE', '#F7EBF7'
+  // '#8B1079', '#A0138E', '#B13DAC', '#C164BD', '#D08BCD', '#E0B1DE', '#EFD8EE', '#F7EBF7'
 ];
 
 class ColorPickerScreen extends Component<{}, State> {
@@ -93,7 +93,7 @@ class ColorPickerScreen extends Component<{}, State> {
     return (
       <TestSuite name="ColorPicker, ColorPalette组件">
         <TestCase itShould="设置ColorPalette的onValueChange">
-          <View padding-20>
+          <View>
             <View bg-$backgroundDefault>
               <Text text60 marginL-20 marginB-4 marginT-24>
                 Theme Color
@@ -104,6 +104,7 @@ class ColorPickerScreen extends Component<{}, State> {
                 onValueChange={this.onPaletteValueChange}
                 colors={colors}
                 backgroundColor={backgroundColor}
+                containerWidth={330}
               />
             </View>
             <View center bg-$backgroundDefault marginV-10>
@@ -126,8 +127,9 @@ class ColorPickerScreen extends Component<{}, State> {
               <View
                 spread
                 row
-                margin-10
-                style={{backgroundColor: nearestColor}}>
+                // margin-10
+                paddingR-10
+                style={{backgroundColor: nearestColor, overflow: 'hidden' }}>
                 <Text margin-5 text70 style={{color: textColor}}>
                   {nearestColor}
                 </Text>

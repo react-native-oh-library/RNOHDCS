@@ -82,9 +82,9 @@ export default class MarqueeScreen extends Component<{}> {
     return (
       <TestSuite name="Marquee">
         <TestCase itShould="例子:">
-          <View padding-20>
+          <View padding-3>
             <ScrollView style={styles.container}>
-              <Text h1 center margin-20 $textDefault>
+              <Text h1 center margin-10 $textDefault>
                 Marquee
               </Text>
               <View>

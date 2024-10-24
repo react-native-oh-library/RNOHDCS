@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, TouchableHighlight} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {
   View,
@@ -43,9 +43,8 @@ const colors: Item[] = [
 ];
 
 class IncubatorDialogScreen extends Component {
-  state = {visible: false};
-  modalProps: ModalProps = {supportedOrientations: ['portrait', 'landscape']};
-  headerProps: Incubator.DialogHeaderProps = {title: 'Title (swipe here)'};
+  state = {visible: false, textValue: ''};
+  
 
   renderVerticalItem = ({item}: {item: Item}) => {
     return (
@@ -54,7 +53,10 @@ class IncubatorDialogScreen extends Component {
         marginH-s5
         marginV-s2
         color={item.value}
-        onPress={this.closeDialog}>
+        onPress={() => {
+          this.closeDialog();
+          this.setState({textValue: item.label})
+        }}>
         {item.label}
       </Text>
     );
@@ -76,8 +78,12 @@ class IncubatorDialogScreen extends Component {
     this.setState({visible: false});
   };
 
+  modalProps: ModalProps = {supportedOrientations: ['portrait', 'landscape']};
+  headerProps: Incubator.DialogHeaderProps = {title: 'Title (close)', onPress: this.closeDialog};
+
   render() {
     const {visible} = this.state;
+    console.log(visible, 666)
 
     return (
       <TestSuite name="IncubatorDialog">
@@ -87,6 +93,7 @@ class IncubatorDialogScreen extends Component {
               <Text $textDefault text50>
                 IncubatorDialogScreen
               </Text>
+              <Text text30>{this.state.textValue}</Text>
             </Card>
             <View flex center>
               <Button
@@ -98,7 +105,8 @@ class IncubatorDialogScreen extends Component {
             <Incubator.Dialog
               useSafeArea
               visible={visible}
-              onDismiss={this.onDismiss}
+              // onDismiss={this.onDismiss}
+              ignoreBackgroundPress={true}
               bottom
               centerH
               modalProps={this.modalProps}

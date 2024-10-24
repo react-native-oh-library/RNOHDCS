@@ -18,7 +18,7 @@ class Tab1 extends Component {
         <Text text40 white>
           Home
         </Text>
-        <View absR marginR-20>
+        <View absR marginR-40>
           <Button
             marginT-20
             round

@@ -64,16 +64,13 @@ class GridViewScreen extends Component {
       (products: any[]) =>
         _.map(products, product => ({
           containerProps: {
-            useNative: true,
-            activeScale: 0.97,
-            activeOpacity: 1,
           },
           renderCustomItem: () => {
             return (
-              <Card height={150} activeOpacity={1}>
-                <Card.Image
-                  style={{flex: 1}}
-                  source={{uri: product.mediaUrl}}
+              <Card height={150} width={180} activeOpacity={1}>
+                <Image
+                  style={{flex: 1, width: '100%'}}
+                  source={require('../../assets/images/empty-state.jpg')}
                 />
               </Card>
             );
@@ -228,7 +225,7 @@ class GridViewScreen extends Component {
         <TestCase itShould="设置 activeBackgroundColor: red 属性 按下为红色反馈">
           <View padding-20>
             <ScrollView onLayout={this.onLayout}>
-              <View padding-page>
+              <View padding-2>
                 <Text center h1>
                   GridView
                 </Text>
@@ -238,7 +235,7 @@ class GridViewScreen extends Component {
                 </Text>
                 <GridView
                   items={contacts}
-                  // viewWidth={300}
+                  viewWidth={280}
                   numColumns={6}
                   lastItemOverlayColor={Colors.rgba(
                     Colors.$backgroundPrimaryHeavy,
@@ -253,6 +250,7 @@ class GridViewScreen extends Component {
                 <GridView
                   items={products}
                   numColumns={4}
+                  viewWidth={280}
                   lastItemOverlayColor={Colors.rgba(
                     Colors.$backgroundPrimaryHeavy,
                     0.6,

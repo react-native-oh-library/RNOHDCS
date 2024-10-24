@@ -139,7 +139,7 @@ Scroll: ${scroll}`;
     return (
       <View>
         <View margin-20>
-          <Text $textDefault>{title}</Text>
+          <Text $textDefault onPress={this.hideDialog}>{title}</Text>
         </View>
         <View height={2} bg-grey70 />
       </View>
@@ -275,11 +275,12 @@ Scroll: ${scroll}`;
         panDirection={panDirection}
         containerStyle={isRounded ? styles.roundedDialog : styles.dialog}
         visible={showDialog}
-        onDismiss={this.hideDialog}
+        // onDismiss={this.hideDialog}
         renderPannableHeader={renderPannableHeader}
         pannableHeaderProps={this.pannableTitle}
         supportedOrientations={this.supportedOrientations}
         ignoreBackgroundPress={ignoreBackgroundPress}>
+          <Button text60 label="close" link onPress={this.hideDialog} />
         {this.renderContent()}
       </Dialog>
     );
@@ -298,9 +299,9 @@ Scroll: ${scroll}`;
     return (
       <TestSuite name="Dialog">
         <TestCase itShould="例子">
-          <View padding-20>
+          <View padding-2>
             <ScrollView>
-              <View flex padding-12>
+              <View flex padding-2>
                 <Text $textDefault text30 marginB-20>
                   Dialog
                 </Text>
@@ -310,27 +311,27 @@ Scroll: ${scroll}`;
                   initialValue={panDirection}
                   onValueChange={this.setPanDirection}>
                   <Text $textDefault>Panning Direction:</Text>
-                  <View row marginV-10>
+                  <View marginV-10 style={{flexWrap: 'wrap'}}>
                     <RadioButton value={null} label={'None'} />
                     <RadioButton
                       value={Dialog.directions.UP}
                       label={'Up'}
-                      marginL-10
+                      // marginL-10
                     />
                     <RadioButton
                       value={Dialog.directions.DOWN}
                       label={'Down'}
-                      marginL-10
+                      // marginL-10
                     />
                     <RadioButton
                       value={Dialog.directions.LEFT}
                       label={'Left'}
-                      marginL-10
+                      // marginL-10
                     />
                     <RadioButton
                       value={Dialog.directions.RIGHT}
                       label={'Right'}
-                      marginL-10
+                      // marginL-10
                     />
                   </View>
                 </RadioGroup>

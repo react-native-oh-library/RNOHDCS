@@ -17,7 +17,7 @@ export default class LoadingScreen extends Component {
     const {loading} = this.state;
     return (
       <TestSuite name="Loader">
-        <TestCase itShould="设置 activeBackgroundColor: red 属性 按下为红色反馈">
+        <TestCase itShould="设置 message 属性 Loading...">
           <View padding-20>
             <View flex bg-orange70 center>
               <Text text10>Content Content Content</Text>

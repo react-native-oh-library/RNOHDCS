@@ -139,7 +139,7 @@ const IncubatorSliderScreen = () => {
 
   const renderCustomSliderExample = () => {
     return (
-      <View marginT-20 marginH-40>
+      <View marginT-20 marginH-1>
         <Text margin-10 text70BL $textDefault>
           Custom Slider
         </Text>
@@ -189,7 +189,7 @@ const IncubatorSliderScreen = () => {
     return (
       <View marginT-20>
         <Text margin-10 text70BL $textDefault>
-          Range Slider values 0 to 100
+          Range Slider values 0 to 350
         </Text>
         <View marginH-20>
           {renderValuesBox(sliderMinValue, sliderMaxValue)}

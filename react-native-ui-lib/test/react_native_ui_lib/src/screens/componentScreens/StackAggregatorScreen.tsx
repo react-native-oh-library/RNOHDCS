@@ -57,7 +57,7 @@ export default class StackAggregatorScreen extends Component {
         keyboardShouldPersistTaps={'handled'}
         showsVerticalScrollIndicator={false}>
         <TestSuite name="StackAggregator">
-          <TestCase itShould="设置 activeBackgroundColor: red 属性 按下为红色反馈">
+          <TestCase itShould="例子">
             <View padding-20>
               <Text center grey40 text90 marginT-20>
                 Thu, 10 Dec, 11:29
@@ -72,7 +72,7 @@ export default class StackAggregatorScreen extends Component {
               </StackAggregator>
             </View>
           </TestCase>
-          <TestCase itShould="设置 activeBackgroundColor: red 属性 按下为红色反馈">
+          <TestCase itShould="设置 contentContainerStyle: red,  collapsed: false属性">
             <View padding-20>
               <Text center grey40 text90 marginT-20>
                 Thu, 11 Dec, 13:03

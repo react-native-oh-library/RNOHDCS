@@ -127,7 +127,7 @@ export default class PickerScreen extends Component {
     return (
       <TestSuite name="Picker Picker.Item">
         {/* <View padding-80 /> */}
-        <TestCase itShould="设置 activeBackgroundColor: red 属性 按下为红色反馈">
+        <TestCase itShould="例子">
           <View padding-20>
           <Picker
             placeholder="Favorite Language"
@@ -135,8 +135,9 @@ export default class PickerScreen extends Component {
             value={this.state.language}
             enableModalBlur={false}
             onChange={item => this.setState({language: item})}
-            topBarProps={{title: 'Languages'}}
-            // style={{color: Colors.red20}}
+            topBarProps={{title: 'Languages', containerStyle: {marginTop: 30}}}
+            // style={{marginTop: 20, backgroundColor: 'red'}}
+            // containerStyle={{marginTop: 20, backgroundColor: 'red'}}
             showSearch
             searchPlaceholder={'Search a language'}
             searchStyle={{color: Colors.blue30, placeholderTextColor: Colors.grey50}}
@@ -148,6 +149,7 @@ export default class PickerScreen extends Component {
             placeholder="Favorite Languages (up to 3)"
             value={this.state.languages}
             onChange={items => this.setState({languages: items})}
+            topBarProps={{containerStyle: {marginTop: 30}}}
             mode={Picker.modes.MULTI}
             selectionLimit={3}
             trailingAccessory={dropdownIcon}
@@ -167,7 +169,7 @@ export default class PickerScreen extends Component {
             topBarProps={{title: 'Languages'}}
             // useDialog
             renderCustomDialogHeader={({onDone, onCancel}) => (
-              <View padding-s5 row spread>
+              <View marginT-20 padding-s5 row spread>
                 <Button link label="Cancel" onPress={onCancel}/>
                 <Button link label="Done" onPress={onDone}/>
               </View>
@@ -186,6 +188,7 @@ export default class PickerScreen extends Component {
             onChange={filter => {
               this.setState({filter})
             }}
+            topBarProps={{title: 'Languages', containerStyle: {marginTop: 30}}}
             renderPicker={(_value?: any, label?: string) => {
               return (
                 <View row>
@@ -204,6 +207,7 @@ export default class PickerScreen extends Component {
           <Picker
             value={this.state.scheme}
             onChange={value => this.setState({scheme: value})}
+            topBarProps={{title: 'Languages', containerStyle: {marginTop: 30}}}
             label="form"
             placeholder="Filter posts"
             fieldType={Picker.fieldTypes.form}
@@ -214,6 +218,7 @@ export default class PickerScreen extends Component {
           label="filter"
             value={this.state.filter}
             onChange={value => this.setState({filter: value})}
+            topBarProps={{title: 'Languages', containerStyle: {marginTop: 30}}}
             placeholder="Filter posts"
             fieldType={Picker.fieldTypes.filter}
             marginB-s3
@@ -222,6 +227,7 @@ export default class PickerScreen extends Component {
           <Picker
             value={this.state.scheme}
             onChange={value => this.setState({scheme: value})}
+            topBarProps={{title: 'Languages', containerStyle: {marginTop: 30}}}
             label="settings"
             placeholder="Filter posts"
             fieldType={Picker.fieldTypes.settings}
