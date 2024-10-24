@@ -86,10 +86,10 @@ export default function Walkthrough() {
             <TestCase itShould="测试allowChildInteraction属性,设置为false,提示中下面的元素无法关闭提示">
                 <TooltipAllowChildInteraction allowChildInteraction={false} />
             </TestCase>
-            <TestCase itShould="测试closeOnChildInteraction属性,设置为true,点击提示中下方的内容将关闭提示">
+            <TestCase itShould="测试closeOnChildInteraction属性,设置为true,点击提示中下方的内容可以交互">
                 <TooltipCloseOnChildInteraction closeOnChildInteraction={true} />
             </TestCase>
-            <TestCase itShould="测试closeOnChildInteraction属性,设置为false,点击提示中下方的内容将不关闭提示">
+            <TestCase itShould="测试closeOnChildInteraction属性,设置为false,点击提示中下方的内容不可以交互">
                 <TooltipCloseOnChildInteraction closeOnChildInteraction={false} />
             </TestCase>
             <TestCase itShould="测试closeOnContentInteraction属性,设置为true,点击提示中上方的内容将关闭提示">
