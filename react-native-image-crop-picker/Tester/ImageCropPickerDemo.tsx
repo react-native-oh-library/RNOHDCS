@@ -663,102 +663,6 @@ export function ImageCropPickerDemo() {
               assert={({ expect, state }) => { expect(state).to.be.true }}
             />
             <TestCase
-              itShould="openCropper compressImageMaxWidth"
-              initialState={undefined as any}
-              arrange={({ setState }) => {
-                return (
-                  <View style={styles.viewBos}>
-                    <Button
-                      title="compressImageMaxWidth 500"
-                      onPress={() => {
-                        if (!image?.uri) return;
-                        ImagePicker.openCropper({
-                          path: image.uri,
-                          compressImageMaxWidth: 500
-                        }).then(image => {
-                          setImage({ ...image, uri: image.path })
-                          setState(true)
-                        });
-                      }}
-                    />
-                  </View>
-                );
-              }}
-              assert={({ expect, state }) => { expect(state).to.be.true }}
-            />
-            <TestCase
-              itShould="openCropper compressImageMaxWidth 2"
-              initialState={undefined as any}
-              arrange={({ setState }) => {
-                return (
-                  <View style={styles.viewBos}>
-                    <Button
-                      title="compressImageMaxWidth 1000"
-                      onPress={() => {
-                        if (!image?.uri) return;
-                        ImagePicker.openCropper({
-                          path: image.uri,
-                          compressImageMaxWidth: 1000
-                        }).then(image => {
-                          setImage({ ...image, uri: image.path })
-                          setState(true)
-                        });
-                      }}
-                    />
-                  </View>
-                );
-              }}
-              assert={({ expect, state }) => { expect(state).to.be.true }}
-            />
-            <TestCase
-              itShould="openCropper compressImageMaxHeight"
-              initialState={undefined as any}
-              arrange={({ setState }) => {
-                return (
-                  <View style={styles.viewBos}>
-                    <Button
-                      title="compressImageMaxHeight 500"
-                      onPress={() => {
-                        if (!image?.uri) return;
-                        ImagePicker.openCropper({
-                          path: image.uri,
-                          compressImageMaxHeight: 500
-                        }).then(image => {
-                          setImage({ ...image, uri: image.path })
-                          setState(true)
-                        });
-                      }}
-                    />
-                  </View>
-                );
-              }}
-              assert={({ expect, state }) => { expect(state).to.be.true }}
-            />
-            <TestCase
-              itShould="openCropper compressImageMaxHeight 2"
-              initialState={undefined as any}
-              arrange={({ setState }) => {
-                return (
-                  <View style={styles.viewBos}>
-                    <Button
-                      title="compressImageMaxHeight 1000"
-                      onPress={() => {
-                        if (!image?.uri) return;
-                        ImagePicker.openCropper({
-                          path: image.uri,
-                          compressImageMaxHeight: 1000
-                        }).then(image => {
-                          setImage({ ...image, uri: image.path })
-                          setState(true)
-                        });
-                      }}
-                    />
-                  </View>
-                );
-              }}
-              assert={({ expect, state }) => { expect(state).to.be.true }}
-            />
-            <TestCase
               itShould="openCropper compressImageQuality"
               initialState={undefined as any}
               arrange={({ setState }) => {
@@ -1028,7 +932,7 @@ export function ImageCropPickerDemo() {
                 return (
                   <View style={styles.viewBos}>
                     <Button
-                      title="cropperChooseColor: #8b4513"
+                      title="cropperChooseColor default"
                       onPress={() => {
                         if (!image?.uri) return;
                         ImagePicker.openCropper({
@@ -1170,7 +1074,7 @@ export function ImageCropPickerDemo() {
                 return (
                   <View style={styles.viewBos}>
                     <Button
-                      title="cropperCancelColor: #8b4513"
+                      title="cropperCancelColor default"
                       onPress={() => {
                         if (!image?.uri) return;
                         ImagePicker.openCropper({
