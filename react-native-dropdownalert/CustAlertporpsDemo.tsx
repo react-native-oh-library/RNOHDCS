@@ -723,32 +723,35 @@ function CustAlertporpsDemo(): React.JSX.Element {
       color: DropdownAlertColor.Warn,
     },
     {
-      name: 'panResponderDismissDistance 100',
-      itshould: 'panResponderDismissDistance 100',
+      name: 'panResponderDismissDistance -20',
+      itshould: 'panResponderDismissDistance -20',
       alertData: {
         type: DropdownAlertType.Success,
         title: 'I am title',
-        message: 'messageNumberOfLines messageNumberOfLines',
+        message: 'messageNumberOfLines messageNumberOfLines messageNumberOfLines messageNumberOfLines messageNumberOfLines messageNumberOfLines messageNumberOfLines messageNumberOfLinesmessageNumberOfLines messageNumberOfLines messageNumberOfLines messageNumberOfLinesmessageNumberOfLines messageNumberOfLines messageNumberOfLines messageNumberOfLinesmessageNumberOfLines messageNumberOfLines messageNumberOfLines messageNumberOfLinesmessageNumberOfLines messageNumberOfLines messageNumberOfLines messageNumberOfLinesmessageNumberOfLines messageNumberOfLines messageNumberOfLines messageNumberOfLines',
       },
       alertProps: {
         alertPosition: 'bottom',
         onDismissPressDisabled: true,
-        panResponderDismissDistance: 100,
+        panResponderDismissDistance: -20,
+        dismissInterval:1000000
+
       },
       color: DropdownAlertColor.Success,
     },
     {
-      name: 'panResponderDismissDistance 300',
-      itshould: 'panResponderDismissDistance 300',
+      name: 'panResponderDismissDistance -80',
+      itshould: 'panResponderDismissDistance -80',
       alertData: {
         type: DropdownAlertType.Success,
         title: 'I am title',
-        message: 'messageNumberOfLines messageNumberOfLines',
+        message: 'messageNumberOfLines messageNumberOfLines messageNumberOfLines messageNumberOfLines messageNumberOfLines messageNumberOfLines messageNumberOfLines messageNumberOfLinesmessageNumberOfLines messageNumberOfLines messageNumberOfLines messageNumberOfLinesmessageNumberOfLines messageNumberOfLines messageNumberOfLines messageNumberOfLinesmessageNumberOfLines messageNumberOfLines messageNumberOfLines messageNumberOfLinesmessageNumberOfLines messageNumberOfLines messageNumberOfLines messageNumberOfLinesmessageNumberOfLines messageNumberOfLines messageNumberOfLines messageNumberOfLines',
       },
       alertProps: {
         alertPosition: 'bottom',
         onDismissPressDisabled: true,
-        panResponderDismissDistance: 300,
+        panResponderDismissDistance: -80,
+        dismissInterval:1000000
       },
       color: DropdownAlertColor.Success,
     },
