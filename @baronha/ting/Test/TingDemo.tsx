@@ -881,47 +881,6 @@ export function TingExample() {
                         </View>
                     </TestCase>
 
-                    <TestCase itShould="blurBackdrop (android only)" tags={['C_API']}>
-                        <Button
-                            title="default"
-                            onPress={() => {
-                                const options: AlertOptions = {
-                                    title: 'title-Alert',
-                                    message: 'message-Alert',
-                                };
-                                handleAlert(options);
-                            }}
-                        />
-
-                        <View style={styles.buttonBox}>
-                            <Button
-                                title="change-10"
-                                onPress={() => {
-                                    const options: AlertOptions = {
-                                        title: 'title-Alert',
-                                        message: 'message-Alert',
-                                        blurBackdrop: 10,
-                                    };
-                                    handleAlert(options);
-                                }}
-                            />
-                        </View>
-
-                        <View style={styles.buttonBox}>
-                            <Button
-                                title="change-50"
-                                onPress={() => {
-                                    const options: AlertOptions = {
-                                        title: 'title-Alert',
-                                        message: 'message-Alert',
-                                        blurBackdrop: 50,
-                                    };
-                                    handleAlert(options);
-                                }}
-                            />
-                        </View>
-                    </TestCase>
-
                     <TestCase itShould="backdropOpacity" tags={['C_API']}>
                         <Button
                             title="default"
