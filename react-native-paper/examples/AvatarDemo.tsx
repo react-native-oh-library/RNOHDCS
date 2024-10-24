@@ -127,7 +127,7 @@ export function AvatarTest() {
             value: {
               style:styles.avatar,
               size:60,
-              source:require('../assets/images/avataraaaa.png'),
+              source:require('../assets/images/avatar.png'),
               onError:_onError
             }
           },
