@@ -1,4 +1,4 @@
-import {Button, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 import React, {useRef, useState} from 'react';
 import {
   Camera,
@@ -8,7 +8,7 @@ import {
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
-export function PhotoIsZoomExample() {
+export function FocusTest() {
   const device = useCameraDevice('back');
   const format = useCameraFormat(device, [
     {videoResolution: {width: 3048, height: 2160}},
@@ -16,6 +16,7 @@ export function PhotoIsZoomExample() {
   ]);
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
+  const [result, setResult] = useState<string>('');
 
   if (!device) {
     return <Text>No Devices</Text>;
@@ -25,32 +26,26 @@ export function PhotoIsZoomExample() {
     requestPermission();
   }
 
-  // 属性
-
-  const [zoom, setZoom] = useState(1);
-
-  const getRandomNumber = (min: number, max: number): number => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
-
-  const changeZoom = () => {
-    setZoom(getRandomNumber(0.48, 15));
-  };
-  const changeZoom1X = () => {
-    setZoom(1);
-  };
-  const changeZoom14X = () => {
-    setZoom(1.4);
-  };
-
-  const onResetProps = () => {
-    setZoom(1);
+  // 聚焦
+  const onFocus = async () => {
+    const getRandomNumber = (min: number, max: number): number => {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
+    const randomPoint = {
+      x: getRandomNumber(0, 2000),
+      y: getRandomNumber(0, 4000),
+    };
+    setResult(`\n随机聚焦坐标: ${JSON.stringify(randomPoint)}`);
+    await camera.current?.focus(randomPoint);
   };
 
   return (
     <Tester>
-      <TestSuite name="zoom">
-        <TestCase itShould={`zoom:${zoom}`}>
+      <TestSuite name="Focus">
+        <TestCase itShould={`设置聚焦坐标`}>
+          <View>
+            <Text>focus:{result}</Text>
+          </View>
           <Camera
             style={style.cameraPreview}
             ref={camera}
@@ -58,15 +53,10 @@ export function PhotoIsZoomExample() {
             isActive
             preview
             photo
-            zoom={zoom}
             format={format}
           />
-          {/* 按钮组 */}
           <View style={style.actionBtn}>
-            <Button title="zoom" onPress={changeZoom}></Button>
-            <Button title="zoom1x" onPress={changeZoom1X}></Button>
-            <Button title="zoom1.4x" onPress={changeZoom14X}></Button>
-            <Button title="重置" onPress={onResetProps}></Button>
+            <Button title="设置随机坐标" onPress={onFocus} />
           </View>
         </TestCase>
       </TestSuite>
@@ -75,7 +65,7 @@ export function PhotoIsZoomExample() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 400},
+  cameraPreview: {width: 300, height: 600},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',

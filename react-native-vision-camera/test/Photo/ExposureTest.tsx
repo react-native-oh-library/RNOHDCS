@@ -8,7 +8,7 @@ import {
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
-export function requestLocationPermissionTest() {
+export function ExposureTest() {
   const device = useCameraDevice('back');
   const format = useCameraFormat(device, [
     {videoResolution: {width: 3048, height: 2160}},
@@ -26,23 +26,19 @@ export function requestLocationPermissionTest() {
     requestPermission();
   }
 
-  const [status, set] = useState<string>('');
-
-  const requestLocationPermission = async () => {
-    const res = await Camera.requestLocationPermission();
-    res && set(JSON.stringify(res));
-    console.log('====================================');
-    console.log('res', JSON.stringify(res));
-    console.log('====================================');
+  // 拍照
+  const onTakePhoto = async () => {
+    const result = await camera.current?.takePhoto();
+    result && setPhotoFile(JSON.stringify(result));
   };
+
+  // 属性
+  const [exposure, setExposure] = useState<number>(0);
 
   return (
     <Tester>
-      <TestSuite name="requestLocationPermission">
-        <TestCase itShould={`发起位置授权请求`}>
-          <View>
-            <Text>result: {status}</Text>
-          </View>
+      <TestSuite name="exposure:白平衡">
+        <TestCase itShould={`exposure:${exposure}`}>
           <Camera
             style={style.cameraPreview}
             ref={camera}
@@ -51,12 +47,26 @@ export function requestLocationPermissionTest() {
             preview
             photo
             format={format}
-            enableLocation
+            exposure={exposure}
           />
-          <View>
+          <View style={style.actionBtn}>
             <Button
-              title="requestLocationPermission"
-              onPress={requestLocationPermission}
+              title="setExposure:1"
+              onPress={() => {
+                setExposure(1);
+              }}
+            />
+            <Button
+              title="setExposure:2"
+              onPress={() => {
+                setExposure(2);
+              }}
+            />
+            <Button
+              title="reset"
+              onPress={() => {
+                setExposure(0);
+              }}
             />
           </View>
         </TestCase>
@@ -66,7 +76,7 @@ export function requestLocationPermissionTest() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 200},
+  cameraPreview: {width: 300, height: 600},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',

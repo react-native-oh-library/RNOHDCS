@@ -8,15 +8,15 @@ import {
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
-export function PhotoStatusExample() {
+export function AndroidPreviewViewTypeTest() {
   const device = useCameraDevice('back');
   const format = useCameraFormat(device, [
     {videoResolution: {width: 3048, height: 2160}},
     {fps: 60},
   ]);
-
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
+  const [photoFile, setPhotoFile] = useState<string>('');
 
   if (!device) {
     return <Text>No Devices</Text>;
@@ -26,57 +26,44 @@ export function PhotoStatusExample() {
     requestPermission();
   }
 
-  // 属性
-
-  const [status, setStatus] = useState<string>('');
-  const [photoFile, setPhotoFile] = useState<string>('');
-  const [isActive, setIsActive] = useState(true);
-  const onError = (e: any) => {
-    e && JSON.stringify(e);
+  // 拍照
+  const onTakePhoto = async () => {
+    const result = await camera.current?.takePhoto();
+    result && setPhotoFile(JSON.stringify(result));
   };
-    // 拍照
-    const onTakePhoto = async () => {
-      const result = await camera.current?.takePhoto();
-      result && setPhotoFile(JSON.stringify(result));
-    };
 
-    const changeIsActive = () => {
-      setIsActive(v => !v);
-    };
+  const [androidPreviewViewType, setAndroidPreviewViewType] = useState<
+    'surface-view' | 'texture-view'
+  >('surface-view');
+  const changeAndroidPreviewViewType = () => {
+    setAndroidPreviewViewType(
+      androidPreviewViewType === 'surface-view'
+        ? 'texture-view'
+        : 'surface-view',
+    );
+  };
 
-    
   return (
     <Tester>
-      <TestSuite name="相机状态信息">
-        <TestCase itShould={``}>
+      <TestSuite name="androidPreviewViewType">
+        <TestCase itShould={`${androidPreviewViewType}`}>
           <View>
-            <Text>status:{status}</Text>
+            <Text>拍照结果:{photoFile}</Text>
           </View>
           <Camera
             style={style.cameraPreview}
             ref={camera}
             device={device}
-            isActive={isActive}
+            isActive
             preview
             photo
             format={format}
-            onError={onError}
-            onInitialized={() => {
-              setStatus('我是onInitialized：初始化成功执行');
-            }}
-            onStarted={() => {
-              setStatus('我是onStarted，相机启动时执行');
-            }}
-            onStopped={() => {
-              setStatus('我是onStopped，相机关闭时执行');
-            }}
-            onShutter={() => {
-              setStatus('我是onShutter，相机拍照时执行');
-            }}
           />
-           <View style={style.actionBtn}>
+          <View style={style.actionBtn}>
             <Button title="拍照" onPress={onTakePhoto}></Button>
-            <Button title="changeIsActive" onPress={changeIsActive}></Button>
+            <Button
+              title="changeAndroidPreviewViewType"
+              onPress={changeAndroidPreviewViewType}></Button>
           </View>
         </TestCase>
       </TestSuite>
@@ -85,7 +72,7 @@ export function PhotoStatusExample() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 400},
+  cameraPreview: {width: 300, height: 600},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',

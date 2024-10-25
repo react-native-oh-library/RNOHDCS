@@ -9,14 +9,15 @@ import {
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 
-export function VideoAudioTest() {
+export function OnInitializedTest() {
   const device = useCameraDevice('back');
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
   const format = useCameraFormat(device, [
-    {videoResolution: {width: 3048, height: 2160}},
+    {videoResolution: {width: 1920, height: 1080}},
     {fps: 30},
   ]);
+
   if (!device) {
     return <Text>No Devices</Text>;
   }
@@ -38,6 +39,7 @@ export function VideoAudioTest() {
 
   const onStart = async () => {
     setVideoPath('');
+    setVideoFile('');
     seteStartStatus('start');
     await camera.current?.startRecording({
       fileType: 'mp4',
@@ -71,20 +73,14 @@ export function VideoAudioTest() {
     seteStartStatus('start');
     camera.current?.resumeRecording();
   };
-  const onChangeVideoCodeC = async () => {
-    const code = videoCodec === 'h264' ? 'h265' : 'h264';
-    setVideoCodec(code);
-  };
-
-  const onChangeAudio = async () => {
-    setAudio(!audio);
-  };
+  const [text, setText] = useState<string>('');
 
   return (
     <Tester>
-      <TestSuite name="audio">
-        <TestCase itShould={`启用视频录制的音频捕获:${audio ? '是' : '否'}`}>
+      <TestSuite name="onInitialized">
+        <TestCase itShould={`初始化成功的回调`}>
           <View>
+            <Text>状态信息:{text}</Text>
             <Text>录像结果:{videoFile}</Text>
           </View>
           {videoPath && (
@@ -93,7 +89,10 @@ export function VideoAudioTest() {
                 title="SaveAsset"
                 onPress={() => {
                   CameraRoll.saveAsset(videoPath).then(res => {
-                    console.log('video-res', JSON.stringify(res));
+                    setTimeout(() => {
+                      setVideoPath('');
+                      setVideoFile('');
+                    }, 500);
                   });
                 }}
               />
@@ -106,9 +105,12 @@ export function VideoAudioTest() {
             preview={preview}
             device={device}
             video={true}
-            audio={audio}
+            audio={false}
             videoHdr={videoHdr}
             fps={30}
+            onInitialized={() => {
+              setText('初始化成功!!!!');
+            }}
             format={format}
           />
 
@@ -140,12 +142,7 @@ export function VideoAudioTest() {
                   )}
                 </>
               )}
-              <Text>fps: 30</Text>
             </>
-            <Button
-              title={`codec:${videoCodec}`}
-              onPress={onChangeVideoCodeC}></Button>
-            <Button title={`audio:${audio}`} onPress={onChangeAudio}></Button>
           </View>
         </TestCase>
       </TestSuite>

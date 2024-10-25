@@ -1,4 +1,4 @@
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {Button, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useRef, useState} from 'react';
 import {
   Camera,
@@ -8,7 +8,7 @@ import {
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
-export function requestLocationPermissionTest() {
+export function ZoomTest() {
   const device = useCameraDevice('back');
   const format = useCameraFormat(device, [
     {videoResolution: {width: 3048, height: 2160}},
@@ -16,7 +16,6 @@ export function requestLocationPermissionTest() {
   ]);
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
-  const [photoFile, setPhotoFile] = useState<string>('');
 
   if (!device) {
     return <Text>No Devices</Text>;
@@ -26,23 +25,32 @@ export function requestLocationPermissionTest() {
     requestPermission();
   }
 
-  const [status, set] = useState<string>('');
+  // 属性
 
-  const requestLocationPermission = async () => {
-    const res = await Camera.requestLocationPermission();
-    res && set(JSON.stringify(res));
-    console.log('====================================');
-    console.log('res', JSON.stringify(res));
-    console.log('====================================');
+  const [zoom, setZoom] = useState(1);
+
+  const getRandomNumber = (min: number, max: number): number => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
+  const changeZoom = () => {
+    setZoom(getRandomNumber(0.48, 15));
+  };
+  const changeZoom1X = () => {
+    setZoom(1);
+  };
+  const changeZoom14X = () => {
+    setZoom(1.4);
+  };
+
+  const onResetProps = () => {
+    setZoom(1);
   };
 
   return (
     <Tester>
-      <TestSuite name="requestLocationPermission">
-        <TestCase itShould={`发起位置授权请求`}>
-          <View>
-            <Text>result: {status}</Text>
-          </View>
+      <TestSuite name="zoom">
+        <TestCase itShould={`zoom:${zoom}`}>
           <Camera
             style={style.cameraPreview}
             ref={camera}
@@ -50,14 +58,15 @@ export function requestLocationPermissionTest() {
             isActive
             preview
             photo
+            zoom={zoom}
             format={format}
-            enableLocation
           />
-          <View>
-            <Button
-              title="requestLocationPermission"
-              onPress={requestLocationPermission}
-            />
+          {/* 按钮组 */}
+          <View style={style.actionBtn}>
+            <Button title="zoom" onPress={changeZoom}></Button>
+            <Button title="zoom1x" onPress={changeZoom1X}></Button>
+            <Button title="zoom1.4x" onPress={changeZoom14X}></Button>
+            <Button title="重置" onPress={onResetProps}></Button>
           </View>
         </TestCase>
       </TestSuite>
@@ -66,7 +75,7 @@ export function requestLocationPermissionTest() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 200},
+  cameraPreview: {width: 300, height: 600},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',

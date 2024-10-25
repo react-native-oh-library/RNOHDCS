@@ -31,15 +31,13 @@ export function requestCameraPermissionTest() {
   const requestCameraPermission = async () => {
     const res = await Camera.requestCameraPermission();
     res && set(JSON.stringify(res));
-    console.log('====================================');
-    console.log('res', JSON.stringify(res));
-    console.log('====================================');
   };
 
   return (
     <Tester>
       <TestSuite name="requestCameraPermission">
         <TestCase itShould={`发起相机授权请求`}>
+          <Text>result: {status}</Text>
           <Camera
             style={style.cameraPreview}
             ref={camera}
@@ -51,7 +49,6 @@ export function requestCameraPermissionTest() {
             enableLocation
           />
           <View>
-            <Text>requestCameraPermission{status}</Text>
             <Button
               title="requestCameraPermission"
               onPress={requestCameraPermission}

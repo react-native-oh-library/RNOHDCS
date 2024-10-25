@@ -8,7 +8,7 @@ import {
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
-export function requestLocationPermissionTest() {
+export function isActiveTest() {
   const device = useCameraDevice('back');
   const format = useCameraFormat(device, [
     {videoResolution: {width: 3048, height: 2160}},
@@ -26,38 +26,41 @@ export function requestLocationPermissionTest() {
     requestPermission();
   }
 
-  const [status, set] = useState<string>('');
+  // 拍照
+  const onTakePhoto = async () => {
+    const result = await camera.current?.takePhoto();
+    result && setPhotoFile(JSON.stringify(result));
+  };
 
-  const requestLocationPermission = async () => {
-    const res = await Camera.requestLocationPermission();
-    res && set(JSON.stringify(res));
-    console.log('====================================');
-    console.log('res', JSON.stringify(res));
-    console.log('====================================');
+  // 属性
+  const [isActive, setIsActive] = useState(true);
+
+  const changeIsActive = () => {
+    setIsActive(v => !v);
   };
 
   return (
     <Tester>
-      <TestSuite name="requestLocationPermission">
-        <TestCase itShould={`发起位置授权请求`}>
-          <View>
-            <Text>result: {status}</Text>
+      <TestSuite name="拍照isActive：激活/禁用">
+        <TestCase itShould={`当前状态:${isActive ? '启用' : '禁用'}`}>
+        <View>
+            <Text>拍照结果:{photoFile}</Text>
           </View>
           <Camera
             style={style.cameraPreview}
             ref={camera}
             device={device}
-            isActive
+            isActive={isActive}
             preview
             photo
             format={format}
-            enableLocation
           />
           <View>
-            <Button
-              title="requestLocationPermission"
-              onPress={requestLocationPermission}
-            />
+            <Text>isActive:{isActive+''}</Text>
+          </View>
+          <View style={style.actionBtn}>
+            <Button title="拍照" onPress={onTakePhoto}></Button>
+            <Button title="changeIsActive" onPress={changeIsActive}></Button>
           </View>
         </TestCase>
       </TestSuite>
@@ -66,7 +69,7 @@ export function requestLocationPermissionTest() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 200},
+  cameraPreview: {width: 300, height: 600},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',

@@ -1,20 +1,15 @@
-import {Button, StyleSheet, Text, View} from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import React, {useRef, useState} from 'react';
 import {
   Camera,
   useCameraDevice,
-  useCameraFormat,
   useCameraPermission,
   useCodeScanner,
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
-export function CodeScanTorchExample() {
+export function onErrorTest() {
   const device = useCameraDevice('back');
-  const format = useCameraFormat(device, [
-    {videoResolution: {width: 3048, height: 2160}},
-    {fps: 60},
-  ]);
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
 
@@ -43,7 +38,7 @@ export function CodeScanTorchExample() {
       'aztec',
       'data-matrix',
     ],
-    onCodeScanned: (codes: string | any[], frame: any) => {
+    onCodeScanned: (codes: string | any[]) => {
       if (codes.length) {
         setIsActive(false);
       }
@@ -53,29 +48,15 @@ export function CodeScanTorchExample() {
   });
 
   const [isActive, setIsActive] = useState(true);
-  const [torch, setTorch] = useState<'off' | 'on'>('off');
-  const [torchTxt, setTorchTxt] = useState(torch);
   const [errorStr, setErrorStr] = useState<string>('');
-
-  useEffect(() => {
-    setTorchTxt(torch);
-  }, [torch]);
-
-  const changeIsActive = () => {
-    setIsActive(!isActive);
-  };
-
-  const changeSetTorch = () => {
-    setTorch(torch === 'off' ? 'on' : 'off');
-  };
 
   return (
     <Tester>
-      <TestSuite name="torch">
-        <TestCase itShould={`手电筒： ${torch === 'on' ? '开启' : '关闭'}`}>
+      <TestSuite name="onError">
+        <TestCase itShould={`错误信息的回调`}>
           <View>
+            <Text style={styles.text}>错误信息:{errorStr}</Text>
             <Text style={styles.text}>codes:{codes}</Text>
-            <Text style={styles.text}>err:{errorStr}</Text>
           </View>
           <Camera
             style={styles.cameraPreview}
@@ -84,18 +65,10 @@ export function CodeScanTorchExample() {
             device={device}
             isActive={isActive}
             preview
-            torch={torch}
-            format={format}
             onError={(e: any) => {
               setErrorStr(JSON.stringify(e));
             }}
           />
-          <View style={styles.actionBtn}>
-            <Button
-              title={`changeSetTorch:${torchTxt}`}
-              onPress={changeSetTorch}
-            />
-          </View>
         </TestCase>
       </TestSuite>
     </Tester>

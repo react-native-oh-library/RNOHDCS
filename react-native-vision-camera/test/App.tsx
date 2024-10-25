@@ -1,13 +1,13 @@
 import React, {ReactElement} from 'react';
-import {PhotoTest} from './Photo/PhotoTest';
-import {CodeScanTest} from './CodeScan/CodeScanTest';
-import {VideoTest} from './Video/VideoTest';
+import {PhotoTestApp} from './Photo/App';
+import {CodeScanTestApp} from './CodeScan/App';
+import {VideoTestAPP} from './Video/APP';
 import {TabNavigator} from '../components/TabNavigator';
 
 const tabs = [
-  {title: 'PhotoTest', content: <PhotoTest />},
-  {title: 'CodeScanTest', content: <CodeScanTest />},
-  {title: 'VideoTest', content: <VideoTest />},
+  {title: 'PhotoTestApp', content: <PhotoTestApp />},
+  {title: 'CodeScanTestApp', content: <CodeScanTestApp />},
+  {title: 'VideoTestAPP', content: <VideoTestAPP />},
 ];
 
 export const VisionCameraExampleApp = (): ReactElement => {
@@ -15,3 +15,4 @@ export const VisionCameraExampleApp = (): ReactElement => {
 };
 
 export default VisionCameraExampleApp;
+

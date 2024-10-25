@@ -8,7 +8,7 @@ import {
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
-export function PhotoEnableLocationExample() {
+export function TorchTest() {
   const device = useCameraDevice('back');
   const format = useCameraFormat(device, [
     {videoResolution: {width: 3048, height: 2160}},
@@ -17,7 +17,6 @@ export function PhotoEnableLocationExample() {
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
   const [photoFile, setPhotoFile] = useState<string>('');
-  const [enableLocation, setEnableLocation] = useState(false);
 
   if (!device) {
     return <Text>No Devices</Text>;
@@ -33,17 +32,17 @@ export function PhotoEnableLocationExample() {
     result && setPhotoFile(JSON.stringify(result));
   };
 
-  const changeEnableLocation = () => {
-    setEnableLocation(v => !v);
+  // 属性
+  const [torch, setTorch] = useState<'off' | 'on'>('off');
+
+  const changeTorch = () => {
+    setTorch(v => (v === 'on' ? 'off' : 'on'));
   };
 
   return (
     <Tester>
-      <TestSuite name="enableLocation">
-        <TestCase itShould={`${enableLocation ? '启用' : '禁用'}`}>
-          <View>
-            <Text>拍照结果:{photoFile}</Text>
-          </View>
+      <TestSuite name="torch：手电筒的状态">
+        <TestCase itShould={`当前状态:${torch === 'on' ? '开启' : '关闭'}`}>
           <Camera
             style={style.cameraPreview}
             ref={camera}
@@ -52,13 +51,13 @@ export function PhotoEnableLocationExample() {
             preview
             photo
             format={format}
-            enableLocation={enableLocation}
+            torch={torch}
           />
+          <View>
+            <Text style={style.text}>torch:{torch}</Text>
+          </View>
           <View style={style.actionBtn}>
-            <Button title="拍照" onPress={onTakePhoto}></Button>
-            <Button
-              title="enableLocation"
-              onPress={changeEnableLocation}></Button>
+            <Button title="changeTorch" onPress={changeTorch}></Button>
           </View>
         </TestCase>
       </TestSuite>
@@ -67,7 +66,7 @@ export function PhotoEnableLocationExample() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 400},
+  cameraPreview: {width: 300, height: 600},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -80,6 +79,6 @@ const style = StyleSheet.create({
   text: {
     fontSize: 20,
     textAlign: 'center',
-    color: '#000',
+    color: '#fff',
   },
 });

@@ -31,15 +31,19 @@ export function getCameraPermissionStatusTest() {
   const getCameraPermissionStatus = async () => {
     const res = await Camera.getCameraPermissionStatus();
     res && set(JSON.stringify(res));
-    console.log('====================================');
-    console.log('res', JSON.stringify(res));
-    console.log('====================================');
   };
 
   return (
     <Tester>
       <TestSuite name="getCameraPermissionStatus">
         <TestCase itShould={`获取相机授权情况`}>
+          <View>
+            <Text>getCameraPermissionStatus{status}</Text>
+            <Button
+              title="getCameraPermissionStatus"
+              onPress={getCameraPermissionStatus}
+            />
+          </View>
           <Camera
             style={style.cameraPreview}
             ref={camera}
@@ -50,13 +54,6 @@ export function getCameraPermissionStatusTest() {
             format={format}
             enableLocation
           />
-          <View>
-            <Text>getCameraPermissionStatus{status}</Text>
-            <Button
-              title="getCameraPermissionStatus"
-              onPress={getCameraPermissionStatus}
-            />
-          </View>
         </TestCase>
       </TestSuite>
     </Tester>
@@ -64,7 +61,7 @@ export function getCameraPermissionStatusTest() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 200},
+  cameraPreview: {width: 300, height: 400},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',

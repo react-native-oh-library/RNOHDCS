@@ -5,7 +5,7 @@ import * as testSuiteByName from './index';
 
 import {NavigationContainer, Page} from '../../components/Navigation';
 
-export function CodeScanTest() {
+export function CodeScanTestApp() {
   return (
     <View style={{backgroundColor: 'black'}}>
       <SafeAreaView>

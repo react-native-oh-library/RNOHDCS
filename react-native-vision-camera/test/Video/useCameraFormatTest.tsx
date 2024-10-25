@@ -3,17 +3,18 @@ import React, {useRef, useState} from 'react';
 import {
   Camera,
   useCameraDevice,
-  useCameraFormat,
   useCameraPermission,
+  useCameraDevices,
+  useCameraFormat,
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 
-export function VideoStabilizationModeTest() {
+export function useCameraFormatTest() {
   const device = useCameraDevice('back');
+  const devices = useCameraDevices();
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
-
   const format = useCameraFormat(device, [
     {videoResolution: {width: 1920, height: 1080}},
     {fps: 30},
@@ -37,13 +38,14 @@ export function VideoStabilizationModeTest() {
   const [videoHdr, setVideoHdr] = useState(false);
 
   const [startStatus, seteStartStatus] = useState('end');
-  const [eq, setEq] = useState(0);
   const [videoFile, setVideoFile] = useState<string>('');
   const [videoPath, setVideoPath] = useState<string>('');
+  const [fps, set] = useState<number>(30);
 
   const onStart = async () => {
-    seteStartStatus('start');
     setVideoPath('');
+    setVideoFile('');
+    seteStartStatus('start');
     await camera.current?.startRecording({
       fileType: 'mp4',
       flash: flash,
@@ -77,48 +79,13 @@ export function VideoStabilizationModeTest() {
     camera.current?.resumeRecording();
   };
 
-  const onChangeVideoMode = async () => {
-    const modes = [
-      'off',
-      'standard',
-      'cinematic',
-      'cinematic-extended',
-      'auto',
-    ];
-    eq >= modes.length - 1 ? setEq(0) : setEq(eq + 1);
-    const mode = modes[eq] as
-      | 'off'
-      | 'standard'
-      | 'cinematic'
-      | 'cinematic-extended'
-      | 'auto';
-    setVideoStabilizationMode(mode);
-    console.log(videoStabilizationMode);
-  };
-
   return (
     <Tester>
-      <TestSuite name="videoStabilizationMode">
-        <TestCase
-          itShould={`指定要使用的视频防抖模式:${videoStabilizationMode}`}>
+      <TestSuite name="useCameraDevice">
+        <TestCase itShould={``}>
           <View>
-            <Text>录像结果:{videoFile}</Text>
+            <Text>format:{JSON.stringify(format)}</Text>
           </View>
-          {videoPath && (
-            <View style={{height: 50}}>
-              <Button
-                title="SaveAsset"
-                onPress={() => {
-                  CameraRoll.saveAsset(videoPath).then(res => {
-                    setTimeout(() => {
-                      setVideoPath('');
-                      setVideoFile('');
-                    }, 500);
-                  });
-                }}
-              />
-            </View>
-          )}
           <Camera
             style={style.cameraPreview}
             ref={camera}
@@ -126,45 +93,12 @@ export function VideoStabilizationModeTest() {
             preview={preview}
             device={device}
             video={true}
-            audio
+            audio={false}
             videoHdr={videoHdr}
             videoStabilizationMode={videoStabilizationMode}
             fps={30}
             format={format}
           />
-
-          <View style={style.actionBtn}>
-            {videoHdr && videoCodec === 'h264' ? (
-              <Text>videoHdr为true时，videoCodeC只能设置为h265; </Text>
-            ) : (
-              <>
-                {startStatus === 'end' ? (
-                  <Button title="开始" onPress={onStart}></Button>
-                ) : (
-                  ''
-                )}
-                {startStatus === 'start' ? (
-                  <Button title="暂停" onPress={onPause}></Button>
-                ) : (
-                  ''
-                )}
-                {startStatus === 'pause' ? (
-                  <Button title="恢复" onPress={onResume}></Button>
-                ) : (
-                  ''
-                )}
-                {startStatus !== 'end' ? (
-                  <Button title="停止" onPress={onStop}></Button>
-                ) : (
-                  ''
-                )}
-              </>
-            )}
-
-            <Button
-              title={`mode:${videoStabilizationMode}`}
-              onPress={onChangeVideoMode}></Button>
-          </View>
         </TestCase>
       </TestSuite>
     </Tester>

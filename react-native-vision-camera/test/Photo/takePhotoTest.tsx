@@ -1,4 +1,4 @@
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {Button, Image, StyleSheet, Text, View} from 'react-native';
 import React, {useRef, useState} from 'react';
 import {
   Camera,
@@ -8,15 +8,15 @@ import {
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
-export function requestLocationPermissionTest() {
+export function takePhotoTest() {
   const device = useCameraDevice('back');
   const format = useCameraFormat(device, [
     {videoResolution: {width: 3048, height: 2160}},
     {fps: 60},
   ]);
+
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
-  const [photoFile, setPhotoFile] = useState<string>('');
 
   if (!device) {
     return <Text>No Devices</Text>;
@@ -26,38 +26,52 @@ export function requestLocationPermissionTest() {
     requestPermission();
   }
 
-  const [status, set] = useState<string>('');
+  // 属性
 
-  const requestLocationPermission = async () => {
-    const res = await Camera.requestLocationPermission();
-    res && set(JSON.stringify(res));
-    console.log('====================================');
-    console.log('res', JSON.stringify(res));
-    console.log('====================================');
+  const [photoFile, setPhotoFile] = useState<string>('');
+  const [path, setPath] = useState('');
+  const [isActive, setIsActive] = useState(true);
+  const onError = (e: any) => {
+    e && JSON.stringify(e);
+  };
+  // 拍照
+  const onTakePhoto = async () => {
+    setPath('')
+    setPhotoFile('')
+    const result = await camera.current?.takePhoto();
+    result && setPhotoFile(JSON.stringify(result));
+    result?.path && setPath(result.path);
   };
 
   return (
     <Tester>
-      <TestSuite name="requestLocationPermission">
-        <TestCase itShould={`发起位置授权请求`}>
+      <TestSuite name="takePhoto">
+        <TestCase itShould={`拍照功能`}>
+        {path && (
+            <View>
+              <Image
+                source={{uri: path}}
+                style={{width: 200, height: 200}}
+                resizeMode="contain"
+              />
+            </View>
+          )}
           <View>
-            <Text>result: {status}</Text>
+            <Text>拍照结果:{photoFile}</Text>
           </View>
           <Camera
             style={style.cameraPreview}
             ref={camera}
             device={device}
-            isActive
+            isActive={isActive}
             preview
             photo
             format={format}
-            enableLocation
+            onError={onError}
           />
-          <View>
-            <Button
-              title="requestLocationPermission"
-              onPress={requestLocationPermission}
-            />
+
+          <View style={style.actionBtn}>
+            <Button title="拍照" onPress={onTakePhoto}></Button>
           </View>
         </TestCase>
       </TestSuite>
@@ -66,7 +80,7 @@ export function requestLocationPermissionTest() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 200},
+  cameraPreview: {width: 300, height: 600},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',

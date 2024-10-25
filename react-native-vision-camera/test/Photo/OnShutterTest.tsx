@@ -8,16 +8,15 @@ import {
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
-export function PhotoTorchExample() {
-  const [cameraType, setCameraType] = useState<'front' | 'back'>('back');
-  const device = useCameraDevice(cameraType);
+export function OnShutterTest() {
+  const device = useCameraDevice('back');
   const format = useCameraFormat(device, [
     {videoResolution: {width: 3048, height: 2160}},
     {fps: 60},
   ]);
+
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
-  const [photoFile, setPhotoFile] = useState<string>('');
 
   if (!device) {
     return <Text>No Devices</Text>;
@@ -27,38 +26,46 @@ export function PhotoTorchExample() {
     requestPermission();
   }
 
+  // 属性
+
+  const [status, setStatus] = useState<string>('');
+  const [photoFile, setPhotoFile] = useState<string>('');
+  const [isActive, setIsActive] = useState(true);
+
   // 拍照
   const onTakePhoto = async () => {
     const result = await camera.current?.takePhoto();
     result && setPhotoFile(JSON.stringify(result));
   };
 
-  // 属性
-  const [torch, setTorch] = useState<'off' | 'on'>('off');
-
-  const changeTorch = () => {
-    setTorch(v => (v === 'on' ? 'off' : 'on'));
-  };
-
   return (
     <Tester>
-      <TestSuite name="torch：手电筒的状态">
-        <TestCase itShould={`当前状态:${torch === 'on' ? '开启' : '关闭'}`}>
+      <TestSuite name="onShutter">
+        <TestCase itShould={`按下拍照按钮的回调`}>
+          <View>
+            <Text>status:{status}</Text>
+            <Text>拍照结果:{photoFile}</Text>
+          </View>
           <Camera
             style={style.cameraPreview}
             ref={camera}
             device={device}
-            isActive
+            isActive={isActive}
             preview
             photo
             format={format}
-            torch={torch}
+            onShutter={() => {
+              setStatus('我是onShutter，相机拍照时执行');
+            }}
           />
-          <View>
-            <Text style={style.text}>torch:{torch}</Text>
-          </View>
           <View style={style.actionBtn}>
-            <Button title="changeTorch" onPress={changeTorch}></Button>
+            <Button title="拍照" onPress={onTakePhoto}></Button>
+            <Button
+              title="Reset"
+              onPress={() => {
+                setPhotoFile('');
+                setStatus('');
+              }}></Button>
           </View>
         </TestCase>
       </TestSuite>
@@ -67,7 +74,7 @@ export function PhotoTorchExample() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 400},
+  cameraPreview: {width: 300, height: 600},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -80,6 +87,6 @@ const style = StyleSheet.create({
   text: {
     fontSize: 20,
     textAlign: 'center',
-    color: '#fff',
+    color: '#000',
   },
 });

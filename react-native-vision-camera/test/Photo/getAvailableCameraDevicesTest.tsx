@@ -4,7 +4,8 @@ import {
   Camera,
   useCameraDevice,
   useCameraFormat,
-  useCameraPermission} from 'react-native-vision-camera';
+  useCameraPermission,
+} from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
 export function getAvailableCameraDevicesTest() {
@@ -24,22 +25,25 @@ export function getAvailableCameraDevicesTest() {
     requestPermission();
   }
 
-
   const [availableCameraDevices, setAvailableCameraDevices] =
     useState<string>('');
 
   const getAvailableCameraDevices = async () => {
     const res = await Camera.getAvailableCameraDevices();
     res && setAvailableCameraDevices(JSON.stringify(res));
-    console.log('====================================');
-    console.log('res', JSON.stringify(res));
-    console.log('====================================');
   };
 
   return (
     <Tester>
       <TestSuite name="getAvailableCameraDevices">
         <TestCase itShould={`获取手机上可用相机设备`}>
+          <View>
+            <Text>availableCameraDevices{availableCameraDevices}</Text>
+            <Button
+              title="getAvailableCameraDevices"
+              onPress={getAvailableCameraDevices}
+            />
+          </View>
           <Camera
             style={style.cameraPreview}
             ref={camera}
@@ -48,15 +52,7 @@ export function getAvailableCameraDevicesTest() {
             preview
             photo
             format={format}
-            enableLocation
           />
-          <View>
-            <Text>availableCameraDevices{availableCameraDevices}</Text>
-            <Button
-              title="getAvailableCameraDevices"
-              onPress={getAvailableCameraDevices}
-            />
-          </View>
         </TestCase>
       </TestSuite>
     </Tester>
@@ -64,7 +60,7 @@ export function getAvailableCameraDevicesTest() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 200},
+  cameraPreview: {width: 300, height: 400},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',

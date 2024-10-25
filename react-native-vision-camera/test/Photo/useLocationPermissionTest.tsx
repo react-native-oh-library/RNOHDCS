@@ -5,10 +5,11 @@ import {
   useCameraDevice,
   useCameraFormat,
   useCameraPermission,
+  useLocationPermission,
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
-export function requestLocationPermissionTest() {
+export function useLocationPermissionTest() {
   const device = useCameraDevice('back');
   const format = useCameraFormat(device, [
     {videoResolution: {width: 3048, height: 2160}},
@@ -16,7 +17,8 @@ export function requestLocationPermissionTest() {
   ]);
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
-  const [photoFile, setPhotoFile] = useState<string>('');
+  const {hasPermission: _hasPermission, requestPermission: _requestPermission} =
+    useLocationPermission();
 
   if (!device) {
     return <Text>No Devices</Text>;
@@ -25,24 +27,15 @@ export function requestLocationPermissionTest() {
   if (!hasPermission) {
     requestPermission();
   }
-
-  const [status, set] = useState<string>('');
-
-  const requestLocationPermission = async () => {
-    const res = await Camera.requestLocationPermission();
-    res && set(JSON.stringify(res));
-    console.log('====================================');
-    console.log('res', JSON.stringify(res));
-    console.log('====================================');
-  };
+  // if (!_hasPermission) {
+  //   _requestPermission();
+  // }
 
   return (
     <Tester>
-      <TestSuite name="requestLocationPermission">
-        <TestCase itShould={`发起位置授权请求`}>
-          <View>
-            <Text>result: {status}</Text>
-          </View>
+      <TestSuite name="useLocationPermission">
+        <TestCase
+          itShould={`${_hasPermission ? '有位置权限' : '没有位置权限'}`}>
           <Camera
             style={style.cameraPreview}
             ref={camera}
@@ -51,14 +44,10 @@ export function requestLocationPermissionTest() {
             preview
             photo
             format={format}
-            enableLocation
           />
-          <View>
-            <Button
-              title="requestLocationPermission"
-              onPress={requestLocationPermission}
-            />
-          </View>
+          {!_hasPermission && (
+            <Button title="requestPermission" onPress={_requestPermission} />
+          )}
         </TestCase>
       </TestSuite>
     </Tester>
@@ -66,7 +55,7 @@ export function requestLocationPermissionTest() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 200},
+  cameraPreview: {width: 300, height: 600},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -79,6 +68,6 @@ const style = StyleSheet.create({
   text: {
     fontSize: 20,
     textAlign: 'center',
-    color: '#000',
+    color: '#fff',
   },
 });

@@ -8,7 +8,7 @@ import {
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
-export function requestLocationPermissionTest() {
+export function useCameraDeviceTest() {
   const device = useCameraDevice('back');
   const format = useCameraFormat(device, [
     {videoResolution: {width: 3048, height: 2160}},
@@ -16,7 +16,6 @@ export function requestLocationPermissionTest() {
   ]);
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
-  const [photoFile, setPhotoFile] = useState<string>('');
 
   if (!device) {
     return <Text>No Devices</Text>;
@@ -26,22 +25,12 @@ export function requestLocationPermissionTest() {
     requestPermission();
   }
 
-  const [status, set] = useState<string>('');
-
-  const requestLocationPermission = async () => {
-    const res = await Camera.requestLocationPermission();
-    res && set(JSON.stringify(res));
-    console.log('====================================');
-    console.log('res', JSON.stringify(res));
-    console.log('====================================');
-  };
-
   return (
     <Tester>
-      <TestSuite name="requestLocationPermission">
-        <TestCase itShould={`发起位置授权请求`}>
+      <TestSuite name="useCameraDevices">
+        <TestCase itShould={``}>
           <View>
-            <Text>result: {status}</Text>
+            <Text>device:{JSON.stringify(device)}</Text>
           </View>
           <Camera
             style={style.cameraPreview}
@@ -51,14 +40,7 @@ export function requestLocationPermissionTest() {
             preview
             photo
             format={format}
-            enableLocation
           />
-          <View>
-            <Button
-              title="requestLocationPermission"
-              onPress={requestLocationPermission}
-            />
-          </View>
         </TestCase>
       </TestSuite>
     </Tester>
@@ -66,7 +48,8 @@ export function requestLocationPermissionTest() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 200},
+  cameraPreview: {width: 300, height: 400},
+  box: {maxHeight: 200},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -78,7 +61,5 @@ const style = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    textAlign: 'center',
-    color: '#000',
   },
 });

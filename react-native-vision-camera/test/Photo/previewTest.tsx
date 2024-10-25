@@ -8,9 +8,8 @@ import {
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
-export function PhotoPreviewExample() {
-  const [cameraType, setCameraType] = useState<'front' | 'back'>('back');
-  const device = useCameraDevice(cameraType);
+export function previewTest() {
+  const device = useCameraDevice('back');
   const format = useCameraFormat(device, [
     {videoResolution: {width: 3048, height: 2160}},
     {fps: 60},
@@ -34,6 +33,7 @@ export function PhotoPreviewExample() {
   };
 
   // 属性
+  const [isActive, setIsActive] = useState(true);
   const [preview, setPreview] = useState(true);
 
   const changePreview = () => {
@@ -42,25 +42,22 @@ export function PhotoPreviewExample() {
 
   return (
     <Tester>
-      <TestSuite name="preview:是否开启预览功能">
+      <TestSuite name="preview">
         <TestCase itShould={`当前状态:${preview ? '启用' : '禁用'}`}>
-          <View>
-            <Text>拍照结果:{photoFile}</Text>
-          </View>
           <Camera
             style={style.cameraPreview}
             ref={camera}
             device={device}
-            isActive
+            isActive={isActive}
             preview={preview}
             photo
             format={format}
           />
-          <View>
-            <Text>preview:{preview}</Text>
-          </View>
           <View style={style.actionBtn}>
-            <Button title="changePreview" onPress={changePreview}></Button>
+            <Button
+              title={`changePreview:${preview}`}
+              onPress={changePreview}
+            />
           </View>
         </TestCase>
       </TestSuite>
@@ -69,7 +66,7 @@ export function PhotoPreviewExample() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 400},
+  cameraPreview: {width: 300, height: 600},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',
