@@ -235,27 +235,27 @@ export default function InCallManagerTest() {
         <Tester key={"InCallManagerTest"} style={{ flex: 1 }}>
 
             <View>
-                <Text numberOfLines={0} style={{ color: 'blue' }}>
+                <Text numberOfLines={0} style={{ color: '#ffffff' }}>
                     EVENT Emit:
                 </Text>
 
-                <Text numberOfLines={0} style={{ color: 'blue' }}>
+                <Text numberOfLines={0} style={{ color: '#ffffff' }}>
                     proximityEvent:{JSON.stringify(proximityEvent)}
                 </Text>
 
-                <Text numberOfLines={0} style={{ color: 'blue' }}>
+                <Text numberOfLines={0} style={{ color: '#ffffff' }}>
                     wiredHeadsetEvent:{JSON.stringify(wiredHeadsetEvent)}
                 </Text>
 
-                <Text numberOfLines={0} style={{ color: 'blue' }}>
+                <Text numberOfLines={0} style={{ color: '#ffffff' }}>
                     noisyAudioEvent(iOS不支持):{JSON.stringify(noisyAudioEvent)}
                 </Text>
 
-                <Text numberOfLines={0} style={{ color: 'blue' }}>
+                <Text numberOfLines={0} style={{ color: '#ffffff' }}>
                     mediaButtonEvent(iOS不支持):{JSON.stringify(mediaButtonEvent)}
                 </Text>
 
-                <Text numberOfLines={0} style={{ color: 'blue' }}>
+                <Text numberOfLines={0} style={{ color: '#ffffff' }}>
                     onAudioFocusChange(iOS不支持):{JSON.stringify(onAudioFocusChange)}
                 </Text>
 
