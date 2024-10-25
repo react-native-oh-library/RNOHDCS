@@ -124,7 +124,7 @@ const SnackbarDemo = () => {
         </TestCase>
       </TestSuite>
 
-      <TestSuite name='Snackbar 轻量提示框 !!!!'>
+      <TestSuite name='Snackbar 轻量提示框'>
         <TestCase itShould='props:button(按钮，沿用按钮组件的props，按钮使用snackbar设置的按钮样式) '>
           <View style={{ height: 200 }}>
             <Snackbar
