@@ -50,6 +50,7 @@ const bannerImages = [
   { uri: "https://developer.huawei.com/images/new-content/develop/img_DLP_develop_gailan_ArkUI.png" },
   { uri: "https://developer.huawei.com/images/new-content/develop/img_DLP_develop_gailan_ArkUI.png" },
   { uri: "https://developer.huawei.com/images/new-content/develop/img_DLP_develop_gailan_ArkUI.png" },
+  { uri: "https://developer.huawei.com/images/new-content/develop/img_DLP_develop_gailan_ArkUI.png" },
 ]
 
 const BetterBannerTest = () => {
