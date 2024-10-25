@@ -8,15 +8,14 @@ import {
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
-export function PhotoFocusExample() {
+export function isActiveTest() {
   const device = useCameraDevice('back');
-  const format = useCameraFormat(device, [
-    {videoResolution: {width: 3048, height: 2160}},
-    {fps: 60},
-  ]);
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
-  const [result, setResult] = useState<string>('');
+  const format = useCameraFormat(device, [
+    {videoResolution: {width: 1920, height: 1080}},
+    {fps: 30},
+  ]);
 
   if (!device) {
     return <Text>No Devices</Text>;
@@ -26,37 +25,36 @@ export function PhotoFocusExample() {
     requestPermission();
   }
 
-  // 聚焦
-  const onFocus = async () => {
-    const getRandomNumber = (min: number, max: number): number => {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    };
-    const randomPoint = {
-      x: getRandomNumber(0, 2000),
-      y: getRandomNumber(0, 4000),
-    };
-    setResult(`\n随机聚焦坐标: ${JSON.stringify(randomPoint)}`);
-    await camera.current?.focus(randomPoint);
+  const [audio, setAudio] = useState(true);
+  const [flash, setFlash] = useState<'off' | 'on'>('off');
+  const [isActive, setIsActive] = useState(true);
+  const [videoCodec, setVideoCodec] = useState<'h265' | 'h264'>('h265');
+  const [videoHdr, setVideoHdr] = useState(false);
+
+  const changeIsActive = () => {
+    setIsActive(v => !v);
   };
 
   return (
     <Tester>
-      <TestSuite name="onFocus">
-        <TestCase itShould={`设置聚焦`}>
-        <View>
-            <Text>focus:{result}</Text>
-          </View>
+      <TestSuite name="isActive">
+        <TestCase itShould={`当前状态:${isActive ? '启用' : '禁用'}`}>
           <Camera
             style={style.cameraPreview}
             ref={camera}
-            device={device}
-            isActive
+            isActive={isActive}
             preview
-            photo
+            device={device}
+            video={true}
+            audio={audio}
+            videoHdr={videoHdr}
+            fps={30}
             format={format}
           />
           <View style={style.actionBtn}>
-            <Button title="聚焦" onPress={onFocus} />
+            <Button
+              title={`isActive:${isActive}`}
+              onPress={changeIsActive}></Button>
           </View>
         </TestCase>
       </TestSuite>
@@ -65,15 +63,16 @@ export function PhotoFocusExample() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 400},
+  cameraPreview: {
+    width: 300,
+    height: 400,
+  },
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
     padding: 10,
     gap: 5,
-    position: 'absolute',
-    top: 300,
   },
   text: {
     fontSize: 20,

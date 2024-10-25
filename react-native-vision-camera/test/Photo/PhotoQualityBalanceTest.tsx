@@ -8,7 +8,7 @@ import {
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
-export function PhotoOnErrorExample() {
+export function PhotoQualityBalanceTest() {
   const device = useCameraDevice('back');
   const format = useCameraFormat(device, [
     {videoResolution: {width: 3048, height: 2160}},
@@ -16,7 +16,6 @@ export function PhotoOnErrorExample() {
   ]);
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
-  const [photoFile, setPhotoFile] = useState<string>('');
 
   if (!device) {
     return <Text>No Devices</Text>;
@@ -26,6 +25,7 @@ export function PhotoOnErrorExample() {
     requestPermission();
   }
 
+  const [photoFile, setPhotoFile] = useState<string>('');
   // 拍照
   const onTakePhoto = async () => {
     const result = await camera.current?.takePhoto();
@@ -34,23 +34,14 @@ export function PhotoOnErrorExample() {
 
   // 属性
 
-  const [errorText, setErrorText] = useState<string>('');
-
-  const onReset = () => {
-    setErrorText('');
-  };
-
-  const onError = e => {
-    e && JSON.stringify(e);
-  };
+  const [photoQualityBalance, setPhotoQualityBalance] = useState<
+    'speed' | 'balanced' | 'quality'
+  >('speed');
 
   return (
     <Tester>
-      <TestSuite name="onError">
-        <TestCase itShould={`处理报错信息`}>
-          <View>
-            <Text>errorText:{errorText}</Text>
-          </View>
+      <TestSuite name="photoQualityBalance">
+        <TestCase itShould={`照片质量平衡:${photoQualityBalance}`}>
           <View>
             <Text>拍照结果:{photoFile}</Text>
           </View>
@@ -61,11 +52,29 @@ export function PhotoOnErrorExample() {
             isActive
             preview
             photo
+            photoQualityBalance={photoQualityBalance}
             format={format}
-            onError={onError}
           />
+
+          {/* 按钮组 */}
           <View style={style.actionBtn}>
             <Button title="拍照" onPress={onTakePhoto}></Button>
+            <Button
+              title="set:speed"
+              onPress={() => {
+                setPhotoQualityBalance('speed');
+              }}></Button>
+            <Button
+              title="set:balanced"
+              onPress={() => {
+                setPhotoQualityBalance('balanced');
+              }}></Button>
+
+            <Button
+              title="set:quality"
+              onPress={() => {
+                setPhotoQualityBalance('quality');
+              }}></Button>
           </View>
         </TestCase>
       </TestSuite>
@@ -74,7 +83,7 @@ export function PhotoOnErrorExample() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 400},
+  cameraPreview: {width: 300, height: 600},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -87,6 +96,6 @@ const style = StyleSheet.create({
   text: {
     fontSize: 20,
     textAlign: 'center',
-    color: '#000',
+    color: '#fff',
   },
 });

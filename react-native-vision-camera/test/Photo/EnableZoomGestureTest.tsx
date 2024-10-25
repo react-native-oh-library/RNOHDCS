@@ -1,4 +1,4 @@
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {Button, Image, StyleSheet, Text, View} from 'react-native';
 import React, {useRef, useState} from 'react';
 import {
   Camera,
@@ -8,7 +8,7 @@ import {
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
-export function requestLocationPermissionTest() {
+export function EnableZoomGestureTest() {
   const device = useCameraDevice('back');
   const format = useCameraFormat(device, [
     {videoResolution: {width: 3048, height: 2160}},
@@ -17,6 +17,7 @@ export function requestLocationPermissionTest() {
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
   const [photoFile, setPhotoFile] = useState<string>('');
+  const [photoPath, setPhotoPath] = useState<string>('');
 
   if (!device) {
     return <Text>No Devices</Text>;
@@ -26,23 +27,27 @@ export function requestLocationPermissionTest() {
     requestPermission();
   }
 
-  const [status, set] = useState<string>('');
+  // 拍照
+  const onTakePhoto = async () => {
+    const result = await camera.current?.takePhoto();
+    result && setPhotoFile(JSON.stringify(result));
+    result?.path && setPhotoPath(result.path);
+  };
 
-  const requestLocationPermission = async () => {
-    const res = await Camera.requestLocationPermission();
-    res && set(JSON.stringify(res));
-    console.log('====================================');
-    console.log('res', JSON.stringify(res));
-    console.log('====================================');
+  // 属性
+  const [enableZoomGesture, setEnableZoomGesture] = useState<boolean>(true);
+
+  const changeEnableZoomGesture = () => {
+    setEnableZoomGesture(v => !v);
   };
 
   return (
     <Tester>
-      <TestSuite name="requestLocationPermission">
-        <TestCase itShould={`发起位置授权请求`}>
-          <View>
-            <Text>result: {status}</Text>
-          </View>
+      <TestSuite name="enableZoomGesture">
+        <TestCase
+          itShould={`是否启用双指缩放功能:${
+            enableZoomGesture ? '开启' : '关闭'
+          }`}>
           <Camera
             style={style.cameraPreview}
             ref={camera}
@@ -51,13 +56,12 @@ export function requestLocationPermissionTest() {
             preview
             photo
             format={format}
-            enableLocation
+            enableZoomGesture={enableZoomGesture}
           />
-          <View>
+          <View style={style.actionBtn}>
             <Button
-              title="requestLocationPermission"
-              onPress={requestLocationPermission}
-            />
+              title="changeEnableZoomGesture"
+              onPress={changeEnableZoomGesture}></Button>
           </View>
         </TestCase>
       </TestSuite>
@@ -66,7 +70,11 @@ export function requestLocationPermissionTest() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 200},
+  cameraPreview: {width: 300, height: 600},
+  imageView: {
+    width: 300,
+    height: 400,
+  },
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -79,6 +87,6 @@ const style = StyleSheet.create({
   text: {
     fontSize: 20,
     textAlign: 'center',
-    color: '#000',
+    color: '#fff',
   },
 });

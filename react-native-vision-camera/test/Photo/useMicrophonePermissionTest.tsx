@@ -5,18 +5,20 @@ import {
   useCameraDevice,
   useCameraFormat,
   useCameraPermission,
+  useMicrophonePermission,
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
-export function PhotoOnInitializedExample() {
+export function useMicrophonePermissionTest() {
   const device = useCameraDevice('back');
   const format = useCameraFormat(device, [
     {videoResolution: {width: 3048, height: 2160}},
     {fps: 60},
   ]);
-
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
+  const {hasPermission: _hasPermission, requestPermission: _requestPermission} =
+    useMicrophonePermission();
 
   if (!device) {
     return <Text>No Devices</Text>;
@@ -25,22 +27,15 @@ export function PhotoOnInitializedExample() {
   if (!hasPermission) {
     requestPermission();
   }
-
-  // 属性
-
-  const [status, setStatus] = useState<string>('');
-
-  const onError = e => {
-    e && JSON.stringify(e);
-  };
+  // if (!_hasPermission) {
+  //   _requestPermission();
+  // }
 
   return (
     <Tester>
-      <TestSuite name="onInitialized">
-        <TestCase itShould={`初始化成功的回调`}>
-          <View>
-            <Text>status:{status}</Text>
-          </View>
+      <TestSuite name="useCameraPermission">
+        <TestCase
+          itShould={`${_hasPermission ? '有麦克风权限' : '没有麦克风权限'}`}>
           <Camera
             style={style.cameraPreview}
             ref={camera}
@@ -49,11 +44,10 @@ export function PhotoOnInitializedExample() {
             preview
             photo
             format={format}
-            onError={onError}
-            onInitialized={() => {
-              setStatus('初始化成功');
-            }}
           />
+          {!_hasPermission && (
+            <Button title="requestPermission" onPress={_requestPermission} />
+          )}
         </TestCase>
       </TestSuite>
     </Tester>
@@ -61,7 +55,7 @@ export function PhotoOnInitializedExample() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 400},
+  cameraPreview: {width: 300, height: 600},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -74,6 +68,6 @@ const style = StyleSheet.create({
   text: {
     fontSize: 20,
     textAlign: 'center',
-    color: '#000',
+    color: '#fff',
   },
 });

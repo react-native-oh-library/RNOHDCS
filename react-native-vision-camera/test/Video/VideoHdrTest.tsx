@@ -1,4 +1,4 @@
-import {Button, StyleSheet, Text, View,} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 import React, {useRef, useState} from 'react';
 import {
   Camera,
@@ -14,9 +14,10 @@ export function VideoHdrTest() {
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
   const format = useCameraFormat(device, [
-    {videoResolution: {width: 3048, height: 2160}},
+    {videoResolution: {width: 1920, height: 1080}},
     {fps: 30},
   ]);
+
   if (!device) {
     return <Text>No Devices</Text>;
   }
@@ -40,7 +41,8 @@ export function VideoHdrTest() {
   const [videoPath, setVideoPath] = useState<string>('');
 
   const onStart = async () => {
-    setVideoPath('')
+    setVideoPath('');
+    setVideoFile('');
     seteStartStatus('start');
     await camera.current?.startRecording({
       fileType: 'mp4',
@@ -75,18 +77,16 @@ export function VideoHdrTest() {
     camera.current?.resumeRecording();
   };
 
-
-
   const onChangeVideoHdr = async () => {
-    setVideoHdr(!videoHdr);
-    console.log(videoHdr);
+    setVideoHdr(v => !v);
   };
 
   return (
     <Tester>
       <TestSuite name="VideoHdrTest">
-        <TestCase itShould={`是否开启hdr：${videoHdr ? '是' :'否'}`}>
+        <TestCase itShould={`是否开启hdr：${videoHdr ? '是' : '否'}`}>
           <View>
+            <Text>注意：先设置参数，后点击开始按钮</Text>
             <Text>录像结果:{videoFile}</Text>
           </View>
           {videoPath && (
@@ -94,8 +94,11 @@ export function VideoHdrTest() {
               <Button
                 title="SaveAsset"
                 onPress={() => {
-                  CameraRoll.saveAsset(videoPath).then(res => {
-                    console.log('video-res', JSON.stringify(res));
+                  CameraRoll.saveAsset(videoPath).then(() => {
+                    setTimeout(() => {
+                      setVideoPath('');
+                      setVideoFile('');
+                    }, 500);
                   });
                 }}
               />
@@ -108,7 +111,7 @@ export function VideoHdrTest() {
             preview={preview}
             device={device}
             video={true}
-            audio={audio}
+            audio={false}
             videoHdr={videoHdr}
             videoStabilizationMode={videoStabilizationMode}
             onError={err => {
@@ -119,41 +122,36 @@ export function VideoHdrTest() {
           />
 
           <View style={style.actionBtn}>
-            <View>
-              {videoHdr && videoCodec === 'h264' ? (
-                <Text>videoHdr为true时，videoCodeC只能设置为h265; </Text>
-              ) : (
-                <>
-                  {startStatus === 'end' ? (
-                    <Button title="开始" onPress={onStart}></Button>
-                  ) : (
-                    ''
-                  )}
-                  {startStatus === 'start' ? (
-                    <Button title="暂停" onPress={onPause}></Button>
-                  ) : (
-                    ''
-                  )}
-                  {startStatus === 'pause' ? (
-                    <Button title="恢复" onPress={onResume}></Button>
-                  ) : (
-                    ''
-                  )}
-                  {startStatus !== 'end' ? (
-                    <Button title="停止" onPress={onStop}></Button>
-                  ) : (
-                    ''
-                  )}
-                </>
-              )}
-              <Text>fps: 30</Text>
-            </View>
-            <View style={style.actionBtn}>
-              <Button
-                title={`hdr:${videoHdr}`}
-                onPress={onChangeVideoHdr}></Button>
-       
-            </View>
+            {videoHdr && videoCodec === 'h264' ? (
+              <Text>videoHdr为true时，videoCodeC只能设置为h265; </Text>
+            ) : (
+              <>
+                {startStatus === 'end' ? (
+                  <Button title="开始" onPress={onStart}></Button>
+                ) : (
+                  ''
+                )}
+                {startStatus === 'start' ? (
+                  <Button title="暂停" onPress={onPause}></Button>
+                ) : (
+                  ''
+                )}
+                {startStatus === 'pause' ? (
+                  <Button title="恢复" onPress={onResume}></Button>
+                ) : (
+                  ''
+                )}
+                {startStatus !== 'end' ? (
+                  <Button title="停止" onPress={onStop}></Button>
+                ) : (
+                  ''
+                )}
+              </>
+            )}
+
+            <Button
+              title={`hdr:${videoHdr}`}
+              onPress={onChangeVideoHdr}></Button>
           </View>
         </TestCase>
       </TestSuite>

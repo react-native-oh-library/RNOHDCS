@@ -1,20 +1,15 @@
-import {Button, StyleSheet, Text, View} from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import React, {useRef, useState} from 'react';
 import {
   Camera,
   useCameraDevice,
-  useCameraFormat,
   useCameraPermission,
   useCodeScanner,
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
-export function CodeScanIsActiveExample() {
+export function deviceTest() {
   const device = useCameraDevice('back');
-  const format = useCameraFormat(device, [
-    {videoResolution: {width: 3048, height: 2160}},
-    {fps: 60},
-  ]);
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
 
@@ -53,19 +48,14 @@ export function CodeScanIsActiveExample() {
   });
 
   const [isActive, setIsActive] = useState(true);
-  const [errorStr, setErrorStr] = useState<string>('');
-
-  const changeIsActive = () => {
-    setIsActive(!isActive);
-  };
 
   return (
     <Tester>
-      <TestSuite name="isActive：激活/禁用">
-        <TestCase itShould={`当前状态:${isActive ? '启用' : '禁用'}`}>
-           <View>
+      <TestSuite name="device">
+        <TestCase itShould={``}>
+          <View>
+            <Text style={styles.text}>device:{JSON.stringify(device)}</Text>
             <Text style={styles.text}>codes:{codes}</Text>
-            <Text style={styles.text}>err:{errorStr}</Text>
           </View>
           <Camera
             style={styles.cameraPreview}
@@ -74,19 +64,7 @@ export function CodeScanIsActiveExample() {
             device={device}
             isActive={isActive}
             preview
-            resizeMode={'cover'}
-            format={format}
-            onError={(e: any) => {
-              setErrorStr(JSON.stringify(e));
-            }}
           />
-          <View style={styles.actionBtn}>
-            <Button
-              title={`changeIsActive:${isActive}`}
-              onPress={changeIsActive}
-            />
-          </View>
-         
         </TestCase>
       </TestSuite>
     </Tester>

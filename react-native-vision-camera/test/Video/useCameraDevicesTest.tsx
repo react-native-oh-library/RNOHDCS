@@ -3,21 +3,23 @@ import React, {useRef, useState} from 'react';
 import {
   Camera,
   useCameraDevice,
-  useCameraFormat,
   useCameraPermission,
+  useCameraDevices,
+  useCameraFormat,
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 
-export function VideoFpsTest() {
+export function useCameraDevicesTest() {
   const device = useCameraDevice('back');
+  const devices = useCameraDevices();
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
-  const [fps, set] = useState<number>(30);
   const format = useCameraFormat(device, [
-    {videoResolution: {width: 3048, height: 2160}},
-    {fps: fps},
+    {videoResolution: {width: 1920, height: 1080}},
+    {fps: 30},
   ]);
+
   if (!device) {
     return <Text>No Devices</Text>;
   }
@@ -38,10 +40,11 @@ export function VideoFpsTest() {
   const [startStatus, seteStartStatus] = useState('end');
   const [videoFile, setVideoFile] = useState<string>('');
   const [videoPath, setVideoPath] = useState<string>('');
-
+  const [fps, set] = useState<number>(30);
 
   const onStart = async () => {
-    setVideoPath('')
+    setVideoPath('');
+    setVideoFile('');
     seteStartStatus('start');
     await camera.current?.startRecording({
       fileType: 'mp4',
@@ -76,26 +79,14 @@ export function VideoFpsTest() {
     camera.current?.resumeRecording();
   };
 
-
   return (
     <Tester>
-      <TestSuite name="fps">
-        <TestCase itShould={`fps:${fps}`}>
+      <TestSuite name="useCameraDevice">
+        <TestCase itShould={``}>
           <View>
-            <Text>录像结果:{videoFile}</Text>
+            <Text>devices:{JSON.stringify(devices)}</Text>
           </View>
-          {videoPath && (
-            <View style={{height: 50}}>
-              <Button
-                title="SaveAsset"
-                onPress={() => {
-                  CameraRoll.saveAsset(videoPath).then(res => {
-                    console.log('video-res', JSON.stringify(res));
-                  });
-                }}
-              />
-            </View>
-          )}
+
           <Camera
             style={style.cameraPreview}
             ref={camera}
@@ -103,56 +94,11 @@ export function VideoFpsTest() {
             preview={preview}
             device={device}
             video={true}
-            audio={audio}
             videoHdr={videoHdr}
             videoStabilizationMode={videoStabilizationMode}
             fps={fps}
             format={format}
           />
-
-          <View style={style.actionBtn}>
-            <View>
-              {videoHdr && videoCodec === 'h264' ? (
-                <Text>videoHdr为true时，videoCodeC只能设置为h265; </Text>
-              ) : (
-                <>
-                  {startStatus === 'end' ? (
-                    <Button title="开始" onPress={onStart}></Button>
-                  ) : (
-                    ''
-                  )}
-                  {startStatus === 'start' ? (
-                    <Button title="暂停" onPress={onPause}></Button>
-                  ) : (
-                    ''
-                  )}
-                  {startStatus === 'pause' ? (
-                    <Button title="恢复" onPress={onResume}></Button>
-                  ) : (
-                    ''
-                  )}
-                  {startStatus !== 'end' ? (
-                    <Button title="停止" onPress={onStop}></Button>
-                  ) : (
-                    ''
-                  )}
-                </>
-              )}
-            </View>
-            <View style={style.actionBtn}>
-              <Button
-                title={'set:20'}
-                onPress={() => {
-                  set(20);
-                }}></Button>
-              <Button
-                title={`set:30`}
-                onPress={() => {
-                  set(30);
-                }}></Button>
-            </View>
-          </View>
-
         </TestCase>
       </TestSuite>
     </Tester>

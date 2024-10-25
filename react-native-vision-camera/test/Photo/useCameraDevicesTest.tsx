@@ -1,15 +1,17 @@
-import {Button, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 import React, {useRef, useState} from 'react';
 import {
   Camera,
   useCameraDevice,
   useCameraFormat,
   useCameraPermission,
+  useCameraDevices,
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
-export function PhotoResizeModeExample() {
+export function useCameraDevicesTest() {
   const device = useCameraDevice('back');
+  const devices = useCameraDevices();
   const format = useCameraFormat(device, [
     {videoResolution: {width: 3048, height: 2160}},
     {fps: 60},
@@ -25,14 +27,13 @@ export function PhotoResizeModeExample() {
     requestPermission();
   }
 
-  // 属性
-
-  const [resizeMode, setResizeMode] = useState<'cover' | 'contain'>('cover');
-
   return (
     <Tester>
-      <TestSuite name="resizeMode">
-        <TestCase itShould={`预览模式:${resizeMode}`}>
+      <TestSuite name="useCameraDevices">
+        <TestCase itShould={`devices`}>
+          <View>
+            <Text style={style.text}>devices:{JSON.stringify(devices)}</Text>
+          </View>
           <Camera
             style={style.cameraPreview}
             ref={camera}
@@ -40,26 +41,8 @@ export function PhotoResizeModeExample() {
             isActive
             preview
             photo
-            resizeMode={resizeMode}
             format={format}
           />
-
-          <View>
-            <Text>resizeMode:{resizeMode}</Text>
-          </View>
-          {/* 按钮组 */}
-          <View style={style.actionBtn}>
-            <Button
-              title="set:cover"
-              onPress={() => {
-                setResizeMode('cover');
-              }}></Button>
-            <Button
-              title="set:contain"
-              onPress={() => {
-                setResizeMode('contain');
-              }}></Button>
-          </View>
         </TestCase>
       </TestSuite>
     </Tester>
@@ -67,7 +50,7 @@ export function PhotoResizeModeExample() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 400},
+  cameraPreview: {width: 300, height: 600},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -78,8 +61,6 @@ const style = StyleSheet.create({
     top: 300,
   },
   text: {
-    fontSize: 20,
-    textAlign: 'center',
-    color: '#000',
+    // fontSize: 20,
   },
 });

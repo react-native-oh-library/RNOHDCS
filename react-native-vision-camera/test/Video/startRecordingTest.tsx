@@ -9,11 +9,10 @@ import {
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 
-export function VideoStabilizationModeTest() {
+export function startRecordingTest() {
   const device = useCameraDevice('back');
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
-
   const format = useCameraFormat(device, [
     {videoResolution: {width: 1920, height: 1080}},
     {fps: 30},
@@ -31,19 +30,17 @@ export function VideoStabilizationModeTest() {
   const [flash, setFlash] = useState<'off' | 'on'>('off');
   const [preview, setPreview] = useState(true);
   const [videoCodec, setVideoCodec] = useState<'h265' | 'h264'>('h265');
-  const [videoStabilizationMode, setVideoStabilizationMode] = useState<
-    'off' | 'standard' | 'cinematic' | 'cinematic-extended' | 'auto'
-  >('auto');
+
   const [videoHdr, setVideoHdr] = useState(false);
 
   const [startStatus, seteStartStatus] = useState('end');
-  const [eq, setEq] = useState(0);
   const [videoFile, setVideoFile] = useState<string>('');
   const [videoPath, setVideoPath] = useState<string>('');
 
   const onStart = async () => {
-    seteStartStatus('start');
     setVideoPath('');
+    setVideoFile('');
+    seteStartStatus('start');
     await camera.current?.startRecording({
       fileType: 'mp4',
       flash: flash,
@@ -77,30 +74,10 @@ export function VideoStabilizationModeTest() {
     camera.current?.resumeRecording();
   };
 
-  const onChangeVideoMode = async () => {
-    const modes = [
-      'off',
-      'standard',
-      'cinematic',
-      'cinematic-extended',
-      'auto',
-    ];
-    eq >= modes.length - 1 ? setEq(0) : setEq(eq + 1);
-    const mode = modes[eq] as
-      | 'off'
-      | 'standard'
-      | 'cinematic'
-      | 'cinematic-extended'
-      | 'auto';
-    setVideoStabilizationMode(mode);
-    console.log(videoStabilizationMode);
-  };
-
   return (
     <Tester>
-      <TestSuite name="videoStabilizationMode">
-        <TestCase
-          itShould={`指定要使用的视频防抖模式:${videoStabilizationMode}`}>
+      <TestSuite name="video">
+        <TestCase itShould={`开始，暂停、恢复、停止功能`}>
           <View>
             <Text>录像结果:{videoFile}</Text>
           </View>
@@ -126,44 +103,41 @@ export function VideoStabilizationModeTest() {
             preview={preview}
             device={device}
             video={true}
-            audio
+            audio={audio}
             videoHdr={videoHdr}
-            videoStabilizationMode={videoStabilizationMode}
             fps={30}
             format={format}
           />
 
           <View style={style.actionBtn}>
-            {videoHdr && videoCodec === 'h264' ? (
-              <Text>videoHdr为true时，videoCodeC只能设置为h265; </Text>
-            ) : (
-              <>
-                {startStatus === 'end' ? (
-                  <Button title="开始" onPress={onStart}></Button>
-                ) : (
-                  ''
-                )}
-                {startStatus === 'start' ? (
-                  <Button title="暂停" onPress={onPause}></Button>
-                ) : (
-                  ''
-                )}
-                {startStatus === 'pause' ? (
-                  <Button title="恢复" onPress={onResume}></Button>
-                ) : (
-                  ''
-                )}
-                {startStatus !== 'end' ? (
-                  <Button title="停止" onPress={onStop}></Button>
-                ) : (
-                  ''
-                )}
-              </>
-            )}
-
-            <Button
-              title={`mode:${videoStabilizationMode}`}
-              onPress={onChangeVideoMode}></Button>
+            <>
+              {videoHdr && videoCodec === 'h264' ? (
+                <Text>videoHdr为true时，videoCodeC只能设置为h265; </Text>
+              ) : (
+                <>
+                  {startStatus === 'end' ? (
+                    <Button title="开始" onPress={onStart}></Button>
+                  ) : (
+                    ''
+                  )}
+                  {startStatus === 'start' ? (
+                    <Button title="暂停" onPress={onPause}></Button>
+                  ) : (
+                    ''
+                  )}
+                  {startStatus === 'pause' ? (
+                    <Button title="恢复" onPress={onResume}></Button>
+                  ) : (
+                    ''
+                  )}
+                  {startStatus !== 'end' ? (
+                    <Button title="停止" onPress={onStop}></Button>
+                  ) : (
+                    ''
+                  )}
+                </>
+              )}
+            </>
           </View>
         </TestCase>
       </TestSuite>
@@ -172,16 +146,18 @@ export function VideoStabilizationModeTest() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {
-    width: 300,
-    height: 400,
-  },
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     padding: 10,
-    gap: 5,
+    gap: 10,
+    position: 'absolute',
+    top: 300,
+  },
+  cameraPreview: {
+    width: 300,
+    height: 400,
   },
   text: {
     fontSize: 20,

@@ -8,15 +8,15 @@ import {
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
-export function requestMicrophonePermissionTest() {
+export function deviceTest() {
   const device = useCameraDevice('back');
-  const format = useCameraFormat(device, [
-    {videoResolution: {width: 3048, height: 2160}},
-    {fps: 60},
-  ]);
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
-  const [photoFile, setPhotoFile] = useState<string>('');
+  const format = useCameraFormat(device, [
+    {videoResolution: {width: 1920, height: 1080}},
+    {fps: 30},
+  ])
+
 
   if (!device) {
     return <Text>No Devices</Text>;
@@ -26,34 +26,33 @@ export function requestMicrophonePermissionTest() {
     requestPermission();
   }
 
-  const [status, set] = useState<string>('');
+  const [audio, setAudio] = useState(true);
+  const [flash, setFlash] = useState<'off' | 'on'>('off');
+  const [isActive, setIsActive] = useState(true);
+  const [videoCodec, setVideoCodec] = useState<'h265' | 'h264'>('h265');
+  const [videoHdr, setVideoHdr] = useState(false);
 
-  const requestMicrophonePermission = async () => {
-    const res = await Camera.requestMicrophonePermission();
-    res && set(JSON.stringify(res));
-  };
+  const [startStatus, seteStartStatus] = useState('end');
+  const [eq, setEq] = useState(0);
+
 
   return (
     <Tester>
-      <TestSuite name="requestMicrophonePermission">
-        <TestCase itShould={`发起麦克风授权请求`}>
-          <Text>result: {status}</Text>
+      <TestSuite name="device">
+        <TestCase itShould={``}>
+          <Text>device:{JSON.stringify(device)}</Text>
           <Camera
             style={style.cameraPreview}
             ref={camera}
-            device={device}
-            isActive
+            isActive={isActive}
             preview
-            photo
+            device={device}
+            video={true}
+            audio={audio}
+            videoHdr={videoHdr}
+            fps={30}
             format={format}
-            enableLocation
           />
-          <View>
-            <Button
-              title="requestMicrophonePermission"
-              onPress={requestMicrophonePermission}
-            />
-          </View>
         </TestCase>
       </TestSuite>
     </Tester>
@@ -61,15 +60,16 @@ export function requestMicrophonePermissionTest() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 200},
+  cameraPreview: {
+    width: 300,
+    height: 400,
+  },
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
     padding: 10,
     gap: 5,
-    position: 'absolute',
-    top: 300,
   },
   text: {
     fontSize: 20,
