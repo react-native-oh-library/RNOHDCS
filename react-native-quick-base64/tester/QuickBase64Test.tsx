@@ -22,540 +22,471 @@
  * SOFTWARE.
  */
 
-import React, { useState } from 'react';
-import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
-import { Text, View, TouchableHighlight, TextInput, ScrollView } from 'react-native';
-import { byteLength, btoa, atob, toByteArray, fromByteArray, getNative, trimBase64Padding, shim } from '@react-native-oh-tpl/react-native-quick-base64';
+import React, {useState} from 'react';
+import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
+import {
+  Text,
+  View,
+  TouchableHighlight,
+  TextInput,
+  ScrollView,
+} from 'react-native';
+import {
+  byteLength,
+  btoa,
+  atob,
+  toByteArray,
+  fromByteArray,
+  getNative,
+  trimBase64Padding,
+  shim,
+} from '@react-native-oh-tpl/react-native-quick-base64';
 
 type FuncBase64ToArrayBuffer = (
-    data: string,
-    removeLinebreaks?: boolean
-) => ArrayBuffer
+  data: string,
+  removeLinebreaks?: boolean,
+) => ArrayBuffer;
 type FuncBase64FromArrayBuffer = (
-    data: string | ArrayBuffer,
-    urlSafe?: boolean
-) => string
-
+  data: string | ArrayBuffer,
+  urlSafe?: boolean,
+) => string;
 
 interface NativeModule {
-    base64FromArrayBuffer: FuncBase64FromArrayBuffer | undefined;
-    base64ToArrayBuffer: FuncBase64ToArrayBuffer | undefined;
+  base64FromArrayBuffer: FuncBase64FromArrayBuffer | undefined;
+  base64ToArrayBuffer: FuncBase64ToArrayBuffer | undefined;
 }
 
 const PALETTE = {
-    REACT_CYAN_LIGHT: 'hsl(193, 95%, 68%)',
-    REACT_CYAN_DARK: 'hsl(193, 95%, 30%)',
+  REACT_CYAN_LIGHT: 'hsl(193, 95%, 68%)',
+  REACT_CYAN_DARK: 'hsl(193, 95%, 30%)',
 };
 
-function Button({ label, onPress }: { onPress: () => void; label: string }) {
-    return (
-        <TouchableHighlight
-            underlayColor={PALETTE.REACT_CYAN_DARK}
-            style={{
-                paddingVertical: 6,
-                paddingHorizontal: 12,
-                backgroundColor: PALETTE.REACT_CYAN_LIGHT,
-                borderWidth: 2,
-                borderColor: PALETTE.REACT_CYAN_DARK,
-            }}
-            onPress={onPress}>
-            <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 12 }}>
-                {label}
-            </Text>
-        </TouchableHighlight>
-    );
+function Button({label, onPress}: {onPress: () => void; label: string}) {
+  return (
+    <TouchableHighlight
+      underlayColor={PALETTE.REACT_CYAN_DARK}
+      style={{
+        paddingVertical: 6,
+        paddingHorizontal: 12,
+        backgroundColor: PALETTE.REACT_CYAN_LIGHT,
+        borderWidth: 2,
+        borderColor: PALETTE.REACT_CYAN_DARK,
+      }}
+      onPress={onPress}>
+      <Text style={{color: 'black', fontWeight: 'bold', fontSize: 12}}>
+        {label}
+      </Text>
+    </TouchableHighlight>
+  );
 }
-
 
 export function QuickBase64Test() {
-    // 测试字符串转base64
-    const [textTobase64, onChangeTextToBase64] = React.useState('');
+  const [text1, setText1] = useState('');
+  const [text2, setText2] = useState('');
+  const [text3, setText3] = useState('');
+  const [text4, setText4] = useState('');
+  const [text5, setText5] = useState('');
+  const [text6, setText6] = useState('');
+  const [text7, setText7] = useState('');
 
-    const [base64ToTextLength, onChangeBase64TextLength] = React.useState(0);
+  // 测试字符串转base64
+  const [textTobase64, onChangeTextToBase64] = React.useState('');
+  const [textTobase0, onChangeTextToBase0] = React.useState('');
+  const [textTobase1, onChangeTextToBase1] = React.useState('');
+  const [textTobase2, onChangeTextToBase2] = React.useState('');
+  const [textTobase3, onChangeTextToBase3] = React.useState('');
+  const [textTobase4, onChangeTextToBase4] = React.useState('');
+  const [textTobase5, onChangeTextToBase5] = React.useState('');
+  const [textTobase6, onChangeTextToBase6] = React.useState('');
+  const [textTobase7, onChangeTextToBase7] = React.useState(new Uint8Array(0));
+  const [textTobase8, onChangeTextToBase8] = React.useState('');
+  const [textTobase9, onChangeTextToBase9] = React.useState('');
 
-    const [base64ToText, onChangeBase64Text] = React.useState('');
 
-    const [byteArray, onChangeByteArray] = React.useState(new Uint8Array(0));
+  const [nativeModule, onChangeNativeModule] = React.useState<NativeModule>({
+    base64FromArrayBuffer: undefined,
+    base64ToArrayBuffer: undefined,
+  });
 
-    const [byteArrayRemove, onChangeByteArrayRemove] = React.useState(new Uint8Array(0));
+  const onPressGetNative = () => {
+    const native = getNative() as NativeModule;
+    onChangeNativeModule(native);
+  };
 
-    const [fbArrayBase64Str, onChangeFbArrayBase64Str] = React.useState('');
+  return (
+    <ScrollView>
+      <View>
+        <Tester style={{height: 1500}}>
+          <TestSuite name="btoa and atoa">
+            <TestCase
+              tags={['C_API']}
+              itShould="BtoA"
+              initialState={undefined as any}
+              arrange={({setState}) => {
+                return (
+                  <View style={{display: 'flex', flexDirection: 'column'}}>
+                    <TextInput
+                      style={{
+                        height: 40,
+                        borderWidth: 1,
+                        width: '100%',
+                        backgroundColor: '#f5f5f5',
+                      }}
+                      onChangeText={text => setText1(text)}
+                      placeholder="please input test text"
+                      placeholderTextColor={'#674651'}
+                      value={text1}
+                    />
+                    <Text>
+                      test string transform base64, testing the text: {text1}
+                    </Text>
+                    <Button
+                      label="BtoA"
+                      onPress={() => {
+                        onChangeTextToBase64(btoa(text1));
+                        if (atob(btoa(text1)) == text1) {
+                          setState(true);
+                        }
+                      }}
+                    />
+                    <Text style={{color: 'green'}}>{btoa(text1)}</Text>
+                  </View>
+                );
+              }}
+              assert={({state, expect}) => {
+                expect(state).to.be.true;
+              }}
+            />
 
-    const [fbArrayBase64StrUrlSafe, onChangeFbArrayBase64StrUrlSafe] = React.useState('');
+            <TestCase
+              tags={['C_API']}
+              itShould="AtoB"
+              initialState={undefined as any}
+              arrange={({setState}) => {
+                return (
+                  <View style={{display: 'flex', flexDirection: 'column'}}>
+                    <Text>
+                      test base64 transform string, testing the text:{' '}
+                      {textTobase64}
+                    </Text>
+                    <Button
+                      label="AtoB"
+                      onPress={() => {
+                        onChangeTextToBase0(atob(textTobase64))
+                        if (atob(textTobase64) == text1) {
+                          setState(true);
+                        }
+                      }}
+                    />
+                    <Text style={{color: 'green'}}>{textTobase0}</Text>
+                  </View>
+                );
+              }}
+              assert={({state, expect}) => {
+                expect(state).to.be.true;
+              }}
+            />
+          </TestSuite>
 
-    const [testShimBtoA, onChangeTestShimBtoA] = React.useState(''); // 字符串转base64
+          <TestSuite name="QuickBase64">
+            <TestCase
+              tags={['C_API']}
+              itShould="toByteArray"
+              initialState={undefined as any}
+              arrange={({setState}) => {
+                return (
+                  <View style={{display: 'flex', flexDirection: 'column'}}>
+                    <TextInput
+                      style={{
+                        height: 40,
+                        borderWidth: 1,
+                        width: '100%',
+                        backgroundColor: '#f5f5f5',
+                      }}
+                      onChangeText={text => setText2(text)}
+                      placeholder="please input test text"
+                      placeholderTextColor={'#674651'}
+                      value={text2}
+                    />
+                    <Button
+                      label="toByteArray"
+                      onPress={() => {
+                        onChangeTextToBase1(btoa(text2));
+                        setState(true);
+                      }}
+                    />
+                    <Text style={{color: 'green'}}>
+                      {toByteArray(textTobase1)}
+                    </Text>
 
-    const [testShimAtoB, onChangeTestShimAtoB] = React.useState(''); // base64转字符串
+                    <Button
+                      label="removeLinebreaks:true"
+                      onPress={() => {
+                        onChangeTextToBase9(btoa(text2));
+                        setState(true);
+                      }}
+                    />
+                    <Text style={{color: 'green'}}>
+                      {toByteArray(textTobase9,true)}
+                    </Text>
+                  </View>
+                );
+              }}
+              assert={({state, expect}) => {
+                expect(state).to.be.true;
+              }}
+            />
 
-    const [nativeModule, onChangeNativeModule] = React.useState<NativeModule>({
-        base64FromArrayBuffer: undefined,
-        base64ToArrayBuffer: undefined
-    });
+            <TestCase
+              tags={['C_API']}
+              itShould="byteLength"
+              initialState={undefined as any}
+              arrange={({setState}) => {
+                return (
+                  <View style={{display: 'flex', flexDirection: 'column'}}>
+                    <TextInput
+                      style={{
+                        height: 40,
+                        borderWidth: 1,
+                        width: '100%',
+                        backgroundColor: '#f5f5f5',
+                      }}
+                      onChangeText={text => setText3(text)}
+                      placeholder="please input test text"
+                      placeholderTextColor={'#674651'}
+                      value={text3}
+                    />
+                    <Button
+                      label="byteLength"
+                      onPress={() => {
+                        onChangeTextToBase2(btoa(text3));
+                        setState(true);
+                      }}
+                    />
+                    <Text style={{color: 'green'}}>
+                      base64 length:{byteLength(textTobase2)}
+                    </Text>
+                  </View>
+                );
+              }}
+              assert={({state, expect}) => {
+                expect(state).to.be.true;
+              }}
+            />
 
-    const [nativeBFABText, onChangeNBFABText] = React.useState('');
+            <TestCase
+              tags={['C_API']}
+              itShould="fromByteArray"
+              initialState={undefined as any}
+              arrange={({setState}) => {
+                return (
+                  <View style={{display: 'flex', flexDirection: 'column'}}>
+                    <TextInput
+                      style={{
+                        height: 40,
+                        borderWidth: 1,
+                        width: '100%',
+                        backgroundColor: '#f5f5f5',
+                      }}
+                      onChangeText={text => setText4(text)}
+                      placeholder="please input test text"
+                      placeholderTextColor={'#674651'}
+                      value={text4}
+                    />
+                    <Button
+                      label="fromByteArray"
+                      onPress={() => {
+                        onChangeTextToBase3(
+                          fromByteArray(toByteArray(btoa(text4))),
+                        );
+                        setState(true);
+                      }}
+                    />
+                    <Text>uint8:{toByteArray(btoa(text4))}</Text>
+                    <Text style={{color: 'green'}}>string:{textTobase3}</Text>
 
-    const [nativeBFABTextUrlSafe, onChangeNBFABTextUrlSafe] = React.useState('');
+                    <Button
+                      label="urlSafe:true"
+                      onPress={() => {
+                        onChangeTextToBase8(
+                          fromByteArray(toByteArray(btoa(text4),true)),
+                        );
+                        setState(true);
+                      }}
+                    />
+                    <Text style={{color: 'green'}}>string:{textTobase8}</Text>
+                  </View>
+                );
+              }}
+              assert={({state, expect}) => {
+                expect(state).to.be.true;
+              }}
+            />
 
-    const [nativeBTABText, onChangeNBTABText] = React.useState(new Uint8Array(0));
+            <TestCase
+              tags={['C_API']}
+              itShould="trimBase64Padding"
+              initialState={undefined as any}
+              arrange={({setState}) => {
+                return (
+                  <View style={{display: 'flex', flexDirection: 'column'}}>
+                    <TextInput
+                      style={{
+                        height: 40,
+                        borderWidth: 1,
+                        width: '100%',
+                        backgroundColor: '#f5f5f5',
+                      }}
+                      onChangeText={text => setText5(text)}
+                      placeholder="please input test text"
+                      placeholderTextColor={'#674651'}
+                      value={text5}
+                    />
+                    <Button
+                      label="trimBase64Padding"
+                      onPress={() => {
+                        trimBase64Padding(btoa(text5));
+                        setState(true);
+                      }}
+                    />
+                    <Text style={{color: 'green'}}>
+                      base64 string:{trimBase64Padding(btoa(text5))}
+                    </Text>
+                  </View>
+                );
+              }}
+              assert={({state, expect}) => {
+                expect(state).to.be.true;
+              }}
+            />
+          </TestSuite>
 
-    const [nativeBTABTextRemoveLinebreaks, onChangeNBTABTextRemoveLinebreaks] = React.useState(new Uint8Array(0));
+          <TestSuite name="shim">
+            <TestCase
+              tags={['C_API']}
+              itShould="shim"
+              initialState={undefined as any}
+              arrange={({setState}) => {
+                return (
+                  <View style={{display: 'flex', flexDirection: 'column'}}>
+                    <Button
+                      label="shim"
+                      onPress={() => {
+                        shim();
+                        setState(true);
+                      }}
+                    />
 
-    const [trimBase64PaddingText, onChangeTrimBase64PaddingText] = React.useState('');
+                    <Text style={{color: 'green'}}>
+                      base64 string:{typeof global.btoa}
+                    </Text>
+                    <Text style={{color: 'green'}}>
+                      base64 string:{typeof global.atob}
+                    </Text>
 
-    const byArray = new Uint8Array([72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100, 33]);
-    // 点击事件 字符串转base64
-    const onPressBtoA = (text: string) => {
-        let b64 = btoa(text);
-        console.log(`字符串转base64 ${b64}`);
-        onChangeTextToBase64(b64)
-    }
+                    <TextInput
+                      style={{
+                        height: 40,
+                        borderWidth: 1,
+                        width: '100%',
+                        backgroundColor: '#f5f5f5',
+                      }}
+                      onChangeText={text => setText6(text)}
+                      placeholder="please input test text"
+                      placeholderTextColor={'#674651'}
+                      value={text6}
+                    />
+                    <Text>
+                      test string transform base64, testing the text: {text1}
+                    </Text>
+                    <Button
+                      label="shim BtoA"
+                      onPress={() => {
+                        onChangeTextToBase4(global.btoa(text6));
+                      }}
+                    />
+                    <Text style={{color: 'green'}}>{textTobase4}</Text>
+                    <Button
+                      label="shim AtoB"
+                      onPress={() => {
+                        onChangeTextToBase5(global.atob(textTobase4));
+                      }}
+                    />
+                    <Text style={{color: 'green'}}>{textTobase5}</Text>
+                  </View>
+                );
+              }}
+              assert={({state, expect}) => {
+                expect(state).to.be.true;
+              }}
+            />
+          </TestSuite>
 
-    const [testText, onChangeTestText] = React.useState('');
+          <TestSuite name="getNative">
+            <TestCase
+              tags={['C_API']}
+              itShould="getNative"
+              initialState={undefined as any}
+              arrange={({setState}) => {
+                return (
+                  <View style={{display: 'flex', flexDirection: 'column'}}>
+                    <Button
+                      label="getNative"
+                      onPress={() => {
+                        onPressGetNative();
+                        setState(true);
+                      }}
+                    />
+                    <TextInput
+                      style={{
+                        height: 40,
+                        borderWidth: 1,
+                        width: '100%',
+                        backgroundColor: '#f5f5f5',
+                      }}
+                      onChangeText={text => setText7(text)}
+                      placeholder="please input test text"
+                      placeholderTextColor={'#674651'}
+                      value={text7}
+                    />
+                    <Button
+                      label="base64FromArrayBuffer"
+                      onPress={() => {
+                        if (nativeModule?.base64FromArrayBuffer) {
+                          let base64FromArrayBuffer =
+                            nativeModule.base64FromArrayBuffer(text7);
+                          onChangeTextToBase6(base64FromArrayBuffer);
+                        }
+                      }}
+                    />
+                    <Text style={{color: 'green'}}>
+                      base64FromArrayBuffer string:{textTobase6}
+                    </Text>
 
-    // 点击事件 base64转字符串
-    const onPressAtoB = (text: string) => {
-        let textA = atob(text);
-        console.log(`base64转字符串 ${textA}`);
-        onChangeBase64Text(textA)
-    }
-
-    // 打印base64转为Unit8Array字节数组的长度
-    const onPressBase64Length = (text: string) => {
-        console.log(`打印base64长度1 ${text}`);
-        onChangeBase64TextLength(byteLength(text))
-    }
-
-    /* toByteArray 把base64字符串解码为Uint8Array */
-    const onPressToByteArray = (text: string) => {
-        let btArray = toByteArray(text);
-        console.log(`toByteArray ${btArray}`);
-        onChangeByteArray(btArray)
-    }
-
-    /* toByteArray 把base64字符串解码为Uint8Array  removeLinebreaks */
-    const onPressToByteArrayRemove = (text: string, removeLinebreaks: boolean = false) => {
-        let btArray = toByteArray(text, removeLinebreaks);
-        console.log(`toByteArray ${btArray}`);
-        onChangeByteArrayRemove(btArray)
-    }
-
-    /* fromByteArray 把Uint8Array编码为Base64字符串 */
-    const onPressFromByteArray = (
-        uint8: Uint8Array,
-        urlSafe: boolean = false) => {
-        let b64 = fromByteArray(uint8);
-        console.log(`fromByteArray ${b64}`);
-        onChangeFbArrayBase64Str(b64)
-    }
-
-    /* fromByteArray 把Uint8Array编码为Base64字符串  */
-    const onPressFromByteArrayUrlSafe = (
-        uint8: Uint8Array,
-        urlSafe: boolean = false) => {
-        let b64 = fromByteArray(uint8, urlSafe);
-        console.log(`fromByteArray ${b64}`);
-        onChangeFbArrayBase64StrUrlSafe(b64)
-    }
-
-    /* shim 给全局对象添加btoa和atob函数的shim实现 */
-    const handleAddShimToGlobal = () => {
-        shim();
-        console.log(typeof global.btoa); // 应该输出 "function"
-        console.log(typeof global.atob); // 同样应该输出 "function"
-    }
-
-    const onPressTestShimBtoA = (text: string) => {
-        const encodeBase64 = global.btoa(text);
-        console.log(`shim global btoa ${encodeBase64}`);
-        onChangeTestShimBtoA(encodeBase64)
-    }
-
-    const onPressTestShimAtoB = (text: string) => {
-        const decodeBase64 = global.atob(text);
-        console.log(`shim global atob ${decodeBase64}`);
-        onChangeTestShimAtoB(decodeBase64)
-    }
-
-    /* trimBase64Padding 清除Base64字符串的填充字符 */
-    const onPressTrimBase64Padding = (text: string) => {
-        let trimBase64 = trimBase64Padding(text);
-        console.log(`shim global atob ${trimBase64}`);
-        onChangeTrimBase64PaddingText(trimBase64)
-    }
-
-    /* getNative 返回包含base64FromArrayBuffer和base64ToArrayBuffer函数的对象 */
-    const onPressGetNative = () => {
-        const native = getNative() as NativeModule;
-        onChangeNativeModule(native)
-    }
-
-    /**
-     * @param text 
-     * base64FromArrayBuffer方法接受一个Base64编码的字符串或ArrayBuffer，
-     * 以及一个可选的布尔值参数，该参数决定是否生成的Base64字符串是URL安全的。
-     * 这个方法将ArrayBuffer对象转换为Base64编码的字符串。
-     * 这两个方法通常用于处理二进制数据，例如在网络传输或文件存储中，因为这些场景中的二进制数据需要被编码为文本格式以便于传输或存储。
-     */
-    const onPressNBFAB = (text: string | ArrayBuffer) => {
-        if (nativeModule?.base64FromArrayBuffer) {
-            let base64FromArrayBuffer = nativeModule.base64FromArrayBuffer(text);
-            onChangeNBFABText(base64FromArrayBuffer)
-        }
-    }
-
-     /** 
-     * @description base64转换Unit8Array 去除换行符
-     * @param text
-     * @param removeLinebreaks true
-     * 
-     */
-    const onPressNBFABUrlSafe = (text: string | ArrayBuffer, urlSafe: boolean = false) => {
-        if (nativeModule?.base64FromArrayBuffer) {
-            let base64FromArrayBuffer = nativeModule.base64FromArrayBuffer(text, urlSafe);
-            onChangeNBFABTextUrlSafe(base64FromArrayBuffer)
-        }
-    }
-
-    /** 
-     * @description base64转换Unit8Array
-     * 这两个方法是用于处理Base64编码和ArrayBuffer之间的转换。
-     * base64ToArrayBuffer方法接受一个Base64编码的字符串和一个可选的布尔值参数，
-     * 该参数决定是否在转换过程中删除换行符。这个方法将Base64编码的字符串转换为ArrayBuffer对象。
-     * @param text
-     * @param removeLinebreaks 默认值 false
-     * 
-     */
-    const onPressNBTAB = (text: string) => {
-        if (nativeModule?.base64ToArrayBuffer) {
-            let base64ToArrayBuffer = new Uint8Array(nativeModule.base64ToArrayBuffer(text));
-            onChangeNBTABText(base64ToArrayBuffer)
-        }
-    }
-
-    /** 
-     * @description base64转换Unit8Array 去除换行符
-     * @param text
-     * @param removeLinebreaks true
-     * 
-     */
-    const onPressNBTABRemoveLinebreaks = (text: string, removeLinebreaks: boolean = false) => {
-        if (nativeModule?.base64ToArrayBuffer) {
-            let base64ToArrayBuffer = new Uint8Array(nativeModule.base64ToArrayBuffer(text, removeLinebreaks));
-            onChangeNBTABTextRemoveLinebreaks(base64ToArrayBuffer)
-        }
-    }
-
-    return (
-        <ScrollView >
-            <View>
-                <Tester>
-                    <TestSuite name="QuickBase64">
-                        <View>
-                            <TextInput
-                                style={{ height: 40, borderColor: '#978081', borderWidth: 1, width: 300, marginBottom: 20, backgroundColor: '#f5f5f5' }}
-                                onChangeText={(text) => onChangeTestText(text)}
-                                placeholder="please input test text"
-                                placeholderTextColor={'#674651'}
-                                value={testText}
-                            />
-                        </View>
-
-                        <TestCase
-                            initialState={undefined as any}
-                            arrange={({ setState }) => {
-                                return (
-                                    <View style={{ display: 'flex', flexDirection: 'column' }}>
-                                        <Text>test string transform base64, testing the text: { testText }</Text>
-                                        <Button
-                                            label="BtoA"
-                                            onPress={() => { setState(true); onPressBtoA(testText) }}
-                                        />
-                                        <Text style={{ color: 'green' }}>{(textTobase64)}</Text>
-                                    </View>
-                                );
-                            }}
-                            assert={({ state, expect }) => {
-                                expect(state).to.be.true;
-                            }}
-                            tags={['C_API']}
-                            itShould="BtoA Encodes a character string into a Base64 character string."
-                        />
-
-                        <TestCase
-                            initialState={undefined as any}
-                            arrange={({ setState }) => {
-                                return (
-                                    <View style={{ display: 'flex', flexDirection: 'column' }}>
-                                        <Text>test base64 transform string, testing the text: { textTobase64 }</Text>
-                                        <Button
-                                            label="AtoB"
-                                            onPress={() => { setState(true); onPressAtoB(textTobase64) }}
-                                        />
-                                        <Text style={{ color: 'green' }}>{(base64ToText)}</Text>
-                                    </View>
-                                );
-                            }}
-                            assert={({ state, expect }) => {
-                                expect(state).to.be.true;
-                            }}
-                            tags={['C_API']}
-                            itShould="AtoB Convert base64 to character string."
-                        />
-
-                        <TestCase
-                            initialState={undefined as any}
-                            arrange={({ setState }) => {
-                                return (
-                                    <View style={{ display: 'flex', flexDirection: 'column' }}>
-                                        <Text>test base64 transform Unit8Array, testing the text: { textTobase64 }</Text>
-                                        <Button
-                                            label="onPressToByteArray"
-                                            onPress={() => { setState(true); onPressToByteArray(textTobase64) }}
-                                        />
-                                        <Text style={{ color: 'green' }}>{(byteArray.toString())}</Text>
-                                    </View>
-                                );
-                            }}
-                            assert={({ state, expect }) => {
-                                expect(state).to.be.true;
-                            }}
-                            tags={['C_API']}
-                            itShould="Decodes a base64 string into a Uint8Array."
-                        />
-
-                        <TestCase
-                            initialState={undefined as any}
-                            arrange={({ setState }) => {
-                                return (
-                                    <View style={{ display: 'flex', flexDirection: 'column' }}>
-                                        <Text>test base64 transform Unit8Array add removeLinebreaks is true, testing the text: { textTobase64 }</Text>
-                                        <Button
-                                            label="onPressToByteArrayRemove"
-                                            onPress={() => { setState(true); onPressToByteArrayRemove(textTobase64, true) }}
-                                        />
-                                        <Text style={{ color: 'green' }}>{(byteArrayRemove.toString())}</Text>
-                                    </View>
-                                );
-                            }}
-                            assert={({ state, expect }) => {
-                                expect(state).to.be.true;
-                            }}
-                            tags={['C_API']}
-                            itShould="Decodes a base64 string into a Uint8Array. Whether to cancel line breaks."
-                        />
-
-                        <TestCase
-                            initialState={undefined as any}
-                            arrange={({ setState }) => {
-                                return (
-                                    <View style={{ display: 'flex', flexDirection: 'column' }}>
-                                        <Text>get Unit8Array length form base64 transform, testing the text: { textTobase64 }</Text>
-                                        <Button
-                                            label="base64ToTextLength"
-                                            onPress={() => { setState(true); onPressBase64Length(textTobase64) }}
-                                        />
-                                        <Text style={{ color: 'green' }}>{(base64ToTextLength)}</Text>
-                                    </View>
-                                );
-                            }}
-                            assert={({ state, expect }) => {
-                                expect(state).to.be.true;
-                            }}
-                            tags={['C_API']}
-                            itShould="Takes a base64 string and returns the length of the byte array."
-                        />
-
-                        <TestCase
-                            initialState={undefined as any}
-                            arrange={({ setState }) => {
-                                return (
-                                    <View style={{ display: 'flex', flexDirection: 'column' }}>
-                                        <Text>test Uint8Array transform base64 string, testing the text: { byteArray.toString() }</Text>
-                                        <Button
-                                            label="onPressFromByteArray"
-                                            onPress={() => { setState(true); onPressFromByteArray(byteArray) }}
-                                        />
-                                        <Text style={{ color: 'green' }}>{(fbArrayBase64Str)}</Text>
-                                    </View>
-                                );
-                            }}
-                            assert={({ state, expect }) => {
-                                expect(state).to.be.true;
-                            }}
-                            tags={['C_API']}
-                            itShould="Encodes a Uint8Array into a Base64 character string."
-                        />
-
-                        <TestCase
-                            initialState={undefined as any}
-                            arrange={({ setState }) => {
-                                return (
-                                    <View style={{ display: 'flex', flexDirection: 'column' }}>
-                                        <Text>test Uint8Array transform base64 string add urlSafe params, testing the text: { byteArray.toString() }</Text>
-                                        <Button
-                                            label="onPressFromByteArrayUrlSafe"
-                                            onPress={() => { setState(true); onPressFromByteArrayUrlSafe(byteArray) }}
-                                        />
-                                        <Text style={{ color: 'green' }}>{(fbArrayBase64StrUrlSafe)}</Text>
-                                    </View>
-                                );
-                            }}
-                            assert={({ state, expect }) => {
-                                expect(state).to.be.true;
-                            }}
-                            tags={['C_API']}
-                            itShould="Encodes a Uint8Array into a Base64 character string. The urlSafe parameter determines whether Base64 encoding uses the URL-safe variant."
-                        />
-          
-                        <View
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                backgroundColor: '#ffffff'
-                            }}>
-                            <Text>Add btoa and atob functions for global objects</Text>
-                            <Button label="shim set global" onPress={() => handleAddShimToGlobal()} />
-                        </View>
-
-                        <TestCase
-                            initialState={undefined as any}
-                            arrange={({ setState }) => {
-                                {/* 测试shim 设置 btoa和atob函数 成功与否 */}
-                                return (
-                                    <View style={{ marginTop: 20, display: 'flex', flexDirection: 'column' }}>
-                                        <Text>test shim BtoA, testing the text: { testText }</Text>
-                                        <Button label="test shim BtoA" onPress={() => { setState(true); onPressTestShimBtoA(testText) }} />
-                                        <Text style={{ color: 'green' }}>{testShimBtoA}</Text>
-                                    </View>
-                                );
-                            }}
-                            assert={({ state, expect }) => {
-                                expect(state).to.be.true;
-                            }}
-                            tags={['C_API']}
-                            itShould="Test whether the shim sets the btoa function successfully."
-                        />
-
-                        <TestCase
-                            initialState={undefined as any}
-                            arrange={({ setState }) => {
-                                {/* 测试shim 设置 btoa和atob函数 成功与否 */}
-                                return (
-                                    <View style={{ display: 'flex', flexDirection: 'column' }}>
-                                        <Text>test shim AtoB, testing the text: { textTobase64 }</Text>
-                                        <Button label="test shim AtoB" onPress={() => { setState(true); onPressTestShimAtoB(textTobase64) }} />
-                                        <Text style={{ color: 'green' }}>{testShimAtoB}</Text>
-                                    </View>
-                                );
-                            }}
-                            assert={({ state, expect }) => {
-                                expect(state).to.be.true;
-                            }}
-                            tags={['C_API']}
-                            itShould="Test whether the shim sets the atob function successfully."
-                        />
-
-                        <TestCase
-                            initialState={undefined as any}
-                            arrange={({ setState }) => {
-                                {/* trimBase64Padding 清除Base64字符串的填充字符 */}
-                                return (
-                                    <View style={{ display: 'flex', flexDirection: 'column' }}>
-                                        <Text>trimBase64Padding clears the padding characters of a Base64 string, testing the text: { textTobase64 }</Text>
-                                        <Button label="test trimBase64Padding" onPress={() => { setState(true); onPressTrimBase64Padding(textTobase64) }} />
-                                        <Text style={{ color: 'green' }}>{trimBase64PaddingText}</Text>
-                                    </View>
-                                );
-                            }}
-                            assert={({ state, expect }) => {
-                                expect(state).to.be.true;
-                            }}
-                            tags={['C_API']}
-                            itShould="trimBase64Padding."
-                        />
-
-                        <View style={{ backgroundColor: "#ffffff" }}>
-                            <Text>Click the button below to get native function for base64FromArrayBuffer and base64ToArrayBuffer</Text>
-                            <Button label="Get getNative function" onPress={() => { onPressGetNative() }} />
-                        </View>
-
-                        <TestCase
-                            initialState={undefined as any}
-                            arrange={({ setState }) => {
-                                return (
-                                    <View>
-                                        <Text>base64 transform string text: { testText }</Text>
-                                        <Button label="onPressNBFAB" onPress={() => { setState(true); onPressNBFAB(testText) }} />
-                                        <Text style={{ color: 'green' }}>{nativeBFABText}</Text>
-                                    </View>
-                                );
-                            }}
-                            assert={({ state, expect }) => {
-                                expect(state).to.be.true;
-                            }}
-                            tags={['C_API']}
-                            itShould="Click the button below to get base64FromArrayBuffer transform text."
-                        />
-
-                        <TestCase
-                            initialState={undefined as any}
-                            arrange={({ setState }) => {
-                                return (
-                                    <View>
-                                        <Text>ArrayBuffer transform string text: { [72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100] }</Text>
-                                        <Button label="onPressNBFABUrlSafe" onPress={() => { setState(true); onPressNBFABUrlSafe(new Uint8Array([72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100]).buffer) }} />
-                                        <Text style={{ color: 'green' }}>{nativeBFABTextUrlSafe}</Text>
-                                    </View>
-                                );
-                            }}
-                            assert={({ state, expect }) => {
-                                expect(state).to.be.true;
-                            }}
-                            tags={['C_API']}
-                            itShould="Click the button below to get base64FromArrayBuffer transform text, The urlSafe parameter determines whether Base64 encoding uses the URL-safe variant."
-                        />
-
-                        <TestCase
-                            initialState={undefined as any}
-                            arrange={({ setState }) => {
-                                return (
-                                    <View>
-                                        <Text>base64 transform ArrayBuffer text: { textTobase64 }</Text>
-                                        <Button label="onPressNBTAB" onPress={() => { setState(true); onPressNBTAB(textTobase64) }} />
-                                        <Text style={{ color: 'green' }}>{nativeBTABText.toString()}</Text>
-                                    </View>
-                                );
-                            }}
-                            assert={({ state, expect }) => {
-                                expect(state).to.be.true;
-                            }}
-                            tags={['C_API']}
-                            itShould="Click the button below to get base64ToArrayBuffer transform text."
-                        />
-
-                        <TestCase
-                            initialState={undefined as any}
-                            arrange={({ setState }) => {
-                                return (
-                                    <View>
-                                        <Text>base64 transform ArrayBuffer text: { textTobase64 }</Text>
-                                        <Button label="onPressNBTABRemoveLinebreaks" onPress={() => { setState(true); onPressNBTABRemoveLinebreaks(textTobase64) }} />
-                                        <Text style={{ color: 'green' }}>{nativeBTABTextRemoveLinebreaks}</Text>
-                                    </View>
-                                );
-                            }}
-                            assert={({ state, expect }) => {
-                                expect(state).to.be.true;
-                            }}
-                            tags={['C_API']}
-                            itShould="Click the button below to get base64ToArrayBuffer transform text, Remove Line Breaks."
-                        />
-                    </TestSuite>
-                </Tester>   
-            </View>
-        </ScrollView>
-    );
+                    <Button
+                      label="base64ToArrayBuffer"
+                      onPress={() => {
+                        if (nativeModule?.base64ToArrayBuffer) {
+                          let base64FromArrayBuffer1 = new Uint8Array(
+                            nativeModule.base64ToArrayBuffer(textTobase6),
+                          );
+                          onChangeTextToBase7(base64FromArrayBuffer1);
+                        }
+                      }}
+                    />
+                    <Text style={{color: 'green'}}>
+                      base64ToArrayBuffer string:{textTobase7}
+                    </Text>
+                  </View>
+                );
+              }}
+              assert={({state, expect}) => {
+                expect(state).to.be.true;
+              }}
+            />
+          </TestSuite>
+        </Tester>
+      </View>
+    </ScrollView>
+  );
 }
-
-
-
