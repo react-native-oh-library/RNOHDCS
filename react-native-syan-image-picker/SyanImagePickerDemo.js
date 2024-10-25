@@ -40,17 +40,21 @@ export default class App extends Component<{}> {
                     this.setState({
                         photos: photos,
                     });
+                    let logs=""
+                   
                     {photos.map((item, index) => {
-                            console.log("rn_syan_image_picker showImagePicker result: ",
-                                "uri:" + item.uri + "-- " +
-                                "width:" + item.width + "-- " +
-                                "height:" + item.height + "-- " +
-                                "type:" + item.type + "-- " +
-                                "size:" + item.size + "-- " +
-                                "original_uri:" + item.original_uri + "-- " +
-                                "base64:" + item.base64 + "-- ");
-                        })
-                    }
+                    	logs+="uri:" + item.uri + "-- " +
+                            "width:" + item.width + "-- " +
+                            "height:" + item.height + "-- " +
+                            "type:" + item.type + "-- " +
+                            "size:" + item.size + "-- " +
+                            "original_uri:" + item.original_uri + "-- " +
+                            "base64:" + item.base64.slice(0,20) + "-- ";
+                     console.log("rn_syan_image_picker showImagePicker result: ",logs);
+                    })}
+                      this.setState({
+                        logs: logs,
+                    });
                 } else {
                     console.log(err);
                 }
@@ -75,17 +79,21 @@ export default class App extends Component<{}> {
                     this.setState({
                         photos: photos,
                     });
+                    let logs=""
+                   
                     {photos.map((item, index) => {
-                            console.log("rn_syan_image_picker showImagePicker result: ",
-                                "uri:" + item.uri + "-- " +
-                                "width:" + item.width + "-- " +
-                                "height:" + item.height + "-- " +
-                                "type:" + item.type + "-- " +
-                                "size:" + item.size + "-- " +
-                                "original_uri:" + item.original_uri + "-- " +
-                                "base64:" + item.base64 + "-- ");
-                        })
-                    }
+                    	logs+="uri:" + item.uri + "-- " +
+                            "width:" + item.width + "-- " +
+                            "height:" + item.height + "-- " +
+                            "type:" + item.type + "-- " +
+                            "size:" + item.size + "-- " +
+                            "original_uri:" + item.original_uri + "-- " +
+                            "base64:" + item.base64.slice(0,20) + "-- ";
+                     console.log("rn_syan_image_picker showImagePicker result: ",logs);
+                    })}
+                      this.setState({
+                        logs: logs,
+                    });
                 } else {
                     console.log(err);
                 }
@@ -109,17 +117,21 @@ export default class App extends Component<{}> {
                     this.setState({
                         photos: photos,
                     });
+                    let logs=""
+                   
                     {photos.map((item, index) => {
-                            console.log("rn_syan_image_picker showImagePicker result: ",
-                                "uri:" + item.uri + "-- " +
-                                "width:" + item.width + "-- " +
-                                "height:" + item.height + "-- " +
-                                "type:" + item.type + "-- " +
-                                "size:" + item.size + "-- " +
-                                "original_uri:" + item.original_uri + "-- " +
-                                "base64:" + item.base64 + "-- ");
-                        })
-                    }
+                    	logs+="uri:" + item.uri + "-- " +
+                            "width:" + item.width + "-- " +
+                            "height:" + item.height + "-- " +
+                            "type:" + item.type + "-- " +
+                            "size:" + item.size + "-- " +
+                            "original_uri:" + item.original_uri + "-- " +
+                            "base64:" + item.base64.slice(0,20) + "-- ";
+                     console.log("rn_syan_image_picker showImagePicker result: ",logs);
+                    })}
+                      this.setState({
+                        logs: logs,
+                    });
                 } else {
                     console.log(err);
                 }
@@ -143,17 +155,21 @@ export default class App extends Component<{}> {
                     this.setState({
                         photos: photos,
                     });
+                    let logs=""
+                   
                     {photos.map((item, index) => {
-                            console.log("rn_syan_image_picker showImagePicker result: ",
-                                "uri:" + item.uri + "-- " +
-                                "width:" + item.width + "-- " +
-                                "height:" + item.height + "-- " +
-                                "type:" + item.type + "-- " +
-                                "size:" + item.size + "-- " +
-                                "original_uri:" + item.original_uri + "-- " +
-                                "base64:" + item.base64 + "-- ");
-                        })
-                    }
+                    	logs+="uri:" + item.uri + "-- " +
+                            "width:" + item.width + "-- " +
+                            "height:" + item.height + "-- " +
+                            "type:" + item.type + "-- " +
+                            "size:" + item.size + "-- " +
+                            "original_uri:" + item.original_uri + "-- " +
+                            "base64:" + item.base64.slice(0,20) + "-- ";
+                     console.log("rn_syan_image_picker showImagePicker result: ",logs);
+                    })}
+                      this.setState({
+                        logs: logs,
+                    });
                 } else {
                     console.log(err);
                 }
@@ -179,17 +195,21 @@ export default class App extends Component<{}> {
                     this.setState({
                         photos: photos,
                     });
+                     let logs=""
+                   
                     {photos.map((item, index) => {
-                            console.log("rn_syan_image_picker showImagePicker result: ",
-                                "uri:" + item.uri + "-- " +
-                                "width:" + item.width + "-- " +
-                                "height:" + item.height + "-- " +
-                                "type:" + item.type + "-- " +
-                                "size:" + item.size + "-- " +
-                                "original_uri:" + item.original_uri + "-- " +
-                                "base64:" + item.base64 + "-- ");
-                        })
-                    }
+                    	logs+="uri:" + item.uri + "-- " +
+                            "width:" + item.width + "-- " +
+                            "height:" + item.height + "-- " +
+                            "type:" + item.type + "-- " +
+                            "size:" + item.size + "-- " +
+                            "original_uri:" + item.original_uri + "-- " +
+                            "base64:" + item.base64.slice(0,20) + "-- ";
+                     console.log("rn_syan_image_picker showImagePicker result: ",logs);
+                    })}
+                      this.setState({
+                        logs: logs,
+                    });
                 } else {
                     console.log(err);
                 }
@@ -213,17 +233,20 @@ export default class App extends Component<{}> {
                     this.setState({
                         photos: photos,
                     });
+                    let logs=""
                     {photos.map((item, index) => {
-                        console.log("rn_syan_image_picker showImagePicker result: ",
-                            "uri:" + item.uri + "-- " +
+                    	logs+="uri:" + item.uri + "-- " +
                             "width:" + item.width + "-- " +
                             "height:" + item.height + "-- " +
                             "type:" + item.type + "-- " +
                             "size:" + item.size + "-- " +
                             "original_uri:" + item.original_uri + "-- " +
-                            "base64:" + item.base64 + "-- ");
-                    })
-                    }
+                            "base64:" + item.base64.slice(0,20) + "-- ";
+                     console.log("rn_syan_image_picker showImagePicker result: ",logs);
+                    })}
+                      this.setState({
+                        logs: logs,
+                    });
                 } else {
                     console.log(err);
                 }
@@ -250,16 +273,22 @@ export default class App extends Component<{}> {
             this.setState({
                 photos: photos,
             });
+            
+            let logs=""
+            
             {photos.map((item, index) => {
-                console.log("rn_syan_image_picker handleAsyncSelectPhoto result: ",
-                    "uri:" + item.uri + "-- " +
+            	logs+="uri:" + item.uri + "-- " +
                     "width:" + item.width + "-- " +
                     "height:" + item.height + "-- " +
                     "type:" + item.type + "-- " +
                     "size:" + item.size + "-- " +
                     "original_uri:" + item.original_uri + "-- " +
-                    "base64:" + item.base64 + "-- ");
+                    "base64:" + item.base64.slice(0,20) + "-- ";
+             console.log("rn_syan_image_picker handleAsyncSelectPhoto result: ",logs);
             })}
+              this.setState({
+                logs: logs,
+            });
         } catch (err) {
             console.log(err);
             // 取消选择，err.message为"取消"
@@ -275,21 +304,25 @@ export default class App extends Component<{}> {
         	      this.setState({video: []});
                 this.setState({
                     photos: photos,
-                });
-                {photos.map((item, index) => {
-                        console.log("rn_syan_image_picker handlePromiseSelectPhoto result: ",
-                            "uri:" + item.uri + "-- " +
-                            "width:" + item.width + "-- " +
-                            "height:" + item.height + "-- " +
-                            "type:" + item.type + "-- " +
-                            "size:" + item.size + "-- " +
-                            "original_uri:" + item.original_uri + "-- " +
-                            "base64:" + item.base64 + "-- ");
-                    })
-                }
-            }).catch(err => {
-                // 取消选择，err.message为"取消"
-            });
+                });              
+             let logs=""
+            
+            {photos.map((item, index) => {
+            	logs+="uri:" + item.uri + "-- " +
+                    "width:" + item.width + "-- " +
+                    "height:" + item.height + "-- " +
+                    "type:" + item.type + "-- " +
+                    "size:" + item.size + "-- " +
+                    "original_uri:" + item.original_uri + "-- " +
+                    "base64:" + item.base64.slice(0,20) + "-- ";
+             console.log("rn_syan_image_picker handlePromiseSelectPhoto result: ",logs);
+            })}
+              this.setState({
+                logs: logs,
+            }); 
+        }).catch(err => {
+            // 取消选择，err.message为"取消"
+        });
     };
 
     handleLaunchCamera = async () => {
@@ -301,17 +334,21 @@ export default class App extends Component<{}> {
                     this.setState({
                         photos: photos,
                     });
+                    let logs=""
+            
                     {photos.map((item, index) => {
-                            console.log("rn_syan_image_picker handleLaunchCamera result: ",
-                                "uri:" + item.uri + "-- " +
-                                "width:" + item.width + "-- " +
-                                "height:" + item.height + "-- " +
-                                "type:" + item.type + "-- " +
-                                "size:" + item.size + "-- " +
-                                "original_uri:" + item.original_uri + "-- " +
-                                "base64:" + item.base64 + "-- ");
-                        })
-                    }
+                    	logs+="uri:" + item.uri + "-- " +
+                            "width:" + item.width + "-- " +
+                            "height:" + item.height + "-- " +
+                            "type:" + item.type + "-- " +
+                            "size:" + item.size + "-- " +
+                            "original_uri:" + item.original_uri + "-- " +
+                            "base64:" + item.base64.slice(0,20) + "-- ";
+                     console.log("rn_syan_image_picker handleLaunchCamera result: ",logs);
+                    })}
+                      this.setState({
+                        logs: logs,
+                    }); 
                 }
             },
         );
@@ -328,17 +365,22 @@ export default class App extends Component<{}> {
             this.setState({
                 photos: photos,
             });
-
+  
+            let logs=""
+            
             {photos.map((item, index) => {
-                    console.log("rn_syan_image_picker handleSyncLaunchCamera result: ",
-                        "uri:" + item.uri + "-- " +
-                        "width:" + item.width + "-- " +
-                        "height:" + item.height + "-- " +
-                        "type:" + item.type + "-- " +
-                        "size:" + item.size + "-- " +
-                        "original_uri:" + item.original_uri + "-- " +
-                        "base64:" + item.base64 + "-- ");
-                })}
+            	logs+="uri:" + item.uri + "-- " +
+                    "width:" + item.width + "-- " +
+                    "height:" + item.height + "-- " +
+                    "type:" + item.type + "-- " +
+                    "size:" + item.size + "-- " +
+                    "original_uri:" + item.original_uri + "-- " +
+                    "base64:" + item.base64.slice(0,20) + "-- ";
+             console.log("rn_syan_image_picker handleSyncLaunchCamera result: ",logs);
+            })}
+              this.setState({
+                logs: logs,
+            }); 
         } catch (err) {
             console.log(err);
         }
@@ -357,16 +399,22 @@ export default class App extends Component<{}> {
                     this.setState({
                         video: res,
                     });
-                    {res.map((item, index) => {
-                        console.log("rn_syan_image_picker handleOpenVideoPicker result: ",
-                            "uri:" + item.uri + "-- " +
+                    
+                    let logs=""
+                    
+                    {photos.map((item, index) => {
+                    	logs+="uri:" + item.uri + "-- " +
                             "width:" + item.width + "-- " +
                             "height:" + item.height + "-- " +
-                            "type:" + item.type + "--" +
+                            "type:" + item.type + "-- " +
                             "size:" + item.size + "-- " +
                             "original_uri:" + item.original_uri + "-- " +
-                            "base64:" + item.base64 + "-- ");
+                            "base64:" + item.base64.slice(0,20) + "-- ";
+                     console.log("rn_syan_image_picker handleOpenVideoPicker result: ",logs);
                     })}
+                      this.setState({
+                        logs: logs,
+                    }); 
                 }
             },
         );
@@ -381,16 +429,21 @@ export default class App extends Component<{}> {
                     this.setState({
                         video: res,
                     });
-                    {res.map((item, index) => {
-                        console.log("rn_syan_image_picker handleOpenVideoPickerNotAllowPickingMultipleVideo result: ",
-                            "uri:" + item.uri + "-- " +
+                    let logs=""
+                    
+                    {photos.map((item, index) => {
+                    	logs+="uri:" + item.uri + "-- " +
                             "width:" + item.width + "-- " +
                             "height:" + item.height + "-- " +
                             "type:" + item.type + "-- " +
                             "size:" + item.size + "-- " +
                             "original_uri:" + item.original_uri + "-- " +
-                            "base64:" + item.base64 + "-- ");
+                            "base64:" + item.base64.slice(0,20) + "-- ";
+                     console.log("rn_syan_image_picker handleOpenVideoPickerNotAllowPickingMultipleVideo result: ",logs);
                     })}
+                      this.setState({
+                        logs: logs,
+                    }); 
                 }
             },
         );
@@ -455,6 +508,10 @@ export default class App extends Component<{}> {
                             />
                         );
                     })}
+                    
+                    <Text style={styles.instructions} testID="constant tab contents">
+                        {JSON.stringify(this.state.logs, null, '  ')}
+                    </Text>
                 </ScrollView>
             </View>
         );
@@ -474,6 +531,11 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#F5FCFF',
         paddingTop: 40,
+    },
+    instructions: {
+        textAlign: 'left',
+        color: '#333333',
+        margin: 5,
     },
     btn: {
         backgroundColor: '#FDA549',
