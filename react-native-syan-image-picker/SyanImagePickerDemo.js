@@ -31,7 +31,6 @@ export default class App extends Component<{}> {
             {
                 isCamera: true,
                 imageCount: 1,
-                isCrop: true,
                 quality: 10,
                 compress: true,
                 enableBase64: true,
@@ -205,7 +204,6 @@ export default class App extends Component<{}> {
             {
                 isCamera: true,
                 imageCount: 1,
-                isCrop: true,
                 quality: 90,
                 compress: true,
                 enableBase64: true,
