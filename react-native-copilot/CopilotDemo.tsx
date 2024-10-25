@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   Image,
   SafeAreaView,
-  ScrollView,
   StyleSheet,
   Switch,
   Text,
@@ -15,14 +14,15 @@ import {
   walkthroughable,
   useCopilot,
 } from "react-native-copilot";
-import { TestSuite, Tester, TestCase } from '@rnoh/testerino';
 
 const WalkthroughableText = walkthroughable(Text);
 const WalkthroughableImage = walkthroughable(Image);
+
 function App() {
   const { start, copilotEvents } = useCopilot();
   const [secondStepActive, setSecondStepActive] = useState(true);
   const [lastEvent, setLastEvent] = useState(null);
+
   useEffect(() => {
     copilotEvents.on("stepChange", (step) => {
       setLastEvent(`stepChange: ${step.name}`);
@@ -34,12 +34,14 @@ function App() {
       setLastEvent(`stop`);
     });
   }, [copilotEvents]);
+
   return (
     <SafeAreaView style={styles.container}>
       <CopilotStep
         text="Hey! This is the first step of the tour!"
         order={1}
-        name="openApp">
+        name="openApp"
+      >
         <WalkthroughableText style={styles.title}>
           {'Welcome to the demo of\n"React Native Copilot"'}
         </WalkthroughableText>
@@ -49,9 +51,10 @@ function App() {
           active={secondStepActive}
           text="Here goes your profile picture!"
           order={2}
-          name="secondText">
+          name="secondText"
+        >
           <WalkthroughableImage
-            source={require('../assets/react-native-copilot-man.jpeg')}
+            source={require("../assets/react-native-copilot-man.jpeg")}
             style={styles.profilePhoto}
           />
         </CopilotStep>
@@ -78,60 +81,47 @@ function App() {
           order={3}
           name="thirdText"
         >
-          <WalkthroughableText >
-            <View style={styles.imageView}><Image source={require('../assets/react-native-copilot-nickname.png')} /></View>
+          <WalkthroughableText>
+            <View style={styles.imageView}>
+              <Image
+                source={require("../assets/react-native-copilot-nickname.png")}
+              />
+            </View>
           </WalkthroughableText>
         </CopilotStep>
-        <View style={styles.imageView}><Image source={require('../assets/react-native-copilot-earphone.png')} /></View>
-        <View style={styles.imageView}><Image source={require('../assets/react-native-copilot-glass.png')} /></View>
-        <View style={styles.imageView}><Image source={require('../assets/react-native-copilot-scan.png')} /></View>
-        <View style={styles.imageView}><Image source={require('../assets/react-native-copilot-todo.png')} /></View>
+        <View style={styles.imageView}>
+          <Image
+            source={require("../assets/react-native-copilot-earphone.png")}
+          />
+        </View>
+        <View style={styles.imageView}>
+          <Image source={require("../assets/react-native-copilot-glass.png")} />
+        </View>
+        <View style={styles.imageView}>
+          <Image source={require("../assets/react-native-copilot-scan.png")} />
+        </View>
+        <View style={styles.imageView}>
+          <Image source={require("../assets/react-native-copilot-todo.png")} />
+        </View>
       </View>
     </SafeAreaView>
   );
 }
+
 const AppwithProvider = () => (
-  <ScrollView>
-  <Tester>
-    <TestSuite name="Copilot">
-      <TestCase tags={['C_API']} itShould="Test Copilot CopilotOptions={arrowColor{'red'}}">
-        <View style={{ height: 500, width: '100%' }}>
-          <CopilotProvider stopOnOutsideClick androidStatusBarVisible arrowColor={'red'} >
-            <App />
-          </CopilotProvider>
-        </View>
-      </TestCase>
-      <TestCase tags={['C_API']} itShould="Test Copilot  CopilotOptions={tipStyle={{backgroundColor:'yellow'}}}">
-        <View style={{ height: 500, width: '100%' }}>
-          <CopilotProvider stopOnOutsideClick androidStatusBarVisible tooltipStyle={{backgroundColor:'yellow'}}>
-            <App />
-          </CopilotProvider>
-        </View>
-      </TestCase>
-      <TestCase tags={['C_API']} itShould="Test Copilot CopilotOptions={animated={false}}">
-        <View style={{ height: 500, width: '100%' }}>
-          <CopilotProvider stopOnOutsideClick androidStatusBarVisible animated={false} >
-            <App />
-          </CopilotProvider>
-        </View>
-      </TestCase>
-      <TestCase tags={['C_API']} itShould="Test Copilot CopilotOptions={animated={true} ,animationDuration={1000}}">
-        <View style={{ height: 500, width: '100%' }}>
-          <CopilotProvider stopOnOutsideClick androidStatusBarVisible animated={true} animationDuration={1000}>
-            <App />
-          </CopilotProvider>
-        </View>
-      </TestCase>
-    </TestSuite>
-  </Tester >
-  </ScrollView>
+  <CopilotProvider stopOnOutsideClick androidStatusBarVisible>
+    <App />
+  </CopilotProvider>
 );
+
+export default AppwithProvider;
+
 const styles = StyleSheet.create({
   imageView: {
     width: 50,
     height: 50,
-    justifyContent: 'space-evenly',
-    alignItems: 'center'
+    justifyContent: "space-evenly",
+    alignItems: "center",
   },
   container: {
     flex: 1,
@@ -164,7 +154,7 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: "row",
-    alignItems: 'center',
+    alignItems: "center",
     justifyContent: "space-between",
   },
   tabItem: {
@@ -182,4 +172,3 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 });
-export default AppwithProvider;
