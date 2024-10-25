@@ -22,25 +22,43 @@ export default function() {
     const POINT_COUNT=50
       const POINTS = generateRandomGraphData(POINT_COUNT)
       const [points, setPoints] = useState(POINTS)
-      const [isAnimated, setIsAnimated] = useState(true)
+
+
+      const POINTS2 = generateRandomGraphData(POINT_COUNT)
+      const [points2, setPoints2] = useState(POINTS2)
+   
 
       const color='#dd4400'
       const refreshData = useCallback(() => {
         setPoints(generateRandomGraphData(POINT_COUNT))
       }, [])
+
+      const refreshData2 = useCallback(() => {
+        setPoints2(generateRandomGraphData(POINT_COUNT))
+      }, [])
       
     return (
         <View style={{ flex: 1 }}>
     {/* <GestureHandlerRootView style={{ flex: 1 }}> */}
-        <Text>{`animated value is ${isAnimated}`}</Text>
+        <Text>{`animated value is false`}</Text>
         <LineGraph 
         style={styles.graph}
-        animated={isAnimated}
+        animated={false}
         color={color}
         points={points}
         />
         <Button title='refreshData' onPress={refreshData} />
-        <Button title='change animated' onPress={()=>setIsAnimated(!isAnimated)} />
+   
+
+        <Text>{`animated value is true`}</Text>
+        <LineGraph 
+        style={styles.graph}
+        animated={true}
+        color={color}
+        points={points2}
+        />
+        <Button title='refreshData' onPress={refreshData2} />
+
      {/* </GestureHandlerRootView> */}
     </View>
     )
