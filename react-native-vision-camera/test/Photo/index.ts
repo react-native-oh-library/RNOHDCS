@@ -11,13 +11,13 @@ export * from './ZoomTest'
 export * from './EnableZoomGestureTest'
 export * from './ExposureTest'
 export * from './ResizeModeTest'
-export * from './AndroidPreviewViewTypeTest'
 export * from './PhotoQualityBalanceTest'
 export * from './OnErrorTest'
 export * from './OnInitializedTest'
 export * from './OnStartedTest'
 export * from './OnStoppedTest'
 export * from './OnShutterTest'
+export * from './FormatTest'
 
 //
 export * from './useCameraDeviceTest';
