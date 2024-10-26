@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SafeAreaView, View, Text, TextInput, FlatList, Pressable } from "react-native";
 import { Realm, RealmProvider, useRealm, useQuery } from '@realm/react'
 
@@ -29,6 +29,7 @@ class Task extends Realm.Object {
 }
 
 export default function AppWrapper() {
+
   return (
     <RealmProvider schema={[Task]}><TaskApp /></RealmProvider>
   )
@@ -37,7 +38,19 @@ export default function AppWrapper() {
 function TaskApp() {
   const realm = useRealm();
   const tasks = useQuery(Task);
-  const [newDescription, setNewDescription] = useState("")
+  const [newDescription, setNewDescription] = useState("")  
+
+  useEffect(() => {
+    return () => {
+      realm.close();      
+      const realmPath = '/data/storage/el2/base/haps/entry/files/default.realm';
+      const config = {
+        path: realmPath
+      };
+      Realm.deleteFile(config);
+      console.log('TaskApp is about to unmount');
+    };
+  }, []);
 
   return (
     <SafeAreaView>
