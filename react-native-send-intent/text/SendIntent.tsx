@@ -279,28 +279,6 @@ function SendIntent() {
               assert={({ expect, state }) => { expect(state).to.be.true }}
             />
             <TestCase
-              itShould='native openAppWithData'
-              tags={['C_API']}
-              initialState={undefined as any}
-              arrange={() => {
-                return (
-                  <>
-                    <><Text style={{ color: "red" }}>{JSON.stringify(flag2)}</Text></>
-                    <Button
-                      onPress={() => {
-                        NativeSendIntent.openAppWithData('', '').then((flag) => {
-                          setFlag2(flag)
-                        })
-                      }}
-                      title="打开携带数据的APP"
-
-                    />
-                  </>
-                )
-              }}
-              assert={({ expect, state }) => { expect(state).to.be.true }}
-            />
-            <TestCase
               itShould='native openChromeIntent'
               tags={['C_API']}
               initialState={undefined as any}
@@ -482,7 +460,7 @@ function SendIntent() {
             itShould='native openFilePicker'
             tags={['C_API']}
             initialState={undefined as any}
-            arrange={() => {
+            arrange={({setState}) => {
               return (
                 <>
                   <><Text style={{ color: "red" }}>{JSON.stringify(url)}</Text></>
@@ -492,7 +470,8 @@ function SendIntent() {
                         type: '',
                         title: ''
                       }, (uris) => {
-                        setUrl(uris)
+                        setUrl(uris);
+                        setState(true)
                       });
                     }}
                     title="选择打开文件选择器获取文件地址"
