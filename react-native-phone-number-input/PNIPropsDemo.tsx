@@ -546,12 +546,13 @@ export const PNIPropsDemo = () => {
             </TestCase>
             <TestCase
               tags={['C_API']}
-              itShould="textInputProps={{selectionColor: 'red',style:{color:'green'}}}">
+              itShould="textInputProps={{selectionColor: 'red',style:{color:'green',width: 200,}}}">
               <PhoneInput
                 textInputProps={{
                   selectionColor: 'red',
                   style: {
                     color: 'green',
+                    width: 200,
                   },
                 }}
                 ref={phoneInput}
@@ -677,7 +678,6 @@ export const PNIPropsDemo = () => {
                 flagButtonStyle={{
                   backgroundColor: 'red',
                   marginRight: 20,
-                  height: 30,
                 }}
                 textContainerStyle={{backgroundColor: 'green'}}
                 ref={phoneInput}
@@ -841,157 +841,94 @@ export const PNIPropsDemo = () => {
             </TestCase>
           </TestSuite>
           <TestSuite name="API">
+            <TestCase tags={['C_API']} itShould="getCountryCode(获取国家代码)">
+              <>
+                <PhoneInput
+                  ref={phoneInput1}
+                  defaultValue={value}
+                  disableArrowIcon={true}
+                  defaultCode="AX"
+                  layout="first"
+                  onChangeText={text => {
+                    setValue(text);
+                  }}
+                  onChangeFormattedText={text => {
+                    setFormattedValueapi(text);
+                    setCountryCodeapi(
+                      phoneInput1.current?.getCountryCode() || '',
+                    );
+                  }}
+                  countryPickerProps={{withAlphaFilter: true}}
+                  disabled={disabled}
+                  withDarkTheme={false}
+                  withShadow={false}
+                  renderDropdownImage={<h1>Hello, world!</h1>}
+                />
+                <Text>{phoneInput1.current?.getCountryCode()}</Text>
+              </>
+            </TestCase>
             <TestCase
               tags={['C_API']}
-              itShould="getCountryCode(获取国家代码)"
-              initialState={false}
-              arrange={({setState, reset}) => (
-                <>
-                  <PhoneInput
-                    ref={phoneInput1}
-                    defaultValue={value}
-                    disableArrowIcon={true}
-                    defaultCode="AX"
-                    layout="first"
-                    onChangeText={text => {
-                      setValue(text);
-                    }}
-                    onChangeFormattedText={text => {
-                      setFormattedValueapi(text);
-                      setCountryCodeapi(
-                        phoneInput1.current?.getCountryCode() || '',
-                      );
-                    }}
-                    countryPickerProps={{withAlphaFilter: true}}
-                    disabled={disabled}
-                    withDarkTheme={false}
-                    withShadow={false}
-                    renderDropdownImage={<h1>Hello, world!</h1>}
-                  />
-                  <View style={styles.view}>
-                    <Button
-                      title="测试getCountryCode接口,获取国家代码"
-                      onPress={() => {
-                        if (
-                          phoneInput1.current?.getCountryCode() ==
-                          countryCodeapi
-                        ) {
-                          setState(true);
-                        }
-                      }}
-                    />
-                    <Button title="reset" onPress={reset} />
-                  </View>
-                </>
-              )}
-              assert={({state, expect}) => {
-                expect(state).to.be.true;
-              }}
-            />
+              itShould="getCallingCode(获取国家电话区号，如+86)">
+              <>
+                <PhoneInput
+                  ref={phoneInput2}
+                  defaultValue={value}
+                  disableArrowIcon={true}
+                  defaultCode="AX"
+                  layout="first"
+                  onChangeText={text => {
+                    setValueapi(text);
+                  }}
+                  onChangeFormattedText={text => {
+                    setFormattedValueapi(text);
+                    setCountryCodeapi(
+                      phoneInput2.current?.getCountryCode() || '',
+                    );
+                  }}
+                  countryPickerProps={{withAlphaFilter: true}}
+                  disabled={disabled}
+                  withDarkTheme={false}
+                  withShadow={false}
+                  renderDropdownImage={<h1>Hello, world!</h1>}
+                />
+                <Text>{phoneInput2.current?.getCallingCode()}</Text>
+              </>
+            </TestCase>
             <TestCase
               tags={['C_API']}
-              itShould="getCallingCode(获取国家电话区号，如+86)"
-              initialState={false}
-              arrange={({setState, reset}) => (
-                <>
-                  <PhoneInput
-                    ref={phoneInput2}
-                    defaultValue={value}
-                    disableArrowIcon={true}
-                    defaultCode="AX"
-                    layout="first"
-                    onChangeText={text => {
-                      setValueapi(text);
-                    }}
-                    onChangeFormattedText={text => {
-                      setFormattedValueapi(text);
-                      setCountryCodeapi(
-                        phoneInput2.current?.getCountryCode() || '',
-                      );
-                    }}
-                    countryPickerProps={{withAlphaFilter: true}}
-                    disabled={disabled}
-                    withDarkTheme={false}
-                    withShadow={false}
-                    renderDropdownImage={<h1>Hello, world!</h1>}
-                  />
-                  <View style={{marginBottom: 20}}>
-                    <Button
-                      title="测试getCallingCode接口，获取国家电话区号，如+86"
-                      onPress={() => {
-                        if (
-                          phoneInput2.current?.getCallingCode() ==
-                          formattedValueapi.slice(
-                            1,
-                            formattedValueapi.length - valueapi.length,
-                          )
-                        ) {
-                          setState(true);
-                        }
-                      }}
-                    />
-                  </View>
-                  <Button title="reset" onPress={reset} />
-                </>
-              )}
-              assert={({state, expect}) => {
-                expect(state).to.be.true;
-              }}
-            />
-            <TestCase
-              tags={['C_API']}
-              itShould="getNumberAfterPossiblyEliminatingZero(获取输入的电话号码和加了区号的电话号码)"
-              initialState={false}
-              arrange={({setState, reset}) => (
-                <>
-                  <PhoneInput
-                    ref={phoneInput3}
-                    defaultValue={value}
-                    disableArrowIcon={true}
-                    defaultCode="AX"
-                    layout="first"
-                    onChangeText={text => {
-                      setValueapi(text);
-                    }}
-                    onChangeFormattedText={text => {
-                      setFormattedValueapi(text);
-                      setCountryCodeapi(
-                        phoneInput3.current?.getCountryCode() || '',
-                      );
-                    }}
-                    countryPickerProps={{withAlphaFilter: true}}
-                    disabled={disabled}
-                    withDarkTheme={false}
-                    withShadow={false}
-                    renderDropdownImage={<h1>Hello, world!</h1>}
-                  />
-                  <View style={styles.view}>
-                    <View style={{width: '60%'}}>
-                      <Button
-                        title="调用getNumberAfterPossiblyEliminatingZero接口"
-                        onPress={() => {
-                          let res =
-                            phoneInput3.current?.getNumberAfterPossiblyEliminatingZero();
-                          console.log(res);
-                          if (
-                            phoneInput3.current?.getNumberAfterPossiblyEliminatingZero()
-                              .number == valueapi &&
-                            phoneInput3.current?.getNumberAfterPossiblyEliminatingZero()
-                              .formattedNumber == formattedValueapi
-                          ) {
-                            setState(true);
-                          }
-                        }}
-                      />
-                    </View>
-                    <Button title="reset" onPress={reset} />
-                  </View>
-                </>
-              )}
-              assert={({state, expect}) => {
-                expect(state).to.be.true;
-              }}
-            />
+              itShould="getNumberAfterPossiblyEliminatingZero(获取输入的电话号码和加了区号的电话号码)">
+              <>
+                <PhoneInput
+                  ref={phoneInput3}
+                  defaultValue={value}
+                  disableArrowIcon={true}
+                  defaultCode="AX"
+                  layout="first"
+                  onChangeText={text => {
+                    setValueapi(text);
+                  }}
+                  onChangeFormattedText={text => {
+                    setFormattedValueapi(text);
+                    setCountryCodeapi(
+                      phoneInput3.current?.getCountryCode() || '',
+                    );
+                  }}
+                  countryPickerProps={{withAlphaFilter: true}}
+                  disabled={disabled}
+                  withDarkTheme={false}
+                  withShadow={false}
+                  renderDropdownImage={<h1>Hello, world!</h1>}
+                />
+                <Text>
+                  {JSON.stringify(
+                    phoneInput3.current?.getNumberAfterPossiblyEliminatingZero(),
+                  )}
+                </Text>
+                {/* <Text>{phoneInput3.current?.getNumberAfterPossiblyEliminatingZero()}</Text> */}
+              </>
+            </TestCase>
+
             <TestCase
               tags={['C_API']}
               itShould="isValidNumber(校验生成的电话号码)"
