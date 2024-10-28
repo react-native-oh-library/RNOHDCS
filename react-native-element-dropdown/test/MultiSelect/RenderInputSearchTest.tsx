@@ -12,44 +12,47 @@ const data = [
   {label: 'Item 5', value: '5', image: imageSource},
 ];
 
-export const RenderInputSearchTest = () => {
+const Demo = (props: any) => {
   const [value, setValue] = useState<string[]>([]);
+  return (
+    <MultiSelect
+      style={styles.MultiSelect}
+      mode="default"
+      labelField="label"
+      valueField="value"
+      data={data}
+      search
+      value={value}
+      onChange={(item: any) => {
+        setValue(item);
+      }}
+      activeColor="#FF8A2D2D"
+      {...props}
+    />
+  );
+};
 
+export const RenderInputSearchTest = () => {
   return (
     <Tester>
       <TestSuite name="renderInputSearch">
         <TestCase itShould={`自定义搜索`}>
-          <MultiSelect
-            renderInputSearch={() => <TextInput placeholder="我是自定义搜索" />}
-            style={styles.MultiSelect}
-            mode="default"
-            labelField="label"
-            valueField="value"
-            data={data}
-            search
-            value={value}
-            onChange={(item: any) => {
-              setValue(item);
-            }}
-            activeColor="#FF8A2D2D"
+          <Demo
+            renderInputSearch={(onSearch: any) => (
+              <TextInput
+                style={{height: 80, padding: 10, backgroundColor: '#92BA6B6B'}}
+                onChangeText={v => {
+                  onSearch(v);
+                }}
+                placeholder="我是自定义搜索"
+              />
+            )}
           />
         </TestCase>
       </TestSuite>
       <TestSuite name="renderInputSearch">
         <TestCase itShould={`默认搜索`}>
-          <MultiSelect
-            searchPlaceholder="我是默认的搜索"
-            style={styles.MultiSelect}
-            mode="default"
-            labelField="label"
-            valueField="value"
-            data={data}
-            search
-            value={value}
-            onChange={(item: any) => {
-              setValue(item);
-            }}
-          />
+          <Demo />
         </TestCase>
       </TestSuite>
     </Tester>
