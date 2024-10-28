@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Button, StyleSheet, View} from 'react-native';
-import {Dropdown} from 'react-native-element-dropdown';
+import {MultiSelect} from 'react-native-element-dropdown';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
 const imageSource = require('../assets/react-native-logo.png');
@@ -12,33 +12,35 @@ const data = [
   {label: 'Item 5', value: '5', image: imageSource},
 ];
 
-export const MaxHeighTest = () => {
-  const [value, setValue] = useState<string>('');
+export const SelectedStyleTest = () => {
+  const [value, setValue] = useState<string[]>([]);
+  const [color, setColor] = useState<string>('red');
 
-  const [maxHeigh, setMaxHeigh] = useState(400);
   return (
     <Tester>
-      <TestSuite name="MaxHeigh">
-        <TestCase itShould={`maxHeight:${maxHeigh}`}>
-          <Dropdown
-            style={styles.dropdown}
+      <TestSuite name="selectedStyle">
+        <TestCase itShould={`backgroundColor:${color}`}>
+          <MultiSelect
+            style={styles.MultiSelect}
             mode="default"
             labelField="label"
             valueField="value"
             data={data}
             search
-            maxHeight={maxHeigh}
+            maxHeight={400}
             placeholder="请选择....."
             value={value}
             onChange={(item: any) => {
-              setValue(item.value);
+              setValue(item);
             }}
+            activeColor="#FF8A2D2D"
+            selectedStyle={{backgroundColor: color}}
           />
           <View style={styles.actionBtn}>
             <Button
-              title="changeMaxHeigh"
+              title="changeSelectedStyle"
               onPress={() => {
-                setMaxHeigh(v => (v === 400 ? 200 : 400));
+                setColor(v => (v === 'red' ? 'pink' : 'red'));
               }}
             />
           </View>
@@ -49,7 +51,7 @@ export const MaxHeighTest = () => {
 };
 
 const styles = StyleSheet.create({
-  dropdown: {
+  MultiSelect: {
     height: 50,
     borderColor: 'gray',
     borderWidth: 0.5,

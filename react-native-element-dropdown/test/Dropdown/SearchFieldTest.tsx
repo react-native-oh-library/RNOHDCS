@@ -5,11 +5,11 @@ import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
 const imageSource = require('../assets/react-native-logo.png');
 const data = [
-  {label: 'Item 1', value: '1', image: imageSource},
-  {label: 'Item 2', value: '2', image: imageSource},
-  {label: 'Item 3', value: '3', image: imageSource},
-  {label: 'Item 4', value: '4', image: imageSource},
-  {label: 'Item 5', value: '5', image: imageSource},
+  {label: 'Item1', value: '1', image: imageSource},
+  {label: 'Item2', value: '2', image: imageSource},
+  {label: 'Item3', value: '3', image: imageSource},
+  {label: 'Item4', value: '4', image: imageSource},
+  {label: 'Item5', value: '5', image: imageSource},
 ];
 
 const Demo = (props: any) => {
