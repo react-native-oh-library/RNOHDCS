@@ -256,19 +256,10 @@ const ZipArchiveDemoTest_ = () => {
                                     style={{ borderWidth: 1, padding: 10, width: '70%' }}
                                 />
                                 <TextInput
-                                    style={{
-                                        height: 100,
-                                        borderColor: 'gray',
-                                        borderWidth: 1,
-                                        width: 200,
-                                        padding: 10,
-                                        marginBottom: 10,
-                                        marginTop: 10
-                                    }}
-                                    onChangeText={text => setFileContent(text)}
+                                    style={styles.input}
+                                    onChangeText={setFileContent}
                                     value={fileContent}
                                     placeholder="文件内容"
-                                    multiline={true}
                                 />
                                 <Button title="创建文件" onPress={() => { createFile(); setState('success'); }} />
                             </View>
@@ -325,7 +316,7 @@ const ZipArchiveDemoTest_ = () => {
                             <TextInput
                                 style={styles.input}
                                 placeholder="设置压缩密码"
-                                onChangeText={text => setPassword(text)}
+                                onChangeText={setPassword}
                                 value={password}
                             />
                             <View style={styles.buttonSix}>
@@ -351,7 +342,7 @@ const ZipArchiveDemoTest_ = () => {
                             <TextInput
                                 style={styles.input}
                                 placeholder="输入解压密码"
-                                onChangeText={text => setUnzipPassword(text)}
+                                onChangeText={setUnzipPassword}
                             />
                             <View style={styles.buttonSix}>
                                 <Button title="解压" onPress={() => { handleUnzipPress(); setState('success'); }} />
