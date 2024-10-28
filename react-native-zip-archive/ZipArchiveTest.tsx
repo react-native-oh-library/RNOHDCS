@@ -42,6 +42,7 @@ const ZipArchiveDemoTest_ = () => {
     }
 
     useEffect(() => {
+        console.log('-----pathParameters');
         let filesDir = pathParameters(); // 获取鸿蒙应用文件路径
         let newZipPath: any = filesDir + '.zip';
         let newSourcePath: any = filesDir;
@@ -80,6 +81,7 @@ const ZipArchiveDemoTest_ = () => {
         } else {
             Alert.alert('请输入文件名和内容');
         }
+        console.log('-----creteFile');
     };
 
     // 密码压缩
@@ -101,6 +103,7 @@ const ZipArchiveDemoTest_ = () => {
                 .catch(error => {
                     Alert.alert('错误', `创建压缩文件失败: ${error}`);
                 });
+            console.log('-----zipWithPassword');
         } else {
             Alert.alert('无文件可供压缩');
         }
@@ -120,7 +123,7 @@ const ZipArchiveDemoTest_ = () => {
                     .catch(error => {
                         Alert.alert('错误', `解压文件失败: ${error}`);
                     });
-
+                console.log('-----unzipWithPassword');
             } else {
                 Alert.alert('密码输入错误');
             }
@@ -155,6 +158,7 @@ const ZipArchiveDemoTest_ = () => {
                                     Alert.alert('错误', '解压失败');
                                     console.log(`unzip error: ${error}`);
                                 })
+                            console.log('-----unzip');
                         }
                     } else {
                         Alert.alert('无压缩文件可供解压');
@@ -164,6 +168,7 @@ const ZipArchiveDemoTest_ = () => {
             .catch(error => {
                 console.error(`isPasswordProtected error: ${error}`)
             })
+        console.log('-----isPasswordProtected');
     }
 
     // 进度条
@@ -204,6 +209,7 @@ const ZipArchiveDemoTest_ = () => {
                 clearInterval(interval);
             }
         })
+        console.log('-----subscribe');
     }
 
     // unzipAssets解压到指定目录
@@ -224,6 +230,7 @@ const ZipArchiveDemoTest_ = () => {
             } finally {
                 setLoading(false);
             }
+            console.log('-----unzipAssets');
         } else {
             Alert.alert('无压缩文件可供解压');
         }
@@ -239,6 +246,7 @@ const ZipArchiveDemoTest_ = () => {
             .catch((err) => {
                 console.log(`getUncompressedSize err:${err}`)
             })
+        console.log('-----getUncompressedSize');
     }
 
     return (
@@ -292,6 +300,7 @@ const ZipArchiveDemoTest_ = () => {
                                         .catch(error => {
                                             Alert.alert('错误', `压缩失败: ${error}`);
                                         })
+                                    console.log('-----zip');
                                 } else {
                                     Alert.alert('无文件可供压缩');
                                 }
