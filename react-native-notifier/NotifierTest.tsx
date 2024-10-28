@@ -315,7 +315,7 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试swipeEnabled,不能滑动隐藏通知（滑动关闭暂未看到效果'>
+                <TestCase itShould='测试swipeEnabled,不能滑动隐藏通知'>
                   <Button
                     title="swipeEnabled"
                     onPress={() =>
@@ -552,7 +552,7 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试swipePixelsToClose属性，用户滑动关闭通知，默认20像素(未生效)'>
+                <TestCase itShould='测试swipePixelsToClose属性，用户滑动关闭通知，默认20像素'>
                   <Button
                     title="swipePixelsToClose"
                     onPress={() =>
@@ -563,7 +563,7 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试swipePixelsToClose属性，用户滑动关闭通知，设置10像素(未生效)'>
+                <TestCase itShould='测试swipePixelsToClose属性，用户滑动关闭通知，设置10像素'>
                   <Button
                     title="swipePixelsToClose"
                     onPress={() =>
@@ -575,7 +575,7 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试swipeEasing属性， Easing.bounce(未生效)'>
+                <TestCase itShould='测试swipeEasing属性， Easing.bounce'>
                   <Button
                     title="swipeEasing"
                     onPress={() =>
@@ -587,7 +587,7 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试swipeEasing属性， Easing.circle(未生效)'>
+                <TestCase itShould='测试swipeEasing属性， Easing.circle'>
                   <Button
                     title="swipeEasing"
                     onPress={() =>
@@ -599,7 +599,7 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试swipeAnimationDuration属性， 用户滑动动画速度，默认200(未生效)'>
+                <TestCase itShould='测试swipeAnimationDuration属性， 用户滑动动画速度，默认200'>
                   <Button
                     title="swipeAnimationDuration"
                     onPress={() =>
@@ -610,7 +610,7 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试swipeAnimationDuration属性， 用户滑动动画速度，设置1000(未生效)'>
+                <TestCase itShould='测试swipeAnimationDuration属性， 用户滑动动画速度，设置1000'>
                   <Button
                     title="swipeAnimationDuration"
                     onPress={() =>
@@ -618,29 +618,6 @@ export default function App() {
                         title: 'swipeAnimationDuration',
                         description: '用户滑动动画速度，设置1000',
                         swipeAnimationDuration: 1000
-                      })
-                    }
-                  />
-                </TestCase>
-                <TestCase itShould='测试translucentStatusBar属性，状态栏透明(不支持)'>
-                  <Button
-                    title="translucentStatusBar"
-                    onPress={() =>
-                      Notifier.showNotification({
-                        title: 'translucentStatusBar',
-                        description: '状态栏透明暂不支持，默认false',
-                      })
-                    }
-                  />
-                </TestCase>
-                <TestCase itShould='测试translucentStatusBar属性，状态栏透明(不支持)'>
-                  <Button
-                    title="translucentStatusBar"
-                    onPress={() =>
-                      Notifier.showNotification({
-                        title: 'translucentStatusBar',
-                        description: '状态栏透明暂不支持，设置true',
-                        translucentStatusBar: true
                       })
                     }
                   />
