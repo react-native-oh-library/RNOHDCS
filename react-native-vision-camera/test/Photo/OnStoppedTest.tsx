@@ -65,6 +65,7 @@ export function OnStoppedTest() {
           />
           <View style={style.actionBtn}>
             <Button title="changeIsActive" onPress={changeIsActive}></Button>
+            <Button title="rest" onPress={()=>{setStatus('')}}></Button>
           </View>
         </TestCase>
       </TestSuite>

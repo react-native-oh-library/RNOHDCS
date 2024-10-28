@@ -40,6 +40,7 @@ export function getLocationPermissionStatusTest() {
     <Tester>
       <TestSuite name="getLocationPermissionStatus">
         <TestCase itShould={`获取位置权限授权情况`}>
+          <Text>result：{status}</Text>
           <Camera
             style={style.cameraPreview}
             ref={camera}
@@ -51,7 +52,6 @@ export function getLocationPermissionStatusTest() {
             enableLocation
           />
           <View>
-            <Text>getLocationPermissionStatus{status}</Text>
             <Button
               title="getLocationPermissionStatus"
               onPress={getLocationPermissionStatus}

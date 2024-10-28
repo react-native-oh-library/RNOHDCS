@@ -43,16 +43,18 @@ export function previewTest() {
   return (
     <Tester>
       <TestSuite name="preview">
-        <TestCase itShould={`当前状态:${preview ? '启用' : '禁用'}`}>
-          <Camera
-            style={style.cameraPreview}
-            ref={camera}
-            device={device}
-            isActive={isActive}
-            preview={preview}
-            photo
-            format={format}
-          />
+        <TestCase itShould={`${preview ? '启用预览' : '禁用预览'}`}>
+          {preview && (
+            <Camera
+              style={style.cameraPreview}
+              ref={camera}
+              device={device}
+              isActive={isActive}
+              preview={preview}
+              photo
+              format={format}
+            />
+          )}
           <View style={style.actionBtn}>
             <Button
               title={`changePreview:${preview}`}

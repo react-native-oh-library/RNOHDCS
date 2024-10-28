@@ -38,7 +38,7 @@ export function getAvailableCameraDevicesTest() {
       <TestSuite name="getAvailableCameraDevices">
         <TestCase itShould={`获取手机上可用相机设备`}>
           <View>
-            <Text>availableCameraDevices{availableCameraDevices}</Text>
+            <Text>result：{availableCameraDevices}</Text>
             <Button
               title="getAvailableCameraDevices"
               onPress={getAvailableCameraDevices}

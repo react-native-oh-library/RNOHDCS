@@ -38,7 +38,7 @@ export function getCameraPermissionStatusTest() {
       <TestSuite name="getCameraPermissionStatus">
         <TestCase itShould={`获取相机授权情况`}>
           <View>
-            <Text>getCameraPermissionStatus{status}</Text>
+            <Text>result：{status}</Text>
             <Button
               title="getCameraPermissionStatus"
               onPress={getCameraPermissionStatus}

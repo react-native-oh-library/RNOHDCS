@@ -71,7 +71,7 @@ export function takePhotoTest() {
           />
 
           <View style={style.actionBtn}>
-            <Button title="拍照" onPress={onTakePhoto}></Button>
+            <Button title="takePhoto" onPress={onTakePhoto}></Button>
           </View>
         </TestCase>
       </TestSuite>

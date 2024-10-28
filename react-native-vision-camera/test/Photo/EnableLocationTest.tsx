@@ -44,6 +44,8 @@ export function EnableLocationTest() {
           <View>
             <Text>拍照结果:{photoFile}</Text>
           </View>
+          <Text>有位置权限：图片有位置信息</Text>
+          <Text>没有位置权限：图片没有位置信息</Text>
           <Camera
             style={style.cameraPreview}
             ref={camera}
