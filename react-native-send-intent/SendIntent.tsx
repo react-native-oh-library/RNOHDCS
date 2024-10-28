@@ -161,18 +161,6 @@ const [flag2, setFlag2] = useState<boolean>();
                 />
             </>
             <>
-            <Text style={{ color: "red" }}>NativeSendIntent.openAppWithData</Text>
-                <><Text style={{ color: "red" }}>{JSON.stringify(flag2)}</Text></>
-                <Button
-                    onPress={() => {
-                        NativeSendIntent.openAppWithData('', '').then((flag) => {
-                            setFlag2(flag)
-                        })
-                    }}
-                    title="打开携带数据的APP"
-                />
-            </>
-            <>
             <Text style={{ color: "red" }}>NativeSendIntent.openChromeIntent</Text>
                 <Button
                     onPress={() => {
