@@ -46,7 +46,7 @@ const BottomNavigationDome = () => {
                   <BottomNavigation.Action
                     key="bookmark-border"
                     icon="bookmark-border"
-                    label="bookmark-border"
+                    label="book"
                     onPress={() => setState({ active: 'bookmark-border' })}
                   />
                   <BottomNavigation.Action
@@ -97,7 +97,7 @@ const BottomNavigationDome = () => {
                   <BottomNavigation.Action
                     key="bookmark-border"
                     icon="bookmark-border"
-                    label="bookmark-border"
+                    label="book"
                     onPress={() => setState({ active: 'bookmark-border' })}
                     style={{ active: { color: 'blue' } }}
                   />

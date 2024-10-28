@@ -824,7 +824,7 @@ export const PNIPropsDemo = () => {
           <TestSuite name="filterProps(国家选择器入参筛选)">
             <TestCase
               tags={['C_API']}
-              itShould="filterProps={{placeholder: 'Enter ',color:'red'}}">
+              itShould="filterProps={{placeholder: 'Enter '}}">
               <PhoneInput filterProps={{placeholder: 'Enter'}} />
             </TestCase>
           </TestSuite>

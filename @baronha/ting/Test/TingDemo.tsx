@@ -465,13 +465,36 @@ export function TingExample() {
                         />
                     </TestCase>
 
-                    <TestCase itShould="handleDismissAlert" tags={['C_API']}>
+                    <TestCase itShould="handleDismissAlert duration: 5s, close: 1s" tags={['C_API']}>
                         <Button
-                            title="handleDismissAlert"
+                            title="show alert 5s"
                             onPress={() => {
-                                handleDismissAlert();
+                                const options: AlertOptions = {
+                                    title: 'title-Alert',
+                                    message: 'message-Alert',
+                                    duration: 5
+                                };
+                                handleAlert(options);
                             }}
                         />
+
+                        <View style={styles.buttonBox}>
+                            <Button
+                                title="handleDismissAlert"
+                                onPress={() => {
+                                    const options: AlertOptions = {
+                                        title: 'title-Alert',
+                                        message: 'message-Alert',
+                                        duration: 5
+                                    };
+                                    handleAlert(options);
+
+                                    setTimeout(() => {
+                                        handleDismissAlert();
+                                    }, 1000);
+                                }}
+                            />
+                        </View>
                     </TestCase>
 
                     <TestCase itShould="titleColor and messageColor" tags={['C_API']}>

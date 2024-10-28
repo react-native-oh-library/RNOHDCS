@@ -3,6 +3,7 @@ export * from './FpsTest'
 export * from './VideoHdrTest'
 export * from './VideoPreviewTest'
 export * from './VideoStabilizationModeTest'
+export * from './FormatTest'
 
 //
 export * from './useCameraDeviceTest'
