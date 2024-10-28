@@ -28,6 +28,8 @@ export default function() {
     return (
         <View style={{ flex: 1 }}>
     {/* <GestureHandlerRootView style={{ flex: 1 }}> */}
+    <Text>{`verticalPadding value is 15`}</Text>
+    <Text>{`horizontalPadding value is 15`}</Text>
         <Text>{`enableIndicator value is ${enableIndicator}`}</Text>
         <LineGraph 
         style={styles.graph}
@@ -35,7 +37,9 @@ export default function() {
         color={color}
         points={points}
         enableIndicator={enableIndicator}
-        horizontalPadding={enableIndicator ? 15 : 0}
+        verticalPadding={15}
+        horizontalPadding={15}
+        
         />
         <Button title='change enableIndicator' onPress={()=>setEnableIndicator(!enableIndicator)} />
      {/* </GestureHandlerRootView> */}
