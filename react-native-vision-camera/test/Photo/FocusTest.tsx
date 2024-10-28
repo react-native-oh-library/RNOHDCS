@@ -16,7 +16,7 @@ export function FocusTest() {
   ]);
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
-  const [result, setResult] = useState<string>('');
+  const [result, setResult] = useState<any>('');
 
   if (!device) {
     return <Text>No Devices</Text>;
@@ -26,25 +26,12 @@ export function FocusTest() {
     requestPermission();
   }
 
-  // 聚焦
-  const onFocus = async () => {
-    const getRandomNumber = (min: number, max: number): number => {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    };
-    const randomPoint = {
-      x: getRandomNumber(0, 2000),
-      y: getRandomNumber(0, 4000),
-    };
-    setResult(`\n随机聚焦坐标: ${JSON.stringify(randomPoint)}`);
-    await camera.current?.focus(randomPoint);
-  };
-
   return (
     <Tester>
       <TestSuite name="Focus">
         <TestCase itShould={`设置聚焦坐标`}>
           <View>
-            <Text>focus:{result}</Text>
+            <Text>focus:{JSON.stringify(result)}</Text>
           </View>
           <Camera
             style={style.cameraPreview}
@@ -56,7 +43,20 @@ export function FocusTest() {
             format={format}
           />
           <View style={style.actionBtn}>
-            <Button title="设置随机坐标" onPress={onFocus} />
+            <Button
+              title="set:{x:0,y:0}"
+              onPress={() => {
+                camera.current?.focus({x: 0, y: 0});
+                setResult({x: 0, y: 0});
+              }}
+            />
+            <Button
+              title="set:{x:1000,y:3000}"
+              onPress={() => {
+                camera.current?.focus({x: 1000, y: 3000});
+                setResult({x: 1000, y: 3000});
+              }}
+            />
           </View>
         </TestCase>
       </TestSuite>

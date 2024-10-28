@@ -28,7 +28,9 @@ export function useCameraPermissionTest() {
   return (
     <Tester>
       <TestSuite name="useCameraPermission">
-        <TestCase itShould={`${hasPermission ? '有相机权限' : '没有相机权限'}`}>
+        <TestCase itShould={`result：${hasPermission ? '有相机权限' : '没有相机权限'}`}>
+          <Text>有相机权限：正常显示相机预览画面</Text>
+          <Text>没有相机权限：不显示相机预览画面</Text>
           <Camera
             style={style.cameraPreview}
             ref={camera}

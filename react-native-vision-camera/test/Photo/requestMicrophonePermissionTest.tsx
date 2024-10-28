@@ -61,7 +61,7 @@ export function requestMicrophonePermissionTest() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 200},
+  cameraPreview: {width: 300, height: 400},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',
