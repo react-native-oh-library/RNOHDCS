@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, StyleSheet, View} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 import {MultiSelect} from 'react-native-element-dropdown';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
@@ -12,37 +12,40 @@ const data = [
   {label: 'Item 5', value: '5', image: imageSource},
 ];
 
-export const MaxHeighTest = () => {
+const Demo = (props: any) => {
   const [value, setValue] = useState<string[]>([]);
 
-  const [maxHeigh, setMaxHeigh] = useState(400);
+  return (
+    <MultiSelect
+      style={styles.MultiSelect}
+      mode="default"
+      labelField="label"
+      valueField="value"
+      data={data}
+      search
+      placeholder="请选择....."
+      value={value}
+      onChange={(item: any) => {
+        setValue(item);
+      }}
+      visibleSelectedItem
+      activeColor='pink'
+      {...props}
+    />
+  );
+};
+
+export const AlwaysRenderSelectedItemTest = () => {
   return (
     <Tester>
-      <TestSuite name="MaxHeigh">
-        <TestCase itShould={`maxHeight:${maxHeigh}`}>
-          <MultiSelect
-            style={styles.MultiSelect}
-            mode="default"
-            labelField="label"
-            valueField="value"
-            data={data}
-            search
-            maxHeight={maxHeigh}
-            placeholder="请选择....."
-            value={value}
-            onChange={(item: any) => {
-              setValue(item);
-            }}
-            activeColor="#FF8A2D2D"
-          />
-          <View style={styles.actionBtn}>
-            <Button
-              title="changeMaxHeigh"
-              onPress={() => {
-                setMaxHeigh(v => (v === 400 ? 200 : 400));
-              }}
-            />
-          </View>
+      <TestSuite name="alwaysRenderSelectedItem">
+        <TestCase itShould={`始终展示选中的item`}>
+          <Demo alwaysRenderSelectedItem />
+        </TestCase>
+      </TestSuite>
+      <TestSuite name="alwaysRenderSelectedItem">
+        <TestCase itShould={`默认值：不展示`}>
+          <Demo alwaysRenderSelectedItem={false} />
         </TestCase>
       </TestSuite>
     </Tester>

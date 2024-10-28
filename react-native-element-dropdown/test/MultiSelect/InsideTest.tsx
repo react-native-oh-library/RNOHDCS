@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text} from 'react-native';
-import {Dropdown} from 'react-native-element-dropdown';
+import {Button, StyleSheet, Text, View} from 'react-native';
+import {MultiSelect} from 'react-native-element-dropdown';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
 const imageSource = require('../assets/react-native-logo.png');
@@ -10,45 +10,42 @@ const data = [
   {label: 'Item 3', value: '3', image: imageSource},
   {label: 'Item 4', value: '4', image: imageSource},
   {label: 'Item 5', value: '5', image: imageSource},
-  {label: 'Item 6', value: '6', image: imageSource},
-  {label: 'Item 7', value: '7', image: imageSource},
 ];
 
 const Demo = (props: any) => {
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState<string[]>([]);
 
   return (
-    <>
-      <Dropdown
-        style={styles.dropdown}
-        mode="default"
-        labelField="label"
-        valueField="value"
-        data={data}
-        search
-        placeholder="请选择....."
-        value={value}
-        onChange={(item: any) => {
-          setValue(item.value);
-        }}
-        {...props}
-      />
-    </>
+    <MultiSelect
+      style={styles.MultiSelect}
+      mode="default"
+      labelField="label"
+      valueField="value"
+      data={data}
+      search
+      placeholder="请选择....."
+      value={value}
+      onChange={(item: any) => {
+        setValue(item);
+      }}
+      visibleSelectedItem
+      activeColor="pink"
+      {...props}
+    />
   );
 };
 
-export const ShowsVerticalScrollIndicatorTest = () => {
+export const InsideTest = () => {
   return (
     <Tester>
-      <TestSuite name="showsVerticalScrollIndicator">
+      <TestSuite name="inside">
         <TestCase itShould={`true`}>
-          <Text>当此属性为 true 的时候，显示一个垂直方向的滚动条。</Text>
-          <Demo showsVerticalScrollIndicator />
+          <Demo inside />
         </TestCase>
       </TestSuite>
-      <TestSuite name="showsVerticalScrollIndicator">
+      <TestSuite name="inside">
         <TestCase itShould={`false`}>
-          <Demo showsVerticalScrollIndicator={false} />
+          <Demo inside={false} />
         </TestCase>
       </TestSuite>
     </Tester>
@@ -56,7 +53,7 @@ export const ShowsVerticalScrollIndicatorTest = () => {
 };
 
 const styles = StyleSheet.create({
-  dropdown: {
+  MultiSelect: {
     height: 50,
     borderColor: 'gray',
     borderWidth: 0.5,

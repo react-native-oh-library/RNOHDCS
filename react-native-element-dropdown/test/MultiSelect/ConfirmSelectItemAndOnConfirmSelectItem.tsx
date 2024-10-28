@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import {Alert, StyleSheet,Text} from 'react-native';
+import {Alert, StyleSheet, Text} from 'react-native';
 import {MultiSelect, IMultiSelectRef} from 'react-native-element-dropdown';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
@@ -55,12 +55,14 @@ const Demo = (props: any) => {
   );
 };
 
-export const ConfirmSelectItemTest = () => {
+export const ConfirmSelectItemAndOnConfirmSelectItem = () => {
   return (
     <Tester>
       <TestSuite name="confirmSelectItem,onConfirmSelectItem">
+        <Text style={{color: '#fff'}}>
+          confirmSelectItem属性需要和onConfirmSelectItem一起使用
+        </Text>
         <TestCase itShould={`启用自定义confirmSelectItem`}>
-            <Text>confirmSelectItem属性需要和onConfirmSelectItem一起使用</Text>
           <Demo />
         </TestCase>
       </TestSuite>

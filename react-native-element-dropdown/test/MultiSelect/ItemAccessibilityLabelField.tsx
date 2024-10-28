@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text} from 'react-native';
-import {Dropdown} from 'react-native-element-dropdown';
+import {StyleSheet, View, Text} from 'react-native';
+import {MultiSelect} from 'react-native-element-dropdown';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
 
 const imageSource = require('../assets/react-native-logo.png');
@@ -10,45 +10,51 @@ const data = [
   {label: 'Item 3', value: '3', image: imageSource},
   {label: 'Item 4', value: '4', image: imageSource},
   {label: 'Item 5', value: '5', image: imageSource},
-  {label: 'Item 6', value: '6', image: imageSource},
-  {label: 'Item 7', value: '7', image: imageSource},
 ];
 
 const Demo = (props: any) => {
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState<string[]>([]);
 
   return (
     <>
-      <Dropdown
-        style={styles.dropdown}
+      <MultiSelect
+        style={styles.MultiSelect}
         mode="default"
         labelField="label"
         valueField="value"
         data={data}
         search
+        maxHeight={300}
         placeholder="请选择....."
         value={value}
         onChange={(item: any) => {
-          setValue(item.value);
+          setValue(item);
         }}
+        searchField="label"
+        activeColor="#FF8A2D2D"
         {...props}
       />
+      <Text>itemAccessibilityLabelField:{JSON.stringify(value)}</Text>
     </>
   );
 };
 
-export const ShowsVerticalScrollIndicatorTest = () => {
+export const ItemAccessibilityLabelFieldTest = () => {
   return (
     <Tester>
-      <TestSuite name="showsVerticalScrollIndicator">
-        <TestCase itShould={`true`}>
-          <Text>当此属性为 true 的时候，显示一个垂直方向的滚动条。</Text>
-          <Demo showsVerticalScrollIndicator />
+      <TestSuite name="itemAccessibilityLabelField">
+        <View>
+          <Text style={{color: '#fff'}}>
+            itemAccessibilityLabelField是辅助标签功能字段：必须是唯一值，且不能重复，设置成label或者value效果是一样的
+          </Text>
+        </View>
+        <TestCase itShould="label">
+          <Demo itemAccessibilityLabelField="label" />
         </TestCase>
       </TestSuite>
-      <TestSuite name="showsVerticalScrollIndicator">
-        <TestCase itShould={`false`}>
-          <Demo showsVerticalScrollIndicator={false} />
+      <TestSuite name="itemAccessibilityLabelField">
+        <TestCase itShould="value">
+          <Demo itemAccessibilityLabelField="value" />
         </TestCase>
       </TestSuite>
     </Tester>
@@ -56,19 +62,11 @@ export const ShowsVerticalScrollIndicatorTest = () => {
 };
 
 const styles = StyleSheet.create({
-  dropdown: {
+  MultiSelect: {
     height: 50,
     borderColor: 'gray',
     borderWidth: 0.5,
     borderRadius: 8,
     paddingHorizontal: 8,
-  },
-  actionBtn: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    backgroundColor: '#000',
-    padding: 10,
-    gap: 10,
   },
 });
