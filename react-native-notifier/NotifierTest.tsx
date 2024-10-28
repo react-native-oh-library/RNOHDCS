@@ -26,11 +26,11 @@ export default function App() {
 
   return (
     <>
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={{ flex: 1 }}>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <NotifierWrapper >
-            <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-              <Tester style={{ marginTop: -50 }}>
+            <ScrollView>
+              <Tester>
                 <TestCase itShould='基本测试'>
                   <Button
                     title="基本测试"
@@ -648,31 +648,16 @@ export default function App() {
                 <TestCase itShould='测试hideNotificationAPI，清楚通知'>
                   <Button title="Hide" onPress={() => Notifier.hideNotification()} />
                 </TestCase>
-
               </Tester>
             </ScrollView>
           </NotifierWrapper>
+         <NotifierRoot ref={notifierRef} />
         </GestureHandlerRootView>
       </SafeAreaView>
-      <NotifierRoot ref={notifierRef} />
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    flex: 1,
-  },
-  contentContainer: {
-    paddingVertical: 50,
-  },
-  modalContainer: {
-    flex: 1,
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    borderRadius: 25,
-    maxHeight: 500,
-    paddingHorizontal: 30,
-  },
+
 });
