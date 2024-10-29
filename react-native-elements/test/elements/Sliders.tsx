@@ -31,6 +31,8 @@ const Sliders: React.FunctionComponent<SlidersComponentProps> = () => {
             </View>
           </TestCase>
         </TestSuite>
+
+        {/* 与iOS保持一致 */}
         <TestSuite name="Slider属性animateTransitions  拖动时有动画效果">
           <TestCase itShould="animateTransitions" tags={['C_API']}>
             <View style={[styles.contentView]}>

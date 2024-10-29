@@ -18,7 +18,7 @@ class ImageComponent extends React.Component {
     return (
       <Image
         source={{
-          uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
+          uri: 'https://randomuser.me/api/portraits/men/4.jpg',
         }}
         style={{width: 100, height: 100}}></Image>
     );

@@ -166,6 +166,7 @@ const AirbnbRatings: React.FunctionComponent<
         </TestSuite>
         <TestSuite name="AirbnbRating属性starContainerStyle 设置星星的容器样式">
           <TestCase tags={['C_API']} itShould="starContainerStyle">
+            {/* 与iOS平台一致 */}
             <AirbnbRating
               starContainerStyle={{backgroundColor: 'black', borderRadius: 20,width:200}}
               // ratingContainerStyle={{
@@ -174,6 +175,7 @@ const AirbnbRatings: React.FunctionComponent<
               //   width: 300,
               //   alignSelf: 'center',
               // }}
+              
               size={60}
               showRating={false}
               selectedColor={'pink'}

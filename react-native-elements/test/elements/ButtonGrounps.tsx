@@ -28,7 +28,7 @@ export default function ButtonGroups(): JSX.Element {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [selectedIndex1, setSelectedIndex1] = useState<number>(0);
   const [selectedIndexes, setSelectedIndexes] = useState<number[]>([0, 2, 3]);
-  const [selectedIndexes1, setSelectedIndexes1] = useState<number[]>([]);
+  const [selectedIndex2, setSelectedIndex2] = React.useState([]);
 
   const [onlongPress, setOnlongPress] = useState(false)
   const [onPress, setOnPress] = useState(false)
@@ -97,7 +97,7 @@ export default function ButtonGroups(): JSX.Element {
           <TestCase itShould='buttons' tags={['C_API']}>
             <ButtonGroup
             
-            buttonStyle={{backgroundColor:'pink'}}
+              buttonStyle={{backgroundColor:'pink'}}
               buttons={['button1', 'button2','button2']}
               activeOpacity={2}
            
@@ -305,17 +305,14 @@ export default function ButtonGroups(): JSX.Element {
         </TestSuite> */}
         <TestSuite name="ButtonGroup属性selectMultiple的验证  设置selectMultiple 设置选中多个">
           <TestCase itShould='selectMultiple' tags={['C_API']}>
-            <ButtonGroup
-            onPress={setSelectedIndexes1}
-            selectMultiple={true}
-            selectedButtonStyle={{backgroundColor:'#222222'}}
-            selectedIndexes={selectedIndexes1}
-            buttonStyle={{backgroundColor:'pink'}}
-            buttonContainerStyle ={{backgroundColor:'yellow',paddingLeft:10,paddingRight:10}}
-              buttons={[<Icon type='font-awesome' color='red' size={20} name='home'/>,<Icon type='font-awesome' color='red' size={50} name='remove'/>]}
-              activeOpacity={0.1}
-            disabledSelectedStyle={{backgroundColor:'green'}}
-            />
+          <ButtonGroup
+         selectMultiple={true}
+         buttons={['Multiple', 'Select', 'Button', 'Group']}
+         selectedIndexes={selectedIndex2}
+         onPress={(value) => {
+          setSelectedIndex2(value);
+         }}
+       />
           </TestCase>
         </TestSuite>
         <TestSuite name="ButtonGroup属性selectedButtonStyle的验证  设置selectedButtonStyle 选中button的样式 选中第一个元素 ">
@@ -443,7 +440,7 @@ export default function ButtonGroups(): JSX.Element {
             setOpacityTo={(value)=>{
 
             }}
-         
+           
             selectMultiple={true}
             onShowUnderlay={()=>{}}
             underlayColor='orange'
