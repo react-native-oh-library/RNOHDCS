@@ -6,6 +6,7 @@ import SharedElementDemo2 from './SharedElementDemo2';
 import SharedElementDemo3 from './SharedElementDemo3';
 import SharedElementDemo4 from './SharedElementDemo4';
 import DebugDemo from './Debug';
+import OnMeasureDemo from './OnMeasure';
 import AlignDemo1 from './Align1';
 import AlignDemo2 from './Align2';
 import AlignDemo3 from './Align3';
@@ -40,6 +41,9 @@ export function SharedElmentTest() {
         </Page>
         <Page name="Debug = true">
           <DebugDemo />
+        </Page>
+        <Page name="OnMeasureDemo">
+          <OnMeasureDemo />
         </Page>
         <Page name="Align:auto">
           <AlignDemo1 />
