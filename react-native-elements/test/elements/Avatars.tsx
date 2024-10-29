@@ -319,8 +319,9 @@ const Avatars: React.FunctionComponent<AvatarComponentProps> = () => {
               }}></View>
           </TestCase>
         </TestSuite>
+        {/*warning: 设置了透明度 */}
         <TestSuite name="Avatars属性overlayContainerStyle的验证 超出Avatar的部分的样式">
-          <TestCase tags={['C_API']} itShould="overlayContainerStyle">
+          <TestCase tags={['C_API']} itShould="overlayContainerStyle">  
             <Avatar
               containerStyle={{
                 width: '100%',
@@ -329,7 +330,7 @@ const Avatars: React.FunctionComponent<AvatarComponentProps> = () => {
                 alignItems: 'center',
               }}
               avatarStyle={{resizeMode: 'cover', width: 80, height: 80}}
-              overlayContainerStyle={{backgroundColor: 'yellow',borderRadius:20,opacity:0.7}}
+              overlayContainerStyle={{backgroundColor: 'yellow',borderRadius:20}}
               source={{
                 uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
               }}
