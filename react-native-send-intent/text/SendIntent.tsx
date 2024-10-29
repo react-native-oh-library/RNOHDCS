@@ -347,46 +347,6 @@ function SendIntent() {
               assert={({ expect, state }) => { expect(state).to.be.true }}
             />
             <TestCase
-              itShould='native openAllEmailApp'
-              tags={['C_API']}
-              initialState={undefined as any}
-              arrange={() => {
-                return (
-                  <Button
-                    onPress={() => {
-                      NativeSendIntent.openAllEmailApp();
-                    }}
-                    title="打开所有电子邮件"
-
-                  />
-                )
-              }}
-              assert={({ expect, state }) => { expect(state).to.be.true }}
-            />
-            <TestCase
-              itShould='native addCalendarEvent'
-              tags={['C_API']}
-              initialState={undefined as any}
-              arrange={() => {
-                return (
-                  <Button
-                    onPress={() => {
-                      NativeSendIntent.addCalendarEvent({
-                        title: "Go To The Park",
-                        description: "It's fun to play at the park.",
-                        startDate: "2016-01-25 10:00",
-                        endDate: "2016-01-25 11:00",
-                        location: "The Park",
-                      });
-                    }}
-                    title="日历事件"
-
-                  />
-                )
-              }}
-              assert={({ expect, state }) => { expect(state).to.be.true }}
-            />
-            <TestCase
               itShould='native requestIgnoreBatteryOptimizations'
               tags={['C_API']}
               initialState={undefined as any}

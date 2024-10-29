@@ -197,21 +197,6 @@ const [flag2, setFlag2] = useState<boolean>();
                 />
             </>
             <>
-            <Text style={{ color: "red" }}>NativeSendIntent.addCalendarEvent</Text>
-                <Button
-                    onPress={() => {
-                        NativeSendIntent.addCalendarEvent({
-                            title: "Go To The Park",
-                            description: "It's fun to play at the park.",
-                            startDate: "2016-01-25 10:00",
-                            endDate: "2016-01-25 11:00",
-                            location: "The Park",
-                        });
-                    }}
-                    title="日历事件"
-                />
-            </>
-            <>
             <Text style={{ color: "red" }}>NativeSendIntent.requestIgnoreBatteryOptimizations</Text>
                 <Button
                     onPress={() => {
