@@ -15,7 +15,7 @@ interface OtherControlProps {
 
 const BasicTextInputMaskDemo: React.FC<
   TextInputMaskProps & OtherControlProps
-> = props => {
+> = (props) => {
   const [formatedValue, setFormatedValue] = useState('');
   const [extractedValue, setExtractedValue] = useState('');
 
@@ -32,7 +32,8 @@ const BasicTextInputMaskDemo: React.FC<
   return (
     <View style={styles.container}>
       <View
-        style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+        style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
+      >
         <Text style={{ fontSize: 18, fontWeight: 600, color: '#546e9e' }}>
           Mask:{' '}
         </Text>
@@ -64,10 +65,10 @@ const TextInputDemo1 = () => {
   const [maskTest, maskValue] = useState('');
   const a = () => {
     mask('+1 ([000]) [000] [00] [00]', '13343468815', true)
-      .then(res => {
+      .then((res) => {
         maskValue(res);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log('error', err);
       });
   };
@@ -75,10 +76,10 @@ const TextInputDemo1 = () => {
   const [unmaskTest, unmaskValue] = useState('');
   const b = () => {
     unmask('+1 ([000]) [000] [00] [00]', '+1 334 346 88 15', true)
-      .then(res => {
+      .then((res) => {
         unmaskValue(res);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log('error', err);
       });
   };
@@ -110,31 +111,31 @@ const TextInputDemo1 = () => {
     maskValue: string;
     result: string;
   }[] = [
-      {
-        label: 'Phone numbers',
-        mask: '+86 ([000]) [0000] [0000]',
-        maskValue: '18271959655',
-        result: '+86 (182) 7195 9655',
-      },
-      {
-        label: 'Dates',
-        mask: '[00]{.}[00]{.}[9900]',
-        maskValue: '10242024',
-        result: '10.24.2024',
-      },
-      {
-        label: 'Serial numbers',
-        mask: '[AA]-[00000099]',
-        maskValue: 'CH12345678',
-        result: 'CH-12345678',
-      },
-      {
-        label: 'IPv4',
-        mask: '[099]{.}[099]{.}[099]{.}[099]',
-        maskValue: '19216811',
-        result: '192.168.11',
-      },
-    ];
+    {
+      label: 'Phone numbers',
+      mask: '+86 ([000]) [0000] [0000]',
+      maskValue: '18271959655',
+      result: '+86 (182) 7195 9655',
+    },
+    {
+      label: 'Dates',
+      mask: '[00]{.}[00]{.}[9900]',
+      maskValue: '10242024',
+      result: '10.24.2024',
+    },
+    {
+      label: 'Serial numbers',
+      mask: '[AA]-[00000099]',
+      maskValue: 'CH12345678',
+      result: 'CH-12345678',
+    },
+    {
+      label: 'IPv4',
+      mask: '[099]{.}[099]{.}[099]{.}[099]',
+      maskValue: '19216811',
+      result: '192.168.11',
+    },
+  ];
 
   const [mList, setMList] = useState(maskList);
 
@@ -162,45 +163,87 @@ const TextInputDemo1 = () => {
         explain={
           <>
             <Text>
-              customNotations: (character: s , characterSet : $@ ,
-              isOptional: true)
+              customNotations: (character: s , characterSet : $@ , isOptional:
+              true)
             </Text>
           </>
         }
         mask={'[ss] [9999]'}
         customNotations={[
           { character: 's', characterSet: '$@&', isOptional: true },
-        ]}></BasicTextInputMaskDemo>
+        ]}
+      ></BasicTextInputMaskDemo>
 
       <BasicTextInputMaskDemo
         explain={
           <>
             <Text>
-              customNotations: (character: s , characterSet : $@ ,
-              isOptional: false)
+              customNotations: (character: s , characterSet : $@ , isOptional:
+              false)
             </Text>
           </>
         }
         mask={'[ss] [9999]'}
         customNotations={[
           { character: 's', characterSet: '$@&', isOptional: false },
-        ]}></BasicTextInputMaskDemo>
+        ]}
+      ></BasicTextInputMaskDemo>
+      {/* Affinity calculation strategy */}
+
+      <BasicTextInputMaskDemo
+        showExtractedValue={true}
+        mask={'[00].[00]'}
+        affinityCalculationStrategy="WHOLE_STRING"
+      ></BasicTextInputMaskDemo>
+
+      <BasicTextInputMaskDemo
+        affineFormats={['8 [000] [000]']}
+        showExtractedValue={true}
+        mask={'+7 [000] [000]'}
+        affinityCalculationStrategy="PREFIX"
+      ></BasicTextInputMaskDemo>
+
+      <BasicTextInputMaskDemo
+        affineFormats={['[00]-[000]', '[00]-[00000]']}
+        showExtractedValue={true}
+        mask={'[00]-[0]'}
+        affinityCalculationStrategy="CAPACITY"
+      ></BasicTextInputMaskDemo>
+
+      <BasicTextInputMaskDemo
+        affineFormats={['[00]-[000]', '[00]-[00000]']}
+        showExtractedValue={true}
+        mask={'[00]-[0]'}
+        affinityCalculationStrategy="EXTRACTED_VALUE_CAPACITY"
+      ></BasicTextInputMaskDemo>
+
+      <BasicTextInputMaskDemo
+        autoskip={true}
+        mask={'+86 [aaaa].[aaa]'}
+      ></BasicTextInputMaskDemo>
+
+      <BasicTextInputMaskDemo
+        autoskip={false}
+        mask={'+86 [aaaa].[aaa]'}
+      ></BasicTextInputMaskDemo>
 
       <BasicTextInputMaskDemo
         mask={'+86 [000] [0000] [0000]'}
-        rightToLeft={true}></BasicTextInputMaskDemo>
+        rightToLeft={true}
+      ></BasicTextInputMaskDemo>
 
       <BasicTextInputMaskDemo
         showExtractedValue={true}
         mask={'+86 [000] [0000] [0000]'}
-        rightToLeft={false}></BasicTextInputMaskDemo>
+        rightToLeft={false}
+      ></BasicTextInputMaskDemo>
 
       <BasicTextInputMaskDemo
         showExtractedValue={true}
-        affineFormats={["+7 ([000]) [000] [00] [00]#[900]"]}
+        affineFormats={['+7 ([000]) [000] [00] [00]#[900]']}
         mask={'+7 ([000]) [000] [00] [00]'}
-        rightToLeft={false}></BasicTextInputMaskDemo>
-
+        rightToLeft={false}
+      ></BasicTextInputMaskDemo>
     </ScrollView>
   );
 };
