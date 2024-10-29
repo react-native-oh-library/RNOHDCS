@@ -140,7 +140,7 @@ const AccordionDemo = () => {
                         />
                     </View>
                 </TestCase>
-                <TestCase itShould="icon:Octiconsc name='flame'" tags={['C_API']} >
+                <TestCase itShould="icon:Octicons name='flame'" tags={['C_API']} >
                     <View style={{ height: 150 }}>
                         <Accordion
                             dataArray={data}
