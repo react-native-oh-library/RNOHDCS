@@ -1,13 +1,17 @@
 jpush-react-native三方库测试需要配置的文件
 
 1.在harmony工程目录AppScope下，配置 "bundleName": "com.lihonggang.test",
+  在entry/src/main/resources/base/element/string.json 文件中 的 "string"中添加：  {
+      "name": "reason",
+      "value": "reason"
+    }
 
 2.在工程级（最外层）build-profile.json5，配置"useNormalizedOHMUrl": true；如下所示
  "products": [
       {
         "buildOption": {
           "strictMode": {
-            "useNormalizedOHMUrl": true//打开
+            "useNormalizedOHMUrl": true
           }
         },
         "name": "default",
@@ -18,7 +22,10 @@ jpush-react-native三方库测试需要配置的文件
       }
     ]
 
-3.请配置工程的签名，签名文件在signingConfig文件夹下。
+3.请配置工程的签名，签名文件在signingConfig文件夹下。打开DevEco Studio编译器， 点击右上角菜单“file”文件按钮，选择“Project Structure”，按照弹窗配置签名文件，别名和密码如下：
+Store password:   arc123456
+Key alias:	test_rn
+Key password:  arc123456
 
 4.在harmony工程目录entry下，按照路径src/main/ets/entryability添加上面src-main-ets-entryability文件夹下的4个文件：EntryAbility.ets（原目录下的EntryAbility.ets直接替换），MyAbilityStage.ets，PushMessageAbility.ets，RemoteNotificationExtAbility.ets
 
@@ -27,3 +34,4 @@ jpush-react-native三方库测试需要配置的文件
 6.在harmony工程目录entry下，路径src/main文件下面的module.json5请替换为上面文件夹src-main下的module.json5文件
 
 7.极光推送平台账号：2523913042@qq.com  密码：Li@159269，可以登陆极光推送平台测试远程推送消息和自定义消息推送的功能
+
