@@ -24,14 +24,6 @@ const BlockDemo = () => {
             value: false
         },
         {
-            key: "flex: true",
-            value: true
-        },
-        {
-            key: "flex: false",
-            value: false
-        },
-        {
             key: "height: 100",
             value: 100
         },
@@ -45,14 +37,6 @@ const BlockDemo = () => {
         },
         {
             key: "left: false",
-            value: false
-        },
-        {
-            key: "middle: true",
-            value: true
-        },
-        {
-            key: "middle: false",
             value: false
         },
     ]
@@ -69,10 +53,8 @@ const BlockDemo = () => {
                                     <Block
                                         bottom={item.value}
                                         card={item.value}
-                                        flex={item.value}
                                         height={item.value}
                                         left={item.value}
-                                        middle={item.value}
                                     >
                                         <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
                                     </Block>
@@ -81,23 +63,63 @@ const BlockDemo = () => {
                         )
                     })
                 }
-                <TestCase itShould="fluid:设置fluid样式为true" tags={['C_API']} >
+                <TestCase itShould="middle:设置middle样式为true" tags={['C_API']} >
                     <View style={{ height: 150 }}>
                         <Block
-                            center={true}
-                            fluid={true}
+                            middle={true}
                         >
                             <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
                         </Block>
                     </View>
                 </TestCase>
-                <TestCase itShould="fluid:设置fluid样式为false" tags={['C_API']} >
+                <TestCase itShould="middle:设置middle样式为false" tags={['C_API']} >
                     <View style={{ height: 150 }}>
                         <Block
-                            center={true}
-                            fluid={false}
+                            middle={false}
                         >
                             <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
+                        </Block>
+                    </View>
+                </TestCase>
+                <TestCase itShould="right:设置right样式为true" tags={['C_API']} >
+                    <View style={{ height: 150 }}>
+                        <Block
+                            right={true}
+                        >
+                            <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
+                        </Block>
+                    </View>
+                </TestCase>
+                <TestCase itShould="right:设置right样式为false" tags={['C_API']} >
+                    <View style={{ height: 150 }}>
+                        <Block
+                            right={false}
+                        >
+                            <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
+                        </Block>
+                    </View>
+                </TestCase>
+                <TestCase itShould="fluid:设置fluid样式为true" tags={['C_API']} >
+                    <View>
+                        <Block
+                            fluid={true}
+                            style={{ backgroundColor: 'blue' }}
+                        >
+                            <Text>111111111111111111111</Text>
+                            <Text>111111111111111111111</Text>
+                            <Text>111111111111111111111</Text>
+                        </Block>
+                    </View>
+                </TestCase>
+                <TestCase itShould="fluid:设置fluid样式为false" tags={['C_API']} >
+                    <View>
+                        <Block
+                            fluid={false}
+                            style={{ alignSelf: 'flex-start', backgroundColor: 'blue' }}
+                        >
+                            <Text>111111111111111111111</Text>
+                            <Text>111111111111111111111</Text>
+                            <Text>111111111111111111111</Text>
                         </Block>
                     </View>
                 </TestCase>
@@ -166,7 +188,7 @@ const BlockDemo = () => {
                 <TestCase itShould="safe:是否使用SafeAreaView组件包裹--true" tags={['C_API']} >
                     <View style={{ height: 150 }}>
                         <Block
-                            safe={true}
+                            safe={false}
                         >
                             <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
                             <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
@@ -201,21 +223,21 @@ const BlockDemo = () => {
                         </Block>
                     </View>
                 </TestCase>
-                <TestCase itShould="shadowColor:阴影颜色--true" tags={['C_API']} >
+                <TestCase itShould="shadowColor:阴影颜色--red(红色)" tags={['C_API']} >
                     <View style={{ height: 150 }}>
                         <Block
                             shadow={true}
-                            shadowColor={true}
+                            shadowColor={'red'}
                         >
                             <Button><Text style={{ color: 'black' }}>111111</Text></Button>
                         </Block>
                     </View>
                 </TestCase>
-                <TestCase itShould="shadowColor:阴影颜色--false" tags={['C_API']} >
+                <TestCase itShould="shadowColor:阴影颜色--blue(蓝色)" tags={['C_API']} >
                     <View style={{ height: 150 }}>
                         <Block
                             shadow={true}
-                            shadowColor={false}
+                            shadowColor={'blue'}
                         >
                             <Button><Text style={{ color: 'black' }}>111111</Text></Button>
                         </Block>
@@ -268,7 +290,7 @@ const BlockDemo = () => {
                         <Block
                             top={false}
                         >
-                             <Card></Card>
+                            <Card></Card>
                         </Block>
                     </View>
                 </TestCase>
@@ -277,7 +299,7 @@ const BlockDemo = () => {
                         <Block
                             width={100}
                         >
-                             <Card></Card>
+                            <Card></Card>
                         </Block>
                     </View>
                 </TestCase>
@@ -286,7 +308,7 @@ const BlockDemo = () => {
                         <Block
                             width={150}
                         >
-                             <Card></Card>
+                            <Card></Card>
                         </Block>
                     </View>
                 </TestCase>
