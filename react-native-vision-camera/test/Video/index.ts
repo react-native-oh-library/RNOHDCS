@@ -1,7 +1,7 @@
 
 export * from './FpsTest'
 export * from './VideoHdrTest'
-export * from './VideoPreviewTest'
+export * from './PreviewTest'
 export * from './VideoStabilizationModeTest'
 export * from './FormatTest'
 
@@ -17,7 +17,6 @@ export * from './startRecordingTest'
 // 
 export * from './isActiveTest'
 export * from './deviceTest'
-export * from './previewTest'
 export * from './VideoTest'
 export * from './AudioTest'
 export * from './OnErrorTest'

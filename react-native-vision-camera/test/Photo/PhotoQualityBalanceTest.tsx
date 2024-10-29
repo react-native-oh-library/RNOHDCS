@@ -7,6 +7,7 @@ import {
   useCameraPermission,
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
+import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 
 export function PhotoQualityBalanceTest() {
   const device = useCameraDevice('back');
@@ -26,10 +27,14 @@ export function PhotoQualityBalanceTest() {
   }
 
   const [photoFile, setPhotoFile] = useState<string>('');
+  const [photoPath, setPhotoPath] = useState<string>('');
   // 拍照
   const onTakePhoto = async () => {
+    setPhotoFile('');
+    setPhotoPath('');
     const result = await camera.current?.takePhoto();
     result && setPhotoFile(JSON.stringify(result));
+    result?.path && setPhotoPath(result?.path);
   };
 
   // 属性
@@ -44,6 +49,21 @@ export function PhotoQualityBalanceTest() {
         <TestCase itShould={`照片质量平衡:${photoQualityBalance}`}>
           <View>
             <Text>拍照结果:{photoFile}</Text>
+            {photoPath && (
+              <View style={{height: 50}}>
+                <Button
+                  title="SaveAsset"
+                  onPress={() => {
+                    CameraRoll.saveAsset(photoPath).then(res => {
+                      setTimeout(() => {
+                        setPhotoFile('');
+                        setPhotoPath('');
+                      }, 500);
+                    });
+                  }}
+                />
+              </View>
+            )}
           </View>
           <Camera
             style={style.cameraPreview}
@@ -83,7 +103,7 @@ export function PhotoQualityBalanceTest() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 600},
+  cameraPreview: {width: '100%', aspectRatio: 56 / 100},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',

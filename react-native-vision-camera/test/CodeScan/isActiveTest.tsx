@@ -60,7 +60,6 @@ export function isActiveTest() {
         <TestCase itShould={`当前状态:${isActive ? '启用' : '禁用'}`}>
           <View>
             <Text style={styles.text}>codes:{codes}</Text>
-            <Text style={styles.text}>err:{errorStr}</Text>
           </View>
           <Camera
             style={styles.cameraPreview}
@@ -86,10 +85,7 @@ export function isActiveTest() {
 }
 
 const styles = StyleSheet.create({
-  cameraPreview: {
-    width: 300,
-    height: 400,
-  },
+  cameraPreview: {width: '100%', aspectRatio: 56 / 100},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',
