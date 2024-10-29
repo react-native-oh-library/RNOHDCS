@@ -168,10 +168,7 @@ const style = StyleSheet.create({
     position: 'absolute',
     top: 300,
   },
-  cameraPreview: {
-    width: 300,
-    height: 400,
-  },
+  cameraPreview: {width: '100%', aspectRatio: 56 / 100},
   text: {
     fontSize: 20,
     textAlign: 'center',

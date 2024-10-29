@@ -88,10 +88,7 @@ export function CodeScannerTest() {
 }
 
 const styles = StyleSheet.create({
-  cameraPreview: {
-    width: 300,
-    height: 400,
-  },
+  cameraPreview: {width: '100%', aspectRatio: 56 / 100},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -99,8 +96,5 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   text: {
-    fontSize: 20,
-    textAlign: 'center',
-    color: '#000',
   },
 });

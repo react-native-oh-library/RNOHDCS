@@ -49,11 +49,64 @@ export function useMicrophonePermissionTest() {
   const [videoPath, setVideoPath] = useState<string>('');
   const [fps, set] = useState<number>(30);
 
+  const onStart = async () => {
+    setVideoPath('');
+    setVideoFile('');
+    seteStartStatus('start');
+    await camera.current?.startRecording({
+      fileType: 'mp4',
+      flash: flash,
+      onRecordingError: error => {
+        seteStartStatus('end');
+        console.log(
+          `videoStartParmas CameraSession: onRecordingError.${JSON.stringify(
+            error,
+          )}`,
+        );
+      },
+      onRecordingFinished: video => {
+        seteStartStatus('end');
+        video && setVideoFile(JSON.stringify(video));
+        video?.path && setVideoPath(video.path);
+      },
+      videoBitRate: 'extra-low',
+      videoCodec: videoCodec,
+    });
+  };
+  const onPause = async () => {
+    seteStartStatus('pause');
+    camera.current?.pauseRecording();
+  };
+  const onStop = async () => {
+    seteStartStatus('end');
+    camera.current?.stopRecording();
+  };
+  const onResume = async () => {
+    seteStartStatus('start');
+    camera.current?.resumeRecording();
+  };
+
   return (
     <Tester>
       <TestSuite name="useMicrophonePermission">
         <TestCase
           itShould={`${_hasPermission ? '有麦克风权限' : '没有麦克风权限'}`}>
+          {videoPath && (
+            <View>
+              <Text>录像结果:{videoFile}</Text>
+              <Button
+                title="SaveAsset"
+                onPress={() => {
+                  CameraRoll.saveAsset(videoPath).then(res => {
+                    setTimeout(() => {
+                      setVideoPath('');
+                      setVideoFile('');
+                    }, 500);
+                  });
+                }}
+              />
+            </View>
+          )}
           <Camera
             style={style.cameraPreview}
             ref={camera}
@@ -69,6 +122,37 @@ export function useMicrophonePermissionTest() {
           {!_hasPermission && (
             <Button title="requestPermission" onPress={_requestPermission} />
           )}
+
+          <View style={style.actionBtn}>
+            <>
+              {videoHdr && videoCodec === 'h264' ? (
+                <Text>videoHdr为true时，videoCodeC只能设置为h265; </Text>
+              ) : (
+                <>
+                  {startStatus === 'end' ? (
+                    <Button title="开始" onPress={onStart}></Button>
+                  ) : (
+                    ''
+                  )}
+                  {startStatus === 'start' ? (
+                    <Button title="暂停" onPress={onPause}></Button>
+                  ) : (
+                    ''
+                  )}
+                  {startStatus === 'pause' ? (
+                    <Button title="恢复" onPress={onResume}></Button>
+                  ) : (
+                    ''
+                  )}
+                  {startStatus !== 'end' ? (
+                    <Button title="停止" onPress={onStop}></Button>
+                  ) : (
+                    ''
+                  )}
+                </>
+              )}
+            </>
+          </View>
         </TestCase>
       </TestSuite>
     </Tester>
@@ -76,10 +160,7 @@ export function useMicrophonePermissionTest() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {
-    width: 300,
-    height: 400,
-  },
+  cameraPreview: {width: '100%', aspectRatio: 56 / 100},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',

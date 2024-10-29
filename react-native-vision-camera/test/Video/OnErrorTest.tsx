@@ -13,14 +13,15 @@ export function onErrorTest() {
   const device = useCameraDevice('back');
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
+  const [fps, setFps] = useState(30);
   const format = useCameraFormat(device, [
     {videoResolution: {width: 1920, height: 1080}},
-    {fps: 30},
+    {fps: fps},
   ]);
 
-  if (!device) {
-    return <Text>No Devices</Text>;
-  }
+  // if (!device) {
+  //   return <Text>No Devices</Text>;
+  // }
 
   if (!hasPermission) {
     requestPermission();
@@ -106,7 +107,7 @@ export function onErrorTest() {
             device={device}
             video={true}
             videoHdr={videoHdr}
-            fps={30}
+            fps={fps}
             onError={e => {
               setErrorText(e && JSON.stringify(e));
             }}
@@ -159,10 +160,7 @@ const style = StyleSheet.create({
     position: 'absolute',
     top: 300,
   },
-  cameraPreview: {
-    width: 300,
-    height: 400,
-  },
+  cameraPreview: {width: '100%', aspectRatio: 56 / 100},
   text: {
     fontSize: 20,
     textAlign: 'center',

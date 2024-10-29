@@ -43,7 +43,7 @@ export function isActiveTest() {
     <Tester>
       <TestSuite name="拍照isActive：激活/禁用">
         <TestCase itShould={`当前状态:${isActive ? '启用' : '禁用'}`}>
-        <View>
+          <View>
             <Text>拍照结果:{photoFile}</Text>
           </View>
           <Camera
@@ -56,7 +56,7 @@ export function isActiveTest() {
             format={format}
           />
           <View>
-            <Text>isActive:{isActive+''}</Text>
+            <Text>isActive:{isActive + ''}</Text>
           </View>
           <View style={style.actionBtn}>
             <Button title="拍照" onPress={onTakePhoto}></Button>
@@ -69,7 +69,7 @@ export function isActiveTest() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 600},
+  cameraPreview: {width: '100%', aspectRatio: 56 / 100},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',

@@ -116,7 +116,6 @@ export function FpsTest() {
             fps={fps}
             format={format}
           />
-
           <View style={style.actionBtn}>
             <>
               {videoHdr && videoCodec === 'h264' ? (
@@ -164,10 +163,7 @@ export function FpsTest() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {
-    width: 300,
-    height: 400,
-  },
+  cameraPreview: {width: '100%', aspectRatio: 56 / 100},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',
