@@ -13,9 +13,9 @@ export function onErrorTest() {
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
 
-  if (!device) {
-    return <Text>No Devices</Text>;
-  }
+  // if (!device) {
+  //   return <Text>No Devices</Text>;
+  // }
 
   if (!hasPermission) {
     requestPermission();
@@ -76,10 +76,7 @@ export function onErrorTest() {
 }
 
 const styles = StyleSheet.create({
-  cameraPreview: {
-    width: 300,
-    height: 400,
-  },
+  cameraPreview: {width: '100%', aspectRatio: 56 / 100},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -87,8 +84,5 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   text: {
-    fontSize: 20,
-    textAlign: 'center',
-    color: '#000',
   },
 });

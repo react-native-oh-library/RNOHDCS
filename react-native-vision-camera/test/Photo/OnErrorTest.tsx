@@ -18,9 +18,9 @@ export function OnErrorTest() {
   const {hasPermission, requestPermission} = useCameraPermission();
   const camera = useRef<Camera>(null);
 
-  if (!device) {
-    return <Text>No Devices</Text>;
-  }
+  // if (!device) {
+  //   return <Text>No Devices</Text>;
+  // }
 
   if (!hasPermission) {
     requestPermission();
@@ -39,17 +39,13 @@ export function OnErrorTest() {
     result && setPhotoFile(JSON.stringify(result));
   };
 
-  const changeIsActive = () => {
-    setIsActive(v => !v);
-  };
-
   return (
     <Tester>
       <TestSuite name="onError">
         <TestCase itShould={`错误信息的回调`}>
           <View>
-            <Text>错误信息:{text}</Text>
-            <Text>拍照结果:{photoFile}</Text>
+            <Text style={style.text}>错误信息:{text}</Text>
+            <Text style={style.text}>拍照结果:{photoFile}</Text>
           </View>
           <Camera
             style={style.cameraPreview}
@@ -65,7 +61,6 @@ export function OnErrorTest() {
           />
           <View style={style.actionBtn}>
             <Button title="拍照" onPress={onTakePhoto}></Button>
-            <Button title="changeIsActive" onPress={changeIsActive}></Button>
           </View>
         </TestCase>
       </TestSuite>
@@ -74,7 +69,7 @@ export function OnErrorTest() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 600},
+  cameraPreview: {width: '100%', aspectRatio: 56 / 100},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -85,8 +80,7 @@ const style = StyleSheet.create({
     top: 300,
   },
   text: {
-    fontSize: 20,
-    textAlign: 'center',
+    fontSize: 16,
     color: '#000',
   },
 });

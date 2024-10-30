@@ -70,10 +70,10 @@ export function EnableZoomGestureTest() {
 }
 
 const style = StyleSheet.create({
-  cameraPreview: {width: 300, height: 600},
+  cameraPreview: {width: '100%', aspectRatio: 56 / 100},
   imageView: {
     width: 300,
-    height: 400,
+    height: 600,
   },
   actionBtn: {
     flexDirection: 'row',

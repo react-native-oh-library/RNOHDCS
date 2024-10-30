@@ -53,7 +53,7 @@ const theme = createTheme({
   },
 });
 
-export function SampleElementExample(): JSX.Element {
+export default function SampleElementExample(): JSX.Element {
   return (
     <ThemeProvider theme={theme}>
       <NavigationContainer>

@@ -61,10 +61,6 @@ export function TorchTest() {
     <Tester>
       <TestSuite name="torch">
         <TestCase itShould={`手电筒： ${torch === 'on' ? '开启' : '关闭'}`}>
-          <View>
-            <Text style={styles.text}>codes:{codes}</Text>
-            <Text style={styles.text}>err:{errorStr}</Text>
-          </View>
           <Camera
             style={styles.cameraPreview}
             ref={camera}
@@ -90,19 +86,12 @@ export function TorchTest() {
 }
 
 const styles = StyleSheet.create({
-  cameraPreview: {
-    width: 300,
-    height: 400,
-  },
+  cameraPreview: {width: '100%', aspectRatio: 56 / 100},
   actionBtn: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     padding: 10,
   },
-  text: {
-    fontSize: 20,
-    textAlign: 'center',
-    color: '#000',
-  },
+  text: {},
 });
