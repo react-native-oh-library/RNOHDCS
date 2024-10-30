@@ -1,6 +1,6 @@
-import COLORS, { Block, theme, Icon, Radio } from 'galio-framework';
+import { Block, Radio } from 'galio-framework';
 import React, { useState } from 'react';
-import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { TestCase, Tester } from '@rnoh/testerino';
 
 const RadioDemo = () => {

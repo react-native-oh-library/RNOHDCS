@@ -1,6 +1,6 @@
 import { TestCase, Tester } from '@rnoh/testerino';
 import { Icon } from 'galio-framework';
-import React, { useState } from 'react';
+import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 

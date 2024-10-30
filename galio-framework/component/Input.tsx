@@ -1,7 +1,7 @@
 import { TestCase, Tester } from '@rnoh/testerino';
-import COLORS, { Card, Block, DeckSwiper, Input, theme, Icon } from 'galio-framework';
-import React, { useState } from 'react';
-import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Input, theme } from 'galio-framework';
+import React from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 const InputDemo = () => {
     const InputProps = [
@@ -60,7 +60,8 @@ const InputDemo = () => {
         { icon: "frown", family: "AntDesign", iconColor: 'red' },
         { icon: "meho", family: "AntDesign", iconColor: 'blue' },
         { icon: "app-store", family: "Entypo", iconColor: 'blue' },
-        { icon: "bowl", family: "Entypo", iconColor: 'skyblue' }
+        { icon: "bowl", family: "Entypo", iconColor: 'skyblue' },
+        { icon: "bowl", family: "Entypo", iconColor: 'pink' }
     ]
     return (
         <ScrollView style={{ backgroundColor: '#fff' }}>

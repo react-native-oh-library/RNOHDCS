@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Block, Button, Card } from 'galio-framework';
 import { TestCase, Tester } from '@rnoh/testerino';
 
@@ -115,11 +115,11 @@ const BlockDemo = () => {
                     <View>
                         <Block
                             fluid={false}
-                            style={{ alignSelf: 'flex-start', backgroundColor: 'blue' }}
+                            style={{ alignSelf: 'flex-start', backgroundColor: 'pink' }}
                         >
-                            <Text>111111111111111111111</Text>
-                            <Text>111111111111111111111</Text>
-                            <Text>111111111111111111111</Text>
+                            <Text>111111111111111111111111</Text>
+                            <Text>111111111111111111111111</Text>
+                            <Text>111111111111111111111111</Text>
                         </Block>
                     </View>
                 </TestCase>
@@ -193,6 +193,7 @@ const BlockDemo = () => {
                             <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
                             <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
                         </Block>
+
                     </View>
                 </TestCase>
                 <TestCase itShould="safe:是否使用SafeAreaView组件包裹--false" tags={['C_API']} >
@@ -244,33 +245,36 @@ const BlockDemo = () => {
                     </View>
                 </TestCase>
                 <TestCase itShould="space:between" tags={['C_API']} >
-                    <View style={{ height: 150 }}>
+                    <View style={{ height: 300 }}>
                         <Block
                             flex
                             space='between'
                         >
                             <Button><Text style={{ color: 'black' }}>111111</Text></Button>
                             <Button><Text style={{ color: 'black' }}>111111</Text></Button>
+                            <Button><Text style={{ color: 'black' }}>111111</Text></Button>
                         </Block>
                     </View>
                 </TestCase>
                 <TestCase itShould="space:around" tags={['C_API']} >
-                    <View style={{ height: 150 }}>
+                    <View style={{ height: 300 }}>
                         <Block
                             flex
                             space='around'
                         >
                             <Button><Text style={{ color: 'black' }}>111111</Text></Button>
                             <Button><Text style={{ color: 'black' }}>111111</Text></Button>
+                            <Button><Text style={{ color: 'black' }}>111111</Text></Button>
                         </Block>
                     </View>
                 </TestCase>
                 <TestCase itShould="space:evenly" tags={['C_API']} >
-                    <View style={{ height: 150 }}>
+                    <View style={{ height: 300 }}>
                         <Block
                             flex
                             space='evenly'
                         >
+                            <Button><Text style={{ color: 'black' }}>111111</Text></Button>
                             <Button><Text style={{ color: 'black' }}>111111</Text></Button>
                             <Button><Text style={{ color: 'black' }}>111111</Text></Button>
                         </Block>

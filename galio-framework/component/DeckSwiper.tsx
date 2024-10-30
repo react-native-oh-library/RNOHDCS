@@ -1,6 +1,6 @@
 import { Card, Block, DeckSwiper } from 'galio-framework';
 import React, { useState } from 'react';
-import { Alert, Button, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { TestCase, Tester } from '@rnoh/testerino';
 
 const DeckSwiperDemo = () => {

@@ -1,21 +1,23 @@
-import COLORS, { Block, Text, Toast, Button, theme } from 'galio-framework';
+import { Block, Toast, Button, theme } from 'galio-framework';
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { TestCase, Tester } from '@rnoh/testerino';
 
 const ToastDemo = () => {
     const [isShow, setShow] = useState(true);
+    const [showToast, setShowToast] = useState(true)
+    const [showToasts, setShowToasts] = useState(true)
 
     return (
         <ScrollView style={{ backgroundColor: "#fff" }}>
             <Tester>
-            <TestCase itShould='textStyle: color:skyblue fontSize:20' tags={['C_API']}>
+                <TestCase itShould='textStyle: color:skyblue fontSize:20' tags={['C_API']}>
                     <Block style={{
                         height: 200,
                         display: 'flex',
                     }}>
                         <Button onPress={() => setShow(!isShow)} style={{ alignItems: 'center', alignContent: 'center', alignSelf: 'center' }}>click here for toast notifications</Button>
-                        <Toast isShow={isShow} textStyle={{color:'skyblue',fontSize:20}}>This is a top positioned toast</Toast>
+                        <Toast isShow={isShow} textStyle={{ color: 'skyblue', fontSize: 20 }}>This is a top positioned toast</Toast>
                     </Block>
                 </TestCase>
                 <TestCase itShould='textStyle: color:blue fontWeight:bold textAlign:center' tags={['C_API']}>
@@ -24,7 +26,7 @@ const ToastDemo = () => {
                         display: 'flex',
                     }}>
                         <Button onPress={() => setShow(!isShow)} style={{ alignItems: 'center', alignContent: 'center', alignSelf: 'center' }}>click here for toast notifications</Button>
-                        <Toast isShow={isShow} textStyle={{color:'skyblue',fontWeight:'bold',textAlign:'center'}}>This is a top positioned toast</Toast>
+                        <Toast isShow={isShow} textStyle={{ color: 'skyblue', fontWeight: 'bold', textAlign: 'center' }}>This is a top positioned toast</Toast>
                     </Block>
                 </TestCase>
                 <TestCase itShould='round: true' tags={['C_API']}>
@@ -113,8 +115,8 @@ const ToastDemo = () => {
                         height: 200,
                         display: 'flex',
                     }}>
-                        <Button onPress={() => setShow(!isShow)} style={{ alignItems: 'center', alignContent: 'center', alignSelf: 'center' }}>click here for toast notifications</Button>
-                        <Toast isShow={isShow} fadeOutDuration={5000}>This is a top positioned toast</Toast>
+                        <Button onPress={() => setShowToasts(!showToasts)} style={{ alignItems: 'center', alignContent: 'center', alignSelf: 'center' }}>click here for toast notifications</Button>
+                        <Toast isShow={showToasts} fadeOutDuration={5000}>This is a top positioned toast</Toast>
                     </Block>
                 </TestCase>
                 <TestCase itShould='fadeOutDuration: 1000(淡出持续时间)' tags={['C_API']}>
@@ -122,8 +124,8 @@ const ToastDemo = () => {
                         height: 200,
                         display: 'flex',
                     }}>
-                        <Button onPress={() => setShow(!isShow)} style={{ alignItems: 'center', alignContent: 'center', alignSelf: 'center' }}>click here for toast notifications</Button>
-                        <Toast isShow={isShow} fadeOutDuration={1000}>This is a top positioned toast</Toast>
+                        <Button onPress={() => setShowToast(!showToast)} style={{ alignItems: 'center', alignContent: 'center', alignSelf: 'center' }}>click here for toast notifications</Button>
+                        <Toast isShow={showToast} fadeOutDuration={1000}>This is a top positioned toast</Toast>
                     </Block>
                 </TestCase>
                 <TestCase itShould='style: backgroundColor: skyblue' tags={['C_API']}>
@@ -173,7 +175,7 @@ const ToastDemo = () => {
                 </TestCase>
                 <TestCase itShould='positionIndicator: center' tags={['C_API']}>
                     <Block style={{
-                        height: 500,
+                        height: 800,
                         display: 'flex',
                     }}>
                         <Button onPress={() => setShow(!isShow)} style={{ alignItems: 'center', alignContent: 'center', alignSelf: 'center' }}>click here for toast notifications</Button>
@@ -187,6 +189,17 @@ const ToastDemo = () => {
                     }}>
                         <Button onPress={() => setShow(!isShow)} style={{ alignItems: 'center', alignContent: 'center', alignSelf: 'center' }}>click here for toast notifications</Button>
                         <Toast isShow={isShow} positionIndicator='bottom'>This is a top positioned toast</Toast>
+                    </Block>
+                </TestCase>
+                <TestCase itShould='children: 展示的是Button组件' tags={['C_API']}>
+                    <Block style={{
+                        height: 300,
+                        display: 'flex',
+                    }}>
+                        <Button onPress={() => setShow(!isShow)} style={{ alignItems: 'center', alignContent: 'center', alignSelf: 'center' }}>click here for toast notifications</Button>
+                        <Toast isShow={isShow}>
+                            <Button style={{ width: 'auto', height: 50, backgroundColor: 'blue' }}>children</Button>
+                        </Toast>
                     </Block>
                 </TestCase>
             </Tester>

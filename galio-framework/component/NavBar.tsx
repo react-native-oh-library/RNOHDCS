@@ -1,6 +1,6 @@
-import COLORS, { NavBar, Block } from 'galio-framework';
+import { NavBar, Block } from 'galio-framework';
 import React, { useState } from 'react';
-import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { TestCase, Tester } from '@rnoh/testerino';
 

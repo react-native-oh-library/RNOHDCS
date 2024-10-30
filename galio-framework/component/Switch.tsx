@@ -1,6 +1,6 @@
-import COLORS, { Block, theme, Radio, Text, Switch } from 'galio-framework';
+import COLORS, { Block, Text, Switch } from 'galio-framework';
 import React, { useState } from 'react';
-import { Alert, ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { TestCase, Tester } from '@rnoh/testerino';
 
 const SwitchDemo = () => {
@@ -19,8 +19,8 @@ const SwitchDemo = () => {
         { initialValue: false, onChange: onPressSwitch },
         { onChange: onPressSwitch, trackColor: { false: 'pink', true: 'red' } },
         { onChange: onPressSwitch, trackColor: { false: 'blue', true: 'purple' } },
-        {ios_backgroundColor:'green',onChange: onPressSwitch,trackColor: {true: 'red' }},
-        {ios_backgroundColor:'green',onChange: onPressSwitch,trackColor: {false:'black',true: 'red' }}
+        { ios_backgroundColor: 'green', onChange: onPressSwitch, trackColor: { true: 'red' } },
+        { ios_backgroundColor: 'green', onChange: onPressSwitch, trackColor: { false: 'black', true: 'red' } }
     ]
     return (
         <ScrollView style={{ backgroundColor: "#fff" }}>
