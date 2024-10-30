@@ -654,7 +654,7 @@ export const ImageMarker = () => {
   const text_options_textalain_left: TextMarkOptions = {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
-      text: 'test text',
+      text: 'test text \n left',
       style: {
         color: '#FF0000',
         fontSize: 100,
@@ -666,7 +666,7 @@ export const ImageMarker = () => {
   const text_options_textalain_center: TextMarkOptions = {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
-      text: 'test text',
+      text: 'test text \n center',
       style: {
         color: '#FF0000',
         fontSize: 100,
@@ -678,7 +678,7 @@ export const ImageMarker = () => {
   const text_options_textalain_right: TextMarkOptions = {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkTexts: [{
-      text: 'test text',
+      text: 'test text \n right',
       style: {
         color: '#FF0000',
         fontSize: 100,
