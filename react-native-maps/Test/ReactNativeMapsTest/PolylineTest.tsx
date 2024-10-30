@@ -151,11 +151,8 @@ export class PolylineTest extends React.Component<any, any> {
             onValueChange={(value) => this.setState({ miterLimit: value })}
           />
         </TestCase> */}
-        <TestCase itShould="geodesic: 是否为大地曲线">
-          <Switch 
-            value={this.state.geodesic} 
-            onValueChange={(value) => this.setState({ geodesic: value })}
-          />
+        <TestCase itShould="geodesic: 是否为大地曲线，缩小地图查看绿色线">
+          <View></View>
         </TestCase>
         {/* <TestCase itShould="lineDashPhase: 虚线的开始偏移量~不支持">
           <Switch 
@@ -198,6 +195,15 @@ export class PolylineTest extends React.Component<any, any> {
               coordinates={POLYLINE2}
               strokeWidth={10}
               strokeColors={["rgba(0,255,0, 1)", "rgba(0,0,255, 1)"]}
+            />
+            <Polyline
+              coordinates={[
+                { latitude: 0, longitude: 0 },
+                { latitude: LATITUDE, longitude: LONGITUDE }
+              ]}
+              strokeWidth={20}
+              strokeColor={"rgba(0,255,0, 1)"}
+              geodesic={true}
             />
           </MapView>
         </View>
