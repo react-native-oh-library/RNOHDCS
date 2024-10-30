@@ -17,14 +17,43 @@ const StickyHeaderFlatListDemoDefault: React.FC = () => {
     await new Promise(res => setTimeout(res, 2000));
     setRefreshing(false);
   }
-
+  // 处理回调方法调用
+  const onHeaderLayout = () => {
+    console.log('StickyHeaderFlatList:onHeaderLayout回调已执行');
+  };
+  const testMomentumScrollBegin = () => {
+    'worklet';
+    console.log('StickyHeaderFlatList-worklet:onMomentumScrollBegin回调已执行');
+  };
+  const testMomentumScrollEnd = () => {
+    'worklet';
+    console.log('StickyHeaderFlatList-worklet:onMomentumScrollEnd回调已执行');
+  };
+  const onScroll = () => {
+    'worklet';
+    console.log('StickyHeaderFlatList-worklet:onScroll回调已执行');
+  };
+  const onScrollBeginDrag = () => {
+    'worklet';
+    console.log('StickyHeaderFlatList-worklet:onScrollBeginDrag回调已执行');
+  };
+  const onScrollEndDrag = () => {
+    'worklet';
+    console.log('StickyHeaderFlatList-worklet:onScrollEndDrag回调已执行');
+  };
   return (
     <View style={screenStyles.screenContainer}>
       <SafeAreaView>
         <StickyHeaderFlatList
           containerStyle={screenStyles.stretchContainer}
+          onHeaderLayout={onHeaderLayout}
+          onMomentumScrollBegin={testMomentumScrollBegin}
+          onMomentumScrollEnd={testMomentumScrollEnd}
+          onScroll={onScroll}
+          onScrollBeginDrag={onScrollBeginDrag}
+          onScrollEndDrag={onScrollEndDrag}
           data={DATA}
-          keyExtractor={item => item}
+          keyExtractor={(item, index) => item + index}
           /**
            * Refresh control is not implemented on web, which causes styles as margin or padding
            * to be duplicated - ignore it on web, it will be no-op anyway

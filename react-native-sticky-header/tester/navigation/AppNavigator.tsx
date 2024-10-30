@@ -51,6 +51,7 @@ import {StickyHeaderFlashListDemoDefault} from '../screens/StickyHeaderFlashList
 import {
   TabbedHeaderPagerDemoDefault,
   TabbedHeaderPagerDemoChild1,
+  TabbedHeaderPagerDemoChild2,
 } from '../screens/TabbedHeaderPager/index';
 import {
   TabbedHeaderListDemoDefault,
@@ -82,6 +83,10 @@ export const App: React.FC = () => (
         <Stack.Screen
           name={CHILDROUTES.TabbedHeaderPagerDemoChild1}
           component={TabbedHeaderPagerDemoChild1}
+        />
+        <Stack.Screen
+          name={CHILDROUTES.TabbedHeaderPagerDemoChild2}
+          component={TabbedHeaderPagerDemoChild2}
         />
         {/* 测试TabbedHeaderPager组件end*/}
         {/* 测试TabbedHeaderList组件start*/}

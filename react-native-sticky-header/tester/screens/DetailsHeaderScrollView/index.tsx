@@ -43,8 +43,6 @@ const defaultRouter = {
     rightTopIcon: '右上角icon图标',
     rightTopIconOnPress: '右上角icon图标点击触发回调',
     snapStartThreshold: '默认值',
-    snapStopThreshold: '默认值',
-    snapToEdge: 'true',
     stickyTabs: 'true',
     tag: 'Product Design',
     tagStyle: `color: 'white'`,
@@ -64,8 +62,7 @@ const childRouter1 = {
     enableSafeAreaTopInset:
       'false（设置为false,表现headerBar部分会减少内边距）',
     renderHeaderBar: '自定义headerBar<Text onPress={goBack}>返回</Text>',
-    snapStartThreshold: '300',
-    snapStopThreshold: '300',
+    snapStartThreshold: '默认值50',
     title: 'BrandonChild1',
     titleStyle: `color:'green'`,
   },

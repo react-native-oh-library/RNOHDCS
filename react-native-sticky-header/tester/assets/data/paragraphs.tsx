@@ -30,7 +30,7 @@ export const SECTIONS: SectionListData<string>[] = [
   {
     data: DATA,
     title: 'One',
-    keyExtractor: item => item,
+    keyExtractor: item => item + '101',
     renderItem: ({item}) => {
       return <Paragraph text={item} />;
     },
@@ -38,7 +38,7 @@ export const SECTIONS: SectionListData<string>[] = [
   {
     data: DATA,
     title: 'Two',
-    keyExtractor: item => item,
+    keyExtractor: item => item + '111',
     renderItem: ({item}) => {
       return <Paragraph text={item} />;
     },
@@ -46,7 +46,7 @@ export const SECTIONS: SectionListData<string>[] = [
   {
     data: DATA,
     title: 'Three',
-    keyExtractor: item => item,
+    keyExtractor: item => item + '121',
     renderItem: ({item}) => {
       return <Paragraph text={item} />;
     },
@@ -54,7 +54,7 @@ export const SECTIONS: SectionListData<string>[] = [
   {
     data: DATA,
     title: 'Four',
-    keyExtractor: item => item,
+    keyExtractor: item => item + '131',
     renderItem: ({item}) => {
       return <Paragraph text={item} />;
     },
@@ -62,7 +62,7 @@ export const SECTIONS: SectionListData<string>[] = [
   {
     data: DATA,
     title: 'Five',
-    keyExtractor: item => item,
+    keyExtractor: item => item + '141',
     renderItem: ({item}) => {
       return <Paragraph text={item} />;
     },

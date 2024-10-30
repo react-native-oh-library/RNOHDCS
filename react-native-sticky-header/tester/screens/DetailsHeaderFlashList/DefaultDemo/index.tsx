@@ -52,10 +52,9 @@ const DetailsHeaderFlashList = withDetailsHeaderFlashList<
 
 const DetailsHeaderFlashListDemoDefault: React.FC = () => {
   const navigation = useNavigation();
-
-  function goBack() {
+  const goBack = () => {
     navigation.goBack();
-  }
+  };
 
   const isDarkTheme = useColorScheme() === 'dark';
 
@@ -67,6 +66,7 @@ const DetailsHeaderFlashListDemoDefault: React.FC = () => {
         leftTopIconOnPress={goBack}
         leftTopIconTestID={flash_detailsHeaderTestIDs.headerLeftTopIcon}
         rightTopIcon={IconMenu}
+        rightTopIconOnPress={goBack}
         rightTopIconTestID={flash_detailsHeaderTestIDs.headerRightTopIcon}
         contentContainerStyle={
           isDarkTheme

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StatusBar} from 'react-native';
+import {StatusBar, StyleSheet} from 'react-native';
 import {TabbedHeaderList} from 'react-native-sticky-parallax-header';
 import {logo, photosPortraitMe} from '../../../assets/images';
 import {TABBED_SECTIONS} from '../../../assets/data/tabbedSections';
@@ -20,23 +20,23 @@ const TabbedHeaderListDemoChild2: React.FC<{
 }> = (props: {attrProps?: Record<string, any>}) => {
   const testMomentumScrollBegin = () => {
     'worklet';
-    console.log('测试testMomentumScrollBegin');
+    console.log('TabbedHeaderList-worklet:onMomentumScrollBegin回调已执行');
   };
   const testMomentumScrollEnd = () => {
     'worklet';
-    console.log('测试testMomentumScrollEnd');
+    console.log('TabbedHeaderList-worklet:onMomentumScrollEnd回调已执行');
   };
   const onScroll = () => {
     'worklet';
-    console.log('测试onScroll');
+    console.log('TabbedHeaderList-worklet:onScroll回调已执行');
   };
   const onScrollBeginDrag = () => {
     'worklet';
-    console.log('测试onScrollBeginDrag');
+    console.log('TabbedHeaderList-worklet:onScrollBeginDrag回调已执行');
   };
   const onScrollEndDrag = () => {
     'worklet';
-    console.log('测试onScrollEndDrag');
+    console.log('TabbedHeaderList-worklet:onScrollEndDrag回调已执行');
   };
   return (
     <>
@@ -60,7 +60,15 @@ const TabbedHeaderListDemoChild2: React.FC<{
           title,
           testID: tabTestID,
         }))}
-        tabTextStyle={screenStyles.text}
+        stickyTabs={false}
+        tabTextStyle={screenStyles.text2}
+        tabTextActiveStyle={styles.tabTextActiveStyle}
+        tabTextContainerStyle={styles.tabTextContainerStyle}
+        tabTextContainerActiveStyle={styles.tabTextContainerActiveStyle}
+        tabUnderlineColor={'white'}
+        tabWrapperStyle={styles.tabWrapperStyle}
+        tabsContainerBackgroundColor={'#rgb(255,102,0)'}
+        tabsContainerStyle={styles.tabsContainerStyle}
         sections={TABBED_SECTIONS}
         tabTextContainerActiveStyle={{backgroundColor: colors.activeOrange}}
         keyExtractor={(_, i) => `${i}`}
@@ -88,4 +96,24 @@ const TabbedHeaderListDemoChild2: React.FC<{
     </>
   );
 };
+const styles = StyleSheet.create({
+  tabTextActiveStyle: {
+    color: 'red',
+  },
+  tabTextContainerStyle: {
+    backgroundColor: 'yellow',
+  },
+  tabTextContainerActiveStyle: {
+    borderWidth: 1,
+    borderColor: 'yellow',
+  },
+  tabWrapperStyle: {
+    borderWidth: 1,
+    borderColor: 'yellow',
+  },
+  tabsContainerStyle: {
+    borderWidth: 1,
+    borderColor: 'red',
+  },
+});
 export default TabbedHeaderListDemoChild2;

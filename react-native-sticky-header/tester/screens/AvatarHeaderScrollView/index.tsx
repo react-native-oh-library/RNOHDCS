@@ -1,4 +1,4 @@
-// import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import * as React from 'react';
 import {StatusBar, StyleSheet, View, useColorScheme} from 'react-native';
 import {AvatarHeaderScrollView} from 'react-native-sticky-parallax-header';
@@ -9,9 +9,10 @@ import {QuizCard} from '../../components';
 import {screenStyles} from '../../constants/index';
 
 const AvatarHeaderScrollViewDemoScreen: React.FC = () => {
-  function goBack() {
-    //   navigation.goBack();
-  }
+  const navigation = useNavigation();
+  const goBack = () => {
+    navigation.goBack();
+  };
 
   const isDarkTheme = useColorScheme() === 'dark';
 

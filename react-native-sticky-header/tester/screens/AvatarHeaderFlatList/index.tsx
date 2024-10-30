@@ -8,12 +8,16 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import type {RootStackNavigationProp} from '../../navigation/types';
 import {colors, screenStyles} from '../../constants/index';
 import {ROUTES, CHILDROUTES} from '../../navigation/routes';
 import {ExampleLink} from '../RouteCenterScreen/ExampleLink';
-
+// 引入日志截图
+import workletCode from '../../assets/workletCodeAvatar.png';
+import workletRunlog from '../../assets/workletAvatarRunlog.png';
+import workletRunlog2 from '../../assets/workletAvatarRunlog2.png';
 //引入组件测试demo
 import AvatarHeaderFlatListDemoDefault from './DefaultDemo/index';
 import AvatarHeaderFlatListDemoChild1 from './TestDemo/ChildDemo1';
@@ -29,10 +33,11 @@ const defaultRouter = {
   title: '默认组件AvatarHeaderFlashListDemoScreenDefault(设置基准属性值)',
   testProps: {
     backgroundColor: 'rgb(78,15,255)',
-    contentContainerStyle: `backgroundColor:'white'`,
+    containerStyle: `flex:1设置弹性布局方式`,
     enableSafeAreaTopInset: 'true',
     leftTopIcon: '左上角icon图标',
     leftTopIconOnPress: '左上角icon图标点击触发回调',
+    leftTopIconTestID: '测试唯一标识符，传递即生效',
     hasBorderRadius: 'true',
     headerHeight: '默认值100',
     parallaxHeight: '300(默认值53%屏幕高度)',
@@ -41,12 +46,14 @@ const defaultRouter = {
     rightTopIcon: '右上角icon图标',
     rightTopIconOnPress: '右上角icon图标点击触发回调',
     snapStartThreshold: '默认值',
-    snapStopThreshold: '默认值',
-    snapToEdge: 'true',
     stickyTabs: 'true',
-    tabsContainerBackgroundColor: 'green',
+    substitle:
+      ':Coffee buff. Web enthusiast. Unapologetic student. Gamer. Avid organizer.',
+    substitleStyle: '设置文字颜色为白色',
+    substitleTestID: '测试唯一标识符，传递即生效',
     title: 'Brandon',
     titleStyle: `color:'white'`,
+    titleTestID: '测试唯一标识符，传递即生效',
   },
 };
 const childRouter1 = {
@@ -61,15 +68,27 @@ const childRouter1 = {
     enableSafeAreaTopInset:
       'false（设置为false,表现headerBar部分会减少内边距）',
     renderHeaderBar: '自定义headerBar<Text onPress={goBack}>返回</Text>',
-    snapStartThreshold: '300',
-    snapStopThreshold: '300',
-    tabsContainerBackgroundColor: 'green',
+    snapStartThreshold: '默认值',
+    onHeaderLayout: 'header布局完成后，由组件内部自动调用',
+    onTopReached: '触顶事件回调，由组件内部自动调用',
     title: 'BrandonChild1',
     titleStyle: `color:'green'`,
     data: 'FlatList组件必传属性，内部已生效',
     keyExtractor: 'FlatList组件必传属性，内部已生效',
     renderItem: 'FlatList组件Item渲染函数，内部已生效',
   },
+};
+const showCallbackInfo = {
+  onMomentumScrollBegin:
+    ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：AvatarHeaderFlatList-worklet)',
+  onMomentumScrollEnd:
+    ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：AvatarHeaderFlatList-worklet)',
+  onScroll:
+    ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：AvatarHeaderFlatList-worklet)',
+  onScrollBeginDrag:
+    ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：AvatarHeaderFlatList-worklet)',
+  onScrollEndDrag:
+    ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：AvatarHeaderFlatList-worklet)',
 };
 
 const SimpleTable = props => {
@@ -116,6 +135,14 @@ const AvatarHeaderFlatListDemoScreen: React.FC = () => {
                 <Text>测试链接：</Text>
                 <ExampleLink key={childRouter1.routeName} {...childRouter1} />
               </View>
+              <View style={styles.sectionPart}>
+                <Text>单独展示相关回调方法测试结果</Text>
+                <SimpleTable obj={showCallbackInfo}></SimpleTable>
+                <Text>测试结果展示：</Text>
+                <Image style={styles.testImage} source={workletCode}></Image>
+                <Image style={styles.testImage} source={workletRunlog}></Image>
+                <Image style={styles.testImage} source={workletRunlog2}></Image>
+              </View>
             </View>
           </ScrollView>
         </View>
@@ -153,7 +180,7 @@ const styles = StyleSheet.create({
   },
   lineBase: {
     width: '100%',
-    height: 18,
+    lineHeight: 18,
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderBottomWidth: 1,
@@ -162,6 +189,9 @@ const styles = StyleSheet.create({
   tableHeaderContainer: {
     fontWeight: 700,
     fontSize: 18,
+  },
+  testImage: {
+    width: '100%',
   },
 });
 

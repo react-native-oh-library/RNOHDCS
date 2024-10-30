@@ -8,12 +8,15 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import type {RootStackNavigationProp} from '../../navigation/types';
 import {colors, screenStyles} from '../../constants/index';
 import {ROUTES, CHILDROUTES} from '../../navigation/routes';
 import {ExampleLink} from '../RouteCenterScreen/ExampleLink';
-
+// 引入日志截图
+import workletCode from '../../assets/DetailsHeaderFlatListWorkletCode.png';
+import workletRunlog from '../../assets/DetailsHeaderWorkletLog.png';
 //引入组件测试demo
 import DetailsHeaderFlatListDemoDefault from './DefaultDemo/index';
 import DetailsHeaderFlatListDemoChild1 from './TestDemo/ChildDemo1';
@@ -29,24 +32,35 @@ const defaultRouter = {
   title: '默认组件DetailsHeaderFlatListDemoDefault(设置基准属性值)',
   testProps: {
     backgroundColor: 'rgb(78,15,255)',
-    contentContainerStyle: `backgroundColor:'white'`,
+    containerStyle: `flex:1设置弹性布局`,
+    contentIcon: '左下角人物头像左侧的背景白色处的icon图标',
+    contentIconNumber: '左下角人物头像左侧的背景白色处的icon图标右边的数字10',
+    contentIconNumberStyle:
+      '设置左下角人物头像左侧的背景白色处的icon图标右边的数字10的样式，设置文字颜色为黑色',
+    contentIconNumberTestID: '测试用例id值，用作唯一标识符，传递即生效',
     enableSafeAreaTopInset: 'true',
     leftTopIcon: '左上角icon图标',
     leftTopIconOnPress: '左上角icon图标点击触发回调',
     hasBorderRadius: 'true',
     headerHeight: '默认值100',
+    onHeaderLayout: 'header布局完成后，由组件内部自动调用',
+    onTopReached: '触顶事件回调，由组件内部自动调用',
     parallaxHeight: '300(默认值53%屏幕高度)',
     image: 'Brandon.image(左上角的头像)',
     renderHeaderBar: '默认组件使用默认headerBar',
     rightTopIcon: '右上角icon图标',
     rightTopIconOnPress: '右上角icon图标点击触发回调',
+    renderHeaderBar: '自定义headerBar,背景色红色，白色文字',
     snapStartThreshold: '默认值',
-    snapStopThreshold: '默认值',
-    snapToEdge: 'true',
     stickyTabs: 'true',
-    tabsContainerBackgroundColor: 'green',
+    tag: 'Product Design的文字',
+    tagStyle: 'Product Design的文字样式,设置文字颜色为白色',
+    tagTestID: '测试唯一标识符，传递即生效',
     title: 'Brandon',
     titleStyle: `color:'black'`,
+    substitle: '左下角子标题的文字内容brand sub title',
+    substitleStyle: '设置文字颜色为白色',
+    substitleTestID: '测试唯一标识符，传递即生效',
   },
 };
 const childRouter1 = {
@@ -85,6 +99,18 @@ const SimpleTable = props => {
     </View>
   );
 };
+const showCallbackInfo = {
+  onMomentumScrollBegin:
+    ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：DetailsHeaderFlatList-worklet)',
+  onMomentumScrollEnd:
+    ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：DetailsHeaderFlatList-worklet)',
+  onScroll:
+    ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：DetailsHeaderFlatList-worklet)',
+  onScrollBeginDrag:
+    ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：DetailsHeaderFlatList-worklet)',
+  onScrollEndDrag:
+    ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：DetailsHeaderFlatList-worklet)',
+};
 const DetailsHeaderFlatListDemoScreen: React.FC = () => {
   return (
     <>
@@ -96,7 +122,7 @@ const DetailsHeaderFlatListDemoScreen: React.FC = () => {
         />
         <View style={styles.container}>
           <View style={styles.header}>
-            <Text>AvatarHeaderFlatList组件测试页面</Text>
+            <Text>DetailsHeaderFlatList组件测试页面</Text>
           </View>
           <ScrollView>
             <View style={styles.testCenter}>
@@ -111,6 +137,13 @@ const DetailsHeaderFlatListDemoScreen: React.FC = () => {
                 <SimpleTable obj={childRouter1.testProps}></SimpleTable>
                 <Text>测试链接：</Text>
                 <ExampleLink key={childRouter1.routeName} {...childRouter1} />
+              </View>
+              <View style={styles.sectionPart}>
+                <Text>单独展示相关回调方法测试结果</Text>
+                <SimpleTable obj={showCallbackInfo}></SimpleTable>
+                <Text>测试结果展示：</Text>
+                <Image style={styles.testImage} source={workletCode}></Image>
+                <Image style={styles.testImage} source={workletRunlog}></Image>
               </View>
             </View>
           </ScrollView>
@@ -149,7 +182,7 @@ const styles = StyleSheet.create({
   },
   lineBase: {
     width: '100%',
-    height: 18,
+    lineHeight: 18,
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderBottomWidth: 1,

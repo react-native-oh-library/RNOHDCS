@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StatusBar} from 'react-native';
+import {StatusBar, StyleSheet, View, Text} from 'react-native';
 import {TabbedHeaderList} from 'react-native-sticky-parallax-header';
 import {logo, photosPortraitMe} from '../../../assets/images';
 import {TABBED_SECTIONS} from '../../../assets/data/tabbedSections';
@@ -43,9 +43,11 @@ const TabbedHeaderListDemoDefault: React.FC<{
       <TabbedHeaderList
         contentContainerStyle={{backgroundColor: colors.coralPink}}
         containerStyle={screenStyles.stretchContainer}
-        backgroundColor={colors.coralPink}
+        backgroundColor={colors.coralPink1}
         title="Food delivery app"
         logo={logo}
+        logoStyle={styles.logoStyle}
+        logoContainerStyle={styles.logoContainer}
         enableSafeAreaTopInset={false}
         titleStyle={screenStyles.text}
         titleTestID={tabbedHeaderListTestIDs.title}
@@ -56,6 +58,11 @@ const TabbedHeaderListDemoDefault: React.FC<{
         onScrollBeginDrag={onScrollBeginDrag}
         onScrollEndDrag={onScrollEndDrag}
         parallaxHeight={300}
+        renderHeaderBar={() => (
+          <View style={styles.headerBarContainer}>
+            <Text style={styles.textStyle}>自定义HeaderBar部分</Text>
+          </View>
+        )}
         tabs={TABBED_SECTIONS.map(({title, tabTestID}) => ({
           title,
           testID: tabTestID,
@@ -88,4 +95,30 @@ const TabbedHeaderListDemoDefault: React.FC<{
     </>
   );
 };
+const styles = StyleSheet.create({
+  headerBarContainer: {
+    width: '100%',
+    height: 180,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgb(255,78,15)',
+  },
+  textStyle: {
+    color: 'white',
+  },
+  logoStyle: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+  },
+  logoContainer: {
+    borderWidth: 1,
+    borderColor: 'yellow',
+  },
+});
+
 export default TabbedHeaderListDemoDefault;

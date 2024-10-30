@@ -12,14 +12,53 @@ import {
 } from '../../../constants/index';
 const AvatarHeaderFlatListDemoChild1: React.FC = () => {
   const navigation = useNavigation();
-  function goBack() {
+  const goBack = () => {
     navigation.goBack();
-  }
+  };
+  const [callbackInfo, setCallbackInfo] = React.useState({});
+  // 处理回调方法调用
+  const onHeaderLayout = () => {
+    let newInfo = {
+      ...callbackInfo,
+      onHeaderLayout: 'onHeaderLayout回调已调用',
+    };
+    setCallbackInfo(newInfo);
+  };
+  const onTopReached = () => {
+    let newInfo = {
+      ...callbackInfo,
+      onTopReached: 'onTopReached回调已调用',
+    };
+    setCallbackInfo(newInfo);
+  };
+  const testMomentumScrollBegin = () => {
+    'worklet';
+    console.log('AvatarHeaderFlatList-worklet:onMomentumScrollBegin回调已执行');
+  };
+  const testMomentumScrollEnd = () => {
+    'worklet';
+    console.log('AvatarHeaderFlatList-worklet:onMomentumScrollEnd回调已执行');
+  };
+  const onScroll = () => {
+    'worklet';
+    console.log('AvatarHeaderFlatList-worklet:onScroll回调已执行');
+  };
+  const onScrollBeginDrag = () => {
+    'worklet';
+    console.log('AvatarHeaderFlatList-worklet:onScrollBeginDrag回调已执行');
+  };
+  const onScrollEndDrag = () => {
+    'worklet';
+    console.log('AvatarHeaderFlatList-worklet:onScrollEndDrag回调已执行');
+  };
 
   const isDarkTheme = useColorScheme() === 'dark';
 
   return (
     <>
+      <View style={styles.showInfoContainer}>
+        <Text>{JSON.stringify(callbackInfo)}</Text>
+      </View>
       <AvatarHeaderFlatList
         leftTopIcon={iconCloseWhite}
         leftTopIconTestID={flat_child1_avatarHeaderTestIDs.headerLeftTopIcon}
@@ -35,6 +74,13 @@ const AvatarHeaderFlatListDemoChild1: React.FC = () => {
         image={Brandon.image}
         headerHeight={100}
         parallaxHeight={400}
+        onHeaderLayout={onHeaderLayout}
+        onTopReached={onTopReached}
+        onMomentumScrollBegin={testMomentumScrollBegin}
+        onMomentumScrollEnd={testMomentumScrollEnd}
+        onScroll={onScroll}
+        onScrollBeginDrag={onScrollBeginDrag}
+        onScrollEndDrag={onScrollEndDrag}
         renderHeader={() => (
           <View style={styles.headerBar}>
             <Text onPress={goBack}>返回(自定义headerBar效果)</Text>
@@ -69,6 +115,15 @@ const styles = StyleSheet.create({
     height: 40,
     flexDirection: 'row',
     justifyContent: 'center',
+  },
+  showInfoContainer: {
+    position: 'absolute',
+    top: 270,
+    width: '100%',
+    height: 152,
+    borderColor: 'white',
+    borderWidth: 1,
+    zIndex: 666,
   },
 });
 export default AvatarHeaderFlatListDemoChild1;

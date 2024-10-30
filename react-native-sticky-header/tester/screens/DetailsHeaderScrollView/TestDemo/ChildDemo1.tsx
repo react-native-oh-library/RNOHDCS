@@ -1,4 +1,4 @@
-// import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import * as React from 'react';
 import {StatusBar, StyleSheet, View, useColorScheme, Text} from 'react-native';
 import {DetailsHeaderScrollView} from 'react-native-sticky-parallax-header';
@@ -14,10 +14,10 @@ import {
 const DetailsHeaderScrollViewDemoChild1: React.FC<{
   attrProps?: Record<string, any>;
 }> = (props: {attrProps?: Record<string, any>}) => {
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
 
   function goBack() {
-    // navigation.goBack();
+    navigation.goBack();
   }
 
   const isDarkTheme = useColorScheme() === 'dark';
