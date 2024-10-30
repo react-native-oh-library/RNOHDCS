@@ -133,7 +133,6 @@ const styles = StyleSheet.create({
   },
   lineBase: {
     width: '100%',
-    height: 36,
     lineHeight: 18,
     flexDirection: 'row',
     justifyContent: 'space-between',

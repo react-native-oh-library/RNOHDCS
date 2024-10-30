@@ -43,7 +43,7 @@ const YodaDemoDefault: React.FC = () => {
           titleStyle={styles.titleStyle}
           titleTestID={yodaScreenTestIDs.headerTitle}
           foregroundImage={{
-            uri: 'https://cdn.iconscout.com/icon/free/png-256/starwars-6-569425.png',
+            uri: 'https://developer.huawei.com/allianceCmsResource/resource/HUAWEI_Developer_VUE/images/0417/home-new-10.png',
           }}
           tabsContainerBackgroundColor={colors.black}
           tabTextContainerStyle={styles.tabTextContainerStyle}

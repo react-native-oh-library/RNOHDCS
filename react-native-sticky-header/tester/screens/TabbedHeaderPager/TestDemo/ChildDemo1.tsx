@@ -108,32 +108,23 @@ const TabbedHeaderPagerDemoChild1: React.FC = () => {
 
   const testMomentumScrollBegin = () => {
     'worklet';
-    console.log('TabbedHeaderPager:测试testMomentumScrollBegin');
+    console.log('TabbedHeaderPager-worklet:onMomentumScrollBegin回调已执行');
   };
   const testMomentumScrollEnd = () => {
     'worklet';
-    console.log('TabbedHeaderPager:测试testMomentumScrollEnd');
+    console.log('TabbedHeaderPager-worklet:onMomentumScrollEnd回调已执行');
   };
   const onScroll = () => {
     'worklet';
-    console.log('TabbedHeaderPager:测试onScroll');
+    console.log('TabbedHeaderPager-worklet:onScroll回调已执行');
   };
   const onScrollBeginDrag = () => {
     'worklet';
-    console.log('TabbedHeaderPager:测试onScrollBeginDrag');
+    console.log('TabbedHeaderPager-worklet:onScrollBeginDrag回调已执行');
   };
   const onScrollEndDrag = () => {
     'worklet';
-    console.log('TabbedHeaderPager:测试onScrollEndDrag');
-  };
-  const testHeaderLayout = () => {
-    console.log('TabbedHeaderPager:测试onHeaderLayout');
-  };
-  const testTabsLayout = () => {
-    console.log('TabbedHeaderPager:测试testTabsLayout');
-  };
-  const testTopReached = () => {
-    console.log('TabbedHeaderPager:测试testTopReached');
+    console.log('TabbedHeaderPager-worklet:onScrollEndDrag回调已执行');
   };
 
   return (
@@ -153,9 +144,6 @@ const TabbedHeaderPagerDemoChild1: React.FC = () => {
         titleStyle={screenStyles.text2}
         titleTestID={homeScreenTestIDs.headerTitleChild1}
         foregroundImage={photosPortraitMe}
-        onHeaderLayout={testHeaderLayout}
-        onTabsLayout={testTabsLayout}
-        onTopReached={testTopReached}
         onMomentumScrollBegin={testMomentumScrollBegin}
         onMomentumScrollEnd={testMomentumScrollEnd}
         onScroll={onScroll}
@@ -224,8 +212,6 @@ const TabbedHeaderPagerDemoChild1: React.FC = () => {
                       mainText={user.label}
                       labelText={user.type}
                       imageSource={user.image}
-                      onPress={navigateToCardScreen(user)}
-                      pressUser={pressUserModal(user)}
                     />
                   ),
               )}
@@ -238,6 +224,17 @@ const TabbedHeaderPagerDemoChild1: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
+  headerBarContainer: {
+    width: '100%',
+    height: 180,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgb(255,78,15)',
+  },
+  textStyle: {
+    color: 'white',
+  },
   modalStyle: {
     margin: 0,
   },
@@ -264,11 +261,11 @@ const styles = StyleSheet.create({
   },
   tabWrapperStyle: {
     borderWidth: 1,
-    borderColor: 'yellow',
+    borderColor: 'blue',
   },
   tabsContainerStyle: {
     borderWidth: 1,
-    borderColor: 'red',
+    borderColor: 'black',
   },
 });
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StatusBar} from 'react-native';
+import {StatusBar, StyleSheet, View, Text} from 'react-native';
 import {TabbedHeaderList} from 'react-native-sticky-parallax-header';
 import {logo, photosPortraitMe} from '../../../assets/images';
 import {TABBED_SECTIONS} from '../../../assets/data/tabbedSections';
@@ -18,28 +18,27 @@ import IconImage from '../../../assets/icon.png';
 const TabbedHeaderListDemoChild1: React.FC<{
   attrProps?: Record<string, any>;
 }> = (props: {attrProps?: Record<string, any>}) => {
-  const testMomentumScrollBegin = () => {
-    'worklet';
-    console.log('测试testMomentumScrollBegin');
+  const [callbackInfo, setCallbackInfo] = React.useState({});
+  // 处理回调方法调用
+  const onTabsLayout = () => {
+    let newInfo = {
+      ...callbackInfo,
+      onTabsLayout: 'onTabsLayout回调已调用',
+    };
+    setCallbackInfo(newInfo);
   };
-  const testMomentumScrollEnd = () => {
-    'worklet';
-    console.log('测试testMomentumScrollEnd');
-  };
-  const onScroll = () => {
-    'worklet';
-    console.log('测试onScroll');
-  };
-  const onScrollBeginDrag = () => {
-    'worklet';
-    console.log('测试onScrollBeginDrag');
-  };
-  const onScrollEndDrag = () => {
-    'worklet';
-    console.log('测试onScrollEndDrag');
+  const onTopReached = () => {
+    let newInfo = {
+      ...callbackInfo,
+      onTopReached: 'onTopReached回调已调用',
+    };
+    setCallbackInfo(newInfo);
   };
   return (
     <>
+      <View style={styles.showInfoContainer}>
+        <Text>{JSON.stringify(callbackInfo)}</Text>
+      </View>
       <TabbedHeaderList
         contentContainerStyle={{backgroundColor: colors.coralPink}}
         containerStyle={screenStyles.stretchContainer}
@@ -50,12 +49,9 @@ const TabbedHeaderListDemoChild1: React.FC<{
         titleStyle={screenStyles.text}
         titleTestID={tabbedHeaderListTestIDs.title}
         foregroundImage={IconImage}
-        onMomentumScrollBegin={testMomentumScrollBegin}
-        onMomentumScrollEnd={testMomentumScrollEnd}
-        onScroll={onScroll}
-        onScrollBeginDrag={onScrollBeginDrag}
-        onScrollEndDrag={onScrollEndDrag}
-        parallaxHeight={300}
+        onTabsLayout={onTabsLayout}
+        onTopReached={onTopReached}
+        parallaxHeight={50}
         tabs={TABBED_SECTIONS.map(({title, tabTestID}) => ({
           title,
           testID: tabTestID,
@@ -88,4 +84,20 @@ const TabbedHeaderListDemoChild1: React.FC<{
     </>
   );
 };
+const styles = StyleSheet.create({
+  headerBarContainer: {
+    width: '100%',
+    height: 280,
+    backgroundColor: 'blue',
+  },
+  showInfoContainer: {
+    position: 'absolute',
+    top: 270,
+    width: '100%',
+    height: 152,
+    borderColor: 'white',
+    borderWidth: 1,
+    zIndex: 666,
+  },
+});
 export default TabbedHeaderListDemoChild1;

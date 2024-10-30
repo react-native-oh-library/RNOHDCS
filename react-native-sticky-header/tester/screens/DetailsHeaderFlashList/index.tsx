@@ -27,7 +27,6 @@ const defaultRouter = {
   title: '默认组件DetailsHeaderFlashListDemoDefault(设置对比属性值)',
   testProps: {
     backgroundColor: 'rgb(78,15,255)',
-    contentContainerStyle: `backgroundColor:'white'`,
     enableSafeAreaTopInset: 'true',
     leftTopIcon: '左上角icon图标',
     leftTopIconOnPress: '左上角icon图标点击触发回调',
@@ -39,8 +38,6 @@ const defaultRouter = {
     rightTopIcon: '右上角icon图标',
     rightTopIconOnPress: '右上角icon图标点击触发回调',
     snapStartThreshold: '默认值',
-    snapStopThreshold: '默认值',
-    snapToEdge: 'true',
     stickyTabs: 'true',
     title: 'Brandon',
     titleStyle: `color:'white'`,

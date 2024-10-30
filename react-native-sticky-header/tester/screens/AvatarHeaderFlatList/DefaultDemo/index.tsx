@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import * as React from 'react';
-import {StatusBar, StyleSheet, View, useColorScheme} from 'react-native';
+import {StatusBar, StyleSheet, View, useColorScheme, Alert} from 'react-native';
 import {AvatarHeaderFlatList} from 'react-native-sticky-parallax-header';
 
 import {Brandon} from '../../../assets/data/cards';
@@ -10,9 +10,9 @@ import {screenStyles} from '../../../constants/index';
 
 const AvatarHeaderFlatListDemoDefault: React.FC = () => {
   const navigation = useNavigation();
-  function goBack() {
+  const goBack = () => {
     navigation.goBack();
-  }
+  };
 
   const isDarkTheme = useColorScheme() === 'dark';
 

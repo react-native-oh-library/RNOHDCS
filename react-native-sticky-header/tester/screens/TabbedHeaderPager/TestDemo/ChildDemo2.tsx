@@ -12,7 +12,7 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import {TabbedHeaderPager} from 'react-native-sticky-parallax-header';
-
+import {runOnJS} from 'react-native-reanimated';
 import type {User} from '../../../assets/data/cards';
 import {logo, photosPortraitMe} from '../../../assets/images';
 import {QuizListElement, UserModal} from '../../../components';
@@ -27,7 +27,7 @@ const wait = (timeout: number) =>
     setTimeout(resolve, timeout);
   });
 
-const TabbedHeaderPagerDemoDefault: React.FC = () => {
+const TabbedHeaderPagerDemoChild2: React.FC = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const {height: windowHeight} = useWindowDimensions();
 
@@ -37,6 +37,8 @@ const TabbedHeaderPagerDemoDefault: React.FC = () => {
   const [contentHeight, setContentHeight] = React.useState<{
     [key: string]: number;
   }>({});
+
+  const [callbackInfo, setCallbackInfo] = React.useState({});
 
   const openUserModal = React.useCallback((user: User) => {
     setUserSelected(() => {
@@ -105,6 +107,25 @@ const TabbedHeaderPagerDemoDefault: React.FC = () => {
   const onPressCloseModal = React.useCallback(() => {
     setModalVisible(false);
   }, []);
+  // 处理回调方法调用
+  const handleChangeTab = () => {
+    let newInfo = {...callbackInfo, onChangeTab: 'onChangeTab方法已调用'};
+    setCallbackInfo(newInfo);
+  };
+  const onTabsLayout = () => {
+    let newInfo = {
+      ...callbackInfo,
+      onTabsLayout: 'onTabsLayout回调已调用',
+    };
+    setCallbackInfo(newInfo);
+  };
+  const onTopReached = () => {
+    let newInfo = {
+      ...callbackInfo,
+      onTopReached: 'onTopReached回调已调用',
+    };
+    setCallbackInfo(newInfo);
+  };
 
   return (
     <>
@@ -113,6 +134,9 @@ const TabbedHeaderPagerDemoDefault: React.FC = () => {
         backgroundColor={colors.primaryGreen}
         translucent
       />
+      <View style={styles.showInfoContainer}>
+        <Text>{JSON.stringify(callbackInfo)}</Text>
+      </View>
       <TabbedHeaderPager
         containerStyle={screenStyles.stretchContainer}
         backgroundColor={colors.primaryGreen}
@@ -120,19 +144,17 @@ const TabbedHeaderPagerDemoDefault: React.FC = () => {
         rememberTabScrollPosition
         logo={logo}
         logoStyle={styles.logoStyle}
+        onChangeTab={handleChangeTab}
+        onTabsLayout={onTabsLayout}
+        onTopReached={onTopReached}
         logoContainerStyle={styles.logoContainer}
         title={"Mornin' Mark! \nReady for a quiz?"}
         titleStyle={screenStyles.text}
         titleTestID={homeScreenTestIDs.headerTitle}
         foregroundImage={photosPortraitMe}
+        headerHeight={250}
         tabs={TABS.map(tab => ({title: tab.title, testID: tab.testID}))}
         tabTextStyle={screenStyles.text}
-        renderHeaderBar={() => (
-          <View style={styles.headerBarContainer}>
-            <Text style={styles.textStyle}>自定义HeaderBar部分</Text>
-          </View>
-        )}
-        snapStartThreshold={300000}
         // Refresh control is not implemented on web and even if provided, it will double padding top and bottom
         {...(Platform.OS !== 'web' && {
           refreshControl: (
@@ -197,16 +219,17 @@ const TabbedHeaderPagerDemoDefault: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  headerBarContainer: {
-    width: '100%',
-    height: 180,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgb(255,78,15)',
-  },
   modalStyle: {
     margin: 0,
+  },
+  showInfoContainer: {
+    position: 'absolute',
+    top: 270,
+    width: '100%',
+    height: 152,
+    borderColor: 'white',
+    borderWidth: 1,
+    zIndex: 666,
   },
   modalContentContainer: {
     flex: 1,
@@ -229,4 +252,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TabbedHeaderPagerDemoDefault;
+export default TabbedHeaderPagerDemoChild2;

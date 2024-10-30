@@ -52,10 +52,9 @@ const AvatarHeaderFlashList = withAvatarHeaderFlashList<
 
 const AvatarHeaderFlashListDemoDefault: React.FC = () => {
   const navigation = useNavigation();
-
-  function goBack() {
+  const goBack = () => {
     navigation.goBack();
-  }
+  };
 
   const isDarkTheme = useColorScheme() === 'dark';
 

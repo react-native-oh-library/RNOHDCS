@@ -8,7 +8,12 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from 'react-native';
+import workletCode from '../../assets/workletCode.png';
+import workletRunlog from '../../assets/workletRunlog.png';
+import workletRunlog2 from '../../assets/workletRunlog2.png';
+
 import type {RootStackNavigationProp} from '../../navigation/types';
 import {colors, screenStyles} from '../../constants/index';
 import {ROUTES, CHILDROUTES} from '../../navigation/routes';
@@ -16,10 +21,12 @@ import {ExampleLink} from '../RouteCenterScreen/ExampleLink';
 //引入组件测试demo
 import TabbedHeaderPagerDemoDefault from './DefaultDemo/index';
 import TabbedHeaderPagerDemoChild1 from './TestDemo/ChildDemo1';
+import TabbedHeaderPagerDemoChild2 from './TestDemo/ChildDemo2';
 //定义组件测试testID
 const testIdObject = {
   default: 'TabbedHeaderPagerDemoDefault_testID',
   child1: 'TabbedHeaderPagerDemoChild1_testID',
+  child2: 'TabbedHeaderPagerDemoChild2_testID',
 };
 const defaultRouter = {
   routeName: CHILDROUTES.TabbedHeaderPagerDemoDefault,
@@ -31,19 +38,21 @@ const defaultRouter = {
     containerStyle: 'flex:1',
     enableSafeAreaTopInset: 'true',
     rememberTabScrollPosition: 'true',
+    renderHeaderBar: '自定义headerBar,背景色红色，白色文字',
     headerHeight: '100(默认值)',
     initialPage: '0',
     tabsContainerBackgroundColor: 'rgb(61,179,106)',
     logo: '左上角netguru文字logo图标',
-    logoStyle: '右下角的阴影',
+    logoStyle: '设置logo的一个阴影效果',
     logoContainerStyle: 'logo外侧border边框',
     title: 'Mornin Mark!...',
     titleStyle: `color:'white'`,
     foregroundImage: '人物头像图片',
     tabs: '自定义tab栏组件',
     tabTextStyle: `color:'white'`,
-    snapToEdge: 'true(默认值）',
     stickyTabs: 'true(默认值)',
+    snapStartThreshold:
+      '设置阻力值最大，无法上滑成功，默认效果见：TabbedHeaderPager测试子组件2',
   },
 };
 const childRouter1 = {
@@ -60,26 +69,38 @@ const childRouter1 = {
     tabTextContainerStyle: `backgroundColor:'yellow'`,
     tabTextContainerActiveStyle: `borderWidth:1;borderColor:'yellow'`,
     tabUnderlineColor: `color:'white'`,
-    tabWrapperStyle: `borderWidth:1;borderColor:'yellow'`,
+    tabWrapperStyle: `borderWidth:1;borderColor:'blue'`,
     tabsContainerBackgroundColor: '#rgb(255,102,0)',
     tabsContainerHorizontalPadding: 20,
-    snapToEdge: 'false',
     stickyTabs: 'false',
-    tabsContainerStyle: `borderWidth: 1,borderColor: 'red',`,
-    onHeaderLayout: `console.log('TabbedHeaderPager:测试onHeaderLayout');`,
-    onTabsLayout: `console.log('TabbedHeaderPager:测试testTabsLayout');`,
-    onTopReached: `console.log('TabbedHeaderPager:测试testTopReached');`,
-    onMomentumScrollBegin:
-      ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：TabbedHeaderPager)',
-    onMomentumScrollEnd:
-      ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：TabbedHeaderPager)',
-    onScroll:
-      ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：TabbedHeaderPager)',
-    onScrollBeginDrag:
-      ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：TabbedHeaderPager)',
-    onScrollEndDrag:
-      ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：TabbedHeaderPager)',
+    tabsContainerStyle: `borderWidth: 1,borderColor: 'black',`,
   },
+};
+const childRouter2 = {
+  routeName: CHILDROUTES.TabbedHeaderPagerDemoChild2,
+  label: 'TabbedHeaderPager测试子组件2',
+  testID: testIdObject.child2,
+  title: '测试组件TabbedHeaderPagerDemoChild2(设置对比属性值)',
+  testProps: {
+    headerHeight: `设置headerHeight的值为250，250*2>视差高度值parallaxHeight(默认值 53% of screen 的高度)此时headerHeight的值生效Moring's Mark 文字下移`,
+    parallaxHeight:
+      '如上所属，视差高度值parallaxHeight(默认值 53% of screen 的高度)，实际效果可参照默认组件（parallaxHeight的值生效）',
+    onChangeTab: `TabbedHeaderPager:测试onChangeTab`,
+    onTabsLayout: `TabbedHeaderPager:测试testTabsLayout`,
+    onTopReached: `TabbedHeaderPager:测试testTopReached`,
+  },
+};
+const showCallbackInfo = {
+  onMomentumScrollBegin:
+    ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：TabbedHeaderPager)',
+  onMomentumScrollEnd:
+    ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：TabbedHeaderPager)',
+  onScroll:
+    ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：TabbedHeaderPager)',
+  onScrollBeginDrag:
+    ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：TabbedHeaderPager)',
+  onScrollEndDrag:
+    ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：TabbedHeaderPager)',
 };
 
 const SimpleTable = props => {
@@ -126,6 +147,20 @@ const TabbedHeaderPagerDemoScreen: React.FC = () => {
                 <Text>测试链接：</Text>
                 <ExampleLink key={childRouter1.routeName} {...childRouter1} />
               </View>
+              <View style={styles.sectionPart}>
+                <Text>{childRouter2.title}</Text>
+                <SimpleTable obj={childRouter2.testProps}></SimpleTable>
+                <Text>测试链接：</Text>
+                <ExampleLink key={childRouter2.routeName} {...childRouter2} />
+              </View>
+              <View style={styles.sectionPart}>
+                <Text>单独展示相关回调方法测试结果</Text>
+                <SimpleTable obj={showCallbackInfo}></SimpleTable>
+                <Text>测试结果展示：</Text>
+                <Image style={styles.testImage} source={workletCode}></Image>
+                <Image style={styles.testImage} source={workletRunlog}></Image>
+                <Image style={styles.testImage} source={workletRunlog2}></Image>
+              </View>
             </View>
           </ScrollView>
         </View>
@@ -141,6 +176,9 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 20,
     textAlign: 'center',
+  },
+  testImage: {
+    width: '100%',
   },
   testCenter: {
     paddingBottom: 200,
@@ -163,7 +201,6 @@ const styles = StyleSheet.create({
   },
   lineBase: {
     width: '100%',
-    height: 36,
     lineHeight: 18,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -177,4 +214,8 @@ const styles = StyleSheet.create({
 });
 
 export default TabbedHeaderPagerDemoScreen;
-export {TabbedHeaderPagerDemoDefault, TabbedHeaderPagerDemoChild1};
+export {
+  TabbedHeaderPagerDemoDefault,
+  TabbedHeaderPagerDemoChild1,
+  TabbedHeaderPagerDemoChild2,
+};

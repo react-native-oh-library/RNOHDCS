@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import * as React from 'react';
-import {StatusBar, StyleSheet, useColorScheme} from 'react-native';
+import {StatusBar, StyleSheet, useColorScheme, View, Text} from 'react-native';
 import {DetailsHeaderFlatList} from 'react-native-sticky-parallax-header';
 
 import {Brandon} from '../../../assets/data/cards';
@@ -36,6 +36,11 @@ const DetailsHeaderFlatListDemoChild1: React.FC = () => {
         contentIconNumberTestID={detailsHeaderFlatListTestIDs.contentIconNumber}
         backgroundColor={Brandon.color2}
         hasBorderRadius
+        renderHeaderBar={() => (
+          <View style={styles.headerBarContainer}>
+            <Text style={styles.textStyle}>自定义HeaderBar部分</Text>
+          </View>
+        )}
         image={Brandon.image}
         tag={Brandon.type}
         tagTestID={detailsHeaderFlatListTestIDs.tag}
@@ -67,6 +72,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'stretch',
     paddingHorizontal: 24,
+  },
+  headerBarContainer: {
+    width: '100%',
+    height: 180,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgb(255,78,15)',
   },
 });
 

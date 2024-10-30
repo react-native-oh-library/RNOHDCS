@@ -8,12 +8,15 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import type {RootStackNavigationProp} from '../../navigation/types';
 import {colors, screenStyles} from '../../constants/index';
 import {ROUTES, CHILDROUTES} from '../../navigation/routes';
 import {ExampleLink} from '../RouteCenterScreen/ExampleLink';
-
+// 引入日志截图
+import workletCode from '../../assets/workletCodeList.png';
+import workletRunlog from '../../assets/workletRunlogList.png';
 //引入组件测试demo
 import TabbedHeaderListDemoDefault from './DefaultDemo/index';
 import TabbedHeaderListDemoChild1 from './TestDemo/ChildDemo1';
@@ -31,23 +34,16 @@ const defaultRouter = {
   title: '默认组件TabbedHeaderListDemoDefault(设置基准属性值)',
   testProps: {
     backgroundColor: 'rgb(78,15,255)',
-    contentContainerStyle: `backgroundColor:'white'`,
-    enableSafeAreaTopInset: 'true',
-    leftTopIcon: '左上角icon图标',
-    leftTopIconOnPress: '左上角icon图标点击触发回调',
-    hasBorderRadius: 'true',
-    headerHeight: '默认值100',
-    parallaxHeight: '300(默认值53%屏幕高度)',
-    image: 'Brandon.image(左上角的头像)',
-    renderHeaderBar: '默认组件使用默认headerBar',
-    rightTopIcon: '右上角icon图标',
-    rightTopIconOnPress: '右上角icon图标点击触发回调',
-    snapStartThreshold: '默认值',
-    snapStopThreshold: '默认值',
-    snapToEdge: 'true',
-    stickyTabs: 'true',
-    title: 'Brandon',
-    titleStyle: `color:'white'`,
+    containerStyle: `flex:1`,
+    enableSafeAreaTopInset:
+      'false（设置为false,表现headerBar部分会减少内边距）',
+    foregroundImage: '左下角带圆角绿色背景白色quiz文字的图片',
+    logo: '左上角netguru quiz的图标',
+    logoStyle: '右下角的阴影',
+    logoContainerStyle: 'logo外侧border边框',
+    renderHeaderBar:
+      '自定义headerBar,设置背景色与backgroundColor一致，同时展示白色文字：自定义HeaderBar部分',
+    tabs: 'Tab栏部分数据源，负责提供整个组件的数据(Pizza、Burgers、Kebab、Chinese Food、Sushi、Pasta)',
   },
 };
 const childRouter1 = {
@@ -57,16 +53,28 @@ const childRouter1 = {
   title: '测试组件TabbedHeaderListDemoChild1(设置对比属性值)',
   testProps: {
     backgroundColor: 'rgb(255,78,15)',
-    contentContainerStyle: `backgroundColor:'red'`,
-    containerStyle: `borderWidth:1;borderColor:'green'`,
-    enableSafeAreaTopInset:
-      'false（设置为false,表现headerBar部分会减少内边距）',
-    renderHeaderBar: '自定义headerBar<Text onPress={goBack}>返回</Text>',
-    snapStartThreshold: '300',
-    snapStopThreshold: '300',
-    title: 'BrandonChild1',
-    titleStyle: `color:'green'`,
+    parallaxHeight:
+      '设置parallaxHeight的值为50<100(headerHeight)*2,左下角header实际以200的高度渲染',
+    headerHeight: `默认值100`,
+    parallaxHeight:
+      '如上所属，视差高度值parallaxHeight(默认值 53% of screen 的高度)，实际效果可参照默认组件（parallaxHeight的值生效）',
+    onTabsLayout: `TabbedHeaderList:测试testTabsLayout,布局完成后由组件内部自动调用`,
+    onTopReached: `TabbedHeaderList:测试testTopReached，触顶事件发生时由组件内部自动调用`,
+    snapStartThreshold: '设置默认值50',
+    stickyTabs: 'true',
   },
+};
+const showCallbackInfo = {
+  onMomentumScrollBegin:
+    ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：TabbedHeaderList-worklet)',
+  onMomentumScrollEnd:
+    ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：TabbedHeaderList-worklet)',
+  onScroll:
+    ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：TabbedHeaderList-worklet)',
+  onScrollBeginDrag:
+    ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：TabbedHeaderList-worklet)',
+  onScrollEndDrag:
+    ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：TabbedHeaderList-worklet)',
 };
 const childRouter2 = {
   routeName: CHILDROUTES.TabbedHeaderListDemoChild2,
@@ -74,18 +82,19 @@ const childRouter2 = {
   testID: testIdObject.child2,
   title: '测试组件TabbedHeaderListDemoChild1(设置对比属性值)',
   testProps: {
-    hasBorderRadius: 'false',
-    leftTopIconTestID: '用例标识符，用作唯一标识，传递即生效',
-    rightTopIconTestID: '用例标识符，用作唯一标识，传递即生效',
+    tabTextStyle: `color:'black'`,
+    tabTextActiveStyle: `color:'red'`,
+    tabTextContainerStyle: `backgroundColor:'yellow'`,
+    tabTextContainerActiveStyle: `borderWidth:1;borderColor:'yellow'`,
+    tabUnderlineColor: `color:'white'`,
+    tabWrapperStyle: `borderWidth:1;borderColor:'yellow'`,
+    tabsContainerBackgroundColor: '#rgb(255,102,0)',
+    tabsContainerHorizontalPadding: '设置tab容器水平方向左右内边距20',
+    stickyTabs: 'false',
+    tabsContainerStyle: `borderWidth: 1,borderColor: 'red',`,
+    title: 'Food delivery app',
+    titleStyle: `color:'white'`,
     titleTestID: '用例标识符，用作唯一标识，传递即生效',
-    onHeaderLayout: '内部已调用，组件动画响应滑动手势依赖该回调',
-    onMomentumScrollBegin: '内部已调用，组件动画响应滑动手势依赖该回调',
-    onMomentumScrollEnd: '内部已调用，组件动画响应滑动手势依赖该回调',
-    onScroll: '内部已调用，组件动画响应滑动手势依赖该回调',
-    onScrollBeginDrag: '内部已调用，组件动画响应滑动手势依赖该回调',
-    onScrollEndDrag: '内部已调用，组件动画响应滑动手势依赖该回调',
-    onTabsLayout: '内部已调用，组件动画响应滑动手势依赖该回调',
-    onTopReached: '内部已调用，组件动画响应滑动手势依赖该回调',
   },
 };
 const SimpleTable = props => {
@@ -138,6 +147,13 @@ const TabbedHeaderListDemoScreen: React.FC = () => {
                 <Text>测试链接：</Text>
                 <ExampleLink key={childRouter2.routeName} {...childRouter2} />
               </View>
+              <View style={styles.sectionPart}>
+                <Text>单独展示相关回调方法测试结果</Text>
+                <SimpleTable obj={showCallbackInfo}></SimpleTable>
+                <Text>测试结果展示：</Text>
+                <Image style={styles.testImage} source={workletCode}></Image>
+                <Image style={styles.testImage} source={workletRunlog}></Image>
+              </View>
             </View>
           </ScrollView>
         </View>
@@ -175,7 +191,7 @@ const styles = StyleSheet.create({
   },
   lineBase: {
     width: '100%',
-    height: 18,
+    lineHeight: 18,
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderBottomWidth: 1,
@@ -184,6 +200,9 @@ const styles = StyleSheet.create({
   tableHeaderContainer: {
     fontWeight: 700,
     fontSize: 18,
+  },
+  testImage: {
+    width: '100%',
   },
 });
 
