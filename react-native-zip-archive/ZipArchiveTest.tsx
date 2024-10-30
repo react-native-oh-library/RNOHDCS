@@ -134,15 +134,13 @@ const ZipArchiveDemoTest_ = () => {
 
     // 密码解压&解压
     const handleUnzipPress = () => {
-        if (this.needPassword) {
-            isUnzipWithPassword();
-            return;
-        }
         isPasswordProtected(newZipPath)
             .then((res) => {
                 if (res) {
                     this.needPassword = true;
                     setShowInput(true);
+                    isUnzipWithPassword();
+                    return 'success';
                 } else {
                     if (compressedFilePath) {
                         if (needPassword === false) {
@@ -153,22 +151,27 @@ const ZipArchiveDemoTest_ = () => {
                                 .then(() => {
                                     console.log(`unzip success`)
                                     Alert.alert('成功', '已解压');
+                                    return 'success';
                                 })
                                 .catch(error => {
                                     Alert.alert('错误', '解压失败');
                                     console.log(`unzip error: ${error}`);
+                                    return 'failed';
                                 })
                             console.log('-----unzip');
                         }
                     } else {
                         Alert.alert('无压缩文件可供解压');
+                        return 'failed';
                     }
                 }
             })
             .catch(error => {
-                console.error(`isPasswordProtected error: ${error}`)
+                console.error(`isPasswordProtected error: ${error}`);
+                return 'failed';
             })
         console.log('-----isPasswordProtected');
+        return 'success';
     }
 
     // 进度条
@@ -354,7 +357,7 @@ const ZipArchiveDemoTest_ = () => {
                                 onChangeText={setUnzipPassword}
                             />
                             <View style={styles.buttonSix}>
-                                <Button title="解压" onPress={() => { handleUnzipPress(); setState('success'); }} />
+                                <Button title="解压" onPress={() => { var result = handleUnzipPress(); setState(result); }} />
                             </View>
                             <Text>解压缩后的大小:{uncompressSize ? uncompressSize : '0'}字节</Text>
                         </View>
