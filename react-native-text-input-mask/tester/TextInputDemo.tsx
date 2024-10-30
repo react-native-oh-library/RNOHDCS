@@ -24,6 +24,8 @@ const BasicTextInputMaskDemo: React.FC<
     setFormatedValue(formatted);
     if (extracted) {
       setExtractedValue(extracted);
+    }else{
+      setExtractedValue("");
     }
     if (props.onChangeText) {
       props.onChangeText(formatted, extracted);
