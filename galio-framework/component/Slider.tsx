@@ -5,8 +5,9 @@ import { TestCase, Tester } from '@rnoh/testerino';
 
 const SliderDemo = () => {
     const [result, setReault] = useState('')
-    const handleValueChange = () => {
-        setReault('change value');
+    const [sliderValue, setSliderValue] = useState(50);
+    const handleValueChange = (value) => {
+        setReault(value);
     };
 
     const handleSlidingStart = () => {
@@ -24,14 +25,10 @@ const SliderDemo = () => {
         { value: 10 },
         { disabled: true },
         { disabled: false },
-        { minimumValue: 15, value: 20 },
-        { minimumValue: 10, value: 20 },
-        { maximumValue: 50, value: 10 },
-        { maximumValue: 60, value: 20 },
         { trackStyle: { backgroundColor: 'pink', opacity: 0.4 } },
         { trackStyle: { backgroundColor: 'blue', opacity: 0.4 } },
         { thumbStyle: { backgroundColor: 'blue', opacity: 0.4 } },
-        { thumbStyle: { backgroundColor: 'skyblue', opacity: 0 } },
+        { thumbStyle: { backgroundColor: 'red', opacity: 0.1 } },
         { step: 10 },
         { step: 20 }
     ]
@@ -57,6 +54,24 @@ const SliderDemo = () => {
                         )
                     })
                 }
+                <TestCase itShould='minimumValue: 最小值10'>
+                    <Text style={{ marginBottom: 20 }}>当前值: {sliderValue}</Text>
+                    <Slider
+                        value={sliderValue}
+                        onValueChange={handleValueChange}
+                        minimumValue={10}
+                        step={1}
+                    />
+                </TestCase>
+                <TestCase itShould='maximumValue: 最大值90'>
+                    <Text style={{ marginBottom: 20 }}>当前值: {sliderValue}</Text>
+                    <Slider
+                        value={sliderValue}
+                        onValueChange={handleValueChange}
+                        maximumValue={90}
+                        step={1}
+                    />
+                </TestCase>
                 <TestCase itShould='onSlidingStart: 开始滑动'>
                     <Slider
                         value={0}
@@ -71,8 +86,11 @@ const SliderDemo = () => {
                 </TestCase>
                 <TestCase itShould='onValueChange: 滑动值改变触发'>
                     <Slider
-                        value={0}
+                        value={sliderValue}
                         onValueChange={handleValueChange}
+                        minimumValue={10}
+                        maximumValue={90}
+                        step={1}
                     />
                 </TestCase>
             </Tester>

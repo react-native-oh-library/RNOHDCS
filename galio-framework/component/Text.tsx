@@ -1,6 +1,6 @@
-import COLORS, { Block, Slider, theme, Radio, Text } from 'galio-framework';
-import React, { useState } from 'react';
-import { Alert, ScrollView, StyleSheet } from 'react-native';
+import { Block, theme, Text } from 'galio-framework';
+import React from 'react';
+import { ScrollView, StyleSheet } from 'react-native';
 import { TestCase, Tester } from '@rnoh/testerino';
 
 const TextDemo = () => {
@@ -26,7 +26,7 @@ const TextDemo = () => {
         { bold: true },
         { bold: false },
         { italic: true },
-        { bitalicold: false },
+        { italic: false },
     ]
 
     return (
@@ -47,6 +47,14 @@ const TextDemo = () => {
                             )
                         })
                     }
+                    <TestCase itShould={'theme.SIZES?.BASE:' + JSON.stringify(theme.SIZES?.BASE)} tags={['C_API']}>
+                        <Block style={{
+                            height: 'auto',
+                            display: 'flex',
+                        }}>
+                            <Text size={theme.SIZES?.BASE}>Heading 1</Text>
+                        </Block>
+                    </TestCase>
                 </Tester>
             }
         </ScrollView>

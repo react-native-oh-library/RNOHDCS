@@ -1,6 +1,6 @@
 import { Card, Block, theme } from 'galio-framework';
 import React, { useState } from 'react';
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text } from 'react-native';
 import { TestCase, Tester } from '@rnoh/testerino';
 
 const CardDemo = () => {
