@@ -21,7 +21,6 @@ import LineChartDataItem from './LineChartDataItem';
 import LineChartProps from './LineChartProps';
 import LineChartPropsAnimateOnDataChange from './LineChartPropsAnimateOnDataChange';
 import LineChartPropsScrollToEnd from './LineChartPropsScrollToEnd';
-import LineChartPropsDataPointLabel from './LineChartPropsDataPointLabel';
 import LineChartAxesProps from './LineChartAxesProps';
 import LineChartArrowProps from './LineChartArrowProps';
 import LineChartFocusProps from './LineChartFocusProps';
@@ -65,7 +64,6 @@ export default {
   LineChartProps,
   LineChartPropsAnimateOnDataChange,
   LineChartPropsScrollToEnd,
-  LineChartPropsDataPointLabel,
   LineChartAxesProps,
   LineChartArrowProps,
   LineChartFocusProps,

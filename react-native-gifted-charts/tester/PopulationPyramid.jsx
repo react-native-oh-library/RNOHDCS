@@ -20,7 +20,7 @@ export default function () {
     { hideRules: true, noOfSections: 4 }, { hideRules: false, noOfSections: 4 },
     { rulesThickness: 5 }, { rulesThickness: 10 },
     { rulesColor: 'red' }, { rulesColor: 'blue' },
-    { rulesType: 'SOLID' }, { rulesType: 'DASHED' }, { rulesType: 'DOTTED' },
+    { rulesType: 'SOLID' }, { rulesType: 'DASHED' },
     { dashWidth: 2 }, { dashWidth: 5 }, { dashWidth: 10 },
     { dashGap: 2 }, { dashGap: 10 }, { dashGap: 15 },
     { stepHeight: 10 }, { stepHeight: 20 },
