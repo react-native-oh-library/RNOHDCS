@@ -117,6 +117,7 @@ export function useMicrophonePermissionTest() {
             videoHdr={videoHdr}
             videoStabilizationMode={videoStabilizationMode}
             fps={30}
+            audio={_hasPermission ? true : false}
             format={format}
           />
           {!_hasPermission && (
