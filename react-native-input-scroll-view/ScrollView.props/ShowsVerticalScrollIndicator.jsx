@@ -1,19 +1,30 @@
-import React, {useState} from 'react';
-import {StyleSheet, TextInput, View} from 'react-native';
+import React, {useState, useRef} from 'react';
+import {
+  StyleSheet,
+  TextInput,
+  View,
+  TouchableOpacity,
+  Text,
+  Button
+} from 'react-native';
 import InputScrollView from 'react-native-input-scroll-view';
 
-const multilineInputStyleInput = () => {
+// showsVerticalScrollIndicator 默认值: true 决定是否显示垂直滚动条
+const ScrollViewPropsInput = () => {
   const [text, setText] = useState('');
   return (
     <View style={styles.container}>
-      <InputScrollView multilineInputStyle={styles.multilineInput}>
+      <InputScrollView
+        keyboardOffset={100}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.placeholder} />
+        <Text>showsVerticalScrollIndicator</Text>
         <TextInput
-          style={styles.multilineInput}
+          style={styles.input}
           value={text}
-          onChangeText={setText}
           multiline
-          placeholder="Type here..."
+          onChangeText={setText}
         />
       </InputScrollView>
     </View>
@@ -29,10 +40,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  multilineInput: {
-    fontSize: 28,
-    fontFamily: 'Arial',
-    lineHeight: 58,
+  input: {
     margin: 20,
     paddingVertical: 10,
     paddingHorizontal: 20,
@@ -42,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default multilineInputStyleInput;
+export default ScrollViewPropsInput;
