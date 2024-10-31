@@ -8,6 +8,10 @@ import { axesProps, commonPointerProps } from "../commonProps";
 
 export default function () {
   const [pressText, setPressText] = useState('')
+  const [pressText1, setPressText1] = useState('')
+  const [pressText2, setPressText2] = useState('')
+  const [pressText3, setPressText3] = useState('')
+  const [pressText4, setPressText4] = useState('')
   const scrollref = useRef();
   const [lineData, setLineData] = useState([
     { value: 50, label: '50' },
@@ -23,7 +27,7 @@ export default function () {
   return (
     <Tester>
       <ScrollView>
-        <TestCase itShould='请点击图形触发onPress, 左右滑动触发onScroll，onMomentumScrollEnd,onEndReached,onStartReached'>
+        <TestCase itShould='请点击图形触发onPress'>
           <Text>{pressText}</Text>
           <LineChart
             scrollRef={scrollref}
@@ -31,18 +35,53 @@ export default function () {
             onPress={() => {
               setPressText('onPress被触发')
             }}
+            >
+              
+            </LineChart>
+        </TestCase>
+        <TestCase itShould='请左右滑动触发onScroll'>
+          <Text>{pressText1}</Text>
+          <LineChart
+            scrollRef={scrollref}
+            data={lineData}
             onScroll={() => {
-              setPressText('onScroll被触发')
+              setPressText1('onScroll被触发')
             }}
+            >
+            </LineChart>
+        </TestCase>
+        <TestCase itShould='请左右滑动触发onMomentumScrollEnd'>
+          <Text>{pressText2}</Text>
+          <LineChart
+            scrollRef={scrollref}
+            data={lineData}
             onMomentumScrollEnd={() => {
-              setPressText('onMomentumScrollEnd被触发')
+              setPressText2('onMomentumScrollEnd被触发')
             }}
+            >
+            </LineChart>
+        </TestCase>
+        <TestCase itShould='请左右滑动触发onEndReached'>
+          <Text>{pressText3}</Text>
+          <LineChart
+            scrollRef={scrollref}
+            data={lineData}
             onEndReached={() => {
-              setPressText('onEndReached被触发')
+              setPressText3('onEndReached被触发')
             }}
+            >
+            </LineChart>
+        </TestCase>
+        <TestCase itShould='请左右滑动触发onStartReached'>
+          <Text>{pressText4}</Text>
+          <LineChart
+            scrollRef={scrollref}
+            data={lineData}
             onStartReached={() => {
-              setPressText('onStartReached被触发')
-            }}></LineChart>
+              setPressText4('onStartReached被触发')
+            }}
+            >
+            </LineChart>
         </TestCase>
       </ScrollView>
     </Tester >

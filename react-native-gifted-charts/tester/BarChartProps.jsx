@@ -33,17 +33,27 @@ export default function () {
     { value: 100, label: '100' },
     { value: 110, label: '110' }];
 
+    const data1 = [
+      { value: -5, label: '-5', },
+      { value: -6, label: '-6', },
+      { value: -7, label: '-7', },
+      { value: -8, label: '-8', },
+      { value: -9, label: '-9', },
+      { value: -10, label: '-10' },
+      { value: -11, label: '-11' }];
+
   const barChartProps = [
     { width: 100 }, { with: 400 },
     { height: 100 }, { height: 200 },
     { maxValue: 70 }, { maxValue: 200 },
     { yAxisOffset: 5 }, { yAxisOffset: 10 },
-    { mostNegativeValue: 10 }, { mostNegativeValue: 20 },
+    { mostNegativeValue: -12 }, { mostNegativeValue: -15},
     { noOfSections: 5 }, { noOfSections: 10 },
     { noOfSectionsBelowXAxis: 2 }, { noOfSectionsBelowXAxis: 5 },
     { stepValue: 10 }, { stepValue: 15 },
     { stepHeight: 10 }, { stepHeight: 15 },
-    { negativeStepValue: 5, negativeStepHeight: 30 }, { negativeStepValue: 15, negativeStepHeight: 20 },
+    { negativeStepValue: 5 }, { negativeStepValue: 15 },
+    { mostNegativeValue:-15, negativeStepHeight: 20 }, { mostNegativeValue:-15, negativeStepHeight: 50 },
     { spacing: 5, }, { spacing: 35 },
     { backgroundColor: 'red', }, { backgroundColor: 'blue' },
     { sectionColors: 'red', }, { sectionColors: 'blue' },// 需组合使用
@@ -75,7 +85,7 @@ export default function () {
               {item.focusBarOnPress ? <Text>请点击条形图子项，观察效果为focusedBarConfig配置信息</Text> : null}
               {item.activeOpacity ? <Text>请点击条形图子项，观察透明度变化</Text> : null}
               {item.disablePress ? <Text>值为true,取消按钮事件，条形图子项不可点击</Text> : null}
-              <BarChart data={data}  {...item}></BarChart>
+              <BarChart data={(item.mostNegativeValue||item.negativeStepValue||item.negativeStepHeight)?data1:data}  {...item}></BarChart>
             </TestCase>)
           })
         }
