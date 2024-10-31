@@ -5,8 +5,6 @@ import { TestCase, Tester } from '@rnoh/testerino';
 
 const ToastDemo = () => {
     const [isShow, setShow] = useState(true);
-    const [showToast, setShowToast] = useState(true)
-    const [showToasts, setShowToasts] = useState(true)
 
     return (
         <ScrollView style={{ backgroundColor: "#fff" }}>
@@ -108,24 +106,6 @@ const ToastDemo = () => {
                     }}>
                         <Button onPress={() => setShow(!isShow)} style={{ alignItems: 'center', alignContent: 'center', alignSelf: 'center' }}>click here for toast notifications</Button>
                         <Toast isShow={isShow} fadeInDuration={1000}>This is a top positioned toast</Toast>
-                    </Block>
-                </TestCase>
-                <TestCase itShould='fadeOutDuration: 5000(淡出持续时间)' tags={['C_API']}>
-                    <Block style={{
-                        height: 200,
-                        display: 'flex',
-                    }}>
-                        <Button onPress={() => setShowToasts(!showToasts)} style={{ alignItems: 'center', alignContent: 'center', alignSelf: 'center' }}>click here for toast notifications</Button>
-                        <Toast isShow={showToasts} fadeOutDuration={5000}>This is a top positioned toast</Toast>
-                    </Block>
-                </TestCase>
-                <TestCase itShould='fadeOutDuration: 1000(淡出持续时间)' tags={['C_API']}>
-                    <Block style={{
-                        height: 200,
-                        display: 'flex',
-                    }}>
-                        <Button onPress={() => setShowToast(!showToast)} style={{ alignItems: 'center', alignContent: 'center', alignSelf: 'center' }}>click here for toast notifications</Button>
-                        <Toast isShow={showToast} fadeOutDuration={1000}>This is a top positioned toast</Toast>
                     </Block>
                 </TestCase>
                 <TestCase itShould='style: backgroundColor: skyblue' tags={['C_API']}>

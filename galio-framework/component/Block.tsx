@@ -185,27 +185,6 @@ const BlockDemo = () => {
                         </Block>
                     </View>
                 </TestCase>
-                <TestCase itShould="safe:是否使用SafeAreaView组件包裹--true" tags={['C_API']} >
-                    <View style={{ height: 150 }}>
-                        <Block
-                            safe={false}
-                        >
-                            <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
-                            <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
-                        </Block>
-
-                    </View>
-                </TestCase>
-                <TestCase itShould="safe:是否使用SafeAreaView组件包裹--false" tags={['C_API']} >
-                    <View style={{ height: 150 }}>
-                        <Block
-                            safe={false}
-                        >
-                            <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
-                            <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
-                        </Block>
-                    </View>
-                </TestCase>
                 <TestCase itShould="shadow:是否添加阴影--true" tags={['C_API']} >
                     <View style={{ height: 150 }}>
                         <Block
