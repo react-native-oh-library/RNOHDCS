@@ -87,26 +87,6 @@ export default function () {
           })
         }
         <TestCase itShould="{
-              showText: true,
-              showTextBackground: true,
-              data: [
-                { value: 60, text: '60', textBackgroundColor: 'red', textBackgroundRadius: 10, onLabelPress: () => { setOnLablePressText('pieDataItem onLabelPress is trigger text:60') } },
-                { value: 70, text: '70', textBackgroundColor: 'yellow', textBackgroundRadius: 20, onLabelPress: () => { setOnLablePressText('pieDataItem onLabelPress is trigger text:70') } },
-                { value: 40, text: '40', textBackgroundColor: 'blue', textBackgroundRadius: 30, onLabelPress: () => { setOnLablePressText('pieDataItem onLabelPress is trigger text:40') } }
-              ],
-            }">
-          <Text>请点击饼图中的文字触发onLabelPress方法：{onLablePressText}</Text>
-          <PieChart data={pieData} {...{
-            showText: true,
-            showTextBackground: true,
-            data: [
-              { value: 60, text: '60', textBackgroundColor: 'red', textBackgroundRadius: 10, onLabelPress: () => { setOnLablePressText('pieDataItem onLabelPress is trigger text:60') } },
-              { value: 70, text: '70', textBackgroundColor: 'yellow', textBackgroundRadius: 20, onLabelPress: () => { setOnLablePressText('pieDataItem onLabelPress is trigger text:70') } },
-              { value: 40, text: '40', textBackgroundColor: 'blue', textBackgroundRadius: 30, onLabelPress: () => { setOnLablePressText('pieDataItem onLabelPress is trigger text:40') } }
-            ],
-          }}></PieChart>
-        </TestCase>
-        <TestCase itShould="{
           showText: true,
           data: [
             { value: 60, text: '60', labelPosition: 'onBorder', onPress: () => { setOnPressText('pieDataItem onPress is trigger text:60') } },

@@ -20,7 +20,7 @@ export default function () {
     { strokeWidth: 5 }, { strokeWidth: 10 },
     { strokeWidth: 5, strokeColor: 'red' }, { strokeWidth: 10, strokeColor: 'blue' },
     { strokeWidth: 5, strokeDashArray: [2, 4] }, { strokeWidth: 10, strokeDashArray: [2, 8] },
-    { edgesRadius: 20, donut: true }, { edgesRadius: 30, donut: true },
+    { edgesRadius: 10, donut: true }, { edgesRadius: 50, donut: true },
     { semiCircle: true }, { semiCircle: false },
     { textSize: 12 }, { textSize: 18 }, { textSize: 20 },
     { textColor: 'red' }, { textColor: 'black' }, { textColor: 'yellow' },
