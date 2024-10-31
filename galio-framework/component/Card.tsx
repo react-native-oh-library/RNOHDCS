@@ -95,7 +95,7 @@ const CardDemo = () => {
                         title='Christopher Moon'
                     />
                 </TestCase>
-                <TestCase itShould='titleColor: 标题颜色'>
+                <TestCase itShould='titleColor: 标题颜色--skyblue'>
                     <Card
                         image='https://images.unsplash.com/photo-1497802176320-541c8e8de98d?&w=1600&h=900&fit=crop&crop=entropy&q=300'
                         avatar='https://avatars.githubusercontent.com/u/155599655?v=4'
@@ -103,6 +103,16 @@ const CardDemo = () => {
                         locationColor='skyblue'
                         title='Christopher Moon'
                         titleColor='skyblue'
+                    />
+                </TestCase>
+                <TestCase itShould='titleColor: 标题颜色--blue'>
+                    <Card
+                        image='https://images.unsplash.com/photo-1497802176320-541c8e8de98d?&w=1600&h=900&fit=crop&crop=entropy&q=300'
+                        avatar='https://avatars.githubusercontent.com/u/155599655?v=4'
+                        location="Los Angeles, CA"
+                        locationColor='skyblue'
+                        title='Christopher Moon'
+                        titleColor='blue'
                     />
                 </TestCase>
                 <TestCase itShould='caption: caption(小标题)'>

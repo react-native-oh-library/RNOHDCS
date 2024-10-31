@@ -10,7 +10,7 @@ import NavBarDemo from "./NavBar"
 import RadioDemo from "./Radio"
 import SliderDemo from "./Slider"
 import SwitchDemo from "./Switch"
-import TestDemo from "./Text"
+import TextDemo from "./Text"
 import ToastDemo from "./ToastNotification"
 
 
@@ -28,6 +28,6 @@ export default{
     RadioDemo,
     SliderDemo,
     SwitchDemo,
-    TestDemo,
+    TextDemo,
     ToastDemo,
 }
