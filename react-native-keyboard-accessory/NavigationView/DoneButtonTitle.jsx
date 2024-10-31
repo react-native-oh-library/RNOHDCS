@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-
 import {
   StyleSheet,
   View,
   TextInput,
   ScrollView,
 } from 'react-native';
-
 import {KeyboardAccessoryNavigation } from 'react-native-keyboard-accessory';
 
 
@@ -35,8 +33,7 @@ let inputs = [
   },
 ];
 
-
-class NavigationViewExample extends Component {
+class DoneButtonTitle extends Component {
   constructor(props) {
     super(props);
 
@@ -63,7 +60,6 @@ class NavigationViewExample extends Component {
   }
 
   handleFocusNext = () => {
-    console.log("handleFocusNext")
     const { nextFocusDisabled, activeInputIndex } = this.state;
     if (nextFocusDisabled) {
       return;
@@ -73,12 +69,10 @@ class NavigationViewExample extends Component {
   }
 
   handleFocusPrevious = () => {
-    console.log("handleFocusPrevious")
     const { previousFocusDisabled, activeInputIndex } = this.state;
     if (previousFocusDisabled) {
       return;
     }
-    
     inputs[activeInputIndex - 1].ref.current.focus();
   }
 
@@ -100,20 +94,15 @@ class NavigationViewExample extends Component {
           )}
         </ScrollView>
         <KeyboardAccessoryNavigation
-          doneButtonStyle={styles.doneButton}
-          doneButtonTitleStyle={styles.doneButtonTitle}
-          doneButtonHitslop={{ left: 200, top: 23, right: 0, bottom: 0 }}
-
-          onNext={this.handleFocusNext}
-          onPrevious={this.handleFocusPrevious}
-          avoidKeyboard
+          doneButtonTitle="自定义按钮" 
+          avoidKeyboard={true}
           androidAdjustResize
         />
       </View>
     );
   }
 }
-NavigationViewExample.navigationOptions = {
+DoneButtonTitle.navigationOptions = {
   title: 'Navigation View Example',
 }
 
@@ -134,18 +123,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 10,
   },
-  doneButton: {
-    backgroundColor: '#ff5722', // 设置背景颜色
-    paddingHorizontal: 20,      // 设置水平内边距
-    paddingVertical: 10,        // 设置垂直内边距
-    borderRadius: 5,            // 设置圆角
+  accessory: {
+    borderTopWidth: 10,          // 设置顶部边框宽度
+    borderTopColor: '#ff5722',     // 设置顶部边框颜色
+    height: 80,                 // 设置高度
     justifyContent: 'center',   // 垂直居中
     alignItems: 'center',       // 水平居中
   },
-  doneButtonTitle: {
-    fontWeight: 'bold',    // 设置文本加粗
-    fontSize: 30,          // 设置文本大小
-  },
+
 });
 
-export default NavigationViewExample;
+export {DoneButtonTitle}

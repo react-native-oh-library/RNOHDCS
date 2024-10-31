@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import {
   StyleSheet,
   View,
   TextInput,
   ScrollView,
+  Text,
+  TouchableOpacity,
 } from 'react-native';
 
-import {KeyboardAccessoryNavigation } from 'react-native-keyboard-accessory';
-
+import {KeyboardAccessoryNavigation} from 'react-native-keyboard-accessory';
 
 let inputs = [
   {
@@ -35,8 +36,13 @@ let inputs = [
   },
 ];
 
+const CustomButton = ({text, onPress, buttonStyle, textStyle}) => (
+  <TouchableOpacity style={[styles.button, buttonStyle]} onPress={onPress}>
+    <Text style={[styles.text, textStyle]}>{text}</Text>
+  </TouchableOpacity>
+);
 
-class NavigationViewExample extends Component {
+class previousButtonHitslop extends Component {
   constructor(props) {
     super(props);
 
@@ -60,31 +66,30 @@ class NavigationViewExample extends Component {
       previousFocusDisabled: index === 0,
       activeInputIndex: index,
     });
-  }
+  };
 
   handleFocusNext = () => {
-    const { nextFocusDisabled, activeInputIndex } = this.state;
+    const {nextFocusDisabled, activeInputIndex} = this.state;
     if (nextFocusDisabled) {
       return;
     }
 
     inputs[activeInputIndex + 1].ref.current.focus();
-  }
+  };
 
   handleFocusPrevious = () => {
-    const { previousFocusDisabled, activeInputIndex } = this.state;
+    const {previousFocusDisabled, activeInputIndex} = this.state;
     if (previousFocusDisabled) {
       return;
     }
-    
     inputs[activeInputIndex - 1].ref.current.focus();
-  }
+  };
 
   render() {
     return (
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.contentContainer}>
-          { inputs.map(({ placeholder, keyboardType, ref }, index) =>
+          {inputs.map(({placeholder, keyboardType, ref}, index) => (
             <TextInput
               key={`input_${index}`}
               ref={ref}
@@ -95,14 +100,15 @@ class NavigationViewExample extends Component {
               blurOnSubmit={false}
               onFocus={this.handleFocus(index)}
             />
-          )}
+          ))}
         </ScrollView>
         <KeyboardAccessoryNavigation
-          nextButtonStyle={styles.button}
-          nextButtonDirection={'right'}
-          nextButtonHitslop={{ left: 0, top: 23, right: 100, bottom: 0 }}
+          // nextButtonStyle = {}
+          previousButtonStyle={styles.button}
           onNext={this.handleFocusNext}
+          previousDisabled={false}
           onPrevious={this.handleFocusPrevious}
+          previousButtonHitslop={{left: 200, top: 23, right: 0, bottom: 0}}
           avoidKeyboard
           androidAdjustResize
         />
@@ -110,9 +116,9 @@ class NavigationViewExample extends Component {
     );
   }
 }
-NavigationViewExample.navigationOptions = {
-  title: 'Navigation View Example',
-}
+previousButtonHitslop.navigationOptions = {
+  title: 'previousButtonHitslop',
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -131,6 +137,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 10,
   },
+  accessory: {
+    borderTopWidth: 10, // 设置顶部边框宽度
+    borderTopColor: '#ff5722', // 设置顶部边框颜色
+    height: 80, // 设置高度
+    justifyContent: 'center', // 垂直居中
+    alignItems: 'center', // 水平居中
+  },
   button: {
     backgroundColor: '#ff5722', // 设置背景颜色
     paddingHorizontal: 20,      // 设置水平内边距
@@ -138,8 +151,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,            // 设置圆角
     justifyContent: 'center',   // 垂直居中
     alignItems: 'center',       // 水平居中
+    marginLeft:50
   },
- 
 });
 
-export default NavigationViewExample;
+export {previousButtonHitslop};

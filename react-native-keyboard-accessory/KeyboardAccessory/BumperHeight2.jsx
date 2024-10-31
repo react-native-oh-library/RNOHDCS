@@ -3,7 +3,7 @@ import { StyleSheet, View, TextInput, Button, ScrollView,LayoutAnimation } from 
 import { KeyboardAccessoryView  } from "react-native-keyboard-accessory";
 
 
-class AccessoryViewExample extends Component {
+class BumperHeight2 extends Component {
   state = {
     text: '',
   };
@@ -18,20 +18,9 @@ class AccessoryViewExample extends Component {
                 style={styles.input}/>
         </ScrollView>
         <KeyboardAccessoryView
-          //当配件隐藏时的不透明度。隐藏时视图的透明度
-          animateOn={'all'} 
-          hiddenOpacity={0.5}
-          animationConfig={{
-            duration: 500,
-            create: {
-              duration: 500,
-              type: LayoutAnimation.Types.linear,
-              property: LayoutAnimation.Properties.opacity
-            },
-            update: {
-              type: LayoutAnimation.Types.linear,
-            }
-         }}>
+          //输入框的背景框的大小
+          bumperHeight={100} 
+          >
             <View style={styles.textInputView}>
               <TextInput
                 placeholder="Write your message"
@@ -53,7 +42,7 @@ class AccessoryViewExample extends Component {
   }
 }
 
-AccessoryViewExample.navigationOptions = {
+BumperHeight2.navigationOptions = {
   title: "View Example",
 };
 
@@ -90,5 +79,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AccessoryViewExample;
-
+export {BumperHeight2}

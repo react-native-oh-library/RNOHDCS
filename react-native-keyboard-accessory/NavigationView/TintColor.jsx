@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-
 import {
   StyleSheet,
   View,
   TextInput,
   ScrollView,
 } from 'react-native';
-
 import {KeyboardAccessoryNavigation } from 'react-native-keyboard-accessory';
 
 
@@ -35,7 +33,7 @@ let inputs = [
   },
 ];
 
-class NavigationViewExample extends Component {
+class TintColor extends Component {
   constructor(props) {
     super(props);
 
@@ -75,7 +73,6 @@ class NavigationViewExample extends Component {
     if (previousFocusDisabled) {
       return;
     }
-    
     inputs[activeInputIndex - 1].ref.current.focus();
   }
 
@@ -97,11 +94,8 @@ class NavigationViewExample extends Component {
           )}
         </ScrollView>
         <KeyboardAccessoryNavigation
-          doneHidden={true}
-          nextHidden={true}
-          previousHidden={true}
-          onNext={this.handleFocusNext}
-          onPrevious={this.handleFocusPrevious}
+          doneButtonTitle="自定义按钮" 
+          tintColor={'#ff00d4'}
           avoidKeyboard
           androidAdjustResize
         />
@@ -109,7 +103,7 @@ class NavigationViewExample extends Component {
     );
   }
 }
-NavigationViewExample.navigationOptions = {
+TintColor.navigationOptions = {
   title: 'Navigation View Example',
 }
 
@@ -130,6 +124,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 10,
   },
+  accessory: {
+    borderTopWidth: 10,          // 设置顶部边框宽度
+    borderTopColor: '#ff5722',     // 设置顶部边框颜色
+    height: 80,                 // 设置高度
+    justifyContent: 'center',   // 垂直居中
+    alignItems: 'center',       // 水平居中
+  },
+
 });
 
-export default NavigationViewExample;
+export {TintColor}

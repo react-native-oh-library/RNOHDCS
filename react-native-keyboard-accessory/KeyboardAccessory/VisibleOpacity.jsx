@@ -3,7 +3,7 @@ import { StyleSheet, View, TextInput, Button, ScrollView,LayoutAnimation,Platfor
 import { KeyboardAccessoryView  } from "react-native-keyboard-accessory";
 
 
-class AccessoryViewExample extends Component {
+class VisibleOpacity extends Component {
   state = {
     text: '',
   };
@@ -18,10 +18,7 @@ class AccessoryViewExample extends Component {
                 style={styles.input}/>
         </ScrollView>
         <KeyboardAccessoryView
-          alwaysVisible={true}
-          animateOn={'all'} 
-          style={{ backgroundColor: '#EB7347', padding: 5 }}
-          hideBorder={true}
+          visibleOpacity={0.5}
           >
             <View style={styles.textInputView}>
               <TextInput
@@ -44,7 +41,8 @@ class AccessoryViewExample extends Component {
   }
 }
 
-AccessoryViewExample.navigationOptions = {
+
+VisibleOpacity.navigationOptions = {
   title: "View Example",
 };
 
@@ -81,5 +79,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AccessoryViewExample;
+export {VisibleOpacity};
 

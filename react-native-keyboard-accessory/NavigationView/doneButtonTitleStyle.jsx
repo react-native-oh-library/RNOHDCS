@@ -5,6 +5,8 @@ import {
   View,
   TextInput,
   ScrollView,
+  Text,
+  TouchableOpacity,
 } from 'react-native';
 
 import {KeyboardAccessoryNavigation } from 'react-native-keyboard-accessory';
@@ -36,7 +38,13 @@ let inputs = [
 ];
 
 
-class NavigationViewExample extends Component {
+const CustomButton = ({ text, onPress, buttonStyle, textStyle }) => (
+  <TouchableOpacity style={[styles.button, buttonStyle]} onPress={onPress}>
+    <Text style={[styles.text, textStyle]}>{text}</Text>
+  </TouchableOpacity>
+);
+
+class doneButtonTitleStyle extends Component {
   constructor(props) {
     super(props);
 
@@ -76,12 +84,10 @@ class NavigationViewExample extends Component {
     if (previousFocusDisabled) {
       return;
     }
-    
     inputs[activeInputIndex - 1].ref.current.focus();
   }
 
   render() {
-   
     return (
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.contentContainer}>
@@ -99,11 +105,7 @@ class NavigationViewExample extends Component {
           )}
         </ScrollView>
         <KeyboardAccessoryNavigation
-          previousButtonStyle={styles.button}
-          previousButtonDirection={'left'}
-          previousButtonHitslop={{ left: 200, top: 23, right: 0, bottom: 0 }}
-          onNext={this.handleFocusNext}
-          onPrevious={this.handleFocusPrevious}
+        doneButtonTitleStyle={{borderColor:'red', fontWeight: 'bold',  fontSize: 30,}}
           avoidKeyboard
           androidAdjustResize
         />
@@ -111,8 +113,8 @@ class NavigationViewExample extends Component {
     );
   }
 }
-NavigationViewExample.navigationOptions = {
-  title: 'Navigation View Example',
+doneButtonTitleStyle.navigationOptions = {
+  title: 'doneButtonTitleStyle',
 }
 
 const styles = StyleSheet.create({
@@ -132,14 +134,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 10,
   },
-  button: {
-    backgroundColor: '#ff5722', // 设置背景颜色
-    paddingHorizontal: 20,      // 设置水平内边距
-    paddingVertical: 10,        // 设置垂直内边距
-    borderRadius: 5,            // 设置圆角
+  accessory: {
+    borderTopWidth: 10,          // 设置顶部边框宽度
+    borderTopColor: '#ff5722',     // 设置顶部边框颜色
+    height: 80,                 // 设置高度
     justifyContent: 'center',   // 垂直居中
     alignItems: 'center',       // 水平居中
   },
 });
 
-export default NavigationViewExample;
+export {doneButtonTitleStyle}
+
