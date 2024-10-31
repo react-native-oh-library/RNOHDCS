@@ -14,7 +14,7 @@ export const axesProps = [
   { yAxisLabelContainerStyle: { backgroundColor: 'blue' } }, { yAxisLabelContainerStyle: { backgroundColor: 'red' } },
   { trimYAxisAtTop: true }, { trimYAxisAtTop: false },
   { horizontalRulesStyle: { backgroundColor: 'blue' } }, { horizontalRulesStyle: { backgroundColor: 'red' } },
-  { showFractionalValues: true }, { showFractionalValues: false },
+  { showFractionalValues: true, yAxisLabelWidth: 50 }, { showFractionalValues: false, yAxisLabelWidth: 50 },
   { roundToDigits: 1, showFractionalValues: true, yAxisLabelWidth: 50, data: [{ value: 49.5 }, { value: 64.2 }, { value: 52.2 }, { value: 76.5 }] },
   { roundToDigits: 2, showFractionalValues: true, yAxisLabelWidth: 50, data: [{ value: 49.5 }, { value: 64.2 }, { value: 52.2 }, { value: 76.5 }] },
   { yAxisLabelPrefix: '$' }, { yAxisLabelPrefix: '#' },

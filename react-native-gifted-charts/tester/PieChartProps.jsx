@@ -15,7 +15,7 @@ export default function () {
     { showGradient: true, }, { showGradient: false },
     { focusOnPress: true, }, { focusOnPress: false },
     { focusOnPress: true, toggleFocusOnPress: true, }, { focusOnPress: true, toggleFocusOnPress: false },
-    { focusOnPress: true, extraRadiusForFocused: 10 }, { focusOnPress: true, extraRadiusForFocused: 28 },
+    { focusOnPress: true, extraRadius: 10 }, { focusOnPress: true, extraRadius: 28 },
     { sectionAutoFocus: true, data: [{ value: 50, focused: true }, { value: 20 }, { value: 40 }] }, { sectionAutoFocus: false },
     { tiltAngle: '80deg', isThreeD: true, }, { tiltAngle: '70deg', isThreeD: true, },
     { shadow: true, isThreeD: true, }, { shadow: false, isThreeD: true, },

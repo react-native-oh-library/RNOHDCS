@@ -111,46 +111,24 @@ export default function () {
     },
     {
       data: [
-        { value: 50, dataPointText: '50', dataPointLabelWidth: 15, },
-        { value: 80, dataPointText: '80', dataPointLabelWidth: 20, },
-        { value: 90, dataPointText: '90', dataPointLabelWidth: 25, },
-        { value: 70, dataPointText: '70', dataPointLabelWidth: 30, }]
+        { value: 50, dataPointText: '50', showStrip: true, },
+        { value: 80, dataPointText: '80', showStrip: false, },
+        { value: 90, dataPointText: '90', showStrip: false, },
+        { value: 70, dataPointText: '70', showStrip: true, }]
     },
     {
       data: [
-        { value: 50, dataPointText: '50', dataPointLabelWidth: 15, showStrip: true, },
-        { value: 80, dataPointText: '80', dataPointLabelWidth: 20, showStrip: false, },
-        { value: 90, dataPointText: '90', dataPointLabelWidth: 25, showStrip: false, },
-        { value: 70, dataPointText: '70', dataPointLabelWidth: 30, showStrip: true, }]
+        { value: 50, dataPointText: '50', showStrip: true, stripHeight: 50, stripWidth: 5, stripColor: 'red' },
+        { value: 80, dataPointText: '80', showStrip: true, stripHeight: 65, stripWidth: 8, stripColor: 'blue' },
+        { value: 90, dataPointText: '90', showStrip: true, stripHeight: 80, stripWidth: 10, stripColor: 'yellow' },
+        { value: 70, dataPointText: '70', showStrip: true, stripHeight: 105, stripWidth: 14, stripColor: 'black' }]
     },
     {
       data: [
-        { value: 50, dataPointText: '50', dataPointLabelWidth: 15, showStrip: true, stripHeight: 50, stripWidth: 5, stripColor: 'red' },
-        { value: 80, dataPointText: '80', dataPointLabelWidth: 20, showStrip: true, stripHeight: 65, stripWidth: 8, stripColor: 'blue' },
-        { value: 90, dataPointText: '90', dataPointLabelWidth: 25, showStrip: true, stripHeight: 80, stripWidth: 10, stripColor: 'yellow' },
-        { value: 70, dataPointText: '70', dataPointLabelWidth: 30, showStrip: true, stripHeight: 105, stripWidth: 14, stripColor: 'black' }]
-    },
-    {
-      data: [
-        { value: 50, dataPointText: '50', dataPointLabelWidth: 15, showStrip: true, stripHeight: 50, stripWidth: 5, stripColor: 'red', stripOpacity: 0.1 },
-        { value: 80, dataPointText: '80', dataPointLabelWidth: 20, showStrip: true, stripHeight: 65, stripWidth: 8, stripColor: 'blue', stripOpacity: 0.5 },
-        { value: 90, dataPointText: '90', dataPointLabelWidth: 25, showStrip: true, stripHeight: 80, stripWidth: 10, stripColor: 'yellow', stripOpacity: 0.8 },
-        { value: 70, dataPointText: '70', dataPointLabelWidth: 30, showStrip: true, stripHeight: 105, stripWidth: 14, stripColor: 'black' }]
-    },
-    // pointerShiftX、pointerShiftY未生效，配置pointerConfig才生效
-    {
-      data: [
-        { value: 50, dataPointText: '50', pointerShiftX: 10 },
-        { value: 80, dataPointText: '80', pointerShiftX: 15 },
-        { value: 90, dataPointText: '90', pointerShiftX: 20 },
-        { value: 70, dataPointText: '70', pointerShiftX: 25 }]
-    },
-    {
-      data: [
-        { value: 50, dataPointText: '50', pointerShiftY: 10 },
-        { value: 80, dataPointText: '80', pointerShiftY: 15 },
-        { value: 90, dataPointText: '90', pointerShiftY: 20 },
-        { value: 70, dataPointText: '70', pointerShiftY: 25 }]
+        { value: 50, dataPointText: '50', showStrip: true, stripHeight: 50, stripWidth: 5, stripColor: 'red', stripOpacity: 0.1 },
+        { value: 80, dataPointText: '80', showStrip: true, stripHeight: 65, stripWidth: 8, stripColor: 'blue', stripOpacity: 0.5 },
+        { value: 90, dataPointText: '90', showStrip: true, stripHeight: 80, stripWidth: 10, stripColor: 'yellow', stripOpacity: 0.8 },
+        { value: 70, dataPointText: '70', showStrip: true, stripHeight: 105, stripWidth: 14, stripColor: 'black' }]
     },
   ]
 
@@ -166,35 +144,47 @@ export default function () {
             )
           })
         }
-        <TestCase itShould="data: [{
-                value: 50, label: '50', onPress: () => {
-                  setPressText('onPress被触发 text:50')
-                }
-              }, {
-                value: 80, label: '80', onPress: () => {
-                  setPressText('onPress被触发 text:80')
-                }
-              }, {
-                value: 90, label: '90', onPress: () => {
-                  setPressText('onPress被触发 text:90')
-                }
-              }]">
-          <Text>请点击这项图子项出发onPress方法，{pressText}</Text>
-          <LineChart scrollref={scrollref} data={lineData} {...{
-            data: [{
-              value: 50, label: '50', onPress: () => {
-                setPressText('onPress被触发 text:50')
-              }
-            }, {
-              value: 80, label: '80', onPress: () => {
-                setPressText('onPress被触发 text:80')
-              }
-            }, {
-              value: 90, label: '90', onPress: () => {
-                setPressText('onPress被触发 text:90')
-              }
-            }]
-          }}></LineChart>
+        <TestCase itShould={"pointerConfig={{ pointerComponent: (item) => <Text>{item}</Text> }}"
+          + "data={["
+          + "{ value: 40, label: 40, dataPointText: '40', pointerShiftX: 0 },"
+          + "{ value: 50, label: 50, dataPointText: '50', pointerShiftX: 10 },"
+          + "{ value: 80, label: 80, dataPointText: '80', pointerShiftX: 15 },"
+          + "{ value: 90, label: 90, dataPointText: '90', pointerShiftX: 20 },"
+          + "{ value: 70, label: 70, dataPointText: '70', pointerShiftX: 25 }]}"
+        } tags={['C_API']}>
+          <>
+            <Text>手指按住图形,向右拖动会出现一条黑色竖线,查看竖线距离黑点或者底部label在X轴上距离.</Text>
+            <LineChart
+              pointerConfig={{ pointerComponent: (item) => <Text>{item}</Text> }}
+              showVerticalLines={true}
+              data={[
+                { value: 40, label: 40, dataPointText: '40', pointerShiftX: 0 },
+                { value: 50, label: 50, dataPointText: '50', pointerShiftX: 10 },
+                { value: 80, label: 80, dataPointText: '80', pointerShiftX: 15 },
+                { value: 90, label: 90, dataPointText: '90', pointerShiftX: 20 },
+                { value: 70, label: 70, dataPointText: '70', pointerShiftX: 25 }]}></LineChart>
+          </>
+        </TestCase>
+        <TestCase itShould={"pointerConfig={{ pointerConfig={{  }} }}"
+          + "data={["
+          + "{ value: 40, label: 40, dataPointText: '40', pointerShiftY: 0 },"
+          + "{ value: 50, label: 50, dataPointText: '50', pointerShiftY: 10 },"
+          + "{ value: 80, label: 80, dataPointText: '80', pointerShiftY: 15 },"
+          + "{ value: 90, label: 90, dataPointText: '90', pointerShiftY: 20 },"
+          + "{ value: 70, label: 70, dataPointText: '70', pointerShiftY: 25 }]}"
+        } tags={['C_API']}>
+          <>
+            <Text>手指按住图形,向右拖动会出现一条黑色待小红点竖线,查看竖线上小红点距离黑点在Y轴上的距离.</Text>
+            <LineChart
+              pointerConfig={{  }}
+              showVerticalLines={true}
+              data={[
+                { value: 40, label: 40, dataPointText: '40', pointerShiftY: 0 },
+                { value: 50, label: 50, dataPointText: '50', pointerShiftY: 10 },
+                { value: 80, label: 80, dataPointText: '80', pointerShiftY: 15 },
+                { value: 90, label: 90, dataPointText: '90', pointerShiftY: 20 },
+                { value: 70, label: 70, dataPointText: '70', pointerShiftY: 25 }]}></LineChart>
+          </>
         </TestCase>
         <TestCase itShould="data: [{
                 value: 50, label: '50', labelComponent: () => <Text style={{ color: 'red' }}>50</Text>
@@ -215,54 +205,21 @@ export default function () {
           }}></LineChart>
         </TestCase>
         <TestCase itShould="{
-              data: [
-                { value: 50, dataPointText: '50', dataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>50</Text>, dataPointLabelWidth: 10,  },
-                { value: 80, dataPointText: '80', dataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>80</Text>, dataPointLabelWidth: 40,  },
-                { value: 90, dataPointText: '90', dataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>90</Text>, dataPointLabelWidth: 25,  },
-                { value: 70, dataPointText: '70', dataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>70</Text>, dataPointLabelWidth: 30,  }]
-            }">
-
-          <LineChart data={lineData} {...{
-            data: [
-              { value: 50, dataPointText: '50', dataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>50</Text>, dataPointLabelWidth: 10, },
-              { value: 80, dataPointText: '80', dataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>80</Text>, dataPointLabelWidth: 40, },
-              { value: 90, dataPointText: '90', dataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>90</Text>, dataPointLabelWidth: 25, },
-              { value: 70, dataPointText: '70', dataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>70</Text>, dataPointLabelWidth: 30, }]
-          }}></LineChart>
-        </TestCase>
-        <TestCase itShould="{
-              data: [
-                { value: 50, dataPointText: '50', dataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>50</Text>, dataPointLabelWidth: 10, dataPointLabelShiftX: 10, dataPointLabelShiftY: 10 },
-                { value: 80, dataPointText: '80', dataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>80</Text>, dataPointLabelWidth: 40, dataPointLabelShiftX: 15, dataPointLabelShiftY: 15 },
-                { value: 90, dataPointText: '90', dataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>90</Text>, dataPointLabelWidth: 25, dataPointLabelShiftX: 20, dataPointLabelShiftY: 20 },
-                { value: 70, dataPointText: '70', dataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>70</Text>, dataPointLabelWidth: 30, dataPointLabelShiftX: 25, dataPointLabelShiftY: 25 }]
-            }">
-
-          <LineChart data={lineData} {...{
-            data: [
-              { value: 50, dataPointText: '50', dataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>50</Text>, dataPointLabelWidth: 10, dataPointLabelShiftX: 10, dataPointLabelShiftY: 10 },
-              { value: 80, dataPointText: '80', dataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>80</Text>, dataPointLabelWidth: 40, dataPointLabelShiftX: 15, dataPointLabelShiftY: 15 },
-              { value: 90, dataPointText: '90', dataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>90</Text>, dataPointLabelWidth: 25, dataPointLabelShiftX: 20, dataPointLabelShiftY: 20 },
-              { value: 70, dataPointText: '70', dataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>70</Text>, dataPointLabelWidth: 30, dataPointLabelShiftX: 25, dataPointLabelShiftY: 25 }]
-          }}></LineChart>
-
-        </TestCase>
-        <TestCase itShould="{
               focusEnabled: true,
               data: [
-                { value: 50, dataPointText: '50', focusedDataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>50</Text>,},
-                { value: 80, dataPointText: '80', focusedDataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>80</Text>,  },
-                { value: 90, dataPointText: '90', focusedDataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>90</Text>,},
-                { value: 70, dataPointText: '70', focusedDataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>70</Text>, }]
+                { value: 50, label:50, dataPointText: '50'},
+                { value: 80, label:80, dataPointText: '80'},
+                { value: 90, label:90, dataPointText: '90'},
+                { value: 70, label:70, dataPointText: '70'}]
             }">
           <Text>请点击图形上显示的数据点，观察效果</Text>
           <LineChart scrollref={scrollref} data={lineData} {...{
             focusEnabled: true,
             data: [
-              { value: 50, focusedDataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>50</Text>, },
-              { value: 80, focusedDataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>80</Text>, },
-              { value: 90, focusedDataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>90</Text>, },
-              { value: 70, focusedDataPointLabelComponent: () => <Text style={{ backgroundColor: 'red' }}>70</Text>, }]
+              { value: 50, label: 50, dataPointText: '50' },
+              { value: 80, label: 80, dataPointText: '80' },
+              { value: 90, label: 90, dataPointText: '90' },
+              { value: 70, label: 70, dataPointText: '70' }]
           }}></LineChart>
         </TestCase>
       </ScrollView>

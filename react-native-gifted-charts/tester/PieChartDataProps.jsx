@@ -22,7 +22,7 @@ export default function () {
       showTextBackground: true,
       sectionAutoFocus: true,
       data: [
-        { shiftTextX: 10, shiftTextY: 20, value: 60, text: '60', textColor: 'red', focused: true, },
+        { shiftTextX: 10, shiftTextY: 20, value: 60, text: '60', focused: true, },
         { value: 70, text: '70', textColor: 'blue', },
         { value: 40, text: '40', textColor: 'black', }
       ],
@@ -32,7 +32,7 @@ export default function () {
       showTextBackground: true,
       sectionAutoFocus: true,
       data: [
-        { shiftTextX: 20, shiftTextY: 30, value: 60, text: '60', textColor: 'red', focused: true, },
+        { shiftTextX: 20, shiftTextY: 30, value: 60, text: '60', focused: true, },
         { value: 70, text: '70', textColor: 'blue', },
         { value: 40, text: '40', textColor: 'black', }
       ],
