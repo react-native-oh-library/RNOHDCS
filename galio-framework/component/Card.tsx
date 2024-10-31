@@ -1,16 +1,14 @@
-import { Card, Block, theme } from 'galio-framework';
-import React, { useState } from 'react';
+import { Card, Block } from 'galio-framework';
+import React from 'react';
 import { ScrollView, StyleSheet, Text } from 'react-native';
 import { TestCase, Tester } from '@rnoh/testerino';
 
 const CardDemo = () => {
     const CardProps = [
-        { card: true },
-        { card: false },
-        { shadow: true, shadowColor: "red" },
-        { shadow: false, shadowColor: "red" },
-        { borderless: true, shadowColor: "red", card: true },
-        { borderless: false, shadowColor: "red", card: true },
+        { shadow: true, shadowColor: 'red' },
+        { shadow: false, shadowColor: 'red' },
+        { borderless: true },
+        { borderless: false },
     ]
     return (
         <ScrollView style={styles.container}>
@@ -31,6 +29,18 @@ const CardDemo = () => {
                         )
                     })
                 }
+
+                <TestCase itShould='card: true'>
+                    <Card card={true} style={{ backgroundColor: 'green', textAlign: 'center' }}>
+                        <Text style={{ textAlign: 'center' }}>Card</Text>
+                    </Card>
+                </TestCase>
+                <TestCase itShould='card: false'>
+                    <Card card={false} style={{ backgroundColor: 'blue', textAlign: 'center' }}>
+                        <Text style={{ textAlign: 'center' }}>Card</Text>
+                    </Card>
+                </TestCase>
+
                 <TestCase itShould='image: 图片'>
                     <Card
                         image='https://images.unsplash.com/photo-1497802176320-541c8e8de98d?&w=1600&h=900&fit=crop&crop=entropy&q=300'

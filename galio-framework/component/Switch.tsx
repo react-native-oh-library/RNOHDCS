@@ -13,7 +13,7 @@ const SwitchDemo = () => {
         return null;
     }
     const SwitchProps = [
-        { disabled: false, onChange: onPressSwitch,title:'onChange事件'},
+        { disabled: false, onChange: onPressSwitch,title:'onChange事件,当开关变化的时候会触发'},
         { disabled: true, onChange: onPressSwitch },
         { initialValue: true, onChange: onPressSwitch },
         { initialValue: false, onChange: onPressSwitch },
