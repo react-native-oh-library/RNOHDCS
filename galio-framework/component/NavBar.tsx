@@ -63,6 +63,18 @@ const NavBarDemo = () => {
                         right={<Ionicons name="alarm" size={20} color="red" />}
                     />
                 </TestCase>
+                <TestCase itShould="rightStyle: backgroundColor:'blue',borderRadius:10">
+                    <NavBar
+                        right={<Text>rightStyle</Text>}
+                        rightStyle={{backgroundColor:'blue',borderRadius:10}}
+                    />
+                </TestCase>
+                <TestCase itShould="rightStyle: backgroundColor:'skyblue',borderRadius:5">
+                    <NavBar
+                        right={<Text>rightStyle</Text>}
+                        rightStyle={{backgroundColor:'skyblue',borderRadius:5}}
+                    />
+                </TestCase>
                 <TestCase itShould='leftIconColor: blue'>
                     <NavBar
                         back={true}

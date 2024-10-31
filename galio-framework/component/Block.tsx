@@ -6,63 +6,85 @@ import { TestCase, Tester } from '@rnoh/testerino';
 
 
 const BlockDemo = () => {
-    const BlockProps = [
-        {
-            key: "bottom: alignItems: 'flex-end' is true",
-            value: true
-        },
-        {
-            key: "bottom: alignItems: 'flex-end' is false",
-            value: false
-        },
-        {
-            key: "card: true",
-            value: true
-        },
-        {
-            key: "card: false",
-            value: false
-        },
-        {
-            key: "height: 100",
-            value: 100
-        },
-        {
-            key: "height: 120",
-            value: 120
-        },
-        {
-            key: "left: true",
-            value: true
-        },
-        {
-            key: "left: false",
-            value: false
-        },
-    ]
     return (
         <ScrollView>
             <Tester>
-                {
-                    BlockProps.map((item: any) => {
-                        return (
-                            <TestCase itShould={item.key} tags={['C_API']} key={item.key}>
-                                <View style={{
-                                    display: 'flex',
-                                }}>
-                                    <Block
-                                        bottom={item.value}
-                                        card={item.value}
-                                        height={item.value}
-                                        left={item.value}
-                                    >
-                                        <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
-                                    </Block>
-                                </View>
-                            </TestCase>
-                        )
-                    })
-                }
+                <TestCase itShould="bottom:设置bottom为true" tags={['C_API']} >
+                    <View style={{ height: 150 }}>
+                        <Block
+                            bottom={true}
+                        >
+                            <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
+                        </Block>
+                    </View>
+                </TestCase>
+                <TestCase itShould="bottom:设置bottom为false" tags={['C_API']} >
+                    <View style={{ height: 150 }}>
+                        <Block
+                            bottom={false}
+                        >
+                            <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
+                        </Block>
+                    </View>
+                </TestCase>
+                <TestCase itShould="card:设置card样式为true" tags={['C_API']} >
+                    <View style={{ height: 150 }}>
+                        <Block
+                            card={true}
+                        >
+                            <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
+                        </Block>
+                    </View>
+                </TestCase>
+                <TestCase itShould="card:设置card样式为false" tags={['C_API']} >
+                    <View style={{ height: 150 }}>
+                        <Block
+                            card={false}
+                        >
+                            <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
+                        </Block>
+                    </View>
+                </TestCase>
+                <TestCase itShould="height:设置height为100" tags={['C_API']} >
+                    <View style={{ height: 150 }}>
+                        <Block
+                            card
+                            height={100}
+                        >
+                            <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
+                        </Block>
+                    </View>
+                </TestCase>
+                <TestCase itShould="height:设置height为140" tags={['C_API']} >
+                    <View style={{ height: 150 }}>
+                        <Block
+                            card
+                            height={140}
+                        >
+                            <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
+                        </Block>
+                    </View>
+                </TestCase>
+                <TestCase itShould="left:设置left为true" tags={['C_API']} >
+                    <View style={{ height: 150 }}>
+                        <Block
+                            left={true}
+                            bottom={true}
+                        >
+                            <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
+                        </Block>
+                    </View>
+                </TestCase>
+                <TestCase itShould="left:设置left为false" tags={['C_API']} >
+                    <View style={{ height: 150 }}>
+                        <Block
+                            left={false}
+                            bottom={false}
+                        >
+                            <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
+                        </Block>
+                    </View>
+                </TestCase>
                 <TestCase itShould="middle:设置middle样式为true" tags={['C_API']} >
                     <View style={{ height: 150 }}>
                         <Block
@@ -165,6 +187,32 @@ const BlockDemo = () => {
                         </Block>
                     </View>
                 </TestCase>
+
+                <TestCase itShould="flex:0" tags={['C_API']} >
+                    <View style={{ flex: 1, height: 150 }}>
+                        <Block flex={0} backgroundColor="green">
+                            <Text>12312</Text>
+                            <Text>2222</Text>
+                        </Block>
+                        <Block flex={0} backgroundColor="blue">
+                            <Text>aaaa</Text>
+                            <Text>bbb</Text>
+                        </Block>
+                    </View>
+                </TestCase>
+                <TestCase itShould="flex:1" tags={['C_API']} >
+                    <View style={{ flex: 1, height: 150 }}>
+                        <Block flex={1} backgroundColor="green">
+                            <Text>12312</Text>
+                            <Text>2222</Text>
+                        </Block>
+                        <Block flex={1} backgroundColor="blue">
+                            <Text>aaaa</Text>
+                            <Text>bbb</Text>
+                        </Block>
+                    </View>
+                </TestCase>
+
                 <TestCase itShould="row:flexDirection: 'row' is true" tags={['C_API']} >
                     <View style={{ height: 150 }}>
                         <Block
