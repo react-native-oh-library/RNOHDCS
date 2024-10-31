@@ -1,19 +1,24 @@
 import React, {useState} from 'react';
-import {StyleSheet, TextInput, View} from 'react-native';
+import {
+  StyleSheet,
+  TextInput,
+  View,
+  TouchableOpacity,
+  Text,
+} from 'react-native';
 import InputScrollView from 'react-native-input-scroll-view';
 
-const multilineInputStyleInput = () => {
+const keyboardOffsetInput = () => {
   const [text, setText] = useState('');
   return (
     <View style={styles.container}>
-      <InputScrollView multilineInputStyle={styles.multilineInput}>
+      <InputScrollView keyboardOffset={100}>
         <View style={styles.placeholder} />
         <TextInput
-          style={styles.multilineInput}
+          style={styles.input}
           value={text}
-          onChangeText={setText}
           multiline
-          placeholder="Type here..."
+          onChangeText={setText}
         />
       </InputScrollView>
     </View>
@@ -29,10 +34,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  multilineInput: {
-    fontSize: 28,
-    fontFamily: 'Arial',
-    lineHeight: 58,
+  input: {
     margin: 20,
     paddingVertical: 10,
     paddingHorizontal: 20,
@@ -42,4 +44,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default multilineInputStyleInput;
+export default keyboardOffsetInput;
