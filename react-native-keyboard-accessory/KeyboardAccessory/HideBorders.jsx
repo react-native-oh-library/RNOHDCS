@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { StyleSheet, View, TextInput, Button, ScrollView,LayoutAnimation,Platform } from "react-native";
+import { StyleSheet, View, TextInput, Button, ScrollView,LayoutAnimation } from "react-native";
 import { KeyboardAccessoryView  } from "react-native-keyboard-accessory";
 
 
-class AccessoryViewExample extends Component {
+class HideBorders extends Component {
   state = {
     text: '',
   };
@@ -18,11 +18,8 @@ class AccessoryViewExample extends Component {
                 style={styles.input}/>
         </ScrollView>
         <KeyboardAccessoryView
-          alwaysVisible={true} 
-          //输入框的背景框的大小
-          bumperHeight={100} 
-          //透明度
-          visibleOpacity={0.5}>
+          hideBorder={true}
+          >
             <View style={styles.textInputView}>
               <TextInput
                 placeholder="Write your message"
@@ -44,8 +41,7 @@ class AccessoryViewExample extends Component {
   }
 }
 
-
-AccessoryViewExample.navigationOptions = {
+HideBorders.navigationOptions = {
   title: "View Example",
 };
 
@@ -82,5 +78,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AccessoryViewExample;
-
+export {HideBorders}

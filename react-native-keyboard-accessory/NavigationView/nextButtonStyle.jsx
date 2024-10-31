@@ -44,7 +44,7 @@ const CustomButton = ({ text, onPress, buttonStyle, textStyle }) => (
   </TouchableOpacity>
 );
 
-class NavigationViewExample extends Component {
+class nextButtonStyle extends Component {
   constructor(props) {
     super(props);
 
@@ -105,23 +105,7 @@ class NavigationViewExample extends Component {
           )}
         </ScrollView>
         <KeyboardAccessoryNavigation
-          doneButton={<CustomButton
-            text="done"
-            buttonStyle={{ backgroundColor: 'red', marginTop: 15 }}
-            textStyle={{ fontSize: 18 }}
-          />}
-          nextButton={<CustomButton
-            text="next"
-            buttonStyle={{ backgroundColor: 'red', marginTop: 15 }}
-            textStyle={{ fontSize: 18 }}
-            onPress={this.handleFocusNext}
-          />}
-          previousButton = {<CustomButton
-            text="pre"
-            buttonStyle={{ backgroundColor: 'red', marginTop: 15 }}
-            textStyle={{ fontSize: 18 }}
-            onPress={this.handleFocusPrevious}
-          />}
+        nextButtonStyle={styles.button}
           avoidKeyboard
           androidAdjustResize
         />
@@ -129,8 +113,8 @@ class NavigationViewExample extends Component {
     );
   }
 }
-NavigationViewExample.navigationOptions = {
-  title: 'Navigation View Example',
+nextButtonStyle.navigationOptions = {
+  title: 'nextButtonStyle',
 }
 
 const styles = StyleSheet.create({
@@ -150,6 +134,21 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 10,
   },
+  accessory: {
+    borderTopWidth: 10,          // 设置顶部边框宽度
+    borderTopColor: '#ff5722',     // 设置顶部边框颜色
+    height: 80,                 // 设置高度
+    justifyContent: 'center',   // 垂直居中
+    alignItems: 'center',       // 水平居中
+  },
+  button: {
+    backgroundColor: '#ff5722', // 设置背景颜色
+    paddingHorizontal: 20,      // 设置水平内边距
+    paddingVertical: 10,        // 设置垂直内边距
+    borderRadius: 5,            // 设置圆角
+    justifyContent: 'center',   // 垂直居中
+    alignItems: 'center',       // 水平居中
+  },
 });
 
-export default NavigationViewExample;
+export {nextButtonStyle}

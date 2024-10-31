@@ -3,7 +3,7 @@ import { StyleSheet, View, TextInput, Button, ScrollView,LayoutAnimation } from 
 import { KeyboardAccessoryView  } from "react-native-keyboard-accessory";
 
 
-class AccessoryViewExample extends Component {
+class HeightProperty extends Component {
   state = {
     text: '',
   };
@@ -18,11 +18,9 @@ class AccessoryViewExample extends Component {
                 style={styles.input}/>
         </ScrollView>
         <KeyboardAccessoryView
-          alwaysVisible={true} 
-          animateOn={'all'}
-          animationConfig={FadeAnimation}
+          heightProperty={'minHeight'}
+          avoidKeyboard={true}
           >
-          
             <View style={styles.textInputView}>
               <TextInput
                 placeholder="Write your message"
@@ -44,21 +42,7 @@ class AccessoryViewExample extends Component {
   }
 }
 
-const FadeAnimation = ( duration, easing ) => {
-  return {
-    duration: 600,
-    create: {
-      duration: 600,
-      type: LayoutAnimation.Types.linear,
-      property: LayoutAnimation.Properties.opacity
-    },
-    update: {
-      type: LayoutAnimation.Types.linear,
-    }
-  }
-};
-
-AccessoryViewExample.navigationOptions = {
+HeightProperty.navigationOptions = {
   title: "View Example",
 };
 
@@ -95,5 +79,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AccessoryViewExample;
-
+export {HeightProperty}

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { StyleSheet, View, TextInput, Button, ScrollView,LayoutAnimation} from "react-native";
+import { StyleSheet, View, TextInput, Button, ScrollView,LayoutAnimation } from "react-native";
 import { KeyboardAccessoryView  } from "react-native-keyboard-accessory";
 
 
-class AccessoryViewExample extends Component {
+class AlwaysVisible extends Component {
   state = {
     text: '',
   };
@@ -18,20 +18,8 @@ class AccessoryViewExample extends Component {
                 style={styles.input}/>
         </ScrollView>
         <KeyboardAccessoryView
-          animateOn={'all'}
-          animationConfig={{
-            duration: 500,
-            create: {
-              duration: 500,
-              type: LayoutAnimation.Types.linear,
-              property: LayoutAnimation.Properties.opacity
-            },
-            update: {
-              type: LayoutAnimation.Types.linear,
-            }
-          }}
+          alwaysVisible={true}
           >
-          
             <View style={styles.textInputView}>
               <TextInput
                 placeholder="Write your message"
@@ -53,8 +41,7 @@ class AccessoryViewExample extends Component {
   }
 }
 
-
-AccessoryViewExample.navigationOptions = {
+AlwaysVisible.navigationOptions = {
   title: "View Example",
 };
 
@@ -88,8 +75,7 @@ const styles = StyleSheet.create({
   },
   textInputButton: {
     flexShrink: 1,
-  }
+  },
 });
 
-export default AccessoryViewExample;
-
+export {AlwaysVisible}

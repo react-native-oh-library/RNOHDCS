@@ -10,7 +10,7 @@ export default function KeyboardAwareTabBarTest() {
   const TabBar = () => {
   return (
     <View style={{ backgroundColor: 'lightblue', padding: 10 }}>
-      <Text>This is a TabBar</Text>
+      <Text>这是一个TabBar哦~</Text>
     </View>
   );
 };
@@ -43,3 +43,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
 });
+export {KeyboardAwareTabBarTest}

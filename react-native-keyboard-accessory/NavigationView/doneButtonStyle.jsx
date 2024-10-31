@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+
 import {
   StyleSheet,
   View,
   TextInput,
   ScrollView,
+  Text,
+  TouchableOpacity,
 } from 'react-native';
+
 import {KeyboardAccessoryNavigation } from 'react-native-keyboard-accessory';
 
 
@@ -33,7 +37,14 @@ let inputs = [
   },
 ];
 
-class NavigationViewExample extends Component {
+
+const CustomButton = ({ text, onPress, buttonStyle, textStyle }) => (
+  <TouchableOpacity style={[styles.button, buttonStyle]} onPress={onPress}>
+    <Text style={[styles.text, textStyle]}>{text}</Text>
+  </TouchableOpacity>
+);
+
+class doneButtonStyle extends Component {
   constructor(props) {
     super(props);
 
@@ -94,11 +105,7 @@ class NavigationViewExample extends Component {
           )}
         </ScrollView>
         <KeyboardAccessoryNavigation
-          doneButtonTitle="自定义按钮" 
-          tintColor={'#ff00d4'}
-		      accessoryStyle={styles.accessory}
-          onNext={this.handleFocusNext}
-          onPrevious={this.handleFocusPrevious}
+        doneButtonStyle={{borderColor:'red',backgroundColor:'green'}}
           avoidKeyboard
           androidAdjustResize
         />
@@ -106,8 +113,8 @@ class NavigationViewExample extends Component {
     );
   }
 }
-NavigationViewExample.navigationOptions = {
-  title: 'Navigation View Example',
+doneButtonStyle.navigationOptions = {
+  title: 'doneButtonStyle',
 }
 
 const styles = StyleSheet.create({
@@ -134,7 +141,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',   // 垂直居中
     alignItems: 'center',       // 水平居中
   },
-
 });
 
-export default NavigationViewExample;
+export {doneButtonStyle}
+
