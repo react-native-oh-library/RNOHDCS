@@ -7,6 +7,7 @@ import {
   useCameraPermission,
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
+import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 
 export function PhotoTest() {
   const device = useCameraDevice('back');
@@ -40,20 +41,24 @@ export function PhotoTest() {
     <Tester>
       <TestSuite name="photo:启用拍照功能">
         <TestCase itShould={''}>
-          {path && (
-            <View>
-              <Image
-                source={{uri: path}}
-                style={{width: 200, height: 200}}
-                resizeMode="contain"
-              />
-            </View>
-          )}
-          {photoFile && (
-            <View>
-              <Text>拍照结果:{photoFile}</Text>
-            </View>
-          )}
+        <View>
+            <Text>拍照结果:{photoFile}</Text>
+            {path && (
+              <View style={{height: 50}}>
+                <Button
+                  title="SaveAsset"
+                  onPress={() => {
+                    CameraRoll.saveAsset(path).then(res => {
+                      setTimeout(() => {
+                        setPhotoFile('');
+                        setPath('');
+                      }, 500);
+                    });
+                  }}
+                />
+              </View>
+            )}
+          </View>
           <Camera
             style={style.cameraPreview}
             ref={camera}

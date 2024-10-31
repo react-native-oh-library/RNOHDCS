@@ -1,4 +1,4 @@
-import {Button, Image, StyleSheet, Text, View} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 import React, {useRef, useState} from 'react';
 import {
   Camera,
@@ -7,6 +7,7 @@ import {
   useCameraPermission,
 } from 'react-native-vision-camera';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
+import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 
 export function takePhotoTest() {
   const device = useCameraDevice('back');
@@ -28,36 +29,44 @@ export function takePhotoTest() {
 
   // 属性
 
-  const [photoFile, setPhotoFile] = useState<string>('');
-  const [path, setPath] = useState('');
   const [isActive, setIsActive] = useState(true);
   const onError = (e: any) => {
     e && JSON.stringify(e);
   };
   // 拍照
+
+  const [photoFile, setPhotoFile] = useState<string>('');
+  const [photoPath, setPhotoPath] = useState<string>('');
+  // 拍照
   const onTakePhoto = async () => {
-    setPath('')
-    setPhotoFile('')
+    setPhotoFile('');
+    setPhotoPath('');
     const result = await camera.current?.takePhoto();
     result && setPhotoFile(JSON.stringify(result));
-    result?.path && setPath(result.path);
+    result?.path && setPhotoPath(result?.path);
   };
 
   return (
     <Tester>
       <TestSuite name="takePhoto">
         <TestCase itShould={`拍照功能`}>
-        {path && (
-            <View>
-              <Image
-                source={{uri: path}}
-                style={{width: 200, height: 200}}
-                resizeMode="contain"
-              />
-            </View>
-          )}
           <View>
             <Text>拍照结果:{photoFile}</Text>
+            {photoPath && (
+              <View style={{height: 50}}>
+                <Button
+                  title="SaveAsset"
+                  onPress={() => {
+                    CameraRoll.saveAsset(photoPath).then(res => {
+                      setTimeout(() => {
+                        setPhotoFile('');
+                        setPhotoPath('');
+                      }, 500);
+                    });
+                  }}
+                />
+              </View>
+            )}
           </View>
           <Camera
             style={style.cameraPreview}
