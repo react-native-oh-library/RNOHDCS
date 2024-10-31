@@ -160,6 +160,48 @@ export default function () {
             }
           }}></BarChart>
         </TestCase>
+        <TestCase itShould="{
+              pointerConfig: {
+                shiftPointerLabelX: 10,
+                shiftPointerLabelY: 20,
+                pointerLabelWidth: 40,
+                pointerLabelHeight: 30,
+                autoAdjustPointerLabelPosition:false,
+                pointerLabelComponent: (items) => {
+                  return (
+                    <Text style={{
+                      backgroundColor: 'black',
+                      color: 'white',
+                      fontSize: 14,
+                      marginBottom: 6,
+                      textAlign: 'center',
+                    }}>{items[0].value}</Text>
+                  )
+                }
+              }
+            }">
+          <Text>请点击条形图，观察效果</Text>
+          <BarChart data={data} {...{
+            pointerConfig: {
+              shiftPointerLabelX: 10,
+              shiftPointerLabelY: 20,
+              pointerLabelWidth: 40,
+              pointerLabelHeight: 30,
+              autoAdjustPointerLabelPosition: false,
+              pointerLabelComponent: (items) => {
+                return (
+                  <Text style={{
+                    backgroundColor: 'black',
+                    color: 'white',
+                    fontSize: 14,
+                    marginBottom: 6,
+                    textAlign: 'center',
+                  }}>{items[0].value}</Text>
+                )
+              }
+            }
+          }}></BarChart>
+        </TestCase>
       </ScrollView>
     </Tester >
 
