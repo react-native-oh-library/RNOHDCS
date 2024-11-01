@@ -18,11 +18,12 @@ function ModalDemo() {
   setVisible({ ...visible, [name]: !visible[name] });
 
   const containerStyle = {backgroundColor: 'white', padding: 20, height:200};
+  const containerStyle2 = {backgroundColor: 'red', padding: 30, height:100};
 
 
   const ModalProps = [
     {
-      key: ' Menu style:visible={getVisible("menu1")}(点击Show可切换visible值为true)',
+      key: ' Modal style:visible={getVisible("Modal1")}(点击Show可切换visible值为true)',
       value: {
         visible :_getVisible('Modal1'),
         onDismiss:_showModal('Modal1'),
@@ -34,7 +35,7 @@ function ModalDemo() {
       }
     },
     {
-      key: ' Menu style:dismissable={true}',
+      key: ' Modal style:dismissable={true}',
       value: {
         visible :_getVisible('Modal2'),
         onDismiss:_showModal('Modal2'),
@@ -47,7 +48,7 @@ function ModalDemo() {
       }
     },
     {
-      key: ' Menu style:dismissable={false}',
+      key: ' Modal style:dismissable={false}',
       value: {
         visible :_getVisible('Modal3'),
         onDismiss:_showModal('Modal3'),
@@ -63,7 +64,7 @@ function ModalDemo() {
       }
     },
     {
-      key: ' Menu style:dismissableBackButton={false}',
+      key: ' Modal style:dismissableBackButton={false}',
       value: {
         visible :_getVisible('Modal4'),
         onDismiss:_showModal('Modal4'),
@@ -76,7 +77,7 @@ function ModalDemo() {
       }
     },
     {
-      key: ' Menu style:dismissableBackButton={true}',
+      key: ' Modal style:dismissableBackButton={true}',
       value: {
         visible :_getVisible('Modal5'),
         onDismiss:_showModal('Modal5'),
@@ -89,11 +90,11 @@ function ModalDemo() {
       }
     },
     {
-      key: ' Menu style:contentContainerStyle={containerStyle}',
+      key: ' Modal style:contentContainerStyle={containerStyle2}',
       value: {
         visible :_getVisible('Modal6'),
         onDismiss:_showModal('Modal6'),
-        contentContainerStyle:containerStyle
+        contentContainerStyle:containerStyle2
       },
       buttonValue:{
         style:{marginTop: 30},
@@ -101,7 +102,7 @@ function ModalDemo() {
       }
     },
     {
-      key: ' Menu style:style={backgroundColor:MD2Colors.red100}',
+      key: ' Modal style:style={backgroundColor:MD2Colors.red100}',
       value: {
         visible :_getVisible('Modal7'),
         onDismiss:_showModal('Modal7'),
@@ -114,7 +115,7 @@ function ModalDemo() {
       }
     },
     {
-      key: ' Menu style:theme={ colors: { primary: "green" } }',
+      key: ' Modal style:theme={ colors: { primary: "green" } }',
       value: {
         visible :_getVisible('Modal8'),
         onDismiss:_showModal('Modal8'),
@@ -127,26 +128,25 @@ function ModalDemo() {
       }
     },
     {
-      key: ' Menu style:testID={"Menu1"}',
+      key: ' Modal style:testID={"Modal1"}',
       value: {
         visible :_getVisible('Modal9'),
         onDismiss:_showModal('Modal9'),
         contentContainerStyle:containerStyle,
-        testID :'Menu1'
+        testID :'Modal1'
       },
       buttonValue:{
         style:{marginTop: 30},
         onPress:_showModal('Modal9'),
       }
-    }
-    ,
+    },
     {
-      key: ' Menu style:testID={"Menu2"}',
+      key: ' Modal style:testID={"Modal2"}',
       value: {
         visible :_getVisible('Modal10'),
         onDismiss:_showModal('Modal10'),
         contentContainerStyle:containerStyle,
-        testID :'Menu2'
+        testID :'Modal2'
       },
       buttonValue:{
         style:{marginTop: 30},

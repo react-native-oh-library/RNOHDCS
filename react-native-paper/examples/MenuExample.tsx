@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {  View,StyleSheet, ScrollView} from 'react-native';
-import {Menu,Divider,Button, MD2Colors} from 'react-native-paper';
+import {Menu,Divider,Button, MD2Colors, MD3DarkTheme} from 'react-native-paper';
 type MenuVisibility = {
   [key: string]: boolean | undefined;
 };
@@ -69,8 +69,8 @@ function MenuDemo() {
     {
       key: ' Menu style:statusBarHeight={"20"}',
       value: {
-        visible :_getVisible('menu5'),
-        onDismiss:_toggleMenu('menu5'),
+        visible :_getVisible('menu55'),
+        onDismiss:_toggleMenu('menu55'),
         anchor:<Button mode="outlined" onPress={_toggleMenu('menu5')}>default Menu</Button>,
         statusBarHeight:20
       }
@@ -106,7 +106,7 @@ function MenuDemo() {
         visible :_getVisible('menu7'),
         onDismiss:_toggleMenu('menu7'),
         style:{backgroundColor:MD2Colors.red100},
-        contentStyle:{backgroundColor:MD2Colors.red100},
+        // contentStyle:{backgroundColor:MD2Colors.red100},
         anchor:<Button mode="outlined" onPress={_toggleMenu('menu7')}>default Menu</Button>,
       }
     },
@@ -129,12 +129,13 @@ function MenuDemo() {
       }
     },
     {
-      key: ' Menu style:mode = { colors: { primary:"green"} }',
+      // 修改
+      key: ' Menu style:theme = MD3DarkTheme',
       value: {
         visible :_getVisible('menu10'),
         onDismiss:_toggleMenu('menu10'),
         anchor:<Button mode="outlined" onPress={_toggleMenu('menu10')}>default Menu</Button>,
-        theme :{ colors: { primary: 'green' } }
+        theme : MD3DarkTheme
       }
     },
     {
@@ -331,6 +332,7 @@ function MenuDemo() {
       value: {
         title:'Redo',
         leadingIcon:'redo',
+        accessible: true,
         accessibilityLabel :'accessibility Label'
       }
     },
@@ -339,7 +341,26 @@ function MenuDemo() {
       value: {
         title:'Redo',
         leadingIcon:'redo',
+        accessible: true,
         accessibilityLabel :'accessibility Label1'
+      }
+    },
+    {
+      key: ' MenuItem style:accessibilityState = { disabled: true }',
+      value: {
+        title:'Redo',
+        leadingIcon:'redo',
+        accessible: true,
+        accessibilityState : { disabled: true }
+      }
+    },
+    {
+      key: ' MenuItem style:accessibilityState = { disabled: false }',
+      value: {
+        title:'Redo',
+        leadingIcon:'redo',
+        accessible: true,
+        accessibilityState : { disabled: false }
       }
     },
   ]
@@ -368,7 +389,7 @@ function MenuDemo() {
             return (
               <TestCase itShould={item.key}  key={item.key}>
                 <View style={{ flex: 1 }}>
-                  <Menu.Item {...item.value}/>
+                  <Menu.Item {...item.value} />
                 </View>
               </TestCase>
             );

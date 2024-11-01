@@ -4,7 +4,7 @@ import { Animated, ScrollView, StyleSheet, View } from 'react-native';
 import {
     Badge,
     IconButton,
-    MD2Colors,
+    MD2Colors,MD3DarkTheme, MD3LightTheme
 } from 'react-native-paper';
 import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
 import { useEffect, useRef } from 'react';
@@ -114,7 +114,7 @@ export function BadgeTest() {
                 <TestCase  itShould={item.key}  key={item.key} > 
                  <View style={styles.row}>
                     <View style={styles.item}>
-                        <IconButton icon="palette-swatch" size={36} style={styles.button} />
+                        <IconButton icon="palette-swatch" size={36} style={styles.button} theme={MD3DarkTheme }/>
                         <Badge  {...item.value}>
                             12
                         </Badge>

@@ -153,7 +153,7 @@ export function DataTableText() {
 
   const DataTablePaginationProps = [
     {
-        key: 'DataTableHeader style: page ={_getPage("DataTablePagination")}',
+        key: 'DataTablePaginationProps style: page ={_getPage("DataTablePagination")}',
         value: {
           page:_getPage('DataTablePagination'),
           numberOfPages:items.length,
@@ -168,7 +168,7 @@ export function DataTableText() {
         } 
     },
     {
-      key: 'DataTableHeader style: numberOfPages = {items.length}',
+      key: 'DataTablePaginationProps style: numberOfPages = {items.length}',
       value: {
         page:_getPage('DataTablePagination1'),
         onPageChange:_showPage('DataTablePagination1'),
@@ -183,7 +183,7 @@ export function DataTableText() {
       } 
     },
     {
-      key: 'DataTableHeader fuction: onPageChange  = {_showPage("DataTablePagination2")}',
+      key: 'DataTablePaginationProps fuction: onPageChange  = {_showPage("DataTablePagination2")}',
       value: {
         page:_getPage('DataTablePagination2'),
         onPageChange:_showPage('DataTablePagination2'),
@@ -198,7 +198,7 @@ export function DataTableText() {
       } 
     },
     {
-      key: 'DataTableHeader fuction: showFastPaginationControls  = {true}',
+      key: 'DataTablePaginationProps fuction: showFastPaginationControls  = {true}',
       value: {
         page:_getPage('DataTablePagination2'),
         onPageChange:_showPage('DataTablePagination2'),
@@ -213,7 +213,7 @@ export function DataTableText() {
       } 
     },
     {
-      key: 'DataTableHeader fuction: showFastPaginationControls  = {false}',
+      key: 'DataTablePaginationProps fuction: showFastPaginationControls  = {false}',
       value: {
         page:_getPage('DataTablePagination2'),
         onPageChange:_showPage('DataTablePagination2'),
@@ -228,7 +228,7 @@ export function DataTableText() {
       } 
     },
     {
-      key: 'DataTableHeader fuction: paginationControlRippleColor  = {MD2Colors.red100}',
+      key: 'DataTablePaginationProps fuction: paginationControlRippleColor  = {MD2Colors.red100}',
       value: {
         page:_getPage('DataTablePagination2'),
         onPageChange:_showPage('DataTablePagination2'),
@@ -243,7 +243,7 @@ export function DataTableText() {
       } 
     },
     {
-      key: 'DataTableHeader style: theme  = { colors: { primary: "green" } }',
+      key: 'DataTablePaginationProps style: theme  = { colors: { primary: "green" } }',
       value: {
         page:_getPage('DataTablePagination2'),
         onPageChange:_showPage('DataTablePagination2'),
@@ -257,7 +257,7 @@ export function DataTableText() {
       } 
     },
     {
-      key: 'DataTableHeader style: numberOfItemsPerPage  = { numberOfItemsPerPage}',
+      key: 'DataTablePaginationProps style: numberOfItemsPerPage  = { numberOfItemsPerPage}',
       value: {
         page:_getPage('DataTablePagination2'),
         onPageChange:_showPage('DataTablePagination2'),
@@ -270,7 +270,7 @@ export function DataTableText() {
       } 
     },
     {
-      key: 'DataTableHeader style: numberOfItemsPerPageList  = { numberOfItemsPerPageList}',
+      key: 'DataTablePaginationProps style: numberOfItemsPerPageList  = { numberOfItemsPerPageList}',
       value: {
         page:_getPage('DataTablePagination2'),
         onPageChange:_showPage('DataTablePagination2'),
@@ -283,7 +283,7 @@ export function DataTableText() {
       } 
     },
     {
-      key: 'DataTableHeader style: dropdownItemRippleColor  = { MD2Colors.red100}',
+      key: 'DataTablePaginationProps style: dropdownItemRippleColor  = { MD2Colors.red100}',
       value: {
         page:_getPage('DataTablePagination2'),
         onPageChange:_showPage('DataTablePagination2'),
@@ -297,7 +297,7 @@ export function DataTableText() {
       } 
     },
     {
-      key: 'DataTableHeader style: selectPageDropdownRippleColor  = { MD2Colors.red100}',
+      key: 'DataTablePaginationProps style: selectPageDropdownRippleColor  = { MD2Colors.red100}',
       value: {
         page:_getPage('DataTablePagination2'),
         onPageChange:_showPage('DataTablePagination2'),
@@ -311,7 +311,7 @@ export function DataTableText() {
       } 
     },
     {
-      key: 'DataTableHeader style: selectPageDropdownLabel  = { "Rows per page1"}',
+      key: 'DataTablePaginationProps style: selectPageDropdownLabel  = { "Rows per page1"}',
       value: {
         page:_getPage('DataTablePagination2'),
         onPageChange:_showPage('DataTablePagination2'),
@@ -325,7 +325,7 @@ export function DataTableText() {
       } 
     },
     {
-      key: 'DataTableHeader style: selectPageDropdownAccessibilityLabel  = { "selectPageDropdownAccessibilityLabel"}',
+      key: 'DataTablePaginationProps style: selectPageDropdownAccessibilityLabel  = { "selectPageDropdownAccessibilityLabel"}',
       value: {
         page:_getPage('DataTablePagination2'),
         onPageChange:_showPage('DataTablePagination2'),
@@ -339,7 +339,7 @@ export function DataTableText() {
       } 
     },
     {
-      key: 'DataTableHeader style: selectPageDropdownAccessibilityLabel  = { "selectPageDropdownAccessibilityLabel1"}',
+      key: 'DataTablePaginationProps style: selectPageDropdownAccessibilityLabel  = { "selectPageDropdownAccessibilityLabel1"}',
       value: {
         page:_getPage('DataTablePagination2'),
         onPageChange:_showPage('DataTablePagination2'),
@@ -353,7 +353,7 @@ export function DataTableText() {
       } 
     },
     {
-      key: 'DataTableHeader style: label  = { "Pagination1"}',
+      key: 'DataTablePaginationProps style: label  = { "Pagination1"}',
       value: {
         page:_getPage('DataTablePagination2'),
         onPageChange:_showPage('DataTablePagination2'),
@@ -366,7 +366,7 @@ export function DataTableText() {
       } 
     },
     {
-      key: 'DataTableHeader style: accessibilityLabel  = { "accessibilityLabel1"}',
+      key: 'DataTablePaginationProps style: accessibilityLabel  = { "accessibilityLabel1"}',
       value: {
         page:_getPage('DataTablePagination2'),
         onPageChange:_showPage('DataTablePagination2'),
@@ -379,7 +379,7 @@ export function DataTableText() {
       } 
     },
     {
-      key: 'DataTableHeader style: accessibilityLabel  = { "accessibilityLabel1"}',
+      key: 'DataTablePaginationProps style: accessibilityLabel  = { "accessibilityLabel1"}',
       value: {
         page:_getPage('DataTablePagination2'),
         onPageChange:_showPage('DataTablePagination2'),

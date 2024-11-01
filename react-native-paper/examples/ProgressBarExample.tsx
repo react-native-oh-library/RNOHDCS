@@ -99,7 +99,7 @@ function ProgressBarDemo() {
       key: ' ProgressBar style:theme={theme}',
       value: {
         progress:0.75,
-        color:MD3Colors.error50,
+        // color:MD3Colors.error50,
         theme:theme,
       },
     },

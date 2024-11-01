@@ -17,9 +17,11 @@ type CheckboxVisibility = {
 type status = 'checked' | 'unchecked' | 'indeterminate';
 export function CheckboxText() {
     const [visible, setVisible] = React.useState<CheckboxVisibility>({});
+
     const _getVisible = (name: string) => !!visible[name];
     const _showCheckbox = (name: string) => () =>
     setVisible({ ...visible, [name]: !visible[name] });
+
 
     const _onLongPress =() => {
         console.info('fuction onLongPress ')
@@ -114,7 +116,7 @@ export function CheckboxText() {
             key: 'ChecAndroidkboxProps fuction: onPress = {_showCheckbox("ChecAndroids")}',
             value: {
                 status:_getVisible('ChecAndroids') ? 'checked' : 'unchecked' as status,
-                onPress:_showCheckbox('ChecAndroid1'),
+                onPress:_showCheckbox('ChecAndroids'),
             } 
         },
         {

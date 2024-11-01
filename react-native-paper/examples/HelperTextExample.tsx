@@ -150,6 +150,22 @@ function HelperTextDemo() {
               </TestCase>
               );
           })},
+          <TestCase itShould='HelpText disabled: false'>
+                  <View>
+                    <TextInput label={'email9'} value={'123'} />
+                    <HelperText type='info' disabled={false}>
+                      Email address is invalid!
+                    </HelperText>
+                  </View>
+          </TestCase>
+          <TestCase itShould='HelpText disabled: true'>
+                  <View>
+                    <TextInput label={'email9'} value={'123'} />
+                    <HelperText type='info' disabled={true}>
+                      Email address is invalid!
+                    </HelperText>
+                  </View>
+          </TestCase>
      </TestSuite>
     </Tester>
     </ScrollView>

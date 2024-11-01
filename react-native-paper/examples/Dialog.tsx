@@ -2,7 +2,8 @@ import * as React from 'react';
 import { Platform, ScrollView, StyleSheet, TextComponent, View } from 'react-native';
 
 import { Button, Portal,
-  Dialog,Text, MD2Colors
+  Dialog,Text, MD2Colors,
+  MD3DarkTheme
 } from 'react-native-paper';
 
 type DialogVisibility = {
@@ -194,6 +195,24 @@ const DialogIconProps = [
         theme:{ colors: { primary: 'green' }}
       }
     },
+    {
+      key: 'DialogIcon style:theme = MD3DarkTheme',
+      buttonKey:'Dialog.Actions button',
+      buttonValue:{
+        onPress:_showVisibility("DialogIcon99"),
+        style:styles.button
+      },
+      value: {
+        visible:_getVisibility("DialogIcon99"),
+        onDismiss:_showVisibility('DialogIcon99'),
+      }, 
+      dialogIconValue:{
+        icon:'alert',
+        size:50,
+        theme: MD3DarkTheme,
+        // theme: { colors: { primary: 'red' }}
+      }
+    },
   ]
 
   const DialogScrollAreaProps = [
@@ -301,7 +320,7 @@ const DialogIconProps = [
                  <Button  {...item.buttonValue}>{item.buttonKey}</Button>
                  <Portal>
                   <Dialog {...item.value}>
-                   <Dialog.ScrollArea theme={{ colors: { primary: 'green' } }} style={{backgroundColor:MD2Colors.red100}} >
+                   <Dialog.ScrollArea theme={{ colors: { primary: 'green' } }} style={{backgroundColor:MD2Colors.red100, height: 100}} >
                     <ScrollView contentContainerStyle={{paddingHorizontal: 24}}>
                       <Text>
                         Material is the metaphor

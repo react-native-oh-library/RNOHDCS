@@ -84,7 +84,7 @@ export function ChipText() {
       text:'Chip Content' 
      },
      {
-      key: 'Chip style: icon  is <Image source={require("../assets/images/avatar.png")} accessibilityIgnoresInvertColors/>',
+      key: 'Chip style: avtar  is <Image source={require("../assets/images/avatar.png")} accessibilityIgnoresInvertColors/>',
       value: {
         style:[styles.chip],
         avatar:<Image
