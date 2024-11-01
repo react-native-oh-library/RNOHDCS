@@ -89,7 +89,11 @@ export default function () {
             )
           })
         }
-        <TestCase itShould={'s'} tags={['C_API']}>
+        <TestCase itShould={`pointerConfig= { {pointerColorsForDataSet: ['green', 'yellow', 'blue', 'blue', 'black']}}
+            dataSet = {[
+              {data : [{ value: 50 }, { value: 80 }, { value: 90 }, { value: 70 },] },
+              {data : [{ value: 10 }, { value: 20 }, { value: 30 }, { value: 40 }] }
+            ]}`} tags={['C_API']}>
           <Text>请点击第一个顶点上显示的数据点，观察效果</Text>
           <LineChart pointerConfig= { {pointerColorsForDataSet: ['green', 'yellow', 'blue', 'blue', 'black']}}
             dataSet = {[

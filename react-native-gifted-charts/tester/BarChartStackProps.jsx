@@ -18,8 +18,6 @@ export default function () {
         ],
       label: 'Jan',
       labelTextStyle: { color: 'green' },
-      barWidth: 40,
-      spacing: 30,
       borderRadius: 10,
     },
     {
@@ -34,14 +32,37 @@ export default function () {
         ],
       label: 'Feb',
       labelTextStyle: { color: 'blue' },
-      barWidth: 60,
-      spacing: 30,
       borderRadius: 15,
+    },
+    {
+      stacks:
+        [
+          {
+            value: 8, color: 'red', showXAxisIndex: true,
+          },
+          {
+            value: 17, color: 'blue', marginBottom: 1
+          },
+        ],
+      label: 'Feb',
+      labelTextStyle: { color: 'blue' },
     },
   ]
   const stackBarChartProps = [
     {
       stackData: stackDatas,
+    },
+    {
+      stackData: stackDatas,spacing:10
+    },
+    {
+      stackData: stackDatas,spacing:40
+    },
+    {
+      stackData: stackDatas, barWidth:10
+    },
+    {
+      stackData: stackDatas, barWidth:80
     },
     {
       barBorderRadius: 10, stackData: stackDatas,
@@ -74,10 +95,10 @@ export default function () {
       barBorderBottomRightRadius: 20, stackData: stackDatas,
     },
     {
-      stackBorderRadius: 10, stackData: stackDatas,
+      stackBorderRadius: 0, stackData: stackDatas,
     },
     {
-      stackBorderRadius: 20, stackData: stackDatas,
+      stackBorderRadius: 60, stackData: stackDatas,
     },
     {
       stackBorderTopLeftRadius: 10, stackData: stackDatas,
