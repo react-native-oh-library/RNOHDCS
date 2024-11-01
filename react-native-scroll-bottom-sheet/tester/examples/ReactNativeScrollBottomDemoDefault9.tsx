@@ -47,7 +47,9 @@ export default function ScrollBottomSheetDemoDefault9() {
         )}
         onSettle={onSettleCallback}
         topInset={100}
-        animationConfig={{}}
+        animationConfig={{
+          duration: 2000,
+        }}
         innerRef={scrollRef}
         enableOverScroll={false}
         containerStyle={styles.containerStyle}
