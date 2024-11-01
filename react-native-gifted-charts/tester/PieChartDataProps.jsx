@@ -115,6 +115,25 @@ export default function () {
         }
         <TestCase itShould="{
           showText: true,
+          showTextBackground: true,
+          data: [
+            { value: 60, text: '60', textBackgroundColor: 'red', textBackgroundRadius: 10 },
+            { value: 70, text: '70', textBackgroundColor: 'yellow', textBackgroundRadius: 20 },
+            { value: 40, text: '40', textBackgroundColor: 'blue', textBackgroundRadius: 30  }
+          ],
+        }">
+          <PieChart data={pieData} {...{
+            showText: true,
+            showTextBackground: true,
+            data: [
+              { value: 60, text: '60', textBackgroundColor: 'red', textBackgroundRadius: 10  },
+              { value: 70, text: '70', textBackgroundColor: 'yellow', textBackgroundRadius: 20 },
+              { value: 40, text: '40', textBackgroundColor: 'blue', textBackgroundRadius: 30 }
+            ],
+          }}></PieChart>
+        </TestCase>
+        <TestCase itShould="{
+          showText: true,
           data: [
             { value: 60, text: '60', labelPosition: 'onBorder', onPress: () => { setOnPressText('pieDataItem onPress is trigger text:60') } },
             { value: 70, text: '70', labelPosition: 'outward', onPress: () => { setOnPressText('pieDataItem onPress is trigger text:70') } },
