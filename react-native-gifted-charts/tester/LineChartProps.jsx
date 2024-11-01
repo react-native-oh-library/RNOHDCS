@@ -25,22 +25,6 @@ export default function () {
     { width: 100 }, { width: 200 },
     { height: 100 }, { height: 200 },
     {
-      overflowTop: 20,
-      data: [
-        { value: 50, dataPointText: '50', dataPointLabelWidth: 15, showStrip: true, },
-        { value: 80, dataPointText: '80', dataPointLabelWidth: 20, showStrip: true, },
-        { value: 90, dataPointText: '90', dataPointLabelWidth: 25, showStrip: true, },
-        { value: 70, dataPointText: '70', dataPointLabelWidth: 30, showStrip: true, }]
-    },
-    {
-      overflowTop: 100,
-      data: [
-        { value: 50, dataPointText: '50', dataPointLabelWidth: 15, showStrip: true, },
-        { value: 80, dataPointText: '80', dataPointLabelWidth: 20, showStrip: true, },
-        { value: 90, dataPointText: '90', dataPointLabelWidth: 25, showStrip: true, },
-        { value: 70, dataPointText: '70', dataPointLabelWidth: 30, showStrip: true, }]
-    },
-    {
       overflowBottom: -10,
       data: [
         { value: 50, dataPointText: '50', dataPointLabelWidth: 15, showStrip: true, },
@@ -70,13 +54,12 @@ export default function () {
     { spacing: 30 }, { spacing: 60 },
     { adjustToWidth: true }, { adjustToWidth: false },
     { backgroundColor: 'red' }, { backgroundColor: 'blue' },
-    { sectionColors: 'green', data: [{ value: 5 }, { value: 30, }, { value: 30 }, { value: 30 }, { value: 5 }] },
-    { sectionColors: 'yellow', data: [{ value: 5 }, { value: 30, }, { value: 30 }, { value: 30 }, { value: 5 }] },
+    { sectionColors: ['red', 'yellow', 'pink', 'blue'] }, { sectionColors: ['blue', 'pink'] },
     { disableScroll: true }, { disableScroll: false },
-    { showScrollIndicator: true, indicatorColor: 'black', data: [{ value: 5 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 },{ value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 5 }] },
-    { showScrollIndicator: true, indicatorColor: 'white', data: [{ value: 5 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 },{ value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 5 }] },
-    { showScrollIndicator: true, indicatorColor: 'default', data: [{ value: 5 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 },{ value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 5 }] },
-    { showScrollIndicator: false, indicatorColor: 'white', data: [{ value: 5 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 },{ value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 5 }] },
+    { showScrollIndicator: true, indicatorColor: 'black', data: [{ value: 5 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 5 }] },
+    { showScrollIndicator: true, indicatorColor: 'white', data: [{ value: 5 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 5 }] },
+    { showScrollIndicator: true, indicatorColor: 'default', data: [{ value: 5 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 5 }] },
+    { showScrollIndicator: false, indicatorColor: 'white', data: [{ value: 5 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 30 }, { value: 5 }] },
     { initialSpacing: 10 }, { initialSpacing: 20 },
     { endSpacing: 20 }, { endSpacing: 40 },
     { color: 'red' }, { color: 'blue' },
@@ -352,6 +335,59 @@ export default function () {
             )
           })
         }
+
+        <TestCase itShould='{overflowTop:0}'>
+          <LineChart scrollRef={scrollref} data={lineData}
+            showVerticalLines
+            verticalLinesColor={'white'}
+            overflowTop={0}
+            noOfSections={5}
+            pointerConfig={{
+              initialPointerIndex: 0,
+              stripBehindBars: false,
+              pointerStripHeight: 207,
+              pointerLabelComponent: items => {
+                return (
+                  <View
+                    style={{
+                      width: 36,
+                      padding: 6,
+                      borderWidth: 1,
+                      borderRadius: 8,
+                      backgroundColor: '#eee',
+                    }}>
+                    <Text>{items[0].value}</Text>
+                  </View>
+                );
+              },
+            }}></LineChart>
+        </TestCase>
+        <TestCase itShould='{overflowTop:1}'>
+          <LineChart scrollRef={scrollref} data={lineData}
+            showVerticalLines
+            verticalLinesColor={'white'}
+            overflowTop={1}
+            noOfSections={5}
+            pointerConfig={{
+              initialPointerIndex: 0,
+              stripBehindBars: false,
+              pointerStripHeight: 207,
+              pointerLabelComponent: items => {
+                return (
+                  <View
+                    style={{
+                      width: 36,
+                      padding: 6,
+                      borderWidth: 1,
+                      borderRadius: 8,
+                      backgroundColor: '#eee',
+                    }}>
+                    <Text>{items[0].value}</Text>
+                  </View>
+                );
+              },
+            }}></LineChart>
+        </TestCase>
 
         <TestCase itShould="{focusEnabled: true,delayBeforeUnFocus: 500,
               onFocus: (item, index) => { 

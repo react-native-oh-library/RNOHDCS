@@ -50,29 +50,29 @@ export const axesProps = [
   },
   {
     showReferenceLine2: true,
-    referenceLine2Position: 120,
+    referenceLine2Position: 50,
     referenceLine2Config: {
       thickness: 2, width: 200, color: 'blue', type: 'solid', dashWidth: 10, dashGap: 2, labelText: '第二条线', labelTextStyle: { color: 'blue' }, zIndex: 100, stripBehindBars: true
     },
     showReferenceLine1: true,
-    referenceLine1Position: 100,
+    referenceLine1Position: 20,
     referenceLine1Config: {
       thickness: 2, width: 200, color: 'red', type: 'solid', dashWidth: 10, dashGap: 2, labelText: '第一条线', labelTextStyle: { color: 'blue' }, zIndex: 100, stripBehindBars: true
     },
   },
   {
     showReferenceLine3: true,
-    referenceLine3Position: 120,
+    referenceLine3Position: 90,
     referenceLine3Config: {
       thickness: 2, width: 200, color: 'green', type: 'solid', dashWidth: 10, dashGap: 2, labelText: '第三条线', labelTextStyle: { color: 'blue' }, zIndex: 100, stripBehindBars: true
     },
     showReferenceLine2: true,
-    referenceLine2Position: 100,
+    referenceLine2Position: 50,
     referenceLine2Config: {
       thickness: 2, width: 200, color: 'blue', type: 'solid', dashWidth: 10, dashGap: 2, labelText: '第二条线', labelTextStyle: { color: 'blue' }, zIndex: 100, stripBehindBars: true
     },
     showReferenceLine1: true,
-    referenceLine1Position: 80,
+    referenceLine1Position: 20,
     referenceLine1Config: {
       thickness: 2, width: 200, color: 'red', type: 'solid', dashWidth: 10, dashGap: 2, labelText: '第一条线', labelTextStyle: { color: 'blue' }, zIndex: 100, stripBehindBars: true
     },
