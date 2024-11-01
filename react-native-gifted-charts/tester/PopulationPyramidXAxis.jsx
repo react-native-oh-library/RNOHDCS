@@ -17,8 +17,10 @@ export default function () {
   const populationPyramidProp = [
     { xAxisColor: 'red' }, { xAxisColor: 'blue' },
     { xAxisThickness: 5 }, { xAxisThickness: 10 },
-    { xAxisType: 'SOLID' }, { xAxisType: 'DASHED' }, { xAxisType: 'DOTTED' },
-    { xAxisNoOfSections: 5 }, { xAxisNoOfSections: 10 }, { xAxisNoOfSections: 15 },
+    { xAxisType: 'SOLID' }, { xAxisType: 'DASHED' },
+    { xAxisNoOfSections: 2 }, 
+    { xAxisNoOfSections: 3 }, 
+    { xAxisNoOfSections: 5},
     { showXAxisIndices: false }, { showXAxisIndices: true },
     { xAxisIndicesWidth: 5, showXAxisIndices: true }, { xAxisIndicesWidth: 10, showXAxisIndices: true },
     { xAxisIndicesHeight: 5, showXAxisIndices: true }, { xAxisIndicesHeight: 10, showXAxisIndices: true },
