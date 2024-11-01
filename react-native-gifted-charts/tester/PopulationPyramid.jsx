@@ -17,7 +17,7 @@ export default function () {
   const populationPyramidProp = [
     { height: 100 }, { height: 200 },
     { width: 200 }, { width: 400 },
-    { hideRules: true, noOfSections: 4 }, { hideRules: false, noOfSections: 4 },
+    { noOfSections: 6, hideRules: true }, { noOfSections: 5, hideRules: false },
     { rulesThickness: 5 }, { rulesThickness: 10 },
     { rulesColor: 'red' }, { rulesColor: 'blue' },
     { rulesType: 'SOLID' }, { rulesType: 'DASHED' },
@@ -38,7 +38,7 @@ export default function () {
     { midAxisColor: 'red', showMidAxis: true }, { midAxisColor: 'blue', showMidAxis: true },
     { midAxisLeftColor: 'red', showMidAxis: true }, { midAxisLeftColor: 'blue', showMidAxis: true },
     { midAxisRightColor: 'red', showMidAxis: true }, { midAxisRightColor: 'blue', showMidAxis: true },
-    { midAxisStrokeDashArray: [4, 10], showMidAxis: true }, { midAxisStrokeDashArray: [2, 9], showMidAxis: true },
+    { midAxisStrokeDashArray: [20, 20], showMidAxis: true }, { midAxisStrokeDashArray: [2, 2], showMidAxis: true },
     { midAxisLabelFontSize: 14, showMidAxis: true }, { midAxisLabelFontSize: 18, showMidAxis: true },
     { midAxisLabelColor: 'red', showMidAxis: true }, { midAxisLabelColor: 'blue', showMidAxis: true },
     { midAxisLabelFontStyle: 'normal', showMidAxis: true },
