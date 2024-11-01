@@ -1,9 +1,35 @@
 import { TestSuite, Tester, TestCase } from '@rnoh/testerino';
 import { useState } from 'react';
-import { ScrollView, StyleSheet, Text, Button } from 'react-native';
+import { ScrollView, StyleSheet, Text, Button, Modal } from 'react-native';
 import DatePicker from 'react-native-date-picker'
 
-export function DatePickerExample() {
+const addZero = (e: number) => {
+  if (e < 10) {
+    return 0 + '' + e
+  }
+  return e + ''
+}
+
+const getDateTime = (e: Date) => {
+  let y = e.getFullYear()
+  let M = addZero(e.getMonth() + 1)
+  let d = addZero(e.getDate())
+  let h = addZero(e.getHours())
+  let m = addZero(e.getMinutes())
+  let s = addZero(e.getSeconds())
+  let dateTime = y + '-' + M + '-' + d + ' ' + h + ':' + m + ':' + s
+  return dateTime
+}
+
+const getDate = (e: Date) => {
+  let y = e.getFullYear()
+  let M = addZero(e.getMonth() + 1)
+  let d = addZero(e.getDate())
+  let date = y + '-' + M + '-' + d;
+  return date
+}
+
+export default function DatePickerExample() {
   const [modalOpen, setModalOpen] = useState(false)
   const [modalOpen1, setModalOpen1] = useState(false)
   const [modalOpen2, setModalOpen2] = useState(false)
@@ -37,6 +63,7 @@ export function DatePickerExample() {
   const [dateTimeText3, setDateTimeText3] = useState('')
   const [dateTimeText4, setDateTimeText4] = useState('')
   const [timeText, setTimeText] = useState('')
+  const [date, setDate] = useState(new Date())
   return (
     <Tester>
       <ScrollView style={styles.container}>
@@ -44,13 +71,12 @@ export function DatePickerExample() {
           <TestCase itShould='{modal:false,mode:date}'>
             <ScrollView>
               <DatePicker
-                style={{ height: 200, width: '100%', }}
+                style={{ height: 200 }}
                 mode='date'
                 modal={false}
-                date={new Date()}
-                onDateChange={e => {
-                  // time is Change
-                  setDateText(e.nativeEvent.timestamp)
+                date={date}
+                onDateChange={(e) => {
+                  setDateText(getDate(e))
                 }}
               />
             </ScrollView>
@@ -59,13 +85,12 @@ export function DatePickerExample() {
           <TestCase itShould="{modal:false,mode:'date'. date:'2024-08-03'}">
             <ScrollView>
               <DatePicker
-                style={{ height: 200, width: '100%', }}
+                style={{ height: 200 }}
                 mode='date'
                 modal={false}
                 date={new Date("2024-08-03")}
                 onDateChange={e => {
-                  // time is Change
-                  setDateText1(e.nativeEvent.timestamp)
+                  setDateText1(getDate(e))
                 }}
               />
             </ScrollView>
@@ -74,13 +99,13 @@ export function DatePickerExample() {
           <TestCase itShould="{modal:false,mode:'date', date:'2024-08-08'}">
             <ScrollView>
               <DatePicker
-                style={{ height: 200, width: '100%', }}
+                style={{ height: 200 }}
                 mode='date'
                 modal={false}
                 date={new Date("2024-08-08")}
                 onDateChange={e => {
                   // time is Change
-                  setDateText2(e.nativeEvent.timestamp)
+                  setDateText2(getDate(e))
                 }}
               />
             </ScrollView>
@@ -89,14 +114,15 @@ export function DatePickerExample() {
           <TestCase itShould="{modal:false,mode:'date',minimumDate:'2024-08-01','maximumDate:'2024-08-08'">
             <ScrollView>
               <DatePicker
-                style={{ height: 200, width: '100%', }}
+                style={{ height: 200 }}
                 mode='date'
                 modal={false}
+                date={date}
                 minimumDate={new Date('2024-08-01')}
                 maximumDate={new Date('2024-08-08')}
                 onDateChange={e => {
                   // time is Change
-                  setDateText3(e.nativeEvent.timestamp)
+                  setDateText3(getDate(e))
                 }}
               />
             </ScrollView>
@@ -105,14 +131,15 @@ export function DatePickerExample() {
           <TestCase itShould="{modal:false,mode:'date',minimumDate:'2024-06-07','maximumDate:'2024-07-15'">
             <ScrollView>
               <DatePicker
-                style={{ height: 200, width: '100%', }}
+                style={{ height: 200 }}
                 mode='date'
                 modal={false}
+                date={date}
                 minimumDate={new Date('2024-06-07')}
                 maximumDate={new Date('2024-07-15')}
                 onDateChange={e => {
                   // time is Change
-                  setDateText4(e.nativeEvent.timestamp)
+                  setDateText4(getDate(e))
                 }}
               />
             </ScrollView>
@@ -121,12 +148,13 @@ export function DatePickerExample() {
           <TestCase itShould="{modal:false,mode:'datetime'}">
             <ScrollView>
               <DatePicker
-                style={{ height: 200, width: '100%', }}
+                style={{ height: 200 }}
+                date={date}
                 mode={'datetime'}
                 modal={false}
                 onDateChange={e => {
                   // time is Change
-                  setDateTimeText(e?.nativeEvent.timestamp)
+                  setDateTimeText(getDateTime(e))
                 }}
               />
             </ScrollView>
@@ -135,13 +163,13 @@ export function DatePickerExample() {
           <TestCase itShould="{modal:false,mode:'datetime', date:'2024-08-05'}">
             <ScrollView>
               <DatePicker
-                style={{ height: 200, width: '100%', }}
+                style={{ height: 200 }}
                 mode={'datetime'}
                 modal={false}
                 date={new Date("2024-08-05")}
                 onDateChange={e => {
                   // time is Change
-                  setDateTimeText1(e?.nativeEvent.timestamp)
+                  setDateTimeText1(getDateTime(e))
                 }}
               />
             </ScrollView>
@@ -150,13 +178,13 @@ export function DatePickerExample() {
           <TestCase itShould="{modal:false,mode:'datetime', date:'2024-08-07'}">
             <ScrollView>
               <DatePicker
-                style={{ height: 200, width: '100%', }}
+                style={{ height: 200 }}
                 mode={'datetime'}
                 modal={false}
                 date={new Date("2024-08-07")}
                 onDateChange={e => {
                   // time is Change
-                  setDateTimeText2(e?.nativeEvent.timestamp)
+                  setDateTimeText2(getDateTime(e))
                 }}
               />
             </ScrollView>
@@ -165,14 +193,15 @@ export function DatePickerExample() {
           <TestCase itShould="{modal:false,mode:'datetime',minimumDate:'2024-06-07','maximumDate:'2024-07-15'}">
             <ScrollView>
               <DatePicker
-                style={{ height: 200, width: '100%', }}
+                style={{ height: 200 }}
                 mode={'datetime'}
                 modal={false}
+                date={date}
                 minimumDate={new Date('2024-06-07')}
                 maximumDate={new Date('2024-07-15')}
                 onDateChange={e => {
                   // time is Change
-                  setDateTimeText3(e?.nativeEvent.timestamp)
+                  setDateTimeText3(getDateTime(e))
                 }}
               />
             </ScrollView>
@@ -181,14 +210,15 @@ export function DatePickerExample() {
           <TestCase itShould="{modal:false,mode:'datetime',minimumDate:'2024-08-01','maximumDate:'2024-08-05'}">
             <ScrollView>
               <DatePicker
-                style={{ height: 200, width: '100%', }}
+                style={{ height: 200 }}
                 mode={'datetime'}
                 modal={false}
+                date={date}
                 minimumDate={new Date('2024-08-01')}
                 maximumDate={new Date('2024-08-05')}
                 onDateChange={e => {
                   // time is Change
-                  setDateTimeText4(e?.nativeEvent.timestamp)
+                  setDateTimeText4(getDateTime(e))
                 }}
               />
             </ScrollView>
@@ -197,12 +227,13 @@ export function DatePickerExample() {
           <TestCase itShould='modal:false,mode:time'>
             <ScrollView>
               <DatePicker
-                style={{ height: 200, width: '100%' }}
+                style={{ height: 200 }}
                 mode='time'
+                date={date}
                 modal={false}
                 onDateChange={e => {
                   // time is Change
-                  setTimeText(e.nativeEvent.timestamp)
+                  setTimeText(getDateTime(e))
                 }}
               />
             </ScrollView>
@@ -216,21 +247,18 @@ export function DatePickerExample() {
                 setModalOpen(true)
               }}></Button>
               <DatePicker
-                style={{ height: 'auto', width: '100%', }}
                 mode='date'
-                modal
+                modal={true}
                 open={modalOpen}
-                onConfirm={e => {
-                  // onConfirm is clicked。
-                  setModalOpenText(e?.nativeEvent.timestamp)
+                date={date}
+                onDateChange={(date) => {
+                  setModalOpenText(getDate(date))
+                }}
+                onConfirm={(date) => {
+                  setModalOpenText(getDate(date))
                   setModalOpen(false)
                 }}
-                onDateChange={e => {
-                  // time is Change
-                  setModalOpenText(e.nativeEvent.timestamp)
-                }}
                 onCancel={() => {
-                  // onCancel is clicked。
                   setModalOpen(false)
                 }}
               />
@@ -243,19 +271,18 @@ export function DatePickerExample() {
                 setModalOpen1(true)
               }}></Button>
               <DatePicker
-                style={{ height: 'auto', width: '100%', }}
                 mode='date'
                 modal
                 open={modalOpen1}
                 date={new Date("2024-08-05")}
                 onConfirm={e => {
                   // onConfirm is clicked。
-                  setModalOpenText1(e?.nativeEvent.timestamp)
+                  setModalOpenText1(getDate(e))
                   setModalOpen1(false)
                 }}
                 onDateChange={e => {
                   // time is Change
-                  setModalOpenText1(e.nativeEvent.timestamp)
+                  setModalOpenText1(getDate(e))
                 }}
                 onCancel={() => {
                   // onCancel is clicked。
@@ -271,19 +298,18 @@ export function DatePickerExample() {
                 setModalOpen2(true)
               }}></Button>
               <DatePicker
-                style={{ height: 'auto', width: '100%', }}
                 mode='date'
                 modal
                 open={modalOpen2}
                 date={new Date("2024-08-10")}
                 onConfirm={e => {
                   // onConfirm is clicked。
-                  setModalOpenText2(e?.nativeEvent.timestamp)
+                  setModalOpenText2(getDate(e))
                   setModalOpen2(false)
                 }}
                 onDateChange={e => {
                   // time is Change
-                  setModalOpenText2(e.nativeEvent.timestamp)
+                  setModalOpenText2(getDate(e))
                 }}
                 onCancel={() => {
                   // onCancel is clicked。
@@ -299,20 +325,19 @@ export function DatePickerExample() {
                 setModalOpen3(true)
               }}></Button>
               <DatePicker
-                style={{ height: 'auto', width: '100%', }}
                 mode='date'
                 modal
                 open={modalOpen3}
+                date={date}
                 minimumDate={new Date('2024-08-01')}
                 maximumDate={new Date('2024-08-05')}
                 onConfirm={e => {
-                  // onConfirm is clicked。
-                  setModalOpenText3(e?.nativeEvent.timestamp)
+                  setModalOpenText3(getDate(e))
                   setModalOpen3(false)
                 }}
                 onDateChange={e => {
                   // time is Change
-                  setModalOpenText3(e.nativeEvent.timestamp)
+                  setModalOpenText3(getDate(e))
                 }}
                 onCancel={() => {
                   // onCancel is clicked。
@@ -328,20 +353,20 @@ export function DatePickerExample() {
                 setModalOpen4(true)
               }}></Button>
               <DatePicker
-                style={{ height: 'auto', width: '100%', }}
                 mode='date'
                 modal
+                date={date}
                 open={modalOpen4}
                 minimumDate={new Date('2024-07-01')}
                 maximumDate={new Date('2024-08-15')}
                 onConfirm={e => {
                   // onConfirm is clicked。
-                  setModalOpenText4(e?.nativeEvent.timestamp)
+                  setModalOpenText4(getDate(e))
                   setModalOpen4(false)
                 }}
                 onDateChange={e => {
                   // time is Change
-                  setModalOpenText4(e.nativeEvent.timestamp)
+                  setModalOpenText4(getDate(e))
                 }}
                 onCancel={() => {
                   // onCancel is clicked。
@@ -358,18 +383,18 @@ export function DatePickerExample() {
                 setModalDateTimeOpen(true)
               }}></Button>
               <DatePicker
-                style={{ height: 'auto', width: '100%' }}
                 mode={'datetime'}
                 open={modalDateTimeOpen}
+                date={date}
                 modal
                 onConfirm={e => {
                   // onConfirm is clicked。
-                  setModalDateTimeText(e.nativeEvent.timestamp)
+                  setModalDateTimeText(getDateTime(e))
                   setModalDateTimeOpen(false)
                 }}
                 onDateChange={e => {
                   // time is Change
-                  setModalDateTimeText(e.nativeEvent.timestamp)
+                  setModalDateTimeText(getDateTime(e))
                 }}
                 onCancel={() => {
                   // onCancel is clicked。
@@ -385,19 +410,18 @@ export function DatePickerExample() {
                 setModalDateTimeOpen1(true)
               }}></Button>
               <DatePicker
-                style={{ height: 'auto', width: '100%' }}
                 mode={'datetime'}
                 open={modalDateTimeOpen1}
                 date={new Date('2024-08-07')}
                 modal
                 onConfirm={e => {
                   // onConfirm is clicked。
-                  setModalDateTimeText1(e.nativeEvent.timestamp)
+                  setModalDateTimeText1(getDateTime(e))
                   setModalDateTimeOpen1(false)
                 }}
                 onDateChange={e => {
                   // time is Change
-                  setModalDateTimeText1(e.nativeEvent.timestamp)
+                  setModalDateTimeText1(getDateTime(e))
                 }}
                 onCancel={() => {
                   // onCancel is clicked。
@@ -413,19 +437,18 @@ export function DatePickerExample() {
                 setModalDateTimeOpen2(true)
               }}></Button>
               <DatePicker
-                style={{ height: 'auto', width: '100%' }}
                 mode={'datetime'}
                 open={modalDateTimeOpen2}
                 date={new Date('2024-08-03')}
                 modal
                 onConfirm={e => {
                   // onConfirm is clicked。
-                  setModalDateTimeText2(e.nativeEvent.timestamp)
+                  setModalDateTimeText2(getDateTime(e))
                   setModalDateTimeOpen2(false)
                 }}
                 onDateChange={e => {
                   // time is Change
-                  setModalDateTimeText2(e.nativeEvent.timestamp)
+                  setModalDateTimeText2(getDateTime(e))
                 }}
                 onCancel={() => {
                   // onCancel is clicked。
@@ -441,20 +464,20 @@ export function DatePickerExample() {
                 setModalDateTimeOpen4(true)
               }}></Button>
               <DatePicker
-                style={{ height: 'auto', width: '100%' }}
                 mode={'datetime'}
                 open={modalDateTimeOpen4}
+                date={date}
                 minimumDate={new Date('2024-07-05')}
                 maximumDate={new Date('2024-08-05')}
                 modal
                 onConfirm={e => {
                   // onConfirm is clicked。
-                  setModalDateTimeText4(e.nativeEvent.timestamp)
+                  setModalDateTimeText4(getDateTime(e))
                   setModalDateTimeOpen4(false)
                 }}
                 onDateChange={e => {
                   // time is Change
-                  setModalDateTimeText4(e.nativeEvent.timestamp)
+                  setModalDateTimeText4(getDateTime(e))
                 }}
                 onCancel={() => {
                   // onCancel is clicked。
@@ -470,20 +493,20 @@ export function DatePickerExample() {
                 setModalDateTimeOpen3(true)
               }}></Button>
               <DatePicker
-                style={{ height: 'auto', width: '100%' }}
                 mode={'datetime'}
                 open={modalDateTimeOpen3}
+                date={date}
                 minimumDate={new Date('2024-07-05')}
                 maximumDate={new Date('2024-07-15')}
                 modal
                 onConfirm={e => {
                   // onConfirm is clicked。
-                  setModalDateTimeText3(e.nativeEvent.timestamp)
+                  setModalDateTimeText3(getDateTime(e))
                   setModalDateTimeOpen3(false)
                 }}
                 onDateChange={e => {
                   // time is Change
-                  setModalDateTimeText3(e.nativeEvent.timestamp)
+                  setModalDateTimeText3(getDateTime(e))
                 }}
                 onCancel={() => {
                   // onCancel is clicked。
@@ -499,19 +522,18 @@ export function DatePickerExample() {
                 setModalTimeOpen(true)
               }}></Button>
               <DatePicker
-                style={{ height: 'auto', width: '100%' }}
                 mode='time'
                 modal
                 open={modalTimeOpen}
-                date={new Date()}
+                date={date}
                 onConfirm={e => {
                   // onConfirm is clicked。
-                  setModalTimeText(e?.nativeEvent?.timestamp)
+                  setModalTimeText(getDateTime(e))
                   setModalTimeOpen(false)
                 }}
                 onDateChange={e => {
                   // time is Change
-                  setModalTimeText(e.nativeEvent.timestamp)
+                  setModalTimeText(getDateTime(e))
                 }}
                 onCancel={() => {
                   // onCancel is clicked。
