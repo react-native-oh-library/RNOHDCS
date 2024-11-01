@@ -69,7 +69,7 @@ const BlockDemo = () => {
                     <View style={{ height: 150 }}>
                         <Block
                             left={true}
-                            bottom={true}
+                            bottom={false}
                         >
                             <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
                         </Block>
@@ -79,7 +79,7 @@ const BlockDemo = () => {
                     <View style={{ height: 150 }}>
                         <Block
                             left={false}
-                            bottom={false}
+                            bottom={true}
                         >
                             <Button color="danger" ><Text style={{ color: 'black' }}>111111</Text></Button>
                         </Block>
@@ -406,6 +406,19 @@ const styles = StyleSheet.create({
         padding: 10,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    box: {
+        width: 200,
+        height: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginVertical: 10,
+        backgroundColor: '#4CAF50',
+        borderRadius: 8,
+    },
+    text: {
+        color: '#FFFFFF',
+        fontWeight: 'bold',
     },
 });
 export default BlockDemo
