@@ -42,11 +42,37 @@ export default function () {
     },
     {
       data: [
-        { value: 60, text: '60', textColor: 'red', fontStyle: 'normal', textSize: 18, fontWeight: 'bold', font: 'Arial' },
-        { value: 70, text: '70', textColor: 'blue', fontStyle: 'italic', textSize: 20, fontWeight: 'bolder', font: 'Cursive' },
-        { value: 40, text: '40', textColor: 'black', fontStyle: 'oblique', textSize: 24, fontWeight: 'lighter', font: 'Comic Sans MS' },
-        { value: 30, text: '30', textColor: 'black', fontStyle: 'italic', textSize: 26, fontWeight: '100', font: 'Comic Sans MS' },
-        { value: 20, text: '20', textColor: 'black', fontStyle: 'oblique', textSize: 28, fontWeight: '200', font: 'Comic Sans MS' },
+        { value: 60, text: '60', font: 'Arial' },
+        { value: 70, text: '70', font: 'Cursive' },
+        { value: 40, text: '40', font: 'Comic Sans MS' },
+      ],
+    },
+    {
+      data: [
+        { value: 60, text: '60', textColor: 'red',  },
+        { value: 70, text: '70', textColor: 'blue',},
+        { value: 40, text: '40', textColor: 'black',  },
+      ],
+    },
+    {
+      data: [
+        { value: 60, text: '60', fontStyle: 'normal', },
+        { value: 70, text: '70',  fontStyle: 'italic',  },
+        { value: 40, text: '40',  fontStyle: 'oblique',  },
+      ],
+    },
+    {
+      data: [
+        { value: 60, text: '60', textSize: 18,  },
+        { value: 70, text: '70',  textSize: 20,  },
+        { value: 40, text: '40',  textSize: 24,  },
+      ],
+    },
+    {
+      data: [
+        { value: 60, text: '60', fontWeight: 'bold' },
+        { value: 70, text: '70', fontWeight: 'bolder' },
+        { value: 40, text: '40',  fontWeight: 'lighter' },
       ],
     },
     {
