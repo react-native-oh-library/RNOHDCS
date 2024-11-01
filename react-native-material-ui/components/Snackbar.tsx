@@ -20,7 +20,7 @@ const SnackbarDemo = () => {
     <Tester>
       <ScrollView style={{marginBottom:170}}>
       <TestSuite name='Snackbar 轻量提示框 message visible onRequestClose  需要一起设置'>
-        <TestCase itShould='props:message(提示框显示的文本 visible(是否可见,通过状态改变true或者false) onRequestColose(时间结束时的回调)) 文本为"hello word"'>
+        <TestCase itShould='props:message(提示框显示的文本 visible(是否可见,通过状态改变true或者false) onRequestClose(时间结束时的回调)) 文本为"hello word"'>
           <View style={{ height: 200 }}>
             <Snackbar 
               message={snackbar}
@@ -30,7 +30,7 @@ const SnackbarDemo = () => {
            <Button text='改变snackbar状态' onPress={()=>setSnackbar('hello word')}></Button>
           </View>
         </TestCase>
-        <TestCase itShould='props:message(提示框显示的文本 visible(是否可见,通过状态改变true或者false) onRequestColose(时间结束时的回调)) 需要一起设置 文本为"hello Snackbar"'>
+        <TestCase itShould='props:message(提示框显示的文本 visible(是否可见,通过状态改变true或者false) onRequestClose(时间结束时的回调)) 需要一起设置 文本为"hello Snackbar"'>
           <View style={{ height: 200 }}>
             <Snackbar 
               message={snackbar1}
