@@ -16,21 +16,21 @@ function SwitchDemo() {
 
   const SwitchProps = [
     {
-      key: ' SurfaceTextProps style:value ={_getVisible("Switch")}',
+      key: ' Switch style:value ={_getVisible("Switch")}',
       value: {
         value:_getVisible('Switch'),
         onValueChange:_showSwitch('Switch')
       }
     },
     {
-      key: ' SurfaceTextProps fuction:onValueChange ={_showSwitch("Switch1")}',
+      key: ' Switch fuction:onValueChange ={_showSwitch("Switch1")}',
       value: {
         value:_getVisible('Switch1'),
         onValueChange:_showSwitch('Switch1')
       }
     },
     {
-      key: ' SurfaceTextProps style:disabled ={true}',
+      key: ' Switch style:disabled ={true}',
       value: {
         value:_getVisible('Switch2'),
         onValueChange:_showSwitch('Switch2'),
@@ -38,7 +38,7 @@ function SwitchDemo() {
       }
     },
     {
-      key: ' SurfaceTextProps style:disabled ={false}',
+      key: ' Switch style:disabled ={false}',
       value: {
         value:_getVisible('Switch3'),
         onValueChange:_showSwitch('Switch3'),
@@ -46,7 +46,7 @@ function SwitchDemo() {
       }
     },
     {
-      key: ' SurfaceTextProps style:color ={MD2Colors.red100}',
+      key: ' Switch style:color ={MD2Colors.red100}',
       value: {
         value:_getVisible('Switch3'),
         onValueChange:_showSwitch('Switch3'),
@@ -54,7 +54,7 @@ function SwitchDemo() {
       }
     },
     {
-      key: ' SurfaceTextProps style:color ={MD2Colors.blue100}',
+      key: ' Switch style:style ={MD2Colors.blue100}',
       value: {
         value:_getVisible('Switch4'),
         onValueChange:_showSwitch('Switch4'),
@@ -62,7 +62,7 @@ function SwitchDemo() {
       }
     },
     {
-      key: ' SurfaceTextProps style:theme ={ colors: { primary:"green"} }',
+      key: ' Switch style:theme ={ colors: { primary:"green"} }',
       value: {
         value:_getVisible('Switch5'),
         onValueChange:_showSwitch('Switch5'),

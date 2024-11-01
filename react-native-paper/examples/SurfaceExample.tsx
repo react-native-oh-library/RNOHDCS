@@ -128,6 +128,7 @@ function SurfaceTextDemo() {
                 <Surface {...item.value}>
                   <Text>Surface</Text>
                 </Surface>
+                <Text style = {{height: 20}}></Text>
               </TestCase>
             );
           })},

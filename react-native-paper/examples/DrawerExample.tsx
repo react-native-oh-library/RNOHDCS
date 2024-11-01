@@ -113,7 +113,7 @@ export function DrawerText() {
         label: 'Starred',
         focusedIcon: 'star',
         unfocusedIcon: 'star-outline',
-        active:true
+        active: false
       },
     },
     {

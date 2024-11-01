@@ -364,13 +364,13 @@ export function AppbarDemo() {
         </Appbar.Header>
           <Button onPress={measureView} >Press me</Button>  
          </TestCase>
-        <TestCase itShould={'Appbar.Action style:ref={viewRef}'}  >
+        <TestCase itShould={'Appbar.Header style:ref={viewRef}'}  >
           <Appbar.Header ref={viewRef}>
             <Appbar.BackAction onPress={() => {}}/>
           </Appbar.Header>
             <Button onPress={measureView} >Press me</Button>  
          </TestCase>
-         <TestCase itShould={'Appbar.Action style:titleRef={viewRef}'}  >
+         <TestCase itShould={'Appbar.Content style:titleRef={viewRef}'}  >
           <Appbar.Header>
             <Appbar.Content title="Title" titleRef={viewRef}/>
           </Appbar.Header>

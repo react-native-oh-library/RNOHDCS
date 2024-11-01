@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Keyboard, ScrollView, StyleSheet } from 'react-native';
-import { Searchbar,MD2Theme,MD3Theme,useTheme,MD3Colors,Avatar, MD2Colors} from 'react-native-paper';
+import { Searchbar,MD2Theme,MD3Theme,useTheme,MD3Colors,Avatar, MD2Colors, MD3LightTheme} from 'react-native-paper';
 
 import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
 import { Style } from 'react-native-paper/lib/typescript/components/List/utils';
@@ -33,7 +33,7 @@ function SearchDemo() {
 
   const SearchbarProps = [
     {
-      key: ' ProgressBar style:placeholder={"Search"}',
+      key: ' Searchbar style:placeholder={"Search"}',
       value: {
         placeholder:"Search",
         onChangeText:_onChangeText('searchbar1'),
@@ -41,7 +41,7 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:placeholder={"Search1"}',
+      key: ' Searchbar style:placeholder={"Search1"}',
       value: {
         placeholder:"Search1",
         onChangeText:_onChangeText('searchbar2'),
@@ -49,21 +49,21 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:value={"aaaaa"}',
+      key: ' Searchbar style:value={"aaaaa"}',
       value: {
         placeholder:"Search",
         value:'aaaaa',
       },
     },
     {
-      key: ' ProgressBar style:value={"bbbbb"}',
+      key: ' Searchbar style:value={"bbbbb"}',
       value: {
         placeholder:"Search",
         value:'bbbbb',
       },
     },
     {
-      key: ' ProgressBar style:mode={"bar"}',
+      key: ' Searchbar style:mode={"bar"}',
       value: {
         placeholder:"Search",
         onChangeText:_onChangeText('searchbar3'),
@@ -72,7 +72,7 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:mode={"view"}',
+      key: ' Searchbar style:mode={"view"}',
       value: {
         placeholder:"Search",
         onChangeText:_onChangeText('searchbar4'),
@@ -82,7 +82,7 @@ function SearchDemo() {
     }
     ,
     {
-      key: ' ProgressBar style:icon={ source: "arrow-left", direction: "auto" }',
+      key: ' Searchbar style:icon={ source: "arrow-left", direction: "auto" }',
       value: {
         placeholder:"Search",
         onChangeText:_onChangeText('searchbar5'),
@@ -91,7 +91,7 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:iconColor={ MD2Colors.red100}',
+      key: ' Searchbar style:iconColor={ MD2Colors.red100}',
       value: {
         placeholder:"Search",
         onChangeText:_onChangeText('searchbar6'),
@@ -101,7 +101,7 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:iconColor={ MD2Colors.black}',
+      key: ' Searchbar style:iconColor={ MD2Colors.black}',
       value: {
         placeholder:"Search",
         onChangeText:_onChangeText('searchbar7'),
@@ -111,7 +111,7 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:rippleColor={ MD2Colors.red100}',
+      key: ' Searchbar style:rippleColor={ MD2Colors.red100}',
       value: {
         placeholder:"Search",
         onChangeText:_onChangeText('searchbar8'),
@@ -121,18 +121,19 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar function:onIconPress={ _onIconPress}',
+      key: ' Searchbar function:onIconPress={ _onIconPress}',
       value: {
         placeholder:"Search",
         onChangeText:_onChangeText('searchbar10'),
         value:_getSearchQuery('searchbar10'),
         rippleColor:MD2Colors.red100,
+        onIconPress:_onIconPress,
         onClearIconPress:_onClearIconPress
       },
     }
     ,
     {
-      key: ' ProgressBar style:searchAccessibilityLabel={"Accessibility Label"}',
+      key: ' Searchbar style:searchAccessibilityLabel={"Accessibility Label"}',
       value: {
         placeholder:"Search",
         onChangeText:_onChangeText('searchbar11'),
@@ -141,7 +142,7 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:searchAccessibilityLabel={"Accessibility Label1"}',
+      key: ' Searchbar style:searchAccessibilityLabel={"Accessibility Label1"}',
       value: {
         placeholder:"Search",
         onChangeText:_onChangeText('searchbar12'),
@@ -150,16 +151,36 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:clearIcon={"arrow-left"}',
+      key: ' Searchbar style:clearIcon={"camera"}',
       value: {
         placeholder:"Search",
         onChangeText:_onChangeText('searchbar13'),
         value:_getSearchQuery('searchbar13'),
-        clearIcon:'arrow-left'
+        clearIcon:'camera'
       },
     },
     {
-      key: ' ProgressBar style:clearAccessibilityLabel={"clearAccessibilityLabel"}',
+      key: ' Searchbar style:onClearIconPress',
+      value: {
+        placeholder:"Search",
+        onChangeText:_onChangeText('searchbar133'),
+        value:_getSearchQuery('searchbar133'),
+        clearIcon: 'close',
+        onClearIconPress: (e) => {
+          console.log('onClearIconPress!')
+        }
+      },
+    },
+    {
+      key: ' Searchbar style:onChangeText',
+      value: {
+        placeholder:"Search",
+        onChangeText: (queryString) => { console.log(`onChangeText: ${queryString} !`); _onChangeText('searchbar1333') },
+        value:_getSearchQuery('searchbar1333'),
+      },
+    },
+    {
+      key: ' Searchbar style:clearAccessibilityLabel={"clearAccessibilityLabel"}',
       value: {
         placeholder:"Search",
         onChangeText:_onChangeText('searchbar14'),
@@ -168,7 +189,7 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:clearAccessibilityLabel={"clearAccessibilityLabel1"}',
+      key: ' Searchbar style:clearAccessibilityLabel={"clearAccessibilityLabel1"}',
       value: {
         placeholder:"Search",
         onChangeText:_onChangeText('searchbar15'),
@@ -178,7 +199,7 @@ function SearchDemo() {
     }
     ,
     {
-      key: ' ProgressBar style:traileringIcon ={"microphone"}',
+      key: ' Searchbar style:traileringIcon ={"microphone"}',
       value: {
         mode:'bar' as 'bar' | 'view',
         value:'',
@@ -187,7 +208,7 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:traileringIcon ={MD2Colors.red100}',
+      key: ' Searchbar style:traileringIconColor ={MD2Colors.red100}',
       value: {
         mode:'bar' as 'bar' | 'view',
         value:'',
@@ -197,7 +218,7 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:traileringIcon ={MD2Colors.blue100}',
+      key: ' Searchbar style:traileringIconColor ={MD2Colors.blue100}',
       value: {
         mode:'bar' as 'bar' | 'view',
         value:'',
@@ -207,69 +228,75 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:traileringIcon ={MD2Colors.blue100}',
+      key: ' Searchbar style:traileringIcon ={MD2Colors.blue100}',
       value: {
         mode:'bar' as 'bar' | 'view',
         value:'',
         placeholder:"Search",
+        traileringIcon :'microphone',
         traileringRippleColor :MD2Colors.blue100,
         onTraileringIconPress :_onTraileringIconPress
       },
     },
     {
-      key: ' ProgressBar style:traileringRippleColor ={MD2Colors.blue100}',
+      key: ' Searchbar style:traileringRippleColor ={MD2Colors.blue100}',
       value: {
         mode:'bar' as 'bar' | 'view',
         value:'',
         placeholder:"Search",
+        traileringIcon :'microphone',
         traileringRippleColor :MD2Colors.blue100,
         onTraileringIconPress :_onTraileringIconPress
       },
     },
     {
-      key: ' ProgressBar style:traileringRippleColor ={MD2Colors.red100}',
+      key: ' Searchbar style:traileringRippleColor ={MD2Colors.red100}',
       value: {
         mode:'bar' as 'bar' | 'view',
         value:'',
         placeholder:"Search",
+        traileringIcon :'microphone',
         traileringRippleColor :MD2Colors.red100,
         onTraileringIconPress :_onTraileringIconPress
       },
     },
     {
-      key: ' ProgressBar fuction:onTraileringIconPress ={_onTraileringIconPress}',
+      key: ' Searchbar fuction:onTraileringIconPress ={_onTraileringIconPress}',
       value: {
         mode:'bar' as 'bar' | 'view',
         value:'',
         placeholder:"Search",
+        traileringIcon :'microphone',
         traileringRippleColor :MD2Colors.red100,
         onTraileringIconPress :_onTraileringIconPress
       },
     },
     {
-      key: ' ProgressBar style:traileringIconAccessibilityLabel ={"traileringIconAccessibilityLabel"}',
+      key: ' Searchbar style:traileringIconAccessibilityLabel ={"traileringIconAccessibilityLabel"}',
       value: {
         mode:'bar' as 'bar' | 'view',
         value:'',
         placeholder:"Search",
+        traileringIcon :'microphone',
         traileringRippleColor :MD2Colors.red100,
         onTraileringIconPress  :_onTraileringIconPress,
         traileringIconAccessibilityLabel:'traileringIconAccessibilityLabel'
       },
     },
     {
-      key: ' ProgressBar style:traileringIconAccessibilityLabel ={"traileringIconAccessibilityLabel1"}',
+      key: ' Searchbar style:traileringIconAccessibilityLabel ={"traileringIconAccessibilityLabel1"}',
       value: {
         mode:'bar' as 'bar' | 'view',
         value:'',
         placeholder:"Search",
+        traileringIcon :'microphone',
         traileringRippleColor :MD2Colors.red100,
         onTraileringIconPress  :_onTraileringIconPress,
         traileringIconAccessibilityLabel:'traileringIconAccessibilityLabel1'
       },
     },
     {
-      key: ' ProgressBar style:right ={" <Avatar.Image {...props} size={30} source={require("../assets/images/avatar.png")}"}',
+      key: ' Searchbar style:right ={" <Avatar.Image {...props} size={30} source={require("../assets/images/avatar.png")}"}',
       value: {
         mode:'bar' as 'bar' | 'view',
         value:'',
@@ -282,25 +309,29 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:showDivider ={true}',
+      key: ' Searchbar style:showDivider ={true}',
       value: {
-        mode:'bar' as 'bar' | 'view',
+        mode:'view' as 'bar' | 'view',
         value:'',
         placeholder:"Search",
         showDivider:true,
+        theme: MD3LightTheme,
+        style: {marginBottom: 50}
       },
     },
     {
-      key: ' ProgressBar style:showDivider={false}',
+      key: ' Searchbar style:showDivider={false}',
       value: {
-        mode:'bar' as 'bar' | 'view',
+        mode:'view' as 'bar' | 'view',
         value:'',
         placeholder:"Search",
         showDivider:false,
+        theme: MD3LightTheme,
+        style: {marginBottom: 50}
       },
     },
     {
-      key: ' ProgressBar style:elevation={0}',
+      key: ' Searchbar style:elevation={0}',
       value: {
         mode:'bar' as 'bar' | 'view',
         value:'',
@@ -309,7 +340,7 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:elevation={1}',
+      key: ' Searchbar style:elevation={1}',
       value: {
         mode:'bar' as 'bar' | 'view',
         value:'',
@@ -318,7 +349,7 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:elevation={2}',
+      key: ' Searchbar style:elevation={2}',
       value: {
         mode:'bar' as 'bar' | 'view',
         value:'',
@@ -327,7 +358,7 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:elevation={3}',
+      key: ' Searchbar style:elevation={3}',
       value: {
         mode:'bar' as 'bar' | 'view',
         value:'',
@@ -336,7 +367,7 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:elevation={4}',
+      key: ' Searchbar style:elevation={4}',
       value: {
         mode:'bar' as 'bar' | 'view',
         value:'',
@@ -345,7 +376,7 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:elevation={5}',
+      key: ' Searchbar style:elevation={5}',
       value: {
         mode:'bar' as 'bar' | 'view',
         value:'',
@@ -354,7 +385,7 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:inputStyle={MD2Colors.red100}',
+      key: ' Searchbar style:inputStyle={MD2Colors.red100}',
       value: {
         placeholder:"Search",
         mode:'bar' as 'bar' | 'view',
@@ -364,7 +395,7 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:inputStyle={MD2Colors.red100}',
+      key: ' Searchbar style:Style={MD2Colors.red100}',
       value: {
         mode:'bar' as 'bar' | 'view',
         onChangeText:_onChangeText('searchbar22'),
@@ -374,7 +405,7 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:loading={true}',
+      key: ' Searchbar style:loading={true}',
       value: {
         mode:'bar' as 'bar' | 'view',
         onChangeText:_onChangeText('searchbar20'),
@@ -384,7 +415,7 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:loading={false}',
+      key: ' Searchbar style:loading={false}',
       value: {
         mode:'bar' as 'bar' | 'view',
         onChangeText:_onChangeText('searchbar21'),
@@ -394,7 +425,7 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:testID={"Searchbar"}',
+      key: ' Searchbar style:testID={"Searchbar"}',
       value: {
         mode:'bar' as 'bar' | 'view',
         value:'',
@@ -403,7 +434,7 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:testID={"Searchbar1"}',
+      key: ' Searchbar style:testID={"Searchbar1"}',
       value: {
         mode:'bar' as 'bar' | 'view',
         value:'',
@@ -412,7 +443,7 @@ function SearchDemo() {
       },
     },
     {
-      key: ' ProgressBar style:theme={theme}',
+      key: ' Searchbar style:theme={theme}',
       value: {
         mode:'bar' as 'bar' | 'view',
         value:'',

@@ -68,11 +68,11 @@ function TextInputDemo() {
       },
 
       {
-        key: ' TextInputProps style:left ={<TextInput.Icon icon="magnify"/>}',
+        key: ' TextInputProps style:right ={<TextInput.Icon icon="magnify"/>',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
-          left:<TextInput.Icon icon="magnify"/>,
+          right:<TextInput.Icon icon="magnify"/>,
           value:_getTextInputValue('TextInput2'),
           onChangeText:_onValueChange('TextInput2')
         }
@@ -108,10 +108,10 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextTextInputPropsProps style:label ={"Email"}',
+        key: ' TextTextInputPropsProps style:label ={"Email1"}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
-          label:'Email',
+          label:'Email1',
           value:_getTextInputValue('TextInput5'),
           onChangeText:_onValueChange('TextInput5')
         }
@@ -149,7 +149,7 @@ function TextInputDemo() {
       {
         key: ' TextInputProps style:underlineColor ={MD2Colors.pink400}',
         value: {
-          mode:'outlined' as 'flat' | 'outlined',
+          mode:'flat' as 'flat' | 'outlined',
           label:'Email',
           placeholder:"Type something1",
           underlineColor:MD2Colors.pink400,
@@ -160,7 +160,7 @@ function TextInputDemo() {
       {
         key: ' TextInputProps style:underlineColor ={MD3Colors.primary70}',
         value: {
-          mode:'outlined' as 'flat' | 'outlined',
+          mode:'flat' as 'flat' | 'outlined',
           label:'Email',
           placeholder:"Type something1",
           underlineColor:MD3Colors.primary70,
@@ -171,7 +171,7 @@ function TextInputDemo() {
       {
         key: ' TextInputProps style:activeUnderlineColor ={MD3Colors.tertiary50}',
         value: {
-          mode:'outlined' as 'flat' | 'outlined',
+          mode:'flat' as 'flat' | 'outlined',
           label:'Email',
           placeholder:"Type something1",
           activeUnderlineColor:MD3Colors.tertiary50,
@@ -182,7 +182,7 @@ function TextInputDemo() {
       {
         key: ' TextInputProps style:activeUnderlineColor ={MD2Colors.amber900}',
         value: {
-          mode:'outlined' as 'flat' | 'outlined',
+          mode:'flat' as 'flat' | 'outlined',
           label:'Email',
           placeholder:"Type something1",
           activeUnderlineColor:MD2Colors.amber900,
@@ -330,7 +330,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextInputProps style:value ={backgroundColor:MD2Colors.blue100}',
+        key: ' TextInputProps style:style ={backgroundColor:MD2Colors.blue100}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -342,7 +342,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextInputProps style:value ={ colors: { primary:"green"} }',
+        key: ' TextInputProps style:theme ={ colors: { primary:"green"} }',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -366,7 +366,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextInputProps style:underlineStyle ={true}',
+        key: ' TextInputProps style:editable ={true}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -378,7 +378,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextInputProps style:underlineStyle ={false}',
+        key: ' TextInputProps style:editable ={false}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -414,7 +414,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextInputProps style:editable ={true}',
+        key: ' TextInputProps style:testID = {test1}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -422,11 +422,11 @@ function TextInputDemo() {
           textColor:MD2Colors.blue100 ,
           value:_getTextInputValue('TextInput24'),
           onChangeText:_onValueChange('TextInput24'),
-          editable:true
+          testID: 'test1'
         }
       },
       {
-        key: ' TextInputProps style:editable ={false}',
+        key: ' TextInputProps style:testID = {test2}',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -434,7 +434,7 @@ function TextInputDemo() {
           textColor:MD2Colors.blue100 ,
           value:_getTextInputValue('TextInput24'),
           onChangeText:_onValueChange('TextInput24'),
-          editable:true
+          testID: 'test2'
         }
       },
     ]
@@ -493,7 +493,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextInputAffix style:textStyle ={backgroundColor:MD2Colors.blue100}',
+        key: ' TextInputAffix style: theme:{ colors: { primary: "green" }',
         value: {
           text:"/100",
           theme:{ colors: { primary: 'green' } }
@@ -599,6 +599,7 @@ function TextInputDemo() {
           return (
             <TestCase itShould={item.key}  key={item.key}>
                 <TextInput {...item.value}/>
+                <Text style = {{height: 20}}></Text>
             </TestCase>
           );
         })},

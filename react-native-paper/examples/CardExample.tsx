@@ -79,19 +79,19 @@ export function CardTest() {
             }
         },
         {
+            key: 'Card stylet: delayLongPress is 1000(延时长按1秒)',
+            value: {
+              mode:'contained' as 'elevated' | 'outlined' | 'contained',
+              onLongPress:_onLongPress,
+              delayLongPress: 1000
+            }
+        },
+        {
             key: 'Card stylet: delayLongPress is 10000(延时长按10秒)',
             value: {
               mode:'contained' as 'elevated' | 'outlined' | 'contained',
               onLongPress:_onLongPress,
-              delayLongPress:10000
-            }
-        },
-        {
-            key: 'Card stylet: delayLongPress is 20000(延时长按10秒)',
-            value: {
-              mode:'contained' as 'elevated' | 'outlined' | 'contained',
-              onLongPress:_onLongPress,
-              delayLongPress:20000
+              delayLongPress: 10000
             }
         },
         {

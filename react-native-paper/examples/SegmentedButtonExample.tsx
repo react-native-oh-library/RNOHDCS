@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
-import { MD2Colors, MD2Theme, MD3Theme, useTheme } from 'react-native-paper';
+import { MD2Colors, MD2Theme, MD3Theme, useTheme, MD3DarkTheme } from 'react-native-paper';
 import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import { SegmentedButtons } from 'react-native-paper';
 
@@ -20,7 +20,7 @@ function SegmentedButtonDemo() {
 
   const SegmentedButtonProps = [
     {
-      key: ' ProgressBar style:density={"regular"}',
+      key: ' SegmentedButton style:density={"regular"}',
       value: {
         density:'regular' as 'regular' | 'small' | 'medium' | 'high',
         value:_getSegmentedButtonValue('Button1'),
@@ -39,7 +39,7 @@ function SegmentedButtonDemo() {
       },
     },
     {
-      key: ' ProgressBar style:density={"small"}',
+      key: ' SegmentedButton style:density={"small"}',
       value: {
         density:'small' as 'regular' | 'small' | 'medium' | 'high',
         value:_getSegmentedButtonValue('Button2'),
@@ -58,7 +58,7 @@ function SegmentedButtonDemo() {
       },
     },
     {
-      key: ' ProgressBar style:density={"medium"}',
+      key: ' SegmentedButton style:density={"medium"}',
       value: {
         density:'medium' as 'regular' | 'small' | 'medium' | 'high',
         value:_getSegmentedButtonValue('Button3'),
@@ -77,7 +77,7 @@ function SegmentedButtonDemo() {
       },
     },
     {
-      key: ' ProgressBar style:density={"high"}',
+      key: ' SegmentedButton style:density={"high"}',
       value: {
         density:'high' as 'regular' | 'small' | 'medium' | 'high',
         value:_getSegmentedButtonValue('Button4'),
@@ -96,7 +96,7 @@ function SegmentedButtonDemo() {
       },
     },
     {
-      key: ' ProgressBar style:{backgroundColor:MD2Colors.red100}',
+      key: ' SegmentedButton style:{backgroundColor:MD2Colors.red100}',
       value: {
         value:_getSegmentedButtonValue('Button5'),
         onValueChange:_onValueChange('Button5'),
@@ -115,11 +115,11 @@ function SegmentedButtonDemo() {
       },
     },
     {
-      key: ' ProgressBar style:theme = {theme}',
+      key: ' SegmentedButton style:theme = {MD3DarkTheme}',
       value: {
         value:_getSegmentedButtonValue('Button6'),
         onValueChange:_onValueChange('Button6'),
-        theme :theme,
+        theme : MD3DarkTheme,
         buttons:[
           {
             value: 'walk',
@@ -134,7 +134,7 @@ function SegmentedButtonDemo() {
       },
     },
     {
-      key: ' ProgressBar style:buttons ={value:"walk",label:"Walking"}',
+      key: ' SegmentedButton style:buttons ={value:"walk",label:"Walking"}',
       value: {
         value:_getSegmentedButtonValue('Button7'),
         onValueChange:_onValueChange('Button7'),
@@ -153,7 +153,7 @@ function SegmentedButtonDemo() {
       },
     },
     {
-      key: ' ProgressBar style:buttons ={value:"walk",icon:"walk",label:"Walking",style:styles.button}',
+      key: ' SegmentedButton style:buttons ={value:"walk",icon:"walk",label:"Walking",style:styles.button}',
       value: {
         value:_getSegmentedButtonValue('Button8'),
         onValueChange:_onValueChange('Button8'),
@@ -181,7 +181,7 @@ function SegmentedButtonDemo() {
       },
     },
     {
-      key: ' ProgressBar style:buttons ={disabled:true}',
+      key: ' SegmentedButton style:buttons ={disabled:true}',
       value: {
         value:_getSegmentedButtonValue('Button8'),
         onValueChange:_onValueChange('Button8'),
@@ -210,7 +210,7 @@ function SegmentedButtonDemo() {
       },
     },
     {
-      key: ' ProgressBar style:buttons ={disabled:false}',
+      key: ' SegmentedButton style:buttons ={disabled:false}',
       value: {
         value:_getSegmentedButtonValue('Button8'),
         onValueChange:_onValueChange('Button8'),
