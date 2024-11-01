@@ -19,11 +19,13 @@ export default function () {
 
   const barChartProps = [
     { horizontal: true, data: [{ value: 50 }, { value: 60 }] },
-    { rtl: true, horizontal: true, data: [{ value: 50 }, { value: 60 }] },
-    { shiftX: 10, horizontal: true, data: [{ value: 50 }, { value: 60 }] },
-    { shiftX: 20, horizontal: true, data: [{ value: 50 }, { value: 60 }] },
+    { shiftX: -50, horizontal: true, data: [{ value: 50 }, { value: 60 }] },
+    { shiftX: 0, horizontal: true, data: [{ value: 50 }, { value: 60 }] },
+    { shiftX: 50, horizontal: true, data: [{ value: 50 }, { value: 60 }] },
+    { shiftY: -20, horizontal: true, data: [{ value: 50 }, { value: 60 }] },
+    { shiftY: 0, horizontal: true, data: [{ value: 50 }, { value: 60 }] },
     { shiftY: 20, horizontal: true, data: [{ value: 50 }, { value: 60 }] },
-    { shiftY: 10, horizontal: true, data: [{ value: 50 }, { value: 60 }] },
+    { rtl: true, horizontal: true, data: [{ value: 50 }, { value: 60 }] },
     { rotateYAxisTexts: 5, horizontal: true, data: [{ value: 50 }, { value: 60 }] },
     { rotateYAxisTexts: 20, horizontal: true, data: [{ value: 50 }, { value: 60 }] },
     { yAxisAtTop: true, horizontal: true, data: [{ value: 50 }, { value: 60 }] },
@@ -31,7 +33,7 @@ export default function () {
     { intactTopLabel: true, horizontal: true, data: [{ value: 50 }, { value: 60 }], showValuesAsTopLabel: true },
     { intactTopLabel: false, horizontal: true, data: [{ value: 50 }, { value: 60 }], showValuesAsTopLabel: true },
   ]
-  console.log(barChartProps.length);
+
   return (
     <Tester>
       <ScrollView>

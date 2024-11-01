@@ -5,7 +5,7 @@ import { axesProps } from '../commonProps'
 
 export default function () {
   const data = [
-    { value: 50, label: '50', },
+    { value: 50, label: '50' },
     { value: 60, label: '60', },
     { value: 70, label: '70', },
     { value: 80, label: '80', },
@@ -15,8 +15,18 @@ export default function () {
 
   const barChartAxesPro = [
     ...axesProps,
-    { labelWidth: 20 }, { labelWidth: 30 },
+    {
+      data: [
+        { value: 50, label: '50', labelTextStyle: { fontSize: 14, backgroundColor: 'red' }, labelWidth: 20 },
+        { value: 60, label: '60', labelTextStyle: { fontSize: 14, backgroundColor: 'red' }, labelWidth: 40 },
+        { value: 70, label: '70', },
+        { value: 80, label: '80', },
+        { value: 90, label: '90', },
+        { value: 100, label: '100' },
+        { value: 110, label: '110' }]
+    },
     { labelsDistanceFromXaxis: 10 }, { labelsDistanceFromXaxis: 20 },
+
   ]
 
   return (
@@ -36,7 +46,6 @@ export default function () {
             formatYLabel: (label) => label + '#'
           }}></BarChart>
         </TestCase>
-
       </ScrollView>
     </Tester >
 
