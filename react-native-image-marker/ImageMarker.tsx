@@ -35,8 +35,10 @@ export const ImageMarker = () => {
   const [url_backscale1_5, seturl_backscale1_5] = useState('');
   // image alpha
   const [url_alpha0_1, seturl_alpha0_1] = useState('');
+  const [url_alpha0_5, seturl_alpha0_5] = useState('');
   const [url_alpha1, seturl_alpha1] = useState('');
   const [url_backalpha0_1, seturl_backalpha0_1] = useState('');
+  const [url_backalpha0_5, seturl_backalpha0_5] = useState('');
   const [url_backalpha1, seturl_backalpha1] = useState('');
   // image position
   const [url_icon_topLeft, seturl_icon_topLeft] = useState('');
@@ -139,6 +141,14 @@ export const ImageMarker = () => {
     }
     ]
   }
+  const image_options_alpha0_5: ImageMarkOptions = {
+    backgroundImage: { src: require('./assets/code-images/1.png') },
+    watermarkImages: [{
+      src: require('./assets/pravatar-131.jpg'),
+      alpha: 0.5
+    }
+    ]
+  }
   const image_options_alpha1: ImageMarkOptions = {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkImages: [{
@@ -151,6 +161,16 @@ export const ImageMarker = () => {
     backgroundImage: {
       src: require('./assets/code-images/1.png'),
       alpha: 0.1
+    },
+    watermarkImages: [{
+      src: require('./assets/pravatar-131.jpg')
+    }
+    ]
+  }
+  const image_options_backalpha0_5: ImageMarkOptions = {
+    backgroundImage: {
+      src: require('./assets/code-images/1.png'),
+      alpha: 0.5
     },
     watermarkImages: [{
       src: require('./assets/pravatar-131.jpg')
@@ -426,6 +446,13 @@ export const ImageMarker = () => {
       console.log('error', error)
     })
   }
+  const markImagealpha0_5 = () => {
+    Marker.markImage(image_options_alpha0_5).then((result) => {
+      seturl_alpha0_5(result)
+    }).catch(error => {
+      console.log('error', error)
+    })
+  }
   const markImagealpha1 = () => {
     Marker.markImage(image_options_alpha1).then((result) => {
       seturl_alpha1(result)
@@ -436,6 +463,13 @@ export const ImageMarker = () => {
   const markImagebackalpha0_1 = () => {
     Marker.markImage(image_options_backalpha0_1).then((result) => {
       seturl_backalpha0_1(result)
+    }).catch(error => {
+      console.log('error', error)
+    })
+  }
+  const markImagebackalpha0_5 = () => {
+    Marker.markImage(image_options_backalpha0_5).then((result) => {
+      seturl_backalpha0_5(result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -537,6 +571,7 @@ export const ImageMarker = () => {
   const [url_text_textalain_right, seturl_text_textalain_right] = useState('');
   // image alpha
   const [url_backalpha0_1_text, seturl_backalpha0_1_text] = useState('');
+  const [url_backalpha0_5_text, seturl_backalpha0_5_text] = useState('');
   const [url_backalpha1_text, seturl_backalpha1_text] = useState('');
   // text position
   const [url_text_topLeft, seturl_text_topLeft] = useState('');
@@ -1773,6 +1808,13 @@ export const ImageMarker = () => {
       console.log('error', error)
     })
   }
+  const markTextbackalpha0_5 = () => {
+    Marker.markText(text_options_backalpha0_5).then((result) => {
+      seturl_backalpha0_5_text(result)
+    }).catch(error => {
+      console.log('error', error)
+    })
+  }
   const markTextbackalpha1 = () => {
     Marker.markText(text_options_backalpha1).then((result) => {
       seturl_backalpha1_text(result)
@@ -2069,6 +2111,26 @@ export const ImageMarker = () => {
             </View>
           </TestCase>
           <TestCase
+            itShould=' back_alpha0_5'
+            tags={['C_API']}>
+            <View style={styles.body}>
+              <View style={styles.sectionContainer}>
+                <Text style={styles.sectionTitle}>
+                  {"image marker"}
+                </Text>
+                <Button
+                  title="back_alpha0_5"
+                  color="#9a73ef"
+                  onPress={markImagebackalpha0_5}
+                />
+                <Text style={styles.sectionTitle}>
+                  {url_backalpha0_5}
+                </Text>
+                <Image resizeMode='contain' source={{ uri: url_backalpha0_5, width: 300, height: 150 }} />
+              </View>
+            </View>
+          </TestCase>
+          <TestCase
             itShould=' back_alpha1'
             tags={['C_API']}>
             <View style={styles.body}>
@@ -2105,6 +2167,26 @@ export const ImageMarker = () => {
                   {url_alpha0_1}
                 </Text>
                 <Image resizeMode='contain' source={{ uri: url_alpha0_1, width: 300, height: 150 }} />
+              </View>
+            </View>
+          </TestCase>
+          <TestCase
+            itShould=' icon_alpha0_5 '
+            tags={['C_API']}>
+            <View style={styles.body}>
+              <View style={styles.sectionContainer}>
+                <Text style={styles.sectionTitle}>
+                  {"image marker"}
+                </Text>
+                <Button
+                  title="icon_alpha0_5 "
+                  color="#9a73ef"
+                  onPress={markImagealpha0_5}
+                />
+                <Text style={styles.sectionTitle}>
+                  {url_alpha0_5}
+                </Text>
+                <Image resizeMode='contain' source={{ uri: url_alpha0_5, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
@@ -3432,6 +3514,26 @@ export const ImageMarker = () => {
                   {url_backalpha0_1_text}
                 </Text>
                 <Image resizeMode='contain' source={{ uri: url_backalpha0_1_text, width: 300, height: 150 }} />
+              </View>
+            </View>
+          </TestCase>
+          <TestCase
+            itShould=' back_alpha0_5 '
+            tags={['C_API']}>
+            <View style={styles.body}>
+              <View style={styles.sectionContainer}>
+                <Text style={styles.sectionTitle}>
+                  {"image marker"}
+                </Text>
+                <Button
+                  title="back_alpha0_5 "
+                  color="#9a73ef"
+                  onPress={markTextbackalpha0_5}
+                />
+                <Text style={styles.sectionTitle}>
+                  {url_backalpha0_5_text}
+                </Text>
+                <Image resizeMode='contain' source={{ uri: url_backalpha0_5_text, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
