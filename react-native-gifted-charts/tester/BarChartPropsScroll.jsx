@@ -29,7 +29,8 @@ export default function () {
     { showScrollIndicator: true, indicatorColor: 'white' }, { showScrollIndicator: false },
     { showScrollIndicator: true, indicatorColor: 'black' },
     { showScrollIndicator: true, indicatorColor: 'default' },
-    { autoShiftLabels: true, }, { autoShiftLabels: false, },
+    { autoShiftLabels: true, data: [{ value: -5, label: 5 }, { value: 10, label: 20 }, { value: 15, label: 15 }] }, 
+    { autoShiftLabels: false, data: [{ value: -5, label: 5 }, { value: 10, label: 20 }, { value: 15, label: 15 }]},
   ]
 
   const initParams = () => {
