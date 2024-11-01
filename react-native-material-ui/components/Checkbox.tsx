@@ -29,7 +29,7 @@ const CheckboxDemo = () => {
               label="checked"
               checked={state1.checked}
               value="false"
-              onCheck={checked =>{setState1({ checked })} }
+              onCheck={checked =>{console.log(checked),setState1({ checked })} }
             />
           </View>
         </TestCase>

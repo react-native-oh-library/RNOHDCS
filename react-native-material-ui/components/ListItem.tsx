@@ -156,7 +156,7 @@ const ListItemDemo = () => {
         </TestSuite>
 
         <TestSuite name='ListItem(列表项) onRightElementPress 按下右侧元素时触发回调事件 '>
-          <TestCase itShould='props:onRightElementPress 按下时显示"leftOnPress"文本'>
+          <TestCase itShould='props:onRightElementPress 按下时显示"pressOneRight"文本'>
             <View style={{ height: 300 }}>
               <View style={styles.container}>
                 <Text>{pressOneRight}</Text>
