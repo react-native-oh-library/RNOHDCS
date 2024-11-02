@@ -47,10 +47,6 @@ export default function () {
     { stepValue: 10 }, { stepValue: 30 },
     { stepHeight: 10 }, { stepHeight: 20 },
     { data: [{ value: -5 }, { value: 10, }, { value: 30 }] },
-    { negativeStepValue: -10, data: [{ value: -5 }, { value: 10, }, { value: 30 }] },
-    { negativeStepValue: -20, data: [{ value: -5, }, { value: 10, }, { value: 30 }] },
-    { negativeStepHeight: -5, data: [{ value: 1 }, { value: 5, }] },
-    { negativeStepHeight: -10, data: [{ value: 1 }, { value: 5, }] },
     { spacing: 30 }, { spacing: 60 },
     { adjustToWidth: true }, { adjustToWidth: false },
     { backgroundColor: 'red' }, { backgroundColor: 'blue' },
@@ -320,7 +316,6 @@ export default function () {
       data5: [{ value: 10 }, { value: 20 }, { value: 30 }, { value: 40 }],
     },
   ]
-
   return (
     <Tester>
       <ScrollView>
