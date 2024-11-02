@@ -10,12 +10,13 @@ export default function () {
       stacks:
         [
           {
-            value: 10, color: 'red', showGradient: true, gradientColor: 'pink', showXAxisIndex: true,
+            value: 10, color: 'red', showGradient: true, gradientColor: 'pink',
           },
           {
             value: 20, color: 'blue', showGradient: true, gradientColor: 'green'
           },
         ],
+      showXAxisIndex: true,
       label: 'Jan',
       labelTextStyle: { color: 'green' },
       borderRadius: 10,
@@ -24,12 +25,13 @@ export default function () {
       stacks:
         [
           {
-            value: 8, color: 'red', showXAxisIndex: true,
+            value: 8, color: 'red', 
           },
           {
-            value: 17, color: 'blue', marginBottom: 1
+            value: 17, color: 'blue', marginBottom: 1, 
           },
         ],
+      showXAxisIndex: false,
       label: 'Feb',
       labelTextStyle: { color: 'blue' },
       borderRadius: 15,
@@ -38,12 +40,13 @@ export default function () {
       stacks:
         [
           {
-            value: 8, color: 'red', showXAxisIndex: true,
+            value: 8, color: 'red'
           },
           {
             value: 17, color: 'blue', marginBottom: 1
           },
         ],
+      showXAxisIndex: true,
       label: 'Feb',
       labelTextStyle: { color: 'blue' },
     },

@@ -56,7 +56,7 @@ export default function () {
     { mostNegativeValue: -15, negativeStepHeight: 20 }, { mostNegativeValue: -15, negativeStepHeight: 50 },
     { spacing: 5, }, { spacing: 35 },
     { backgroundColor: 'red', }, { backgroundColor: 'blue' },
-    { sectionColors: 'red', }, { sectionColors: 'blue' },// 需组合使用
+    { sectionColors: ['red', 'yellow', 'pink', 'blue'] }, { sectionColors: ['blue', 'pink'] },
     { initialSpacing: 10, }, { initialSpacing: 30, },
     { adjustToWidth: true, parentWidth: 300 }, { adjustToWidth: true, parentWidth: 200 },
     { adjustToWidth: false, parentWidth: 300 },
