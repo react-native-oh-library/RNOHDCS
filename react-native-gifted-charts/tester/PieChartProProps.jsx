@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import { PieChartPro } from "react-native-gifted-charts";
 import { TestCase, Tester } from "@rnoh/testerino";
-import { ScrollView } from "react-native";
+import { Button, ScrollView, View, useAnimatedValue } from "react-native";
 
 export default function () {
 
@@ -10,8 +11,6 @@ export default function () {
     { value: 26, color: '#ED6665', text: '26%', onPress: () => setOnPressText('onPress被触发 text:26%') },
   ];
   const pieChartProProps = [
-    { isAnimated: true, curvedStartEdges: true, donut: true, innerRadius: 30 },
-    { isAnimated: false, curvedStartEdges: true, donut: true, innerRadius: 30 },
     { curvedStartEdges: true, donut: true, innerRadius: 30 },
     { curvedStartEdges: false, donut: true, innerRadius: 20 },
     { curvedEndEdges: true, donut: true, innerRadius: 30 },
@@ -29,9 +28,61 @@ export default function () {
     { fontStyle: 'normal' }, { fontStyle: 'italic', }, { fontStyle: 'oblique' },
   ]
 
+  const [isAnimated, setIsAnimated] = useState(false)
+  const [animationDuration, setAnimationDuration] = useState(500)
+  const [isShow, setIsShow] = useState(true)
+  const initParams = () => {
+    setIsShow(false)
+    setIsAnimated(false)
+    setAnimationDuration(500)
+  }
   return (
     <Tester>
-      <ScrollView >
+      <ScrollView>
+        <TestCase itShould={'isAnimated,animationDuration'} tags={['C_API']}>
+          <View style={{ flex: 1, gap: 10 }}>
+            <Button title='isAnimated:false' onPress={() => {
+              initParams()
+              const t = setTimeout(() => {
+                clearTimeout(t)
+                setIsAnimated(false)
+                setIsShow(true)
+              }, 500)
+            }}></Button>
+            <Button title='isAnimated:true' onPress={() => {
+              initParams()
+              const t = setTimeout(() => {
+                clearTimeout(t)
+                setIsAnimated(true)
+                setIsShow(true)
+              }, 500)
+            }}></Button>
+            <Button title='isAnimated:true,animationDuration:1000' onPress={() => {
+              initParams()
+              const t = setTimeout(() => {
+                clearTimeout(t)
+                setIsAnimated(true)
+                setAnimationDuration(1000)
+                setIsShow(true)
+              }, 500)
+            }}></Button>
+            <Button title='isAnimated:true,animationDuration:2000' onPress={() => {
+              initParams()
+              const t = setTimeout(() => {
+                clearTimeout(t)
+                setIsAnimated(true)
+                setAnimationDuration(2000)
+                setIsShow(true)
+              }, 500)
+            }}></Button>
+          </View>
+          <View style={{ height: 246 }}>{isShow ? <PieChartPro data={pieData}
+            isAnimated={isAnimated}
+            animationDuration={animationDuration}
+            curvedStartEdges={true}
+            innerRadius={30}
+          ></PieChartPro> : null}</View>
+        </TestCase>
         {
           pieChartProProps.map((item, index) => {
             return (

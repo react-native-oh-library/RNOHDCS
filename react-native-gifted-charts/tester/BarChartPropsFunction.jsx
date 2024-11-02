@@ -6,6 +6,10 @@ import { Tester, TestCase } from "@rnoh/testerino";
 
 export default function () {
   const [pressProText, setPressProText] = useState('');
+  const [onLongPressText, setOnLongPress] = useState('');
+  const [onPressOutText, setOnPressOut] = useState('');
+  const [onStartReached, setOnStartReached] = useState('');
+  const [onEndReached, setOnEndReached] = useState('');
   const scrollRef = useRef();
 
   const data = [
@@ -22,10 +26,10 @@ export default function () {
       <ScrollView>
         <TestCase itShould={'function'} tags={['C_API']}>
           <Text>请点击条形图触发onPress方法:{pressProText}</Text>
-          <Text>请长按条形图触发onLongPress方法:{pressProText}</Text>
-          <Text>请长按条形图并释放触发onPressOut方法:{pressProText}</Text>
-          <Text>开始滚动触发onStartReached方法:{pressProText}</Text>
-          <Text>结束滚动触发onEndReached方法:{pressProText}</Text>
+          <Text>请长按条形图触发onLongPress方法:{onLongPressText}</Text>
+          <Text>请长按条形图并释放触发onPressOut方法:{onPressOutText}</Text>
+          <Text>开始滚动触发onStartReached方法:{onStartReached}</Text>
+          <Text>结束滚动触发onEndReached方法:{onEndReached}</Text>
           <BarChart
             data={data}
             scrollref={scrollRef}
@@ -33,19 +37,16 @@ export default function () {
               setPressProText('触发onPress方法');
             }}
             onLongPress={() => {
-              setPressProText('触发onLongPress方法');
+              setOnLongPress('触发onLongPress方法');
             }}
             onPressOut={() => {
-              setPressProText('触发onPressOut方法');
-            }}
-            onMomentumScrollEnd={() => {
-              setPressProText('触发onMomentumScrollEndl方法');
+              setOnPressOut('触发onPressOut方法');
             }}
             onEndReached={() => {
-              setPressProText('触发onEndReached方法');
+              setOnEndReached('触发onEndReached方法');
             }}
             onStartReached={() => {
-              setPressProText('触发onStartReached方法');
+              setOnStartReached('触发onStartReached方法');
             }}></BarChart>
         </TestCase>
       </ScrollView>

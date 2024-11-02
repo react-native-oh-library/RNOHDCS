@@ -93,13 +93,6 @@ export default function () {
       showLine: true,
       lineData: [{ value: 80 }, { value: 20 }, { value: 100 }, { value: 40 }, { value: 50 }, { value: 60 }, { value: 70 }],
       lineData2: [{ value: 100 }, { value: 90 }, { value: 80 }, { value: 70 }, { value: 60 }, { value: 50 }, { value: 40 }],
-      lineConfig: { isAnimated: true, delay: 5000 },
-      lineConfig2: { isAnimated: true, delay: 5000 },
-    },
-    {
-      showLine: true,
-      lineData: [{ value: 80 }, { value: 20 }, { value: 100 }, { value: 40 }, { value: 50 }, { value: 60 }, { value: 70 }],
-      lineData2: [{ value: 100 }, { value: 90 }, { value: 80 }, { value: 70 }, { value: 60 }, { value: 50 }, { value: 40 }],
       lineConfig: { thickness: 5 },
       lineConfig2: { thickness: 5 },
     },
@@ -264,16 +257,71 @@ export default function () {
       lineConfig2: { textColor: 'blue', dataPointsShape: 'rectangular', textFontSize: 20, shiftY: -10 }
     },
   ]
+  const [isAnimated, setIsAnimated] = useState(false)
+  const [delay, setDelay] = useState(1000)
+  const [isShow, setIsShow] = useState(true)
+  const initParams = () => {
+    setIsShow(false)
+    setIsAnimated(false)
+    setDelay(1000)
+  }
   return (
     <Tester>
       <ScrollView>
         {
           barChartProps.map((item, index) => {
-            return (<TestCase itShould={JSON.stringify(item)} key={JSON.stringify(item)} tags={['C_API']}>
-              <BarChart data={data}  {...item}></BarChart>
-            </TestCase>)
+            return (
+              <TestCase itShould={JSON.stringify(item)} key={JSON.stringify(item)} tags={['C_API']}>
+                <BarChart data={data}  {...item}></BarChart>
+              </TestCase>
+            )
           })
         }
+        <TestCase itShould='{
+            showLine: true,
+            lineData: [{ value: 80 }, { value: 20 }, { value: 100 }, { value: 40 }, { value: 50 }, { value: 60 }, { value: 70 }],
+            lineData2: [{ value: 100 }, { value: 90 }, { value: 80 }, { value: 70 }, { value: 60 }, { value: 50 }, { value: 40 }],
+            lineConfig: { isAnimated: false, delay: 1000 },
+            lineConfig2: { isAnimated: false, delay: 1000 }'>
+          <View style={{ flex: 1, gap: 10 }}>
+            <Button title='lineConfig: { isAnimated: false, delay: 1000 }lineConfig2: { isAnimated: false, delay: 1000 }' onPress={() => {
+              initParams()
+              const t = setTimeout(() => {
+                clearTimeout(t)
+                setIsAnimated(false)
+                setDelay(1000)
+                setIsShow(true)
+              }, 500)
+            }}></Button>
+            <Button title='lineConfig: { isAnimated: true, delay: 500 }lineConfig2: { isAnimated: true, delay: 500 }' onPress={() => {
+              initParams()
+              const t = setTimeout(() => {
+                clearTimeout(t)
+                setIsAnimated(true)
+                setDelay(500)
+                setIsShow(true)
+              }, 500)
+            }}></Button>
+             <Button title='lineConfig: { isAnimated: true, delay: 1500 }lineConfig2: { isAnimated: true, delay: 1500 }' onPress={() => {
+              initParams()
+              const t = setTimeout(() => {
+                clearTimeout(t)
+                setIsAnimated(true)
+                setDelay(1500)
+                setIsShow(true)
+              }, 500)
+            }}></Button>
+          </View>
+          <View style={{ height: 246, gap: 10 }}>
+            {isShow ? <BarChart data={data}  {...{
+              showLine: true,
+              lineData: [{ value: 80 }, { value: 20 }, { value: 100 }, { value: 40 }, { value: 50 }, { value: 60 }, { value: 70 }],
+              lineData2: [{ value: 100 }, { value: 90 }, { value: 80 }, { value: 70 }, { value: 60 }, { value: 50 }, { value: 40 }],
+              lineConfig: { isAnimated: isAnimated, delay: delay },
+              lineConfig2: { isAnimated: isAnimated, delay: delay },
+            }}></BarChart> : null}
+          </View>
+        </TestCase>
       </ScrollView>
     </Tester >
 
