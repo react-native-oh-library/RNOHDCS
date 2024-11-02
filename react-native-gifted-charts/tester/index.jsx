@@ -19,7 +19,6 @@ import BarChartPointerConfigProps from './BarChartPointerConfigProps';
 
 import LineChartDataItem from './LineChartDataItem';
 import LineChartProps from './LineChartProps';
-import LineChartPropsAnimateOnDataChange from './LineChartPropsAnimateOnDataChange';
 import LineChartPropsScrollToEnd from './LineChartPropsScrollToEnd';
 import LineChartAxesProps from './LineChartAxesProps';
 import LineChartArrowProps from './LineChartArrowProps';
@@ -62,7 +61,6 @@ export default {
   
   LineChartDataItem,
   LineChartProps,
-  LineChartPropsAnimateOnDataChange,
   LineChartPropsScrollToEnd,
   LineChartAxesProps,
   LineChartArrowProps,
