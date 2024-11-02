@@ -61,7 +61,7 @@ export default function () {
     { adjustToWidth: true, parentWidth: 300 }, { adjustToWidth: true, parentWidth: 200 },
     { adjustToWidth: false, parentWidth: 300 },
     { barWidth: 20 }, { barWidth: 30 },
-    { barStyle: { borderRadius: 10 } }, { barStyle: { borderRadius: 30 } },
+    { barStyle: { borderRadius: 10,backgroundColor:'red' }}, { barStyle: { borderRadius: 30 ,backgroundColor:'green'} },
     { isThreeD: true }, { isThreeD: false },
     { frontColor: 'red' }, { frontColor: 'blue' },
     { isThreeD: true, sideColor: 'red' }, { isThreeD: true, sideColor: 'blue' },
