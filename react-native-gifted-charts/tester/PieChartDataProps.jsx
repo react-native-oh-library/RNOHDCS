@@ -84,6 +84,7 @@ export default function () {
     },
     {
       showText: true,
+      paddingHorizontal:100,
       data: [
         { value: 60, text: '60', strokeWidth: 5, strokeColor: 'red' },
         { value: 70, text: '70', strokeWidth: 10, strokeColor: 'yellow' },
