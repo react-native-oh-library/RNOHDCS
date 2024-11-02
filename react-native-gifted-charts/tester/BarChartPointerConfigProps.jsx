@@ -44,23 +44,28 @@ export default function () {
 
   const pointerConfigProps = [
     ...commonPointerProps,
-    { pointerConfig: { pointerEvents: 'box-none' } },
-    { pointerConfig: { pointerEvents: 'none' } },
-    { pointerConfig: { pointerEvents: 'box-only' } },
-    { pointerConfig: { pointerEvents: 'auto' } },
+    { pointerConfig: { pointerEvents: 'box-none',barTouchable: true},},
+    { pointerConfig: { pointerEvents: 'none' ,barTouchable: true} },
+    { pointerConfig: { pointerEvents: 'box-only' ,barTouchable: true} },
+    { pointerConfig: { pointerEvents: 'auto' ,barTouchable: true} },
     { pointerConfig: { barTouchable: true } },
     { pointerConfig: { barTouchable: false } }
   ]
 
   return (
     <Tester>
+      {/* <TestCase itShould='box-none'>
+      <Text>请点击条形图，观察效果</Text>
+          <Text></Text>
+          <BarChart data={data} {...{pointerEvents:'auto'}}></BarChart>
+      </TestCase> */}
       <ScrollView>
         {
           pointerConfigProps.map(item => {
             return (
               <TestCase key={JSON.stringify(item)} itShould={JSON.stringify(item)} tags={['C_API']}>
                 <Text>{item?.pointerConfig.activatePointersOnLongPress ? '长按' : '请点击'}条形图，观察效果</Text>
-                <BarChart data={data}  {...item}></BarChart>
+                <BarChart data={data}  {...item} onPress={()=>{item.pointerConfig.pointerEvents || item.pointerConfig.barTouchable?console.log(item):'';}}></BarChart>
               </TestCase>
             )
           })

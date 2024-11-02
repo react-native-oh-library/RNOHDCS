@@ -105,18 +105,18 @@ export const axesProps = [
 ];
 
 export const commonPointerProps = [
-  { pointerConfig: { width: 10, height: 10 } }, { pointerConfig: { width: 30, height: 30 } },
+  { pointerConfig: { width: 10, height: 10,pointerStripColor: 'blue',stripBehindBars: false,} }, { pointerConfig: { width: 30, height: 30 ,pointerStripColor: 'blue',stripBehindBars: false,} },
   { pointerConfig: { radius: 8 } }, { pointerConfig: { radius: 15 } },
   { pointerConfig: { pointerColor: 'yellow' } }, { pointerConfig: { pointerColor: 'blue' } },
   { pointerConfig: { showPointerStrip: true }, }, { pointerConfig: { showPointerStrip: false }, },
-  { pointerConfig: { pointerStripWidth: 10 }, }, { pointerConfig: { pointerStripWidth: 20 }, },
+  { pointerConfig: { pointerStripWidth: 10 ,pointerStripColor: 'blue',stripBehindBars: false,}, }, { pointerConfig: { pointerStripWidth: 20 ,pointerStripColor: 'blue',stripBehindBars: false,}, },
   { pointerConfig: { pointerStripHeight: 150, pointerStripWidth: 5 }, }, { pointerConfig: { pointerStripHeight: 200, pointerStripWidth: 5 }, },
   { pointerConfig: { pointerStripColor: 'green' }, }, { pointerConfig: { pointerStripColor: 'blue' }, },
   { pointerConfig: { pointerStripUptoDataPoint: true }, }, { pointerConfig: { pointerStripUptoDataPoint: false }, },
   { pointerConfig: { stripOverPointer: true, stripBehindBars: false, pointerStripColor: 'blue' }, }, { pointerConfig: { stripOverPointer: false, stripBehindBars: false, pointerStripColor: 'blue' }, },
   { pointerConfig: { pointerVanishDelay: 500 }, }, { pointerConfig: { pointerVanishDelay: 1000 }, },
   { pointerConfig: { activatePointersOnLongPress: true }, }, { pointerConfig: { activatePointersOnLongPress: false }, },
-  { pointerConfig: { activatePointersDelay: 1000, persistPointer: true, }, },
-  { pointerConfig: { activatePointersDelay: 2500, persistPointer: true, }, },
+  { pointerConfig: { persistPointer: true, }, },
+  { pointerConfig: { persistPointer: false, }, },
   { pointerConfig: { strokeDashArray: [10, 20] } }, { pointerConfig: { strokeDashArray: [10, 40] } },
 ]
