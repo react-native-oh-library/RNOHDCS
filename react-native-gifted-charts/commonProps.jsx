@@ -10,7 +10,7 @@ export const axesProps = [
   { xAxisType: 'solid' }, { xAxisType: 'dashed' },
   { yAxisLabelWidth: 25 }, { yAxisLabelWidth: 45 },
   { yAxisTextStyle: { color: 'red', backgroundColor: 'blue' } }, { yAxisTextStyle: { color: 'blue', backgroundColor: 'red' } },
-  { yAxisTextNumberOfLines: 1, yAxisLabelWidth: 10 }, { yAxisTextNumberOfLines: 2, yAxisLabelWidth: 10 },
+  { yAxisTextNumberOfLines: 1, yAxisLabelPrefix: "hello", stepHeight: 30 }, { yAxisTextNumberOfLines: 2, stepHeight: 30, yAxisLabelPrefix: "hello", },
   { yAxisLabelContainerStyle: { backgroundColor: 'blue' } }, { yAxisLabelContainerStyle: { backgroundColor: 'red' } },
   { trimYAxisAtTop: true }, { trimYAxisAtTop: false },
   { horizontalRulesStyle: { backgroundColor: 'blue' } }, { horizontalRulesStyle: { backgroundColor: 'red' } },
