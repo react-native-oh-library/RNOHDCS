@@ -8,10 +8,10 @@ export function HumanTallExample() {
     <Tester>
       <ScrollView>
         <TestSuite name="react-native-typography humanTall">
-          {Object.entries(humanTall).map((data: any) => {
+          {Object.entries(humanTall).map((data: any,index) => {
             const itemStyle = StyleSheet.create(data[1]);
             return ( !data[0].includes('Object') &&
-              <TestCase itShould={JSON.stringify(itemStyle)}>
+              <TestCase key={index} itShould={JSON.stringify(itemStyle)}>
                 <View style={{backgroundColor:data[0].includes('White') ?'black':'white' }}>
                   <Text style={itemStyle}> {data[0]}</Text>
                 </View>
