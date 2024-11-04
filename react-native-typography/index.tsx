@@ -10,6 +10,8 @@ import {IOSUIKitExample} from './TypographyIOSUIKit';
 import {IOSUIKitDenseExample} from './TypographyIOSUIKitDense';
 import {IOSUIKitTallExample} from './TypographyIOSUIKitTall';
 import {MaterialExample} from './TypographyMaterial';
+import {TypographyMaterialTall} from './TypographyMaterialTall';
+import {TypographyMaterialDense} from './TypographyMaterialDense';
 import {MaterialColorsExample} from './TypographymaterialColors';
 import {NotoCJKWeightsExample} from './TypographynotoCJKWeights';
 import {NotoTallWeightsExample} from './TypographynotoTallWeights';
@@ -34,6 +36,8 @@ export function TypographyExample() {
           <Page name ='IOSUIKitDenseExample'><IOSUIKitDenseExample/></Page>
           <Page name ='IOSUIKitTallExample'><IOSUIKitTallExample/></Page>
           <Page name ='MaterialExample'><MaterialExample/></Page>
+          <Page name ='materialTallExample'><materialTallExample/></Page>
+          <Page name ='TypographyMaterialDense'><TypographyMaterialDense/></Page>
           <Page name ='MaterialColorsExample'><MaterialColorsExample/></Page>
           <Page name ='NotoCJKWeightsExample'><NotoCJKWeightsExample/></Page>
           <Page name ='NotoTallWeightsExample'><NotoTallWeightsExample/></Page>

@@ -7,7 +7,7 @@ export function HumanExample() {
   return (
     <Tester>
       <ScrollView>
-        <TestSuite name="react-native-typography material">
+        <TestSuite name="react-native-typography human">
           {Object.entries(human).map((data: any,index) => {
             const itemStyle = StyleSheet.create(data[1]);
             return ( !data[0].includes('Object') &&

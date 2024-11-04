@@ -8,10 +8,10 @@ export function MaterialColorsExample() {
     <Tester>
       <ScrollView>
       <TestSuite name="react-native-typography materialColors">
-            {Object.entries(materialColors).map((data: any) => {
+            {Object.entries(materialColors).map((data: any,index) => {
               const itemStyle = StyleSheet.create(data[1]);
               return ( !data[0].includes('Object') &&
-                <TestCase itShould={JSON.stringify(itemStyle)}>
+                <TestCase key={index} itShould={JSON.stringify(itemStyle)}>
                   <View style={{backgroundColor:data[0].includes('white') ?'black':'white' }}>
                     <Text style={{color:itemStyle}}> {data[0]}</Text>
                   </View>
