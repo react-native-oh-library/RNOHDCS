@@ -3,7 +3,7 @@ import React from 'react';
 import {TestSuite, Tester, TestCase} from '@rnoh/testerino';
 import {materialTall} from 'react-native-typography';
 
-export function materialTallExample() {
+export function MaterialTallExample() {
   return (
     <Tester>
       <ScrollView>
