@@ -204,6 +204,20 @@ export function FlashMessageTest() {
               </TouchableOpacity>
             </TestCase>
 
+            <TestCase itShould="测试icon">
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => {
+                  showMessage({
+                    message: '添加图标',
+                    type: 'info',
+                    icon: 'success',
+                  });
+                }}>
+                <Text>添加成功图标</Text>
+              </TouchableOpacity>
+            </TestCase>
+
             <TestCase itShould="测试icon自定义">
               <TouchableOpacity
                 style={styles.button}
