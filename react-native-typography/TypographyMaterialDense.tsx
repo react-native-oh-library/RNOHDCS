@@ -3,7 +3,7 @@ import React from 'react';
 import {TestSuite, Tester, TestCase} from '@rnoh/testerino';
 import {materialDense } from 'react-native-typography';
 
-export function materialDenseExample() {
+export function MaterialDenseExample() {
   return (
     <Tester>
       <ScrollView>

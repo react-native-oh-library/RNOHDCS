@@ -1,7 +1,6 @@
 import { View, StyleSheet, ScrollView, Text,} from 'react-native';
 import React from 'react';
 import {NavigationContainer, Page} from './Navigation';
-import {PortalHost, PortalProvider} from '@gorhom/portal';
 import {HumanExample} from './TypographyHuman';
 import {HumanDenseExample} from './TypographyHumanDense';
 import {HumanTallExample} from './TypographyHumanTall';
@@ -10,8 +9,8 @@ import {IOSUIKitExample} from './TypographyIOSUIKit';
 import {IOSUIKitDenseExample} from './TypographyIOSUIKitDense';
 import {IOSUIKitTallExample} from './TypographyIOSUIKitTall';
 import {MaterialExample} from './TypographyMaterial';
-import {TypographyMaterialTall} from './TypographyMaterialTall';
-import {TypographyMaterialDense} from './TypographyMaterialDense';
+import {MaterialTallExample} from './TypographyMaterialTall';
+import {MaterialDenseExample} from './TypographyMaterialDense';
 import {MaterialColorsExample} from './TypographymaterialColors';
 import {NotoCJKWeightsExample} from './TypographynotoCJKWeights';
 import {NotoTallWeightsExample} from './TypographynotoTallWeights';
@@ -27,7 +26,6 @@ export function TypographyExample() {
   return (
     <View style={{backgroundColor: 'black'}}>
     <NavigationContainer>
-        <PortalProvider>
           <Page name ='humanExample'><HumanExample/></Page>
           <Page name ='HumanDenseExample'><HumanDenseExample/></Page>
           <Page name ='HumanTallExample'><HumanTallExample/></Page>
@@ -36,8 +34,8 @@ export function TypographyExample() {
           <Page name ='IOSUIKitDenseExample'><IOSUIKitDenseExample/></Page>
           <Page name ='IOSUIKitTallExample'><IOSUIKitTallExample/></Page>
           <Page name ='MaterialExample'><MaterialExample/></Page>
-          <Page name ='materialTallExample'><materialTallExample/></Page>
-          <Page name ='TypographyMaterialDense'><TypographyMaterialDense/></Page>
+          <Page name ='MaterialTallExample'><MaterialTallExample/></Page>
+          <Page name ='MaterialDenseExample'><MaterialDenseExample/></Page>
           <Page name ='MaterialColorsExample'><MaterialColorsExample/></Page>
           <Page name ='NotoCJKWeightsExample'><NotoCJKWeightsExample/></Page>
           <Page name ='NotoTallWeightsExample'><NotoTallWeightsExample/></Page>
@@ -47,15 +45,7 @@ export function TypographyExample() {
           <Page name ='SystemTallWeightsExample'><SystemTallWeightsExample/></Page>
           <Page name ='SystemWeightsExample'><SystemWeightsExample/></Page>
           <Page name ='WebWeightsExample'><WebWeightsExample/></Page>
-
-          <View
-          style={[
-            StyleSheet.absoluteFill,
-            {zIndex: 100, pointerEvents: 'box-none'},
-          ]}>
-          <PortalHost name="ModalHost" />
-        </View>
-        </PortalProvider>
+          <View style={{height:200}}></View>
       </NavigationContainer>
   </View>
   );
