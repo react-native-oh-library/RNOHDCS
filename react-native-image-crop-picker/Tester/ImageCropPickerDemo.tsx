@@ -1198,7 +1198,6 @@ export function ImageCropPickerDemo() {
                     <Button
                       title="useFrontCamera: true"
                       onPress={() => {
-                        if (!image?.uri) return;
                         ImagePicker.openCamera({
                           useFrontCamera: true
                         }).then(image => {
@@ -1221,7 +1220,6 @@ export function ImageCropPickerDemo() {
                     <Button
                       title="useFrontCamera: false"
                       onPress={() => {
-                        if (!image?.uri) return;
                         ImagePicker.openCamera({
                           useFrontCamera: false
                         }).then(image => {
