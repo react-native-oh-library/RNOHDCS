@@ -159,16 +159,18 @@ export function DrawerText() {
         label: 'Starred',
         focusedIcon: 'star',
         unfocusedIcon: 'star-outline',
-        theme:{ colors: { primary: 'green' } }
+        active: true,
+        theme: { colors: { secondaryContainer: 'green' } }
       },
     },
     {
-      key: 'DrawerCollapsed style:testID= {Drawer}',
+      key: 'DrawerCollapsed style:theme ={ colors: { primary: "red" } }',
       value: {
         label: 'Starred',
         focusedIcon: 'star',
         unfocusedIcon: 'star-outline',
-        testID:'Drawer'
+        active: true,
+        theme: { colors: { secondaryContainer: 'red' } }
       },
     },
     {
@@ -315,11 +317,21 @@ export function DrawerText() {
       },
     },
     {
-      key: 'DrawerItem style:theme = {{ colors: { primary: "green"} }}',
+      key: 'DrawerItem style:theme = {{ colors: { secondaryContainer: "green"} }}',
       value: {
         icon:'star',
         label:'First Item',
-        theme:{ colors: { primary: 'green' } }
+        active: true,
+        theme:{ colors: { secondaryContainer: 'green' } }
+      },
+    },
+    {
+      key: 'DrawerItem style:theme = {{ colors: { secondaryContainer: "red"} }}',
+      value: {
+        icon:'star',
+        label:'First Item',
+        active: true,
+        theme:{ colors: { secondaryContainer: 'red' } }
       },
     },
   ]
@@ -373,10 +385,17 @@ export function DrawerText() {
       },
     },
     {
-      key: 'Drawer.Section style:theme = {{ colors: { primary: "green"} }}',
+      key: 'Drawer.Section style:theme = {{ colors: { onSurfaceVariant: "red"} }}',
       value: {
         title:'Some title',
-        theme :{ colors: { primary: "green"} }
+        theme :{ colors: { onSurfaceVariant: "red"} }
+      },
+    },
+    {
+      key: 'Drawer.Section style:theme = {{ colors: { onSurfaceVariant: "blue"} }}',
+      value: {
+        title:'Some title',
+        theme :{ colors: { onSurfaceVariant: "blue"} }
       },
     },
   ]

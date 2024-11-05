@@ -54,6 +54,7 @@ export function CheckboxIOS() {
                             status={'indeterminate'}
                             // 设置 testID ,类似该组件的自定义ID
                             testID="my-checkbox2"
+                            color='red'
                         />
                         <Text>这里只展示status的第三种属性配置,不确定图标</Text>
                     </View>

@@ -200,7 +200,9 @@ function BottomNavigationDemo() {
         renderScene: renderScene,
         navigationState: { index: _getIndex('BottomNavigation9'), routes: routes },
         onIndexChange: _changeIndex('BottomNavigation9'),
-        activeColor: 'red',
+        // activeColor: 'red',
+        shifting: true,
+        theme: { isV3: false },
         getColor: (props: { route: BaseRoute }) => 'red'
       }
     },
@@ -258,6 +260,7 @@ function BottomNavigationDemo() {
         renderScene: renderScene,
         navigationState: { index: _getIndex('BottomNavigation15'), routes: routes },
         onIndexChange: _changeIndex('BottomNavigation15'),
+        activeColor: "green",
         inactiveColor: "red",
       }
     },
@@ -285,7 +288,9 @@ function BottomNavigationDemo() {
         renderScene: renderScene,
         navigationState: { index: _getIndex('BottomNavigation18'), routes: routes },
         onIndexChange: _changeIndex('BottomNavigation18'),
+        sceneAnimationEnabled: true,
         sceneAnimationType: 'opacity' as 'opacity' | 'shifting',
+        theme: { animation: { scale: 5}},
       }
     },
     {
@@ -294,7 +299,9 @@ function BottomNavigationDemo() {
         renderScene: renderScene,
         navigationState: { index: _getIndex('BottomNavigation19'), routes: routes },
         onIndexChange: _changeIndex('BottomNavigation19'),
+        sceneAnimationEnabled: true,
         sceneAnimationType: 'shifting' as 'opacity' | 'shifting',
+        theme: { animation: { scale: 5}},
       }
     },
     {
@@ -533,6 +540,15 @@ function BottomNavigationDemo() {
       }
     },
     {
+      key: 'BottomNavigationBar style: onTabLongPress ={_onTabLongPress}',
+      value: {
+        renderScene: renderScene,
+        navigationState: { index: 1, routes },
+        safeAreaInsets: { top: 10, bottom: 10 },
+        onTabLongPress: _onTabLongPress
+      }
+    },
+    {
       key: 'BottomNavigationBar style: activeColor ={"red"}',
       value: {
         renderScene: renderScene,
@@ -598,7 +614,7 @@ function BottomNavigationDemo() {
         onTabPress: _onTabPress,
         navigationState: { index: _getIndex('BottomNavigation6'), routes: routes },
 
-        renderTouchable: (porps) => <Icon source="close" color={MD3Colors.error50} size={20} />
+        renderTouchable: (porps) => <Icon source="camera" color={MD3Colors.error50} size={20} />
       }
     },
     {
@@ -638,6 +654,52 @@ function BottomNavigationDemo() {
         testID: 'barId_01'
       }
     },
+    {
+      key: 'BottomNavigationBar style: keyboardHidesNavigationBar={true}',
+      value: {
+        renderScene: renderScene,
+        navigationState: { index: 1, routes },
+        safeAreaInsets: { top: 10, bottom: 10 },
+        keyboardHidesNavigationBar:true
+      }
+    },
+    {
+      key: 'BottomNavigationBar style: keyboardHidesNavigationBar={false}',
+      value: {
+        renderScene: renderScene,
+        navigationState: { index: 1, routes },
+        safeAreaInsets: { top: 10, bottom: 10 },
+        keyboardHidesNavigationBar:false
+      }
+    },
+    {
+      key: 'BottomNavigationBar animationEasing: Easing.linear',
+      value: {
+        renderScene: renderScene,
+        navigationState: { index: _getIndex('BottomNavigation666'), routes: routes },
+        onIndexChange: _changeIndex('BottomNavigation666'),
+        animationEasing: Easing.linear,
+        theme: { animation: {scale: 5}},
+        onTabPress: ({route, preventDefault}) => {
+            const actIndex = routes.findIndex(_route => _route.key === route.key);
+            setIndex({...index, BottomNavigation666: actIndex});
+        },
+      }
+    },
+    {
+      key: 'BottomNavigationBar animationEasing: Easing.cubic',
+      value: {
+        renderScene: renderScene,
+        navigationState: { index: _getIndex('BottomNavigation667'), routes: routes },
+        onIndexChange: _changeIndex('BottomNavigation667'),
+        animationEasing: Easing.cubic,
+        theme: { animation: {scale: 5}},
+        onTabPress: ({route, preventDefault}) => {
+            const actIndex = routes.findIndex(_route => _route.key === route.key);
+            setIndex({...index, BottomNavigation667: actIndex});
+        },
+      }
+    },
   ]
 
   return (
@@ -661,6 +723,7 @@ function BottomNavigationDemo() {
             return (
               <TestCase itShould={item.key} key={item.key} modal={true} >
                 <View style={{ height: 160, justifyContent: "center" }}>
+                <TextInput style={{borderWidth:1}}></TextInput>
                   <BottomNavigation.Bar {...item.value} />
                 </View>
               </TestCase>

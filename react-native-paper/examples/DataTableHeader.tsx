@@ -19,7 +19,7 @@ export function DataTableHeader() {
     return (
         <Tester>
             <ScrollView>
-                <TestSuite name='DataTableHeader'>
+                <TestSuite name=''>
                     <TestCase itShould='展示DataTable.Title'>
                         <DataTable.Header>
                             <DataTable.Title

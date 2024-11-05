@@ -8,7 +8,7 @@ type ItemsState = Array<{
   calories: number;
   fat: number;
 }>;
-import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
+import { TestSuite, TestCase, Tester } from '@rnoh/testerino';
 
 const numberOfItemsPerPageList = [2, 3, 4];
 
@@ -34,17 +34,17 @@ type DataTablePage = {
 export function DataTableText() {
 
   const [page, setPage] = React.useState<DataTablePage>({});
-  const _getPage = (name: string) => page[name] ? page[name]:0;
-  const _showPage = (name: string) => (pages:number) =>
-  setPage({ ...page, [name]: pages });
+  const _getPage = (name: string) => page[name] ? page[name] : 0;
+  const _showPage = (name: string) => (pages: number) =>
+    setPage({ ...page, [name]: pages });
 
 
   // const [page, setPage] = React.useState(0);
-   const [numberOfItemsPerPage, onItemsPerPageChange] = React.useState(numberOfItemsPerPageList[0]);
+  const [numberOfItemsPerPage, onItemsPerPageChange] = React.useState(numberOfItemsPerPageList[0]);
   // const from = page * numberOfItemsPerPage;
   // const to = Math.min((page + 1) * numberOfItemsPerPage, items.length);
-  
-  const _onPress =() => {
+
+  const _onPress = () => {
     console.info('DataTable onPress')
   }
 
@@ -53,343 +53,324 @@ export function DataTableText() {
   //   setPage(page)
   // }
 
-  const _onItemsPerPageChange =(numberOfItemsPerPage: number) => {
+  const _onItemsPerPageChange = (numberOfItemsPerPage: number) => {
     console.info('_onItemsPerPageChange===' + numberOfItemsPerPage)
-    
+
     onItemsPerPageChange(numberOfItemsPerPage)
   }
 
   const DataTableCellProps = [
     {
-        key: 'DataTableCell style: numeric  is true',
-        value: {
-          numeric:true
-        } 
+      key: 'DataTableCell style: numeric  is true',
+      value: {
+        numeric: true
+      }
     },
     {
       key: 'DataTableCell style: numeric is true',
       value: {
-        numeric:false
-      } 
+        numeric: false
+      }
     },
     {
       key: 'DataTableCell fuction: onPress',
       value: {
-        numeric:false,
-        onPress:_onPress
-      } 
+        numeric: false,
+        onPress: _onPress
+      }
     },
     {
       key: 'DataTableCell style: {backgroundColor:MD2Colors.red100}',
       value: {
-        numeric:false,
-        onPress:_onPress,
-        style:{backgroundColor:MD2Colors.red100}
-      } 
+        numeric: false,
+        onPress: _onPress,
+        style: { backgroundColor: MD2Colors.red100 }
+      }
     },
     {
       key: 'DataTableCell textStyle: {colors:MD2Colors.red100}',
       value: {
-        numeric:false,
-        onPress:_onPress,
-        textStyle:{color:MD2Colors.red100}
-      } 
+        numeric: false,
+        onPress: _onPress,
+        textStyle: { color: MD2Colors.red100 }
+      }
     },
     {
       key: 'DataTableCell style: maxFontSizeMultiplier is 1',
       value: {
-        numeric:false,
-        onPress:_onPress,
-        maxFontSizeMultiplier:1
-      } 
+        numeric: false,
+        onPress: _onPress,
+        maxFontSizeMultiplier: 1
+      }
     },
     {
       key: 'DataTableCell style: maxFontSizeMultiplier is 2',
       value: {
-        numeric:false,
-        onPress:_onPress,
-        maxFontSizeMultiplier:2
-      } 
+        numeric: false,
+        onPress: _onPress,
+        maxFontSizeMultiplier: 2
+      }
     },
 
     {
       key: 'DataTableCell style: testID is DataTableCell',
       value: {
-        numeric:false,
-        onPress:_onPress,
-        testID:'DataTableCell'
-      } 
+        numeric: false,
+        onPress: _onPress,
+        testID: 'DataTableCell'
+      }
     },
     {
       key: 'DataTableCell style: testID is DataTableCell1',
       value: {
-        numeric:false,
-        onPress:_onPress,
-        testID:'DataTableCell1'
-      } 
+        numeric: false,
+        onPress: _onPress,
+        testID: 'DataTableCell1'
+      }
     },
   ]
 
   const DataTableHeaderProps = [
     {
-        key: 'DataTableHeader style: children   is <DataTable.Title numeric>Calories</DataTable.Title>',
-        value: {
-          style:styles.first
-        } 
+      key: 'DataTableHeader style: children   is <DataTable.Title numeric>Calories</DataTable.Title>',
+      value: {
+        style: styles.first
+      }
     },
     {
       key: 'DataTableHeader style:{backgroundColor:MD2Colors.red100} ',
       value: {
-        style:{backgroundColor:MD2Colors.red100}
+        style: { backgroundColor: MD2Colors.red100 }
       }
     },
-    {
-      key: 'DataTableHeader theme:{ colors: { primary: "green" }',
-      value: {
-        theme:{ colors: { primary: 'green' } }
-      }
-    },
+  
   ]
 
   const DataTablePaginationProps = [
     {
-        key: 'DataTablePaginationProps style: page ={_getPage("DataTablePagination")}',
-        value: {
-          page:_getPage('DataTablePagination'),
-          numberOfPages:items.length,
-          onPageChange:_showPage('DataTablePagination'),
-          label:'Pagination',
-          showFastPaginationControls:true,
-          paginationControlRippleColor:MD2Colors.red100,
-          numberOfItemsPerPageList:numberOfItemsPerPageList,
-          numberOfItemsPerPage:numberOfItemsPerPage,
-          onItemsPerPageChange:_onItemsPerPageChange,
-          selectPageDropdownLabel:'Rows per page'
-        } 
+      key: 'DataTablePaginationProps style: page ={_getPage("DataTablePagination")}',
+      value: {
+        page: _getPage('DataTablePagination'),
+        numberOfPages: items.length,
+        onPageChange: _showPage('DataTablePagination'),
+        label: 'Pagination',
+        showFastPaginationControls: true,
+        paginationControlRippleColor: MD2Colors.red100,
+        numberOfItemsPerPageList: numberOfItemsPerPageList,
+        numberOfItemsPerPage: numberOfItemsPerPage,
+        onItemsPerPageChange: _onItemsPerPageChange,
+        selectPageDropdownLabel: 'Rows per page'
+      }
     },
     {
       key: 'DataTablePaginationProps style: numberOfPages = {items.length}',
       value: {
-        page:_getPage('DataTablePagination1'),
-        onPageChange:_showPage('DataTablePagination1'),
-        numberOfPages:items.length,
-        label:'Pagination',
-        showFastPaginationControls:true,
-        paginationControlRippleColor:MD2Colors.red100,
-        numberOfItemsPerPageList:numberOfItemsPerPageList,
-        numberOfItemsPerPage:numberOfItemsPerPage,
-        onItemsPerPageChange:_onItemsPerPageChange,
-        selectPageDropdownLabel:'Rows per page'
-      } 
+        page: _getPage('DataTablePagination1'),
+        onPageChange: _showPage('DataTablePagination1'),
+        numberOfPages: items.length,
+        label: 'Pagination',
+        showFastPaginationControls: true,
+        paginationControlRippleColor: MD2Colors.red100,
+        numberOfItemsPerPageList: numberOfItemsPerPageList,
+        numberOfItemsPerPage: numberOfItemsPerPage,
+        onItemsPerPageChange: _onItemsPerPageChange,
+        selectPageDropdownLabel: 'Rows per page'
+      }
     },
     {
       key: 'DataTablePaginationProps fuction: onPageChange  = {_showPage("DataTablePagination2")}',
       value: {
-        page:_getPage('DataTablePagination2'),
-        onPageChange:_showPage('DataTablePagination2'),
-        numberOfPages:items.length,
-        label:'Pagination',
-        showFastPaginationControls:true,
-        paginationControlRippleColor:MD2Colors.red100,
-        numberOfItemsPerPageList:numberOfItemsPerPageList,
-        numberOfItemsPerPage:numberOfItemsPerPage,
-        onItemsPerPageChange:_onItemsPerPageChange,
-        selectPageDropdownLabel:'Rows per page'
-      } 
+        page: _getPage('DataTablePagination2'),
+        onPageChange: _showPage('DataTablePagination2'),
+        numberOfPages: items.length,
+        label: 'Pagination',
+        showFastPaginationControls: true,
+        paginationControlRippleColor: MD2Colors.red100,
+        numberOfItemsPerPageList: numberOfItemsPerPageList,
+        numberOfItemsPerPage: numberOfItemsPerPage,
+        onItemsPerPageChange: _onItemsPerPageChange,
+        selectPageDropdownLabel: 'Rows per page'
+      }
     },
     {
       key: 'DataTablePaginationProps fuction: showFastPaginationControls  = {true}',
       value: {
-        page:_getPage('DataTablePagination2'),
-        onPageChange:_showPage('DataTablePagination2'),
-        numberOfPages:items.length,
-        label:'Pagination',
-        showFastPaginationControls:true,
-        paginationControlRippleColor:MD2Colors.red100,
-        numberOfItemsPerPageList:numberOfItemsPerPageList,
-        numberOfItemsPerPage:numberOfItemsPerPage,
-        onItemsPerPageChange:_onItemsPerPageChange,
-        selectPageDropdownLabel:'Rows per page'
-      } 
+        page: _getPage('DataTablePagination2'),
+        onPageChange: _showPage('DataTablePagination2'),
+        numberOfPages: items.length,
+        label: 'Pagination',
+        showFastPaginationControls: true,
+        paginationControlRippleColor: MD2Colors.red100,
+        numberOfItemsPerPageList: numberOfItemsPerPageList,
+        numberOfItemsPerPage: numberOfItemsPerPage,
+        onItemsPerPageChange: _onItemsPerPageChange,
+        selectPageDropdownLabel: 'Rows per page'
+      }
     },
     {
       key: 'DataTablePaginationProps fuction: showFastPaginationControls  = {false}',
       value: {
-        page:_getPage('DataTablePagination2'),
-        onPageChange:_showPage('DataTablePagination2'),
-        numberOfPages:items.length,
-        label:'Pagination',
-        showFastPaginationControls:false,
-        paginationControlRippleColor:MD2Colors.red100,
-        numberOfItemsPerPageList:numberOfItemsPerPageList,
-        numberOfItemsPerPage:numberOfItemsPerPage,
-        onItemsPerPageChange:_onItemsPerPageChange,
-        selectPageDropdownLabel:'Rows per page'
-      } 
+        page: _getPage('DataTablePagination2'),
+        onPageChange: _showPage('DataTablePagination2'),
+        numberOfPages: items.length,
+        label: 'Pagination',
+        showFastPaginationControls: false,
+        paginationControlRippleColor: MD2Colors.red100,
+        numberOfItemsPerPageList: numberOfItemsPerPageList,
+        numberOfItemsPerPage: numberOfItemsPerPage,
+        onItemsPerPageChange: _onItemsPerPageChange,
+        selectPageDropdownLabel: 'Rows per page'
+      }
     },
     {
       key: 'DataTablePaginationProps fuction: paginationControlRippleColor  = {MD2Colors.red100}',
       value: {
-        page:_getPage('DataTablePagination2'),
-        onPageChange:_showPage('DataTablePagination2'),
-        numberOfPages:items.length,
-        label:'Pagination',
-        showFastPaginationControls:false,
-        paginationControlRippleColor:MD2Colors.red100,
-        numberOfItemsPerPageList:numberOfItemsPerPageList,
-        numberOfItemsPerPage:numberOfItemsPerPage,
-        onItemsPerPageChange:_onItemsPerPageChange,
-        selectPageDropdownLabel:'Rows per page'
-      } 
-    },
-    {
-      key: 'DataTablePaginationProps style: theme  = { colors: { primary: "green" } }',
-      value: {
-        page:_getPage('DataTablePagination2'),
-        onPageChange:_showPage('DataTablePagination2'),
-        numberOfPages:items.length,
-        label:'Pagination',
-        numberOfItemsPerPageList:numberOfItemsPerPageList,
-        numberOfItemsPerPage:numberOfItemsPerPage,
-        onItemsPerPageChange:_onItemsPerPageChange,
-        selectPageDropdownLabel:'Rows per page',
-        theme:{ colors: { primary: 'green' } }
-      } 
+        page: _getPage('DataTablePagination2'),
+        onPageChange: _showPage('DataTablePagination2'),
+        numberOfPages: items.length,
+        label: 'Pagination',
+        showFastPaginationControls: false,
+        paginationControlRippleColor: MD2Colors.red100,
+        numberOfItemsPerPageList: numberOfItemsPerPageList,
+        numberOfItemsPerPage: numberOfItemsPerPage,
+        onItemsPerPageChange: _onItemsPerPageChange,
+        selectPageDropdownLabel: 'Rows per page'
+      }
     },
     {
       key: 'DataTablePaginationProps style: numberOfItemsPerPage  = { numberOfItemsPerPage}',
       value: {
-        page:_getPage('DataTablePagination2'),
-        onPageChange:_showPage('DataTablePagination2'),
-        numberOfPages:items.length,
-        label:'Pagination',
-        numberOfItemsPerPageList:numberOfItemsPerPageList,
-        numberOfItemsPerPage:numberOfItemsPerPage,
-        onItemsPerPageChange:_onItemsPerPageChange,
-        selectPageDropdownLabel:'Rows per page',
-      } 
+        page: _getPage('DataTablePagination2'),
+        onPageChange: _showPage('DataTablePagination2'),
+        numberOfPages: items.length,
+        label: 'Pagination',
+        numberOfItemsPerPageList: numberOfItemsPerPageList,
+        numberOfItemsPerPage: numberOfItemsPerPage,
+        onItemsPerPageChange: _onItemsPerPageChange,
+        selectPageDropdownLabel: 'Rows per page',
+      }
     },
     {
       key: 'DataTablePaginationProps style: numberOfItemsPerPageList  = { numberOfItemsPerPageList}',
       value: {
-        page:_getPage('DataTablePagination2'),
-        onPageChange:_showPage('DataTablePagination2'),
-        numberOfPages:items.length,
-        label:'Pagination',
-        numberOfItemsPerPageList:numberOfItemsPerPageList,
-        numberOfItemsPerPage:numberOfItemsPerPage,
-        onItemsPerPageChange:_onItemsPerPageChange,
-        selectPageDropdownLabel:'Rows per page',
-      } 
+        page: _getPage('DataTablePagination2'),
+        onPageChange: _showPage('DataTablePagination2'),
+        numberOfPages: items.length,
+        label: 'Pagination',
+        numberOfItemsPerPageList: numberOfItemsPerPageList,
+        numberOfItemsPerPage: numberOfItemsPerPage,
+        onItemsPerPageChange: _onItemsPerPageChange,
+        selectPageDropdownLabel: 'Rows per page',
+      }
     },
     {
       key: 'DataTablePaginationProps style: dropdownItemRippleColor  = { MD2Colors.red100}',
       value: {
-        page:_getPage('DataTablePagination2'),
-        onPageChange:_showPage('DataTablePagination2'),
-        numberOfPages:items.length,
-        label:'Pagination',
-        numberOfItemsPerPageList:numberOfItemsPerPageList,
-        numberOfItemsPerPage:numberOfItemsPerPage,
-        onItemsPerPageChange:_onItemsPerPageChange,
-        selectPageDropdownLabel:'Rows per page',
-        dropdownItemRippleColor:MD2Colors.red100
-      } 
+        page: _getPage('DataTablePagination2'),
+        onPageChange: _showPage('DataTablePagination2'),
+        numberOfPages: items.length,
+        label: 'Pagination',
+        numberOfItemsPerPageList: numberOfItemsPerPageList,
+        numberOfItemsPerPage: numberOfItemsPerPage,
+        onItemsPerPageChange: _onItemsPerPageChange,
+        selectPageDropdownLabel: 'Rows per page',
+        dropdownItemRippleColor: MD2Colors.red100
+      }
     },
     {
       key: 'DataTablePaginationProps style: selectPageDropdownRippleColor  = { MD2Colors.red100}',
       value: {
-        page:_getPage('DataTablePagination2'),
-        onPageChange:_showPage('DataTablePagination2'),
-        numberOfPages:items.length,
-        label:'Pagination',
-        numberOfItemsPerPageList:numberOfItemsPerPageList,
-        numberOfItemsPerPage:numberOfItemsPerPage,
-        onItemsPerPageChange:_onItemsPerPageChange,
-        selectPageDropdownLabel:'Rows per page',
-        selectPageDropdownRippleColor:MD2Colors.red100
-      } 
+        page: _getPage('DataTablePagination2'),
+        onPageChange: _showPage('DataTablePagination2'),
+        numberOfPages: items.length,
+        label: 'Pagination',
+        numberOfItemsPerPageList: numberOfItemsPerPageList,
+        numberOfItemsPerPage: numberOfItemsPerPage,
+        onItemsPerPageChange: _onItemsPerPageChange,
+        selectPageDropdownLabel: 'Rows per page',
+        selectPageDropdownRippleColor: MD2Colors.red100
+      }
     },
     {
       key: 'DataTablePaginationProps style: selectPageDropdownLabel  = { "Rows per page1"}',
       value: {
-        page:_getPage('DataTablePagination2'),
-        onPageChange:_showPage('DataTablePagination2'),
-        numberOfPages:items.length,
-        label:'Pagination',
-        numberOfItemsPerPageList:numberOfItemsPerPageList,
-        numberOfItemsPerPage:numberOfItemsPerPage,
-        onItemsPerPageChange:_onItemsPerPageChange,
-        selectPageDropdownLabel:'Rows per page1',
-        selectPageDropdownRippleColor:MD2Colors.red100
-      } 
+        page: _getPage('DataTablePagination2'),
+        onPageChange: _showPage('DataTablePagination2'),
+        numberOfPages: items.length,
+        label: 'Pagination',
+        numberOfItemsPerPageList: numberOfItemsPerPageList,
+        numberOfItemsPerPage: numberOfItemsPerPage,
+        onItemsPerPageChange: _onItemsPerPageChange,
+        selectPageDropdownLabel: 'Rows per page1',
+        selectPageDropdownRippleColor: MD2Colors.red100
+      }
     },
     {
       key: 'DataTablePaginationProps style: selectPageDropdownAccessibilityLabel  = { "selectPageDropdownAccessibilityLabel"}',
       value: {
-        page:_getPage('DataTablePagination2'),
-        onPageChange:_showPage('DataTablePagination2'),
-        numberOfPages:items.length,
-        label:'Pagination',
-        numberOfItemsPerPageList:numberOfItemsPerPageList,
-        numberOfItemsPerPage:numberOfItemsPerPage,
-        onItemsPerPageChange:_onItemsPerPageChange,
-        selectPageDropdownLabel:'Rows per page1',
-        selectPageDropdownAccessibilityLabel:'selectPageDropdownAccessibilityLabel'
-      } 
+        page: _getPage('DataTablePagination2'),
+        onPageChange: _showPage('DataTablePagination2'),
+        numberOfPages: items.length,
+        label: 'Pagination',
+        numberOfItemsPerPageList: numberOfItemsPerPageList,
+        numberOfItemsPerPage: numberOfItemsPerPage,
+        onItemsPerPageChange: _onItemsPerPageChange,
+        selectPageDropdownLabel: 'Rows per page1',
+        selectPageDropdownAccessibilityLabel: 'selectPageDropdownAccessibilityLabel'
+      }
     },
     {
       key: 'DataTablePaginationProps style: selectPageDropdownAccessibilityLabel  = { "selectPageDropdownAccessibilityLabel1"}',
       value: {
-        page:_getPage('DataTablePagination2'),
-        onPageChange:_showPage('DataTablePagination2'),
-        numberOfPages:items.length,
-        label:'Pagination',
-        numberOfItemsPerPageList:numberOfItemsPerPageList,
-        numberOfItemsPerPage:numberOfItemsPerPage,
-        onItemsPerPageChange:_onItemsPerPageChange,
-        selectPageDropdownLabel:'Rows per page1',
-        selectPageDropdownAccessibilityLabel:'selectPageDropdownAccessibilityLabel1'
-      } 
+        page: _getPage('DataTablePagination2'),
+        onPageChange: _showPage('DataTablePagination2'),
+        numberOfPages: items.length,
+        label: 'Pagination',
+        numberOfItemsPerPageList: numberOfItemsPerPageList,
+        numberOfItemsPerPage: numberOfItemsPerPage,
+        onItemsPerPageChange: _onItemsPerPageChange,
+        selectPageDropdownLabel: 'Rows per page1',
+        selectPageDropdownAccessibilityLabel: 'selectPageDropdownAccessibilityLabel1'
+      }
     },
     {
       key: 'DataTablePaginationProps style: label  = { "Pagination1"}',
       value: {
-        page:_getPage('DataTablePagination2'),
-        onPageChange:_showPage('DataTablePagination2'),
-        numberOfPages:items.length,
-        label:'Pagination1',
-        numberOfItemsPerPageList:numberOfItemsPerPageList,
-        numberOfItemsPerPage:numberOfItemsPerPage,
-        onItemsPerPageChange:_onItemsPerPageChange,
-        selectPageDropdownLabel:'Rows per page1',
-      } 
+        page: _getPage('DataTablePagination2'),
+        onPageChange: _showPage('DataTablePagination2'),
+        numberOfPages: items.length,
+        label: 'Pagination1',
+        numberOfItemsPerPageList: numberOfItemsPerPageList,
+        numberOfItemsPerPage: numberOfItemsPerPage,
+        onItemsPerPageChange: _onItemsPerPageChange,
+        selectPageDropdownLabel: 'Rows per page1',
+      }
     },
     {
       key: 'DataTablePaginationProps style: accessibilityLabel  = { "accessibilityLabel1"}',
       value: {
-        page:_getPage('DataTablePagination2'),
-        onPageChange:_showPage('DataTablePagination2'),
-        numberOfPages:items.length,
-        label:'Pagination1',
-        numberOfItemsPerPageList:numberOfItemsPerPageList,
-        numberOfItemsPerPage:numberOfItemsPerPage,
-        onItemsPerPageChange:_onItemsPerPageChange,
-        accessibilityLabel:'accessibilityLabel1',
-      } 
+        page: _getPage('DataTablePagination2'),
+        onPageChange: _showPage('DataTablePagination2'),
+        numberOfPages: items.length,
+        label: 'Pagination1',
+        numberOfItemsPerPageList: numberOfItemsPerPageList,
+        numberOfItemsPerPage: numberOfItemsPerPage,
+        onItemsPerPageChange: _onItemsPerPageChange,
+        accessibilityLabel: 'accessibilityLabel1',
+      }
     },
     {
       key: 'DataTablePaginationProps style: accessibilityLabel  = { "accessibilityLabel1"}',
       value: {
-        page:_getPage('DataTablePagination2'),
-        onPageChange:_showPage('DataTablePagination2'),
-        numberOfPages:items.length,
-        label:'Pagination1',
-        numberOfItemsPerPageList:numberOfItemsPerPageList,
-        numberOfItemsPerPage:numberOfItemsPerPage,
-        onItemsPerPageChange:_onItemsPerPageChange,
-        style:{backgroundColor:MD2Colors.yellow500},
-      } 
+        page: _getPage('DataTablePagination2'),
+        onPageChange: _showPage('DataTablePagination2'),
+        numberOfPages: items.length,
+        label: 'Pagination1',
+        numberOfItemsPerPageList: numberOfItemsPerPageList,
+        numberOfItemsPerPage: numberOfItemsPerPage,
+        onItemsPerPageChange: _onItemsPerPageChange,
+        style: { backgroundColor: MD2Colors.yellow500 },
+      }
     },
   ]
 
@@ -397,37 +378,32 @@ export function DataTableText() {
     {
       key: 'DataTableRowProps style: children  is <DataTable.Cell numeric>1</DataTable.Cell>',
       value: {
-        styles:styles.first
+        styles: styles.first
       }
     },
     {
       key: 'DataTableRowProps fuction: onPress',
       value: {
-        styles:styles.first,
-        onPress:_onPress
+        styles: styles.first,
+        onPress: _onPress
       }
     },
     {
       key: 'DataTableRowProps styles: {backgroundColor:MD2Colors.red100}',
       value: {
-        style:{backgroundColor:MD2Colors.red100},
+        style: { backgroundColor: MD2Colors.red100 },
       }
     },
-    {
-      key: 'DataTableRowProps theme: { colors: { primary: "green" } }',
-      value: {
-        theme:{ colors: { primary: 'green' } }
-      }
-    },
+    
     {
       key: 'DataTableRowProps styles: pointerEvents is auto',
       value: {
-        pointerEvents:'auto' as "box-none" | "none" | "box-only" | "auto"
+        pointerEvents: 'auto' as "box-none" | "none" | "box-only" | "auto"
       }
     },
   ]
 
-  const _OnDataTableTitlePress =() => {
+  const _OnDataTableTitlePress = () => {
     console.info('OnDataTableTitlePress ====')
   }
 
@@ -435,127 +411,121 @@ export function DataTableText() {
     {
       key: 'DataTableTitle style: children  is Dessert',
       value: {
-        styles:styles.first
+        styles: styles.first
       },
-      test:'Dessert'
+      test: 'Dessert'
     },
     {
       key: 'DataTableTitle style: numeric  is true',
       value: {
-        styles:styles.first,
-        numeric:true
+        styles: styles.first,
+        numeric: true
       },
-      test:'Dessert'
+      test: 'Dessert'
     },
     {
       key: 'DataTableTitle style: numeric  is false',
       value: {
-        styles:styles.first,
-        numeric:false
+        styles: styles.first,
+        numeric: false
       },
-      test:'Dessert'
+      test: 'Dessert'
     },
     {
       key: 'DataTableTitle style: sortDirection  is sortDirection',
       value: {
-        styles:styles.first,
-        sortDirection:'ascending' as 'ascending' | 'descending'
+        styles: styles.first,
+        sortDirection: 'ascending' as 'ascending' | 'descending'
       },
-      test:'Dessert'
+      test: 'Dessert'
     },
     {
       key: 'DataTableTitle style: sortDirection  is descending',
       value: {
-        styles:styles.first,
-        sortDirection:'descending' as 'ascending' | 'descending'
+        styles: styles.first,
+        sortDirection: 'descending' as 'ascending' | 'descending'
       },
-      test:'Dessert'
+      test: 'Dessert'
     },
     {
       key: 'DataTableTitle style: numberOfLines  is 1',
       value: {
-        styles:styles.first,
-        numberOfLines:1
+        styles: styles.first,
+        numberOfLines: 1
       },
-      test:'Dessert Dessert Dessert Dessert'
+      test: 'Dessert Dessert Dessert Dessert'
     },
     {
       key: 'DataTableTitle style: numberOfLines  is 2',
       value: {
-        styles:styles.first,
-        numberOfLines:2
+        styles: styles.first,
+        numberOfLines: 2
       },
-      test:'Dessert Dessert Dessert Dessert'
+      test: 'Dessert Dessert Dessert Dessert'
     },
     {
       key: 'DataTableTitle fuction:onPress',
       value: {
-        styles:styles.first,
-        onPress:_OnDataTableTitlePress
+        styles: styles.first,
+        onPress: _OnDataTableTitlePress
       },
-      test:'Dessert'
+      test: 'Dessert'
     },
     {
       key: 'DataTableTitle style:{backgroundColor:MD2Colors.red100}',
       value: {
-        style:{backgroundColor:MD2Colors.red100},
+        style: { backgroundColor: MD2Colors.red100 },
       },
-      test:'Dessert'
+      test: 'Dessert'
     },
     {
       key: 'DataTableTitle textStyle:{color:MD2Colors.red100}',
       value: {
-        textStyle:{color:MD2Colors.red100},
+        textStyle: { color: MD2Colors.red100 },
       },
-      test:'Dessert'
+      test: 'Dessert'
     },
     {
       key: 'DataTableTitle Style:maxFontSizeMultiplier is 1',
       value: {
-        styles:styles.first,
-        maxFontSizeMultiplier:1
+        styles: styles.first,
+        maxFontSizeMultiplier: 1
       },
-      test:'Dessert'
+      test: 'Dessert'
     },
     {
       key: 'DataTableTitle Style:maxFontSizeMultiplier is 2',
       value: {
-        styles:styles.first,
-        maxFontSizeMultiplier:2
+        styles: styles.first,
+        maxFontSizeMultiplier: 2
       },
-      test:'Dessert'
+      test: 'Dessert'
     },
-    {
-      key: 'DataTableTitle Style:theme is { colors: { primary:"green" } }',
-      value: {
-        theme:{ colors: { primary: 'green' } }
-      },
-      test:'Dessert'
-    },
+    
   ]
 
   return (
     <Tester>
       <ScrollView>
         <TestSuite name='DataTable' >
-        {DataTableCellProps.map((item) => {
+          {DataTableCellProps.map((item) => {
             return (
-              <TestCase itShould={item.key}  key={item.key}>
-                      <DataTable.Row>
-                        <DataTable.Cell >1</DataTable.Cell>
-                        <DataTable.Cell {...item.value}>2</DataTable.Cell>
-                        <DataTable.Cell {...item.value}>3</DataTable.Cell>
-                        <DataTable.Cell {...item.value}>4</DataTable.Cell>
-                      </DataTable.Row>
+              <TestCase itShould={item.key} key={item.key}>
+                <DataTable.Row>
+                  <DataTable.Cell >1</DataTable.Cell>
+                  <DataTable.Cell {...item.value}>2</DataTable.Cell>
+                  <DataTable.Cell {...item.value}>3</DataTable.Cell>
+                  <DataTable.Cell {...item.value}>4</DataTable.Cell>
+                </DataTable.Row>
               </TestCase>
             );
-        })} 
-        {DataTableHeaderProps.map((item) => {
+          })}
+          {DataTableHeaderProps.map((item) => {
             return (
-              <TestCase itShould={item.key}  key={item.key}>
-                <DataTable>
-                  <DataTable.Header theme={{ colors: { primary: 'green' }}}>
-                    <DataTable.Title theme={{ colors: { primary: 'green' }}}
+              <TestCase itShould={item.key} key={item.key}>
+                <DataTable style={{ marginBottom: 10 }}>
+                  <DataTable.Header theme={{ colors: { primary: 'green' } }}>
+                    <DataTable.Title theme={{ colors: { primary: 'green' } }}
                       sortDirection='descending'
                     >
                       Dessert
@@ -566,31 +536,31 @@ export function DataTableText() {
                 </DataTable>
               </TestCase>
             );
-        })} 
-         {DataTablePaginationProps.map((item) => {
+          })}
+          {DataTablePaginationProps.map((item) => {
             return (
-              <TestCase itShould={item.key}  key={item.key}>
+              <TestCase itShould={item.key} key={item.key}>
                 <DataTable>
-                  <DataTable.Pagination {...item.value}/>
-              </DataTable>
-            </TestCase>
+                  <DataTable.Pagination {...item.value} />
+                </DataTable>
+              </TestCase>
             );
-        })} 
-        {DataTableRowProps.map((item) => {
+          })}
+          {DataTableRowProps.map((item) => {
             return (
-              <TestCase itShould={item.key}  key={item.key}>
+              <TestCase itShould={item.key} key={item.key}>
                 <DataTable.Row {...item.value}>
                   <DataTable.Cell numeric>1</DataTable.Cell>
                   <DataTable.Cell numeric>2</DataTable.Cell>
                   <DataTable.Cell numeric>3</DataTable.Cell>
                   <DataTable.Cell numeric>4</DataTable.Cell>
                 </DataTable.Row>
-            </TestCase>
+              </TestCase>
             );
-        })} 
-        {DataTableTitleProps.map((item) => {
+          })}
+          {DataTableTitleProps.map((item) => {
             return (
-              <TestCase itShould={item.key}  key={item.key}>
+              <TestCase itShould={item.key} key={item.key}>
                 <DataTable>
                   <DataTable.Header>
                     <DataTable.Title {...item.value}>{item.test}</DataTable.Title>
@@ -598,10 +568,124 @@ export function DataTableText() {
                     <DataTable.Title {...item.value}>Fat (g)</DataTable.Title>
                   </DataTable.Header>
                 </DataTable>
-            </TestCase>
+              </TestCase>
             );
-        })} 
-       </TestSuite>
+          })}
+        </TestSuite>
+
+        <TestSuite name='DateTable theme test'>
+          <TestCase itShould='DataTable.Header theme: { colors: { surfaceVariant: green } }'>
+            <DataTable style={{ marginBottom: 10 }}>
+              <DataTable.Header style={{ borderBottomWidth: 4 }} theme={{ colors: { surfaceVariant: 'green' } }}>
+                <DataTable.Title
+                  sortDirection='descending'
+                >
+                  Dessert
+                </DataTable.Title>
+                <DataTable.Title numeric>Calories</DataTable.Title>
+                <DataTable.Title numeric>Fat (g)</DataTable.Title>
+              </DataTable.Header>
+            </DataTable>
+          </TestCase>
+          <TestCase itShould='DataTable.Header theme: { colors: { surfaceVariant: red } }'>
+            <DataTable style={{ marginBottom: 10 }}>
+              <DataTable.Header style={{ borderBottomWidth: 4 }} theme={{ colors: { surfaceVariant: 'red' } }}>
+                <DataTable.Title
+                  sortDirection='descending'
+                >
+                  Dessert
+                </DataTable.Title>
+                <DataTable.Title numeric>Calories</DataTable.Title>
+                <DataTable.Title numeric>Fat (g)</DataTable.Title>
+              </DataTable.Header>
+            </DataTable>
+          </TestCase>
+
+          <TestCase itShould='DataTable.Title theme: {colors: {onSurface: red } }'>
+            <DataTable style={{ marginBottom: 10 }}>
+              <DataTable.Header style={{ borderBottomWidth: 4 }}>
+                <DataTable.Title sortDirection='descending' theme={{ colors: { onSurface: 'red' } }}>
+                  Dessert
+                </DataTable.Title>
+                <DataTable.Title numeric>Calories</DataTable.Title>
+                <DataTable.Title numeric>Fat (g)</DataTable.Title>
+              </DataTable.Header>
+            </DataTable>
+          </TestCase>
+
+          <TestCase itShould='DataTable.Title theme: {colors: {onSurface: blue } }'>
+            <DataTable style={{ marginBottom: 10 }}>
+              <DataTable.Header style={{ borderBottomWidth: 4 }}>
+                <DataTable.Title sortDirection='descending' theme={{ colors: { onSurface: 'blue' } }}>
+                  Dessert
+                </DataTable.Title>
+                <DataTable.Title numeric>Calories</DataTable.Title>
+                <DataTable.Title numeric>Fat (g)</DataTable.Title>
+              </DataTable.Header>
+            </DataTable>
+          </TestCase>
+
+          <TestCase itShould='DataTable.Pagination theme: {colors: {onSurface: blue } }'>
+            <DataTable style={{ marginBottom: 10 }}>
+              <DataTable.Pagination
+                theme={{ colors: { onSurface: 'blue' } }}
+                page={_getPage('DataTablePagination')}
+                numberOfPages={items.length}
+                onPageChange={_showPage('DataTablePagination')}
+                label='Pagination'
+                showFastPaginationControls={true}
+                paginationControlRippleColor={MD2Colors.red100}
+                numberOfItemsPerPageList={numberOfItemsPerPageList}
+                numberOfItemsPerPage={numberOfItemsPerPage}
+                onItemsPerPageChange={_onItemsPerPageChange}
+                selectPageDropdownLabel='Rows per page'
+              >
+              </DataTable.Pagination>
+            </DataTable>
+          </TestCase>
+
+          <TestCase itShould='DataTable.Pagination theme: {colors: {onSurface: red } }'>
+            <DataTable style={{ marginBottom: 10 }}>
+              <DataTable.Pagination
+                theme={{ colors: { onSurface: 'red' } }}
+                page={_getPage('DataTablePagination')}
+                numberOfPages={items.length}
+                onPageChange={_showPage('DataTablePagination')}
+                label='Pagination'
+                showFastPaginationControls={true}
+                paginationControlRippleColor={MD2Colors.red100}
+                numberOfItemsPerPageList={numberOfItemsPerPageList}
+                numberOfItemsPerPage={numberOfItemsPerPage}
+                onItemsPerPageChange={_onItemsPerPageChange}
+                selectPageDropdownLabel='Rows per page'
+              >
+              </DataTable.Pagination>
+            </DataTable>
+          </TestCase>
+
+          <TestCase itShould='DataTable.Row theme: {colors: {surfaceVariant: red } }'>
+            <DataTable style={{ marginBottom: 10 }}>
+              <DataTable.Row style={{borderBottomWidth: 4}} theme={{colors: {surfaceVariant: 'red'}}}>
+                <DataTable.Cell numeric>1</DataTable.Cell>
+                <DataTable.Cell numeric>2</DataTable.Cell>
+                <DataTable.Cell numeric>3</DataTable.Cell>
+                <DataTable.Cell numeric>4</DataTable.Cell>
+              </DataTable.Row>
+            </DataTable>
+          </TestCase>
+
+          <TestCase itShould='DataTable.Row theme: {colors: {surfaceVariant: blue } }'>
+            <DataTable style={{ marginBottom: 10 }}>
+              <DataTable.Row style={{borderBottomWidth: 4}} theme={{colors: {surfaceVariant: 'blue'}}}>
+                <DataTable.Cell numeric>1</DataTable.Cell>
+                <DataTable.Cell numeric>2</DataTable.Cell>
+                <DataTable.Cell numeric>3</DataTable.Cell>
+                <DataTable.Cell numeric>4</DataTable.Cell>
+              </DataTable.Row>
+            </DataTable>
+          </TestCase>
+
+        </TestSuite>
       </ScrollView>
     </Tester>
   )
@@ -610,7 +694,7 @@ export function DataTableText() {
 const styles = StyleSheet.create({
   content: {
     padding: 8,
-    backgroundColor:'white',
+    backgroundColor: 'white',
   },
   first: {
     flex: 2,

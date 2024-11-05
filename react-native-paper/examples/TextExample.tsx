@@ -118,15 +118,22 @@ function TextDemo() {
       value: {
         variant: 'labelSmall',
         value: 'Label Small',
-        theme: { colors: { primary: '"#green"' } }
       }
     },
     {
-      key: ' TextProps style:theme  ={ colors: { primary:"green"} }',
+      key: ' TextProps style:theme  ={ colors: { onSurface:"green"} }',
       value: {
         variant: 'labelSmall',
         value: 'Label Small',
-        theme: { colors: { primary: '"#008000"' } }
+        theme: { colors: { onSurface: 'green' } }
+      }
+    },
+    {
+      key: ' TextProps style:theme  ={ colors: { onSurface:"red"} }',
+      value: {
+        variant: 'labelSmall',
+        value: 'Label Small',
+        theme: { colors: { onSurface: 'red' } }
       }
     },
     {

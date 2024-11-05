@@ -132,20 +132,20 @@ function SnackbarDemo() {
       }
     },
     {
-      key: ' ProgressBar style:duration = {1000}',
+      key: ' SnackBar style:duration ={10000}',
       buttonValue: {
         onPress: _showSnackbar("Snackbar7"),
         text: _getVisible("Snackbar7") ? 'Hide' : 'Show'
       },
       value: {
-        visible: _getVisible("Snackbar7"),
+        visible: _getVisible("Snackbar"),
         onDismiss: _showSnackbar("Snackbar7"),
         action: { label: 'Undo', onPress: () => { } },
-        duration: 1000
+        duration: 10000
       }
     },
     {
-      key: ' ProgressBar style:duration = {5000}',
+      key: ' SnackBar style:duration ={50000}',
       buttonValue: {
         onPress: _showSnackbar("Snackbar8"),
         text: _getVisible("Snackbar8") ? 'Hide' : 'Show'
@@ -154,7 +154,7 @@ function SnackbarDemo() {
         visible: _getVisible("Snackbar8"),
         onDismiss: _showSnackbar("Snackbar8"),
         action: { label: 'Undo', onPress: () => { } },
-        duration: 5000
+        duration: 50000
       }
     },
     {
@@ -243,7 +243,7 @@ function SnackbarDemo() {
       },
       value: {
         visible: _getVisible("Snackbar15"),
-        onDismiss: _showSnackbar("Snackbar155"),
+        onDismiss: _showSnackbar("Snackbar15"),
         action: { label: 'Undo', onPress: () => { } },
         maxFontSizeMultiplier: 1
       }
@@ -251,12 +251,12 @@ function SnackbarDemo() {
     {
       key: ' SnackBar style:maxFontSizeMultiplier ={2}',
       buttonValue: {
-        onPress: _showSnackbar("Snackbar155"),
-        text: _getVisible("Snackbar155") ? 'Hide' : 'Show'
+        onPress: _showSnackbar("Snackbar15"),
+        text: _getVisible("Snackbar15") ? 'Hide' : 'Show'
       },
       value: {
-        visible: _getVisible("Snackbar155"),
-        onDismiss: _showSnackbar("Snackbar155"),
+        visible: _getVisible("Snackbar15"),
+        onDismiss: _showSnackbar("Snackbar15"),
         action: { label: 'Undo', onPress: () => { } },
         maxFontSizeMultiplier: 2
       }
@@ -288,7 +288,7 @@ function SnackbarDemo() {
       }
     },
     {
-      key: ' SnackBar style:theme ={ colors: { primary:"green" } }',
+      key: ' Snackbar style:theme ={ colors: { inverseOnSurface:"green" } }',
       buttonValue: {
         onPress: _showSnackbar("Snackbar18"),
         text: _getVisible("Snackbar18") ? 'Hide' : 'Show'
@@ -297,7 +297,7 @@ function SnackbarDemo() {
         visible: _getVisible("Snackbar18"),
         onDismiss: _showSnackbar("Snackbar18"),
         action: { label: 'Undo', onPress: () => { } },
-        theme: { colors: { primary: 'green' } }
+        theme: { colors: { isV3: true, inverseOnSurface: 'green' } }
       }
     },
     {

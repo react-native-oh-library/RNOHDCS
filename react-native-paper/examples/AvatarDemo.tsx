@@ -284,6 +284,24 @@ export function AvatarTest() {
         theme: { colors: { primary: 'green' } }
       }
     },
+    {
+      key: 'Avatar.Image style: theme = { colors: { primary:"green"} }',
+      value: {
+        style: styles.themStyle,
+        size: 60,
+        source: require('../assets/images/avatar.png'),
+        theme: { colors: { primary: 'green' } }
+      }
+    },
+    {
+      key: 'Avatar.Image style: theme = { colors: { primary:"pink"} }',
+      value: {
+        style: styles.themStyle,
+        size: 60,
+        source: require('../assets/images/menu.png'),
+        theme: { colors: { primary: 'pink' } }
+      }
+    },
   ]
 
   return (
@@ -440,6 +458,13 @@ const styles = StyleSheet.create({
   },
   avatar: {
     margin: 8,
+  },
+  themStyle: {
+    justifyContent:'center',
+    alignItems: 'center',
+    height :80,
+    width : 80,
+    borderRadius: 100
   },
 });
 

@@ -50,6 +50,9 @@ import CheckboxItem from './examples/CheckboxItem';
 import ListAccordion from './examples/ListAccordion';
 import ListAccordionBox from './examples/ListAccordionBox';
 import DataTableHeader from './examples/DataTableHeader';
+import HelperTextTheme from './examples/HelperTextTheme';
+import IconTheme from './examples/IconTheme';
+import ListTheme from './examples/ListTheme';
 
 
 function App() {
@@ -131,8 +134,14 @@ function App() {
             <Page name="EXAMPLE: HelperTextExample">
               <HelperTextExample/>
             </Page>
+            <Page name="EXAMPLE: HelperTextTheme">
+              <HelperTextTheme/>
+            </Page>
             <Page name="EXAMPLE: IconExample">
               <IconExample/>
+            </Page>
+            <Page name="EXAMPLE: IconTheme">
+              <IconTheme/>
             </Page>
             <Page name="EXAMPLE: IconButtonExample">
               <IconButtonExample/>
@@ -142,6 +151,9 @@ function App() {
             </Page>
             <Page name="EXAMPLE: ListAccordion">
               <ListAccordion/>
+            </Page>
+            <Page name="EXAMPLE: ListTheme">
+              <ListTheme/>
             </Page>
             <Page name="EXAMPLE: ListAccordionBox">
               <ListAccordionBox/>

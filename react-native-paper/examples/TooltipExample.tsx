@@ -65,8 +65,15 @@ function TooltipDemo() {
     {
       key: 'Tooltipp style:theme={ colors: { primary:"green"} }',
       value: {
-        title:"Selected Camera",
-        theme:{ colors: { primary: 'green' } },
+        title: "Selected Camera",
+        theme: { colors: { onSurface: 'green' } },
+      }
+    },
+    {
+      key: 'Tooltipp style:theme={ colors: { primary:"red"} }',
+      value: {
+        title: "Selected Camera",
+        theme: { colors: { onSurface: 'red' } },
       }
     },
     {

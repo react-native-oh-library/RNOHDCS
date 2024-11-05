@@ -327,8 +327,8 @@ export function CheckboxText() {
                 label:'Default ',
                 status:_getVisible('checkedDefault16') ? 'checked' : 'unchecked' as status,
                 onPress:_showCheckbox('checkedDefault16'),
-                style:{backgroundColor:MD2Colors.red100},
-                background:{}
+                // style:{backgroundColor:MD2Colors.red100},
+                background:{backgroundColor:MD2Colors.red100}
             } 
         },
         {

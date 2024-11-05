@@ -115,12 +115,12 @@ function ModalDemo() {
       }
     },
     {
-      key: ' Modal style:theme={ colors: { primary: "green" } }',
+      key: ' Modal style:theme={ colors: { backdrop: "green" } }',
       value: {
         visible :_getVisible('Modal8'),
         onDismiss:_showModal('Modal8'),
         contentContainerStyle:containerStyle,
-        theme :{ colors: { primary: 'green' } }
+        theme :{ colors: { backdrop: 'green' } }
       },
       buttonValue:{
         style:{marginTop: 30},
