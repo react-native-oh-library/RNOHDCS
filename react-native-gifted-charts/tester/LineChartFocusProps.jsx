@@ -21,8 +21,6 @@ export default function () {
     { showStripOnFocus: false, showDataPointOnFocus: true, areaChart: true, focusEnabled: true, },
     { showTextOnFocus: true, showDataPointOnFocus: true, areaChart: true, focusEnabled: true, showValuesAsDataPointsText: true },
     { showTextOnFocus: false, showDataPointOnFocus: true, areaChart: true, focusEnabled: true, showValuesAsDataPointsText: true },
-    { showDataPointLabelOnFocus: true, areaChart: true, focusEnabled: true },
-    { showDataPointLabelOnFocus: false, areaChart: true, focusEnabled: true },
     { stripHeight: 20, stripWidth: 30, stripColor: 'red', stripOpacity: 0.9, showStripOnFocus: true, areaChart: true, focusEnabled: true },
     { stripHeight: 60, stripWidth: 40, stripColor: 'green', stripOpacity: 0.5, showStripOnFocus: true, areaChart: true, focusEnabled: true },
   ]
