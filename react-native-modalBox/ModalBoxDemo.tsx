@@ -6,15 +6,190 @@ import {
   Text,
   StyleSheet,
   TextInput,
+  FlatList,
+  StatusBar,
+  SafeAreaView,
+  TouchableOpacity,
 } from 'react-native';
 import {TestSuite, TestCase, Tester} from '@rnoh/testerino';
-
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 
 import ModalBox from 'react-native-modalbox';
 
+const PALETTE = {
+  REACT_CYAN_LIGHT: 'hsl(193, 95%, 68%)',
+  REACT_CYAN_DARK: 'hsl(193, 95%, 30%)',
+};
+
+const NavigationContext = React.createContext<
+  | {
+      currentPageName: string;
+      navigateTo: (pageName: string) => void;
+      registerPageName: (pageName: string) => void;
+      registeredPageNames: string[];
+    }
+  | undefined
+>(undefined);
+
+function NavigationContainer({
+  initialPage = 'INDEX',
+  hasHeader = true,
+  children,
+}: {
+  initialPage?: string;
+  children: any;
+  hasHeader?: boolean;
+}) {
+  const [currentPageName, setCurrentPageName] = React.useState(initialPage);
+  const [registeredPageNames, setRegisteredPageNames] = React.useState<
+    string[]
+  >([]);
+
+  return (
+    <NavigationContext.Provider
+      value={{
+        currentPageName,
+        navigateTo: setCurrentPageName,
+        registerPageName: (pageName: string) => {
+          setRegisteredPageNames(pageNames => {
+            if (pageNames.includes(pageName)) {
+              return pageNames;
+            }
+            return [...pageNames, pageName];
+          });
+        },
+        registeredPageNames,
+      }}>
+      <View style={{width: '100%', height: '100%', flexDirection: 'column'}}>
+        <Page name="INDEX">
+          <IndexPage hasHeader={hasHeader} />
+        </Page>
+        {children}
+      </View>
+    </NavigationContext.Provider>
+  );
+}
+
+function useNavigation() {
+  return React.useContext(NavigationContext)!;
+}
+
+function Page({name, children}: {name: string; children: any}) {
+  const {currentPageName, navigateTo, registerPageName} = useNavigation();
+
+  useEffect(() => {
+    if (name !== 'INDEX') {
+      registerPageName(name);
+    }
+  }, [name]);
+
+  return name === currentPageName ? (
+    <View style={{width: '100%', height: '100%'}}>
+      {name !== 'INDEX' && (
+        <View style={{backgroundColor: PALETTE.REACT_CYAN_DARK}}>
+          <TouchableOpacity
+            onPress={() => {
+              navigateTo('INDEX');
+            }}>
+            <Text
+              style={[styles.buttonText, {color: PALETTE.REACT_CYAN_LIGHT}]}>
+              {'‹ Back'}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      )}
+      <View style={{width: '100%', flex: 1}}>{children}</View>
+    </View>
+  ) : null;
+}
+
+export function IndexPage({hasHeader}: {hasHeader: boolean}) {
+  const {navigateTo, registeredPageNames} = useNavigation();
+
+  return (
+    <FlatList
+      data={registeredPageNames}
+      ListHeaderComponent={
+        hasHeader ? (
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              paddingHorizontal: 5,
+              paddingVertical: 5,
+            }}></View>
+        ) : null
+      }
+      renderItem={({item}) => {
+        return (
+          <View style={{backgroundColor: PALETTE.REACT_CYAN_DARK}}>
+            <TouchableOpacity
+              onPress={() => {
+                navigateTo(item);
+              }}>
+              <Text style={styles.buttonText}>{item}</Text>
+            </TouchableOpacity>
+          </View>
+        );
+      }}
+      ItemSeparatorComponent={() => (
+        <View
+          style={{height: StyleSheet.hairlineWidth, backgroundColor: '#666'}}
+        />
+      )}
+    />
+  );
+}
+
+const StartOpenModalBox = () => {
+  return (
+    <ModalBox
+      style={[styles.modal]}
+      startOpen={true}
+      backdropPressToClose={true}>
+      <Text style={[styles.modalText]}>startOpen is true</Text>
+    </ModalBox>
+  );
+};
+const StartOpenModalBox1 = () => {
+  const [isOpenVal, setIsOpenVal] = useState(false);
+  return (
+    <View style={{width: '100%', height: '100%'}}>
+      <Button title="点击打开弹框" onPress={() => setIsOpenVal(!isOpenVal)} />
+      <ModalBox
+        style={[styles.modal]}
+        isOpen={isOpenVal}
+        startOpen={false}
+        backdropPressToClose={true}>
+        <Text style={[styles.modalText]}>startOpen is false</Text>
+      </ModalBox>
+    </View>
+  );
+};
 
 export const ModalBoxDemo = () => {
+  return (
+    <>
+      <StatusBar barStyle="dark-content" />
+      <SafeAreaView>
+        <View style={{backgroundColor: 'black', paddingBottom: 70}}>
+          <NavigationContainer>
+            <Page key="ModalBoxAll" name="ModalBoxAll">
+              <ModalBoxAll />
+            </Page>
+            <Page key="StartOpenModalBox" name="StartOpenModalBox:true">
+              <StartOpenModalBox />
+            </Page>
+            <Page key="StartOpenModalBox1" name="StartOpenModalBox:false">
+              <StartOpenModalBox1 />
+            </Page>
+          </NavigationContainer>
+        </View>
+      </SafeAreaView>
+    </>
+  );
+};
+const ModalBoxAll = () => {
   const [isOpenVal, setIsOpenVal] = useState(false);
   const [isOpenVal1, setIsOpenVal1] = useState(false);
   const [isOpenVal2, setIsOpenVal2] = useState(false);
@@ -551,11 +726,15 @@ export const ModalBoxDemo = () => {
         </TestSuite>
       </ScrollView>
     </Tester>
-
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#888',
+  },
   input: {},
   modal: {
     height: 300,
