@@ -253,6 +253,34 @@ const MMKVStorageTest = () => {
                                 }}
                             />
 
+<TestCase
+                                tags={['C_API']}
+                                itShould="MMKV.clearStore();"
+                                initialState={false}
+                                arrange={({ setState }) => (
+                                    <View>
+                                        <TouchableOpacity
+                                            style={styles.moduleButton}
+                                            onPress={() => {
+                                                storageString.clearStore();
+                                                if (!storageString.options.key) {
+                                                    setState(true)
+                                                } else {
+                                                    setState(false)
+                                                }
+                                            }}
+                                        >
+                                            <Text style={styles.buttonText}>
+                                                清仓
+                                            </Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                )}
+                                assert={({ state, expect }) => {
+                                    expect(state).to.be.true;
+                                }}
+                            />
+
                             <TestCase
                                 tags={['C_API']}
                                 itShould="MMKV.getAllMMKVInstanceIDs();"
@@ -900,7 +928,6 @@ const MMKVStorageTest = () => {
                                 }}
                             />
                         </View>
-
 
                         <View>
                             <TestCase
