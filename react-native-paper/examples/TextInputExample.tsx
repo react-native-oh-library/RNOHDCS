@@ -342,7 +342,7 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextInputProps style:theme ={ colors: { primary:"green"} }',
+        key: ' TextInputProps style:theme ={ colors: { background:"green"} }',
         value: {
           mode:'outlined' as 'flat' | 'outlined',
           label:'Email',
@@ -350,7 +350,19 @@ function TextInputDemo() {
           textColor:MD2Colors.blue100 ,
           value:_getTextInputValue('TextInput21'),
           onChangeText:_onValueChange('TextInput21'),
-          theme:{ colors: { primary: 'green' } }
+          theme:{ colors: { background: 'green' } }
+        }
+      },
+      {
+        key: ' TextInputProps style:theme ={ colors: { background:"blue"} }',
+        value: {
+          mode:'outlined' as 'flat' | 'outlined',
+          label:'Email',
+          placeholder:"Type something1",
+          textColor:MD2Colors.blue100 ,
+          value:_getTextInputValue('TextInput21'),
+          onChangeText:_onValueChange('TextInput21'),
+          theme:{ colors: { background: 'blue' } }
         }
       },
       {
@@ -493,10 +505,17 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextInputAffix style: theme:{ colors: { primary: "green" }',
+        key: ' TextInputAffix style: theme:{ colors: { onSurfaceVariant: "green" }',
         value: {
           text:"/100",
-          theme:{ colors: { primary: 'green' } }
+          theme:{ colors: { onSurfaceVariant: 'green' } }
+        }
+      },
+      {
+        key: ' TextInputAffix style: theme:{ colors: { onSurfaceVariant: "pink" }',
+        value: {
+          text:"/100",
+          theme:{ colors: { onSurfaceVariant: 'pink' } }
         }
       },
     ]
@@ -555,10 +574,17 @@ function TextInputDemo() {
         }
       },
       {
-        key: ' TextInputIconProps style:theme ={ colors: { primary: "green"} }',
+        key: ' TextInputIconProps style:theme ={ colors: { onSurfaceVariant: "green"} }',
         value: {
           icon:"eye",
-          theme:{ colors: { primary: 'green' } }
+          theme:{ colors: { onSurfaceVariant: 'green' } }
+        }
+      },
+      {
+        key: ' TextInputIconProps style:theme ={ colors: { onSurfaceVariant: "red"} }',
+        value: {
+          icon:"eye",
+          theme:{ colors: { onSurfaceVariant: 'red' } }
         }
       },
     ]

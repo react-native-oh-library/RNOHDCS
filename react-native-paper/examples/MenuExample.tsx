@@ -304,11 +304,14 @@ function MenuDemo() {
       }
     },
     {
-      key: ' MenuItem style:theme ={ colors: { primary: "green" } }',
+      key: ' MenuItem style:theme ={ colors: { onSurfaceVariant: "green" } }',
       value: {
-        title:'Redo',
-        leadingIcon:'redo',
-        theme :{ colors: { primary: 'green' } }
+        title: 'Redo',
+        leadingIcon: 'redo',
+        theme: {
+          isV3: true,
+          colors: { onSurfaceVariant: 'green' },
+        }
       }
     },
     {

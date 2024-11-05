@@ -68,11 +68,17 @@ function SurfaceTextDemo() {
       }
     },
     {
-      key: ' SurfaceTextProps style:theme ={ colors: { primary: "green" } }',
+      key: ' SurfaceTextProps style:theme: { colors: { elevation: { level1: green} } }',
       value: {
-        style:styles.surface,
-        elevation:5 as 0 | 1 | 2 | 3 | 4 | 5 ,
-        theme:{ colors: { primary: 'green' } }
+        style: styles.surface,
+        theme: { colors: { elevation: { level1: 'green' } } }
+      }
+    },
+    {
+      key: ' SurfaceTextProps style:theme: { colors: { elevation: { level1: yellow} } }',
+      value: {
+        style: styles.surface,
+        theme: { colors: { elevation: { level1: 'yellow'} } }
       }
     },
     {

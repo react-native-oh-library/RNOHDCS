@@ -69,6 +69,14 @@ function SwitchDemo() {
         theme:{ colors: { primary: 'green' } }
       }
     },
+    {
+      key: ' Switch style:theme ={ colors: { primary:"red"} }',
+      value: {
+        value:_getVisible('Switch5'),
+        onValueChange:_showSwitch('Switch5'),
+        theme:{ colors: { primary: 'red' } }
+      }
+    },
   ]
 
   return (

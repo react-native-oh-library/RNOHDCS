@@ -164,7 +164,7 @@ export function ButtonTest() {
             key: 'Button style: background  is MD2Colors.red100',
             value: {
               mode:'contained' as 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal',
-              style:[styles.button,{backgroundColor:MD2Colors.red100}]
+              backgroundColor:MD2Colors.red100,
             },
             test:'children text'
           },

@@ -54,9 +54,17 @@ export function DividerText() {
       },
     },
     {
-      key: 'Divider style:theme={{ colors: { primary: "green"} }} ',
+      key: 'Divider style:theme={{ colors: { outlineVariant: "green"} }} ',
       value: {
-        theme:{ colors: { primary: 'green' } }
+        theme:{ colors: { outlineVariant: 'green' } },
+        bold: true
+      },
+    },
+    {
+      key: 'Divider style:theme={{ colors: { outlineVariant: "red"} }} ',
+      value: {
+        theme:{ colors: { outlineVariant: 'red' } },
+        bold: true
       },
     },
   ]

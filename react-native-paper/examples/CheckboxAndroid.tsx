@@ -52,11 +52,13 @@ export function CheckboxAndroid() {
           <View style={{ flexDirection: 'row', alignItems: 'center', padding: 16 }}>
             <Checkbox.Android
               status={'indeterminate'}
+              onPress={()=>console.log('')}
+              color='red'
               // 设置 testID ,类似该组件的自定义ID
               testID="my-checkbox2"
             />
-            <Text>这里只展示status的第三种属性配置,不确定图标</Text>
           </View>
+          <Text>这里只展示status的第三种属性配置,不确定图标,点击图标，按压区域为红色</Text>
         </TestCase>
       </ScrollView>
     </Tester>

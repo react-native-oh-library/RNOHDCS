@@ -141,13 +141,19 @@ function TouchableRippleDemo() {
       }
     },
     {
-      key: 'TouchableRipple style:theme = { colors: { primary:"green"} },',
+      key: 'TouchableRipple style:theme:  { colors: {onSurface:"red"} }(设置red颜色后源码会进行透明度解析),red颜色会变淡,属于正常显现},',
       value: {
-        disabled:false,
         style:styles.ripple,
-        rippleColor:MD2Colors.red100,
-        underlayColor:MD2Colors.blue100,
-        theme:{ colors: { primary: 'green' } },
+        theme:  { colors: {onSurface:"red"} },
+        onPress:_onPress
+      }
+    },
+    {
+      key: 'TouchableRipple style:theme:  { colors: {onSurface:"yellow"} }(设置yellow颜色后源码会进行透明度解析),yellow颜色会变淡,属于正常显现},',
+      value: {
+        style:styles.ripple,
+        theme:  { colors: {onSurface:"yellow"} },
+        onPress:_onPress
       }
     },
     {

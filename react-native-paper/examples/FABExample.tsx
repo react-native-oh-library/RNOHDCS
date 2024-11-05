@@ -383,14 +383,24 @@ function FABText() {
       },
     },
     {
-      key: 'fab style:Theme { colors: { primary: "green"} }',
+      key: 'fab style: theme { colors: { onPrimaryContainer: "red"} }',
       value: {
         icon:'email',
         style:styles.fab,
         label:'Email',
-        theme:{ colors: { primary: 'green' } }
+        theme:{ colors: { onPrimaryContainer: 'red'} }
       },
     },
+    {
+      key: 'fab style: theme { colors: { onPrimaryContainer: "yellow"} }',
+      value: {
+        icon:'email',
+        style:styles.fab,
+        label:'Email',
+        theme:{ colors: { onPrimaryContainer: 'yellow'} }
+      },
+    },
+
   ]
 
   const [isExtended, setIsExtended] = React.useState(false);
@@ -727,7 +737,7 @@ function FABText() {
       },
     },
     {
-      key: ' iconMode style:theme ={ colors: { primary:"green" } }',
+      key: ' iconMode style:theme ={ colors: { onPrimaryContainer:"green" } }',
       value: {
         icon :'plus',
         label:"label",
@@ -736,7 +746,20 @@ function FABText() {
         animateFromL:'left' as 'left' | 'right',
         iconMode:'dynamic' as 'static' | 'dynamic',
         style:styles.fabStyle,
-        theme:{ colors: { primary: 'green' } }
+        theme:{ colors: { onPrimaryContainer: 'green' } }
+      },
+    },
+    {
+      key: ' iconMode style:theme ={ colors: { onPrimaryContainer:"red" } }',
+      value: {
+        icon :'plus',
+        label:"label",
+        extended:true,
+        onPress:_onPress,
+        animateFromL:'left' as 'left' | 'right',
+        iconMode:'dynamic' as 'static' | 'dynamic',
+        style:styles.fabStyle,
+        theme:{ colors: { onPrimaryContainer: 'red' } }
       },
     },
     {
@@ -1109,14 +1132,25 @@ function FABText() {
       },
     },
     {
-      key: ' FABGroup style :theme = { colors: { primary: "green" } }',
+      key: ' FABGroup style :theme = { onPrimaryContainer: { primary: "green" } }',
       value: {
         open:_getOpen('FABGroup28'),
         visible:true,
         icon:_getOpen('FABGroup28') ? 'calendar-today' : 'plus',
         actions:actions,
         onStateChange:_showOpen('FABGroup28'),
-        theme :{ colors: { primary: 'green' } }
+        theme :{ colors: { onPrimaryContainer: 'green' } }
+      },
+    },
+    {
+      key: ' FABGroup style :theme = { onPrimaryContainer: { primary: "pink" } }',
+      value: {
+        open:_getOpen('FABGroup28'),
+        visible:true,
+        icon:_getOpen('FABGroup28') ? 'calendar-today' : 'plus',
+        actions:actions,
+        onStateChange:_showOpen('FABGroup28'),
+        theme :{ colors: { onPrimaryContainer: 'pink' } }
       },
     },
     {
