@@ -20,4 +20,7 @@ export * from './OnMomentumDragEnd';
 export * from './OnMomentumDragStart';
 export * from './ShowBackdrop';
 export * from './SnappingPoints';
+export * from './Show';
+export * from './Hide';
+export * from './ScrollIntoView';
 
