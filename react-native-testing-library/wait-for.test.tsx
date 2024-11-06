@@ -46,7 +46,7 @@ test('waits for element until it stops throwing', async () => {
   const freshBananaText = await waitFor(() => screen.getByText('Fresh'));
 
   expect(freshBananaText.props.children).toBe('Fresh');
-});
+},3000);
 
 test('waits for element until timeout is met', async () => {
   render(<BananaContainer />);
