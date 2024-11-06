@@ -14,15 +14,12 @@ const BottomSheetComponent: React.FunctionComponent<
   const [isVisible4, setIsVisible4] = useState(false);
   const [isVisible5, setIsVisible5] = useState(false);
   const list = [
-    {title: 'List Item 1'},
-    {title: 'List Item 2'},
-    {title: 'List Item 2'},
-    {title: 'List Item 2'},
-    {title: 'List Item 2'},
+    { title: 'List Item 1' },
+    { title: 'List Item 2' },
     {
       title: 'Cancel',
-      containerStyle: {backgroundColor: 'red'},
-      titleStyle: {color: 'white'},
+      containerStyle: { backgroundColor: 'red' },
+      titleStyle: { color: 'white' },
       onPress: () => setIsVisible(false),
     },
   ];
@@ -118,40 +115,41 @@ const BottomSheetComponent: React.FunctionComponent<
           </TestCase>
         </TestSuite>
         <TestSuite name="BottomSheet属性modalProps的验证 modalProps是对bottomSheet弹出时 设置是否需要动画 默认是自带动画的 需要哪种动画 以及对BottomSheet显示和隐藏的监听">
-          <TestCase itShould="modalProps" tags={['C_API']}>
-            <Button
-              title="Open Bottom Sheet with handler"
-              onPress={() => setIsVisible4(true)}
-              buttonStyle={styles.button}
-            />
-            <BottomSheet
-              modalProps={{
-                animationType: 'slide',
-                animated: true,
-                onRequestClose: () => {},
-                onDismiss: () => {},
-              }}
-              onBackdropPress={() => setIsVisible4(false)}
-              isVisible={isVisible3}
-              containerStyle={{
-                marginBottom: 50,
-                backgroundColor: 'pink',
-                borderRadius: 20,
-              }}>
-              {list.map((l, i) => (
-                <ListItem
-                  key={i}
-                  containerStyle={l.containerStyle}
-                  onPress={l.onPress}>
-                  <ListItem.Content>
-                    <ListItem.Title style={l.titleStyle}>
-                      {l.title}
-                    </ListItem.Title>
-                  </ListItem.Content>
-                </ListItem>
-              ))}
-            </BottomSheet>
-          </TestCase>
+        <TestCase itShould='Rounded Buttons' tags={['C_API']}>
+          <Button
+            title="Open Bottom Sheet with handler"
+            onPress={() => setIsVisible3(true)}
+            buttonStyle={styles.button}
+          />
+          <BottomSheet
+            modalProps={{
+              onShow: () => {
+                console.log('BottomSheet modalProps onShow')
+              },
+              animationType: 'fade',
+              transparent: false
+            }}
+            onBackdropPress={() => setIsVisible3(false)}
+            isVisible={isVisible3}
+            containerStyle={{
+              marginBottom: 50,
+              backgroundColor: 'pink',
+              borderRadius: 20,
+            }}
+          >
+            {list.map((l, i) => (
+              <ListItem
+                key={i}
+                containerStyle={l.containerStyle}
+                onPress={l.onPress}
+              >
+                <ListItem.Content>
+                  <ListItem.Title style={l.titleStyle}>{l.title}</ListItem.Title>
+                </ListItem.Content>
+              </ListItem>
+            ))}
+          </BottomSheet>
+        </TestCase>
         </TestSuite>
         <TestSuite name="BottomSheet属性onBackdropPress的验证 onBackdropPress是对bottomSheet弹出后遮罩的点击事件的监听 当点击遮罩会隐藏bottomSheet">
           <TestCase itShould="onBackdropPress" tags={['C_API']}>

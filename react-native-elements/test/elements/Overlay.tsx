@@ -124,9 +124,9 @@ const ModalComponent = ({ visible,onPress }) => {
               buttonStyle={styles.button}
             />
             <Overlay
-              ModalComponent={() => <ModalComponent visible={visible10} onPress={()=>{
+               ModalComponent={() => <ModalComponent visible={visible10} onPress={()=>{
                 toggleOverlay10()
-              }}/>}
+               }}/>}
               isVisible={visible10}
               onBackdropPress={toggleOverlay10}>
               <Text style={styles.textPrimary}>Hello!</Text>
@@ -217,7 +217,7 @@ const ModalComponent = ({ visible,onPress }) => {
           </TestCase>
         </TestSuite>
         <TestSuite name="Overlay属性isVisible 控制模态框的显示和隐藏">
-          <TestCase itShould="测试isVisible" tags={['C_API']}>
+          <TestCase itShould="测试isVisible 为true" tags={['C_API']}>
             <Button
               title="Open Overlay"
               onPress={toggleOverlay2}
@@ -243,6 +243,34 @@ const ModalComponent = ({ visible,onPress }) => {
                 }
                 title="Start Building"
                 onPress={toggleOverlay2}
+              />
+            </Overlay>
+          </TestCase>
+          <TestCase itShould="测试isVisible 为false" tags={['C_API']}>
+            <Button
+              title="Open Overlay"
+              buttonStyle={styles.button}
+            />
+            <Overlay
+              overlayStyle={{backgroundColor: 'yellow'}}
+              isVisible={false}
+           >
+              <Text style={styles.textPrimary}>Hello!</Text>
+              <Text style={styles.textSecondary}>
+                Welcome to React Native Elements
+              </Text>
+              <Button
+                icon={
+                  <Icon
+                    name="wrench"
+                    type="font-awesome"
+                    color="white"
+                    size={25}
+                    iconStyle={{marginRight: 10}}
+                  />
+                }
+                title="Start Building"
+               
               />
             </Overlay>
           </TestCase>
@@ -390,15 +418,17 @@ const ModalComponent = ({ visible,onPress }) => {
             </Overlay>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Overlay属性h3和h3Style	 接收Text组件的h3和h3Style属性">
-          <TestCase itShould="设置Text组件的h3和h3Style属性" tags={['C_API']}>
+        <TestSuite name="Overlay属性onLayout	接收原生View的onLayout属性">
+          <TestCase itShould="onLayout" tags={['C_API']}>
             <Button
-              title="接收Text组件的h3和h3Style属性"
+              title="接收原生View的onLayout属性"
               onPress={toggleOverlay8}
               buttonStyle={styles.button}
             />
             <Overlay
-              h3={true} h3Style={{backgroundColor:'pink'}}
+              onLayout={(event)=>{
+                  console.log('11111111111111111')
+              }}
               isVisible={visible8}
               overlayStyle={{backgroundColor: 'green', borderRadius: 20}}
               onBackdropPress={toggleOverlay8}>
@@ -422,15 +452,20 @@ const ModalComponent = ({ visible,onPress }) => {
             </Overlay>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Overlay属性h4和h4Style	 接收Text组件的h4和h4Style属性">
-          <TestCase itShould="设置Text组件的h4和h4Style属性" tags={['C_API']}>
+        <TestSuite name="Overlay属性Style 接收原生View组件的style">
+          <TestCase itShould="设置style" tags={['C_API']}>
             <Button
-              title="接收Text组件的h4和h4Style属性"
+              title="接收原生View组件的style"
               onPress={toggleOverlay9}
               buttonStyle={styles.button}
             />
             <Overlay
-              h4={true} h4Style={{backgroundColor:'pink'}}
+            backdropStyle={{
+              backgroundColor: 'blue',
+              borderRadius: 100,
+              opacity: 0.7,
+            }}
+              style={{width:200,height:100,backgroundColor:'red'}}
               isVisible={visible9}
               overlayStyle={{backgroundColor: 'green', borderRadius: 20}}
               onBackdropPress={toggleOverlay9}>

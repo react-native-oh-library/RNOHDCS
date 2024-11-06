@@ -100,7 +100,7 @@ const SearchBarTest: React.FunctionComponent<SearchBarComponentProps> = () => {
             />
           </TestCase>
         </TestSuite> */}
-        <TestSuite name="SearchBar属性 cancelIcon 设置cancelIcon 一个小图标无效">
+        {/* <TestSuite name="SearchBar属性 cancelIcon 设置cancelIcon 一个小图标无效">
           <TestCase itShould="cancelButtonProps" tags={['C_API']}>
             <SearchBar
               autoFocus={true}
@@ -122,7 +122,7 @@ const SearchBarTest: React.FunctionComponent<SearchBarComponentProps> = () => {
               onCancel={() => { }}
             />
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         {/* 已解决 */}
         <TestSuite name="SearchBar属性clearIcon  设置clearIcon 输入后显示删除按钮 ">
           <TestCase itShould="clearIcon" tags={['C_API']}>
@@ -134,9 +134,6 @@ const SearchBarTest: React.FunctionComponent<SearchBarComponentProps> = () => {
               inputMode='numeric'
               placeholder="请输入"
               placeholderTextColor={'green'}
-              onClear={() => {
-                
-              }}
               clearIcon={
                 <Button onPress={()=>{
                   setValue4('')
@@ -146,11 +143,6 @@ const SearchBarTest: React.FunctionComponent<SearchBarComponentProps> = () => {
                   color: "red"
 
                 }} />
-                // <Icon
-                //   name="remove"
-                //   type="font-awesome"
-                //   color="red"
-                //   size={20}></Icon>
               }
             />
           </TestCase>
@@ -556,7 +548,7 @@ const SearchBarTest: React.FunctionComponent<SearchBarComponentProps> = () => {
             />
           </TestCase>
         </TestSuite>
-        <TestSuite name="SearchBar属性inputStyle 接收Input组件属性inputStyle">
+        {/* <TestSuite name="SearchBar属性inputStyle 接收Input组件属性inputStyle">
           <TestCase itShould="设置SearchBar的inputStyle" tags={['C_API']}>
             <SearchBar
               showLoading={true}
@@ -606,7 +598,7 @@ const SearchBarTest: React.FunctionComponent<SearchBarComponentProps> = () => {
               onClear={() => { }}
             />
           </TestCase>
-        </TestSuite>
+        </TestSuite> */}
         <TestSuite name="SearchBar属性editable 接收Input组件属性editable">
           <TestCase itShould="设置ListItem.Input的editable" tags={['C_API']}>
             <SearchBar

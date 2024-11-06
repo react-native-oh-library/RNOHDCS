@@ -6,10 +6,10 @@ import {
   Image,
   PressableProps,
 } from 'react-native';
-import { Avatar, Icon, Switch } from '@rneui/themed';
+import { Avatar, Icon, Switch,Button } from '@rneui/themed';
 import { Text } from '@rneui/base';
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
-
+import {panResponder}  from './RegistEvent'
 interface SwitchComponentProps {
   // 定义props的属性和类型
 }
@@ -20,12 +20,30 @@ const Switchs: React.FunctionComponent<SwitchComponentProps> = () => {
   const [onPressIn, setOnPressIn] = useState(false);
   const [onPressOut, setonPressOut] = useState(false);
   const [value, setChangeValue] = useState(false);
+  const [value2, setChangeValue2] = useState(false);
+  const [value1, setValue1] = useState('');
+  const [value3, setChangeValue3] = useState(false);
+  const [changeBg,setChangeBg] = useState(false)
+  const [dimensions, setDimensions] = useState({ width: 100, height: 50 });
   // trackColor={{ 'false': 'black', 'true': 'green' }} thumbColor={'pink'} color='yellow' value={value} onValueChange={(value) => {
   //     setChangeValue(value)
   // }}
+  const pan = panResponder()
   return (
     <Tester style={{ flex: 1, backgroundColor: '#000' }}>
       <ScrollView>
+      <TestSuite name="Swicth属性color 设置color">
+          <TestCase itShould="color" tags={['C_API']}>
+            <Switch
+              color='pink'
+              value={value3}
+              onValueChange={value => {
+                setChangeValue3(value);
+              }}
+              style={{ width: 60, alignSelf: 'center', margin: 40 }}
+            />
+          </TestCase>
+        </TestSuite>
         <TestSuite name="Swicth属性 设置style样式">
           <TestCase itShould="style" tags={['C_API']}>
             <Switch
@@ -108,7 +126,7 @@ const Switchs: React.FunctionComponent<SwitchComponentProps> = () => {
           </TestCase>
         </TestSuite>
         <TestSuite name="Swicth属性disable 接收React-native 原生Switch组件的disable属性 设置disable后 switch将不能滑动 ">
-          <TestCase itShould="disable" tags={['C_API']}>
+          <TestCase itShould="disable为true" tags={['C_API']}>
             <Switch
               disabled
               trackColor={{ false: 'black', true: 'green' }}
@@ -120,11 +138,27 @@ const Switchs: React.FunctionComponent<SwitchComponentProps> = () => {
               style={{ width: 60, alignSelf: 'center', margin: 40 }}
             />
           </TestCase>
-        </TestSuite>
-        <TestSuite name="Swicth属性style 接收 React-native 原生View组件的style">
-          <TestCase itShould="设置原生View组件的style" tags={['C_API']}>
+          <TestCase itShould="disable为false" tags={['C_API']}>
             <Switch
-              style={{ backgroundColor: 'yellow', width: 80, alignSelf: 'center' }}
+              disabled={false}
+              trackColor={{ false: 'black', true: 'green' }}
+              thumbColor={'red'}
+              value={value2}
+              onValueChange={value => {
+                setChangeValue2(value);
+              }}
+              style={{ width: 60, alignSelf: 'center', margin: 40 }}
+            />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Swicth属性onResponderRelease接收 React-native 原生View组件的onResponderRelease属性">
+          <TestCase itShould="设置原生View组件的onResponderRelease" tags={['C_API']}>
+            <Switch
+            {...pan.panHandlers}
+             onResponderRelease={(event)=>{
+                setChangeBg(!changeBg)
+             }}
+              style={{ backgroundColor: changeBg ? 'blue' : 'yellow', width: 100, alignSelf: 'center',height:40 }}
               trackColor={{ false: 'black', true: 'green' }}
               thumbColor={'red'}
               value={true}
@@ -135,19 +169,38 @@ const Switchs: React.FunctionComponent<SwitchComponentProps> = () => {
             />
           </TestCase>
         </TestSuite>
-        <TestSuite name="Swicth属性testID 接收 React-native 原生View组件的testID">
-          <TestCase itShould="设置原生View组件的style" tags={['C_API']}>
+        <TestSuite name="Swicth属性onLayout 接收React-native原生View组件的onLayout">
+          <TestCase itShould="设置原生View组件的onLayout" tags={['C_API']}>
             <Switch
-              testID={'Switch'}
-              style={{ backgroundColor: 'yellow', width: 80, alignSelf: 'center' }}
+            
+              style={{ backgroundColor: 'yellow', width:dimensions.width ,height:dimensions.height, alignSelf: 'center' }}
               trackColor={{ false: 'black', true: 'green' }}
               thumbColor={'red'}
               value={true}
               onValueChange={value => {
                 setChangeValue(value);
               }}
+              onLayout={(event) => {
+                const { width, height } = event.nativeEvent.layout;
+                const layoutString = `width: ${width}, height: ${height}`;
+                setValue1(layoutString);
+                console.log('Layout:', layoutString);
+              }}
 
             />
+             <View style={{ width: 200, marginLeft: 20, paddingBottom: 20, marginTop: 20 }}>
+              <Text style={{ color: 'black' }}>onLayout回调方法显示组件的宽高</Text>
+              <Text style={{ color: 'black' }}>
+                {value1}
+              </Text>
+              <Button onPress={()=>{
+                if (dimensions.width == 100 ) {
+                  setDimensions({ width: 80, height: 30 })
+                }else{
+                  setDimensions({ width: 100, height: 50 })
+                }       
+              }}>修改组件的size</Button>
+            </View>
           </TestCase>
         </TestSuite>
       </ScrollView>

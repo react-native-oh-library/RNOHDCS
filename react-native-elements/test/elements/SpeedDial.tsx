@@ -20,6 +20,7 @@ export default () => {
   const [open13, setOpen13] = React.useState(false);
   const [open14, setOpen14] = React.useState(false);
   const [open15, setOpen15] = React.useState(false);
+  const [open16, setOpen16] = React.useState(false);
   return (
     <Tester>
       <ScrollView style={{height: '100%'}}>
@@ -504,7 +505,7 @@ export default () => {
           </TestCase>
         </TestSuite>
         <TestSuite name="SpeedDial的属性disable 接收Button组件的disable属性">
-          <TestCase itShould="设置Button组件的disable属性" tags={['C_API']}>
+          <TestCase itShould="设置Button组件的disable属性为true" tags={['C_API']}>
             <View style={{height: 400, width: '100%'}}>
               <SpeedDial
                 color="black"
@@ -521,6 +522,50 @@ export default () => {
                 openIcon={{name: 'save', type: 'font-awesome', color: '#fff'}}
                 onOpen={() => setOpen10(!open10)}
                 onClose={() => setOpen10(!open10)}
+                transitionDuration={2000}>
+                <SpeedDial.Action
+                  color="black"
+                  icon={{name: 'plus', type: 'font-awesome', color: 'yellow'}}
+                  title="child1"
+                  onPress={() => console.log('Added Event')}
+                />
+                <SpeedDial.Action
+                  color="black"
+                  icon={{name: 'minus', type: 'font-awesome', color: 'yellow'}}
+                  title="child2"
+                  onPress={() => console.log('Delete Event')}
+                />
+                <SpeedDial.Action
+                  color="black"
+                  icon={{
+                    name: 'minus',
+                    type: 'font-awesome',
+                    color: 'yellow',
+                    style: {marginLeft: 5, marginBottom: 7},
+                  }}
+                  title="child3"
+                  onPress={() => console.log('Delete Event')}
+                />
+              </SpeedDial>
+            </View>
+          </TestCase>
+          <TestCase itShould="设置Button组件的disable属性为false" tags={['C_API']}>
+            <View style={{height: 400, width: '100%'}}>
+              <SpeedDial
+                color="black"
+                backdropPressableProps={{
+                  children: <Text>123</Text>,
+                  style: {backgroundColor: 'yellow'},
+                }}
+                disabled={false}
+                isOpen={open16}
+                labelPressable
+                placement="right"
+                overlayColor="pink"
+                icon={{name: 'pencil', type: 'font-awesome', color: '#fff'}}
+                openIcon={{name: 'save', type: 'font-awesome', color: '#fff'}}
+                onOpen={() => setOpen16(!open16)}
+                onClose={() => setOpen16(!open16)}
                 transitionDuration={2000}>
                 <SpeedDial.Action
                   color="black"
@@ -794,7 +839,6 @@ export default () => {
                   style: {backgroundColor: 'yellow'},
                 }}
                 isOpen={open9}
-                labelPressable
                 placement="right"
                 overlayColor="pink"
                 icon={{name: 'pencil', type: 'font-awesome', color: '#fff'}}
@@ -802,21 +846,21 @@ export default () => {
                 onOpen={() => setOpen9(!open9)}
                 onClose={() => setOpen9(!open9)}>
                 <SpeedDial.Action
-                  labelPressable={true}
+                  labelPressable={false}
                   color="black"
                   icon={{name: 'plus', type: 'font-awesome', color: 'yellow'}}
                   title="child1"
                   onPress={() => setOpen9(!open9)}
                 />
                 <SpeedDial.Action
-                  labelPressable={true}
+                  labelPressable={false}
                   color="black"
                   icon={{name: 'minus', type: 'font-awesome', color: 'yellow'}}
                   title="child2"
                   onPress={() => setOpen9(!open9)}
                 />
                 <SpeedDial.Action
-                  labelPressable={true}
+                  labelPressable={false}
                   color="black"
                   icon={{
                     name: 'minus',

@@ -151,8 +151,11 @@ export default function SnapCarouselExample(): JSX.Element {
           </TestCase>
         </TestSuite>
         <TestSuite name="Button属性disabled的验证 设置disabled属性 控制button的是否可交互">
-          <TestCase itShould="disabled" tags={['C_API']}>
+          <TestCase itShould="disabled为true" tags={['C_API']}>
             <Button title={'disabled'} disabled={true} />
+          </TestCase>
+          <TestCase itShould="disabled为false" tags={['C_API']}>
+            <Button title={'disabled'} disabled={false} />
           </TestCase>
         </TestSuite>
         <TestSuite name="Button属性disabledStyle的验证 这个属性是设置button在disable状态下的样式">
@@ -522,8 +525,9 @@ export default function SnapCarouselExample(): JSX.Element {
               <Button
                 title={'titleProps属性验证'}
                 titleProps={{
+                  style:{color:'pink'},
                   h1: true,
-                  h1Style: {fontSize: 50, fontWeight: '400'},
+                  h1Style: {fontSize: 500, fontWeight: '400'},
                 }}
                
                 buttonStyle={{
@@ -628,6 +632,27 @@ export default function SnapCarouselExample(): JSX.Element {
         </TestSuite>
         <TestSuite name="Button属性style的验证  接收TouchableOpacityProps的style">
           <TestCase itShould="TouchableOpacityProps的style" tags={['C_API']}>
+            {/* <View
+              style={{
+                paddingTop: 20,
+                paddingBottom: 20,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}> */}
+              <Button
+                style={{width:200,height:80,backgroundColor:'yellow'}}
+                title={'TouchableOpacityProps的style'}
+                containerStyle={{
+                  width: 200,
+                  marginHorizontal: 50,
+                  marginVertical: 10,
+                }}
+              />
+            {/* </View> */}
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Button属性activeOpacity的验证  接收TouchableOpacityProps的activeOpacity">
+          <TestCase itShould="TouchableOpacityProps的activeOpacity 设置为0.1" tags={['C_API']}>
             <View
               style={{
                 paddingTop: 20,
@@ -636,9 +661,8 @@ export default function SnapCarouselExample(): JSX.Element {
                 justifyContent: 'center',
               }}>
               <Button
-               style={{width:200,height:80,backgroundColor:'yellow'}}
+                activeOpacity={0.1}
                 title={'TouchableOpacityProps的style'}
-        
                 containerStyle={{
                   width: 200,
                   marginHorizontal: 50,
@@ -647,9 +671,7 @@ export default function SnapCarouselExample(): JSX.Element {
               />
             </View>
           </TestCase>
-        </TestSuite>
-        <TestSuite name="Button属性activeOpacity的验证  接收TouchableOpacityProps的activeOpacity">
-          <TestCase itShould="TouchableOpacityProps的activeOpacity" tags={['C_API']}>
+          <TestCase itShould="TouchableOpacityProps的activeOpacity 设置为1" tags={['C_API']}>
             <View
               style={{
                 paddingTop: 20,
@@ -658,7 +680,7 @@ export default function SnapCarouselExample(): JSX.Element {
                 justifyContent: 'center',
               }}>
               <Button
-                activeOpacity={0.2}
+                activeOpacity={1}
                 title={'TouchableOpacityProps的style'}
                 containerStyle={{
                   width: 200,

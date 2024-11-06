@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, { Component, useState } from 'react';
 import {
   View,
   ScrollView,
@@ -6,9 +6,10 @@ import {
   Image,
   PressableProps,
 } from 'react-native';
-import {Avatar, Icon} from '@rneui/themed';
-import {Text} from '@rneui/base';
-import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
+import { Avatar, Icon, Button} from '@rneui/themed';
+import { Text } from '@rneui/base';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
+import {panResponder} from './RegistEvent'
 
 interface IconProps {
   // 定义props的属性和类型
@@ -36,9 +37,14 @@ const Icons: React.FunctionComponent<IconProps> = () => {
   const [onPress, setOnPress] = useState(false);
   const [onPressIn, setOnPressIn] = useState(false);
   const [onPressOut, setonPressOut] = useState(false);
-
+  const [value, setValue] = useState(false)
+  const [value1, setValue1] = useState('')
+  const [changeSize, setChangeSize] = useState(50)
+  const [touchEnd,setTouchEnd] = useState(false)
+  const [touchMove,setTouchMove] = useState(false)
+  const pan = panResponder()
   return (
-    <Tester style={{flex: 1, backgroundColor: '#000'}}>
+    <Tester style={{ flex: 1, backgroundColor: '#000' }}>
       <ScrollView>
         <TestSuite name="Icon属性Component 传入一个图片组件">
           <TestCase itShould="Component" tags={['C_API']}>
@@ -77,8 +83,8 @@ const Icons: React.FunctionComponent<IconProps> = () => {
               size={100}></Icon>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Icon属性disabled 设置disable后点击事件失效">
-          <TestCase itShould="disabled" tags={['C_API']}>
+        <TestSuite name="Icon属性disabled 设置disable 灰色背景代表是设置disable的效果">
+          <TestCase itShould="disabled设置为true" tags={['C_API']}>
             <Icon
               disabled={true}
               name="home"
@@ -94,12 +100,31 @@ const Icons: React.FunctionComponent<IconProps> = () => {
               color="red"
               size={100}></Icon>
           </TestCase>
+          <TestCase itShould="disabled设置为false  点击可切换背景颜色" tags={['C_API']}>
+            <Icon
+              disabled={false}
+              name="home"
+              containerStyle={{
+                padding: 10,
+                backgroundColor: value ? 'pink' : 'black',
+                borderRadius: 20,
+                width: 100,
+                height: 100,
+                alignSelf: 'center',
+              }}
+              onPress={() => {
+                setValue(!value)
+              }}
+              type="font-awesome"
+              color="red"
+              size={100}></Icon>
+          </TestCase>
         </TestSuite>
         <TestSuite name="Icon属性disabledStyle 设置disable状态下的样式">
           <TestCase itShould="disabledStyle" tags={['C_API']}>
             <Icon
               disabled={true}
-              disabledStyle={{backgroundColor: 'green', borderRadius: 20,borderWidth:2,borderColor:'gray'}}
+              disabledStyle={{ backgroundColor: 'green', borderRadius: 20, borderWidth: 2, borderColor: 'gray' }}
               name="home"
               containerStyle={{
                 padding: 10,
@@ -117,7 +142,7 @@ const Icons: React.FunctionComponent<IconProps> = () => {
         <TestSuite name="Icon属性iconProps 设置iconProps 来显示icon">
           <TestCase itShould="iconProps" tags={['C_API']}>
             <Icon
-              iconProps={{name: 'save', color: 'green', size: 50}}
+              iconProps={{ name: 'save', color: 'green', size: 50 }}
               name="home"
               containerStyle={{
                 padding: 10,
@@ -215,7 +240,7 @@ const Icons: React.FunctionComponent<IconProps> = () => {
             <Icon
               name={'save'}
               raised
-              containerStyle={{alignSelf: 'center'}}
+              containerStyle={{ alignSelf: 'center' }}
               type="font-awesome"
               color="red"
               size={100}></Icon>
@@ -226,7 +251,7 @@ const Icons: React.FunctionComponent<IconProps> = () => {
             <Icon
               name={'save'}
               reverse
-              containerStyle={{alignSelf: 'center'}}
+              containerStyle={{ alignSelf: 'center' }}
               type="font-awesome"
               color="red"
               size={100}></Icon>
@@ -238,7 +263,7 @@ const Icons: React.FunctionComponent<IconProps> = () => {
               name={'save'}
               reverseColor="yellow"
               reverse
-              containerStyle={{alignSelf: 'center'}}
+              containerStyle={{ alignSelf: 'center' }}
               type="font-awesome"
               color="red"
               size={100}></Icon>
@@ -249,44 +274,82 @@ const Icons: React.FunctionComponent<IconProps> = () => {
             <Icon
               name={'save'}
               solid={true}
-              containerStyle={{alignSelf: 'center'}}
+              containerStyle={{ alignSelf: 'center' }}
               type="font-awesome"
               color="red"
               size={100}></Icon>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Icon属性testID 设置testID">
-          <TestCase itShould="testID" tags={['C_API']}>
+        <TestSuite name="Icon属性接受 原生View的style属性">
+          <TestCase itShould="style" tags={['C_API']}>
             <Icon
               name={'save'}
               testID="testID"
-             
-              containerStyle={{alignSelf: 'center'}}
+              style={{ backgroundColor: 'red' }}
+              containerStyle={{ alignSelf: 'center' }}
               type="font-awesome"
               color="red"
               size={100}></Icon>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Icon属性numberOfLines 接收React-Native原生Text组件的numberOfLines">
-          <TestCase itShould="Text组件的numberOfLines" tags={['C_API']}>
+        <TestSuite name="Icon属性接收 原生View的onLayout属性">
+          <TestCase itShould="onLayout" tags={['C_API']}>
             <Icon
+
+              onLayout={(event) => {
+                const { width, height } = event.nativeEvent.layout;
+                const layoutString = `width: ${width}, height: ${height}`;
+                setValue1(layoutString);
+                console.log('Layout:', layoutString);
+              }}
               name={'save'}
+              testID="testID"
+              containerStyle={{ alignSelf: 'center' }}
+              type="font-awesome"
+              color="red"
+              size={changeSize}></Icon>
+            <View style={{ width: 200, marginLeft: 20, paddingBottom: 20, marginTop: 20 }}>
+              <Text style={{ color: 'black' }}>onLayout回调方法显示组件的宽高</Text>
+              <Text style={{ color: 'black' }}>
+                {value1}
+              </Text>
+              <Button onPress={()=>{
+                      if (changeSize == 50) {
+                        setChangeSize(100)
+                      }else{
+                        setChangeSize(50)
+                      }
+              }}>修改组件的size</Button>
+            </View>
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="Icon属性onResponderRelease 接收React-Native原生Text组件的onResponderRelease">
+          <TestCase itShould="Text组件的onResponderRelease" tags={['C_API']}>
+            <Icon
+              {...pan.panHandlers}  
+              onResponderRelease={()=> setTouchEnd(!touchEnd)}
+              name={touchEnd ? 'home' : 'save'}
               numberOfLines={1}
-              containerStyle={{alignSelf: 'center'}}
+              containerStyle={{ alignSelf: 'center' }}
               type="font-awesome"
               color="red"
               size={100}></Icon>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Icon属性ellipsizeMode 接收React-Native原生Text组件的ellipsizeMode">
-          <TestCase itShould="Text组件的ellipsizeMode" tags={['C_API']}>
+        <TestSuite name="Icon属性onResponderMove 接收React-Native原生Text组件的onResponderMove">
+          <TestCase itShould="Text组件的onResponderMove" tags={['C_API']}>
             <Icon
+              {...pan.panHandlers}  
+              onResponderMove={()=>{
+               setTouchMove(!touchMove)
+              }}
               name={'save'}
               ellipsizeMode={'middle'}
-              containerStyle={{alignSelf: 'center'}}
+              containerStyle={{ alignSelf: 'center' }}
               type="font-awesome"
-              color="red"
-              size={100}></Icon>
+              color= {touchMove ? 'black' : "red"}
+              size={100}>
+              </Icon>
           </TestCase>
         </TestSuite>
       </ScrollView>

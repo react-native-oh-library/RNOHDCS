@@ -1,11 +1,16 @@
-import React from 'react';
-import {Text, Divider} from '@rneui/themed';
-import {ScrollView, StyleSheet, View} from 'react-native';
-import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
-
+import React, {useState} from 'react';
+import { Text, Divider, Button } from '@rneui/themed';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
+import {panResponder} from './RegistEvent'
 type DividerViewTypes = {};
 
 const DividerView: React.FunctionComponent<DividerViewTypes> = () => {
+  const [value1,setValue1] = useState('')
+  const [changeColor, setChangeColor] = useState(false)
+  const [dimensions, setDimensions] = useState({ width: 300, height: 20 });
+  const pan = panResponder()
+
   return (
     <Tester>
       <ScrollView>
@@ -83,17 +88,16 @@ const DividerView: React.FunctionComponent<DividerViewTypes> = () => {
           <TestCase itShould="subHeader " tags={['C_API']}>
             <View style={styles.horizontal}>
               <Text style={styles.horizontalText}>
-                Divider的subHeader 
+                Divider的subHeader
               </Text>
               <Divider
-                style={{height: 5, backgroundColor: 'yellow', borderRadius: 3}}
+                style={{ height: 5, backgroundColor: 'yellow', borderRadius: 3 }}
                 subHeader="subHeader"
-            
               />
             </View>
           </TestCase>
         </TestSuite>
-        
+
         <TestSuite name="Divider属性 subHeaderStyle  Divider设置 subHeaderStyle ">
           <TestCase itShould=" subHeaderStyle" tags={['C_API']}>
             <View style={styles.horizontal}>
@@ -101,7 +105,7 @@ const DividerView: React.FunctionComponent<DividerViewTypes> = () => {
                 Divider的 subHeaderStyle
               </Text>
               <Divider
-                style={{height: 5, backgroundColor: 'yellow', borderRadius: 3}}
+                style={{ height: 5, backgroundColor: 'yellow', borderRadius: 3 }}
                 subHeader="subHeader"
                 subHeaderStyle={{
                   fontSize: 28,
@@ -149,23 +153,42 @@ const DividerView: React.FunctionComponent<DividerViewTypes> = () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Divider属性style 接收View的style属性 ">
+        <TestSuite name="Divider属性onResponderRelease 接收View的onResponderRelease属性 ">
           <TestCase
-            itShould="View的style属性"
+            itShould="View的onResponderRelease属性"
             tags={['C_API']}>
-            <View style={{alignItems:'center',justifyContent:'center'}}>
-              <Text style={styles.horizontalText}>View的style属性</Text>
-              <Divider width={10} color="yellow"  style={{ width:300,height:50,backgroundColor:'green',alignItems:'center',justifyContent:'center'}} />
+            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+              <Text style={styles.horizontalText}>View的onResponderRelease属性</Text>
+              <Divider {...pan.panHandlers}  onResponderRelease={()=>setChangeColor(!changeColor)}   style={{ width: 300, height: 50, backgroundColor: changeColor ?  'green' : 'yellow', alignItems: 'center', justifyContent: 'center',marginBottom:20 }} />
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Divider属性testID 接收View的testID属性 ">
+        <TestSuite name="Divider属性onLayout 接收原生View的onLayout属性">
           <TestCase
-            itShould="View的testID属性"
+            itShould="接收原生View的onLayout属性"
             tags={['C_API']}>
-            <View style={{alignItems:'center',justifyContent:'center'}}>
-              <Text style={styles.horizontalText}>View的testID属性</Text>
-              <Divider testID='divider' width={10} color="black"  style={{ width:300,height:50,backgroundColor:'blue',alignItems:'center',justifyContent:'center'}} />
+            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+              <Text style={styles.horizontalText}>原生View的onLayout属性</Text>
+              <Divider 
+                onLayout={(event) => {
+                const { width, height } = event.nativeEvent.layout;
+                const layoutString = `width: ${width}, height: ${height}`;
+                setValue1(layoutString);
+                console.log('Layout:', layoutString);
+              }}  style={{ width: dimensions.width,height:dimensions.height, backgroundColor: 'blue', alignItems: 'center', justifyContent: 'center' }} />
+            </View>
+            <View style={{ width: 200, marginLeft: 20, paddingBottom: 20, marginTop: 20 }}>
+              <Text style={{ color: 'black' }}>onLayout回调方法显示组件的宽高</Text>
+              <Text style={{ color: 'black' }}>
+                {value1}
+              </Text>
+              <Button onPress={()=>{
+                if (dimensions.width == 300 ) {
+                  setDimensions({ width: 200, height: 30 })
+                }else{
+                  setDimensions({ width: 300, height: 20 })
+                }       
+              }}>修改组件的size</Button>
             </View>
           </TestCase>
         </TestSuite>
