@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState,useRef} from 'react';
 import {View, ScrollView, StyleSheet} from 'react-native';
 import {Skeleton, Text} from '@rneui/themed';
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
 import LinearGradient from 'react-native-linear-gradient';
+import { Button } from '@rneui/base';
 class ViewComponent extends React.Component<{}, {}> {
   render() {
     return (
@@ -22,7 +23,11 @@ class ViewComponent extends React.Component<{}, {}> {
   }
 }
 
-const Avatars = () => {
+const SkeletonComponent = () => {
+
+  const [value1, setValue1] = useState('');
+  const skeletonRef = useRef(null)
+  const [dimensions, setDimensions] = useState({ width: 100, height: 100 });
   return (
     // <Tester>
     //   <TestSuite name='Skeleton'>
@@ -198,7 +203,7 @@ const Avatars = () => {
               <Skeleton
                 style={{backgroundColor:'green',padding:5}}
                 skeletonStyle={{
-                  backgroundColor: 'pink',
+                  backgroundColor: 'red',
                   borderRadius: 10,
                   opacity: 0.7,
                 }}
@@ -208,20 +213,38 @@ const Avatars = () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Skeleton的属性Width 接收React-Native原生组件View的Width属性">
-          <TestCase itShould="设置原生View的Width属性">
+        <TestSuite name="Skeleton的属性onLayout 接收React-Native原生组件View的onLayout属性">
+          <TestCase itShould="设置原生View的onLayout属性">
             <View style={styles.rowCenter}>
               <Skeleton
-                width={180}
+                onLayout={(event)=>{
+                  const { width, height } = event.nativeEvent.layout;
+                  const layoutString = `width: ${width}, height: ${height}`;
+                  setValue1(layoutString);
+                }}
                 style={{backgroundColor:'green',padding:5}}
                 skeletonStyle={{
-                  backgroundColor: 'pink',
+                  backgroundColor: 'yellow',
                   borderRadius: 10,
                   opacity: 0.7,
                 }}
-                height={100}
+                height={dimensions.height}
                 animation="wave"
               />
+            </View>
+            <View style={{ width: 200, marginLeft: 20, paddingBottom: 20, marginTop: 20 }}>
+              
+              <Text style={{ color: 'black' }}>onLayout回调方法显示组件的宽高</Text>
+              <Text style={{ color: 'black' }}>
+                {value1}
+              </Text>
+              <Button onPress={()=>{
+                if (dimensions.height == 100 ) {
+                  setDimensions({ width: 200, height: 200 })
+                }else{
+                  setDimensions({ width: 100, height: 100 })
+                }       
+              }}>修改组件的size</Button>
             </View>
           </TestCase>
         </TestSuite>
@@ -245,4 +268,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Avatars;
+export default SkeletonComponent;

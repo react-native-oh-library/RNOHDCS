@@ -10,6 +10,7 @@ const Sliders: React.FunctionComponent<SlidersComponentProps> = () => {
   const [vertValue, setVertValue] = useState(10);
   const [sliderStrat, setSliderStrat] = useState(false);
   const [value1, setValue1] = useState(10);
+  const [value2, setValue2] = useState(10);
   const interpolate = (start: number, end: number) => {
     let k = (value - 0) / 10; // 0 =>min  && 10 => MAX
     return Math.ceil((1 - k) * start + k * end) % 256;
@@ -52,13 +53,21 @@ const Sliders: React.FunctionComponent<SlidersComponentProps> = () => {
           <TestCase itShould="animationConfig" tags={['C_API']}>
             <View style={[styles.contentView]}>
               <Slider
-                allowTouchTrack
-                animateTransitions={true}
+              // value={value2}
+              //   allowTouchTrack
+              //   animateTransitions={false}
+              //   maximumValue={100}
+              //   minimumValue={0}
+              //   onValueChange={(value)=>{
+              //     setValue2(value)
+              //   }}
+               
                 animationConfig={{
-                  toValue: 100,
+                  toValue: value2,
                   duration: 2000,
-                  useNativeDriver: true,
+                  useNativeDriver: false,
                 }}
+                animationType="spring"
               />
             </View>
           </TestCase>
@@ -69,12 +78,21 @@ const Sliders: React.FunctionComponent<SlidersComponentProps> = () => {
               <Slider
                 allowTouchTrack
                 animateTransitions={true}
-                animationConfig={{
-                  toValue: 1000,
-                  duration: 100,
-                  useNativeDriver: true,
+                onValueChange={(value)=>{
+                  console.log('value1111111111',value)
+                  setValue2(value)
                 }}
-                animationType="timing"
+                step={10}
+                value={value2}
+               
+                animationConfig={{
+                  toValue: value2,
+                  duration: 10,
+                  useNativeDriver: false,
+                }}
+                animationType='spring'
+                minimumValue={0}
+                maximumValue={100}
               />
             </View>
           </TestCase>
@@ -181,7 +199,7 @@ const Sliders: React.FunctionComponent<SlidersComponentProps> = () => {
           </TestCase>
         </TestSuite>
         <TestSuite name="Slider属性disabled 设置为true slider将无法拖动 ">
-          <TestCase itShould="disabled" tags={['C_API']}>
+          <TestCase itShould="disabled 为true" tags={['C_API']}>
             <View style={[styles.contentView]}>
               <Slider
                 allowTouchTrack
@@ -192,6 +210,56 @@ const Sliders: React.FunctionComponent<SlidersComponentProps> = () => {
                   useNativeDriver: true,
                 }}
                 disabled={true}
+                debugTouchArea={true}
+                animationType="timing"
+                containerStyle={{
+                  containerHorizontal: {
+                    height: 10,
+                    justifyContent: 'center',
+                  },
+                  containerVertical: {
+                    width: 100,
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                  },
+                  track: {
+                    borderRadius: 100,
+                  },
+                  trackHorizontal: {
+                    height: 10,
+                  },
+                  trackVertical: {
+                    flex: 0,
+                    width: 100,
+                  },
+                  touchArea: {
+                    position: 'absolute',
+                    backgroundColor: 'green',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                  },
+                  debugThumbTouchArea: {
+                    position: 'absolute',
+                    backgroundColor: 'pink',
+                    opacity: 0.7,
+                  },
+                }}
+              />
+            </View>
+          </TestCase>
+          <TestCase itShould="disabled 为false" tags={['C_API']}>
+            <View style={[styles.contentView]}>
+              <Slider
+                allowTouchTrack
+                animateTransitions={true}
+                animationConfig={{
+                  toValue: 1000,
+                  duration: 100,
+                  useNativeDriver: true,
+                }}
+                disabled={false}
                 debugTouchArea={true}
                 animationType="timing"
                 containerStyle={{
@@ -740,13 +808,14 @@ const Sliders: React.FunctionComponent<SlidersComponentProps> = () => {
                 step={2}
                 thumbTintColor={'blue'}
                 thumbStyle={{width: 40, height: 40}}
-                thumbTouchSize={{width: 200, height: 20}}
+                thumbTouchSize={{width: 200, height: 80}}
                 onValueChange={value => setValue1(value)}
                 style={{
                   height: 20,
                   backgroundColor: 'yellow',
                   borderRadius: 10,
                 }}
+                
                 containerStyle={{
                   containerHorizontal: {
                     height: 100,

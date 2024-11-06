@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {View, Text, ScrollView, StyleSheet} from 'react-native';
 import {Button, LinearProgress} from '@rneui/themed';
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
-
+import {panResponder} from './RegistEvent'
+ 
 const LinearProgressAPI: React.FunctionComponent = () => {
   const [progress, setProgress] = React.useState<number>(0);
-
+  const [changeBg,setChangeBg] = useState(false)
+  const [changeBg1,setChangeBg1] = useState(false)
   React.useEffect(() => {
     let subs = true;
     if (progress < 1 && progress !== 0) {
@@ -19,6 +21,7 @@ const LinearProgressAPI: React.FunctionComponent = () => {
       subs = false;
     };
   }, [progress]);
+  const pan = panResponder()
 
   return (
     <Tester>
@@ -178,12 +181,15 @@ const LinearProgressAPI: React.FunctionComponent = () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="LinearProgress属性style  接收React-Native原生View组件的style">
-          <TestCase itShould="React-Native原生View组件的style" tags={['C_API']}>
+        <TestSuite name="LinearProgress属性onResponderRelease 接收React-Native原生View组件的onResponderRelease 手指点击修改背景颜色">
+          <TestCase itShould="React-Native原生View组件的onResponderRelease" tags={['C_API']}>
             <View style={styles.container}>
-              <Text style={styles.subText}>接收React-Native原生View组件的style</Text>
+              <Text style={styles.subText}>接收React-Native原生View组件的onResponderRelease</Text>
               <LinearProgress
-              
+              {...pan.panHandlers}
+                onResponderRelease={()=>{
+                  setChangeBg(!changeBg)
+                }}
                 variant="determinate"
                 trackColor="pink"
                 color="blue"
@@ -192,8 +198,8 @@ const LinearProgressAPI: React.FunctionComponent = () => {
                   width: '80%',
                   alignSelf: 'center',
                   height: 30,
-                  borderRadius: 5,
-                  backgroundColor:'black',
+                  borderRadius: 20,
+                  backgroundColor:changeBg ? 'green' : 'black',
                   
                 }}
                 animation={{duration: 1000}}
@@ -201,12 +207,15 @@ const LinearProgressAPI: React.FunctionComponent = () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="LinearProgress属性testID  接收React-Native原生View组件的testID">
-          <TestCase itShould="React-Native原生View组件的testID" tags={['C_API']}>
+        <TestSuite name="LinearProgress属性 接收React-Native原生View组件的onResponderMove属性 手指移动修改背景颜色">
+          <TestCase itShould="React-Native原生View组件的onResponderMove属性" tags={['C_API']}>
             <View style={styles.container}>
-              <Text style={styles.subText}>接收React-Native原生View组件的testID</Text>
+              <Text style={styles.subText}>接收React-Native原生View组件的onResponderMove属性</Text>
               <LinearProgress
-              
+              {...pan.panHandlers}
+               onResponderMove={()=>{
+                setChangeBg1(!changeBg1)
+              }}
                 variant="determinate"
                 trackColor="pink"
                 color="blue"
@@ -216,10 +225,9 @@ const LinearProgressAPI: React.FunctionComponent = () => {
                   alignSelf: 'center',
                   height: 30,
                   borderRadius: 5,
-                  backgroundColor:'black',
+                  backgroundColor:changeBg1 ? 'pink' : 'black',
                   
                 }}
-                testID='LinearProgress'
                 animation={{duration: 1000}}
               />
             </View>

@@ -208,11 +208,13 @@ const TooltipComponent: React.FunctionComponent<ToolTipComponentProps> = () => {
           <TestCase itShould="fade" tags={['C_API']}>
             <View style={styles.view}>
               <Tooltip
+                overlayColor='yellow'
                 animationType="fade"
                 visible={open2}
                 onOpen={() => {
                   setOpen2(true);
                 }}
+
                 onClose={() => {
                   setOpen2(false);
                 }}
@@ -227,6 +229,7 @@ const TooltipComponent: React.FunctionComponent<ToolTipComponentProps> = () => {
           <TestCase itShould="none" tags={['C_API']}>
             <View style={styles.view}>
               <Tooltip
+               overlayColor='yellow'
                 animationType="none"
                 visible={open3}
                 onOpen={() => {
@@ -248,6 +251,7 @@ const TooltipComponent: React.FunctionComponent<ToolTipComponentProps> = () => {
           <TestCase itShould="backgroundColor" tags={['C_API']}>
             <View style={styles.view}>
               <Tooltip
+   
                 animationType="fade"
                 visible={open4}
                 onOpen={() => {
@@ -551,6 +555,7 @@ const TooltipComponent: React.FunctionComponent<ToolTipComponentProps> = () => {
           <TestCase itShould="toggleAction" tags={['C_API']}>
             <View style={styles.view}>
               <Tooltip
+               skipAndroidStatusBar={false}
                 toggleOnPress={true}
                 toggleAction={'onLongPress'}
                 pointerColor={'blue'}

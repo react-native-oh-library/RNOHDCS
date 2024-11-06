@@ -135,6 +135,7 @@ const SocialIcons: React.FunctionComponent<SocialIconsComponentProps> = () => {
   const [onPress, setOnPress] = useState(false);
   const [onPressIn, setOnPressIn] = useState(false);
   const [onPressOut, setonPressOut] = useState(false);
+  const [value, setValue] = useState(false);
   return (
     <Tester>
       {/* <TestSuite name='Social Icons'>
@@ -175,7 +176,7 @@ const SocialIcons: React.FunctionComponent<SocialIconsComponentProps> = () => {
           <TestCase itShould="activityIndicatorStyle">
             <SocialIcon
               loading={true}
-              activityIndicatorStyle={{width: 40, height: 40}}
+              activityIndicatorStyle={{width: 80,height:80,backgroundColor:'green'}}
               style={{alignSelf: 'center'}}
               type={'codepen'}
               iconType={'font-awesome'}
@@ -201,7 +202,7 @@ const SocialIcons: React.FunctionComponent<SocialIconsComponentProps> = () => {
           </TestCase>
         </TestSuite>
         <TestSuite name="SocialIcon的属性disabled 设置disable则点击无响应">
-          <TestCase itShould="disabled">
+          <TestCase itShould="disabled 为true">
             <SocialIcon
               disabled={true}
               activityIndicatorStyle={{width: 40, height: 40}}
@@ -211,6 +212,20 @@ const SocialIcons: React.FunctionComponent<SocialIconsComponentProps> = () => {
               button={true}
               onPress={() => {
                 console.log('22222');
+              }}
+            />
+          </TestCase>
+          <TestCase itShould="disabled 为false">
+            <SocialIcon
+              disabled={false}
+              activityIndicatorStyle={{width: 40, height: 40}}
+              style={{alignSelf: 'center'}}
+              type={value ? 'stumbleupon' : 'codepen'}
+              iconType={'font-awesome'}
+              button={true}
+              onPress={() => {
+                console.log('22222');
+                setValue(!value)
               }}
             />
           </TestCase>
@@ -347,7 +362,7 @@ const SocialIcons: React.FunctionComponent<SocialIconsComponentProps> = () => {
               activityIndicatorStyle={{width: 40, height: 40}}
               style={{alignSelf: 'center', width: 100, height: 100}}
               type={'stumbleupon'}
-              iconType={'font-awesome'}
+              // iconType={'font-awesome'}
               button={true}
               iconSize={100}
               fontWeight="800"

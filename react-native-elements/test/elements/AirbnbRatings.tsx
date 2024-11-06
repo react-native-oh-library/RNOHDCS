@@ -45,10 +45,14 @@ const AirbnbRatings: React.FunctionComponent<
           </TestCase>
         </TestSuite>
         <TestSuite name="AirbnbRating属性isDisabled 设置后不可评分">
-          <TestCase tags={['C_API']} itShould="isDisabled">
-            <AirbnbRating defaultRating={3} isDisabled />
+          <TestCase tags={['C_API']} itShould="isDisabled为true">
+            <AirbnbRating defaultRating={3} isDisabled={true} />
+          </TestCase>
+          <TestCase tags={['C_API']} itShould="isDisabled为false">
+            <AirbnbRating defaultRating={3} isDisabled={false}/>
           </TestCase>
         </TestSuite>
+    
         <TestSuite name="AirbnbRating属性onFinishRating 评分后的回调 会将分数回调出来">
           <TestCase tags={['C_API']} itShould="onFinishRating">
             <AirbnbRating

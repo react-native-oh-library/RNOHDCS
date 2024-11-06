@@ -65,6 +65,20 @@ const TextComponent: React.FunctionComponent<TextComponentProps> = () => {
           </View>
         </ThemeProvider>
       </TestSuite>
+      <TestSuite name="Text的style">
+        <ThemeProvider>
+          <View style={styles.view}>
+            <TestCase itShould="style" tags={['C_API']}>
+              <Text
+                style={{backgroundColor:'blue',color:'yellow'}}
+                h4
+                >
+                Text的style
+              </Text>
+            </TestCase>
+          </View>
+        </ThemeProvider>
+      </TestSuite>
     </Tester>
   );
 };

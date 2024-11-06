@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -10,7 +10,11 @@ import {Header as HeaderRNE, HeaderProps, Icon} from '@rneui/themed';
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
 import LinearGradient from 'react-native-linear-gradient';
 import {SafeAreaProvider} from '@react-native-oh-tpl/react-native-safe-area-context';
+import { Button } from '@rneui/base';
+import {panResponder} from './RegistEvent'
+
 class ViewComponent extends React.Component {
+  
   render() {
     return (
       <TouchableOpacity>
@@ -34,6 +38,11 @@ class ViewComponent extends React.Component {
 }
 export default function HeaderComponent(): JSX.Element{
   const [visible, setVisible] = React.useState(true);
+  const [value1, setValue1] = React.useState('');
+  const [hidden, setHidden] = React.useState(true);
+  const [changeBg, setChangeBg] = useState(false)
+  const [dimensions, setDimensions] = useState({ width: '100%', height: 100 });
+  const pan = panResponder()
 
   return (
     <Tester>
@@ -130,25 +139,39 @@ export default function HeaderComponent(): JSX.Element{
             </View>
           </TestCase>
         </TestSuite> */}
-        <TestSuite name="Header属性centerComponent验证  ">
-          <TestCase itShould="设置centerComponent" tags={['C_API']}>
-            <SafeAreaProvider>
+       <TestSuite name="Header属性centerComponent验证  ">
+          <TestCase itShould="设置centerComponent" tags={['C_API']}> 
               <HeaderRNE
                 containerStyle={{
                   width: '100%',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  backgroundColor: 'pink',
+                  backgroundColor: 'yellow',
+                  display:'flex',
+                  height:100
+                 
                 }}
+                centerContainerStyle={{
+                  backgroundColor: 'pink',
+                  borderRadius: 5,
+                  height:50,
+                  alignContent:'center',
+                  justifyContent:'center',
+               
+                  
+                  
+                }}
+                
                 centerComponent={{
                   icon: 'save',
                   color: 'yellow',
                   // text: "MY TITLE",
                   type: 'font-awesome',
                   size: 20,
+                  
                 }}
               />
-            </SafeAreaProvider>
+   
           </TestCase>
         </TestSuite>
         <TestSuite name="Header属性centerContainerStyle验证 设置centerComponent容器样式 ">
@@ -165,11 +188,16 @@ export default function HeaderComponent(): JSX.Element{
                 // text: "MY TITLE",
                 type: 'font-awesome',
                 size: 20,
+                
               }}
               centerContainerStyle={{
                 backgroundColor: 'pink',
                 borderRadius: 5,
                 height: 40,
+                alignContent:'center',
+                justifyContent:'center',
+    
+
               }}
             />
           </TestCase>
@@ -221,6 +249,7 @@ export default function HeaderComponent(): JSX.Element{
                 backgroundColor: 'pink',
                 borderRadius: 5,
                 height: 40,
+             
               }}
             />
           </TestCase>
@@ -307,17 +336,19 @@ export default function HeaderComponent(): JSX.Element{
             <HeaderRNE
               leftComponent={{
                 icon: 'menu',
-                color: 'yellow',
+                color: 'green',
                 text: 'MY TITLE',
                 type: 'font-awesome',
-                style: {color: 'yellow', alignSelf: 'center'},
+                style: {color: 'green', alignSelf: 'center',backgroundColor:'black',width:80,height:50},
               }}
               containerStyle={{
                 width: '100%',
                 height: 100,
                 borderRadius: 20,
                 backgroundColor: 'yellow',
+                
               }}
+             
             />
           </TestCase>
         </TestSuite>
@@ -326,24 +357,26 @@ export default function HeaderComponent(): JSX.Element{
             itShould="leftContainerStyle"
             tags={['C_API']}>
             <HeaderRNE
+               containerStyle={{
+                width: '100%',
+                height: 100,
+                borderRadius: 20,
+                backgroundColor: 'yellow',
+              }}
               leftContainerStyle={{
                 backgroundColor: 'pink',
                 borderRadius: 5,
                 height: 40,
               }}
               leftComponent={{
-                icon: 'menu',
+                icon: 'remove',
                 color: 'yellow',
-                text: 'MY TITLE',
                 type: 'font-awesome',
-                style: {color: 'yellow', alignSelf: 'center'},
+                text: 'left',
+                style: {color: 'yellow'},
               }}
-              containerStyle={{
-                width: '100%',
-                height: 100,
-                borderRadius: 20,
-                backgroundColor: 'yellow',
-              }}
+           
+             
             />
           </TestCase>
         </TestSuite>
@@ -385,14 +418,15 @@ export default function HeaderComponent(): JSX.Element{
                 borderRadius: 20,
                 backgroundColor: 'yellow',
               }}
-              centerComponent={{
+              leftComponent={{
+                 
                 icon: 'menu',
                 color: 'yellow',
-                text: 'MY TITLE',
+                text: 'left',
                 type: 'font-awesome',
-                style: {color: 'yellow', alignSelf: 'center'},
+                style: {color: 'yellow', alignSelf: 'center',width:200,textAlign:'center'},
               }}
-              centerContainerStyle={{
+              leftContainerStyle={{
                 backgroundColor: 'pink',
                 borderRadius: 5,
                 height: 40,
@@ -409,11 +443,12 @@ export default function HeaderComponent(): JSX.Element{
                 backgroundColor: 'yellow',
               }}
               centerComponent={{
-                icon: 'menu',
+                icon: 'remove',
                 color: 'yellow',
-                text: 'MY TITLE',
+                text:'center',
                 type: 'font-awesome',
-                style: {color: 'yellow', alignSelf: 'center'},
+                style: {color: 'yellow', alignSelf: 'center',width:200,textAlign:'center'},
+
               }}
               centerContainerStyle={{
                 backgroundColor: 'pink',
@@ -431,14 +466,14 @@ export default function HeaderComponent(): JSX.Element{
                 borderRadius: 20,
                 backgroundColor: 'yellow',
               }}
-              centerComponent={{
+              rightComponent={{
                 icon: 'menu',
                 color: 'yellow',
-                text: 'MY TITLE',
+                text: 'right',
                 type: 'font-awesome',
-                style: {color: 'yellow', alignSelf: 'center'},
+                style: {color: 'yellow', alignSelf: 'center',width:200,textAlign:'center'},
               }}
-              centerContainerStyle={{
+              rightContainerStyle={{
                 backgroundColor: 'pink',
                 borderRadius: 5,
                 height: 40,
@@ -493,9 +528,7 @@ export default function HeaderComponent(): JSX.Element{
           <TestCase itShould="statusBarProps" tags={['C_API']}>
             <HeaderRNE
               statusBarProps={{
-                animated: true,
-                barStyle: 'dark-content',
-                backgroundColor: 'green',
+                hidden:hidden
               }}
               linearGradientProps={{
                 colors: '#F44336',
@@ -521,27 +554,32 @@ export default function HeaderComponent(): JSX.Element{
                 height: 40,
               }}
             />
+            <View style={{width:'100%' ,height:40,marginTop:20}}>
+                 <Button  onPress={()=>{
+                    setHidden(!hidden)
+                 }}>控制状态栏的显示和隐藏</Button>
+            </View>
           </TestCase>
         </TestSuite>
 
-        <TestSuite name="Header属性style 接收View的style属性 ">
-        <TestCase itShould="View的style属性" tags={['C_API']}>
+        <TestSuite name="Header属性onLayout 接收View的onLayout属性 ">
+        <TestCase itShould="View的onLayout属性" tags={['C_API']}>
             <HeaderRNE
-              style={{width:100,backgroundColor:'yellow',height:50}}
-              statusBarProps={{
-                animated: true,
-                barStyle: 'dark-content',
-                backgroundColor: 'green',
+              onLayout={(event)=>{
+                const { width, height } = event.nativeEvent.layout;
+                const layoutString = `width: ${width}, height: ${height}`;
+                console.log('Layout:', layoutString);
+                setValue1(layoutString)
               }}
+          
               linearGradientProps={{
                 colors: '#F44336',
                 start: {x: 0, y: 0.5},
                 end: {x: 1, y: 0.5},
               }}
               containerStyle={{ 
-                width: '100%',
-                height: 100,
-                borderRadius: 20,
+                width: dimensions.width,
+                height: dimensions.height,
                 backgroundColor: 'yellow',
               }}
               centerComponent={{
@@ -557,41 +595,33 @@ export default function HeaderComponent(): JSX.Element{
                 height: 40,
               }}
             />
+
+           <View style={{ width: 200, marginLeft: 20, paddingBottom: 20, marginTop: 20 }}>
+              <Text style={{ color: 'black' }}>onLayout回调方法显示组件的宽高</Text>
+              <Text style={{ color: 'black' }}>
+                {value1}
+              </Text>
+              <Button onPress={()=>{
+                if (dimensions.height == 100 ) {
+                  setDimensions({ width: '100%', height: 130 })
+                }else{
+                  setDimensions({ width:'100%', height: 100 })
+                }       
+              }}>修改组件的size</Button>
+            </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Header属性testId 接收View的testId属性 ">
-        <TestCase itShould="View的testId属性" tags={['C_API']}>
+        <TestSuite name="Header属性onResponderRelease 接收原生View的onResponderRelease属性 点击修改背景色 ">
+        <TestCase itShould="接收原生View的onResponderRelease属性" tags={['C_API']}>
             <HeaderRNE
-              testID='headerTest'
-              style={{width:100,backgroundColor:'yellow',height:50}}
-              statusBarProps={{
-                animated: true,
-                barStyle: 'dark-content',
-                backgroundColor: 'green',
-              }}
-              linearGradientProps={{
-                colors: '#F44336',
-                start: {x: 0, y: 0.5},
-                end: {x: 1, y: 0.5},
-              }}
-              containerStyle={{ 
-                width: '100%',
-                height: 100,
-                borderRadius: 20,
-                backgroundColor: 'yellow',
-              }}
-              centerComponent={{
-                icon: 'menu',
-                color: 'yellow',
-                text: '接收View的testId属性',
-                type: 'font-awesome',
-                style: {color: 'yellow', alignSelf: 'center'},
-              }}
-              centerContainerStyle={{
-                backgroundColor: 'pink',
-                borderRadius: 5,
-                height: 40,
-              }}
+                containerStyle={{ 
+                  width: '100%',
+                  height: 80,
+                  backgroundColor: changeBg ? 'black' : 'yellow',
+                }}
+                {...pan.panHandlers} 
+                onResponderRelease={()=>setChangeBg(!changeBg)} 
+             
             />
           </TestCase>
         </TestSuite>

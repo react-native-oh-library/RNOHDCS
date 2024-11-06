@@ -6,7 +6,7 @@ import {
   Image,
   PressableProps,
 } from 'react-native';
-import {Avatar, Icon} from '@rneui/themed';
+import {Avatar, Icon, Button} from '@rneui/themed';
 import {Text} from '@rneui/base';
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
 
@@ -41,6 +41,9 @@ const Avatars: React.FunctionComponent<AvatarComponentProps> = () => {
   const [onPress1, setOnPress1] = useState(false);
   const [onPressIn1, setOnPressIn1] = useState(false);
   const [onPressOut1, setonPressOut1] = useState(false);
+  const [value, setValue] = useState('');
+  const [changeSize, setChangeSize] = useState(130);
+
   return (
     <Tester style={{flex: 1, backgroundColor: '#000'}}>
       <ScrollView>
@@ -507,6 +510,14 @@ const Avatars: React.FunctionComponent<AvatarComponentProps> = () => {
         </TestSuite>
         <TestSuite name="Avatar.Accessory属性onPress的验证 点击触发修改下面小方块的背景色">
           <TestCase tags={['C_API']} itShould="onPress">
+          <View
+              style={{
+                alignSelf: 'center',
+                marginTop: 20,
+                width: 100,
+                height: 100,
+                backgroundColor: onPress1 ? 'yellow' : 'gray',
+              }}>
             <Avatar.Accessory
              size={100}
               onPress={() => {
@@ -516,14 +527,7 @@ const Avatars: React.FunctionComponent<AvatarComponentProps> = () => {
                 uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
               }}
             />
-            <View
-              style={{
-                alignSelf: 'center',
-                marginTop: 20,
-                width: 100,
-                height: 100,
-                backgroundColor: onPress1 ? 'yellow' : 'gray',
-              }}></View>
+            </View>
           </TestCase>
         </TestSuite>
         <TestSuite name="Avatar.Accessory属性onPressIn的验证 手指按下触发下方小方块背景色变化">
@@ -652,8 +656,8 @@ const Avatars: React.FunctionComponent<AvatarComponentProps> = () => {
            </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Avatar.Accessory属性h1和h1Style 接收Text组件的h1和h1Style属性">
-          <TestCase tags={['C_API']} itShould="设置Text组件的h1和h1Style属性">
+        <TestSuite name="Avatar.Accessory属性Style 接收Text组件的Style属性 设置旋转效果">
+          <TestCase tags={['C_API']} itShould="Text组件的Style属性">
           <View
               style={{
                 paddingTop: 20,
@@ -661,38 +665,50 @@ const Avatars: React.FunctionComponent<AvatarComponentProps> = () => {
                 width:'100%',
                 height:100,
   
-              }}>
+              }}>     
             <Avatar.Accessory
-               h1={true}
-               h1Style={{backgroundColor:'pink'}}
+               name='save'
+               type='font-awesome'
+               color= 'blue'
                size={100}
-               source={{
-                 uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
-               }}
+               style={{ transform: [{ rotate: '45deg' }], backgroundColor: 'red' }}
                
             />
            </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Avatar.Accessory属性h2和h2Style 接收Text组件的h2和h2Style属性">
-          <TestCase tags={['C_API']} itShould="设置Text组件的h2和h2Style属性">
+        <TestSuite name="Avatar.Accessory属性Style 接收Text组件的onLayout属性">
+          <TestCase tags={['C_API']} itShould="Text组件的onLayout属性 显示Text的宽高">
           <View
               style={{
                 paddingTop: 20,
                 paddingBottom: 20,
                 width:'100%',
-                height:100,
-  
-              }}>
+                height:130,
+              }}> 
             <Avatar.Accessory
-               h2={true}
-               h2Style={{backgroundColor:'green'}}
-               size={100}
-               source={{
-                 uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
+               size={changeSize}
+               onLayout={(event)=>{
+                const { width, height } = event.nativeEvent.layout;
+                const layoutString = `width: ${width}, height: ${height}`;
+                setValue(layoutString);
+                console.log('Layout:', layoutString);
                }}
-               
             />
+            <View style={{width:200}}>
+            <Text>onLayout回调方法显示组件的宽高</Text>
+            <Text>
+              {value}
+            </Text>
+            <Button onPress={()=>{
+               if (changeSize == 100) {
+                setChangeSize(130)
+               }else{
+                setChangeSize(100)
+               }
+              }}>修改组件的size</Button>
+            </View>
+            
            </View>
           </TestCase>
         </TestSuite>

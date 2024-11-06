@@ -107,7 +107,7 @@ export default () => {
           <TestCase itShould="传入一个Image组件" tags={['C_API']}>
             <View style={styles.container}>
               <Text style={styles.subText}>ImageComponent</Text>
-              <Image Component={ImageComponent} />
+              <Image ImageComponent={ImageComponent} />
             </View>
           </TestCase>
         </TestSuite>

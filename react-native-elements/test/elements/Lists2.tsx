@@ -321,7 +321,7 @@
 
 // export default Lists2;
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -332,6 +332,7 @@ import {
 import {Button, LinearProgress, ListItem, Icon, Avatar} from '@rneui/themed';
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
 import LinearGradient from 'react-native-linear-gradient';
+import {panResponder} from './RegistEvent'
 class TouchableComponent extends React.Component<{}, {}> {
   render() {
     return (
@@ -391,8 +392,10 @@ const List: React.FunctionComponent = () => {
   const [selectedButtonIndex1, setSelectedButtonIndex1] = React.useState(0);
   const [selectedButtonIndex2, setSelectedButtonIndex2] = React.useState(0);
   const [selectedButtonIndex3, setSelectedButtonIndex3] = React.useState(0);
+  const [selectedButtonIndex4, setSelectedButtonIndex4] = React.useState(0);
   const [checkbox1, setCheckbox1] = React.useState(true);
   const [checkbox2, setCheckbox2] = React.useState(true);
+  const [checkbox3, setCheckbox3] = React.useState(true);
   const [onlongPress, setOnlongPress] = React.useState(false);
   const [onPress, setOnPress] = React.useState(false);
   const [onPressIn, setOnPressIn] = React.useState(false);
@@ -400,7 +403,16 @@ const List: React.FunctionComponent = () => {
 
   const [changeBg1, setChangeBg1] = React.useState(false);
   const [changeBg2, setChangeBg2] = React.useState(false);
-
+  const [value1, setValue1] = React.useState('');
+  const [value2, setValue2] = React.useState('');
+  const [value3, setValue3] = React.useState('');
+  const [dimensions, setDimensions] = React.useState({ width: '80%', height: 100 });
+  const [dimensions1, setDimensions1] = React.useState({ width: '80%', height: 100 });
+  const [changeHeight, setChangeHeight] = React.useState(130);
+  const [changeBg3, setChangeBg3] = useState(false)
+  const [changeBg4, setChangeBg4] = useState(false)  
+  const [changeBg5, setChangeBg5] = useState(false)  
+  const pan = panResponder()
   return (
     <Tester>
       <ScrollView>
@@ -468,7 +480,6 @@ const List: React.FunctionComponent = () => {
             <View style={styles.container}>
               <Text style={styles.subText}>在内部添加内容</Text>
               <ListItem
-                
                 containerStyle={{
                   backgroundColor: 'white',
                   width: '80%',
@@ -727,8 +738,9 @@ const List: React.FunctionComponent = () => {
                 width: '80%',
                 alignSelf: 'center',
                 height: 100,
-                borderRadius: 5,
-                backgroundColor:'black',
+                borderRadius: 20,
+                backgroundColor:'blue',
+                
               }}
                 pad={20}
                 containerStyle={{
@@ -756,26 +768,31 @@ const List: React.FunctionComponent = () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="ListItem属性testID 接收React-Native原生View组件的testID">
-          <TestCase itShould="React-Native原生View组件的testID" tags={['C_API']}>
+        <TestSuite name="ListItem属性onLayout 接收React-Native原生View组件的onLayout">
+          <TestCase itShould="React-Native原生View组件的onLayout" tags={['C_API']}>
             <View style={styles.container}>
               <Text style={styles.subText}>
                  设置原生的style样式
               </Text>
               <ListItem
+               onLayout={(event) => {
+                const { width, height } = event.nativeEvent.layout;
+                const layoutString = `width: ${width}, height: ${height}`;
+                setValue1(layoutString);
+                console.log('Layout:', layoutString);
+              }}
               style={{
                 marginVertical: 10,
-                width: '80%',
+                width: dimensions.width,
                 alignSelf: 'center',
-                height: 100,
+                height: dimensions.height,
                 borderRadius: 5,
                 backgroundColor:'black',
               }}
-              testID={'ListItem'}
                 pad={20}
                 containerStyle={{
                   backgroundColor: 'white',
-                  width: '80%',
+                  width: dimensions.width,
                   alignSelf: 'center',
                   opacity: 0.7,
                 }}
@@ -795,6 +812,19 @@ const List: React.FunctionComponent = () => {
                   </ListItem.Subtitle>
                 </ListItem.Content>
               </ListItem>
+            </View>
+            <View style={{ width: 200, marginLeft: 20, paddingBottom: 20, marginTop: 20 }}>
+              <Text style={{ color: 'black' }}>onLayout回调方法显示组件的宽高</Text>
+              <Text style={{ color: 'black' }}>
+                {value1}
+              </Text>
+              <Button onPress={()=>{
+                if (dimensions.height == 100 ) {
+                  setDimensions({ width: '80%', height: 200 })
+                }else{
+                  setDimensions({ width: '80%', height: 100 })
+                }       
+              }}>修改组件的size</Button>
             </View>
           </TestCase>
         </TestSuite>
@@ -1395,7 +1425,7 @@ const List: React.FunctionComponent = () => {
           </TestCase>
         </TestSuite>
         <TestSuite name="ListItem.ButtonGroup属性disabled  接收ButtonGroup的disabled">
-          <TestCase itShould="设置disabled" tags={['C_API']}>
+          <TestCase itShould="设置disabled 为true" tags={['C_API']}>
             <View style={styles.container}>
               <Text style={styles.subText}>接收ButtonGroup的disabled</Text>
               <ListItem bottomDivider>
@@ -1405,8 +1435,22 @@ const List: React.FunctionComponent = () => {
                 <ListItem.ButtonGroup selectedButtonStyle={{backgroundColor:'black',width:100,borderRadius:20}}
                 disabled={true}
                   buttons={['Flower', 'Coco']}
-                  selectedIndex={selectedButtonIndex3}
-                  onPressOut={()=>{setSelectedButtonIndex3(selectedButtonIndex3 == 0 ? 1 : 0)}} />
+               />
+              </ListItem>
+            </View>
+          </TestCase>
+          <TestCase itShould="设置disabled 为false" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>接收ButtonGroup的disabled</Text>
+              <ListItem bottomDivider>
+                <ListItem.Content>
+                  <ListItem.Title>Choose 🤯</ListItem.Title>
+                </ListItem.Content>
+                <ListItem.ButtonGroup selectedButtonStyle={{backgroundColor:'black',width:100,borderRadius:20}}
+                  disabled={false}
+                  buttons={['Flower', 'Coco']}
+                  selectedIndex={selectedButtonIndex4}
+                  onPress={()=>{setSelectedButtonIndex4(selectedButtonIndex4 == 0 ? 1 : 0)}} />
               </ListItem>
             </View>
           </TestCase>
@@ -1447,7 +1491,7 @@ const List: React.FunctionComponent = () => {
           </TestCase>
         </TestSuite>
         <TestSuite name="ListItem.CheckBox属性disable 接收checkbox的disable">
-          <TestCase itShould="设置disable" tags={['C_API']}>
+          <TestCase itShould="设置disable为true" tags={['C_API']}>
             <View style={styles.container}>
               <Text style={styles.subText}>接收checkbox的disable</Text>
               <ListItem bottomDivider>
@@ -1455,6 +1499,21 @@ const List: React.FunctionComponent = () => {
                   checked={checkbox2}
                   disabled={true}
                   onPress={() => setCheckbox1(!checkbox2)}
+                />
+                <ListItem.Content>
+                  <ListItem.Title>Check that please 😢</ListItem.Title>
+                </ListItem.Content>
+              </ListItem>
+            </View>
+          </TestCase>
+          <TestCase itShould="设置disable为false" tags={['C_API']}>
+            <View style={styles.container}>
+              <Text style={styles.subText}>接收checkbox的disable</Text>
+              <ListItem bottomDivider>
+                <ListItem.CheckBox
+                  checked={checkbox3}
+                  disabled={false}
+                  onPress={() => setCheckbox3(!checkbox3)}
                 />
                 <ListItem.Content>
                   <ListItem.Title>Check that please 😢</ListItem.Title>
@@ -1591,17 +1650,20 @@ const List: React.FunctionComponent = () => {
                 bottomDivider>
                 <ListItem.Content>
                   <ListItem.Title style={{color: 'black'}}>
-                    修改chevron颜色
+                    Icon组件的name属性
                   </ListItem.Title>
                 </ListItem.Content>
                 <ListItem.Chevron
-                  onPressOut={() => {
-                    setonPressOut(!onPressOut);
-                  }}
                   color={'red'}
                   size={30}
                   type="font-awesome"
-                  name='remove'
+                  name='save'
+                />
+                 <ListItem.Chevron
+                  color={'red'}
+                  size={30}
+                  type="font-awesome"
+                  name='home'
                 />
               </ListItem>
             </View>
@@ -1686,10 +1748,10 @@ const List: React.FunctionComponent = () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="ListItem.Content属性h1和h1style  接收Text组件的h1和h1style">
-          <TestCase itShould="设置Text组件的h1和h1style " tags={['C_API']}>
+        <TestSuite name="ListItem.Content属性onResponderRelease  接收Text组件的onResponderRelease">
+          <TestCase itShould="设置Text组件的onResponderRelease " tags={['C_API']}>
             <View style={styles.container}>
-              <Text style={styles.subText}>Text组件的h1和h1style </Text>
+              <Text style={styles.subText}>Text组件的onResponderRelease </Text>
               <ListItem
                 containerStyle={{
                   backgroundColor: 'white',
@@ -1703,23 +1765,19 @@ const List: React.FunctionComponent = () => {
                     uri: 'https://randomuser.me/api/portraits/men/36.jpg',
                   }}
                 />
-                <ListItem.Content  h1={true} h1Style={{backgroundColor:'green'}}>
-                  <ListItem.Title style={{color: 'black'}}>
-                    John Doe
-                  </ListItem.Title>
-                  <ListItem.Subtitle style={{color: 'black'}}>
-                    President
-                  </ListItem.Subtitle>
+                <ListItem.Content {...pan.panHandlers} onResponderRelease={()=>{
+                          setChangeBg3(!changeBg3)
+                }}  style={{height:80,backgroundColor:changeBg3 ? 'black' : 'yellow'}}>
                 </ListItem.Content>
               </ListItem>
             </View>
     
           </TestCase>
         </TestSuite>
-        <TestSuite name="ListItem.Content属性h2和h2style  接收Text组件的h2和h2style">
-          <TestCase itShould="设置Text组件的h2和h2style " tags={['C_API']}>
+        <TestSuite name="ListItem.Content属性onLayout  接收Text组件的onLayout">
+          <TestCase itShould="设置Text组件的onLayout " tags={['C_API']}>
             <View style={styles.container}>
-              <Text style={styles.subText}>Text组件的h2和h2style </Text>
+              <Text style={styles.subText}>Text组件的onLayout </Text>
               <ListItem
                 containerStyle={{
                   backgroundColor: 'white',
@@ -1733,17 +1791,30 @@ const List: React.FunctionComponent = () => {
                     uri: 'https://randomuser.me/api/portraits/men/36.jpg',
                   }}
                 />
-                <ListItem.Content  h2={true} h2Style={{backgroundColor:'green'}}>
-                  <ListItem.Title style={{color: 'black'}}>
-                    John Doe
-                  </ListItem.Title>
-                  <ListItem.Subtitle style={{color: 'black'}}>
-                    President
-                  </ListItem.Subtitle>
+                <ListItem.Content style={{height:changeHeight,backgroundColor:'black'}} onLayout={(event)=>{
+                     const { width, height } = event.nativeEvent.layout;
+                     const layoutString = `width: ${width}, height: ${height}`;
+                     setValue2(layoutString);
+                     console.log('1111111111Layout:', layoutString);
+                }}>
+                  
                 </ListItem.Content>
               </ListItem>
             </View>
-    
+            <View style={{ width: 200, marginLeft: 20, paddingBottom: 20, marginTop: 20 }}>
+              
+              <Text style={{ color: 'black' }}>onLayout回调方法显示组件的宽高</Text>
+              <Text style={{ color: 'black' }}>
+                {value2}
+              </Text>
+              <Button onPress={()=>{
+                if (changeHeight == 130 ) {
+                    setChangeHeight(100)
+                }else{
+                    setChangeHeight(130)
+                }       
+              }}>修改组件的size</Button>
+            </View>
           </TestCase>
         </TestSuite>
         <TestSuite name="ListItem.Input 接收所有input组件的属性">
@@ -1823,18 +1894,15 @@ const List: React.FunctionComponent = () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="ListItem.Subtitle属性right 左边组件与右边组件的距离">
-          <TestCase itShould="设置pad为20，40，80" tags={['C_API']}>
+         {/* <TestSuite name="ListItem.Subtitle属性right Subtitle在右边显示 设置无效">
+          <TestCase itShould="设置right属性" tags={['C_API']}>
             <View style={styles.container}>
-              <Text style={styles.subText}>设置pad值为20</Text>
+              <Text style={styles.subText}>ListItem.Subtitle设置right</Text>
               <ListItem
-                pad={20}
                 containerStyle={{
-                  backgroundColor: 'pink',
+                  backgroundColor: 'white',
                   width: '80%',
                   alignSelf: 'center',
-                  borderRadius: 20,
-                  opacity: 0.7,
                 }}
                 bottomDivider>
                 <Avatar
@@ -1843,72 +1911,23 @@ const List: React.FunctionComponent = () => {
                     uri: 'https://randomuser.me/api/portraits/men/36.jpg',
                   }}
                 />
-                {/* <ListItem.Content> */}
-                {/* <ListItem.Title style={{ color: 'black' }}>John Doe</ListItem.Title> */}
-                <ListItem.Subtitle right={false} style={{color: 'black'}}>
-                  President
-                </ListItem.Subtitle>
-                {/* </ListItem.Content> */}
-              </ListItem>
-            </View>
-            <View style={styles.container}>
-              <Text style={styles.subText}>设置pad值为40</Text>
-              <ListItem
-                pad={40}
-                containerStyle={{
-                  backgroundColor: 'pink',
-                  width: '80%',
-                  alignSelf: 'center',
-                  borderRadius: 20,
-                  opacity: 0.7,
-                }}
-                bottomDivider>
-                <Avatar
-                  rounded
-                  source={{
-                    uri: 'https://randomuser.me/api/portraits/men/36.jpg',
-                  }}
-                />
-                {/* <ListItem.Content> */}
-                {/* <ListItem.Title style={{ color: 'black' }}>John Doe</ListItem.Title> */}
-                <ListItem.Subtitle right={false} style={{color: 'black'}}>
-                  President
-                </ListItem.Subtitle>
-                {/* </ListItem.Content> */}
-              </ListItem>
-            </View>
-            <View style={styles.container}>
-              <Text style={styles.subText}>设置pad值为80</Text>
-              <ListItem
-                pad={80}
-                containerStyle={{
-                  backgroundColor: 'pink',
-                  width: '80%',
-                  alignSelf: 'center',
-                  borderRadius: 20,
-                  opacity: 0.7,
-                }}
-                bottomDivider>
-                <Avatar
-                  rounded
-                  source={{
-                    uri: 'https://randomuser.me/api/portraits/men/36.jpg',
-                  }}
-                />
-                {/* <ListItem.Content> */}
-                {/* <ListItem.Title style={{ color: 'black' }}>John Doe</ListItem.Title> */}
-                <ListItem.Subtitle right={false} style={{color: 'black'}}>
-                  President
-                </ListItem.Subtitle>
-                {/* </ListItem.Content> */}
+                <ListItem.Content right={true} style={{backgroundColor: 'yellow'}}>
+                  <ListItem.Subtitle right={true} style={{color: 'black'}}>
+                    John Doe
+                  </ListItem.Subtitle>
+                  <ListItem.Subtitle style={{color: 'black'}}>
+                    President
+                  </ListItem.Subtitle>
+                </ListItem.Content>
               </ListItem>
             </View>
           </TestCase>
-        </TestSuite>
-        <TestSuite name="ListItem.Subtitle属性h1和h1Style 接收Text组件属性h1和h1Style">
-          <TestCase itShould="设置Text组件属性h1和h1Style" tags={['C_API']}>
+        </TestSuite> */}
+
+        <TestSuite name="ListItem.Subtitle属性style 接收Text组件属性style">
+          <TestCase itShould="设置Text组件属性style" tags={['C_API']}>
             <View style={styles.container}>
-              <Text style={styles.subText}>接收Text组件属性h1和h1Style</Text>
+              <Text style={styles.subText}>接收Text组件属性style</Text>
               <ListItem
                 pad={20}
                 containerStyle={{
@@ -1925,17 +1944,17 @@ const List: React.FunctionComponent = () => {
                     uri: 'https://randomuser.me/api/portraits/men/36.jpg',
                   }}
                 />
-                <ListItem.Subtitle h1={true} h1Style={{backgroundColor:'green',color:'red'}} right={false} style={{color: 'black'}}>
+                <ListItem.Subtitle  style={{color: 'black',backgroundColor:'green',width:100,height:30}}>
                   President
                 </ListItem.Subtitle>
               </ListItem>
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="ListItem.Subtitle属性h2和h2Style 接收Text组件属性h2和h2Style">
-          <TestCase itShould="设置Text组件属性h2和h2Style" tags={['C_API']}>
+        <TestSuite name="ListItem.Subtitle属性onResponderRelease 接收Text组件属性onResponderRelease">
+          <TestCase itShould="设置Text组件属性onResponderRelease" tags={['C_API']}>
             <View style={styles.container}>
-              <Text style={styles.subText}>接收Text组件属性h2和h2Style</Text>
+              <Text style={styles.subText}>接收Text组件属性onResponderRelease</Text>
               <ListItem
                 pad={20}
                 containerStyle={{
@@ -1952,11 +1971,14 @@ const List: React.FunctionComponent = () => {
                     uri: 'https://randomuser.me/api/portraits/men/36.jpg',
                   }}
                 />
-                <ListItem.Subtitle h2={true} h2Style={{backgroundColor:'blue',color:'red'}} right={false} style={{color: 'black'}}>
+                <ListItem.Subtitle   {...pan.panHandlers} onResponderRelease={()=>{
+                  setChangeBg4(!changeBg4)
+                }}  style={{color: 'black',backgroundColor: changeBg4 ? 'blue' : 'green',width:180,height:50}}>
                   President
                 </ListItem.Subtitle>
               </ListItem>
             </View>
+          
           </TestCase>
         </TestSuite>
         <TestSuite name="ListItem.Swipeable属性animation 左右拖动的时候显示动画">
@@ -2327,7 +2349,7 @@ const List: React.FunctionComponent = () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="ListItem.Swipeable属性rightStyle 往右拖动显示的内容的样式">
+        <TestSuite name="ListItem.Swipeable属性rightStyle 往左拖动显示的内容的样式">
           <TestCase itShould="设置rightStyle" tags={['C_API']}>
             <View style={styles.container}>
               <Text style={styles.subText}>往左拖动显示的内容的样式设置</Text>
@@ -2366,7 +2388,7 @@ const List: React.FunctionComponent = () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="ListItem.Swipeable属性rightWidth 设置左边内容的宽度">
+        <TestSuite name="ListItem.Swipeable属性rightWidth 设置右边内容的宽度">
           <TestCase itShould="设置rightWidth 100, 180" tags={['C_API']}>
             <View style={styles.container}>
               <Text style={styles.subText}>右边内容的宽度100</Text>
@@ -2390,13 +2412,13 @@ const List: React.FunctionComponent = () => {
                   />
                 }
                 rightStyle={{
-                  width: 200,
+                  width: 100,
                   opacity: 0.6,
                   borderColor: 'black',
                   borderWidth: 1,
                 }}
                 containerStyle={{backgroundColor: 'pink'}}
-                leftWidth={100}>
+                rightWidth={100}>
                 <Icon type="font-awesome" name="save" color="green" size={30} />
                 <ListItem.Content>
                   <ListItem.Title>{'ListItem.Swipeable'}</ListItem.Title>
@@ -2426,13 +2448,13 @@ const List: React.FunctionComponent = () => {
                   />
                 }
                 rightStyle={{
-                  width: 200,
+                  width: 180,
                   opacity: 0.6,
                   borderColor: 'black',
                   borderWidth: 1,
                 }}
                 containerStyle={{backgroundColor: 'pink'}}
-                leftWidth={180}>
+                rightWidth={180}>
                 <Icon type="font-awesome" name="save" color="green" size={30} />
                 <ListItem.Content>
                   <ListItem.Title>{'ListItem.Swipeable'}</ListItem.Title>
@@ -2558,10 +2580,10 @@ const List: React.FunctionComponent = () => {
             </View>
           </TestCase>
         </TestSuite> */}
-        <TestSuite name="ListItem.Title属性h1和h1Style  接收Text组件的h1和h1Style属性">
-          <TestCase itShould="设置Text组件的h1和h1Style属性" tags={['C_API']}>
+        <TestSuite name="ListItem.Title属性onLayout  接收View组件的onLayout属性">
+          <TestCase itShould="设置View组件的onLayout属性" tags={['C_API']}>
             <View style={styles.container}>
-              <Text style={styles.subText}>接收Text组件的h1和h1Style属性</Text>
+              <Text style={styles.subText}>接收Text组件的onLayout属性</Text>
               <ListItem
                 containerStyle={{
                   backgroundColor: 'white',
@@ -2575,22 +2597,39 @@ const List: React.FunctionComponent = () => {
                     uri: 'https://randomuser.me/api/portraits/men/36.jpg',
                   }}
                 />
-                <ListItem.Content style={{backgroundColor: 'yellow'}}>
-                  <ListItem.Title h1={true} h1Style={{backgroundColor:'green'}}  style={{color: 'black'}}>
+                <ListItem.Content>
+                  <ListItem.Title onLayout={(event)=>{
+                         const { width, height } = event.nativeEvent.layout;
+                         const layoutString = `width: ${width}, height: ${height}`;
+                         console.log('layoutString',layoutString)
+                         setValue3(layoutString);
+                  }}  style={{color: 'black',backgroundColor:'green',width:dimensions1.width,height:dimensions1.height}}>
                     John Doe
                   </ListItem.Title>
-                  <ListItem.Subtitle style={{color: 'black'}}>
-                    President
-                  </ListItem.Subtitle>
                 </ListItem.Content>
               </ListItem>
             </View>
+
+            <View style={{ width: 200, marginLeft: 20, paddingBottom: 20, marginTop: 20 }}>
+              
+              <Text style={{ color: 'black' }}>onLayout回调方法显示组件的宽高</Text>
+              <Text style={{ color: 'black' }}>
+                {value3}
+              </Text>
+              <Button onPress={()=>{
+                if (dimensions1.height == 100 ) {
+                  setDimensions1({ width: '100%', height: 200 })
+                }else{
+                  setDimensions1({ width: '100%', height: 100 })
+                }       
+              }}>修改组件的size</Button>
+            </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="ListItem.Title属性h2和h2Style  接收Text组件的h2和h2Style属性">
-          <TestCase itShould="设置Text组件的h2和h2Style属性" tags={['C_API']}>
+        <TestSuite name="ListItem.Title属性onResponderRelease 接收View组件的onResponderRelease属性">
+          <TestCase itShould="设置Text组件的onResponderRelease属性" tags={['C_API']}>
             <View style={styles.container}>
-              <Text style={styles.subText}>接收Text组件的h2和h2Style属性</Text>
+              <Text style={styles.subText}>接收Text组件的onResponderRelease属性</Text>
               <ListItem
                 containerStyle={{
                   backgroundColor: 'white',
@@ -2605,12 +2644,11 @@ const List: React.FunctionComponent = () => {
                   }}
                 />
                 <ListItem.Content style={{backgroundColor: 'yellow'}}>
-                  <ListItem.Title h2={true} h2Style={{backgroundColor:'pink'}}  style={{color: 'black'}}>
+                  <ListItem.Title {...pan.panHandlers} onResponderRelease={()=>{
+                    setChangeBg5(!changeBg5)
+                  }} style={{color: 'black',width:'100%',height:100,backgroundColor:changeBg5 ? 'yellow' : 'green'}}>
                     John Doe
                   </ListItem.Title>
-                  <ListItem.Subtitle style={{color: 'black'}}>
-                    President
-                  </ListItem.Subtitle>
                 </ListItem.Content>
               </ListItem>
             </View>

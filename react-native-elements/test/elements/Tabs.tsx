@@ -1,8 +1,8 @@
-import React from 'react';
-import {Tab, Text, TabView} from '@rneui/themed';
+import React, { useState } from 'react';
+import {Tab, Text, TabView,Button} from '@rneui/themed';
 import {ScrollView, View} from 'react-native';
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
-
+import {panResponder} from './RegistEvent'
 export default () => {
   const [direction,setDirection] = React.useState('right')
   const [index, setIndex] = React.useState(0);
@@ -42,20 +42,25 @@ export default () => {
   const [index34, setIndex34] = React.useState(0);
   const [index35, setIndex35] = React.useState(0);
   const [index36, setIndex36] = React.useState(0);
+  const [index37, setIndex37] = React.useState(0);
+  const [index38, setIndex38] = React.useState(0);
+  const [dimensions, setDimensions] = useState({ width: '100%', height: 100 });
+  const [changeBg,setChangeBg] = useState(false)
   console.log('tabs re render');
+  const [value2,setValue2] = useState('')
+  const pan = panResponder()
   return (
     <Tester>
       <ScrollView>
         <TestSuite name="Tab的buttonStyle属性 设置选项卡的buttonStyle">
           <TestCase itShould="buttonStyle" tags={['C_API']}>
             <Tab
-              value={Math.ceil(index > -1 ? index : 0)}
-              onChange={e => setIndex(e)}
+              value={index}
+              onChange={index => setIndex(index)}
               indicatorStyle={{
                 backgroundColor: 'white',
                 height: 3,
               }}
-              scrollable
               variant="primary"
               containerStyle={{justifyContent: 'space-around'}}
               buttonStyle={active=>({backgroundColor: active ? 'pink' : 'green', borderRadius: 20,borderWidth:1,borderColor:'black'})}
@@ -140,7 +145,6 @@ export default () => {
                 backgroundColor: 'white',
                 height: 3,
               }}
-              scrollable
               variant="primary"
               containerStyle={active => ({
                 backgroundColor: 'yellow',
@@ -221,90 +225,6 @@ export default () => {
             </View>
           </TestCase>
         </TestSuite>
-        {/* <TestSuite name="Tab的dense属性 设置Tab的dense无效 设置ture或false均无效">
-          <TestCase itShould="containerStyle" tags={['C_API']}>
-            <Tab
-              value={Math.ceil(index2 > -1 ? index2 : 0)}
-              onChange={e => setIndex2(e)}
-              indicatorStyle={{
-                backgroundColor: 'white',
-                height: 3,
-              }}
-              scrollable
-              variant="primary"
-              containerStyle={{backgroundColor: 'yellow', borderRadius: 20}}
-              dense={false}>
-              <Tab.Item
-                containerStyle={active => ({
-                  width: 113,
-                  backgroundColor: active ? '#208990' : 'transparent',
-                })}
-                title="Recent"
-                titleStyle={{fontSize: 12}}
-                icon={{name: 'calendar', type: 'font-awesome', color: 'white'}}
-              />
-              <Tab.Item
-                title="Custom"
-                containerStyle={active => ({
-                  backgroundColor: active ? '#208990' : 'transparent',
-                  width: 115,
-                })}
-                titleStyle={{fontSize: 12}}
-                icon={{name: 'heart', type: 'font-awesome', color: 'white'}}
-              />
-              <Tab.Item
-                containerStyle={active => ({
-                  width: 118,
-                  backgroundColor: active ? '#208990' : 'transparent',
-                })}
-                title="Cart"
-                titleStyle={{fontSize: 12}}
-                icon={{
-                  name: 'shopping-cart',
-                  type: 'font-awesome',
-                  color: 'white',
-                }}
-              />
-            </Tab>
-          </TestCase>
-          <TestCase itShould="TabView" tags={['C_API']}>
-            <View style={{width: '100%', height: 200, overflow: 'hidden'}}>
-              <TabView
-                onSwipeStart={e => console.log(e)}
-                value={index2}
-                onChange={index => setIndex2(index)}
-                animationType="spring">
-                <TabView.Item style={{backgroundColor: 'red', width: '100%'}}>
-                  <ScrollView>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                  </ScrollView>
-                </TabView.Item>
-                <TabView.Item style={{backgroundColor: 'blue', width: '100%'}}>
-                  <Text h1>Favorite 1</Text>
-                </TabView.Item>
-                <TabView.Item style={{backgroundColor: 'green', width: '100%'}}>
-                  <Text h1>Cart 2${Math.random()}</Text>
-                </TabView.Item>
-              </TabView>
-            </View>
-          </TestCase>
-        </TestSuite> */}
         <TestSuite name="Tab的disableIndicator属性 设置Tab的disableIndicator 选择哪一个选项卡的指示器隐藏">
           <TestCase itShould="containerStyle" tags={['C_API']}>
             <Tab
@@ -314,7 +234,6 @@ export default () => {
                 backgroundColor: 'white',
                 height: 3,
               }}
-              scrollable
               variant="default"
               style={{backgroundColor: 'yellow'}}
               // buttonStyle={{ backgroundColor:'yellow' ,borderRadius:20}}
@@ -400,7 +319,6 @@ export default () => {
                 backgroundColor: 'black',
                 height: 3,
               }}
-              scrollable
               variant="default"
               style={{backgroundColor: 'yellow'}}
               iconPosition="left">
@@ -445,7 +363,6 @@ export default () => {
                 backgroundColor: 'black',
                 height: 3,
               }}
-              scrollable
               variant="default"
               style={{backgroundColor: 'yellow'}}
               iconPosition="top">
@@ -490,7 +407,6 @@ export default () => {
                 backgroundColor: 'black',
                 height: 3,
               }}
-              scrollable
               variant="default"
               style={{backgroundColor: 'yellow'}}
               iconPosition="right">
@@ -535,7 +451,6 @@ export default () => {
                 backgroundColor: 'black',
                 height: 3,
               }}
-              scrollable
               variant="default"
               style={{backgroundColor: 'yellow'}}
               iconPosition="bottom">
@@ -583,7 +498,6 @@ export default () => {
                 height: 5,
                 borderRadius: 2.5,
               }}
-              scrollable
               variant="default"
               style={{backgroundColor: 'yellow'}}
               dense={false}>
@@ -670,7 +584,6 @@ export default () => {
                 height: 5,
                 borderRadius: 2.5,
               }}
-              scrollable
               variant="default"
               style={{
                 backgroundColor:
@@ -748,188 +661,6 @@ export default () => {
             </View>
           </TestCase>
         </TestSuite>
-        {/* <TestSuite name="Tab的scrollable属性 设置Tab的scrollable 选项卡条是否可滚动  设置为false仍然可滚动  scrollable设置无效">
-          <TestCase itShould="scrollable" tags={['C_API']}>
-            <Tab
-              value={Math.ceil(index8 > -1 ? index8 : 0)}
-              onChange={e => setIndex8(e)}
-              indicatorStyle={{
-                backgroundColor: 'pink',
-                height: 5,
-                borderRadius: 2.5,
-              }}
-              scrollable={false}
-              // variant="default"
-              style={{
-                backgroundColor:
-                  index8 == 0 ? 'yellow' : index8 == 1 ? 'red' : 'blue',
-              }}
-              // dense={false}
-              >
-              <Tab.Item
-                containerStyle={active => ({
-                  width: 113,
-                  backgroundColor: active ? '#208990' : 'transparent',
-                })}
-                title="Recent"
-                titleStyle={{fontSize: 12}}
-                icon={{name: 'calendar', type: 'font-awesome', color: 'black'}}
-              />
-              <Tab.Item
-                title="Custom"
-                containerStyle={active => ({
-                  backgroundColor: active ? '#208990' : 'transparent',
-                  width: 115,
-                })}
-                titleStyle={{fontSize: 12}}
-                icon={{name: 'heart', type: 'font-awesome', color: 'black'}}
-              />
-              <Tab.Item
-                containerStyle={active => ({
-                  width: 118,
-                  backgroundColor: active ? '#208990' : 'transparent',
-                })}
-                title="Cart"
-                titleStyle={{fontSize: 12}}
-                icon={{
-                  name: 'shopping-cart',
-                  type: 'font-awesome',
-                  color: 'black',
-                }}
-              />
-            </Tab>
-          </TestCase>
-          <TestCase itShould="TabView" tags={['C_API']}>
-            <View style={{width: '100%', height: 200, overflow: 'hidden'}}>
-              <TabView
-                onSwipeStart={e => console.log(e)}
-                value={index8}
-                onChange={index => setIndex8(index)}
-                animationType="spring">
-                <TabView.Item style={{backgroundColor: 'red', width: '100%'}}>
-                  <ScrollView>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                  </ScrollView>
-                </TabView.Item>
-                <TabView.Item style={{backgroundColor: 'blue', width: '100%'}}>
-                  <Text h1>Favorite 1</Text>
-                </TabView.Item>
-                <TabView.Item style={{backgroundColor: 'green', width: '100%'}}>
-                  <Text h1>Cart 2${Math.random()}</Text>
-                </TabView.Item>
-              </TabView>
-            </View>
-          </TestCase>
-        </TestSuite> */}
-        {/* <TestSuite name="Tab的titleStyle属性 设置Tab的titleStyle 设置文字的样式 字体颜色 字体大小 字体加粗均无效 ">
-          <TestCase itShould="titleStyle" tags={['C_API']}>
-            <Tab
-              titleStyle={active => ({
-                fontSize: 100,
-                fontWeight: '400',
-                color: '#222222',
-              })}
-              value={Math.ceil(index9 > -1 ? index9 : 0)}
-              onChange={e => setIndex9(e)}
-              indicatorStyle={{
-                backgroundColor: 'pink',
-                height: 5,
-                borderRadius: 2.5,
-              }}
-              scrollable
-              variant="default"
-              style={{
-                backgroundColor:
-                  index9 == 0 ? 'yellow' : index9 == 1 ? 'red' : 'blue',
-              }}
-              dense={false}>
-              <Tab.Item
-                containerStyle={active => ({
-                  width: 113,
-                  backgroundColor: active ? '#208990' : 'transparent',
-                })}
-                title="Recent"
-                titleStyle={{fontSize: 12}}
-                icon={{name: 'calendar', type: 'font-awesome', color: 'black'}}
-              />
-              <Tab.Item
-                title="Custom"
-                containerStyle={active => ({
-                  backgroundColor: active ? '#208990' : 'transparent',
-                  width: 115,
-                })}
-                titleStyle={{fontSize: 12}}
-                icon={{name: 'heart', type: 'font-awesome', color: 'black'}}
-              />
-              <Tab.Item
-                containerStyle={active => ({
-                  width: 118,
-                  backgroundColor: active ? '#208990' : 'transparent',
-                })}
-                title="Cart"
-                titleStyle={{fontSize: 12}}
-                icon={{
-                  name: 'shopping-cart',
-                  type: 'font-awesome',
-                  color: 'black',
-                }}
-              />
-            </Tab>
-          </TestCase>
-          <TestCase itShould="TabView" tags={['C_API']}>
-            <View style={{width: '100%', height: 200, overflow: 'hidden'}}>
-              <TabView
-                onSwipeStart={e => console.log(e)}
-                value={index9}
-                onChange={index => setIndex9(index)}
-                animationType="spring">
-                <TabView.Item style={{backgroundColor: 'red', width: '100%'}}>
-                  <ScrollView>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                    <Text h1>Recent 0</Text>
-                  </ScrollView>
-                </TabView.Item>
-                <TabView.Item style={{backgroundColor: 'blue', width: '100%'}}>
-                  <Text h1>Favorite 1</Text>
-                </TabView.Item>
-                <TabView.Item style={{backgroundColor: 'green', width: '100%'}}>
-                  <Text h1>Cart 2${Math.random()}</Text>
-                </TabView.Item>
-              </TabView>
-            </View>
-          </TestCase>
-        </TestSuite> */}
         <TestSuite name="Tab的value属性 设置Tab的value 选项卡选中的值 ">
           <TestCase itShould="value" tags={['C_API']}>
             <Tab
@@ -941,7 +672,6 @@ export default () => {
                 height: 5,
                 borderRadius: 2.5,
               }}
-              scrollable
               variant="default"
               style={{
                 backgroundColor:
@@ -993,7 +723,6 @@ export default () => {
                 height: 5,
                 borderRadius: 2.5,
               }}
-              scrollable
               variant="primary"
               dense={false}>
               <Tab.Item
@@ -1039,7 +768,6 @@ export default () => {
                 height: 5,
                 borderRadius: 2.5,
               }}
-              scrollable
               variant="default"
               // style={{ backgroundColor: index == 0 ? 'yellow' : index == 1 ? 'red' : 'blue' }}
               dense={false}>
@@ -1078,9 +806,9 @@ export default () => {
           </TestCase>
         </TestSuite>
         <TestSuite name="Tab的style属性 接收React-native 的原生View组件的style ">
-          <TestCase itShould="设置React-native 的原生View组件的style 设置背景色为黄色" tags={['C_API']}>
+          <TestCase itShould="设置React-native 的原生View组件的style 设置背景色为黄色 圆角 居中" tags={['C_API']}>
             <Tab
-              style={{backgroundColor:'yellow'}}
+              style={{backgroundColor:'black',borderRadius:40,width:300,alignSelf:'center'}}
               titleStyle={{fontSize: 100, fontWeight: '500', color: '#222222'}}
               value={Math.ceil(index11 > -1 ? index11 : 0)}
               onChange={e => setIndex11(e)}
@@ -1089,12 +817,11 @@ export default () => {
                 height: 5,
                 borderRadius: 2.5,
               }}
-              scrollable
               variant="primary"
               dense={false}>
               <Tab.Item
                 containerStyle={active => ({
-                  width: 113,
+                  width: 100,
                   backgroundColor: active ? '#208990' : 'transparent',
                 })}
                 title="Recent"
@@ -1105,14 +832,14 @@ export default () => {
                 title="Custom"
                 containerStyle={active => ({
                   backgroundColor: active ? '#208990' : 'transparent',
-                  width: 115,
+                  width: 100,
                 })}
                 titleStyle={{fontSize: 12}}
                 icon={{name: 'heart', type: 'font-awesome', color: 'black'}}
               />
               <Tab.Item
                 containerStyle={active => ({
-                  width: 118,
+                  width: 100,
                   backgroundColor: active ? '#208990' : 'transparent',
                 })}
                 title="Cart"
@@ -1126,20 +853,21 @@ export default () => {
             </Tab>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Tab的testID属性 接收React-native 的原生View组件的testID ">
-          <TestCase itShould="设置React-native 的原生View组件的testID " tags={['C_API']}>
+        <TestSuite name="Tab的onResponderRelease属性 接收React-native 的原生View组件的onResponderRelease">
+          <TestCase itShould="设置React-native 的原生View组件的onResponderRelease" tags={['C_API']}>
             <Tab
               testID='Tab'
-              style={{backgroundColor:'yellow'}}
+              style={{backgroundColor:changeBg ? '#489303' : 'yellow'}}
               titleStyle={{fontSize: 100, fontWeight: '500', color: '#222222'}}
-              value={Math.ceil(index11 > -1 ? index11 : 0)}
-              onChange={e => setIndex11(e)}
               indicatorStyle={{
                 backgroundColor: 'pink',
                 height: 5,
                 borderRadius: 2.5,
               }}
-              scrollable
+              {...pan.panHandlers}
+              onResponderRelease={()=>{
+                  setChangeBg(!changeBg)
+              }}
               variant="primary"
               dense={false}>
               <Tab.Item
@@ -1176,59 +904,6 @@ export default () => {
             </Tab>
           </TestCase>
         </TestSuite>
-        {/* <TestSuite name="Tab.Item的active属性 设置Tab.Item的active 选项卡选中的值 设置active ture或false 均无效 ">
-          <TestCase itShould="active" tags={['C_API']}>
-            <Tab
-              titleStyle={{fontSize: 100, fontWeight: '500', color: '#222222'}}
-              value={Math.ceil(index13 > -1 ? index13 : 0)}
-              onChange={e => setIndex13(e)}
-              indicatorStyle={{
-                backgroundColor: 'pink',
-                height: 5,
-                borderRadius: 2.5,
-              }}
-              scrollable
-              variant="default"
-              style={{
-                backgroundColor:
-                  index13 == 0 ? 'yellow' : index13 == 1 ? 'red' : 'blue',
-              }}
-              dense={false}>
-              <Tab.Item
-                containerStyle={active => ({
-                  width: 113,
-                  backgroundColor: active ? '#208990' : 'transparent',
-                })}
-                title="Recent"
-                titleStyle={{fontSize: 12}}
-                icon={{name: 'calendar', type: 'font-awesome', color: 'black'}}
-              />
-              <Tab.Item
-                title="Custom"
-                containerStyle={active => ({
-                  backgroundColor: active ? '#208990' : 'transparent',
-                  width: 115,
-                })}
-                titleStyle={{fontSize: 12}}
-                icon={{name: 'heart', type: 'font-awesome', color: 'black'}}
-              />
-              <Tab.Item
-                active={false}
-                containerStyle={active => ({
-                  width: 118,
-                  backgroundColor: active ? 'green' : 'transparent',
-                })}
-                title="Cart"
-                titleStyle={{fontSize: 12}}
-                icon={{
-                  name: 'shopping-cart',
-                  type: 'font-awesome',
-                  color: 'black',
-                }}
-              />
-            </Tab>
-          </TestCase>
-        </TestSuite> */}
         <TestSuite name="Tab.Item的buttonStyle属性 设置Tab.Item的buttonStyle 设置选项卡样式 ">
           <TestCase itShould="buttonStyle" tags={['C_API']}>
             <Tab
@@ -1240,7 +915,6 @@ export default () => {
                 height: 5,
                 borderRadius: 2.5,
               }}
-              scrollable
               variant="default"
               style={{
                 backgroundColor:
@@ -1296,7 +970,6 @@ export default () => {
                 height: 5,
                 borderRadius: 2.5,
               }}
-              scrollable
               variant="default"
               style={{
                 backgroundColor:
@@ -1338,59 +1011,6 @@ export default () => {
             </Tab>
           </TestCase>
         </TestSuite>
-        {/* <TestSuite name="Tab.Item的dense属性 设置Tab.Item的dense 设置dense true或false均无效 ">
-          <TestCase itShould="dense" tags={['C_API']}>
-            <Tab
-              titleStyle={{fontSize: 100, fontWeight: '500', color: '#222222'}}
-              value={Math.ceil(index16 > -1 ? index16 : 0)}
-              onChange={e => setIndex16(e)}
-              indicatorStyle={{
-                backgroundColor: 'pink',
-                height: 5,
-                borderRadius: 2.5,
-              }}
-              scrollable
-              variant="default"
-              style={{
-                backgroundColor:
-                  index16 == 0 ? 'yellow' : index16 == 1 ? 'red' : 'blue',
-              }}
-              dense={true}>
-              <Tab.Item
-                containerStyle={active => ({
-                  width: 113,
-                  backgroundColor: 'gray',
-                })}
-                title="Recent"
-                titleStyle={{fontSize: 12}}
-                icon={{name: 'calendar', type: 'font-awesome', color: 'black'}}
-              />
-              <Tab.Item
-                title="Custom"
-                containerStyle={active => ({
-                  backgroundColor: 'white',
-                  width: 115,
-                })}
-                titleStyle={{fontSize: 12}}
-                icon={{name: 'heart', type: 'font-awesome', color: 'black'}}
-              />
-              <Tab.Item
-                active={false}
-                containerStyle={active => ({
-                  width: 118,
-                  backgroundColor: 'orange',
-                })}
-                title="Cart"
-                titleStyle={{fontSize: 12}}
-                icon={{
-                  name: 'shopping-cart',
-                  type: 'font-awesome',
-                  color: 'black',
-                }}
-              />
-            </Tab>
-          </TestCase>
-        </TestSuite> */}
         <TestSuite name="Tab.Item的iconContainerStyle属性 设置Tab.Item的iconContainerStyle 设置icon图标的容器样式 ">
           <TestCase itShould="iconContainerStyle" tags={['C_API']}>
             <Tab
@@ -1402,7 +1022,6 @@ export default () => {
                 height: 5,
                 borderRadius: 2.5,
               }}
-              scrollable
               variant="default"
               style={{
                 backgroundColor:
@@ -1470,7 +1089,6 @@ export default () => {
                 height: 5,
                 borderRadius: 2.5,
               }}
-              scrollable
               variant="default"
               style={{
                 backgroundColor:
@@ -1544,7 +1162,7 @@ export default () => {
           </TestCase>
         </TestSuite>
         <TestSuite name="Tab.Item的disable属性  接收Button组件的disable属性 ">
-          <TestCase itShould="设置Button组件的disable属性" tags={['C_API']}>
+          <TestCase itShould="设置Button组件的disable属性为true" tags={['C_API']}>
             <Tab
               titleStyle={{fontSize: 100, fontWeight: '500', color: '#222222'}}
               value={Math.ceil(index33 > -1 ? index33 : 0)}
@@ -1554,7 +1172,7 @@ export default () => {
                 height: 5,
                 borderRadius: 2.5,
               }}
-              scrollable
+
               variant="default"
               style={{
                 backgroundColor:
@@ -1629,6 +1247,91 @@ export default () => {
               />
             </Tab>
           </TestCase>
+          <TestCase itShould="设置Button组件的disable属性为false" tags={['C_API']}>
+            <Tab
+              titleStyle={{fontSize: 100, fontWeight: '500', color: '#222222'}}
+              value={Math.ceil(index37 > -1 ? index37 : 0)}
+              onChange={e => setIndex37(e)}
+              indicatorStyle={{
+                backgroundColor: 'pink',
+                height: 5,
+                borderRadius: 2.5,
+              }}
+
+              variant="default"
+              style={{
+                backgroundColor:
+                  index37 == 0 ? 'yellow' : index37 == 1 ? 'red' : 'blue',
+              }}
+              dense={true}>
+              <Tab.Item
+                disabled={false}
+                titleStyle={active => ({
+                  fontSize: 28,
+                  color: 'green',
+                })}
+                containerStyle={active => ({
+                  width: 113,
+                  backgroundColor: 'yellow',
+                })}
+                iconContainerStyle={active => ({
+                  backgroundColor: active ? 'blue' : 'gray',
+                  width: 100,
+                  height: 100,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                })}
+                title="Recent"
+                icon={{name: 'calendar', type: 'font-awesome', color: 'black'}}
+              />
+              <Tab.Item
+                title="Custom"
+                disabled={false}
+                iconContainerStyle={active => ({
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: active ? 'blue' : 'gray',
+                  width: 100,
+                  height: 100,
+                })}
+                containerStyle={active => ({
+                  backgroundColor: 'white',
+                  width: 115,
+                })}
+                titleStyle={active => ({
+                  fontSize: 28,
+                  color: 'green',
+                })}
+                icon={{name: 'heart', type: 'font-awesome', color: 'black'}}
+              />
+              <Tab.Item
+                disabled={false}
+                active={false}
+                iconContainerStyle={active => ({
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: active ? 'blue' : 'gray',
+                  width: 100,
+                  height: 100,
+                })}
+                containerStyle={active => ({
+                  width: 118,
+                  backgroundColor: 'orange',
+                })}
+                title="Cart"
+                titleStyle={active => ({
+                  fontSize: 28,
+                  color: 'green',
+                })}
+                icon={{
+                  name: 'shopping-cart',
+                  type: 'font-awesome',
+                  color: 'black',
+                }}
+              />
+            </Tab>
+          </TestCase>
         </TestSuite>
         <TestSuite name="Tab.Item的uppercase属性  接收Button组件的uppercase属性 ">
           <TestCase itShould="设置Button组件的uppercase属性" tags={['C_API']}>
@@ -1641,7 +1344,7 @@ export default () => {
                 height: 5,
                 borderRadius: 2.5,
               }}
-              scrollable
+
               variant="default"
               style={{
                 backgroundColor:
@@ -1718,116 +1421,6 @@ export default () => {
             </Tab>
           </TestCase>
         </TestSuite>
-        {/* <TestSuite name="Tab.Item的variant属性 设置Tab.Item的variant的枚举验证  设置primary和default均无效 ">
-          <TestCase itShould="primary" tags={['C_API']}>
-            <Tab
-              titleStyle={{fontSize: 100, fontWeight: '500', color: '#222222'}}
-              value={Math.ceil(index20 > -1 ? index20 : 0)}
-              onChange={e => setIndex20(e)}
-              indicatorStyle={{
-                backgroundColor: 'pink',
-                height: 5,
-                borderRadius: 2.5,
-              }}
-              scrollable
-              style={{
-                backgroundColor:
-                  index20 == 0 ? 'yellow' : index20 == 1 ? 'red' : 'blue',
-              }}
-              dense={false}>
-              <Tab.Item
-                variant="primary"
-                buttonStyle={{backgroundColor: 'pink'}}
-                containerStyle={active => ({
-                  width: 113,
-                  backgroundColor: active ? '#208990' : 'transparent',
-                })}
-                title="Recent"
-                titleStyle={{fontSize: 12}}
-                icon={{name: 'calendar', type: 'font-awesome', color: 'black'}}
-              />
-              <Tab.Item
-                variant="primary"
-                title="Custom"
-                containerStyle={active => ({
-                  backgroundColor: active ? '#208990' : 'transparent',
-                  width: 115,
-                })}
-                titleStyle={{fontSize: 12}}
-                icon={{name: 'heart', type: 'font-awesome', color: 'black'}}
-              />
-              <Tab.Item
-                variant="primary"
-                active={false}
-                containerStyle={active => ({
-                  width: 118,
-                  backgroundColor: active ? '#208990' : 'transparent',
-                })}
-                title="Cart"
-                titleStyle={{fontSize: 12}}
-                icon={{
-                  name: 'shopping-cart',
-                  type: 'font-awesome',
-                  color: 'black',
-                }}
-              />
-            </Tab>
-          </TestCase>
-          <TestCase itShould="default" tags={['C_API']}>
-            <Tab
-              titleStyle={{fontSize: 100, fontWeight: '500', color: '#222222'}}
-              value={Math.ceil(index21 > -1 ? index21 : 0)}
-              onChange={e => setIndex21(e)}
-              indicatorStyle={{
-                backgroundColor: 'pink',
-                height: 5,
-                borderRadius: 2.5,
-              }}
-              scrollable
-              style={{
-                backgroundColor:
-                  index21 == 0 ? 'yellow' : index21 == 1 ? 'red' : 'blue',
-              }}
-              dense={false}>
-              <Tab.Item
-                variant="default"
-                buttonStyle={{backgroundColor: 'pink'}}
-                containerStyle={active => ({
-                  width: 113,
-                  backgroundColor: active ? '#208990' : 'transparent',
-                })}
-                title="Recent"
-                titleStyle={{fontSize: 12}}
-                icon={{name: 'calendar', type: 'font-awesome', color: 'black'}}
-              />
-              <Tab.Item
-                variant="default"
-                title="Custom"
-                containerStyle={active => ({
-                  backgroundColor: active ? '#208990' : 'transparent',
-                  width: 115,
-                })}
-                titleStyle={{fontSize: 12}}
-                icon={{name: 'heart', type: 'font-awesome', color: 'black'}}
-              />
-              <Tab.Item
-                variant="default"
-                active={false}
-                containerStyle={active => ({
-                  width: 118,
-                  backgroundColor: active ? '#208990' : 'transparent',
-                })}
-                title="Cart"
-                titleStyle={{fontSize: 12}}
-                icon={{
-                  name: 'shopping-cart',
-                  type: 'font-awesome',
-                  color: 'black',
-                }}
-              />
-            </Tab>
-          </TestCase>
-        </TestSuite> */}
         <TestSuite name="TabView的animationConfig属性 设置animationConfig 配置动画时间和是否使用原生动画">
           <TestCase itShould="animationConfig" tags={['C_API']}>
             <Tab
@@ -1837,7 +1430,7 @@ export default () => {
                 backgroundColor: 'white',
                 height: 3,
               }}
-              scrollable
+
               variant="primary"
               containerStyle={{justifyContent: 'space-around'}}
               buttonStyle={{backgroundColor: 'pink'}}
@@ -1884,7 +1477,7 @@ export default () => {
                 }}
                 onSwipeStart={e => console.log(e)}
                 value={index22}
-                onChange={index22 => setIndex(index22)}
+                onChange={index22 => setIndex22(index22)}
                 animationType="timing">
                 <TabView.Item style={{backgroundColor: 'red', width: '100%'}}>
                   <ScrollView>
@@ -1926,7 +1519,7 @@ export default () => {
                 backgroundColor: 'white',
                 height: 3,
               }}
-              scrollable
+
               variant="primary"
               containerStyle={{justifyContent: 'space-around'}}
               buttonStyle={{backgroundColor: 'pink'}}
@@ -2056,7 +1649,7 @@ export default () => {
                 backgroundColor: 'white',
                 height: 3,
               }}
-              scrollable
+
               variant="primary"
               containerStyle={{justifyContent: 'space-around'}}
               buttonStyle={{backgroundColor: 'pink'}}
@@ -2146,7 +1739,7 @@ export default () => {
                 backgroundColor: 'white',
                 height: 3,
               }}
-              scrollable
+
               variant="primary"
               containerStyle={{justifyContent: 'space-around'}}
               buttonStyle={{backgroundColor: 'pink'}}
@@ -2237,7 +1830,7 @@ export default () => {
                 backgroundColor: 'white',
                 height: 3,
               }}
-              scrollable
+
               variant="primary"
               containerStyle={{justifyContent: 'space-around'}}
               buttonStyle={{backgroundColor: 'pink'}}
@@ -2329,7 +1922,7 @@ export default () => {
                 backgroundColor: 'white',
                 height: 3,
               }}
-              scrollable
+
               variant="primary"
               containerStyle={{justifyContent: 'space-around'}}
               buttonStyle={{backgroundColor: 'pink'}}
@@ -2378,7 +1971,7 @@ export default () => {
                 }}
                 onSwipeStart={e => console.log(e)}
                 value={index27}
-                onChange={index => setIndex(index27)}
+                onChange={index => setIndex27(index27)}
                 animationType="spring">
                 <TabView.Item style={{width: '100%'}}>
                   <ScrollView>
@@ -2420,7 +2013,7 @@ export default () => {
                 backgroundColor: 'white',
                 height: 3,
               }}
-              scrollable
+
               variant="primary"
               containerStyle={{justifyContent: 'space-around'}}
               buttonStyle={{backgroundColor: 'pink'}}
@@ -2512,7 +2105,7 @@ export default () => {
                 backgroundColor: 'white',
                 height: 3,
               }}
-              scrollable
+
               variant="primary"
               containerStyle={{justifyContent: 'space-around'}}
               buttonStyle={{backgroundColor: 'pink'}}
@@ -2607,7 +2200,7 @@ export default () => {
                 backgroundColor: 'white',
                 height: 3,
               }}
-              scrollable
+
               variant="primary"
               containerStyle={{justifyContent: 'space-around'}}
               buttonStyle={{backgroundColor: 'pink'}}
@@ -2689,7 +2282,7 @@ export default () => {
                 backgroundColor: 'white',
                 height: 3,
               }}
-              scrollable
+
               variant="primary"
               containerStyle={{justifyContent: 'space-around'}}
               buttonStyle={{backgroundColor: 'pink'}}
@@ -2784,7 +2377,7 @@ export default () => {
                 backgroundColor: 'white',
                 height: 3,
               }}
-              scrollable
+
               variant="primary"
               containerStyle={{justifyContent: 'space-around'}}
               buttonStyle={{backgroundColor: 'pink'}}
@@ -2888,7 +2481,7 @@ export default () => {
                 value={index35}
                 onChange={index => setIndex35(index)}
                 animationType="spring">
-                <TabView.Item  style={{width: '100%',backgroundColor:'red'}}>
+                <TabView.Item  style={{width: '100%',backgroundColor:'blue',borderRadius:20}}>
                   <ScrollView>
                     <Text h1>Recent 0</Text>
                     <Text h1>Recent 0</Text>
@@ -2909,20 +2502,21 @@ export default () => {
                     <Text h1>Recent 0</Text>
                   </ScrollView>
                 </TabView.Item>
-                <TabView.Item style={{width: '100%',backgroundColor:'green'}}>
+                <TabView.Item style={{width: '100%',backgroundColor:'blue',borderRadius:20}}>
                   <Text h1>Favorite 1</Text>
                 </TabView.Item>
-                <TabView.Item style={{width: '100%',backgroundColor:'black'}}>
+                <TabView.Item style={{width: '100%',backgroundColor:'blue',borderRadius:20}}>
                   <Text h1>Cart 2${Math.random()}</Text>
                 </TabView.Item>
               </TabView>
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="TabView.Item的testID属性  接收React-native 的原生View组件的testID ">
-          <TestCase itShould="设置原生View组件的testID" tags={['C_API']}>
-            <View style={{width: '100%', height: 200, overflow: 'hidden'}}>
+        <TestSuite name="TabView.Item的onLayout属性  接收React-native 的原生View组件的onLayout ">
+          <TestCase itShould="设置原生View组件的onLayout" tags={['C_API']}>
+            <View style={{width: dimensions.width, height: dimensions.height, overflow: 'hidden'}}>
               <TabView
+                
                 tabItemContainerStyle={{backgroundColor: 'yellow'}}
                 minSwipeSpeed={10}
                 containerStyle={{
@@ -2937,7 +2531,12 @@ export default () => {
                 value={index36}
                 onChange={index => setIndex36(index)}
                 animationType="spring">
-                <TabView.Item  testID='TabView.Item1' style={{width: '100%',backgroundColor:'red'}}>
+                <TabView.Item  onLayout={(event) => {
+                const { width, height } = event.nativeEvent.layout;
+                const layoutString = `width: ${width}, height: ${height}`;
+                setValue2(layoutString);
+                console.log('Layout:', layoutString);
+              }} testID='TabView.Item1' style={{width: '100%',backgroundColor:'red'}}>
                   <ScrollView>
                     <Text h1>Recent 0</Text>
                     <Text h1>Recent 0</Text>
@@ -2965,6 +2564,20 @@ export default () => {
                   <Text h1>Cart 2${Math.random()}</Text>
                 </TabView.Item>
               </TabView>
+            </View>
+
+            <View style={{ width: 200, marginLeft: 20, paddingBottom: 20, marginTop: 20 }}>
+              <Text style={{ color: 'black' }}>onLayout回调方法显示组件的宽高</Text>
+              <Text style={{ color: 'black' }}>
+                {value2}
+              </Text>
+              <Button onPress={()=>{
+                if (dimensions.height == 100 ) {
+                  setDimensions({ width: '100%', height: 200 })
+                }else{
+                  setDimensions({ width: '100%', height: 100 })
+                }       
+              }}>修改组件的size</Button>
             </View>
           </TestCase>
         </TestSuite>

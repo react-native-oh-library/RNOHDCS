@@ -238,8 +238,7 @@ const Dialogs: React.FunctionComponent<DialogComponentProps> = () => {
           </TestCase>
         </TestSuite>
       </ScrollView>
-      <Dialog isVisible={visible1} onBackdropPress={toggleDialog1}>
-        <ChildComponent img={imgSrc} text={'Dialog children'} />
+      <Dialog isVisible={visible1} children={<ChildComponent img={imgSrc} text={'Dialog children'} />} onBackdropPress={toggleDialog1}>
       </Dialog>
       <Dialog
         onLongPress={toggleDialog2}
@@ -329,7 +328,7 @@ const Dialogs: React.FunctionComponent<DialogComponentProps> = () => {
         <Dialog.Actions>
           <Dialog.Button
             style={{ backgroundColor: 'yellow' }}
-            size='lg'
+            size='sm'
             title="ACTION 1"
             onPress={() => console.log('Primary Action Clicked!')}
           />
@@ -415,7 +414,7 @@ const Dialogs: React.FunctionComponent<DialogComponentProps> = () => {
         />
         <Text>Dialog body text. Add relevant information here.</Text>
       </Dialog>
-      <Dialog fullScreen={true} isVisible={visible12} onBackdropPress={toggleDialog12}>
+      <Dialog fullScreen={true} overlayStyle={{width:'100%'}} isVisible={visible12} onBackdropPress={toggleDialog12}>
         <Dialog.Title
           titleStyle={{
             backgroundColor: 'yellow',
@@ -425,6 +424,7 @@ const Dialogs: React.FunctionComponent<DialogComponentProps> = () => {
           title="Dialog Title Title Title Title"
         />
         <Text>Dialog body text. Add relevant information here.</Text>
+        <Dialog.Button buttonStyle={{width:100,backgroundColor:'pink',alignSelf:'center',marginTop:20}} onPress={toggleDialog12}>关闭Dialog</Dialog.Button>
       </Dialog>
       <Dialog overlayStyle={{ backgroundColor: 'green', height: '50%' }} isVisible={visible13} onBackdropPress={toggleDialog13}>
         <Dialog.Title
