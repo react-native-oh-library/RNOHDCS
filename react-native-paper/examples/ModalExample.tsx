@@ -152,6 +152,19 @@ function ModalDemo() {
         style:{marginTop: 30},
         onPress:_showModal('Modal10'),
       }
+    },
+    {
+      key: ' Modal style:overlayAccessibilityLabel={"辅助功能测试"}',
+      value: {
+        visible :_getVisible('Modal10'),
+        onDismiss:_showModal('Modal10'),
+        contentContainerStyle:containerStyle,
+        overlayAccessibilityLabel: '辅助功能测试'
+      },
+      buttonValue:{
+        style:{marginTop: 30},
+        onPress:_showModal('Modal10'),
+      }
     }
   ]
 

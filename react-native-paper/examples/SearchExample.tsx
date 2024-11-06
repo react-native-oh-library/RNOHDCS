@@ -451,6 +451,24 @@ function SearchDemo() {
         theme :theme,
       },
     },
+    {
+      key: ' Searchbar style:theme={colors :{onSurface: "red"} }',
+      value: {
+        mode: 'bar' as 'bar' | 'view',
+        value: '',
+        placeholder: "Search",
+        theme: { colors: { onSurface: "red" } },
+      },
+    },
+    {
+      key: ' Searchbar style:theme={colors :{onSurface: "blue"} }',
+      value: {
+        mode: 'bar' as 'bar' | 'view',
+        value: '',
+        placeholder: "Search",
+        theme: { colors: { onSurface: "blue" } },
+      },
+    }
   ]
 
   //icon={{ source: 'arrow-left', direction: 'auto' }}
