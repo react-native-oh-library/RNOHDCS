@@ -10,12 +10,12 @@ export function BarExample() {
   const [staticFunc, setIsStaticFunc] = React.useState(false);
   const [btn, setIsBtn] = React.useState(true);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-  const e: any = {
+  const eRef = React.useRef<any>({
     barStyle: "light-content"
-  }
-  const e1: any = {
+  })
+  const e1Ref = React.useRef<any>({
     barStyle: "dark-content"
-  }
+  })
   return (
     <Tester>
 
@@ -62,58 +62,47 @@ export function BarExample() {
           setIsStaticFunc(false);
           setIsBtn(true)
         }} />
+        <TestCase itShould='popStackEntry' tags={['C_API']}>
+          <View style={{ marginBottom: 10 }}>
+            <Button title='第一步pushStackEntry1' onPress={() => {
+              StatusBar.pushStackEntry(e1Ref.current)
+            }} />
+          </View>
+          <View style={{ marginBottom: 10 }}>
+            <Button title='第二步pushStackEntry' onPress={() => {
+              StatusBar.pushStackEntry(eRef.current)
+            }} />
+          </View>
+          <Button title='第三步popStackEntry' onPress={() => {
+            StatusBar.popStackEntry(eRef.current)
+          }} />
+        </TestCase>
+        <TestCase itShould='replaceStackEntry' tags={['C_API']}>
+          <View style={{ marginBottom: 10 }}>
+            <Button title='第一步pushStackEntry1' onPress={() => {
+              StatusBar.pushStackEntry(e1Ref.current)
+            }} />
+          </View>
+          <View style={{ marginBottom: 10 }}>
+            <Button title='第二步pushStackEntry' onPress={() => {
+              StatusBar.pushStackEntry(eRef.current)
+            }} />
+          </View>
+          <Button title='第三步replaceStackEntry' onPress={() => {
+            StatusBar.replaceStackEntry(eRef.current, e1Ref.current);
+          }} />
+        </TestCase>
         <TestCase itShould='pushStackEntry' tags={['C_API']}>
           <Button title='pushStackEntry' onPress={() => {
-            StatusBar.pushStackEntry(e)
+            StatusBar.pushStackEntry(eRef.current)
           }} />
         </TestCase>
         <TestCase itShould='pushStackEntry1' tags={['C_API']}>
           <Button title='pushStackEntry1' onPress={() => {
-            StatusBar.pushStackEntry(e1)
+            StatusBar.pushStackEntry(e1Ref.current)
           }} />
         </TestCase>
-        <TestCase
-          itShould="popStackEntry"
-          tags={['C_API']}
-          initialState={false}
-          arrange={({ setState }) => {
-            return (
-              <Button title='popStackEntry' onPress={
-                () => {
-                  try {
-                    StatusBar.popStackEntry(e);
-                    setState(true)
-                  } catch (error) {
-                    setState(false)
-                  }
-                }} />
-            );
-          }}
-          assert={({ state, expect }) => {
-            expect(state).to.be.true;
-          }}
-        />
-        <TestCase
-          itShould="replaceStackEntry"
-          tags={['C_API']}
-          initialState={false}
-          arrange={({ setState }) => {
-            return (
-              <Button title='replaceStackEntry' onPress={
-                () => {
-                  try {
-                    StatusBar.replaceStackEntry(e, e1);
-                    setState(true)
-                  } catch (error) {
-                    setState(false)
-                  }
-                }} />
-            );
-          }}
-          assert={({ state, expect }) => {
-            expect(state).to.be.true;
-          }}
-        />
+        
       </TestSuite>}
     </Tester>
 
