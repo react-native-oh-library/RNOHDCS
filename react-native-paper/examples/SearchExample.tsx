@@ -443,15 +443,6 @@ function SearchDemo() {
       },
     },
     {
-      key: ' Searchbar style:theme={theme}',
-      value: {
-        mode:'bar' as 'bar' | 'view',
-        value:'',
-        placeholder:"Search",
-        theme :theme,
-      },
-    },
-    {
       key: ' Searchbar style:theme={colors :{onSurface: "red"} }',
       value: {
         mode: 'bar' as 'bar' | 'view',
@@ -468,7 +459,7 @@ function SearchDemo() {
         placeholder: "Search",
         theme: { colors: { onSurface: "blue" } },
       },
-    }
+    },
   ]
 
   //icon={{ source: 'arrow-left', direction: 'auto' }}
