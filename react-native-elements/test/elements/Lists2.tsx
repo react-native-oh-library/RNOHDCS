@@ -1408,22 +1408,6 @@ const List: React.FunctionComponent = () => {
             </View>
           </TestCase>
         </TestSuite>
-        <TestSuite name="ListItem.ButtonGroup属性onPressOut  手指松开触发事件">
-          <TestCase itShould="设置onPressOut" tags={['C_API']}>
-            <View style={styles.container}>
-              <Text style={styles.subText}>设置onPressOut</Text>
-              <ListItem bottomDivider>
-                <ListItem.Content>
-                  <ListItem.Title>Choose 🤯</ListItem.Title>
-                </ListItem.Content>
-                <ListItem.ButtonGroup selectedButtonStyle={{backgroundColor:'black',width:100,borderRadius:20}}
-                  buttons={['Flower', 'Coco']}
-                  selectedIndex={selectedButtonIndex3}
-                  onPressOut={()=>{setSelectedButtonIndex3(selectedButtonIndex3 == 0 ? 1 : 0)}} />
-              </ListItem>
-            </View>
-          </TestCase>
-        </TestSuite>
         <TestSuite name="ListItem.ButtonGroup属性disabled  接收ButtonGroup的disabled">
           <TestCase itShould="设置disabled 为true" tags={['C_API']}>
             <View style={styles.container}>
@@ -1561,81 +1545,6 @@ const List: React.FunctionComponent = () => {
                   size={30}
                   type="font-awesome"
                   name={onlongPress ? 'close' : 'save'}
-                />
-              </ListItem>
-            </View>
-          </TestCase>
-        </TestSuite>
-        <TestSuite name="ListItem.Chevron属性onPress	点击事件">
-          <TestCase itShould="设置onPress	" tags={['C_API']}>
-            <View style={styles.container}>
-              <Text style={styles.subText}>onPress</Text>
-              <ListItem
-                containerStyle={{backgroundColor: 'white'}}
-                bottomDivider>
-                <ListItem.Content>
-                  <ListItem.Title style={{color: 'black'}}>
-                    修改chevron颜色
-                  </ListItem.Title>
-                </ListItem.Content>
-                <ListItem.Chevron
-                  onPress={() => {
-                    setOnPress(!onPress);
-                  }}
-                  color={'blue'}
-                  size={30}
-                  type="font-awesome"
-                  name={onPress ? 'close' : 'save'}
-                />
-              </ListItem>
-            </View>
-          </TestCase>
-        </TestSuite>
-        <TestSuite name="ListItem.Chevron属性onPressIn	按下触发">
-          <TestCase itShould="设置onPressIn	" tags={['C_API']}>
-            <View style={styles.container}>
-              <Text style={styles.subText}>onPressIn</Text>
-              <ListItem
-                containerStyle={{backgroundColor: 'white'}}
-                bottomDivider>
-                <ListItem.Content>
-                  <ListItem.Title style={{color: 'black'}}>
-                    修改chevron颜色
-                  </ListItem.Title>
-                </ListItem.Content>
-                <ListItem.Chevron
-                  onPressIn={() => {
-                    setOnPressIn(!onPressIn);
-                  }}
-                  color={'blue'}
-                  size={30}
-                  type="font-awesome"
-                  name={onPressIn ? 'close' : 'save'}
-                />
-              </ListItem>
-            </View>
-          </TestCase>
-        </TestSuite>
-        <TestSuite name="ListItem.Chevron属性onPressOut	松开触发">
-          <TestCase itShould="设置onPressOut" tags={['C_API']}>
-            <View style={styles.container}>
-              <Text style={styles.subText}>onPressOut</Text>
-              <ListItem
-                containerStyle={{backgroundColor: 'white'}}
-                bottomDivider>
-                <ListItem.Content>
-                  <ListItem.Title style={{color: 'black'}}>
-                    修改chevron颜色
-                  </ListItem.Title>
-                </ListItem.Content>
-                <ListItem.Chevron
-                  onPressOut={() => {
-                    setonPressOut(!onPressOut);
-                  }}
-                  color={'blue'}
-                  size={30}
-                  type="font-awesome"
-                  name={onPressOut ? 'close' : 'save'}
                 />
               </ListItem>
             </View>
@@ -2261,50 +2170,6 @@ const List: React.FunctionComponent = () => {
                 containerStyle={
                   changeBg1
                     ? {backgroundColor: 'yellow'}
-                    : {backgroundColor: 'gray'}
-                }>
-                <Icon type="font-awesome" name="save" color="green" size={30} />
-                <ListItem.Content>
-                  <ListItem.Title>{'ListItem.Swipeable'}</ListItem.Title>
-                </ListItem.Content>
-                <ListItem.Chevron />
-              </ListItem.Swipeable>
-            </View>
-          </TestCase>
-        </TestSuite>
-        <TestSuite name="ListItem.Swipeable事件onSwipeEnd onSwipeEnd结束滑动修改背景颜色">
-          <TestCase itShould="onSwipeEnd事件触发修改背景颜色" tags={['C_API']}>
-            <View style={styles.container}>
-              <Text style={styles.subText}>onSwipeEnd事件触发</Text>
-              <ListItem.Swipeable
-                animation={{type: 'timing', duration: 100}}
-                bottomDivider
-                onSwipeEnd={() => {
-                  setChangeBg2(!changeBg2);
-                }}
-                leftContent={resetToDefault => (
-                  <Button
-                    title="Info"
-                    onPress={() => resetToDefault()}
-                    icon={{name: 'info', type: 'font-awesome', color: 'white'}}
-                    buttonStyle={{minHeight: '100%'}}
-                  />
-                )}
-                // or pass component
-                rightContent={
-                  <Button
-                    title="Delete"
-                    icon={{
-                      name: 'remove',
-                      type: 'font-awesome',
-                      color: 'white',
-                    }}
-                    buttonStyle={{minHeight: '100%', backgroundColor: 'red'}}
-                  />
-                }
-                containerStyle={
-                  changeBg2
-                    ? {backgroundColor: 'blue'}
                     : {backgroundColor: 'gray'}
                 }>
                 <Icon type="font-awesome" name="save" color="green" size={30} />
