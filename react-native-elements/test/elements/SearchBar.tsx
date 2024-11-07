@@ -548,7 +548,7 @@ const SearchBarTest: React.FunctionComponent<SearchBarComponentProps> = () => {
             />
           </TestCase>
         </TestSuite>
-        {/* <TestSuite name="SearchBar属性inputStyle 接收Input组件属性inputStyle">
+        <TestSuite name="SearchBar属性inputStyle 接收Input组件属性inputStyle">
           <TestCase itShould="设置SearchBar的inputStyle" tags={['C_API']}>
             <SearchBar
               showLoading={true}
@@ -598,7 +598,7 @@ const SearchBarTest: React.FunctionComponent<SearchBarComponentProps> = () => {
               onClear={() => { }}
             />
           </TestCase>
-        </TestSuite> */}
+        </TestSuite>
         <TestSuite name="SearchBar属性editable 接收Input组件属性editable">
           <TestCase itShould="设置ListItem.Input的editable" tags={['C_API']}>
             <SearchBar

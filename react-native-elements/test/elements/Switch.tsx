@@ -23,16 +23,18 @@ const Switchs: React.FunctionComponent<SwitchComponentProps> = () => {
   const [value2, setChangeValue2] = useState(false);
   const [value1, setValue1] = useState('');
   const [value3, setChangeValue3] = useState(false);
+  const [value4, setChangeValue4] = useState(false);
+  const [value5, setChangeValue5] = useState(false);
+  const [value6, setChangeValue6] = useState(false);
+  const [value7, setChangeValue7] = useState(false);
+  const [value8, setChangeValue8] = useState(false);
   const [changeBg,setChangeBg] = useState(false)
   const [dimensions, setDimensions] = useState({ width: 100, height: 50 });
-  // trackColor={{ 'false': 'black', 'true': 'green' }} thumbColor={'pink'} color='yellow' value={value} onValueChange={(value) => {
-  //     setChangeValue(value)
-  // }}
   const pan = panResponder()
   return (
     <Tester style={{ flex: 1, backgroundColor: '#000' }}>
       <ScrollView>
-      <TestSuite name="Swicth属性color 设置color">
+        <TestSuite name="Swicth属性color 设置color">
           <TestCase itShould="color" tags={['C_API']}>
             <Switch
               color='pink'
@@ -47,9 +49,9 @@ const Switchs: React.FunctionComponent<SwitchComponentProps> = () => {
         <TestSuite name="Swicth属性 设置style样式">
           <TestCase itShould="style" tags={['C_API']}>
             <Switch
-              value={value}
+              value={value4}
               onValueChange={value => {
-                setChangeValue(value);
+                setChangeValue4(value4);
               }}
               style={{ width: 60, alignSelf: 'center', margin: 40 }}
             />
@@ -59,9 +61,9 @@ const Switchs: React.FunctionComponent<SwitchComponentProps> = () => {
           <TestCase itShould="trackColor" tags={['C_API']}>
             <Switch
               trackColor={{ false: 'black', true: 'green' }}
-              value={value}
+              value={value5}
               onValueChange={value => {
-                setChangeValue(value);
+                setChangeValue5(value5);
               }}
               style={{ width: 60, alignSelf: 'center', margin: 40 }}
             />
@@ -72,9 +74,9 @@ const Switchs: React.FunctionComponent<SwitchComponentProps> = () => {
             <Switch
               trackColor={{ false: 'black', true: 'green' }}
               thumbColor={'pink'}
-              value={value}
+              value={value6}
               onValueChange={value => {
-                setChangeValue(value);
+                setChangeValue6(value6);
               }}
               style={{ width: 60, alignSelf: 'center', margin: 40 }}
             />
@@ -96,9 +98,9 @@ const Switchs: React.FunctionComponent<SwitchComponentProps> = () => {
             <Switch
               trackColor={{ false: 'black', true: 'green' }}
               thumbColor={'red'}
-              value={value}
+              value={value7}
               onValueChange={value => {
-                setChangeValue(value);
+                setChangeValue7(value7);
               }}
               style={{ width: 60, alignSelf: 'center', margin: 40 }}
             />

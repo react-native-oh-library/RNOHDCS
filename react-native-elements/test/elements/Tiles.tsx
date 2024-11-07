@@ -135,7 +135,7 @@ const Tiles: React.FunctionComponent<TilesComponentProps> = () => {
               title="When I admire the wonders of a sunset or the beauty of the moon, my soul expands in the worship of the creator."
               titleStyle={{fontSize: 15}}
               featured
-              caption={<Text>Mahatma Gandhi</Text>}
+              caption={'Mahatma Gandhi'}
               activeOpacity={0.8}
               width={310}
               onPress={() => {}}

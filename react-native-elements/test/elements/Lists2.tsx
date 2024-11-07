@@ -2418,7 +2418,7 @@ const List: React.FunctionComponent = () => {
                   borderWidth: 1,
                 }}
                 containerStyle={{backgroundColor: 'pink'}}
-                rightWidth={100}>
+                >
                 <Icon type="font-awesome" name="save" color="green" size={30} />
                 <ListItem.Content>
                   <ListItem.Title>{'ListItem.Swipeable'}</ListItem.Title>
@@ -2454,7 +2454,7 @@ const List: React.FunctionComponent = () => {
                   borderWidth: 1,
                 }}
                 containerStyle={{backgroundColor: 'pink'}}
-                rightWidth={180}>
+              >
                 <Icon type="font-awesome" name="save" color="green" size={30} />
                 <ListItem.Content>
                   <ListItem.Title>{'ListItem.Swipeable'}</ListItem.Title>

@@ -122,7 +122,7 @@ class ButtonComponent extends React.Component<{}, {}> {
         icon={{
           name: 'home',
           type: 'font-awesome',
-          color: 'white',
+          color: 'blue',
         }}
         color={'pink'}
       />
@@ -176,7 +176,7 @@ const SocialIcons: React.FunctionComponent<SocialIconsComponentProps> = () => {
           <TestCase itShould="activityIndicatorStyle">
             <SocialIcon
               loading={true}
-              activityIndicatorStyle={{width: 80,height:80,backgroundColor:'green'}}
+              activityIndicatorStyle={{width:40,height:40,backgroundColor:'green'}}
               style={{alignSelf: 'center'}}
               type={'codepen'}
               iconType={'font-awesome'}
