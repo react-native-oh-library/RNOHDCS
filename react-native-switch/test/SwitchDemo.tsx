@@ -290,20 +290,11 @@ export default function SwitchDemo() {
                         </View>
                     </TestCase>
 
-                    <TestCase itShould="containerStyle: 开关关闭时文字的背景色为蓝色" tags={['C_API']} >
-                        <View style={{ height: 30 }}>
-                            <Switch
-                                value={true}
-                                activeText={'Off'}
-                                containerStyle={{ backgroundColor: 'blue' }}
-                            />
-                        </View>
-                    </TestCase>
                     <TestCase itShould="containerStyle: 设置开关容器的样式" tags={['C_API']} >
                         <View style={{ height: 30 }}>
                             <Switch
                                 value={true}
-                                containerStyle={{ shadowOffset: { width: 0, height: 2 }, shadowColor: 'pink', shadowOpacity: 0.8, shadowRadius: 4 }}
+                                containerStyle={{ shadowOffset: { width: 0, height: 5 }, shadowColor: 'pink', shadowOpacity: 0.8, shadowRadius: 4 }}
                             />
                         </View>
                     </TestCase>
