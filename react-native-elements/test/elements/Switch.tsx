@@ -51,7 +51,7 @@ const Switchs: React.FunctionComponent<SwitchComponentProps> = () => {
             <Switch
               value={value4}
               onValueChange={value => {
-                setChangeValue4(value4);
+                setChangeValue4(value);
               }}
               style={{ width: 60, alignSelf: 'center', margin: 40 }}
             />
@@ -63,7 +63,7 @@ const Switchs: React.FunctionComponent<SwitchComponentProps> = () => {
               trackColor={{ false: 'black', true: 'green' }}
               value={value5}
               onValueChange={value => {
-                setChangeValue5(value5);
+                setChangeValue5(value);
               }}
               style={{ width: 60, alignSelf: 'center', margin: 40 }}
             />
@@ -76,7 +76,7 @@ const Switchs: React.FunctionComponent<SwitchComponentProps> = () => {
               thumbColor={'pink'}
               value={value6}
               onValueChange={value => {
-                setChangeValue6(value6);
+                setChangeValue6(value);
               }}
               style={{ width: 60, alignSelf: 'center', margin: 40 }}
             />
@@ -100,10 +100,14 @@ const Switchs: React.FunctionComponent<SwitchComponentProps> = () => {
               thumbColor={'red'}
               value={value7}
               onValueChange={value => {
-                setChangeValue7(value7);
+                setChangeValue7(value);
               }}
               style={{ width: 60, alignSelf: 'center', margin: 40 }}
             />
+
+            <View>
+              <Text>{`回调值：${value7}`}</Text>
+            </View>
           </TestCase>
         </TestSuite>
         <TestSuite name="Swicth属性value 接收React-native 原生Switch组件的value属性  true为打开 false则为关闭 ">
