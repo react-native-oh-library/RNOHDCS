@@ -885,7 +885,7 @@ export default () => {
             </View>
           </TestCase>
         </TestSuite>
-        {/* <TestSuite name="Input属性shake 设置无效">
+        <TestSuite name="Input属性shake 设置无效">
           <TestCase itShould="设置shake" tags={['C_API']}>
             <View style={styles.container}>
               <Text style={styles.subText}>shake</Text>
@@ -920,7 +920,7 @@ export default () => {
               />
             </View>
           </TestCase>
-        </TestSuite> */}
+        </TestSuite>
         <TestSuite name="Input属性editable  接收React-Native原生Input组件的editable">
           <TestCase itShould="接收React-Native原生Input组件的editable" tags={['C_API']}>
             <View style={styles.container}>

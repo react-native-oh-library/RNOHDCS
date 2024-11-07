@@ -1,11 +1,5 @@
-import React, {useState,useMemo,useCallback} from 'react';
-import {Switch as S, View, ScrollView,    PanResponder,
-  Platform,
-  ViewStyle,
-  StyleProp,
-  GestureResponderEvent,
-  PanResponderGestureState,
-  LayoutChangeEvent,} from 'react-native';
+import React, {useState} from 'react';
+import {Switch as S, View, ScrollView} from 'react-native';
 import {CheckBox, Icon, Switch, Text, Button} from '@rneui/themed';
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
 import  {safeStringify} from './log'
@@ -47,22 +41,6 @@ const CheckboxComponent: React.FunctionComponent<
   const [value1, setValue1] = useState('')
   const [changeBg,setChangeBg] = useState(false)
   const [dimensions, setDimensions] = useState({ width: 300, height: 50 });
-
-  const handlePanResponderEnd = useCallback((e, gestureState) => {
-    console.log('Pan responder ended');
-  }, []);
-
-  const panResponder = useMemo(
-    () =>
-      PanResponder.create({
-        onStartShouldSetPanResponder: (e, gestureState) => true,
-        onMoveShouldSetPanResponder: (e, gestureState) => true,
-        
-        onPanResponderRelease: handlePanResponderEnd,
-        onPanResponderTerminate: handlePanResponderEnd,
-      }),
-    [ handlePanResponderEnd]
-  );
   return (
     <Tester>
       <ScrollView>

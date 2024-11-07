@@ -155,11 +155,8 @@ export default function HeaderComponent(): JSX.Element{
                   backgroundColor: 'pink',
                   borderRadius: 5,
                   height:50,
-                  alignContent:'center',
-                  justifyContent:'center',
-               
-                  
-                  
+                  // alignContent:'center',
+                  // justifyContent:'center',
                 }}
                 
                 centerComponent={{
@@ -179,7 +176,7 @@ export default function HeaderComponent(): JSX.Element{
             <HeaderRNE
               containerStyle={{
                 width: '100%',
-                height: 400,
+                height:200,
                 backgroundColor: 'black',
               }}
               centerComponent={{
@@ -193,11 +190,9 @@ export default function HeaderComponent(): JSX.Element{
               centerContainerStyle={{
                 backgroundColor: 'pink',
                 borderRadius: 5,
-                height: 40,
+                height:50,
                 alignContent:'center',
                 justifyContent:'center',
-    
-
               }}
             />
           </TestCase>
@@ -419,12 +414,12 @@ export default function HeaderComponent(): JSX.Element{
                 backgroundColor: 'yellow',
               }}
               leftComponent={{
-                 
+        
                 icon: 'menu',
                 color: 'yellow',
                 text: 'left',
                 type: 'font-awesome',
-                style: {color: 'yellow', alignSelf: 'center',width:200,textAlign:'center'},
+                style: {color: 'yellow', alignSelf: 'center',width:200},
               }}
               leftContainerStyle={{
                 backgroundColor: 'pink',
@@ -447,7 +442,7 @@ export default function HeaderComponent(): JSX.Element{
                 color: 'yellow',
                 text:'center',
                 type: 'font-awesome',
-                style: {color: 'yellow', alignSelf: 'center',width:200,textAlign:'center'},
+                style: {color: 'yellow', alignSelf: 'center',width:200},
 
               }}
               centerContainerStyle={{
@@ -471,7 +466,7 @@ export default function HeaderComponent(): JSX.Element{
                 color: 'yellow',
                 text: 'right',
                 type: 'font-awesome',
-                style: {color: 'yellow', alignSelf: 'center',width:200,textAlign:'center'},
+                style: {color: 'yellow', alignSelf: 'center',width:200},
               }}
               rightContainerStyle={{
                 backgroundColor: 'pink',

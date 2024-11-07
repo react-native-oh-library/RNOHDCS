@@ -710,6 +710,9 @@ export default () => {
                 }}
               />
             </Tab>
+            <View style={{width:'100%',height:40,marginTop:20,marginBottom:20}}>
+              <Text style={{color:'black'}}>value值：{index10}</Text>
+            </View>
           </TestCase>
         </TestSuite>
         <TestSuite name="Tab的variant属性 设置Tab的variant枚举值 ">
@@ -853,8 +856,8 @@ export default () => {
             </Tab>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Tab的onResponderRelease属性 接收React-native 的原生View组件的onResponderRelease">
-          <TestCase itShould="设置React-native 的原生View组件的onResponderRelease" tags={['C_API']}>
+        <TestSuite name="Tab的onResponderMove属性 接收React-native 的原生View组件的onResponderMove">
+          <TestCase itShould="设置React-native 的原生View组件的onResponderMove" tags={['C_API']}>
             <Tab
               testID='Tab'
               style={{backgroundColor:changeBg ? '#489303' : 'yellow'}}
@@ -865,8 +868,9 @@ export default () => {
                 borderRadius: 2.5,
               }}
               {...pan.panHandlers}
-              onResponderRelease={()=>{
-                  setChangeBg(!changeBg)
+              onResponderMove={()=>{
+                console.log('1111111111111')
+                    setChangeBg(!changeBg)
               }}
               variant="primary"
               dense={false}>

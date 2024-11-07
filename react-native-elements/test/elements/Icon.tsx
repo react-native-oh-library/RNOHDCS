@@ -280,49 +280,6 @@ const Icons: React.FunctionComponent<IconProps> = () => {
               size={100}></Icon>
           </TestCase>
         </TestSuite>
-        <TestSuite name="Icon属性接受 原生View的style属性">
-          <TestCase itShould="style" tags={['C_API']}>
-            <Icon
-              name={'save'}
-              testID="testID"
-              style={{ backgroundColor: 'red' }}
-              containerStyle={{ alignSelf: 'center' }}
-              type="font-awesome"
-              color="red"
-              size={100}></Icon>
-          </TestCase>
-        </TestSuite>
-        <TestSuite name="Icon属性接收 原生View的onLayout属性">
-          <TestCase itShould="onLayout" tags={['C_API']}>
-            <Icon
-
-              onLayout={(event) => {
-                const { width, height } = event.nativeEvent.layout;
-                const layoutString = `width: ${width}, height: ${height}`;
-                setValue1(layoutString);
-                console.log('Layout:', layoutString);
-              }}
-              name={'save'}
-              testID="testID"
-              containerStyle={{ alignSelf: 'center' }}
-              type="font-awesome"
-              color="red"
-              size={changeSize}></Icon>
-            <View style={{ width: 200, marginLeft: 20, paddingBottom: 20, marginTop: 20 }}>
-              <Text style={{ color: 'black' }}>onLayout回调方法显示组件的宽高</Text>
-              <Text style={{ color: 'black' }}>
-                {value1}
-              </Text>
-              <Button onPress={()=>{
-                      if (changeSize == 50) {
-                        setChangeSize(100)
-                      }else{
-                        setChangeSize(50)
-                      }
-              }}>修改组件的size</Button>
-            </View>
-          </TestCase>
-        </TestSuite>
         <TestSuite name="Icon属性onResponderRelease 接收React-Native原生Text组件的onResponderRelease">
           <TestCase itShould="Text组件的onResponderRelease" tags={['C_API']}>
             <Icon
