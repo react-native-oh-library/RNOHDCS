@@ -78,7 +78,7 @@ class VoiceTest extends Component<Props, State> {
   onSpeechError = (e: SpeechErrorEvent) => {
     console.log('onSpeechError: ', e);
     this.setState({
-      error: JSON.stringify(e.error),
+      error: JSON.stringify(e),
     });
   };
 
@@ -107,7 +107,8 @@ class VoiceTest extends Component<Props, State> {
     });
 
     try {
-      await Voice.start('zh-CN').then((res)=>console.log(res));
+      await Voice.start('zh-CN').then((e)=>{console.log({'start-succes':e})}).catch((e)=>{console.error('start-err:'+ e);
+      })
     } catch (e) {
       console.error(e);
     }
@@ -115,7 +116,9 @@ class VoiceTest extends Component<Props, State> {
 
   _stopRecognizing = async () => {
     try {
-      await Voice.stop().then((res)=>console.log(res));
+      
+      await Voice.stop().then((e)=>{console.log({'stop-succes':e})}).catch((e)=>{console.error('stop-err:'+ e);
+    })
     } catch (e) {
       console.error(e);
     }
@@ -124,7 +127,8 @@ class VoiceTest extends Component<Props, State> {
   _cancelRecognizing = async (setCancelState: any) => {
     try {
       setCancelState(true);
-      await Voice.cancel().then((res)=>console.log(res));
+      await Voice.cancel().then((e)=>{console.log({'cancel-succes':e})}).catch((e)=>{console.error('cancel-err:'+ e);
+    })
     } catch (e) {
       console.error(e);
     }
@@ -133,8 +137,8 @@ class VoiceTest extends Component<Props, State> {
   _destroyRecognizer = async (setDestroyState: any) => {
     try {
       setDestroyState(true);
-      await Voice.destroy().then((res)=>(console.log(res)));
-      Voice.removeAllListeners()
+       Voice.destroy().then((e)=>{console.log({'destroy-succes':e})}).catch((e)=>{console.error('destroy-err:'+ e);
+    })
     } catch (e) {
       console.error(e);
     }
@@ -154,7 +158,8 @@ class VoiceTest extends Component<Props, State> {
         this.setState({
           isAvailable: available ? 1 : 0,
         });
-      });
+      }).catch((e)=>{console.error('isAvailable-err:'+ e);
+    })
     } catch (e) {
       console.error(e);
       this.setState({
@@ -171,7 +176,8 @@ class VoiceTest extends Component<Props, State> {
           isRecognizing: isRecognizing ? 1 : 0,
         });
         console.log('isRecognizing:' + isRecognizing);
-      });
+      }).catch((e)=>{console.error('isRecognizing-err:'+ e);
+    })
     } catch (e) {
       console.error(e);
       this.setState({
@@ -287,7 +293,7 @@ class VoiceTest extends Component<Props, State> {
             }}></TestCase>
 
           <TestCase
-            itShould="销毁实例 Voice.destroy()后调用Voice.removeAllListeners"
+            itShould="销毁实例 Voice.destroy()"
             tags={['C_API']}
             initialState={undefined}
             arrange={({setState}: any) => (
