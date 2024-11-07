@@ -155,13 +155,23 @@ function ToggleButtonDemo() {
       }
     },
     {
-      key: ' ToggleButton style:theme ={ colors: { primary:"green"} }',
+      key: ' ToggleButton style:theme ={ colors: { onSecondaryContainer:"green"}} (源码会对颜色进行透明度解析，导致颜色变淡属于正常显现)',
       value: {
         icon: "bluetooth",
         value: "bluetooth",
         status: _getStatus("ToggleButton9") as 'checked' | 'unchecked',
         onPress: _showStatus("ToggleButton9"),
-        theme: { colors: { primary: 'green' } }
+        theme: { colors: { onSecondaryContainer: 'green' } }
+      }
+    },
+    {
+      key: ' ToggleButton style:theme ={ colors: { onSecondaryContainer:"red"}} (源码会对颜色进行透明度解析，导致颜色变淡属于正常显现)',
+      value: {
+        icon: "bluetooth",
+        value: "bluetooth",
+        status: _getStatus("ToggleButton9") as 'checked' | 'unchecked',
+        onPress: _showStatus("ToggleButton9"),
+        theme: { colors: { onSecondaryContainer: 'red' } }
       }
     },
     {
@@ -232,7 +242,7 @@ function ToggleButtonDemo() {
                 <ToggleButton {...item.value} />
               </TestCase>
             );
-          })},
+          })}
           {ToggleButtonGroupProps.map((item) => {
             return (
               <TestCase
@@ -263,7 +273,7 @@ function ToggleButtonDemo() {
                 }}
               ></TestCase>
             );
-          })},
+          })}
 
           {ToggleButtonGroupProps.map((item) => {
             return (
@@ -286,7 +296,7 @@ function ToggleButtonDemo() {
                 </ToggleButton.Group>
               </TestCase>
             );
-          })},
+          })}
 
           {ToggleButtonGroupProps.map((item) => {
             return (
@@ -310,7 +320,7 @@ function ToggleButtonDemo() {
                   </>} />
               </TestCase>
             );
-          })},
+          })}
 
           {ToggleButtonRowGroupProps.map((item) => {
             return (
@@ -342,7 +352,7 @@ function ToggleButtonDemo() {
                 }}
               ></TestCase>
             );
-          })},
+          })}
 
           {ToggleButtonRowGroupProps.map((item) => {
             return (
@@ -364,7 +374,7 @@ function ToggleButtonDemo() {
                 </ToggleButton.Row>
               </TestCase>
             );
-          })},
+          })}
 
           {ToggleButtonRowGroupProps.map((item) => {
             return (
@@ -386,7 +396,7 @@ function ToggleButtonDemo() {
                   </>} />
               </TestCase>
             );
-          })},
+          })}
           {ToggleButtonRowGroupProps.map((item) => {
             return (
               <TestCase itShould={'ToggleButton.Row style={{ marginRight: 100 }}'} key={'ToggleButton.Row style={{ marginRight: 100 }}'}>
@@ -410,7 +420,7 @@ function ToggleButtonDemo() {
                 </ToggleButton.Row>
               </TestCase>
             );
-          })},
+          })}
         </TestSuite>
       </ScrollView>
     </Tester>
