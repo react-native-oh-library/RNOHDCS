@@ -31,6 +31,26 @@ const App = () => {
     }
   };
 
+  const handleCheckIsWXAppInstalled = async () => {
+    try {
+      const res = await WeChat.isWXAppInstalled();
+      Alert.alert(JSON.stringify(res));
+    } catch (error) {
+      console.log('%c  error:', 'color: #0e93e0;background: #aaefe5;', error);
+    }
+  };
+
+  const handleLaunchMiniProgram = async () => {
+    try {
+      await WeChat.launchMiniProgram({
+        userName: "gh_bd3176843a63",
+        miniProgramType: 2
+      });
+    } catch (error) {
+      console.log('%c  error:', 'color: #0e93e0;background: #aaefe5;', error);
+    }
+  };
+
   const handleSendAuthRequest = async () => {
     try {
       const res = await WeChat.sendAuthRequest('snsapi_userinfo', 'none');
@@ -42,7 +62,7 @@ const App = () => {
 
   const handleAuthByScanRequest = async () => {
     try {
-      const res = await WeChat.authByScan(APP_ID, APP_SECRET, qrcode => {
+      const res = await WeChat.authByScan(APP_ID, APP_SECRET, (qrcode: any) => {
         // 拿到 qrcode 用 Image 去渲染
         setQrcode(qrcode);
       });
@@ -98,6 +118,23 @@ const App = () => {
     );
   };
 
+  const handlePay = async () => {
+    try {
+      const res = await WeChat.pay({
+        partnerId: '2480306091',
+        prepayId: 'wx26161523845794ecced251acf2b6860000',
+        nonceStr: 'vmall_240926161523_993_2774',
+        timeStamp: '1727338524',
+        package: 'Sign=WXPay',
+        sign: 'rAqsrx5yLfRNBGvlHYuLhUsNK0OPeOLQ5xlvhxFo9guPU4HeNtzRdPaGAXAzXvn7V5chVe8sj3BfvDgwXlCKctCcFIllOgheyZbZ7btFC',
+        extData: '',
+      });
+      console.log(res);
+    } catch (error) {
+      console.log('%c  error:', 'color: #0e93e0;background: #aaefe5;', error);
+    }
+  };
+
   return (
     <Tester style={{ flex: 1 }}>
       <ScrollView>
@@ -106,9 +143,19 @@ const App = () => {
             <Button title="registerApp" onPress={handleRegisterApp} />
           </TestCase>
         </TestSuite>
+        <TestSuite name="微信是否安装">
+          <TestCase itShould="Click the button to check whether WeChat is installed">
+            <Button title="isWXAppInstalled" onPress={handleCheckIsWXAppInstalled} />
+          </TestCase>
+        </TestSuite>
         <TestSuite name="打开微信">
           <TestCase itShould="Click the button to launch the WeChat application">
             <Button title="openWXApp" onPress={handleOpenWXApp} />
+          </TestCase>
+        </TestSuite>
+        <TestSuite name="打开小程序">
+          <TestCase itShould="Click the button to open the mini program">
+            <Button title="launchMiniProgram" onPress={handleLaunchMiniProgram} />
           </TestCase>
         </TestSuite>
         <TestSuite name="授权登录">
@@ -154,6 +201,11 @@ Click the button to select a local picture, then pull up the WeChat chat list an
             <Button title="shareLocalImage" onPress={handleShareLocalImage} />
           </TestCase>
         </TestSuite>
+        <TestSuite name="支付">
+          <TestCase itShould="Click the button to launch WeChat payment">
+            <Button title="pay" onPress={handlePay} />
+          </TestCase>
+        </TestSuite>
         <View style={{ height: 150 }} />
       </ScrollView>
     </Tester>
@@ -162,3 +214,20 @@ Click the button to select a local picture, then pull up the WeChat chat list an
 
 export default App;
 
+const styles = StyleSheet.create({
+  buttonContainer: {
+    width: 80,
+    height: 80,
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  text: {
+    height: 20,
+    width: 200,
+    fontSize: 14,
+  },
+});
