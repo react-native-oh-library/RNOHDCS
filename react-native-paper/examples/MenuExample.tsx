@@ -86,8 +86,9 @@ function MenuDemo() {
     {
       key: ' Menu style:overlayAccessibilityLabel = {"overlay Accessibility Label"}("该属性用于无障碍阅读")',
       value: {
-        visible :false,
-        anchor:<Button mode="outlined">Menu with icons</Button>,
+        visible :_getVisible('menu56'),
+         onDismiss:_toggleMenu('menu56'),
+        anchor:<Button mode="outlined" onPress={_toggleMenu('menu56')}>default Menu</Button>,
         overlayAccessibilityLabel:'overlay Accessibility Label'
       }
     },
