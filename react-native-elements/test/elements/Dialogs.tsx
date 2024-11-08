@@ -293,7 +293,7 @@ const Dialogs: React.FunctionComponent<DialogComponentProps> = () => {
       <Dialog isVisible={visible6} onBackdropPress={toggleDialog6}>
         <Dialog.Title title="Dialog Title" />
         <Text>Dialog body text. Add relevant information here.</Text>
-        <Dialog.Actions>
+        <Dialog.Actions children={<>
           <Dialog.Button
             title="ACTION 1"
             style={{ backgroundColor: 'black', width: 100 }}
@@ -304,7 +304,9 @@ const Dialogs: React.FunctionComponent<DialogComponentProps> = () => {
             title="ACTION 2"
             onPress={() => console.log('Secondary Action Clicked!')}
           />
-        </Dialog.Actions>
+        </>} />
+          
+        {/* </Dialog.Actions> */}
       </Dialog>
       <Dialog isVisible={visible14} onBackdropPress={toggleDialog14}>
         <Dialog.Title title="Dialog Title" />

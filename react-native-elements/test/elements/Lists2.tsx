@@ -480,13 +480,8 @@ const List: React.FunctionComponent = () => {
             <View style={styles.container}>
               <Text style={styles.subText}>在内部添加内容</Text>
               <ListItem
-                containerStyle={{
-                  backgroundColor: 'white',
-                  width: '80%',
-                  alignSelf: 'center',
-                }}
-                bottomDivider>
-                <Avatar
+               children={<>
+                  <Avatar
                   rounded
                   source={{
                     uri: 'https://randomuser.me/api/portraits/men/36.jpg',
@@ -500,7 +495,14 @@ const List: React.FunctionComponent = () => {
                     President
                   </ListItem.Subtitle>
                 </ListItem.Content>
-              </ListItem>
+               </>}
+                containerStyle={{
+                  backgroundColor: 'white',
+                  width: '80%',
+                  alignSelf: 'center',
+                }}
+                bottomDivider />
+              
             </View>
           </TestCase>
         </TestSuite>
