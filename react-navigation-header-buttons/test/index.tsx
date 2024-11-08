@@ -35,7 +35,7 @@ import {
   HeaderButtons_HeaderButton_RenderButton,
   HeaderButtons_HeaderButton_Style,
   HeaderButtons_HeaderButton_OnPress,
-} from './testers';
+} from './tester';
 const stackType = 'native';
 const Stack = createNativeStackNavigator();
 
