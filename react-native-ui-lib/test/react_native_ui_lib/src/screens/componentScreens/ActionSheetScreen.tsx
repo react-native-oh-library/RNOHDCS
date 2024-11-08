@@ -6,8 +6,7 @@ import {TestCase, TestSuite} from '@rnoh/testerino';
 
 const useCases = [
   {label: 'Default (Android/iOS)', useNativeIOS: false, icons: false},
-  {label: 'Default with icons', useNativeIOS: false, icons: true},
-  {label: 'Native IOS', useNativeIOS: true},
+  {label: 'Default with icons', useNativeIOS: false, icons: true}
 ];
 const collectionsIcon = require('../../assets/icons/collections.png');
 const starIcon = require('../../assets/icons/star.png');

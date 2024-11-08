@@ -49,10 +49,11 @@ class ToastsScreen extends Component {
 
   toggleVisibility = () => {
     // Im using this for storing toast visible since setState is async and takes time to response
-    this.showToast = !this.showToast;
-    this.setState({
-      visible: this.showToast,
-    });
+    // this.showToast = !this.showToast;
+    // this.setState({
+    //   visible: this.showToast,
+    // });
+    this.setState({visible: !this.state.visible})
   };
 
   renderCustomContent = () => {
@@ -174,7 +175,7 @@ class ToastsScreen extends Component {
               Toast
             </Text>
 
-            <View flex>
+            <View flex style={{height: 900}}>
               <ScrollView contentContainerStyle={styles.scrollView}>
                 {renderMultipleSegmentOptions.call(
                   this,

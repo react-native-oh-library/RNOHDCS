@@ -128,6 +128,8 @@ export default class ColorSwatchScreen extends Component {
               value={color2}
               onValueChange={this.onValueChange2}
               colors={this.allColors}
+              containerWidth={330}
+              containerStyle={{marginLeft: -18}}
             />
           </View>
         </TestCase>

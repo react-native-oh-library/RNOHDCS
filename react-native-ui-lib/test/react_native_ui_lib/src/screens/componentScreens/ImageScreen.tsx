@@ -16,6 +16,8 @@ import {
 } from '../ExampleScreenPresenter';
 import {TestCase, TestSuite} from '@rnoh/testerino';
 
+const {loadDemoConfigurations} = require('../../../src/configurations');
+loadDemoConfigurations();
 const IMAGE_URL =
   'https://images.pexels.com/photos/748837/pexels-photo-748837.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
 const BROKEN_URL = 'file:///Desktop/website/img/cupcake.jpg';
@@ -54,10 +56,7 @@ enum SizeType {
 }
 
 enum SvgType {
-  File = 'file',
-  Uri = 'uri',
-  // UriWithCss = 'use_with_css',
-  Xml = 'xml',
+  File = 'file'
 }
 
 interface State {
@@ -91,13 +90,8 @@ class ImageScreen extends Component<{}, State> {
     switch (svgType) {
       case SvgType.File:
         return file;
-      case SvgType.Uri:
-        return uri;
-      // case SvgType.UriWithCss:
-      //   return uriWithCss;
-      case SvgType.Xml:
       default:
-        return xml;
+        return file;
     }
   }
 
@@ -160,7 +154,7 @@ class ImageScreen extends Component<{}, State> {
   renderSvgImage() {
     const {sizeType} = this.state;
     const size: any = Number(sizeType) || sizeType;
-    const source = this.getSvgSource();
+    const source = this.getSvgSource() || require('../../assets/svgs/headerLogo.svg');
     return (
       <>
         {size ? (
