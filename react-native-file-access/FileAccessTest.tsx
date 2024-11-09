@@ -21,6 +21,7 @@ export default () => {
   const [readFileChunkInfoBase64, setReadFileChunkInfoBase64] = useState<string>();
   const [concatBeyts, setConcatBeyts] = useState<number>();
   const [dirOrNot, setDirOrNot] = useState<any>('');
+  const [dirOrNot1, setDirOrNot1] = useState<any>('');
 
   // 以utf-8形式读取文件的内容
   const readFile = () => {
@@ -85,6 +86,11 @@ export default () => {
   const isDir = async () => {
     let res = await FileSystem.isDir(Dirs.DocumentDir + '/text1.txt');
     setDirOrNot(res);
+  };
+  // 检查路径是否是目录
+  const isDir0801 = async () => {
+    let res = await FileSystem.isDir(Dirs.DocumentDir + '/0801');
+    setDirOrNot1(res);
   };
 
   // 列出目录中的文件
@@ -225,6 +231,21 @@ export default () => {
           <Text>新目录路径：{mkdirParam}</Text>
         </View>
       </TestCase>
+      <TestCase itShould="在0801目录下新增一个text0801.txt" tags={['C_API']} initialState={false}
+        arrange={({ setState }: any) =>
+          <View style={styles.baseArea}>
+            <Text style={{ flex: 1 }}>FileSystem.writeFile()</Text>
+            <Button title="运行" color="#841584" onPress={() => {
+              FileSystem.writeFile(Dirs.DocumentDir + "/0801/text0801.txt", "08010801", "utf8").then(() => {
+                setState(true);
+              })
+            }}></Button>
+          </View>
+        }
+        assert={({ expect, state }) => {
+          expect(state).to.be.eq(true);
+        }}>
+      </TestCase>
       <TestCase itShould="移动文件text.txt到text1.txt" initialState={false}
         arrange={({ setState }: any) =>
           <View style={styles.baseArea}>
@@ -273,7 +294,7 @@ export default () => {
           <Text>文件是否存在：{isExists === '' ? '' : isExists ? '存在' : '不存在'}</Text>
         </View>
       </TestCase>
-      <TestCase itShould='复制text.txt文件到text1.txt文件' initialState={false}
+      <TestCase itShould='复制text.txt文件到text2.txt文件' initialState={false}
         arrange={({ setState }: any) =>
           <View style={styles.baseArea}>
             <Text style={{ flex: 1 }}>FileAccess.cp()</Text>
@@ -297,6 +318,17 @@ export default () => {
           <Text>是否是目录：{dirOrNot === '' ? '' : dirOrNot ? '是' : '不是'}</Text>
         </View>
       </TestCase>
+
+      <TestCase itShould='检查0801目录是否是目录'>
+        <View style={{ height: 'auto', backgroundColor: "#FFF", marginTop: 6 }}>
+          <View style={styles.baseArea}>
+            <Text style={{ flex: 1 }}>FileAccess.isDir()</Text>
+            <Button title="运行" color="#841584" onPress={isDir0801}></Button>
+          </View>
+          <Text>是否是目录：{dirOrNot1 === '' ? '' : dirOrNot1 ? '是' : '不是'}</Text>
+        </View>
+      </TestCase>
+
       <TestCase itShould='对text1.txt文件内容进行哈希处理SHA-256'>
         <View style={{ height: 'auto', backgroundColor: "#FFF", marginTop: 6 }}>
           <View style={styles.baseArea}>
