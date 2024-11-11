@@ -55,9 +55,39 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试Component.Alert属性'>
+                <TestCase itShould='测试Component.Alert-componentProps{alertType：error}属性'>
                   <Button
-                    title="Component.Alert"
+                    title="属性alertType：err，"
+                    onPress={() =>
+                      Notifier.showNotification({
+                        title: 'The request was failed The request was failed The request was failed',
+                        description: 'Check your internet connection, please Check your internet connection, please Check your internet connection, please',
+                        Component: NotifierComponents.Alert,
+                        componentProps: {
+                          alertType: 'error',
+                        },
+                      })
+                    }
+                  />
+                </TestCase>
+                <TestCase itShould='测试Component.Alert-componentProps{alertType：success}属性'>
+                  <Button
+                    title="属性alertType：success"
+                    onPress={() =>
+                      Notifier.showNotification({
+                        title: 'The request was failed The request was failed The request was failed',
+                        description: 'Check your internet connection, please Check your internet connection, please Check your internet connection, please',
+                        Component: NotifierComponents.Alert,
+                        componentProps: {
+                          alertType: 'success',
+                        },
+                      })
+                    }
+                  />
+                </TestCase>
+                <TestCase itShould='测试Component.Alert-componentProps{maxTitleLines,maxDescriptionLines,backgroundColor，textColor}属性'>
+                  <Button
+                    title="样式-蓝-绿-红，显示行数-1行"
                     onPress={() =>
                       Notifier.showNotification({
                         title: 'The request was failed The request was failed The request was failed',
@@ -76,9 +106,9 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试Component.Alert属性'>
+                <TestCase itShould='测试Component.Alert-componentProps{backgroundColor，textColor，maxDescriptionLines，maxDescriptionLines}属性'>
                   <Button
-                    title="Component.Alert"
+                    title="样式-黄-蓝-粉，显示行数-2行"
                     onPress={() =>
                       Notifier.showNotification({
                         title: 'The request was failed The request was failed The request was failed',
@@ -96,9 +126,9 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试Component.Alert属性'>
+                <TestCase itShould='测试Component.Alert-ContainerComponent属性'>
                   <Button
-                    title="Component.Alert"
+                    title="componentProps-ContainerComponent组件"
                     onPress={() =>
                       Notifier.showNotification({
                         title: 'The request was failed The request was failed The request was failed',
@@ -117,9 +147,9 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试Component.Notification属性'>
+                <TestCase itShould='测试Component.Notification-componentProps{imageStyle，titleStyle，descriptionStyle，containerStyle}属性'>
                   <Button
-                    title="Component.Notification"
+                    title="样式-红-蓝-黄，图片-30px，显示行数-1行"
                     onPress={() =>
                       Notifier.showNotification({
                         title: 'The request was failed The request was failed The request was failed',
@@ -140,7 +170,7 @@ export default function App() {
                 </TestCase>
                 <TestCase itShould='测试Component.Notification属性'>
                   <Button
-                    title="Component.Notification"
+                    title="样式-蓝-红-绿，图片-50px，显示行数-2行"
                     onPress={() =>
                       Notifier.showNotification({
                         title: 'The request was failed The request was failed The request was failedThe request was failed',
@@ -159,9 +189,9 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试Component.Notification属性'>
+                <TestCase itShould='测试Component.Notification-ContainerComponent属性'>
                   <Button
-                    title="Component.Notification"
+                    title="componentProps-ContainerComponent"
                     onPress={() =>
                       Notifier.showNotification({
                         title: 'The request was failed The request was failed The request was failedThe request was failed',
