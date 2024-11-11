@@ -40,7 +40,7 @@ export function HeaderButtonsTester({navigation}) {
       title: '导航栏',
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
-          <Item title="this is a item" />
+          <Item title="this is a item"/>
         </HeaderButtons>
       ),
     });
@@ -61,19 +61,19 @@ export function HeaderButtonsTester({navigation}) {
 }
 
 export function HeaderButtons_childrenTester({navigation}) {
-  const ChildrenCom = () => {
-    return (
-      <View>
-        <Text>this is children</Text>
-      </View>
-    );
-  };
+    const MaterialHeaderButton = (props: HeaderButtonProps) => {
+        return (
+          <View>
+            <Text>{props.title}</Text>
+          </View>
+        );
+      };
   React.useLayoutEffect(() => {
     navigation.setOptions({
       title: '导航栏',
       headerRight: () => (
-        <HeaderButtons>
-          <ChildrenCom />
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <Item title='this is children'/>
         </HeaderButtons>
       ),
     });
@@ -97,7 +97,7 @@ export function HeaderButtons_Left_true({navigation}) {
       headerLeft: () => (
         <HeaderButtons
           preset="tabHeader"
-          left
+          left={true}
           HeaderButtonComponent={MaterialHeaderButton}>
           <Item
             title="Test Left"
@@ -109,7 +109,7 @@ export function HeaderButtons_Left_true({navigation}) {
       headerRight: () => (
         <HeaderButtons
           preset="tabHeader"
-          left
+          left={true}
           HeaderButtonComponent={MaterialHeaderButton}>
           <Item
             title="Test Right"
@@ -484,12 +484,12 @@ export function HeaderButtons_OverflowMenu_OnPress({navigation}) {
         <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
           <OverflowMenu
             style={{backgroundColor: '#fff111'}}
-            OverflowIcon={() => <Text>PressMe</Text>}>
-            <HiddenItem title="child1" onPress={() => Alert.alert('child1')} />
-            <Divider />
-            <HiddenItem title="child2" onPress={() => Alert.alert('child2')} />
-            <Divider />
-            <Text>this is a text</Text>
+            OverflowIcon={() => <Text>PressMe</Text>}
+            onPress={()=>{
+                Alert.alert('onPress方法')
+            }}
+            >
+            <Text>this is a text</Text> 
           </OverflowMenu>
         </HeaderButtons>
       ),
