@@ -141,6 +141,15 @@ export function AvatarTest() {
         size: 80,
       }
     },
+    {
+      key: 'Avatar.Image style: backgroundColor: MD2Colors.yellow500',
+      value: {
+        style: [styles.themStyle, { backgroundColor: MD2Colors.yellow500 }],
+        size: 60,
+        source: require('../assets/images/avatar.png'),
+      }
+    },
+
     //2024/10/30：回调用例重写
     // {
     //   key: 'Avatar.Image fuction: onError = {_onError}',
@@ -401,10 +410,12 @@ export function AvatarTest() {
           >
             <View style={styles.row}>
               <Avatar.Image
-              source={{}}
-              theme={{colors:{
-                primary: "rgb(220, 184, 255)"
-              }}}
+                source={{}}
+                theme={{
+                  colors: {
+                    primary: "rgb(220, 184, 255)"
+                  }
+                }}
               />
             </View>
           </TestCase>
@@ -460,10 +471,10 @@ const styles = StyleSheet.create({
     margin: 8,
   },
   themStyle: {
-    justifyContent:'center',
+    justifyContent: 'center',
     alignItems: 'center',
-    height :80,
-    width : 80,
+    height: 80,
+    width: 80,
     borderRadius: 100
   },
 });
