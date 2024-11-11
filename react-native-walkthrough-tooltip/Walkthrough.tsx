@@ -32,40 +32,40 @@ export default function Walkthrough() {
             <TestCase itShould='accessible属性测试,设置为false,屏幕朗读可触碰提示气泡'>
                 <TooltipAccessible  accessible={false}/>
             </TestCase>
-            <TestCase itShould='测试arrowSize属性,改变气泡箭头大小'>
+            <TestCase itShould='测试arrowSize属性,气泡箭头大小16x8'>
                 <TooltipArrowSize width={16} height={8}/>
             </TestCase>
-            <TestCase itShould='测试arrowSize属性,改变气泡箭头大小'>
+            <TestCase itShould='测试arrowSize属性,气泡箭头大小30x15'>
                 <TooltipArrowSize width={30} height={15}/>
             </TestCase>
-            <TestCase itShould='测试backgroundColor属性,改变气泡背景色'>
+            <TestCase itShould='测试backgroundColor属性,蓝色-0.8透明度背景色'>
                 <TooltipBackgroundColor backgroundColor='rgba(0,50,135,0.8)'/>
             </TestCase>
-            <TestCase itShould='测试backgroundColor属性,改变气泡背景色'>
+            <TestCase itShould='测试backgroundColor属性,绿色-无透明度背景色'>
                 <TooltipBackgroundColor backgroundColor='rgba(0,125,50,1)'/>
             </TestCase>
-            <TestCase itShould='测试childContentSpacing属性,气泡箭头距离下方文字距离'>
+            <TestCase itShould='测试childContentSpacing属性,气泡箭头距离下方文字距离-5'>
                 <TooltipChildContentSpacing childContentSpacing={5}/>
             </TestCase>
-            <TestCase itShould='测试childContentSpacing属性,气泡箭头距离下方文字距离'>
+            <TestCase itShould='测试childContentSpacing属性,气泡箭头距离下方文字距离-20'>
                 <TooltipChildContentSpacing childContentSpacing={20}/>
             </TestCase>
-            <TestCase itShould='测试displayInsets，改变气泡大小'>
+            <TestCase itShould='测试displayInsets，改变气泡大小top5-bottom15-left25-right30'>
                 <TooltipDisplayInsets top={5}bottom={15}left={25}right={30}/>
             </TestCase>
-            <TestCase itShould='测试displayInsets，改变气泡大小'>
+            <TestCase itShould='测试displayInsets，改变气泡大小top30-bottom60-left90-right120'>
                 <TooltipDisplayInsets top={30}bottom={60}left={90}right={120}/>
             </TestCase>
-            <TestCase itShould='测试placement属性,改变气泡显示位置'>
+            <TestCase itShould='测试placement属性,改变气泡显示位置-top'>
                 <TooltipPlacement placement='top'/>
             </TestCase>
-            <TestCase itShould='测试placement属性,改变气泡显示位置'>
+            <TestCase itShould='测试placement属性,改变气泡显示位置-bottom'>
                 <TooltipPlacement placement='bottom'/>
             </TestCase>
-            <TestCase itShould='测试placement属性,改变气泡显示位置'>
+            <TestCase itShould='测试placement属性,改变气泡显示位置-left'>
                 <TooltipPlacement placement='left'/>
             </TestCase>
-            <TestCase itShould='测试placement属性,改变气泡显示位置'>
+            <TestCase itShould='测试placement属性,改变气泡显示位置-right'>
                 <TooltipPlacement placement='right'/>
             </TestCase>
             <TestCase itShould='测试showChildInTooltip属性,设置为true,气泡下面文字显示'>
@@ -74,10 +74,10 @@ export default function Walkthrough() {
             <TestCase itShould='测试showChildInTooltip属性,设置为false,气泡下面文字不显示'>
                 <TooltipShowChildInTooltip showChildInTooltip={false}/>
             </TestCase>
-            <TestCase itShould='测试topAdjustment属性,调整气泡顶部距离'>
+            <TestCase itShould='测试topAdjustment属性,调整气泡顶部距离-5'>
                 <TooltipTopAdjustment topAdjustment={5}/>
             </TestCase>
-            <TestCase itShould='测试topAdjustment属性,调整气泡顶部距离'>
+            <TestCase itShould='测试topAdjustment属性,调整气泡顶部距离-50'>
                 <TooltipTopAdjustment topAdjustment={50}/>
             </TestCase>
             <TestCase itShould="测试allowChildInteraction属性,设置为true,提示中下面的元素点击可以关闭提示">
@@ -104,10 +104,10 @@ export default function Walkthrough() {
             <TestCase itShould="测试disableShadow属性,设置为false,气泡周围有阴影">
                 <TooltipDisableShadow disableShadow={false} />
             </TestCase>
-            <TestCase itShould="测试horizontalAdjustment属性，改变气泡水平位置">
+            <TestCase itShould="测试horizontalAdjustment属性，改变气泡水平位置-5">
                 <TooltipHorizontalAdjustment  horizontalAdjustment={5}/>
             </TestCase>
-            <TestCase itShould="测试horizontalAdjustment属性，改变气泡水平位置">
+            <TestCase itShould="测试horizontalAdjustment属性，改变气泡水平位置-20">
                 <TooltipHorizontalAdjustment  horizontalAdjustment={20} />
             </TestCase>
             <TestCase itShould="测试useReactNativeModal属性,设置为true">
