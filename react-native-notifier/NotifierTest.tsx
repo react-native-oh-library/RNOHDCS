@@ -168,7 +168,7 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试Component.Notification属性'>
+                <TestCase itShould='测试Component.NotificationcomponentProps{imageStyle，titleStyle，descriptionStyle，containerStyle}属性'>
                   <Button
                     title="样式-蓝-红-绿，图片-50px，显示行数-2行"
                     onPress={() =>
@@ -236,7 +236,7 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试containerProps属性'>
+                <TestCase itShould='测试containerProps{ needsOffscreenAlphaCompositing: true }属性'>
                   <Button
                     title="containerProps"
                     onPress={() =>
@@ -336,7 +336,7 @@ export default function App() {
                 </TestCase>
                 <TestCase itShould='测试swipeEnabled,滑动隐藏通知'>
                   <Button
-                    title="swipeEnabled"
+                    title="swipeEnabled-true"
                     onPress={() =>
                       Notifier.showNotification({
                         title: 'swipeEnabled',
@@ -347,7 +347,7 @@ export default function App() {
                 </TestCase>
                 <TestCase itShould='测试swipeEnabled,不能滑动隐藏通知'>
                   <Button
-                    title="swipeEnabled"
+                    title="swipeEnabled-false"
                     onPress={() =>
                       Notifier.showNotification({
                         title: 'swipeEnabled-false',
@@ -357,9 +357,9 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试animationDuration属性,通知出现/消失的速度'>
+                <TestCase itShould='测试animationDuration属性,通知出现/消失的速度默认300'>
                   <Button
-                    title="animationDuration属"
+                    title="animationDuration-300"
                     onPress={() =>
                       notifierRef.current?.showNotification({
                         title: 'animationDuration',
@@ -368,9 +368,9 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试animationDuration属性,通知出现/消失的速度'>
+                <TestCase itShould='测试animationDuration属性,通知出现/消失的速度100'>
                   <Button
-                    title="animationDuration"
+                    title="animationDuration-100"
                     onPress={() =>
                       notifierRef.current?.showNotification({
                         title: 'animationDuration-100',
@@ -380,9 +380,9 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试animationDuration属性,通知出现的速度'>
+                <TestCase itShould='测试animationDuration属性,通知出现的速度默认300'>
                   <Button
-                    title="showAnimationDuration"
+                    title="showAnimationDuration-300"
                     onPress={() =>
                       notifierRef.current?.showNotification({
                         title: 'showAnimationDuration-300',
@@ -391,9 +391,9 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试animationDuration属性,通知出现的速度'>
+                <TestCase itShould='测试animationDuration属性,通知出现的速度1000'>
                   <Button
-                    title="showAnimationDuration"
+                    title="showAnimationDuration-1000"
                     onPress={() =>
                       notifierRef.current?.showNotification({
                         title: 'showAnimationDuration-1000',
@@ -403,9 +403,9 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试hideAnimationDuration属性,通知消失的速度'>
+                <TestCase itShould='测试hideAnimationDuration属性,通知消失的速度默认300'>
                   <Button
-                    title="hideAnimationDuration"
+                    title="hideAnimationDuration-300"
                     onPress={() =>
                       notifierRef.current?.showNotification({
                         title: 'hideAnimationDuration-300',
@@ -414,9 +414,9 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试hideAnimationDuration属性,通知消失的速度'>
+                <TestCase itShould='测试hideAnimationDuration属性,通知消失的速度1000'>
                   <Button
-                    title="hideAnimationDuration"
+                    title="hideAnimationDuration-1000"
                     onPress={() =>
                       notifierRef.current?.showNotification({
                         title: 'hideAnimationDuration-1000',
@@ -428,7 +428,7 @@ export default function App() {
                 </TestCase>
                 <TestCase itShould='测试easing属性,easing-Easing.bounce'>
                   <Button
-                    title="easing"
+                    title="easing-Easing.bounce"
                     onPress={() =>
                       Notifier.showNotification({
                         title: 'easing-Easing.bounce',
@@ -440,7 +440,7 @@ export default function App() {
                 </TestCase>
                 <TestCase itShould='测试easing属性,easing-Easing.ease'>
                   <Button
-                    title="easing"
+                    title="easing-Easing.ease"
                     onPress={() =>
                       Notifier.showNotification({
                         title: 'easing-Easing.ease',
@@ -452,7 +452,7 @@ export default function App() {
                 </TestCase>
                 <TestCase itShould='测试easing属性,Easing.elastic(4)'>
                   <Button
-                    title="easing"
+                    title="easing-Easing.elastic(4)"
                     onPress={() =>
                       Notifier.showNotification({
                         title: 'easing-Easing.elastic(4)',
@@ -464,7 +464,7 @@ export default function App() {
                 </TestCase>
                 <TestCase itShould='测试showEasing属性,showEasing-Easing.bounce'>
                   <Button
-                    title="showEasing"
+                    title="showEasing--Easing.bounce"
                     onPress={() =>
                       Notifier.showNotification({
                         title: 'easing-Easing.bounce',
@@ -476,7 +476,7 @@ export default function App() {
                 </TestCase>
                 <TestCase itShould='测试showEasing属性,showEasing-Easing.circle'>
                   <Button
-                    title="showEasing"
+                    title="showEasing--Easing.circle"
                     onPress={() =>
                       Notifier.showNotification({
                         title: 'showEasing-Easing.circle',
@@ -488,7 +488,7 @@ export default function App() {
                 </TestCase>
                 <TestCase itShould='测试hideEasing属性,hideEasing-Easing.bounce'>
                   <Button
-                    title="hideEasing"
+                    title="hideEasing--Easing.bounce"
                     onPress={() =>
                       Notifier.showNotification({
                         title: 'hideEasing-Easing.bounce',
@@ -500,7 +500,7 @@ export default function App() {
                 </TestCase>
                 <TestCase itShould='测试hideEasing属性,hideEasing-Easing.circle'>
                   <Button
-                    title="hideEasing"
+                    title="hideEasing-Easing.circle"
                     onPress={() =>
                       Notifier.showNotification({
                         title: 'hideEasing-Easing.circle',
@@ -511,7 +511,7 @@ export default function App() {
                   />
                 </TestCase>
                 <Text style={{ textAlign: 'center', marginTop: 10, color: 'red' }}><Text>函数回调log：</Text>{texts}</Text>
-                <TestCase itShould='测试onShown方法'>
+                <TestCase itShould='测试onShown方法,进入动画完成时调用的函数'>
                   <Button
                     title="onShown"
                     onPress={() =>
@@ -523,7 +523,7 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试onStartHiding方法'>
+                <TestCase itShould='测试onStartHiding方法,开始隐藏时调用的函数'>
                   <Button
                     title="onStartHiding"
                     onPress={() =>
@@ -535,7 +535,7 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试onHidden方法'>
+                <TestCase itShould='测试onHidden方法,进入完全隐藏时调用的函数'>
                   <Button
                     title="onHidden"
                     onPress={() =>
@@ -547,7 +547,7 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试onPress方法'>
+                <TestCase itShould='测试onPress方法,用户按下通知时调用的函数'>
                   <Button
                     title="onPress"
                     onPress={() =>
@@ -561,7 +561,7 @@ export default function App() {
                 </TestCase>
                 <TestCase itShould='测试hideOnPress属性，按下隐藏通知'>
                   <Button
-                    title="hideOnPress"
+                    title="hideOnPress-true"
                     onPress={() =>
                       Notifier.showNotification({
                         title: 'hideOnPress',
@@ -572,7 +572,7 @@ export default function App() {
                 </TestCase>
                 <TestCase itShould='测试hideOnPress属性，按下不隐藏通知'>
                   <Button
-                    title="hideOnPress"
+                    title="hideOnPress-false"
                     onPress={() =>
                       Notifier.showNotification({
                         title: 'hideOnPress',
@@ -584,7 +584,7 @@ export default function App() {
                 </TestCase>
                 <TestCase itShould='测试swipePixelsToClose属性，用户滑动关闭通知，默认20像素'>
                   <Button
-                    title="swipePixelsToClose"
+                    title="swipePixelsToClose-20"
                     onPress={() =>
                       Notifier.showNotification({
                         title: 'swipePixelsToClose',
@@ -595,7 +595,7 @@ export default function App() {
                 </TestCase>
                 <TestCase itShould='测试swipePixelsToClose属性，用户滑动关闭通知，设置10像素'>
                   <Button
-                    title="swipePixelsToClose"
+                    title="swipePixelsToClose-10"
                     onPress={() =>
                       Notifier.showNotification({
                         title: 'swipePixelsToClose',
@@ -607,7 +607,7 @@ export default function App() {
                 </TestCase>
                 <TestCase itShould='测试swipeEasing属性， Easing.bounce'>
                   <Button
-                    title="swipeEasing"
+                    title="swipeEasing-Easing.bounce"
                     onPress={() =>
                       Notifier.showNotification({
                         title: 'swipeEasing',
@@ -619,7 +619,7 @@ export default function App() {
                 </TestCase>
                 <TestCase itShould='测试swipeEasing属性， Easing.circle'>
                   <Button
-                    title="swipeEasing"
+                    title="swipeEasing-Easing.circle"
                     onPress={() =>
                       Notifier.showNotification({
                         title: 'swipeEasing',
@@ -631,7 +631,7 @@ export default function App() {
                 </TestCase>
                 <TestCase itShould='测试swipeAnimationDuration属性， 用户滑动动画速度，默认200'>
                   <Button
-                    title="swipeAnimationDuration"
+                    title="swipeAnimationDuration-200"
                     onPress={() =>
                       Notifier.showNotification({
                         title: 'swipeAnimationDuration',
@@ -642,7 +642,7 @@ export default function App() {
                 </TestCase>
                 <TestCase itShould='测试swipeAnimationDuration属性， 用户滑动动画速度，设置1000'>
                   <Button
-                    title="swipeAnimationDuration"
+                    title="swipeAnimationDuration-1000"
                     onPress={() =>
                       Notifier.showNotification({
                         title: 'swipeAnimationDuration',
