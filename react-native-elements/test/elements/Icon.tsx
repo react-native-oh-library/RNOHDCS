@@ -275,7 +275,7 @@ const Icons: React.FunctionComponent<IconProps> = () => {
               name={'save'}
               solid={true}
               containerStyle={{ alignSelf: 'center' }}
-              type="font-awesome"
+              type="font-awesome-5"
               color="red"
               size={100}></Icon>
           </TestCase>

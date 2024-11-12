@@ -355,14 +355,14 @@ const SocialIcons: React.FunctionComponent<SocialIconsComponentProps> = () => {
             />
           </TestCase>
         </TestSuite>
-        <TestSuite name="SocialIcon的属性iconType 设置iconType icon字体类型">
+        <TestSuite name="SocialIcon的属性iconType 设置iconType 设置icon图标集的类型">
           <TestCase itShould="iconType">
             <SocialIcon
               disabled={true}
               activityIndicatorStyle={{width: 40, height: 40}}
               style={{alignSelf: 'center', width: 100, height: 100}}
-              type={'stumbleupon'}
-              // iconType={'font-awesome'}
+              type={'whatsapp'}
+              iconType={'font-awesome-5'}
               button={true}
               iconSize={100}
               fontWeight="800"

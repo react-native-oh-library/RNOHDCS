@@ -1805,7 +1805,7 @@ const List: React.FunctionComponent = () => {
             </View>
           </TestCase>
         </TestSuite>
-         {/* <TestSuite name="ListItem.Subtitle属性right Subtitle在右边显示 设置无效">
+         <TestSuite name="ListItem.Subtitle属性right Subtitle在右边显示 设置无效">
           <TestCase itShould="设置right属性" tags={['C_API']}>
             <View style={styles.container}>
               <Text style={styles.subText}>ListItem.Subtitle设置right</Text>
@@ -1833,7 +1833,7 @@ const List: React.FunctionComponent = () => {
               </ListItem>
             </View>
           </TestCase>
-        </TestSuite> */}
+        </TestSuite>
 
         <TestSuite name="ListItem.Subtitle属性style 接收Text组件属性style">
           <TestCase itShould="设置Text组件属性style" tags={['C_API']}>

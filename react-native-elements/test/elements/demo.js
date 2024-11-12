@@ -3,7 +3,7 @@ import { View } from 'react-native';
 const edges = ['left', 'right','top']
 export default Center = () => {
     return (
-        <View style={{ display: 'flex', flex: 1, backgroundColor: 'blue' }}>
+        <View style={{ display: 'flex', flex: 1 }}>
             <SafeAreaView edges={edges} style={{
                 width: '100%',
                 flexDirection: 'row',
