@@ -1,5 +1,5 @@
 import WebView from 'react-native-webview';
-import { ScrollView, StatusBar, View, Button, Text, TextInput } from 'react-native';
+import { ScrollView, StatusBar, View, Button, Text, TextInput, Switch } from 'react-native';
 import { TestCase, Tester } from '@rnoh/testerino';
 import React, { useRef, useState } from 'react';
 
@@ -909,6 +909,35 @@ export default function WebViewTest() {
                   <WebView
                     source={{ uri: 'www.baidu.com' }}
                     minimumFontSize={50}
+                  />
+                </View>
+              );
+            }}
+            assert={async ({ expect, state }) => {
+              expect(state).to.be.true;
+            }}
+          />
+
+          <TestCase
+            key={'webview api ref onShouldStartLoadWithRequest'}
+            itShould={`webview api ref onShouldStartLoadWithRequest`}
+            tags={['C_API']}
+            initialState={false}
+            arrange={({ setState }) => {
+              const [url, setUrl] = useState('www.baidu.com');
+              const [intercept, setInterCept] = useState(false);
+              return (
+                <View style={{ padding: 20, height: 600 }}>
+                  <Button title='切换URL' onPress={() => {
+                    setUrl(url === 'www.163.com' ? 'www.baidu.com' : 'www.163.com');
+                  }}></Button>
+                  <Text>拦截：</Text><Switch value={intercept} onValueChange={(v) => setInterCept(v)}></Switch>
+                  <View><Text>当前URL: { url }</Text></View>
+                  <WebView
+                    source={{ uri: url }}
+                    onShouldStartLoadWithRequest={() => {
+                      return !intercept;
+                    }}
                   />
                 </View>
               );
