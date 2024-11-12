@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, StyleSheet, View, Image, ScrollView, Text } from 'react-native';
+import { Platform, StyleSheet, View, Image, ScrollView } from 'react-native';
 
 import {
   Avatar,
@@ -9,43 +9,57 @@ import {
   Tooltip,
   Card,
 } from 'react-native-paper';
-import { TestSuite, TestCase, Tester } from '@rnoh/testerino';
+import {TestSuite,TestCase,Tester} from '@rnoh/testerino';
 
-function TooltipDemo() {
+function TooltipDemo() { 
 
   const TooltippProps = [
     {
       key: 'Tooltipp style:title={Selected Camera}',
       value: {
-        title: "Selected Camera"
+        title:"Selected Camera"
       }
     },
     {
       key: 'Tooltipp style:enterTouchDelay={1000}',
       value: {
-        title: "Selected Camera",
-        enterTouchDelay: 1000,
+        title:"Selected Camera",
+        enterTouchDelay:1000,
       }
     },
     {
       key: 'Tooltipp style:enterTouchDelay={2000}',
       value: {
-        title: "Selected Camera",
-        enterTouchDelay: 2000,
+        title:"Selected Camera",
+        enterTouchDelay:2000,
       }
     },
     {
       key: 'Tooltipp style:leaveTouchDelay={1500}',
       value: {
-        title: "Selected Camera",
-        leaveTouchDelay: 1500,
+        title:"Selected Camera",
+        leaveTouchDelay:1500,
       }
     },
     {
       key: 'Tooltipp style:leaveTouchDelay={3000}',
       value: {
-        title: "Selected Camera",
-        leaveTouchDelay: 3000,
+        title:"Selected Camera",
+        leaveTouchDelay:3000,
+      }
+    },
+    {
+      key: 'Tooltipp style:enterTouchDelay={1}',
+      value: {
+        title:"Selected Camera",
+        titleMaxFontSizeMultiplier:1,
+      }
+    },
+    {
+      key: 'Tooltipp style:enterTouchDelay={2}',
+      value: {
+        title:"Selected Camera",
+        titleMaxFontSizeMultiplier:2,
       }
     },
     {
@@ -63,25 +77,10 @@ function TooltipDemo() {
       }
     },
     {
-      key: 'Tooltipp style:titleMaxFontSizeMultiplier={0.5}',
-      value: {
-        title: "Selected Camera",
-        allowFontScaling:true,
-        titleMaxFontSizeMultiplier: 0.5,
-      }
-    },
-    {
-      key: 'Tooltipp style:titleMaxFontSizeMultiplier={1}',
-      value: {
-        title: "Selected Camera",
-        allowFontScaling:true,
-        titleMaxFontSizeMultiplier: 1,
-      }
-    },
-    {
       key: 'Tooltipp style:children=<IconButton icon="camera" selected size={24} onPress={() => {}} />',
       value: {
-        title: "Selected Camera",
+        title:"Selected Camera",
+        theme:{ colors: { primary: 'green' } },
       }
     },
   ]
@@ -89,28 +88,21 @@ function TooltipDemo() {
   return (
     <Tester>
       <ScrollView>
-        <TestSuite name='Tooltip' >
-          {TooltippProps.map((item) => {
-            return (
-              <TestCase itShould={item.key} key={item.key}>
-                <Tooltip {...item.value}>
-                  <IconButton icon="camera" selected size={24} onPress={() => {}} />
-                </Tooltip>
-              </TestCase>
+      <TestSuite name='Tooltip' >
+      {TooltippProps.map((item) => {
+          return (
+            <TestCase itShould={item.key}  key={item.key}>
+              <Tooltip {...item.value}>
+                <IconButton icon="camera" selected size={24} onPress={() => {}} />
+              </Tooltip>
+            </TestCase>
             );
-          })}
-          <Text style = {styles.tooltip}></Text>
-        </TestSuite>
+          })},
+       </TestSuite>
       </ScrollView>
     </Tester>
   )
 }
-const styles = StyleSheet.create({
-  tooltip: {
-    height: 180
-  },
-});
+
 
 export default TooltipDemo;
-
-

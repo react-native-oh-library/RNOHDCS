@@ -242,7 +242,7 @@ function ToggleButtonDemo() {
                 <ToggleButton {...item.value} />
               </TestCase>
             );
-          })}
+          })},
           {ToggleButtonGroupProps.map((item) => {
             return (
               <TestCase
@@ -273,7 +273,7 @@ function ToggleButtonDemo() {
                 }}
               ></TestCase>
             );
-          })}
+          })},
 
           {ToggleButtonGroupProps.map((item) => {
             return (
@@ -296,7 +296,7 @@ function ToggleButtonDemo() {
                 </ToggleButton.Group>
               </TestCase>
             );
-          })}
+          })},
 
           {ToggleButtonGroupProps.map((item) => {
             return (
@@ -320,7 +320,7 @@ function ToggleButtonDemo() {
                   </>} />
               </TestCase>
             );
-          })}
+          })},
 
           {ToggleButtonRowGroupProps.map((item) => {
             return (
@@ -352,7 +352,7 @@ function ToggleButtonDemo() {
                 }}
               ></TestCase>
             );
-          })}
+          })},
 
           {ToggleButtonRowGroupProps.map((item) => {
             return (
@@ -374,7 +374,7 @@ function ToggleButtonDemo() {
                 </ToggleButton.Row>
               </TestCase>
             );
-          })}
+          })},
 
           {ToggleButtonRowGroupProps.map((item) => {
             return (
@@ -396,7 +396,7 @@ function ToggleButtonDemo() {
                   </>} />
               </TestCase>
             );
-          })}
+          })},
           {ToggleButtonRowGroupProps.map((item) => {
             return (
               <TestCase itShould={'ToggleButton.Row style={{ marginRight: 100 }}'} key={'ToggleButton.Row style={{ marginRight: 100 }}'}>
@@ -420,7 +420,7 @@ function ToggleButtonDemo() {
                 </ToggleButton.Row>
               </TestCase>
             );
-          })}
+          })},
         </TestSuite>
       </ScrollView>
     </Tester>

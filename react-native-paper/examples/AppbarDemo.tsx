@@ -175,7 +175,7 @@ export function AppbarDemo() {
       }
     },
     {
-      key: 'Appbar.Action style: theme: {colors: { onSurface: red}},',
+      key: 'Appbar.Action style: theme: {colors: { onSurface: green}},',
       value: {
         isLeading : true,
         icon: "magnify",
