@@ -67,7 +67,7 @@ export function DataTableText() {
       }
     },
     {
-      key: 'DataTableCell style: numeric is true',
+      key: 'DataTableCell style: numeric is false',
       value: {
         numeric: false
       }
