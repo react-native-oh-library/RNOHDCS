@@ -9,14 +9,12 @@ import {
   Image,
 } from 'react-native';
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
-import * as WeChat from '@react-native-ohos/react-native-wechat-lib';
-import { APP_ID, APP_SECRET } from './src/constants';
+import * as WeChat from 'react-native-wechat-lib';
+import { APP_ID } from './src/constants';
 import { launchImageLibrary } from 'react-native-image-picker';
 
 const App = () => {
   const [authRes, setAuthRes] = useState('');
-  const [qrcode, setQrcode] = useState('');
-  const [scanRes, setScanRes] = useState('');
 
   const handleRegisterApp = async () => {
     const res = await WeChat.registerApp(APP_ID, '');
@@ -55,18 +53,6 @@ const App = () => {
     try {
       const res = await WeChat.sendAuthRequest('snsapi_userinfo', 'none');
       setAuthRes(res as any);
-    } catch (error) {
-      console.log('%c  error:', 'color: #0e93e0;background: #aaefe5;', error);
-    }
-  };
-
-  const handleAuthByScanRequest = async () => {
-    try {
-      const res = await WeChat.authByScan(APP_ID, APP_SECRET, (qrcode: any) => {
-        // 拿到 qrcode 用 Image 去渲染
-        setQrcode(qrcode);
-      });
-      setScanRes(res as any);
     } catch (error) {
       console.log('%c  error:', 'color: #0e93e0;background: #aaefe5;', error);
     }
@@ -163,20 +149,6 @@ const App = () => {
             <View>
               <Button title="sendAuthRequest" onPress={handleSendAuthRequest} />
               {authRes && <Text>授权登录结果: {JSON.stringify(authRes)}</Text>}
-            </View>
-          </TestCase>
-        </TestSuite>
-        <TestSuite name="扫码登录">
-          <TestCase itShould="Click the button to get the QR code to log in. Scan the QR code to authorize the login and return the login information.">
-            <View>
-              <Button title="authByScan" onPress={handleAuthByScanRequest} />
-              {qrcode && !scanRes && (
-                <Image
-                  style={{ width: 100, height: 100 }}
-                  source={{ uri: qrcode }}
-                />
-              )}
-              {scanRes && <Text>扫码登录结果: {JSON.stringify(scanRes)}</Text>}
             </View>
           </TestCase>
         </TestSuite>
