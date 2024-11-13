@@ -149,6 +149,7 @@ export const ImageMarker = () => {
     }
     ]
   }
+
   const image_options_alpha1: ImageMarkOptions = {
     backgroundImage: { src: require('./assets/code-images/1.png') },
     watermarkImages: [{
@@ -157,20 +158,22 @@ export const ImageMarker = () => {
     }
     ]
   }
-  const image_options_backalpha0_1: ImageMarkOptions = {
+
+  const image_options_backalpha0_5: ImageMarkOptions = {
     backgroundImage: {
       src: require('./assets/code-images/1.png'),
-      alpha: 0.1
+      alpha: 0.5
     },
     watermarkImages: [{
       src: require('./assets/pravatar-131.jpg')
     }
     ]
   }
-  const image_options_backalpha0_5: ImageMarkOptions = {
+
+  const image_options_backalpha0_1: ImageMarkOptions = {
     backgroundImage: {
       src: require('./assets/code-images/1.png'),
-      alpha: 0.5
+      alpha: 0.1
     },
     watermarkImages: [{
       src: require('./assets/pravatar-131.jpg')
@@ -1307,6 +1310,17 @@ export const ImageMarker = () => {
     }
     ]
   }
+  const text_options_backalpha0_5: TextMarkOptions = {
+    backgroundImage: {
+      src: require('./assets/code-images/1.png'),
+      alpha: 0.5
+    },
+    watermarkTexts: [{
+      text: 'test text',
+      style: { color: '#FFFF00', fontSize: 100, }
+    }
+    ]
+  }
   const text_options_backalpha1: TextMarkOptions = {
     backgroundImage: {
       src: require('./assets/code-images/1.png'),
@@ -1899,7 +1913,7 @@ export const ImageMarker = () => {
                   {"network_image"}
                 </Text>
                 <Button
-                  title="network_image "
+                  title="src_network_image "
                   color="#9a73ef"
                   onPress={markImageNetWorkImage}
                 />
@@ -1919,7 +1933,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="icon_topleft "
+                  title="image_icon_topleft "
                   color="#9a73ef"
                   onPress={markImagetopleft}
                 />
@@ -1931,7 +1945,7 @@ export const ImageMarker = () => {
             </View>
           </TestCase>
           <TestCase
-            itShould=' icon_topright '
+            itShould='icon_topright '
             tags={['C_API']}>
             <View style={styles.body}>
               <View style={styles.sectionContainer}>
@@ -1939,7 +1953,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="icon_topright "
+                  title="image_icon_topright "
                   color="#9a73ef"
                   onPress={markImagetopright}
                 />
@@ -1959,7 +1973,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="icon_topcenter "
+                  title="image_icon_topcenter "
                   color="#9a73ef"
                   onPress={markImagetopcenter}
                 />
@@ -1979,7 +1993,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="icon_bottomleft "
+                  title="image_icon_bottomleft "
                   color="#9a73ef"
                   onPress={markImagebottomleft}
                 />
@@ -1999,7 +2013,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="icon_bottomcenter "
+                  title="image_icon_bottomcenter "
                   color="#9a73ef"
                   onPress={markImagebottomcenter}
                 />
@@ -2019,7 +2033,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="icon_bottomright "
+                  title="image_icon_bottomright "
                   color="#9a73ef"
                   onPress={markImagebottomright}
                 />
@@ -2039,7 +2053,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="icon_center "
+                  title="image_icon_center "
                   color="#9a73ef"
                   onPress={markImagecenter}
                 />
@@ -2059,7 +2073,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="icon_xy "
+                  title="image_icon_x30y50 "
                   color="#9a73ef"
                   onPress={markImagexy}
                 />
@@ -2079,7 +2093,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="icon_xypercent "
+                  title="image_icon_x10%y20%percent "
                   color="#9a73ef"
                   onPress={markImagexppercentt}
                 />
@@ -2099,7 +2113,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="back_alpha0_1 "
+                  title="image_back_alpha0_1 "
                   color="#9a73ef"
                   onPress={markImagebackalpha0_1}
                 />
@@ -2119,7 +2133,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="back_alpha0_5"
+                  title="image_back_alpha0_5"
                   color="#9a73ef"
                   onPress={markImagebackalpha0_5}
                 />
@@ -2139,7 +2153,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="back_alpha1"
+                  title="image_back_alpha1"
                   color="#9a73ef"
                   onPress={markImagebackalpha1}
                 />
@@ -2159,7 +2173,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="icon_alpha0_1 "
+                  title="image_icon_alpha0_1 "
                   color="#9a73ef"
                   onPress={markImagealpha0_1}
                 />
@@ -2179,7 +2193,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="icon_alpha0_5 "
+                  title="image_icon_alpha0_5 "
                   color="#9a73ef"
                   onPress={markImagealpha0_5}
                 />
@@ -2199,7 +2213,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="icon_alpha1"
+                  title="image_icon_alpha1"
                   color="#9a73ef"
                   onPress={markImagealpha1}
                 />
@@ -2219,7 +2233,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="back_scale0_5 "
+                  title="image_back_scale0_5 "
                   color="#9a73ef"
                   onPress={markImagebackscale0_5}
                 />
@@ -2239,7 +2253,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="back_scale1_5"
+                  title="image_back_scale1_5"
                   color="#9a73ef"
                   onPress={markImagebackscale1_5}
                 />
@@ -2259,7 +2273,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="icon_scale0_5 "
+                  title="image_icon_scale0_5 "
                   color="#9a73ef"
                   onPress={markImagescale0_5}
                 />
@@ -2279,7 +2293,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="icon_scale1_5"
+                  title="image_icon_scale1_5"
                   color="#9a73ef"
                   onPress={markImagescale1_5}
                 />
@@ -2299,7 +2313,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="back_rotate_50 "
+                  title="image_back_rotate_50 "
                   color="#9a73ef"
                   onPress={markImagebackrotate_50}
                 />
@@ -2319,7 +2333,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="back_rotate_20"
+                  title="image_back_rotate_20"
                   color="#9a73ef"
                   onPress={markImagebackrotate_20}
                 />
@@ -2339,7 +2353,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="icon_rotate_50 "
+                  title="image_icon_rotate_50 "
                   color="#9a73ef"
                   onPress={markImagerotate_50}
                 />
@@ -2359,7 +2373,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="icon_rotate_20"
+                  title="image_icon_rotate_20"
                   color="#9a73ef"
                   onPress={markImagerotate_20}
                 />
@@ -2379,7 +2393,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="qualityurl_100 "
+                  title="image_qualityurl_100 "
                   color="#9a73ef"
                   onPress={markImagequalityurl_100}
                 />
@@ -2399,7 +2413,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="qualityurl_20"
+                  title="image_qualityurl_20"
                   color="#9a73ef"
                   onPress={markImagequalityurl_20}
                 />
@@ -2419,7 +2433,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="filename test1"
+                  title="image_filename test1"
                   color="#9a73ef"
                   onPress={markImageFilename1}
                 />
@@ -2439,7 +2453,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="filename test2"
+                  title="image_filename test2"
                   color="#9a73ef"
                   onPress={markImageFilename2}
                 />
@@ -2459,7 +2473,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="filetype png"
+                  title="image_filetype png"
                   color="#9a73ef"
                   onPress={markImageFiletypepng}
                 />
@@ -2479,7 +2493,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="file type jpg"
+                  title="image_file type jpg"
                   color="#9a73ef"
                   onPress={markImageFiletypejpg}
                 />
@@ -2499,7 +2513,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="file type base64"
+                  title="image_file type base64"
                   color="#9a73ef"
                   onPress={markImageFiletypebase64}
                 />
@@ -2604,7 +2618,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="text_skewX "
+                  title="text_skewX 0.5 "
                   color="#9a73ef"
                   onPress={markTextskewX}
                 />
@@ -2765,7 +2779,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="text_backgroundStyle_padding_all1 "
+                  title="text_backgroundStyle_padding_all1 10% "
                   color="#9a73ef"
                   onPress={markTextbackgroundstylePaddingAll1}
                 />
@@ -2785,7 +2799,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="text_backgroundStyle_padding_all2 "
+                  title="text_backgroundStyle_padding_all2 10% 15%"
                   color="#9a73ef"
                   onPress={markTextbackgroundstylePaddingAll2}
                 />
@@ -2805,7 +2819,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="text_backgroundStyle_padding_all3 "
+                  title="text_backgroundStyle_padding_all3 10% 15% 20%"
                   color="#9a73ef"
                   onPress={markTextbackgroundstylePaddingAll3}
                 />
@@ -2825,7 +2839,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="text_backgroundStyle_padding_all4 "
+                  title="text_backgroundStyle_padding_all4 10% 15% 20% 5%"
                   color="#9a73ef"
                   onPress={markTextbackgroundstylePaddingAll4}
                 />
@@ -2846,7 +2860,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="text_backgroundStyle_padding_top "
+                  title="text_backgroundStyle_padding_top 10%"
                   color="#9a73ef"
                   onPress={markTextbackgroundstylePaddingTop}
                 />
@@ -2866,7 +2880,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="text_backgroundStyle_padding_bottom "
+                  title="text_backgroundStyle_padding_bottom 10%"
                   color="#9a73ef"
                   onPress={markTextbackgroundstylePaddingBottom}
                 />
@@ -2886,7 +2900,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="text_backgroundStyle_padding_left "
+                  title="text_backgroundStyle_padding_left 10%"
                   color="#9a73ef"
                   onPress={markTextbackgroundstylePaddingLeft}
                 />
@@ -2906,7 +2920,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="text_backgroundStyle_padding_right "
+                  title="text_backgroundStyle_padding_right 10%"
                   color="#9a73ef"
                   onPress={markTextbackgroundstylePaddingRight}
                 />
@@ -2926,7 +2940,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="text_backgroundStyle_padding_horizontal "
+                  title="text_backgroundStyle_padding_horizontal 10% "
                   color="#9a73ef"
                   onPress={markTextbackgroundstylePaddingHorizontal}
                 />
@@ -2946,7 +2960,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="text_backgroundStyle_padding_vertical "
+                  title="text_backgroundStyle_padding_vertical 10%"
                   color="#9a73ef"
                   onPress={markTextbackgroundstylePaddingVertical}
                 />
@@ -2966,7 +2980,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="text_backgroundStyle_padding_x "
+                  title="text_backgroundStyle_padding_x 10%"
                   color="#9a73ef"
                   onPress={markTextbackgroundstylePaddingX}
                 />
@@ -2986,7 +3000,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="text_backgroundStyle_padding_y "
+                  title="text_backgroundStyle_padding_y 10%"
                   color="#9a73ef"
                   onPress={markTextbackgroundstylePaddingY}
                 />
@@ -3006,7 +3020,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="text_backgroundStyle_cornerRadius_all "
+                  title="text_backgroundStyle_cornerRadius_all { x  20%, y 30% }  "
                   color="#9a73ef"
                   onPress={markTextbackgroundstyleCornerRadiusAll}
                 />
@@ -3026,7 +3040,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="text_backgroundStyle_cornerRadius_topLeft "
+                  title="text_backgroundStyle_cornerRadius_topLeft { x  20%, y 30% } "
                   color="#9a73ef"
                   onPress={markTextbackgroundstyleCornerRadiustopLeft}
                 />
@@ -3046,7 +3060,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="text_backgroundStyle_cornerRadius_topRight "
+                  title="text_backgroundStyle_cornerRadius_topRight { x  20%, y 30% }"
                   color="#9a73ef"
                   onPress={markTextbackgroundstyleCornerRadiustopRight}
                 />
@@ -3066,7 +3080,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="text_backgroundStyle_cornerRadius_bottomLeft "
+                  title="text_backgroundStyle_cornerRadius_bottomLeft { x  20%, y 30% }"
                   color="#9a73ef"
                   onPress={markTextbackgroundstyleCornerRadiusbottomLeft}
                 />
@@ -3086,7 +3100,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="text_backgroundStyle_cornerRadius_bottomRight "
+                  title="text_backgroundStyle_cornerRadius_bottomRight { x  20%, y 30% }"
                   color="#9a73ef"
                   onPress={markTextbackgroundstyleCornerRadiusbottomRight}
                 />
@@ -3186,7 +3200,12 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="text_shadowStyle1 "
+                  title="text_shadowStyle1 {
+                    dx: 50,
+                    dy: 50,
+                    radius: 10,
+                    color: '#008F6D'
+                  } "
                   color="#9a73ef"
                   onPress={markTextShadowStyle1}
                 />
@@ -3206,7 +3225,12 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="text_shadowStyle2 "
+                  title="text_shadowStyle2  {
+                    dx: 50,
+                    dy: 50,
+                    radius: 20,
+                    color: '#FC0700'
+                  }"
                   color="#9a73ef"
                   onPress={markTextShadowStyle2}
                 />
@@ -3466,7 +3490,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="text_xy "
+                  title="text_xy { X: 30, Y: 50 }"
                   color="#9a73ef"
                   onPress={markTextxy}
                 />
@@ -3486,7 +3510,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="text_xypercent "
+                  title="text_xypercent { X: '10%', Y: '20%' }"
                   color="#9a73ef"
                   onPress={markTextxppercentt}
                 />
@@ -3506,7 +3530,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="back_alpha0_1 "
+                  title="text_back_alpha0_1 "
                   color="#9a73ef"
                   onPress={markTextbackalpha0_1}
                 />
@@ -3526,7 +3550,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="back_alpha0_5 "
+                  title="text_back_alpha0_5 "
                   color="#9a73ef"
                   onPress={markTextbackalpha0_5}
                 />
@@ -3546,7 +3570,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="back_alpha1"
+                  title="text_back_alpha1"
                   color="#9a73ef"
                   onPress={markTextbackalpha1}
                 />
@@ -3566,7 +3590,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="back_scale0_5 "
+                  title="text_back_scale0_5 "
                   color="#9a73ef"
                   onPress={markTextbackscale0_5}
                 />
@@ -3586,7 +3610,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="back_scale1_5"
+                  title="text_back_scale1_5"
                   color="#9a73ef"
                   onPress={markTextbackscale1_5}
                 />
@@ -3606,7 +3630,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="back_rotate_50 "
+                  title="text_back_rotate_50 "
                   color="#9a73ef"
                   onPress={markTextbackrotate_50}
                 />
@@ -3626,7 +3650,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="back_rotate_20"
+                  title="text_back_rotate_20"
                   color="#9a73ef"
                   onPress={markTextbackrotate_20}
                 />
@@ -3646,7 +3670,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="qualityurl_100 "
+                  title="text_qualityurl_100 "
                   color="#9a73ef"
                   onPress={markTextqualityurl_100}
                 />
@@ -3666,7 +3690,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="qualityurl_20"
+                  title="text_qualityurl_20"
                   color="#9a73ef"
                   onPress={markTextqualityurl_20}
                 />
@@ -3686,7 +3710,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="filename test1"
+                  title="text_filename test1"
                   color="#9a73ef"
                   onPress={markTextFilename1}
                 />
@@ -3706,7 +3730,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="filename test2"
+                  title="text_filename test2"
                   color="#9a73ef"
                   onPress={markTextFilename2}
                 />
@@ -3726,7 +3750,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="filetype png"
+                  title="text_filetype png"
                   color="#9a73ef"
                   onPress={markTextFiletypepng}
                 />
@@ -3746,7 +3770,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="file type jpg"
+                  title="text_file type jpg"
                   color="#9a73ef"
                   onPress={markTextFiletypejpg}
                 />
@@ -3766,7 +3790,7 @@ export const ImageMarker = () => {
                   {"image marker"}
                 </Text>
                 <Button
-                  title="file type base64"
+                  title="text_file type base64"
                   color="#9a73ef"
                   onPress={markTextFiletypebase64}
                 />
