@@ -6,8 +6,8 @@ import { Tester, TestCase, TestSuite } from "@rnoh/testerino";
 const YourImage = () => {
   const img1 = require('./img/capinset_bg.png');
   const img2 = require('./img/capinset_bg2.png');
-  const img3 = 'https://img95.699pic.com/xsj/0z/qt/7p.jpg%21/fh/300';
-  const img4 = 'https://tupian.qqw21.com/article/UploadPic/2014-5/2014551549412981.jpg';
+  const img3 = 'https://img2.baidu.com/it/u=2814429148,2262424695&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=1422';
+  const img4 = 'https://img0.baidu.com/it/u=2616823501,3205478532&fm=253&fmt=auto&app=138&f=JPEG?w=509&h=500';
   
   const initInset = JSON.stringify({top: 2, right: 5, bottom: 2, left: 5});
   const initInset2 = JSON.stringify({top: 15, right: 20, bottom: 15, left: 20});
