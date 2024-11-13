@@ -85,6 +85,25 @@ export default function App() {
                     }
                   />
                 </TestCase>
+                <TestCase itShould='测试Component.Alert-componentProps{textColor,backgroundColor}属性'>
+                  <Button
+                    title="textColor:blue，显示行数-1行"
+                    onPress={() =>
+                      Notifier.showNotification({
+                        title: 'The request was failed The request was failed The request was failed',
+                        description: 'Check your internet connection, please Check your internet connection, please Check your internet connection, please',
+                        Component: NotifierComponents.Alert,
+                        componentProps: {
+                          alertType: 'error',
+                          backgroundColor:'green',
+                          textColor:'blue',
+                          maxTitleLines:1,
+                          maxDescriptionLines:1,
+                        },
+                      })
+                    }
+                  />
+                </TestCase>
                 <TestCase itShould='测试Component.Alert-componentProps{maxTitleLines,maxDescriptionLines,backgroundColor，textColor}属性'>
                   <Button
                     title="样式-蓝-绿-红，显示行数-1行"
