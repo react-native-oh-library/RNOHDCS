@@ -127,12 +127,6 @@ const TabbedHeaderPagerDemoDefault: React.FC = () => {
         foregroundImage={photosPortraitMe}
         tabs={TABS.map(tab => ({title: tab.title, testID: tab.testID}))}
         tabTextStyle={screenStyles.text}
-        renderHeaderBar={() => (
-          <View style={styles.headerBarContainer}>
-            <Text style={styles.textStyle}>自定义HeaderBar部分</Text>
-          </View>
-        )}
-        snapStartThreshold={300000}
         // Refresh control is not implemented on web and even if provided, it will double padding top and bottom
         {...(Platform.OS !== 'web' && {
           refreshControl: (
