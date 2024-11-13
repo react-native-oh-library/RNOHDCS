@@ -22,11 +22,13 @@ import {ExampleLink} from '../RouteCenterScreen/ExampleLink';
 import TabbedHeaderPagerDemoDefault from './DefaultDemo/index';
 import TabbedHeaderPagerDemoChild1 from './TestDemo/ChildDemo1';
 import TabbedHeaderPagerDemoChild2 from './TestDemo/ChildDemo2';
+import TabbedHeaderPagerDemoChild3 from './TestDemo/ChildDemo3';
 //定义组件测试testID
 const testIdObject = {
   default: 'TabbedHeaderPagerDemoDefault_testID',
   child1: 'TabbedHeaderPagerDemoChild1_testID',
   child2: 'TabbedHeaderPagerDemoChild2_testID',
+  child3: 'TabbedHeaderPagerDemoChild3_testID',
 };
 const defaultRouter = {
   routeName: CHILDROUTES.TabbedHeaderPagerDemoDefault,
@@ -38,7 +40,6 @@ const defaultRouter = {
     containerStyle: 'flex:1',
     enableSafeAreaTopInset: 'true',
     rememberTabScrollPosition: 'true',
-    renderHeaderBar: '自定义headerBar,背景色红色，白色文字',
     headerHeight: '100(默认值)',
     initialPage: '0',
     tabsContainerBackgroundColor: 'rgb(61,179,106)',
@@ -51,8 +52,7 @@ const defaultRouter = {
     tabs: '自定义tab栏组件',
     tabTextStyle: `color:'white'`,
     stickyTabs: 'true(默认值)',
-    snapStartThreshold:
-      '设置阻力值最大，无法上滑成功，默认效果见：TabbedHeaderPager测试子组件2',
+    snapStartThreshold: '设置阻力值为默认值',
   },
 };
 const childRouter1 = {
@@ -82,12 +82,24 @@ const childRouter2 = {
   testID: testIdObject.child2,
   title: '测试组件TabbedHeaderPagerDemoChild2(设置对比属性值)',
   testProps: {
+    enableSafeAreaTopInset: 'false',
     headerHeight: `设置headerHeight的值为250，250*2>视差高度值parallaxHeight(默认值 53% of screen 的高度)此时headerHeight的值生效Moring's Mark 文字下移`,
     parallaxHeight:
       '如上所属，视差高度值parallaxHeight(默认值 53% of screen 的高度)，实际效果可参照默认组件（parallaxHeight的值生效）',
     onChangeTab: `TabbedHeaderPager:测试onChangeTab`,
     onTabsLayout: `TabbedHeaderPager:测试testTabsLayout`,
     onTopReached: `TabbedHeaderPager:测试testTopReached`,
+  },
+};
+const childRouter3 = {
+  routeName: CHILDROUTES.TabbedHeaderPagerDemoChild3,
+  label: 'TabbedHeaderPager测试子组件3',
+  testID: testIdObject.child3,
+  title: '测试组件TabbedHeaderPagerDemoChild3(设置对比属性值)',
+  testProps: {
+    renderHeaderBar: '自定义headerBar,背景色红色，白色文字',
+    snapStartThreshold:
+      '设置阻力值最大，无法上滑成功，默认效果见：TabbedHeaderPager默认组件',
   },
 };
 const showCallbackInfo = {
@@ -154,6 +166,12 @@ const TabbedHeaderPagerDemoScreen: React.FC = () => {
                 <ExampleLink key={childRouter2.routeName} {...childRouter2} />
               </View>
               <View style={styles.sectionPart}>
+                <Text>{childRouter3.title}</Text>
+                <SimpleTable obj={childRouter3.testProps}></SimpleTable>
+                <Text>测试链接：</Text>
+                <ExampleLink key={childRouter3.routeName} {...childRouter3} />
+              </View>
+              <View style={styles.sectionPart}>
                 <Text>单独展示相关回调方法测试结果</Text>
                 <SimpleTable obj={showCallbackInfo}></SimpleTable>
                 <Text>测试结果展示：</Text>
@@ -218,4 +236,5 @@ export {
   TabbedHeaderPagerDemoDefault,
   TabbedHeaderPagerDemoChild1,
   TabbedHeaderPagerDemoChild2,
+  TabbedHeaderPagerDemoChild3,
 };

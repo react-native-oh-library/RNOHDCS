@@ -90,7 +90,7 @@ const DetailsHeaderFlatListDemoDefault: React.FC = () => {
         titleStyle={screenStyles.text2}
         titleTestID={detailsHeaderFlatListTestIDs.title}
         subtitle={'brand sub title'}
-        substitleStyle={screenStyles.text}
+        substitleStyle={styles.text}
         substitleTestID={'detailsHeaderDemoTestUUId'}
         onHeaderLayout={onHeaderLayout}
         onTopReached={onTopReached}
@@ -134,6 +134,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     zIndex: 666,
   },
+  text:{
+    color:'white'
+  }
 });
 
 export default DetailsHeaderFlatListDemoDefault;
