@@ -14,6 +14,7 @@ import {
   CircleTest,
   GeojsonTest,
   OverlayTest,
+  ClusterTest,
   UrlWMSTileTest,
   CalloutTest,
   HeatmapTest,
@@ -46,6 +47,9 @@ function App() {
             </Page>
             <Page name="EXAMPLE: OverlayTest">
               <OverlayTest />
+            </Page>
+            <Page name="EXAMPLE: ClusterTest">
+              <ClusterTest />
             </Page>
             {/* <Page name="EXAMPLE: UrlTile & WMSTile Test 不支持">
               <UrlWMSTileTest />

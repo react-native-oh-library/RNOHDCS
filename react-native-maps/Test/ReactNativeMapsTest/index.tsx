@@ -5,6 +5,7 @@ export { PolylineTest } from "./PolylineTest";
 export { CircleTest } from "./CircleTest";
 export { GeojsonTest } from "./GeojsonTest";
 export { OverlayTest } from "./OverlayTest";
+export { ClusterTest } from "./ClusterTest";
 export { UrlWMSTileTest } from "./UrlTile&WMSTile_Test";
 export { CalloutTest } from "./CalloutTest";
 export { HeatmapTest } from "./HeatmapTest";
