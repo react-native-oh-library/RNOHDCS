@@ -3,9 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
-  FlatList,
-  Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
 import DraxViewBaseComponent from './components/DraxViewBaseComponent';
@@ -19,10 +16,6 @@ const DraxViewDemo24 = () => {
     );
   };
 
-  const resetBtn = () => {
-    setResult('');
-  };
-
   return (
     <>
       <Tester children={undefined}>
@@ -33,19 +26,6 @@ const DraxViewDemo24 = () => {
             <DraxViewBaseComponent
               draggingStyle={styles.draggingStyle}
               renderContent={() => <Text style={styles.redText}>Hello</Text>}
-              receiverPayload={'receiverPayload'}
-              onDragEnter={onDragEnterHandler}></DraxViewBaseComponent>
-          </View>
-        </TestCase>
-        <TestCase
-          itShould="DraxView组件:renderHoverContent(渲染复制蓝色正方形内部元素-设置renderHoverContent内容为黄色的World文字)"
-          tags={['C_API']}>
-          <View style={{height: 260}}>
-            <DraxViewBaseComponent
-              draggingStyle={styles.draggingStyle}
-              renderHoverContent={() => (
-                <Text style={styles.yellowText}>World</Text>
-              )}
               receiverPayload={'receiverPayload'}
               onDragEnter={onDragEnterHandler}></DraxViewBaseComponent>
           </View>

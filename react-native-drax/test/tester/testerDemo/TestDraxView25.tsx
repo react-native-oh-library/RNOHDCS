@@ -3,9 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
-  FlatList,
-  Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
 import DraxViewBaseComponent from './components/DraxViewBaseComponent';
@@ -41,17 +38,6 @@ const DraxViewDemo25 = () => {
             <DraxViewBaseComponent
               draggingStyle={styles.draggingStyle}
               registration={handleRegistration}
-              receiverPayload={'receiverPayload'}
-              onDragEnter={onDragEnterHandler}></DraxViewBaseComponent>
-          </View>
-        </TestCase>
-        <TestCase
-          itShould="DraxView组件:onMeasure回调,回调参数可以接收到蓝色正方形组件内部传递的数据"
-          tags={['C_API']}>
-          <View style={{height: 260}}>
-            <DraxViewBaseComponent
-              draggingStyle={styles.draggingStyle}
-              onMeasure={handleOnMeasure}
               receiverPayload={'receiverPayload'}
               onDragEnter={onDragEnterHandler}></DraxViewBaseComponent>
           </View>

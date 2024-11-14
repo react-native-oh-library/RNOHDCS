@@ -29,16 +29,6 @@ const DraxViewDemo14 = () => {
               onDragEnter={onDragEnterHandler}></DraxViewBaseComponent>
           </View>
         </TestCase>
-        <TestCase
-          itShould="DraxView组件:draggingStyle(拖拽过程中应用于蓝色正方形的样式,拖拽停止后消失)"
-          tags={['C_API']}>
-          <View style={{height: 260}}>
-            <DraxViewBaseComponent
-              draggingStyle={styles.draggingStyle}
-              receiverPayload={'receiverPayload'}
-              onDragEnter={onDragEnterHandler}></DraxViewBaseComponent>
-          </View>
-        </TestCase>
       </Tester>
     </>
   );

@@ -1,42 +1,31 @@
 import React, {useState} from 'react';
 import {
   StyleSheet,
-  Text,
   View,
-  ScrollView,
-  FlatList,
-  Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
-import DraxViewComponents from './components/DraxViewComponents';
+import DraxViewBaseComponent from './components/DraxViewBaseComponent';
 
-const DraxViewDemo4 = () => {
+const DraxViewDemo45 = () => {
   const [result, setResult] = useState('');
-
-  const onDragDropHandler = () => {
-    setResult('onDragDrop回调已执行');
-  };
-
-  const resetBtn = () => {
-    setResult('');
+  const onDragEnterHandler = ({receiver}) => {
+    setResult(
+      'onDragEnter回调接收到绿色正方形传递的receiverPayload:' +
+        JSON.stringify(receiver.payload),
+    );
   };
 
   return (
     <>
-      <View style={styles.inputArea}>
-        <Text style={styles.baseText}>{result}</Text>
-        <Button
-          style={styles.resetBtn}
-          title="重置"
-          onPress={resetBtn}></Button>
-      </View>
       <Tester children={undefined}>
         <TestCase
-          itShould="DraxView组件:onDragDrop(手指拖动蓝色正方形进入绿色正方形正上方然后释放)"
+          itShould="DraxView组件:receiverInactiveStyle(拖动开始前应用于绿色正方形的样式-红色边框)"
           tags={['C_API']}>
           <View style={{height: 260}}>
-            <DraxViewComponents
-              onDragDrop={onDragDropHandler}></DraxViewComponents>
+            <DraxViewBaseComponent
+              receiverInactiveStyle={styles.receiverInactiveStyle}
+              receiverPayload={'receiverPayload'}
+              onDragEnter={onDragEnterHandler}></DraxViewBaseComponent>
           </View>
         </TestCase>
       </Tester>
@@ -49,6 +38,14 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#fff',
+  },
+  receiverInactiveStyle: {
+    borderWidth: 2,
+    borderColor: 'red',
+  },
+  receivingStyle: {
+    borderWidth: 2,
+    borderColor: 'pink',
   },
   accordion: {
     borderWidth: 1,
@@ -98,4 +95,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 });
-export default DraxViewDemo4;
+export default DraxViewDemo45;

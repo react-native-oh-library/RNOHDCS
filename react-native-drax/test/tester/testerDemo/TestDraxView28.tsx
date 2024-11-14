@@ -1,11 +1,7 @@
 import React, {useState} from 'react';
 import {
   StyleSheet,
-  Text,
   View,
-  ScrollView,
-  FlatList,
-  Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
 import DraxViewBaseComponent from './components/DraxViewBaseComponent';
@@ -29,17 +25,6 @@ const DraxViewDemo28 = () => {
             <DraxViewBaseComponent
               draggingStyle={styles.draggingStyle}
               longPressDelay={0}
-              receiverPayload={'receiverPayload'}
-              onDragEnter={onDragEnterHandler}></DraxViewBaseComponent>
-          </View>
-        </TestCase>
-        <TestCase
-          itShould="DraxView组件:longPressDelay(设置视图识别长按手势的最小时间，单位为毫秒,默认值250)"
-          tags={['C_API']}>
-          <View style={{height: 300}}>
-            <DraxViewBaseComponent
-              draggingStyle={styles.draggingStyle}
-              longPressDelay={250}
               receiverPayload={'receiverPayload'}
               onDragEnter={onDragEnterHandler}></DraxViewBaseComponent>
           </View>

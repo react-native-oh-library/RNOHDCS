@@ -10,9 +10,6 @@ import DraxViewBaseComponent from './components/DraxViewBaseComponent';
 
 const DraxViewDemo12 = () => {
   const [result, setResult] = useState('');
-  const onReceiveDragEnterHandler = ({dragged: {payload}}) => {
-    setResult('onReceiveDragEnter回调执行时接收到payload参数:' + payload);
-  };
 
   const onReceiveDragOverHandler = ({dragged: {payload}}) => {
     setResult('onReceiveDragOver回调已执行,接收到payload参数:' + payload);
@@ -31,17 +28,6 @@ const DraxViewDemo12 = () => {
           onPress={resetBtn}></Button>
       </View>
       <Tester children={undefined}>
-        <TestCase
-          itShould="DraxView组件:payload(手指拖动蓝色正方形进入绿色正方形正上方然后释放,此时绿色正方形接收到传递的payload参数'hello')"
-          tags={['C_API']}>
-          <View style={{height: 260}}>
-            <DraxViewBaseComponent
-              payload={'hello'}
-              onReceiveDragEnter={
-                onReceiveDragEnterHandler
-              }></DraxViewBaseComponent>
-          </View>
-        </TestCase>
         <TestCase
           itShould="DraxView组件:dragPayload与payload(手指拖动蓝色正方形悬浮在绿色正方形正上方时,此时绿色正方形接收到传递的dragPayload(值为'hi'覆盖payload的值'hello'))"
           tags={['C_API']}>

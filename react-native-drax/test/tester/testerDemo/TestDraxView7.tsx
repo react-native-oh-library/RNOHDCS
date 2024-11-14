@@ -16,9 +16,7 @@ const DraxViewDemo7 = () => {
   const onMonitorDragEndHandler = eventData => {
     setResult('onMonitorDragEnd回调已执行,参数eventData:' + JSON.stringify(eventData));
   };
-  const onMonitorDragEnterHandler = eventData => {
-    setResult('onMonitorDragEnter回调已执行,参数eventData:' + JSON.stringify(eventData));
-  };
+
   const resetBtn = () => {
     setResult('');
   };
@@ -41,17 +39,6 @@ const DraxViewDemo7 = () => {
               payload={'hello'}
               onMonitorDragEnd={
                 onMonitorDragEndHandler
-              }></DraxViewBaseComponent>
-          </View>
-        </TestCase>
-        <TestCase
-          itShould="DraxView组件:onMonitorDragEnter(手指拖动蓝色正方形进入绿色正方形，检测到进入，执行回调)"
-          tags={['C_API']}>
-          <View style={{height: 230}}>
-            <DraxViewBaseComponent
-              payload={'hello'}
-              onMonitorDragEnter={
-                onMonitorDragEnterHandler
               }></DraxViewBaseComponent>
           </View>
         </TestCase>

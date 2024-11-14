@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+/* eslint-disable prettier/prettier */
+import React, { useState } from 'react';
 import {
   StyleSheet,
   View,
 } from 'react-native';
-import {Tester, TestCase} from '@rnoh/testerino';
+import { Tester, TestCase } from '@rnoh/testerino';
 import DraxScrollViewBaseComponent from './components/DraxScrollViewBaseComponent';
 
 const DraxScrollViewDemo1 = () => {
@@ -13,7 +14,7 @@ const DraxScrollViewDemo1 = () => {
         <TestCase
           itShould="DraxScrollView组件:children(基准组件包含1、2、3、4四个子组件)"
           tags={['C_API']}>
-          <View style={{height: 800}}>
+          <View style={{ height: 800 }}>
             <DraxScrollViewBaseComponent></DraxScrollViewBaseComponent>
           </View>
         </TestCase>

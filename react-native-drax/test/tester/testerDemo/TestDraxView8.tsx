@@ -14,9 +14,6 @@ const DraxViewDemo8 = () => {
     setResult('onMonitorDragOver回调已执行,参数eventData:' + JSON.stringify(eventData));
   };
 
-  const onMonitorDragExitHandler = eventData => {
-    setResult('onMonitorDragExit回调已执行,参数eventData:' + JSON.stringify(eventData));
-  };
   const resetBtn = () => {
     setResult('');
   };
@@ -39,17 +36,6 @@ const DraxViewDemo8 = () => {
               payload={'hello'}
               onMonitorDragOver={
                 onMonitorDragOverHandler
-              }></DraxViewBaseComponent>
-          </View>
-        </TestCase>
-        <TestCase
-          itShould="DraxView组件:onMonitorDragExit(手指拖动蓝色正方形进入绿色正方形然后离开，检测到离开，执行回调)"
-          tags={['C_API']}>
-          <View style={{height: 230}}>
-            <DraxViewBaseComponent
-              payload={'hello'}
-              onMonitorDragExit={
-                onMonitorDragExitHandler
               }></DraxViewBaseComponent>
           </View>
         </TestCase>

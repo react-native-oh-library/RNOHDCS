@@ -3,20 +3,23 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
-  FlatList,
   Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
-import DraxViewComponents from './components/DraxViewComponents';
+import DraxViewBaseTestMonitor from './components/DraxViewBaseTestMonitor';
 
-const DraxViewDemo4 = () => {
+const DraxViewDemo38 = () => {
   const [result, setResult] = useState('');
 
-  const onDragDropHandler = () => {
-    setResult('onDragDrop回调已执行');
+  const onReceiveDragDropHandler = ({dragged: {payload}}) => {
+    setResult('onReceiveDragDrop回调已执行,接收到payload参数:' + payload);
   };
 
+  const onMonitorDragDropHandler = eventData => {
+    setResult(
+      'onMonitorDragDrop回调已执行,参数eventData:' + JSON.stringify(eventData),
+    );
+  };
   const resetBtn = () => {
     setResult('');
   };
@@ -32,11 +35,15 @@ const DraxViewDemo4 = () => {
       </View>
       <Tester children={undefined}>
         <TestCase
-          itShould="DraxView组件:onDragDrop(手指拖动蓝色正方形进入绿色正方形正上方然后释放)"
+          itShould="DraxView组件:onMonitorDragDrop(拖动蓝色正方形进入绿色正方形然后丢掉此时检测到释放)"
           tags={['C_API']}>
-          <View style={{height: 260}}>
-            <DraxViewComponents
-              onDragDrop={onDragDropHandler}></DraxViewComponents>
+          <View style={{height: 230}}>
+            <DraxViewBaseTestMonitor
+              payload={'hello'}
+              onReceiveDragDrop={onReceiveDragDropHandler}
+              onMonitorDragDrop={
+                onMonitorDragDropHandler
+              }></DraxViewBaseTestMonitor>
           </View>
         </TestCase>
       </Tester>
@@ -79,7 +86,7 @@ const styles = StyleSheet.create({
   },
   inputArea: {
     width: '100%',
-    height: 80,
+    height: 120,
     marginTop: 8,
     justifyContent: 'center',
     alignItems: 'center',
@@ -92,10 +99,10 @@ const styles = StyleSheet.create({
   },
   baseText: {
     width: '100%',
-    height: 48,
+    height: 60,
     fontWeight: 'bold',
     textAlign: 'center',
     fontSize: 14,
   },
 });
-export default DraxViewDemo4;
+export default DraxViewDemo38;

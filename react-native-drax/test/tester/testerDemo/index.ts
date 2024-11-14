@@ -8,6 +8,7 @@ import DraxViewDemo7 from "./TestDraxView7"
 import DraxViewDemo8 from "./TestDraxView8"
 import DraxViewDemo9 from "./TestDraxView9"
 import DraxViewDemo10 from "./TestDraxView10"
+import DraxViewDemo11 from "./TestDraxView11"
 import DraxViewDemo12 from "./TestDraxView12"
 import DraxViewDemo13 from "./TestDraxView13"
 import DraxViewDemo14 from "./TestDraxView14"
@@ -26,6 +27,28 @@ import DraxViewDemo26 from "./TestDraxView26"
 import DraxViewDemo27 from "./TestDraxView27"
 import DraxViewDemo28 from "./TestDraxView28"
 import DraxViewDemo29 from "./TestDraxView29"
+import DraxViewDemo30 from "./TestDraxView30"
+import DraxViewDemo31 from "./TestDraxView31"
+import DraxViewDemo32 from "./TestDraxView32"
+import DraxViewDemo33 from "./TestDraxView33"
+import DraxViewDemo34 from "./TestDraxView34"
+import DraxViewDemo35 from "./TestDraxView35"
+import DraxViewDemo36 from "./TestDraxView36"
+import DraxViewDemo37 from "./TestDraxView37"
+import DraxViewDemo38 from "./TestDraxView38"
+import DraxViewDemo39 from "./TestDraxView39"
+import DraxViewDemo40 from "./TestDraxView40"
+import DraxViewDemo41 from "./TestDraxView41"
+import DraxViewDemo42 from "./TestDraxView42"
+import DraxViewDemo43 from "./TestDraxView43"
+import DraxViewDemo44 from "./TestDraxView44"
+import DraxViewDemo45 from "./TestDraxView45"
+import DraxViewDemo46 from "./TestDraxView46"
+import DraxViewDemo47 from "./TestDraxView47"
+import DraxViewDemo48 from "./TestDraxView48"
+import DraxViewDemo49 from "./TestDraxView49"
+import DraxViewDemo50 from "./TestDraxView50"
+import DraxViewDemo51 from "./TestDraxView51"
 import DraxListDemo1 from "./TestDraxList1"
 import DraxListDemo2 from "./TestDraxList2"
 import DraxListDemo3 from "./TestDraxList3"
@@ -53,6 +76,7 @@ export default {
     DraxViewDemo8,
     DraxViewDemo9,
     DraxViewDemo10,
+    DraxViewDemo11,
     DraxViewDemo12,
     DraxViewDemo13,
     DraxViewDemo14,
@@ -71,6 +95,28 @@ export default {
     DraxViewDemo27,
     DraxViewDemo28,
     DraxViewDemo29,
+    DraxViewDemo30,
+    DraxViewDemo31,
+    DraxViewDemo32,
+    DraxViewDemo33,
+    DraxViewDemo34,
+    DraxViewDemo35,
+    DraxViewDemo36,
+    DraxViewDemo37,
+    DraxViewDemo38,
+    DraxViewDemo39,
+    DraxViewDemo40,
+    DraxViewDemo41,
+    DraxViewDemo42,
+    DraxViewDemo43,
+    DraxViewDemo44,
+    DraxViewDemo45,
+    DraxViewDemo46,
+    DraxViewDemo47,
+    DraxViewDemo48,
+    DraxViewDemo49,
+    DraxViewDemo50,
+    DraxViewDemo51,
     DraxListDemo1,
     DraxListDemo2,
     DraxListDemo3,

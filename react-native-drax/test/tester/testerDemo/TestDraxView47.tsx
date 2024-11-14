@@ -3,40 +3,43 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
-  FlatList,
-  Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
-import DraxViewComponents from './components/DraxViewComponents';
+import DraxViewBaseComponent from './components/DraxViewBaseComponent';
 
-const DraxViewDemo4 = () => {
-  const [result, setResult] = useState('');
-
-  const onDragDropHandler = () => {
-    setResult('onDragDrop回调已执行');
+const DraxViewDemo47 = () => {
+  const [result1, setResult1] = useState('');
+  const [result2, setResult2] = useState('');
+  const onDragEnterHandler = ({receiver}) => {
+    setResult1(
+      'onDragEnter回调接收到绿色正方形传递的receiverPayload:' +
+        JSON.stringify(receiver.payload),
+    );
   };
 
-  const resetBtn = () => {
-    setResult('');
+  const handleRegistration = e => {
+    setResult1('registration回调接收到的参数:' + JSON.stringify(e));
+  };
+  const handleOnMeasure = e => {
+    setResult2('onMeasure回调接收到的参数:' + JSON.stringify(e));
   };
 
   return (
     <>
       <View style={styles.inputArea}>
-        <Text style={styles.baseText}>{result}</Text>
-        <Button
-          style={styles.resetBtn}
-          title="重置"
-          onPress={resetBtn}></Button>
+        <Text style={styles.baseText}>{result1}</Text>
+        <Text style={styles.baseText}>{result2}</Text>
       </View>
       <Tester children={undefined}>
         <TestCase
-          itShould="DraxView组件:onDragDrop(手指拖动蓝色正方形进入绿色正方形正上方然后释放)"
+          itShould="DraxView组件:onMeasure回调,回调参数可以接收到蓝色正方形组件内部传递的数据"
           tags={['C_API']}>
           <View style={{height: 260}}>
-            <DraxViewComponents
-              onDragDrop={onDragDropHandler}></DraxViewComponents>
+            <DraxViewBaseComponent
+              draggingStyle={styles.draggingStyle}
+              onMeasure={handleOnMeasure}
+              receiverPayload={'receiverPayload'}
+              onDragEnter={onDragEnterHandler}></DraxViewBaseComponent>
           </View>
         </TestCase>
       </Tester>
@@ -49,6 +52,22 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#fff',
+  },
+  dragInactiveStyle: {
+    borderWidth: 2,
+    borderColor: 'red',
+  },
+  draggingStyle: {
+    borderWidth: 2,
+    borderColor: 'green',
+  },
+  redText: {
+    fontSize: 24,
+    color: 'red',
+  },
+  yellowText: {
+    fontSize: 24,
+    color: 'yellow',
   },
   accordion: {
     borderWidth: 1,
@@ -92,10 +111,10 @@ const styles = StyleSheet.create({
   },
   baseText: {
     width: '100%',
-    height: 48,
+    height: 36,
     fontWeight: 'bold',
     textAlign: 'center',
     fontSize: 14,
   },
 });
-export default DraxViewDemo4;
+export default DraxViewDemo47;
