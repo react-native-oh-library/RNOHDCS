@@ -242,19 +242,6 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试containerStyle，动画样式getContainerStyleClassicWithOverSwipe'>
-                  <Button
-                    title="动画样式"
-                    onPress={() =>
-                      notifierRef.current?.showNotification({
-                        title: 'Pulldown',
-                        description: 'Pulldown动画样式',
-                        containerStyle: getContainerStyleClassicWithOverSwipe,
-                        queueMode: 'standby',
-                      })
-                    }
-                  />
-                </TestCase>
                 <TestCase itShould='测试containerProps{ needsOffscreenAlphaCompositing: true }属性'>
                   <Button
                     title="containerProps"
@@ -262,7 +249,6 @@ export default function App() {
                       notifierRef.current?.showNotification({
                         title: 'containerProps',
                         description: '测试containerProps属性',
-                        containerStyle: getContainerStyleOpacityOnly,
                         containerProps: { needsOffscreenAlphaCompositing: true },
                         queueMode: 'standby',
                       })
