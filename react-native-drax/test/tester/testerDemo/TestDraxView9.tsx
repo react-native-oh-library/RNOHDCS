@@ -3,8 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
-  FlatList,
   Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
@@ -18,15 +16,7 @@ const DraxViewDemo9 = () => {
       'onMonitorDragStart回调已执行,参数eventData:' + JSON.stringify(eventData),
     );
   };
-  const onReceiveDragDropHandler = ({dragged: {payload}}) => {
-    setResult('onReceiveDragDrop回调已执行,接收到payload参数:' + payload);
-  };
 
-  const onMonitorDragDropHandler = eventData => {
-    setResult(
-      'onMonitorDragDrop回调已执行,参数eventData:' + JSON.stringify(eventData),
-    );
-  };
   const resetBtn = () => {
     setResult('');
   };
@@ -49,18 +39,6 @@ const DraxViewDemo9 = () => {
               payload={'hello'}
               onMonitorDragStart={
                 onMonitorDragStartHandler
-              }></DraxViewBaseTestMonitor>
-          </View>
-        </TestCase>
-        <TestCase
-          itShould="DraxView组件:onMonitorDragDrop(拖动蓝色正方形进入绿色正方形然后丢掉此时检测到释放)"
-          tags={['C_API']}>
-          <View style={{height: 230}}>
-            <DraxViewBaseTestMonitor
-              payload={'hello'}
-              onReceiveDragDrop={onReceiveDragDropHandler}
-              onMonitorDragDrop={
-                onMonitorDragDropHandler
               }></DraxViewBaseTestMonitor>
           </View>
         </TestCase>

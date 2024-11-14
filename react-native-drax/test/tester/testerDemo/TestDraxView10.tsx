@@ -1,11 +1,7 @@
 import React, {useState} from 'react';
 import {
   StyleSheet,
-  Text,
   View,
-  ScrollView,
-  FlatList,
-  Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
 import DraxViewBaseComponent from './components/DraxViewBaseComponent';
@@ -20,15 +16,6 @@ const DraxViewDemo10 = () => {
           tags={['C_API']}>
           <View style={{height: 260}}>
             <DraxViewBaseComponent payload={'hello'}></DraxViewBaseComponent>
-          </View>
-        </TestCase>
-        <TestCase
-          itShould="DraxView组件:animateSnapback(是否在拖动释放后为悬停视图快照设置动画(设置为false时关闭动画))"
-          tags={['C_API']}>
-          <View style={{height: 260}}>
-            <DraxViewBaseComponent
-              payload={'hello'}
-              animateSnapback={false}></DraxViewBaseComponent>
           </View>
         </TestCase>
       </Tester>

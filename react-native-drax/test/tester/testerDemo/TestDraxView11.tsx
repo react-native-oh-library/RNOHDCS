@@ -3,18 +3,15 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
-  FlatList,
   Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
-import DraxViewComponents from './components/DraxViewComponents';
+import DraxViewBaseComponent from './components/DraxViewBaseComponent';
 
-const DraxViewDemo4 = () => {
+const DraxViewDemo11 = () => {
   const [result, setResult] = useState('');
-
-  const onDragDropHandler = () => {
-    setResult('onDragDrop回调已执行');
+  const onReceiveDragEnterHandler = ({dragged: {payload}}) => {
+    setResult('onReceiveDragEnter回调执行时接收到payload参数:' + payload);
   };
 
   const resetBtn = () => {
@@ -32,11 +29,14 @@ const DraxViewDemo4 = () => {
       </View>
       <Tester children={undefined}>
         <TestCase
-          itShould="DraxView组件:onDragDrop(手指拖动蓝色正方形进入绿色正方形正上方然后释放)"
+          itShould="DraxView组件:payload(手指拖动蓝色正方形进入绿色正方形正上方然后释放,此时绿色正方形接收到传递的payload参数'hello')"
           tags={['C_API']}>
           <View style={{height: 260}}>
-            <DraxViewComponents
-              onDragDrop={onDragDropHandler}></DraxViewComponents>
+            <DraxViewBaseComponent
+              payload={'hello'}
+              onReceiveDragEnter={
+                onReceiveDragEnterHandler
+              }></DraxViewBaseComponent>
           </View>
         </TestCase>
       </Tester>
@@ -98,4 +98,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 });
-export default DraxViewDemo4;
+export default DraxViewDemo11;

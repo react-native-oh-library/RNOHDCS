@@ -1,42 +1,23 @@
 import React, {useState} from 'react';
 import {
   StyleSheet,
-  Text,
   View,
-  ScrollView,
-  FlatList,
-  Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
-import DraxViewComponents from './components/DraxViewComponents';
+import DraxViewBaseComponent from './components/DraxViewBaseComponent';
 
-const DraxViewDemo4 = () => {
-  const [result, setResult] = useState('');
-
-  const onDragDropHandler = () => {
-    setResult('onDragDrop回调已执行');
-  };
-
-  const resetBtn = () => {
-    setResult('');
-  };
+const DraxViewDemo39 = () => {
 
   return (
     <>
-      <View style={styles.inputArea}>
-        <Text style={styles.baseText}>{result}</Text>
-        <Button
-          style={styles.resetBtn}
-          title="重置"
-          onPress={resetBtn}></Button>
-      </View>
       <Tester children={undefined}>
         <TestCase
-          itShould="DraxView组件:onDragDrop(手指拖动蓝色正方形进入绿色正方形正上方然后释放)"
+          itShould="DraxView组件:animateSnapback(是否在拖动释放后为悬停视图快照设置动画(设置为false时关闭动画))"
           tags={['C_API']}>
           <View style={{height: 260}}>
-            <DraxViewComponents
-              onDragDrop={onDragDropHandler}></DraxViewComponents>
+            <DraxViewBaseComponent
+              payload={'hello'}
+              animateSnapback={false}></DraxViewBaseComponent>
           </View>
         </TestCase>
       </Tester>
@@ -98,4 +79,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 });
-export default DraxViewDemo4;
+export default DraxViewDemo39;

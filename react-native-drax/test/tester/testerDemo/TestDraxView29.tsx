@@ -1,11 +1,7 @@
 import React, {useState} from 'react';
 import {
   StyleSheet,
-  Text,
   View,
-  ScrollView,
-  FlatList,
-  Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
 import DraxViewBaseComponent from './components/DraxViewBaseComponent';
@@ -29,17 +25,6 @@ const DraxViewDemo29 = () => {
             <DraxViewBaseComponent
               draggingStyle={styles.draggingStyle}
               draggable={true}
-              receiverPayload={'receiverPayload'}
-              onDragEnter={onDragEnterHandler}></DraxViewBaseComponent>
-          </View>
-        </TestCase>
-        <TestCase
-          itShould="DraxView组件:draggable(是否允许拖拽,设置为false)"
-          tags={['C_API']}>
-          <View style={{height: 300}}>
-            <DraxViewBaseComponent
-              draggingStyle={styles.draggingStyle}
-              draggable={false}
               receiverPayload={'receiverPayload'}
               onDragEnter={onDragEnterHandler}></DraxViewBaseComponent>
           </View>

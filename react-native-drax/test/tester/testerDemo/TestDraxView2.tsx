@@ -17,9 +17,6 @@ const DraxViewDemo2 = () => {
     setResult('onDragEnter回调已执行');
   };
 
-  const onDragOverHandler = () => {
-    setResult('onDragOver回调已执行');
-  };
   const resetBtn = () => {
     setResult('');
   };
@@ -40,14 +37,6 @@ const DraxViewDemo2 = () => {
           <View style={{height: 260}}>
             <DraxViewComponents
               onDragEnter={onDragEnterHandler}></DraxViewComponents>
-          </View>
-        </TestCase>
-        <TestCase
-          itShould="DraxView组件:onDragOver(手指拖动蓝色正方形到绿色正方形上方)"
-          tags={['C_API']}>
-          <View style={{height: 260}}>
-            <DraxViewComponents
-              onDragOver={onDragOverHandler}></DraxViewComponents>
           </View>
         </TestCase>
       </Tester>

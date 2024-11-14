@@ -17,9 +17,6 @@ const DraxViewDemo1 = () => {
     setResult('onDragStart回调已执行');
   };
 
-  const onDragHandler = () => {
-    setResult('onDrag回调已执行');
-  };
   const resetBtn = () => {
     setResult('');
   };
@@ -40,14 +37,6 @@ const DraxViewDemo1 = () => {
           <View style={{height: 260}}>
             <DraxViewBaseComponent
               onDragStart={onDragStartHandler}></DraxViewBaseComponent>
-          </View>
-        </TestCase>
-        <TestCase
-          itShould="DraxView组件:onDrag(手指拖动蓝色正方形)"
-          tags={['C_API']}>
-          <View style={{height: 260}}>
-            <DraxViewBaseComponent
-              onDrag={onDragHandler}></DraxViewBaseComponent>
           </View>
         </TestCase>
       </Tester>

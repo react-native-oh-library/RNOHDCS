@@ -1,42 +1,32 @@
 import React, {useState} from 'react';
 import {
   StyleSheet,
-  Text,
   View,
-  ScrollView,
-  FlatList,
-  Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
-import DraxViewComponents from './components/DraxViewComponents';
+import DraxViewBaseComponent from './components/DraxViewBaseComponent';
 
-const DraxViewDemo4 = () => {
+const DraxViewDemo50 = () => {
   const [result, setResult] = useState('');
-
-  const onDragDropHandler = () => {
-    setResult('onDragDrop回调已执行');
-  };
-
-  const resetBtn = () => {
-    setResult('');
+  const onDragEnterHandler = ({receiver}) => {
+    setResult(
+      'onDragEnter回调接收到绿色正方形传递的receiverPayload:' +
+        JSON.stringify(receiver.payload),
+    );
   };
 
   return (
     <>
-      <View style={styles.inputArea}>
-        <Text style={styles.baseText}>{result}</Text>
-        <Button
-          style={styles.resetBtn}
-          title="重置"
-          onPress={resetBtn}></Button>
-      </View>
       <Tester children={undefined}>
         <TestCase
-          itShould="DraxView组件:onDragDrop(手指拖动蓝色正方形进入绿色正方形正上方然后释放)"
+          itShould="DraxView组件:longPressDelay(设置视图识别长按手势的最小时间，单位为毫秒,默认值250)"
           tags={['C_API']}>
-          <View style={{height: 260}}>
-            <DraxViewComponents
-              onDragDrop={onDragDropHandler}></DraxViewComponents>
+          <View style={{height: 300}}>
+            <DraxViewBaseComponent
+              draggingStyle={styles.draggingStyle}
+              longPressDelay={250}
+              receiverPayload={'receiverPayload'}
+              onDragEnter={onDragEnterHandler}></DraxViewBaseComponent>
           </View>
         </TestCase>
       </Tester>
@@ -49,6 +39,22 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#fff',
+  },
+  dragInactiveStyle: {
+    borderWidth: 2,
+    borderColor: 'red',
+  },
+  draggingStyle: {
+    borderWidth: 2,
+    borderColor: 'green',
+  },
+  redText: {
+    fontSize: 24,
+    color: 'red',
+  },
+  yellowText: {
+    fontSize: 24,
+    color: 'yellow',
   },
   accordion: {
     borderWidth: 1,
@@ -92,10 +98,10 @@ const styles = StyleSheet.create({
   },
   baseText: {
     width: '100%',
-    height: 48,
+    height: 36,
     fontWeight: 'bold',
     textAlign: 'center',
     fontSize: 14,
   },
 });
-export default DraxViewDemo4;
+export default DraxViewDemo50;

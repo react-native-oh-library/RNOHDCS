@@ -3,8 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
-  FlatList,
   Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
@@ -18,9 +16,6 @@ const DraxViewDemo3 = () => {
     setResult('onDragExit回调已执行');
   };
 
-  const onDragEndHandler = () => {
-    setResult('onDragEnd回调已执行');
-  };
   const resetBtn = () => {
     setResult('');
   };
@@ -41,14 +36,6 @@ const DraxViewDemo3 = () => {
           <View style={{height: 260}}>
             <DraxViewComponents
               onDragExit={onDragExitHandler}></DraxViewComponents>
-          </View>
-        </TestCase>
-        <TestCase
-          itShould="DraxView组件:onDragEnd(手指拖动蓝色正方形然后停止)"
-          tags={['C_API']}>
-          <View style={{height: 260}}>
-            <DraxViewComponents
-              onDragEnd={onDragEndHandler}></DraxViewComponents>
           </View>
         </TestCase>
       </Tester>

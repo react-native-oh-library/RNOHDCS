@@ -3,8 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
-  FlatList,
   Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
@@ -16,9 +14,6 @@ const DraxViewDemo5 = () => {
     setResult('onReceiveDragEnter回调已执行,接收到payload参数:' + payload);
   };
 
-  const onReceiveDragOverHandler = ({dragged: {payload}}) => {
-    setResult('onReceiveDragOver回调已执行,接收到payload参数:' + payload);
-  };
   const resetBtn = () => {
     setResult('');
   };
@@ -41,17 +36,6 @@ const DraxViewDemo5 = () => {
               payload={'hello'}
               onReceiveDragEnter={
                 onReceiveDragEnterHandler
-              }></DraxViewBaseComponent>
-          </View>
-        </TestCase>
-        <TestCase
-          itShould="DraxView组件:onReceiveDragOver(手指拖动蓝色正方形悬浮在绿色正方形正上方时,此时绿色正方形接收到传递的payload参数'hi')"
-          tags={['C_API']}>
-          <View style={{height: 260}}>
-            <DraxViewBaseComponent
-              payload={'hi'}
-              onReceiveDragOver={
-                onReceiveDragOverHandler
               }></DraxViewBaseComponent>
           </View>
         </TestCase>

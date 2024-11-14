@@ -3,8 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
-  FlatList,
   Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
@@ -16,9 +14,6 @@ const DraxViewDemo6 = () => {
     setResult('onReceiveDragExit回调已执行,接收到payload参数:' + payload);
   };
 
-  const onReceiveDragDropHandler = ({dragged: {payload}}) => {
-    setResult('onReceiveDragDrop回调已执行,接收到payload参数:' + payload);
-  };
   const resetBtn = () => {
     setResult('');
   };
@@ -41,17 +36,6 @@ const DraxViewDemo6 = () => {
               payload={'hello'}
               onReceiveDragExit={
                 onReceiveDragExitHandler
-              }></DraxViewBaseComponent>
-          </View>
-        </TestCase>
-        <TestCase
-          itShould="DraxView组件:onReceiveDragDrop(手指拖动蓝色正方形进入绿色正方形正上方然后释放，此时绿色正方形接收到传递的payload参数'hi')"
-          tags={['C_API']}>
-          <View style={{height: 260}}>
-            <DraxViewBaseComponent
-              payload={'hi'}
-              onReceiveDragDrop={
-                onReceiveDragDropHandler
               }></DraxViewBaseComponent>
           </View>
         </TestCase>

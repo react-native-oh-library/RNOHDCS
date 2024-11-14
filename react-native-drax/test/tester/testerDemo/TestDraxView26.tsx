@@ -1,11 +1,7 @@
 import React, {useState} from 'react';
 import {
   StyleSheet,
-  Text,
   View,
-  ScrollView,
-  FlatList,
-  Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
 import DraxViewBaseComponent from './components/DraxViewBaseComponent';
@@ -29,17 +25,6 @@ const DraxViewDemo26 = () => {
             <DraxViewBaseComponent
               draggingStyle={styles.draggingStyle}
               lockDragXPosition={true}
-              receiverPayload={'receiverPayload'}
-              onDragEnter={onDragEnterHandler}></DraxViewBaseComponent>
-          </View>
-        </TestCase>
-        <TestCase
-          itShould="DraxView组件:lockDragYPosition(只允许X轴即水平方向拖拽)"
-          tags={['C_API']}>
-          <View style={{height: 300}}>
-            <DraxViewBaseComponent
-              draggingStyle={styles.draggingStyle}
-              lockDragYPosition={true}
               receiverPayload={'receiverPayload'}
               onDragEnter={onDragEnterHandler}></DraxViewBaseComponent>
           </View>

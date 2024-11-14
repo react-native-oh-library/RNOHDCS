@@ -1,11 +1,7 @@
 import React, {useState} from 'react';
 import {
   StyleSheet,
-  Text,
   View,
-  ScrollView,
-  FlatList,
-  Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
 import DraxViewBaseComponent from './components/DraxViewBaseComponent';
@@ -29,17 +25,6 @@ const DraxViewDemo17 = () => {
             <DraxViewBaseComponent
               dragInactiveStyle={styles.dragInactiveStyle}
               hoverDraggingStyle={styles.hoverDraggingStyle}
-              receiverPayload={'receiverPayload'}
-              onDragEnter={onDragEnterHandler}></DraxViewBaseComponent>
-          </View>
-        </TestCase>
-        <TestCase
-          itShould="DraxView组件:hoverDragReleasedStyle(拖动蓝色正方形停止时应用于复制蓝色正方形的样式-黄色边框)"
-          tags={['C_API']}>
-          <View style={{height: 260}}>
-            <DraxViewBaseComponent
-              dragInactiveStyle={styles.dragInactiveStyle}
-              hoverDragReleasedStyle={styles.hoverDragReleasedStyle}
               receiverPayload={'receiverPayload'}
               onDragEnter={onDragEnterHandler}></DraxViewBaseComponent>
           </View>

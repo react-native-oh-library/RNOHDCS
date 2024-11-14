@@ -3,9 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
-  FlatList,
-  Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
 import DraxViewBaseComponent from './components/DraxViewBaseComponent';
@@ -29,17 +26,6 @@ const DraxViewDemo27 = () => {
             <DraxViewBaseComponent
               draggingStyle={styles.draggingStyle}
               children={<Text style={styles.redText}>Children</Text>}
-              receiverPayload={'receiverPayload'}
-              onDragEnter={onDragEnterHandler}></DraxViewBaseComponent>
-          </View>
-        </TestCase>
-        <TestCase
-          itShould="DraxView组件:noHover(设置是否禁止拖拽复制功能，默认为false-设置为true,即拖拽后无复制效果)"
-          tags={['C_API']}>
-          <View style={{height: 300}}>
-            <DraxViewBaseComponent
-              draggingStyle={styles.draggingStyle}
-              noHover={true}
               receiverPayload={'receiverPayload'}
               onDragEnter={onDragEnterHandler}></DraxViewBaseComponent>
           </View>

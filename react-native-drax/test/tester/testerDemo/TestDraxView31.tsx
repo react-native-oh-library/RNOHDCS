@@ -3,20 +3,17 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
-  FlatList,
   Button,
 } from 'react-native';
 import {Tester, TestCase} from '@rnoh/testerino';
 import DraxViewComponents from './components/DraxViewComponents';
 
-const DraxViewDemo4 = () => {
+const DraxViewDemo31 = () => {
   const [result, setResult] = useState('');
 
-  const onDragDropHandler = () => {
-    setResult('onDragDrop回调已执行');
+  const onDragOverHandler = () => {
+    setResult('onDragOver回调已执行');
   };
-
   const resetBtn = () => {
     setResult('');
   };
@@ -32,11 +29,11 @@ const DraxViewDemo4 = () => {
       </View>
       <Tester children={undefined}>
         <TestCase
-          itShould="DraxView组件:onDragDrop(手指拖动蓝色正方形进入绿色正方形正上方然后释放)"
+          itShould="DraxView组件:onDragOver(手指拖动蓝色正方形到绿色正方形上方)"
           tags={['C_API']}>
           <View style={{height: 260}}>
             <DraxViewComponents
-              onDragDrop={onDragDropHandler}></DraxViewComponents>
+              onDragOver={onDragOverHandler}></DraxViewComponents>
           </View>
         </TestCase>
       </Tester>
@@ -98,4 +95,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 });
-export default DraxViewDemo4;
+export default DraxViewDemo31;

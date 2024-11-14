@@ -33,17 +33,6 @@ const DraxViewDemo16 = () => {
               onDragEnter={onDragEnterHandler}></DraxViewBaseComponent>
           </View>
         </TestCase>
-        <TestCase
-          itShould="DraxView组件:hoverStyle(拖动蓝色正方形时应用于复制蓝色正方形的样式-黄色边框)"
-          tags={['C_API']}>
-          <View style={{height: 260}}>
-            <DraxViewBaseComponent
-              dragInactiveStyle={styles.dragInactiveStyle}
-              hoverStyle={styles.hoverStyle}
-              receiverPayload={'receiverPayload'}
-              onDragEnter={onDragEnterHandler}></DraxViewBaseComponent>
-          </View>
-        </TestCase>
       </Tester>
     </>
   );
