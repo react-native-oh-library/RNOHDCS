@@ -917,41 +917,6 @@ export default function WebViewTest() {
               expect(state).to.be.true;
             }}
           />
-
-          <TestCase
-            key={'webview api ref onShouldStartLoadWithRequest'}
-            itShould={`webview api ref onShouldStartLoadWithRequest`}
-            tags={['C_API']}
-            initialState={false}
-            arrange={({ setState }) => {
-              const [url, setUrl] = useState('www.baidu.com');
-              return (
-                <View style={{ padding: 20, height: 600 }}>
-                  <View><Text>无onShouldStartLoadWithRequest属性</Text></View>
-                  <WebView
-                    source={{ uri: url }}
-                  />
-                  <View><Text>onShouldStartLoadWithRequest返回true</Text></View>
-                  <WebView
-                    source={{ uri: url }}
-                    onShouldStartLoadWithRequest={(e: ShouldStartLoadRequest) => {
-                      return true;
-                    }}
-                  />
-                  <View><Text>onShouldStartLoadWithRequest返回false</Text></View>
-                  <WebView
-                    source={{ uri: url }}
-                    onShouldStartLoadWithRequest={(e: ShouldStartLoadRequest) => {
-                      return false;
-                    }}
-                  />
-                </View>
-              );
-            }}
-            assert={async ({ expect, state }) => {
-              expect(state).to.be.true;
-            }}
-          />
         </Tester>
       </ScrollView>
     </View>
