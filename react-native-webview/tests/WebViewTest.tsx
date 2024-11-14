@@ -385,11 +385,11 @@ export default function WebViewTest() {
                 <View style={{ padding: 20, height: 600 }}>
                   <Text> ignoreSilentHardwareSwitch=true</Text>
                   <WebView
-                    source={{ uri: 'https://res.vmallres.com//uomcdn/CN/cms/202210/C75C7E20060F3E909F2998E13C3ABC03.mp4' }}
+                    source={{ uri: 'https://res.vmallres.com/uomcdn/CN/cms/202210/C75C7E20060F3E909F2998E13C3ABC03.mp4' }}
                     ignoreSilentHardwareSwitch={true} />
                   <Text> ignoreSilentHardwareSwitch=false</Text>
                   <WebView
-                    source={{ uri: 'https://res.vmallres.com//uomcdn/CN/cms/202210/C75C7E20060F3E909F2998E13C3ABC03.mp4' }}
+                    source={{ uri: 'https://res.vmallres.com/uomcdn/CN/cms/202210/C75C7E20060F3E909F2998E13C3ABC03.mp4' }}
                     ignoreSilentHardwareSwitch={false} />
                 </View>
               );
