@@ -58,6 +58,7 @@ import {
   TabbedHeaderListDemoDefault,
   TabbedHeaderListDemoChild1,
   TabbedHeaderListDemoChild2,
+  TabbedHeaderListDemoChild3,
 } from '../screens/TabbedHeaderList/index';
 import {DetailsHeaderFlashListDemoDefault} from '../screens/DetailsHeaderFlashList/index';
 import {TabbedHeaderFlashListDemoDefault} from '../screens/TabbedHeaderFlashList/index';
@@ -110,6 +111,10 @@ export const App: React.FC = () => (
         <Stack.Screen
           name={CHILDROUTES.TabbedHeaderListDemoChild2}
           component={TabbedHeaderListDemoChild2}
+        />
+        <Stack.Screen
+          name={CHILDROUTES.TabbedHeaderListDemoChild3}
+          component={TabbedHeaderListDemoChild3}
         />
         {/* 测试TabbedHeaderList组件end*/}
         {/* 测试DetailsHeaderScrollView组件start*/}

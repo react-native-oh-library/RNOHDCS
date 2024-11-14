@@ -48,7 +48,7 @@ const TabbedHeaderListDemoDefault: React.FC<{
         logo={logo}
         logoStyle={styles.logoStyle}
         logoContainerStyle={styles.logoContainer}
-        enableSafeAreaTopInset={false}
+        enableSafeAreaTopInset={true}
         titleStyle={screenStyles.text}
         titleTestID={tabbedHeaderListTestIDs.title}
         foregroundImage={IconImage}
@@ -58,11 +58,6 @@ const TabbedHeaderListDemoDefault: React.FC<{
         onScrollBeginDrag={onScrollBeginDrag}
         onScrollEndDrag={onScrollEndDrag}
         parallaxHeight={300}
-        renderHeaderBar={() => (
-          <View style={styles.headerBarContainer}>
-            <Text style={styles.textStyle}>自定义HeaderBar部分</Text>
-          </View>
-        )}
         tabs={TABBED_SECTIONS.map(({title, tabTestID}) => ({
           title,
           testID: tabTestID,

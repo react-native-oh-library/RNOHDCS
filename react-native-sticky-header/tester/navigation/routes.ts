@@ -57,6 +57,7 @@ export const CHILDROUTES = {
   TabbedHeaderListDemoDefault: 'TabbedHeaderListDemoDefault' as const,
   TabbedHeaderListDemoChild1: 'TabbedHeaderListDemoChild1' as const,
   TabbedHeaderListDemoChild2: 'TabbedHeaderListDemoChild2' as const,
+  TabbedHeaderListDemoChild3: 'TabbedHeaderListDemoChild3' as const,
   //TabbedHeaderFlashList
   TabbedHeaderFlashListDemoDefault: 'TabbedHeaderFlashListDemoDefault' as const,
   //Yoda

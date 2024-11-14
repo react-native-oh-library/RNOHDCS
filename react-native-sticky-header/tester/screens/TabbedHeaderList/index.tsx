@@ -21,11 +21,13 @@ import workletRunlog from '../../assets/workletRunlogList.png';
 import TabbedHeaderListDemoDefault from './DefaultDemo/index';
 import TabbedHeaderListDemoChild1 from './TestDemo/ChildDemo1';
 import TabbedHeaderListDemoChild2 from './TestDemo/ChildDemo2';
+import TabbedHeaderListDemoChild3 from './TestDemo/ChildDemo3';
 //定义组件测试testID
 const testIdObject = {
   default: 'TabbedHeaderPagerDemoDefault_testID',
   child1: 'TabbedHeaderPagerDemoChild1_testID',
   child2: 'TabbedHeaderPagerDemoChild2_testID',
+  child3: 'TabbedHeaderPagerDemoChild3_testID',
 };
 const defaultRouter = {
   routeName: CHILDROUTES.TabbedHeaderListDemoDefault,
@@ -35,14 +37,11 @@ const defaultRouter = {
   testProps: {
     backgroundColor: 'rgb(78,15,255)',
     containerStyle: `flex:1`,
-    enableSafeAreaTopInset:
-      'false（设置为false,表现headerBar部分会减少内边距）',
+    enableSafeAreaTopInset: 'true',
     foregroundImage: '左下角带圆角绿色背景白色quiz文字的图片',
     logo: '左上角netguru quiz的图标',
     logoStyle: '右下角的阴影',
     logoContainerStyle: 'logo外侧border边框',
-    renderHeaderBar:
-      '自定义headerBar,设置背景色与backgroundColor一致，同时展示白色文字：自定义HeaderBar部分',
     tabs: 'Tab栏部分数据源，负责提供整个组件的数据(Pizza、Burgers、Kebab、Chinese Food、Sushi、Pasta)',
   },
 };
@@ -53,6 +52,8 @@ const childRouter1 = {
   title: '测试组件TabbedHeaderListDemoChild1(设置对比属性值)',
   testProps: {
     backgroundColor: 'rgb(255,78,15)',
+    enableSafeAreaTopInset:
+      ':false（设置为false,表现headerBar部分会减少内边距）',
     parallaxHeight:
       '设置parallaxHeight的值为50<100(headerHeight)*2,左下角header实际以200的高度渲染',
     headerHeight: `默认值100`,
@@ -95,6 +96,16 @@ const childRouter2 = {
     title: 'Food delivery app',
     titleStyle: `color:'white'`,
     titleTestID: '用例标识符，用作唯一标识，传递即生效',
+  },
+};
+const childRouter3 = {
+  routeName: CHILDROUTES.TabbedHeaderListDemoChild3,
+  label: 'TabbedHeaderList测试子组件3',
+  testID: testIdObject.child3,
+  title: '测试组件TabbedHeaderListDemoChild3(设置对比属性值)',
+  testProps: {
+    renderHeaderBar:
+      '自定义headerBar,设置背景色与backgroundColor一致，同时展示白色文字：自定义HeaderBar部分',
   },
 };
 const SimpleTable = props => {
@@ -146,6 +157,12 @@ const TabbedHeaderListDemoScreen: React.FC = () => {
                 <SimpleTable obj={childRouter2.testProps}></SimpleTable>
                 <Text>测试链接：</Text>
                 <ExampleLink key={childRouter2.routeName} {...childRouter2} />
+              </View>
+              <View style={styles.sectionPart}>
+                <Text>{childRouter3.title}</Text>
+                <SimpleTable obj={childRouter3.testProps}></SimpleTable>
+                <Text>测试链接：</Text>
+                <ExampleLink key={childRouter3.routeName} {...childRouter3} />
               </View>
               <View style={styles.sectionPart}>
                 <Text>单独展示相关回调方法测试结果</Text>
@@ -211,4 +228,5 @@ export {
   TabbedHeaderListDemoDefault,
   TabbedHeaderListDemoChild1,
   TabbedHeaderListDemoChild2,
+  TabbedHeaderListDemoChild3,
 };
