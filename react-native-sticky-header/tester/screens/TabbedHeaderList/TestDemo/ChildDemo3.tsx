@@ -15,34 +15,35 @@ import {
 } from '../../../constants/index';
 import IconImage from '../../../assets/icon.png';
 
-const TabbedHeaderListDemoChild1: React.FC<{
+const TabbedHeaderListDemoChild3: React.FC<{
   attrProps?: Record<string, any>;
 }> = (props: {attrProps?: Record<string, any>}) => {
-  const [callbackInfo, setCallbackInfo] = React.useState({});
-  // 处理回调方法调用
-  const onTabsLayout = () => {
-    let newInfo = {
-      ...callbackInfo,
-      onTabsLayout: 'onTabsLayout回调已调用',
-    };
-    setCallbackInfo(newInfo);
+  const testMomentumScrollBegin = () => {
+    'worklet';
+    console.log('测试testMomentumScrollBegin');
   };
-  const onTopReached = () => {
-    let newInfo = {
-      ...callbackInfo,
-      onTopReached: 'onTopReached回调已调用',
-    };
-    setCallbackInfo(newInfo);
+  const testMomentumScrollEnd = () => {
+    'worklet';
+    console.log('测试testMomentumScrollEnd');
+  };
+  const onScroll = () => {
+    'worklet';
+    console.log('测试onScroll');
+  };
+  const onScrollBeginDrag = () => {
+    'worklet';
+    console.log('测试onScrollBeginDrag');
+  };
+  const onScrollEndDrag = () => {
+    'worklet';
+    console.log('测试onScrollEndDrag');
   };
   return (
     <>
-      <View style={styles.showInfoContainer}>
-        <Text>{JSON.stringify(callbackInfo)}</Text>
-      </View>
       <TabbedHeaderList
         contentContainerStyle={{backgroundColor: colors.coralPink}}
         containerStyle={screenStyles.stretchContainer}
-        backgroundColor={colors.coralPink}
+        backgroundColor={colors.coralPink1}
         title="Food delivery app"
         logo={logo}
         logoStyle={styles.logoStyle}
@@ -51,9 +52,17 @@ const TabbedHeaderListDemoChild1: React.FC<{
         titleStyle={screenStyles.text}
         titleTestID={tabbedHeaderListTestIDs.title}
         foregroundImage={IconImage}
-        onTabsLayout={onTabsLayout}
-        onTopReached={onTopReached}
-        parallaxHeight={50}
+        onMomentumScrollBegin={testMomentumScrollBegin}
+        onMomentumScrollEnd={testMomentumScrollEnd}
+        onScroll={onScroll}
+        onScrollBeginDrag={onScrollBeginDrag}
+        onScrollEndDrag={onScrollEndDrag}
+        parallaxHeight={300}
+        renderHeaderBar={() => (
+          <View style={styles.headerBarContainer}>
+            <Text style={styles.textStyle}>自定义HeaderBar部分</Text>
+          </View>
+        )}
         tabs={TABBED_SECTIONS.map(({title, tabTestID}) => ({
           title,
           testID: tabTestID,
@@ -89,17 +98,14 @@ const TabbedHeaderListDemoChild1: React.FC<{
 const styles = StyleSheet.create({
   headerBarContainer: {
     width: '100%',
-    height: 280,
-    backgroundColor: 'blue',
+    height: 180,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgb(255,78,15)',
   },
-  showInfoContainer: {
-    position: 'absolute',
-    top: 270,
-    width: '100%',
-    height: 152,
-    borderColor: 'white',
-    borderWidth: 1,
-    zIndex: 666,
+  textStyle: {
+    color: 'white',
   },
   logoStyle: {
     shadowColor: '#000',
@@ -114,4 +120,5 @@ const styles = StyleSheet.create({
     borderColor: 'yellow',
   },
 });
-export default TabbedHeaderListDemoChild1;
+
+export default TabbedHeaderListDemoChild3;
