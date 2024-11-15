@@ -242,19 +242,6 @@ export default function App() {
                     }
                   />
                 </TestCase>
-                <TestCase itShould='测试containerProps{ needsOffscreenAlphaCompositing: true }属性'>
-                  <Button
-                    title="containerProps"
-                    onPress={() =>
-                      notifierRef.current?.showNotification({
-                        title: 'containerProps',
-                        description: '测试containerProps属性',
-                        containerProps: { needsOffscreenAlphaCompositing: true },
-                        queueMode: 'standby',
-                      })
-                    }
-                  />
-                </TestCase>
                 <TestCase itShould=' 测试containerStyle设置In/Out动画样式'>
                   <Button
                     title="动画样式"
