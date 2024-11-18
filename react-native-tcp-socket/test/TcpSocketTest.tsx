@@ -281,6 +281,10 @@ export const TcpSocketTest = () => {
                 dataLen +
                 ' bytes',
             );
+            console.log(
+              'TcpSocketDemo:tcpClient writableNeedDrain:' +
+                client.writableNeedDrain,
+            );
             sendMessage(
               'TcpSocketDemo:tcpServer client received data: ' +
                 dataLen +
@@ -305,6 +309,18 @@ export const TcpSocketTest = () => {
         }
         console.log('TcpSocketDemo:tcpServer socket on error ' + errorMsg);
         sendMessage('TcpSocketDemo:tcpServer socket on error ' + errorMsg);
+      });
+      socket.on('pause', () => {
+        console.log(
+          'TcpSocketDemo:tcpClient on pause'
+        );
+        sendMessage('TcpSocketDemo:tcpClient on pause');
+      });
+      client.on('resume', () => {
+        console.log(
+          'TcpSocketDemo:tcpClient on resume'
+        );
+        sendMessage('TcpSocketDemo:tcpClient on resume');
       });
 
       socket.on('close', (error: any) => {
@@ -333,12 +349,17 @@ export const TcpSocketTest = () => {
   };
 
   const createTcpClient = () => {
-    if (client) {
-      sendMessage('TcpSocketDemo:tcpClient had created!');
-      return;
-    }
     client = new TcpSocket.Socket();
-
+    console.log(
+      'TcpSocketDemo:tcpClient Socket.connecting:' + client.connecting
+    );
+    console.log(
+      'TcpSocketDemo:tcpClient Socket.pending:' + client.pending
+    );
+    console.log( 'TcpSocketDemo:tcpClient destroyed:' + client.destroyed);
+    console.log(
+      'TcpSocketDemo:tcpClient Socket.readyState is:' + client.readyState,
+    );
     let port = server.address()?.port;
     if (!port) {
       setTimeout(() => {
@@ -355,6 +376,15 @@ export const TcpSocketTest = () => {
       interface: 'wifi',
     };
     client.connect(options, () => {
+      console.log(
+        'TcpSocketDemo:tcpClient Socket.readyState is:' + client.readyState,
+      );
+      console.log(
+        'TcpSocketDemo:tcpClient Socket.connecting:' + client.connecting,
+      );
+      console.log(
+        'TcpSocketDemo:tcpClient Socket.pending:' + client.pending
+      );
       console.log('TcpSocketDemo:tcpClient connect success');
       sendMessage('TcpSocketDemo:tcpClient connect success');
     });
@@ -374,6 +404,15 @@ export const TcpSocketTest = () => {
         'TcpSocketDemo:tcpClient on connect:' +
           JSON.stringify(client.address()),
       );
+      console.log(
+        'TcpSocketDemo:tcpClient Socket.connecting:' + client.connecting,
+      );
+      console.log(
+        'TcpSocketDemo:tcpClient Socket.pending:' + client.pending
+      );
+      console.log(
+        'TcpSocketDemo:tcpClient Socket.readyState is:' + client.readyState,
+      );
       sendMessage(
         'TcpSocketDemo:tcpClient on connect:' +
           JSON.stringify(client.address()),
@@ -381,6 +420,9 @@ export const TcpSocketTest = () => {
     });
 
     client.on('drain', () => {
+      console.log(
+        'TcpSocketDemo:tcpClient drained'
+      );
       sendMessage('TcpSocketDemo:tcpClient drained');
     });
 
@@ -405,6 +447,12 @@ export const TcpSocketTest = () => {
       console.log('TcpSocketDemo:tcpClient closed ' + errorMsg);
       sendMessage('TcpSocketDemo:tcpClient closed ' + errorMsg);
     });
+    console.log(
+      'TcpSocketDemo:tcpClient Socket.connecting:' + client.connecting
+    );
+    console.log(
+      'TcpSocketDemo:tcpClient Socket.readyState is:' + client.readyState,
+    );
   };
 
   const createTcpClientError = () => {
@@ -431,6 +479,7 @@ export const TcpSocketTest = () => {
   const tcpSendData = () => {
     testCase = 1;
     let time = getNowTime();
+    console.log('TcpSocketDemo: tcp send data start:' + new Date().getTime());
     client.write(`${time} Hello, tcpServer!`);
   };
 
@@ -723,6 +772,9 @@ export const TcpSocketTest = () => {
               'TcpSocketDemo:tcpServer received data:' + JSON.stringify(data),
             );
             let time = getNowTime();
+            console.log(
+              'TcpSocketDemo: tcp send data end:' + new Date().getTime(),
+            );
             socket.write(`${time} Hello, tcpClient!`);
             break;
           case 2:
@@ -756,11 +808,21 @@ export const TcpSocketTest = () => {
                 dataLen +
                 ' bytes',
             );
+            console.log(
+              'TcpSocketDemo:tcpClient writableNeedDrain:' +
+                client.writableNeedDrain,
+            );
+            console.log(
+              'TcpSocketDemo:tcpClient Socket.bytesWritten:' +
+                client.bytesWritten,
+            );
             sendMessage(
               'TcpSocketDemo:tcpServer client received data: ' +
                 dataLen +
                 ' bytes',
             );
+            const hugeData = 'y'.repeat(5 * 1024);
+            socket.write(hugeData, 'utf8');
             break;
           default:
             console.log(
@@ -780,6 +842,19 @@ export const TcpSocketTest = () => {
         }
         console.log('TcpSocketDemo:tcpServer socket on error ' + errorMsg);
         sendMessage('TcpSocketDemo:tcpServer socket on error ' + errorMsg);
+      });
+
+      socket.on('pause', () => {
+        console.log(
+          'TcpSocketDemo:tcpClient on pause'
+        );
+        sendMessage('TcpSocketDemo:tcpClient on pause');
+      });
+      socket.on('resume', () => {
+        console.log(
+          'TcpSocketDemo:tcpClient on resume'
+        );
+        sendMessage('TcpSocketDemo:tcpClient on resume');
       });
 
       socket.on('close', (error: any) => {
@@ -844,6 +919,9 @@ export const TcpSocketTest = () => {
       },
     );
     client.on('data', (data: any) => {
+      console.log(
+        'TcpSocketDemo:tcpClient Socket.bytesRead:' + client.bytesRead,
+      );
       console.log(
         'TcpSocketDemo:tcpClient received data: ' +
           (data.length < 500 ? data : data.length + ' bytes'),
@@ -1301,6 +1379,10 @@ export const TcpSocketTest = () => {
                   <TouchableOpacity
                     onPress={() => {
                       if (server) {
+                        console.log(
+                          'TcpSocketDemo:Server.address:' +
+                            JSON.stringify(server.address()),
+                        );
                         setState(server.address()?.port);
                       } else {
                         sendMessage('TcpSocketDemo:tcpServer is null');
@@ -1414,6 +1496,10 @@ export const TcpSocketTest = () => {
                   <TouchableOpacity
                     onPress={() => {
                       if (client) {
+                        console.log(
+                          'TcpSocketDemo:Socket.address:' +
+                            JSON.stringify(client.address()),
+                        );
                         setState(client.address()?.port);
                       } else {
                         sendMessage('TcpSocketDemo:tcpClient is null');
@@ -1458,10 +1544,22 @@ export const TcpSocketTest = () => {
                     }
                   }}
                   style={styles.moduleButton}>
-                  <Text style={styles.buttonText}>setEncoding</Text>
+                  <Text style={styles.buttonText}>setEncoding('UTF-8')</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    if (client) {
+                      client.setEncoding('hex');
+                      tcpSendData();
+                    } else {
+                      sendMessage('TcpSocketDemo:tcpClient is null');
+                    }
+                  }}
+                  style={styles.moduleButton}>
+                  <Text style={styles.buttonText}>setEncoding('hex')</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="23.测试Socket.setEncoding方法，成功会打印‘Hello, tcpClient!’(测试前需要先点击1,2创建服务器和客户端）">
+              <TestCase itShould="23.测试Socket.setNoDelay方法，成功会打印‘Hello, tcpClient!’(测试前需要先点击1,2创建服务器和客户端）">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1472,7 +1570,19 @@ export const TcpSocketTest = () => {
                     }
                   }}
                   style={styles.moduleButton}>
-                  <Text style={styles.buttonText}>setNoDelay</Text>
+                  <Text style={styles.buttonText}>setNoDelay_true</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    if (client) {
+                      client.setNoDelay(false);
+                      tcpSendData();
+                    } else {
+                      sendMessage('TcpSocketDemo:tcpClient is null');
+                    }
+                  }}
+                  style={styles.moduleButton}>
+                  <Text style={styles.buttonText}>setNoDelay_false</Text>
                 </TouchableOpacity>
               </TestCase>
               <TestCase itShould="24.测试Socket.setTimeout方法，点击3s后会打印‘Socket timed out!’(测试前需要先点击17,15创建服务器和客户端）">
@@ -1527,10 +1637,17 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>resume</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="28.测试Socket.writableNeedDrain属性">
+              <TestCase itShould="28.测试Socket.writableNeedDrain属性(需要先点击1.2.开启服务器和客户端)">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
+                      testCase = 3;
+                      const hugeData = 'x'.repeat(5 * 1024 * 10);
+                      client.write(hugeData, 'utf8');
+                      console.log(
+                        'TcpSocketDemo:tcpClient writableNeedDrain:' +
+                          client.writableNeedDrain,
+                      );
                       sendMessage(
                         'TcpSocketDemo:tcpClient writableNeedDrain:' +
                           client.writableNeedDrain,
@@ -1543,10 +1660,17 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>writableNeedDrain</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="29.测试Socket.bytesRead属性">
+              <TestCase itShould="29.测试Socket.bytesRead属性(需要先点击1.2.开启服务器和客户端)">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
+                      testCase = 3;
+                      const hugeData = 'x'.repeat(5 * 1024 * 10);
+                      client.write(hugeData, 'utf8');
+                      console.log(
+                        'TcpSocketDemo:tcpClient Socket.bytesRead:' +
+                          client.bytesRead,
+                      );
                       sendMessage(
                         'TcpSocketDemo:tcpClient bytesRead:' + client.bytesRead,
                       );
@@ -1558,10 +1682,16 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>bytesRead</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="30.测试Socket.bytesWritten属性">
+              <TestCase itShould="30.测试Socket.bytesWritten属性(需要先点击1.2.开启服务器和客户端)">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
+                      const hugeData = 'x'.repeat(5 * 1024 * 10);
+                      client.write(hugeData, 'utf8');
+                      console.log(
+                        'TcpSocketDemo:tcpClient Socket.bytesWritten:' +
+                          client.bytesWritten,
+                      );
                       sendMessage(
                         'TcpSocketDemo:tcpClient bytesWritten:' +
                           client.bytesWritten,
@@ -1574,26 +1704,19 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>bytesWritten</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="31.测试Socket.connecting属性">
+              <TestCase itShould="31.测试Socket.connecting属性(先点击9，创建客户端)">
                 <TouchableOpacity
-                  onPress={() => {
-                    if (client) {
-                      sendMessage(
-                        'TcpSocketDemo:tcpClient connecting:' +
-                          client.connecting,
-                      );
-                    } else {
-                      sendMessage('TcpSocketDemo:tcpClient is null');
-                    }
-                  }}
+                  onPress={createTcpClient}
                   style={styles.moduleButton}>
                   <Text style={styles.buttonText}>connecting</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="32.测试Socket.destroyed属性">
+              <TestCase itShould="32.测试Socket.destroyed属性(需要先点击1.2.开启服务器和客户端)">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
+                      client.destroy();
+                      console.log( 'TcpSocketDemo:tcpClient destroyed:' + client.destroyed);
                       sendMessage(
                         'TcpSocketDemo:tcpClient destroyed:' + client.destroyed,
                       );
@@ -1605,7 +1728,7 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>destroyed</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="33.测试Socket.localAddress属性">
+              <TestCase itShould="33.测试Socket.localAddress属性(需要先点击1.2.开启服务器和客户端)">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1621,7 +1744,7 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>localAddress</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="34.测试Socket.localPort属性">
+              <TestCase itShould="34.测试Socket.localPort属性(需要先点击1.2.开启服务器和客户端)">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1636,7 +1759,7 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>localPort</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="35.测试Socket.remoteAddress属性">
+              <TestCase itShould="35.测试Socket.remoteAddress属性(需要先点击1.2.开启服务器和客户端)">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1652,7 +1775,7 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>remoteAddress</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="36.测试Socket.remoteFamily属性">
+              <TestCase itShould="36.测试Socket.remoteFamily属性(需要先点击1.2.开启服务器和客户端)">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1668,7 +1791,7 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>remoteFamily</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="37.测试Socket.remotePort属性">
+              <TestCase itShould="37.测试Socket.remotePort属性(需要先点击1.2.开启服务器和客户端)">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1684,22 +1807,14 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>remotePort</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="38.测试Socket.pending属性">
+              <TestCase itShould="38.测试Socket.pending属性(需要先点击1.开启服务器)">
                 <TouchableOpacity
-                  onPress={() => {
-                    if (client) {
-                      sendMessage(
-                        'TcpSocketDemo:tcpClient pending:' + client.pending,
-                      );
-                    } else {
-                      sendMessage('TcpSocketDemo:tcpClient is null');
-                    }
-                  }}
+                  onPress={createTcpClient}
                   style={styles.moduleButton}>
                   <Text style={styles.buttonText}>pending</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="39.测试Socket.timeout属性">
+              <TestCase itShould="39.测试Socket.timeout属性(需要先点击1.2.开启服务器和客户端)">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1715,18 +1830,9 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>timeout</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="40.测试Socket.readyState属性">
+              <TestCase itShould="40.测试Socket.readyState属性(需要先点击1.开启服务器)">
                 <TouchableOpacity
-                  onPress={() => {
-                    if (client) {
-                      sendMessage(
-                        'TcpSocketDemo:tcpClient readyState:' +
-                          client.readyState,
-                      );
-                    } else {
-                      sendMessage('TcpSocketDemo:tcpClient is null');
-                    }
-                  }}
+                  onPress={createTcpClient}
                   style={styles.moduleButton}>
                   <Text style={styles.buttonText}>readyState</Text>
                 </TouchableOpacity>
