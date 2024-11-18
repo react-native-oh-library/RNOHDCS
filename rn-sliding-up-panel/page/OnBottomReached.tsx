@@ -37,7 +37,7 @@ export function OnBottomReached() {
         animatedValue={_draggedValue}
         draggableRange={draggableRange}
         snappingPoints={[300]}
-        onMomentumDragStart={() => {
+        onBottomReached={() => {
           setEventBackText({ ...eventBackText, onBottomReached: 'bottomReached change text' });
         }}>
         <View style={styles.panel}>
