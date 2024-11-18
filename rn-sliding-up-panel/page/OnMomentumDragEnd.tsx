@@ -37,7 +37,7 @@ export function OnMomentumDragEnd() {
         animatedValue={_draggedValue}
         draggableRange={draggableRange}
         snappingPoints={[300]}
-        onMomentumDragStart={() => {
+        onMomentumDragEnd={() => {
           setEventBackText({ ...eventBackText, onMomentumDragEnd: 'momentumDragEnd change text' });
         }}>
         <View style={styles.panel}>
