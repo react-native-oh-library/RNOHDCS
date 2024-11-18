@@ -1,29 +1,28 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   View,
 } from 'react-native';
-import {Tester, TestCase} from '@rnoh/testerino';
+import { Tester, TestCase } from '@rnoh/testerino';
 import DraxViewBaseComponent from './components/DraxViewBaseComponent';
 
 const DraxViewDemo41 = () => {
   const [result, setResult] = useState('');
-  const onDragEnterHandler = ({receiver}) => {
+  const onDragEnterHandler = ({ receiver }) => {
     setResult(
       'onDragEnter回调接收到绿色正方形传递的receiverPayload:' +
-        JSON.stringify(receiver.payload),
+      JSON.stringify(receiver.payload),
     );
   };
   return (
     <>
       <Tester children={undefined}>
         <TestCase
-          itShould="DraxView组件:draggingWithoutReceiverStyle(拖动蓝色正方形未进入绿色正方形正上方时应用于蓝色正方形的样式,拖拽释放时消失)"
+          itShould="DraxView组件:draggingStyle(拖拽过程中应用于蓝色正方形的样式,拖拽停止后消失)"
           tags={['C_API']}>
-          <View style={{height: 260}}>
+          <View style={{ height: 260 }}>
             <DraxViewBaseComponent
-              dragInactiveStyle={styles.dragInactiveStyle}
-              draggingWithoutReceiverStyle={styles.draggingWithoutReceiverStyle}
+              draggingStyle={styles.draggingStyle}
               receiverPayload={'receiverPayload'}
               onDragEnter={onDragEnterHandler}></DraxViewBaseComponent>
           </View>
