@@ -25,10 +25,14 @@ function PropsType() {
         热更新版本号: "codePushStore.info.label",
         热更新详情: "codePushStore.info.desc"
     }
+    const Panels = {
+        title: 'test',
+        component: <Text style={{ paddingLeft: 100 }}>test</Text>
+    }
 
     return (
         <View style={styles.container1}>
-            <Vconsole appInfo={appInfo} console={true} showBtn={true} />
+            <Vconsole appInfo={appInfo} console={true} showBtn={true} panels={Panels}/>
         </View>
     );
 }
