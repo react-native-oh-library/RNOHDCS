@@ -118,6 +118,9 @@ export function ReCAPTCHAExample() {
         <TestSuite name='react-native-recaptcha-that-works'>
               {tester_change("语言 lang = zh-CN",'zh-CN',()=>{ setState({...state,lang:'zh-CN'}) })}
               {tester_change("语言 lang = pt",'pt',()=>{ setState({...state,lang:'pt'}) })}
+              {tester_change("样式 size = compact",'compact',()=>{ setState({...state,size:'compact'}) })}
+              {tester_change("样式 size = normal",'normal',()=>{ setState({...state,size:'normal'}) })}
+              {tester_change("样式 size = invisible",'invisible',()=>{ setState({...state,size:'invisible'}) })}
               {tester_change("样式 style = {marginBottom:100}",'style {marginBottom:100}',()=>{ setState({...state,style: {marginBottom:100}}) })}
               {tester_change("样式 style = {marginBottom:50}",'style {marginBottom:50}',()=>{ setState({...state,style: {marginBottom:50}}) })}
               {tester_change("modal样式 modalProps = {animationType slide}",'modal样式 ',()=>{ setState({...state,modalProps: {animationType:'slide'}}) })}
