@@ -6,6 +6,9 @@ import { MMKVLoader, ProcessingModes, create, useMMKVRef, useMMKVStorage, useInd
 const storageString = new MMKVLoader().withInstanceID('storageString').initialize();
 const useStorageString = create(storageString);
 
+const MMKVKey = new MMKVLoader().withEncryption().encryptWithCustomKey('key').initialize();
+const useStorageKey = create(MMKVKey);
+
 const storageInt = new MMKVLoader().withInstanceID('storageInt').initialize();
 const useStorageInt = create(storageInt);
 
@@ -18,6 +21,8 @@ const useStorageMap = create(storageMap);
 const storageArray = new MMKVLoader().withInstanceID('storageArray').initialize();
 const useStorageArray = create(storageArray);
 
+
+
 const storageMultipleItems = new MMKVLoader().withInstanceID('storageMultipleItems').initialize();
 const useStorageMultipleItems = create(storageMultipleItems);
 
@@ -27,10 +32,12 @@ const useStorageMultipleItems2 = create(storageMultipleItems2)
 const storageRef = new MMKVLoader().withInstanceID('storageRef').initialize();
 const MMKV = new MMKVLoader().initialize();
 
+
+
 const indexMMKV = new MMKVLoader().withInstanceID('indexMMKV').initialize();
 const MMKVStorageTest = () => {
     indexMMKV.transactions.register('array', 'beforewrite', ({ key, value }) => {
-       
+
     });
 
     const [tagIndex, setTagIndex] = useMMKVStorage('index', MMKV, ['abc', '123']);
@@ -38,6 +45,8 @@ const MMKVStorageTest = () => {
 
     const name = useMMKVRef("name", storageRef, "")
     const [user, setUser] = useMMKVStorage("user", MMKV, "robert"); // robert is the default value
+
+ 
 
 
 
@@ -79,28 +88,50 @@ const MMKVStorageTest = () => {
 
     const [multipleItemsTest2, setMultipleItemsTest2] = useStorageMultipleItems2('multipleItemsTest2', "shaoen");
 
+    const [MMKV1, setMMKV1] = useState(Object);
+    const [MMKV2, setMMKV2] = useState(Object);
+    const [MMKV3, setMMKV3] = useState(Object);
+    const [MMKV4, setMMKV4] = useState(Object);
+    const [MMKV5, setMMKV5] = useState(Object);
+    const [MMKV6, setMMKV6] = useState(Object);
+    const [MMKV7, setMMKV7] = useState(Object);
+    const [MMKV8, setMMKV8] = useState(Object);
+    const [MMKV9, setMMKV9] = useState(Object);
+    const [MMKV10, setMMKV10] = useState(Object);
+    const [MMKV11, setMMKV11] = useState("");
+    const [MMKV12, setMMKV12] = useState(Object);
+    const [MMKV13, setMMKV13] = useState(Object);
+    const [MMKV14, setMMKV14] = useState(Object);
+    const [MMKV15, setMMKV15] = useState(Object);
+    const [MMKV16, setMMKV16] = useState(Object);
+    const [MMKV17, setMMKV17] = useState(Object);
+    const [MMKV18, setMMKV18] = useState(Object);
+    const [MMKV19, setMMKV19] = useState(Object);
+    const [MMKV20, setMMKV20] = useState(Object);
+    const [MMKV21, setMMKV21] = useState(Object);
+    const [MMKV22, setMMKV22] = useState(Object);
+    const [MMKV23, setMMKV23] = useState(Object);
+
+
     //#endregion
     return (
         <>
             <Tester style={{ height: '100%' }}>
-                <ScrollView style={{ marginBottom:70 }}>
+                <ScrollView style={{ marginBottom: 120 }}>
                     <TestSuite name='API'>
                         <View>
                             <TestCase
                                 tags={['C_API']}
-                                itShould="新建一个MMKV实例: new MMKVLoader().initialize()"
-                                initialState={false}
-                                arrange={({ setState }) => (
+                                itShould="新建一个MMKV实例: new MMKVLoader().initialize()">
+
+                                <>
+                                    <Text>{JSON.stringify(MMKV1)}</Text>
                                     <View>
                                         <TouchableOpacity
                                             style={styles.moduleButton}
                                             onPress={() => {
                                                 const MMKV = new MMKVLoader().initialize();
-                                                if (MMKV) {
-                                                    setState(true)
-                                                } else {
-                                                    setState(false)
-                                                }
+                                                setMMKV1(MMKV)
                                             }}
                                         >
                                             <Text style={styles.buttonText}>
@@ -108,263 +139,188 @@ const MMKVStorageTest = () => {
                                             </Text>
                                         </TouchableOpacity>
                                     </View>
-                                )}
-                                assert={({ state, expect }) => {
-                                    expect(state).to.be.true;
-                                }}
-                            />
+                                </>
+                            </TestCase>
 
                             <TestCase
                                 tags={['C_API']}
-                                itShould="新建一个MMKV实例: new MMKVLoader().withInstanceID('id')"
-                                initialState={false}
-                                arrange={({ setState }) => (
-                                    <View>
+                                itShould="新建一个MMKV实例: new MMKVLoader().withInstanceID('id')">
+                                <View>
+                                    <>
+                                        <Text>{JSON.stringify(MMKV2)}</Text>
                                         <TouchableOpacity
                                             style={styles.moduleButton}
                                             onPress={() => {
                                                 const MMKV = new MMKVLoader().withInstanceID('id');
-                                                if (MMKV.options.instanceID) {
-                                                    setState(true)
-                                                } else {
-                                                    setState(false)
-                                                }
+                                                setMMKV2(MMKV.options.instanceID)
                                             }}
                                         >
                                             <Text style={styles.buttonText}>
                                                 创建MMKV实例并指定应使用的ID创建MMKV实例
                                             </Text>
                                         </TouchableOpacity>
-                                    </View>
-                                )}
-                                assert={({ state, expect }) => {
-                                    expect(state).to.be.true;
-                                }}
-                            />
-
+                                    </>
+                                </View>
+                            </TestCase>
                             <TestCase
                                 tags={['C_API']}
-                                itShould="新建一个MMKV实例: new MMKVLoader().withEncryption().initialize()"
-                                initialState={false}
-                                arrange={({ setState }) => (
-                                    <View>
+                                itShould="新建一个MMKV实例: new MMKVLoader().withEncryption().initialize()">
+
+                                <View>
+                                    <>
+                                        <Text>{JSON.stringify(MMKV3)}</Text>
                                         <TouchableOpacity
                                             style={styles.moduleButton}
                                             onPress={() => {
                                                 const MMKV = new MMKVLoader().withEncryption().initialize();
-                                                if (MMKV.options.initWithEncryption) {
-                                                    setState(true)
-                                                } else {
-                                                    setState(false)
-                                                }
+                                                setMMKV3(MMKV.options.initWithEncryption)
+
                                             }}
                                         >
                                             <Text style={styles.buttonText}>
                                                 创建MMKV实例并初始化时加密MMKV实例
                                             </Text>
                                         </TouchableOpacity>
-                                    </View>
-                                )}
-                                assert={({ state, expect }) => {
-                                    expect(state).to.be.true;
-                                }}
-                            />
+                                    </>
+                                </View>
+                            </TestCase>
 
                             <TestCase
                                 tags={['C_API']}
-                                itShould="新建一个MMKV实例: new MMKVLoader().encryptWithCustomKey('key').initialize()"
-                                initialState={false}
-                                arrange={({ setState }) => (
-                                    <View>
+                                itShould="新建一个MMKV实例: new MMKVLoader().encryptWithCustomKey('key').initialize()">
+
+                                <View>
+                                    <>
+                                        <Text>{JSON.stringify(MMKV4)}</Text>
                                         <TouchableOpacity
                                             style={styles.moduleButton}
                                             onPress={() => {
                                                 const MMKV = new MMKVLoader().withEncryption().encryptWithCustomKey('key').initialize();
-                                                if (MMKV.options.initWithEncryption) {
-                                                    setState(true)
-                                                } else {
-                                                    setState(false)
-                                                }
+                                                setMMKV4(MMKV.options.key)
+
                                             }}
                                         >
                                             <Text style={styles.buttonText}>
                                                 创建MMKV实例并指定密码来加密存储
                                             </Text>
                                         </TouchableOpacity>
-                                    </View>
-                                )}
-                                assert={({ state, expect }) => {
-                                    expect(state).to.be.true;
-                                }}
-                            />
+                                    </>
+                                </View>
+                            </TestCase>
 
                             <TestCase
                                 tags={['C_API']}
-                                itShould="MMKV.clearMemoryCache();"
-                                initialState={false}
-                                arrange={({ setState }) => (
-                                    <View>
+                                itShould="MMKV.clearMemoryCache();">
+
+                                <View>
+                                    <>
+                                        <Text>{JSON.stringify(MMKV5)}</Text>
                                         <TouchableOpacity
                                             style={styles.moduleButton}
                                             onPress={() => {
-                                                if (storageBoolean.clearMemoryCache()) {
-                                                    setState(true)
-                                                } else {
-                                                    setState(false)
-                                                }
+                                                let clear = storageBoolean.clearMemoryCache();
+                                                setMMKV5(clear)
+
                                             }}
                                         >
                                             <Text style={styles.buttonText}>
                                                 从内存中清除
                                             </Text>
                                         </TouchableOpacity>
-                                    </View>
-                                )}
-                                assert={({ state, expect }) => {
-                                    expect(state).to.be.true;
-                                }}
-                            />
+                                    </>
+                                </View>
+                            </TestCase>
 
                             <TestCase
                                 tags={['C_API']}
-                                itShould="MMKV.removeItem(key);"
-                                initialState={false}
-                                arrange={({ setState }) => (
-                                    <View>
+                                itShould="MMKV.removeItem(key);">
+
+                                <View>
+                                    <>
+                                        <Text>{JSON.stringify(MMKV6)}</Text>
                                         <TouchableOpacity
                                             style={styles.moduleButton}
                                             onPress={() => {
-                                                storageString.removeItem('stringTest');
-                                                if (!storageString.options.key) {
-                                                    setState(true)
-                                                } else {
-                                                    setState(false)
-                                                }
+
+                                                let removeResult = storageString.removeItem('stringTest');
+                                                setMMKV6(removeResult)
+
                                             }}
                                         >
                                             <Text style={styles.buttonText}>
                                                 删除给定键的项
                                             </Text>
                                         </TouchableOpacity>
-                                    </View>
-                                )}
-                                assert={({ state, expect }) => {
-                                    expect(state).to.be.true;
-                                }}
-                            />
-
-<TestCase
+                                    </>
+                                </View>
+                            </TestCase>
+                            <TestCase
                                 tags={['C_API']}
-                                itShould="MMKV.clearStore();"
-                                initialState={false}
-                                arrange={({ setState }) => (
-                                    <View>
+                                itShould="MMKV.clearStore();">
+
+                                <View>
+                                    <>
+                                        <Text>{JSON.stringify(MMKV7)}</Text>
                                         <TouchableOpacity
                                             style={styles.moduleButton}
                                             onPress={() => {
-                                                storageString.clearStore();
-                                                if (!storageString.options.key) {
-                                                    setState(true)
-                                                } else {
-                                                    setState(false)
-                                                }
+                                                let result = storageString.clearStore();
+                                                setMMKV7(result)
+
                                             }}
                                         >
                                             <Text style={styles.buttonText}>
                                                 清仓
                                             </Text>
                                         </TouchableOpacity>
-                                    </View>
-                                )}
-                                assert={({ state, expect }) => {
-                                    expect(state).to.be.true;
-                                }}
-                            />
+                                    </>
+                                </View>
+                            </TestCase>
 
                             <TestCase
                                 tags={['C_API']}
-                                itShould="MMKV.getAllMMKVInstanceIDs();"
-                                initialState={false}
-                                arrange={({ setState }) => (
-                                    <View>
-                                        <TouchableOpacity
-                                            style={styles.moduleButton}
-                                            onPress={() => {
-                                                let res = getAllMMKVInstanceIDs()
-                                                console.log(res);
-                                                if (res) {
-                                                    setState(true)
-                                                } else {
-                                                    setState(false)
-                                                }
-                                            }}
-                                        >
-                                            <Text style={styles.buttonText}>
-                                                返回创建的所有MMKV实例ID的列表
-                                            </Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                )}
-                                assert={({ state, expect }) => {
-                                    expect(state).to.be.true;
-                                }}
-                            />
+                                itShould="MMKV.getCurrentMMKVInstances();">
 
-                            <TestCase
-                                tags={['C_API']}
-                                itShould="MMKV.getCurrentMMKVInstances();"
-                                initialState={false}
-                                arrange={({ setState }) => (
-                                    <View>
+                                <View>
+                                    <>
+                                        <Text>{JSON.stringify(MMKV9)}</Text>
                                         <TouchableOpacity
                                             style={styles.moduleButton}
                                             onPress={() => {
                                                 let res = storageInt.getCurrentMMKVInstanceIDs()
-                                                console.log(res);
-                                                if (res) {
-                                                    setState(true)
-                                                } else {
-                                                    setState(false)
-                                                }
+                                                setMMKV9(res)
+
                                             }}
                                         >
                                             <Text style={styles.buttonText}>
                                                 获取当前初始化的实例ID
                                             </Text>
                                         </TouchableOpacity>
-                                    </View>
-                                )}
-                                assert={({ state, expect }) => {
-                                    expect(state).to.be.true;
-                                }}
-                            />
-
+                                    </>
+                                </View>
+                            </TestCase>
                             <TestCase
                                 tags={['C_API']}
-                                itShould="MMKV.getKey();"
-                                initialState={false}
-                                arrange={({ setState }) => (
-                                    <View>
+                                itShould="MMKV.getKey();">
+
+                                <View>
+                                    <>
+                                        <Text>{JSON.stringify(MMKV10)}</Text>
                                         <TouchableOpacity
                                             style={styles.moduleButton}
                                             onPress={() => {
-                                                if (storageInt.getKey()) {
-                                                    setState(true)
-                                                } else {
-                                                    setState(false)
-                                                }
+                                                const MMKVKey = new MMKVLoader().withEncryption().encryptWithCustomKey('key').initialize();
+                                                let result = MMKVKey.getKey();
+                                                setMMKV10(result)
                                             }}
                                         >
                                             <Text style={styles.buttonText}>
                                                 获取当前MMKV实例的加密密钥
                                             </Text>
                                         </TouchableOpacity>
-                                    </View>
-                                )}
-                                assert={({ state, expect }) => {
-                                    expect(state).to.be.true;
-                                }}
-                            />
+                                    </>
+                                </View>
+                            </TestCase>
                         </View>
                         <View>
                             <View style={styles.unitView}>
@@ -386,30 +342,25 @@ const MMKVStorageTest = () => {
                             </TestCase>
                             <TestCase
                                 tags={['C_API']}
-                                itShould="getString: 调用实例的getString方法获取给定键的字符串值"
-                                initialState={false}
-                                arrange={({ setState }) => (
-                                    <View>
+                                itShould="getString: 调用实例的getString方法获取给定键的字符串值">
+
+                                <View>
+                                    <>
+                                        <Text>{MMKV11}</Text>
                                         <TouchableOpacity
                                             style={styles.moduleButton}
                                             onPress={() => {
                                                 let res = storageString.getString('stringTest');
-                                                if (res === stringTest) {
-                                                    setState(true)
-                                                } else {
-                                                    setState(false)
-                                                }
+                                                setMMKV11(res)
+
                                             }}
                                         >
                                             <Text style={styles.buttonText}>getString</Text>
                                         </TouchableOpacity>
-                                    </View>
+                                    </>
+                                </View>
+                            </TestCase>
 
-                                )}
-                                assert={({ state, expect }) => {
-                                    expect(state).to.be.true;
-                                }}
-                            />
                         </View>
                         <View>
                             <View style={styles.unitView}>
@@ -419,6 +370,7 @@ const MMKVStorageTest = () => {
                             </View>
                             <TestCase tags={['C_API']} itShould='调用实例的setInt方法给定的键设置存储中的数字值'>
                                 <View>
+
                                     <TouchableOpacity
                                         style={styles.moduleButton}
                                         onPress={() => {
@@ -432,29 +384,24 @@ const MMKVStorageTest = () => {
                             </TestCase>
                             <TestCase
                                 tags={['C_API']}
-                                itShould="调用实例的getInt方法获取给定键的数字值"
-                                initialState={false}
-                                arrange={({ setState }) => (
-                                    <View>
+                                itShould="调用实例的getInt方法获取给定键的数字值">
+
+                                <View>
+                                    <>
+                                        <Text>{JSON.stringify(MMKV12)}</Text>
                                         <TouchableOpacity
                                             style={styles.moduleButton}
                                             onPress={() => {
                                                 let res = storageInt.getInt('intTest');
-                                                if (res === intTest) {
-                                                    setState(true)
-                                                } else {
-                                                    setState(false)
-                                                }
+                                                setMMKV12(res)
+
                                             }}
                                         >
                                             <Text style={styles.buttonText}>getInt</Text>
                                         </TouchableOpacity>
-                                    </View>
-                                )}
-                                assert={({ state, expect }) => {
-                                    expect(state).to.be.true;
-                                }}
-                            />
+                                    </>
+                                </View>
+                            </TestCase>
                         </View>
                         <View>
                             <View style={styles.unitView}>
@@ -476,30 +423,25 @@ const MMKVStorageTest = () => {
                             </TestCase>
                             <TestCase
                                 tags={['C_API']}
-                                itShould="getBool: 调用实例的getBool方法获取给定键的布尔值"
-                                initialState={false}
-                                arrange={({ setState }) => (
-                                    <View>
+                                itShould="getBool: 调用实例的getBool方法获取给定键的布尔值">
+
+                                <View>
+                                    <>
+                                        <Text>{JSON.stringify(MMKV13)}</Text>
                                         <TouchableOpacity
                                             style={styles.moduleButton}
                                             onPress={() => {
                                                 let res = storageBoolean.getBool('booleanTest');
-                                                if (JSON.stringify(res) === JSON.stringify(booleanTest)) {
-                                                    setState(true)
-                                                } else {
-                                                    setState(false)
-                                                }
+                                                setMMKV13(res)
+
                                             }}
                                         >
                                             <Text style={styles.buttonText}>getBool</Text>
                                         </TouchableOpacity>
-                                    </View>
+                                    </>
+                                </View>
+                            </TestCase>
 
-                                )}
-                                assert={({ state, expect }) => {
-                                    expect(state).to.be.true;
-                                }}
-                            />
                         </View>
                         <View>
                             <View style={styles.unitView}>
@@ -521,29 +463,24 @@ const MMKVStorageTest = () => {
                             </TestCase>
                             <TestCase
                                 tags={['C_API']}
-                                itShould="getMap: 调用实例的getMap方法从存储中获取对象"
-                                initialState={false}
-                                arrange={({ setState }) => (
-                                    <View>
+                                itShould="getMap: 调用实例的getMap方法从存储中获取对象">
+
+                                <View>
+                                    <>
+                                        <Text>{JSON.stringify(MMKV14)}</Text>
                                         <TouchableOpacity
                                             style={styles.moduleButton}
                                             onPress={() => {
                                                 let res = storageMap.getMap('mapTest');
-                                                if (JSON.stringify(res) === JSON.stringify(mapTest)) {
-                                                    setState(true)
-                                                } else {
-                                                    setState(false)
-                                                }
+                                                setMMKV14(res)
+
                                             }}
                                         >
                                             <Text style={styles.buttonText}>getMap</Text>
                                         </TouchableOpacity>
-                                    </View>
-                                )}
-                                assert={({ state, expect }) => {
-                                    expect(state).to.be.true;
-                                }}
-                            />
+                                    </>
+                                </View>
+                            </TestCase>
                         </View>
                         <View>
                             <View style={styles.unitView}>
@@ -565,29 +502,24 @@ const MMKVStorageTest = () => {
                             </TestCase>
                             <TestCase
                                 tags={['C_API']}
-                                itShould="getArray: 调用实例的getArray方法从存储中获取一个数组"
-                                initialState={false}
-                                arrange={({ setState }) => (
-                                    <View>
+                                itShould="getArray: 调用实例的getArray方法从存储中获取一个数组">
+
+                                <View>
+                                    <>
+                                        <Text>{JSON.stringify(MMKV15)}</Text>
                                         <TouchableOpacity
                                             style={styles.moduleButton}
                                             onPress={() => {
                                                 let res = storageArray.getArray('arrayTest');
-                                                if (JSON.stringify(res) === JSON.stringify(arrayTest)) {
-                                                    setState(true)
-                                                } else {
-                                                    setState(false)
-                                                }
+                                                setMMKV15(res)
+
                                             }}
                                         >
                                             <Text style={styles.buttonText}>getArray</Text>
                                         </TouchableOpacity>
-                                    </View>
-                                )}
-                                assert={({ state, expect }) => {
-                                    expect(state).to.be.true;
-                                }}
-                            />
+                                    </>
+                                </View>
+                            </TestCase>
                         </View>
                         <View>
                             <View style={styles.unitView}>
@@ -597,30 +529,25 @@ const MMKVStorageTest = () => {
                             </View>
                             <TestCase
                                 tags={['C_API']}
-                                itShould="getMultipleItems: 调用实例的getMultipleItems方法从存储中获取给定键数组的多个对象"
-                                initialState={false}
-                                arrange={({ setState }) => (
-                                    <View>
+                                itShould="getMultipleItems: 调用实例的getMultipleItems方法从存储中获取给定键数组的多个对象">
+
+                                <View>
+                                    <>
+                                        <Text>{JSON.stringify(MMKV16)}</Text>
                                         <TouchableOpacity
                                             style={styles.moduleButton}
                                             onPress={() => {
                                                 storageMultipleItems.setMultipleItemsAsync([['user', 'shaoen']], 'string')
                                                 let res = storageMultipleItems.getMultipleItems(['user'], 'string');
-                                                if (JSON.stringify(res) === JSON.stringify(multipleItemsTest)) {
-                                                    setState(true)
-                                                } else {
-                                                    setState(false)
-                                                }
+                                                setMMKV16(res)
+
                                             }}
                                         >
                                             <Text style={styles.buttonText}>getMultipleItems</Text>
                                         </TouchableOpacity>
-                                    </View>
-                                )}
-                                assert={({ state, expect }) => {
-                                    expect(state).to.be.true;
-                                }}
-                            />
+                                    </>
+                                </View>
+                            </TestCase>
                         </View>
                         <View>
                             <View style={styles.unitView}>
@@ -642,31 +569,25 @@ const MMKVStorageTest = () => {
                             </TestCase>
                             <TestCase
                                 tags={['C_API']}
-                                itShould="getStringAsync: 调用实例的getStringAsync方法获取给定键的字符串值"
-                                initialState={false}
-                                arrange={({ setState }) => (
-                                    <View>
+                                itShould="getStringAsync: 调用实例的getStringAsync方法获取给定键的字符串值">
+
+                                <View>
+                                    <>
+                                        <Text>{JSON.stringify(MMKV17)}</Text>
                                         <TouchableOpacity
                                             style={styles.moduleButton}
                                             onPress={async () => {
                                                 let res = await storageString.getStringAsync('stringTest');
-                                                if (res === stringTest) {
-                                                    await storageString.setString('stringTest', res)
-                                                    setState(true)
-                                                } else {
-                                                    setState(false)
-                                                }
+                                                setMMKV17(res)
+
                                             }}
                                         >
                                             <Text style={styles.buttonText}>getStringAsync</Text>
                                         </TouchableOpacity>
-                                    </View>
+                                    </>
+                                </View>
 
-                                )}
-                                assert={({ state, expect }) => {
-                                    expect(state).to.be.true;
-                                }}
-                            />
+                            </TestCase>
                         </View>
                         <View>
                             <View style={styles.unitView}>
@@ -688,31 +609,25 @@ const MMKVStorageTest = () => {
                             </TestCase>
                             <TestCase
                                 tags={['C_API']}
-                                itShould="getIntAsync: 调用实例的getIntAsync方法获取给定键的数字值"
-                                initialState={false}
-                                arrange={({ setState }) => (
-                                    <View>
+                                itShould="getIntAsync: 调用实例的getIntAsync方法获取给定键的数字值">
+
+                                <View>
+                                    <>
+                                        <Text>{JSON.stringify(MMKV18)}</Text>
                                         <TouchableOpacity
                                             style={styles.moduleButton}
                                             onPress={async () => {
                                                 let res = await storageInt.getIntAsync('intTest');
-                                                if (res === intTest) {
-                                                    await storageInt.setIntAsync('intTest', res)
-                                                    setState(true)
-                                                } else {
-                                                    setState(false)
-                                                }
+                                                setMMKV18(res)
+
                                             }}
                                         >
                                             <Text style={styles.buttonText}>getIntAsync</Text>
                                         </TouchableOpacity>
-                                    </View>
+                                    </>
+                                </View>
+                            </TestCase>
 
-                                )}
-                                assert={({ state, expect }) => {
-                                    expect(state).to.be.true;
-                                }}
-                            />
                         </View>
                         <View>
                             <View style={styles.unitView}>
@@ -734,30 +649,25 @@ const MMKVStorageTest = () => {
                             </TestCase>
                             <TestCase
                                 tags={['C_API']}
-                                itShould="getBoolAsync: 调用实例的getBoolAsync方法获取给定键的布尔值"
-                                initialState={false}
-                                arrange={({ setState }) => (
-                                    <View>
+                                itShould="getBoolAsync: 调用实例的getBoolAsync方法获取给定键的布尔值">
+
+                                <View>
+                                    <>
+                                        <Text>{JSON.stringify(MMKV19)}</Text>
                                         <TouchableOpacity
                                             style={styles.moduleButton}
                                             onPress={async () => {
                                                 let res = await storageBoolean.getBoolAsync('booleanTest');
-                                                if (JSON.stringify(res) === JSON.stringify(booleanTest)) {
-                                                    setState(true)
-                                                } else {
-                                                    setState(false)
-                                                }
+                                                setMMKV19(res)
+
                                             }}
                                         >
                                             <Text style={styles.buttonText}>getBoolAsync</Text>
                                         </TouchableOpacity>
-                                    </View>
+                                    </>
+                                </View>
+                            </TestCase>
 
-                                )}
-                                assert={({ state, expect }) => {
-                                    expect(state).to.be.true;
-                                }}
-                            />
                         </View>
                         <View>
                             <View style={styles.unitView}>
@@ -779,29 +689,24 @@ const MMKVStorageTest = () => {
                             </TestCase>
                             <TestCase
                                 tags={['C_API']}
-                                itShould="getMapAsync: 调用实例的getMapAsync方法从存储中获取对象"
-                                initialState={false}
-                                arrange={({ setState }) => (
-                                    <View>
+                                itShould="getMapAsync: 调用实例的getMapAsync方法从存储中获取对象">
+
+                                <View>
+                                    <>
+                                        <Text>{JSON.stringify(MMKV20)}</Text>
                                         <TouchableOpacity
                                             style={styles.moduleButton}
                                             onPress={async () => {
                                                 let res = await storageMap.getMapAsync('mapTest');
-                                                if (JSON.stringify(res) === JSON.stringify(mapTest)) {
-                                                    setState(true)
-                                                } else {
-                                                    setState(false)
-                                                }
+                                                setMMKV20(res)
+
                                             }}
                                         >
                                             <Text style={styles.buttonText}>getMapAsync</Text>
                                         </TouchableOpacity>
-                                    </View>
-                                )}
-                                assert={({ state, expect }) => {
-                                    expect(state).to.be.true;
-                                }}
-                            />
+                                    </>
+                                </View>
+                            </TestCase>
                         </View>
                         <View>
                             <View style={styles.unitView}>
@@ -823,31 +728,24 @@ const MMKVStorageTest = () => {
                             </TestCase>
                             <TestCase
                                 tags={['C_API']}
-                                itShould="getArrayAsync: 调用实例的getArrayAsync方法从存储中获取一个数组"
-                                initialState={false}
-                                arrange={({ setState }) => (
-                                    <View>
+                                itShould="getArrayAsync: 调用实例的getArrayAsync方法从存储中获取一个数组">
+
+                                <View>
+                                    <>
+                                        <Text>{JSON.stringify(MMKV21)}</Text>
                                         <TouchableOpacity
                                             style={styles.moduleButton}
                                             onPress={async () => {
                                                 let res = await storageArray.getArrayAsync('arrayTest');
-                                                console.log(JSON.stringify(arrayTest))
-                                                console.log(JSON.stringify(res))
-                                                if (JSON.stringify(res) === JSON.stringify(arrayTest)) {
-                                                    setState(true)
-                                                } else {
-                                                    setState(false)
-                                                }
+                                                setMMKV21(res)
+
                                             }}
                                         >
                                             <Text style={styles.buttonText}>getArrayAsync</Text>
                                         </TouchableOpacity>
-                                    </View>
-                                )}
-                                assert={({ state, expect }) => {
-                                    expect(state).to.be.true;
-                                }}
-                            />
+                                    </>
+                                </View>
+                            </TestCase>
                         </View>
                         <View>
                             <View style={styles.unitView}>
@@ -869,65 +767,54 @@ const MMKVStorageTest = () => {
                             </TestCase>
                             <TestCase
                                 tags={['C_API']}
-                                itShould="getMultipleItemsAsync: 调用实例的getmultipleItems方法从存储中获取给定键数组的多个对象"
-                                initialState={false}
-                                arrange={({ setState }) => (
-                                    <View>
+                                itShould="getMultipleItemsAsync: 调用实例的getmultipleItems方法从存储中获取给定键数组的多个对象">
+
+                                <View>
+                                    <>
+                                        <Text>{JSON.stringify(MMKV22)}</Text>
                                         <TouchableOpacity
                                             style={styles.moduleButton}
                                             onPress={async () => {
 
                                                 let res = await storageMultipleItems2.getMultipleItemsAsync(['multipleItemsTest2'], 'string');
-                                                console.log(multipleItemsTest2);
-                                                console.log(res);
+                                                setMMKV22(res)
 
-                                                if (JSON.stringify(res) === JSON.stringify([["multipleItemsTest2", `${multipleItemsTest2}`]])) {
-                                                    setState(true)
-                                                } else {
-                                                    setState(false)
-                                                }
                                             }}
                                         >
                                             <Text style={styles.buttonText}>getMultipleItemsAsync</Text>
                                         </TouchableOpacity>
-                                    </View>
-                                )}
-                                assert={({ state, expect }) => {
-                                    expect(state).to.be.true;
-                                }}
-                            />
+                                    </>
+                                </View>
+                            </TestCase>
+
                         </View>
 
                         <View>
+
                             <TestCase
                                 tags={['C_API']}
-                                itShould="indexer.hasKey: 检查给定键是否存在任何数据。"
-                                initialState={false}
-                                arrange={({ setState }) => (
-                                    <View>
+                                itShould="indexer.hasKey: 检查给定键是否存在任何数据。">
+
+                                <View>
+                                    <>
+                                        <Text>{JSON.stringify(MMKV23)}</Text>
                                         <TouchableOpacity
                                             style={styles.moduleButton}
                                             onPress={() => {
 
                                                 let res = storageString.indexer.hasKey("stringTest");
-                                                console.log(res);
+                                                setMMKV23(res)
 
-                                                if (res) {
-                                                    setState(true)
-                                                } else {
-                                                    setState(false)
-                                                }
                                             }}
                                         >
                                             <Text style={styles.buttonText}>indexer.hasKey</Text>
                                         </TouchableOpacity>
-                                    </View>
-                                )}
-                                assert={({ state, expect }) => {
-                                    expect(state).to.be.true;
-                                }}
-                            />
+                                    </>
+                                </View>
+
+                            </TestCase>
                         </View>
+
 
                         <View>
                             <TestCase
@@ -979,11 +866,11 @@ const MMKVStorageTest = () => {
                         </View>
                     </TestSuite>
                 </ScrollView>
-               
 
-                
-               
-        
+
+
+
+
             </Tester>
         </>
     )
