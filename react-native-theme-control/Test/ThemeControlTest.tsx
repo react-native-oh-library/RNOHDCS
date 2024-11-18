@@ -43,7 +43,6 @@ export const themeControlTest = () => {
             return (
               <View
                 style={{
-                  backgroundColor: systemBarsBackgroundColor,
                   flexGrow: 1,
                   flexShrink: 1,
                   alignItems: "center",
@@ -72,7 +71,6 @@ export const themeControlTest = () => {
             expect(values).to.include(state);
           }}
         />
-
         <TestCase
           itShould="setAppBackground"
           initialState={appbgclor}
@@ -82,7 +80,6 @@ export const themeControlTest = () => {
             return (
               <View
                 style={{
-                  backgroundColor: appbgc,
                   flexGrow: 1,
                   flexShrink: 1,
                   alignItems: "center",
@@ -113,7 +110,6 @@ export const themeControlTest = () => {
             return (
               <View
                 style={{
-                  backgroundColor: appLight,
                   flexGrow: 1,
                   flexShrink: 1,
                   alignItems: "center",
@@ -143,7 +139,6 @@ export const themeControlTest = () => {
             return (
               <View
                 style={{
-                  backgroundColor: bgColor,
                   flexGrow: 1,
                   flexShrink: 1,
                   alignItems: "center",
