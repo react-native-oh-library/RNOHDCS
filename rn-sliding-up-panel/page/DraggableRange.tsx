@@ -2,7 +2,7 @@ import React, { createRef, useState } from 'react';
 import { Text, View, Button } from 'react-native';
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import styles from '../components/styles';
-import PanelView, { height, _draggedValue } from '../components/Variable'
+import PanelView, { height } from '../components/Variable'
 
 export function DraggableRange() {
   const panelRef = createRef<SlidingUpPanel>();
@@ -11,7 +11,6 @@ export function DraggableRange() {
   const [draggableRange, setDraggableRange] = useState(initData);
 
   const textCont = `
-    animatedValue=${JSON.stringify(_draggedValue)}
     draggableRange=${JSON.stringify(draggableRange)}`
 
   return (<View style={styles.container}>
@@ -33,7 +32,6 @@ export function DraggableRange() {
 
     <SlidingUpPanel
       ref={panelRef}
-      animatedValue={_draggedValue}
       draggableRange={draggableRange}
     >
       <View style={styles.panel}>

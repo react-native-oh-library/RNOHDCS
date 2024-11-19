@@ -2,7 +2,7 @@ import React, { createRef, useState } from 'react';
 import { Text, View, Button } from 'react-native';
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import styles from '../components/styles';
-import PanelView, { height, _draggedValue } from '../components/Variable';
+import PanelView, { height } from '../components/Variable';
 
 export function AllowDragging() {
   const panelRef = createRef<SlidingUpPanel>();
@@ -10,7 +10,6 @@ export function AllowDragging() {
   const [draggingFlag, setDraggingFlag] = useState(false)
 
   const textCont = `
-  animatedValue=${JSON.stringify(_draggedValue)}
   draggableRange=${JSON.stringify(draggableRange)}
   snappingPoints=[300]
   allowDragging=${draggingFlag}`
@@ -35,7 +34,6 @@ export function AllowDragging() {
 
       <SlidingUpPanel
         ref={panelRef}
-        animatedValue={_draggedValue}
         draggableRange={draggableRange}
         snappingPoints={[300]}
         allowDragging={draggingFlag}

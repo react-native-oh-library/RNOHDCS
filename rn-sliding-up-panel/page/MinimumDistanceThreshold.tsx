@@ -2,7 +2,7 @@ import React, { createRef, useState } from 'react';
 import { Text, View, Button } from 'react-native';
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import styles from '../components/styles';
-import PanelView, { height, _draggedValue } from '../components/Variable'
+import PanelView, { height } from '../components/Variable'
 
 export function MinimumDistanceThreshold() {
   const panelRef = createRef<SlidingUpPanel>();
@@ -10,7 +10,6 @@ export function MinimumDistanceThreshold() {
 
   const [distanceThreshold, setDistanceThreshold] = useState(5);
   const textCont = `
-    animatedValue=${JSON.stringify(_draggedValue)}
     draggableRange=${JSON.stringify(draggableRange)}
     minimumVelocityThreshold=1
     minimumDistanceThreshold=${distanceThreshold}`
@@ -34,7 +33,6 @@ export function MinimumDistanceThreshold() {
 
     <SlidingUpPanel
       ref={panelRef}
-      animatedValue={_draggedValue}
       draggableRange={draggableRange}
       minimumVelocityThreshold={1}
       minimumDistanceThreshold={distanceThreshold}
