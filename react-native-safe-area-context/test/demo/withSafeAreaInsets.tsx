@@ -1,6 +1,6 @@
 import {  } from 'react-native-safe-area-context';
 import * as React from 'react';
-import { withSafeAreaInsets, WithSafeAreaInsetsProps,,SafeAreaProvider } from 'react-native-safe-area-context';
+import { withSafeAreaInsets, WithSafeAreaInsetsProps, SafeAreaProvider } from 'react-native-safe-area-context';
 import { View } from 'react-native';
 
 class MyConmpoent extends React.Component<WithSafeAreaInsetsProps> {
