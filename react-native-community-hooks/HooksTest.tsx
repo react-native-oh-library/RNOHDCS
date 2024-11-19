@@ -96,10 +96,6 @@ export const HooksTest = () => {
                     >
                         <Text> boldTextEnabled: {`${boldTextEnabled}`} </Text>
                         <Text> screenReaderEnabled: {`${screenReaderEnabled}`}</Text>
-                        <Text> reduceMotionEnabled: {`${reduceMotionEnabled}`}</Text>
-                        <Text> grayscaleEnabled: {`${grayscaleEnabled}`}</Text>
-                        <Text> invertColorsEnabled: {`${invertColorsEnabled}`}</Text>
-                        <Text> reduceTransparencyEnabled: {`${reduceTransparencyEnabled}`}</Text>
                     </TestCase>
                 </TestSuite>
                 {/* hooks-useRefresh-demo */}
