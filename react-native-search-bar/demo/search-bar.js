@@ -221,7 +221,7 @@ const App = () => {
           cancelButtonText="清理"
         />
 		
-		<Text style={styles.header}>32.失去焦点的时候为true: {onBlur? 'true' : 'false'}</Text>
+		<Text style={styles.header}>32.onBlur 失去焦点的时候为true: {onBlur? 'true' : 'false'}</Text>
         <SearchBar
 		  style={{marginTop:10,height: 55}}
           onBlur={()=>{
@@ -229,7 +229,7 @@ const App = () => {
 		  }}
         />
 		
-		<Text style={styles.header}>33.获取焦点的时候为true：{onFocus? 'true' : 'false'}</Text>
+		<Text style={styles.header}>33.onFocus 获取焦点的时候为true：{onFocus? 'true' : 'false'}</Text>
         <SearchBar
 		  style={{marginTop:10,height: 55}}
           onFocus={()=>{
@@ -262,7 +262,7 @@ const App = () => {
 		  }}
         />
 		
-		<Text style={styles.header}>37.当点击取消按钮或者删除完输入框输入的内容是为true: {onCancelButtonPress? 'true' : 'false'}</Text>
+		<Text style={styles.header}>37.onCancelButtonPress 当点击取消按钮或者删除完输入框输入的内容是为true: {onCancelButtonPress? 'true' : 'false'}</Text>
         <SearchBar
 		  style={{marginTop:10,height: 55}}
           onCancelButtonPress={() => {
