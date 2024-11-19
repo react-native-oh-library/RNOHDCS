@@ -26,6 +26,8 @@ export const CHILDROUTES = {
   //AvatarHeaderFlatList
   AvatarHeaderFlatListDemoDefault: 'AvatarHeaderFlatListDemoDefault' as const,
   AvatarHeaderFlatListDemoChild1: 'AvatarHeaderFlatListDemoChild1' as const,
+  //AvatarHeaderScrollView
+  AvatarHeaderScrollViewDemoDefault: 'AvatarHeaderScrollViewDemoDefault' as const,
   //AvatarHeaderSectionList
   AvatarHeaderSectionListDemoDefault: 'AvatarHeaderSectionListDemoDefault' as const,
   //DetailsHeaderScrollView
@@ -37,11 +39,11 @@ export const CHILDROUTES = {
   //DetailsHeaderFlatList
   DetailsHeaderFlatListDemoDefault: 'DetailsHeaderFlatListDemoDefault' as const,
   DetailsHeaderFlatListDemoChild1: 'DetailsHeaderFlatListDemoChild1' as const,
+  DetailsHeaderFlatListDemoChild2: 'DetailsHeaderFlatListDemoChild2' as const,
   //DetailsHeaderFlashListDemoDefault
   DetailsHeaderFlashListDemoDefault: 'DetailsHeaderFlashListDemoDefault' as const,
   //StickyHeaderScrollView
   StickyHeaderScrollViewDemoDefault: 'StickyHeaderScrollViewDemoDefault' as const,
-  StickyHeaderScrollViewDemoChild1: 'StickyHeaderScrollViewDemoChild1' as const,
   //StickyHeaderSectionList
   StickyHeaderSectionListDemoDefault: 'StickyHeaderSectionListDemoDefault' as const,
   //StickyHeaderFlatList

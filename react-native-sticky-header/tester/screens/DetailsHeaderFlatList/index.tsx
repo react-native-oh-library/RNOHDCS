@@ -20,10 +20,12 @@ import workletRunlog from '../../assets/DetailsHeaderWorkletLog.png';
 //引入组件测试demo
 import DetailsHeaderFlatListDemoDefault from './DefaultDemo/index';
 import DetailsHeaderFlatListDemoChild1 from './TestDemo/ChildDemo1';
+import DetailsHeaderFlatListDemoChild2 from './TestDemo/ChildDemo2';
 //定义组件测试testID
 const testIdObject = {
   default: 'DetailsHeaderFlatListDemoScreenDefault_testID',
   child1: 'DetailsHeaderFlatListDemoScreenChild1_testID',
+  child2: 'DetailsHeaderFlatListDemoScreenChild2_testID',
 };
 const defaultRouter = {
   routeName: CHILDROUTES.DetailsHeaderFlatListDemoDefault,
@@ -58,9 +60,9 @@ const defaultRouter = {
     tagTestID: '测试唯一标识符，传递即生效',
     title: 'Brandon',
     titleStyle: `color:'black'`,
-    substitle: '左下角子标题的文字内容brand sub title',
-    substitleStyle: '设置文字颜色为白色',
-    substitleTestID: '测试唯一标识符，传递即生效',
+    subtitle: '左下角子标题的文字内容brand sub title',
+    subtitleStyle: '设置文字颜色为白色',
+    subtitleTestID: '测试唯一标识符，传递即生效',
   },
 };
 const childRouter1 = {
@@ -72,13 +74,21 @@ const childRouter1 = {
     backgroundColor: 'rgb(255,78,65)',
     contentContainerStyle: `backgroundColor:'red'`,
     containerStyle: `borderWidth:1;borderColor:'green'`,
-    enableSafeAreaTopInset:
-      'false（设置为false,表现headerBar部分会减少内边距）',
     title: 'BrandonChild1',
     titleStyle: `color:'green'`,
     data: 'FlatList组件必传属性，内部已生效',
     keyExtractor: 'FlatList组件必传属性，内部已生效',
     renderItem: 'FlatList组件Item渲染函数，内部已生效',
+  },
+};
+const childRouter2 = {
+  routeName: CHILDROUTES.DetailsHeaderFlatListDemoChild2,
+  label: 'DetailsHeaderFlatList测试子组件2',
+  testID: testIdObject.child2,
+  title: '测试组件DetailsHeaderFlatListDemoChild2(设置对比属性值)',
+  testProps: {
+    enableSafeAreaTopInset:
+      'false（设置为false,表现headerBar部分会减少内边距）',
   },
 };
 
@@ -139,6 +149,12 @@ const DetailsHeaderFlatListDemoScreen: React.FC = () => {
                 <ExampleLink key={childRouter1.routeName} {...childRouter1} />
               </View>
               <View style={styles.sectionPart}>
+                <Text>{childRouter2.title}</Text>
+                <SimpleTable obj={childRouter2.testProps}></SimpleTable>
+                <Text>测试链接：</Text>
+                <ExampleLink key={childRouter2.routeName} {...childRouter2} />
+              </View>
+              <View style={styles.sectionPart}>
                 <Text>单独展示相关回调方法测试结果</Text>
                 <SimpleTable obj={showCallbackInfo}></SimpleTable>
                 <Text>测试结果展示：</Text>
@@ -195,4 +211,8 @@ const styles = StyleSheet.create({
 });
 
 export default DetailsHeaderFlatListDemoScreen;
-export {DetailsHeaderFlatListDemoDefault, DetailsHeaderFlatListDemoChild1};
+export {
+  DetailsHeaderFlatListDemoDefault,
+  DetailsHeaderFlatListDemoChild1,
+  DetailsHeaderFlatListDemoChild2,
+};

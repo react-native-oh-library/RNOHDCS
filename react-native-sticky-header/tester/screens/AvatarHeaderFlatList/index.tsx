@@ -46,11 +46,10 @@ const defaultRouter = {
     rightTopIcon: '右上角icon图标',
     rightTopIconOnPress: '右上角icon图标点击触发回调',
     snapStartThreshold: '默认值',
-    stickyTabs: 'true',
-    substitle:
+    subtitle:
       ':Coffee buff. Web enthusiast. Unapologetic student. Gamer. Avid organizer.',
-    substitleStyle: '设置文字颜色为白色',
-    substitleTestID: '测试唯一标识符，传递即生效',
+    subtitleStyle: '设置文字颜色为白色',
+    subtitleTestID: '测试唯一标识符，传递即生效',
     title: 'Brandon',
     titleStyle: `color:'white'`,
     titleTestID: '测试唯一标识符，传递即生效',

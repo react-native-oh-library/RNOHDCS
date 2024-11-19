@@ -16,7 +16,6 @@ import {ExampleLink} from '../RouteCenterScreen/ExampleLink';
 
 //引入组件测试demo
 import StickyHeaderScrollViewDemoDefault from './DefaultDemo/index';
-import StickyHeaderScrollViewDemoChild1 from './TestDemo/ChildDemo1';
 //定义组件测试testID
 const testIdObject = {
   default: 'StickyHeaderScrollViewDemoDefault_testID',
@@ -26,29 +25,11 @@ const defaultRouter = {
   routeName: CHILDROUTES.StickyHeaderScrollViewDemoDefault,
   label: 'StickyHeaderScrollView默认组件',
   testID: testIdObject.default,
-  title: '默认组件StickyHeaderScrollViewDemoDefault(设置基准属性值)',
+  title: '默认组件StickyHeaderScrollViewDemoDefault',
   testProps: {
     stickyTabs: 'true',
     renderHeader: '自定义header组件展示一张图形图片（联网查看）',
     renderTabs: '自定义Tabs栏组件，展示Tab1~Tab5',
-  },
-};
-const childRouter1 = {
-  routeName: CHILDROUTES.StickyHeaderScrollViewDemoChild1,
-  label: 'StickyHeaderScrollView测试子组件1',
-  testID: testIdObject.child1,
-  title: '测试组件StickyHeaderScrollViewDemoChild1(设置对比属性值)',
-  testProps: {
-    onMomentumScrollBegin:
-      ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：StickyHeaderScrow)',
-    onMomentumScrollEnd:
-      ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：StickyHeaderScrow)',
-    onScroll:
-      ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：StickyHeaderScrow)',
-    onScrollBeginDrag:
-      ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：StickyHeaderScrow)',
-    onScrollEndDrag:
-      ':内部已调用，组件动画响应滑动手势依赖该回调(log日志筛选关键词：StickyHeaderScrow)',
   },
 };
 
@@ -89,12 +70,6 @@ const StickyHeaderScrollViewDemoScreen: React.FC = () => {
                 <SimpleTable obj={defaultRouter.testProps}></SimpleTable>
                 <Text>测试链接：</Text>
                 <ExampleLink key={defaultRouter.routeName} {...defaultRouter} />
-              </View>
-              <View style={styles.sectionPart}>
-                <Text>{childRouter1.title}</Text>
-                <SimpleTable obj={childRouter1.testProps}></SimpleTable>
-                <Text>测试链接：</Text>
-                <ExampleLink key={childRouter1.routeName} {...childRouter1} />
               </View>
             </View>
           </ScrollView>
@@ -146,4 +121,4 @@ const styles = StyleSheet.create({
 });
 
 export default StickyHeaderScrollViewDemoScreen;
-export {StickyHeaderScrollViewDemoDefault, StickyHeaderScrollViewDemoChild1};
+export {StickyHeaderScrollViewDemoDefault};

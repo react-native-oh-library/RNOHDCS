@@ -43,7 +43,6 @@ const defaultRouter = {
     rightTopIcon: '右上角icon图标',
     rightTopIconOnPress: '右上角icon图标点击触发回调',
     snapStartThreshold: '默认值',
-    stickyTabs: 'true',
     tag: 'Product Design',
     tagStyle: `color: 'white'`,
     title: 'Brandon',
@@ -77,14 +76,6 @@ const childRouter2 = {
     leftTopIconTestID: '用例标识符，用作唯一标识，传递即生效',
     rightTopIconTestID: '用例标识符，用作唯一标识，传递即生效',
     titleTestID: '用例标识符，用作唯一标识，传递即生效',
-    onHeaderLayout: '内部已调用，组件动画响应滑动手势依赖该回调',
-    onMomentumScrollBegin: '内部已调用，组件动画响应滑动手势依赖该回调',
-    onMomentumScrollEnd: '内部已调用，组件动画响应滑动手势依赖该回调',
-    onScroll: '内部已调用，组件动画响应滑动手势依赖该回调',
-    onScrollBeginDrag: '内部已调用，组件动画响应滑动手势依赖该回调',
-    onScrollEndDrag: '内部已调用，组件动画响应滑动手势依赖该回调',
-    onTabsLayout: '内部已调用，组件动画响应滑动手势依赖该回调',
-    onTopReached: '内部已调用，组件动画响应滑动手势依赖该回调',
   },
 };
 const SimpleTable = props => {
