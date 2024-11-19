@@ -37,12 +37,6 @@ export const HooksTest = () => {
     const source = require('../assets/react-native-community-hooks.jpg')
     const { dimensions, loading, error } = useImageDimensions(source)
     const { onLayout, ...layout } = useLayout()
-    const [isBoldTextEnabled, setIsBoldTextEnabled] = useState(false)
-    const [isscreenReaderEnabled, setIsscreenReaderEnabled] = useState(false)
-    const [isReduceMotionEnabled, setIsReduceMotionEnabled] = useState(false)
-    const [isGrayscaleEnabled, setIsGrayscaleEnabled] = useState(false)
-    const [isInvertColorsEnabled, setIsInvertColorsEnabled] = useState(false)
-    const [isReduceTransparencyEnabled, setIsReduceTransparencyEnabled] = useState(false)
     const [showBall, setShowBall] = useState(false)
     const useBackHandlerClick = (type: boolean) => {
         type ? setBackText('返回中断') : setBackText('')
@@ -57,17 +51,6 @@ export const HooksTest = () => {
     const ballStart = () => {
         setShowBall(true)
     }
-    let clearUseAccessibilityInfo = setTimeout(() => {
-        setIsBoldTextEnabled(boldTextEnabled)
-        setIsscreenReaderEnabled(screenReaderEnabled)
-        setIsReduceMotionEnabled(reduceMotionEnabled)
-        setIsGrayscaleEnabled(grayscaleEnabled)
-        setIsInvertColorsEnabled(invertColorsEnabled)
-        setIsReduceTransparencyEnabled(reduceTransparencyEnabled)
-    }, 1000)
-    useEffect(() => {
-        return clearTimeout(clearUseAccessibilityInfo)
-    }, [])
     const instructions = Platform.select({
         ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
         android:
@@ -111,12 +94,12 @@ export const HooksTest = () => {
                 <TestSuite name="useAccessibilityInfo">
                     <TestCase itShould="some-hooks" tags={['useAccessibilityInfo']}
                     >
-                        <Text> boldTextEnabled: {`${isBoldTextEnabled}`} </Text>
-                        <Text> screenReaderEnabled: {`${isscreenReaderEnabled}`}</Text>
-                        <Text> reduceMotionEnabled: {`${isReduceMotionEnabled}`}</Text>
-                        <Text> grayscaleEnabled: {`${isGrayscaleEnabled}`}</Text>
-                        <Text> invertColorsEnabled: {`${isInvertColorsEnabled}`}</Text>
-                        <Text> reduceTransparencyEnabled: {`${isReduceTransparencyEnabled}`}</Text>
+                        <Text> boldTextEnabled: {`${boldTextEnabled}`} </Text>
+                        <Text> screenReaderEnabled: {`${screenReaderEnabled}`}</Text>
+                        <Text> reduceMotionEnabled: {`${reduceMotionEnabled}`}</Text>
+                        <Text> grayscaleEnabled: {`${grayscaleEnabled}`}</Text>
+                        <Text> invertColorsEnabled: {`${invertColorsEnabled}`}</Text>
+                        <Text> reduceTransparencyEnabled: {`${reduceTransparencyEnabled}`}</Text>
                     </TestCase>
                 </TestSuite>
                 {/* hooks-useRefresh-demo */}
