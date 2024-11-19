@@ -89,7 +89,8 @@ export default function NfcManagerDemo() {
   await NfcManager.clearBackgroundTag();
   let background = await NfcManager.getBackgroundTag();
 
-  console.info('background ===' + background)
+  console.info('background ===' + background);
+  setText('clearBackgroundTag ===' + JSON.stringify(background));
   return background;
  }
 
@@ -258,6 +259,7 @@ export default function NfcManagerDemo() {
   } catch (ex) {
     handleException(ex);
   }
+  setText('getLaunchTagEvent == ' + JSON.stringify(wantInfo))
   return wantInfo;
 }
 
@@ -272,6 +274,7 @@ const setTimeout = async () => {
   } finally {
     NfcManager.cancelTechnologyRequest();
   }
+  setText('setTimeout success == ' + isTimeout)
   return isTimeout;
 }
 
@@ -573,7 +576,7 @@ const RequestTechnologyProps = [
     }
   },
   {
-    key:"function:getTag(NfcTech.IsoDep,{isReaderModeEnabled:true})(扫描设备,将卡片放置在手机背后进行扫描,前台设置卡片类型为IsoDep,设置读卡模式为flase)",
+    key:"function:getTag(NfcTech.IsoDep,{isReaderModeEnabled:false})(扫描设备,将卡片放置在手机背后进行扫描,前台设置卡片类型为IsoDep,设置读卡模式为flase)",
     value: {
        tech: NfcTech.IsoDep,
        option:{
@@ -622,7 +625,7 @@ const RequestTechnologyProps = [
 
  return (
    <View>
-      <View>
+      <View style={{marginTop: 30 }}>
         <Text>Scan a Tag result:</Text>
         <Text style={styles.baseText}>
               返回结果(进行卡片操作时，请先通过ScanTag()扫描设备，获取当前卡片支持的标签):
@@ -632,7 +635,7 @@ const RequestTechnologyProps = [
         </Text>
       </View>
    <ScrollView>
-     <Tester>
+     <Tester style={{marginBottom: 190}}>
       <TestSuite name='NfcManagerDemo'>
        <TestCase itShould="function:isSupported()(该接口判断设备是否支持nfc)"  initialState={false} arrange={({ setState }) => (
           <Button title='运行' color='#841584' onPress={async () => {
