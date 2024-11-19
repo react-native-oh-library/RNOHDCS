@@ -36,12 +36,15 @@ export function OnMomentumDragStart() {
         ref={panelRef}
         animatedValue={_draggedValue}
         draggableRange={draggableRange}
-        snappingPoints={[300]}
+        snappingPoints={[100, 300]}
+        minimumVelocityThreshold={100}
         onMomentumDragStart={() => {
           setEventBackText({ ...eventBackText, onMomentumDragStart: 'momentumDragStart change text' });
         }}>
         <View style={styles.panel}>
-          <PanelView onPress={() => panelRef.current!.hide()} />
+          <PanelView onPress={() => panelRef.current!.hide()} >
+            <Text>{eventBackText.onMomentumDragStart}</Text>
+          </PanelView>
         </View>
       </SlidingUpPanel>
     </View>

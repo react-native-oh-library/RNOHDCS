@@ -2,7 +2,7 @@ import React, { createRef } from 'react';
 import { Text, View, Button } from 'react-native';
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import styles from '../components/styles';
-import PanelView, { height, _draggedValue } from '../components/Variable'
+import PanelView, { height } from '../components/Variable'
 
 export function SnappingPoints() {
   const panelRef = createRef<SlidingUpPanel>();
@@ -11,8 +11,7 @@ export function SnappingPoints() {
   return (<View style={styles.container}>
     <View style={styles.viewbox}>
       <Text>
-        {`animatedValue=${JSON.stringify(_draggedValue)}
-        draggableRange=${JSON.stringify(draggableRange)}
+        {`draggableRange=${JSON.stringify(draggableRange)}
         snappingPoints=[300, 500, 700]`}
       </Text>
       <Button title='Show panel btn' onPress={() => panelRef.current!.show()} />
@@ -20,7 +19,6 @@ export function SnappingPoints() {
 
     <SlidingUpPanel
       ref={panelRef}
-      animatedValue={_draggedValue}
       draggableRange={draggableRange}
       snappingPoints={[300, 500, 700]}
     >

@@ -7,11 +7,9 @@ import PanelView, { height } from '../components/Variable'
 export function BackdropOpacity() {
   const panelRef = createRef<SlidingUpPanel>();
   const draggableRange = { top: height, bottom: 0 };
-  const draggedValue = new Animated.Value(200);
   const [backdropOpacityNum, setBackdropOpacityNum] = useState(0.2);
 
   const textCont = `
-    animatedValue=${JSON.stringify(draggedValue)}
     draggableRange=${JSON.stringify(draggableRange)}
     snappingPoints=[300]
     minimumVelocityThreshold=0.5
@@ -37,7 +35,6 @@ export function BackdropOpacity() {
 
     <SlidingUpPanel
       ref={panelRef}
-      animatedValue={draggedValue}
       draggableRange={draggableRange}
       snappingPoints={[300]}
       minimumVelocityThreshold={0.5}

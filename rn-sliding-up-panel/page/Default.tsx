@@ -2,7 +2,7 @@ import React, { createRef } from 'react';
 import { View, Text, Button, TextInput } from 'react-native';
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import styles from '../components/styles';
-import PanelView, { _draggedValue } from '../components/Variable';
+import PanelView from '../components/Variable';
 
 export function DefaultDemo() {
   const panelRef = createRef<SlidingUpPanel>();

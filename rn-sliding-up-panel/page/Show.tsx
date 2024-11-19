@@ -2,7 +2,7 @@ import React, { createRef, useState } from 'react';
 import { Text, View, Button } from 'react-native';
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import styles from '../components/styles';
-import PanelView, { height, _draggedValue } from '../components/Variable';
+import PanelView, { height } from '../components/Variable';
 
 export function Show() {
   const panelRef = createRef<SlidingUpPanel>();
@@ -18,7 +18,6 @@ export function Show() {
 
       <SlidingUpPanel
         ref={panelRef}
-        animatedValue={_draggedValue}
         draggableRange={draggableRange}
         snappingPoints={[300]}
         allowDragging={true}

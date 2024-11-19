@@ -2,7 +2,7 @@ import React, { createRef, useState } from 'react';
 import { Text, View, Button } from 'react-native';
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import styles from '../components/styles';
-import PanelView, { height, _draggedValue } from '../components/Variable'
+import PanelView, { height } from '../components/Variable'
 
 export function ShowBackdrop() {
   const panelRef = createRef<SlidingUpPanel>();
@@ -10,7 +10,6 @@ export function ShowBackdrop() {
 
   const [showBackdropState, setShowBackdropState] = useState(false);
   const textCont = `
-    animatedValue=${JSON.stringify(_draggedValue)}
     draggableRange=${JSON.stringify(draggableRange)}
     snappingPoints=[300]
     showBackdrop=${showBackdropState}`
@@ -34,7 +33,6 @@ export function ShowBackdrop() {
 
     <SlidingUpPanel
       ref={panelRef}
-      animatedValue={_draggedValue}
       draggableRange={draggableRange}
       snappingPoints={[300]}
       showBackdrop={showBackdropState}

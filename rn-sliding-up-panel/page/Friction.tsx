@@ -2,7 +2,7 @@ import React, { createRef, useState } from 'react';
 import { Text, View, Button } from 'react-native';
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import styles from '../components/styles';
-import PanelView, { height, _draggedValue } from '../components/Variable'
+import PanelView, { height } from '../components/Variable'
 
 export function Friction() {
   const panelRef = createRef<SlidingUpPanel>();
@@ -10,7 +10,6 @@ export function Friction() {
 
   const [frictionState, setFrictionState] = useState(1.5);
   const textCont = `
-    animatedValue=${JSON.stringify(_draggedValue)}
     draggableRange=${JSON.stringify(draggableRange)}
     snappingPoints={[300]}
     minimumVelocityThreshold={0.5}
@@ -39,7 +38,6 @@ export function Friction() {
 
     <SlidingUpPanel
       ref={panelRef}
-      animatedValue={_draggedValue}
       draggableRange={draggableRange}
       snappingPoints={[300]}
       minimumVelocityThreshold={0.5}
