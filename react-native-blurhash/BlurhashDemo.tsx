@@ -358,25 +358,6 @@ const BlurhashDemo: React.FC = (): JSX.Element => {
                                 </View>
                                 <Text>resizeMode:center</Text>
                             </SafeAreaView>
-                            <SafeAreaView style={styles.container}>
-                                <View style={styles.blurhashContainer}>
-                                    <View style={styles.blurhashRadiusMask}>
-                                        <Blurhash
-                                            blurhash="LEG[._~p-SsmlC=]NGWV~V%2E1NG"
-                                            decodeWidth={32}
-                                            decodeHeight={32}
-                                            decodePunch={1}
-                                            decodeAsync={decodeAsync}
-                                            onLoadStart={onLoadStart}
-                                            onLoadEnd={onLoadEnd}
-                                            onLoadError={onLoadError}
-                                            style={{ ...styles.blurhashImage, borderRadius: 5 }}
-                                            resizeMode="stretch"
-                                        />
-                                    </View>
-                                </View>
-                                <Text>resizeMode:center</Text>
-                            </SafeAreaView>
                         </TestCase>
                         <TestCase tags={['C_API']} itShould='设置decodeAsync参数'>
                             <SafeAreaView style={styles.container}>
