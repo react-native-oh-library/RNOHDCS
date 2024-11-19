@@ -30,7 +30,7 @@ class Home extends React.Component {
   }
 };
 
-class waterflowListDemo extends React.Component {
+class WaterflowListDemo extends React.Component {
     render() {
         return (
             <NavigationContainer>
@@ -45,4 +45,4 @@ class waterflowListDemo extends React.Component {
     }
 }
 
-export default waterflowListDemo;
+export default WaterflowListDemo;

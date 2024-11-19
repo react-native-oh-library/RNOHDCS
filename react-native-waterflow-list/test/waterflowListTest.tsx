@@ -63,7 +63,7 @@ const renderItem = item => {
 };
 
 
-export const waterflowListTest = () => {
+export const WaterflowListTest = () => {
     const [asyncHeightForItemData, setAsyncHeightForItemData] = React.useState<IItem[]>([]);
     const [heightForItemData, setHeightForItemData] = React.useState<IItem[]>([]);
     const [columnFlatListPropsData, setColumnFlatListPropsData] = React.useState<IItem[]>([]);
