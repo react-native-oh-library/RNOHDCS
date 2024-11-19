@@ -26,6 +26,13 @@ const defaultRouter = {
   testID: testIdObject.default,
   title: '默认组件DetailsHeaderSectionListDemoDefault(设置对比属性值)',
   testProps: {
+    leftTopIcon: '左上角icon图标',
+    leftTopIconOnPress: '左上角icon图标点击触发回调',
+    hasBorderRadius: '设置header左下角圆角效果',
+    tag: 'Product Design',
+    tagStyle: `设置Product Design字体颜色为白色`,
+    title: 'Brandon文字',
+    titleStyle: `color:white设置Brandon文字颜色为白色`,
     sections: 'SectionList组件必传属性，内部已生效',
     keyExtractor: 'SectionList组件必传属性，内部已生效',
     renderItem: 'SectionList组件Item渲染函数，内部已生效',

@@ -11,7 +11,7 @@ import {
   detailsHeaderFlatListTestIDs,
 } from '../../../constants/index';
 
-const DetailsHeaderFlatListDemoDefault: React.FC = () => {
+const DetailsHeaderFlatListDemoChild2: React.FC = () => {
   const navigation = useNavigation();
   const goBack = () => {
     navigation.goBack();
@@ -58,9 +58,6 @@ const DetailsHeaderFlatListDemoDefault: React.FC = () => {
 
   return (
     <>
-      <View style={styles.showInfoContainer}>
-        <Text>{JSON.stringify(callbackInfo)}</Text>
-      </View>
       <DetailsHeaderFlatList
         enableSafeAreaTopInset={false}
         leftTopIcon={iconCloseWhite}
@@ -76,7 +73,7 @@ const DetailsHeaderFlatListDemoDefault: React.FC = () => {
             : screenStyles.lightBackground,
         ]}
         containerStyle={screenStyles.stretchContainer}
-        enableSafeAreaTopInset={true}
+        enableSafeAreaTopInset={false}
         contentIcon={CardsBlack}
         contentIconNumber={10}
         contentIconNumberTestID={detailsHeaderFlatListTestIDs.contentIconNumber}
@@ -140,4 +137,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DetailsHeaderFlatListDemoDefault;
+export default DetailsHeaderFlatListDemoChild2;
