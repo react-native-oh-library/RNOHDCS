@@ -433,6 +433,9 @@ const BlurhashDemo: React.FC = (): JSX.Element => {
                                 </TouchableOpacity>
                             </SafeAreaView>
                         </TestCase>
+
+                        
+
                         <TestCase
                             tags={['C_API']}
                             itShould='验证isBlurhashValid方法（返回ture或false则为成功）'
@@ -474,6 +477,35 @@ const BlurhashDemo: React.FC = (): JSX.Element => {
                             }}
                         />
                         <Text style={{ color: '#fff' }}>{'isBlurhashValid:' + validData}</Text>
+                        <TestCase
+                            tags={['C_API']}
+                            itShould='验证getAverageColor'>
+                            <>
+                                <SafeAreaView style={styles.container}>
+                                    <TextInput
+                                        value={String(blurhash5)}
+                                        placeholder="Blurhash"
+                                        onChangeText={setBlurhash5}
+                                        style={styles.textInput}
+                                    />
+                                    <TouchableOpacity
+                                        style={clearCosineCacheButton}
+                                        disabled={blurhash5.length < 5}
+                                        onPress={() => {
+                                            const data = Blurhash.getAverageColor(blurhash5)
+                                            setAverageColor(data)
+                                        }}>
+                                        {isValiding ? (
+                                            <ActivityIndicator color="black" />
+                                        ) : (
+                                            <Text>getAverageColor</Text>
+                                        )}
+                                    </TouchableOpacity>
+                                </SafeAreaView>
+                            </>
+                            )
+                        </TestCase>
+                        <Text style={{ color: '#fff' }}>{'AverageColor:' + JSON.stringify(AverageColor)}</Text>
                     </View>
                 </TestSuite>
             </ScrollView>
