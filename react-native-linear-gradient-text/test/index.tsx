@@ -28,8 +28,14 @@ export function LinearGradientTextTest() {
         </TestSuite>
 
         <TestSuite name="colors and position">
-          <TestCase tags={['C_API']} itShould="设置渐变文本的起始位置">
+          <TestCase tags={['C_API']} itShould="changeStart">
             <ChangeColorPosition />
+          </TestCase>
+        </TestSuite>
+
+        <TestSuite name="colors and position">
+          <TestCase tags={['C_API']} itShould="changeEnd">
+            <ChangeColorPosition1 />
           </TestCase>
         </TestSuite>
 
@@ -113,7 +119,7 @@ function ChangeColorPosition() {
         textProps={{allowFontScaling: true, numberOfLines: 1}}
       />
       <Button
-        title="change position"
+        title="change start"
         onPress={() => {
           setStartX(v => {
             return v === 0.5 ? 0.2 : 0.2;
@@ -121,11 +127,34 @@ function ChangeColorPosition() {
           setStartY(v => {
             return v === 0.7 ? 0.2 : 0.7;
           });
+        }}
+      />
+    </View>
+  );
+}
+function ChangeColorPosition1() {
+  const [startX, setStartX] = React.useState(0.5);
+  const [startY, setStartY] = React.useState(0.7);
+  const [endX, setEndX] = React.useState(0.2);
+  const [endY, setEndY] = React.useState(0.7);
+  return (
+    <View style={styles.container}>
+      <LinearGradientText
+        colors={gradientColors[0]}
+        text={'Hello World'}
+        start={{x: startX, y: startY}}
+        end={{x: endX, y: endY}}
+        textStyle={{fontSize: 30}}
+        textProps={{allowFontScaling: true, numberOfLines: 1}}
+      />
+      <Button
+        title="change end"
+        onPress={() => {
           setEndX(v => {
-            return v === 0.2 ? 0.3 : 0.2;
+            return v === 1 ? 0 : 1;
           });
           setEndY(v => {
-            return v === 0.7 ? 0.3 : 0.7;
+            return v === 1 ? 0 : 0;
           });
         }}
       />
@@ -191,19 +220,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default {
-  displayName: 'LinearGradientTextTest',
-  framework: 'React',
-  category: 'UI',
-  title: 'react-native-linear-gradient-text',
-  documentationURL: 'https://reactnative.dev/docs/text',
-  description: 'React Native text',
-  examples: [
-    {
-      title: 'react-native-linear-gradient-text',
-      render: function (): any {
-        return <LinearGradientTextTest />;
-      },
-    },
-  ],
-};
+export default LinearGradientTextTest;
