@@ -224,7 +224,7 @@ export const TcpSocketTest = () => {
       return;
     }
     server = new TcpSocket.Server();
-
+    console.log('TcpSocketDemo:tcpServer server.listening:'+server.listening)
     server.listen({port: 0, host: '127.0.0.1', reuseAddress: true}, () => {
       let port = server.address()?.port;
       if (!port) {
@@ -232,6 +232,7 @@ export const TcpSocketTest = () => {
           port = server.address()?.port;
         }, 3000);
       }
+      console.log('TcpSocketDemo:tcpServer server.listening:'+server.listening)
       console.log('TcpSocketDemo:tcpServer start listen success on:' + port);
       sendMessage('TcpSocketDemo:tcpServer start listen success on:' + port);
     });
@@ -545,6 +546,9 @@ export const TcpSocketTest = () => {
       cert: ca,
       keystore: keystore,
     });
+    console.log(
+      'TcpSocketDemo:TlsServer setSecureContext success'
+    );
     tlsServer.on('secureConnection', (socket: any) => {
       console.log(
         'TcpSocketDemo:TlsServer on secureConnection:' +
@@ -821,8 +825,9 @@ export const TcpSocketTest = () => {
                 dataLen +
                 ' bytes',
             );
-            const hugeData = 'y'.repeat(5 * 1024);
-            socket.write(hugeData, 'utf8');
+            console.log(
+              'TcpSocketDemo: tcp send data end:' + new Date().getTime(),
+            );
             break;
           default:
             console.log(
@@ -1142,7 +1147,7 @@ export const TcpSocketTest = () => {
         });
       },
     );
-
+    console.log('TcpSocketDemo:TlsServer createTLSServer success');
     tlsServer.on('error', (error: any) => {
       console.log('TcpSocketDemo:TlsServer on error ' + JSON.stringify(error));
       sendMessage('TcpSocketDemo:TlsServer on error ' + JSON.stringify(error));
@@ -1286,33 +1291,33 @@ export const TcpSocketTest = () => {
         <ScrollView style={{margin: 10, height: '90%'}}>
           <Tester>
             <TestSuite name="测试API属性">
-              <TestCase itShould="1.测试创建TCP服务器，成功会打印'tcpServer start listen success on:xxx'">
+              <TestCase itShould="1.测试创建TCP服务器">
                 <TouchableOpacity
                   onPress={createServer}
                   style={styles.moduleButton}>
                   <Text style={styles.buttonText}>createServer</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="2.测试TCP客户端连接服务器，成功会打印‘tcpClient on connect:xxx’，（需要先创建服务器）">
+              <TestCase itShould="2.测试TCP客户端连接服务器">
                 <TouchableOpacity onPress={connect} style={styles.moduleButton}>
                   <Text style={styles.buttonText}>connect</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="3.测试TCP客户端连接服务器，成功会打印‘tcpClient on connect:xxx（测试前先clearData，再重新创建服务器）">
+              <TestCase itShould="3.测试TCP客户端连接服务器">
                 <TouchableOpacity
                   onPress={createConnection}
                   style={styles.moduleButton}>
                   <Text style={styles.buttonText}>createConnection</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="4.测试创建TLS服务器，无打印，需要与客户端一起使用">
+              <TestCase itShould="4.测试创建TLS服务器">
                 <TouchableOpacity
                   onPress={createTLSServer}
                   style={styles.moduleButton}>
                   <Text style={styles.buttonText}>createTLSServer</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="5.测试TLS客户端连接服务器，成功会打印‘TlsClient clientSocket connect success‘（需要先创建服务器）">
+              <TestCase itShould="5.测试TLS客户端连接服务器（需要先创建服务器）">
                 <TouchableOpacity
                   onPress={connectTLS}
                   style={styles.moduleButton}>
@@ -1365,7 +1370,7 @@ export const TcpSocketTest = () => {
               </TestCase>
             </TestSuite>
             <TestSuite name="测试Server对象属性">
-              <TestCase itShould="9.测试Server.listen方法,成功会打印‘tcpServer start listen success on:’(先点击clearData清除已创建的服务器)">
+              <TestCase itShould="9.测试Server.listen方法">
                 <TouchableOpacity
                   onPress={createTcpServer}
                   style={styles.moduleButton}>
@@ -1396,7 +1401,7 @@ export const TcpSocketTest = () => {
                   expect(state).not.to.be.undefined;
                 }}
               />
-              <TestCase itShould="11.测试Server.close方法，关闭TCP服务器，成功会打印‘tcpServer closed’(测试前先点击9.创建TCP服务器)">
+              <TestCase itShould="11.测试Server.close方法">
                 <TouchableOpacity
                   onPress={() => {
                     if (server) {
@@ -1409,7 +1414,7 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>close</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="12.测试Server.getConnections方法，成功会打印‘tcpServer getConnections:1’，（测试前先点击1,2创建服务器和客户端）">
+              <TestCase itShould="12.测试Server.getConnections方法，（测试前先点击9创建服务器并点击18建立连接）">
                 <TouchableOpacity
                   onPress={() => {
                     if (server) {
@@ -1433,6 +1438,9 @@ export const TcpSocketTest = () => {
                   <TouchableOpacity
                     onPress={() => {
                       if (server) {
+                        console.log(
+                          'TcpSocketDemo:tcpServer server.listening:' + server.listening
+                        );
                         setState(server.listening);
                       } else {
                         sendMessage('TcpSocketDemo:tcpServer is null');
@@ -1446,7 +1454,7 @@ export const TcpSocketTest = () => {
                   expect(state).to.be.true;
                 }}
               />
-              <TestCase itShould="14.测试on('close')事件，成功会打印‘tcpServer closed’(测试前先点击9.创建TCP服务器)">
+              <TestCase itShould="14.测试on('close')事件(测试前先点击9.创建TCP服务器)">
                 <TouchableOpacity
                   onPress={() => {
                     if (server) {
@@ -1459,21 +1467,21 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>on('close')</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="15.测试on('connection')事件，成功会打印‘tcpClient on connect:xxx’(测试前先点击9.创建TCP服务器)">
+              <TestCase itShould="15.测试on('connection')事件(测试前先点击9.创建TCP服务器)">
                 <TouchableOpacity
                   onPress={createTcpClient}
                   style={styles.moduleButton}>
                   <Text style={styles.buttonText}>on('connection')</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="16.测试on('error')事件，成功会打印‘tcpServer socket on close’(需要先点击1,2创建服务器和客户端)">
+              <TestCase itShould="16.测试on('error')事件(需要先点击1,2创建服务器和客户端)">
                 <TouchableOpacity
                   onPress={createTcpClientError}
                   style={styles.moduleButton}>
                   <Text style={styles.buttonText}>on('error')</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="17.测试on('listening')事件，成功会打印‘tcpServer start listen success on:’(需点击clearData清除已创建的服务器)">
+              <TestCase itShould="17.测试on('listening')事件(需点击clearData清除已创建的服务器)">
                 <TouchableOpacity
                   onPress={createTcpServer}
                   style={styles.moduleButton}>
@@ -1482,7 +1490,7 @@ export const TcpSocketTest = () => {
               </TestCase>
             </TestSuite>
             <TestSuite name="测试Socket对象属性">
-              <TestCase itShould="18.测试Socket.connect方法，成功会打印‘tcpClient on connect:xxx’,（测试前需要先点击1.创建服务器）">
+              <TestCase itShould="18.测试Socket.connect方法（测试前需要先点击1.创建服务器）">
                 <TouchableOpacity
                   onPress={createTcpClient}
                   style={styles.moduleButton}>
@@ -1513,7 +1521,7 @@ export const TcpSocketTest = () => {
                   expect(state).not.to.be.undefined;
                 }}
               />
-              <TestCase itShould="20.测试Socket.destroy方法，关闭TCP服务器，成功会打印‘tcpServer socket on close’(测试前需要先点击1,2创建服务器和客户端）">
+              <TestCase itShould="20.测试Socket.destroy方法，关闭TCP服务器(测试前需要先点击1,2创建服务器和客户端）">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1526,14 +1534,14 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>destroy</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="21.测试Socket.end方法，成功会打印‘tcpServer socket on close’(测试前需要先点击1,2创建服务器和客户端）">
+              <TestCase itShould="21.测试Socket.end方法(测试前需要先点击1,2创建服务器和客户端）">
                 <TouchableOpacity
                   onPress={tcpLongData}
                   style={styles.moduleButton}>
                   <Text style={styles.buttonText}>end</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="22.测试Socket.setEncoding方法，成功会打印‘Hello, tcpClient!’(测试前需要先点击1,2创建服务器和客户端）">
+              <TestCase itShould="22.测试Socket.setEncoding方法(测试前需要先点击1,2创建服务器和客户端）">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1559,12 +1567,15 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>setEncoding('hex')</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="23.测试Socket.setNoDelay方法，成功会打印‘Hello, tcpClient!’(测试前需要先点击1,2创建服务器和客户端）">
+              <TestCase itShould="23.测试Socket.setNoDelay方法(测试前需要先点击1,2创建服务器和客户端）">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
                       client.setNoDelay(true);
-                      tcpSendData();
+                      testCase = 3;
+                      const hugeData = 'h'.repeat(1024);
+                      console.log('TcpSocketDemo: tcp send data start:' + new Date().getTime());
+                      client.write(hugeData, 'utf8');
                     } else {
                       sendMessage('TcpSocketDemo:tcpClient is null');
                     }
@@ -1576,7 +1587,10 @@ export const TcpSocketTest = () => {
                   onPress={() => {
                     if (client) {
                       client.setNoDelay(false);
-                      tcpSendData();
+                      testCase = 3;
+                      const hugeData = 'h'.repeat(1024);
+                      console.log('TcpSocketDemo: tcp send data start:' + new Date().getTime());
+                      client.write(hugeData, 'utf8');
                     } else {
                       sendMessage('TcpSocketDemo:tcpClient is null');
                     }
@@ -1585,7 +1599,7 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>setNoDelay_false</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="24.测试Socket.setTimeout方法，点击3s后会打印‘Socket timed out!’(测试前需要先点击17,15创建服务器和客户端）">
+              <TestCase itShould="24.测试Socket.setTimeout方法(测试前需要先点击17,15创建服务器和客户端）">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1598,7 +1612,7 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>setTimeout</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="25.测试Socket.write方法，成功会打印‘Hello, tcpClient!’(测试前需要先点击1,2创建服务器和客户端）">
+              <TestCase itShould="25.测试Socket.write方法(测试前需要先点击1,2创建服务器和客户端）">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1611,7 +1625,7 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>write</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="26.测试Socket.pause方法，成功会打印‘Now data will start flowing again.’(测试前需要先点击1,2创建服务器和客户端）">
+              <TestCase itShould="26.测试Socket.pause和resume方法(测试前需要先点击1,2创建服务器和客户端）">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1621,23 +1635,10 @@ export const TcpSocketTest = () => {
                     }
                   }}
                   style={styles.moduleButton}>
-                  <Text style={styles.buttonText}>pause</Text>
+                  <Text style={styles.buttonText}>pause,resume</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="27.测试Socket.resume方法，成功会打印‘Now data will start flowing again.’(测试前需要先点击1,2创建服务器和客户端）">
-                <TouchableOpacity
-                  onPress={() => {
-                    if (client) {
-                      tcpPauseResume();
-                    } else {
-                      sendMessage('TcpSocketDemo:tcpClient is null');
-                    }
-                  }}
-                  style={styles.moduleButton}>
-                  <Text style={styles.buttonText}>resume</Text>
-                </TouchableOpacity>
-              </TestCase>
-              <TestCase itShould="28.测试Socket.writableNeedDrain属性(需要先点击1.2.开启服务器和客户端)">
+              <TestCase itShould="28.测试Socket.writableNeedDrain属性(需要先点击1.2创建服务器和客户端)">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1660,7 +1661,7 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>writableNeedDrain</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="29.测试Socket.bytesRead属性(需要先点击1.2.开启服务器和客户端)">
+              <TestCase itShould="29.测试Socket.bytesRead属性(需要先点击1.2开启服务器和客户端)">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1682,7 +1683,7 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>bytesRead</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="30.测试Socket.bytesWritten属性(需要先点击1.2.开启服务器和客户端)">
+              <TestCase itShould="30.测试Socket.bytesWritten属性(需要先点击1.2开启服务器和客户端)">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1704,14 +1705,14 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>bytesWritten</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="31.测试Socket.connecting属性(先点击9，创建客户端)">
+              <TestCase itShould="31.测试Socket.connecting属性(先点击9创建服务器)">
                 <TouchableOpacity
                   onPress={createTcpClient}
                   style={styles.moduleButton}>
                   <Text style={styles.buttonText}>connecting</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="32.测试Socket.destroyed属性(需要先点击1.2.开启服务器和客户端)">
+              <TestCase itShould="32.测试Socket.destroyed属性(需要先点击1.2开启服务器和客户端)">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1744,7 +1745,7 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>localAddress</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="34.测试Socket.localPort属性(需要先点击1.2.开启服务器和客户端)">
+              <TestCase itShould="34.测试Socket.localPort属性(需要先点击1.2开启服务器和客户端)">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1759,7 +1760,7 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>localPort</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="35.测试Socket.remoteAddress属性(需要先点击1.2.开启服务器和客户端)">
+              <TestCase itShould="35.测试Socket.remoteAddress属性(需要先点击1.2开启服务器和客户端)">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1775,7 +1776,7 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>remoteAddress</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="36.测试Socket.remoteFamily属性(需要先点击1.2.开启服务器和客户端)">
+              <TestCase itShould="36.测试Socket.remoteFamily属性(需要先点击1.2开启服务器和客户端)">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1791,7 +1792,7 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>remoteFamily</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="37.测试Socket.remotePort属性(需要先点击1.2.开启服务器和客户端)">
+              <TestCase itShould="37.测试Socket.remotePort属性(需要先点击1.2开启服务器和客户端)">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1814,7 +1815,7 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>pending</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="39.测试Socket.timeout属性(需要先点击1.2.开启服务器和客户端)">
+              <TestCase itShould="39.测试Socket.timeout属性(需要先点击1.2开启服务器和客户端)">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1837,7 +1838,7 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>readyState</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="41.测试on('pause')事件，成功会打印‘Now data will start flowing again.’(测试前需要先点击1,2创建服务器和客户端）">
+              <TestCase itShould="41.测试on('pause')和on('resume')事件(测试前需要先点击1,2创建服务器和客户端）">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1847,23 +1848,10 @@ export const TcpSocketTest = () => {
                     }
                   }}
                   style={styles.moduleButton}>
-                  <Text style={styles.buttonText}>on('pause')</Text>
+                  <Text style={styles.buttonText}>on('pause'),on('resume')</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="42.测试on('resume')事件，成功会打印‘Now data will start flowing again.’(测试前需要先点击1,2创建服务器和客户端）">
-                <TouchableOpacity
-                  onPress={() => {
-                    if (client) {
-                      tcpPauseResume();
-                    } else {
-                      sendMessage('TcpSocketDemo:tcpClient is null');
-                    }
-                  }}
-                  style={styles.moduleButton}>
-                  <Text style={styles.buttonText}>on('resume')</Text>
-                </TouchableOpacity>
-              </TestCase>
-              <TestCase itShould="43.测试on('close')事件，成功会打印‘tcpServer socket on close’(测试前需要先点击1,2创建服务器和客户端）">
+              <TestCase itShould="43.测试on('close')事件(测试前需要先点击1,2创建服务器和客户端）">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1876,14 +1864,14 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>on('close')</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="44.测试on('connect')事件，成功会打印‘tcpClient on connect:xxx’(测试前需要先点击1,创建服务器）">
+              <TestCase itShould="44.测试on('connect')事件(测试前需要先点击1,创建服务器）">
                 <TouchableOpacity
                   onPress={createTcpClient}
                   style={styles.moduleButton}>
                   <Text style={styles.buttonText}>on('connect')</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="45.测试on('data')事件，成功会打印‘Hello, tcpClient!’(测试前需要先点击1,2创建服务器和客户端）">
+              <TestCase itShould="45.测试on('data')事件(测试前需要先点击1,2创建服务器和客户端）">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1896,7 +1884,7 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>on('data')</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="46.测试on('drain')事件，成功会打印‘Now data will start flowing again.’(测试前需要先点击1,2创建服务器和客户端）">
+              <TestCase itShould="46.测试on('drain')事件(测试前需要先点击1,2创建服务器和客户端）">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1909,7 +1897,7 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>on('drain')</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="47.测试on('error')事件，成功会打印‘socket on close’(测试前需要先点击1,2创建服务器和客户端）">
+              <TestCase itShould="47.测试on('error')事件(测试前需要先点击1,2创建服务器和客户端）">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1922,7 +1910,7 @@ export const TcpSocketTest = () => {
                   <Text style={styles.buttonText}>on('error')</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="48.测试on('timeout')事件，点击3s后会打印‘Socket timed out!’(测试前需要先点击17,15创建服务器和客户端）">
+              <TestCase itShould="48.测试on('timeout')事件(测试前需要先点击17,15创建服务器和客户端）">
                 <TouchableOpacity
                   onPress={() => {
                     if (client) {
@@ -1937,14 +1925,14 @@ export const TcpSocketTest = () => {
               </TestCase>
             </TestSuite>
             <TestSuite name="测试TLSServer对象属性">
-              <TestCase itShould="49.测试TLSServer.setSecureContext方法，成功会打印’TlsServer on secureConnection:xx‘（49，50用例需要一起验证）">
+              <TestCase itShould="49.测试TLSServer.setSecureContext方法">
                 <TouchableOpacity
                   onPress={createTlsServer}
                   style={styles.moduleButton}>
                   <Text style={styles.buttonText}>setSecureContext</Text>
                 </TouchableOpacity>
               </TestCase>
-              <TestCase itShould="50.测试on('secureConnection')事件，成功会打印’TlsServer on secureConnection:xx‘（49，50用例需要一起验证）">
+              <TestCase itShould="50.测试on('secureConnection')事件">
                 <TouchableOpacity
                   onPress={createTlsClient}
                   style={styles.moduleButton}>
@@ -2015,7 +2003,7 @@ export const TcpSocketTest = () => {
                   expect(state).not.to.be.null;
                 }}
               />
-              <TestCase itShould="53.测试on('secureConnect')事件，成功会打印’TlsClient on secureConnect:xx‘,（测试前先点击49.创建服务器）">
+              <TestCase itShould="53.测试on('secureConnect')事件（测试前先点击49.创建服务器）">
                 <TouchableOpacity
                   onPress={createTlsClient}
                   style={styles.moduleButton}>
