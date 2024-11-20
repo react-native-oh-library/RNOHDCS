@@ -11,8 +11,9 @@ export default class InputTapToHideKeyboardTrueExample extends React.Component {
     return (
       <SpringScrollView
         style={styles.container}
-        tapToHideKeyboard={true}
+        dragToHideKeyboard={true}
         inputToolBarHeight={-20}
+        pageSize={{width: 200, height: 200}}
         textInputRefs={[this._topInput, this._bottomInput]}
       >
         <TextInput

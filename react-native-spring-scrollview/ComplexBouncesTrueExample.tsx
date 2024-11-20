@@ -37,13 +37,14 @@ export default class ComplexBouncesTrueExample extends React.Component {
           bounces={true}
           textInputRefs={this._refs}
           refreshHeader={NormalHeader}
+          pageSize={{width: 200, height: 200}}
           onRefresh={() => {
             setTimeout(() => this._scrollView?.endRefresh(), 1000);
           }}
           loadingFooter={NormalFooter}
           loadingFooterHeight={80}
           onLoading={() => {
-            setTimeout(() => this._scrollView?.endLoading(), 1000);
+            setTimeout(() => this._scrollView?.endLoading(true), 1000);
           }}
         >
         <TouchableOpacity

@@ -42,7 +42,7 @@ export default class ComplexBouncesFalseExample extends React.Component {
           loadingFooter={NormalFooter}
           loadingFooterHeight={80}
           onLoading={() => {
-            setTimeout(() => this._scrollView?.endLoading(), 1000);
+            setTimeout(() => this._scrollView?.endLoading(true), 1000);
           }}
         >
         <TouchableOpacity

@@ -28,6 +28,7 @@ export default class RefreshAndLoadingInvertTrueExample extends React.Component 
         refreshHeader={CommonLottieHeader}
         loadingFooter={CommonLottieFooter}
         allLoaded={this.state.allLoaded}
+        pageSize={{width: 200, height: 200}}
       >
         {arr.map(item => (
           <Text key={item} style={styles.text}>
@@ -48,7 +49,7 @@ export default class RefreshAndLoadingInvertTrueExample extends React.Component 
   _onLoading = () => {
     setTimeout(() => {
       if(this.state.count>20) return;
-      this._scrollView?.endLoading();
+      this._scrollView?.endLoading(true);
       this.setState(p => ({
         count: p.count + this._step,
         allLoaded: false
@@ -61,7 +62,7 @@ export default class RefreshAndLoadingInvertTrueExample extends React.Component 
         count: p.count,
         allLoaded: true
       }));
-      this._scrollView?.endLoading();
+      this._scrollView?.endLoading(true);
      }
     }, 6000);
   };

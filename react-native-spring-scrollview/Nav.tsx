@@ -19,8 +19,8 @@ export class Nav extends React.Component {
          >
             <Stack.Navigator initialRouteName="Home">
                 <Stack.Screen name="Home" component={HomeDemo} />
-                <Stack.Screen name="InputTapToHideKeyboardTrueExample" component={InputTapToHideKeyboardTrueExample} />
-                <Stack.Screen name="InputTapToHideKeyboardFalseExample" component={InputTapToHideKeyboardFalseExample} />
+                <Stack.Screen name="InputDragToHideKeyboardTrueExample" component={InputTapToHideKeyboardTrueExample} />
+                <Stack.Screen name="InputDragToHideKeyboardFalseExample" component={InputTapToHideKeyboardFalseExample} />
                 <Stack.Screen name="ComplexBouncesFalseExample" component={ComplexBouncesFalseExample} />
                 <Stack.Screen name="ComplexBouncesTrueExample" component={ComplexBouncesTrueExample} />
                 <Stack.Screen name="RefreshAndLoadingInvertFalseExample" component={RefreshAndLoadingInvertFalseExample} />
