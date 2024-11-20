@@ -138,6 +138,8 @@ export function  TooltipBackgroundColor (props:any){
         placement="top"
         onClose={() =>onclikcloseOnChildInteraction() }
         closeOnChildInteraction={closeOnChildInteraction}
+        closeOnBackgroundInteraction={false}
+        closeOnContentInteraction={false}
         contentStyle={{margin:5}}
       >
       <TouchableHighlight onPress={() => setToolTipCloseOnChildInteractionVisible(!toolTipCloseOnChildInteractionVisible)}>
