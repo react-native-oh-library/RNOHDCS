@@ -26,7 +26,6 @@ import LineChartFocusProps from './LineChartFocusProps';
 import LineChartAreaChartProps from './LineChartAreaChartProps';
 import LineChartPointerConfigProps from './LineChartPointerConfigProps';
 import LineChartFunctionProps from './LineChartFunctionProps';
-import LineChartPropsAnimateOnDataChange from './LineChartPropsAnimateOnDataChange'
 
 import PieChartDataProps from './PieChartDataProps';
 import PieChartProps from './PieChartProps';
@@ -69,7 +68,6 @@ export default {
   LineChartAreaChartProps,
   LineChartPointerConfigProps,
   LineChartFunctionProps,
-  LineChartPropsAnimateOnDataChange,
 
   PieChartDataProps,
   PieChartProps,
