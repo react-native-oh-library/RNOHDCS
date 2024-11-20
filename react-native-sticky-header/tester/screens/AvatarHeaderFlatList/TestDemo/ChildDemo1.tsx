@@ -69,6 +69,7 @@ const AvatarHeaderFlatListDemoChild1: React.FC = () => {
         rightTopIconOnPress={goBack}
         contentContainerStyle={screenStyles.lightBackground1}
         containerStyle={screenStyles.stretchContainer1}
+        enableSafeAreaTopInset={false}
         backgroundColor={Brandon.color1}
         hasBorderRadius={false}
         image={Brandon.image}

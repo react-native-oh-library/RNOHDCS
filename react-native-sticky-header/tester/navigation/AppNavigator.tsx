@@ -162,10 +162,6 @@ export const App: React.FC = () => (
           component={DetailsHeaderSectionListDemoDefault}
         />
         {/* 测试DetailsHeaderSectionList组件end*/}
-        <Stack.Screen
-          name={ROUTES.AvatarHeaderScrollViewDemo}
-          component={AvatarHeaderScrollViewDemoScreen}
-        />
         {/* 测试AvatarHeaderFlatList组件start*/}
         <Stack.Screen
           name={ROUTES.AvatarHeaderFlatListDemo}
@@ -188,6 +184,10 @@ export const App: React.FC = () => (
         <Stack.Screen
           name={CHILDROUTES.AvatarHeaderSectionListDemoDefault}
           component={AvatarHeaderSectionListDemoDefault}
+        />
+        <Stack.Screen
+          name={ROUTES.AvatarHeaderScrollViewDemo}
+          component={AvatarHeaderScrollViewDemoScreen}
         />
         <Stack.Screen
           name={CHILDROUTES.AvatarHeaderScrollViewDemoDefault}

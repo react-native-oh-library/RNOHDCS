@@ -92,7 +92,7 @@ const DetailsHeaderFlatListDemoDefault: React.FC = () => {
         titleTestID={detailsHeaderFlatListTestIDs.title}
         subtitle={'brand sub title'}
         subtitleStyle={styles.text}
-        substitleTestID={'detailsHeaderDemoTestUUId'}
+        subtitleTestID={'detailsHeaderDemoTestUUId'}
         onHeaderLayout={onHeaderLayout}
         onTopReached={onTopReached}
         onMomentumScrollBegin={testMomentumScrollBegin}

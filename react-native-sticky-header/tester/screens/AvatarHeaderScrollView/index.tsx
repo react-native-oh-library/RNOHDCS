@@ -28,7 +28,7 @@ const defaultRouter = {
   testProps: {
     leftTopIcon: '左上角icon图标',
     leftTopIconOnPress: '左上角icon图标点击触发回调',
-    hasBorderRadius: '设置header左下角圆角效果',
+    hasBorderRadius: '设置header右下角圆角效果',
     title: 'Brandon文字',
     titleStyle: `color:white设置Brandon文字颜色为白色`,
     subtitle: 'Coffee buff.Web enthusiast....文字',

@@ -59,8 +59,8 @@ const childRouter1 = {
     headerHeight: `默认值100`,
     parallaxHeight:
       '如上所属，视差高度值parallaxHeight(默认值 53% of screen 的高度)，实际效果可参照默认组件（parallaxHeight的值生效）',
-    onTabsLayout: `TabbedHeaderList:测试testTabsLayout,布局完成后由组件内部自动调用`,
-    onTopReached: `TabbedHeaderList:测试testTopReached，触顶事件发生时由组件内部自动调用`,
+    onTabsLayout: `内部窗口展示:onTabsLayout回调已调用`,
+    onTopReached: `内部窗口展示:onTopReached回调已调用`,
     snapStartThreshold: '设置默认值50',
     stickyTabs: 'true',
   },

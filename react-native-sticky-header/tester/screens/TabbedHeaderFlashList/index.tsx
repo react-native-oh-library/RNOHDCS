@@ -28,7 +28,6 @@ const defaultRouter = {
   testProps: {
     backgroundColor: 'rgb(78,15,255)',
     enableSafeAreaTopInset: 'true',
-    leftTopIcon: '左上角icon图标',
     headerHeight: '默认值100',
     parallaxHeight: '300(默认值53%屏幕高度)',
     renderHeaderBar: '默认组件使用默认headerBar',

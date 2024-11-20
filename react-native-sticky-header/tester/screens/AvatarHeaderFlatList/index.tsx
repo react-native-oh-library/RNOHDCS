@@ -64,8 +64,7 @@ const childRouter1 = {
     backgroundColor: 'rgb(255,78,15)',
     contentContainerStyle: `backgroundColor:'red'`,
     containerStyle: `borderWidth:1;borderColor:'green'`,
-    enableSafeAreaTopInset:
-      'false（设置为false,表现headerBar部分会减少内边距）',
+    enableSafeAreaTopInset: '（设置为false,表现headerBar部分会减少内边距）',
     renderHeaderBar: '自定义headerBar<Text onPress={goBack}>返回</Text>',
     snapStartThreshold: '默认值',
     onHeaderLayout: 'header布局完成后，由组件内部自动调用',
