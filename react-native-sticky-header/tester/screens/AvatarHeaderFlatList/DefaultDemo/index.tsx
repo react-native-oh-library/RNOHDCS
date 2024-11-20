@@ -29,6 +29,7 @@ const AvatarHeaderFlatListDemoDefault: React.FC = () => {
             ? screenStyles.darkBackground
             : screenStyles.lightBackground,
         ]}
+        enableSafeAreaTopInset={true}
         containerStyle={screenStyles.stretchContainer}
         backgroundColor={Brandon.color}
         hasBorderRadius
