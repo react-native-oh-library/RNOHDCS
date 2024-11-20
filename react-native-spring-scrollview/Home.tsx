@@ -17,17 +17,17 @@ export default class HomeDemo extends React.Component  {
             <ScrollView>
             <View style={styles.container}>
               <TouchableHighlight
-                    onPress={() => { this.props.navigation.navigate("InputTapToHideKeyboardTrueExample") }}
+                    onPress={() => { this.props.navigation.navigate("InputDragToHideKeyboardTrueExample") }}
                     style={styles.button}
                 >
-                    <Text style={styles.text}>InputTapToHideKeyboardTrueExample</Text>
+                    <Text style={styles.text}>InputDragToHideKeyboardTrueExample</Text>
                 </TouchableHighlight>
 
                 <TouchableHighlight
-                    onPress={() => { this.props.navigation.navigate("InputTapToHideKeyboardFalseExample") }}
+                    onPress={() => { this.props.navigation.navigate("InputDragToHideKeyboardFalseExample") }}
                     style={styles.button}
                 >
-                    <Text style={styles.text}>InputTapToHideKeyboardFalseExample</Text>
+                    <Text style={styles.text}>InputDragToHideKeyboardFalseExample</Text>
                 </TouchableHighlight>
 
                 <TouchableHighlight
