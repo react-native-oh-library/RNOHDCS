@@ -5,6 +5,7 @@ import { Tester, TestSuite, TestCase } from '@rnoh/testerino'
 
 const BlurhashDemo: React.FC = (): JSX.Element => {
     const [validData, setValidData] = useState<boolean>(undefined)
+    const [AverageColor, setAverageColor] = useState("")
     const [blurhash, setBlurhash] = useState('LGF5]+Yk^6#M@-5c,1J5@[or[Q6.');
     const [blurhash2, setBlurhash2] = useState('LOGj+#n$02t7IVWWtQs,03R-~As9');
     const [blurhash3, setBlurhash3] = useState('LGF5]+Yk^6#M@-5c,1J5@[or[Q6.');
