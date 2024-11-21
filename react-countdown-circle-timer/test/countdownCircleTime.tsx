@@ -1,27 +1,59 @@
-import React, {useState} from 'react';
-import {TestSuite, Tester, TestCase} from '@rnoh/testerino';
-import {View, StyleSheet, Button, Text, ScrollView} from 'react-native';
-import {CountdownCircleTimer} from 'react-native-countdown-circle-timer';
+import React, { useState } from 'react';
+import { TestSuite, Tester, TestCase } from '@rnoh/testerino';
+import { View, StyleSheet, Button, Text, ScrollView } from 'react-native';
+import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
 export default function CountdownCircleTime() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [count, setCount] = useState(15);
   const [result, setResult] = useState(0);
-  const [update,setUpdate] = useState(0)
+  const [update, setUpdate] = useState(0)
 
   return (
     <Tester>
       <TestSuite name="CountdownCircleTimerDemo">
-        <ScrollView style={{height: 700}} stickyHeaderIndices={[0]}>
+        <ScrollView style={{ height: 700 }} stickyHeaderIndices={[0]}>
           <View style={styles.inputArea}>
             <Text style={styles.baseText}>{count}</Text>
           </View>
-          <View style={{backgroundColor: '#000'}}>
+          <View style={{ backgroundColor: '#000' }}>
+            <TestCase
+              itShould="duration:10"
+              tags={['dev']}
+              initialState={false}
+              arrange={({ setState }) => (
+                <CountdownCircleTimer
+                  isPlaying
+                  duration={10}
+                  initialRemainingTime={10}
+                  isSmoothColorTransition={false}
+                  updateInterval={0}
+                  strokeWidth={12}
+                  strokeLinecap={'square'}
+                  rotation={'clockwise'}
+                  size={180}
+                  trailColor="#d9d9d9"
+                  isGrowing={true}
+                  trailStrokeWidth={10}
+                  colors={['#004777', '#F7B801', '#A30000', '#A30000']}
+                  colorsTime={[8, 6, 3, 0]}
+                  onComplete={() => ({ shouldRepeat: true })}>
+                  {({ remainingTime }) => {
+                    return (
+                      <View>
+                        <Text>{remainingTime}</Text>
+                      </View>
+                    );
+                  }}
+                </CountdownCircleTimer>
+              )}
+            />
+
             <TestCase
               itShould="initialRemainingTime:10"
               tags={['dev']}
               initialState={false}
-              arrange={({setState}) => (
+              arrange={({ setState }) => (
                 <CountdownCircleTimer
                   isPlaying
                   duration={count}
@@ -40,8 +72,8 @@ export default function CountdownCircleTime() {
                   onUpdate={remainingTime => {
                     setState(true);
                   }}
-                  onComplete={() => ({shouldRepeat: true})}>
-                  {({remainingTime}) => {
+                  onComplete={() => ({ shouldRepeat: true })}>
+                  {({ remainingTime }) => {
                     return (
                       <View>
                         <Text>{remainingTime}</Text>
@@ -50,7 +82,7 @@ export default function CountdownCircleTime() {
                   }}
                 </CountdownCircleTimer>
               )}
-              assert={({expect, state}) => {
+              assert={({ expect, state }) => {
                 expect(state).to.be.eq(true);
               }}
             />
@@ -58,7 +90,7 @@ export default function CountdownCircleTime() {
               itShould="倒计时器"
               tags={['dev']}
               initialState={false}
-              arrange={({setState}) => (
+              arrange={({ setState }) => (
                 <CountdownCircleTimer
                   isPlaying={isPlaying}
                   duration={count}
@@ -74,9 +106,9 @@ export default function CountdownCircleTime() {
                   trailStrokeWidth={10}
                   colors={['#004777', '#F7B801', '#A30000', '#A30000']}
                   colorsTime={[8, 6, 3, 0]}
-                  onUpdate={remainingTime => {}}
-                  onComplete={() => ({shouldRepeat: true})}>
-                  {({remainingTime}) => {
+                  onUpdate={remainingTime => { }}
+                  onComplete={() => ({ shouldRepeat: true })}>
+                  {({ remainingTime }) => {
                     return (
                       <View>
                         <Text>{remainingTime}</Text>
@@ -85,7 +117,7 @@ export default function CountdownCircleTime() {
                   }}
                 </CountdownCircleTimer>
               )}
-              assert={({expect, state}) => {
+              assert={({ expect, state }) => {
                 expect(state).to.be.eq(true);
               }}
             />
@@ -97,7 +129,7 @@ export default function CountdownCircleTime() {
               itShould="isSmoothColorTransition:true"
               tags={['dev']}
               initialState={false}
-              arrange={({setState}) => (
+              arrange={({ setState }) => (
                 <CountdownCircleTimer
                   isPlaying={true}
                   duration={count}
@@ -116,8 +148,8 @@ export default function CountdownCircleTime() {
                   onUpdate={remainingTime => {
                     setState(true);
                   }}
-                  onComplete={() => ({shouldRepeat: true})}>
-                  {({remainingTime}) => {
+                  onComplete={() => ({ shouldRepeat: true })}>
+                  {({ remainingTime }) => {
                     return (
                       <View>
                         <Text>{remainingTime}</Text>
@@ -126,7 +158,7 @@ export default function CountdownCircleTime() {
                   }}
                 </CountdownCircleTimer>
               )}
-              assert={({expect, state}) => {
+              assert={({ expect, state }) => {
                 expect(state).to.be.eq(true);
               }}
             />
@@ -134,7 +166,7 @@ export default function CountdownCircleTime() {
               itShould="isSmoothColorTransition:false"
               tags={['dev']}
               initialState={false}
-              arrange={({setState}) => (
+              arrange={({ setState }) => (
                 <CountdownCircleTimer
                   isPlaying={true}
                   duration={count}
@@ -153,8 +185,8 @@ export default function CountdownCircleTime() {
                   onUpdate={remainingTime => {
                     setState(true);
                   }}
-                  onComplete={() => ({shouldRepeat: true})}>
-                  {({remainingTime}) => {
+                  onComplete={() => ({ shouldRepeat: true })}>
+                  {({ remainingTime }) => {
                     return (
                       <View>
                         <Text>{remainingTime}</Text>
@@ -163,7 +195,7 @@ export default function CountdownCircleTime() {
                   }}
                 </CountdownCircleTimer>
               )}
-              assert={({expect, state}) => {
+              assert={({ expect, state }) => {
                 expect(state).to.be.eq(true);
               }}
             />
@@ -172,7 +204,7 @@ export default function CountdownCircleTime() {
               itShould="updateInterval:5"
               tags={['dev']}
               initialState={false}
-              arrange={({setState}) => (
+              arrange={({ setState }) => (
                 <CountdownCircleTimer
                   isPlaying={true}
                   duration={count}
@@ -191,8 +223,8 @@ export default function CountdownCircleTime() {
                   onUpdate={remainingTime => {
                     setState(true);
                   }}
-                  onComplete={() => ({shouldRepeat: true})}>
-                  {({remainingTime}) => {
+                  onComplete={() => ({ shouldRepeat: true })}>
+                  {({ remainingTime }) => {
                     return (
                       <View>
                         <Text>{remainingTime}</Text>
@@ -201,7 +233,7 @@ export default function CountdownCircleTime() {
                   }}
                 </CountdownCircleTimer>
               )}
-              assert={({expect, state}) => {
+              assert={({ expect, state }) => {
                 expect(state).to.be.eq(true);
               }}
             />
@@ -210,7 +242,7 @@ export default function CountdownCircleTime() {
               itShould="strokeWidth:40"
               tags={['dev']}
               initialState={false}
-              arrange={({setState}) => (
+              arrange={({ setState }) => (
                 <CountdownCircleTimer
                   isPlaying={true}
                   duration={count}
@@ -229,8 +261,8 @@ export default function CountdownCircleTime() {
                   onUpdate={remainingTime => {
                     setState(true);
                   }}
-                  onComplete={() => ({shouldRepeat: true})}>
-                  {({remainingTime}) => {
+                  onComplete={() => ({ shouldRepeat: true })}>
+                  {({ remainingTime }) => {
                     return (
                       <View>
                         <Text>{remainingTime}</Text>
@@ -239,7 +271,7 @@ export default function CountdownCircleTime() {
                   }}
                 </CountdownCircleTimer>
               )}
-              assert={({expect, state}) => {
+              assert={({ expect, state }) => {
                 expect(state).to.be.eq(true);
               }}
             />
@@ -248,7 +280,7 @@ export default function CountdownCircleTime() {
               itShould="strokeLinecap:round"
               tags={['dev']}
               initialState={false}
-              arrange={({setState}) => (
+              arrange={({ setState }) => (
                 <CountdownCircleTimer
                   isPlaying={true}
                   duration={count}
@@ -267,8 +299,8 @@ export default function CountdownCircleTime() {
                   onUpdate={remainingTime => {
                     setState(true);
                   }}
-                  onComplete={() => ({shouldRepeat: true})}>
-                  {({remainingTime}) => {
+                  onComplete={() => ({ shouldRepeat: true })}>
+                  {({ remainingTime }) => {
                     return (
                       <View>
                         <Text>{remainingTime}</Text>
@@ -277,7 +309,7 @@ export default function CountdownCircleTime() {
                   }}
                 </CountdownCircleTimer>
               )}
-              assert={({expect, state}) => {
+              assert={({ expect, state }) => {
                 expect(state).to.be.eq(true);
               }}
             />
@@ -285,7 +317,7 @@ export default function CountdownCircleTime() {
               itShould="strokeLinecap:square"
               tags={['dev']}
               initialState={false}
-              arrange={({setState}) => (
+              arrange={({ setState }) => (
                 <CountdownCircleTimer
                   isPlaying={true}
                   duration={count}
@@ -304,8 +336,8 @@ export default function CountdownCircleTime() {
                   onUpdate={remainingTime => {
                     setState(true);
                   }}
-                  onComplete={() => ({shouldRepeat: true})}>
-                  {({remainingTime}) => {
+                  onComplete={() => ({ shouldRepeat: true })}>
+                  {({ remainingTime }) => {
                     return (
                       <View>
                         <Text>{remainingTime}</Text>
@@ -314,7 +346,7 @@ export default function CountdownCircleTime() {
                   }}
                 </CountdownCircleTimer>
               )}
-              assert={({expect, state}) => {
+              assert={({ expect, state }) => {
                 expect(state).to.be.eq(true);
               }}
             />
@@ -322,7 +354,7 @@ export default function CountdownCircleTime() {
               itShould="strokeLinecap:butt"
               tags={['dev']}
               initialState={false}
-              arrange={({setState}) => (
+              arrange={({ setState }) => (
                 <CountdownCircleTimer
                   isPlaying={true}
                   duration={count}
@@ -341,8 +373,8 @@ export default function CountdownCircleTime() {
                   onUpdate={remainingTime => {
                     setState(true);
                   }}
-                  onComplete={() => ({shouldRepeat: true})}>
-                  {({remainingTime}) => {
+                  onComplete={() => ({ shouldRepeat: true })}>
+                  {({ remainingTime }) => {
                     return (
                       <View>
                         <Text>{remainingTime}</Text>
@@ -351,7 +383,7 @@ export default function CountdownCircleTime() {
                   }}
                 </CountdownCircleTimer>
               )}
-              assert={({expect, state}) => {
+              assert={({ expect, state }) => {
                 expect(state).to.be.eq(true);
               }}
             />
@@ -360,7 +392,7 @@ export default function CountdownCircleTime() {
               itShould="rotation:counterclockwise"
               tags={['dev']}
               initialState={false}
-              arrange={({setState}) => (
+              arrange={({ setState }) => (
                 <CountdownCircleTimer
                   isPlaying={true}
                   duration={count}
@@ -372,15 +404,14 @@ export default function CountdownCircleTime() {
                   rotation={'counterclockwise'}
                   size={180}
                   trailColor="#d9d9d9"
-                  isGrowing={true}
                   trailStrokeWidth={10}
                   colors={['#004777', '#F7B801', '#A30000', '#A30000']}
                   colorsTime={[8, 6, 3, 0]}
                   onUpdate={remainingTime => {
                     setState(true);
                   }}
-                  onComplete={() => ({shouldRepeat: true})}>
-                  {({remainingTime}) => {
+                  onComplete={() => ({ shouldRepeat: true })}>
+                  {({ remainingTime }) => {
                     return (
                       <View>
                         <Text>{remainingTime}</Text>
@@ -389,7 +420,7 @@ export default function CountdownCircleTime() {
                   }}
                 </CountdownCircleTimer>
               )}
-              assert={({expect, state}) => {
+              assert={({ expect, state }) => {
                 expect(state).to.be.eq(true);
               }}
             />
@@ -397,7 +428,7 @@ export default function CountdownCircleTime() {
               itShould="rotation:clockwise"
               tags={['dev']}
               initialState={false}
-              arrange={({setState}) => (
+              arrange={({ setState }) => (
                 <CountdownCircleTimer
                   isPlaying={true}
                   duration={count}
@@ -409,15 +440,14 @@ export default function CountdownCircleTime() {
                   rotation={'clockwise'}
                   size={180}
                   trailColor="#d9d9d9"
-                  isGrowing={true}
                   trailStrokeWidth={10}
                   colors={['#004777', '#F7B801', '#A30000', '#A30000']}
                   colorsTime={[8, 6, 3, 0]}
                   onUpdate={remainingTime => {
                     setState(true);
                   }}
-                  onComplete={() => ({shouldRepeat: true})}>
-                  {({remainingTime}) => {
+                  onComplete={() => ({ shouldRepeat: true })}>
+                  {({ remainingTime }) => {
                     return (
                       <View>
                         <Text>{remainingTime}</Text>
@@ -426,7 +456,7 @@ export default function CountdownCircleTime() {
                   }}
                 </CountdownCircleTimer>
               )}
-              assert={({expect, state}) => {
+              assert={({ expect, state }) => {
                 expect(state).to.be.eq(true);
               }}
             />
@@ -435,7 +465,7 @@ export default function CountdownCircleTime() {
               itShould="size:100"
               tags={['dev']}
               initialState={false}
-              arrange={({setState}) => (
+              arrange={({ setState }) => (
                 <CountdownCircleTimer
                   isPlaying={true}
                   duration={count}
@@ -454,8 +484,8 @@ export default function CountdownCircleTime() {
                   onUpdate={remainingTime => {
                     setState(true);
                   }}
-                  onComplete={() => ({shouldRepeat: true})}>
-                  {({remainingTime}) => {
+                  onComplete={() => ({ shouldRepeat: true })}>
+                  {({ remainingTime }) => {
                     return (
                       <View>
                         <Text>{remainingTime}</Text>
@@ -464,7 +494,7 @@ export default function CountdownCircleTime() {
                   }}
                 </CountdownCircleTimer>
               )}
-              assert={({expect, state}) => {
+              assert={({ expect, state }) => {
                 expect(state).to.be.eq(true);
               }}
             />
@@ -473,7 +503,7 @@ export default function CountdownCircleTime() {
               itShould="trailColor:#efd"
               tags={['dev']}
               initialState={false}
-              arrange={({setState}) => (
+              arrange={({ setState }) => (
                 <CountdownCircleTimer
                   isPlaying={true}
                   duration={count}
@@ -492,8 +522,8 @@ export default function CountdownCircleTime() {
                   onUpdate={remainingTime => {
                     setState(true);
                   }}
-                  onComplete={() => ({shouldRepeat: true})}>
-                  {({remainingTime}) => {
+                  onComplete={() => ({ shouldRepeat: true })}>
+                  {({ remainingTime }) => {
                     return (
                       <View>
                         <Text>{remainingTime}</Text>
@@ -502,7 +532,7 @@ export default function CountdownCircleTime() {
                   }}
                 </CountdownCircleTimer>
               )}
-              assert={({expect, state}) => {
+              assert={({ expect, state }) => {
                 expect(state).to.be.eq(true);
               }}
             />
@@ -511,7 +541,7 @@ export default function CountdownCircleTime() {
               itShould="isGrowing:false"
               tags={['dev']}
               initialState={false}
-              arrange={({setState}) => (
+              arrange={({ setState }) => (
                 <CountdownCircleTimer
                   isPlaying={true}
                   duration={count}
@@ -530,8 +560,8 @@ export default function CountdownCircleTime() {
                   onUpdate={remainingTime => {
                     setState(true);
                   }}
-                  onComplete={() => ({shouldRepeat: true})}>
-                  {({remainingTime}) => {
+                  onComplete={() => ({ shouldRepeat: true })}>
+                  {({ remainingTime }) => {
                     return (
                       <View>
                         <Text>{remainingTime}</Text>
@@ -540,7 +570,7 @@ export default function CountdownCircleTime() {
                   }}
                 </CountdownCircleTimer>
               )}
-              assert={({expect, state}) => {
+              assert={({ expect, state }) => {
                 expect(state).to.be.eq(true);
               }}
             />
@@ -548,7 +578,7 @@ export default function CountdownCircleTime() {
               itShould="isGrowing:true"
               tags={['dev']}
               initialState={false}
-              arrange={({setState}) => (
+              arrange={({ setState }) => (
                 <CountdownCircleTimer
                   isPlaying={true}
                   duration={count}
@@ -567,8 +597,8 @@ export default function CountdownCircleTime() {
                   onUpdate={remainingTime => {
                     setState(true);
                   }}
-                  onComplete={() => ({shouldRepeat: true})}>
-                  {({remainingTime}) => {
+                  onComplete={() => ({ shouldRepeat: true })}>
+                  {({ remainingTime }) => {
                     return (
                       <View>
                         <Text>{remainingTime}</Text>
@@ -577,7 +607,7 @@ export default function CountdownCircleTime() {
                   }}
                 </CountdownCircleTimer>
               )}
-              assert={({expect, state}) => {
+              assert={({ expect, state }) => {
                 expect(state).to.be.eq(true);
               }}
             />
@@ -586,7 +616,7 @@ export default function CountdownCircleTime() {
               itShould="trailStrokeWidth:100"
               tags={['dev']}
               initialState={false}
-              arrange={({setState}) => (
+              arrange={({ setState }) => (
                 <CountdownCircleTimer
                   isPlaying={true}
                   duration={count}
@@ -605,8 +635,8 @@ export default function CountdownCircleTime() {
                   onUpdate={remainingTime => {
                     setState(true);
                   }}
-                  onComplete={() => ({shouldRepeat: true})}>
-                  {({remainingTime}) => {
+                  onComplete={() => ({ shouldRepeat: true })}>
+                  {({ remainingTime }) => {
                     return (
                       <View>
                         <Text>{remainingTime}</Text>
@@ -615,7 +645,7 @@ export default function CountdownCircleTime() {
                   }}
                 </CountdownCircleTimer>
               )}
-              assert={({expect, state}) => {
+              assert={({ expect, state }) => {
                 expect(state).to.be.eq(true);
               }}
             />
@@ -624,7 +654,7 @@ export default function CountdownCircleTime() {
               itShould="colors:['#0000FF', '#FFFF00', '#5C3317', '#D9D919'],colorsTime:[15, 10, 7, 3, 0]"
               tags={['dev']}
               initialState={0}
-              arrange={({setState}) => (
+              arrange={({ setState }) => (
                 <CountdownCircleTimer
                   isPlaying={true}
                   duration={count}
@@ -643,8 +673,8 @@ export default function CountdownCircleTime() {
                   onUpdate={remainingTime => {
                     setResult(remainingTime);
                   }}
-                  onComplete={() => ({shouldRepeat: true})}>
-                  {({remainingTime}) => {
+                  onComplete={() => ({ shouldRepeat: true })}>
+                  {({ remainingTime }) => {
                     return (
                       <View>
                         <Text>{remainingTime}</Text>
@@ -653,7 +683,7 @@ export default function CountdownCircleTime() {
                   }}
                 </CountdownCircleTimer>
               )}
-              assert={({expect, state}) => {
+              assert={({ expect, state }) => {
                 expect(state).to.be.eq(true);
               }}
             />
@@ -662,40 +692,40 @@ export default function CountdownCircleTime() {
               itShould="onUpdate调用测试"
               tags={['dev']}
               initialState={false}
-              arrange={({setState}) => (
+              arrange={({ setState }) => (
                 <View>
-                <Text>onUpdate:{update}</Text>
-                <CountdownCircleTimer
-                  isPlaying={true}
-                  duration={count}
-                  initialRemainingTime={6}
-                  isSmoothColorTransition={false}
-                  updateInterval={0}
-                  strokeWidth={12}
-                  strokeLinecap={'square'}
-                  rotation={'clockwise'}
-                  size={180}
-                  trailColor="#d9d9d9"
-                  isGrowing={true}
-                  trailStrokeWidth={10}
-                  colors={['#004777', '#F7B801', '#A30000', '#A30000']}
-                  colorsTime={[8, 6, 3, 0]}
-                  onUpdate={(a) => {
-                    setUpdate(a)
-                    setState(true);
-                  }}
-                  onComplete={() => ({shouldRepeat: true})}>
-                  {({remainingTime}) => {
-                    return (
-                      <View>
-                        <Text>Time: {remainingTime} seconds</Text>
-                      </View>
-                    );
-                  }}
-                </CountdownCircleTimer>
+                  <Text>onUpdate:{update}</Text>
+                  <CountdownCircleTimer
+                    isPlaying={true}
+                    duration={count}
+                    initialRemainingTime={6}
+                    isSmoothColorTransition={false}
+                    updateInterval={0}
+                    strokeWidth={12}
+                    strokeLinecap={'square'}
+                    rotation={'clockwise'}
+                    size={180}
+                    trailColor="#d9d9d9"
+                    isGrowing={true}
+                    trailStrokeWidth={10}
+                    colors={['#004777', '#F7B801', '#A30000', '#A30000']}
+                    colorsTime={[8, 6, 3, 0]}
+                    onUpdate={(a) => {
+                      setUpdate(a)
+                      setState(true);
+                    }}
+                    onComplete={() => ({ shouldRepeat: true })}>
+                    {({ remainingTime }) => {
+                      return (
+                        <View>
+                          <Text>Time: {remainingTime} seconds</Text>
+                        </View>
+                      );
+                    }}
+                  </CountdownCircleTimer>
                 </View>
               )}
-              assert={({expect, state}) => {
+              assert={({ expect, state }) => {
                 expect(state).to.be.eq(true);
               }}
             />
@@ -704,7 +734,7 @@ export default function CountdownCircleTime() {
               itShould="onComplete={() => ({ shouldRepeat: false })} "
               tags={['dev']}
               initialState={false}
-              arrange={({setState}) => (
+              arrange={({ setState }) => (
                 <CountdownCircleTimer
                   isPlaying={true}
                   duration={count}
@@ -720,9 +750,9 @@ export default function CountdownCircleTime() {
                   trailStrokeWidth={10}
                   colors={['#004777', '#F7B801', '#A30000', '#A30000']}
                   colorsTime={[8, 6, 3, 0]}
-                  onUpdate={remainingTime => {}}
-                  onComplete={() => ({shouldRepeat: false})}>
-                  {({remainingTime}) => {
+                  onUpdate={remainingTime => { }}
+                  onComplete={() => ({ shouldRepeat: false })}>
+                  {({ remainingTime }) => {
                     return (
                       <View>
                         <Text>{remainingTime}</Text>
@@ -731,7 +761,7 @@ export default function CountdownCircleTime() {
                   }}
                 </CountdownCircleTimer>
               )}
-              assert={({expect, state}) => {
+              assert={({ expect, state }) => {
                 expect(state).to.be.eq(true);
               }}
             />
