@@ -39,7 +39,7 @@ export default class ScrollToAndOnScrollExample extends React.Component {
           style={styles.container}
           ref={(ref) => (this._scrollView = ref)}
           onTouchBegin={this._onTouchBegin}
-          onTouchFinish={this._onTouchEnd}
+          onTouchEnd={this._onTouchEnd}
           onMomentumScrollBegin={this.onMomentumScrollBegin}
           onMomentumScrollEnd={this._onMomentumScrollEnd}
           onNativeContentOffsetExtract={this._nativeOffset}
