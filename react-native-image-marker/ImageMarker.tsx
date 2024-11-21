@@ -616,6 +616,8 @@ export const ImageMarker = () => {
   const [url_text_shadowStyle1, seturl_text_shadowStyle1] = useState('');
   //rotate
   const [url_text_shadowStyle2, seturl_text_shadowStyle2] = useState('');
+  const [url_text_shadowStyle3, seturl_text_shadowStyle3] = useState('');
+  const [url_text_shadowStyle4, seturl_text_shadowStyle4] = useState('');
   // text style
   // textBackgroundStyle
   // color
@@ -1091,6 +1093,40 @@ export const ImageMarker = () => {
           dx: 50,
           dy: 50,
           radius: 20,
+          color: '#FC0700'
+        }
+      }
+    }
+    ]
+  }
+  const text_options_shadowStyle3: TextMarkOptions = {
+    backgroundImage: { src: require('./assets/code-images/1.png') },
+    watermarkTexts: [{
+      text: 'test text',
+      style: {
+        color: '#FF0000',
+        fontSize: 100,
+        shadowStyle: {
+          dx: 30,
+          dy: 50,
+          radius: 10,
+          color: '#FC0700'
+        }
+      }
+    }
+    ]
+  }
+  const text_options_shadowStyle4: TextMarkOptions = {
+    backgroundImage: { src: require('./assets/code-images/1.png') },
+    watermarkTexts: [{
+      text: 'test text',
+      style: {
+        color: '#FF0000',
+        fontSize: 100,
+        shadowStyle: {
+          dx: 50,
+          dy: 30,
+          radius: 10,
           color: '#FC0700'
         }
       }
@@ -1647,6 +1683,20 @@ export const ImageMarker = () => {
   const markTextShadowStyle2 = () => {
     Marker.markText(text_options_shadowStyle2).then((result) => {
       seturl_text_shadowStyle2(result)
+    }).catch(error => {
+      console.log('error', error)
+    })
+  }
+  const markTextShadowStyle3 = () => {
+    Marker.markText(text_options_shadowStyle3).then((result) => {
+      seturl_text_shadowStyle3(result)
+    }).catch(error => {
+      console.log('error', error)
+    })
+  }
+  const markTextShadowStyle4 = () => {
+    Marker.markText(text_options_shadowStyle4).then((result) => {
+      seturl_text_shadowStyle4(result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -3257,6 +3307,56 @@ export const ImageMarker = () => {
                   {url_text_shadowStyle2}
                 </Text>
                 <Image resizeMode='contain' source={{ uri: url_text_shadowStyle2, width: 300, height: 150 }} />
+              </View>
+            </View>
+          </TestCase>
+          <TestCase
+            itShould=' text_shadowStyle3 '
+            tags={['C_API']}>
+            <View style={styles.body}>
+              <View style={styles.sectionContainer}>
+                <Text style={styles.sectionTitle}>
+                  {"image marker"}
+                </Text>
+                <Button
+                  title="markText_TextMarkOptions_watermarkTexts_TextOptions_style_TextStyle_shadowStyle  {
+                    dx: 30,
+                    dy: 50,
+                    radius: 20,
+                    color: '#FC0700'
+                  }"
+                  color="#9a73ef"
+                  onPress={markTextShadowStyle3}
+                />
+                <Text style={styles.sectionTitle}>
+                  {url_text_shadowStyle3}
+                </Text>
+                <Image resizeMode='contain' source={{ uri: url_text_shadowStyle3, width: 300, height: 150 }} />
+              </View>
+            </View>
+          </TestCase>
+          <TestCase
+            itShould=' text_shadowStyle4 '
+            tags={['C_API']}>
+            <View style={styles.body}>
+              <View style={styles.sectionContainer}>
+                <Text style={styles.sectionTitle}>
+                  {"image marker"}
+                </Text>
+                <Button
+                  title="markText_TextMarkOptions_watermarkTexts_TextOptions_style_TextStyle_shadowStyle  {
+                    dx: 50,
+                    dy: 30,
+                    radius: 20,
+                    color: '#FC0700'
+                  }"
+                  color="#9a73ef"
+                  onPress={markTextShadowStyle4}
+                />
+                <Text style={styles.sectionTitle}>
+                  {url_text_shadowStyle4}
+                </Text>
+                <Image resizeMode='contain' source={{ uri: url_text_shadowStyle4, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
