@@ -95,7 +95,7 @@ const childRouter2 = {
     tabsContainerStyle: `borderWidth: 1,borderColor: 'red',`,
     title: 'Food delivery app',
     titleStyle: `color:'white'`,
-    titleTestID: '用例标识符，用作唯一标识，传递即生效',
+    titleTestID: '标题测试ID,唯一标识符，传递即生效',
   },
 };
 const childRouter3 = {

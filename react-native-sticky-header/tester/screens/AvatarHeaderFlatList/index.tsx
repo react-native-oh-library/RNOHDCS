@@ -37,7 +37,7 @@ const defaultRouter = {
     enableSafeAreaTopInset: 'true',
     leftTopIcon: '左上角icon图标',
     leftTopIconOnPress: '左上角icon图标点击触发回调',
-    leftTopIconTestID: '测试唯一标识符，传递即生效',
+    leftTopIconTestID: '测试ID,唯一标识符，传递即生效',
     hasBorderRadius: 'true',
     headerHeight: '默认值100',
     parallaxHeight: '300(默认值53%屏幕高度)',
@@ -45,14 +45,15 @@ const defaultRouter = {
     renderHeaderBar: '默认组件使用默认headerBar',
     rightTopIcon: '右上角icon图标',
     rightTopIconOnPress: '右上角icon图标点击触发回调',
+    rightTopIconTestID: '测试ID,唯一标识符，传递即生效',
     snapStartThreshold: '默认值',
     subtitle:
       ':Coffee buff. Web enthusiast. Unapologetic student. Gamer. Avid organizer.',
     subtitleStyle: '设置文字颜色为白色',
-    subtitleTestID: '测试唯一标识符，传递即生效',
+    subtitleTestID: '测试ID,唯一标识符，传递即生效',
     title: 'Brandon',
     titleStyle: `color:'white'`,
-    titleTestID: '测试唯一标识符，传递即生效',
+    titleTestID: '测试ID,唯一标识符，传递即生效',
   },
 };
 const childRouter1 = {

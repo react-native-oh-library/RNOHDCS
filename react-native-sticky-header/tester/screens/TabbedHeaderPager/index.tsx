@@ -48,6 +48,7 @@ const defaultRouter = {
     logoContainerStyle: 'logo外侧border边框',
     title: 'Mornin Mark!...',
     titleStyle: `color:'white'`,
+    titleTestID: '标题测试ID,唯一标识符，传递即生效',
     foregroundImage: '人物头像图片',
     tabs: '自定义tab栏组件',
     tabTextStyle: `color:'white'`,
