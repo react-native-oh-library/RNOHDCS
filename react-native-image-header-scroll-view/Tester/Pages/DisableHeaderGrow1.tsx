@@ -7,8 +7,8 @@
  * 
  */
 
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image,Animated, Dimensions ,Easing} from 'react-native';
+import React, { useRef } from 'react';
+import { StyleSheet, Text, View, ScrollView, Image, Dimensions, StatusBar } from 'react-native';
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino'
 import ImageHeaderScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 const MIN_HEIGHT = 80;
@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
     },
     title: {
-        // backgroundColor:'green',
         fontSize: 20,
     },
     name: {
@@ -108,72 +107,23 @@ const styles = StyleSheet.create({
     },
 });
 
-function TriggeringViewBottomOffsetAndTopOffset() {
-    const [visible, setVisible] = useState(false);
-    const fadeAnim = new Animated.Value(1);
-    useEffect(() => {
-        if (visible) {
-          Animated.timing(fadeAnim, {
-            toValue: 1,
-            duration: 100,
-            easing: Easing.bounce,
-            useNativeDriver: true,
-          }).start();
-        } else {
-          // 如果当前是不可见的，则执行淡出动画
-          Animated.timing(fadeAnim, {
-            toValue: 0,
-            duration: 100,
-            easing: Easing.bounce,
-            useNativeDriver: true,
-          }).start();
-        }
-      }, [visible, fadeAnim]);   
-     
+function DisableHeaderGrow1() {
+    const HeaderRef = useRef(null)
 
     return (
-            <Tester>
-                <TestSuite name='topOffset & bottomOffset'>
-                    <TestCase  itShould='topOffset & bottomOffset'>
+        <Tester>
+            <TestSuite name='disableHeaderGrow'>
+                <TestCase itShould='disableHeaderGrow'> 
                         <View style={{ height:1000}}>
                             <ImageHeaderScrollView
                                 maxHeight={MAX_HEIGHT}
                                 minHeight={MIN_HEIGHT}
-                                maxOverlayOpacity={0.8}
-                                minOverlayOpacity={0.2}
-                                fadeOutForeground={true}
-                                foregroundParallaxRatio={1}
-                                overlayColor={'blue'}
                                 renderHeader={() => <Image source={require('./doctorwho.jpg')} style={styles.image} />}
-                                renderFixedForeground={() => (
-                                    <Animated.View
-                                    style={[styles.navTitleView,{ opacity: fadeAnim}]}  
-                                >
-                                    <Text style={styles.navTitle}>
-                                        {tvShowContent.title}, ({tvShowContent.year})
-                                    </Text>
-                                </Animated.View>
-                                )}
-                                renderForeground={() => (
-                                    <View style={styles.titleContainer}>
-                                        <Text style={styles.imageTitle}>{tvShowContent.title}</Text>
-                                    </View>
-                                )}
+                                maxOverlayOpacity={0.8}
                                 useNativeDriver={true}
-                                disableHeaderGrow={false}
+                                disableHeaderGrow={true}
                             >
-                                <>
-                                    <TriggeringView
-                                      onHide={() =>  setVisible(true)}
-                                      onDisplay={() => setVisible(false)}
-                                      bottomOffset={10}
-                                      topOffset={10}
-                                      
-                                    >
-                                        <Text  style={styles.title}>
-                                            <Text style={styles.name}>{tvShowContent.title}</Text>, ({tvShowContent.year})
-                                        </Text>
-                                    </TriggeringView>
+                                  <>
                                     <View style={styles.section}>
                                         <Text style={styles.sectionTitle}>Overview</Text>
                                         <Text style={styles.sectionContent}>{tvShowContent.overview}</Text>
@@ -191,13 +141,14 @@ function TriggeringViewBottomOffsetAndTopOffset() {
                                 </>
                             </ImageHeaderScrollView>
                         </View>
-                    </TestCase>
-                </TestSuite> 
-            </Tester>
+                  
+                </TestCase>
+            </TestSuite>
+        </Tester>
     );
 
 }
 
-export default TriggeringViewBottomOffsetAndTopOffset;
+export default DisableHeaderGrow1;
 
 

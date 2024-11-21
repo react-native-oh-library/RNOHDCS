@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
 });
 
 function TriggeringViewOnBeginHiddenAndOnBeginDisplayed() {
+    const [methodName, setMethodName] = useState('');
     const [visible, setVisible] = useState(false);
     const fadeAnim = new Animated.Value(0);
     useEffect(() => {
@@ -134,6 +135,8 @@ function TriggeringViewOnBeginHiddenAndOnBeginDisplayed() {
                 <TestSuite name='onBeginHidden & onBeginDisplayed'>
                     <TestCase  itShould='onBeginHidden & onBeginDisplayed'>
                         <View style={{ height:1000}}>
+                        <Text style={{height:40,color:'blue',fontSize:20}}>{`回调方法：${methodName}`}</Text>
+
                             <ImageHeaderScrollView
                                 maxHeight={MAX_HEIGHT}
                                 minHeight={MIN_HEIGHT}
@@ -162,8 +165,16 @@ function TriggeringViewOnBeginHiddenAndOnBeginDisplayed() {
                             >
                                 <>
                                     <TriggeringView
-                                        onBeginHidden={() =>setVisible(true)}
-                                        onBeginDisplayed={() => setVisible(false)}
+                                        onBeginHidden={() => {
+                                            setVisible(true)
+                                            setMethodName('onBeginHidden')
+
+                                        }}
+                                        onBeginDisplayed={() => {
+                                            setVisible(false)
+                                            setMethodName('onBeginDisplayed')
+
+                                        }}
                                     >
                                         <Text style={styles.title}>
                                             <Text style={styles.name}>{tvShowContent.title}</Text>, ({tvShowContent.year})

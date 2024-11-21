@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
 
 function TriggeringViewOnHideAndOnDisplay() {
     const [visible, setVisible] = useState(false);
+    const [methodName, setMethodName] = useState('');
     const fadeAnim = new Animated.Value(0);
     useEffect(() => {
         if (visible) {
@@ -136,6 +137,7 @@ function TriggeringViewOnHideAndOnDisplay() {
                 <TestSuite name='onHide & onDisplay'>
                     <TestCase  itShould='onHide & onDisplay'>
                         <View style={{ height:1000}}>
+                            <Text style={{height:40,color:'blue',fontSize:20}}>{`回调方法：${methodName}`}</Text>
                             <ImageHeaderScrollView
                                 maxHeight={MAX_HEIGHT}
                                 minHeight={MIN_HEIGHT}
@@ -150,7 +152,7 @@ function TriggeringViewOnHideAndOnDisplay() {
                                     style={[styles.navTitleView,{ opacity: fadeAnim}]}  
                                 >
                                     <Text style={styles.navTitle}>
-                                        {tvShowContent.title}, ({tvShowContent.year})
+                                     {tvShowContent.title}, ({tvShowContent.year})
                                     </Text>
                                 </Animated.View>
                                 )}
@@ -164,8 +166,17 @@ function TriggeringViewOnHideAndOnDisplay() {
                             >
                                 <>
                                     <TriggeringView
-                                        onHide={() => setVisible(true)}
-                                        onDisplay={() => setVisible(false)}
+                                        onHide={() => {
+                                            setVisible(true)
+                                                setMethodName('onHide')
+                                          
+                                            
+                                        } }
+                                        onDisplay={() => {
+                                             setVisible(false)
+                                                setMethodName('onDisplay')
+                                             
+                                        }}
                                     >
                                         <Text style={styles.title}>
                                             <Text style={styles.name}>{tvShowContent.title}</Text>, ({tvShowContent.year})
