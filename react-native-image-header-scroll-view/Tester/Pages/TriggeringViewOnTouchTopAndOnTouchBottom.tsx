@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
 });
 
 function TriggeringViewOnTouchTopAndOnTouchBottom() {
+    const [methodName, setMethodName] = useState('');
     const [visible, setVisible] = useState(false);
     const fadeAnim = new Animated.Value(0);
     useEffect(() => {
@@ -135,6 +136,7 @@ function TriggeringViewOnTouchTopAndOnTouchBottom() {
                 <TestSuite name='onTouchTop & onTouchBottom'>
                     <TestCase  itShould='onTouchTop & onTouchBottom'>
                         <View style={{ height:1000}}>
+                        <Text style={{height:40,color:'blue',fontSize:20}}>{`回调方法：${methodName}`}</Text>
                             <ImageHeaderScrollView
                                 maxHeight={MAX_HEIGHT}
                                 minHeight={MIN_HEIGHT}
@@ -164,12 +166,12 @@ function TriggeringViewOnTouchTopAndOnTouchBottom() {
                                 <>
                                     <TriggeringView 
                                         onTouchBottom={() => {
-                                            console.log('111111111111')
                                             setVisible(true)
+                                            setMethodName('onTouchBottom')
                                         } }
                                         onTouchTop={() => {
-                                            console.log('22222222222222222222')
                                             setVisible(false)
+                                            setMethodName('onTouchTop')
                                         } }
                                     >
                                         <Text style={styles.title}>

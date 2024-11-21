@@ -46,7 +46,7 @@ export function NavigationContainer({
         },
         registeredPageNames,
       }}>
-      <View style={{width: '100%', height: '100%', marginTop:40, flexDirection: 'column'}}>
+      <View style={{width: '100%', height: '100%', marginTop:20,paddingBottom:40, flexDirection: 'column'}}>
         <Page name="INDEX">
           <IndexPage />
         </Page>

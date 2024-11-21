@@ -10,7 +10,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image,Animated, Dimensions ,Easing} from 'react-native';
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino'
-import ImageHeaderScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
+import ImageHeaderScrollView, { TriggeringView } from '@react-native-oh-tpl/react-native-image-header-scroll-view';
 
 const MIN_HEIGHT = 80;
 const MAX_HEIGHT = 250;
@@ -163,8 +163,8 @@ function ImageHeaderScrollViewExample() {
                                 // borderRadius: 10,
                                 // margin: 10,
                                 // padding: 10,}}
-                                // useNativeDriver={true}
-                                // disableHeaderGrow={false}
+                                useNativeDriver={true}
+                                disableHeaderGrow={false}
                          
                             >
                                 <>

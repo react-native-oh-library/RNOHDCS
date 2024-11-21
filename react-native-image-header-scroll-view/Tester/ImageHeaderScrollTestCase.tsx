@@ -19,12 +19,13 @@ import RenderForeground from './Pages/RenderForeground';
 import ForegroundParallaxRatio from './Pages/ForegroundParallaxRatio';
 import UseNativeDriver from './Pages/UseNativeDriver';
 import DisableHeaderGrow from './Pages/DisableHeaderGrow';
+import DisableHeaderGrow1 from './Pages/DisableHeaderGrow1';
 import ScrollViewComponent from './Pages/ScrollViewComponent';
 import RenderTouchableFixedForeground from './Pages/RenderTouchableFixedForeground';
 import TriggeringViewOnHideAndOnDisplay from './Pages/TriggeringViewOnHideAndOnDisplay';
 import TriggeringViewOnBeginHiddenAndOnBeginDisplayed from './Pages/TriggeringViewOnBeginHiddenAndOnBeginDisplayed';
 import TriggeringViewOnTouchTopAndOnTouchBottom from './Pages/TriggeringViewOnTouchTopAndOnTouchBottom';
-import TriggeringViewBottomOffsetAndTopOffset from './Pages/TriggeringViewBottomOffsetAndTopOffset';
+
 export default function ImageHeaderScrollTestCase(): JSX.Element {
   return (
       <NavigationContainer >
@@ -79,8 +80,11 @@ export default function ImageHeaderScrollTestCase(): JSX.Element {
         <Page name="UseNativeDriver">
           <UseNativeDriver />
         </Page>
-        <Page name="DisableHeaderGrow">
+        <Page name="DisableHeaderGrow=false">
           <DisableHeaderGrow />
+        </Page>
+        <Page name="DisableHeaderGrow=true">
+          <DisableHeaderGrow1 />
         </Page>
         <Page name="RenderTouchableFixedForeground">
           <RenderTouchableFixedForeground />
@@ -93,9 +97,6 @@ export default function ImageHeaderScrollTestCase(): JSX.Element {
         </Page>
         <Page name="TriggeringViewOnTouchTopAndOnTouchBottom">
           <TriggeringViewOnTouchTopAndOnTouchBottom />
-        </Page>
-        <Page name="TriggeringViewBottomOffsetAndTopOffset">
-          <TriggeringViewBottomOffsetAndTopOffset />
         </Page>
       </NavigationContainer>
   );
