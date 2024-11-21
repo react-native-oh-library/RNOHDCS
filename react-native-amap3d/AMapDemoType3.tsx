@@ -52,10 +52,11 @@ const line3 = [
   { latitude: 39.906901, longitude: 116.697972 },
 ];
 
-function AMapDemo() {
+function AMapDemo3() {
   return (
     <View style={styles.container}>
       <MapView
+	    style={{ width: '100%', height: '100%' }}
         mapType={2}
         tiltGesturesEnabled={false}
         rotateGesturesEnabled={false}
@@ -120,4 +121,4 @@ const styles = StyleSheet.create({
     paddingTop: 24,
   }
 });
-export default AMapDemo;
+export default AMapDemo3;
