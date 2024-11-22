@@ -14,6 +14,9 @@ export function CheckboxTest() {
             <TestCase itShould={'default checkbox'}>
               <CheckBox value={true} />;
             </TestCase>
+            <TestCase itShould={'default checkbox with margin'}>
+              <CheckBox style={{ margin: 5 }} value={true} />;
+            </TestCase>
             <TestCase itShould={'checkbox value=true'}>
               <CheckBox value={true} />;
             </TestCase>
@@ -29,6 +32,12 @@ export function CheckboxTest() {
             <TestCase itShould={'checkbox tintColor=blue'}>
               <CheckBox value={false} tintColor={'blue'}/>;
             </TestCase>
+            <TestCase itShould={'checkbox boxType=circle'}>
+              <CheckBox value={true} boxType={'circle'} />;
+            </TestCase>
+            <TestCase itShould={'checkbox boxType=square'}>
+              <CheckBox value={true} boxType={'square'} />;
+            </TestCase>
             <TestCase itShould={'checkbox shape=0'}>
               <CheckBox value={true} shape={0} />;
             </TestCase>
@@ -40,6 +49,12 @@ export function CheckboxTest() {
             </TestCase>
             <TestCase itShould={'checkbox markSize=50'}>
               <CheckBox value={true} markSize={50} />;
+            </TestCase>
+            <TestCase itShould={'checkbox lineWidth=5'}>
+              <CheckBox value={true} lineWidth={5} />;
+            </TestCase>
+            <TestCase itShould={'checkbox lineWidth=10'}>
+              <CheckBox value={true} lineWidth={10} />;
             </TestCase>
             <TestCase itShould={'checkbox strokeWidth=5'}>
               <CheckBox value={true} strokeWidth={5} />;
