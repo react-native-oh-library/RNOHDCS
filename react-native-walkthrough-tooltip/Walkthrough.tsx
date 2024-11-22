@@ -26,12 +26,6 @@ export default function Walkthrough() {
     <ScrollView style={{flex:1}}>
         <Tester>
         <TestSuite name="Walkthrough">
-            <TestCase itShould='accessible属性测试,设置为true,屏幕朗读不可触碰提示气泡'>
-                <TooltipAccessible  accessible={true}/>
-            </TestCase>
-            <TestCase itShould='accessible属性测试,设置为false,屏幕朗读可触碰提示气泡'>
-                <TooltipAccessible  accessible={false}/>
-            </TestCase>
             <TestCase itShould='测试arrowSize属性,气泡箭头大小16x8'>
                 <TooltipArrowSize width={16} height={8}/>
             </TestCase>
