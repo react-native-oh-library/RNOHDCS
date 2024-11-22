@@ -23,7 +23,6 @@ export default function NfcManagerDemo() {
 
   const [text, setText] = useState('');
   const [isRegister,setRegister] = useState(false);
-  
   const [blockIndex , setBlock] = useState<ArrayLike<number>>();
 
   useEffect(() => {
@@ -79,27 +78,73 @@ export default function NfcManagerDemo() {
     return tagInfo;
  }
 
+ //用于应用前端注册功能
+ //通过NfcManager.registerTagEvent的接口，可以让应用处于前台时候贴卡，没有“叮咚”的声音，也没有NFC弹窗
+ const registerTagEvent = async(option?:RegisterTagEventOpts) => {
+  let tagInfo = null
+    try {
+      if (option!== null) {
+        await NfcManager.registerTagEvent(option);
+        tagInfo = "应用前台注册已开启，请贴卡，此时不会再弹出NFC提示，没有“叮咚”的声音"
+      } else {
+        tagInfo = "option为空"
+      }
+      tagInfo  = await NfcManager.getTag();
+    } catch (ex) {
+      //console.info('aaaaaa'+ ex);
+      handleException(ex);
+    } finally {
+      // stop the nfc scanning
+      NfcManager.cancelTechnologyRequest();
+    }
+    setText('registerTagEvent == ' + JSON.stringify(tagInfo));
+    return tagInfo;
+ }
+
+  //用于应用处于前台时候的注册功能
+ //通过NfcManager.registerTagEvent的接口，可以让应用处于前台时候贴卡，可以有“叮咚”的声音，可能有NFC弹框
+ const unregisterTagEvent = async() => {
+  let tagInfo = null
+    try {
+        await NfcManager.unregisterTagEvent();
+        tagInfo = "已经取消应用前台贴卡状态，有“叮咚”的声音，可能有NFC弹框"
+    } catch (ex) {
+      //console.info('aaaaaa'+ ex);
+      handleException(ex);
+    } finally {
+      // stop the nfc scanning
+      NfcManager.cancelTechnologyRequest();
+    }
+    setText('unregisterTagEvent == ' + JSON.stringify(tagInfo));
+    return tagInfo;
+ }
+
+//获取后台启动的Tag，在通过NFC扫卡拉起应用后，该接口可以识别到
  const getBackgroundTag = async ()=> {
   let background = await NfcManager.getBackgroundTag();
   setText(JSON.stringify(background));
   return background;
  }
 
+ //清理后台启动Tag
  const clearBackgroundTag = async ()=> {
   await NfcManager.clearBackgroundTag();
   let background = await NfcManager.getBackgroundTag();
-
   console.info('background ===' + background);
   setText('clearBackgroundTag ===' + JSON.stringify(background));
   return background;
  }
 
+ //注册NFC开关状态事件
+ //通过调用NfcManager.setEventListener，传入对应的属性来进行注册
  const registerStateChanged = async () => {
   NfcManager.setEventListener(NfcEvents.StateChanged, (tag:any) => {
     setText("NfcManageStateChanged == " + JSON.stringify(tag));
   })
  }
 
+ //注册NFC扫描事件
+ //通过调用 NfcManager.setEventListener，传入对应的属性来进行注册
  const registerDiscoverTag = async () => {
   NfcManager.setEventListener(NfcEvents.DiscoverTag, (tag:any) => {
     setText("NfcManagerDiscoverTag == " + JSON.stringify(tag));
@@ -107,12 +152,16 @@ export default function NfcManagerDemo() {
   setRegister(true);
  }
  
+ //注册NFC后台扫描事件
+ //通过调用 NfcManager.setEventListener，传入对应的属性来进行注册
  const registerDiscoverBackgroundTag = async () => {
   NfcManager.setEventListener(NfcEvents.DiscoverBackgroundTag,(tagInfo:any) => {
     setText("NfcManagerDiscoverBackgroundTag == " + JSON.stringify(tagInfo));
   })
  }
 
+ //取消注册：即调用的是设置监听的接口
+ //通过调用 NfcManager.setEventListener，传入对应的属性为null来达成取消注册
  const unRegisterTagStateChanged = async () => {
   NfcManager.setEventListener(NfcEvents.StateChanged,null);
   NfcManager.setEventListener(NfcEvents.DiscoverTag,null);
@@ -138,6 +187,7 @@ export default function NfcManagerDemo() {
   return isWrite
  }
 
+ //获取Ndef的message数据（小区门禁卡可能可以识别到）
  const getNdefMessage = async () => {
   let tag = null
   try {
@@ -263,45 +313,6 @@ export default function NfcManagerDemo() {
   return wantInfo;
 }
 
-const setTimeout = async () => {
-  let isTimeout = true
-  try {
-    await NfcManager.requestTechnology(NfcTech.IsoDep);
-    await NfcManager.setTimeout(7000);
-  } catch (ex) {
-    handleException(ex);
-    isTimeout = false
-  } finally {
-    NfcManager.cancelTechnologyRequest();
-  }
-  setText('setTimeout success == ' + isTimeout)
-  return isTimeout;
-}
-
-const connect = async () => {
-  let isConnect = true;
-  try {
-  await NfcManager.connect([NfcTech.IsoDep]);
-  }catch(ex) {
-    handleException(ex);
-    isConnect = true
-  }
-  setText('IsoDep tag connect success');
-  return isConnect
-}
-
-const close = async () => {
-  let isClose = true;
-  try {
-  await NfcManager.close();
-  }catch(ex) {
-    handleException(ex);
-    isClose = false
-  }
-  return isClose
-}
-
-
 const mifareClassicAuthenticateA = async() => {
   try {
     await NfcManager.requestTechnology(NfcTech.MifareClassic);
@@ -334,7 +345,6 @@ const mifareClassicAuthenticateB = async() => {
   return true;
 }
 
-
 const mifareClassicSectorToBlock = async () => {
   let number:ArrayLike<number> = []
   try {
@@ -351,7 +361,6 @@ const mifareClassicSectorToBlock = async () => {
   return number;
 }
 
-
 const mifareClassicReadBlock = async(blockIndex:ArrayLike<number>) => {
   let number = null
   try {
@@ -365,7 +374,6 @@ const mifareClassicReadBlock = async(blockIndex:ArrayLike<number>) => {
   setText("customReadBlockMifareClassic == " +  number)
   return number
 }
-
 
 const mifareClassicWriteBlock = async(blockIndex:ArrayLike<number>) => {
   let isWriteBlock = true
@@ -625,17 +633,20 @@ const RequestTechnologyProps = [
 
  return (
    <View>
-      <View style={{marginTop: 30 }}>
+      <View style={{marginTop: 30}}>
         <Text>Scan a Tag result:</Text>
         <Text style={styles.baseText}>
               返回结果(进行卡片操作时，请先通过ScanTag()扫描设备，获取当前卡片支持的标签):
+        </Text>
+        <Text style={styles.baseText}>
+              如果点击用例出现"Target cannot be null or undefined."表示Test框架的state被影响，导致assert判断异常，非本库自身的缘故。重启应用可以解决
         </Text>
         <Text style={styles.inputArea}>
               {text}
         </Text>
       </View>
    <ScrollView>
-     <Tester style={{marginBottom: 190}}>
+     <Tester style={{marginBottom: 550}}>
       <TestSuite name='NfcManagerDemo'>
        <TestCase itShould="function:isSupported()(该接口判断设备是否支持nfc)"  initialState={false} arrange={({ setState }) => (
           <Button title='运行' color='#841584' onPress={async () => {
@@ -674,7 +685,7 @@ const RequestTechnologyProps = [
           <View>
             <Text style={styles.baseText}>
               在对相关Tag类型卡片进行读写之前，必须先获取TagInfo相关属性值，以确认设备读取到的Tag卡片支持哪些技术类型。这样Tag应用程序才能调用正确的接口和所读取到的Tag卡片进行通信。
-              读卡接口测试案例中需要使用：start、requestTechnology、registerTagEvent、unregisterTagEvent、cancelTechnologyRequest、getTag接口配合使用
+              读卡接口测试案例中需要使用：start、requestTechnology等扫描注册接口配合使用
             </Text>
           </View>
         </TestCase>
@@ -763,29 +774,6 @@ const RequestTechnologyProps = [
           )}
           assert={({ expect, state }) => {
             expect(state).to.have.property('id')
-          }}
-        />
-
-        <TestCase itShould="function:connect()(后台启动nfc,可以使用connect与标签建立连接)"  initialState={false} arrange={({ setState }) => (
-          <Button title='运行' color='#841584' onPress={async () => {
-            await connect();
-            setState(true)
-          }}>
-          </Button>
-          )}
-          assert={({ expect, state }) => {
-            expect(state).to.eql(true)
-          }}
-        />
-        <TestCase itShould="function:close()(后台启动nfc,可以使用connect与标签建立连接后，可以通过close进行关闭)"  initialState={false} arrange={({ setState }) => (
-          <Button title='运行' color='#841584' onPress={async () => {
-            await close();
-            setState(true)
-          }}>
-          </Button>
-          )}
-          assert={({ expect, state }) => {
-            expect(state).to.eql(true)
           }}
         />
         <TestCase itShould="function:clearBackgroundTag()(清除后台启动nfc获取的tag信息)"  initialState={false} arrange={({ setState }) => (
@@ -956,18 +944,6 @@ const RequestTechnologyProps = [
             expect(state).to.not.eql(-1)
           }}
         />
-        <TestCase itShould="function:setTimeout()(设置发送数据到Tag的等待超时时间)"  initialState={false} arrange={({ setState }) => (
-          <Button title='运行' color='#841584' onPress={async () => {
-           let isTimeout =  await setTimeout();
-            setState(isTimeout);
-          }}>
-          </Button>
-          )}
-          assert={({ expect, state }) => {
-            expect(state).to.eql(true)
-          }}
-        />
-
       <TestCase itShould="MifareClassicTag提供对MIFARE Classic属性和I/O操作的访问">
         <View>
           <Text style={styles.baseText}>
@@ -1107,6 +1083,7 @@ const RequestTechnologyProps = [
             expect(state).to.eql(true)
           }}
         />
+
         <TestCase itShould="NdefFormatableTag为NDEF Formattable的标签提供格式化操作">
           <View>
             <Text style={styles.baseText}>
@@ -1137,6 +1114,44 @@ const RequestTechnologyProps = [
           }}
         />
       </TestSuite>
+      <TestCase itShould="前台应用（应用处于打开状态，且屏幕处于亮屏状态）">
+          <View>
+            <Text style={styles.baseText}>
+              用于应用处于前台时候（即打开应用，且屏幕处于亮屏状态），进行事件监听。
+              </Text>
+              <Text style={styles.baseText}>
+              默认：刷卡，有震动和“叮咚”的声音，（可能会有NFC弹框拉起，这个涉及NFC框架的逻辑判断和本库无关）
+             </Text>
+             <Text style={styles.baseText}>
+              registerTagEvent：点击后，刷卡，只会有震动，没有“叮咚”的声音，以及不会进行NFC弹框拉起
+              </Text>
+              <Text style={styles.baseText}>
+              unregisterTagEvent：点击后，刷卡，有震动，也有“叮咚”的声音，可能会有NFC弹框拉起
+            </Text>
+          </View>
+        </TestCase>
+        <TestCase itShould="function:registerTagEvent()"  initialState={false} arrange={({ setState }) => (
+          <Button title='运行' color='#841584' onPress={async () => {
+            await registerTagEvent();
+            setState(true);
+          }}>
+          </Button>
+          )}
+          assert={({ expect, state }) => {
+            expect(state).to.eql(true)
+          }}
+        />
+         <TestCase itShould="function:unregisterTagEvent()"  initialState={false} arrange={({ setState }) => (
+          <Button title='运行' color='#841584' onPress={async () => {
+            await unregisterTagEvent();
+            setState(true);
+          }}>
+          </Button>
+          )}
+          assert={({ expect, state }) => {
+            expect(state).to.eql(true)
+          }}
+        />
      </Tester>
     </ScrollView>
     </View>
