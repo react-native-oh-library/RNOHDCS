@@ -2309,7 +2309,7 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_backscale0_5}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_backscale0_5, width: 300, height: 150 }} />
+                <Image resizeMode='center' source={{ uri: url_backscale0_5, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
@@ -2329,7 +2329,7 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_backscale1_5}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_backscale1_5, width: 300, height: 150 }} />
+                <Image resizeMode='center' source={{ uri: url_backscale1_5, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
@@ -2349,7 +2349,7 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_scale0_5}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_scale0_5, width: 300, height: 150 }} />
+                <Image resizeMode='center' source={{ uri: url_scale0_5, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
@@ -2369,7 +2369,7 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_scale1_5}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_scale1_5, width: 300, height: 150 }} />
+                <Image resizeMode='center' source={{ uri: url_scale1_5, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
@@ -3716,7 +3716,7 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_backscale0_5_text}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_backscale0_5_text, width: 300, height: 150 }} />
+                <Image resizeMode='center' source={{ uri: url_backscale0_5_text, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
@@ -3736,7 +3736,7 @@ export const ImageMarker = () => {
                 <Text style={styles.sectionTitle}>
                   {url_backscale1_5_text}
                 </Text>
-                <Image resizeMode='contain' source={{ uri: url_backscale1_5_text, width: 300, height: 150 }} />
+                <Image resizeMode='center' source={{ uri: url_backscale1_5_text, width: 300, height: 150 }} />
               </View>
             </View>
           </TestCase>
