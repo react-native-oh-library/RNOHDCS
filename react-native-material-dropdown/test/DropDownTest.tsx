@@ -478,6 +478,24 @@ export class DropDownTest extends Component {
                 </TestSuite>
 
                 <TestSuite name="DropDown测试case">
+                  <TestCase itShould="Props:renderAccessory 属性测试,需要指定renderRightAccessory或者renderLeftAccessory">
+                    <View style={styles.container}>
+                      <Dropdown
+                        value={typography}
+                        data={typographyData}
+                        dropdownPosition={0}
+                        dropdownOffset={{ top: 10, left: 0, }}
+                        pickerStyle={{}}
+                        renderLeftAccessory={() => <View style={{ width: 30, borderWidth: 0.5 }}>
+                          <Image source={{ uri: 'https://pics1.baidu.com/feed/c2cec3fdfc0392456576003568f8f3cc7c1e2540.jpeg@f_auto?token=b8c70f853c3c1bd7984b47a2e382552a' }}
+                            style={{ width: 30, height: 30}} />
+                        </View>}
+                      />
+                    </View>
+                  </TestCase>
+                </TestSuite>
+
+                <TestSuite name="DropDown测试case">
                   <TestCase itShould="Props:renderBase 自定义下拉菜单的基础属性">
                     <View style={styles.container}>
                       <Dropdown
