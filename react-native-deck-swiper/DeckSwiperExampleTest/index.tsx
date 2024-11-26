@@ -8,6 +8,9 @@ import DeckSwiperExample5 from './DeckSwiperExample5';
 import DeckSwiperExample6 from './DeckSwiperExample6';
 import DeckSwiperExample7 from './DeckSwiperExample7';
 import DeckSwiperExample8 from './DeckSwiperExample8';
+import DeckSwiperExample9 from './DeckSwiperExample9';
+import DeckSwiperExample10 from './DeckSwiperExample10';
+import DeckSwiperExample11 from './DeckSwiperExample11';
 
 
 
@@ -45,6 +48,18 @@ export const DeckSwiperExampleTestDemo = () => {
 
             <Page name="DeckSwiperExample8">
               <DeckSwiperExample8 />
+            </Page>
+
+            <Page name="DeckSwiperExample9">
+              <DeckSwiperExample9 />
+            </Page>
+
+            <Page name="DeckSwiperExample10">
+              <DeckSwiperExample10 />
+            </Page>
+
+            <Page name="DeckSwiperExample11">
+              <DeckSwiperExample11 />
             </Page>
             
           </NavigationContainer>
