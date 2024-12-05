@@ -24,7 +24,7 @@ export default class ToastTest extends Component {
     }
 
     onClick({
-        text, position, duration, withStyle, fadeInDuration, fadeOutDuration, opacity, textStyle, backgroundColor
+        text, position, duration, withStyle, fadeInDuration, fadeOutDuration, opacity, textStyle, backgroundColor,positionValue
     }) {
         this.toast.close()
         this.toastWithStyle.close()
@@ -33,6 +33,7 @@ export default class ToastTest extends Component {
             fadeInDuration: fadeInDuration || 500,
             fadeOutDuration: fadeOutDuration || 500,
             opacity: opacity ?? 1,
+            positionValue: positionValue || 180,
             textStyle: {
                 color: textStyle || '#ffffff'
             },
@@ -49,14 +50,14 @@ export default class ToastTest extends Component {
     }
 
     getButton({
-        text, position, duration, withStyle, fadeInDuration, fadeOutDuration, opacity, textStyle, backgroundColor
+        text, position, duration, withStyle, fadeInDuration, fadeOutDuration, opacity, textStyle, backgroundColor,positionValue
     }) {
         return (
             <Button
                 style={{ padding: 10 }}
                 size
                 onPress={() => this.onClick({
-                    text, position, duration, withStyle, fadeInDuration, fadeOutDuration, opacity, textStyle, backgroundColor
+                    text, position, duration, withStyle, fadeInDuration, fadeOutDuration, opacity, textStyle, backgroundColor,positionValue
                 })}
                 title={text}
             />
@@ -72,102 +73,101 @@ export default class ToastTest extends Component {
                             {this.getButton({
                                 text: 'position=top',
                                 position: 'top',
-                                duration: DURATION.LENGTH_SHORT
+                                duration: 3000,
                             })}
                         </TestCase>
                         <TestCase itShould="2、position=bottom">
                             {this.getButton({
                                 text: 'position=bottom',
                                 position: 'bottom',
-                                duration: DURATION.LENGTH_SHORT
+                                duration: 3000,
                             })}
                         </TestCase>
-                        <TestCase itShould="3、position=center, duration=2000">
+                        <TestCase itShould="3、position=center">
                             {this.getButton({
                                 text: 'position=center',
                                 position: 'center',
-                                duration: 2000
+                                duration: 3000,
                             })}
                         </TestCase>
-                        <TestCase itShould="4、position=bottom，duration=4000">
+                        <TestCase itShould="4、position=center，duration=4000">
                             {this.getButton({
-                                text: 'position=bottom, duration=4000',
-                                position: 'bottom',
+                                text: 'position=center, duration=4000',
+                                position: 'center',
                                 duration: 4000
                             })}
                         </TestCase>
-                        <TestCase itShould="5、position=bottom,custom style, duration=2000">
+                        <TestCase itShould="5、position=center,custom style, duration=2000">
                             {this.getButton({
                                 text: 'backgroundColor=red',
-                                position: 'bottom',
+                                position: 'center',
                                 duration: 2000,
                                 withStyle: true
                             })}
                         </TestCase>
-                        <TestCase itShould="6、position=center，, duration=5000">
+                        <TestCase itShould="6、position=center, duration=5000">
                             {this.getButton({
                                 text: 'duration=5000',
                                 position: 'center',
                                 duration: 5000
                             })}
                         </TestCase>
-                        <TestCase itShould="7、position=bottom, duration=3000，positionValue=500">
+                        <TestCase itShould="7、position=center, duration=3000，positionValue=500">
                             {this.getButton({
                                 text: 'positionvalue=500',
-                                position: 'bottom',
+                                position: 'center',
                                 duration: 3000,
                                 positionValue: 500
                             })}
                         </TestCase>
-                        <TestCase itShould="8、position=bottom, duration=3000, fadeInDuration=2000">
+                        <TestCase itShould="8、position=center, duration=3000, fadeInDuration=2000">
                             {this.getButton({
                                 text: 'fadeInDuration=2000',
-                                position: 'bottom',
+                                position: 'center',
                                 duration: 3000,
                                 fadeInDuration: 2000,
                                 withStyle: true,
                                 backgroundColor: 'blue'
                             })}
                         </TestCase>
-                        <TestCase itShould="9、position=bottom, duration=3000, fadeOutDuration=2000">
+                        <TestCase itShould="9、position=center, duration=3000, fadeOutDuration=2000">
                             {this.getButton({
                                 text: 'fadeOutDuration=2000',
-                                position: 'bottom',
+                                position: 'center',
                                 duration: 3000,
                                 fadeOutDuration: 2000,
                                 withStyle: true,
                                 backgroundColor: 'blue'
                             })}
                         </TestCase>
-                        <TestCase itShould="10、position=bottom, duration=3000，positionValue=500, opacity=0.7, fadeInDuration=1000">
+                        <TestCase itShould="10、position=center, duration=3000，positionValue=500, opacity=0.7, fadeInDuration=1000">
                             {this.getButton({
                                 text: 'opacity=0.7',
-                                position: 'bottom',
+                                position: 'center',
                                 duration: 3000,
                                 opacity: 0.7,
                                 fadeInDuration: 1000
                             })}
                         </TestCase>
-                        <TestCase itShould="11、position=bottom, duration=3000，positionValue=500, opacity=0.3">
+                        <TestCase itShould="11、position=center, duration=3000，positionValue=500, opacity=0.3">
                             {this.getButton({
                                 text: 'opacity=0.3，fadeOutDuration=1000',
-                                position: 'bottom',
+                                position: 'center',
                                 duration: 3000,
                                 opacity: 0.7,
                                 fadeOutDuration: 2000
                             })}
                         </TestCase>
-                        <TestCase itShould="12、position=bottom，textStyle=blue', backgroundColor=green, duration=2000">
+                        <TestCase itShould="12、position=center，textStyle=blue', backgroundColor=green, duration=2000">
                             {this.getButton({
                                 text: 'color=blue，backgroundColor=green',
-                                position: 'bottom',
+                                position: 'center',
                                 duration: 2000,
                                 textStyle: 'blue',
                                 backgroundColor: 'green',
                                 withStyle: true
                             })}
                         </TestCase>
-
                     </ScrollView>
                 </Tester>
                 <Toast
@@ -177,6 +177,7 @@ export default class ToastTest extends Component {
                     fadeOutDuration={this.state.fadeOutDuration}
                     opacity={this.state.opacity}
                     textStyle={this.state.textStyle}
+                    positionValue = {this.state.positionValue}
                 />
                 <Toast ref={(toast) => this.toastWithStyle = toast}
                     style={{ backgroundColor: this.state.backgroundColor }}
@@ -185,17 +186,16 @@ export default class ToastTest extends Component {
                     fadeOutDuration={this.state.fadeOutDuration}
                     opacity={this.state.opacity}
                     textStyle={this.state.textStyle}
+                    positionValue = {this.state.positionValue}
                 />
             </View>
         );
     }
 }
-
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
-        paddingTop: 40
+        // paddingTop: 40,
     },
 });
-
