@@ -407,7 +407,7 @@ const AlertDialogTest = () => {
             </TestCase>
           </TestSuite>
 
-          {/* <TestSuite name="avoidKeyboard">
+          <TestSuite name="avoidKeyboard">
             <TestCase itShould="avoidKeyboard" tags={['dev']}>
               <View style={styles.section}>
                 <Text>avoidKeyboard</Text>
@@ -416,7 +416,7 @@ const AlertDialogTest = () => {
                     <Button
                       colorScheme="danger"
                       onPress={() => setIsOpen7(!isOpen7)}>
-                      avoidKeyboard-不生效项目问题
+                      avoidKeyboard
                     </Button>
                     <AlertDialog
                       avoidKeyboard
@@ -452,7 +452,7 @@ const AlertDialogTest = () => {
                 </View>
               </View>
             </TestCase>
-          </TestSuite> */}
+          </TestSuite>
 
           <TestSuite name="closeOnOverlayClick">
             <TestCase itShould="closeOnOverlayClick" tags={['dev']}>
