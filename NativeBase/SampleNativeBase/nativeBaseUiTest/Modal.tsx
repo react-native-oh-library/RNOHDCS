@@ -1,5 +1,5 @@
-import {useState, useRef, SetStateAction} from 'react';
-import {View, StyleSheet, ScrollView, Alert} from 'react-native';
+import { useState, useRef, SetStateAction } from 'react';
+import { View, StyleSheet, ScrollView, Alert } from 'react-native';
 import {
   Center,
   Button,
@@ -12,7 +12,7 @@ import {
   Radio,
   Stack,
 } from 'native-base';
-import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
+import { Tester, TestSuite, TestCase } from '@rnoh/testerino';
 import React from 'react';
 
 const ModalTest = () => {
@@ -493,7 +493,7 @@ const ModalTest = () => {
             </TestCase>
           </TestSuite>
 
-          {/* <TestSuite name="avoidKeyboard">
+          <TestSuite name="avoidKeyboard">
             <TestCase itShould="avoidKeyboard" tags={['dev']}>
               <View style={styles.section}>
                 <Text>avoidKeyboard</Text>
@@ -502,7 +502,7 @@ const ModalTest = () => {
                     <Button
                       colorScheme="danger"
                       onPress={() => setIsOpen7(!isOpen7)}>
-                      avoidKeyboard-不生效项目问题
+                      avoidKeyboard
                     </Button>
                     <Modal
                       avoidKeyboard
@@ -511,7 +511,11 @@ const ModalTest = () => {
                       <Modal.Content>
                         <Modal.CloseButton />
                         <Modal.Header>isOpen</Modal.Header>
-                        <Modal.Body>isOpen</Modal.Body>
+                        <Modal.Body>
+                          <Input></Input>
+                          <Input></Input>
+                          <Input></Input>
+                        </Modal.Body>
                         <Modal.Footer>
                           <Button.Group space={2}>
                             <Button
@@ -533,7 +537,7 @@ const ModalTest = () => {
                 </View>
               </View>
             </TestCase>
-          </TestSuite> */}
+          </TestSuite>
 
           <TestSuite name="closeOnOverlayClick">
             <TestCase itShould="closeOnOverlayClick" tags={['dev']}>
@@ -795,7 +799,7 @@ const ModalTest = () => {
                         },
                         bg: 'warmGray.50',
                       }}
-                      _backdropFade={{exitDuration: 1000, entryDuration: 2000}}
+                      _backdropFade={{ exitDuration: 1000, entryDuration: 2000 }}
                       isOpen={isOpen15}
                       onClose={() => setIsOpen15(!isOpen15)}>
                       <Modal.Content>
