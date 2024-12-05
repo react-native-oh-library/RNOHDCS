@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View,ScrollView} from 'react-native';
 import {Text, useTheme, ThemeProvider} from '@rneui/themed';
 import {Tester, TestSuite, TestCase} from '@rnoh/testerino';
 
@@ -9,6 +9,7 @@ const TextComponent: React.FunctionComponent<TextComponentProps> = () => {
 
   return (
     <Tester>
+      <ScrollView>
       <TestSuite name="h1 h1style">
         <ThemeProvider>
           <View style={styles.view}>
@@ -79,6 +80,8 @@ const TextComponent: React.FunctionComponent<TextComponentProps> = () => {
           </View>
         </ThemeProvider>
       </TestSuite>
+      <View style={{height:30}}></View>
+      </ScrollView>
     </Tester>
   );
 };

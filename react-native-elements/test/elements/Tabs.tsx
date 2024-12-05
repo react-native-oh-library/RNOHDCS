@@ -1967,7 +1967,7 @@ export default () => {
           <TestCase itShould="TabView" tags={['C_API']}>
             <View style={{width: '100%', height: 200, overflow: 'hidden'}}>
               <TabView
-                minSwipeRatio={80}
+                minSwipeRatio={0.8}
                 containerStyle={{backgroundColor: 'black'}}
                 animationConfig={{
                   duration: 10,
@@ -2461,7 +2461,7 @@ export default () => {
                   <Text h1>Favorite 1</Text>
                 </TabView.Item>
                 <TabView.Item>
-                  <Text h1>Cart 2${Math.random()}</Text>
+                  <Text h1>Cart 2$0.9823</Text>
                 </TabView.Item>
               </TabView>
             </View>
