@@ -42,8 +42,9 @@ function SslPingDemo() : React.JSX.Element{
                         pkPinning: true,
                         // your certificates array (needed only in android) ios will pick it automatically
                         sslPinning: {
-                          certs: ["sha256/kPwnudZVhc+iC/fTd3OPph8uugk1YN5ZsJDAeM2P4UU="
-                        ]
+                          certs: [
+                            "sha256/kPwnudZVhc+iC/fTd3OPph8uugk1YN5ZsJDAeM2P4UU="
+                          ]
                         },
                         headers: {
                           Accept: "application/json; charset=utf-8", "Access-Control-Allow-Origin": "*", "e_platform": "mobile",
@@ -94,28 +95,36 @@ function SslPingDemo() : React.JSX.Element{
                 <Button
                   title="fetch"
                   onPress={() => {
-                    let formData = new FormData()
-                    formData.append('username', 'Chris');
-                    let filePathArray = filePath.length > 0 ?filePath[0].split("/") : ["test"]
-                    formData.append('file', {
-                      name: encodeURIComponent(filePathArray[filePathArray.length - 1]),
-                      fileName: encodeURIComponent(filePathArray[filePathArray.length - 1]),
-                      type: "multipart/form-data",
-                      uri: filePath[0]
-                    })
-                    fetch("http://123.249.28.4:8888/handerOkhttpRequest/parse", {
-                      method: "POST" ,
-                      timeoutInterval: 10000, // milliseconds
-                      body: {
-                        formData: formData,
-                      },
-                      sslPinning: {
-                        certs: ["cert"]
-                      },
-                      headers: {
-                        accept: 'application/json, text/plain, /',
-                      }
-                    })
+                      let formData = new FormData()
+                      formData.append('username', 'Chris');
+                      let filePathArray = filePath.length > 0 ?filePath[0].split("/") : ["test"]
+                      formData.append('file', {
+                        name: encodeURIComponent(filePathArray[filePathArray.length - 1]),
+                        fileName: encodeURIComponent(filePathArray[filePathArray.length - 1]),
+                        type: "multipart/form-data",
+                        uri: filePath[0]
+                      })
+                      fetch("https://jsnjlq.cn/handerOkhttpRequest/parse", {
+                        method: "POST" ,
+                        timeoutInterval: 10000, // milliseconds
+                        body: {
+                          formData: formData,
+                        },
+                        pkPinning: true,
+                        sslPinning: {
+                          certs: [
+                            "sha256/kPwnudZVhc+iC/fTd3OPph8uugk1YN5ZsJDAeM2P4UU="
+                          ]
+                        },
+                        headers: {
+                          "Content-Type": "multipart/form-data"
+                        }
+                      }).then(response => {
+                        Alert.alert(JSON.stringify(response),response.bodyString);
+                      })
+                      .catch(err => {
+                        console.log(`error: ${err}`)
+                      })
                   }}
                 />
               </Text>
@@ -124,7 +133,7 @@ function SslPingDemo() : React.JSX.Element{
               <Text style={styles.sectionTitle}>getCookies</Text>
               <Text style={styles.sectionDescription}>
                 <Button
-                  title="fetch"
+                  title="getCookies"
                   onPress={async () => {
                     getCookies("jsnjlq.cn").then(
                       (result) => {
@@ -139,9 +148,9 @@ function SslPingDemo() : React.JSX.Element{
               <Text style={styles.sectionTitle}>remove Cookie</Text>
               <Text style={styles.sectionDescription}>
                 <Button
-                  title="fetch"
+                  title="removeCookie"
                   onPress={async () => {
-                    removeCookieByName("jsnjlq.cn").then(
+                    removeCookieByName("name").then(
                       (result) => {
                       },
                     );
