@@ -220,7 +220,7 @@ class SwipeGesturesFunction extends Component {
                             config={config}
                             style={{
                                 backgroundColor: this.state.backgroundColorOnSwipe,
-                                height: 70
+                                height: 50
                             }}
                         >
                             <Text>{this.state.myTextOnSwipe}</Text>
@@ -235,7 +235,7 @@ class SwipeGesturesFunction extends Component {
                             config={config}
                             style={{
                                 backgroundColor: this.state.backgroundColorUp,
-                                height: 70
+                                height: 50
                             }}
                         >
                             <Text>{this.state.myTextUp}</Text>
@@ -250,7 +250,7 @@ class SwipeGesturesFunction extends Component {
                             config={config}
                             style={{
                                 backgroundColor: this.state.backgroundColorDown,
-                                height: 70
+                                height: 50
                             }}
                         >
                             <Text>{this.state.myTextDown}</Text>
@@ -265,7 +265,7 @@ class SwipeGesturesFunction extends Component {
                             config={config}
                             style={{
                                 backgroundColor: this.state.backgroundColorLeft,
-                                height: 70
+                                height: 50
                             }}
                         >
                             <Text>{this.state.myTextLeft}</Text>
@@ -280,7 +280,7 @@ class SwipeGesturesFunction extends Component {
                             config={config}
                             style={{
                                 backgroundColor: this.state.backgroundColorRight,
-                                height: 70
+                                height: 50
                             }}
                         >
                             <Text>{this.state.myTextRight}</Text>
@@ -349,7 +349,7 @@ class SwipeComponent extends Component {
                 onSwipeRight={(state) => this.onSwipeRight(state)}
                 config={this.props.config}
                 style={{
-                    height: 200,
+                    height: 130,
                     backgroundColor: this.state.backgroundColor
                 }}
             >
@@ -387,7 +387,7 @@ class SwipeGesturesAttribute extends Component {
                             this.setState({
                                 config: {
                                     velocityThreshold: 0.3,
-                                    directionalOffsetThreshold: 80,
+                                    directionalOffsetThreshold: 60,
                                     gestureIsClickThreshold: 5
                                 }
                             })
@@ -404,7 +404,7 @@ class SwipeGesturesAttribute extends Component {
                             this.setState({
                                 config: {
                                     velocityThreshold: 30000000000000,
-                                    directionalOffsetThreshold: 80,
+                                    directionalOffsetThreshold: 60,
                                     gestureIsClickThreshold: 5
                                 }
                             })
@@ -438,7 +438,7 @@ class SwipeGesturesAttribute extends Component {
                             this.setState({
                                 config: {
                                     velocityThreshold: 0.3,
-                                    directionalOffsetThreshold: 80,
+                                    directionalOffsetThreshold: 60,
                                     gestureIsClickThreshold: 500000000000000
                                 }
                             })
