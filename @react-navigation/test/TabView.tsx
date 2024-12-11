@@ -45,7 +45,6 @@ export const TabViewExamples = () => {
 
       let [state, setState] = useState(title1)
 
-      // console.log('initValue', initValue)
       return (
         <View style={{
           flexWrap: 'wrap',
@@ -71,7 +70,6 @@ export const TabViewExamples = () => {
                   value = key.value
                 }
 
-                // console.log('render', title, value, state)
                 return (
                   <Pressable
                     style={{
@@ -81,7 +79,6 @@ export const TabViewExamples = () => {
                       paddingHorizontal: 6,
                     }}
                     key={index + ''} onPress={() => {
-                      // console.log(title, value)
                       setState(title)
                       onChange(key)
                     }}
@@ -127,7 +124,7 @@ export const TabViewExamples = () => {
   const layout = useWindowDimensions();
 
 
-  const renderTabBar = (props: TabBarProps<Route>) => (
+  const renderTabBarFn = (props: TabBarProps<Route>) => (
     <TabBar
       labelStyle={{
         textTransform: 'none'
@@ -138,7 +135,7 @@ export const TabViewExamples = () => {
 
 
   const MyTabView = (props: TabViewProps<Route> & { onIndexChange: () => void, tabBarOptions: TabBarProps<Route> }) => {
-    const { onIndexChange, tabBarOptions = {}, navigationState, renderScene, ...rest } = props
+    const { onIndexChange, tabBarOptions = {}, navigationState, renderScene, renderTabBar, ...rest } = props
     const [index, setIndex] = React.useState(0);
     const [routes] = React.useState<Route[]>([
       { key: 'first', title: 'First' },
@@ -152,10 +149,11 @@ export const TabViewExamples = () => {
       third: ThirdRoute,
     });
 
+    const showRenderTabBar = typeof renderTabBar === 'undefined' ? true : renderTabBar
 
     return (
       <TabView
-        renderTabBar={(options: TabBarProps<Route>) => renderTabBar({ ...options, ...tabBarOptions })}
+        renderTabBar={showRenderTabBar ? (options: TabBarProps<Route>) => renderTabBarFn({ ...options, ...tabBarOptions }) : undefined}
         navigationState={{ index, routes }}
         renderScene={renderScene1}
         onIndexChange={(number) => {
@@ -225,7 +223,7 @@ export const TabViewExamples = () => {
 
     return (
       <TabView
-        renderTabBar={(options: TabBarProps<Route>) => renderTabBar({ ...options, ...tabBarOptions })}
+        renderTabBar={(options: TabBarProps<Route>) => renderTabBarFn({ ...options, ...tabBarOptions })}
         navigationState={{ index, routes }}
         renderScene={renderScene1}
         onIndexChange={(number) => {
@@ -366,6 +364,14 @@ export const TabViewExamples = () => {
   ]
   const [state, setState] = useState<State>(() => {
     return {
+      renderTabBar: {
+        description: 'renderTabBar',
+        value: true,
+        valueList: [
+          true,
+          false,
+        ],
+      },
       navigationState: {
         type: 'preview',
         description: '基本属性，路由状态',
@@ -925,8 +931,6 @@ export const TabViewExamples = () => {
                   }
                 }
 
-                // console.log('initOptions  ', JSON.stringify(initOptions))
-
                 return <TestSuite name={(platform ? `[${platform}]` : '') + (testName || title)} key={title + state?.[title].value}>
                   <ToggleButton title={'切换' + title} list={valueList} initValue={value} onChange={(val: any) => {
                     setState({
@@ -956,7 +960,6 @@ export const TabViewExamples = () => {
                   }
                 }
 
-                // console.log('initOptions2 ', initOptions)
                 return <TestSuite name={(platform ? `[${platform}] ` : '') + (testName || title)} key={title}>
                   <TestCase itShould={description} tags={['C_API']}>
                     <View style={styles.container}>
@@ -1091,4 +1094,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default TabViewExamples
+export default TabViewExamples;
