@@ -30,6 +30,7 @@ import PathEffect from './Skia_PathEffect';
 import Animations_Animations from './Skia_Animations';
 import Video from './Skia_Video';
 import ColorFilters from './Skia_ColorFilters';
+import Issuse_EmojiRGBAColorMartix from './Issuse_EmojiRGBAColorMartix';
 
 import ZgenPath from './genPath';
 import ZgenRect from './genRect';
@@ -133,5 +134,6 @@ export default {
   PathEffect,
   // Animations_Animations,
   // Video,
+  Issuse_EmojiRGBAColorMartix,
 };
 //54组件
