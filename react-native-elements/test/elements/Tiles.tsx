@@ -9,7 +9,7 @@ class ImageComponent extends React.Component {
     return (
       <Image
         source={{
-          uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
+          uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
         }}
         style={{width: 200, height: 200}}></Image>
     );
@@ -130,7 +130,7 @@ const Tiles: React.FunctionComponent<TilesComponentProps> = () => {
           <TestCase itShould="caption" tags={['C_API']}>
             <Tile
               imageSrc={{
-                uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
+                uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
               }}
               title="When I admire the wonders of a sunset or the beauty of the moon, my soul expands in the worship of the creator."
               titleStyle={{fontSize: 15}}
@@ -147,7 +147,7 @@ const Tiles: React.FunctionComponent<TilesComponentProps> = () => {
             <Tile
               captionStyle={{fontSize: 20, color: 'blue', fontWeight: '400'}}
               imageSrc={{
-                uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
+                uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
               }}
               title="When I admire the wonders of a sunset or the beauty of the moon, my soul expands in the worship of the creator."
               titleStyle={{fontSize: 15}}
@@ -169,7 +169,7 @@ const Tiles: React.FunctionComponent<TilesComponentProps> = () => {
               }}
               captionStyle={{fontSize: 20, color: 'blue', fontWeight: '400'}}
               imageSrc={{
-                uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
+                uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
               }}
               title="When I admire the wonders of a sunset or the beauty of the moon, my soul expands in the worship of the creator."
               titleStyle={{fontSize: 15}}
@@ -191,7 +191,7 @@ const Tiles: React.FunctionComponent<TilesComponentProps> = () => {
               }}
               captionStyle={{fontSize: 20, color: 'blue', fontWeight: '400'}}
               imageSrc={{
-                uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
+                uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
               }}
               title="When I admire the wonders of a sunset or the beauty of the moon, my soul expands in the worship of the creator."
               titleStyle={{fontSize: 15}}
@@ -213,7 +213,7 @@ const Tiles: React.FunctionComponent<TilesComponentProps> = () => {
               }}
               captionStyle={{fontSize: 20, color: 'blue', fontWeight: '400'}}
               imageSrc={{
-                uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
+                uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
               }}
               title="When I admire the wonders of a sunset or the beauty of the moon, my soul expands in the worship of the creator."
               titleStyle={{fontSize: 15}}
@@ -236,7 +236,7 @@ const Tiles: React.FunctionComponent<TilesComponentProps> = () => {
               }}
               captionStyle={{fontSize: 20, color: 'blue', fontWeight: '400'}}
               imageSrc={{
-                uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
+                uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
               }}
               title="When I admire the wonders of a sunset or the beauty of the moon, my soul expands in the worship of the creator."
               titleStyle={{fontSize: 15}}
@@ -264,7 +264,7 @@ const Tiles: React.FunctionComponent<TilesComponentProps> = () => {
               }}
               captionStyle={{fontSize: 20, color: 'blue', fontWeight: '400'}}
               imageSrc={{
-                uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
+                uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
               }}
               title="When I admire the wonders of a sunset or the beauty of the moon, my soul expands in the worship of the creator."
               titleStyle={{fontSize: 15}}
@@ -298,7 +298,7 @@ const Tiles: React.FunctionComponent<TilesComponentProps> = () => {
               }}
               captionStyle={{fontSize: 20, color: 'blue', fontWeight: '400'}}
               imageSrc={{
-                uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
+                uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
               }}
               title="When I admire the wonders of a sunset or the beauty of the moon, my soul expands in the worship of the creator."
               titleStyle={{fontSize: 15}}
@@ -336,7 +336,7 @@ const Tiles: React.FunctionComponent<TilesComponentProps> = () => {
               }}
               captionStyle={{fontSize: 20, color: 'blue', fontWeight: '400'}}
               imageSrc={{
-                uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
+                uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
               }}
               title="When I admire the wonders of a sunset or the beauty of the moon, my soul expands in the worship of the creator."
               titleStyle={{fontSize: 15}}
@@ -375,7 +375,7 @@ const Tiles: React.FunctionComponent<TilesComponentProps> = () => {
               }}
               captionStyle={{fontSize: 20, color: 'blue', fontWeight: '400'}}
               imageSrc={{
-                uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
+                uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
               }}
               title="When I admire the wonders of a sunset or the beauty of the moon, my soul expands in the worship of the creator."
               titleStyle={{fontSize: 15}}
@@ -412,7 +412,7 @@ const Tiles: React.FunctionComponent<TilesComponentProps> = () => {
               }}
               captionStyle={{fontSize: 20, color: 'blue', fontWeight: '400'}}
               imageSrc={{
-                uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
+                uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
               }}
               title="When I admire the wonders of a sunset or the beauty of the moon, my soul expands in the worship of the creator."
               titleStyle={{fontSize: 15}}
@@ -450,7 +450,7 @@ const Tiles: React.FunctionComponent<TilesComponentProps> = () => {
               }}
               captionStyle={{fontSize: 20, color: 'blue', fontWeight: '400'}}
               imageSrc={{
-                uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
+                uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
               }}
               title="When I admire the wonders of a sunset or the beauty of the moon, my soul expands in the worship of the creator."
               titleStyle={{fontSize: 15}}
@@ -564,7 +564,7 @@ const Tiles: React.FunctionComponent<TilesComponentProps> = () => {
               }}
               captionStyle={{fontSize: 20, color: 'blue', fontWeight: '400'}}
               imageSrc={{
-                uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
+                uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
               }}
               title="When I admire the wonders of a sunset or the beauty of the moon, my soul expands in the worship of the creator."
               titleStyle={{fontSize: 15}}
@@ -604,7 +604,7 @@ const Tiles: React.FunctionComponent<TilesComponentProps> = () => {
               }}
               captionStyle={{fontSize: 20, color: 'blue', fontWeight: '400'}}
               imageSrc={{
-                uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
+                uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
               }}
               title="When I admire the wonders of a sunset or the beauty of the moon, my soul expands in the worship of the creator."
               titleStyle={{fontSize: 15}}
@@ -645,7 +645,7 @@ const Tiles: React.FunctionComponent<TilesComponentProps> = () => {
               }}
               captionStyle={{fontSize: 20, color: 'blue', fontWeight: '400'}}
               imageSrc={{
-                uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
+                uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
               }}
               title="When I admire the wonders of a sunset or the beauty of the moon, my soul expands in the worship of the creator."
               titleStyle={{fontSize: 20, color: 'yellow', fontWeight: '500'}}
@@ -686,7 +686,7 @@ const Tiles: React.FunctionComponent<TilesComponentProps> = () => {
               }}
               captionStyle={{fontSize: 20, color: 'blue', fontWeight: '400'}}
               imageSrc={{
-                uri: 'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
+                uri: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
               }}
               title="When I admire the wonders of a sunset or the beauty of the moon, my soul expands in the worship of the creator."
               titleStyle={{fontSize: 20, color: 'yellow', fontWeight: '500'}}
