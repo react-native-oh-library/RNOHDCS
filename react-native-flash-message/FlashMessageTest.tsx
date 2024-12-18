@@ -248,7 +248,7 @@ export function FlashMessageTest() {
                     animated: true,
                     floating: true,
                     style: {
-                      backgroundColor: '#f0f0f0',
+                      backgroundColor: 'orange',
                       padding: 10,
                       borderRadius: 5,
                     },
