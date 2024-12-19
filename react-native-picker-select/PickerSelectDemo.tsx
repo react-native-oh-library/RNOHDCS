@@ -273,7 +273,7 @@ export default function PickerSelectDemo() {
               <RNPickerSelect
                 items={sports}
                 Icon={() => {
-                  return <Image source={require('../assets/expo.png')} style={{ width: 16, height: 16 }} />;
+                  return <Image source={require('./assets/expo.png')} style={{ width: 16, height: 16 }} />;
                 }}
                 onValueChange={(value) => { }}
               />
@@ -285,7 +285,7 @@ export default function PickerSelectDemo() {
               <RNPickerSelect
                 items={sports}
                 Icon={() => {
-                  return <Image source={require('../assets/react-native-logo.png')} style={{ width: 16, height: 16 }} />;
+                  return <Image source={require('./assets/react-native-logo.png')} style={{ width: 16, height: 16 }} />;
                 }}
                 onValueChange={(value) => { }}
               />
@@ -301,7 +301,8 @@ export default function PickerSelectDemo() {
                   <RNPickerSelect
                     items={sports}
                     textInputProps={selectVal.textInputProps}
-                    onValueChange={(value) => {
+                    onValueChange={(value) => { }}
+                    onDonePress={() => {
                       setSelectVal({ ...selectVal, textInputProps: { secureTextEntry: !selectVal.textInputProps.secureTextEntry } });
                       setState(true);
                     }}
