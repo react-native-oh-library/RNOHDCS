@@ -5,8 +5,8 @@ import HTMLView from 'react-native-htmlview';
 
 const htmlContent = `
 <h1>Hello, World!</h1>
-<p>This is a <a href="https://www.vmallres.com">link</a></p>
-<p>Here is an image: <img src="https://res.vmallres.com/pimages/uomcdn/CN/pms/202404/displayProduct/10086102004921/428_428_a_mobileFF345C8650FF6E88771386A6433556D0.jpg" alt="Example Image" /></p>
+<p>This is a <a href="https://www.vmall.com/index.html">link</a></p>
+<p>Here is an image: <img src="https://res.vmallres.com/pimages/uomcdn/CN/pms/202404/displayProduct/10086102004921/428_428_a_mobileFF345C8650FF6E88771386A6433556D0.jpg"/></p>
 `;
 
 const htmlContent2 = `
@@ -16,7 +16,7 @@ const htmlContent2 = `
 `;
 
 const htmlContent3 = `
-<p>This is a <a href="https://www.vmallres.com">link</a></p>
+<p>This is a <a href="https://www.vmall.com/index.html">link</a></p>
 `;
 
 const htmlContent4 = `
@@ -38,7 +38,7 @@ const htmlContent6 = `
 `;
 
 const htmlContent7 = `
-<p>This is a <a href="https://www.vmallres.com">link</a></p>
+<p>This is a <a href="https://www.vmall.com/index.html">link</a></p>
 <p>Here is an image: <img src="https://res.vmallres.com/pimages/uomcdn/CN/pms/202404/displayProduct/10086102004921/428_428_a_mobileFF345C8650FF6E88771386A6433556D0.jpg"/></p>
 `;
 
@@ -47,7 +47,7 @@ const htmlContent8 = `
 `;
 
 const htmlContent9 = `
-    <p>This is a paragraph with a <a href="https://www.vmallres.com">link</a>.</p>
+    <p>This is a paragraph with a <a href="https://www.vmall.com/index.html">link</a>.</p>
 `;
 
 const htmlContent10 = `
@@ -135,7 +135,7 @@ export default function HtmlViewExample() {
 
     const handleLinkPress = (url) => {
         // Open the link using Linking module
-        Linking.openURL('https://www.vmallres.com');
+        Linking.openURL('https://www.vmall.com/index.html');
     };
 
     return (
@@ -147,6 +147,7 @@ export default function HtmlViewExample() {
                         itShould="整体效果,点击蓝色Link,可以进行跳转">
                         <HTMLView
                             value={htmlContent}
+                            renderNode={renderNode}
                             stylesheet={styles} // Optional: Pass custom styles for HTML elements
                             onLinkPress={(url) => Linking.openURL(url)} // Optional: Handle link presses
                         />
@@ -244,7 +245,7 @@ export default function HtmlViewExample() {
                 <TestSuite name="TesterHtmlViewExample10">
                     <TestCase
                         tags={['C_API']}
-                        itShould="onLinkPress,当点击跳转的时候,可以自定义操作,例如这里点击的网址为https://example.com,实际上最后跳转到了https://www.vmallres.com">
+                        itShould="onLinkPress,当点击跳转的时候,可以自定义操作,例如这里点击的网址为https://example.com,实际上最后跳转到了https://www.vmall.com/index.html">
                         <HTMLView
                             value={htmlContent8}
                             onLinkPress={(url) => handleLinkPress(url)}
@@ -255,7 +256,7 @@ export default function HtmlViewExample() {
                 <TestSuite name="TesterHtmlViewExample11">
                     <TestCase
                         tags={['C_API']}
-                        itShould="onLinkLongPress,长按操作。长按Link,可以显示对应网址https://www.vmallres.com">
+                        itShould="onLinkLongPress,长按操作。长按Link,可以显示对应网址https://www.vmall.com/index.html">
                         <Text>现在长按的链接为：{linkText}</Text>
                         <HTMLView
                             value={htmlContent9}
