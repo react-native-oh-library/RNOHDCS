@@ -45,7 +45,7 @@ export function ImageCropPickerDemo() {
   const renderProps = (image) => {
     return Object.entries(image).map(([key, value]) => (<View style={{ backgroundColor: "#000" }} key={`${key}${value}`}>
       <Text style={{ fontWeight: 'bold', color: "orange" }}>{JSON.stringify(key)}</Text>
-      <Text style={{ color: "orange" }}>{JSON.stringify(value)}</Text>
+      <Text style={{ color: "orange" }}>{key == "data" ? `${JSON.stringify(value).slice(0, 200)}..."` : JSON.stringify(value)}</Text>
     </View>))
   }
 
