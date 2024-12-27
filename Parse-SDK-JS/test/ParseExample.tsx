@@ -26,6 +26,7 @@ Parse.CoreManager.set('REQUEST_HEADERS', {
 const ParseExample = () => {
   const [status, setStatus] = useState(false);
   const [data, setData] = useState<any>([]);
+  const [dataTwo, setDataTwo] = useState<any>([]);
   const [batchData, setBatchData] = useState<any>([]);
   const [jointData, setJointData] = useState<any>([]);
   const [roleData, setRoleData] = useState<any>([]);
@@ -161,11 +162,21 @@ const ParseExample = () => {
       Alert.alert('注销失败');
     }
   }
-  // 查询当前用户信息
+  // 查询当前用户信息 设置读写权限
   function getCurrentUser() {
     const currentUser = Parse.User.current();
     if (currentUser) {
-      setUserInfo(currentUser.toJSON());
+      // setUserInfo(currentUser.toJSON());
+      let currentUserJson = currentUser.toJSON();
+      const acl = new Parse.ACL();
+      acl.setReadAccess(currentUser.id, true);
+      acl.setWriteAccess(currentUser.id, true);
+      let aclStr = acl.getReadAccess(currentUser.id) ? '读' : '';
+      aclStr += acl.getWriteAccess(currentUser.id) ? '写' : '';
+      setUserInfo({
+        ...currentUserJson,
+        acl: aclStr,
+      });
       console.log('Current user:', currentUser);
       return currentUser;
     } else {
@@ -173,6 +184,25 @@ const ParseExample = () => {
       return null;
     }
   }
+
+  // 删除用户
+  const destroyUser = () => {
+    const currentUser = Parse.User.current();
+    if (currentUser) {
+      currentUser
+        .destroy()
+        .then(deletedUser => {
+          console.log('User deleted successfully:', deletedUser);
+          // 用户已被删除，可能需要注销并清理本地存储
+          Alert.alert('删除用户成功');
+        })
+        .catch(error => {
+          console.error('Error deleting user:', error);
+        });
+    } else {
+      console.log('No user is currently logged in');
+    }
+  };
 
   // 批量创建数据
   async function batchCreateObjects() {
@@ -242,11 +272,44 @@ const ParseExample = () => {
       console.error('Error while fetching objects:', error);
     }
   }
+  // 模拟服务端函数
+  async function cloudErr() {
+    const query = new Parse.Query('BatchObject');
+    // query.limit(5); // 限制为只更新前5个对象
+    try {
+      const objectsToUpdate = await query.find();
+      objectsToUpdate.forEach(obj => {
+        obj.set('age', '30');
+      });
+      const updatedObjects = await Parse.Object.saveAll(objectsToUpdate);
+      console.log(`Saved object beforeSave with ID: ${updatedObjects}`);
+      Alert.alert('批量修改成功');
+      console.log(`Saved object afterSave with ID: ${updatedObjects}`);
+    } catch (error) {
+      Alert.alert('批量修改失败');
+      console.error('Error while updating objects:', error);
+    }
+  }
+  async function cloudDeleteErr() {
+    const query = new Parse.Query('BatchObject');
+    query.limit(1000);
+    try {
+      const objectsToDelete = await query.find();
+      console.log(`Deleted object beforeDelete`);
+      await Parse.Object.destroyAll(objectsToDelete);
+      Alert.alert('删除成功');
+      console.log(`Deleted object afterDelete`);
+    } catch (error) {
+      console.log(`Deleted object beforeDelete`);
+      console.log(`Deleted object afterDelete`);
+    }
+  }
 
   // 创建角色
   async function createRole(roleName: string) {
     const roleACL = new Parse.ACL(); // 创建一个空的 ACL
     roleACL.setPublicReadAccess(true); // 设置公开读取权限
+    roleACL.setPublicWriteAccess(true); // 设置公开读取权限
 
     const role = new Parse.Role(roleName, roleACL); // 创建角色对象
     try {
@@ -286,25 +349,58 @@ const ParseExample = () => {
       throw error;
     }
   }
+  // 新增联表数据
+  async function addJoinPostData() {
+    const ObjectClass = Parse.Object.extend('Post');
+    const objectsToSave = [];
 
-  // 云函数
-  // 模拟云端创建的函数
-  async function cloudBatchUpdateObjects() {
-    const query = new Parse.Query('BatchObject');
-    // query.limit(5); // 限制为只更新前5个对象
+    const object1 = new ObjectClass();
+    object1.set('postId', `1`);
+    object1.set('postName', `测试11`);
+    
+    objectsToSave.push(object1);
+    const object2 = new ObjectClass();
+    object2.set('postId', `2`);
+    object2.set('postName', `测试22`);
+    objectsToSave.push(object2);
+
     try {
-      const objectsToUpdate = await query.find();
-      objectsToUpdate.forEach(obj => {
-        obj.set('age', '30');
-      });
-      const updatedObjects = await Parse.Object.saveAll(objectsToUpdate);
-      Alert.alert('批量修改成功');
-      console.log('Batch update successful:', updatedObjects);
+      const savedObjects = await Parse.Object.saveAll(objectsToSave);
+      console.log('Batch creation successful:', savedObjects);
     } catch (error) {
-      Alert.alert('批量修改失败');
-      console.error('Error while updating objects:', error);
+      console.error('Error while saving objects:', error);
     }
   }
+  async function addJoinCommentData() {
+    const ObjectClass = Parse.Object.extend('Comment');
+    const objectsToSave = [];
+
+    const object1 = new ObjectClass();
+    object1.set('postId', `1`);
+    object1.set('CommentObjName1', `描述111`);
+    object1.set('CommentObjName2', `20`);
+    objectsToSave.push(object1);
+    const object2 = new ObjectClass();
+    object2.set('postId', `2`);
+    object2.set('CommentObjName1', `描述111`);
+    object2.set('CommentObjName2', `2011`);
+    objectsToSave.push(object2);
+    const object3 = new ObjectClass();
+    object3.set('postId', `1`);
+    object3.set('CommentObjName1', `描述222`);
+    object3.set('CommentObjName2', `20222`);
+    objectsToSave.push(object3);
+
+    try {
+      const savedObjects = await Parse.Object.saveAll(objectsToSave);
+      Alert.alert('新增成功');
+      console.log('Batch creation successful:', savedObjects);
+    } catch (error) {
+      Alert.alert('新增失败');
+      console.error('Error while saving objects:', error);
+    }
+  }
+
   // 创建云函数
   // 仅适用于 Parse 平台的云代码环境
   // Parse.Cloud.define('cloudBatchUpdateObjects', async request => {
@@ -313,14 +409,59 @@ const ParseExample = () => {
   // 调用云函数
   async function runCloudToBatchUpdateObjects() {
     try {
+      // beforeSave：验证数据或修改数据
+      Parse.Cloud.beforeSave('cloudBatchUpdateObjects', request => {
+        const object = request.object;
+        console.log(`Saved object beforeSave with ID: ${object.id}`);
+      });
+
+      // afterSave：保存后执行一些操作
+      Parse.Cloud.afterSave('cloudBatchUpdateObjects', request => {
+        const object = request.object;
+        console.log(`Saved object afterSave with ID: ${object.id}`);
+      });
+
       // 调用云函数
-      // const result = await Parse.Cloud.run('cloudBatchUpdateObjects');
-      cloudBatchUpdateObjects();
-      console.log('result');
+      const result = await Parse.Cloud.run('cloudBatchUpdateObjects');
     } catch (error) {
-      console.error('Cloud function error:', error);
+      cloudErr();
     }
   }
+
+  async function runCloudToBatchDeleteObjects() {
+    try {
+      // beforeDelete：删除前检查
+      Parse.Cloud.beforeDelete('cloudBatchDeleteObjects', request => {
+        const object = request.object;
+        console.log(`Deleted object beforeDelete`);
+      });
+
+      // afterDelete：删除后清理
+      Parse.Cloud.afterDelete('cloudBatchDeleteObjects', request => {
+        const object = request.object;
+        console.log(`Deleted object afterDelete`);
+      });
+
+      // 调用云函数
+      const result = await Parse.Cloud.run('cloudBatchDeleteObjects');
+    } catch (error) {
+      cloudDeleteErr();
+    }
+  }
+
+  const getRolesByName = async (roleName: string) => {
+    const roleQuery = new Parse.Query(Parse.Role);
+    roleQuery.equalTo('name', roleName); // 根据角色名进行查询
+    const role = await roleQuery.first(); // 获取第一个匹配的角色对象
+
+    if (role) {
+      console.log(`Found Role: ${role.get('name')}`);
+      return role;
+    } else {
+      console.log(`Role with name ${roleName} not found.`);
+      return null;
+    }
+  };
 
   return (
     <Tester style={{flex: 1}}>
@@ -376,6 +517,100 @@ const ParseExample = () => {
                 </View>
               </View>
             </TestCase>
+
+            <TestCase itShould="数据管理二 Parse.Object">
+              <View style={style.mainBox}>
+                <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+                  unset increment remove fetchWithinclude get方法
+                </Text>
+                <Text style={{fontSize: 16, fontWeight: 'bold'}}>
+                  TestObject 类（表）
+                </Text>
+                <View style={{marginTop: 10, marginBottom: 10}}>
+                  <Button
+                    title="删除destroy测试"
+                    onPress={async () => {
+                      const TestObject = Parse.Object.extend('TestObjectTwo');
+                      const testObject = new TestObject();
+                      testObject.set('name', '李四');
+                      testObject
+                        .destroy()
+                        .then((deletedObject: any) => {
+                          Alert.alert('删除成功');
+                        })
+                        .catch((error: any) => {
+                          console.error('Error deleting object:', error);
+                        });
+                    }}
+                  />
+                  <View style={{height: 10}} />
+                  <Button
+                    title="增加数据"
+                    onPress={async () => {
+                      const TestObject = Parse.Object.extend('TestObjectTwo');
+                      const testObject = new TestObject();
+                      testObject.set('name', '张三');
+                      testObject.set('age', '18');
+                      testObject.set('num', 10);
+                      testObject.set('tags', ['tag1', 'tag2', 'tag3']);
+                      // 移除 'age' 属性
+                      testObject.unset('age');
+                      testObject.increment('num', 5); // score 变为 15
+                      // 从 'tags' 数组中移除 'tag2'
+                      testObject.remove('tags', 'tag2');
+
+                      testObject.fetchWithInclude('num');
+
+                      testObject.fetch();
+
+                      // 获取 'name' 属性的值
+                      const name = testObject.get('name');
+                      console.log('Object.get', name);
+
+                      try {
+                        const result = await testObject.save();
+                        if (result) {
+                          Alert.alert('添加成功');
+                        } else {
+                          Alert.alert('添加失败');
+                        }
+                        console.log('Object saved successfully:', result);
+                      } catch (error) {
+                        console.error('Error while saving object:', error);
+                      }
+                    }}
+                  />
+                </View>
+                <Button
+                  title="查询所有数据"
+                  onPress={async () => {
+                    const TestObject = Parse.Object.extend('TestObjectTwo');
+                    const query = new Parse.Query(TestObject);
+
+                    try {
+                      const results = await query.find();
+                      const resultJson = results.map(item => item.toJSON());
+                      setDataTwo(resultJson);
+                    } catch (error) {
+                      console.error('Error while fetching objects:', error);
+                    }
+                  }}
+                />
+                <View style={style.showBox}>
+                  {dataTwo?.map((item: any) => {
+                    return (
+                      <View style={{marginTop: 10}} key={item.objectId}>
+                        <Text>姓名：{item?.name}</Text>
+                        {item?.age ? <Text>年龄：{item?.age}</Text> : null}
+                        <Text>num：{item?.num}</Text>
+                        <Text>tags: {JSON.stringify(item?.tags)}</Text>
+                      </View>
+                    );
+                  })}
+                </View>
+              </View>
+            </TestCase>
+
             <TestCase itShould="用户管理 Parse.User">
               <View style={style.mainBox}>
                 <Text style={{fontSize: 16, fontWeight: 'bold'}}>
@@ -502,7 +737,23 @@ const ParseExample = () => {
                   <Text>username: {userInfo?.username}</Text>
                   <Text>email: {userInfo?.email}</Text>
                   <Text>sessionToken: {userInfo?.sessionToken}</Text>
+                  <Text>ACL: {userInfo?.acl}</Text>
                 </View>
+                <Button
+                  title="删除用户"
+                  onPress={async () => {
+                    destroyUser();
+                  }}
+                />
+                <View style={{height: 10}} />
+                <Button
+                  title="become认证用户"
+                  onPress={async () => {
+                    Parse.User.become(userInfo.sessionToken).then(res => {
+                      Alert.alert('认证成功！');
+                    });
+                  }}
+                />
               </View>
             </TestCase>
             <TestCase itShould="批量操作 saveAll, destroyAll">
@@ -575,7 +826,7 @@ const ParseExample = () => {
                   />
                 </View>
                 <Button
-                  title="创建角色, 设置ACL可读权限"
+                  title="创建角色, 设置ACL读写权限"
                   color={'#007AFF'}
                   onPress={() => {
                     // 创建角色示例
@@ -589,25 +840,89 @@ const ParseExample = () => {
                         setInputData({});
                         Alert.alert('角色创建成功');
                       })
-                      .catch(error => {
-                        Alert.alert('角色名不能重复');
-                      });
+                      .catch(error => {});
                   }}
                 />
+                <View style={{height: 10}} />
+                <Button
+                  title="getName, getUsers, getRoles"
+                  color={'#007AFF'}
+                  onPress={async () => {
+                    const role = await new Parse.Query(Parse.Role)
+                      .equalTo('name', roleData.name)
+                      .first();
+                    if (role) {
+                      const getNameStr = role.getName();
+                      const getUserStr = role.getUsers().toJSON();
+                      const getRolesStr = role.getRoles().toJSON();
+                      console.log(getNameStr, getUserStr, getRolesStr, 655);
+                      setRoleData({
+                        ...roleData,
+                        getName: getNameStr,
+                        getUsers: JSON.stringify(getUserStr),
+                        getRoles: JSON.stringify(getRolesStr),
+                      });
+                    }
+                  }}
+                />
+                <View style={{height: 10}} />
+                <Button
+                  title="getRolesByName"
+                  color={'#007AFF'}
+                  onPress={async () => {
+                    const role = await new Parse.Query(Parse.Role)
+                      .equalTo('name', roleData.name)
+                      .first();
+                    if (role) {
+                      getRolesByName(roleData.name).then(res => {
+                        console.log(res, 64445);
+                        setRoleData({...roleData, getRolesByName: res?.id});
+                      });
+                    }
+                  }}
+                />
+
                 <View>
                   <View style={style.showBox}>
                     <View style={{marginTop: 10}} key={roleData.objectId}>
                       <Text>name：{roleData?.name}</Text>
                       <Text>ACL: {roleData?.ACL}</Text>
                       <Text>创建时间：{roleData?.createdAt}</Text>
+                      <Text>getName:{roleData?.getName}</Text>
+                      <Text>getUsers:{roleData?.getUsers}</Text>
+                      <Text>getRoles:{roleData?.getRoles}</Text>
+                      <Text>getRolesByName:{roleData?.getRolesByName}</Text>
                     </View>
                   </View>
                 </View>
+                <Button
+                  title="role.destroy"
+                  color={'#007AFF'}
+                  onPress={async () => {
+                    const role = await new Parse.Query(Parse.Role)
+                      .equalTo('name', roleData.name)
+                      .first()
+                    if (role) {
+                      role.destroy().then(() => {
+                        Alert.alert("删除成功")
+                      })
+                    }
+                  }}
+                />
               </View>
             </TestCase>
             <TestCase itShould="联表、外键 createWithoutData">
               <View style={style.mainBox}>
                 <Text>主表Post，主键postId, 外键表Comments</Text>
+                <Button
+                  title="新增联表数据"
+                  color={'#007AFF'}
+                  onPress={async () => {
+                    addJoinPostData();
+                    addJoinCommentData();
+                  }}
+                />
+                <View style={{height: 10}} />
                 <Button
                   title="联表查询"
                   color={'#007AFF'}
@@ -645,6 +960,15 @@ const ParseExample = () => {
                     color={'#007AFF'}
                     onPress={() => {
                       runCloudToBatchUpdateObjects();
+                    }}
+                  />
+                </View>
+                <View style={{margin: 10}}>
+                  <Button
+                    title="云函数删除触发"
+                    color={'#007AFF'}
+                    onPress={() => {
+                      runCloudToBatchDeleteObjects();
                     }}
                   />
                 </View>
