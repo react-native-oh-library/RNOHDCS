@@ -326,7 +326,7 @@ export const ImageMarker = () => {
   // network image
   const markImageNetWorkImage = () => {
     Marker.markImage(image_options_network_image).then((result) => {
-      setNetWorkImage(result)
+      setNetWorkImage('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -334,14 +334,14 @@ export const ImageMarker = () => {
   // image file name
   const markImageFilename1 = () => {
     Marker.markImage(image_options_filename1).then((result) => {
-      setFilename1(result)
+      setFilename1('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markImageFilename2 = () => {
     Marker.markImage(image_options_filename2).then((result) => {
-      setFilename2(result)
+      setFilename2('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -349,14 +349,14 @@ export const ImageMarker = () => {
   // image type
   const markImageFiletypepng = () => {
     Marker.markImage(image_options_filetype_png).then((result) => {
-      setFileTypePng(result)
+      setFileTypePng('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markImageFiletypejpg = () => {
     Marker.markImage(image_options_filetyoe_jpg).then((result) => {
-      setFileTypeJpg(result)
+      setFileTypeJpg('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -371,14 +371,14 @@ export const ImageMarker = () => {
   // image quality
   const markImagequalityurl_20 = () => {
     Marker.markImage(image_options_qualityurl_20).then((result) => {
-      setqualityurl_20(result)
+      setqualityurl_20('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markImagequalityurl_100 = () => {
     Marker.markImage(image_options_qualityurl_100).then((result) => {
-      setqualityurl_100(result)
+      setqualityurl_100('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -386,28 +386,28 @@ export const ImageMarker = () => {
   // image rotate
   const markImagerotate_20 = () => {
     Marker.markImage(image_options_rotate20).then((result) => {
-      seturl_rotate20(result)
+      seturl_rotate20('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markImagerotate_50 = () => {
     Marker.markImage(image_options_rotate50).then((result) => {
-      seturl_rotate50(result)
+      seturl_rotate50('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markImagebackrotate_20 = () => {
     Marker.markImage(image_options_backrotate20).then((result) => {
-      seturl_backrotate20(result)
+      seturl_backrotate20('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markImagebackrotate_50 = () => {
     Marker.markImage(image_options_backrotate50).then((result) => {
-      seturl_backrotate50(result)
+      seturl_backrotate50('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -415,28 +415,28 @@ export const ImageMarker = () => {
   // image scale
   const markImagescale0_5 = () => {
     Marker.markImage(image_options_scale0_5).then((result) => {
-      seturl_scale0_5(result)
+      seturl_scale0_5('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markImagescale1_5 = () => {
     Marker.markImage(image_options_scale1_5).then((result) => {
-      seturl_scale1_5(result)
+      seturl_scale1_5('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markImagebackscale0_5 = () => {
     Marker.markImage(image_options_backscale0_5).then((result) => {
-      seturl_backscale0_5(result)
+      seturl_backscale0_5('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markImagebackscale1_5 = () => {
     Marker.markImage(image_options_backscale1_5).then((result) => {
-      seturl_backscale1_5(result)
+      seturl_backscale1_5('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -444,42 +444,42 @@ export const ImageMarker = () => {
   // image alpha
   const markImagealpha0_1 = () => {
     Marker.markImage(image_options_alpha0_1).then((result) => {
-      seturl_alpha0_1(result)
+      seturl_alpha0_1('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markImagealpha0_5 = () => {
     Marker.markImage(image_options_alpha0_5).then((result) => {
-      seturl_alpha0_5(result)
+      seturl_alpha0_5('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markImagealpha1 = () => {
     Marker.markImage(image_options_alpha1).then((result) => {
-      seturl_alpha1(result)
+      seturl_alpha1('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markImagebackalpha0_1 = () => {
     Marker.markImage(image_options_backalpha0_1).then((result) => {
-      seturl_backalpha0_1(result)
+      seturl_backalpha0_1('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markImagebackalpha0_5 = () => {
     Marker.markImage(image_options_backalpha0_5).then((result) => {
-      seturl_backalpha0_5(result)
+      seturl_backalpha0_5('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markImagebackalpha1 = () => {
     Marker.markImage(image_options_backalpha1).then((result) => {
-      seturl_backalpha1(result)
+      seturl_backalpha1('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -487,63 +487,63 @@ export const ImageMarker = () => {
   // position
   const markImagetopleft = () => {
     Marker.markImage(image_options_topLeft).then((result) => {
-      seturl_icon_topLeft(result)
+      seturl_icon_topLeft('file://'+result);
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markImagetopcenter = () => {
     Marker.markImage(image_options_topCenter).then((result) => {
-      seturl_icon_topCenter(result)
+      seturl_icon_topCenter('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markImagetopright = () => {
     Marker.markImage(image_options_topRight).then((result) => {
-      seturl_icon_topRight(result)
+      seturl_icon_topRight('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markImagecenter = () => {
     Marker.markImage(image_options_center).then((result) => {
-      seturl_icon_center(result)
+      seturl_icon_center('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markImagebottomleft = () => {
     Marker.markImage(image_options_bottomLeft).then((result) => {
-      seturl_icon_bottomLeft(result)
+      seturl_icon_bottomLeft('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markImagebottomcenter = () => {
     Marker.markImage(image_options_bottomCenter).then((result) => {
-      seturl_icon_bottomCenter(result)
+      seturl_icon_bottomCenter('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markImagebottomright = () => {
     Marker.markImage(image_options_bottomRight).then((result) => {
-      seturl_icon_bottomRight(result)
+      seturl_icon_bottomRight('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markImagexy = () => {
     Marker.markImage(image_options_xy).then((result) => {
-      seturl_icon_xy(result)
+      seturl_icon_xy('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markImagexppercentt = () => {
     Marker.markImage(image_options_xypercent).then((result) => {
-      seturl_icon_xypercent(result)
+      seturl_icon_xypercent('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -1494,7 +1494,7 @@ export const ImageMarker = () => {
   // font name
   const markTextFontName = () => {
     Marker.markText(text_options_fontName).then((result) => {
-      seturl_text_fontName(result)
+      seturl_text_fontName('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -1502,21 +1502,21 @@ export const ImageMarker = () => {
   // text alain
   const markTextTextAlainLeft = () => {
     Marker.markText(text_options_textalain_left).then((result) => {
-      seturl_text_textalain_left(result)
+      seturl_text_textalain_left('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextTextAlainCenter = () => {
     Marker.markText(text_options_textalain_center).then((result) => {
-      seturl_text_textalain_center(result)
+      seturl_text_textalain_center('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextTextAlainRight = () => {
     Marker.markText(text_options_textalain_right).then((result) => {
-      seturl_text_textalain_right(result)
+      seturl_text_textalain_right('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -1524,84 +1524,84 @@ export const ImageMarker = () => {
   // textBackgroundStyle padding
   const markTextbackgroundstylePaddingAll1 = () => {
     Marker.markText(text_options_backgroundstyle_padding_all1).then((result) => {
-      seturl_text_backgroundstyle_padding_all1(result)
+      seturl_text_backgroundstyle_padding_all1('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbackgroundstylePaddingAll2 = () => {
     Marker.markText(text_options_backgroundstyle_padding_all2).then((result) => {
-      seturl_text_backgroundstyle_padding_all2(result)
+      seturl_text_backgroundstyle_padding_all2('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbackgroundstylePaddingAll3 = () => {
     Marker.markText(text_options_backgroundstyle_padding_all3).then((result) => {
-      seturl_text_backgroundstyle_padding_all3(result)
+      seturl_text_backgroundstyle_padding_all3('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbackgroundstylePaddingAll4 = () => {
     Marker.markText(text_options_backgroundstyle_padding_all4).then((result) => {
-      seturl_text_backgroundstyle_padding_all4(result)
+      seturl_text_backgroundstyle_padding_all4('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbackgroundstylePaddingTop = () => {
     Marker.markText(text_options_backgroundstyle_padding_top).then((result) => {
-      seturl_text_backgroundstyle_padding_top(result)
+      seturl_text_backgroundstyle_padding_top('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbackgroundstylePaddingLeft = () => {
     Marker.markText(text_options_backgroundstyle_padding_left).then((result) => {
-      seturl_text_backgroundstyle_padding_left(result)
+      seturl_text_backgroundstyle_padding_left('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbackgroundstylePaddingRight = () => {
     Marker.markText(text_options_backgroundstyle_padding_right).then((result) => {
-      seturl_text_backgroundstyle_padding_right(result)
+      seturl_text_backgroundstyle_padding_right('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbackgroundstylePaddingBottom = () => {
     Marker.markText(text_options_backgroundstyle_padding_bottom).then((result) => {
-      seturl_text_backgroundstyle_padding_bottom(result)
+      seturl_text_backgroundstyle_padding_bottom('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbackgroundstylePaddingHorizontal = () => {
     Marker.markText(text_options_backgroundstyle_padding_horizontal).then((result) => {
-      seturl_text_backgroundstyle_padding_horizontal(result)
+      seturl_text_backgroundstyle_padding_horizontal('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbackgroundstylePaddingVertical = () => {
     Marker.markText(text_options_backgroundstyle_padding_vertical).then((result) => {
-      seturl_text_backgroundstyle_padding_vertical(result)
+      seturl_text_backgroundstyle_padding_vertical('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbackgroundstylePaddingX = () => {
     Marker.markText(text_options_backgroundstyle_padding_x).then((result) => {
-      seturl_text_backgroundstyle_padding_x(result)
+      seturl_text_backgroundstyle_padding_x('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbackgroundstylePaddingY = () => {
     Marker.markText(text_options_backgroundstyle_padding_y).then((result) => {
-      seturl_text_backgroundstyle_padding_y(result)
+      seturl_text_backgroundstyle_padding_y('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -1609,35 +1609,35 @@ export const ImageMarker = () => {
   // textBackgroundStyle cornerRadius
   const markTextbackgroundstyleCornerRadiusAll = () => {
     Marker.markText(text_options_backgroundstyle_cornerRadius_all).then((result) => {
-      seturl_text_backgroundstyle_cornerRadius_all(result)
+      seturl_text_backgroundstyle_cornerRadius_all('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbackgroundstyleCornerRadiustopLeft = () => {
     Marker.markText(text_options_backgroundstyle_cornerRadius_topLeft).then((result) => {
-      seturl_text_backgroundstyle_cornerRadius_topLeft(result)
+      seturl_text_backgroundstyle_cornerRadius_topLeft('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbackgroundstyleCornerRadiustopRight = () => {
     Marker.markText(text_options_backgroundstyle_cornerRadius_topRight).then((result) => {
-      seturl_text_backgroundstyle_cornerRadius_topRight(result)
+      seturl_text_backgroundstyle_cornerRadius_topRight('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbackgroundstyleCornerRadiusbottomLeft = () => {
     Marker.markText(text_options_backgroundstyle_cornerRadius_bottomLeft).then((result) => {
-      seturl_text_backgroundstyle_cornerRadius_bottomLeft(result)
+      seturl_text_backgroundstyle_cornerRadius_bottomLeft('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbackgroundstyleCornerRadiusbottomRight = () => {
     Marker.markText(text_options_backgroundstyle_cornerRadius_bottomRight).then((result) => {
-      seturl_text_backgroundstyle_cornerRadius_bottomRight(result)
+      seturl_text_backgroundstyle_cornerRadius_bottomRight('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -1645,14 +1645,14 @@ export const ImageMarker = () => {
   // textBackgroundStyle type
   const markTextbackgroundstyleTypeStretchX = () => {
     Marker.markText(text_options_backgroundstyle_type_stretchX).then((result) => {
-      seturl_text_backgroundstyle_type_stretchX(result)
+      seturl_text_backgroundstyle_type_stretchX('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbackgroundstyleTypeStretchY = () => {
     Marker.markText(text_options_backgroundstyle_type_stretchY).then((result) => {
-      seturl_text_backgroundstyle_type_stretchY(result)
+      seturl_text_backgroundstyle_type_stretchY('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -1660,14 +1660,14 @@ export const ImageMarker = () => {
   // textBackgroundStyle color
   const markTextbackgroundstyleColorRed = () => {
     Marker.markText(text_options_backgroundstyle_color_red).then((result) => {
-      seturl_text_backgroundstyle_color_red(result)
+      seturl_text_backgroundstyle_color_red('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbackgroundstyleColorGreen = () => {
     Marker.markText(text_options_backgroundstyle_color_green).then((result) => {
-      seturl_text_backgroundstyle_color_green(result)
+      seturl_text_backgroundstyle_color_green('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -1675,28 +1675,28 @@ export const ImageMarker = () => {
   // shadowstyle
   const markTextShadowStyle1 = () => {
     Marker.markText(text_options_shadowStyle1).then((result) => {
-      seturl_text_shadowStyle1(result)
+      seturl_text_shadowStyle1('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextShadowStyle2 = () => {
     Marker.markText(text_options_shadowStyle2).then((result) => {
-      seturl_text_shadowStyle2(result)
+      seturl_text_shadowStyle2('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextShadowStyle3 = () => {
     Marker.markText(text_options_shadowStyle3).then((result) => {
-      seturl_text_shadowStyle3(result)
+      seturl_text_shadowStyle3('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextShadowStyle4 = () => {
     Marker.markText(text_options_shadowStyle4).then((result) => {
-      seturl_text_shadowStyle4(result)
+      seturl_text_shadowStyle4('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -1704,7 +1704,7 @@ export const ImageMarker = () => {
   // bold
   const markTextFontBold = () => {
     Marker.markText(text_options_bold).then((result) => {
-      seturl_text_bold(result)
+      seturl_text_bold('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -1712,14 +1712,14 @@ export const ImageMarker = () => {
   // rotate
   const markTextRotate30 = () => {
     Marker.markText(text_options_rotate30).then((result) => {
-      seturl_text_rotate30(result)
+      seturl_text_rotate30('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextRotate50 = () => {
     Marker.markText(text_options_rotate50).then((result) => {
-      seturl_text_rotate50(result)
+      seturl_text_rotate50('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -1727,7 +1727,7 @@ export const ImageMarker = () => {
   // strikeThrough
   const markTextFontStrikeThrough = () => {
     Marker.markText(text_options_strikeThrough).then((result) => {
-      seturl_text_strikeThrough(result)
+      seturl_text_strikeThrough('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -1735,7 +1735,7 @@ export const ImageMarker = () => {
   // underline
   const markTextUnderline = () => {
     Marker.markText(text_options_underline).then((result) => {
-      seturl_text_underline(result)
+      seturl_text_underline('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -1743,7 +1743,7 @@ export const ImageMarker = () => {
   // skewX
   const markTextskewX = () => {
     Marker.markText(text_options_skewX).then((result) => {
-      seturl_text_skewX(result)
+      seturl_text_skewX('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -1751,7 +1751,7 @@ export const ImageMarker = () => {
   // text font italic
   const markTextFontItalic = () => {
     Marker.markText(text_options_italic).then((result) => {
-      seturl_text_italic(result)
+      seturl_text_italic('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -1759,14 +1759,14 @@ export const ImageMarker = () => {
   // text font size
   const markTextFontSize30 = () => {
     Marker.markText(text_options_fontSize30).then((result) => {
-      seturl_text_fontSize30(result)
+      seturl_text_fontSize30('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextFontSize100 = () => {
     Marker.markText(text_options_fontSize100).then((result) => {
-      seturl_text_fontSize100(result)
+      seturl_text_fontSize100('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -1774,14 +1774,14 @@ export const ImageMarker = () => {
   // text color
   const markTextColor1 = () => {
     Marker.markText(text_options_color1).then((result) => {
-      seturl_text_color1(result)
+      seturl_text_color1('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextColor2 = () => {
     Marker.markText(text_options_color2).then((result) => {
-      seturl_text_color2(result)
+      seturl_text_color2('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -1789,14 +1789,14 @@ export const ImageMarker = () => {
   // text test
   const markTextText1 = () => {
     Marker.markText(text_options_test1).then((result) => {
-      seturl_text_test1(result)
+      seturl_text_test1('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextText2 = () => {
     Marker.markText(text_options_test2).then((result) => {
-      seturl_text_test2(result)
+      seturl_text_test2('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -1804,14 +1804,14 @@ export const ImageMarker = () => {
   // image file name
   const markTextFilename1 = () => {
     Marker.markText(text_options_filename1).then((result) => {
-      setTextFilename1(result)
+      setTextFilename1('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextFilename2 = () => {
     Marker.markText(text_options_filename2).then((result) => {
-      setTextFilename2(result)
+      setTextFilename2('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -1819,14 +1819,14 @@ export const ImageMarker = () => {
   // image type
   const markTextFiletypepng = () => {
     Marker.markText(text_options_filetype_png).then((result) => {
-      setTextFileTypePng(result)
+      setTextFileTypePng('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextFiletypejpg = () => {
     Marker.markText(text_options_filetyoe_jpg).then((result) => {
-      setTextFileTypeJpg(result)
+      setTextFileTypeJpg('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -1841,14 +1841,14 @@ export const ImageMarker = () => {
   // image quality
   const markTextqualityurl_20 = () => {
     Marker.markText(text_options_qualityurl_20).then((result) => {
-      setTextqualityurl_20(result)
+      setTextqualityurl_20('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextqualityurl_100 = () => {
     Marker.markText(text_options_qualityurl_100).then((result) => {
-      setTextqualityurl_100(result)
+      setTextqualityurl_100('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -1856,14 +1856,14 @@ export const ImageMarker = () => {
   // image rotate
   const markTextbackrotate_20 = () => {
     Marker.markText(text_options_backrotate20).then((result) => {
-      seturl_backrotate20_text(result)
+      seturl_backrotate20_text('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbackrotate_50 = () => {
     Marker.markText(text_options_backrotate50).then((result) => {
-      seturl_backrotate50_text(result)
+      seturl_backrotate50_text('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -1871,14 +1871,14 @@ export const ImageMarker = () => {
   // image scale
   const markTextbackscale0_5 = () => {
     Marker.markText(text_options_scale0_5).then((result) => {
-      seturl_backscale0_5_text(result)
+      seturl_backscale0_5_text('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbackscale1_5 = () => {
     Marker.markText(text_options_scale1_5).then((result) => {
-      seturl_backscale1_5_text(result)
+      seturl_backscale1_5_text('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -1886,21 +1886,21 @@ export const ImageMarker = () => {
   // image alpha
   const markTextbackalpha0_1 = () => {
     Marker.markText(text_options_backalpha0_1).then((result) => {
-      seturl_backalpha0_1_text(result)
+      seturl_backalpha0_1_text('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbackalpha0_5 = () => {
     Marker.markText(text_options_backalpha0_5).then((result) => {
-      seturl_backalpha0_5_text(result)
+      seturl_backalpha0_5_text('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbackalpha1 = () => {
     Marker.markText(text_options_backalpha1).then((result) => {
-      seturl_backalpha1_text(result)
+      seturl_backalpha1_text('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
@@ -1908,69 +1908,69 @@ export const ImageMarker = () => {
   // position
   const markTexttopleft = () => {
     Marker.markText(text_options_topLeft).then((result) => {
-      seturl_text_topLeft(result)
+      seturl_text_topLeft('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTexttopcenter = () => {
     Marker.markText(text_options_topCenter).then((result) => {
-      seturl_text_topCenter(result)
+      seturl_text_topCenter('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTexttopright = () => {
     Marker.markText(text_options_topRight).then((result) => {
-      seturl_text_topRight(result)
+      seturl_text_topRight('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextcenter = () => {
     Marker.markText(text_options_center).then((result) => {
-      seturl_text_center(result)
+      seturl_text_center('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbottomleft = () => {
     Marker.markText(text_options_bottomLeft).then((result) => {
-      seturl_text_bottomLeft(result)
+      seturl_text_bottomLeft('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbottomcenter = () => {
     Marker.markText(text_options_bottomCenter).then((result) => {
-      seturl_text_bottomCenter(result)
+      seturl_text_bottomCenter('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextbottomright = () => {
     Marker.markText(text_options_bottomRight).then((result) => {
-      seturl_text_bottomRight(result)
+      seturl_text_bottomRight('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextxy = () => {
     Marker.markText(text_options_xy).then((result) => {
-      seturl_text_xy(result)
+      seturl_text_xy('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   const markTextxppercentt = () => {
     Marker.markText(text_options_xypercent).then((result) => {
-      seturl_text_xypercent(result)
+      seturl_text_xypercent('file://'+result)
     }).catch(error => {
       console.log('error', error)
     })
   }
   return (
-    <Tester>
+    <Tester style={{marginBottom : 120 }}>
       <ScrollView>
         <TestSuite name='react-native-image-marker'>
           <TestCase
