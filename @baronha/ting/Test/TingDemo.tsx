@@ -50,6 +50,7 @@ export function TingExample() {
                                 const options: ToastOptions = {
                                     title: 'title-Toast',
                                     message: 'message-Toast',
+                                    duration: 5,
                                 };
                                 handleToast(options);
                             }}
@@ -65,6 +66,7 @@ export function TingExample() {
                                     message: 'message-Toast',
                                     titleColor: '#FF0000',
                                     messageColor: '#00FF51',
+                                    duration: 5,
                                 };
 
                                 handleToast(options);
@@ -80,6 +82,7 @@ export function TingExample() {
                                         message: 'message-Toast',
                                         titleColor: '#00FF51',
                                         messageColor: '#1500FF',
+                                        duration: 5,
                                     };
                                     handleToast(options);
                                 }}
@@ -95,6 +98,7 @@ export function TingExample() {
                                         message: 'message-Toast',
                                         titleColor: '#1500FF',
                                         messageColor: '#FF0000',
+                                        duration: 5,
                                     };
                                     handleToast(options);
                                 }}
@@ -110,6 +114,7 @@ export function TingExample() {
                                     title: 'title-Toast',
                                     message: 'message-Toast',
                                     preset: 'done',
+                                    duration: 5,
                                 };
                                 handleToast(options);
                             }}
@@ -123,6 +128,7 @@ export function TingExample() {
                                         title: 'title-Toast',
                                         message: 'message-Toast',
                                         preset: 'error',
+                                        duration: 5,
                                     };
                                     handleToast(options);
                                 }}
@@ -137,6 +143,7 @@ export function TingExample() {
                                         title: 'title-Toast',
                                         message: 'message-Toast',
                                         preset: 'spinner',
+                                        duration: 5,
                                     };
                                     handleToast(options);
                                 }}
@@ -151,6 +158,7 @@ export function TingExample() {
                                         title: 'title-Toast',
                                         message: 'message-Toast',
                                         preset: 'none',
+                                        duration: 5,
                                     };
                                     handleToast(options);
                                 }}
@@ -264,6 +272,7 @@ export function TingExample() {
                                     title: 'title-Toast',
                                     message: 'message-Toast',
                                     shouldDismissByDrag: true,
+                                    duration: 5,
                                 };
                                 handleToast(options);
                             }}
@@ -277,6 +286,7 @@ export function TingExample() {
                                         title: 'title-Toast',
                                         message: 'message-Toast',
                                         shouldDismissByDrag: false,
+                                        duration: 5,
                                     };
                                     handleToast(options);
                                 }}
@@ -292,6 +302,7 @@ export function TingExample() {
                                     title: 'title-Toast',
                                     message: 'message-Toast',
                                     position: 'top',
+                                    duration: 5,
                                 };
                                 handleToast(options);
                             }}
@@ -305,6 +316,7 @@ export function TingExample() {
                                         title: 'title-Toast',
                                         message: 'message-Toast',
                                         position: 'bottom',
+                                        duration: 5,
                                     };
                                     handleToast(options);
                                 }}
@@ -320,6 +332,7 @@ export function TingExample() {
                                     title: 'title-Toast',
                                     message: 'message-Toast',
                                     backgroundColor: '#FF0000',
+                                    duration: 5,
                                 };
                                 handleToast(options);
                             }}
@@ -333,6 +346,7 @@ export function TingExample() {
                                         title: 'title-Toast',
                                         message: 'message-Toast',
                                         backgroundColor: '#00FF59',
+                                        duration: 5,
                                     };
                                     handleToast(options);
                                 }}
@@ -347,6 +361,7 @@ export function TingExample() {
                                         title: 'title-Toast',
                                         message: 'message-Toast',
                                         backgroundColor: '#3700FF',
+                                        duration: 5,
                                     };
                                     handleToast(options);
                                 }}
@@ -364,6 +379,7 @@ export function TingExample() {
                                     icon: {
                                         uri: balloon,
                                     },
+                                    duration: 5,
                                 };
                                 handleToast(options);
                             }}
@@ -380,6 +396,7 @@ export function TingExample() {
                                             uri: balloon,
                                             tintColor: '#00FF62',
                                         },
+                                        duration: 5,
                                     };
                                     handleToast(options);
                                 }}
@@ -397,6 +414,7 @@ export function TingExample() {
                                             uri: balloon,
                                             tintColor: '#FF0000',
                                         },
+                                        duration: 5,
                                     };
                                     handleToast(options);
                                 }}
@@ -414,6 +432,7 @@ export function TingExample() {
                                             uri: balloon,
                                             size: 100,
                                         },
+                                        duration: 5,
                                     };
                                     handleToast(options);
                                 }}
@@ -429,6 +448,7 @@ export function TingExample() {
                                     title: 'title-Toast',
                                     message: 'message-Toast',
                                     preset: 'spinner',
+                                    duration: 5,
                                 };
                                 handleToast(options);
                             }}
@@ -443,6 +463,7 @@ export function TingExample() {
                                         message: 'message-Toast',
                                         progressColor: '#FF0000',
                                         preset: 'spinner',
+                                        duration: 5,
                                     };
                                     handleToast(options);
                                 }}
@@ -459,6 +480,7 @@ export function TingExample() {
                                 const options: AlertOptions = {
                                     title: 'title-Alert',
                                     message: 'message-Alert',
+                                    duration: 5,
                                 };
                                 handleAlert(options);
                             }}
@@ -506,6 +528,7 @@ export function TingExample() {
                                     message: 'message-Alert',
                                     titleColor: '#FF0000',
                                     messageColor: '#00FF51',
+                                    duration: 5,
                                 };
 
                                 handleAlert(options);
@@ -521,6 +544,7 @@ export function TingExample() {
                                         message: 'message-Alert',
                                         titleColor: '#00FF51',
                                         messageColor: '#1500FF',
+                                        duration: 5,
                                     };
                                     handleAlert(options);
                                 }}
@@ -536,6 +560,7 @@ export function TingExample() {
                                         message: 'message-Alert',
                                         titleColor: '#1500FF',
                                         messageColor: '#FF0000',
+                                        duration: 5,
                                     };
                                     handleAlert(options);
                                 }}
@@ -551,6 +576,7 @@ export function TingExample() {
                                     title: 'title-Alert',
                                     message: 'message-Alert',
                                     preset: 'done',
+                                    duration: 5,
                                 };
                                 handleAlert(options);
                             }}
@@ -564,6 +590,7 @@ export function TingExample() {
                                         title: 'title-Alert',
                                         message: 'message-Alert',
                                         preset: 'error',
+                                        duration: 5,
                                     };
                                     handleAlert(options);
                                 }}
@@ -578,6 +605,7 @@ export function TingExample() {
                                         title: 'title-Alert',
                                         message: 'message-Alert',
                                         preset: 'spinner',
+                                        duration: 5,
                                     };
                                     handleAlert(options);
                                 }}
@@ -592,6 +620,7 @@ export function TingExample() {
                                         title: 'title-Alert',
                                         message: 'message-Alert',
                                         preset: 'none',
+                                        duration: 5,
                                     };
                                     handleAlert(options);
                                 }}
@@ -705,6 +734,7 @@ export function TingExample() {
                                     title: 'title-Alert',
                                     message: 'message-Alert',
                                     shouldDismissByTap: true,
+                                    duration: 5,
                                 };
                                 handleAlert(options);
                             }}
@@ -718,6 +748,7 @@ export function TingExample() {
                                         title: 'title-Alert',
                                         message: 'message-Alert',
                                         shouldDismissByTap: false,
+                                        duration: 5,
                                     };
                                     handleAlert(options);
                                 }}
@@ -733,6 +764,7 @@ export function TingExample() {
                                     title: 'title-Alert',
                                     message: 'message-Alert',
                                     backgroundColor: '#FF0000',
+                                    duration: 5,
                                 };
                                 handleAlert(options);
                             }}
@@ -746,6 +778,7 @@ export function TingExample() {
                                         title: 'title-Alert',
                                         message: 'message-Alert',
                                         backgroundColor: '#00FF59',
+                                        duration: 5,
                                     };
                                     handleAlert(options);
                                 }}
@@ -760,6 +793,7 @@ export function TingExample() {
                                         title: 'title-Alert',
                                         message: 'message-Alert',
                                         backgroundColor: '#3300FF',
+                                        duration: 5,
                                     };
                                     handleAlert(options);
                                 }}
@@ -777,6 +811,7 @@ export function TingExample() {
                                     icon: {
                                         uri: balloon,
                                     },
+                                    duration: 5,
                                 };
                                 handleAlert(options);
                             }}
@@ -793,6 +828,7 @@ export function TingExample() {
                                             uri: balloon,
                                             tintColor: '#00FF62',
                                         },
+                                        duration: 5,
                                     };
                                     handleAlert(options);
                                 }}
@@ -810,6 +846,7 @@ export function TingExample() {
                                             uri: balloon,
                                             tintColor: '#FF0000',
                                         },
+                                        duration: 5,
                                     };
                                     handleAlert(options);
                                 }}
@@ -827,6 +864,7 @@ export function TingExample() {
                                             uri: balloon,
                                             size: 100,
                                         },
+                                        duration: 5,
                                     };
                                     handleAlert(options);
                                 }}
@@ -842,6 +880,7 @@ export function TingExample() {
                                     title: 'title-Alert',
                                     message: 'message-Alert',
                                     preset: 'spinner',
+                                    duration: 5,
                                 };
                                 handleAlert(options);
                             }}
@@ -856,6 +895,7 @@ export function TingExample() {
                                         message: 'message-Alert',
                                         progressColor: '#FF0000',
                                         preset: 'spinner',
+                                        duration: 5,
                                     };
                                     handleAlert(options);
                                 }}
@@ -870,6 +910,7 @@ export function TingExample() {
                                 const options: AlertOptions = {
                                     title: 'title-Alert',
                                     message: 'message-Alert',
+                                    duration: 5,
                                 };
                                 handleAlert(options);
                             }}
@@ -883,6 +924,7 @@ export function TingExample() {
                                         title: 'title-Alert',
                                         message: 'message-Alert',
                                         borderRadius: 10,
+                                        duration: 5,
                                     };
                                     handleAlert(options);
                                 }}
@@ -897,6 +939,7 @@ export function TingExample() {
                                         title: 'title-Alert',
                                         message: 'message-Alert',
                                         borderRadius: 50,
+                                        duration: 5,
                                     };
                                     handleAlert(options);
                                 }}
@@ -911,6 +954,7 @@ export function TingExample() {
                                 const options: AlertOptions = {
                                     title: 'title-Alert',
                                     message: 'message-Alert',
+                                    duration: 5,
                                 };
                                 handleAlert(options);
                             }}
@@ -924,6 +968,7 @@ export function TingExample() {
                                         title: 'title-Alert',
                                         message: 'message-Alert',
                                         backdropOpacity: 1,
+                                        duration: 5,
                                     };
                                     handleAlert(options);
                                 }}
