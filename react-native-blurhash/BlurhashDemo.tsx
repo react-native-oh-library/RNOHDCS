@@ -4,6 +4,9 @@ import { ScrollView, Text, View, StyleSheet, TouchableOpacity, Alert, SafeAreaVi
 import { Tester, TestSuite, TestCase } from '@rnoh/testerino'
 
 const BlurhashDemo: React.FC = (): JSX.Element => {
+    const [loadStart, setLoadStart] = useState('')
+    const [loadEnd, setLoadEnd] = useState('')
+    const [loadError, setLoadError] = useState('')
     const [validData, setValidData] = useState<boolean>(undefined)
     const [AverageColor, setAverageColor] = useState("")
     const [blurhash, setBlurhash] = useState('LGF5]+Yk^6#M@-5c,1J5@[or[Q6.');
@@ -40,13 +43,14 @@ const BlurhashDemo: React.FC = (): JSX.Element => {
 
     //#region Callbacks
     const onLoadStart = () => {
-        console.log('onLoadStart called!');
+        setLoadStart('onLoadStart called!')
     };
     const onLoadEnd = () => {
-        console.log('onLoadEnd called!');
+        setLoadEnd('onLoadEnd called!')
     };
-    const onLoadError = (message?: string) => {
-        console.log(`onLoadError called! Message: ${message}`);
+    const onLoadError = () => {
+        setLoadError(`onLoadError called!`)
+
     };
     const startEncoding = useCallback(async () => {
         try {
@@ -507,6 +511,73 @@ const BlurhashDemo: React.FC = (): JSX.Element => {
                             )
                         </TestCase>
                         <Text style={{ color: '#fff' }}>{'AverageColor:' + JSON.stringify(AverageColor)}</Text>
+
+                        
+                        <TestCase
+                            tags={['C_API']}
+                            itShould='验证onLoadStart方法（返回onLoadStart called则触发成功）'>
+                            <SafeAreaView style={styles.container}>
+                                <View style={styles.blurhashContainer}>
+                                    <View style={styles.blurhashRadiusMask}>
+                                        <Blurhash
+                                            blurhash={blurhash}
+                                            decodeWidth={32}
+                                            decodeHeight={32}
+                                            decodePunch={1}
+                                            decodeAsync={decodeAsync}
+                                            resizeMode="cover"
+                                            onLoadStart={onLoadStart}
+                                            style={styles.blurhashImage}
+                                        />
+                                    </View>
+                                </View>
+                            </SafeAreaView>
+                        </TestCase>
+                        <Text style={{ color: '#fff' }}>{'onLoadStart:' + loadStart}</Text>
+
+                        <TestCase
+                            tags={['C_API']}
+                            itShould='验证onLoadEnd方法（返回onLoadEnd called则触发成功）'>
+                            <SafeAreaView style={styles.container}>
+                                <View style={styles.blurhashContainer}>
+                                    <View style={styles.blurhashRadiusMask}>
+                                        <Blurhash
+                                            blurhash={blurhash}
+                                            decodeWidth={32}
+                                            decodeHeight={32}
+                                            decodePunch={1}
+                                            decodeAsync={decodeAsync}
+                                            resizeMode="cover"
+                                            onLoadStart={onLoadEnd}
+                                            style={styles.blurhashImage}
+                                        />
+                                    </View>
+                                </View>
+                            </SafeAreaView>
+                        </TestCase>
+                        <Text style={{ color: '#fff' }}>{'onLoadEnd:' + loadEnd}</Text>
+
+                        <TestCase
+                            tags={['C_API']}
+                            itShould='验证onLoadError方法（返回onLoadError called则触发成功）'>
+                            <SafeAreaView style={styles.container}>
+                                <View style={styles.blurhashContainer}>
+                                    <View style={styles.blurhashRadiusMask}>
+                                        <Blurhash
+                                            blurhash={blurhash}
+                                            decodeWidth={32}
+                                            decodeHeight={32}
+                                            decodePunch={1}
+                                            decodeAsync={decodeAsync}
+                                            resizeMode="cover"
+                                            onLoadError={onLoadError}
+                                            style={styles.blurhashImage}
+                                        />
+                                    </View>
+                                </View>
+                            </SafeAreaView>
+                        </TestCase>
+                        <Text style={{ color: '#fff' }}>{'onLoadEnd:' + loadEnd}</Text>
                     </View>
                 </TestSuite>
             </ScrollView>
