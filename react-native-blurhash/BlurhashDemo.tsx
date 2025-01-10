@@ -439,7 +439,7 @@ const BlurhashDemo: React.FC = (): JSX.Element => {
                             </SafeAreaView>
                         </TestCase>
 
-                        
+
 
                         <TestCase
                             tags={['C_API']}
@@ -512,7 +512,8 @@ const BlurhashDemo: React.FC = (): JSX.Element => {
                         </TestCase>
                         <Text style={{ color: '#fff' }}>{'AverageColor:' + JSON.stringify(AverageColor)}</Text>
 
-                        
+
+
                         <TestCase
                             tags={['C_API']}
                             itShould='验证onLoadStart方法（返回onLoadStart called则触发成功）'>
@@ -575,9 +576,21 @@ const BlurhashDemo: React.FC = (): JSX.Element => {
                                         />
                                     </View>
                                 </View>
+                                <TouchableOpacity
+                                    style={clearCosineCacheButton}
+                                    disabled={blurhash5.length < 5}
+                                    onPress={() => {
+                                        setBlurhash("")
+                                    }}>
+                                    {isValiding ? (
+                                        <ActivityIndicator color="black" />
+                                    ) : (
+                                        <Text>setBlurhash</Text>
+                                    )}
+                                </TouchableOpacity>
                             </SafeAreaView>
                         </TestCase>
-                        <Text style={{ color: '#fff' }}>{'onLoadEnd:' + loadEnd}</Text>
+                        <Text style={{ color: '#fff' }}>{'onLoadError:' + loadError}</Text>
                     </View>
                 </TestSuite>
             </ScrollView>
