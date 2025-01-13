@@ -1,6 +1,6 @@
 import React from 'react';  
 import { View, StyleSheet, ScrollView } from 'react-native';  
-import { PolarChart, Pie } from 'victory-native';  
+import { PolarChart, Pie } from '@react-native-oh-tpl/victory-native-xl';  
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino';  
 
 const PolarChartPage = () => {  

@@ -1,4 +1,4 @@
-import { useFont, Line as SkiaLine, Circle, vec, Skia, Shader } from "@shopify/react-native-skia";
+import { useFont, Line as SkiaLine, Circle, vec, Skia, Shader } from "@react-native-oh-tpl/react-native-skia";
 import * as React from "react";
 import { useMemo, useState } from "react";
 import { SafeAreaView, Text, ScrollView, StyleSheet, View } from "react-native";
@@ -33,7 +33,7 @@ const parseTickValues = (tickString?: string) =>
     ?.split(",")
     .map((v) => parseFloat(v))
     .filter((v) => !isNaN(v));
-
+const TestNumber = [0.2,0.5,0.5,0.2,0,0.3,0.1,0.2,0.3,0.5];
 const DATA = (ticksX: number[], ticksY: number[]) => {
   const maxY = Math.max(...ticksY);
   const minY = Math.min(...ticksY);
@@ -44,7 +44,7 @@ const DATA = (ticksX: number[], ticksY: number[]) => {
 
   return Array.from({ length: 10 }, (_, index) => ({
     day: minX + (dX * index) / 10,
-    sales: Math.random() * dY + minY,
+    sales: TestNumber[index] * dY + minY,
   }));
 };
 

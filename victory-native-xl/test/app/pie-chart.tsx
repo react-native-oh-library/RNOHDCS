@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SafeAreaView, ScrollView, StyleSheet, View, Text } from "react-native";
-import { LinearGradient, vec } from "@shopify/react-native-skia";
-import { Pie, PolarChart } from "victory-native";
+import { LinearGradient, vec } from "@react-native-oh-tpl/react-native-skia";
+import { Pie, PolarChart } from "@react-native-oh-tpl/victory-native-xl";
 import { Button } from "../components/Button";
 import { appColors } from "./consts/colors";
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
@@ -31,10 +31,13 @@ function calculateGradientPoints(
   return { startX, startY, endX, endY };
 }
 
-const randomNumber = () => Math.floor(Math.random() * (50 - 25 + 1)) + 125;
+// const randomNumber = () => Math.floor(Math.random() * (50 - 25 + 1)) + 125;改动位置
+const randomNumber = () => Math.floor((50 - 25 + 1)) + 125;
+
 function generateRandomColor(): string {
   // Generating a random number between 0 and 0xFFFFFF
-  const randomColor = Math.floor(Math.random() * 0xffffff);
+  // const randomColor = Math.floor(Math.random() * 0xffffff);改动位置
+  const randomColor = Math.floor(0x336688);
   // Converting the number to a hexadecimal string and padding with zeros
   return `#${randomColor.toString(16).padStart(6, "0")}`;
 }
