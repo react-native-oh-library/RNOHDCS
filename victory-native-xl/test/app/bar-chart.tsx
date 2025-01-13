@@ -1,4 +1,4 @@
-import { LinearGradient, useFont, vec } from "@shopify/react-native-skia";
+import { LinearGradient, useFont, vec } from "@react-native-oh-tpl/react-native-skia";
 import React, { useState } from "react";
 import { SafeAreaView, ScrollView, StyleSheet, View, Text } from "react-native";
 import { Bar, CartesianChart } from "victory-native";
@@ -7,17 +7,26 @@ import { appColors } from "./consts/colors";
 import { Button } from "../components/Button";
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
 
+const TestNumber = [1,15,25,90,45,60,8,16];
+
 const DATA = (length: number = 10) =>
   Array.from({ length }, (_, index) => ({
     month: index + 1,
     listenCount: Math.floor(Math.random() * (100 - 50 + 1)) + 50,
   }));
-
+const DATATest= (numberPoints = 8) =>
+  Array.from({ length: numberPoints }, (_, index) => ({
+    month: index + 1,
+    listenCount: TestNumber[index],
+  }));
 export default function BarChartPage() {
   const font = useFont(inter, 12);
   const [data, setData] = useState(DATA(5));
   const [data1, setData1] = useState(DATA(5));
   const [data2, setData2] = useState(DATA(5));
+  const [data5, setData5] = useState(DATATest());
+  const [data6, setData6] = useState(DATATest());
+  const [data7, setData7] = useState(DATATest());
   const [innerPadding, setInnerPadding] = useState(0.33);
   const [barWidth, setBarWidth] = useState(20);
   const [barCount, setBarCount] = useState(5);
@@ -39,9 +48,9 @@ export default function BarChartPage() {
                 padding={{ left: 10, right: 10, bottom: 10, top: 15 }}
                 yKeys={["listenCount"]}
                 domainPadding={{ left: 50, right: 80, top: 30 }}
-                domain={{ y: [0, 100] }}
+                domain={{x: [1, 4], y: [-10, 100]}}
                 axisOptions={{ font }}
-                data={data1}
+                data={data6}
               >
                 {({ points, chartBounds }) => {
                   return (
@@ -68,7 +77,7 @@ export default function BarChartPage() {
             >
               <Button
                 style={{ flex: 1 }}
-                onPress={() => setData1((data1) => DATA(data1.length))}
+                onPress={() => setData6((data6) => DATA(data6.length))}
                 title="Shuffle Data"
               />
             </View>
@@ -82,9 +91,9 @@ export default function BarChartPage() {
                 padding={{ left: 10, right: 10, bottom: 10, top: 15 }}
                 yKeys={["listenCount"]}
                 domainPadding={{ left: 50, right: 80, top: 30 }}
-                domain={{ y: [0, 100] }}
+                domain={{x: [1, 4], y: [-10, 100]}}
                 axisOptions={{ font }}
-                data={data2}
+                data={data7}
               >
                 {({ points, chartBounds }) => {
                   return (
@@ -112,14 +121,14 @@ export default function BarChartPage() {
             >
               <Button
                 style={{ flex: 1 }}
-                onPress={() => setData2(DATA(data2.length + 1))}
+                onPress={() => setData7(DATA(data7.length + 1))}
                 title="up"
               />
               <Button
                 style={{ flex: 1 }}
                 onPress={() => {
-                  if (data2.length != 1) {
-                    setData2(DATA(data2.length - 1))
+                  if (data7.length != 1) {
+                    setData7(DATA(data7.length - 1))
                   }
                 }}
                 title="down"
@@ -135,9 +144,9 @@ export default function BarChartPage() {
                 padding={{ left: 10, right: 10, bottom: 10, top: 15 }}
                 yKeys={["listenCount"]}
                 domainPadding={{ left: 50, right: 100, top: 30 }}
-                domain={{ y: [0, 100] }}
+                domain={{x: [1, 4], y: [-10, 100]}}
                 axisOptions={{ font }}
-                data={data}
+                data={data5}
               >
                 {({ points, chartBounds }) => {
                   return (
@@ -183,9 +192,9 @@ export default function BarChartPage() {
                 padding={{ left: 10, right: 10, bottom: 10, top: 15 }}
                 yKeys={["listenCount"]}
                 domainPadding={{ left: 50, right: 100, top: 30 }}
-                domain={{ y: [0, 100] }}
+                domain={{x: [1, 4], y: [-10, 100]}}
                 axisOptions={{ font }}
-                data={data}
+                data={data5}
               >
                 {({ points, chartBounds }) => {
                   return (
@@ -248,9 +257,9 @@ export default function BarChartPage() {
                 padding={{ left: 10, right: 10, bottom: 10, top: 15 }}
                 yKeys={["listenCount"]}
                 domainPadding={{ left: 50, right: 100, top: 30 }}
-                domain={{ y: [0, 100] }}
+                domain={{x: [1, 4], y: [-10, 100]}}
                 axisOptions={{ font }}
-                data={data}
+                data={data5}
               >
                 {({ points, chartBounds }) => {
                   return (
@@ -296,9 +305,9 @@ export default function BarChartPage() {
                 padding={{ left: 10, right: 10, bottom: 10, top: 15 }}
                 yKeys={["listenCount"]}
                 domainPadding={{ left: 50, right: 100, top: 30 }}
-                domain={{ y: [0, 100] }}
+                domain={{x: [1, 4], y: [-10, 100]}}
                 axisOptions={{ font }}
-                data={data}
+                data={data5}
               >
                 {({ points, chartBounds }) => {
                   return (
@@ -344,9 +353,9 @@ export default function BarChartPage() {
                 padding={{ left: 10, right: 10, bottom: 10, top: 15 }}
                 yKeys={["listenCount"]}
                 domainPadding={{ left: 50, right: 100, top: 30 }}
-                domain={{ y: [0, 100] }}
+                domain={{x: [1, 4], y: [-10, 100]}}
                 axisOptions={{ font }}
-                data={data}
+                data={data5}
               >
                 {({ points, chartBounds }) => {
                   return (
@@ -392,9 +401,9 @@ export default function BarChartPage() {
                 padding={{ left: 10, right: 10, bottom: 10, top: 15 }}
                 yKeys={["listenCount"]}
                 domainPadding={{ left: 50, right: 80, top: 30 }}
-                domain={{ y: [0, 100] }}
+                domain={{x: [1, 4], y: [-10, 100]}}
                 axisOptions={{ font }}
-                data={data1}
+                data={data5}
               >
                 {({ points, chartBounds }) => {
                   return (
@@ -472,9 +481,9 @@ export default function BarChartPage() {
                 padding={{ left: 10, right: 10, bottom: 10, top: 15 }}
                 yKeys={["listenCount"]}
                 domainPadding={{ left: 50, right: 80, top: 30 }}
-                domain={{ y: [0, 100] }}
+                domain={{x: [1, 4], y: [-10, 100]}}
                 axisOptions={{ font }}
-                data={data1}
+                data={data5}
               >
                 {({ points, chartBounds }) => {
                   return (

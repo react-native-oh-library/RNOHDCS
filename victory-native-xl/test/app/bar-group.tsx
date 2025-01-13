@@ -1,12 +1,15 @@
 import * as React from "react";
 import { SafeAreaView, ScrollView, StyleSheet, View, Text } from "react-native";
-import { BarGroup, CartesianChart } from "victory-native";
-import { LinearGradient, useFont, vec } from "@shopify/react-native-skia";
+import { BarGroup, CartesianChart } from "@react-native-oh-tpl/victory-native-xl";
+import { LinearGradient, useFont, vec } from "@react-native-oh-tpl/react-native-skia";
 import { appColors } from "./consts/colors";
 import inter from "../../assets/inter-medium.ttf";
 import { Button } from "../components/Button";
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
 
+const TestNumber1 = [1,15,25,100,45];
+const TestNumber2 = [5,18,30,90,40];
+const TestNumber3 = [8,20,40,80,30];
 const DATA = (length: number = 10) =>
   Array.from({ length }, (_, index) => ({
     x: index + 1,
@@ -14,9 +17,17 @@ const DATA = (length: number = 10) =>
     z: 30 + Math.floor(20 * Math.random()),
     w: 5 + Math.floor(45 * Math.random()),
   }));
+  const DATATest = (length: number = 5) =>
+  Array.from({ length }, (_, index) => ({
+    x: index + 1,
+    y: TestNumber1[index],
+    z: TestNumber2[index],
+    w: TestNumber3[index],
+  }));
 
 export default function BarGroupPage() {
   const [data, setData] = React.useState(DATA(5));
+  const [data5,setData5] = React.useState(DATATest());
   const [betweenGroupPadding, setBetweenGroupPadding] = React.useState(0.4);
   const [withinGroupPadding, setWithinGroupPadding] = React.useState(0.1);
   const [roundedCorner, setRoundedCorner] = React.useState(0);
@@ -41,7 +52,7 @@ export default function BarGroupPage() {
       <TestCase itShould="case1: betweenGroupPadding, withinGroupPadding, withinGroupPadding 属性图例">
         <View style={{ height: 180 }}>
           <CartesianChart
-            data={data}
+            data={data5}
             xKey="x"
             yKeys={["y", "z", "w"]}
             domain={{ y: [0, 50] }}
@@ -165,7 +176,7 @@ export default function BarGroupPage() {
         <TestCase itShould="case5: color, barWidth, barCount 属性图例">
         <View style={{ height: 180 }}>
           <CartesianChart
-            data={data}
+            data={data5}
             xKey="x"
             yKeys={["y", "z", "w"]}
             domain={{ y: [0, 50] }}
@@ -265,7 +276,7 @@ export default function BarGroupPage() {
         <TestCase itShould="case9: chartBounds 属性 设置图表边界">
         <View style={{ height: 180 }}>
             <CartesianChart
-              data={data}
+              data={data5}
               xKey="x"
               yKeys={["y", "z", "w"]}
               domain={{ y: [0, 50] }}
@@ -352,7 +363,7 @@ export default function BarGroupPage() {
         <TestCase itShould="case11: children 属性 测试渐变">
           <View style={{ height: 180 }}>
             <CartesianChart
-              data={data}
+              data={data5}
               xKey="x"
               yKeys={["y", "z", "w"]}
               domain={{ y: [0, 50] }}
