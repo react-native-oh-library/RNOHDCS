@@ -8,7 +8,7 @@ import ToggleButton from './Components/ToggleButton'
 import OverlayContainerExample from './Components/OverlayContainer'
 import TriggerWrapper from './Components/TriggerWrapper'
 
-export const T_ReactNativeAira = () => {
+export const T_ReactNativeAria = () => {
 
     return (
         <Tester>
@@ -121,4 +121,4 @@ export const T_ReactNativeAira = () => {
         </Tester>);
 }
 
-export default T_ReactNativeAira
+export default T_ReactNativeAria;
