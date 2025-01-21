@@ -65,7 +65,7 @@ export default function DatePickerExample() {
   const [timeText, setTimeText] = useState('')
   const [date, setDate] = useState(new Date())
   return (
-    <Tester>
+    <Tester style={{paddingBottom: 60}}>
       <ScrollView style={styles.container}>
         <TestSuite name='DatePickerDemo'>
           <TestCase itShould='{modal:false,mode:date}'>
