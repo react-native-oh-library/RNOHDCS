@@ -7,7 +7,7 @@ import { appColors } from "./consts/colors";
 import { Button } from "../components/Button";
 import { Tester, TestCase, TestSuite } from '@rnoh/testerino';
 
-const TestNumber = [1,15,25,90,45,60,8,16];
+const TestNumber = [1,15,25,90,45,60,8,16,1,15,25,90,45,60,8,16,1,15,25,90,45,60,8,16,1,15,25,90,45,60,8,16];
 
 const DATA = (length: number = 10) =>
   Array.from({ length }, (_, index) => ({
@@ -91,7 +91,6 @@ export default function BarChartPage() {
                 padding={{ left: 10, right: 10, bottom: 10, top: 15 }}
                 yKeys={["listenCount"]}
                 domainPadding={{ left: 50, right: 80, top: 30 }}
-                domain={{x: [1, 4], y: [-10, 100]}}
                 axisOptions={{ font }}
                 data={data7}
               >
@@ -121,14 +120,14 @@ export default function BarChartPage() {
             >
               <Button
                 style={{ flex: 1 }}
-                onPress={() => setData7(DATA(data7.length + 1))}
+                onPress={() => setData7(DATATest(data7.length + 1))}
                 title="up"
               />
               <Button
                 style={{ flex: 1 }}
                 onPress={() => {
                   if (data7.length != 1) {
-                    setData7(DATA(data7.length - 1))
+                    setData7(DATATest(data7.length - 1))
                   }
                 }}
                 title="down"
