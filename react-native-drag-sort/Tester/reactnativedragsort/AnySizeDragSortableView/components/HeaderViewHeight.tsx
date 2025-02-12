@@ -80,7 +80,7 @@ export const API_headerViewHeight = () => {
                 <View
                   style={{
                     height: 40,
-                    backgroundColor: '#ffff00',
+                    backgroundColor: '#00ff00',
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}>

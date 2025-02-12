@@ -49,7 +49,7 @@ export const API_parentWidth = () => {
                 <Button
                   title="修改parentWidth"
                   onPress={() => {
-                    setParentWidth(300);
+                    setParentWidth(320);
                     setChildrenWidth(80);
                     setState(true);
                   }}
