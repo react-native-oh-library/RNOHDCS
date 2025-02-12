@@ -47,7 +47,7 @@ export const API_renderBottomView = () => {
                       <View
                         style={{
                           height: 40,
-                          backgroundColor: '#00ff00',
+                          backgroundColor: '#ffff00',
                           justifyContent: 'center',
                           alignItems: 'center',
                         }}>
