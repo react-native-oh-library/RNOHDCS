@@ -64,8 +64,8 @@ export function TimelineExample() {
 
 
     const timelineProps1: Partial<TimelineProps> = {
-        start: 9,
-        end: 18,
+        start: 8,
+        end: 19,
         overlapEventsSpacing: 8,
         rightEdgeSpacing: 24,
     };
