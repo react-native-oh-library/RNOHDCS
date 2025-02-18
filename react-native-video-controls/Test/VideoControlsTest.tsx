@@ -107,7 +107,7 @@ function VideoPlayerTest(){
                 paused = {true}   
               /> 
             </TestCase>
-            <TestCase itShould="test VideoPlayer videoStyle properties and set value {width,heigth}">
+            <TestCase itShould="test VideoPlayer videoStyle properties and set value {width=50%,heigth=50%}">
               <VideoPlayer
                 style = {styles.video}
                 controlTimeout = {160000}
@@ -116,7 +116,7 @@ function VideoPlayerTest(){
                 paused = {true}   
               /> 
             </TestCase>
-            <TestCase itShould="test VideoPlayer style properties and set value {width,heigth}">
+            <TestCase itShould="test VideoPlayer style properties and set value {width=90%,heigth=75%}">
               <VideoPlayer
                 controlTimeout = {160000}
                 style={styles.videostyletwo}
@@ -497,7 +497,7 @@ function VideoPlayerTest(){
       height: '50%',
     },
     videostyletwo: {
-      width: '75%',
+      width: '90%',
       height: '75%',
     },
   });
