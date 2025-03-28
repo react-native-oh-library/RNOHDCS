@@ -18,6 +18,7 @@ import {
   Directions,
 } from 'react-native-gesture-handler';
 import { PALETTE } from '../constants';
+import { runOnJS } from '@react-native-oh-tpl/react-native-reanimated';
 
 export function NewApiTest() {
   return (
@@ -27,13 +28,19 @@ export function NewApiTest() {
           itShould="rotate blue square 45 deg clockwise"
           initialState={new Animated.Value(0)}
           arrange={({ setState, state }) => {
-            const rotationGh = Gesture.Rotation()
-              .onUpdate(({ rotation }) => {
-                state.setValue(rotation);
-              })
-              .onEnd(({ rotation }) => {
-                setState(new Animated.Value(rotation));
-              });
+            const updateVu=(rotation)=>{
+              state.setValue(rotation);
+            }
+            const updateVu2=(rotation)=>{
+              setState(new Animated.Value(rotation));
+            }
+          const rotationGh = Gesture.Rotation()
+            .onUpdate(({ rotation }) => {
+              runOnJS(updateVu)(rotation);
+            })
+            .onEnd(({ rotation }) => {
+              runOnJS(updateVu2)(rotation);
+            });
             return (
               <GestureDetector gesture={rotationGh}>
                 <Animated.View
@@ -72,14 +79,19 @@ export function NewApiTest() {
           itShould="pass after swiping from left to right"
           initialState={false}
           arrange={({ setState, state, reset }) => {
+
+            const updateVu=()=>{
+              if (state) {
+                reset();
+              } else {
+                setState(true);
+              }
+            }
+
             const flingRightGesture = Gesture.Fling()
               .direction(Directions.RIGHT)
               .onStart(() => {
-                if (state) {
-                  reset();
-                } else {
-                  setState(true);
-                }
+                runOnJS(updateVu)();
               });
 
             return (
@@ -107,14 +119,19 @@ export function NewApiTest() {
           itShould="pass after pressing the blue rectangle for one second"
           initialState={false}
           arrange={({ state, reset, setState }) => {
+
+            const updateVu=()=>{
+              if (state) {
+                reset();
+              } else {
+                setState(true);
+              }
+            }
+
             const longPressGesture = Gesture.LongPress()
               .minDuration(1000)
               .onStart(() => {
-                if (state) {
-                  reset();
-                } else {
-                  setState(true);
-                }
+                runOnJS(updateVu)();
               });
             return (
               <GestureDetector gesture={longPressGesture}>
@@ -151,16 +168,29 @@ export function NewApiTest() {
               hasMoved: false,
               hasReleased: false,
             };
+
+            const updateDown=()=>{
+              state.hasTouchedDown = true;
+            }
+
+            const updateMove=()=>{
+              state.hasMoved = true;
+            }
+
+            const updateUp=()=>{
+              state.hasReleased = true;
+                setState(state);
+            }
+
             const gesture = Gesture.Manual()
               .onTouchesDown(() => {
-                state.hasTouchedDown = true;
+                runOnJS(updateDown)();
               })
               .onTouchesMove(() => {
-                state.hasMoved = true;
+                runOnJS(updateMove)();
               })
               .onTouchesUp(() => {
-                state.hasReleased = true;
-                setState(state);
+                runOnJS(updateUp)();
               });
 
             return (
@@ -199,17 +229,24 @@ export function NewApiTest() {
           itShould="change color to green when panning"
           initialState={false}
           arrange={({ setState }) => {
+            const updateState=(setBackgroundColor)=>{
+              setState(true);
+			  setBackgroundColor(PALETTE.LIGHT_GREEN);
+            }
+			const updateEndState=(setBackgroundColor)=>{
+			  setBackgroundColor(PALETTE.DARK_BLUE);
+            }
+
             return (
               <Example
                 label="PAN ME"
                 createGesture={setBackgroundColor => {
                   return Gesture.Pan()
                     .onStart(() => {
-                      setBackgroundColor(PALETTE.LIGHT_GREEN);
-                      setState(true);
+                      runOnJS(updateState)(setBackgroundColor);
                     })
                     .onEnd(() => {
-                      setBackgroundColor(PALETTE.DARK_BLUE);
+                      runOnJS(updateState)(setBackgroundColor);
                     });
                 }}
               />
@@ -223,26 +260,35 @@ export function NewApiTest() {
             itShould="not trigger onPress from RN after panning"
             initialState={{ hasPanningEnded: false, hasRNTriggeredOnPress: false }}
             arrange={({ setState, reset }) => {
+              const updatePress=()=>{
+                reset();
+              }
+              const updateState1=()=>{
+                setState(prev => ({ ...prev, hasPanningEnded: true }));
+              }
+              const updateState2=()=>{
+                setState(prev => ({
+                  ...prev,
+                  hasRNTriggeredOnPress: true,
+                }));
+              }
               return (
                 <View style={styles.testCaseContainer}>
                   <View style={{ position: 'absolute', top: 0, right: 0 }}>
                     <Button
                       title="Reset"
                       onPress={() => {
-                        reset();
+                        runOnJS(updatePress)();
                       }}
                     />
                   </View>
                   <GestureDetector
                     gesture={Gesture.Pan().onEnd(() => {
-                      setState(prev => ({ ...prev, hasPanningEnded: true }));
+                      runOnJS(updateState1)();
                     })}>
                     <Pressable
                       onPress={() => {
-                        setState(prev => ({
-                          ...prev,
-                          hasRNTriggeredOnPress: true,
-                        }));
+                        runOnJS(updateState2)();
                       }}
                       style={{
                         width: 128,
@@ -276,18 +322,21 @@ export function NewApiTest() {
             itShould="toggle color on PINCH"
             initialState={false}
             arrange={({ setState }) => {
+              const updateState=(setBackgroundColor)=>{
+                setState(true);
+				setBackgroundColor(prev =>
+                        prev === PALETTE.DARK_BLUE
+                          ? PALETTE.LIGHT_GREEN
+                          : PALETTE.DARK_BLUE,
+                      );
+              }
               return (
                 <Example
                   label="PINCH ME"
                   size={250}
                   createGesture={setBackgroundColor => {
                     return Gesture.Pinch().onStart(() => {
-                      setState(true);
-                      setBackgroundColor(prev =>
-                        prev === PALETTE.DARK_BLUE
-                          ? PALETTE.LIGHT_GREEN
-                          : PALETTE.DARK_BLUE,
-                      );
+                      runOnJS(updateState)(setBackgroundColor);
                     });
                   }}
                 />
@@ -303,17 +352,20 @@ export function NewApiTest() {
           itShould="toggle color on tap"
           initialState={false}
           arrange={({ setState }) => {
+            const updateState=(setBackgroundColor)=>{
+              setState(true);
+			  setBackgroundColor(prev =>
+                      prev === PALETTE.DARK_BLUE
+                        ? PALETTE.LIGHT_GREEN
+                        : PALETTE.DARK_BLUE,
+                    );
+            }
             return (
               <Example
                 label="PRESS ME"
                 createGesture={setBackgroundColor => {
                   return Gesture.Tap().onStart(() => {
-                    setState(true);
-                    setBackgroundColor(prev =>
-                      prev === PALETTE.DARK_BLUE
-                        ? PALETTE.LIGHT_GREEN
-                        : PALETTE.DARK_BLUE,
-                    );
+                    runOnJS(updateState)(setBackgroundColor);
                   });
                 }}
               />
