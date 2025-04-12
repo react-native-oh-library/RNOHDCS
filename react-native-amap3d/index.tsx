@@ -6,7 +6,7 @@ import AMapDemo from './AMapDemo';
 import AMapDemo2 from './AMapDemoType2';
 import AMapDemo3 from './AMapDemoType3';
 import AMapDemo4 from './AMapDemoType4';
-
+import AMapDemo5 from './AMapDemoType5';
 
 const Stack = createStackNavigator();
 
@@ -22,6 +22,9 @@ class Entrance extends React.Component {
     }
     onPress4 = () => {
         this.props.navigation.navigate('AMapDemo4');
+    }
+    onPress5 = () => {
+        this.props.navigation.navigate('AMapDemo5');
     }
 
 
@@ -40,6 +43,9 @@ class Entrance extends React.Component {
                 <View style={{height:50,marginTop:12}}>
                     <Button title="Amap3dDemo4"  onPress={this.onPress4}></Button>
                 </View>
+                <View style={{height:50,marginTop:12}}>
+                    <Button title="Amap3dDemo5"  onPress={this.onPress5}></Button>
+                </View>
             </View>
         );
     }
@@ -55,6 +61,7 @@ class AMapApp extends React.Component {
                     <Stack.Screen name="AMapDemo2" component={AMapDemo2} />
                     <Stack.Screen name="AMapDemo3" component={AMapDemo3} />
                     <Stack.Screen name="AMapDemo4" component={AMapDemo4} />
+                    <Stack.Screen name="AMapDemo5" component={AMapDemo5} />
                 </Stack.Navigator>
             </NavigationContainer>
         );
