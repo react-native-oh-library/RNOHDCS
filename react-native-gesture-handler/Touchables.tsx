@@ -75,7 +75,7 @@ function Tests() {
                     onPress={() => {
                       setState(true);
                     }}>
-                    <Text style={{color: 'white', textAlign: 'center'}}>
+                    <Text style={{color: 'red', textAlign: 'center'}}>
                       PRESS ME
                       </Text>
                       </TouchableNativeFeedback>
