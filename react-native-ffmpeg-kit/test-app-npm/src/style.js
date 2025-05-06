@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
         borderColor: '#B9C3C7',
         borderRadius: 5,
         borderWidth: 1,
-        height: window.height - 310,
+        height: window.height - 500,
         width: window.width - 40,
         marginVertical: 20,
         marginHorizontal: 20
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         borderColor: '#B9C3C7',
         borderRadius: 5,
         borderWidth: 1,
-        height: (window.height - 250) / 2,
+        height: (window.height - 300) / 2,
         width: window.width - 40,
         marginVertical: 20,
         marginHorizontal: 20
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
     outputScrollViewStyle: {
         padding: 4,
         backgroundColor: '#f1c40f',
+        marginBottom: 65,
         borderColor: '#f39c12',
         borderRadius: 5,
         borderWidth: 1

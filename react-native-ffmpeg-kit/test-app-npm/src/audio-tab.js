@@ -117,7 +117,6 @@ export default class AudioTab extends React.Component {
                 extension = "mpg";
                 break;
             case "mp3 (liblame)":
-            case "mp3 (libshine)":
                 extension = "mp3";
                 break;
             case "vorbis":
@@ -125,15 +124,6 @@ export default class AudioTab extends React.Component {
                 break;
             case "opus":
                 extension = "opus";
-                break;
-            case "amr-nb":
-                extension = "amr";
-                break;
-            case "amr-wb":
-                extension = "amr";
-                break;
-            case "ilbc":
-                extension = "lbc";
                 break;
             case "speex":
                 extension = "spx";
@@ -176,6 +166,10 @@ export default class AudioTab extends React.Component {
                 return `-hide_banner -y -i ${audioSampleFile} -c:a libvorbis -b:a 64k ${audioOutputFile}`;
             case "wavpack":
                 return `-hide_banner -y -i ${audioSampleFile} -c:a wavpack -b:a 64k ${audioOutputFile}`;
+            case "opus":
+                return `-hide_banner -y -i ${audioSampleFile} -c:a libopus -b:a 64k -vbr on -compression_level 10 ${audioOutputFile}`;
+            case "speex":
+                return `-hide_banner -y -i ${audioSampleFile} -c:a libspeex -ar 16000 ${audioOutputFile}`;
             default:
 
                 // soxr
@@ -202,6 +196,7 @@ export default class AudioTab extends React.Component {
                         <Picker.Item label="mp3 (liblame)" value="mp3 (liblame)"/>
                         <Picker.Item label="vorbis" value="vorbis"/>
                         <Picker.Item label="wavpack" value="wavpack"/>
+                        <Picker.Item label="opus" value="opus"/>
                     </Picker>
                 </View>
                 <View style={styles.buttonViewStyle}>

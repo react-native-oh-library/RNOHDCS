@@ -55,6 +55,9 @@ export default class OtherTab extends React.Component {
             case "chromaprint":
                 this.testChromaprint();
                 break;
+            case "webp":
+                this.testWebp();
+                break;
         }
     }
 
@@ -202,6 +205,7 @@ export default class OtherTab extends React.Component {
                             this.setState({selectedTest: itemValue})
                         }>
                         <Picker.Item label="chromaprint" value="chromaprint"/>
+                        <Picker.Item label="webp" value="webp"/>
                     </Picker>
                 </View>
                 <View style={styles.buttonViewStyle}>
