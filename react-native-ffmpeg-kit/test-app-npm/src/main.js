@@ -88,6 +88,13 @@ function BottomTabs() {
                 }}
             />
             <Tab.Screen
+                name="PIPE"
+                component={PipeTab}
+                options={{
+                    tabBarLabel: 'PIPE'
+                }}
+            />
+            <Tab.Screen
                 name="CONCURRENT EXECUTION"
                 component={ConcurrentExecutionTab}
                 options={{

@@ -115,6 +115,9 @@ export default class VideoTab extends React.Component {
             case "x265":
                 videoCodec = "libx265";
                 break;
+            case "openh264":
+                videoCodec = "libopenh264";
+                break;
             case "xvid":
                 videoCodec = "libxvid";
                 break;
@@ -211,6 +214,7 @@ export default class VideoTab extends React.Component {
                     <Picker.Item label="mpeg4" value="mpeg4"/>
                     <Picker.Item label="x264" value="x264"/>
                     <Picker.Item label="x265" value="x265"/>
+                    <Picker.Item label="openh264" value="openh264"/>
                     <Picker.Item label="xvid" value="xvid"/>
                     <Picker.Item label="vp8" value="vp8"/>
                     <Picker.Item label="vp9" value="vp9"/>
