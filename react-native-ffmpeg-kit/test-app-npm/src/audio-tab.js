@@ -197,6 +197,7 @@ export default class AudioTab extends React.Component {
                         <Picker.Item label="vorbis" value="vorbis"/>
                         <Picker.Item label="wavpack" value="wavpack"/>
                         <Picker.Item label="opus" value="opus"/>
+                        <Picker.Item label="speex" value="speex"/>
                     </Picker>
                 </View>
                 <View style={styles.buttonViewStyle}>
