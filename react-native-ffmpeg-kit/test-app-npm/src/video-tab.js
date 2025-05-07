@@ -231,8 +231,7 @@ export default class VideoTab extends React.Component {
                 visible={false}
                 ref={this.progressModalReference}/>
             <Video
-                source={require('./asstes/video.mp4')}
-                // source={{uri:"https://vjs.zencdn.net/v/oceans.mp4"}}
+                source={{uri: this.getVideoFile()}}
                 ref={(ref) => {
                     this.player = ref
                 }}

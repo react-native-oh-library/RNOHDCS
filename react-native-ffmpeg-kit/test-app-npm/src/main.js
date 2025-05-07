@@ -9,6 +9,7 @@ import HttpsTab from "./https-tab";
 import AudioTab from "./audio-tab";
 import SubtitleTab from "./subtitle-tab";
 import VidStabTab from "./vid-stab-tab";
+import PipeTab from "./pipe-tab";
 import ConcurrentExecutionTab from "./concurrent-execution-tab";
 import SafTab from "./saf-tab";
 import OtherTab from "./other-tab";
