@@ -57,6 +57,7 @@ export async function registerApplicationFonts() {
     let fontNameMapping = new Map();
     fontNameMapping["MyFontName"] = "Doppio One";
     await FFmpegKitConfig.setFontDirectoryList([RNFS.CachesDirectoryPath, "/system/fonts", "/System/Library/Fonts"], fontNameMapping);
+    ffprint("setFontDirectoryList set success.");
     await FFmpegKitConfig.setEnvironmentVariable("FFREPORT", "file=" +
         RNFS.CachesDirectoryPath + "/" + today() + "-ffreport.txt");
 }
