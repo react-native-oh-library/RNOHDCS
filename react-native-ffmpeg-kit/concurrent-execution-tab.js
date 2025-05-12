@@ -83,7 +83,7 @@ export default class ConcurrentExecutionTab extends React.Component {
                     break;
                 default:
                     this.setState({sessionId3: sessionId});
-                    FFmpegKitConfig.setSessionHistorySize(3);
+                    FFmpegKitConfig.setSessionHistorySize(4);
             }
 
             listFFmpegSessions();

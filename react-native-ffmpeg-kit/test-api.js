@@ -142,12 +142,13 @@ export default class Test {
         const platform = await FFmpegKitConfig.getPlatform();
         ffprint(`Platform: ${platform}`);
         ffprint(`Old log level: ${Level.levelToString(FFmpegKitConfig.getLogLevel())}`);
-        await FFmpegKitConfig.setLogLevel(Level.AV_LOG_INFO);
+        await FFmpegKitConfig.setLogLevel(Level.AV_LOG_DEBUG);
         ffprint(`New log level: ${Level.levelToString(FFmpegKitConfig.getLogLevel())}`)
         const packageName = await Packages.getPackageName();
         ffprint(`Package name: ${packageName}`);
         // Packages.getExternalLibraries().then(packageList => packageList.forEach(value => ffprint(`External library: ${value}`)));
         await FFmpegKitConfig.ignoreSignal(Signal.SIGXCPU);
+        ffprint("Testing common api methods ignoreSignal is call");
     }
 
     static testParseArguments() {
