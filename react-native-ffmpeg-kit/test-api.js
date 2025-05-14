@@ -141,7 +141,8 @@ export default class Test {
         ffprint(`FFmpeg version: ${version}`);
         const platform = await FFmpegKitConfig.getPlatform();
         ffprint(`Platform: ${platform}`);
-        ffprint(`Old log level: ${Level.levelToString(FFmpegKitConfig.getLogLevel())}`);
+        await FFmpegKitConfig.setLogLevel(Level.AV_LOG_ERROR);
+        ffprint(`Old log level: ${Level.levelToString(FFmpegKitConfig.getLogLevel())}`)
         await FFmpegKitConfig.setLogLevel(Level.AV_LOG_DEBUG);
         ffprint(`New log level: ${Level.levelToString(FFmpegKitConfig.getLogLevel())}`)
         const packageName = await Packages.getPackageName();

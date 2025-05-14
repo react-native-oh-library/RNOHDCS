@@ -5,6 +5,7 @@ import CommandTab from './command-tab'
 import VideoTab from './video-tab'
 import VideoUtil from "./video-util";
 import Test from "./test-api";
+import TestMainTab from "./test-main-tab";
 import HttpsTab from "./https-tab";
 import AudioTab from "./audio-tab";
 import SubtitleTab from "./subtitle-tab";
@@ -17,6 +18,7 @@ import OtherTab from "./other-tab";
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {registerApplicationFonts} from "./util";
 import {FFmpegKitConfig} from "ffmpeg-kit-react-native";
+import RNFS from 'react-native-fs';
 
 LogBox.ignoreLogs([
     'ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from \'deprecated-react-native-prop-types\'.'
@@ -39,10 +41,19 @@ function BottomTabs() {
                     fontWeight: "600",
                     textAlign: "center",
                     flex: 1,
-                    height: 20
+                    height: 40,
+                    marginBottom: 14
                 },
                 lazy: false
             }}>
+
+            <Tab.Screen
+                name="TestMain"
+                component={TestMainTab}
+                options={{
+                    tabBarLabel: 'TestMain'
+                }}
+            />    
 
             <Tab.Screen
                 name="COMMAND"
@@ -136,7 +147,7 @@ export default class Main extends React.Component {
             VideoUtil.prepareAssets();
             registerApplicationFonts();
 
-            Test.testCommonApiMethods();
+            // Test.testCommonApiMethods();
             Test.testParseArguments();
             Test.setSessionHistorySizeTest();
         });
