@@ -12,6 +12,7 @@ export default class ConcurrentExecutionTab extends React.Component {
 
         this.state = {
             outputText: '',
+            testlog:'',
             sessionId1: 0,
             sessionId2: 0,
             sessionId3: 0
@@ -86,7 +87,10 @@ export default class ConcurrentExecutionTab extends React.Component {
                     FFmpegKitConfig.setSessionHistorySize(4);
             }
 
-            listFFmpegSessions();
+            //listFFmpegSessions();
+            FFmpegKit.listSessions().then(sessionList => {
+                this.setState({testlog: `Listing ${sessionList.length} FFmpeg sessions asynchronously.`});
+            });
         });
     }
 
@@ -164,6 +168,7 @@ export default class ConcurrentExecutionTab extends React.Component {
                         <Text style={styles.buttonTextStyle}>CANCEL ALL</Text>
                     </TouchableOpacity>
                 </View>
+                <Text>test log 在这里：{this.state.testlog}</Text>
                 <View style={styles.outputViewStyle}>
                     <ScrollView
                         ref={(view) => {

@@ -13,7 +13,8 @@ export default class AudioTab extends React.Component {
 
         this.state = {
             selectedCodec: 'mp2 (twolame)',
-            outputText: ''
+            outputText: '',
+            testlog:'',
         };
 
         this.progressModalReference = React.createRef();
@@ -32,6 +33,7 @@ export default class AudioTab extends React.Component {
         FFmpegKitConfig.enableStatisticsCallback(undefined);
         this.createAudioSample();
 		FFmpegKitConfig.enableLogs();
+        this.appendOutput("enableLogs 接口调用成功。");
         FFmpegKitConfig.enableLogCallback(this.logCallback);
     }
 
@@ -74,6 +76,27 @@ export default class AudioTab extends React.Component {
                 if (ReturnCode.isSuccess(returnCode)) {
                     ffprint("Encode completed successfully.");
                     ffprint("Encode completed successfully.");
+                    this.setState({testlog: "Encode completed successfully."});
+
+                    RNFS.readDir(RNFS.CachesDirectoryPath) // 这将返回该目录下的所有文件和文件夹
+                        .then((result) => {
+                        // 筛选出文件，并打印它们的名字
+                        const files = result.filter(item => item.isFile()).map(item => item.name);
+                        for(let i = 0; i < files.length; i++){
+                            ffprint(`test 音频audioCodec: \'${audioCodec}\'${files[i]}.`);
+                            if(audioCodec === "mp3 (liblame)" && files[i] === "audio.mp3"){
+                                this.setState({testlog: `audio.mp3 文件已生成.`});
+                            }else if(audioCodec === "mp2 (twolame)" && files[i] === "audio.mpg"){
+                                this.setState({testlog: `audio.mpg 文件已生成.`});
+                            }else if(audioCodec === "wavpack" && files[i] === "audio.wv"){
+                                this.setState({testlog: `audio.wv 文件已生成.`});
+                            }
+                        }
+                        })
+                    .catch((err) => {
+                        console.log(err.message, err.code);
+                    });
+
                     listAllLogs(session);
                 } else {
                     ffprint("Encode failed. Please check log for the details.");
@@ -210,6 +233,7 @@ export default class AudioTab extends React.Component {
                 <ProgressModal
                     visible={false}
                     ref={this.progressModalReference}/>
+                 <Text>test log 在这里：{this.state.testlog}</Text>   
                 <View style={styles.outputViewStyle}>
                     <ScrollView
                         ref={(view) => {

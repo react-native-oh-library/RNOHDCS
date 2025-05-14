@@ -14,7 +14,7 @@ export default class VideoTab extends React.Component {
         super(props);
 
         this.state = {
-            selectedCodec: 'mpeg4', statistics: undefined
+            selectedCodec: 'mpeg4', statistics: undefined,testlog:''
         };
 
         this.progressModalReference = React.createRef();
@@ -54,7 +54,7 @@ export default class VideoTab extends React.Component {
         let ffmpegCommand = VideoUtil.generateEncodeVideoScriptWithCustomPixelFormat(image1Path, image2Path, image3Path, videoFile, videoCodec, this.getPixelFormat(), this.getCustomOptions());
 
         ffprint(`FFmpeg process started with arguments: \'${ffmpegCommand}\'.`);
-
+        this.setState({testlog: ''});
         FFmpegKit.executeAsync(ffmpegCommand, async (session) => {
             const state = FFmpegKitConfig.sessionStateToString(await session.getState());
             const returnCode = await session.getReturnCode();
@@ -65,6 +65,21 @@ export default class VideoTab extends React.Component {
 
             if (ReturnCode.isSuccess(returnCode)) {
                 ffprint(`Encode completed successfully in ${duration} milliseconds; playing video.`);
+                const path = `${RNFS.CachesDirectoryPath}/video.mp4`;
+
+                RNFS.readDir(RNFS.CachesDirectoryPath) // 这将返回该目录下的所有文件和文件夹
+                .then((result) => {
+                    // 筛选出文件，并打印它们的名字
+                    const files = result.filter(item => item.isFile()).map(item => item.name);
+                    for(let i = 0; i < files.length; i++){
+                        if(videoCodec === "mpeg4" && files[i] === "video.mp4"){
+                            this.setState({testlog: `video.mp4 文件已生成.`});
+                        }
+                    }
+                })
+                .catch((err) => {
+                    console.log(err.message, err.code);
+                });
                 this.playVideo();
             } else {
                 ffprint("Encode failed. Please check log for the details.");
@@ -230,6 +245,7 @@ export default class VideoTab extends React.Component {
             <ProgressModal
                 visible={false}
                 ref={this.progressModalReference}/>
+            <Text style={{height:40}}>test log 在这里：{this.state.testlog}</Text>
             <Video
                 source={{uri: this.getVideoFile()}}
                 ref={(ref) => {

@@ -8,15 +8,21 @@ import {
     FFprobeSession,
     Level,
     LogRedirectionStrategy,
-    SessionState
+    SessionState,
+    Packages,
+    Signal,
+    FFprobeKit
 } from "ffmpeg-kit-react-native";
+import RNFS from 'react-native-fs';
+import {today} from "./util";
+
 
 export default class CommandTab extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            commandText: '', outputText: ''
+            commandText: '-i /data/storage/el2/base/haps/entry/cache/testaac.m4a -c copy /data/storage/el2/base/haps/entry/cache/outputtestaac.aac', outputText: '', testlog:'',
         };
     }
 
@@ -41,12 +47,52 @@ export default class CommandTab extends React.Component {
         this.setState({outputText: ''});
     }
 
+    runTest = async () => {
+        this.clearOutput();
+
+        this.appendOutput("init success. \n");
+        const version = await FFmpegKitConfig.getFFmpegVersion();
+        this.appendOutput(`FFmpeg version: ${version} \n`);
+        const platform = await FFmpegKitConfig.getPlatform();
+        this.appendOutput(`Platform: ${platform} \n`);
+        await FFmpegKitConfig.setLogLevel(Level.AV_LOG_QUIET);
+        ffprint('log level: ' + FFmpegKitConfig.getLogLevel());
+        if(FFmpegKitConfig.getLogLevel() == -8){
+            this.appendOutput(`Old log level: QUIET \n`)
+        }
+        await FFmpegKitConfig.setLogLevel(Level.AV_LOG_INFO);
+        this.appendOutput(`New log level: ${Level.levelToString(FFmpegKitConfig.getLogLevel())} \n`)
+        const packageName = await Packages.getPackageName();
+        this.appendOutput(`Package name: ${packageName} \n`);
+        // Packages.getExternalLibraries().then(packageList => packageList.forEach(value => ffprint(`External library: ${value}`)));
+        await FFmpegKitConfig.ignoreSignal(Signal.SIGXCPU);
+        this.appendOutput("Testing common api methods ignoreSignal is call \n");
+        let sessionsCount = (await FFmpegKitConfig.getSessions()).length
+        this.appendOutput(`FFmpegKit getSessions count: ${sessionsCount} \n`);
+        
+
+        let fontNameMapping = new Map();
+        fontNameMapping["MyFontName"] = "Doppio One";
+        await FFmpegKitConfig.setFontDirectoryList([RNFS.CachesDirectoryPath, "/system/fonts", "/System/Library/Fonts"], fontNameMapping);
+        this.appendOutput("setFontDirectoryList set success. \n");
+        
+        await FFmpegKitConfig.setEnvironmentVariable("FFREPORT", "file=" +
+            RNFS.CachesDirectoryPath + "/" + today() + "-ffreport.txt");
+        this.appendOutput("setEnvironmentVariable set success. \n");
+
+        let sessionList = await FFprobeKit.listFFprobeSessions();
+        this.appendOutput(`FFprobe Sessions Listing ${sessionList.length} FFprobe sessions asynchronously.\n`);
+    };
+
     runFFmpeg = () => {
         this.clearOutput();
+        this.setState({testlog: ""});
 
         let ffmpegCommand = this.state.commandText;
 
         ffprint(`Current log level is ${Level.levelToString(FFmpegKitConfig.getLogLevel())}.`);
+
+        this.setState({testlog: this.state.testlog + `log level is: ${Level.levelToString(FFmpegKitConfig.getLogLevel())}. \n`});
 
         ffprint('Testing FFmpeg COMMAND asynchronously.');
 
@@ -60,6 +106,8 @@ export default class CommandTab extends React.Component {
 
             ffprint(`FFmpeg process exited with state ${state} and rc ${returnCode}.${notNull(failStackTrace, "\\n")}`);
 
+            this.setState({testlog: this.state.testlog + `FFmpeg process exited with state ${state} and rc ${returnCode}.${notNull(failStackTrace, "\\n")} \n`});
+
             this.appendOutput(output);
 
             if (state === SessionState.FAILED || !returnCode.isValueSuccess()) {
@@ -70,6 +118,7 @@ export default class CommandTab extends React.Component {
 
     runFFprobe = () => {
         this.clearOutput();
+        this.setState({testlog: ""});
 
         let ffprobeCommand = this.state.commandText;
 
@@ -84,6 +133,8 @@ export default class CommandTab extends React.Component {
             const failStackTrace = await session.getFailStackTrace();
             session.getOutput().then(output => this.appendOutput(output));
 
+            this.setState({testlog: this.state.testlog + "parseArguments 已被调用. \n"});
+
             ffprint(`FFprobe process exited with state ${state} and rc ${returnCode}.${notNull(failStackTrace, "\\n")}`);
 
             if (state === SessionState.FAILED || !returnCode.isValueSuccess()) {
@@ -93,7 +144,12 @@ export default class CommandTab extends React.Component {
         }, undefined, LogRedirectionStrategy.NEVER_PRINT_LOGS).then(session => {
             FFmpegKitConfig.asyncFFprobeExecute(session);
 
-            listFFprobeSessions();
+            this.setState({testlog: this.state.testlog + "asyncFFprobeExecute 已被调用. \n"});
+
+            //listFFprobeSessions();
+            FFprobeKit.listFFprobeSessions().then(sessionList => {
+                this.setState({testlog: this.state.testlog + `FFprobe session count: ${sessionList.length}.\n`});
+            });
         });
     };
 
@@ -115,20 +171,24 @@ export default class CommandTab extends React.Component {
                     value={this.state.commandText}
                 />
             </View>
-            <View style={styles.buttonViewStyle}>
+            <View style={[styles.buttonViewStyle, {flexDirection: 'row'}]}>
                 <TouchableOpacity
-                    style={styles.buttonStyle}
+                    style={[styles.buttonStyle, {width: 92}]}
                     onPress={this.runFFmpeg}>
                     <Text style={styles.buttonTextStyle}>RUN FFMPEG</Text>
                 </TouchableOpacity>
-            </View>
-            <View style={styles.buttonViewStyle}>
                 <TouchableOpacity
-                    style={styles.buttonStyle}
+                    style={[styles.buttonStyle, {width: 92, marginHorizontal: 20}]}
                     onPress={this.runFFprobe}>
                     <Text style={styles.buttonTextStyle}>RUN FFPROBE</Text>
                 </TouchableOpacity>
+                <TouchableOpacity
+                    style={[styles.buttonStyle, {width: 92}]}
+                    onPress={this.runTest}>
+                    <Text style={styles.buttonTextStyle}>RUN TEST</Text>
+                </TouchableOpacity>
             </View>
+            <Text style={{height:40}}>test log 在这里：{this.state.testlog}</Text>
             <View style={styles.outputViewStyle}>
                 <ScrollView
                     ref={(view) => {
