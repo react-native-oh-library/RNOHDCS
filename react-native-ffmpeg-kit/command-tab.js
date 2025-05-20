@@ -11,7 +11,8 @@ import {
     SessionState,
     Packages,
     Signal,
-    FFprobeKit
+    FFprobeKit,
+    ReturnCode
 } from "ffmpeg-kit-react-native";
 import RNFS from 'react-native-fs';
 import {today} from "./util";
@@ -22,7 +23,7 @@ export default class CommandTab extends React.Component {
         super(props);
 
         this.state = {
-            commandText: '-i /data/storage/el2/base/haps/entry/cache/testaac.m4a -c copy /data/storage/el2/base/haps/entry/cache/outputtestaac.aac', outputText: '', testlog:'',
+            commandText: '-codecs', outputText: '', testlog:'',
         };
     }
 
@@ -49,6 +50,7 @@ export default class CommandTab extends React.Component {
 
     runTest = async () => {
         this.clearOutput();
+        this.setState({testlog: ""});
 
         this.appendOutput("init success. \n");
         const version = await FFmpegKitConfig.getFFmpegVersion();
@@ -82,6 +84,19 @@ export default class CommandTab extends React.Component {
 
         let sessionList = await FFprobeKit.listFFprobeSessions();
         this.appendOutput(`FFprobe Sessions Listing ${sessionList.length} FFprobe sessions asynchronously.\n`);
+        if(sessionList.length > 0){
+
+            sessionList.forEach(async session => {
+                const sessionId = session.getSessionId();
+                const startTime = session.getStartTime();
+                const duration = await session.getDuration();
+                const state = FFmpegKitConfig.sessionStateToString(await session.getState());
+                const returnCode = await session.getReturnCode();
+                ffprint(`Session id:${sessionId}, startTime:${startTime}, duration:${duration}, state:${state}, returnCode:${returnCode}.\n`);
+
+                this.appendOutput(`Session id:${sessionId}, startTime:${startTime}, duration:${duration}, state:${state}, returnCode:${returnCode}.\n`);
+            });
+        }
     };
 
     runFFmpeg = () => {
@@ -109,6 +124,10 @@ export default class CommandTab extends React.Component {
             this.setState({testlog: this.state.testlog + `FFmpeg process exited with state ${state} and rc ${returnCode}.${notNull(failStackTrace, "\\n")} \n`});
 
             this.appendOutput(output);
+
+            if(!ReturnCode.isSuccess(returnCode)){
+                this.setState({testlog: this.state.testlog + `isSuccess: 失败. \n`});
+            }
 
             if (state === SessionState.FAILED || !returnCode.isValueSuccess()) {
                 ffprint("Command failed. Please check output for the details.");
