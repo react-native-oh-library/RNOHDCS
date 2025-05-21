@@ -28,7 +28,11 @@ export default class ConcurrentExecutionTab extends React.Component {
 
     async setActive() {
         ffprint("Concurrent Execution Tab Activated");
+        let sessionsCountS = (await FFmpegKitConfig.getSessions()).length;
+        this.setState({testlog:`clearSessions start: ${sessionsCountS}.`});
         await FFmpegKitConfig.clearSessions();
+        let sessionsCountE = (await FFmpegKitConfig.getSessions()).length;
+        this.setState({testlog:this.state.testlog +`clearSessions end: ${sessionsCountE}.`});
 		await FFmpegKitConfig.enableLogs();
         FFmpegKitConfig.enableLogCallback(this.logCallback);
         FFmpegKitConfig.enableStatisticsCallback(undefined);
@@ -57,6 +61,7 @@ export default class ConcurrentExecutionTab extends React.Component {
         let ffmpegCommand = VideoUtil.generateEncodeVideoScript(image1Path, image2Path, image3Path, videoFile, "mpeg4", "");
 
         ffprint(`FFmpeg process starting for button ${buttonNumber} with arguments: \'${ffmpegCommand}\'.`);
+
 
         FFmpegKit.executeAsync(ffmpegCommand, async (session) => {
                 const sessionId = await session.getSessionId();
@@ -89,7 +94,7 @@ export default class ConcurrentExecutionTab extends React.Component {
 
             //listFFmpegSessions();
             FFmpegKit.listSessions().then(sessionList => {
-                this.setState({testlog: `Listing ${sessionList.length} FFmpeg sessions asynchronously.`});
+                this.setState({testlog: `Listing ${sessionList.length} FFmpeg sessions asynchronously.Session id:${sessionList[0].getSessionId()}, startTime:${sessionList[0].getStartTime()}`});
             });
         });
     }
