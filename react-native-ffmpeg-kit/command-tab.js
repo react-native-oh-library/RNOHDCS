@@ -23,7 +23,7 @@ export default class CommandTab extends React.Component {
         super(props);
 
         this.state = {
-            commandText: '-codecs', outputText: '', testlog:'',
+            commandText: '-codecs', outputText: '', testlog:'', asynclog: ''
         };
     }
 
@@ -161,7 +161,12 @@ export default class CommandTab extends React.Component {
             }
 
         }, undefined, LogRedirectionStrategy.NEVER_PRINT_LOGS).then(session => {
-            FFmpegKitConfig.asyncFFprobeExecute(session);
+            FFmpegKitConfig.asyncFFprobeExecute(session).then(()=>{
+                ffprint("asyncFFprobeExecute 执行顺序 2");
+                this.setState({asynclog: this.state.asynclog + ",2."});
+            });
+            ffprint("asyncFFprobeExecute 执行顺序 2,");
+            this.setState({asynclog: this.state.asynclog + "asyncFFprobeExecute: 1"});
 
             this.setState({testlog: this.state.testlog + "asyncFFprobeExecute 已被调用. \n"});
 
@@ -208,6 +213,7 @@ export default class CommandTab extends React.Component {
                 </TouchableOpacity>
             </View>
             <Text style={{height:40}}>test log 在这里：{this.state.testlog}</Text>
+            <Text>异步执行顺序：{this.state.asynclog}</Text>
             <View style={styles.outputViewStyle}>
                 <ScrollView
                     ref={(view) => {

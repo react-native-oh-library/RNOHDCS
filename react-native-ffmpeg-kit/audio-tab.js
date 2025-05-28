@@ -15,6 +15,7 @@ export default class AudioTab extends React.Component {
             selectedCodec: 'mp2 (twolame)',
             outputText: '',
             testlog:'',
+            asynclog:'',
         };
 
         this.progressModalReference = React.createRef();
@@ -105,6 +106,69 @@ export default class AudioTab extends React.Component {
             }
         );
     }
+
+    asyncEncodeAudio = () => {
+        let audioOutputFile = this.getAudioOutputFile();
+        deleteFile(audioOutputFile);
+
+        let audioCodec = this.state.selectedCodec;
+
+        ffprint(`Testing AUDIO encoding with '${audioCodec}' codec`);
+
+        let ffmpegCommand = this.generateAudioEncodeScript();
+        this.hideProgressDialog();
+        this.showProgressDialog();
+
+        this.clearOutput();
+
+        ffprint(`FFmpeg process started with arguments: \'${ffmpegCommand}\'.`);
+        FFmpegKit.executeAsync(ffmpegCommand, async (session) => {
+            ffprint("executeAsync 异步顺序: 2");
+            this.setState({asynclog: this.state.asynclog + ",2."});
+            const state = FFmpegKitConfig.sessionStateToString(await session.getState());
+            const returnCode = await session.getReturnCode();
+            const failStackTrace = await session.getFailStackTrace();
+
+            this.hideProgressDialog();
+
+            if (ReturnCode.isSuccess(returnCode)) {
+                ffprint("Encode completed successfully.");
+                ffprint("Encode completed successfully.");
+                this.setState({testlog: "Encode completed successfully."});
+
+                RNFS.readDir(RNFS.CachesDirectoryPath) // 这将返回该目录下的所有文件和文件夹
+                    .then((result) => {
+                    // 筛选出文件，并打印它们的名字
+                    const files = result.filter(item => item.isFile()).map(item => item.name);
+                    for(let i = 0; i < files.length; i++){
+                        ffprint(`test 音频audioCodec: \'${audioCodec}\'${files[i]}.`);
+                        if(audioCodec === "mp3 (liblame)" && files[i] === "audio.mp3"){
+                            this.setState({testlog: `async audio.mp3 文件已生成.`});
+                        }else if(audioCodec === "mp2 (twolame)" && files[i] === "audio.mpg"){
+                            this.setState({testlog: `async audio.mpg 文件已生成.`});
+                        }else if(audioCodec === "wavpack" && files[i] === "audio.wv"){
+                            this.setState({testlog: `async audio.wv 文件已生成.`});
+                        }
+                    }
+                    })
+                .catch((err) => {
+                    console.log(err.message, err.code);
+                });
+
+                listAllLogs(session);
+            } else {
+                ffprint("Encode failed. Please check log for the details.");
+                ffprint(`Encode failed with state ${state} and rc ${returnCode}.${notNull(failStackTrace, "\\n")}`);
+            }
+        }, log => {
+
+        }, statistics => {
+
+        }).then(session => ffprint(`Async FFmpeg process started with sessionId ${session.getSessionId()}.`));
+        ffprint("executeAsync 异步顺序: 1");
+        this.setState({asynclog: this.state.asynclog + "executeAsync: 1"});
+    }
+
 
     createAudioSample() {
         ffprint("Creating AUDIO sample before the test.");
@@ -223,17 +287,23 @@ export default class AudioTab extends React.Component {
                         <Picker.Item label="speex" value="speex"/>
                     </Picker>
                 </View>
-                <View style={styles.buttonViewStyle}>
+                <View style={[styles.buttonViewStyle, {paddingTop: 20, flexDirection: 'row'}]}>
                     <TouchableOpacity
                         style={styles.buttonStyle}
                         onPress={this.encodeAudio}>
                         <Text style={styles.buttonTextStyle}>CREATE</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity
+                        style={[styles.buttonStyle, {marginLeft: 20}]}
+                        onPress={this.asyncEncodeAudio}>
+                        <Text style={styles.buttonTextStyle}>CREATE ASYNC</Text>
+                    </TouchableOpacity>
                 </View>
                 <ProgressModal
                     visible={false}
                     ref={this.progressModalReference}/>
-                 <Text>test log 在这里：{this.state.testlog}</Text>   
+                 <Text>test log 在这里：{this.state.testlog}</Text>
+                 <Text>异步执行顺序 log 在这里：{this.state.asynclog}</Text>
                 <View style={styles.outputViewStyle}>
                     <ScrollView
                         ref={(view) => {
