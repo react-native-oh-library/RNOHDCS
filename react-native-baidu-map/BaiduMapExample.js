@@ -98,11 +98,11 @@ function App({ }): JSX.Element {
 
 				<Overlay.Polyline
 					points={[{ latitude: 38.914935, longitude: 115.403119 }, { latitude: 39.014935, longitude: 115.603119 }, { latitude: 40.914935, longitude: 115.603119 }]}
-					stroke={{ width: 5, color: 'AA000000' }} />
+					stroke={{ width: 15, color: 'FF0080' }} />
 
 				<Overlay.Polyline
 					points={[{ latitude: 38.914935, longitude: 115.403119 }, { latitude: 38.914935, longitude: 115.603119 }, { latitude: 38.714935, longitude: 115.603119 }]}
-					stroke={{ width: 5, color: 'AA000000' }} />
+					stroke={{ width: 15, color: 'FF0080' }} />
 
                <Overlay.Polygon
 					points={[{ latitude: 38.814935, longitude: 115.303119 }, { latitude: 38.914935, longitude: 115.103119 }, { latitude: 39.014935, longitude: 115.303119 }]}
