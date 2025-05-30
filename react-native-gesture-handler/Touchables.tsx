@@ -49,7 +49,7 @@ function Tests() {
                   onPress={() => {
                     setState(true);
                   }}>
-                  <Text style={{color: 'white', textAlign: 'center'}}>
+                  <Text style={{color: 'black', textAlign: 'center'}}>
                   PRESS ME
                   </Text>
                 </TouchableHighlight>
