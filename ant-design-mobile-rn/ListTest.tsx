@@ -118,6 +118,7 @@ export default () => {
                 <Brief>辅助文字内容</Brief>
               </View>
             }
+			multipleLine
           >
             顶部对齐
           </Item>
@@ -127,7 +128,7 @@ export default () => {
         <List>
           <Item
             wrap
-            align="top"
+            align="middle"
             extra={
               <View>
                 内容内容
