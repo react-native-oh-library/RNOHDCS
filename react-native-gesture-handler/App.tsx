@@ -8,6 +8,7 @@ import Swipeable from './Swipeable';
 import GestureHandlers from './GestureHandlers';
 import Buttons from './Buttons';
 import Touchables from './Touchables';
+import DDGestureDemo from './DDGestureDemo';
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,9 @@ class Home extends React.Component {
     }
     onPress6 = () => {
         this.props.navigation.navigate('GestureHandlers');
+    }
+    onPress7 = () => {
+        this.props.navigation.navigate('滴滴出行');
     }
 
 
@@ -53,6 +57,9 @@ class Home extends React.Component {
                 <View style={{height:50,marginTop:12}}>
                     <Button title="GestureHandlers"  onPress={this.onPress6}></Button>
                 </View>
+                <View style={{height:50,marginTop:12}}>
+                    <Button title="滴滴出行"  onPress={this.onPress7}></Button>
+                </View>
             </View>
         );
     }
@@ -70,6 +77,7 @@ class App extends React.Component {
                     <Stack.Screen name="GestureHandlers" component={GestureHandlers} />
                     <Stack.Screen name="Buttons" component={Buttons} />
                     <Stack.Screen name="Touchables" component={Touchables} />
+                    <Stack.Screen name="滴滴出行" component={DDGestureDemo} />
                 </Stack.Navigator>
             </NavigationContainer>
         );
