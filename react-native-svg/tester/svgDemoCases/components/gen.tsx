@@ -71,7 +71,7 @@ function RenderCase({_case, basicProps, comName, renderComChildren, bindFunc, no
                             <View
                                 style={{
                                     borderWidth: 1,
-                                    width: 100,
+                                    width: 240,
                                     height: 100
                                 }}
                             >
