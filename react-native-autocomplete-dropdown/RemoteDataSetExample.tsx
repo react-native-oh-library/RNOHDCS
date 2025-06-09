@@ -5,8 +5,9 @@ import { AutocompleteDropdown } from 'react-native-autocomplete-dropdown'
 
 export const RemoteDataSetExample = memo(() => {
   const [loading, setLoading] = useState(false)
-  const [remoteDataSet, setRemoteDataSet] = useState<AutocompleteDropdownItem[] | null>(null)
-  const [selectedItem, setSelectedItem] = useState<AutocompleteDropdownItem | null>(null)
+  const [lodongResult, setLodongResult] = useState('')
+  const [remoteDataSet, setRemoteDataSet] = useState<AutocompleteDropdownItem[] | null>()
+  const [selectedItem, setSelectedItem] = useState<AutocompleteDropdownItem | null>(null)  
 
   const getSuggestions = useCallback(async (q: string) => {
     const filterToken = q.toLowerCase()
@@ -16,15 +17,38 @@ export const RemoteDataSetExample = memo(() => {
       return
     }
     setLoading(true)
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts').then(
-      data =>
-        new Promise(res => {
-          setTimeout(() => res(data.json()), 2000) // imitate of a long response
-        }),
-    )
-    const items = (await response) as Record<string, string>[]
-    console.log(items);
-    
+
+    let flag: boolean  = true;
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+        if (!response.ok) {
+          flag = false;
+          setLoading(false)
+          setLodongResult(`HTTP错误! 状态码: ${response.status}`)
+          // throw new Error(`rmoteDataSet HTTP错误! 状态码: ${response.status}`);          
+        }
+      
+        const data = await new Promise((resolve) => {
+          setTimeout(async () => {
+            resolve(await response.json());
+          }, 2000);
+        });
+        
+        return data;
+      } catch (error) {
+        flag = false;
+        setLodongResult(`请求失败`+error);
+        setLoading(false)
+        // throw error;
+      }
+    };
+    let tmp = await fetchData();
+    if(!flag){
+        return;
+    }
+    const items = (await tmp) as Record<string, string>[]    
+    console.info('rmoteDataSet getSuggestions items:', items)
 
     const suggestions = items
       .filter(item => item.title?.toLowerCase().includes(filterToken))
@@ -32,14 +56,16 @@ export const RemoteDataSetExample = memo(() => {
         id: item.id || '0',
         title: item.title || '',
       }))
-
-    setRemoteDataSet(suggestions)
+    console.info('rmoteDataSet getSuggestions suggestions:', suggestions)
+    const result = suggestions as AutocompleteDropdownItem[];
+    setRemoteDataSet(result)  
+    setLodongResult(JSON.stringify(result));
     setLoading(false)
   }, [])
 
   return (
-    <>
-      <AutocompleteDropdown
+    <>       
+      <AutocompleteDropdown        
         dataSet={remoteDataSet}
         closeOnBlur={false}
         useFilter={false}
@@ -47,15 +73,17 @@ export const RemoteDataSetExample = memo(() => {
         textInputProps={{
           placeholder: 'Start typing "est"...',
         }}
-        onSelectItem={setSelectedItem}
-        loading={loading}
         onChangeText={getSuggestions}
+        onSelectItem={setSelectedItem}
+        loading={loading}        
         suggestionsListTextStyle={{
           color: '#8f3c96',
         }}
         EmptyResultComponent={<Text style={{ padding: 10, fontSize: 15 }}>Oops ¯\_(ツ)_/¯</Text>}
       />
+      
       <Text style={{ color: '#668', fontSize: 13 }}>Selected item: {JSON.stringify(selectedItem)}</Text>
+      <Text>result: {lodongResult}</Text>
     </>
   )
 })
