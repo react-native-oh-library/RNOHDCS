@@ -8,7 +8,7 @@ export function NestedScrollStickyHeightBeginIndex() {
   return (
     <NestedScrollView style={styles.coordinator} bounces = {false}>
 
-      <NestedScrollViewHeader stickyHeaderBeginIndex={1}>
+      <NestedScrollViewHeader stickyHeaderBeginIndex={2}>
         <Image source={require('../assets/cover.webp')} style={styles.image} resizeMode="cover" />
         <Text style={styles.text}>anchor</Text>
         <Text style={styles.text}>anchorTest</Text>
