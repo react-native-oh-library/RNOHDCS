@@ -63,7 +63,7 @@ class NestScrollApp extends React.Component {
                     <Stack.Screen name="NestedScrollTabView" component={NestedScrollTabView} />
                     <Stack.Screen name="NestedScrollView" component={NestedScrollView} />
                     <Stack.Screen name="NestedScrollPagerViewStickyHeader" component={NestedScrollPagerViewStickyHeader} />
-                    <Stack.Screen name="indexStickyHeightBeginIndex" component={nestedScrollStickyHeightBeginIndex} />
+                    <Stack.Screen name="nestedScrollStickyHeightBeginIndex" component={nestedScrollStickyHeightBeginIndex} />
                 </Stack.Navigator>
             </NavigationContainer>
         );
