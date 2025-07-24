@@ -109,7 +109,7 @@ export const AudioDemo = () => {
                 </View>
                 <View style={{ marginTop: 10 }}>
                     <Button
-                        title="prepare"
+                        title="preparem4a"
                         onPress={async () => {
                             // let file_name = autoGenAudioName();
                             let file_name = 'audio_demo';
@@ -121,6 +121,27 @@ export const AudioDemo = () => {
                                 AudioEncodingBitRate: Number(audioEncodingBitRate),
                                 AudioSource: 1,
                                 OutputFormat: 'm4a',
+                                IncludeBase64: includeBase64
+                            }
+                            await AudioRecorder.prepareRecordingAtPath(`${AudioUtils[fileFlag]}/${file_name}.m4a`, options);
+                            console.log(`AudioRecorder : ,${AudioUtils[fileFlag]}/${file_name}.m4a`);
+                        }}
+                    />
+                </View>
+                <View style={{ marginTop: 10 }}>
+                    <Button
+                        title="prepareAAC"
+                        onPress={async () => {
+                            // let file_name = autoGenAudioName();
+                            let file_name = 'audio_demo';
+                            setTempFileName(file_name);
+                            const options = {
+                                SampleRate: Number(audioSampleRate),
+                                Channels: Number(audioChannels),
+                                AudioEncoding: 'aac',
+                                AudioEncodingBitRate: Number(audioEncodingBitRate),
+                                AudioSource: 1,
+                                OutputFormat: 'aac',
                                 IncludeBase64: includeBase64
                             }
                             await AudioRecorder.prepareRecordingAtPath(`${AudioUtils[fileFlag]}/${file_name}.m4a`, options);
