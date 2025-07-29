@@ -1,9 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
-import { SafeAreaView, StatusBar, Text, Button, TextInput, View, Switch, StyleSheet, TouchableOpacity } from 'react-native';
-import { AudioRecorder, AudioUtils } from 'react-native-audio/index';
+import { SafeAreaView, StatusBar, Text, Button, TextInput, View, Switch, StyleSheet, TouchableOpacity, Alert,Platform,ScrollView } from 'react-native';
+import { AudioRecorder, AudioUtils,AudioSource } from 'react-native-audio/index';
 
-type FileDirType = 'FilesDirectoryPath' | 'CachesDirectoryPath' | 'TempsDirectoryPath';
+type FileDirType = 'FilesDirectoryPath' | 'CachesDirectoryPath'| 'CacheDirectoryPath' | 'TempsDirectoryPath';
 
 export const AudioDemo = () => {
     const [auth, setAuth] = useState<boolean>(false);
@@ -20,12 +20,22 @@ export const AudioDemo = () => {
     const [audioSampleRate, setAudioSampleRate] = useState<string>('48000');
     const [audioEncodingBitRate, setAudioEncodingBitRate] = useState<string>('100000');
     const [includeBase64, setIncludeBase64] = useState<boolean>(false);
+    const [isButtonPressed01, setIsButtonPressed01] = useState<boolean>(false);
     const [fileFlag, setFileFlag] = useState<FileDirType>('FilesDirectoryPath');
 
     const toggleSwitch = () => setIncludeBase64(!includeBase64);
 
+    const resetRecording = () => {
+        setIsButtonPressed01(false)
+        setBase64('');
+        setDuration(0);
+        setStatus('');
+        setAudioFileURL('');
+        setAudioFileSize(0);
+        setSecond(0);
+    }
     return (
-        <SafeAreaView>
+        <ScrollView>
             <StatusBar barStyle={"dark-content"} />
             <View style={{ borderColor: '#aaa', borderWidth: 1, padding: 10 }}>
                 <View>
@@ -39,6 +49,11 @@ export const AudioDemo = () => {
                             onPress={async () => {
                                 const res = await AudioRecorder.requestAuthorization();
                                 setIsAuthorised(res);
+
+                                const hasPermission = await AudioRecorder.checkAuthorizationStatus();
+                                if (!hasPermission) {
+                                    Alert.alert('Deny authorization! Recording requeires authorization,Enter the system setting and turn on microphone permissions');
+                                }
                             }}
                         />
                     </View>
@@ -53,7 +68,6 @@ export const AudioDemo = () => {
                     </View>
                 </View>
             </View>
-
             <View style={{ marginTop: 10, borderColor: '#aaa', borderWidth: 1, padding: 10 }}>
                 <View>
                     <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
@@ -95,9 +109,9 @@ export const AudioDemo = () => {
                                 <Text style={{ color: fileFlag === 'FilesDirectoryPath' ? '#0081f1' : '#666', fontSize: 14 }}>Files</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={{ marginRight: 10 }} onPress={() => {
-                                setFileFlag('CachesDirectoryPath');
+                                setFileFlag(Platform.OS === 'harmony'?'CacheDirectoryPath':'CachesDirectoryPath');
                             }}>
-                                <Text style={{ color: fileFlag === 'CachesDirectoryPath' ? '#0081f1' : '#666', fontSize: 14 }}>Caches</Text>
+                                <Text style={{ color: fileFlag === 'CachesDirectoryPath'||fileFlag === 'CacheDirectoryPath' ? '#0081f1' : '#666', fontSize: 14 }}>Caches</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => {
                                 setFileFlag('TempsDirectoryPath');
@@ -107,9 +121,40 @@ export const AudioDemo = () => {
                         </View>
                     </View>
                 </View>
-                <View style={{ marginTop: 10 }}>
+                <View style={{ marginTop: 10, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <View style={{ width: 120 }}>
+                        <Button
+                            title="prepare"
+                            onPress={async () => {
+                                // let file_name = autoGenAudioName();
+                                let file_name = 'audio_demo';
+                                setTempFileName(file_name);
+                                resetRecording()
+                                const options = {
+                                    SampleRate: Number(audioSampleRate),
+                                    Channels: Number(audioChannels),
+                                    AudioEncoding: 'aac',
+                                    AudioEncodingBitRate: Number(audioEncodingBitRate),
+                                    AudioSource: 1,
+                                    OutputFormat: 'm4a',
+                                    IncludeBase64: includeBase64
+                                }
+                                try {
+                                    await AudioRecorder.prepareRecordingAtPath(`${AudioUtils[fileFlag]}/${file_name}.m4a`, options);
+                                    console.log(`AudioRecorder : ${AudioSource},${AudioUtils[fileFlag]}/${file_name}.m4a`);
+                                    setIsButtonPressed01(true);
+                                    Alert.alert('Recording is prepared');
+                                } catch (error) {
+                                    // Alert.alert('error',JSON.stringify(error));
+                                    
+                                }
+
+                            }}
+                        />
+                    </View>
+                    <View style={{ width: 120}}>
                     <Button
-                        title="prepare"
+                        title="prepare-aac"
                         onPress={async () => {
                             // let file_name = autoGenAudioName();
                             let file_name = 'audio_demo';
@@ -120,13 +165,27 @@ export const AudioDemo = () => {
                                 AudioEncoding: 'aac',
                                 AudioEncodingBitRate: Number(audioEncodingBitRate),
                                 AudioSource: 1,
-                                OutputFormat: 'm4a',
+                                OutputFormat: 'aac',
                                 IncludeBase64: includeBase64
                             }
-                            await AudioRecorder.prepareRecordingAtPath(`${AudioUtils[fileFlag]}/${file_name}.m4a`, options);
-                            console.log(`AudioRecorder : ,${AudioUtils[fileFlag]}/${file_name}.m4a`);
+                            try {
+                                    await AudioRecorder.prepareRecordingAtPath(`${AudioUtils[fileFlag]}/${file_name}.m4a`, options);
+                                    console.log(`AudioRecorder : ${AudioSource},${AudioUtils[fileFlag]}/${file_name}.m4a`);
+                                    setIsButtonPressed01(true);
+                                    Alert.alert('Recording is prepared');
+                                } catch (error) {
+                                    // Alert.alert('error',JSON.stringify(error));
+                                    
+                                }
                         }}
                     />
+                </View>
+                    <View style={{ width: 120 }}>
+                        <Button
+                            title="reset"
+                            onPress={resetRecording}
+                        />
+                    </View>
                 </View>
             </View>
             <View style={{ marginTop: 10, borderColor: '#aaa', borderWidth: 1, padding: 10 }}>
@@ -149,6 +208,21 @@ export const AudioDemo = () => {
                             title="set onFinished"
                             onPress={() => {
                                 AudioRecorder.onFinished = (data) => {
+
+                                    let file_name = 'audio_demo';
+                                    setTempFileName(file_name);
+                                    setFileFlag('FilesDirectoryPath');
+                                    const options1 = {
+                                        SampleRate: Number(audioSampleRate),
+                                        Channels: Number(audioChannels),
+                                        AudioEncoding: 'aac',
+                                        AudioEncodingBitRate: Number(audioEncodingBitRate),
+                                        AudioSource: 1,
+                                        OutputFormat: 'm4a',
+                                        IncludeBase64: includeBase64,
+                                    }
+                                    AudioRecorder.prepareRecordingAtPath(`${AudioUtils[fileFlag]}/${file_name}.m4a`, options1);
+
                                     let str = data.base64.slice(0, 80);
                                     setBase64(includeBase64 ? str + '...' : '');
                                     setDuration(includeBase64 ? data.duration : 0);
@@ -160,14 +234,18 @@ export const AudioDemo = () => {
                         />
                     </View>
                 </View>
-
-                <View style={{ marginTop: 10, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                 <View style={{ marginTop: 10, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                     <View style={{ width: 80 }}>
                         <Button
                             title="start"
                             onPress={async () => {
-                                await AudioRecorder.startRecording();
-                                setFileName(tempFileName);
+                                if (!isButtonPressed01) {
+                                    Alert.alert('Please call prepareRecording before starting recording');
+                                } else {
+                                    Alert.alert('start recording');
+                                    await AudioRecorder.startRecording();
+                                    setFileName(tempFileName);
+                                }
                             }}
                         />
                     </View>
@@ -175,7 +253,12 @@ export const AudioDemo = () => {
                         <Button
                             title="pause"
                             onPress={async () => {
-                                await AudioRecorder.pauseRecording();
+                                if (!isButtonPressed01) {
+                                    Alert.alert('It is reasonable to call pauseRecording only in the started stat');
+                                } else {
+                                    Alert.alert('pause recording');
+                                    await AudioRecorder.pauseRecording();
+                                }
                             }}
                         />
                     </View>
@@ -183,7 +266,12 @@ export const AudioDemo = () => {
                         <Button
                             title="resume"
                             onPress={async () => {
-                                await AudioRecorder.resumeRecording();
+                                if (!isButtonPressed01) {
+                                    Alert.alert('It is reasonable to call resumeRecording only in the paused stats');
+                                } else {
+                                    Alert.alert('resume recording');
+                                    await AudioRecorder.resumeRecording();
+                                }
                             }}
                         />
                     </View>
@@ -191,21 +279,23 @@ export const AudioDemo = () => {
                         <Button
                             title="stop"
                             onPress={async () => {
-                                await AudioRecorder.stopRecording();
-                                if (!AudioRecorder.onFinished || !includeBase64) {
-                                    setBase64('');
-                                    setDuration(0);
-                                    setStatus('');
-                                    setAudioFileURL('');
-                                    setAudioFileSize(0);
+
+                                if (!isButtonPressed01) {
+                                    Alert.alert('It is reasonable to call stopRecording only in the started or paused state');
+                                } else {
+                                    Alert.alert('stop recording');
+                                    await AudioRecorder.stopRecording();
+                                    if (!AudioRecorder.onFinished || !includeBase64) {
+                                        resetRecording()
+                                    }
                                 }
+
                             }}
                         />
                     </View>
                 </View>
             </View>
-
-            <View style={{ marginTop: 10, borderColor: '#aaa', borderWidth: 1, padding: 10 }}>
+            <View style={{ marginTop: 10, borderColor: '#aaa', borderWidth: 1, padding: 10, marginBottom:30  }}>
                 <Text>录音文件：</Text>
                 <View style={{ marginTop: 10, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                     {fileName && <>
@@ -233,7 +323,7 @@ export const AudioDemo = () => {
                     <Text >{`${audioFileURL}`}</Text>
                 </View>
             </View>
-        </SafeAreaView>
+        </ScrollView>
     )
 }
 const styles = StyleSheet.create({
