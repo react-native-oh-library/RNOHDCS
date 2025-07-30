@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {PALETTE} from './Palette';
+import {PALETTE} from './palette';
 
 const NavigationContext = React.createContext<
   | {
@@ -22,12 +22,10 @@ const NavigationContext = React.createContext<
 
 export function NavigationContainer({
   initialPage = 'INDEX',
-  hasHeader = true,
   children,
 }: {
   initialPage?: string;
   children: any;
-  hasHeader?: boolean
 }) {
   const [currentPageName, setCurrentPageName] = React.useState(initialPage);
   const [registeredPageNames, setRegisteredPageNames] = React.useState<
@@ -51,7 +49,7 @@ export function NavigationContainer({
       }}>
       <View style={{width: '100%', height: '100%', flexDirection: 'column'}}>
         <Page name="INDEX">
-        <IndexPage hasHeader={hasHeader} />
+          <IndexPage />
         </Page>
         {children}
       </View>
@@ -73,61 +71,34 @@ export function Page({name, children}: {name: string; children: any}) {
   }, [name]);
 
   return name === currentPageName ? (
-    <View style={{width: '100%', height: '100%'}}>
-      {name !== 'INDEX' && (
-        <View style={{backgroundColor: PALETTE.REACT_CYAN_DARK}}>
-          <TouchableOpacity
-            onPress={() => {
-              navigateTo('INDEX');
-            }}>
-            <Text
-              style={[styles.buttonText, {color: PALETTE.REACT_CYAN_LIGHT}]}>
-              {'‹ Back'}
-            </Text>
-          </TouchableOpacity>
-        </View>
-      )}
       <View style={{width: '100%', flex: 1}}>{children}</View>
-    </View>
   ) : null;
 }
 
-export function IndexPage({ hasHeader }: { hasHeader: boolean }) {
+export function IndexPage() {
   const {navigateTo, registeredPageNames} = useNavigation();
 
   return (
     <FlatList
       data={registeredPageNames}
       ListHeaderComponent={
-        hasHeader ? <View
+        <View
           style={{
             flexDirection: 'row',
             alignItems: 'center',
             paddingHorizontal: 16,
             paddingVertical: 16,
           }}>
-          <Text
-            style={{
-              color: '#EEE',
-              fontSize: 24,
-              fontWeight: 'bold',
-              padding: 16,
-            }}>
-            RN WebView Tester
-          </Text>
         </View>
-        : null
       }
       renderItem={({item}) => {
         return (
-          <View style={{backgroundColor: PALETTE.REACT_CYAN_DARK}}>
-            <TouchableOpacity
-              onPress={() => {
-                navigateTo(item);
-              }}>
-              <Text style={styles.buttonText}>{item}</Text>
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            onPress={() => {
+              navigateTo(item);
+            }}>
+            <Text style={styles.buttonText}>{item}</Text>
+          </TouchableOpacity>
         );
       }}
       ItemSeparatorComponent={() => (
@@ -148,9 +119,10 @@ const styles = StyleSheet.create({
   buttonText: {
     width: '100%',
     fontWeight: 'bold',
+    fontSize: 18,
     paddingHorizontal: 16,
     paddingVertical: 24,
     color: 'white',
-    backgroundColor: 'black',
+    backgroundColor: 'lightblue',
   },
 });
