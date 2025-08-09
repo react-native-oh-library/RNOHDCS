@@ -22,10 +22,14 @@ export default function WebViewTestOnLoadEnd() {
 
     let [start, setstart] = useState<number>(0);
     let [end, setend] = useState<number>(0);
+    let [loadStartStr, setLoadStart] = useState<string>("");
     let [progressStr, setProcess] = useState<string>("");
+    let [loadEndStr, setLoadEnd] = useState<string>("");
+    let [onNavigationStateChangeStr, setOnNavigationStateChange] = useState<string>("");
+	  let [onNavigationStateChangeStrTwo, setOnNavigationStateChangeTwo] = useState<string>("");
     return (
-      <View style={{ flex:1}}>
-          <Tester style={{ paddingBottom: 80 }}>
+      <View style={{ flex:1, height:"100%"}}>
+          <Tester style={{ paddingBottom: 0 }}>
           <TestCase
               key={'webview LoadEnd after progressChange'}
               itShould={`webview LoadEnd after progressChange`}
@@ -33,7 +37,7 @@ export default function WebViewTestOnLoadEnd() {
               arrange={({ setState }) => {
                 const [event, setEvent] = useState({});
                 return (
-                  <View style={{ padding: 20, height: 500 }}>
+                  <View style={{ padding: 20, height: 650 }}>
                     <WebView
                       source={source}
                       startInLoadingState={true}
@@ -41,25 +45,33 @@ export default function WebViewTestOnLoadEnd() {
                       onLoadStart={(e) => {
                         setstart(new Date().getTime())
                         console.log('webview LoadStart:', new Date().getTime());
-                        setProcess(" LoadStart" + ";")
+                        setLoadStart(" LoadStart" + "时间戳：" + new Date().getTime())
                       }}
                       onNavigationStateChange={(e)=>{
-                        console.log('webview onNavigationStateChange:', e.loading);
+                        if (e.loading) {
+                        console.log("NavigationStateChange :" + (e.loading) + ";")
+                                    setOnNavigationStateChange((e.loading) + "时间戳：" + new Date().getTime() + ";")
+                        } else {
+                        console.log("NavigationStateChange :" + (e.loading) + ";")
+                                    setOnNavigationStateChangeTwo((e.loading)  + "时间戳：" + new Date().getTime() + ";")
+                        }                     
                       }}
                       onLoadProgress={(e) => {
-                        console.log('webview Load:', new Date().getTime());
-                        setProcess(progressStr + " Loading:" + (e.nativeEvent.progress * 100 + "%") + ";")
+                        console.log('webview Loading:', new Date().getTime());
+                        setProcess(" " + (e.nativeEvent.progress * 100 + "%"))
                       }}
-                      
                       onLoadEnd={(e) => {
-                        setProcess(progressStr + " LoadEnd" + ";")
+                        setLoadEnd(" LoadEnd" + "时间戳：" + new Date().getTime())
                         let end = new Date().getTime();
-                        console.log('LoadEnd:', end);
+                        console.log('webview LoadEnd:', end);
                         setend(end - start)
                       }}
                     />
-                    <Text>总耗时：{end}</Text>
-                    <Text>process:{progressStr}</Text>
+                    <Text>LoadStart:{loadStartStr}</Text>
+                    <Text>progress:{progressStr}</Text>
+                    <Text>LoadEnd:{loadEndStr}</Text>
+					          <Text>onNavigationStateChange:{onNavigationStateChangeStr}</Text>
+                    <Text>onNavigationStateChange:{onNavigationStateChangeStrTwo}</Text>
                   </View>
                 );
               }}
