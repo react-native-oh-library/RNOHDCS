@@ -6,21 +6,18 @@ import Button from './utils/Button'
 // @ts-ignore
 
 const source = [ 
-"https://gitee.com/kongchuiyu1/test/raw/master/1.jpg",
-"https://gitee.com/kongchuiyu1/test/raw/master/1.jpg",
-"https://gitee.com/kongchuiyu1/test/raw/master/2.jpg",
-"https://gitee.com/kongchuiyu1/test/raw/master/3.jpg",
-"https://gitee.com/kongchuiyu1/test/raw/master/4.jpg",
-"https://gitee.com/kongchuiyu1/test/raw/master/5.jpg",
-"https://gitee.com/kongchuiyu1/test/raw/master/6.jpg",
-"https://gitee.com/kongchuiyu1/test/raw/master/7.jpg",
-"https://gitee.com/kongchuiyu1/test/raw/master/8.jpg",
+"https://news.inewsweek.cn/society/2025-08-28/U695P972T2D26451F122DT20250828114111.jpeg",
+"https://news.inewsweek.cn/society/2025-08-28/U695P972T2D26451F122DT20250828114111.jpeg",
+"https://news.inewsweek.cn/cover/2025-08-27/U695P972T2D26443F122DT20250827095331.png",
+"https://www.inewsweek.cn/society/2025-08-22/U695P972T2D26399F122DT20250822161905.png",
+"https://www.inewsweek.cn/society/2025-08-21/U695P972T2D26388F122DT20250821164030.png",
+
  ];
 
-export const FastImagePreloadExample = () => {
+ const FastImagePreloadExample = () => {
     const [show, setShow] = useState(false)
     const [i, setI] = useState(0);
-    const [ url, bust ] = useState('https://gitee.com/kongchuiyu1/test/raw/master/1724492090596.jpg')
+    const [ url, bust ] = useState('https://www.inewsweek.cn/finance/2025-08-19/U695P972T2D26355F122DT20250819175954.png')
 
     const preload = () => {
         FastImage.preload([{ uri: url }])
@@ -82,3 +79,6 @@ const styles = StyleSheet.create({
         width: 100,
     },
 })
+
+
+export default FastImagePreloadExample
