@@ -4,14 +4,14 @@ import {
   PullToRefreshHeader,
   PullToRefreshHeaderProps,
   PullToRefreshStateChangedEvent,
-  PullToRefreshState,
+  // PullToRefreshState,
   PullToRefreshStateIdle,
   PullToRefreshStateRefreshing,
   PullToRefreshOffsetChangedEvent
-} from '@sdcx/pull-to-refresh';
+} from '@react-native-oh-tpl/pull-to-refresh';
 
 function SpinnerPullToRefreshHeader(props: PullToRefreshHeaderProps) {
-  const stateRef = useRef<PullToRefreshState>(PullToRefreshStateIdle);
+  const stateRef = useRef<number>(PullToRefreshStateIdle);
   const [animating, setAnimating] = useState(false);
 
   const onStateChanged = useCallback((event: PullToRefreshStateChangedEvent) => {
