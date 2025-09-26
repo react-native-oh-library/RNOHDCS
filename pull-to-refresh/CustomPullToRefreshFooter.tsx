@@ -5,18 +5,17 @@ import {
     PullToRefreshOffsetChangedEvent,
     PullToRefreshStateIdle,
     PullToRefreshStateRefreshing,
-  } from '@sdcx/pull-to-refresh'
+  } from '@react-native-oh-tpl/pull-to-refresh'
   import React, {useCallback, useRef, useState} from 'react';
   import {StyleSheet,Image ,Text,Animated} from 'react-native';
 
-  export function CustomPullToRefreshFooter(props: PullToRefreshFooterProps) {
-    const { onRefresh, refreshing, noMoreData } = props
+  export function CustomPullToRefreshFooter(props: PullToRefreshFooterProps & { callBack?: (offset) => void }){
+    const { onRefresh, refreshing, noMoreData, callBack } = props;
   
     const [text, setText] = useState('上拉加载更多')
-  
+
     const onStateChanged = useCallback((event: PullToRefreshStateChangedEvent) => {
       const state = event.nativeEvent.state
-      console.log('refresh footer state', event.nativeEvent.state)
       if (state === PullToRefreshStateIdle) {
         setText('上拉加载更多')
       } else if (state === PullToRefreshStateRefreshing) {
@@ -28,12 +27,15 @@ import {
   
     const onOffsetChanged = useCallback((event: PullToRefreshOffsetChangedEvent) => {
       console.log('refresh footer offset11', event.nativeEvent.offset)
+      if (callBack) {
+        callBack(event.nativeEvent.offset);
+      }
     }, [])
   
     return (
       <PullToRefreshFooter
         style={styles.container}
-        manual={true /* 设置模式为手动 */}
+        manual={false /* 设置模式为手动 */}
         onOffsetChanged={onOffsetChanged}
         onStateChanged={onStateChanged}
         onRefresh={onRefresh}
