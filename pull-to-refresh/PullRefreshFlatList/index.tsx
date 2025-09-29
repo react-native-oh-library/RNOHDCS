@@ -1,6 +1,6 @@
 // import {withNavigationItem} from 'hybrid-navigation';
 import React, {useRef, useState} from 'react';
-import {PullToRefresh} from '@react-native-oh-tpl/pull-to-refresh';
+import {PullToRefresh} from '@react-native-ohos/pull-to-refresh';
 import {FlatListPage, useDemoFlatlistData} from '../FlatListPage';
 import {SpinnerPullToRefreshHeader} from '../SpinnerPullToRefreshHeader';
 import { Tester, Filter, TestCase, TestSuite } from '@rnoh/testerino';

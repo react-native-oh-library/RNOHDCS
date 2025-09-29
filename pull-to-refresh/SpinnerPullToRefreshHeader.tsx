@@ -8,7 +8,7 @@ import {
   PullToRefreshStateIdle,
   PullToRefreshStateRefreshing,
   PullToRefreshOffsetChangedEvent
-} from '@react-native-oh-tpl/pull-to-refresh';
+} from '@react-native-ohos/pull-to-refresh';
 
 function SpinnerPullToRefreshHeader(props: PullToRefreshHeaderProps) {
   const stateRef = useRef<number>(PullToRefreshStateIdle);
