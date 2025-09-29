@@ -5,7 +5,7 @@ import {
     PullToRefreshOffsetChangedEvent,
     PullToRefreshStateIdle,
     PullToRefreshStateRefreshing,
-  } from '@react-native-oh-tpl/pull-to-refresh'
+  } from '@react-native-ohos/pull-to-refresh'
   import React, {useCallback, useRef, useState} from 'react';
   import {StyleSheet,Image ,Text,Animated} from 'react-native';
 
