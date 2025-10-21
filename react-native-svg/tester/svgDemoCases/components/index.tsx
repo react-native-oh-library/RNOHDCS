@@ -21,6 +21,7 @@ import Use from './Use';
 import Svg from './Svg'
 import ClipPath from './ClipPath';
 import Image from './Image';
+import ForeignObject from './ForeignObject';
 export default {
     Circle,
     Defs,
@@ -45,4 +46,5 @@ export default {
     Xml,
     ClipPath,
     Image,
+    ForeignObject
 }
