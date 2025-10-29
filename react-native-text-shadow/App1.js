@@ -21,9 +21,9 @@ const base = {
 const App = () => {
   return (
     <Tester>
-      <TestSuite name="text-shadow-component">
-        <ScrollView>
-          <TestCase itShould="默认效果（基线）">
+      <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
+        <TestSuite name="text-shadow-component">
+          <TestCase itShould="默认效果(基线)">
             <View style={[styles.containerWrapper, { backgroundColor: base.background }]}>
               <TextShadow
                 title={base.title}
@@ -192,8 +192,8 @@ const App = () => {
               />
             </View>
           </TestCase>
-        </ScrollView>
-      </TestSuite>
+        </TestSuite>
+      </ScrollView>
     </Tester>
   );
 };
